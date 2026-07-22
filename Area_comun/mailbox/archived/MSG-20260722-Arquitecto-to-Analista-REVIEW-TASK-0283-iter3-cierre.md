@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de cierre de TASK-0283 iteracion 3 sobre el commit 8b61b05, con ACCEPTANCE REFINADO por el Arquitecto: la meta 'detectar cualquier negativo sin declarar' es indecidible y se retiro; se cierra lo cerrable. El maker hizo el inventario recursivo sobre TODO examples/ y scripts/ (caso C cerrado): el negativo del guardian que antes estaba fuera del glob ahora se ve, inventario 15 declarados / 0 missing, y su control positivo sin contrato da missing=1 rojo; quitar el marcador obligatorio lo vuelve invisible (limite documentado, demostrado). Verificar por comportamiento: (1) que el glob recursivo NO deje ningun fichero de test fuera -- intenta TU colocar un negativo real en un rincon de examples/ o scripts/ que sospeches no cubierto, y exige que el inventario lo vea; (2) que el marcador sea load-bearing (quitarlo -> invisible, con self-test); (3) que el limite este ESCRITO en la doc y el export, y que no promete completitud absoluta; (4) regresion: degradacion de contrato sigue cazandose. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE. Si sale GO, cierra la tercera de higiene."

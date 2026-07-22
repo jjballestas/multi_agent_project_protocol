@@ -545,6 +545,27 @@
             "updated_at": "2026-07-22T10:48:04Z"
         },
         {
+            "claim_id": "CLAIM-arq-it4-0283-20260722",
+            "expires_at": "2026-07-22T13:52:31Z",
+            "notes": "Iteracion 4 de 0283 (ast.walk recorrido completo) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-it4-0283-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter3-cierre-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter3-cierre-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre.md"
+            ],
+            "started_at": "2026-07-22T13:32:31Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:32:31Z"
+        },
+        {
             "claim_id": "CLAIM-arq-iter3-0283-20260722",
             "expires_at": "2026-07-22T13:26:51Z",
             "notes": "Iteracion 3 de 0283 con acceptance refinado (glob+convencion+limite) + higiene 2",
