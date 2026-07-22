@@ -33546,6 +33546,395 @@
             "status": "released",
             "task_id": "TASK-0283",
             "updated_at": "2026-07-22T12:06:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-140728-prune-arquitecto",
+            "expires_at": "2026-07-22",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-22T14:07:28Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-22T14:07:28Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0275",
+            "expires_at": "2026-07-23T03:25:00Z",
+            "notes": "Implement TASK-0275 residual: successful quarantine path logging, retention policy, and mutation-proved permanent negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0275",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T15:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-22T15:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0275-done-flip",
+            "expires_at": "2026-07-22T17:00:00Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0275-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T16:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-22T16:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0275-handoff",
+            "expires_at": "2026-07-22T17:35:00Z",
+            "notes": "Publish self-contained TASK-0275 review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0275-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0275.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T15:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-22T15:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276",
+            "expires_at": "2026-07-23T02:09:24Z",
+            "notes": "Implement TASK-0276 useful-work evidence filtering, signature coherence, git exit gates, and permanent mutation-proved negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:09:24Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:09:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-done-flip",
+            "expires_at": "2026-07-22T16:25:00Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T15:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T15:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-handoff",
+            "expires_at": "2026-07-22T16:14:35Z",
+            "notes": "Publish self-contained TASK-0276 review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276.md"
+            ],
+            "started_at": "2026-07-22T14:14:35Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:14:35Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-remediation1",
+            "expires_at": "2026-07-22T18:43:37Z",
+            "notes": "Remediate TASK-0276 commit-proxy slip and add mutation-proved pure-claim negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:43:37Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:43:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-remediation1-handoff",
+            "expires_at": "2026-07-22T16:48:09Z",
+            "notes": "Publish TASK-0276 remediation handoff for independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-remediation1-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276-remediation1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:48:09Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:48:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-done-flip",
+            "expires_at": "2026-07-22T16:09:24Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:09:24Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:09:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0285",
+            "expires_at": "2026-07-22T20:00:00Z",
+            "notes": "Make the full instantiation runner green with exported ledger_head and tier-aware assertions, including mutation-proved negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0285",
+                "Area_comun/state/TASK_INDEX.json#TASK-0285",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0285",
+                "Area_comun/tasks/TASK-0285-instanciacion-runner-ledger-head.md",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T16:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0285",
+            "updated_at": "2026-07-22T16:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0285-delivery",
+            "expires_at": "2026-07-22T17:10:00Z",
+            "notes": "Publish TASK-0285 self-contained handoff and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0285-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0285",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0285",
+                "Area_comun/tasks/TASK-0285-instanciacion-runner-ledger-head.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0285.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T16:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0285",
+            "updated_at": "2026-07-22T16:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0285-msgfix",
+            "expires_at": "2026-07-22T17:15:00Z",
+            "notes": "Add the validator-required explicit question to the TASK-0285 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0285-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0285.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T16:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0285",
+            "updated_at": "2026-07-22T16:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre0275-20260722",
+            "expires_at": "2026-07-22T16:03:31Z",
+            "notes": "Ratificacion 0275 + done-flip y GO 0285 a Codex + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0275-y-GO-0285.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "Area_comun/artifacts/Analista-TASK-0275-cuarentena-residual-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0275-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0275-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0275-cuarentena-residual.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0275-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0275-cuarentena-residual.md"
+            ],
+            "started_at": "2026-07-22T15:43:31Z",
+            "status": "released",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-22T15:43:31Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre0276-20260722",
+            "expires_at": "2026-07-22T15:26:00Z",
+            "notes": "Ratificacion 0276 + done-flip y GO 0275 a Codex + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0276-y-GO-0275.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0276-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0276-GO.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0276-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-rejuicio.md"
+            ],
+            "started_at": "2026-07-22T15:06:00Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T15:06:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre0285-20260722",
+            "expires_at": "2026-07-22T16:28:51Z",
+            "notes": "Ratificacion 0285 (fin de higiene) + done-flip y GO 0259 (arranque nucleo 0103) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0285-y-GO-0259.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0285",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0285",
+                "Area_comun/tasks/TASK-0285-instanciacion-runner-ledger-head.md",
+                "Area_comun/artifacts/Analista-TASK-0285-instanciacion-runner-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0285-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0285-GO.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0285-instanciacion.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0285-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0285-instanciacion.md"
+            ],
+            "started_at": "2026-07-22T16:08:51Z",
+            "status": "released",
+            "task_id": "TASK-0285",
+            "updated_at": "2026-07-22T16:08:51Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rej0276-20260722",
+            "expires_at": "2026-07-22T15:11:50Z",
+            "notes": "Re-juicio de 0276 + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276-remediation1.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0276-rama-commit.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276-remediation1.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0276-rama-commit.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rej0276-20260722"
+            ],
+            "started_at": "2026-07-22T14:51:50Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:51:50Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rem0276-20260722",
+            "expires_at": "2026-07-22T15:00:52Z",
+            "notes": "Remediacion de 0276 (rama commit no discrimina) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0276-rama-commit.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0276-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0276-NO-GO.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-evidencia-util.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0276-NO-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-evidencia-util.md"
+            ],
+            "started_at": "2026-07-22T14:40:52Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:40:52Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rev0275-20260722",
+            "expires_at": "2026-07-22T15:41:48Z",
+            "notes": "Ruteo del juicio de 0275 al checker + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0275-cuarentena-residual.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0275.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0276-y-GO-0275.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0275.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0276-y-GO-0275.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0275-20260722"
+            ],
+            "started_at": "2026-07-22T15:21:48Z",
+            "status": "released",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-22T15:21:48Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rev0276-20260722",
+            "expires_at": "2026-07-22T14:39:03Z",
+            "notes": "Ruteo del juicio de 0276 al checker + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-evidencia-util.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0283-y-GO-0276.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0283-y-GO-0276.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0276-20260722"
+            ],
+            "started_at": "2026-07-22T14:19:03Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:19:03Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rev0285-20260722",
+            "expires_at": "2026-07-22T16:15:23Z",
+            "notes": "Ruteo del juicio de 0285 al checker (ultima de higiene) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0285-instanciacion.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0285.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0275-y-GO-0285.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0285.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0275-y-GO-0285.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0285-20260722"
+            ],
+            "started_at": "2026-07-22T15:55:23Z",
+            "status": "released",
+            "task_id": "TASK-0285",
+            "updated_at": "2026-07-22T15:55:23Z"
         }
     ]
 }
