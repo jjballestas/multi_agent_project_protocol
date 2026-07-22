@@ -3935,3 +3935,40 @@ Arquitecto corra la poda en su proximo checkpoint.
 Flip a done = del Arquitecto (yo checker-only). Con esto TASK-0259 (nucleo tanda 0103) queda GO;
 la cadena de remediacion 0259 cierra tras 3 iteraciones (iter1 NO-GO friccion inerte, iter2 NO-GO
 guardian rojo, iter3 GO).
+
+---
+
+## TASK-0260 (C1 vista de plan + gate turno 0) -- GO / OK-CLOSABLE (2026-07-22 22:15)
+
+Commit veredicto 7366925 (push OK). Impl b7d29c1 (deliver 5cfeb47); runtime/*.py + example
+IDENTICOS a HEAD 1ab1be1 -> puertas en b7d29c1 = HEAD vivo. Clon limpio D:/ccv0260 @ b7d29c1;
+TODAS las puertas exit 0 (plan_approval_cases + 3 turn runners + validate + scan_encoding +
+neutrality + git diff --check). Extraje render_plan/plan_approval_error/run_loop del CLON y corri
+28 payloads PROPIOS (no los del maker) sobre toda la familia de cada punto -> 28/28 PASS.
+
+Diseno del gate (correcto en ambas direcciones): render_hash = TODO el render; approval_hash =
+SOLO {id, acceptance, risk} sorted-by-id. Display (goal/verification_cmd/required_capability/
+estimate) mueve render_hash pero NO approval_hash -> no invalida en falso. Material (acceptance/
+risk/unidad nueva) mueve approval_hash -> invalida. Reorden del index NO invalida (sort por id).
+Auth: actor in human_actors(caps=human_owner) + payload.approval_hash==expected + type==plan.approved
++ verify_event_auth (si event_auth) + verify_actor_auth (si agent_signatures). run_loop rehusa
+turno-0 con ok:false "turn-zero plan approval required" ANTES de cualquier mutacion (cero efecto
+colateral); probe: con firmas ON y sin actor_auth -> rechazado (sin falso-seguro). Gate NO toca
+supervised_autonomy/human_checkpoint. Hub intacto: los 5 eventos del commit son intent.applied
+(submit_intent lifecycle 0260), no orchestrator; sin RUN-*.jsonl; config/dataset/6-reservadas
+fuera del filelist.
+
+CLAVE reutilizable: probar el "arranca" de forma INTEGRAL en run_loop, no solo el guarda aislado
+(el test del maker solo asertaba plan_approval_error(...) is None para esa direccion). Y probar la
+direccion de NO-invalidacion-falsa (cambiar campos no-materiales) ademas de la de invalidacion.
+
+Residuales declarados (ninguno bloquea C1): R1 alcance por decision_id (unidad ligada a otra
+decision queda excluida del plan decision-scoped y no invalida; con decision_id=None todas cuentan).
+R2 fuerza de auth = postura event-log (con event_auth+agent_signatures off, actor confia en texto
+plano; not_enforced_phase2 pasa aun con firmas ON -> escotilla GLOBAL de fase 2, no nueva). R3 slip
+cosmetico: intake verification_cmd nombra run_runtime_turn_cases.py inexistente; reales = 3 split +
+plan_approval, todos verdes.
+
+ANOMALIA (DECISION-0018, senalada al Arquitecto en el MSG): prune_state --check = DUE
+(released_ratio 92.59>=90); poda --apply es op de orchestrator bajo enforce, no mia; que la corra
+en su checkpoint. Flip a done = del Arquitecto (yo checker-only).
