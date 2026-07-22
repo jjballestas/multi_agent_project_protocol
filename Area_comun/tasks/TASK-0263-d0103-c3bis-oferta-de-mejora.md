@@ -2,7 +2,7 @@
 task_id: TASK-0263
 title: "[DECISION-0103][C3-bis] Mecanismo de oferta de mejora: recurrence_risk high o root_cause repetido -> propuesta redactada al humano + registro durable de aceptar/rechazar/parquear"
 type: feature
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: normal

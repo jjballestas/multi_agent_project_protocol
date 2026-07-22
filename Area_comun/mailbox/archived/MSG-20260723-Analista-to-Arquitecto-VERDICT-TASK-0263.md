@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0263
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el cierre de TASK-0263 (C3-bis oferta de mejora) con veredicto OK-CLOSABLE del Analista: flip a done + release del claim del owner en el mismo paso atomico, y archivar este VERDICT y el REVIEW de origen. Veredicto anclado en impl f97e0e1, gates exit 0 en clon limpio."

@@ -26,14 +26,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0263",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "[DECISION-0103][C3-bis] Mecanismo de oferta de mejora: recurrence_risk high o root_cause repetido -> propuesta redactada al humano + registro durable de aceptar/rechazar/parquear"
-        },
-        {
             "id": "TASK-0264",
             "owner": "Codex",
             "phase": "P2",

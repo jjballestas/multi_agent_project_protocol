@@ -42,6 +42,28 @@
             "updated_at": "2026-07-22T23:44:11Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratif0263-20260723",
+            "expires_at": "2026-07-23T00:09:18Z",
+            "notes": "Ratificacion 0263 (GO checker) -> review_approved + done-flip y GO 0264 a Codex + archivo VERDICT/REVIEW",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0263-y-GO-0264.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0263",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0263",
+                "Area_comun/tasks/TASK-0263-d0103-c3bis-oferta-de-mejora.md",
+                "Area_comun/artifacts/Analista-TASK-0263-oferta-de-mejora-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratif0263-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0263.md",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0263.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0263.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0263.md"
+            ],
+            "started_at": "2026-07-22T23:49:18Z",
+            "status": "released",
+            "task_id": "TASK-0263",
+            "updated_at": "2026-07-22T23:49:18Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
