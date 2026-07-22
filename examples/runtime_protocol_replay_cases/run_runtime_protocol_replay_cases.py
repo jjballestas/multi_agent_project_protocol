@@ -186,6 +186,9 @@ def case_cli_is_a_real_aborting_gate() -> None:
         assert clean.returncode == 0, clean.stdout + clean.stderr
         assert "verdict=CLEAN" in clean.stdout and "up_to_seq=1" in clean.stdout, clean.stdout
 
+        isolated_unknown = run(command + ["--bogus-flag"], check=False)
+        assert isolated_unknown.returncode != 0, isolated_unknown.stdout + isolated_unknown.stderr
+
         write_json(root / "Area_comun/state/TASK_INDEX.json", hot_docs("done")["task_index"])
         dirty = run(command, check=False)
         assert dirty.returncode != 0, dirty.stdout + dirty.stderr
