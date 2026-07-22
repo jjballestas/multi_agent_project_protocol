@@ -10,6 +10,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+FALSIFICATION_CONTRACTS = (
+    {
+        "id": "NEG-FALSIFICATION-GUARDIAN",
+        "negative": "A convention-marked negative outside the former examples/run_*.py glob is inventoried.",
+        "mutation": ".replace(marker_line, \"\")",
+        "boundaries": (
+            "assert off_glob.returncode != 0",
+            "assert invisible.returncode == 0",
+        ),
+        "exercised_by": "main",
+    },
+)
+
 
 def run(root: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
@@ -21,6 +34,7 @@ def run(root: Path) -> subprocess.CompletedProcess[str]:
 
 
 def main() -> int:
+    """PERMANENT_NEGATIVE: NEG-FALSIFICATION-GUARDIAN"""
     clean = run(ROOT)
     assert clean.returncode == 0, clean.stdout + clean.stderr
     with tempfile.TemporaryDirectory(prefix="falsification-contract-") as temp:
@@ -46,7 +60,31 @@ def main() -> int:
         assert undeclared.returncode != 0, undeclared.stdout + undeclared.stderr
         assert "permanent_negatives=2 declared=1 missing=1" in undeclared.stdout, undeclared.stdout
         assert "NEG-SHADOW" in undeclared.stdout, undeclared.stdout
-    print("OK: falsification contracts reject relaxed boundaries and undeclared permanent negatives")
+    with tempfile.TemporaryDirectory(prefix="falsification-off-glob-") as temp:
+        fixture = Path(temp)
+        outside_old_glob = fixture / "scripts/test_outside_old_glob.py"
+        outside_old_glob.parent.mkdir(parents=True)
+        marker_line = "    '''PERMANENT_NEGATIVE: NEG-OFF-GLOB'''\n"
+        outside_old_glob.write_text(
+            "def test_real_negative():\n" + marker_line + "    assert False\n",
+            encoding="ascii",
+        )
+        off_glob = run(fixture)
+        assert off_glob.returncode != 0, off_glob.stdout + off_glob.stderr
+        assert "permanent_negatives=1 declared=0 missing=1" in off_glob.stdout, off_glob.stdout
+        assert "NEG-OFF-GLOB" in off_glob.stdout, off_glob.stdout
+
+        outside_old_glob.write_text(
+            outside_old_glob.read_text(encoding="ascii").replace(marker_line, ""),
+            encoding="ascii",
+        )
+        invisible = run(fixture)
+        assert invisible.returncode == 0, invisible.stdout + invisible.stderr
+        assert "permanent_negatives=0 declared=0 missing=0" in invisible.stdout, invisible.stdout
+    print(
+        "OK: guardian rejects relaxed boundaries and marked undeclared negatives; "
+        "comprehensive scripts discovery and the marker's load-bearing limit are proved"
+    )
     return 0
 
 

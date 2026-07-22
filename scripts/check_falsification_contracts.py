@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Inventory and validate declared falsification mutations beside their negative tests."""
+"""Inventory declared falsification mutations beside convention-marked negative tests.
+
+Discovery is comprehensive for Python files under ``examples/`` and ``scripts/``.
+``PERMANENT_NEGATIVE:`` is mandatory and load-bearing: an unmarked negative is a
+prohibited review/CI defect, but cannot be inferred automatically. The inventory is
+complete for tests that follow the convention; absolute discovery is not promised.
+"""
 
 from __future__ import annotations
 
@@ -68,7 +74,12 @@ def permanent_negatives(path: Path) -> dict[str, str]:
 def main() -> int:
     args = parse_args()
     root = Path(args.root).resolve()
-    files = sorted((root / "examples").glob("**/run_*.py"))
+    files = sorted(
+        path
+        for test_root in (root / "examples", root / "scripts")
+        if test_root.is_dir()
+        for path in test_root.rglob("*.py")
+    )
     raw: list[dict[str, object]] = []
     owners: dict[str, Path] = {}
     existing: dict[str, tuple[Path, str]] = {}

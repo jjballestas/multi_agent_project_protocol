@@ -3,6 +3,11 @@
 
 The script uses only the Python standard library and treats ``*.template.*`` files
 as the source of canonical instance files.
+
+The exported falsification guardian recursively inventories Python tests under
+``examples/`` and ``scripts/``. Permanent negatives must carry the load-bearing
+``PERMANENT_NEGATIVE:`` marker. An unmarked negative is prohibited and must be caught
+in review/CI; inferring whether arbitrary test code can fail is not auto-detectable.
 """
 
 from __future__ import annotations

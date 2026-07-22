@@ -1,5 +1,25 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/new_instance.py",
+                "scripts/test_cases/falsification_off_glob_case.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0283"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
