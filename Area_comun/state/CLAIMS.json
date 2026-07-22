@@ -179,6 +179,24 @@
             "updated_at": "2026-07-22T16:20:06Z"
         },
         {
+            "claim_id": "CLAIM-arq-review0259r1-20260722",
+            "expires_at": "2026-07-22T17:24:03Z",
+            "notes": "Ruteo re-juicio 0259 remediacion iter1 al Analista + archivo de los 2 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-review0259r1-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-friccion-y-predicado.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-friccion-y-predicado.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-1.md"
+            ],
+            "started_at": "2026-07-22T17:04:03Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T17:04:03Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",

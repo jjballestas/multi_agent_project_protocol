@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-friccion-y-predica
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediacion de TASK-0259, iteracion 1 de 2, con ACCEPTANCE REFINADO por el Arquitecto hacia el modelo pleno de C3. El checker probo dos cosas: (BLOQUEANTE) is_delivery_turn lee report.outcome, un campo ortogonal auto-declarado, en vez de la senal autoritativa transitions.task_status.to que el resto de validate_turn ya usa -- una entrega real (in_progress->in_review, suelta el claim) con outcome=ok y SIN obstacles pasa con cero errores; y (ALCANCE) forzar obstacles en TODA entrega es teatro, que C3 prohibe (lista vacia es respuesta legitima), y ademas no hay sensor de friccion. Modelo correcto -- la FRICCION es el disparador, no la entrega: (1) is_delivery_turn lee transitions.task_status.to in {in_review, done}, NO report.outcome; (2) SENSOR DE FRICCION: cualquier turno (entrega o no) que muestre friccion OBJETIVA -- gate_green:false, attempt>1/reintento, revert -- exige obstacles NO VACIO que la narre; empty ahi -> RECHAZADO; (3) ANTI-TEATRO: una entrega SIN friccion objetiva puede tener obstacles VACIO (empty = 'no hubo friccion', legitimo); no forzar narracion donde no la hubo; el bloque debe estar PRESENTE pero puede ser []. Negativos permanentes con mutacion demostrada (0283): entrega-via-transicion con outcome divergente y sin obstacles -> RECHAZADO (hoy pasa); turno con gate rojo y obstacles vacio -> RECHAZADO; entrega sin friccion con obstacles [] -> ACEPTADO. Entregar in_review + handoff bien formado + release."
