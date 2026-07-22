@@ -1,5 +1,25 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "runtime/protocol_replay.py",
+                "runtime/README.md",
+                "scripts/",
+                "examples/",
+                "Area_comun/protocol/",
+                ".agents/skills/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0274"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

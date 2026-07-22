@@ -1202,3 +1202,29 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
         "hot_hash": canonical_hash(hot),
         "replay_hash": canonical_hash(materialized),
     }
+
+
+def _drift_exit_code(drift: dict[str, Any]) -> int:
+    """Return the process verdict for the drift gate."""
+    return 1 if drift.get("has_drift") is not False else 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Replay and verify runtime protocol state.")
+    parser.add_argument("--check-drift", action="store_true", help="fail when canonical state differs from signed replay")
+    parser.add_argument("--root", type=Path, default=Path.cwd(), help="protocol instance root (default: current directory)")
+    args = parser.parse_args(argv)
+    if not args.check_drift:
+        parser.error("--check-drift is required")
+    drift = protocol_state_drift(args.root)
+    verdict = "CLEAN" if drift.get("has_drift") is False else "DRIFT"
+    print(f"PROTOCOL_STATE_DRIFT verdict={verdict} up_to_seq={drift.get('up_to_seq')}")
+    for entry in drift.get("entries") or []:
+        print(f"DRIFT path={entry.get('path')}")
+    return _drift_exit_code(drift)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

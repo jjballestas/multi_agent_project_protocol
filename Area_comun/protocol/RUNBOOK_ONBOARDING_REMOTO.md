@@ -21,6 +21,10 @@ employee-run pre-registrada, posterior a este doc.
 
 ## 2. Paso a paso (onboarding)
 
+En una instancia runtime-authoritative, `python runtime/protocol_replay.py
+--check-drift` es el gate de deriva: registra `verdict`, `up_to_seq` y exit 0. La
+deriva o un argumento desconocido deben salir distinto de cero.
+
 1. **Clonar la instancia** (no el hub): `git clone -c core.longpaths=true <URL-remoto-privado> <carpeta>`.
 2. **Leer en frio** (orden de arranque, sin asumir contexto): `AGENTS.md` (s.0 How to Start), luego
    `Area_comun/README.md`, `Area_comun/protocol/TASK_PROTOCOL.md`, y el estado en

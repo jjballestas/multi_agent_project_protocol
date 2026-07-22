@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 
 from runtime.eventlog import rebuild_snapshot  # noqa: E402
 from runtime.protocol_replay import (  # noqa: E402
+    _drift_exit_code,
     build_genesis_snapshot,
     materialize_protocol_state,
     protocol_state_drift,
@@ -177,6 +178,30 @@ def case_drift_detected_and_absent() -> None:
         assert any(entry["path"] == "Area_comun/state/TASK_INDEX.json" for entry in drift["entries"])
 
 
+def case_cli_is_a_real_aborting_gate() -> None:
+    with root_temp_dir(ROOT, ".protocol-replay-cli-") as root:
+        build_fixture(root, event_state_enabled=True, hot_status="ready")
+        command = [sys.executable, str(ROOT / "runtime/protocol_replay.py"), "--check-drift", "--root", str(root)]
+        clean = run(command, check=False)
+        assert clean.returncode == 0, clean.stdout + clean.stderr
+        assert "verdict=CLEAN" in clean.stdout and "up_to_seq=1" in clean.stdout, clean.stdout
+
+        write_json(root / "Area_comun/state/TASK_INDEX.json", hot_docs("done")["task_index"])
+        dirty = run(command, check=False)
+        assert dirty.returncode != 0, dirty.stdout + dirty.stderr
+        assert "verdict=DRIFT" in dirty.stdout and "up_to_seq=1" in dirty.stdout, dirty.stdout
+
+        unknown = run([sys.executable, str(ROOT / "runtime/protocol_replay.py"), "--bogus-flag"], check=False)
+        assert unknown.returncode != 0, unknown.stdout + unknown.stderr
+
+        # Mutation control: an inverted verdict is killed by both branch assertions.
+        assert _drift_exit_code({"has_drift": False}) == 0
+        assert _drift_exit_code({"has_drift": True}) != 0
+        inverted = lambda value: 0 if value.get("has_drift") is not False else 1
+        assert inverted({"has_drift": False}) != 0
+        assert inverted({"has_drift": True}) == 0
+
+
 def case_pruned_archive_loss_is_drift() -> None:
     with root_temp_dir(ROOT, ".protocol-replay-archive-drift-") as root:
         build_fixture(root, event_state_enabled=True, hot_status="ready")
@@ -270,6 +295,7 @@ def main() -> int:
         case_materialize_is_idempotent_and_canonical,
         case_genesis_round_trip_matches_hot_state,
         case_drift_detected_and_absent,
+        case_cli_is_a_real_aborting_gate,
         case_pruned_archive_loss_is_drift,
         case_validator_cross_checks_task_files_and_rows,
         case_validator_gate_off_is_silent_and_gate_on_warns,

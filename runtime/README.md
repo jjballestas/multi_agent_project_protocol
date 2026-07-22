@@ -107,6 +107,19 @@ de cadena.
 Ficheros = fuente de verdad. 1 turno = 1 commit. Gate por turno + rollback. Gates humanos como
 paradas duras. Adapters vendor-neutral. Determinismo en router/transiciones. Claim como lock.
 
+## Gate de deriva del ledger
+
+Desde la raiz de una instancia runtime, el gate verificable es:
+
+```text
+python runtime/protocol_replay.py --check-drift
+```
+
+Imprime `verdict=CLEAN|DRIFT` y `up_to_seq=<n>`. Sale 0 exclusivamente con
+`has_drift=false`; la deriva, un argumento desconocido o la ausencia de
+`--check-drift` producen un exit distinto de cero. Las automatizaciones deben gatear
+el exit code, no buscar texto en stdout.
+
 ## Neutralidad
 `runtime/**` es tooling: se anade a `scan_globs` de neutralidad (no puede introducir terminos de
 dominio). El dominio del piloto vive en la instancia, no aqui.

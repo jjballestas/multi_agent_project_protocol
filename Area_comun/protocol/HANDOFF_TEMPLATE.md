@@ -45,6 +45,10 @@ Map each acceptance criterion to evidence.
 | <criterion> | <file, command, output, review note> | met | partial | not met |
 
 ## 5. Tests Run
+
+For runtime-authoritative instances, include `python runtime/protocol_replay.py
+--check-drift` and record its `verdict` and `up_to_seq`; its exit code must be 0.
+An unknown argument is an error and never counts as green evidence.
 Commands, fixtures or manual checks from the `test_plan`, with results.
 
 ## 6. Spec Deviations

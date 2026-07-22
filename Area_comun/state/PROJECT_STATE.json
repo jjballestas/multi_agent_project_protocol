@@ -117,7 +117,7 @@
         {
             "id": "TASK-0274",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba"
         },
         {
@@ -135,7 +135,7 @@
         {
             "id": "TASK-0279",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {
