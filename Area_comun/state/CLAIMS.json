@@ -91,9 +91,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T14:43:37Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0276",
             "updated_at": "2026-07-22T14:43:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-remediation1-handoff",
+            "expires_at": "2026-07-22T16:48:09Z",
+            "notes": "Publish TASK-0276 remediation handoff for independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-remediation1-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276-remediation1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:48:09Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:48:09Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-done-flip",

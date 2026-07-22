@@ -123,7 +123,7 @@
         {
             "id": "TASK-0276",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code"
         },
         {
