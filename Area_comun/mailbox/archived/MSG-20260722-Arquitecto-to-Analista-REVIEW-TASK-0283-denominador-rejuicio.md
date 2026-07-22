@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-denominador-rej
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de la remediacion de TASK-0283 sobre el commit 2a52e0c. Tu NO-GO fue exacto: el guardian cazaba la degradacion de un contrato pero no la ENTRADA de un negativo sin declarar. El maker anadio un denominador INDEPENDIENTE por descubrimiento AST del universo de negativos permanentes, no derivado de la lista de contratos; el self-test inyecta un negativo marcado sin contrato y prueba checker exit distinto de cero con permanent_negatives=2 declared=1 missing=1; inventario vivo 14/14, cero missing. Verificar con tu propio escrutinio: (Q2/Q3) que un negativo NUEVO sin contrato -- inyectado por TI, no el del maker -- ponga el inventario en ROJO por missing>0, y que la enumeracion AST no se pueda evadir (un negativo que exista pero que el descubridor no vea seria el mismo agujero); (Q1a/Q4 regresion) que la degradacion de un contrato declarado siga cazandose. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."
