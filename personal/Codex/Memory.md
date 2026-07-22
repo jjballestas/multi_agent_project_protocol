@@ -3840,3 +3840,9 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Commit `8422453` records the Codex-signed `review_approved -> done` flip after independent checker GO and Arquitecto ratification.
 - Runtime transaction seq 5647-5649 acquired and released `CLAIM-20260722-Codex-TASK-0284-done-flip`; the status event is seq 5648 and drift remained false.
 - Canonical validation, encoding, and domain-neutrality gates exited 0. No other unit was opened.
+
+## 2026-07-22 - TASK-0279 hook-phase blocker
+
+- Commit `825ac90` records TASK-0279 as `blocked`, releases both Codex claims, and asks Arquitecto one concrete question in `MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md`.
+- A real commit fixture proved `.githooks/pre-commit` sees stale `.git/COMMIT_EDITMSG`; Git does not provide the finalized pending message to that phase. The reliable abort point is `.githooks/commit-msg`, which receives the finalized message path and rejects before commit creation.
+- No hook implementation remains in the worktree. Resume only if Arquitecto authorizes `commit-msg` as the trailer gate; then restore TASK-0279 to `in_progress`, claim `.githooks/commit-msg` plus the helper/tests/export routes, and implement the born-operational mirror.
