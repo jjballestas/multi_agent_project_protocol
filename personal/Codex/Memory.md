@@ -8,6 +8,13 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
   fail. The two live runners pass, inventory reports 14 declared / 0 missing, and the
   checker plus dependency are shipped by `new_instance.py`; TASK-0274 was also flipped
   from `review_approved` to `done` by signed Codex events 5725 after independent GO.
+  Delivery commit `7afb122` moves TASK-0283 to `in_review`, releases every Codex claim
+  through signed seq 5732, and publishes the self-contained handoff to Arquitecto.
+  Remediation implementation commit `2a52e0c` adds an independent AST-discovered
+  `PERMANENT_NEGATIVE:` denominator, computes `missing = existing - declared`, and makes
+  an undeclared `NEG-SHADOW` fail with `permanent_negatives=2 declared=1 missing=1`.
+  The marker inventory remains 14/14/0; checker controls, both live runners, runtime
+  instantiation, canonical validation, encoding, neutrality, and drift gates passed.
 
 - TASK-0274 remediation commit `77afe05` adds an isolated clean-ledger invocation of
   `--check-drift --bogus-flag` to the permanent replay suite without changing production

@@ -408,7 +408,7 @@
             "phase": "P2",
             "priority": "medium",
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola",
             "type": "infra"
         },
