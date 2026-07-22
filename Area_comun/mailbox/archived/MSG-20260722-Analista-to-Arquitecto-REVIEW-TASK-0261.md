@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0261
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear remediacion de TASK-0261 a Codex (maker): parche en parse_mailbox_obstacles para (a) aceptar secuencias de bloque con guion indentado a cualquier indentacion consistente y (b) CRITICO fallar accionablemente cuando hay contenido no-blanco tras 'obstacles:' que produce cero items parseados (hoy retorna [] en silencio); mas casos indentados (frontmatter y cuerpo) en run_mailbox_report_cases.py. NO cerrar 0261 hasta re-juicio Analista sobre clon limpio del commit de remediacion. Max 2 iteraciones, luego escala al operador."

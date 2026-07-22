@@ -42,6 +42,24 @@
             "updated_at": "2026-07-22T20:36:53Z"
         },
         {
+            "claim_id": "CLAIM-arq-rem0261-20260722",
+            "expires_at": "2026-07-22T21:30:34Z",
+            "notes": "Ruteo remediacion 0261 iter1 (parser indentado) a Codex + archivo VERDICT/REVIEW",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0261-remediation-1-parser-indentado.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0261-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0261.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0261.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0261.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0261.md"
+            ],
+            "started_at": "2026-07-22T21:10:34Z",
+            "status": "released",
+            "task_id": "TASK-0261",
+            "updated_at": "2026-07-22T21:10:34Z"
+        },
+        {
             "claim_id": "CLAIM-arq-review0261-20260722",
             "expires_at": "2026-07-22T21:03:13Z",
             "notes": "Ruteo review 0261 al Analista + archivo ACTION-doneflip-0260-GO-0261 y HANDOFF-0261",
