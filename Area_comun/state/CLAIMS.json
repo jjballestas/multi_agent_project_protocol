@@ -160,6 +160,25 @@
             "updated_at": "2026-07-22T18:13:07Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0259-remediation-3",
+            "expires_at": "2026-07-22T21:56:10Z",
+            "notes": "Iteration 3 mechanical falsification guardian re-sync only; no validator behavior changes.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0259-remediation-3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0259",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0259",
+                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T18:56:10Z",
+            "status": "active",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T18:56:10Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0285-done-flip",
             "expires_at": "2026-07-22T17:13:00Z",
             "notes": "Implementer done-flip after independent checker GO and architect ratification.",

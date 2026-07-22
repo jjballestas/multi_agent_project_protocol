@@ -30,50 +30,50 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-TURN-STATUS-FRICTION-OBSTACLES",
         "negative": "An authoritative friction status transition cannot carry empty obstacles.",
-        "mutation": "remove task_status.to handling from friction_sensors",
+        "mutation": "sensor for sensor in original_friction(report) if not sensor.startswith(\"task_status:\")",
         "boundaries": (
-            "assert STATUS_ERROR in validate_turn(blocked_empty)",
-            "assert STATUS_ERROR not in validate_turn(blocked_empty) after mutation",
+            "assert STATUS_ERROR in turn_validate.validate_turn(blocked_empty, fixture_root)",
+            "assert STATUS_ERROR not in turn_validate.validate_turn(blocked_empty, fixture_root)",
         ),
         "exercised_by": "main",
     },
     {
         "id": "NEG-TURN-REVIEW-FRICTION-OBSTACLES",
         "negative": "An authoritative review/QA friction event cannot carry empty obstacles.",
-        "mutation": "remove review_qa handling from friction_sensors",
+        "mutation": "sensor for sensor in original_friction(report) if not sensor.startswith(\"review_qa:\")",
         "boundaries": (
-            "assert REVIEW_ERROR in validate_turn(review_empty)",
-            "assert REVIEW_ERROR not in validate_turn(review_empty) after mutation",
+            "review_errors = turn_validate.validate_turn(review_empty, fixture_root)",
+            "assert all(\"review_qa:assign_fix\" not in error for error in mutated_review_errors)",
         ),
         "exercised_by": "main",
     },
     {
         "id": "NEG-TURN-CHECKS-FRICTION-OBSTACLES",
         "negative": "Non-empty failed checks cannot carry empty obstacles.",
-        "mutation": "remove review_qa.checks_failed handling from friction_sensors",
+        "mutation": "sensor for sensor in original_friction(report) if sensor != \"review_qa:checks_failed\"",
         "boundaries": (
-            "assert CHECKS_ERROR in validate_turn(checks_empty)",
-            "assert CHECKS_ERROR not in validate_turn(checks_empty) after mutation",
+            "assert CHECKS_ERROR in turn_validate.validate_turn(checks_empty, fixture_root)",
+            "assert CHECKS_ERROR not in turn_validate.validate_turn(checks_empty, fixture_root)",
         ),
         "exercised_by": "main",
     },
     {
         "id": "NEG-TURN-REVERT-PROXY-OBSTACLES",
         "negative": "A declared revert action proxy cannot carry empty obstacles.",
-        "mutation": "remove action-summary revert proxy from friction_sensors",
+        "mutation": "sensor for sensor in original_friction(report) if sensor != \"revert:action-summary-proxy\"",
         "boundaries": (
-            "assert REVERT_ERROR in validate_turn(revert)",
-            "assert REVERT_ERROR not in validate_turn(revert) after mutation",
+            "assert REVERT_ERROR in turn_validate.validate_turn(revert, fixture_root)",
+            "assert REVERT_ERROR not in turn_validate.validate_turn(revert, fixture_root)",
         ),
         "exercised_by": "main",
     },
     {
         "id": "NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER",
         "negative": "An idempotency attempt_id suffix cannot create friction.",
-        "mutation": "restore trailing-integer parsing of attempt_id",
+        "mutation": "[\"attempt>1\"] if report.get(\"attempt_id\") == \"TASK-0259-codex-0042\" else []",
         "boundaries": (
-            "assert validate_turn(first_attempt_0042) == []",
-            "assert ATTEMPT_ERROR in validate_turn(first_attempt_0042) after mutation",
+            "assert turn_validate.validate_turn(first_attempt_0042, fixture_root) == []",
+            "assert ATTEMPT_ERROR in turn_validate.validate_turn(first_attempt_0042, fixture_root)",
         ),
         "exercised_by": "main",
     },
@@ -88,7 +88,7 @@ ATTEMPT_ERROR = "semantic: objective friction (attempt>1) requires non-empty obs
 
 
 def main() -> int:
-    """PERMANENT_NEGATIVE: NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-FRICTION-OBSTACLES"""
+    """PERMANENT_NEGATIVE: NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-STATUS-FRICTION-OBSTACLES, NEG-TURN-REVIEW-FRICTION-OBSTACLES, NEG-TURN-CHECKS-FRICTION-OBSTACLES, NEG-TURN-REVERT-PROXY-OBSTACLES, NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER"""
     delivery_missing = {
         "outcome": "ok",
         "transitions": {"task_status": {"from": "in_progress", "to": "in_review"}},
