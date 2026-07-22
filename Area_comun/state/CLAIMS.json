@@ -298,9 +298,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T12:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0283",
             "updated_at": "2026-07-22T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-delivery",
+            "expires_at": "2026-07-22T14:35:00Z",
+            "notes": "Publish TASK-0283 independent-review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-delivery",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:35:00Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-memory",
@@ -314,7 +330,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T12:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0283",
             "updated_at": "2026-07-22T12:20:00Z"
         },
