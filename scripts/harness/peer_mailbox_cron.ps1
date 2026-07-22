@@ -477,9 +477,15 @@ function Get-OwnEvidence {
         if ([string]::IsNullOrWhiteSpace($line)) { continue }
         try { $event = $line | ConvertFrom-Json } catch { continue }
         if ([string]$event.actor -cne $PeerId) { continue }
+        if ($event.applied -ne $true) { continue }
         if ([string]$event.actor_auth.method -cne "ed25519") { continue }
-        if ([string]::IsNullOrWhiteSpace([string]$event.actor_auth.keyid)) { continue }
+        $expectedKeyPrefix = $PeerId.ToLowerInvariant() + ":"
+        if (-not ([string]$event.actor_auth.keyid).StartsWith($expectedKeyPrefix, [StringComparison]::Ordinal)) { continue }
         if ([string]::IsNullOrWhiteSpace([string]$event.actor_auth.sig)) { continue }
+        $intentType = [string]$event.payload.intent_type
+        $hasUsefulIntent = $intentType -in @("task_status", "task_upsert", "decision")
+        $hasCommit = -not [string]::IsNullOrWhiteSpace([string]$event.payload.commit)
+        if (-not ($hasUsefulIntent -or $hasCommit)) { continue }
         return $true
     }
     return $false
@@ -674,6 +680,9 @@ function Invoke-PreExecPatch {
     }
     $args += $PatchPath
     & git @args 2>$null
+    if ($LASTEXITCODE -ne 0) {
+        Write-Log "APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE"
+    }
 }
 
 function Test-LedgerDerivedState {

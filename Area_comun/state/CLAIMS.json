@@ -42,6 +42,44 @@
             "updated_at": "2026-07-22T14:07:28Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276",
+            "expires_at": "2026-07-23T02:09:24Z",
+            "notes": "Implement TASK-0276 useful-work evidence filtering, signature coherence, git exit gates, and permanent mutation-proved negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:09:24Z",
+            "status": "active",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:09:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-done-flip",
+            "expires_at": "2026-07-22T16:09:24Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:09:24Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:09:24Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",

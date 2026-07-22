@@ -372,7 +372,7 @@
             "phase": "P2",
             "priority": "medium",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code",
             "type": "infra"
         },
@@ -384,7 +384,7 @@
             "phase": "P2",
             "priority": "medium",
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola",
             "type": "infra"
         },

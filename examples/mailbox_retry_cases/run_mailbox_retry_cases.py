@@ -86,6 +86,27 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "run_pure_append_evidence_cases",
     },
     {
+        "id": "retry-useful-own-evidence",
+        "negative": "pure claims, rejected events, exceptions, and foreign-key signatures do not confirm",
+        "mutation": 'body.replace("if (-not ($hasUsefulIntent -or $hasCommit)) { continue }", "", 1)',
+        "boundaries": ('"pure_claim": False', '"task_status": True'),
+        "exercised_by": "run_useful_own_evidence_cases",
+    },
+    {
+        "id": "retry-preexec-untracked-exit-gate",
+        "negative": "pre-exec untracked enumeration failure defers launch",
+        "mutation": 'text.replace("if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason \\"untracked_snapshot_failed\\"; return }", "", 1)',
+        "boundaries": ('"untracked_snapshot_failed" in candidate', 'assert not survivors'),
+        "exercised_by": "run_git_gate_contract_mutants",
+    },
+    {
+        "id": "retry-apply-fail-visible",
+        "negative": "failed index reapply emits APPLY_FAIL",
+        "mutation": 'text.replace("Write-Log \\"APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE\\"", "", 1)',
+        "boundaries": ('"APPLY_FAIL" in apply_body', 'assert not survivors'),
+        "exercised_by": "run_git_gate_contract_mutants",
+    },
+    {
         "id": "retry-expired-claim",
         "negative": "an expired external claim does not defer launch",
         "mutation": 'replace("$expires -gt $now", "$true", 1)',
@@ -434,7 +455,7 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
         raise AssertionError("pure-append evidence helpers not found")
     events = sandbox / "runtime/state/events.jsonl"
     old = b'{"seq":1,"actor":"Other"}\n'
-    own = b'{"seq":2,"actor":"TestPeer","actor_auth":{"method":"ed25519","keyid":"test:v1","sig":"new"}}\n'
+    own = b'{"seq":2,"actor":"TestPeer","applied":true,"actor_auth":{"method":"ed25519","keyid":"testpeer:v1","sig":"new"},"payload":{"intent_type":"task_status"}}\n'
     events.write_bytes(old)
     probe = sandbox / "pure-append-probe.ps1"
     probe.write_text(
@@ -456,6 +477,124 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
     assert result == {"append": True, "rewrite_grow": False, "rewrite_shrink": False, "mutant_rewrite_grow": True}, result
     events.write_text("", encoding="ascii")
     probe.unlink()
+
+
+def run_useful_own_evidence_cases(sandbox: Path) -> None:
+    """Only applied, coherently signed useful work confirms an exec.
+    PERMANENT_NEGATIVE: retry-useful-own-evidence
+    """
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    helpers = re.search(
+        r"(?ms)^function Get-FilePrefixSha256 \{.*?^\}\r?\n\r?\nfunction Get-OwnEvidence \{.*?^\}",
+        runner_text,
+    )
+    if not helpers:
+        raise AssertionError("own-evidence helpers not found")
+    body = helpers.group(0)
+
+    def contract(candidate: str) -> bool:
+        return all(
+            (
+                "$event.applied -ne $true" in candidate,
+                ".StartsWith($expectedKeyPrefix, [StringComparison]::Ordinal)" in candidate,
+                '$intentType -in @("task_status", "task_upsert", "decision")' in candidate,
+                "$hasUsefulIntent -or $hasCommit" in candidate,
+            )
+        )
+
+    assert contract(body), "useful-own-evidence contract is incomplete"
+    mutants = {
+        "applied_gate_removed": body.replace("if ($event.applied -ne $true) { continue }", "", 1),
+        "key_actor_gate_removed": body.replace(
+            'if (-not ([string]$event.actor_auth.keyid).StartsWith($expectedKeyPrefix, [StringComparison]::Ordinal)) { continue }',
+            "",
+            1,
+        ),
+        "useful_work_gate_removed": body.replace("if (-not ($hasUsefulIntent -or $hasCommit)) { continue }", "", 1),
+    }
+    survivors = [name for name, mutant in mutants.items() if contract(mutant)]
+    assert not survivors, f"useful-evidence contract failed to kill declared mutants: {survivors}"
+
+    events = sandbox / "runtime/state/events.jsonl"
+    probe = sandbox / "useful-evidence-probe.ps1"
+    cases = {
+        "pure_claim": ("claim", True, "testpeer:v1", "", False),
+        "exception": ("exception.recorded", True, "testpeer:v1", "", False),
+        "rejected_status": ("task_status", False, "testpeer:v1", "", False),
+        "foreign_key": ("task_status", True, "other:v1", "", False),
+        "task_status": ("task_status", True, "testpeer:v1", "", True),
+        "task_upsert": ("task_upsert", True, "testpeer:v1", "", True),
+        "decision": ("decision", True, "testpeer:v1", "", True),
+        "commit": ("claim", True, "testpeer:v1", "abc123", True),
+    }
+    rendered = [
+        "$Root=(Get-Location).Path",
+        "$PeerId='TestPeer'",
+        "function Write-Log { param([string]$Message) }",
+        body,
+        "$path=Join-Path $Root 'runtime/state/events.jsonl'",
+        "$results=[ordered]@{}",
+    ]
+    for name, (intent_type, applied, keyid, commit, _) in cases.items():
+        event = {
+            "seq": 2,
+            "actor": "TestPeer",
+            "applied": applied,
+            "actor_auth": {"method": "ed25519", "keyid": keyid, "sig": "fixture"},
+            "payload": {"intent_type": intent_type},
+        }
+        if commit:
+            event["payload"]["commit"] = commit
+        encoded = json.dumps(event, separators=(",", ":"))
+        rendered.extend(
+            (
+                "[IO.File]::WriteAllText($path,'{}'+[Environment]::NewLine,[Text.Encoding]::ASCII)".format("{}"),
+                "$before=(Get-Item -LiteralPath $path).Length",
+                "$hash=Get-FilePrefixSha256 -Path $path -Length $before",
+                "[IO.File]::AppendAllText($path,'{}'+[Environment]::NewLine,[Text.Encoding]::ASCII)".format(encoded.replace("'", "''")),
+                f"$results['{name}']=Get-OwnEvidence -LedgerBytesBefore $before -LedgerPrefixSha256Before $hash",
+            )
+        )
+    rendered.append("$results|ConvertTo-Json -Compress")
+    probe.write_text("\n".join(rendered) + "\n", encoding="ascii")
+    result = json.loads(run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout)
+    assert result == {name: expected for name, (*_, expected) in cases.items()}, result
+    events.write_text("", encoding="ascii")
+    probe.unlink()
+
+
+def run_git_gate_contract_mutants() -> None:
+    """Both git probes fail closed and an apply failure remains visible.
+    PERMANENT_NEGATIVE: retry-preexec-untracked-exit-gate, retry-apply-fail-visible
+    """
+    text = RUNNER.read_text(encoding="utf-8-sig")
+    apply_fn = re.search(r"(?ms)^function Invoke-PreExecPatch \{.*?^\}", text)
+    if not apply_fn:
+        raise AssertionError("Invoke-PreExecPatch function not found")
+    apply_body = apply_fn.group(0)
+
+    def contract(candidate: str, candidate_apply: str) -> bool:
+        return all(
+            (
+                'Reason "untracked_snapshot_failed"' in candidate,
+                'reason=untracked_enumeration_failed' in candidate,
+                'Write-Log "APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE"' in candidate_apply,
+            )
+        )
+
+    assert contract(text, apply_body), "git exit/logging contract is incomplete"
+    mutants = {
+        "preexec_gate_removed": (
+            text.replace('if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason "untracked_snapshot_failed"; return }', "", 1),
+            apply_body,
+        ),
+        "apply_fail_log_removed": (
+            text,
+            apply_body.replace('Write-Log "APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE"', "", 1),
+        ),
+    }
+    survivors = [name for name, mutant in mutants.items() if contract(*mutant)]
+    assert not survivors, f"git gate contract failed to kill declared mutants: {survivors}"
 
 
 def run_nul_residue_path_cases(sandbox: Path) -> None:
@@ -758,6 +897,8 @@ def main() -> int:
         run_large_stderr_drain_case(sandbox)
         run_expired_claim_behavior_case(sandbox)
         run_pure_append_evidence_cases(sandbox)
+        run_useful_own_evidence_cases(sandbox)
+        run_git_gate_contract_mutants()
         run_nul_residue_path_cases(sandbox)
         run_unreadable_head_case(sandbox, prompt, fake)
         run_unstaged_residue_case(sandbox, prompt, fake)

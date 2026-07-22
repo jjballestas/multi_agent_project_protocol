@@ -2,7 +2,7 @@
 task_id: TASK-0276
 title: "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code"
 type: infra
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: medium
