@@ -3,7 +3,7 @@ message_id: MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0260
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 requested_action: "Route TASK-0260 implementation commit b7d29c1 to Analista for independent review."
 created_at: 2026-07-22
