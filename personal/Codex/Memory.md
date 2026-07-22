@@ -1,6 +1,14 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, after TASK-0281 final done flip.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0279 delivery.
+
+- TASK-0279 implementation commit `15fe9c8` adds the aborting `commit-msg` trailer
+  gate while leaving the staged-snapshot `pre-commit` unchanged. The bounded checker
+  validates only governed staged paths, accepts hot or archived task ids, and reports
+  exact repairs for the four recurrent failure classes. Seven real-commit cases include
+  explicit mutation controls; the born-operational export contains both hooks and the
+  checker. Validator, encoding, neutrality, and targeted tests are green. Independent
+  review remains with Analista; Codex has not reviewed or ratified the implementation.
 
 - TASK-0281 is `done` after independent Analista review and Arquitecto ratification.
   Codex applied the implementer-only `review_approved -> done` transition at signed

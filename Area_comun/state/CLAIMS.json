@@ -65,6 +65,34 @@
             "updated_at": "2026-07-22T10:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-delivery",
+            "expires_at": "2026-07-22T11:15:47Z",
+            "notes": "Publish TASK-0279 delivery handoff and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-delivery",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279.md"
+            ],
+            "started_at": "2026-07-22T10:15:47Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:15:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-msgfix",
+            "expires_at": "2026-07-22T11:16:49Z",
+            "notes": "Add the compact-mailbox question required by validation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279.md"
+            ],
+            "started_at": "2026-07-22T10:16:49Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:16:49Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0279-question",
             "expires_at": "2026-07-22T12:25:00Z",
             "notes": "Publish the single TASK-0279 hook-phase blocking question.",
@@ -96,7 +124,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T10:09:33Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0279",
             "updated_at": "2026-07-22T10:09:33Z"
         },
