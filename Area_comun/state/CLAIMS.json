@@ -230,6 +230,22 @@
             "updated_at": "2026-07-22T23:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0263-final-memory",
+            "expires_at": "2026-07-23T00:35:00Z",
+            "notes": "Persist final TASK-0263 delivery checkpoint.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0263-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T23:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0263",
+            "updated_at": "2026-07-22T23:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0263-memory",
             "expires_at": "2026-07-23T00:15:00Z",
             "notes": "Persist post-commit TASK-0263 implementation context.",

@@ -18,6 +18,9 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
   all five acceptance cases, explicit-new-evidence behavior, and zero apply routes.
 - Implementation gates passed: new runner, py_compile, canonical validator, encoding,
   domain neutrality, and diff check. TASK-0263 remains in progress until delivery.
+- Delivery commit `d5611b7` moves TASK-0263 to `in_review`, releases all maker
+  implementation/delivery claims, and opens the self-contained handoff to Arquitecto.
+  Independent review is assigned to Analista; Codex did not review or ratify the work.
 
 ## 2026-07-23 - TASK-0262 remediation iteration 1
 
