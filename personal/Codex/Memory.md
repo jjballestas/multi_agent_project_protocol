@@ -10,6 +10,10 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 implementation.
   both exit-gated. `run_mailbox_retry_cases.py` passes with permanent behavioral and
   mutation-killing negatives. TASK-0283 was flipped from review_approved to done in
   the same signed start transaction; TASK-0276 is in_progress under its active claim.
+- TASK-0276 delivery commit `5f2b81d` moves the task to `in_review`, releases both
+  Codex claims, and publishes the self-contained handoff to Arquitecto. All required
+  gates and the 43-second mailbox retry E2E suite pass. The live harness was not
+  redeployed; independent review by Analista is pending.
 
 - TASK-0283 iteration 4 implementation commit `2267f2c` replaces shallow
   `tree.body` discovery with complete `ast.walk` traversal for both marked
