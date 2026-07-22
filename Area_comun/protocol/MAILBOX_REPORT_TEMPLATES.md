@@ -42,7 +42,7 @@ required_capability: <routing_decision.required_capability>
 candidate_agents:
   - <routing_decision.explanation.candidate_agents item>
 candidates:
-  - agent_id: <routing_decision.explanation.candidates item agent_id>
+  - agent: <routing_decision.explanation.candidates item agent>
     load_score: <existing load_score>
     stable_hash: <existing stable_hash>
 friction_count: 0
@@ -78,10 +78,10 @@ candidate_agents:
   - MakerA
   - MakerB
 candidates:
-  - agent_id: MakerA
+  - agent: MakerA
     load_score: 2.0
     stable_hash: 941
-  - agent_id: MakerB
+  - agent: MakerB
     load_score: 1.0
     stable_hash: 317
 friction_count: 0

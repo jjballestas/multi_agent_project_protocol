@@ -132,6 +132,25 @@
             "updated_at": "2026-07-22T21:57:28Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0262-remediation-1",
+            "expires_at": "2026-07-23T02:31:02Z",
+            "notes": "TASK-0262 remediation iteration 1: correct candidate key agent_id to agent only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0262-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0262",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0262",
+                "Area_comun/tasks/TASK-0262-d0103-c2c4-plantilla-reporte-asignacion-mailbox.md",
+                "Area_comun/protocol/MAILBOX_REPORT_TEMPLATES.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T22:31:02Z",
+            "status": "active",
+            "task_id": "TASK-0262",
+            "updated_at": "2026-07-22T22:31:02Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratif0261-20260722",
             "expires_at": "2026-07-22T22:06:51Z",
             "notes": "Ratificacion 0261 (GO checker iter1) -> review_approved + done-flip y GO 0262 a Codex + archivo de los 2 REVIEW",
