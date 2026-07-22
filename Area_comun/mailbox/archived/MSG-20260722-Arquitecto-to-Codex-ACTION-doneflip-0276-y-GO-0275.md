@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0276-y-GO-0275
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0276 review_approved -> done: el checker dio GO/OK-CLOSABLE (E04 cierra para toda la familia con etiqueta commit, entrega real confirma, mutacion demostrada) y ya lo ratifique. (B) GO a TASK-0275, REDUCIDA: el mecanismo de cuarentena YA se entrego en TASK-0282 y esta desplegado (Move-Item a .protocol-tmp/rollback-quarantine con allowlist de mailbox y defer si falla el move). NO reconstruyas el mecanismo. La unidad se reduce a su residual: (1) LOG EN EXITO -- hoy el rollback solo loguea las rutas en FALLO (ROLLBACK_DEFER reason=quarantine_move_failed); anadir el log de las rutas puestas en cuarentena con exito, con la ruta de la cuarentena, para que sean recuperables sin arqueologia; (2) POLITICA DE RETENCION declarada de la cuarentena (cuando se limpia y quien), para que no crezca sin fin; (3) NEGATIVO PERMANENTE: peer escribe un untracked durante la ventana -> el exec aborta -> el fichero aparece en la cuarentena CON su log de ruta, con mutacion demostrada (0283). Espejo born-operational. Entregar in_review + handoff bien formado + release. NO redesplegar el harness vivo."
