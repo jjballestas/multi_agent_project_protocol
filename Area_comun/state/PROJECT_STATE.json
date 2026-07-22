@@ -115,12 +115,6 @@
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
         },
         {
-            "id": "TASK-0274",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba"
-        },
-        {
             "id": "TASK-0275",
             "owner": "Codex",
             "status": "ready",
@@ -131,12 +125,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code"
-        },
-        {
-            "id": "TASK-0279",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {
             "id": "TASK-0283",

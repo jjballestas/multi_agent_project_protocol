@@ -32703,6 +32703,849 @@
             "status": "released",
             "task_id": "TASK-0280",
             "updated_at": "2026-07-21T00:08:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-095557-prune-arquitecto",
+            "expires_at": "2026-07-22",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-22T09:55:57Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-22T09:55:57Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274",
+            "expires_at": "2026-07-22T22:55:00Z",
+            "notes": "Implement real drift CLI, permanent behavioral tests, documentation sweep, and born-operational mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "runtime/protocol_replay.py",
+                "runtime/README.md",
+                "scripts/",
+                "examples/",
+                "Area_comun/protocol/",
+                ".agents/skills/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T10:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T10:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274-delivery",
+            "expires_at": "2026-07-22T13:10:00Z",
+            "notes": "Deliver TASK-0274 for independent review and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0274-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T11:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274-flag-delivery",
+            "expires_at": "2026-07-22T13:46:00Z",
+            "notes": "Deliver test-only TASK-0274 remediation for independent MutC re-judgement.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274-flag-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0274-flag-remediation-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274-flag-remediation.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T11:46:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:46:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274-flag-memory",
+            "expires_at": "2026-07-22T13:45:00Z",
+            "notes": "Persist post-commit TASK-0274 flag-remediation memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274-flag-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T11:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274-flag-msgfix",
+            "expires_at": "2026-07-22T12:52:00Z",
+            "notes": "Add mandatory compact-message question field after validator rejection.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274-flag-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274-flag-remediation.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T11:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:52:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274-flag-remediation",
+            "expires_at": "2026-07-22T13:40:00Z",
+            "notes": "Test-only remediation for isolated unknown-flag rejection and MutC control.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274-flag-remediation",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T11:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0274-memory",
+            "expires_at": "2026-07-22T13:05:00Z",
+            "notes": "Persist post-commit TASK-0274 implementation memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0274-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T11:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279",
+            "expires_at": "2026-07-22T22:15:00Z",
+            "notes": "Implement bounded aborting commit trailer gate and born-operational mirror for TASK-0279.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                ".githooks/pre-commit",
+                "scripts/check_commit_trailers.py",
+                "scripts/test_precommit_trailers.py",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T10:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-delivery",
+            "expires_at": "2026-07-22T11:15:47Z",
+            "notes": "Publish TASK-0279 delivery handoff and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-delivery",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279.md"
+            ],
+            "started_at": "2026-07-22T10:15:47Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:15:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-done-flip",
+            "expires_at": "2026-07-22T12:55:00Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T10:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-msgfix",
+            "expires_at": "2026-07-22T11:16:49Z",
+            "notes": "Add the compact-mailbox question required by validation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279.md"
+            ],
+            "started_at": "2026-07-22T10:16:49Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:16:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-question",
+            "expires_at": "2026-07-22T12:25:00Z",
+            "notes": "Publish the single TASK-0279 hook-phase blocking question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-question",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md"
+            ],
+            "started_at": "2026-07-22T10:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-resume",
+            "expires_at": "2026-07-22T22:09:33Z",
+            "notes": "Resume TASK-0279 with the authorized commit-msg trailer gate and born-operational export.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-resume",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                ".githooks/",
+                "scripts/",
+                "examples/runtime_instantiation_cases/",
+                "Area_comun/protocol/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T10:09:33Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:09:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283",
+            "expires_at": "2026-07-22T16:00:00Z",
+            "notes": "Implement declared falsification mutations, inventory, assertion boundaries, and born-operational mirror for TASK-0283.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py",
+                "scripts/falsification_contracts.py",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-delivery",
+            "expires_at": "2026-07-22T14:35:00Z",
+            "notes": "Publish TASK-0283 independent-review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-delivery",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator",
+            "expires_at": "2026-07-22T17:00:00Z",
+            "notes": "Add an independently discoverable negative-test denominator and guardian self-test for TASK-0283 remediation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator-delivery",
+            "expires_at": "2026-07-22T15:00:00Z",
+            "notes": "Publish the TASK-0283 independent-denominator remediation handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0283-denominator-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator-final-memory",
+            "expires_at": "2026-07-22T14:00:00Z",
+            "notes": "Persist the TASK-0283 denominator delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator-msgfix",
+            "expires_at": "2026-07-22T14:00:00Z",
+            "notes": "Add the validator-required compact response question to the TASK-0283 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator-runners",
+            "expires_at": "2026-07-22T17:00:00Z",
+            "notes": "Mark the independently discoverable permanent-negative universe in existing runner files.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator-runners",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3",
+            "expires_at": "2026-07-22T17:20:00Z",
+            "notes": "Close TASK-0283 iteration 3 with comprehensive test-tree discovery, load-bearing marker controls, and explicit convention limits.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/new_instance.py",
+                "scripts/test_cases/falsification_off_glob_case.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3-delivery",
+            "expires_at": "2026-07-22T15:40:00Z",
+            "notes": "Publish TASK-0283 iteration 3 handoff and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0283-iter3-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3-final-memory",
+            "expires_at": "2026-07-22T14:45:00Z",
+            "notes": "Persist TASK-0283 iteration 3 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3-memory",
+            "expires_at": "2026-07-22T14:35:00Z",
+            "notes": "Persist TASK-0283 iteration 3 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4",
+            "expires_at": "2026-07-22T18:00:00Z",
+            "notes": "Close TASK-0283 iteration 4 with complete ast.walk discovery and nested-negative mutation controls.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4-delivery",
+            "expires_at": "2026-07-22T15:20:00Z",
+            "notes": "Publish TASK-0283 iteration 4 handoff and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter4-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0283-iter4-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter4.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4-final-memory",
+            "expires_at": "2026-07-22T15:30:00Z",
+            "notes": "Persist TASK-0283 iteration 4 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter4-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4-memory",
+            "expires_at": "2026-07-22T15:10:00Z",
+            "notes": "Persist TASK-0283 iteration 4 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter4-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-memory",
+            "expires_at": "2026-07-22T14:20:00Z",
+            "notes": "Persist TASK-0283 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre0274-20260722",
+            "expires_at": "2026-07-22T12:05:24Z",
+            "notes": "Ratificacion 0274 + done-flip y GO 0283 a Codex + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0274-y-GO-0283.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0274-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0274-flag-GO.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-flag-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0274-flag-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-flag-rejuicio.md"
+            ],
+            "started_at": "2026-07-22T11:45:24Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:45:24Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre0279-20260722",
+            "expires_at": "2026-07-22T11:08:04Z",
+            "notes": "Ratificacion 0279 + alta TASK-0285 + done-flip y GO 0274 a Codex + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274.md",
+                "Area_comun/tasks/TASK-0285-instanciacion-runner-ledger-head.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/TASK_INDEX.json#TASK-0285",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0285",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0279-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0279-commit-msg-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0279-commit-msg.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0279-commit-msg-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0279-commit-msg.md",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md"
+            ],
+            "started_at": "2026-07-22T10:48:04Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:48:04Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre0283-20260722",
+            "expires_at": "2026-07-22T14:26:03Z",
+            "notes": "Ratificacion 0283 + done-flip y GO 0276 a Codex + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0283-y-GO-0276.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0283-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter4-GO.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter4-cierre.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter4-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter4-cierre.md"
+            ],
+            "started_at": "2026-07-22T14:06:03Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:06:03Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-it4-0283-20260722",
+            "expires_at": "2026-07-22T13:52:31Z",
+            "notes": "Iteracion 4 de 0283 (ast.walk recorrido completo) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-it4-0283-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter3-cierre-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter3-cierre-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre.md"
+            ],
+            "started_at": "2026-07-22T13:32:31Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:32:31Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-iter3-0283-20260722",
+            "expires_at": "2026-07-22T13:26:51Z",
+            "notes": "Iteracion 3 de 0283 con acceptance refinado (glob+convencion+limite) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter3-glob-convencion.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-iter3-0283-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-denominador-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-denominador-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-denominador-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-denominador-rejuicio.md"
+            ],
+            "started_at": "2026-07-22T13:06:51Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:06:51Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rej0274-20260722",
+            "expires_at": "2026-07-22T11:52:16Z",
+            "notes": "Re-juicio del negativo del flag de 0274 + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-flag-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274-flag-remediation.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0274-negativo-flag.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274-flag-remediation.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0274-negativo-flag.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rej0274-20260722"
+            ],
+            "started_at": "2026-07-22T11:32:16Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:32:16Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rej0283-20260722",
+            "expires_at": "2026-07-22T13:04:23Z",
+            "notes": "Re-juicio del denominador de 0283 + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-denominador-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rej0283-20260722"
+            ],
+            "started_at": "2026-07-22T12:44:23Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:44:23Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rejit3-0283-20260722",
+            "expires_at": "2026-07-22T13:35:06Z",
+            "notes": "Re-juicio de cierre de 0283 iter3 + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter3.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter3-glob-convencion.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter3.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter3-glob-convencion.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rejit3-0283-20260722"
+            ],
+            "started_at": "2026-07-22T13:15:06Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:15:06Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rejit4-0283-20260722",
+            "expires_at": "2026-07-22T14:05:13Z",
+            "notes": "Re-juicio de cierre de 0283 iter4 (ast.walk) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter4-cierre.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter4.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter4.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rejit4-0283-20260722"
+            ],
+            "started_at": "2026-07-22T13:45:13Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:45:13Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rem0274-20260722",
+            "expires_at": "2026-07-22T11:41:02Z",
+            "notes": "Remediacion test-only de 0274 (negativo del flag) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0274-negativo-flag.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0274-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0274-drift-cli-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-drift-cli.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0274-drift-cli-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-drift-cli.md"
+            ],
+            "started_at": "2026-07-22T11:21:02Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:21:02Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rem0283-20260722",
+            "expires_at": "2026-07-22T12:43:44Z",
+            "notes": "Remediacion de 0283 (denominador independiente) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0283-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad.md"
+            ],
+            "started_at": "2026-07-22T12:23:44Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:23:44Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-resp0279-20260722",
+            "expires_at": "2026-07-22T10:24:37Z",
+            "notes": "RESP autorizando commit-msg para 0279 + correccion de acceptance + higiene",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg.md",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-resp0279-20260722"
+            ],
+            "started_at": "2026-07-22T10:04:37Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:04:37Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rev0274-20260722",
+            "expires_at": "2026-07-22T11:24:02Z",
+            "notes": "Ruteo del juicio de 0274 al checker + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-drift-cli.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0274-20260722"
+            ],
+            "started_at": "2026-07-22T11:04:02Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:04:02Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rev0279-20260722",
+            "expires_at": "2026-07-22T10:40:28Z",
+            "notes": "Ruteo del juicio de 0279 al checker + higiene de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0279-commit-msg.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precommit.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precommit.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0279-20260722"
+            ],
+            "started_at": "2026-07-22T10:20:28Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:20:28Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rev0283-20260722",
+            "expires_at": "2026-07-22T12:26:07Z",
+            "notes": "Ruteo del juicio de 0283 al checker + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0274-y-GO-0283.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0274-y-GO-0283.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0283-20260722"
+            ],
+            "started_at": "2026-07-22T12:06:07Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:06:07Z"
         }
     ]
 }

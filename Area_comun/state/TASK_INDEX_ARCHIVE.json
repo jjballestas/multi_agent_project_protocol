@@ -7506,6 +7506,30 @@
             "status": "done",
             "title": "[HARNESS] El pre-gate deja de adivinar por forense del arbol: senal autoritativa de quien trabaja, borrado que puede envejecer, y lectura de git que no se cuelga",
             "type": "fix"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+            "id": "TASK-0274",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+            "id": "TASK-0279",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer",
+            "type": "infra"
         }
     ]
 }
