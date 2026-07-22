@@ -5,7 +5,32 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-22 (4) (TASK-0274 gate de drift CLI CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+> Ultima actualizacion: 2026-07-22 (5) (TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+
+## Ultima actualizacion 2026-07-22 (5) - TASK-0274 RE-JUICIO del negativo del flag: GO (OK-CLOSABLE)
+
+- Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-flag-rejuicio`. Re-juicio de la
+  remediacion TEST-ONLY de mi F-0274-01. Codigo del gate NO cambio (blob d7bd4d3 byte-identico en
+  6f2084f/77afe05/0831701/7decc08); solo se le dio DIENTES al negativo del flag desconocido.
+- Fix (commit 77afe05, entrega 0831701): +3 lineas en `case_cli_is_a_real_aborting_gate`; anade
+  `isolated_unknown = run(command + ["--bogus-flag"])` con `assert returncode != 0`, donde
+  `command` YA incluye `--check-drift --root <root>`. Es EXACTAMENTE el fix que declare: aisla el
+  rechazo del flag desconocido para que el guardia de "flag requerido" no pueda enmascararlo.
+- **Verificado por comportamiento en clon limpio `/d/ccv0274b` (checkout 0831701):** suite 9/9
+  exit 0; validate/encoding/neutralidad exit 0. Disciplina de mutantes sobre PRODUCCION:
+  MutA (`_drift_exit_code`->return 0) ROJO, MutB (veredicto invertido) ROJO, **MutC
+  (`parse_args`->`parse_known_args`) AHORA ROJO** -- el caso que falla es exactamente
+  `case_cli_is_a_real_aborting_gate` y el error es `PROTOCOL_STATE_DRIFT verdict=CLEAN up_to_seq=1`
+  (la combinacion aislada ignoro el flag, corrio drift limpio, salio 0, asercion !=0 fallo). Los
+  TRES negativos del gate tienen dientes. Produccion `--check-drift --root <root> --bogus-flag`
+  sale 2 (unrecognized arguments): la asercion pasa por la razon correcta.
+- **Veredicto: OK-CLOSABLE (GO).** Artifact `Area_comun/artifacts/Analista-TASK-0274-flag-rejuicio-verdict.md`,
+  msg `MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0274-flag-GO.md`, commit **0c9f089** (push
+  7decc08..0c9f089). Bucle de fix cerro en iteracion 1 (de 2). Cierre (done-flip + release de la
+  claim del maker) corresponde al Arquitecto/orquestador, no al checker -- yo no cierro. Residuales
+  R1 (bloque mutation-control inline decorativo)/R2 (--root=cwd)/R3 (coordination-tier CLEAN) no
+  bloqueantes, arrastrados. LECCION reforzada: un negativo debe enrojecer al revertir SU arreglo,
+  no el de al lado; aislar el modo de fallo probado es lo que le da dientes.
 
 ## Ultima actualizacion 2026-07-22 (4) - TASK-0274 gate de drift CLI CHANGE-REQUIRED sobre 6f2084f
 
