@@ -484,8 +484,7 @@ function Get-OwnEvidence {
         if ([string]::IsNullOrWhiteSpace([string]$event.actor_auth.sig)) { continue }
         $intentType = [string]$event.payload.intent_type
         $hasUsefulIntent = $intentType -in @("task_status", "task_upsert", "decision")
-        $hasCommit = -not [string]::IsNullOrWhiteSpace([string]$event.payload.commit)
-        if (-not ($hasUsefulIntent -or $hasCommit)) { continue }
+        if (-not $hasUsefulIntent) { continue }
         return $true
     }
     return $false

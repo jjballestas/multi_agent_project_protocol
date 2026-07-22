@@ -87,8 +87,8 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "retry-useful-own-evidence",
-        "negative": "pure claims, rejected events, exceptions, and foreign-key signatures do not confirm",
-        "mutation": 'body.replace("if (-not ($hasUsefulIntent -or $hasCommit)) { continue }", "", 1)',
+        "negative": "pure claims, including claims carrying commit metadata, do not confirm",
+        "mutation": 'body.replace("if (-not $hasUsefulIntent) { continue }", "$hasCommit = -not [string]::IsNullOrWhiteSpace([string]$event.payload.commit)\\n        if (-not ($hasUsefulIntent -or $hasCommit)) { continue }", 1)',
         "boundaries": ('"pure_claim": False', '"task_status": True'),
         "exercised_by": "run_useful_own_evidence_cases",
     },
@@ -498,7 +498,8 @@ def run_useful_own_evidence_cases(sandbox: Path) -> None:
                 "$event.applied -ne $true" in candidate,
                 ".StartsWith($expectedKeyPrefix, [StringComparison]::Ordinal)" in candidate,
                 '$intentType -in @("task_status", "task_upsert", "decision")' in candidate,
-                "$hasUsefulIntent -or $hasCommit" in candidate,
+                "if (-not $hasUsefulIntent) { continue }" in candidate,
+                "$hasCommit" not in candidate,
             )
         )
 
@@ -510,7 +511,7 @@ def run_useful_own_evidence_cases(sandbox: Path) -> None:
             "",
             1,
         ),
-        "useful_work_gate_removed": body.replace("if (-not ($hasUsefulIntent -or $hasCommit)) { continue }", "", 1),
+        "useful_work_gate_removed": body.replace("if (-not $hasUsefulIntent) { continue }", "", 1),
     }
     survivors = [name for name, mutant in mutants.items() if contract(mutant)]
     assert not survivors, f"useful-evidence contract failed to kill declared mutants: {survivors}"
@@ -525,40 +526,51 @@ def run_useful_own_evidence_cases(sandbox: Path) -> None:
         "task_status": ("task_status", True, "testpeer:v1", "", True),
         "task_upsert": ("task_upsert", True, "testpeer:v1", "", True),
         "decision": ("decision", True, "testpeer:v1", "", True),
-        "commit": ("claim", True, "testpeer:v1", "abc123", True),
+        "claim_with_commit": ("claim", True, "testpeer:v1", "abc123", False),
     }
-    rendered = [
-        "$Root=(Get-Location).Path",
-        "$PeerId='TestPeer'",
-        "function Write-Log { param([string]$Message) }",
-        body,
-        "$path=Join-Path $Root 'runtime/state/events.jsonl'",
-        "$results=[ordered]@{}",
-    ]
-    for name, (intent_type, applied, keyid, commit, _) in cases.items():
-        event = {
-            "seq": 2,
-            "actor": "TestPeer",
-            "applied": applied,
-            "actor_auth": {"method": "ed25519", "keyid": keyid, "sig": "fixture"},
-            "payload": {"intent_type": intent_type},
-        }
-        if commit:
-            event["payload"]["commit"] = commit
-        encoded = json.dumps(event, separators=(",", ":"))
-        rendered.extend(
-            (
-                "[IO.File]::WriteAllText($path,'{}'+[Environment]::NewLine,[Text.Encoding]::ASCII)".format("{}"),
-                "$before=(Get-Item -LiteralPath $path).Length",
-                "$hash=Get-FilePrefixSha256 -Path $path -Length $before",
-                "[IO.File]::AppendAllText($path,'{}'+[Environment]::NewLine,[Text.Encoding]::ASCII)".format(encoded.replace("'", "''")),
-                f"$results['{name}']=Get-OwnEvidence -LedgerBytesBefore $before -LedgerPrefixSha256Before $hash",
+    def exercise(candidate: str) -> dict[str, bool]:
+        rendered = [
+            "$Root=(Get-Location).Path",
+            "$PeerId='TestPeer'",
+            "function Write-Log { param([string]$Message) }",
+            candidate,
+            "$path=Join-Path $Root 'runtime/state/events.jsonl'",
+            "$results=[ordered]@{}",
+        ]
+        for name, (intent_type, applied, keyid, commit, _) in cases.items():
+            event = {
+                "seq": 2,
+                "actor": "TestPeer",
+                "applied": applied,
+                "actor_auth": {"method": "ed25519", "keyid": keyid, "sig": "fixture"},
+                "payload": {"intent_type": intent_type},
+            }
+            if commit:
+                event["payload"]["commit"] = commit
+            encoded = json.dumps(event, separators=(",", ":"))
+            rendered.extend(
+                (
+                    "[IO.File]::WriteAllText($path,'{}'+[Environment]::NewLine,[Text.Encoding]::ASCII)".format("{}"),
+                    "$before=(Get-Item -LiteralPath $path).Length",
+                    "$hash=Get-FilePrefixSha256 -Path $path -Length $before",
+                    "[IO.File]::AppendAllText($path,'{}'+[Environment]::NewLine,[Text.Encoding]::ASCII)".format(encoded.replace("'", "''")),
+                    f"$results['{name}']=Get-OwnEvidence -LedgerBytesBefore $before -LedgerPrefixSha256Before $hash",
+                )
             )
-        )
-    rendered.append("$results|ConvertTo-Json -Compress")
-    probe.write_text("\n".join(rendered) + "\n", encoding="ascii")
-    result = json.loads(run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout)
+        rendered.append("$results|ConvertTo-Json -Compress")
+        probe.write_text("\n".join(rendered) + "\n", encoding="ascii")
+        return json.loads(run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout)
+
+    result = exercise(body)
     assert result == {name: expected for name, (*_, expected) in cases.items()}, result
+    commit_proxy_mutant = body.replace(
+        "if (-not $hasUsefulIntent) { continue }",
+        "$hasCommit = -not [string]::IsNullOrWhiteSpace([string]$event.payload.commit)\n        if (-not ($hasUsefulIntent -or $hasCommit)) { continue }",
+        1,
+    )
+    mutant_result = exercise(commit_proxy_mutant)
+    assert mutant_result["claim_with_commit"] is True, mutant_result
+    assert mutant_result["task_status"] is True, mutant_result
     events.write_text("", encoding="ascii")
     probe.unlink()
 
