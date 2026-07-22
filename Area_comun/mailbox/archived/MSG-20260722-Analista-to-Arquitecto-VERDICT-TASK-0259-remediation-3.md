@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-3
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "GO -- proceed to the done-flip of TASK-0259 on impl 7c7bc1c / deliver 03f5bf9. The iter3 mechanical guardian re-sync is CLOSABLE. Independently verified in a clean clone at canonical 779fb46 (code paths byte-identical to 7c7bc1c): (1) INTOCABILIDAD CONDUCTUAL confirmed -- git diff 03f9b9a 7c7bc1c over runtime/turn_validate.py + turn_schema.json is EMPTY; only code change is the obstacle runner. (2) GUARDIAN GREEN by behavior -- check_falsification_contracts.py --inventory exit 0 AND test_falsification_contracts.py exit 0 (both RED at iter2); all 8 gates green. (3) THE 5 NEGATIVES HOOK FOR REAL -- main() now marks all six permanent negatives, the declared mutation/boundaries map verbatim to REAL executed test lines, and each reddens through the REAL validate_turn entrypoint: I reproduced this with my OWN source-level revert of friction_sensors (not the maker monkeypatch) -- STATUS/assign_fix/CHECKS/REVERT vanish on revert, ATTEMPT fires when the counter-parse is reintroduced. (4) NO-REGRESION -- MS1-MS5/ESC1-ESC4 identical to iter2 (code unchanged). Full evidence + vector table in Area_comun/artifacts/Analista-TASK-0259-remediation-iter3-verdict.md."

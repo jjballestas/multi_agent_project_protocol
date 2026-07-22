@@ -256,6 +256,28 @@
             "updated_at": "2026-07-22T18:49:27Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratif0259-20260722",
+            "expires_at": "2026-07-22T19:51:46Z",
+            "notes": "Ratificacion 0259 (GO checker iter3) -> review_approved + done-flip y GO 0260 a Codex + archivo VERDICT/REVIEW iter3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0259-y-GO-0260.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0259",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0259",
+                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+                "Area_comun/artifacts/Analista-TASK-0259-remediation-iter3-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratif0259-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-3.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-3.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-3.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-3.md"
+            ],
+            "started_at": "2026-07-22T19:31:46Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T19:31:46Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0259-20260722",
             "expires_at": "2026-07-22T17:01:46Z",
             "notes": "Remediacion de 0259 (predicado + friccion, C3 pleno) + higiene 2",
