@@ -10,6 +10,9 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
   A4 boundary degradation remain load-bearing. Inventory is 15/15/0; guardian,
   both live runners, runtime instantiation, validation, encoding, and neutrality
   gates passed. Runtime-generated tests remain the explicit static-analysis limit.
+  Delivery commit `3c1d3d9` moves TASK-0283 to `in_review`, releases every maker
+  claim through signed seq 5786, and opens the self-contained iteration 4 handoff
+  with a non-empty review-routing question. Codex did not self-review.
 
 - TASK-0283 implementation commit `62a4480` adds machine-readable falsification
   contracts beside 14 permanent negatives, a repository inventory/checker, and a
