@@ -57,9 +57,23 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T21:18:30Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0261",
             "updated_at": "2026-07-22T21:18:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0261-remediation-1-handoff",
+            "expires_at": "2026-07-22T23:25:31Z",
+            "notes": "Publish self-contained TASK-0261 remediation iteration 1 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0261-remediation-1-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0261-remediation-1.md"
+            ],
+            "started_at": "2026-07-22T21:25:31Z",
+            "status": "released",
+            "task_id": "TASK-0261",
+            "updated_at": "2026-07-22T21:25:31Z"
         },
         {
             "claim_id": "CLAIM-arq-rem0261-20260722",

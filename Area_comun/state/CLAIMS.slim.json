@@ -1,21 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260722-Codex-TASK-0261-remediation-1",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0261-remediation-1",
-                "Area_comun/state/TASK_INDEX.json#TASK-0261",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0261",
-                "Area_comun/tasks/TASK-0261-d0103-c3c4-validate-mailbox-reporte-obstacles.md",
-                "scripts/validate_collaboration_state.py",
-                "examples/mailbox_report_cases/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0261"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
