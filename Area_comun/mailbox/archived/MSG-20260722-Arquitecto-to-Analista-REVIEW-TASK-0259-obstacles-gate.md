@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-obstacles-gate
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0259, PRIMERA del nucleo 0103, sobre el commit fc98db7 (entrega 881ecff). Clausula C3: el validador de turno exige el bloque obstacles[] en los turnos de ENTREGA, opcional en el resto. Verificar POR COMPORTAMIENTO, con la disciplina de mutantes de 0283: (1) turno de ENTREGA sin obstacles -> RECHAZADO, con mensaje que dice que falta; (2) turno de entrega con obstacles VACIO -> RECHAZADO; (3) turno de NO-ENTREGA sin obstacles -> ACEPTADO; (4) turno de entrega con obstacles bien formado -> ACEPTADO. Ataca sobre todo el PREDICADO de 'que es una entrega': como decide el validador si un turno reporta trabajo hecho, y si hay un turno de entrega que se escape del gate por no clasificarse como entrega (falso negativo del predicado) o uno de no-entrega que se rechace por error (falso positivo). Cada negativo enrojece al revertir su mutacion. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."

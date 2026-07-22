@@ -100,6 +100,28 @@
             "updated_at": "2026-07-22T16:13:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-rem0259-20260722",
+            "expires_at": "2026-07-22T17:01:46Z",
+            "notes": "Remediacion de 0259 (predicado + friccion, C3 pleno) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-friccion-y-predicado.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0259",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0259",
+                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+                "Area_comun/artifacts/Analista-TASK-0259-obstacles-gate-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0259-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-obstacles-gate.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-obstacles-gate.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-obstacles-gate.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-obstacles-gate.md"
+            ],
+            "started_at": "2026-07-22T16:41:46Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T16:41:46Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rev0259-20260722",
             "expires_at": "2026-07-22T16:40:06Z",
             "notes": "Ruteo del juicio de 0259 al checker (primera del nucleo) + higiene 2",
