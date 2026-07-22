@@ -205,9 +205,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T23:05:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0263",
             "updated_at": "2026-07-22T23:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0263-delivery",
+            "expires_at": "2026-07-23T00:25:00Z",
+            "notes": "Publish TASK-0263 review handoff and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0263-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0263",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0263",
+                "Area_comun/tasks/TASK-0263-d0103-c3bis-oferta-de-mejora.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0263-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0263.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T23:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0263",
+            "updated_at": "2026-07-22T23:25:00Z"
         },
         {
             "claim_id": "CLAIM-20260723-Codex-TASK-0263-memory",
@@ -221,7 +241,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T23:15:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0263",
             "updated_at": "2026-07-22T23:15:00Z"
         },
