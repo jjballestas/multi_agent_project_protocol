@@ -32450,6 +32450,259 @@
             "status": "released",
             "task_id": "TASK-0280",
             "updated_at": "2026-07-20T19:46:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-233650-prune-arquitecto",
+            "expires_at": "2026-07-21",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-21T23:36:50Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-21T23:36:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0282-done-flip",
+            "expires_at": "2026-07-22T01:38:32Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0282-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0282",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0282",
+                "Area_comun/tasks/TASK-0282-retirar-rama-destructiva-rollback.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-21T23:38:32Z",
+            "status": "released",
+            "task_id": "TASK-0282",
+            "updated_at": "2026-07-21T23:38:32Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284",
+            "expires_at": "2026-07-22T11:40:31Z",
+            "notes": "Implement TASK-0284 pre-gate separation, bounded residue aging, terminal defers, and fail-closed timed reads.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-21T23:40:31Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-21T23:40:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-banco",
+            "expires_at": "2026-07-22T04:32:33Z",
+            "notes": "TEST-ONLY remediation: replace shadow assertions with real-loop mutation-killing negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-banco",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T00:32:33Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T00:32:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-banco-handoff",
+            "expires_at": "2026-07-22T01:39:19Z",
+            "notes": "Publish TASK-0284 behavioral test-bank remediation handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-banco-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md"
+            ],
+            "started_at": "2026-07-22T00:39:19Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T00:39:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-banco-msgfix",
+            "expires_at": "2026-07-22T01:41:48Z",
+            "notes": "Add validator-required question to TASK-0284 bank handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-banco-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md"
+            ],
+            "started_at": "2026-07-22T00:41:48Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T00:41:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-done-flip",
+            "expires_at": "2026-07-22T07:20:31Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T05:20:31Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T05:20:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-handoff",
+            "expires_at": "2026-07-22T01:46:45Z",
+            "notes": "Publish self-contained TASK-0284 review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284.md"
+            ],
+            "started_at": "2026-07-21T23:46:45Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-21T23:46:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-handoff-hashfix",
+            "expires_at": "2026-07-22T00:50:08Z",
+            "notes": "Correct handoff implementation hash after mandatory trailer repair.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-handoff-hashfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284.md"
+            ],
+            "started_at": "2026-07-21T23:50:08Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-21T23:50:08Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-banco0284-20260722",
+            "expires_at": "2026-07-22T00:51:34Z",
+            "notes": "Ruteo de la remediacion de banco de 0284 (codigo ya redesplegado) + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-banco0284-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate.md",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md"
+            ],
+            "started_at": "2026-07-22T00:26:34Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T00:26:34Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-go0279-20260722",
+            "expires_at": "2026-07-22T10:14:39Z",
+            "notes": "GO a 0279 (trailers al pre-commit), inicio del frente de higiene",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precommit.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0279-20260722"
+            ],
+            "started_at": "2026-07-22T09:54:39Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T09:54:39Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg0834-20260722",
+            "expires_at": "2026-07-22T06:54:44Z",
+            "notes": "Higiene: archivar el ACTION del done-flip de 0284 ya consumido",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg0834-20260722"
+            ],
+            "started_at": "2026-07-22T06:34:44Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T06:34:44Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0284-20260722",
+            "expires_at": "2026-07-22T05:42:49Z",
+            "notes": "Ratificacion del banco de 0284 (GO) + done-flip a Codex + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0284-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-banco-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-banco-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio.md"
+            ],
+            "started_at": "2026-07-22T05:17:49Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T05:17:49Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rejbanco0284-20260722",
+            "expires_at": "2026-07-22T02:21:31Z",
+            "notes": "Re-juicio del banco de 0284 al checker + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rejbanco0284-20260722"
+            ],
+            "started_at": "2026-07-22T01:56:31Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T01:56:31Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0280it3-20260721",
+            "expires_at": "2026-07-21T00:28:08Z",
+            "notes": "Ruteo del juicio de la iteracion 3 conservadora + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0280it3-20260721"
+            ],
+            "started_at": "2026-07-21T00:08:08Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T00:08:08Z"
         }
     ]
 }

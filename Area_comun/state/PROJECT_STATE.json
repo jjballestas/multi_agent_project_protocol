@@ -139,22 +139,10 @@
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {
-            "id": "TASK-0282",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HARNESS] Retirar la rama destructiva del rollback: ni reset --hard ni re-apply del parche de worktree; el arbol ajeno no se reescribe nunca"
-        },
-        {
             "id": "TASK-0283",
             "owner": "Codex",
             "status": "ready",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
-        },
-        {
-            "id": "TASK-0284",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HARNESS] El pre-gate deja de adivinar por forense del arbol: senal autoritativa de quien trabaja, borrado que puede envejecer, y lectura de git que no se cuelga"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
