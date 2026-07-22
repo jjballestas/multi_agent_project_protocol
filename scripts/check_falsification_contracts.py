@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Inventory declared falsification mutations beside convention-marked negative tests.
 
-Discovery is comprehensive for Python files under ``examples/`` and ``scripts/``.
-``PERMANENT_NEGATIVE:`` is mandatory and load-bearing: an unmarked negative is a
-prohibited review/CI defect, but cannot be inferred automatically. The inventory is
-complete for tests that follow the convention; absolute discovery is not promised.
+Discovery walks the complete AST of every Python file under ``examples/`` and
+``scripts/``, including methods and nested functions. ``PERMANENT_NEGATIVE:`` is
+mandatory and load-bearing: an unmarked or runtime-generated negative is a prohibited
+review/CI defect, but cannot be inferred from the static source. The inventory is
+complete for source definitions that follow the convention; runtime generation is not
+mechanically decidable here.
 """
 
 from __future__ import annotations
@@ -43,7 +45,7 @@ def declarations(path: Path) -> list[dict[str, object]]:
 def function_source(path: Path, name: str) -> str:
     source = path.read_text(encoding="utf-8-sig")
     tree = ast.parse(source, filename=str(path))
-    for node in tree.body:
+    for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == name:
             return ast.get_source_segment(source, node) or ""
     return ""
@@ -53,7 +55,7 @@ def permanent_negatives(path: Path) -> dict[str, str]:
     """Discover the negative-test universe independently from contract declarations."""
     tree = ast.parse(path.read_text(encoding="utf-8-sig"), filename=str(path))
     found: dict[str, str] = {}
-    for node in tree.body:
+    for node in ast.walk(tree):
         if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             continue
         docstring = ast.get_docstring(node, clean=False) or ""
