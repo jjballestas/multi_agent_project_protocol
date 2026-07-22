@@ -332,6 +332,24 @@
             "updated_at": "2026-07-22T18:22:24Z"
         },
         {
+            "claim_id": "CLAIM-arq-review0259r3-20260722",
+            "expires_at": "2026-07-22T19:30:13Z",
+            "notes": "Ruteo re-juicio 0259 iter3 (mecanica) al Analista + archivo ACTION-iter3 y HANDOFF-remediation-3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-3.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-review0259r3-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-iter3-guardian-resync.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-3.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-iter3-guardian-resync.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-3.md"
+            ],
+            "started_at": "2026-07-22T19:10:13Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T19:10:13Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
