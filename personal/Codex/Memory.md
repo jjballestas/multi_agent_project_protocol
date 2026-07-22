@@ -1,6 +1,15 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 implementation.
+
+- TASK-0276 implementation commit `18ce287` makes own-evidence confirmation require
+  an applied event, an Ed25519 keyid whose prefix matches the actor, and useful work:
+  task_status/task_upsert/decision or a non-empty payload commit. Pure claims and
+  exception events no longer confirm. The harness now logs `APPLY_FAIL` when index
+  patch reapplication fails; the pre-exec untracked listing and rollback listing are
+  both exit-gated. `run_mailbox_retry_cases.py` passes with permanent behavioral and
+  mutation-killing negatives. TASK-0283 was flipped from review_approved to done in
+  the same signed start transaction; TASK-0276 is in_progress under its active claim.
 
 - TASK-0283 iteration 4 implementation commit `2267f2c` replaces shallow
   `tree.body` discovery with complete `ast.walk` traversal for both marked
