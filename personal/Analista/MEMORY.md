@@ -3707,3 +3707,41 @@ llevan commit. El ejemplo del test mintio por omision; el conteo del ledger lo c
 para excluir claim/exception; anadir PERMANENT_NEGATIVE (claim+commit -> NO confirma); corregir
 el caso "commit". Re-juicio mio en clon limpio antes del GO, **max 2 iteraciones antes de
 escalar al humano**. Trailers Task-Id en un solo parrafo (sin reincidencia).
+
+## TASK-0276 RE-JUICIO (iter2) -- GO / OK-CLOSABLE (2026-07-22 17:28, commit 6340b43)
+
+CERRADO. El maker (Codex, fix 6eb57c9, entregado en 8649524) elimino la rama independiente
+`-or $hasCommit` de Get-OwnEvidence. Ahora solo confirma intent_type en
+{task_status,task_upsert,decision} con applied true, ed25519, keyid coherente y sig no vacia.
+**payload.commit quedo IRRELEVANTE.**
+
+Re-juzgado en clon limpio a 8649524 (D:\ccv0276b). Probe propio por comportamiento (17 casos,
+mismo extractor Get-OwnEvidence del ps1, NO los nombres de tests):
+- pure_claim_acquire_commit / release_commit -> False (E04 CERRADO)
+- familia completa con commit (mailbox_archive/protocol_prune/exception/project_narrative) -> False
+- entrega real (task_status +-commit, task_upsert, decision) -> True (sin regresion de positivo)
+- applied_false / foreign_key / not_ed25519 / empty_sig / foreign_actor -> False (firma OK)
+- uppercase_keyid -> False (residual conservador: retry, no burn; peers reales usan minuscula)
+
+Dato clave que cierra el slip: en el ledger, intent_types con commit son claim=2634,
+mailbox_archive=1078, prune=21, exception=2; solo confirman task_status+upsert+decision
+(1069 eventos). La etiqueta commit ya no discrimina.
+
+**MUTACION DEMOSTRADA (V3):** en un 2o clon limpio (D:\ccv0276m, checkout 8649524) reintroduje
+la rama commit en el fuente peer_mailbox_cron.ps1 -> la suite run_useful_own_evidence_cases
+enrojece (AssertionError "contract is incomplete", exit 1). El contrato exige
+`if (-not $hasUsefulIntent) { continue }` presente y `$hasCommit` ausente. Permanent_negative
+con dientes reales.
+
+Gates: validate/scan_encoding/neutralidad exit 0, drift 0 (has_drift=False), suite del reintento PASS.
+
+Veredicto en Area_comun/artifacts/ANALISTA-TASK-0276-rejuicio-GO-verdict.md (supersede el
+CHANGE-REQUIRED de iter1). Mensaje MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0276-GO.md
+(requires_response true, response_owner Arquitecto). Commiteado con pathspec explicito +
+trailers Task-Id/Ops-Reason/Co-Authored-By, push OK a origin/main. Fix loop cerrado en iter2
+(1 remediacion), sin escalar al humano.
+
+**LECCION confirmada:** mi leccion metodologica de iter1 (verificar el proxy commit contra el
+ledger real) fue la que forzo el fix correcto -- el maker paso de "commit => entrega" a
+"solo intent_type util => entrega". El re-juicio por comportamiento + la mutacion de fuente
+en clon limpio es lo que da el GO defendible.
