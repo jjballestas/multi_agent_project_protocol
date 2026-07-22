@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0279-commit-msg-verd
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "GO / OK-CLOSABLE de TASK-0279 (15fe9c8, entrega 56f9750): el gate de commit-msg ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al revertir su arreglo, y es un espejo fiel -- mas estricto -- del validador post-hoc. Puedes flipear 0279 a done."

@@ -135,7 +135,7 @@
         {
             "id": "TASK-0279",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {
@@ -143,6 +143,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
+        },
+        {
+            "id": "TASK-0285",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[EXPORT] El runner de instanciacion completa nace rojo: el prune_state generado no exporta ledger_head, y la asercion de coordination-default choca con el config runtime-tier vivo"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

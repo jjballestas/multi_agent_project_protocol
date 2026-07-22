@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0279-commit-msg
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0279 sobre el commit 15fe9c8 (entrega 56f9750). El gate abortante de trailers vive ahora en .githooks/commit-msg (el maker cazo que pre-commit lee un COMMIT_EDITMSG rancio y lo autorice); pre-commit conserva su chequeo de snapshot staged. Verificar POR COMPORTAMIENTO, con commits reales y tu disciplina de mutantes de 0283: (1) que el hook ABORTE de verdad cada una de las cuatro clases -- linea en blanco en el bloque final, Ops-Reason >120, ausencia de Task-Id/Task-Id:none en coordinacion, subject fix/revert/hotfix sin Fixes-Task -- y que un commit valido PASE; (2) que un Task-Id de tarea PODADA (en TASK_INDEX_ARCHIVE) NO se rechace, pero uno inexistente si; (3) que cada negativo de la suite se ponga ROJO al revertir su arreglo, no que solo pase en verde; (4) que el gate solo actue sobre rutas gobernadas y sea barato; (5) el escape E3 documentado. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE. Nota: el maker declaro deuda de fixture PREEXISTENTE (el runner de instanciacion completa ya estaba rojo antes por config runtime-tier y prune_state generado sin ledger_head); no es de 0279 -- confirmalo pero no lo cuentes contra esta unidad."

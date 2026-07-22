@@ -85,16 +85,16 @@
             "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code"
         },
         {
-            "id": "TASK-0279",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
-        },
-        {
             "id": "TASK-0283",
             "owner": "Codex",
             "status": "ready",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
+        },
+        {
+            "id": "TASK-0285",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[EXPORT] El runner de instanciacion completa nace rojo: el prune_state generado no exporta ledger_head, y la asercion de coordination-default choca con el config runtime-tier vivo"
         }
     ],
     "next_actions": [
