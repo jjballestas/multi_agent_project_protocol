@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0262
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route implementation commit 5a7db87 to Analista for independent review; Codex is maker and does not self-review."

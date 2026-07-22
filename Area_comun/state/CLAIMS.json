@@ -208,6 +208,24 @@
             "updated_at": "2026-07-22T20:43:13Z"
         },
         {
+            "claim_id": "CLAIM-arq-review0262-20260723",
+            "expires_at": "2026-07-22T22:24:42Z",
+            "notes": "Ruteo review 0262 al Analista + archivo ACTION-doneflip-0261-GO-0262 y HANDOFF-0262",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0262.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-review0262-20260723",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0261-y-GO-0262.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0262.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0261-y-GO-0262.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0262.md"
+            ],
+            "started_at": "2026-07-22T22:04:42Z",
+            "status": "released",
+            "task_id": "TASK-0262",
+            "updated_at": "2026-07-22T22:04:42Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
