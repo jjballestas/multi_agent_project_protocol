@@ -15,6 +15,10 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
   an undeclared `NEG-SHADOW` fail with `permanent_negatives=2 declared=1 missing=1`.
   The marker inventory remains 14/14/0; checker controls, both live runners, runtime
   instantiation, canonical validation, encoding, neutrality, and drift gates passed.
+  Delivery commit `e017b57` moves TASK-0283 to `in_review`, releases the implementation
+  and delivery claims through signed seq 5750, and publishes the independent-review
+  handoff. The commit hook reports pruning due (`released_ratio=94.29`); pruning remains
+  an Arquitecto checkpoint action and was not performed by Codex.
 
 - TASK-0274 remediation commit `77afe05` adds an isolated clean-ledger invocation of
   `--check-drift --bogus-flag` to the permanent replay suite without changing production
