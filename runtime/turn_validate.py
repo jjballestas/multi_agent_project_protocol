@@ -215,6 +215,20 @@ def validate_review_qa_semantics(report: dict[str, Any], state: dict[str, Any]) 
     return errors
 
 
+def is_delivery_turn(report: dict[str, Any]) -> bool:
+    """Return whether this report delivers completed work for review or closure."""
+    return report.get("outcome") in {"in_review", "done"}
+
+
+def validate_delivery_obstacles(report: dict[str, Any]) -> list[str]:
+    """Require a non-empty obstacle account on delivery turns only."""
+    if is_delivery_turn(report) and not report.get("obstacles"):
+        return [
+            "semantic: delivery turn is missing non-empty obstacles; report what was encountered and resolved"
+        ]
+    return []
+
+
 def validate_guardrail_semantics(report: dict[str, Any], root: Path, state: dict[str, Any]) -> list[str]:
     guardrail_result = contain_untrusted(
         report,
@@ -281,6 +295,7 @@ def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
         return errors
 
     state = load_state(root)
+    errors.extend(validate_delivery_obstacles(report))
     errors.extend(validate_guardrail_semantics(report, root, state))
     errors.extend(validate_agent_semantics(report, root))
     errors.extend(validate_tool_policy_semantics(report, state))

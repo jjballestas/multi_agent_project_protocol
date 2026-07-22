@@ -16,3 +16,9 @@ orquestador.
 Runners:
 - `python examples/runtime_turn_cases/run_runtime_turn_schema_cases.py`
 - `python examples/runtime_turn_cases/run_runtime_turn_semantic_cases.py`
+- `python examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py`
+
+The obstacle runner proves the conditional semantic gate: delivery outcomes (`in_review`
+or `done`) require a non-empty `obstacles` array, while non-delivery outcomes may omit it.
+Its permanent negative disables delivery detection and requires the missing-obstacles case
+to become incorrectly accepted, demonstrating that the predicate is load-bearing.

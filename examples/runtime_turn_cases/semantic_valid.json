@@ -4,6 +4,14 @@
   "agent": "Codex",
   "outcome": "in_review",
   "summary": "Valid semantic turn report inside the active claim scope.",
+  "obstacles": [
+    {
+      "what": "The fixture must satisfy the delivery reporting contract.",
+      "root_cause": "Its in_review outcome classifies the turn as a delivery.",
+      "resolution": "Added a structured obstacle account to the positive fixture.",
+      "recurrence_risk": "low"
+    }
+  ],
   "changed_paths": [
     "runtime/orchestrator.py",
     "Area_comun/tasks/TASK-0099.md"
