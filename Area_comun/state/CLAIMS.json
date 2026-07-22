@@ -248,6 +248,24 @@
             "updated_at": "2026-07-22T10:04:37Z"
         },
         {
+            "claim_id": "CLAIM-arq-rev0274-20260722",
+            "expires_at": "2026-07-22T11:24:02Z",
+            "notes": "Ruteo del juicio de 0274 al checker + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-drift-cli.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0274-20260722"
+            ],
+            "started_at": "2026-07-22T11:04:02Z",
+            "status": "released",
+            "task_id": "TASK-0274",
+            "updated_at": "2026-07-22T11:04:02Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rev0279-20260722",
             "expires_at": "2026-07-22T10:40:28Z",
             "notes": "Ruteo del juicio de 0279 al checker + higiene de 3",

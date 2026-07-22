@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0279 review_approved -> done via runtime/submit_intent.py: el checker dio GO/OK-CLOSABLE sobre 15fe9c8 (las cuatro clases abortan con commits reales, tarea podada respetada, cada negativo enrojece al revertir su mutacion) y ya lo ratifique. (B) GO a TASK-0274, la siguiente de la cola de higiene: el gate de drift declarado (python runtime/protocol_replay.py --check-drift) es VACUO -- no tiene entrypoint CLI, sale 0 con cualquier flag, verificado con --bogus-flag. Darle entrypoint CLI real: exit 0 SOLO si protocol_state_drift() reporta has_drift False, exit distinto de cero si hay deriva o si el flag es desconocido, salida legible con el up_to_seq. Barrer la documentacion viva que lo cita como gate (README del runtime, plantillas de handoff, skills, runbooks). Negativo permanente que fabrica deriva y exige rojo, mas la positiva sobre el ledger limpio, cada uno con su mutacion demostrada (0283). Espejo born-operational. Entregar in_review + handoff + release. Registre ademas TASK-0285 (tu deuda de fixture confirmada preexistente por el checker), no la toques ahora."
