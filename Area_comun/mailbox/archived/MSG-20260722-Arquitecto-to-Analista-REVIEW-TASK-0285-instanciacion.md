@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0285-instanciacion
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0285, la ULTIMA de la cola de higiene, sobre el commit 3b66b6b (entrega 23e4179). El runner de instanciacion completa nacia ROJO por dos causas preexistentes que tu mismo confirmaste ajenas a 0279 (fallan igual en el padre 6197e10): el export no arrastraba ledger_head, y la asercion de coordination-default chocaba con el config runtime-tier. Verificar POR COMPORTAMIENTO, con la disciplina de mutantes de 0283: (1) el runner de instanciacion completa pasa a VERDE sobre una instancia recien exportada; (2) ledger_head se arrastra al export -- el prune_state generado lo encuentra; (3) la asercion de tier distingue la instancia bajo prueba y no da rojo con runtime-tier legitima; (4) NEGATIVO PERMANENTE con mutacion demostrada: quitar ledger_head del export vuelve a poner el runner rojo, y un tier mal declarado tambien. Emitir GO o NO-GO con artifact. Si sale GO, cierra la maquinaria COMPLETA y abrimos el nucleo 0103. SIN PRODUCTO EN ALCANCE."

@@ -301,6 +301,28 @@
             "updated_at": "2026-07-22T15:06:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-cierre0285-20260722",
+            "expires_at": "2026-07-22T16:28:51Z",
+            "notes": "Ratificacion 0285 (fin de higiene) + done-flip y GO 0259 (arranque nucleo 0103) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0285-y-GO-0259.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0285",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0285",
+                "Area_comun/tasks/TASK-0285-instanciacion-runner-ledger-head.md",
+                "Area_comun/artifacts/Analista-TASK-0285-instanciacion-runner-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre0285-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0285-GO.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0285-instanciacion.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0285-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0285-instanciacion.md"
+            ],
+            "started_at": "2026-07-22T16:08:51Z",
+            "status": "released",
+            "task_id": "TASK-0285",
+            "updated_at": "2026-07-22T16:08:51Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rej0276-20260722",
             "expires_at": "2026-07-22T15:11:50Z",
             "notes": "Re-juicio de 0276 + higiene 2",

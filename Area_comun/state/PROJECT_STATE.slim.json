@@ -65,12 +65,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
-        },
-        {
-            "id": "TASK-0285",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[EXPORT] El runner de instanciacion completa nace rojo: el prune_state generado no exporta ledger_head, y la asercion de coordination-default choca con el config runtime-tier vivo"
         }
     ],
     "next_actions": [
