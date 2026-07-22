@@ -10,7 +10,8 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
 - The permanent runner proves the divergent-outcome delivery escape through full
   `validate_turn`, covers the three friction signals and the clean-delivery anti-theater
   control, and kills both delivery-sensor and friction-sensor mutants. Delivery back to
-  `in_review` and independent re-review are still pending.
+  `in_review` is commit `435ab5b`; both maker claims are released and the self-contained
+  Arquitecto handoff is open. Independent Analista re-review is pending.
 
 ## 2026-07-22 - TASK-0285 close and TASK-0259 implementation
 
