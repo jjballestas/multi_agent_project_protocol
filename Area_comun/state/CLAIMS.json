@@ -57,9 +57,23 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T14:09:24Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0276",
             "updated_at": "2026-07-22T14:09:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-handoff",
+            "expires_at": "2026-07-22T16:14:35Z",
+            "notes": "Publish self-contained TASK-0276 review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276.md"
+            ],
+            "started_at": "2026-07-22T14:14:35Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:14:35Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-done-flip",
