@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 remediation.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
+
+## 2026-07-22 - TASK-0285 close and TASK-0259 implementation
+
+- Commit `fc98db7` applies the Codex-signed TASK-0285 `review_approved -> done` flip
+  after independent Analista GO and Arquitecto ratification, then starts TASK-0259.
+- `runtime/turn_validate.py` now classifies `in_review` and `done` outcomes as delivery
+  turns and rejects absent or empty `obstacles` with an actionable missing-field error;
+  non-delivery outcomes may omit the block.
+- The permanent runtime-turn negative disables delivery detection and proves the missing
+  obstacle report becomes incorrectly accepted. Schema, semantic, obstacle, falsification,
+  fresh runtime export, validator, encoding, and neutrality checks passed. The runtime
+  exporter already mirrors the complete runtime directory, so no exporter change was needed.
+- TASK-0259 delivery transaction seq 5879-5882 moves the task to `in_review`, releases
+  both maker claims, and opens the self-contained Arquitecto handoff. Independent review
+  belongs to Analista; Codex did not review or ratify the implementation.
 
 - TASK-0276 is `done` after independent Analista GO and Arquitecto ratification; Codex
   applied the implementer-only flip in signed transaction seq 5837-5841. TASK-0275

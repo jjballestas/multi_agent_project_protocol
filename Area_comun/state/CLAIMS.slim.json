@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260722-Codex-TASK-0259",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0259",
-                "Area_comun/state/TASK_INDEX.json#TASK-0259",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0259",
-                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
-                "runtime/turn_validate.py",
-                "examples/runtime_turn_cases/",
-                "scripts/new_instance.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0259"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
