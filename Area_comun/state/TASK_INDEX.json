@@ -276,7 +276,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][C2/C4] Plantillas de mailbox: REPORTE de entrega con bloque obstacles + friction_count, y reporte de ASIGNACION (unidad, agente, por que)",
             "type": "doc"
         },
