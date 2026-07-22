@@ -360,7 +360,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana",
             "type": "infra"
         },

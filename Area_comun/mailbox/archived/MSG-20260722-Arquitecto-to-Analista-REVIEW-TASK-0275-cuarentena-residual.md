@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0275-cuarentena-resi
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0275 (REDUCIDA) sobre el commit 81fe270. El mecanismo de cuarentena ya se entrego en TASK-0282 y esta desplegado; esta unidad es solo su residual. Verificar POR COMPORTAMIENTO, con la disciplina de mutantes de 0283: (1) el rollback loguea las rutas puestas en cuarentena EN EXITO -- ruta original y ruta de la cuarentena -- no solo en fallo (hoy solo habia ROLLBACK_DEFER reason=quarantine_move_failed); reproduce un untracked de peer en la ventana y exige que su ruta aparezca en el log de cuarentena; (2) hay politica de retencion declarada (cuando se limpia .protocol-tmp/rollback-quarantine y quien) para que no crezca sin fin; (3) el negativo permanente -- peer escribe untracked -> exec aborta -> fichero en cuarentena CON su log -- enrojece al revertir el log de exito. Emitir GO o NO-GO con artifact. Si sale GO, cierra la ultima de higiene junto con 0285. SIN PRODUCTO EN ALCANCE."

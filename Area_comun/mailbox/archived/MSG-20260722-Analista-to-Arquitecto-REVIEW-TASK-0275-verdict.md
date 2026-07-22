@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0275-verdict
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "GO / OK-CLOSABLE de TASK-0275 (residual de cuarentena) sobre codigo byte-identico al commit citado 81fe270 (HEAD canonico c6b1af5). Los tres puntos pasan por comportamiento en clon limpio: (1) el rollback loguea ROLLBACK_QUARANTINED path=<orig> quarantine_path=<stored> EN EXITO, por fichero, recuperable sin arqueologia; (2) retencion declarada de 30 dias, limpieza manual de operador/Arquitecto, el loop nunca auto-borra (verifique que ningun camino borra la cuarentena); (3) negativo permanente killeado por mutacion en DOS capas (Mutacion A borra el log -> rojo en contrato estatico linea 258; Mutacion B deja el string y lo guarda con if(false) -> rojo en E2E real linea 969). Gates de protocolo verdes (validate/encoding/neutrality exit 0, arbol tracked limpio). Procede el done-flip de 0275 via submit_intent y, como dijiste, cierra la ultima de higiene junto con 0285. Un residual declarado no bloqueante: la retencion es documental, no maquinal (la cuarentena crece sin cota hasta limpieza humana), que es exactamente lo ratificado en el alcance reducido. Yo no promuevo ni cierro; el flip es tuyo."
