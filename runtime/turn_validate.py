@@ -223,29 +223,25 @@ def is_delivery_turn(report: dict[str, Any]) -> bool:
 
 
 def friction_sensors(report: dict[str, Any]) -> list[str]:
-    """Return objective friction signals carried by a turn or runtime result."""
+    """Return friction signals available in a schema-valid pre-gate turn report."""
     sensors: list[str] = []
-    gate = report.get("gate") or {}
-    if report.get("gate_green") is False or gate.get("green") is False:
-        sensors.append("gate_green:false")
-
-    attempt = report.get("attempt")
-    if not isinstance(attempt, int):
-        attempt_id = str(report.get("attempt_id") or "")
-        numeric_parts = [int(part) for part in re.findall(r"\d+", attempt_id)]
-        attempt = numeric_parts[-1] if numeric_parts else 1
-    if attempt > 1:
-        sensors.append("attempt>1")
-
     transitions = report.get("transitions") or {}
+    task_status = transitions.get("task_status") or {}
+    if task_status.get("to") in {"blocked", "qa_failed", "changes_requested", "architect_review"}:
+        sensors.append(f"task_status:{task_status['to']}")
+
+    review_qa = transitions.get("review_qa") or {}
+    review_event = review_qa.get("event")
+    if review_event in {"reject_review", "fail_qa", "assign_fix"}:
+        sensors.append(f"review_qa:{review_event}")
+    if review_qa.get("checks_failed"):
+        sensors.append("review_qa:checks_failed")
+
     actions = report.get("actions") or []
     action_text = " ".join(str(action.get("summary") or "") for action in actions if isinstance(action, dict))
-    if (
-        report.get("reverted") is True
-        or transitions.get("revert") is True
-        or re.search(r"\b(revert(?:ed)?|rollback)\b", action_text, re.IGNORECASE)
-    ):
-        sensors.append("revert")
+    # Best-effort only: action prose is evadable until TASK-0258 provides a structured revert signal.
+    if re.search(r"\b(revert(?:ed)?|rollback)\b", action_text, re.IGNORECASE):
+        sensors.append("revert:action-summary-proxy")
     return sensors
 
 

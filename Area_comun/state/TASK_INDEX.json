@@ -264,7 +264,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[DECISION-0103][C3] Validacion condicional en turn_validate: obstacles obligatorio si hubo friccion (gate_green false / attempt>1 / revert)",
             "type": "feature"
         },

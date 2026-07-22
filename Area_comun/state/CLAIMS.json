@@ -121,6 +121,26 @@
             "updated_at": "2026-07-22T17:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0259-remediation-2",
+            "expires_at": "2026-07-22T21:08:15Z",
+            "notes": "Remediation iteration 2: authoritative in-schema friction transitions, no attempt_id parsing, and validate_turn behavior coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0259-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0259",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0259",
+                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+                "runtime/turn_validate.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T18:08:15Z",
+            "status": "active",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T18:08:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0285-done-flip",
             "expires_at": "2026-07-22T17:13:00Z",
             "notes": "Implementer done-flip after independent checker GO and architect ratification.",
