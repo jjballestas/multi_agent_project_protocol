@@ -127,6 +127,24 @@
             "updated_at": "2026-07-22T00:41:48Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-done-flip",
+            "expires_at": "2026-07-22T07:20:31Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T05:20:31Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T05:20:31Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0284-handoff",
             "expires_at": "2026-07-22T01:46:45Z",
             "notes": "Publish self-contained TASK-0284 review handoff.",
