@@ -79,6 +79,23 @@
             "updated_at": "2026-07-22T10:25:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-resp0279-20260722",
+            "expires_at": "2026-07-22T10:24:37Z",
+            "notes": "RESP autorizando commit-msg para 0279 + correccion de acceptance + higiene",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg.md",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-resp0279-20260722"
+            ],
+            "started_at": "2026-07-22T10:04:37Z",
+            "status": "released",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:04:37Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "51c66568a96c19d5187043eebef25b50a3058658ac01cb05322ea97f161105ea",
+  "canonical_hash": "89d11f2dbeab599cd72325c16cb3239ccc8513933be7402344099ec0c281eede",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -872,6 +872,7 @@
       "CLAIM-arq-reject0267-iter1-20260720": 1,
       "CLAIM-arq-reject0272-20260720": 1,
       "CLAIM-arq-reporte0103-20260720": 1,
+      "CLAIM-arq-resp0279-20260722": 1,
       "CLAIM-arq-rutear-iter2-20260720": 1,
       "CLAIM-arq-rutear0272iter2-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio-20260720": 1,
@@ -2011,6 +2012,7 @@
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco": 1,
+      "MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2299,7 +2301,7 @@
       "TASK-0276": 1,
       "TASK-0277": 19,
       "TASK-0278": 14,
-      "TASK-0279": 8,
+      "TASK-0279": 9,
       "TASK-0280": 46,
       "TASK-0281": 24,
       "TASK-0282": 12,
@@ -2327,7 +2329,7 @@
       "protocol-prune": 20,
       "protocol-state": 1
     },
-    "events_applied": 4992,
+    "events_applied": 4995,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2747,6 +2749,9 @@
       "arq:rem77:1ec5db61-fd35-404f-a180-fd95b6f655b8": 5396,
       "arq:reporte0103:acquire:eeb4aadc-b420-425b-b541-c82c0c372533": 5343,
       "arq:reporte0103:release:eeb4aadc-b420-425b-b541-c82c0c372533": 5344,
+      "arq:resp0279:acquire:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5664,
+      "arq:resp0279:arch:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5665,
+      "arq:resp0279:release:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5666,
       "arq:rut0277rej:acquire:76c2172a-262b-4033-bb98-56a4a8e66b48": 5416,
       "arq:rut0277rej:arch1:76c2172a-262b-4033-bb98-56a4a8e66b48": 5417,
       "arq:rut0277rej:arch2:76c2172a-262b-4033-bb98-56a4a8e66b48": 5418,
@@ -7323,5 +7328,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5663
+  "up_to_seq": 5666
 }

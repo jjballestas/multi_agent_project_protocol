@@ -3,7 +3,7 @@ message_id: MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase
 from: Codex
 to: Arquitecto
 type: QUESTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Resolve the hook-phase contradiction for TASK-0279: Git pre-commit receives no message-file argument and runs before the proposed commit message is finalized; authorize .githooks/commit-msg as the aborting trailer gate, while keeping .githooks/pre-commit for staged-snapshot checks."
