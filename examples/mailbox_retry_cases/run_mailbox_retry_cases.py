@@ -13,6 +13,93 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+FALSIFICATION_CONTRACTS = (
+    {
+        "id": "retry-destructive-reset",
+        "negative": "rollback rejects destructive reset",
+        "mutation": '"destructive_reset": body + "\\n# reset --hard"',
+        "boundaries": ("assert contract(body)", "assert not survivors"),
+        "exercised_by": "run_nondestructive_rollback_contract",
+    },
+    {
+        "id": "retry-worktree-reapply",
+        "negative": "rollback does not reapply a captured worktree patch",
+        "mutation": '"worktree_reapply": body + "\\n# WorktreePatch"',
+        "boundaries": ("assert contract(body)", "assert not survivors"),
+        "exercised_by": "run_nondestructive_rollback_contract",
+    },
+    {
+        "id": "retry-mailbox-allowlist",
+        "negative": "rollback preserves ledger-managed mailbox paths",
+        "mutation": 'body.replace("if (Test-LedgerManagedPath -Path $path) { continue }", "")',
+        "boundaries": ("assert contract(body)", "assert not survivors"),
+        "exercised_by": "run_nondestructive_rollback_contract",
+    },
+    {
+        "id": "retry-index-exit-gate",
+        "negative": "rollback defers after an index restore failure",
+        "mutation": 'reason=index_restore_failed\"; return }\', "")',
+        "boundaries": ("assert contract(body)", "assert not survivors"),
+        "exercised_by": "run_nondestructive_rollback_contract",
+    },
+    {
+        "id": "retry-untracked-exit-gate",
+        "negative": "rollback defers after untracked enumeration failure",
+        "mutation": 'reason=untracked_enumeration_failed\"; return }\', "")',
+        "boundaries": ("assert contract(body)", "assert not survivors"),
+        "exercised_by": "run_nondestructive_rollback_contract",
+    },
+    {
+        "id": "retry-terminal-defer",
+        "negative": "an exhausted defer is terminal",
+        "mutation": 'text.replace("exhausted = $terminal", "exhausted = $false", 1)',
+        "boundaries": ("assert contract(text)", "assert not survivors"),
+        "exercised_by": "run_pregate_contract_mutants",
+    },
+    {
+        "id": "retry-dirty-forensics",
+        "negative": "dirty-tree forensics runs before lock acquisition",
+        "mutation": 'text.replace("$residueState = Get-StagedResidueState", "# dirty-tree veto removed", 1)',
+        "boundaries": ("assert contract(text)", "assert not survivors"),
+        "exercised_by": "run_pregate_contract_mutants",
+    },
+    {
+        "id": "retry-large-stderr-drain",
+        "negative": "concurrent pipe drain terminates while the sequential mutant deadlocks",
+        "mutation": "$stdout = $process.StandardOutput.ReadToEnd()",
+        "boundaries": ("assert not (fixture / \"drain-test.lock\").exists()", "raise AssertionError(\"sequential pipe-drain control did not hang"),
+        "exercised_by": "run_large_stderr_drain_case",
+    },
+    {
+        "id": "retry-deleted-first-seen",
+        "negative": "a deleted residue ages out of defer in the real loop",
+        "mutation": 'runner_text.replace("$firstSeen.ContainsKey($relative)", "$false", 1)',
+        "boundaries": ("exercise(runner_text, expect_exec=True)", "exercise(mutant, expect_exec=False)"),
+        "exercised_by": "run_deleted_residue_real_loop_case",
+    },
+    {
+        "id": "retry-pure-append-evidence",
+        "negative": "growth without a byte-identical prefix cannot prove own work",
+        "mutation": "$mutantRewriteGrow=((Get-Item -LiteralPath $path).Length -gt $before)",
+        "boundaries": ("assert result == {\"append\": True", "\"mutant_rewrite_grow\": True"),
+        "exercised_by": "run_pure_append_evidence_cases",
+    },
+    {
+        "id": "retry-expired-claim",
+        "negative": "an expired external claim does not defer launch",
+        "mutation": 'replace("$expires -gt $now", "$true", 1)',
+        "boundaries": ('assert probe(signal.group(0)) == "none"', 'assert probe(mutant) == "active_external_claim"'),
+        "exercised_by": "run_expired_claim_behavior_case",
+    },
+    {
+        "id": "retry-utf8-residue-path",
+        "negative": "a stale UTF-8 residue ages while a console-codepage mutant does not",
+        "mutation": "[Text.Encoding]::GetEncoding(850)",
+        "boundaries": ('assert output == "aborted"', 'assert mutant_output == "live"'),
+        "exercised_by": "run_nul_residue_path_cases",
+    },
+)
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
 LEDGER_HEAD = ROOT / "scripts" / "ledger_head.py"
 

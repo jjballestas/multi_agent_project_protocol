@@ -71,6 +71,9 @@ HARNESS_SOURCE_DIR = "scripts/harness"
 CLAUDE_SKILLS_SOURCE_DIR = "scripts/instance_assets/claude-skills"
 
 GATE_SCRIPT_FILES = [
+    "check_falsification_contracts.py",
+    "falsification_contracts.py",
+    "ledger_head.py",
     "check_commit_trailers.py",
     "validate_collaboration_state.py",
     "validate_collaboration_state.ps1",
@@ -129,6 +132,9 @@ jobs:
 
       - name: Validate protocol state
         run: python scripts/validate_collaboration_state.py --root .
+
+      - name: Validate declared falsification contracts
+        run: python scripts/check_falsification_contracts.py --root .
 
       - name: Validate protocol state with PowerShell
         shell: pwsh

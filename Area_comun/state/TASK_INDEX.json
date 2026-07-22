@@ -360,7 +360,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba",
             "type": "infra"
         },
@@ -408,7 +408,7 @@
             "phase": "P2",
             "priority": "medium",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola",
             "type": "infra"
         },

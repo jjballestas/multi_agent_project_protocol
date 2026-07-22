@@ -81,7 +81,7 @@
         {
             "id": "TASK-0283",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
         },
         {

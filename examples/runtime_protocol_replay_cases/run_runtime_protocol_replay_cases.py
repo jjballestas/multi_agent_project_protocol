@@ -26,6 +26,23 @@ from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 TASK_ID = "TASK-9000"
 
+FALSIFICATION_CONTRACTS = (
+    {
+        "id": "protocol-replay-drift-exit",
+        "negative": "a drifted hot state must make the CLI gate red",
+        "mutation": "inverted = lambda value",
+        "boundaries": ("assert dirty.returncode != 0", "assert inverted({\"has_drift\": True}) == 0"),
+        "exercised_by": "case_cli_is_a_real_aborting_gate",
+    },
+    {
+        "id": "protocol-replay-unknown-flag",
+        "negative": "an unknown CLI flag must be rejected",
+        "mutation": "isolated_unknown = run(command + [\"--bogus-flag\"]",
+        "boundaries": ("assert isolated_unknown.returncode != 0",),
+        "exercised_by": "case_cli_is_a_real_aborting_gate",
+    },
+)
+
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)

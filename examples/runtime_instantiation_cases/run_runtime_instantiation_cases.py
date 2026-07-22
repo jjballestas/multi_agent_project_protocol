@@ -20,6 +20,9 @@ SCAN_NEUTRALITY = ROOT / "scripts" / "scan_domain_neutrality.py"
 
 GATE_SCRIPTS = {
     "check_commit_trailers.py",
+    "check_falsification_contracts.py",
+    "falsification_contracts.py",
+    "ledger_head.py",
     "validate_collaboration_state.py",
     "validate_collaboration_state.ps1",
     "scan_encoding.py",
@@ -88,6 +91,7 @@ def validate_with_repo_tools(root: Path) -> None:
 
 
 def validate_with_instance_tools(root: Path) -> None:
+    assert_ok(run([sys.executable, str(root / "scripts" / "check_falsification_contracts.py"), "--root", str(root)]))
     assert_ok(run([sys.executable, str(root / "scripts" / "validate_collaboration_state.py"), "--root", str(root)]))
     assert_ok(run([sys.executable, str(root / "scripts" / "scan_encoding.py"), "--root", str(root)]))
     assert_ok(run([sys.executable, str(root / "scripts" / "scan_domain_neutrality.py"), "--root", str(root)]))
