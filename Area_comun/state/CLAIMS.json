@@ -136,9 +136,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T18:08:15Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0259",
             "updated_at": "2026-07-22T18:08:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0259-remediation-2-delivery",
+            "expires_at": "2026-07-22T21:13:07Z",
+            "notes": "Deliver TASK-0259 remediation iteration 2 for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0259-remediation-2-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0259",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0259",
+                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T18:13:07Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T18:13:07Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0285-done-flip",
