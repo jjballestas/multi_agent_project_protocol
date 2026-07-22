@@ -7,6 +7,42 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-22 (9) - TASK-0259 (C3 obstacles gate): NO-GO (CHANGE-REQUIRED) - el predicado lee el campo equivocado
+
+- Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-obstacles-gate`. Primera del nucleo 0103.
+  Ancla impl `fc98db7`, entrega `881ecff`; HEAD `2020c81`==origin/main, sin drift. Clon limpio `D:/ccv259`
+  (ruta CORTA por el long-path de Windows), exit codes. Veredicto commit `0e04aef`. SIN PRODUCTO EN ALCANCE.
+- **Los 4 casos base PASS** (verificado por comportamiento sobre validate_turn completo con el fixture del
+  maker): entrega sin obstacles -> RECHAZADO; entrega obstacles vacio -> RECHAZADO; no-entrega sin obstacles
+  -> ACEPTADO; entrega bien formada -> ACEPTADO. La suite del maker (obstacle/schema/semantic) + validate +
+  encoding: todo exit0.
+- **BLOQUEANTE - el predicado deja escapar una entrega REAL:** `is_delivery_turn(report)` lee
+  `report.get("outcome") in {in_review,done}`. NUNCA lee `transitions.task_status.to`, que es la senal que
+  TODO el resto de validate_turn trata como autoritativa para el MISMO evento (gate de capacidad L97,
+  anti-carrera L320, apply.py). Grep: cero acople outcome<->to en esquema y validador. Money-shot:
+  entrega `in_progress->in_review` que suelta el claim y cambia ficheros, con `outcome="ok"` y SIN obstacles
+  -> `is_delivery_turn=False`, `validate_turn errors=[]` -> el orquestador la COMMITEA. Igual con
+  outcome="blocked"/"no_op". La puerta de C3 se anula con un relabel de un campo ortogonal. DECISION-0103 C4:
+  debe ser regla de validador "no es cuestion de disciplina"; vencerla eligiendo una etiqueta = disciplina.
+- **El negativo permanente del maker NO cubre este vector:** mutar `is_delivery_turn` a False enrojece, lo
+  que prueba que el guard PESA cuando outcome ES la senal; jamas prueba una entrega senalada por la
+  transicion con outcome divergente. Necesario, no suficiente (mismo patron que 0283 (8): el test mide su
+  propia sombra en el eje que el maker eligio, no en el que se escapa).
+- **Alcance vs C3 (el Arquitecto invito a decirlo):** NO existe ningun sensor de friccion en el codigo
+  (gate_green:false / attempt>1 / revert), que es lo que C3 y el acceptance de 0259 nombran como el nucleo
+  del carril runtime -> un turno de NO-entrega con friccion real (blocked tras gate rojo) no obliga a nada;
+  y toda entrega SIN friccion es forzada a narrar -> el teatro "sin problemas" que C3 prohibe ("lista vacia
+  es respuesta legitima"). El GO del Arquitecto acoto la intake de "sensores de friccion" a "entrega/
+  no-entrega"; lo registro como divergencia, la decision de alcance es suya.
+- **Residual senalado:** el `verification_cmd` de la tarea cita `run_runtime_turn_cases.py` que NO existe
+  (los runners reales son `run_runtime_turn_{schema,semantic,obstacle}_cases.py`). Drift de DoR, no bloqueante.
+- **Fix loop:** remediacion 1 de 2 a Codex. Bloqueo = leer la transicion (no el outcome) + negativo de
+  entrega-via-transicion en el runner. Re-juicio mio antes del cierre; max 2 iter.
+- LECCION reforzada: cuando una guarda condicional decide "es entrega?/hubo friccion?", atacar SIEMPRE la
+  senal que lee vs la senal autoritativa del sistema. Aqui dos campos independientes (outcome libre vs
+  transitions.task_status.to) que nadie acopla: el guard leyo el barato. Construir la entrega real por la
+  transicion y darle el outcome "inocente" es el money-shot.
+
 ## Ultima actualizacion 2026-07-22 (8) - TASK-0283 CIERRE iter3: NO-GO (CHANGE-REQUIRED) - escape NUEVO por placement
 
 - Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter3-cierre`. Re-juicio de CIERRE con
