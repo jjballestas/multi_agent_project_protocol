@@ -5,7 +5,42 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-22 (1) (TASK-0281 iter3 NO-GO sobre 8c70dbb: dos regresiones nuevas del lado de la PARADA; antes TASK-0277 OK-CLOSABLE con condicion F1; antes cierre 0272 ratificado, iter2 OK/CERRABLE a5e1acd, iter1 NO-GO 417bd01, 0273 GO b43c6c6, 0258 GO 305efd1).
+> Ultima actualizacion: 2026-07-22 (2) (TASK-0284 banco RE-JUICIO GO/OK-CLOSABLE sobre 947c6f5, commit d1910a3: los tres negativos nuevos son de bucle real y cada uno se pone rojo por conducta al mutarlo; cierra la maquinaria de integridad; antes TASK-0281 iter3 NO-GO sobre 8c70dbb).
+
+## Ultima actualizacion 2026-07-22 (2) - TASK-0284 banco RE-JUICIO GO/OK-CLOSABLE sobre 947c6f5
+
+- Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio`. Re-juicio del
+  banco TEST-ONLY sobre `947c6f5` (HEAD protocolo `748c5e7`). **El codigo del harness NO cambio**:
+  `git diff --stat 04ec9d1 947c6f5 -- scripts/harness/` VACIO. Ya certifique ese codigo correcto
+  por comportamiento (F-0281-07/08 cerrados en el pregate); esto era solo endurecer el banco.
+- Contexto: mi pregate (`Analista-TASK-0284-pregate-verdict.md`, commit 8a716f0) fue
+  CHANGE-REQUIRED por DOS SLIPS cabecera -- `deleted_first_seen_removed` y `sequential_pipe_drain`
+  MEDIAN SU SOMBRA (solo string-contract, ningun test de comportamiento) -- mas una SLIP menor de
+  vejez de claims. Remediacion test-only movio esos TRES a negativos de BUCLE REAL.
+- **Veredicto: GO / OK-CLOSABLE** (`Analista-TASK-0284-banco-rejuicio-verdict.md`, commit
+  `d1910a3`, pusheado, canonical verde). Clon limpio `D:/ccv0284b`. Re-conduje cada mutacion yo
+  mismo con instrumentacion (no confie en la asercion interna del test):
+  - **Negativo 1 (borrado):** REAL -> R1 `residue_live` -> R2 `staged_residue_aborted` ->
+    `EXEC_START`. MUTANTE `first-seen->$false` -> eterno `live` -> `defer_terminal
+    reason=worktree_residue_live` (F-0281-07 renacido). Muerto por conducta.
+  - **Negativo 2 (>64KB stderr):** concurrente exit 0 wall **0.47s** sin lock. MUTANTE secuencial
+    (ReadToEnd sync) = **DEADLOCK REAL**: le di 45s (15x el tope de 3s del banco) y sigue colgado,
+    lock huerfano. Cierra el R1 de mi pregate (antes se cazaba por choque de TIPO, no por cuelgue).
+  - **Negativo 3 (claim vencida):** REAL vencida -> `none`, fresca externa -> `active_external_claim`
+    (base: SI detecta, `none` significativo), propia -> `none`. MUTANTE `$expires -gt $now->$true`
+    -> vencida contada `active_external_claim`. Muerto por conducta.
+- String-contract `run_pregate_contract_mutants` RETENIDO como EXTRA (literales cabecera presentes)
+  guardando solo los dos mutantes que ademas se cazan por comportamiento (terminal_defer,
+  dirty_forensics). Avale esto en el pregate: extra, no guardian unico. Sin regresion.
+- Gates sobre 947c6f5: validate/encoding/neutrality exit 0, `run_mailbox_retry_cases` exit 0,
+  drift False. Residuos NO bloqueantes: R1 el mutante mata la LINEA declarada (limite del mutation
+  testing por linea); R2 vejez serializada fail-closed; R3 `context_ref` handoffs/ inexistente
+  (el handoff se archivo como MSG) -- anomalia de traza DECISION-0018.
+- LECCION reforzada (patron 0283): un negativo que sobrevive a su propia mutacion mide su sombra.
+  El banco cerro cuando cada positivo alcanza su estado por el camino declarado Y el mutante
+  enrojece por la CONDUCTA y la RAZON declarada, verificado por mi con payloads propios, no por el
+  nombre ni la asercion del test. La prueba del deadlock real: darle 15x el tope y confirmar que
+  SIGUE colgado (distingue deadlock de timeout-por-lentitud).
 
 ## Ultima actualizacion 2026-07-22 (1) - TASK-0281 iter3 NO-GO sobre 8c70dbb (dos paradas nuevas)
 
