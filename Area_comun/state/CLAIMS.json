@@ -604,6 +604,24 @@
             "updated_at": "2026-07-23T02:48:12Z"
         },
         {
+            "claim_id": "CLAIM-arq-reg0287-20260723",
+            "expires_at": "2026-07-23T10:32:36Z",
+            "notes": "Registro follow-up F1 (TASK-0287) ready sin GO + archivo FYI al Asesor de 0264",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0287-f1-hook-fullmode-inventory-deliverables.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0287",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0287",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reg0287-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Asesor-FYI-TASK-0264-regla-C1-publicada.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Codex-to-Asesor-FYI-TASK-0264-regla-C1-publicada.md"
+            ],
+            "started_at": "2026-07-23T10:12:36Z",
+            "status": "released",
+            "task_id": "TASK-0287",
+            "updated_at": "2026-07-23T10:12:36Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0266-20260723",
             "expires_at": "2026-07-23T01:36:45Z",
             "notes": "Ruteo remediacion 0266 iter1 (integridad prueba E5) a Codex + archivo verdict/review",

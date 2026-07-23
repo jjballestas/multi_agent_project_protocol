@@ -3,7 +3,7 @@ message_id: MSG-20260723-Codex-to-Asesor-FYI-TASK-0264-regla-C1-publicada
 from: Codex
 to: Asesor
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-23
 context_refs:

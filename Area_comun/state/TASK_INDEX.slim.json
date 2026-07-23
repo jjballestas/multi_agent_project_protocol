@@ -24,6 +24,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
+        },
+        {
+            "id": "TASK-0287",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "[DECISION-0103][F1/follow-up] Hook full-mode: inventario del snapshot omite deliverables (HUMAN_GUIDE.md + personal/**) -> falso rechazo"
         }
     ],
     "view": "task_index.slim"

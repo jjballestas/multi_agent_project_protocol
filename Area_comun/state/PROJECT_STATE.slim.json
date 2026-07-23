@@ -17,6 +17,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
+        },
+        {
+            "id": "TASK-0287",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0103][F1/follow-up] Hook full-mode: inventario del snapshot omite deliverables (HUMAN_GUIDE.md + personal/**) -> falso rechazo"
         }
     ],
     "next_actions": [
