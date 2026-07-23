@@ -166,6 +166,24 @@
             "updated_at": "2026-07-23T00:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0265-in-review",
+            "expires_at": "2026-07-23T05:08:29Z",
+            "notes": "Implementer status flip requested after independent OK-CLOSABLE verdict.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0265-in-review",
+                "Area_comun/state/TASK_INDEX.json#TASK-0265",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0265",
+                "Area_comun/tasks/TASK-0265-d0103-gate-revision-adversarial-conjunto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T04:08:29Z",
+            "status": "released",
+            "task_id": "TASK-0265",
+            "updated_at": "2026-07-23T04:08:29Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0266",
             "expires_at": "2026-07-23T12:35:00Z",
             "notes": "Implement E4/E5/H1 propagation only in sandbox and scratch fixtures.",
