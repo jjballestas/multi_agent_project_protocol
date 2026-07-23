@@ -4291,3 +4291,8 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - TASK-0291 and TASK-0292 are `in_progress` under
   `CLAIM-20260723-Codex-TASK-0291-remediation1`; next action is governed delivery to `in_review`,
   release, and an ASCII handoff requesting independent review.
+- Delivery commit `f49b0d3` moves both tasks to `in_review`, releases the work and handoff
+  claims, and updates `MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0291-0292.md`.
+  Arquitecto must route commits `23d7476` and `dd9602a` to Analista; Codex has not self-reviewed
+  or ratified either task. The commit hook reported pruning due; that remains an Arquitecto
+  coordinated checkpoint action.

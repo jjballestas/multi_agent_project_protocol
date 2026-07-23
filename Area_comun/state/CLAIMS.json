@@ -153,6 +153,20 @@
             "updated_at": "2026-07-23T20:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0291-remediation1-final-memory",
+            "expires_at": "2026-07-23T23:00:00Z",
+            "notes": "Persist TASK-0291 and TASK-0292 remediation delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0291-remediation1-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-23T21:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T21:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0291-remediation1-handoff",
             "expires_at": "2026-07-23T22:54:00Z",
             "notes": "Update the coupled TASK-0291 and TASK-0292 handoff for remediation iteration 1.",
