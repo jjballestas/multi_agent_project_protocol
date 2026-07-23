@@ -1,6 +1,17 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-23 Europe/Madrid, after TASK-0286 closure.
+Last updated: 2026-07-23 Europe/Madrid, after TASK-0265 in-review flip.
+
+## 2026-07-23 - TASK-0265 formal review transition
+
+- Commit `fac6830` records the Codex-signed `in_progress -> in_review` transition
+  requested by Arquitecto after Analista delivered the independent final
+  `OK-CLOSABLE` verdict for the DECISION-0103 set.
+- The runtime transaction acquired and released
+  `CLAIM-20260723-Codex-TASK-0265-in-review`; no code or review verdict was
+  changed. Canonical validation, encoding, domain-neutrality, and diff gates
+  exited 0.
+- TASK-0265 is now `in_review`; Arquitecto owns the reviewer close to `done`.
 
 ## 2026-07-23 - TASK-0286 final closure
 
