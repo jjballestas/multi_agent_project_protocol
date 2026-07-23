@@ -221,6 +221,20 @@
             "updated_at": "2026-07-23T17:16:46Z"
         },
         {
+            "claim_id": "CLAIM-arq-rembatch-20260723",
+            "expires_at": "2026-07-23T20:20:54Z",
+            "notes": "Ruteo remediacion iter1 batch R3+R4 (test non-reviewed fragil)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0291-0292-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rembatch-20260723"
+            ],
+            "started_at": "2026-07-23T20:00:54Z",
+            "status": "released",
+            "task_id": "TASK-0292",
+            "updated_at": "2026-07-23T20:00:54Z"
+        },
+        {
             "claim_id": "CLAIM-arq-review0290-20260723",
             "expires_at": "2026-07-23T18:34:34Z",
             "notes": "Ruteo REVIEW 0290 a Analista + archivo GO-0290 y HANDOFF-0290",
