@@ -7,6 +7,45 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-23 (22) - TASK-0289 R2 acotar personal/** en full-hook: OK-CLOSABLE sobre 3090d5f/cf369d4
+
+- Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0289`. Residual R2 del veredicto 0287. Ancla:
+  impl `3090d5f`, ancla clon-limpio `cf369d4` (ancestro de origin/main `f6bf963`, commit coord que solo rutea).
+  Clon limpio `/d/ccv289`. Veredicto commit `88d7198` (artefacto
+  `Area_comun/artifacts/Analista-TASK-0289-bound-fullhook-personal-verdict.md` + MSG REVIEW a Arquitecto).
+  SOLO PROTOCOLO, sin producto en alcance.
+- **VEREDICTO: OK-CLOSABLE (GO)** con 2 residuales no-bloqueantes (R3, R4). El fix quita el arbol `personal`
+  completo del `snapshot_inventory` estatico y anade un bloque Python que lee TASK_INDEX(+ARCHIVE) del
+  snapshot staged, extrae deliverables bajo `personal/` (guarda anti-traversal: parts[0]==personal, sin `..`,
+  no absoluta) y materializa SOLO esos via `git checkout-index --force -- <path>`; fallo -> "could not
+  materialize" exit 1. Reduccion medible: 1 of 761 tracked paths.
+- Gates por exit code (clon limpio): HOOK_FULL limpio -> exit0 "1 of 761"; estado roto -> exit1 via validate
+  ("...invalid; commit rejected", parse-robustez: el bloque hace except JSONDecodeError->continue y el
+  validador queda de autoridad); masking-probe (rm --cached STARTUP_PROMPT.md, TASK-0084 done) -> exit1 PERO
+  la RAZON cambio vs 0287: ahora checkout-index ("not in the cache") ANTES del validador; regresion exit0;
+  validate/scan_encoding exit0; pin SHA-256 == validate.yml (MATCH); scripts/ diff VACIO (validador intacto).
+- **A-SOBRE-RECHAZO adjudicado ACEPTABLE (no reintroduce F1)**: divergencia REAL y net-new. El hook falla-duro
+  ante un deliverable personal/ AUSENTE para CUALQUIER status; el validador exige existencia SOLO para
+  `REVIEWED_TASK_STATUSES = {in_review, review_approved, qa_pending, architect_review, done}`
+  (validate:1048). Para status NO-revisado (cancelled/proposed/...) el hook es MAS ESTRICTO que el validador ->
+  falso-rechazo. Aislado extrayendo `validate_tasks` (ghost en cancelled NO marcado; en done SI marcado) +
+  probe vivo del hook sobre cancelled REQ-829CBFCE (checkout-index rechaza). OJO: para `done` NO hay
+  divergencia (el validador tambien rechaza). NO existia en 0287 (git ls-files -- personal solo lista
+  TRACKED, nunca falla por ausente). GOTCHA de metodo: editar TASK_INDEX.json a mano dispara la puerta B.3
+  drift (esta instancia tiene event_state.enforce ON) que ENMASCARA la logica de deliverable -> hay que
+  aislar `validate_tasks` para verlo.
+- Por que ACEPTABLE y no NO-GO (evitar sobre-rechazo yo mismo): (1) F1 segun lo acota la tarea = falso-rechazo
+  del ARBOL LIMPIO con deliverables presentes-omitidos; el arbol limpio pasa exit0. (2) severidad acotada:
+  local opt-in, fail-CLOSED, NO bloquea CI (la frontera dura de CI es el validador DIRECTO en validate.yml:29,
+  que tolera el mismo estado; ningun paso CI corre HOOK_FULL parcial sobre el arbol real). (3) LATENTE (unico
+  deliverable personal = TASK-0084 done+presente). (4) rechazo honesto/atribuible. -> residual R3 con fix
+  minimo (filtrar deliverables extraidos por REVIEWED_TASK_STATUSES, o tolerar el miss y dejar al validador de
+  autoridad -filosofia del propio handoff-). R4 = el masking-case de la regresion solo asevera returncode!=0,
+  no la RAZON, asi que ahora verdea por checkout-index y no prueba el camino validador/C5.
+- LECCION: cuando el checker debe adjudicar "gate mas estricto que el validador", la divergencia es REAL y hay
+  que probarla falsable, pero GO+residual (no NO-GO) si no rompe ningun acceptance ni la prohibicion ACOTADA;
+  un NO-GO ahi seria sobre-rechazo -ironico en una tarea que trata justo de no sobre-rechazar-.
+
 ## Ultima actualizacion 2026-07-23 (21) - TASK-0288 R1 JSON gobernado malformado graceful: OK-CLOSABLE sobre 18b25da+2959622
 
 - Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0288`. Residual R1 del veredicto 0287. Ancla:
