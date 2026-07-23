@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import subprocess
@@ -91,6 +92,54 @@ def main() -> int:
                 f"stdout:\n{negative.stdout}\nstderr:\n{negative.stderr}"
             )
 
+        nonreviewed_root = Path(tmp) / "nonreviewed"
+        clone_with_fix(source, nonreviewed_root)
+        task_index = nonreviewed_root / "Area_comun" / "state" / "TASK_INDEX.json"
+        task_data = json.loads(task_index.read_text(encoding="utf-8"))
+        nonreviewed_task = next(task for task in task_data["tasks"] if task["id"] == "TASK-0291")
+        if nonreviewed_task["status"] in {
+            "in_review",
+            "review_approved",
+            "qa_pending",
+            "architect_review",
+            "done",
+        }:
+            raise AssertionError("non-reviewed probe fixture unexpectedly has a reviewed status")
+        nonreviewed_task["deliverables"] = ["personal/Codex/absent-nonreviewed-probe.md"]
+        task_index.write_text(
+            json.dumps(task_data, ensure_ascii=True, indent=4) + "\n",
+            encoding="ascii",
+        )
+        config_path = nonreviewed_root / "protocol.config.json"
+        config_data = json.loads(config_path.read_text(encoding="utf-8"))
+        for key in (
+            "enabled",
+            "materialize",
+            "enforce",
+            "authoritative",
+            "chain_enabled",
+            "agent_signatures_enabled",
+            "anchor_enabled",
+        ):
+            config_data["event_state"][key] = False
+        config_path.write_text(
+            json.dumps(config_data, ensure_ascii=True, indent=2) + "\n",
+            encoding="ascii",
+        )
+        require(
+            run(
+                ["git", "add", "Area_comun/state/TASK_INDEX.json", "protocol.config.json"],
+                nonreviewed_root,
+            ),
+            0,
+            "stage non-reviewed missing deliverable probe",
+        )
+        require(
+            hook(nonreviewed_root),
+            0,
+            "non-reviewed task with absent personal deliverable",
+        )
+
         masking_root = Path(tmp) / "masking"
         clone_with_fix(source, masking_root)
         require(
@@ -101,11 +150,21 @@ def main() -> int:
         masking = hook(masking_root)
         if masking.returncode == 0:
             raise AssertionError("staged deletion of an indexed personal deliverable was accepted")
+        combined = f"{masking.stdout}\n{masking.stderr}"
+        if (
+            "deliverable missing" not in combined
+            or "collaboration state in staged snapshot is invalid" not in combined
+        ):
+            raise AssertionError(
+                "reviewed-task masking probe was rejected outside the validator boundary\n"
+                f"stdout:\n{masking.stdout}\nstderr:\n{masking.stderr}"
+            )
 
     print(
         "OK: real hook accepts the clean full-mode partial snapshot with indexed "
-        "deliverables, bounds personal materialization, and rejects broken state "
-        "plus an indexed-deliverable masking probe."
+        "deliverables, tolerates absent non-reviewed deliverables, bounds personal "
+        "materialization, and rejects broken state plus a reviewed-task masking "
+        "probe at the validator boundary."
     )
     return 0
 

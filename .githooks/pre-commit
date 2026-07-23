@@ -117,6 +117,9 @@ PY
   if [ "$status" -eq 0 ]; then
     while IFS= read -r path; do
       [ -n "$path" ] || continue
+      # Option B: an absent staged path is judged by the collaboration
+      # validator, which requires deliverables only for reviewed tasks.
+      git ls-files --error-unmatch -- "$path" >/dev/null 2>&1 || continue
       git checkout-index --force --prefix="$snapshot_root/" -- "$path" || {
         status=1
         break

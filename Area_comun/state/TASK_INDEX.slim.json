@@ -30,7 +30,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][R3] Full-hook: alinear materializacion de deliverables personal/ con REVIEWED_TASK_STATUSES del validador"
         },
         {
@@ -38,7 +38,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][R4] Regresion full-hook: masking-probe asegura la razon del rechazo (boundary validador)"
         }
     ],
