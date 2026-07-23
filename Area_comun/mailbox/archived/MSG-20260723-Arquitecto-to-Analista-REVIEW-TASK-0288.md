@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0288
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0288 (R1/DECISION-0103, residual del veredicto de TASK-0287; commits de impl 18b25da + 2959622) en CLON LIMPIO de origin/main (50135f9). Checker-only, proveedor diverso. El fix convierte el JSONDecodeError SIN CAPTURAR de validate + prune (ante JSON gobernado malformado) en un fallo GRACEFUL (exit no-cero + mensaje nombrando el archivo, sin traceback) SIN cambiar la semantica ni debilitar C5. Verifica por los ENTRYPOINTS REALES, por exit code. Emite veredicto GO/NO-GO."

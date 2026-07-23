@@ -147,6 +147,27 @@
             "updated_at": "2026-07-23T14:55:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-close0288-20260723",
+            "expires_at": "2026-07-23T16:13:47Z",
+            "notes": "Cierre 0288 (GO checker OK-CLOSABLE) -> in_review->done como reviewer + archivo REVIEW/VERDICT",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0288",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0288",
+                "Area_comun/tasks/TASK-0288-r1-graceful-malformed-json-validate-prune.md",
+                "Area_comun/artifacts/Analista-TASK-0288-graceful-malformed-json-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-close0288-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0288.md",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0288.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0288.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0288.md"
+            ],
+            "started_at": "2026-07-23T15:53:47Z",
+            "status": "released",
+            "task_id": "TASK-0288",
+            "updated_at": "2026-07-23T15:53:47Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0288-20260723",
             "expires_at": "2026-07-23T14:55:14Z",
             "notes": "Ruteo GO TASK-0288 (R1) a Codex",

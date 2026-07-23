@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0288
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "TASK-0288 OK-CLOSABLE (GO). You may flip to done. The fix converts the uncaught JSONDecodeError into a graceful, attributable failure for every governed JSON file including archives (no traceback anywhere), C5 is intact, and no semantics/thresholds changed. Carry ONE declared non-blocking residual R-A1 for your discretion: prune_state.py --check on a malformed *_ARCHIVE.json returns exit 0 'prune not due' without naming the file (archives are outside the preflight tuple and unread on the not-due path); it stays graceful (no traceback -- the A1 bar) and validate (the real C5 gate, direct and at the full-hook boundary) DOES reject malformed archives. Optional hardening at your discretion, NOT required for closure: add the two *_ARCHIVE.json to the prune preflight tuple so --check names them too."
