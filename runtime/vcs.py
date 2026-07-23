@@ -39,7 +39,12 @@ def is_policy_path(path: str) -> bool:
     return any(normalized == policy.rstrip("/") or normalized.startswith(policy) for policy in POLICY_PATHS)
 
 
-def commit_turn(root: Path, message: str, paths: list[str], allow_policy: bool = False, verify: bool = False) -> str:
+def commit_turn(root: Path, message: str, paths: list[str], allow_policy: bool = False, verify: bool = True) -> str:
+    """Commit a runtime turn with repository hooks enabled by default.
+
+    ``verify=False`` is an explicit recovery-only bypass for repairing the gate itself or
+    rolling back a broken gate; normal runtime turns must retain the default.
+    """
     root = root.resolve()
     if not message.strip():
         raise VcsError("Commit message is required")

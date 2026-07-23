@@ -92,6 +92,24 @@ def assert_generated_tier(root: Path, requested_tier: str) -> None:
     )
 
 
+def assert_hooks_are_active(root: Path) -> None:
+    configured = run(["git", "config", "--get", "core.hooksPath"], cwd=root)
+    assert_ok(configured)
+    assert configured.stdout.strip() == ".githooks"
+
+
+def assert_broken_governed_state_is_rejected(root: Path) -> None:
+    run(["git", "config", "user.name", "Fixture"], cwd=root)
+    run(["git", "config", "user.email", "fixture@example.invalid"], cwd=root)
+    assert_ok(run(["git", "add", "--", "."], cwd=root))
+    assert_ok(run(["git", "commit", "--no-verify", "-m", "fixture baseline"], cwd=root))
+    task_index = root / "Area_comun" / "state" / "TASK_INDEX.json"
+    task_index.write_text("{broken\n", encoding="utf-8")
+    assert_ok(run(["git", "add", "--", "Area_comun/state/TASK_INDEX.json"], cwd=root))
+    rejected = run(["git", "commit", "-m", "broken governed state"], cwd=root)
+    assert rejected.returncode != 0, "active generated hook accepted broken governed state"
+
+
 def validate_with_repo_tools(root: Path) -> None:
     assert_ok(run([sys.executable, str(VALIDATOR), "--root", str(root)]))
     assert_ok(run([sys.executable, str(SCAN_ENCODING), "--root", str(root)]))
@@ -130,6 +148,7 @@ def case_coordination_default_and_flag() -> None:
         generate(explicit_root, "coordination")
         for root in (default_root, explicit_root):
             assert_generated_tier(root, "coordination")
+            assert_hooks_are_active(root)
             assert (root / "runtime" / "protocol_replay.py").exists()
             assert {path.name for path in (root / "scripts").iterdir() if path.is_file()} == GATE_SCRIPTS
             assert not (root / ".github" / "workflows" / "validate.yml").exists()
@@ -143,6 +162,7 @@ def case_runtime_tier_scaffolds_motor_gates_ci_off() -> None:
         root = Path(temp) / "runtime"
         generate(root, "runtime")
         assert_generated_tier(root, "runtime")
+        assert_hooks_are_active(root)
         config = load_config(root)
         assert config["runtime"]["enabled"] is False
         assert config["tool_policy"]["enabled"] is False
@@ -152,6 +172,14 @@ def case_runtime_tier_scaffolds_motor_gates_ci_off() -> None:
         assert {path.name for path in (root / "scripts").iterdir() if path.is_file()} == GATE_SCRIPTS
         validate_with_repo_tools(root)
         validate_with_instance_tools(root)
+
+
+def case_generated_hook_rejects_broken_governed_state() -> None:
+    with tempfile.TemporaryDirectory(prefix="tier-hook-negative-") as temp:
+        root = Path(temp) / "coordination"
+        generate(root, "coordination")
+        assert_hooks_are_active(root)
+        assert_broken_governed_state_is_rejected(root)
 
 
 def case_missing_exported_ledger_head_is_detected() -> None:
@@ -220,6 +248,7 @@ def main() -> int:
     cases = [
         case_coordination_default_and_flag,
         case_runtime_tier_scaffolds_motor_gates_ci_off,
+        case_generated_hook_rejects_broken_governed_state,
         case_missing_exported_ledger_head_is_detected,
         case_declared_tier_mismatch_is_detected,
         case_runtime_excludes_execution_artifacts,
@@ -236,7 +265,7 @@ def main() -> int:
     if failures:
         print(json.dumps({"status": "FAILED", "failures": failures}, indent=2))
         return 1
-    print("OK: runtime instantiation cases passed (7 + ps1 parity when available).")
+    print("OK: runtime instantiation cases passed (8 + ps1 parity when available).")
     return 0
 
 

@@ -2,7 +2,7 @@
 task_id: TASK-0266
 title: "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
 type: infra
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

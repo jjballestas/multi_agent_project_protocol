@@ -157,6 +157,18 @@ def case_runtime_execution_artifacts_are_excluded() -> None:
         assert "__pycache__" not in report
 
 
+def case_hooks_are_adoptable_for_existing_instances() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-upgrade-hooks-") as temp:
+        root = Path(temp)
+        master = root / "master"
+        instance = root / "instance"
+        build_master(master)
+        build_instance(instance, tier="coordination")
+        write(master / ".githooks/pre-commit", "#!/bin/sh\nexit 0\n")
+        report = report_py(instance, master)
+        assert "| `.githooks/pre-commit` | nuevo |" in report
+
+
 def case_inform_only_and_powershell_parity() -> None:
     with tempfile.TemporaryDirectory(prefix="runtime-upgrade-parity-") as temp:
         root = Path(temp)
@@ -178,6 +190,7 @@ def main() -> int:
         case_runtime_tier_reports_runtime_delta_and_version,
         case_coordination_tier_does_not_report_runtime_delta,
         case_runtime_execution_artifacts_are_excluded,
+        case_hooks_are_adoptable_for_existing_instances,
         case_inform_only_and_powershell_parity,
     ]
     failures = []

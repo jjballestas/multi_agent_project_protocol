@@ -128,6 +128,7 @@ def turn_report() -> dict:
         },
         "commit_message": "test(runtime): apply fixture turn",
         "gate": {"human_required": False},
+        "obstacles": [],
         "next_hint": None,
     }
 
@@ -181,6 +182,26 @@ def case_policy_reject() -> None:
         raise AssertionError("commit_turn accepted a policy path without allow_policy=True")
 
 
+def case_runtime_commit_verifies_hooks_by_default() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-apply-hook-verify-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture)
+        hook = fixture / ".githooks" / "pre-commit"
+        hook.parent.mkdir(parents=True, exist_ok=True)
+        hook.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8", newline="\n")
+        run(["git", "config", "core.hooksPath", ".githooks"], fixture)
+        changed = fixture / "runtime-change.txt"
+        changed.write_text("default must verify\n", encoding="utf-8")
+        try:
+            commit_turn(fixture, "runtime hook default", ["runtime-change.txt"])
+        except VcsError:
+            pass
+        else:
+            raise AssertionError("default runtime commit bypassed a failing hook")
+        changed.write_text("explicit recovery bypass\n", encoding="utf-8")
+        commit_turn(fixture, "runtime recovery bypass", ["runtime-change.txt"], verify=False)
+
+
 def case_invalid_report_no_write() -> None:
     with tempfile.TemporaryDirectory(prefix="runtime-apply-invalid-") as temp:
         fixture = Path(temp)
@@ -198,7 +219,13 @@ def case_invalid_report_no_write() -> None:
 
 
 def main() -> int:
-    cases = [case_valid_commit, case_gate_red_reverts_turn, case_policy_reject, case_invalid_report_no_write]
+    cases = [
+        case_valid_commit,
+        case_gate_red_reverts_turn,
+        case_policy_reject,
+        case_runtime_commit_verifies_hooks_by_default,
+        case_invalid_report_no_write,
+    ]
     failures = []
     for case in cases:
         try:

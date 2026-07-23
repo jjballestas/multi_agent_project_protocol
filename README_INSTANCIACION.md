@@ -33,6 +33,10 @@ crea la estructura necesaria de `Area_comun/` y sustituye todos los placeholders
 Si queda un placeholder sin resolver, falla. Si el `--target` existe y no esta vacio, falla salvo
 que se pase `--force`.
 
+El target nace como repositorio Git con `core.hooksPath` configurado automaticamente a la
+`.githooks` copiada (o a la ruta equivalente dentro del directorio de gobernanza encapsulado).
+No hay un paso manual para activar el gate local.
+
 Parametros minimos obligatorios:
 
 - `--source-template`
@@ -99,6 +103,12 @@ El reporte es informativo: no muta la instancia. Si `adoption_tier` es `runtime`
 deltas de `runtime/**`, workflow de CI y `runtime_version`; si el tier es `coordination` o falta, no
 propone runtime y conserva el comportamiento ligero. Los artefactos de ejecucion (`runtime/state/`,
 `runtime/runs/`, `__pycache__/`) quedan fuera del upgrade.
+
+`.githooks/**` forma parte del conjunto adoptable por defecto, por lo que el reporte muestra los
+hooks nuevos o cambiados para instancias existentes. Tras aplicar ese delta en una copia sandbox,
+configura `git config core.hooksPath .githooks` en la instancia existente y ejecuta su validador.
+La aplicacion del upgrade y la activacion del hook en una instancia viva requieren su operacion
+gobernada separada; este comparador nunca las ejecuta.
 
 Para reglas de versionado y migracion (`protocol_version`, `runtime_version`, `schema_version`,
 `profile_version`, compatibilidad por tier y paso de `coordination` a `runtime`), ver

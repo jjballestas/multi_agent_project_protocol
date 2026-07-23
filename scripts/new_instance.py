@@ -871,6 +871,24 @@ def create_personal_areas(target: Path, args: argparse.Namespace) -> None:
             keep.write_text("\n", encoding="utf-8")
 
 
+def configure_git_hooks_path(target: Path, gov: Path) -> None:
+    """Initialize the generated repository and activate its shipped validation hooks."""
+    init = subprocess.run(
+        ["git", "init", "--quiet", str(target)], text=True, capture_output=True, check=False
+    )
+    if init.returncode != 0:
+        raise RuntimeError(init.stderr.strip() or "git init failed")
+    hooks_path = (gov / ".githooks").relative_to(target).as_posix()
+    configured = subprocess.run(
+        ["git", "-C", str(target), "config", "core.hooksPath", hooks_path],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if configured.returncode != 0:
+        raise RuntimeError(configured.stderr.strip() or "git core.hooksPath configuration failed")
+
+
 def main() -> int:
     args = parse_args()
     source = Path(args.source_template).resolve()
@@ -911,6 +929,7 @@ def main() -> int:
         if encapsulate:
             write_root_gitattributes(target, governance_dir)
             scaffold_governance_claude(source, gov)
+        configure_git_hooks_path(target, gov)
         unresolved = find_unresolved_placeholders(target)
         if unresolved:
             raise ValueError(
@@ -922,7 +941,8 @@ def main() -> int:
 
     print(f"OK: created protocol instance at {target}")
     print(f"Protocol version: {replacements['PROTOCOL_VERSION']}")
-    print("Enable the validation hook in this clone: git config core.hooksPath .githooks")
+    hooks_path = (gov / ".githooks").relative_to(target).as_posix()
+    print(f"Validation hook enabled: core.hooksPath={hooks_path}")
     return 0
 
 

@@ -32,6 +32,7 @@ DEFAULT_ADOPTABLE_GLOBS = [
     "profiles/PROFILE_TEMPLATE/**/*",
     "scripts/*.py",
     "scripts/*.ps1",
+    ".githooks/**",
     "runtime/**",
     ".github/workflows/validate.yml",
 ]
