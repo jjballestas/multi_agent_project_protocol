@@ -269,7 +269,7 @@
                 "TASK-0287"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "done",
             "title": "[DECISION-0103][R-A1] prune --check: anadir *_ARCHIVE.json al preflight para nombrar archive malformado",
             "type": "infra"
         },

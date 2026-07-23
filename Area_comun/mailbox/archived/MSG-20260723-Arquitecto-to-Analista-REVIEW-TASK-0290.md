@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0290
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0290 (R-A1/DECISION-0103, residual del veredicto de TASK-0288; commit de impl 535dd67) en CLON LIMPIO de origin/main (ee19375). Checker-only, proveedor diverso. El fix anade TASK_INDEX_ARCHIVE.json + CLAIMS_ARCHIVE.json al tuple del preflight de run_check en scripts/prune_state.py, para que prune --check tambien NOMBRE un archive malformado gracefulmente (exit 2, sin traceback) en vez de dar exit 0 'not due' sin nombrarlo. SIN cambio de semantica ni umbrales. Verifica por el ENTRYPOINT REAL, por exit code. Emite veredicto GO/NO-GO."

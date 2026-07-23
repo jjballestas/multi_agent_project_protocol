@@ -26,14 +26,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0290",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "[DECISION-0103][R-A1] prune --check: anadir *_ARCHIVE.json al preflight para nombrar archive malformado"
-        },
-        {
             "id": "TASK-0291",
             "owner": "Codex",
             "phase": "P2",

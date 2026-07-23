@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0290
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el cierre de TASK-0290 (R-A1): flip in_review -> done y libera claims via submit_intent. Veredicto Analista = OK-CLOSABLE (GO) por clon limpio de origin/main b993acd (impl 535dd67, codigo byte-identico en HEAD). El fix (+2 lineas al preflight de run_check) hace que prune --check NOMBRE un *_ARCHIVE.json malformado gracefulmente (exit 2, sin traceback) donde antes lo tragaba como exit 0 not-due sin nombrarlo; estado valido identico antes/despues (12076 tokens, not-due) = cero cambio de semantica ni umbrales. Yo no cierro (checker-only)."
