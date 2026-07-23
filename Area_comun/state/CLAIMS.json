@@ -168,6 +168,22 @@
             "updated_at": "2026-07-23T16:03:23Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0289-memory",
+            "expires_at": "2026-07-23T17:31:48Z",
+            "notes": "Persist TASK-0289 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0289-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T16:31:48Z",
+            "status": "active",
+            "task_id": "TASK-0289",
+            "updated_at": "2026-07-23T16:31:48Z"
+        },
+        {
             "claim_id": "CLAIM-arq-close0288-20260723",
             "expires_at": "2026-07-23T16:13:47Z",
             "notes": "Cierre 0288 (GO checker OK-CLOSABLE) -> in_review->done como reviewer + archivo REVIEW/VERDICT",

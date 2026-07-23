@@ -2,6 +2,19 @@
 
 Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
 
+## 2026-07-23 - TASK-0289 implementation
+
+- Commit `3090d5f` bounds full-hook personal materialization to deliverable paths
+  declared by the staged hot/archive task indexes. The current measured selection
+  is 1 personal deliverable instead of the complete tracked personal tree.
+- The real-entrypoint regression proves clean full mode exits 0, malformed
+  governed state is rejected at the validator boundary, and staged deletion of
+  the indexed personal deliverable is rejected. Hook pin is
+  `66e7f3814de529e8234d745cd3e639f3cfe0432aaa9858fbd4c6a275ef76f4ed`.
+- The regression runner, live `HOOK_FULL=1` hook, canonical validator, encoding,
+  neutrality, and diff gates exited 0. TASK-0289 remains `in_progress` under its
+  implementation and memory claims pending governed delivery.
+
 ## 2026-07-23 - TASK-0288 implementation
 
 - Commit `18b25da` converts malformed governed JSON failures into attributed,
