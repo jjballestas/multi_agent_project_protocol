@@ -35,6 +35,34 @@ proposed -> spec_ready -> ready -> claimed -> in_progress -> in_review -> done
 The status in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/state/TASK_INDEX.json` must
 match.
 
+## Governed Plan Approval Before Execution (DECISION-0103 C1)
+
+No governed set of work units may start execution until the human owner has seen and approved
+the complete unit list. The person or system presenting the plan, whether an advisor or an
+orchestrator, must not start the first execution turn before that approval is recorded.
+
+The presented plan contains one row per unit with all of these fields:
+
+| Field | Required content |
+|---|---|
+| `id` | Stable unit identifier |
+| `goal` | Concrete intended outcome |
+| `acceptance` | Verifiable acceptance criteria |
+| `verification_cmd` | Exact verification command or commands |
+| `required_capability` | Capability required from the assigned maker |
+| `risk` | Declared risk level |
+| `estimate` | Declared size estimate |
+
+Approval must be durable and attributable: record a reference to the approved plan in the signed
+event log or in a signed mailbox message. An ephemeral chat acknowledgement is not sufficient.
+Adding a unit or materially changing a unit's acceptance criteria or risk invalidates the prior
+approval and requires human re-approval before execution continues. A checker-requested
+remediation remains covered by the original approval only under the DECISION-0103 E1 carve-out:
+it retains the same acceptance, scope, and risk and references its parent unit.
+
+This is the written lifecycle rule. Mechanical turn-zero enforcement is a separate implementation
+concern and does not replace the recorded human approval.
+
 ## Clarity Before Execution
 
 If the requirement is ambiguous, incomplete or internally inconsistent, the agent asks before

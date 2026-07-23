@@ -69,13 +69,13 @@
         {
             "id": "TASK-0263",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[DECISION-0103][C3-bis] Mecanismo de oferta de mejora: recurrence_risk high o root_cause repetido -> propuesta redactada al humano + registro durable de aceptar/rechazar/parquear"
         },
         {
             "id": "TASK-0264",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][C1] Regla de arranque documentada: ningun conjunto de unidades gobernadas se ejecuta sin plan aprobado por el humano"
         },
         {

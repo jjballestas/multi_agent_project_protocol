@@ -106,6 +106,29 @@ verifiable), `verification_cmd` (>=1 exact command), `scope_routes`, `out_of_sco
 in their own templates. Exemptions require a real audited `exception.recorded` event
 (kind `intake_exempt`); the gate is fail-closed.
 
+#### Governed plan approval before execution (DECISION-0103 C1)
+
+No governed set of work units may start execution until the human owner has seen and approved
+the complete unit list. The advisor or orchestrator presenting the plan must not start the first
+execution turn before that approval is recorded. The plan contains one row per unit with:
+
+| Field | Required content |
+|---|---|
+| `id` | Stable unit identifier |
+| `goal` | Concrete intended outcome |
+| `acceptance` | Verifiable acceptance criteria |
+| `verification_cmd` | Exact verification command or commands |
+| `required_capability` | Capability required from the assigned maker |
+| `risk` | Declared risk level |
+| `estimate` | Declared size estimate |
+
+Record a durable, attributable reference to the approved plan in the signed event log or a signed
+mailbox message; an ephemeral chat acknowledgement is not sufficient. Adding a unit or materially
+changing acceptance or risk requires human re-approval before execution continues. A remediation
+keeps the original approval only under the DECISION-0103 E1 carve-out: same acceptance, scope, and
+risk, with a reference to its parent unit. This is the written rule; mechanical turn-zero
+enforcement is a separate concern.
+
 ### 6.2 Audited exceptions
 
 Every deviation from the normal flow (manual intervention, assist, arbitration, suspension,

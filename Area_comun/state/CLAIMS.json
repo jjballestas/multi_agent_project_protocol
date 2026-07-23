@@ -42,6 +42,60 @@
             "updated_at": "2026-07-22T23:44:11Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0263-done-flip",
+            "expires_at": "2026-07-23T05:55:00Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0263-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0263",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0263",
+                "Area_comun/tasks/TASK-0263-d0103-c3bis-oferta-de-mejora.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T23:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0263",
+            "updated_at": "2026-07-22T23:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0264",
+            "expires_at": "2026-07-23T05:55:00Z",
+            "notes": "Document the DECISION-0103 C1 governed-plan approval rule and born-operational mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0264",
+                "Area_comun/state/TASK_INDEX.json#TASK-0264",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0264",
+                "Area_comun/tasks/TASK-0264-d0103-c1-regla-arranque-plan-aprobado.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "AGENTS.template.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T23:55:00Z",
+            "status": "active",
+            "task_id": "TASK-0264",
+            "updated_at": "2026-07-22T23:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0264-fyi",
+            "expires_at": "2026-07-23T05:55:00Z",
+            "notes": "Publish the TASK-0264 FYI to Asesor on the written C1 rule.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0264-fyi",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Asesor-FYI-TASK-0264-regla-C1-publicada.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T00:02:00Z",
+            "status": "active",
+            "task_id": "TASK-0264",
+            "updated_at": "2026-07-23T00:02:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratif0263-20260723",
             "expires_at": "2026-07-23T00:09:18Z",
             "notes": "Ratificacion 0263 (GO checker) -> review_approved + done-flip y GO 0264 a Codex + archivo VERDICT/REVIEW",
