@@ -2,6 +2,23 @@
 
 Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
 
+## 2026-07-23 - TASK-0288 implementation
+
+- Commit `18b25da` converts malformed governed JSON failures into attributed,
+  nonzero, traceback-free results in the collaboration validator and prune
+  checker without changing semantic validation or pruning thresholds.
+- The real-entrypoint regression proves clean validation, malformed validator
+  and prune rejection, valid-JSON semantic rejection, and `HOOK_FULL=1` C5
+  rejection of malformed staged governed state.
+- Canonical validation, encoding, neutrality, and diff gates exited 0.
+  Delivery commit `99fa377` moves TASK-0288 to `in_review`, releases all maker
+  claims, and opens the self-contained Arquitecto handoff for independent
+  Analista review. Codex did not review or ratify the implementation.
+- Post-gate commit `2959622` makes the regression runner work both before and
+  after its files are committed: the clean clone creates an overlay commit only
+  when staged overlays differ. The complete real-entrypoint runner then exited
+  0. The handoff message was also completed with the required response question.
+
 ## 2026-07-23 - TASK-0287 implementation
 
 - Commit `cd6bcfc` fixes the optional full-mode hook false rejection by adding
