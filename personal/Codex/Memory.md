@@ -1,6 +1,17 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-23 Europe/Madrid, during TASK-0286 implementation.
+Last updated: 2026-07-23 Europe/Madrid, after TASK-0286 closure.
+
+## 2026-07-23 - TASK-0286 final closure
+
+- Commit `56f49ca` records the Codex-signed `review_approved -> done` flip after
+  independent Analista `OK-CLOSABLE` and Arquitecto ratification.
+- The signed runtime transaction acquired and released
+  `CLAIM-20260723-Codex-TASK-0286-done-flip`; canonical validation, encoding,
+  and domain-neutrality gates exited 0.
+- All DECISION-0103 implementation units are closed. TASK-0265 is the
+  checker-only final adversarial gate owned by Analista; Codex takes no action
+  unless a governed remediation is returned.
 
 ## 2026-07-23 - TASK-0266 closure and TASK-0286 implementation
 
