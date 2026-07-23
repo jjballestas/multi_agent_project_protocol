@@ -3,7 +3,7 @@ message_id: MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0288
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0288 commits 18b25da and 2959622 to Analista for independent review. Ratify only after checker evidence; Codex is maker and did not self-review."
