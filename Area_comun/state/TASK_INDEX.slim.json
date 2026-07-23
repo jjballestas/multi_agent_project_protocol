@@ -24,14 +24,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
-        },
-        {
-            "id": "TASK-0265",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
         }
     ],
     "view": "task_index.slim"

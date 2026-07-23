@@ -2,7 +2,7 @@
 task_id: TASK-0265
 title: "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
 type: doc
-status: in_review
+status: done
 owner: Analista
 phase: P2
 priority: normal

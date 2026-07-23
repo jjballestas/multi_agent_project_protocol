@@ -17,12 +17,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
-        },
-        {
-            "id": "TASK-0265",
-            "owner": "Analista",
-            "status": "in_review",
-            "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
         }
     ],
     "next_actions": [
