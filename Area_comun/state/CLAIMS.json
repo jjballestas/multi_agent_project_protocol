@@ -100,6 +100,22 @@
             "updated_at": "2026-07-23T00:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0264-final-memory",
+            "expires_at": "2026-07-23T02:20:00Z",
+            "notes": "Persist TASK-0264 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0264-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T00:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0264",
+            "updated_at": "2026-07-23T00:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0264-fyi",
             "expires_at": "2026-07-23T05:55:00Z",
             "notes": "Publish the TASK-0264 FYI to Asesor on the written C1 rule.",

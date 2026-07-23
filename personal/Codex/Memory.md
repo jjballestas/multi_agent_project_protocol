@@ -14,7 +14,9 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
   explicitly separates the written rule from TASK-0260 mechanical turn-zero enforcement.
 - The ASCII FYI to Asesor is open and tells each participant to update only their own private
   startup material. Required validation, encoding, and neutrality gates passed. TASK-0264 is
-  still `in_progress` pending governed delivery to independent review.
+  delivered by commit `1c61e9b`: status is `in_review`, all maker delivery claims are released,
+  and the self-contained Arquitecto handoff requests independent Analista review. Codex did not
+  implement TASK-0260 enforcement and did not self-review or ratify TASK-0264.
 
 ## 2026-07-23 - TASK-0262 closure and TASK-0263 implementation
 
