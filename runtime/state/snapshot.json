@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0a9ba1bbe43341df294a0a6aa3342595b69d5b2353b4102d9e27e5fb8406267d",
+  "canonical_hash": "8e598e6d04e305a30147f898a7e0003b817ad30c034407047ecd2a3396a558db",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2460,7 +2460,7 @@
       "TASK-0283": 50,
       "TASK-0284": 26,
       "TASK-0285": 15,
-      "TASK-0286": 11,
+      "TASK-0286": 13,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2483,7 +2483,7 @@
       "protocol-prune": 24,
       "protocol-state": 1
     },
-    "events_applied": 5447,
+    "events_applied": 5449,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5003,6 +5003,8 @@
       "codex:task0286:delivery:claim-acquire:20260723T021842Z": 6115,
       "codex:task0286:delivery:claim-release:20260723T021842Z": 6118,
       "codex:task0286:delivery:implementation-claim-release:20260723T021842Z": 6117,
+      "codex:task0286:final-memory:claim-acquire:20260723T022208Z": 6119,
+      "codex:task0286:final-memory:claim-release:20260723T022208Z": 6120,
       "codex:task0286:in-progress-to-in-review:20260723T021842Z": 6116,
       "codex:task0286:memory:claim-acquire:20260723T021516Z": 6113,
       "codex:task0286:memory:claim-release:20260723T021516Z": 6114,
@@ -7934,5 +7936,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6118
+  "up_to_seq": 6120
 }
