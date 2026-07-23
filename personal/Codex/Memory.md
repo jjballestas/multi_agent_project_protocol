@@ -15,6 +15,10 @@ Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
 - The complete runner, canonical validator, encoding, neutrality, pin, and
   diff gates exited 0. TASK-0291 and TASK-0292 remain `in_progress` pending
   governed delivery to independent review.
+- Delivery commit `985f05c` moves both tasks to `in_review`, releases every
+  Codex claim, and opens the coupled Arquitecto handoff. Canonical validation,
+  encoding, neutrality, and diff gates exited 0 after delivery. Codex did not
+  review or ratify either task.
 
 ## 2026-07-23 - TASK-0289 implementation
 
