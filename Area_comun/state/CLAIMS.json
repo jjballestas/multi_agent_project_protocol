@@ -235,6 +235,30 @@
             "updated_at": "2026-07-23T18:42:14Z"
         },
         {
+            "claim_id": "CLAIM-arq-closebatch-20260724",
+            "expires_at": "2026-07-23T23:23:53Z",
+            "notes": "Cierre batch 0291+0292 (GO checker OK-CLOSABLE ambas; RES-4 no-bloq) -> in_review->done + archivo REVIEW/VERDICT",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0291",
+                "Area_comun/state/TASK_INDEX.json#TASK-0292",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0291",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0292",
+                "Area_comun/tasks/TASK-0291-r3-fullhook-align-reviewed-statuses.md",
+                "Area_comun/tasks/TASK-0292-r4-masking-probe-assert-reason.md",
+                "Area_comun/artifacts/Analista-TASK-0291-0292-fullhook-align-masking-reason-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-closebatch-20260724",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0291-0292.md",
+                "Area_comun/mailbox/open/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0291-0292.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0291-0292.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0291-0292.md"
+            ],
+            "started_at": "2026-07-23T23:03:53Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T23:03:53Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0290-20260723",
             "expires_at": "2026-07-23T17:39:35Z",
             "notes": "Ruteo GO TASK-0290 (R-A1) a Codex",

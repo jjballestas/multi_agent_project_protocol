@@ -3,7 +3,7 @@ message_id: MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0291-0292
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el cierre del BATCH: flip in_review -> done de TASK-0291 y TASK-0292 y libera los claims asociados via submit_intent. Veredicto Analista = OK-CLOSABLE (GO) para AMBAS, por clon limpio de origin/main a3d7b91 (contiene 23d7476 + dd9602a; b0425d6..a3d7b91 no toca hook ni runner). Verificado por entrypoint real del hook y por exit code: 6/6 estados NO-revisados aceptados (falso-rechazo cerrado), 5/5 estados REVISADOS rechazados con la razon del validador (deliverable missing + collaboration state invalid), falsabilidad probada contra el hook PRE-R3, 4 vectores de caza de escapes sin hallazgo, runner determinista 2/2 exit 0. Yo no cierro (checker-only). 4 residuales NO bloqueantes en el artefacto."

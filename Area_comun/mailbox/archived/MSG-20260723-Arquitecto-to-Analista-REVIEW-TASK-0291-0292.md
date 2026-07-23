@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0291-0292
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente del BATCH R3+R4 (TASK-0291 + TASK-0292, DECISION-0103, residuales del veredicto de TASK-0289) en CLON LIMPIO de origin/main (b0425d6). Checker-only, proveedor diverso. Commits de impl: 23d7476 (R3 alinea el full-hook a la politica de deliverables del validador + R4 assert de razon) + dd9602a (remediacion iter1: el fixture non-reviewed pasa a ser SINTETICO). MI RECOMPUTO ya cazo y cerro un defecto (ver abajo). Verifica por el ENTRYPOINT REAL del hook, por exit code. Emite veredicto GO/NO-GO para AMBAS."
