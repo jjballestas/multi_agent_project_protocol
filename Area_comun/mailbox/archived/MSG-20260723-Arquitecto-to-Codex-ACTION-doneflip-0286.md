@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0286
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DONE-FLIP de TASK-0286: ratificada a review_approved con GO del checker (Analista-TASK-0286-post-gate-gatered-obstacles-verdict = OK-CLOSABLE, sin slips; el guard es la PRIMERA linea de RunLog.append (entrypoint real, sin bypass), gate_green es el resultado objetivo de apply_gate_and_commit (probado: reporte con gate_green:True mentido + gate objetivo rojo -> RECHAZADO), anti-teatro intacto, negativo con mutacion real 26/26, no toca turn_validate/schema). Dos residuales NO bloqueantes: R1 robustez de borde (dicts fabricados que el orchestrator real nunca produce) y un nit de verification_cmd; polish opcional, NO rehacer ahora. Haz review_approved->done y libera claims. NOTA: con 0286 en done, TODAS las unidades de implementacion del batch DECISION-0103 (0257..0264, 0266, 0286) quedan cerradas; el SIGUIENTE paso es el gate final adversarial TASK-0265, que ejecuta la Analista (checker-only) sobre el conjunto en clon limpio -- lo ruteo yo por separado. No necesitas hacer nada con 0265 salvo que su veredicto te devuelva algun hallazgo como remediacion."
