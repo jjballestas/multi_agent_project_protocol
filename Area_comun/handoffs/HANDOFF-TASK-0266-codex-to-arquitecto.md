@@ -18,8 +18,9 @@ checker: Analista
   `nuevo` para una instancia existente.
 - E5: `scripts/new_instance.py` inicializa el target como repositorio Git y configura
   `core.hooksPath` a `.githooks` o a la ruta relativa equivalente para gobernanza
-  encapsulada. El caso scratch comprueba la configuracion y que un estado gobernado roto
-  staged aborta el commit.
+  encapsulada. El caso scratch rompe `CLAIMS.json`, que no lee el trailer checker, y prueba
+  ambos modos: partial por defecto permite el commit como declara E6-A; `HOOK_FULL=1` lo
+  rechaza con el diagnostico del validador de estado colaborativo y sin crash incidental.
 - H1: `runtime.vcs.commit_turn` usa `verify=True` por defecto. `verify=False` queda
   documentado como excepcion explicita de recuperacion para reparar o revertir el propio
   gate. El caso runtime prueba fallo con hook rojo, y exito solo con bypass explicito.
@@ -32,6 +33,13 @@ checker: Analista
 - No se aplico upgrade a NOVA ni a ninguna instancia viva.
 - No se modificaron `.githooks/pre-commit`, `protocol.config.json`,
   `protocol.config.template.json`, supervised autonomy ni real invoker.
+
+## Residual E6-A
+
+El hook local nace activo pero su modo por defecto es partial: no hard-rechaza un estado
+gobernado roto en cada commit local. El hard-gate de integridad corresponde a full mode
+(`HOOK_FULL=1` o `git config hook.full true`) y al CI en clon limpio. La propagacion E5 no
+cambia ese reparto de coste ni debe interpretarse como enforcement local total por defecto.
 
 ## Verificacion
 

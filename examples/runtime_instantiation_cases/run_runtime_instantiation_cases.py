@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -38,8 +39,10 @@ GATE_SCRIPTS = {
 }
 
 
-def run(command: list[str], *, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, cwd=cwd, text=True, capture_output=True, check=False)
+def run(
+    command: list[str], *, cwd: Path = ROOT, env: dict[str, str] | None = None
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(command, cwd=cwd, env=env, text=True, capture_output=True, check=False)
 
 
 def assert_ok(result: subprocess.CompletedProcess[str]) -> None:
@@ -103,11 +106,28 @@ def assert_broken_governed_state_is_rejected(root: Path) -> None:
     run(["git", "config", "user.email", "fixture@example.invalid"], cwd=root)
     assert_ok(run(["git", "add", "--", "."], cwd=root))
     assert_ok(run(["git", "commit", "--no-verify", "-m", "fixture baseline"], cwd=root))
-    task_index = root / "Area_comun" / "state" / "TASK_INDEX.json"
-    task_index.write_text("{broken\n", encoding="utf-8")
-    assert_ok(run(["git", "add", "--", "Area_comun/state/TASK_INDEX.json"], cwd=root))
-    rejected = run(["git", "commit", "-m", "broken governed state"], cwd=root)
-    assert rejected.returncode != 0, "active generated hook accepted broken governed state"
+    claims_path = root / "Area_comun" / "state" / "CLAIMS.json"
+    valid_claims = claims_path.read_bytes()
+    claims_path.write_text("{broken\n", encoding="utf-8")
+    assert_ok(run(["git", "add", "--", "Area_comun/state/CLAIMS.json"], cwd=root))
+    message = "probe governed state\n\nTask-Id: none\nOps-Reason: generated hook fixture"
+
+    partial = run(["git", "commit", "-m", message], cwd=root)
+    assert_ok(partial)
+    claims_path.write_bytes(valid_claims)
+    assert_ok(run(["git", "add", "--", "Area_comun/state/CLAIMS.json"], cwd=root))
+    assert_ok(run(["git", "commit", "--no-verify", "-m", "restore fixture baseline"], cwd=root))
+
+    claims_path.write_text("{broken\n", encoding="utf-8")
+    assert_ok(run(["git", "add", "--", "Area_comun/state/CLAIMS.json"], cwd=root))
+    full_env = os.environ.copy()
+    full_env["HOOK_FULL"] = "1"
+    rejected = run(["git", "commit", "-m", message], cwd=root, env=full_env)
+    output = "\n".join([rejected.stdout, rejected.stderr])
+    assert rejected.returncode != 0, "full-mode generated hook accepted broken governed state"
+    assert "Invalid JSON:" in output and "Area_comun\\state\\CLAIMS.json" in output, output
+    assert "collaboration state in staged snapshot is invalid" in output, output
+    assert "check_commit_trailers.py" not in output, output
 
 
 def validate_with_repo_tools(root: Path) -> None:
