@@ -12,8 +12,10 @@ Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
   the indexed personal deliverable is rejected. Hook pin is
   `66e7f3814de529e8234d745cd3e639f3cfe0432aaa9858fbd4c6a275ef76f4ed`.
 - The regression runner, live `HOOK_FULL=1` hook, canonical validator, encoding,
-  neutrality, and diff gates exited 0. TASK-0289 remains `in_progress` under its
-  implementation and memory claims pending governed delivery.
+  neutrality, and diff gates exited 0.
+- Delivery commit `22fb4ee` moves TASK-0289 to `in_review`, releases all maker
+  claims, and opens the self-contained Arquitecto handoff for independent
+  Analista review. Codex did not review or ratify the implementation.
 
 ## 2026-07-23 - TASK-0288 implementation
 
