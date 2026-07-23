@@ -24,6 +24,22 @@
             "priority": "normal",
             "status": "proposed",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
+        },
+        {
+            "id": "TASK-0288",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "[DECISION-0103][R1/follow-up] Manejo graceful de JSON gobernado malformado en validate + prune"
+        },
+        {
+            "id": "TASK-0289",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "[DECISION-0103][R2/follow-up] Acotar materializacion de personal/** en el full-hook sin reintroducir F1 ni debilitar C5"
         }
     ],
     "view": "task_index.slim"
