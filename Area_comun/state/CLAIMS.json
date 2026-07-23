@@ -75,9 +75,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T23:55:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0264",
             "updated_at": "2026-07-22T23:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0264-delivery",
+            "expires_at": "2026-07-23T05:55:00Z",
+            "notes": "Publish TASK-0264 handoff and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0264-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0264",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0264",
+                "Area_comun/tasks/TASK-0264-d0103-c1-regla-arranque-plan-aprobado.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0264-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0264.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T00:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0264",
+            "updated_at": "2026-07-23T00:10:00Z"
         },
         {
             "claim_id": "CLAIM-20260723-Codex-TASK-0264-fyi",
@@ -91,7 +111,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T00:02:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0264",
             "updated_at": "2026-07-23T00:02:00Z"
         },
@@ -107,7 +127,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T00:05:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0264",
             "updated_at": "2026-07-23T00:05:00Z"
         },
