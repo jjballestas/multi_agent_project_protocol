@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6d66166e80e8c3fe12453db63cdcaf18e2a226a5e868f52d3e8439659c0a297d",
+  "canonical_hash": "c7acee3dffcbb1e44f48356f3f82a857d3ac2e81a0ee1e54c41a35881e55c4ee",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2516,8 +2516,8 @@
       "TASK-0288": 23,
       "TASK-0289": 16,
       "TASK-0290": 15,
-      "TASK-0291": 13,
-      "TASK-0292": 8,
+      "TASK-0291": 17,
+      "TASK-0292": 9,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2540,7 +2540,7 @@
       "protocol-prune": 26,
       "protocol-state": 1
     },
-    "events_applied": 5611,
+    "events_applied": 5616,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5211,16 +5211,21 @@
       "codex:task0291-0292:delivery-claim": 6270,
       "codex:task0291-0292:delivery-release": 6275,
       "codex:task0291-0292:remediation1:claim-acquire": 6278,
+      "codex:task0291-0292:remediation1:handoff-claim": 6283,
+      "codex:task0291-0292:remediation1:handoff-claim-release": 6287,
       "codex:task0291-0292:remediation1:memory-claim": 6281,
       "codex:task0291-0292:remediation1:memory-release": 6282,
+      "codex:task0291-0292:remediation1:work-claim-release": 6286,
       "codex:task0291:in-progress-to-in-review": 6271,
       "codex:task0291:ready-to-in-progress": 6267,
       "codex:task0291:release": 6273,
+      "codex:task0291:remediation1:in-progress-to-in-review": 6284,
       "codex:task0291:remediation1:in-review-to-in-progress": 6279,
       "codex:task0291:start:claim": 6266,
       "codex:task0292:in-progress-to-in-review": 6272,
       "codex:task0292:ready-to-in-progress": 6269,
       "codex:task0292:release": 6274,
+      "codex:task0292:remediation1:in-progress-to-in-review": 6285,
       "codex:task0292:remediation1:in-review-to-in-progress": 6280,
       "codex:task0292:start:claim": 6268,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -8155,5 +8160,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6282
+  "up_to_seq": 6287
 }

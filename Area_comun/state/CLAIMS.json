@@ -148,9 +148,23 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T20:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0291",
             "updated_at": "2026-07-23T20:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0291-remediation1-handoff",
+            "expires_at": "2026-07-23T22:54:00Z",
+            "notes": "Update the coupled TASK-0291 and TASK-0292 handoff for remediation iteration 1.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0291-remediation1-handoff",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0291-0292.md"
+            ],
+            "started_at": "2026-07-23T20:54:00Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T20:54:00Z"
         },
         {
             "claim_id": "CLAIM-20260723-Codex-TASK-0291-remediation1-memory",
