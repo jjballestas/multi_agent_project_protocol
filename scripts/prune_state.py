@@ -66,10 +66,17 @@ class Assessment:
     before_tokens: int
 
 
+class InvalidJsonError(ValueError):
+    """A JSON input could not be decoded and its source path is known."""
+
+
 def read_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    try:
+        return json.loads(path.read_text(encoding="utf-8-sig"))
+    except (json.JSONDecodeError, UnicodeError) as exc:
+        raise InvalidJsonError(f"invalid JSON in {path}: {exc}") from exc
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -634,6 +641,13 @@ def apply_prune_via_submit_intent(
 
 
 def run_check(root: Path) -> int:
+    for relative in (
+        "protocol.config.json",
+        "Area_comun/state/PROJECT_STATE.json",
+        "Area_comun/state/TASK_INDEX.json",
+        "Area_comun/state/CLAIMS.json",
+    ):
+        read_json(root / relative)
     assessment = assess(root)
     if not assessment.due:
         print(f"OK: prune not due (cold_start_tokens={assessment.before_tokens}).")
@@ -660,11 +674,15 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     root = Path(args.root).resolve()
-    if args.check:
-        return run_check(root)
-    result = apply_prune(root, actor_id=args.actor_id, timestamp=args.timestamp, commit=args.commit)
-    print(json.dumps(result, indent=2, sort_keys=True))
-    return 0
+    try:
+        if args.check:
+            return run_check(root)
+        result = apply_prune(root, actor_id=args.actor_id, timestamp=args.timestamp, commit=args.commit)
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return 0
+    except InvalidJsonError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

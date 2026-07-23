@@ -1452,6 +1452,8 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     claims_hot = read_json_file(state_dir / "CLAIMS.json", validation)
     index_archive = read_json_file(state_dir / "TASK_INDEX_ARCHIVE.json", validation) if (state_dir / "TASK_INDEX_ARCHIVE.json").exists() else None
     claims_archive = read_json_file(state_dir / "CLAIMS_ARCHIVE.json", validation) if (state_dir / "CLAIMS_ARCHIVE.json").exists() else None
+    if validation.errors:
+        return validation
     index = merge_by_array_field(
         index_hot if isinstance(index_hot, dict) else None,
         index_archive if isinstance(index_archive, dict) else None,

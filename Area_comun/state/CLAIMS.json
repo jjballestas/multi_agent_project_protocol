@@ -42,6 +42,27 @@
             "updated_at": "2026-07-23T14:07:13Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0288",
+            "expires_at": "2026-07-23T16:42:30Z",
+            "notes": "Implement graceful malformed governed JSON failures without changing validation or pruning semantics.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0288",
+                "Area_comun/state/TASK_INDEX.json#TASK-0288",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0288",
+                "Area_comun/tasks/TASK-0288-r1-graceful-malformed-json-validate-prune.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/prune_state.py",
+                "examples/malformed_json_cases",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T14:42:30Z",
+            "status": "active",
+            "task_id": "TASK-0288",
+            "updated_at": "2026-07-23T14:42:30Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0288-20260723",
             "expires_at": "2026-07-23T14:55:14Z",
             "notes": "Ruteo GO TASK-0288 (R1) a Codex",

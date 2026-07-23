@@ -21,7 +21,7 @@
         {
             "id": "TASK-0288",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][R1/follow-up] Manejo graceful de JSON gobernado malformado en validate + prune"
         },
         {
