@@ -516,6 +516,20 @@
             "updated_at": "2026-07-23T03:47:23Z"
         },
         {
+            "claim_id": "CLAIM-arq-go0287-20260723",
+            "expires_at": "2026-07-23T13:11:59Z",
+            "notes": "Ruteo GO TASK-0287 (F1) a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-GO-TASK-0287.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0287-20260723"
+            ],
+            "started_at": "2026-07-23T12:51:59Z",
+            "status": "released",
+            "task_id": "TASK-0287",
+            "updated_at": "2026-07-23T12:51:59Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratif0263-20260723",
             "expires_at": "2026-07-23T00:09:18Z",
             "notes": "Ratificacion 0263 (GO checker) -> review_approved + done-flip y GO 0264 a Codex + archivo VERDICT/REVIEW",
