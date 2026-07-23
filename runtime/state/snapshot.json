@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "bb0c72c7a4bba26a9ee058be206e7201c0bb872738d05673038ec2445712bfc8",
+  "canonical_hash": "327fa0f95a4166a8a2d3a13f2b1e769c902695a3ee5458e50589b039abcdbef2",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -836,6 +836,7 @@
       "CLAIM-arq-escalada0280-20260720": 1,
       "CLAIM-arq-fix0278type-20260720": 1,
       "CLAIM-arq-gate0265-20260723": 1,
+      "CLAIM-arq-gate0265v2-20260723": 1,
       "CLAIM-arq-go0277-20260720": 1,
       "CLAIM-arq-go0279-20260722": 1,
       "CLAIM-arq-h1h2-0267-20260719": 1,
@@ -2157,6 +2158,7 @@
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0263": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0264": 1,
+      "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266-remediation-1": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0286": 1,
@@ -2447,7 +2449,7 @@
       "TASK-0262": 22,
       "TASK-0263": 18,
       "TASK-0264": 20,
-      "TASK-0265": 3,
+      "TASK-0265": 4,
       "TASK-0266": 29,
       "TASK-0267": 20,
       "TASK-0268": 23,
@@ -2491,7 +2493,7 @@
       "protocol-prune": 24,
       "protocol-state": 1
     },
-    "events_applied": 5466,
+    "events_applied": 5469,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2803,6 +2805,9 @@
       "arq:gate0265:acquire:7d05df49-839d-4a8e-a1c8-125e3baf7351": 6135,
       "arq:gate0265:arch1:7d05df49-839d-4a8e-a1c8-125e3baf7351": 6136,
       "arq:gate0265:release:7d05df49-839d-4a8e-a1c8-125e3baf7351": 6137,
+      "arq:gate0265v2:acquire:e47f50ed-6a6b-463e-8178-b7a3a57b4703": 6138,
+      "arq:gate0265v2:arch1:e47f50ed-6a6b-463e-8178-b7a3a57b4703": 6139,
+      "arq:gate0265v2:release:e47f50ed-6a6b-463e-8178-b7a3a57b4703": 6140,
       "arq:go0277:acquire:cdf5efbd-16cb-42e3-9b86-a7e872c94ef0": 5356,
       "arq:go0277:arch1:cdf5efbd-16cb-42e3-9b86-a7e872c94ef0": 5358,
       "arq:go0277:arch2:cdf5efbd-16cb-42e3-9b86-a7e872c94ef0": 5359,
@@ -7961,5 +7966,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6137
+  "up_to_seq": 6140
 }

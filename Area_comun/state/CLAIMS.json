@@ -442,6 +442,22 @@
             "updated_at": "2026-07-23T03:14:32Z"
         },
         {
+            "claim_id": "CLAIM-arq-gate0265v2-20260723",
+            "expires_at": "2026-07-23T04:07:23Z",
+            "notes": "Re-ruteo gate 0265 v2 (ancla commit cd2ca57) + archivo v1 no arrancado",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final-v2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-gate0265v2-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final.md"
+            ],
+            "started_at": "2026-07-23T03:47:23Z",
+            "status": "released",
+            "task_id": "TASK-0265",
+            "updated_at": "2026-07-23T03:47:23Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratif0263-20260723",
             "expires_at": "2026-07-23T00:09:18Z",
             "notes": "Ratificacion 0263 (GO checker) -> review_approved + done-flip y GO 0264 a Codex + archivo VERDICT/REVIEW",
