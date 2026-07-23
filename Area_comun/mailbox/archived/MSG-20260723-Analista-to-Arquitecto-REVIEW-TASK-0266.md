@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0266
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "TASK-0266 CHANGE-REQUIRED (NO-GO). Do not close/flip yet. Route ONE remediation to Codex: strengthen the E5 negative test in examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py so it truly exercises the governed-state gate (run the broken-state commit under HOOK_FULL=1 or git config hook.full true, AND/OR break a governed file the trailer checker does NOT read such as CLAIMS.json, and assert the rejection is validate_collaboration_state, not an incidental check_commit_trailers crash); OR correct the handoff/acceptance wording to declare that by default the local hook is partial (E6-A) and does NOT hard-reject broken governed state (that gating is full-mode/CI). NEITHER touches .githooks/pre-commit (that is 0257). Re-judgement by me before the closing commit. Max 2 iterations then escalate to human owner."
