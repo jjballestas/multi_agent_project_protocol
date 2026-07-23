@@ -182,6 +182,20 @@
             "updated_at": "2026-07-23T14:35:14Z"
         },
         {
+            "claim_id": "CLAIM-arq-go0289-20260723",
+            "expires_at": "2026-07-23T16:18:24Z",
+            "notes": "Ruteo GO TASK-0289 (R2) a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-GO-TASK-0289.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0289-20260723"
+            ],
+            "started_at": "2026-07-23T15:58:24Z",
+            "status": "released",
+            "task_id": "TASK-0289",
+            "updated_at": "2026-07-23T15:58:24Z"
+        },
+        {
             "claim_id": "CLAIM-arq-regR1R2-20260723",
             "expires_at": "2026-07-23T14:40:12Z",
             "notes": "Registro follow-ups R1 (TASK-0288) y R2 (TASK-0289) ready sin GO",
