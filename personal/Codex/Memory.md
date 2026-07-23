@@ -4277,3 +4277,17 @@ issue. Re-run only the necessary evidence path and record the caveat.
   named its file, and emitted no traceback; valid state exited 0 with `prune not due`.
 - Gates exited 0: malformed JSON runner, collaboration validator, encoding scan, and domain
   neutrality scan. TASK-0290 remains `in_progress` pending delivery to independent Analista review.
+- Delivery commit `ee19375` moves TASK-0290 to `in_review`, releases all Codex claims, and opens
+  `MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0290.md`. Arquitecto must route implementation
+  commit `535dd67` to Analista; Codex has not self-reviewed or ratified the change.
+
+## 2026-07-23 - TASK-0291/TASK-0292 remediation iteration 1
+
+- Commit `dd9602a` replaces the mutable TASK-0291 non-reviewed regression fixture with a
+  clone-local synthetic ready task, its clone-local task file, and an absent personal deliverable.
+  The test no longer depends on any live task status or hot-state retention.
+- The real-hook runner exited 0 twice consecutively. Collaboration validation, encoding scan, and
+  domain-neutrality scan also exited 0. The hook and masking probe were not changed.
+- TASK-0291 and TASK-0292 are `in_progress` under
+  `CLAIM-20260723-Codex-TASK-0291-remediation1`; next action is governed delivery to `in_review`,
+  release, and an ASCII handoff requesting independent review.

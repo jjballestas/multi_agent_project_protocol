@@ -153,6 +153,20 @@
             "updated_at": "2026-07-23T20:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0291-remediation1-memory",
+            "expires_at": "2026-07-23T22:50:05Z",
+            "notes": "Persist TASK-0291 and TASK-0292 remediation implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0291-remediation1-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-23T20:50:05Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T20:50:05Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0292",
             "expires_at": "2026-07-24T07:15:00Z",
             "notes": "Implement TASK-0292 R4 masking-probe reason assertion in coordinated batch with TASK-0291.",
