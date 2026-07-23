@@ -69,7 +69,7 @@
         {
             "id": "TASK-0290",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][R-A1] prune --check: anadir *_ARCHIVE.json al preflight para nombrar archive malformado"
         },
         {

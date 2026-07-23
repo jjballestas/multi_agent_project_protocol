@@ -646,6 +646,8 @@ def run_check(root: Path) -> int:
         "Area_comun/state/PROJECT_STATE.json",
         "Area_comun/state/TASK_INDEX.json",
         "Area_comun/state/CLAIMS.json",
+        "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+        "Area_comun/state/CLAIMS_ARCHIVE.json",
     ):
         read_json(root / relative)
     assessment = assess(root)

@@ -85,10 +85,33 @@ def main() -> int:
             raise AssertionError(f"overlay diff failed\n{overlay.stdout}\n{overlay.stderr}")
         task_index = fixture / "Area_comun/state/TASK_INDEX.json"
         original = task_index.read_text(encoding="utf-8-sig")
+        state_dir = fixture / "Area_comun/state"
 
         clean = run([sys.executable, "scripts/validate_collaboration_state.py", "--root", "."], fixture)
         if clean.returncode != 0:
             raise AssertionError(f"clean validator failed\n{clean.stdout}\n{clean.stderr}")
+        clean_prune = run(
+            [sys.executable, "scripts/prune_state.py", "--root", ".", "--check"], fixture
+        )
+        if clean_prune.returncode not in (0, 1):
+            raise AssertionError(
+                f"clean prune returned unexpected exit {clean_prune.returncode}\n"
+                f"{clean_prune.stdout}\n{clean_prune.stderr}"
+            )
+
+        for archive_name in ("TASK_INDEX_ARCHIVE.json", "CLAIMS_ARCHIVE.json"):
+            archive = state_dir / archive_name
+            archive_original = archive.read_text(encoding="utf-8-sig")
+            archive.write_text("{", encoding="utf-8")
+            malformed_archive_prune = run(
+                [sys.executable, "scripts/prune_state.py", "--root", ".", "--check"], fixture
+            )
+            require_graceful_failure(
+                malformed_archive_prune,
+                archive_name,
+                f"malformed prune {archive_name}",
+            )
+            archive.write_text(archive_original, encoding="utf-8")
 
         task_index.write_text("{", encoding="utf-8")
         malformed_validate = run(
