@@ -61,7 +61,13 @@ def main() -> int:
                 ],
                 "overlay add",
             ),
-            (
+        ):
+            result = run(args, fixture)
+            if result.returncode != 0:
+                raise AssertionError(f"{label} failed\n{result.stdout}\n{result.stderr}")
+        overlay = run(["git", "diff", "--cached", "--quiet"], fixture)
+        if overlay.returncode == 1:
+            result = run(
                 [
                     "git",
                     "commit",
@@ -71,12 +77,12 @@ def main() -> int:
                     "-m",
                     "Task-Id: TASK-0288",
                 ],
-                "overlay commit",
-            ),
-        ):
-            result = run(args, fixture)
+                fixture,
+            )
             if result.returncode != 0:
-                raise AssertionError(f"{label} failed\n{result.stdout}\n{result.stderr}")
+                raise AssertionError(f"overlay commit failed\n{result.stdout}\n{result.stderr}")
+        elif overlay.returncode != 0:
+            raise AssertionError(f"overlay diff failed\n{overlay.stdout}\n{overlay.stderr}")
         task_index = fixture / "Area_comun/state/TASK_INDEX.json"
         original = task_index.read_text(encoding="utf-8-sig")
 

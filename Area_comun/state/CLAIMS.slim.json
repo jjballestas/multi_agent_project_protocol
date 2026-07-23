@@ -1,16 +1,15 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260723-Codex-TASK-0288",
+            "claim_id": "CLAIM-20260723-Codex-TASK-0288-delivery-fix",
             "owner": "Codex",
             "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0288",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0288-delivery-fix",
                 "Area_comun/state/TASK_INDEX.json#TASK-0288",
                 "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0288",
                 "Area_comun/tasks/TASK-0288-r1-graceful-malformed-json-validate-prune.md",
-                "scripts/validate_collaboration_state.py",
-                "scripts/prune_state.py",
-                "examples/malformed_json_cases",
+                "examples/malformed_json_cases/run_malformed_json_cases.py",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0288.md",
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json"
             ],
