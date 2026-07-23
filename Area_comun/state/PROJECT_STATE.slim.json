@@ -19,12 +19,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0264",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[DECISION-0103][C1] Regla de arranque documentada: ningun conjunto de unidades gobernadas se ejecuta sin plan aprobado por el humano"
-        },
-        {
             "id": "TASK-0265",
             "owner": "Analista",
             "status": "ready",

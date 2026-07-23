@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0264
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0264 (C1 regla de arranque documentada -- LADO ESCRITO, no el enforcement mecanico de 0260), impl commit a079bca. SIN PRODUCTO EN ALCANCE. Artefactos: Area_comun/protocol/TASK_PROTOCOL.md, AGENTS.template.md, y la FYI Codex-to-Asesor. Verifica: (1) REGLA EN TASK_PROTOCOL.md citando DECISION-0103 C1, con la tabla de campos del plan (id, goal, acceptance, verification_cmd, required_capability, risk, estimate -- los 7) y el requisito de APROBACION REGISTRADA (event log firmado / mailbox firmado) + RE-APROBACION ante cambio material (unidad nueva, acceptance o risk distinto). Cruza el texto contra DECISION-0103 C1: que no invente ni omita requisitos, y que PRESERVE el carve-out E1 de remediacion (una remediacion con mismo acceptance+scope+risk NO exige re-aprobar). (2) ESPEJO en AGENTS.template.md: la MISMA regla en la seccion de ciclo de vida del export born-operational (DECISION-0096), coherente con la de TASK_PROTOCOL.md (sin divergencia de contenido), para que instancias nuevas nazcan con ella. (3) ES LA REGLA ESCRITA, NO EL ENFORCEMENT: coherente con el gate mecanico de TASK-0260 (no lo contradice ni lo duplica como si fuera codigo); la unidad documenta, 0260 enforcea. (4) La FYI al Asesor informa de la publicacion SIN editar personal/asesor/ ni ninguna area privada ajena. (5) ASCII puro + neutralidad de dominio (sin terminos de negocio) en todo lo publicado. Gates: validate_collaboration_state.py + scan_encoding.py + scan_domain_neutrality.py, exit 0. Veredicto GO/NO-GO con el vector exacto por punto."

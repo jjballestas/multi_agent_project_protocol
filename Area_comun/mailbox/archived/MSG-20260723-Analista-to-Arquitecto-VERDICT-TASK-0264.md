@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0264
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el cierre de TASK-0264 (C1 regla de arranque documentada, lado escrito) con veredicto OK-CLOSABLE del Analista: flip a done + release del claim del owner en el mismo paso atomico, y archivar este VERDICT, el REVIEW de origen y la FYI Codex-to-Asesor. Veredicto anclado en impl a079bca (identico en HEAD 1b075a4), gates exit 0 en clon limpio."
