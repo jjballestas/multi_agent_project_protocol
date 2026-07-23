@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "291158f8841b877223ea2b248c3bff3305ec8c31a06baad37eb3a25a7cf9bd5b",
+  "canonical_hash": "496c942cfbc898b3d7e0ec4af1692c07afa4e2438ce30df09c7925ab65e169df",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -870,6 +870,7 @@
       "CLAIM-arq-ratif0263-20260723": 1,
       "CLAIM-arq-ratif0264-20260723": 1,
       "CLAIM-arq-ratif0266-20260723": 1,
+      "CLAIM-arq-ratif0286-20260723": 1,
       "CLAIM-arq-ratifica0257-b-20260720": 1,
       "CLAIM-arq-ratifica0258-20260720": 1,
       "CLAIM-arq-ratifica0267-20260720": 1,
@@ -2151,11 +2152,13 @@
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0263": 1,
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0264": 1,
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0266-remediation-1": 1,
+      "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0286": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0263": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0264": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266-remediation-1": 1,
+      "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0286": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0262-remediation-1-agent-key": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0266-remediation-1-e5-negative-test": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0262-y-GO-0263": 1,
@@ -2463,7 +2466,7 @@
       "TASK-0283": 50,
       "TASK-0284": 26,
       "TASK-0285": 15,
-      "TASK-0286": 14,
+      "TASK-0286": 16,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2486,7 +2489,7 @@
       "protocol-prune": 24,
       "protocol-state": 1
     },
-    "events_applied": 5453,
+    "events_applied": 5458,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2992,6 +2995,11 @@
       "arq:ratif0266:arch2:65286f2f-a936-4646-a514-884dcf532122": 6106,
       "arq:ratif0266:release:65286f2f-a936-4646-a514-884dcf532122": 6107,
       "arq:ratif0266:st:65286f2f-a936-4646-a514-884dcf532122": 6104,
+      "arq:ratif0286:acquire:552071e1-4e9d-4a2f-967b-e5bb9c949c4c": 6125,
+      "arq:ratif0286:arch1:552071e1-4e9d-4a2f-967b-e5bb9c949c4c": 6127,
+      "arq:ratif0286:arch2:552071e1-4e9d-4a2f-967b-e5bb9c949c4c": 6128,
+      "arq:ratif0286:release:552071e1-4e9d-4a2f-967b-e5bb9c949c4c": 6129,
+      "arq:ratif0286:st:552071e1-4e9d-4a2f-967b-e5bb9c949c4c": 6126,
       "arq:ratifica0272:acquire:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5345,
       "arq:ratifica0272:arch1:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5349,
       "arq:ratifica0272:arch2:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5350,
@@ -7943,5 +7951,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6124
+  "up_to_seq": 6129
 }

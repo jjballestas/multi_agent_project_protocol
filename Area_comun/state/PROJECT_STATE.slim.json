@@ -23,12 +23,6 @@
             "owner": "Analista",
             "status": "ready",
             "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
-        },
-        {
-            "id": "TASK-0286",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[DECISION-0103][C3/E7] Enforcement post-gate de gate-red -> obstacles no vacio (capa apply/run-log)"
         }
     ],
     "next_actions": [
