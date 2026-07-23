@@ -21,7 +21,7 @@
         {
             "id": "TASK-0287",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][F1/follow-up] Hook full-mode: inventario del snapshot omite deliverables (HUMAN_GUIDE.md + personal/**) -> falso rechazo"
         }
     ],

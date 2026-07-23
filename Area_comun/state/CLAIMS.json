@@ -459,9 +459,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T12:59:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0287",
             "updated_at": "2026-07-23T12:59:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0287-delivery",
+            "expires_at": "2026-07-23T14:14:17Z",
+            "notes": "Deliver TASK-0287 implementation and independent-review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0287-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0287",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0287",
+                "Area_comun/tasks/TASK-0287-f1-hook-fullmode-inventory-deliverables.md",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0287.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T13:14:17Z",
+            "status": "released",
+            "task_id": "TASK-0287",
+            "updated_at": "2026-07-23T13:14:17Z"
         },
         {
             "claim_id": "CLAIM-20260723-Codex-TASK-0287-pin",
@@ -475,7 +494,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T13:05:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0287",
             "updated_at": "2026-07-23T13:05:00Z"
         },

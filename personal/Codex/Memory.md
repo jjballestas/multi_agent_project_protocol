@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-23 Europe/Madrid, after TASK-0265 in-review flip.
+Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
+
+## 2026-07-23 - TASK-0287 implementation
+
+- Commit `cd6bcfc` fixes the optional full-mode hook false rejection by adding
+  `HUMAN_GUIDE.md` and `personal/**` to the partial snapshot inventory; the
+  validator behavior and default partial-cost mode are unchanged.
+- The new real-entrypoint sandbox regression proves the clean full-mode partial
+  snapshot exits 0 and genuinely broken staged governed state exits nonzero at
+  the collaboration-validator boundary. CI runs the regression and pins hook
+  SHA-256 `90685654449cb364995cd8362150411992dc6d173cf6f77acbb974d6b9a7f90f`.
+- Canonical validation, encoding, neutrality, diff, and the live
+  `HOOK_FULL=1 sh .githooks/pre-commit` gate exited 0. TASK-0287 remains
+  `in_progress` under its two Codex claims pending governed delivery.
 
 ## 2026-07-23 - TASK-0265 formal review transition
 
