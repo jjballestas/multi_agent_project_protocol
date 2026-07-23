@@ -123,6 +123,20 @@
             "updated_at": "2026-07-23T17:19:35Z"
         },
         {
+            "claim_id": "CLAIM-arq-gobatchR3R4-20260723",
+            "expires_at": "2026-07-23T19:05:09Z",
+            "notes": "Ruteo GO BATCH R3(0291)+R4(0292) a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-GO-BATCH-TASK-0291-0292.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-gobatchR3R4-20260723"
+            ],
+            "started_at": "2026-07-23T18:45:09Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T18:45:09Z"
+        },
+        {
             "claim_id": "CLAIM-arq-regRA1R3R4-20260723",
             "expires_at": "2026-07-23T17:36:46Z",
             "notes": "Registro follow-ups R-A1(0290) R3(0291) R4(0292) ready; GO solo a R-A1 por directiva",
