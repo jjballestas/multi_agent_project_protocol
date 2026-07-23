@@ -1,6 +1,28 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-23 Europe/Madrid, during TASK-0266 implementation.
+Last updated: 2026-07-23 Europe/Madrid, during TASK-0286 implementation.
+
+## 2026-07-23 - TASK-0266 closure and TASK-0286 implementation
+
+- Commit `e7feb77` records the Codex-signed TASK-0266 `review_approved -> done`
+  flip after independent Analista GO and Arquitecto ratification, then starts
+  TASK-0286.
+- `runtime/runlog.py` now carries the report's `obstacles` into the post-gate
+  entry and rejects `gate_green:false` with absent or empty obstacles at the
+  real `RunLog.append` boundary. A green gate does not require obstacles.
+- The new runtime-turn runner exercises red gate with absent, empty, and
+  populated obstacles plus green gate without obstacles. Its permanent
+  falsification contract mutates away the append enforcement and proves the
+  same red/empty entry becomes accepted.
+- Runtime-turn schema, semantic, obstacle and post-gate suites, falsification
+  inventory/guardian, compilation, collaboration validation, encoding, and
+  neutrality gates exited 0. TASK-0286 remains `in_progress` pending governed
+  delivery to independent Analista review; Codex did not review or ratify it.
+- Delivery commit `3a87264` moves TASK-0286 to `in_review`, releases both maker
+  claims, and opens the self-contained Arquitecto handoff requesting independent
+  Analista review. A timed delivery submit left the event snapshot behind seq
+  6118; deterministic replay rematerialization restored drift to zero before
+  the delivery gates and commit.
 
 ## 2026-07-23 - TASK-0266 remediation iteration 1
 
