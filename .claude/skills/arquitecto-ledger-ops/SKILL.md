@@ -296,10 +296,25 @@ completar TODOS los intents de la transaccion o sus EFECTOS DE ARCHIVO. Dos sint
   comparando los `intent_count` esperados de la transaccion contra los que realmente aparecen; (2)
   re-materializar state (s.3 de este skill); (3) verificar el estado FISICO real (mailbox, claims activos)
   contra lo que el log dice; (4) reenviar SOLO lo que falta.
-- **Causa raiz del timeout AUN no diagnosticada con certeza** (el lock `.ledger.lock` se probo LIBRE con un
-  probe manual `msvcrt.locking(LK_NBLCK)` durante uno de los hangs -- no es el lock file el que bloquea).
-  Candidato mas probable: I/O lento bajo escritura concurrente del arbol compartido. Mitigacion que
-  funciono: reintentar con timeout MUY generoso (90-100s) en vez de asumir deadlock indefinido.
+- **Contencion del `.ledger.lock` (diagnosticada 2026-07-23, runtime-authoritative):** bajo enforce:true,
+  cuando un exec VIVO de un cron (Codex/Analista) tiene el lock del ledger, mi `submit_intent` choca con
+  `OSError: [Errno 36] Resource deadlock avoided` en `msvcrt.locking` -> **0 eventos aplicados, exit 1
+  (aunque el wrapper `; echo EXIT=$?` reporte 0 si el pipe se comio el codigo)**. Sintoma colateral:
+  `scan_encoding` da FALSO-RED con `PermissionError [Errno 13]` al intentar leer `runtime/state/.ledger.lock`
+  mientras esta tomado (blind spot del scan; NO es un byte no-ASCII real). **REGLA: antes de rutear/submit,
+  esperar VENTANA ESTABLE** -- `msvcrt.locking(LK_NBLCK)` sobre `.ledger.lock` da libre Y `validate=0` Y sin
+  exec de cron vivo. Si el submit fallo por Errno 36, el tx es idempotente (0 aplicados): REINTENTAR el
+  MISMO tx cuando el lock libere. (El hang/timeout distinto del submit -- aplica pero no cierra -- se mitiga
+  con detach real; ver abajo.)
+- **Correr submit DETACHED, no con `&`:** `submit_intent` suele aplicar rapido pero colgar en el cierre.
+  Lanzarlo con `&` DENTRO de un comando foreground que luego expira (timeout 143) MATA el background antes de
+  regenerar el snapshot -> events.jsonl adelantado, snapshot rezagado, `validate=1 up_to_seq differs`. Fix:
+  lanzar con `run_in_background:true` (detach real del harness); y si quedo desincronizado, re-correr el MISMO
+  tx (idempotente) regenera el snapshot al final -> verde. NUNCA regenesis (fondo intocable).
+- **`intake.type` valido del DoR gate = {feature, doc, infra, analysis, triage, extraction}.** `bug` NO pasa
+  (`ERROR: task ... intake.type out of range: bug`) -> para un fix usar `infra`. Al registrar tarea nueva por
+  `task_upsert`: crear en `proposed` y luego `task_status proposed->ready` para EJERCER el DoR gate (valida el
+  intake); el `type` del `task_obj` debe casar con el `intake.type` del `.md`.
 
 ## 7. Cuando el CLASIFICADOR DE PERMISOS del harness bloquea una accion (2026-07-06, nuevo)
 El auto-mode classifier del harness puede bloquear una accion tuya que consideras legitima por precedente

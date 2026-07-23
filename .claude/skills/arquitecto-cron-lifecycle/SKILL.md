@@ -66,6 +66,19 @@ cuelgue: pid muerto, SIN lock, log limpio. Visto 2x el 2026-07-02 (Codex ~03:17,
 - Relanzar: `powershell -NoProfile -File personal/<Peer>/<peer>_mailbox_cron.ps1` (run_in_background). Al arrancar
   procesa la cola de `open/` que no este en su `seen.json`.
 
+### 1e. EXEC vacio/unconfirmed en tarea grande = FALLO DEL AGENTE del peer, NO jam del cron (visto 2026-07-23)
+El cron esta VIVO y RELANZA, pero cada `EXEC_START` sale en ~1s con `EXEC_EXIT code=0 outcome=unconfirmed` y
+`out.log`/`err.log` VACIOS (0 bytes), en bucle de `RETRY_SCHEDULED`. El peer proceso OTRAS tareas OK antes (0257..0264
+todas confirmed/definitive) y solo falla en la MAS grande (p.ej. el gate final que revisa el conjunto). Firma: exec
+launcha pero el agente no produce NADA -> fallo de su agente/proveedor (auth/quota/lanzamiento), NO residuo/lock/staging
+de tu lado (verifica arbol limpio + `.ledger.lock` libre + git diff --cached vacio). **NO relances el cron (esta VIVO ->
+duplicarias).** El destrabe NO esta en tus manos: el Operador REACTIVA el runtime del peer (controla su activacion).
+Tu parte: (1) escala al Operador con el diagnostico; (2) re-rutea el encargo con ANCLA DE COMMIT explicita al frente del
+requested_action (`impl commit <sha>` / `HEAD <sha>`) -- las revisiones que SI arrancaron llevaban ese ancla; sin ella
+el harness del checker puede no saber que anclar y salir no-op. Ojo extra si es una tarea que el peer OWNea (un gate
+checker-only): su harness entrega el veredicto pero NO reclama/flipea la tarea (queda en `ready`) -> el cierre lo
+conduces tu por capabilities (Arquitecto ready->in_progress, Codex in_progress->in_review, Arquitecto ->done/review_approved).
+
 ## 2. Diagnostico (read-only)
 ```
 tail -12 .protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.log      # LOCKED skip / LOOP_ERROR?
