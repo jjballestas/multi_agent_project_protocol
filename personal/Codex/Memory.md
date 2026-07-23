@@ -19,6 +19,9 @@ Last updated: 2026-07-23 Europe/Madrid, during TASK-0266 implementation.
 - Runtime upgrade, runtime apply, runtime instantiation, compilation, collaboration,
   encoding, neutrality, and diff gates passed. TASK-0266 remains `in_progress` pending
   governed delivery to independent review.
+- Delivery commit `0bc194d` moves TASK-0266 to `in_review`, releases all maker claims,
+  and opens the self-contained Arquitecto handoff for independent Analista review. Codex
+  did not review or ratify the implementation.
 
 ## 2026-07-23 - TASK-0263 closure and TASK-0264 implementation
 
