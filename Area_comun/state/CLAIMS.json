@@ -299,6 +299,26 @@
             "updated_at": "2026-07-23T20:00:54Z"
         },
         {
+            "claim_id": "CLAIM-arq-revbatch-20260723",
+            "expires_at": "2026-07-23T21:48:38Z",
+            "notes": "Ruteo REVIEW batch 0291+0292 a Analista + archivo GO-BATCH/remediation/HANDOFF",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0291-0292.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-revbatch-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-GO-BATCH-TASK-0291-0292.md",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0291-0292-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0291-0292.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Codex-ACTION-GO-BATCH-TASK-0291-0292.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0291-0292-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0291-0292.md"
+            ],
+            "started_at": "2026-07-23T21:28:38Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T21:28:38Z"
+        },
+        {
             "claim_id": "CLAIM-arq-review0290-20260723",
             "expires_at": "2026-07-23T18:34:34Z",
             "notes": "Ruteo REVIEW 0290 a Analista + archivo GO-0290 y HANDOFF-0290",

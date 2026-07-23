@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7ed637944a9b6380efe8875df8e3c4288146ecc6703e245579cb041df003f0a3",
+  "canonical_hash": "af159a1ad746b5eb3c43c9d094e12c2702fcf59c5252f3d0423de916f6e5a8dd",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -939,6 +939,7 @@
       "CLAIM-arq-rev0279-20260722": 1,
       "CLAIM-arq-rev0283-20260722": 1,
       "CLAIM-arq-rev0285-20260722": 1,
+      "CLAIM-arq-revbatch-20260723": 1,
       "CLAIM-arq-review0259r1-20260722": 1,
       "CLAIM-arq-review0259r2-20260722": 1,
       "CLAIM-arq-review0259r3-20260722": 1,
@@ -2194,12 +2195,14 @@
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0289": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0290": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-0265-flip-in-review": 1,
+      "MSG-20260723-Arquitecto-to-Codex-ACTION-GO-BATCH-TASK-0291-0292": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-GO-TASK-0287": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-GO-TASK-0288": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-GO-TASK-0289": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-GO-TASK-0290": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0262-remediation-1-agent-key": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0266-remediation-1-e5-negative-test": 1,
+      "MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0291-0292-remediation-1": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0262-y-GO-0263": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0263-y-GO-0264": 1,
       "MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0264-y-GO-0266": 1,
@@ -2215,6 +2218,7 @@
       "MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0288": 1,
       "MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0289": 1,
       "MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0290": 1,
+      "MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0291-0292": 1,
       "MSG-20260723-Codex-to-Asesor-FYI-TASK-0264-regla-C1-publicada": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
@@ -2516,7 +2520,7 @@
       "TASK-0288": 23,
       "TASK-0289": 16,
       "TASK-0290": 15,
-      "TASK-0291": 19,
+      "TASK-0291": 20,
       "TASK-0292": 9,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2540,7 +2544,7 @@
       "protocol-prune": 26,
       "protocol-state": 1
     },
-    "events_applied": 5618,
+    "events_applied": 5623,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3269,6 +3273,11 @@
       "arq:rev0290:arch1:d8066a92-2ed5-46cf-9b77-0c389351e58a": 6256,
       "arq:rev0290:arch2:d8066a92-2ed5-46cf-9b77-0c389351e58a": 6257,
       "arq:rev0290:release:d8066a92-2ed5-46cf-9b77-0c389351e58a": 6258,
+      "arq:revbatch:acquire:3d7e382d-0dfb-4f37-9016-3e7abd6bb985": 6290,
+      "arq:revbatch:arch1:3d7e382d-0dfb-4f37-9016-3e7abd6bb985": 6291,
+      "arq:revbatch:arch2:3d7e382d-0dfb-4f37-9016-3e7abd6bb985": 6292,
+      "arq:revbatch:arch3:3d7e382d-0dfb-4f37-9016-3e7abd6bb985": 6293,
+      "arq:revbatch:release:3d7e382d-0dfb-4f37-9016-3e7abd6bb985": 6294,
       "arq:rut0277rej:acquire:76c2172a-262b-4033-bb98-56a4a8e66b48": 5416,
       "arq:rut0277rej:arch1:76c2172a-262b-4033-bb98-56a4a8e66b48": 5417,
       "arq:rut0277rej:arch2:76c2172a-262b-4033-bb98-56a4a8e66b48": 5418,
@@ -8162,5 +8171,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6289
+  "up_to_seq": 6294
 }
