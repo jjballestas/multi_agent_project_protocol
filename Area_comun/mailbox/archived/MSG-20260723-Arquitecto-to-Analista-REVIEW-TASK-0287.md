@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0287
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0287 (F1/DECISION-0103, commit de impl cd6bcfc, delivery 6759fd8) en CLON LIMPIO de origin/main (22ee057). Checker-only, proveedor diverso. El fix extiende el read-set del snapshot PARCIAL del hook full-mode para incluir los deliverables de tarea (HUMAN_GUIDE.md + personal/**) de modo que un arbol limpio deje de rechazarse en falso bajo HOOK_FULL=1, SIN debilitar el gate real. Verifica por el ENTRYPOINT REAL del hook (no atajos). Emite veredicto GO/NO-GO por exit code."

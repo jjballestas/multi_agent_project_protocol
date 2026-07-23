@@ -333,7 +333,7 @@
                 "TASK-0265"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "done",
             "title": "[DECISION-0103][F1/follow-up] Hook full-mode: inventario del snapshot omite deliverables (HUMAN_GUIDE.md + personal/**) -> falso rechazo",
             "type": "infra"
         },

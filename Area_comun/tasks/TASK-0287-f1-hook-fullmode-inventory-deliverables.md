@@ -2,7 +2,7 @@
 task_id: TASK-0287
 title: "[DECISION-0103][F1/follow-up] Hook full-mode: el inventario del snapshot parcial omite deliverables de tarea (HUMAN_GUIDE.md + personal/**) -> falso rechazo de arbol limpio"
 type: infra
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal
