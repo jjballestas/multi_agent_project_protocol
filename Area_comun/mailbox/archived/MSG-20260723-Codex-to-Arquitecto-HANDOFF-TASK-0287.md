@@ -3,7 +3,7 @@ message_id: MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0287
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0287 implementation commit cd6bcfc to independent Analista review. Codex is maker only and does not ratify this work."
