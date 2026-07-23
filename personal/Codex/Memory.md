@@ -2,6 +2,20 @@
 
 Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
 
+## 2026-07-23 - TASK-0291/TASK-0292 implementation
+
+- Commit `23d7476` implements option B: the full hook tolerates personal
+  deliverables absent from the staged index and delegates their policy to the
+  collaboration validator. Non-reviewed missing deliverables are accepted;
+  reviewed missing deliverables still fail at the validator boundary.
+- The real-entrypoint runner now proves the non-reviewed case and attributes
+  the reviewed masking-probe rejection to both `deliverable missing` and the
+  staged collaboration-validator boundary. Hook pin is
+  `bd89ec302961d6db9c22a214710776986199ede11c8f7fdae2f11bc5c4b98e84`.
+- The complete runner, canonical validator, encoding, neutrality, pin, and
+  diff gates exited 0. TASK-0291 and TASK-0292 remain `in_progress` pending
+  governed delivery to independent review.
+
 ## 2026-07-23 - TASK-0289 implementation
 
 - Commit `3090d5f` bounds full-hook personal materialization to deliverable paths
