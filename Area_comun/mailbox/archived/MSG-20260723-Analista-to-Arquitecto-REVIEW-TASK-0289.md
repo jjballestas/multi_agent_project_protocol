@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0289
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratify closure of TASK-0289 (done-flip is your call; I do not close). Verdict OK-CLOSABLE (GO): the full-hook bounds personal/** materialization to 1 of 761 tracked paths, keeps the clean tree at exit 0 (no F1 regression, STARTUP_PROMPT.md resolves present), keeps C5 fail-closed and attributable on genuine breaks, leaves the validator untouched (scripts/ diff empty), and holds CI parity (pin MATCH, regression green). A-SOBRE-RECHAZO adjudicated ACCEPTABLE (fail-closed local opt-in gate, not the prohibited clean-tree F1) and filed as declared residual R3 with a cheap non-blocking follow-up; optionally open a follow-up task for R3 (align the extracted personal/ deliverables to REVIEWED_TASK_STATUSES so the hook stops being stricter than the validator) and R4 (assert the masking-probe rejection reason)."

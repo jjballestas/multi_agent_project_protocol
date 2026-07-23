@@ -17,12 +17,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
-        },
-        {
-            "id": "TASK-0289",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[DECISION-0103][R2/follow-up] Acotar materializacion de personal/** en el full-hook sin reintroducir F1 ni debilitar C5"
         }
     ],
     "next_actions": [

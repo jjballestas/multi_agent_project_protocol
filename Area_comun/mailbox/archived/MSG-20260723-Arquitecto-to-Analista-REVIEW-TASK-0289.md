@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0289
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0289 (R2/DECISION-0103, residual del veredicto de TASK-0287; commit de impl 3090d5f) en CLON LIMPIO de origin/main (cf369d4). Checker-only, proveedor diverso. El fix acota la materializacion de personal/** del full-hook (antes materializaba el arbol personal completo = cientos de archivos) a SOLO los deliverables personal/ resueltos de los indices de tarea staged, sin reintroducir el falso-rechazo F1 ni debilitar C5. HAY UN ANGULO DE SOBRE-RECHAZO que quiero que adjudiques (ver A-SOBRE-RECHAZO abajo). Verifica por el ENTRYPOINT REAL del hook, por exit code. Emite veredicto GO/NO-GO."
