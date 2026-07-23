@@ -1,6 +1,24 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
+Last updated: 2026-07-23 Europe/Madrid, during TASK-0266 implementation.
+
+## 2026-07-23 - TASK-0264 closure and TASK-0266 implementation
+
+- Commit `cef1e9b` records the Codex-signed TASK-0264 `review_approved -> done` flip
+  after independent Analista GO and Arquitecto ratification, then starts TASK-0266.
+- `.githooks/**` is now in the default adoptable upgrade set. New instances initialize
+  Git and configure `core.hooksPath` automatically, including the encapsulated-governance
+  relative path. Existing-instance activation remains a separately governed operation.
+- `runtime.vcs.commit_turn` now verifies hooks by default. `verify=False` remains an
+  explicit recovery-only exception for repairing or rolling back the gate itself.
+- Sandbox tests prove upgrade delta discovery, automatic new-instance hook activation,
+  rejection of broken governed state, default runtime commit rejection under a failing
+  hook, and explicit recovery bypass. No live instance or NOVA upgrade was run;
+  `.githooks/pre-commit`, the pinned hub config, supervised autonomy, and real invoker
+  were not changed.
+- Runtime upgrade, runtime apply, runtime instantiation, compilation, collaboration,
+  encoding, neutrality, and diff gates passed. TASK-0266 remains `in_progress` pending
+  governed delivery to independent review.
 
 ## 2026-07-23 - TASK-0263 closure and TASK-0264 implementation
 
