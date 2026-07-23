@@ -104,9 +104,31 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T19:15:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0291",
             "updated_at": "2026-07-23T19:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0291-0292-delivery",
+            "expires_at": "2026-07-24T07:45:12Z",
+            "notes": "Governed coupled delivery of TASK-0291 and TASK-0292 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0291-0292-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0291",
+                "Area_comun/state/TASK_INDEX.json#TASK-0292",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0291",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0292",
+                "Area_comun/tasks/TASK-0291-r3-fullhook-align-reviewed-statuses.md",
+                "Area_comun/tasks/TASK-0292-r4-masking-probe-assert-reason.md",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0291-0292.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T19:45:12Z",
+            "status": "released",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T19:45:12Z"
         },
         {
             "claim_id": "CLAIM-20260723-Codex-TASK-0292",
@@ -123,7 +145,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-23T19:15:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0292",
             "updated_at": "2026-07-23T19:15:00Z"
         },

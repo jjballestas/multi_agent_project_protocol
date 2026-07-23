@@ -2,7 +2,7 @@
 task_id: TASK-0291
 title: "[DECISION-0103][R3/follow-up] Full-hook: alinear la materializacion de deliverables personal/ con la autoridad del validador (no ser mas estricto en tareas no-revisadas)"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
