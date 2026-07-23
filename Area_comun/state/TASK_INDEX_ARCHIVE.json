@@ -7740,6 +7740,57 @@
             "status": "done",
             "title": "[DECISION-0103][R2/follow-up] Acotar materializacion de personal/** en el full-hook sin reintroducir F1 ni debilitar C5",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-23",
+            "file": "Area_comun/tasks/TASK-0290-ra1-prune-preflight-name-archives.md",
+            "id": "TASK-0290",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "DECISION-0103",
+                "TASK-0288",
+                "TASK-0287"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[DECISION-0103][R-A1] prune --check: anadir *_ARCHIVE.json al preflight para nombrar archive malformado",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-23",
+            "file": "Area_comun/tasks/TASK-0291-r3-fullhook-align-reviewed-statuses.md",
+            "id": "TASK-0291",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "DECISION-0103",
+                "TASK-0289",
+                "TASK-0287"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[DECISION-0103][R3] Full-hook: alinear materializacion de deliverables personal/ con REVIEWED_TASK_STATUSES del validador",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-23",
+            "file": "Area_comun/tasks/TASK-0292-r4-masking-probe-assert-reason.md",
+            "id": "TASK-0292",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "DECISION-0103",
+                "TASK-0289",
+                "TASK-0291"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[DECISION-0103][R4] Regresion full-hook: masking-probe asegura la razon del rechazo (boundary validador)",
+            "type": "infra"
         }
     ]
 }
