@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fa5d93e2dc984237af88a7653eb170a304f688823e7f36e7e86aeee690511de8",
+  "canonical_hash": "abf7479e332d3cae465183a25448744c8039312b37775e1d48854663e6241836",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -902,6 +902,7 @@
       "CLAIM-arq-reflip0257-b-20260719": 1,
       "CLAIM-arq-reg0287-20260723": 1,
       "CLAIM-arq-regR1R2-20260723": 1,
+      "CLAIM-arq-regRA1R3R4-20260723": 1,
       "CLAIM-arq-registro0272-20260720": 1,
       "CLAIM-arq-registro0273-20260720": 1,
       "CLAIM-arq-rej0274-20260722": 1,
@@ -2505,6 +2506,9 @@
       "TASK-0287": 15,
       "TASK-0288": 23,
       "TASK-0289": 16,
+      "TASK-0290": 3,
+      "TASK-0291": 2,
+      "TASK-0292": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2527,7 +2531,7 @@
       "protocol-prune": 26,
       "protocol-state": 1
     },
-    "events_applied": 5565,
+    "events_applied": 5573,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3090,6 +3094,14 @@
       "arq:regR1R2:release:6820d4a4-992e-4b0f-bd08-b33a1e0cf3ea": 6185,
       "arq:regR1R2:upsert88:6820d4a4-992e-4b0f-bd08-b33a1e0cf3ea": 6181,
       "arq:regR1R2:upsert89:6820d4a4-992e-4b0f-bd08-b33a1e0cf3ea": 6183,
+      "arq:regRA1R3R4:acquire:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6237,
+      "arq:regRA1R3R4:rd0290:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6239,
+      "arq:regRA1R3R4:rd0291:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6241,
+      "arq:regRA1R3R4:rd0292:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6243,
+      "arq:regRA1R3R4:release:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6244,
+      "arq:regRA1R3R4:up0290:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6238,
+      "arq:regRA1R3R4:up0291:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6240,
+      "arq:regRA1R3R4:up0292:28d7f055-c488-4407-a9cb-69afcf99f6ce": 6242,
       "arq:rej0274:acquire:c820c822-d20b-4062-82ff-dda641021269": 5715,
       "arq:rej0274:arch1:c820c822-d20b-4062-82ff-dda641021269": 5716,
       "arq:rej0274:arch2:c820c822-d20b-4062-82ff-dda641021269": 5717,
@@ -8096,5 +8108,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6236
+  "up_to_seq": 6244
 }

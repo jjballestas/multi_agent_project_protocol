@@ -67,6 +67,24 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
+            "id": "TASK-0290",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0103][R-A1] prune --check: anadir *_ARCHIVE.json al preflight para nombrar archive malformado"
+        },
+        {
+            "id": "TASK-0291",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0103][R3] Full-hook: alinear materializacion de deliverables personal/ con REVIEWED_TASK_STATUSES del validador"
+        },
+        {
+            "id": "TASK-0292",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0103][R4] Regresion full-hook: masking-probe asegura la razon del rechazo (boundary validador)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
