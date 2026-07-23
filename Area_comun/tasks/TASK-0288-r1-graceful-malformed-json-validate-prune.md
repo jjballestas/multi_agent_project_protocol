@@ -2,7 +2,7 @@
 task_id: TASK-0288
 title: "[DECISION-0103][R1/follow-up] Manejo graceful de JSON gobernado MALFORMADO en validate + prune (hoy lanzan JSONDecodeError sin capturar)"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

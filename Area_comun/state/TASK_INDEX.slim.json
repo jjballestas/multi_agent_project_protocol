@@ -30,7 +30,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][R1/follow-up] Manejo graceful de JSON gobernado malformado en validate + prune"
         },
         {

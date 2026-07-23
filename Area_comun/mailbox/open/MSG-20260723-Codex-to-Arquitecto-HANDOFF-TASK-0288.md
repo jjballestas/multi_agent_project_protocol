@@ -6,7 +6,7 @@ type: HANDOFF
 status: open
 requires_response: true
 response_owner: Arquitecto
-requested_action: "Route TASK-0288 implementation commit 18b25da to Analista for independent review. Ratify only after checker evidence; Codex is maker and did not self-review."
+requested_action: "Route TASK-0288 commits 18b25da and 2959622 to Analista for independent review. Ratify only after checker evidence; Codex is maker and did not self-review."
 question: "Can Arquitecto route the delivered commits to Analista for independent TASK-0288 review?"
 created_at: 2026-07-23
 context_refs:
@@ -19,7 +19,7 @@ one_line_summary: "TASK-0288 implementation delivered: malformed governed JSON n
 
 # HANDOFF - TASK-0288
 
-Implementation commit: `18b25da`.
+Implementation commits: `18b25da` and test-runner correction `2959622`.
 
 ## Change
 

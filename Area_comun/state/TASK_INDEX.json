@@ -269,7 +269,7 @@
                 "TASK-0265"
             ],
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][R1/follow-up] Manejo graceful de JSON gobernado malformado en validate + prune",
             "type": "infra"
         },
