@@ -55,8 +55,8 @@ fi
 # imports: collaboration data, runtime state, validator/prune scripts, profiles,
 # examples, task deliverables, live config, and the runtime-tier CI sentinel.
 # The validator resolves deliverables from the task indexes, so HUMAN_GUIDE.md
-# and personal/** are judgment inputs too. The total mode is a regression oracle;
-# normal full mode uses the partial inventory.
+# and task-indexed personal/** paths are judgment inputs too. The total mode is
+# a regression oracle; normal full mode uses the partial inventory.
 snapshot_root=$(mktemp -d "${TMPDIR:-/tmp}/protocol-index.XXXXXX") || exit 1
 cleanup_snapshot() {
   rm -rf -- "$snapshot_root"
@@ -67,7 +67,6 @@ runtime
 scripts
 profiles
 examples
-personal
 protocol.config.json
 protocol.config.template.json
 AGENTS.md
@@ -84,8 +83,52 @@ if [ "${HOOK_SNAPSHOT_MODE:-partial}" = "total" ]; then
 else
   # Deliberate word splitting: every inventory entry is a pathspec without spaces.
   git ls-files -z -- $snapshot_inventory | git checkout-index --stdin -z --force --prefix="$snapshot_root/"
+  status=$?
+  if [ "$status" -eq 0 ]; then
+    personal_deliverables="$snapshot_root/.personal-deliverables"
+    python - "$snapshot_root" > "$personal_deliverables" <<'PY'
+import json
+import sys
+from pathlib import Path, PurePosixPath
+
+sys.stdout.reconfigure(newline="\n")
+root = Path(sys.argv[1])
+paths = set()
+for name in ("TASK_INDEX.json", "TASK_INDEX_ARCHIVE.json"):
+    try:
+        data = json.loads((root / "Area_comun" / "state" / name).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        continue
+    for task in data.get("tasks", []):
+        for raw in task.get("deliverables", []):
+            path = PurePosixPath(str(raw))
+            if (
+                path.parts
+                and path.parts[0] == "personal"
+                and ".." not in path.parts
+                and not path.is_absolute()
+            ):
+                paths.add(path.as_posix())
+for path in sorted(paths):
+    print(path)
+PY
+    status=$?
+  fi
+  if [ "$status" -eq 0 ]; then
+    while IFS= read -r path; do
+      [ -n "$path" ] || continue
+      git checkout-index --force --prefix="$snapshot_root/" -- "$path" || {
+        status=1
+        break
+      }
+    done < "$personal_deliverables"
+  fi
+  if [ "$status" -eq 0 ] && [ "${HOOK_INVENTORY_REPORT:-0}" = "1" ]; then
+    selected=$(wc -l < "$personal_deliverables" | tr -d ' ')
+    tracked=$(git ls-files 'personal/**' | wc -l | tr -d ' ')
+    echo "bounded personal deliverables: $selected of $tracked tracked paths"
+  fi
 fi
-status=$?
 if [ "$status" -ne 0 ]; then
   echo "could not materialize staged snapshot; commit rejected" >&2
   exit 1

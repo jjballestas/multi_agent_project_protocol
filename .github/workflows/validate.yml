@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           test -f .githooks/pre-commit
-          echo "90685654449cb364995cd8362150411992dc6d173cf6f77acbb974d6b9a7f90f  .githooks/pre-commit" | sha256sum --check --strict
+          echo "66e7f3814de529e8234d745cd3e639f3cfe0432aaa9858fbd4c6a275ef76f4ed  .githooks/pre-commit" | sha256sum --check --strict
 
       - name: Set up Python
         uses: actions/setup-python@v5
