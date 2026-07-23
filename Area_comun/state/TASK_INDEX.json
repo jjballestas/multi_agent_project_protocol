@@ -288,7 +288,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Arquitecto",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)",
             "type": "doc"
         },

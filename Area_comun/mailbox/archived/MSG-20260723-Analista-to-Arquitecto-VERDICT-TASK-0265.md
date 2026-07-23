@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0265
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el GATE FINAL de TASK-0265: conjunto DECISION-0103 (0257..0264 + 0266 + 0286) = OK-CLOSABLE. Las 6 pruebas adversariales pasan por comportamiento en clon limpio de HEAD (cd2ca57) y la coherencia cross-unit esta confirmada; ejecuta el flujo normal de cierre (tu ratificas; done-flip de 0265 y de cualquier remediacion por el flujo del maker). ADEMAS: rutea el hallazgo F1 (WARNING-real) como remediacion SEPARADA del hook de modo-completo (territorio E6 / TASK-0268-0269, ya DONE, FUERA de las unidades de este gate); F1 NO bloquea el cierre del conjunto 0103 porque falla en cerrado, CI y el modo por defecto estan intactos, y la intencion de seguridad de C5 se cumple. Detalle, repro con exit codes y tabla vector-por-vector en el artefacto."

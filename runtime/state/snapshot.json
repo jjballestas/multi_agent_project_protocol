@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "327fa0f95a4166a8a2d3a13f2b1e769c902695a3ee5458e50589b039abcdbef2",
+  "canonical_hash": "b059fef0ff8c8e66bdb6f0229e70dbf9c21face50e291cd5ec9484a80182387f",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -805,6 +805,7 @@
       "CLAIM-TASK-0257-Codex-remediation-F01-F02": 1,
       "CLAIM-TASK-0257-Codex-remediation-delivery": 1,
       "CLAIM-TASK-0257-Codex-remediation-status": 1,
+      "CLAIM-arq-0265ip-20260723": 1,
       "CLAIM-arq-0270-0271-registro-20260720": 1,
       "CLAIM-arq-0280-it4-20260721": 1,
       "CLAIM-arq-0281-0282-20260721": 1,
@@ -2153,12 +2154,14 @@
       "MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0266": 1,
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0263": 1,
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0264": 1,
+      "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0265": 1,
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0266-remediation-1": 1,
       "MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0286": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0263": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0264": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final": 1,
+      "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final-v2": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266-remediation-1": 1,
       "MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0286": 1,
@@ -2449,7 +2452,7 @@
       "TASK-0262": 22,
       "TASK-0263": 18,
       "TASK-0264": 20,
-      "TASK-0265": 4,
+      "TASK-0265": 6,
       "TASK-0266": 29,
       "TASK-0267": 20,
       "TASK-0268": 23,
@@ -2493,7 +2496,7 @@
       "protocol-prune": 24,
       "protocol-state": 1
     },
-    "events_applied": 5469,
+    "events_applied": 5474,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2638,6 +2641,11 @@
       "arq:0204-0205:rel": 2330,
       "arq:0205cr:acq": 2341,
       "arq:0205cr:rel": 2343,
+      "arq:0265ip:acquire:d459f4d6-4e21-4539-a241-9d3892cd22e7": 6141,
+      "arq:0265ip:arch1:d459f4d6-4e21-4539-a241-9d3892cd22e7": 6143,
+      "arq:0265ip:arch2:d459f4d6-4e21-4539-a241-9d3892cd22e7": 6144,
+      "arq:0265ip:release:d459f4d6-4e21-4539-a241-9d3892cd22e7": 6145,
+      "arq:0265ip:st:d459f4d6-4e21-4539-a241-9d3892cd22e7": 6142,
       "arq:0272iter2:acquire:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5318,
       "arq:0272iter2:arch1:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5322,
       "arq:0272iter2:arch2:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5323,
@@ -7966,5 +7974,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6140
+  "up_to_seq": 6145
 }

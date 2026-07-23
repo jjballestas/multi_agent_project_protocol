@@ -81,7 +81,7 @@
         {
             "id": "TASK-0265",
             "owner": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
         },
         {
