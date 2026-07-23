@@ -14,6 +14,9 @@ Last updated: 2026-07-23 Europe/Madrid, during TASK-0266 implementation.
 - Runtime instantiation, collaboration validation, encoding, neutrality, and diff gates
   exited 0. TASK-0266 is being returned to independent Analista re-review; Codex did not
   review or ratify the remediation.
+- Delivery commit `9e16447` moves TASK-0266 back to `in_review`, releases both maker
+  claims, and opens the self-contained Arquitecto handoff for independent Analista
+  re-review. The same required gates exited 0 after delivery.
 
 ## 2026-07-23 - TASK-0264 closure and TASK-0266 implementation
 
