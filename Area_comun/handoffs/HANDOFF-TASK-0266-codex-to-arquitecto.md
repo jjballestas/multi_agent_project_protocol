@@ -5,7 +5,7 @@ from: Codex
 to: Arquitecto
 status: ready_for_review
 created_at: 2026-07-23
-implementation_commit: cef1e9bad39330510e62bea03fc9cdfe473d2b77
+implementation_commit: 14d7150f
 checker: Analista
 ---
 
@@ -55,5 +55,5 @@ cambia ese reparto de coste ni debe interpretarse como enforcement local total p
 
 ## Revision solicitada
 
-Arquitecto debe rutear el commit `cef1e9b` a Analista para juicio independiente. Codex no
+Arquitecto debe rutear el commit `14d7150f` a Analista para juicio independiente. Codex no
 revisa ni ratifica su propia implementacion.

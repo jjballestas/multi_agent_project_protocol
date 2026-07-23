@@ -2,6 +2,19 @@
 
 Last updated: 2026-07-23 Europe/Madrid, during TASK-0266 implementation.
 
+## 2026-07-23 - TASK-0266 remediation iteration 1
+
+- Commit `14d7150f` corrects the E5 evidence defect without changing hook behavior. The
+  generated-instance negative corrupts `CLAIMS.json`, uses a valid trailer, proves default
+  partial mode accepts the commit, then proves `HOOK_FULL=1` rejects it through the
+  collaboration validator rather than the trailer checker.
+- The governed handoff now declares the E6-A residual: local default is partial; full mode
+  and clean-clone CI are the hard enforcement boundaries. `.githooks/pre-commit` and its
+  default were not changed.
+- Runtime instantiation, collaboration validation, encoding, neutrality, and diff gates
+  exited 0. TASK-0266 is being returned to independent Analista re-review; Codex did not
+  review or ratify the remediation.
+
 ## 2026-07-23 - TASK-0264 closure and TASK-0266 implementation
 
 - Commit `cef1e9b` records the Codex-signed TASK-0264 `review_approved -> done` flip

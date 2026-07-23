@@ -27,7 +27,7 @@
         {
             "id": "TASK-0266",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
         },
         {
