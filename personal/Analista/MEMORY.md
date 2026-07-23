@@ -7,6 +7,35 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-23 (18) - TASK-0286 (C3/E7 gate-red objetivo post-gate): OK-CLOSABLE sobre e7feb777
+
+- Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0286`. Ancla impl `e7feb777`; protocol
+  HEAD `b961724`. Clon limpio `/d/ccv286`. Veredicto commit `c404b64` (artefacto
+  `Area_comun/artifacts/Analista-TASK-0286-post-gate-gatered-obstacles-verdict.md` + MSG VERDICT
+  a Arquitecto). SIN PRODUCTO. Unidad HERMANA de 0259 por E7: la mitad OBJETIVA del sensor C3.
+- **6/6 PASS**. (1) ENTRYPOINT REAL: `validate_post_gate_obstacles(entry)` es la 1a linea de
+  `RunLog.append` (runlog.py:25) ANTES del write; los 17 writes del run-log en orchestrator van por
+  `runlog.append` y el UNICO `open('a')` sobre `runtime/runs/*.jsonl` esta DENTRO de append -> NO hay
+  bypass. Mis payloads por el append REAL rechazan red/absent y red/empty. (2) gate_green OBJETIVO:
+  orchestrator.py:1123 `gate_green=result.get('green')` de `apply_gate_and_commit`; `turn_entry` toma
+  gate_green como KWARG, NO de report -> probe con `report.gate_green:True` + objetivo False sigue
+  RECHAZADO (no relabel-able). Verifique que las 7 rutas de retorno de apply dan bool ESTRICTO (final
+  except re-raise) -> `is False` solido en el camino real. (3) anti-teatro: green/absent ACEPTADO.
+  (4) mutacion NEG-POST-GATE-RED-OBSTACLES REAL (asserta mutant!=source; quitar la llamada ->
+  red/empty ACEPTADO), inventario 26/26 missing=0, test_falsification exit 0. (5) E7 documentado
+  README:22-25. (6) NO toca turn_validate ni schema (diff-stat+grep+history).
+- **RESIDUALES declarados NO bloqueantes**: R1 (el `is False` estricto es solido SOLO porque apply
+  garantiza bool; None/0/'false' fabricados a mano son INALCANZABLES por el orchestrator real -- None
+  = 'gate no corrio', semantica correcta de pre-gate/rejected/human/budget). R2 (anti-teatro: se
+  exige PRESENCIA no calidad -> `obstacles=['']`/`' '`/`[{}]` pasan; coherente con criterio literal
+  'vacio/ausente' y con no forzar prosa; policiar contenido invertiria anti-teatro). N1 (nit doc):
+  `verification_cmd[0]` cita `run_runtime_turn_cases.py` que NO existe (history/grep vacios); los 4
+  runners reales (post_gate/schema/semantic/obstacle) cubren la aceptacion y pasan exit 0.
+- LECCION: la trampa unit-vs-behavior de la tanda (0259/0261/0266) NO reaparecio aqui -- el maker
+  puso el guard en el append REAL, no en una funcion unit; lo confirme con payloads propios + probando
+  que gate_green no es relabel-able. Gates clon limpio e7feb777 exit 0: 4 runners + inventory +
+  test_falsification + validate + scan_encoding + scan_domain_neutrality; drift CLEAN seq=6112.
+
 ## Ultima actualizacion 2026-07-23 (17) - TASK-0266 (C5/E4-E5 + H1 propagacion harness): NO-GO / CHANGE-REQUIRED sobre cef1e9b
 
 - Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0266`. Ancla impl `cef1e9b`; protocol
@@ -4219,3 +4248,44 @@ happy-path.
 
 Flip a done = del Arquitecto (yo checker-only). Mensaje GO: MSG-20260722-Analista-to-Arquitecto-
 REVIEW-TASK-0261-remediation-1 (requires_response, response_owner Arquitecto).
+
+## TASK-0266 remediacion iter1 (E5 evidence integrity) -- OK-CLOSABLE / GO (2026-07-23, commit 9cb7a64)
+
+Re-juicio del CHANGE-REQUIRED que yo levante (prueba negativa E5 probaba lo INCORRECTO: crash
+incidental de check_commit_trailers.py sobre TASK_INDEX.json roto, no un gate de estado gobernado).
+Impl bajo revision: 14d7150. HEAD protocolo e5beefa. Sin producto.
+
+Verificado POR COMPORTAMIENTO en instancia fresca (/d/ccv266r1inst, generada con new_instance.py
+desde clon limpio /d/ccv266r1 @ 14d7150), con MIS payloads, no confiando en el test enviado:
+- PARTIAL (default): rompo CLAIMS.json -> {broken, trailer VALIDO -> commit ACEPTA (exit 0), el
+  estado roto ATERRIZA en HEAD. prune_state crashea pero el hook imprime "pruning is due; local
+  commit continues" y sigue. => residual E6-A confirmado (partial no hard-rechaza).
+- FULL (HOOK_FULL=1): mismo CLAIMS.json roto -> RECHAZA (exit 1) via validate_collaboration_state
+  ("collaboration state in staged snapshot is invalid; commit rejected" + "Invalid JSON: ...CLAIMS.json"),
+  SIN check_commit_trailers.py en la salida. HEAD sin cambiar.
+- PROBE EXTRA mia: violacion SEMANTICA (JSON valido, row selector en ruta no soportada) tambien
+  rechazada en full mode -> el gate cableado es el VALIDADOR REAL, no un parse-only.
+Origen de diagnosticos confirmado en codigo: .githooks/pre-commit:118 y
+scripts/validate_collaboration_state.py:153. Trailer valido => pre-commit rechaza ANTES del commit-msg.
+
+No-regresion: diff 14d7150 = runner + handoff + estado de turno. .githooks/pre-commit, commit-msg,
+protocol.config.json, protocol.config.template.json VACIOS en el diff. upgrade_instance.py,
+new_instance.py, runtime/vcs.py NO aparecen (E4/E5/H1 intactos). Handoff agrega seccion "Residual E6-A".
+Gates clon limpio 14d7150: runner exit 0 (8 + ps1 parity), validate/scan_encoding/scan_domain_neutrality 0.
+
+Residual R-1 (NO bloqueante): el runner asserta "Area_comun\state\CLAIMS.json" (backslash Windows);
+el validador imprime {path} con str(Path) (forward slash en POSIX) => en instancia POSIX el substring
+false-fallaria aunque el gate dispare igual. El GATE es portable, solo el assert no. Sugerido follow-up
+opcional agnostico al separador. No gatea el cierre en este harness Windows.
+
+Veredicto: artefacto Area_comun/artifacts/Analista-TASK-0266-remediation1-e5-integrity-verdict.md +
+mensaje MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0266-remediation-1 (requires_response,
+response_owner Arquitecto). Flip a done = del Arquitecto (yo checker-only). Prune due (released_ratio
+92.31) es checkpoint del Arquitecto, NO lo toco.
+
+LECCION: cuando el CHANGE-REQUIRED era "el test prueba lo incorrecto", re-correr MI PROPIA
+falsificacion con la variante que el maker dice haber arreglado (CLAIMS.json, no leido por el
+trailer-checker) Y anadir una variante ORTOGONAL (violacion semantica) para probar que el gate
+full-mode es el validador real, no un happy-path de un solo string. Cazar tambien residuales de
+PORTABILIDAD del test (separadores de ruta OS-dependientes) que no rompen el gate pero si el golden
+case en otras plataformas.
