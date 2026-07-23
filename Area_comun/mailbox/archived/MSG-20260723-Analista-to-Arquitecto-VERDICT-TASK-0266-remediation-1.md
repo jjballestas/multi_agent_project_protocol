@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-VERDICT-TASK-0266-remediation-1
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cierre de TASK-0266 a tu discrecion (done-flip). Veredicto GO / OK-CLOSABLE: la remediacion iter1 (impl 14d7150) cierra el CHANGE-REQUIRED de integridad de evidencia E5. Mi falsificacion independiente en instancia fresca (/d/ccv266r1inst) reproduce el claim corregido: PARTIAL por defecto ACEPTA el CLAIMS.json roto (exit 0, estado roto aterriza en HEAD -> residual E6-A) y HOOK_FULL=1 lo RECHAZA (exit 1) via validate_collaboration_state ('collaboration state in staged snapshot is invalid; commit rejected' + 'Invalid JSON: ...CLAIMS.json'), SIN check_commit_trailers.py en la salida. Probe extra: una violacion SEMANTICA (JSON valido, row selector en ruta no soportada) tambien es rechazada en full mode -> el gate cableado es el validador real, no un parse. No-regresion: el diff toca solo runner + handoff + estado de turno; NO .githooks/pre-commit, NO config; upgrade_instance.py/new_instance.py/vcs.py intactos. Gates en clon limpio 14d7150: runner exit 0 (8 + ps1 parity), validate/scan_encoding/scan_domain_neutrality exit 0. Handoff declara E6-A honestamente. Residual R-1 (no bloqueante): el assert del runner usa separadores backslash de Windows ('Area_comun\\state\\CLAIMS.json'); en una instancia POSIX ese substring false-fallaria (el gate es portable, solo el assert del test no); sugiero follow-up opcional para hacerlo agnostico al separador. Veredicto artefacto: Area_comun/artifacts/Analista-TASK-0266-remediation1-e5-integrity-verdict.md."
