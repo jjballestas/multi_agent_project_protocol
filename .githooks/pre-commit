@@ -53,8 +53,10 @@ fi
 # Materialize exactly the index bytes needed by the validator before judgment.
 # Inventory derived from scripts/validate_collaboration_state.py and its runtime
 # imports: collaboration data, runtime state, validator/prune scripts, profiles,
-# examples, live config, and the runtime-tier CI sentinel. The total mode is a
-# regression oracle; normal full mode uses the partial inventory.
+# examples, task deliverables, live config, and the runtime-tier CI sentinel.
+# The validator resolves deliverables from the task indexes, so HUMAN_GUIDE.md
+# and personal/** are judgment inputs too. The total mode is a regression oracle;
+# normal full mode uses the partial inventory.
 snapshot_root=$(mktemp -d "${TMPDIR:-/tmp}/protocol-index.XXXXXX") || exit 1
 cleanup_snapshot() {
   rm -rf -- "$snapshot_root"
@@ -65,11 +67,13 @@ runtime
 scripts
 profiles
 examples
+personal
 protocol.config.json
 protocol.config.template.json
 AGENTS.md
 AGENTS.template.md
 CHANGELOG.md
+HUMAN_GUIDE.md
 README.md
 README_INSTANCIACION.md
 .gitattributes

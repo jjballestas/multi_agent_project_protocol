@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           test -f .githooks/pre-commit
-          echo "739d9eadf7c8c2b692cc8a87a4938729ba1ad9ff6063b14f2846ba01a210704e  .githooks/pre-commit" | sha256sum --check --strict
+          echo "90685654449cb364995cd8362150411992dc6d173cf6f77acbb974d6b9a7f90f  .githooks/pre-commit" | sha256sum --check --strict
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,6 +27,9 @@ jobs:
 
       - name: Validate repository dogfood instance
         run: python scripts/validate_collaboration_state.py --root .
+
+      - name: Run full-mode hook inventory cases
+        run: python examples/hook_fullmode_inventory_cases/run_hook_fullmode_inventory_cases.py
 
       - name: Validate minimal example instance
         run: python scripts/validate_collaboration_state.py --root examples/minimal_instance

@@ -444,6 +444,42 @@
             "updated_at": "2026-07-23T02:15:16Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0287",
+            "expires_at": "2026-07-24T00:59:00Z",
+            "notes": "Implement TASK-0287 full-mode partial snapshot inventory correction and real-hook positive/negative regression evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0287",
+                "Area_comun/state/TASK_INDEX.json#TASK-0287",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0287",
+                "Area_comun/tasks/TASK-0287-f1-hook-fullmode-inventory-deliverables.md",
+                ".githooks/pre-commit",
+                "examples/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T12:59:00Z",
+            "status": "active",
+            "task_id": "TASK-0287",
+            "updated_at": "2026-07-23T12:59:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0287-pin",
+            "expires_at": "2026-07-24T01:05:00Z",
+            "notes": "Update the CI SHA-256 pin required by TASK-0287 after changing the governed hook.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0287-pin",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T13:05:00Z",
+            "status": "active",
+            "task_id": "TASK-0287",
+            "updated_at": "2026-07-23T13:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-0265done-20260723",
             "expires_at": "2026-07-23T10:16:12Z",
             "notes": "Cierre gate 0265 -> done (reviewer) + reporte humano del batch 0103 + archivo flip ACTION",
