@@ -1,33 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260723-Codex-TASK-0289",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0289",
-                "Area_comun/state/TASK_INDEX.json#TASK-0289",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0289",
-                "Area_comun/tasks/TASK-0289-r2-bound-fullhook-personal-materialization.md",
-                ".githooks/pre-commit",
-                "examples/hook_fullmode_inventory_cases/run_hook_fullmode_inventory_cases.py",
-                ".github/workflows/validate.yml",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0289"
-        },
-        {
-            "claim_id": "CLAIM-20260723-Codex-TASK-0289-memory",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0289-memory",
-                "personal/Codex/Memory.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0289"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

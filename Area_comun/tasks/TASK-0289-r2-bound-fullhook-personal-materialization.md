@@ -2,7 +2,7 @@
 task_id: TASK-0289
 title: "[DECISION-0103][R2/follow-up] Acotar la materializacion de personal/** en el snapshot parcial del full-hook (latencia) sin reintroducir el falso-rechazo F1 ni debilitar C5"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
