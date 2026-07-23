@@ -7,6 +7,51 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-24 (24) - BATCH TASK-0291 (R3) + TASK-0292 (R4): OK-CLOSABLE (GO) para AMBAS sobre 23d7476+dd9602a
+
+- Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0291-0292`. Residuales R3/R4 del veredicto de
+  TASK-0289. Ancla: clon limpio `/d/ccv0291` sobre origin/main `a3d7b91` (contiene impl `23d7476` +
+  remediacion iter1 `dd9602a`; `b0425d6..a3d7b91` NO toca hook ni runner). Veredicto commit `1bed95e`
+  (artefacto `Area_comun/artifacts/Analista-TASK-0291-0292-fullhook-align-masking-reason-verdict.md` +
+  MSG REVIEW `MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0291-0292.md`). SOLO PROTOCOLO, sin producto.
+- **VEREDICTO: OK-CLOSABLE (GO) para AMBAS.** R3 = +3 lineas en `.githooks/pre-commit` (opcion B:
+  `git ls-files --error-unmatch -- "$path" || continue` antes del `checkout-index` de deliverables
+  `personal/`). R4 = el assert de la masking-probe exige `deliverable missing` + `collaboration state ...
+  invalid`. Remediacion iter1 = el fixture non-reviewed pasa a tarea SINTETICA inyectada clone-local.
+- Gates clon limpio (exit code): validate 0; scan_encoding 0; scan_domain_neutrality 0; full-hook arbol
+  limpio 0; `run_hook_fullmode_inventory_cases.py` 0 y 0 (2 corridas, con 0291/0292 ya `in_review`);
+  pin CI `bd89ec30...` = MATCH; `git diff --stat 23d7476^ a3d7b91 -- scripts/ runtime/protocol_replay.py
+  runtime/submit_intent.py protocol.config.json` VACIO.
+- **METODO QUE VALIO (repetir):** no me fie del ejemplo dado -- probe la FAMILIA COMPLETA de estados con
+  una tarea sintetica `TASK-9999` propia: 6/6 no-revisados (proposed/ready/claimed/in_progress/blocked/
+  cancelled) -> exit 0; 5/5 revisados (in_review/review_approved/qa_pending/architect_review/done) ->
+  exit 1 con `deliverable missing` + frontera del validador y SIN `could not materialize`.
+- **FALSABILIDAD (lo que convierte el assert en real):** restaure el hook PRE-R3 (`66e7f38...`) en un
+  sandbox y corri los MISMOS probes -> `ready`/`cancelled` exit 1 por `could not materialize` (el
+  falso-rechazo era REAL) y `done` exit 1 por checkout-index SIN `deliverable missing` (o sea: el assert
+  de R4 NO habria pasado pre-R3). Tecnica: extraer el blob viejo con `git show <sha>^:<path>` y
+  sobrescribirlo en el sandbox + `git add`.
+- **REFUTACION QUE INTENTE Y FRACASO (anotar como patron):** hipotesis "la opcion B delega en el
+  validador, pero el validador solo ve el indice CALIENTE -> tarea revisada ARCHIVADA con deliverable
+  ausente escaparia". FALSA: `main()` hace `merge_by_array_field(index_hot, index_archive, ...)` antes de
+  `validate_tasks`. De hecho la masking-probe ataca `personal/Codex/STARTUP_PROMPT.md`, deliverable de
+  `TASK-0084` (`done`, ARCHIVADA) -> ya ejercita el camino del archivo.
+- **Caza de escapes, 4 vectores, 0 hallazgos:** E1 revisada + deliverable existente sin trackear y NO
+  staged -> RECHAZA (no hay enmascaramiento); E2 ruta `personal/./Codex/...` -> RECHAZA; E3 estado roto
+  staged -> RECHAZA; E4 revisada + deliverable staged NUEVO -> ACEPTA (sin falso-rechazo positivo).
+- Residuales declarados NO bloqueantes: RES-1 el id sintetico se busca solo contra `TASK_INDEX.json`
+  (ciego al archivo; colision futura la cazaria `Duplicate task across hot/archive` = CI rojo, no verde
+  falso); RES-2 el assert busca las subcadenas en el output global sin ligarlas al path; RES-3
+  PREEXISTENTE (`selected == 1`, conteo acoplado a indices vivos, ya en `23d7476^` linea 70); RES-4 la
+  masking-probe sigue acoplada a un path vivo pero degrada en ALTO.
+- Poda vencida (`released_ratio 91.3 >= 90`) senalada como WARNING, no ejecutada (es del Arquitecto).
+- **GOTCHA de metodo:** cada corrida del full-hook cuesta ~50s; 11 casos = ~9 min. Reutilizar UN sandbox
+  con `git reset --hard HEAD` + `git clean -fd` entre casos en vez de clonar por caso, y lanzar los
+  probes en background. Y para inyectar tareas hay que apagar `event_state.*` en `protocol.config.json`
+  o el drift del ledger enmascara el resultado.
+- **GOTCHA de commit:** `git commit -- <path>` NO funciona con ficheros untracked ("pathspec did not
+  match"); hay que `git add -- <paths>` explicito ANTES y luego commitear con el mismo pathspec.
+
 ## Ultima actualizacion 2026-07-23 (23) - TASK-0290 R-A1 prune --check nombra archives malformados: OK-CLOSABLE (GO) sobre 535dd67
 
 - Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0290`. Residual R-A1 del veredicto de TASK-0288.
