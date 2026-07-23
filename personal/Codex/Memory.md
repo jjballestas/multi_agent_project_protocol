@@ -4249,3 +4249,13 @@ issue. Re-run only the necessary evidence path and record the caveat.
   diff gates exited 0 after delivery. The commit hook reported pruning due
   (`released_ratio 92.31 >= 90`); pruning is an Arquitecto coordinated checkpoint action and
   was not performed by Codex.
+
+## 2026-07-23 - TASK-0290 implementation
+
+- Commit `535dd67` adds only `TASK_INDEX_ARCHIVE.json` and `CLAIMS_ARCHIVE.json` to the
+  `scripts/prune_state.py --check` JSON preflight; pruning semantics and thresholds are unchanged.
+- The malformed-JSON runner now covers both archives through the real entrypoint and preserves
+  the valid-state due/not-due behavior. Direct fixture evidence: each malformed archive exited 2,
+  named its file, and emitted no traceback; valid state exited 0 with `prune not due`.
+- Gates exited 0: malformed JSON runner, collaboration validator, encoding scan, and domain
+  neutrality scan. TASK-0290 remains `in_progress` pending delivery to independent Analista review.

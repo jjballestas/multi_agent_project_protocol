@@ -55,9 +55,37 @@
                 "examples/malformed_json_cases/run_malformed_json_cases.py"
             ],
             "started_at": "2026-07-23T17:25:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0290",
             "updated_at": "2026-07-23T17:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0290-handoff",
+            "expires_at": "2026-07-23T19:48:00Z",
+            "notes": "Publish self-contained TASK-0290 review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0290-handoff",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0290.md"
+            ],
+            "started_at": "2026-07-23T17:48:00Z",
+            "status": "released",
+            "task_id": "TASK-0290",
+            "updated_at": "2026-07-23T17:48:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0290-memory",
+            "expires_at": "2026-07-23T19:45:00Z",
+            "notes": "Persist TASK-0290 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0290-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-23T17:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0290",
+            "updated_at": "2026-07-23T17:45:00Z"
         },
         {
             "claim_id": "CLAIM-arq-go0290-20260723",

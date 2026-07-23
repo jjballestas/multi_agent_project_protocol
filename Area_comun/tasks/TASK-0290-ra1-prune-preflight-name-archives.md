@@ -2,7 +2,7 @@
 task_id: TASK-0290
 title: "[DECISION-0103][R-A1/follow-up] prune --check: anadir *_ARCHIVE.json al preflight para NOMBRAR un archive malformado (hoy da exit 0 not-due sin nombrarlo)"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
