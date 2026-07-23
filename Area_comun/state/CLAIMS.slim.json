@@ -25,6 +25,17 @@
                 "runtime/state/snapshot.json"
             ],
             "task_id": "TASK-0264"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0264-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0264-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0264"
         }
     ],
     "schema_version": "1.0",

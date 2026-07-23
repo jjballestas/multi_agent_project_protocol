@@ -2,6 +2,20 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
 
+## 2026-07-23 - TASK-0263 closure and TASK-0264 implementation
+
+- Commit `a079bca` records the Codex-signed TASK-0263 `review_approved -> done` flip after
+  independent Analista GO and Arquitecto ratification, then starts TASK-0264.
+- `Area_comun/protocol/TASK_PROTOCOL.md` now states the DECISION-0103 C1 written rule:
+  the human sees and approves the complete governed-unit table before execution, approval is
+  recorded in a signed event log or mailbox, and material unit, acceptance, or risk changes
+  require re-approval. The required table fields are explicit.
+- `AGENTS.template.md` mirrors the same rule for born-operational exports. The publication
+  explicitly separates the written rule from TASK-0260 mechanical turn-zero enforcement.
+- The ASCII FYI to Asesor is open and tells each participant to update only their own private
+  startup material. Required validation, encoding, and neutrality gates passed. TASK-0264 is
+  still `in_progress` pending governed delivery to independent review.
+
 ## 2026-07-23 - TASK-0262 closure and TASK-0263 implementation
 
 - Commit `f97e0e1` records the Codex-signed TASK-0262 `review_approved -> done`
