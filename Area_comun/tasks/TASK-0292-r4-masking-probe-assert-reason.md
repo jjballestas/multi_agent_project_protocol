@@ -2,7 +2,7 @@
 task_id: TASK-0292
 title: "[DECISION-0103][R4/follow-up] Regresion full-hook: la masking-probe debe asegurar la RAZON del rechazo (boundary del validador), no solo returncode!=0"
 type: infra
-status: in_review
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

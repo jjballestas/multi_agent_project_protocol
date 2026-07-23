@@ -96,18 +96,58 @@ def main() -> int:
         clone_with_fix(source, nonreviewed_root)
         task_index = nonreviewed_root / "Area_comun" / "state" / "TASK_INDEX.json"
         task_data = json.loads(task_index.read_text(encoding="utf-8"))
-        nonreviewed_task = next(task for task in task_data["tasks"] if task["id"] == "TASK-0291")
-        if nonreviewed_task["status"] in {
-            "in_review",
-            "review_approved",
-            "qa_pending",
-            "architect_review",
-            "done",
-        }:
-            raise AssertionError("non-reviewed probe fixture unexpectedly has a reviewed status")
-        nonreviewed_task["deliverables"] = ["personal/Codex/absent-nonreviewed-probe.md"]
+        existing_task_ids = {task["id"] for task in task_data["tasks"]}
+        synthetic_task_id = next(
+            f"TASK-{number:04d}"
+            for number in range(9999, 8999, -1)
+            if f"TASK-{number:04d}" not in existing_task_ids
+        )
+        synthetic_task_file = (
+            f"Area_comun/tasks/{synthetic_task_id}-nonreviewed-hook-probe.md"
+        )
+        task_data["tasks"].append(
+            {
+                "file": synthetic_task_file,
+                "id": synthetic_task_id,
+                "owner": "Codex",
+                "phase": "P2",
+                "priority": "low",
+                "status": "ready",
+                "title": "Synthetic non-reviewed hook probe",
+                "type": "infra",
+                "deliverables": ["personal/Codex/absent-nonreviewed-probe.md"],
+            }
+        )
         task_index.write_text(
             json.dumps(task_data, ensure_ascii=True, indent=4) + "\n",
+            encoding="ascii",
+        )
+        synthetic_task_path = nonreviewed_root / synthetic_task_file
+        synthetic_task_path.write_text(
+            "---\n"
+            f"task_id: {synthetic_task_id}\n"
+            "title: Synthetic non-reviewed hook probe\n"
+            "type: infra\n"
+            "status: ready\n"
+            "owner: Codex\n"
+            "phase: P2\n"
+            "priority: low\n"
+            f"file: {synthetic_task_file}\n"
+            "intake:\n"
+            "  type: infra\n"
+            "  goal: Exercise absent non-reviewed deliverable handling.\n"
+            "  acceptance:\n"
+            "    - The synthetic ready task is accepted without its personal deliverable.\n"
+            "  verification_cmd:\n"
+            "    - HOOK_FULL=1 sh .githooks/pre-commit\n"
+            "  scope_routes:\n"
+            "    - examples/\n"
+            "  out_of_scope:\n"
+            "    - Production task state.\n"
+            "  risk: low\n"
+            "  estimate: S\n"
+            "---\n\n"
+            "# Synthetic non-reviewed hook probe\n",
             encoding="ascii",
         )
         config_path = nonreviewed_root / "protocol.config.json"
@@ -128,7 +168,13 @@ def main() -> int:
         )
         require(
             run(
-                ["git", "add", "Area_comun/state/TASK_INDEX.json", "protocol.config.json"],
+                [
+                    "git",
+                    "add",
+                    "Area_comun/state/TASK_INDEX.json",
+                    synthetic_task_file,
+                    "protocol.config.json",
+                ],
                 nonreviewed_root,
             ),
             0,

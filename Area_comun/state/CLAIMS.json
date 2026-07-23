@@ -131,6 +131,28 @@
             "updated_at": "2026-07-23T19:45:12Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0291-remediation1",
+            "expires_at": "2026-07-24T08:20:00Z",
+            "notes": "Remediate the coupled TASK-0291 and TASK-0292 synthetic non-reviewed regression fixture.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0291-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0291",
+                "Area_comun/state/TASK_INDEX.json#TASK-0292",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0291",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0292",
+                "Area_comun/tasks/TASK-0291-r3-fullhook-align-reviewed-statuses.md",
+                "Area_comun/tasks/TASK-0292-r4-masking-probe-assert-reason.md",
+                "examples/hook_fullmode_inventory_cases/run_hook_fullmode_inventory_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T20:20:00Z",
+            "status": "active",
+            "task_id": "TASK-0291",
+            "updated_at": "2026-07-23T20:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0292",
             "expires_at": "2026-07-24T07:15:00Z",
             "notes": "Implement TASK-0292 R4 masking-probe reason assertion in coordinated batch with TASK-0291.",
