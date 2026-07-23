@@ -14,6 +14,9 @@ Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
 - Canonical validation, encoding, neutrality, diff, and the live
   `HOOK_FULL=1 sh .githooks/pre-commit` gate exited 0. TASK-0287 remains
   `in_progress` under its two Codex claims pending governed delivery.
+- Delivery commit `6759fd8` moves TASK-0287 to `in_review`, releases all three
+  Codex claims, and opens the self-contained Arquitecto handoff for independent
+  Analista review. Drift is false at seq 6167; Codex did not self-review.
 
 ## 2026-07-23 - TASK-0265 formal review transition
 
