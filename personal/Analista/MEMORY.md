@@ -7,6 +7,44 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-23 (19) - TASK-0265 GATE FINAL conjunto DECISION-0103: OK-CLOSABLE sobre cd2ca57
+
+- Encargo `MSG-...-Arquitecto-to-Analista-REVIEW-TASK-0265-gate-final` (v1) + re-route v2 (commit abad858,
+  ancla EXPLICITA cd2ca57; v1 exec no arranco). Ancla batch = HEAD cd2ca57 (batch todo DONE). Clon limpio
+  `C:/ccv0265`. Veredicto commit `1562e87` (artefacto
+  `Area_comun/artifacts/Analista-TASK-0265-gate-final-conjunto-0103-verdict.md` + MSG VERDICT a Arquitecto).
+  cd2ca57..abad858 = solo events.jsonl+snapshot.json (coord), CERO cambio de impl -> mi review en cd2ca57
+  vale para v2. SIN PRODUCTO en alcance.
+- **VEREDICTO: OK-CLOSABLE** para 0257..0264 + 0266 + 0286. Gates protocolo exit 0 (validate/encoding/
+  neutralidad/drift CLEAN seq6137). Harness adversarial PROPIO 34 checks 0 SLIP + 5 suites maker verde.
+- **6/6 pruebas PASS por comportamiento**: (a) hook rechaza estado gobernado ROJO en HOOK_FULL=1 via
+  validate_collaboration_state (rompi CLAIMS.json status=bogus; partial default solo avisa exit0);
+  (b) friccion autoritativa (blocked/qa_failed/changes_requested/architect_review, reject_review/fail_qa/
+  assign_fix, checks_failed) + obstacles vacio/ausente -> rechaza turn_validate (diferencial poblado OK);
+  (c) REPORTE friction_count>0 + obstacles vacio -> rechaza validate_mailbox; (d) grandfathering VERDE;
+  (e) oferta rechazada NO se re-oferta (solo con evidencia cambiada Y declarada); (f) gate_green:false +
+  obstacles vacio POST-gate -> rechaza RunLog.append (orchestrator.py:1136, entrypoint real, bool genuino).
+- **Coherencia cross-unit CONFIRMADA**: C3=0259(pre-gate)+0286(post-gate) cada mitad en su entrypoint;
+  gate_green NO es campo legal del turn_schema (additionalProperties:false) -> split E7 correcto; bloque
+  obstacles compartido 0258==0261==0262 (4 campos+enum); 0260 gate turno0 (approval_hash sobre material
+  id/acceptance/risk) <-> 0264 regla escrita en TASK_PROTOCOL.md+AGENTS.template.md.
+- **HALLAZGO F1 (WARNING-real, NO bloquea el batch, ruteado follow-up)**: el inventario del snapshot PARCIAL
+  del hook modo-completo (.githooks/pre-commit:63-77) OMITE deliverables fuera de sus raices -> HOOK_FULL=1
+  RECHAZA en FALSO un arbol LIMPIO (working-tree validate exit0; hook full exit1 "Task TASK-0037 deliverable
+  missing: HUMAN_GUIDE.md" + "TASK-0084 ... personal/Codex/STARTUP_PROMPT.md", ambos EXISTEN, ambos en
+  ARCHIVE, cota=2). Falla en CERRADO; CI (validate.yml:29 arbol completo, no el snapshot) y default intactos;
+  cae en E6/0268-0269 (fuera de las unidades del gate). FALSA la afirmacion E6-A "paridad partial-total
+  intacta / inventario cerrado contra read-set". LECCION: el read-set de EXISTENCIA-DE-DELIVERABLES apunta
+  fuera de las raices del inventario (raiz HUMAN_GUIDE.md, personal/**); un inventario derivado de imports
+  NO lo cubre. Reco: anadir esas rutas al inventario o acotar el chequeo al inventario; +caso en
+  test_precommit_hook (full sobre arbol limpio -> exit0).
+- Residuales declarados: revert proxy best-effort (evade "backed out"/"rolled back"); sin sensor outcome
+  (E7 por diseno); grandfathering por ancla (declarado en MAILBOX_REPORT_TEMPLATES.md lineas 10-12);
+  `is False` no alcanzable por entrypoint real; 0260/0264 confirmados ESTRUCTURALMENTE (no end-to-end en
+  este barrido). GOTCHA nuevo: total-mode del hook (HOOK_SNAPSHOT_MODE=total) copia todo el arbol -> timeout
+  >2min, no lo corri (es el coste que E6-partial evita). GOTCHA loader: importlib module_from_spec necesita
+  sys.modules[name]=m ANTES de exec para frozen dataclass (improvement_offers.Obstacle).
+
 ## Ultima actualizacion 2026-07-23 (18) - TASK-0286 (C3/E7 gate-red objetivo post-gate): OK-CLOSABLE sobre e7feb777
 
 - Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0286`. Ancla impl `e7feb777`; protocol
