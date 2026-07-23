@@ -67,42 +67,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0263",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C3-bis] Mecanismo de oferta de mejora: recurrence_risk high o root_cause repetido -> propuesta redactada al humano + registro durable de aceptar/rechazar/parquear"
-        },
-        {
-            "id": "TASK-0264",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C1] Regla de arranque documentada: ningun conjunto de unidades gobernadas se ejecuta sin plan aprobado por el humano"
-        },
-        {
-            "id": "TASK-0265",
-            "owner": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
-        },
-        {
-            "id": "TASK-0266",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
-        },
-        {
-            "id": "TASK-0286",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C3/E7] Enforcement post-gate de gate-red -> obstacles no vacio (capa apply/run-log)"
-        },
-        {
-            "id": "TASK-0287",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][F1/follow-up] Hook full-mode: inventario del snapshot omite deliverables (HUMAN_GUIDE.md + personal/**) -> falso rechazo"
-        },
-        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
