@@ -1,5 +1,24 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0286",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0286",
+                "Area_comun/state/TASK_INDEX.json#TASK-0286",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0286",
+                "Area_comun/tasks/TASK-0286-d0103-c3-post-gate-gatered-obstacles.md",
+                "runtime/apply.py",
+                "runtime/runlog.py",
+                "examples/runtime_turn_cases/",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0286"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

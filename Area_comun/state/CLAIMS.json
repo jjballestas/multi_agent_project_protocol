@@ -210,6 +210,24 @@
             "updated_at": "2026-07-23T01:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0266-done-flip",
+            "expires_at": "2026-07-23T03:08:27Z",
+            "notes": "Implementer done-flip after independent Analista GO and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0266-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0266",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0266",
+                "Area_comun/tasks/TASK-0266-d0103-e4e5-propagacion-harness-adoptable.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T02:08:27Z",
+            "status": "released",
+            "task_id": "TASK-0266",
+            "updated_at": "2026-07-23T02:08:27Z"
+        },
+        {
             "claim_id": "CLAIM-20260723-Codex-TASK-0266-final-memory",
             "expires_at": "2026-07-23T02:25:00Z",
             "notes": "Persist TASK-0266 delivery commit context.",
@@ -297,6 +315,29 @@
             "status": "released",
             "task_id": "TASK-0266",
             "updated_at": "2026-07-23T02:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260723-Codex-TASK-0286",
+            "expires_at": "2026-07-23T14:08:27Z",
+            "notes": "Implement TASK-0286 objective post-gate red sensor through the real apply/run-log entrypoint.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260723-Codex-TASK-0286",
+                "Area_comun/state/TASK_INDEX.json#TASK-0286",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0286",
+                "Area_comun/tasks/TASK-0286-d0103-c3-post-gate-gatered-obstacles.md",
+                "runtime/apply.py",
+                "runtime/runlog.py",
+                "examples/runtime_turn_cases/",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-23T02:08:27Z",
+            "status": "active",
+            "task_id": "TASK-0286",
+            "updated_at": "2026-07-23T02:08:27Z"
         },
         {
             "claim_id": "CLAIM-arq-ratif0263-20260723",

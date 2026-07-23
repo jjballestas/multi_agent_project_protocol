@@ -22,6 +22,7 @@ class RunLog:
         self.path.parent.mkdir(parents=True, exist_ok=True)
 
     def append(self, entry: dict[str, Any]) -> None:
+        validate_post_gate_obstacles(entry)
         payload = {"run_id": self.run_id, **entry}
         with self.path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(payload, ensure_ascii=False, sort_keys=True) + "\n")
@@ -70,6 +71,18 @@ class RunLog:
             "accumulated_tokens": accumulated_tokens,
             "run_log": str(self.path),
         }
+
+
+def validate_post_gate_obstacles(entry: dict[str, Any]) -> None:
+    """Enforce objective gate friction where the post-gate result is observable.
+
+    Self-declared transition and revert friction stays in ``turn_validate``. This
+    boundary handles only the objective result produced after the gate runs.
+    """
+    if entry.get("gate_green") is False and not entry.get("obstacles"):
+        raise ValueError(
+            "post-gate friction sensor gate_green:false requires non-empty obstacles in the turn report"
+        )
 
 
 def summary_token_count(text: str, divisor: int = 4) -> int:
@@ -127,7 +140,7 @@ def turn_entry(
         cost = {"tokens": cost}
     summary = str(report.get("summary") or "")
     tools = report.get("tools") if isinstance(report.get("tools"), list) else []
-    return {
+    entry = {
         "turn": turn,
         "unit": unit,
         "agent": report.get("agent"),
@@ -148,3 +161,6 @@ def turn_entry(
         "duration_ms": duration_ms,
         "collision_avoided": collision_avoided,
     }
+    if "obstacles" in report:
+        entry["obstacles"] = report.get("obstacles")
+    return entry

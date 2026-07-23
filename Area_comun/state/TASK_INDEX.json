@@ -300,7 +300,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance",
             "type": "infra"
         },
@@ -316,7 +316,7 @@
                 "TASK-0259"
             ],
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][C3/E7] Enforcement post-gate de gate-red -> obstacles no vacio (capa apply/run-log)",
             "type": "feature"
         },

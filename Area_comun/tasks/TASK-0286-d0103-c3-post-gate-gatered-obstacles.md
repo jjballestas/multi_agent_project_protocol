@@ -2,7 +2,7 @@
 task_id: TASK-0286
 title: "[DECISION-0103][C3/E7] Enforcement post-gate de gate-red -> obstacles no vacio, sobre el run-log (capa apply), donde gate_green existe"
 type: feature
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

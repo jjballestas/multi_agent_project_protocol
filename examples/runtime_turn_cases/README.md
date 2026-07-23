@@ -17,6 +17,12 @@ Runners:
 - `python examples/runtime_turn_cases/run_runtime_turn_schema_cases.py`
 - `python examples/runtime_turn_cases/run_runtime_turn_semantic_cases.py`
 - `python examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py`
+- `python examples/runtime_turn_cases/run_post_gate_obstacle_cases.py`
+
+The post-gate runner covers the objective C3/E7 boundary after the gate result
+exists. The real `RunLog.append` entrypoint rejects `gate_green:false` with
+absent or empty `obstacles`; a green gate does not require narration.
+Self-declared transition and revert signals remain in `turn_validate.py`.
 
 The obstacle runner proves the conditional semantic gate: delivery outcomes (`in_review`
 or `done`) require a non-empty `obstacles` array, while non-delivery outcomes may omit it.
