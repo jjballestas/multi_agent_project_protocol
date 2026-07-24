@@ -12,8 +12,9 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
   all three rules, conditional registry wording, and rubber-stamp rationale. Coordination
   and runtime had no `agent_registry`; attested had one.
 - Collaboration validation, neutrality, encoding, drift, attested-instancing, and runtime
-  instantiation gates exited 0. TASK-0293 remains `in_progress` pending governed delivery
-  to independent Analista review; Codex did not review or ratify the work.
+  instantiation gates exited 0. Delivery transaction seq 6350-6354 moved TASK-0293 to
+  `in_review`, released every Codex claim, and opened the self-contained Arquitecto
+  handoff for independent Analista review. Codex did not review or ratify the work.
 
 ## 2026-07-24 - TASK-0256 remediation iteration 1
 
