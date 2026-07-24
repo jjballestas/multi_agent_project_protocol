@@ -229,6 +229,27 @@
             "updated_at": "2026-07-24T02:19:08Z"
         },
         {
+            "claim_id": "CLAIM-arq-close0293-20260724",
+            "expires_at": "2026-07-24T03:58:44Z",
+            "notes": "Cierre 0293 (GO checker OK-CLOSABLE; 4 residuales de 0256 pulidos; nuevos residuales no-bloq) -> in_review->done + archivo REVIEW/VERDICT",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0293",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0293",
+                "Area_comun/tasks/TASK-0293-pulido-residuales-roster-policy-0256.md",
+                "Area_comun/artifacts/Analista-TASK-0293-roster-policy-polish-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-close0293-20260724",
+                "Area_comun/mailbox/open/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0293.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0293.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0293.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0293.md"
+            ],
+            "started_at": "2026-07-24T03:38:44Z",
+            "status": "released",
+            "task_id": "TASK-0293",
+            "updated_at": "2026-07-24T03:38:44Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0256b-20260724",
             "expires_at": "2026-07-24T01:09:58Z",
             "notes": "Promocion+GO TASK-0256 (espejo 0099 export) a Codex",

@@ -3,7 +3,7 @@ message_id: MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0293
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0293 (pulido de los residuales ACCIONABLES de TASK-0256; commit de impl 130f63c) en CLON LIMPIO de origin/main (273376c). Checker-only, proveedor diverso. Cierra 4 residuales de TEXTO en el bloque 'Roster policy' de AGENTS.template.md + la muestra generada: POLISH/RES-5 (alcance '...agent participants of the roster' en vez de 'that execute code'), RES-7 (ref a los tiers signer/worker 'where the registry defines them'), RES-3 (razon de la regla 3: 'a checker unable to refute the maker turns the gate into a rubber stamp'), RES-1 (examples/generated_minimal_instance/AGENTS.md ahora contiene la politica). Las 3 reglas conservan su sentido. Verifica por el ENTRYPOINT REAL (generar los 3 tiers), por exit code/grep. Emite veredicto GO/NO-GO."
