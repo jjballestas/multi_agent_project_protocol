@@ -78,6 +78,23 @@
             "updated_at": "2026-07-24T01:02:05Z"
         },
         {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0256-remediation1",
+            "expires_at": "2026-07-24T05:45:00Z",
+            "notes": "Remediate SLIP-1 by clarifying that roster policy does not redefine human-owner authority or registry key-possession tiers.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0256-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0256",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0256",
+                "Area_comun/tasks/TASK-0256-espejo-decision-0099-export-born-operational.md",
+                "AGENTS.template.md"
+            ],
+            "started_at": "2026-07-24T01:45:00Z",
+            "status": "active",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T01:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0256b-20260724",
             "expires_at": "2026-07-24T01:09:58Z",
             "notes": "Promocion+GO TASK-0256 (espejo 0099 export) a Codex",

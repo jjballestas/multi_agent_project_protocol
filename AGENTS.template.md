@@ -58,6 +58,9 @@ Suggested role model:
 
 Roster policy:
 
+This policy governs agent participants that execute code. It does not alter the human owner's
+approval authority or redefine the registry's `signer`/`worker` key-possession tiers.
+
 1. A worker agent is a code executor subordinate to the maker. It writes code only under
    the maker's direction; it is not an autonomous maker and never acts as checker,
    orchestrator, or ratification signer.
