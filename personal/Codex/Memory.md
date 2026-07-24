@@ -18,6 +18,9 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
   Collaboration validation, encoding, neutrality, drift, attested-instancing, and
   runtime-instantiation gates exited 0. TASK-0294 remains `in_progress` pending governed
   delivery to independent Analista review.
+- Delivery commit `e38835c` records runtime events 6373-6376, moves TASK-0294 to
+  `in_review`, releases both Codex claims, and opens the self-contained handoff to
+  Arquitecto. Independent Analista review is required; Codex did not self-review.
 
 ## 2026-07-24 - TASK-0293 implementation
 
@@ -4355,3 +4358,12 @@ issue. Re-run only the necessary evidence path and record the caveat.
   Arquitecto must route commits `23d7476` and `dd9602a` to Analista; Codex has not self-reviewed
   or ratified either task. The commit hook reported pruning due; that remains an Arquitecto
   coordinated checkpoint action.
+
+## 2026-07-24 - TASK-0294 remediation iteration 1
+
+- Commit `a2e65d6` restores `examples/generated_minimal_instance/` to its 21-file minimal
+  coordination-tier structure and retains the updated `AGENTS.md` policy snapshot.
+- Relative to pre-task commit `5dacd85`, the sample now differs only in `AGENTS.md`
+  (109 insertions, 3 deletions); no runtime, scripts, skills, hooks, or extra protocol tree remains.
+- Required validation, encoding, neutrality, drift, attested-instancing, and runtime-instantiation
+  gates exited 0. TASK-0294 remains `in_progress` pending governed remediation delivery.
