@@ -54,6 +54,7 @@ Suggested role model:
 |-------|-----------|------|-------------|
 | `{{AGENT_ARCHITECT}}` | Architect / orchestrator | Designs, reviews, decomposes tasks, maintains shared method artifacts | Does not own implementation-only work unless assigned |
 | `{{AGENT_IMPLEMENTER}}` | Implementation specialist | Scaffolding, patches, scripts, tests, CI, concrete technical proposals | Does not change protocol or critical boundaries without a decision |
+| `{{AGENT_ANALYST}}` | Adversarial checker | Independently challenges the maker's evidence and verifies acceptance criteria | Does not implement or ratify its own reviewed work |
 | `{{HUMAN_OWNER}}` | Human owner | Approves project policy, critical transitions and business decisions | - |
 
 Roster policy:
