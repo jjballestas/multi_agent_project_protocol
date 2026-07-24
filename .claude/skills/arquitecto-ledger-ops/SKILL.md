@@ -274,6 +274,19 @@ medias; (2) si aborto por rojo, cuando el canonico vuelva verde **des-seen** su 
 reintente; (3) su reporte de aborto ("que Arquitecto/Codex deje el canonico verde y libere/cierre TASK-XXXX") es la
 senal -> destraba el ledger (espera el commit del peer o cierra tu la transicion) y luego des-seen.
 
+### 5c. Exec de review del checker COLGADO+muerto -> seen sin veredicto -> destrabe (distinto de 5b)
+Sintoma: el exec de review de la Analista queda con `out.log`/`err.log` en **0 bytes congelados** (mtime = hora del
+EXEC_START, sin crecer >13min) = **fallo de proveedor** (el LLM del checker nunca produjo salida). El exec a menudo
+**muere solo** poco despues; el mensaje QUEDA en `.seen.json` (el harness lo marco antes de colgarse) -> el cron NO
+re-ejecuta y crees que el checker trabaja. Destrabe (taskkill requiere autorizacion del Operador; a menudo el exec ya
+murio -> `taskkill` da "no se encontro el proceso"): (1) confirma exec muerto + lock LIBRE + sin trabajo hecho (tree
+limpio); (2) **des-ve** el MSG (backup del `seen.json` primero, luego borra su clave) -> el cron re-ejecuta con
+proveedor fresco; (3) **CRITICO -- cuando el veredicto llegue, RE-AGREGA la clave seen (del backup)**: si no, el
+mensaje des-visto se re-procesa en el siguiente ciclo -> VEREDICTO DUPLICADO. No relanzar un cron VIVO (duplica loops).
+El watchdog v3.1 'seen-burn' es FALSO POSITIVO cuando la tarea avanzo (in_progress/in_review por rework/remediacion):
+el review previo YA entrego su veredicto; el in_progress es la remediacion. Verifica liveness real (err.log
+escribiendo) antes de des-ver nada; NUNCA des-veas un mensaje ya procesado con veredicto entregado.
+
 ## 6. `submit_intent` timeoutea a mitad de transaccion (2026-07-06, real, 3 episodios en una sesion)
 Bajo contencion/carga (peers escribiendo el mismo `events.jsonl` casi simultaneamente), `submit_intent.py`
 puede timeoutear (30-100s) DESPUES de haber escrito uno o mas eventos `intent.applied` al log pero ANTES de

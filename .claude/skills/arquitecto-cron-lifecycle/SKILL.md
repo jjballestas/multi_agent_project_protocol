@@ -78,6 +78,10 @@ requested_action (`impl commit <sha>` / `HEAD <sha>`) -- las revisiones que SI a
 el harness del checker puede no saber que anclar y salir no-op. Ojo extra si es una tarea que el peer OWNea (un gate
 checker-only): su harness entrega el veredicto pero NO reclama/flipea la tarea (queda en `ready`) -> el cierre lo
 conduces tu por capabilities (Arquitecto ready->in_progress, Codex in_progress->in_review, Arquitecto ->done/review_approved).
+Variante VIVO-CONGELADO (no 1s-exit): el exec del checker queda VIVO con `err.log` 0 bytes congelado (mtime = EXEC_START,
+sin crecer >13min) = mismo fallo de proveedor, colgado en la llamada. Suele morir solo poco despues, dejando el MSG en
+`.seen.json` -> el cron NO re-ejecuta. Destrabe = **des-ver + re-agregar la clave seen tras el veredicto** (skill
+`arquitecto-ledger-ops` s.5c); taskkill del exec colgado requiere autorizacion del Operador (a menudo ya murio solo).
 
 ## 2. Diagnostico (read-only)
 ```
