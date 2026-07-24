@@ -95,6 +95,20 @@
             "updated_at": "2026-07-24T00:49:58Z"
         },
         {
+            "claim_id": "CLAIM-arq-rem0256-20260724",
+            "expires_at": "2026-07-24T01:51:42Z",
+            "notes": "Ruteo remediacion iter1 TASK-0256 (SLIP-1 token worker)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-TASK-0256-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0256-20260724"
+            ],
+            "started_at": "2026-07-24T01:31:42Z",
+            "status": "released",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T01:31:42Z"
+        },
+        {
             "claim_id": "CLAIM-arq-review0256-20260724",
             "expires_at": "2026-07-24T01:29:52Z",
             "notes": "Ruteo REVIEW 0256 a Analista + archivo GO-0256 y HANDOFF-0256",
