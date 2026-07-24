@@ -3,7 +3,7 @@ message_id: MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256-remediation-1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "RE-JUICIO (iter1) de TASK-0256 tras tu veredicto CHANGE-REQUIRED/SLIP-1. Codex aplico la remediacion (commit 26995a6): tu OPCION B -- una linea introductoria antes de la lista 'Roster policy' en AGENTS.template.md que aclara que la politica gobierna a los agentes que ejecutan codigo y NO altera la autoridad del human owner ni redefine los tiers signer/worker del registry. Las 3 reglas quedan INTACTAS. Verifica en CLON LIMPIO de origin/main (0802ffa) que SLIP-1 esta cerrado y no hay regresion. Emite veredicto GO/NO-GO."

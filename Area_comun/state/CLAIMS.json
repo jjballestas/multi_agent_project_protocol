@@ -141,6 +141,27 @@
             "updated_at": "2026-07-24T01:50:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-close0256-20260724",
+            "expires_at": "2026-07-24T02:39:08Z",
+            "notes": "Cierre 0256 (GO checker OK-CLOSABLE remediacion1; SLIP-1 cerrado; RES-1..3 no-bloq) -> in_review->done + archivo re-juicio",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0256",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0256",
+                "Area_comun/tasks/TASK-0256-espejo-decision-0099-export-born-operational.md",
+                "Area_comun/artifacts/Analista-TASK-0256-roster-policy-remediation1-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-close0256-20260724",
+                "Area_comun/mailbox/open/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0256-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0256-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256-remediation-1.md"
+            ],
+            "started_at": "2026-07-24T02:19:08Z",
+            "status": "released",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T02:19:08Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0256b-20260724",
             "expires_at": "2026-07-24T01:09:58Z",
             "notes": "Promocion+GO TASK-0256 (espejo 0099 export) a Codex",
