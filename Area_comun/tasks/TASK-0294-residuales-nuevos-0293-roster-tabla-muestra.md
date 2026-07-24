@@ -2,7 +2,7 @@
 task_id: TASK-0294
 title: "[0293/follow-up] Residuales nuevos de 0293: fila checker en la tabla de roles (RES-8) + muestra generada coherente (RES-9) + cobertura de neutralidad de examples (RES-10)"
 type: infra
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

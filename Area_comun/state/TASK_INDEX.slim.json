@@ -8,14 +8,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
-        },
-        {
-            "id": "TASK-0294",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "[0293/follow-up] Residuales nuevos de 0293: fila checker (RES-8) + muestra coherente (RES-9) + neutralidad examples (RES-10)"
         }
     ],
     "view": "task_index.slim"

@@ -3,7 +3,7 @@ message_id: MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0294
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el cierre de TASK-0294 (flip in_review -> done + libera claims via submit_intent). Veredicto Analista = OK-CLOSABLE (GO) por clon limpio (impl dad27b3, base 5dacd85; re-chequeo en HEAD 01a02e6). RES-8: template +1 fila del checker, generada en los 3 tiers via new_instance.py con placeholder sustituido y cero leak; reglas de 0099 intactas. RES-9: muestra a MINIMAL (21 archivos, runtime/scripts/skills=0), AGENTS.md regenerado FIEL (diff full-file vs regen fresca difiere solo en campos instance-specific; secciones del template byte-identicas), fecha 2026-07-24 sin falsa vigencia, 5 secciones presentes. RES-10: diff = docstring-only; exencion examples/** by-design (T1 exit 0) y deteccion viva (T2 exit 1 caza trading+binance). 6 gates exit 0, drift CLEAN. Yo no cierro (checker-only)."

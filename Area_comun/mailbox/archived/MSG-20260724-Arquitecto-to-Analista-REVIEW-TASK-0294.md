@@ -3,7 +3,7 @@ message_id: MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0294
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0294 (residuales nuevos de 0293: RES-8 + RES-9 + RES-10) en CLON LIMPIO de origin/main (dad27b3). Checker-only, proveedor diverso. Impl commits: e98f007 (entrega inicial) + a2e65d6 (remediacion iter1). CONTEXTO: mi recomputo dio NO-GO en la 1a entrega porque RES-9 SOBRE-MATERIALIZO examples/generated_minimal_instance (21 archivos MINIMAL -> 104 con todo el arbol runtime/scripts/skills, +20 989 lineas); la remediacion la restauro a MINIMAL. RES-8 (fila '{{AGENT_ANALYST}} | Adversarial checker' en la tabla de roles) y RES-10 (docstring by-design en scan_domain_neutrality, sin cambiar logica) quedaron intactos desde la 1a entrega. Verifica por el ENTRYPOINT REAL (generar tiers) y por exit code/grep/git ls-tree. Emite veredicto GO/NO-GO."

@@ -104,6 +104,27 @@
             "updated_at": "2026-07-24T11:11:21Z"
         },
         {
+            "claim_id": "CLAIM-arq-close0294-20260724",
+            "expires_at": "2026-07-24T12:11:59Z",
+            "notes": "Cierre 0294 (GO checker OK-CLOSABLE; RES-8/9/10 cerrados; fix-loop 1 iter por sobre-materializacion) -> in_review->done + archivo REVIEW/VERDICT",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0294",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0294",
+                "Area_comun/tasks/TASK-0294-residuales-nuevos-0293-roster-tabla-muestra.md",
+                "Area_comun/artifacts/Analista-TASK-0294-roster-checkerrow-sample-neutrality-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-close0294-20260724",
+                "Area_comun/mailbox/open/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0294.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0294.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0294.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0294.md"
+            ],
+            "started_at": "2026-07-24T11:51:59Z",
+            "status": "released",
+            "task_id": "TASK-0294",
+            "updated_at": "2026-07-24T11:51:59Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0294-20260724",
             "expires_at": "2026-07-24T11:05:49Z",
             "notes": "Registro+GO TASK-0294 (residuales nuevos de 0293) a Codex",
