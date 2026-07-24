@@ -99,6 +99,20 @@
             "updated_at": "2026-07-24T10:45:49Z"
         },
         {
+            "claim_id": "CLAIM-arq-rem0294-20260724",
+            "expires_at": "2026-07-24T11:25:42Z",
+            "notes": "Ruteo remediacion iter1 TASK-0294 (RES-9 sobre-materializacion)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-TASK-0294-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0294-20260724"
+            ],
+            "started_at": "2026-07-24T11:05:42Z",
+            "status": "released",
+            "task_id": "TASK-0294",
+            "updated_at": "2026-07-24T11:05:42Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
