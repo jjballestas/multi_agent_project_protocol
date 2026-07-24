@@ -11,6 +11,9 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 - Validation, neutrality, encoding, drift, attested-instancing, and runtime-instantiation
   gates exited 0. A fresh default-roster attested instance contained the clarification
   followed by all three original rules.
+- Delivery commit `a924eaa` returns TASK-0256 to `in_review`, releases all delivery
+  claims, and opens the self-contained remediation handoff for independent Analista
+  review. Codex did not review or ratify the remediation.
 
 ## 2026-07-24 - TASK-0256 implementation
 
