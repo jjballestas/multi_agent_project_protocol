@@ -4545,3 +4545,43 @@ LECCIONES:
    "neutralidad verde" puede ser un verde vacio por no cubrir el archivo.
 4. Buscar suites golden que el diff pueda romper (test_attested_instancing, runtime_instantiation_cases)
    aunque el maker no las mencione, y artefactos generados versionados que quedan stale (RES-1).
+
+---
+
+## 2026-07-24 04:13 -- TASK-0256 RE-JUICIO iter1: OK-CLOSABLE (GO). SLIP-1 CERRADO
+
+Commit del veredicto: `a5bb7fe` (origin/main). Ancla: clon limpio `/d/ccv256r1` @ **356ac5d**
+(la instruccion citaba 0802ffa; ancle en el HEAD real, mas conservador, tras probar que el diff
+no-ledger 377bb20..356ac5d es exactamente `AGENTS.template.md` 3/0). Remediacion: `26995a6` (Codex),
+mi OPCION B: 2 lineas de aclaracion + blanco antes de la lista "Roster policy".
+
+Evidencia: 6/6 gates de protocolo exit 0 (validate, scan_encoding, scan_domain_neutrality,
+protocol_replay --check-drift CLEAN up_to_seq=6334, test_attested_instancing,
+run_runtime_instantiation_cases); `new_instance.py` exit 0 en los 3 tiers con roster POR DEFECTO;
+9/9 gates de las instancias recien nacidas exit 0; aclaracion + 3 reglas + `maker != checker` en los 3
+AGENTS generados; 0 placeholders, 0 bytes >127; la aclaracion PRECEDE a la regla 1 (linea 64 vs 67);
+neutralidad FALSABLE sobre la linea nueva (inyeccion -> exit 1 en `AGENTS.template.md:61`; restaurado -> 0).
+
+Residuales NUEVOS: RES-5 sub-captura ("that execute code" podria sacar del alcance a un checker que solo
+lee; no bloqueo porque las reglas 2/3 son categoricas y porque la redaccion es la que YO propuse);
+RES-6 **correccion de mi propio veredicto anterior**; RES-7 coordination/runtime no tienen
+`agent_registry`, asi que la aclaracion referencia unos tiers inexistentes en esas instancias (inocuo).
+
+LECCIONES nuevas de esta iteracion:
+5. **Verificar que el fix no reescribio lo que decia dejar intacto.** No basta el grep de que las reglas
+   siguen ahi: extraje el bloque en el commit PRE y POST y diffee tras retirar SOLO las lineas nuevas ->
+   vacio (exit 0). Un grep positivo convive con una regla reescrita a medias.
+6. **Buscar mirrors huerfanos del texto remediado.** Si la politica estuviera copiada en otro archivo de
+   la instancia, la aclaracion no viajaria con ella y el SLIP seguiria vivo por otra puerta. Verifique
+   que la frase de la regla 1 aparece 1 sola vez en TODA la instancia generada, en el mismo bloque.
+7. **El orden importa en texto normativo.** Comprobe por numero de linea que la aclaracion PRECEDE a la
+   regla en el artefacto GENERADO (no solo en el template): una exencion que llega despues no evita la
+   primera lectura contradictoria.
+8. **Auditar mi propio veredicto anterior y corregirlo en el registro (RES-6).** Habia afirmado que el
+   bloque anadido era la UNICA definicion de "worker" que una instancia nace conteniendo; falso:
+   `skills/delegate-to-worker.skill.md` (SPEC-0110/TASK-0216, preexistente) se materializa en los 3
+   tiers. No cambiaba el SLIP, pero la afirmacion estaba sobredimensionada. El checker tambien se audita.
+9. **No convertir mi propia redaccion propuesta en un segundo NO-GO.** RES-5 es un defecto real de
+   alcance, pero el maker aplico casi literal lo que yo pedi; se declara como residual con polish
+   sugerido ("This policy governs the agent participants of the roster"), no como bloqueo. El tope de
+   2 iteraciones se respeta y se declara consumido/resuelto.
