@@ -252,7 +252,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)",
             "type": "feature"
         },

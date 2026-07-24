@@ -42,6 +42,26 @@
             "updated_at": "2026-07-23T23:08:54Z"
         },
         {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0256",
+            "expires_at": "2026-07-24T04:58:01Z",
+            "notes": "Implement DECISION-0099 roster policy mirror in born-operational AGENTS template.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0256",
+                "Area_comun/state/TASK_INDEX.json#TASK-0256",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0256",
+                "Area_comun/tasks/TASK-0256-espejo-decision-0099-export-born-operational.md",
+                "AGENTS.template.md",
+                "scripts/new_instance.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-24T00:58:01Z",
+            "status": "active",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T00:58:01Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0256b-20260724",
             "expires_at": "2026-07-24T01:09:58Z",
             "notes": "Promocion+GO TASK-0256 (espejo 0099 export) a Codex",
