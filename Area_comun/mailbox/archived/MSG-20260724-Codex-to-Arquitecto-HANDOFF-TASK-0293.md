@@ -3,7 +3,7 @@ message_id: MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0293
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0293 implementation commit 130f63c and its self-contained handoff to Analista for independent review."
