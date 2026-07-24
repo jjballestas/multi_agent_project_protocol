@@ -5,6 +5,12 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
+        },
+        {
+            "id": "TASK-0293",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0099/0256][follow-up] Pulido de los residuales accionables del espejo de roster (polish/RES-5, RES-3, RES-7, RES-1)"
         }
     ],
     "next_actions": [

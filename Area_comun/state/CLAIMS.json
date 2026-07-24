@@ -195,6 +195,23 @@
             "updated_at": "2026-07-24T00:49:58Z"
         },
         {
+            "claim_id": "CLAIM-arq-go0293-20260724",
+            "expires_at": "2026-07-24T03:07:11Z",
+            "notes": "Registro+GO TASK-0293 (pulido residuales 0256) a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0293-pulido-residuales-roster-policy-0256.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-GO-TASK-0293.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0293",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0293",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0293-20260724"
+            ],
+            "started_at": "2026-07-24T02:47:11Z",
+            "status": "released",
+            "task_id": "TASK-0293",
+            "updated_at": "2026-07-24T02:47:11Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0256-20260724",
             "expires_at": "2026-07-24T01:51:42Z",
             "notes": "Ruteo remediacion iter1 TASK-0256 (SLIP-1 token worker)",
