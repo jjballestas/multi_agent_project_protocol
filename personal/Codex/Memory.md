@@ -2,6 +2,19 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-24 - TASK-0293 implementation
+
+- Commit `130f63c` broadens the roster policy to every agent participant while preserving
+  the human owner's authority, makes registry tier wording conditional where a registry
+  exists, and states why the checker must be capable of refuting the maker.
+- `examples/generated_minimal_instance/AGENTS.md` now carries the same three-rule policy.
+- Fresh coordination, runtime, and attested instances each contained the corrected scope,
+  all three rules, conditional registry wording, and rubber-stamp rationale. Coordination
+  and runtime had no `agent_registry`; attested had one.
+- Collaboration validation, neutrality, encoding, drift, attested-instancing, and runtime
+  instantiation gates exited 0. TASK-0293 remains `in_progress` pending governed delivery
+  to independent Analista review; Codex did not review or ratify the work.
+
 ## 2026-07-24 - TASK-0256 remediation iteration 1
 
 - Commit `26995a6` adds one clarification to `AGENTS.template.md`: the roster policy

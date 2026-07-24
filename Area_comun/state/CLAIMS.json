@@ -159,6 +159,20 @@
             "updated_at": "2026-07-24T02:53:17Z"
         },
         {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0293-memory",
+            "expires_at": "2026-07-24T10:59:12Z",
+            "notes": "Persist TASK-0293 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0293-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-24T02:59:12Z",
+            "status": "active",
+            "task_id": "TASK-0293",
+            "updated_at": "2026-07-24T02:59:12Z"
+        },
+        {
             "claim_id": "CLAIM-arq-cancel0231-20260724",
             "expires_at": "2026-07-24T02:52:10Z",
             "notes": "Cancelar TASK-0231 (peones F6.1): serie de peones CERRADA/no-adoptada (DRAFT-0102); directiva del Operador",

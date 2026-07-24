@@ -12,6 +12,15 @@
                 "examples/generated_minimal_instance/"
             ],
             "task_id": "TASK-0293"
+        },
+        {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0293-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0293-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "task_id": "TASK-0293"
         }
     ],
     "schema_version": "1.0",
