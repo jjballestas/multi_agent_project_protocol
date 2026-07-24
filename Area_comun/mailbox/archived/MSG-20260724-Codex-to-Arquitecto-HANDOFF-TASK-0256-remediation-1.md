@@ -3,7 +3,7 @@ message_id: MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0256-remediation-1
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0256 remediation iteration 1 commit 26995a6 to Analista for independent review of SLIP-1. Codex is maker and does not review or ratify this work."

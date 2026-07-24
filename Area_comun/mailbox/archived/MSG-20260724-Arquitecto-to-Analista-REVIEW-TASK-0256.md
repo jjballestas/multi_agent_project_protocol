@@ -3,7 +3,7 @@ message_id: MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial independiente de TASK-0256 (espejo de DECISION-0099 en el export born-operational de DECISION-0096; commit de impl 8168fae) en CLON LIMPIO de origin/main (9879e9a). Checker-only, proveedor diverso. El fix anade las 3 reglas de roster de DECISION-0099 (texto NEUTRAL) al AGENTS.template.md (seccion 'Roster policy', tras el role model), para que toda instancia NUEVA generada por new_instance nazca con la politica en su AGENTS. scripts/new_instance.py NO se cambio (ya materializa el template). Verifica por el ENTRYPOINT REAL (genera una instancia temporal con new_instance y comprueba el AGENTS resultante), por exit code. Emite veredicto GO/NO-GO."

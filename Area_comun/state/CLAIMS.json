@@ -172,6 +172,28 @@
             "updated_at": "2026-07-24T01:31:42Z"
         },
         {
+            "claim_id": "CLAIM-arq-rev0256r1-20260724",
+            "expires_at": "2026-07-24T02:21:56Z",
+            "notes": "Ruteo RE-JUICIO 0256 remediacion iter1 a Analista + archivo 4 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0256r1-20260724",
+                "Area_comun/mailbox/open/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0256.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-TASK-0256-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0256-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0256.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0256.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Codex-ACTION-TASK-0256-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0256-remediation-1.md"
+            ],
+            "started_at": "2026-07-24T02:01:56Z",
+            "status": "released",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T02:01:56Z"
+        },
+        {
             "claim_id": "CLAIM-arq-review0256-20260724",
             "expires_at": "2026-07-24T01:29:52Z",
             "notes": "Ruteo REVIEW 0256 a Analista + archivo GO-0256 y HANDOFF-0256",

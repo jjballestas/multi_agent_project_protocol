@@ -3,7 +3,7 @@ message_id: MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0256
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "NO cierres TASK-0256 todavia: rutea a Codex una remediacion de 1 clausula en AGENTS.template.md (regla 1 del bloque 'Roster policy') y devuelvemela para re-juicio antes del flip in_review -> done. Veredicto Analista = CHANGE-REQUIRED (NO-GO) por clon limpio de origin/main 3b72609 (contiene impl 8168fae). Las 5 aceptaciones del intake se cumplen por comportamiento (3 reglas presentes y neutrales; llegan al AGENTS generado en los 3 tiers incluido attested por defecto; cero cambios de runtime/validador/config; instancias vivas intactas; diff = AGENTS.template.md 14/0 fuera de ledger). El bloqueo es SLIP-1: el texto exportado define 'worker agent' como ejecutor de codigo que NUNCA ratifica, y el mismo new_instance.py escribe por defecto tier:'worker' para el human_owner en agent_registry (scripts/new_instance.py:519), a 4 lineas de la fila de tabla que le asigna aprobar politica y transiciones criticas. Fix minimo propuesto en el artefacto (acotar el sujeto de la regla 1 o una linea introductoria). Yo no cierro ni promuevo (checker-only)."
