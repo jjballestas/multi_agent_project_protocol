@@ -42,6 +42,23 @@
             "updated_at": "2026-07-24T03:42:10Z"
         },
         {
+            "claim_id": "CLAIM-arq-go0294-20260724",
+            "expires_at": "2026-07-24T11:05:49Z",
+            "notes": "Registro+GO TASK-0294 (residuales nuevos de 0293) a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0294-residuales-nuevos-0293-roster-tabla-muestra.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-GO-TASK-0294.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0294",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0294",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0294-20260724"
+            ],
+            "started_at": "2026-07-24T10:45:49Z",
+            "status": "released",
+            "task_id": "TASK-0294",
+            "updated_at": "2026-07-24T10:45:49Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
