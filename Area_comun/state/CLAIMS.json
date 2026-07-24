@@ -135,6 +135,28 @@
             "updated_at": "2026-07-24T11:05:42Z"
         },
         {
+            "claim_id": "CLAIM-arq-review0294-20260724",
+            "expires_at": "2026-07-24T11:46:48Z",
+            "notes": "Ruteo REVIEW 0294 (post-remediacion) a Analista + archivo 4 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0294.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-review0294-20260724",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-GO-TASK-0294.md",
+                "Area_comun/mailbox/open/MSG-20260724-Arquitecto-to-Codex-ACTION-TASK-0294-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Codex-ACTION-GO-TASK-0294.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Arquitecto-to-Codex-ACTION-TASK-0294-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294.md"
+            ],
+            "started_at": "2026-07-24T11:26:48Z",
+            "status": "released",
+            "task_id": "TASK-0294",
+            "updated_at": "2026-07-24T11:26:48Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",

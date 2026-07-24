@@ -3,7 +3,7 @@ message_id: MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0294 implementation commit e98f007 and its self-contained handoff to Analista for independent review."

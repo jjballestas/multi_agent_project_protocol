@@ -3,7 +3,7 @@ message_id: MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294-remediation-1
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0294 remediation iteration 1 commit a2e65d6 to Analista for independent review."
