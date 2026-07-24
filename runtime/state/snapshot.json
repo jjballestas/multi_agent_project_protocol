@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "5376ecc2922fdabe0862f620f24ecd30e56179518f113e2890bac589fe17ad49",
+  "canonical_hash": "7a8acf47e8070f819d68885eade6868d3f3aa5ae2c7df571aad355eaca49a638",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -763,6 +763,9 @@
       "CLAIM-20260723-140713-prune-arquitecto": 1,
       "CLAIM-20260723-171135-prune-arquitecto": 1,
       "CLAIM-20260723-230854-prune-arquitecto": 1,
+      "CLAIM-20260724-Codex-TASK-0256-remediation1": 1,
+      "CLAIM-20260724-Codex-TASK-0256-remediation1-delivery": 1,
+      "CLAIM-20260724-Codex-TASK-0256-remediation1-memory": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2494,7 +2497,7 @@
       "TASK-0253": 67,
       "TASK-0254": 32,
       "TASK-0255": 27,
-      "TASK-0256": 14,
+      "TASK-0256": 17,
       "TASK-0257": 41,
       "TASK-0258": 15,
       "TASK-0259": 37,
@@ -2553,7 +2556,7 @@
       "protocol-prune": 27,
       "protocol-state": 1
     },
-    "events_applied": 5649,
+    "events_applied": 5655,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4775,7 +4778,13 @@
       "codex:task0256:in-progress-to-in-review:20260724": 6310,
       "codex:task0256:ready-to-in-progress:20260724": 6308,
       "codex:task0256:remediation1-claim:20260724T014500Z": 6319,
+      "codex:task0256:remediation1-delivery-claim:20260724T015500Z": 6322,
+      "codex:task0256:remediation1-delivery-release:20260724T015600Z": 6326,
       "codex:task0256:remediation1-in-progress:20260724T014500Z": 6320,
+      "codex:task0256:remediation1-in-review:20260724T015600Z": 6323,
+      "codex:task0256:remediation1-main-release:20260724T015600Z": 6324,
+      "codex:task0256:remediation1-memory-claim:20260724T015000Z": 6321,
+      "codex:task0256:remediation1-memory-release:20260724T015600Z": 6325,
       "codex:task0256:work-claim-release:20260724": 6311,
       "codex:task0257:blocked-to-in-progress:20260720T065000Z": 5166,
       "codex:task0257:close-claim:20260720T065000Z": 5165,
@@ -8206,5 +8215,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6320
+  "up_to_seq": 6326
 }

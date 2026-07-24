@@ -90,9 +90,41 @@
                 "AGENTS.template.md"
             ],
             "started_at": "2026-07-24T01:45:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0256",
             "updated_at": "2026-07-24T01:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0256-remediation1-delivery",
+            "expires_at": "2026-07-24T05:55:00Z",
+            "notes": "Publish TASK-0256 remediation iteration 1 handoff and return task to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0256-remediation1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0256",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0256",
+                "Area_comun/tasks/TASK-0256-espejo-decision-0099-export-born-operational.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0256-remediation-1-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0256-remediation-1.md"
+            ],
+            "started_at": "2026-07-24T01:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T01:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0256-remediation1-memory",
+            "expires_at": "2026-07-24T05:50:00Z",
+            "notes": "Persist TASK-0256 remediation iteration 1 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0256-remediation1-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-24T01:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-24T01:50:00Z"
         },
         {
             "claim_id": "CLAIM-arq-go0256b-20260724",

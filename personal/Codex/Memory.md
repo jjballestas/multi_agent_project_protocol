@@ -1,6 +1,30 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-23 Europe/Madrid, during TASK-0287 delivery.
+Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
+
+## 2026-07-24 - TASK-0256 remediation iteration 1
+
+- Commit `26995a6` adds one clarification to `AGENTS.template.md`: the roster policy
+  governs code-executing agent participants and neither changes the human owner's
+  approval authority nor redefines the registry's `signer`/`worker` key-possession tiers.
+- The three roster rules, runtime, validators, config, and live instances are unchanged.
+- Validation, neutrality, encoding, drift, attested-instancing, and runtime-instantiation
+  gates exited 0. A fresh default-roster attested instance contained the clarification
+  followed by all three original rules.
+
+## 2026-07-24 - TASK-0256 implementation
+
+- Commit `8168fae` mirrors DECISION-0099 in `AGENTS.template.md`: a worker agent is
+  subordinate to the maker and code-only, the strong-capability maker governs and
+  fully specifies delegated work, and the adversarial checker remains strong-capability
+  with `maker != checker`.
+- `scripts/new_instance.py` behavior is unchanged. A temporary generated instance at
+  `C:/Users/johnb/AppData/Local/Temp/task0256-c996641f3ffa4672a3060fee2d8ae91a/instance`
+  contains all three rules in its generated `AGENTS.md`.
+- Canonical validation, encoding, domain neutrality, and diff gates exited 0.
+  Delivery commit `9879e9a` moves TASK-0256 to `in_review`, releases both Codex
+  claims, and opens the self-contained Arquitecto handoff for independent Analista
+  review. Codex did not review or ratify the change.
 
 ## 2026-07-23 - TASK-0291/TASK-0292 implementation
 

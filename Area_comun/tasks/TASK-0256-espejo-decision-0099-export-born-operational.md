@@ -2,7 +2,7 @@
 task_id: TASK-0256
 title: "Espejo de DECISION-0099 (politica roster peon/maker/checker) en el export born-operational (DECISION-0096)"
 type: feature
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
