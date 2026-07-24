@@ -141,6 +141,24 @@
             "updated_at": "2026-07-24T01:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0293",
+            "expires_at": "2026-07-24T10:53:17Z",
+            "notes": "Implement TASK-0293 text-only roster policy polish and generated sample coherence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0293",
+                "Area_comun/state/TASK_INDEX.json#TASK-0293",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0293",
+                "Area_comun/tasks/TASK-0293-pulido-residuales-roster-policy-0256.md",
+                "AGENTS.template.md",
+                "examples/generated_minimal_instance/"
+            ],
+            "started_at": "2026-07-24T02:53:17Z",
+            "status": "active",
+            "task_id": "TASK-0293",
+            "updated_at": "2026-07-24T02:53:17Z"
+        },
+        {
             "claim_id": "CLAIM-arq-cancel0231-20260724",
             "expires_at": "2026-07-24T02:52:10Z",
             "notes": "Cancelar TASK-0231 (peones F6.1): serie de peones CERRADA/no-adoptada (DRAFT-0102); directiva del Operador",

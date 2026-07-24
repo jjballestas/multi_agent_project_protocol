@@ -2,7 +2,7 @@
 task_id: TASK-0293
 title: "[DECISION-0099/0256][follow-up] Pulido de los residuales accionables del espejo de roster (polish/RES-5, RES-3, RES-7, RES-1) en AGENTS.template + muestra generada"
 type: infra
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

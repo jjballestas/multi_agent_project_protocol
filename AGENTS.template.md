@@ -58,8 +58,8 @@ Suggested role model:
 
 Roster policy:
 
-This policy governs agent participants that execute code. It does not alter the human owner's
-approval authority or redefine the registry's `signer`/`worker` key-possession tiers.
+This policy governs the agent participants of the roster. It does not alter the human owner's
+approval authority or redefine `signer`/`worker` key-possession tiers where the registry defines them.
 
 1. A worker agent is a code executor subordinate to the maker. It writes code only under
    the maker's direction; it is not an autonomous maker and never acts as checker,
@@ -71,7 +71,8 @@ approval authority or redefine the registry's `signer`/`worker` key-possession t
    must be refined by the maker before delegation; weaker workers require more specification
    and less discretion.
 3. The adversarial checker must always be a strong-capability agent. Checker capability is
-   required in addition to key possession, and `maker != checker` remains mandatory.
+   required in addition to key possession, and `maker != checker` remains mandatory; otherwise,
+   a checker unable to refute the maker turns the gate into a rubber stamp.
 
 ## 4. Hard Project Boundaries
 

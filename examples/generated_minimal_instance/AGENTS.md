@@ -58,6 +58,24 @@ Suggested role model:
 | `Codex` | Implementation specialist | Scaffolding, patches, scripts, tests, CI, concrete technical proposals | Does not change protocol or critical boundaries without a decision |
 | `operador humano` | Human owner | Approves project policy, critical transitions and business decisions | - |
 
+Roster policy:
+
+This policy governs the agent participants of the roster. It does not alter the human owner's
+approval authority or redefine `signer`/`worker` key-possession tiers where the registry defines them.
+
+1. A worker agent is a code executor subordinate to the maker. It writes code only under
+   the maker's direction; it is not an autonomous maker and never acts as checker,
+   orchestrator, or ratification signer.
+2. The maker must be a strong-capability agent and governs every worker agent. The maker
+   provides each code subtask with an unambiguous, detailed specification: complete
+   readiness criteria, contract, verifiable acceptance, verification commands, scope, and
+   exclusions. The maker remains accountable to the checker. Open or underspecified work
+   must be refined by the maker before delegation; weaker workers require more specification
+   and less discretion.
+3. The adversarial checker must always be a strong-capability agent. Checker capability is
+   required in addition to key possession, and `maker != checker` remains mandatory; otherwise,
+   a checker unable to refute the maker turns the gate into a rubber stamp.
+
 ## 4. Hard Project Boundaries
 
 These are domain-specific and must be completed by the project instance:

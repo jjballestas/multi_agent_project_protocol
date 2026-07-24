@@ -1,5 +1,19 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0293",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0293",
+                "Area_comun/state/TASK_INDEX.json#TASK-0293",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0293",
+                "Area_comun/tasks/TASK-0293-pulido-residuales-roster-policy-0256.md",
+                "AGENTS.template.md",
+                "examples/generated_minimal_instance/"
+            ],
+            "task_id": "TASK-0293"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
