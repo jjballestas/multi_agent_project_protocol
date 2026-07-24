@@ -4503,3 +4503,45 @@ trailer-checker) Y anadir una variante ORTOGONAL (violacion semantica) para prob
 full-mode es el validador real, no un happy-path de un solo string. Cazar tambien residuales de
 PORTABILIDAD del test (separadores de ruta OS-dependientes) que no rompen el gate pero si el golden
 case en otras plataformas.
+
+## 2026-07-24 03:35 -- TASK-0256 (espejo DECISION-0099 en export born-operational): CHANGE-REQUIRED (NO-GO)
+
+Commit veredicto: 906c96f (artefacto Area_comun/artifacts/Analista-TASK-0256-roster-policy-born-operational-verdict.md
++ MSG-20260724-Analista-to-Arquitecto-REVIEW-TASK-0256). Clon limpio /d/ccv0256 sobre origin/main 3b72609
+(impl Codex 8168fae). Sin producto en alcance.
+
+Cambio: AGENTS.template.md +14/-0, bloque "Roster policy" (3 reglas de 0099) en la seccion 3, tras la
+tabla de roles. new_instance.py sin cambios (ya materializa el template).
+
+Lo verde (por ENTRYPOINT REAL, 4 generaciones): new_instance --tier coordination / runtime /
+attested(--roster propio) / attested(POR DEFECTO) -> exit 0 las 4; en las 4 el AGENTS generado da
+grep "Roster policy"=1 y las 3 reglas exit 0, 0 placeholders sin sustituir, 0 bytes >127. La instancia
+recien nacida pasa SUS gates (validate/encoding/neutralidad 0 en 3 raices). Hub en clon: validate 0,
+neutralidad 0, encoding 0, protocol_replay --check-drift 0 (CLEAN up_to_seq=6316). Suites que el +14
+podia romper: test_attested_instancing.py 0 y run_runtime_instantiation_cases.py 0. Diff fuera de
+ledger/mailbox/tasks = exactamente AGENTS.template.md 14/0. No existe new_instance.ps1 (entrypoint unico).
+
+SLIP-1 (bloqueante): el texto exportado define "worker agent" = ejecutor de codigo subordinado que
+NUNCA ratifica, y el mismo new_instance.py escribe por defecto tier:"worker" para el human_owner en
+agent_registry/attested_instancing.roster (new_instance.py:519; enum de tier {signer,worker} en :534,
+distincion de POSESION DE LLAVE). En el AGENTS generado attested: linea 60 = "Human owner | Approves
+project policy, critical transitions"; linea 64 = worker agents nunca ratifican. Tras 8168fae ese bloque
+es la UNICA definicion normativa de "worker" que una instancia nace conteniendo, y es falsa para esa
+entrada. Fix minimo = 1 clausula acotando el sujeto de la regla 1. Bucle declarado max 2 iteraciones.
+
+Residuales: RES-1 examples/generated_minimal_instance/AGENTS.md sin la politica (CI no lo regenera);
+RES-2 upgrade_instance.py propaga el TEMPLATE, no re-materializa el AGENTS vivo de instancias existentes;
+RES-3 el espejo omite la razon anti-rubber-stamp de la regla 3; RES-4 "strong-capability" auto-declarable
+(enforcement fuera de alcance por intake).
+
+LECCIONES:
+1. Cuando el entregable ES TEXTO NORMATIVO exportado, no basta con grep de que las reglas llegan:
+   hay que leer el artefacto GENERADO junto a su PROPIA config y buscar colisiones de vocabulario. El
+   defecto aparecio solo al generar la instancia attested POR DEFECTO y abrir su protocol.config.json.
+2. Probar la FAMILIA de tiers, no el ejemplo dado: el maker verifico un solo tier; el defecto vive en
+   attested (el tier al que apunta el export born-operational).
+3. Falsificar el gate de neutralidad antes de creerle: inyectar un termino de dominio en el archivo
+   modificado dentro del clon (exit 1, linea nombrada) y restaurar (exit 0, git status limpio). Sin eso,
+   "neutralidad verde" puede ser un verde vacio por no cubrir el archivo.
+4. Buscar suites golden que el diff pueda romper (test_attested_instancing, runtime_instantiation_cases)
+   aunque el maker no las mencione, y artefactos generados versionados que quedan stale (RES-1).
