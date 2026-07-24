@@ -7,6 +7,63 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-24 (25) - TASK-0293 pulido residuales roster policy: OK-CLOSABLE (GO) sobre 130f63c
+
+- Encargo `MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0293`. Cierra los 4 residuales ACCIONABLES que
+  yo declare en TASK-0256 (POLISH/RES-5 alcance sin "that execute code", RES-7 exencion condicional del
+  registry, RES-3 razon de la regla 3, RES-1 muestra generada). Ancla: impl `130f63c` (base `b7babed9`);
+  la instruccion citaba HEAD `273376c` pero el origin/main real al juzgar era `0047279` y el delta entre
+  ambos es SOLO ledger/mailbox -> ancla en `0047279`. Clon limpio `/d/ccv293`, instancias temporales en
+  `/d/i293`. Veredicto commit `7196b8d` (artefacto
+  `Area_comun/artifacts/Analista-TASK-0293-roster-policy-polish-verdict.md` + MSG REVIEW). SOLO PROTOCOLO.
+- **VEREDICTO: OK-CLOSABLE (GO), sin iteracion.** 11 vectores PASS. Reglas 1 y 2 byte-identicas (no
+  aparecen en el diff = esa es la prueba); regla 3 conserva sus 3 clausulas normativas y solo suma la
+  razon. Diff no-ledger = `AGENTS.template.md 4/3` + muestra `18/0`. Gates: validate/encoding/neutralidad/
+  drift(CLEAN seq 6358)/test_attested_instancing/run_runtime_instantiation_cases = 6/6 exit 0; instancias
+  nacidas 9/9 exit 0; `validate --root examples/generated_minimal_instance` = 0. Neutralidad FALSABLE
+  sobre las 2 lineas nuevas del template (inyeccion -> exit 1 en l.61 y l.75; restaurado -> 0).
+- **Aporte central del juicio: refute la PREMISA de la pregunta del Arquitecto y confirme su CONCLUSION.**
+  El decia "el alcance sigue excluyendo al human owner porque un humano no es un agente". FALSO en el
+  artefacto: el tier attested emite `agent_registry.agents` con `{"id":"Own","role":"human_owner",
+  "tier":"worker","adapter":"human"}` -> el human owner ES una entrada del roster de agentes y cae DENTRO
+  del alcance nuevo. Lo que mantiene SLIP-1 cerrado NO es la palabra "agent" sino la clausula de exencion
+  explicita ("does not alter the human owner's approval authority"), intacta desde 0256.
+- Residuales NUEVOS (no bloqueantes): **RES-8** "the roster" no tiene referente definido y la unica tabla
+  TITULADA de roles del template trae 3 filas SIN la del analyst/checker -> la sub-captura de RES-5 entra
+  por otra puerta (fix de una linea: anadir la fila del analyst). **RES-9** la muestra quedo HIBRIDA: el
+  intake ofrecia regenerar O fechar como snapshot congelado, y la entrega hizo una tercera cosa (parche a
+  mano); sigue diciendo `Last updated: 2026-06-05`, 0 ocurrencias de "snapshot", 132 lineas de diff y 5
+  secciones enteras faltantes frente a una generacion fresca -> senala falsa vigencia. **RES-10**
+  `examples/**` es exempt_glob del scan de neutralidad -> las 18 lineas de politica que esta tarea mete en
+  la muestra quedan SIN gate (falsable: inyeccion en la muestra -> exit 0; la misma en el template -> 1);
+  inocuo hoy porque probe que el bloque es byte-identico al del template.
+- Correccion de registro C2 (DECISION-0018 al Arquitecto): mi "9/9 gates de instancia nacida" de 0256 solo
+  se reproduce con ids de agente que NO sean subcadenas de palabras inglesas. Con `--human-owner Own` el
+  `scan_domain_neutrality --root <instancia>` da exit **1** en los 3 tiers (flaggea `Own` dentro de
+  comentarios preexistentes: "ITS OWN", "own path semantics"); con `--human-owner Duenyo` -> exit 0.
+  Preexistente y ajeno a 0293, pero una instancia puede NACER con su propio gate en rojo.
+
+LECCIONES nuevas de esta iteracion:
+10. **Refutar la premisa aunque la conclusion sea correcta.** El Arquitecto pedia confirmar dos cosas
+    encadenadas ("excluye al human owner PORQUE un humano no es un agente"). La conclusion se sostiene y
+    la premisa no. Firmar el GO sin separar ambas habria dejado en el registro una defensa falsa de la
+    politica, reutilizable en el proximo debate. El checker valida el razonamiento, no solo el resultado.
+11. **Cuando un fix cambia un predicado de alcance, enumerar los REFERENTES candidatos.** "that execute
+    code" (definido, estrecho) -> "of the roster" (ancho pero INDEFINIDO). Tabule los 3 candidatos
+    (lista de participantes / tabla titulada / `agent_registry.agents`) y verifique si el sujeto de la
+    regla cae dentro de cada uno; bajo el mas literal (la tabla) el checker sigue sin estar enumerado.
+12. **Contrastar una "muestra generada" contra una generacion FRESCA, no contra el grep pedido.** El grep
+    de la acceptance daba verde; el diff contra `new_instance.py` revelo 132 lineas y 5 secciones
+    faltantes + fecha de junio. Un artefacto parcheado a mano miente mas que uno viejo y honesto.
+13. **Probar si el gate cubre el archivo donde se mete el texto nuevo.** `examples/**` esta exento: inyecte
+    un termino de negocio en la muestra (exit 0) y el MISMO en el template (exit 1). Un verde sobre un
+    archivo exento es un verde vacio; lo salve verificando byte-identidad con el bloque si gateado.
+14. **Aislar la causa antes de reportar un ROJO.** El neutrality de las instancias nacidas salio 1 en los
+    3 tiers; en vez de firmarlo como regresion, re-genere con otro id de human owner -> 0. La causa era
+    MI parametro ("Own" como subcadena), no la entrega. Un rojo no atribuido es tan malo como un verde
+    no falsado. (Corolario ya sabido y re-pisado: gatear por exit code REAL, nunca `python x | head`,
+    que devuelve el exit de `head` y me dio "exit=0" sobre una salida que mostraba violaciones.)
+
 ## Ultima actualizacion 2026-07-24 (24) - BATCH TASK-0291 (R3) + TASK-0292 (R4): OK-CLOSABLE (GO) para AMBAS sobre 23d7476+dd9602a
 
 - Encargo `MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0291-0292`. Residuales R3/R4 del veredicto de
