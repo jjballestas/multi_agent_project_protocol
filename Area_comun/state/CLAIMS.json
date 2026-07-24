@@ -42,6 +42,46 @@
             "updated_at": "2026-07-24T03:42:10Z"
         },
         {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0294",
+            "expires_at": "2026-07-24T18:52:11Z",
+            "notes": "Implement TASK-0294 RES-8 role row, RES-9 coherent generated sample, and RES-10 documented neutrality exemption.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0294",
+                "Area_comun/state/TASK_INDEX.json#TASK-0294",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0294",
+                "Area_comun/tasks/TASK-0294-residuales-nuevos-0293-roster-tabla-muestra.md",
+                "AGENTS.template.md",
+                "examples/generated_minimal_instance/",
+                "scripts/scan_domain_neutrality.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-24T10:52:11Z",
+            "status": "released",
+            "task_id": "TASK-0294",
+            "updated_at": "2026-07-24T10:52:11Z"
+        },
+        {
+            "claim_id": "CLAIM-20260724-Codex-TASK-0294-delivery",
+            "expires_at": "2026-07-24T18:59:28Z",
+            "notes": "Deliver TASK-0294 to independent review with self-contained evidence and release all Codex claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0294-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260724-Codex-TASK-0294",
+                "Area_comun/state/TASK_INDEX.json#TASK-0294",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0294",
+                "Area_comun/tasks/TASK-0294-residuales-nuevos-0293-roster-tabla-muestra.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0294-Codex-to-Arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0294.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-24T10:59:28Z",
+            "status": "released",
+            "task_id": "TASK-0294",
+            "updated_at": "2026-07-24T10:59:28Z"
+        },
+        {
             "claim_id": "CLAIM-arq-go0294-20260724",
             "expires_at": "2026-07-24T11:05:49Z",
             "notes": "Registro+GO TASK-0294 (residuales nuevos de 0293) a Codex",

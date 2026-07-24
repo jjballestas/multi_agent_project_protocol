@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "38f229aacd7e6bf8a41dcdf3780e419ddde9954719627807150d7702fdb24a37",
+  "canonical_hash": "75272cb05fe9aa71d009673039960b70f4385f5530d5f009980678dd860617a1",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -771,6 +771,8 @@
       "CLAIM-20260724-Codex-TASK-0293": 1,
       "CLAIM-20260724-Codex-TASK-0293-delivery": 1,
       "CLAIM-20260724-Codex-TASK-0293-memory": 1,
+      "CLAIM-20260724-Codex-TASK-0294": 1,
+      "CLAIM-20260724-Codex-TASK-0294-delivery": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2557,7 +2559,7 @@
       "TASK-0291": 22,
       "TASK-0292": 10,
       "TASK-0293": 11,
-      "TASK-0294": 3,
+      "TASK-0294": 7,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2580,7 +2582,7 @@
       "protocol-prune": 28,
       "protocol-state": 1
     },
-    "events_applied": 5699,
+    "events_applied": 5705,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5345,6 +5347,12 @@
       "codex:task0293:memory-claim:20260724T025912Z": 6349,
       "codex:task0293:memory-release:20260724T030320Z": 6353,
       "codex:task0293:ready-to-in-progress:20260724T025317Z": 6348,
+      "codex:task0294:delivery-claim:20260724T105928Z": 6373,
+      "codex:task0294:in-progress-to-in-review:20260724T105928Z": 6374,
+      "codex:task0294:ready-to-in-progress:20260724T105211Z": 6372,
+      "codex:task0294:release-delivery:20260724T105928Z": 6376,
+      "codex:task0294:release-main:20260724T105928Z": 6375,
+      "codex:task0294:start-claim:20260724T105211Z": 6371,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -8283,5 +8291,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6370
+  "up_to_seq": 6376
 }

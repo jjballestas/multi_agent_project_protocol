@@ -2,6 +2,23 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-24 - TASK-0294 implementation
+
+- Commit `e98f007` adds the `{{AGENT_ANALYST}}` adversarial-checker row to the
+  canonical suggested-role table, including the prohibition on implementing or
+  ratifying its own reviewed work.
+- `examples/generated_minimal_instance/` was fully regenerated from the current
+  coordination-tier template with date `2026-07-24`; its `AGENTS.md` contains the
+  checker row, roster policy, intake/DoR, governed plan approval, audited exceptions,
+  commit trailers, and handoff/fix-loop sections.
+- RES-10 uses the documented by-design option: examples remain illustrative and exempt,
+  while generated policy is covered through the scanned canonical template plus
+  regeneration. Neutrality detection logic and scan scope are unchanged.
+- Fresh coordination, runtime, and attested probes each contained the checker row.
+  Collaboration validation, encoding, neutrality, drift, attested-instancing, and
+  runtime-instantiation gates exited 0. TASK-0294 remains `in_progress` pending governed
+  delivery to independent Analista review.
+
 ## 2026-07-24 - TASK-0293 implementation
 
 - Commit `130f63c` broadens the roster policy to every agent participant while preserving
