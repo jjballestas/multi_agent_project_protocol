@@ -245,35 +245,6 @@
             "type": "build"
         },
         {
-            "created_at": "2026-07-17",
-            "file": "Area_comun/tasks/TASK-0256-espejo-decision-0099-export-born-operational.md",
-            "id": "TASK-0256",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)",
-            "type": "feature"
-        },
-        {
-            "created_at": "2026-07-24",
-            "file": "Area_comun/tasks/TASK-0293-pulido-residuales-roster-policy-0256.md",
-            "id": "TASK-0293",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "relates_to": [
-                "TASK-0256",
-                "DECISION-0099",
-                "DECISION-0096"
-            ],
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0099/0256][follow-up] Pulido de los residuales accionables del espejo de roster (polish/RES-5, RES-3, RES-7, RES-1)",
-            "type": "infra"
-        },
-        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
