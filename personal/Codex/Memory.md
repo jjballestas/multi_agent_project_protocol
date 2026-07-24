@@ -14,7 +14,8 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 - Collaboration validation, neutrality, encoding, drift, attested-instancing, and runtime
   instantiation gates exited 0. Delivery transaction seq 6350-6354 moved TASK-0293 to
   `in_review`, released every Codex claim, and opened the self-contained Arquitecto
-  handoff for independent Analista review. Codex did not review or ratify the work.
+  handoff for independent Analista review. Delivery commit is `4798d22`. Codex did not
+  review or ratify the work.
 
 ## 2026-07-24 - TASK-0256 remediation iteration 1
 
