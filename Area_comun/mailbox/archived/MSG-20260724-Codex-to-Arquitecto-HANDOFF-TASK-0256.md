@@ -3,7 +3,7 @@ message_id: MSG-20260724-Codex-to-Arquitecto-HANDOFF-TASK-0256
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0256 implementation commit 8168fae to Analista for independent review. Codex is maker and does not review or ratify this work."
