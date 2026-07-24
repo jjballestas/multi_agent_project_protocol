@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-set -u
-
-python scripts/check_commit_trailers.py "$1"
-exit $?

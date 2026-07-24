@@ -30,7 +30,6 @@ This folder contains the shared, auditable state for `generated_minimal_instance
 ## Minimum Rules
 
 - Check `TASK_INDEX.json`, `CLAIMS.json` and `mailbox/open/` before editing.
-- Create/update an active claim before creating or editing any shared file, including drafts.
 - Do not edit another owner active claim.
 - Record blocking ambiguity as `blocked` with one concrete question.
 - Do not change `No secrets committed. Project-specific critical boundaries must be recorded here.` without a decision.

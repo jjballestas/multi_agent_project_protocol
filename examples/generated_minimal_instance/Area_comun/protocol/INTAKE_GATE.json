@@ -1,5 +1,0 @@
-{
-  "enabled": true,
-  "start_task_id": "TASK-0238",
-  "enforcement": "post_start_ready_requires_intake"
-}

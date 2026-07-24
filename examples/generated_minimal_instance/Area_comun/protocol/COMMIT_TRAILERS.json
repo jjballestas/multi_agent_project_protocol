@@ -1,6 +1,0 @@
-{
-  "enabled": false,
-  "start_commit": "",
-  "enforcement": "post_start_governed_commits_require_task_id_trailer",
-  "rationale": "Disabled at instantiation; activate after the instance harness emits trailers."
-}
