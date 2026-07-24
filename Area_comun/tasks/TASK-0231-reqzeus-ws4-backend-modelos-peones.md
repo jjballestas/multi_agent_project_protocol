@@ -2,7 +2,7 @@
 task_id: TASK-0231
 title: "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: build
-status: proposed
+status: cancelled
 owner: Codex
 phase: P2
 priority: medium

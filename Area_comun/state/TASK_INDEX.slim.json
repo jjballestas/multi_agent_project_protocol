@@ -8,14 +8,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
-        },
-        {
-            "id": "TASK-0231",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "medium",
-            "status": "proposed",
-            "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         }
     ],
     "view": "task_index.slim"
