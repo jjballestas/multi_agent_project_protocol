@@ -90,7 +90,7 @@
     <span class="chip">Protocol <b>1.14.0</b></span>
     <span class="chip">Runtime <b>0.12.0</b></span>
     <span class="chip">Perfiles <b>ninguno</b></span>
-    <span class="chip">Actualizado <b>2026-07-17</b></span>
+    <span class="chip">Actualizado <b>2026-07-24</b></span>
   </div>
 </header>
 <div class="panorama">Panorama. Este repositorio mantiene y enriquece un protocolo de proyecto multiagente, generico y reutilizable, para trabajo de software (ciclo de vida de tareas, claims, buzon, handoffs, decisiones, reportes humanos y un validador de estado), y ademas se gestiona a si mismo con su propio protocolo (dogfooding). Esta guia permite que cualquier persona o agente nuevo entienda que es la instancia, que hace, como se construye/ejecuta/prueba/opera, como se diagnostica, donde estan las rutas del protocolo, que roles hay y como retomar el contexto.</div>
@@ -161,6 +161,7 @@
 </div>
 <div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
 <p>Aplica su propio metodo: tareas pequeñas, verificables y de un solo dueño; coordinacion en el area comun; decisiones registradas antes de aplicarse; gates de calidad que deben quedar en verde. En esta instancia el runtime esta activo como escritor autoritativo: cada transicion de estado pasa por una transaccion atomica de intents y la edicion manual del ledger se rechaza como drift.</p>
+<p>Cada unidad de trabajo pasa por un <strong>ciclo gobernado de dos capas de revision</strong>: el maker entrega; el orquestador hace un <strong>recomputo independiente</strong> (corre los money-shots por el entrypoint real, no confia en la evidencia del maker); un <strong>checker adversarial</strong> de capacidad fuerte y <strong>proveedor diverso</strong> (nunca el mismo agente que construyo, <code>maker != checker</code>) verifica en un clon limpio y emite un veredicto por exit code; solo entonces se ratifica y se cierra. Un fallo se devuelve como fix-loop (tope de iteraciones antes de escalar al humano). Las dos capas son complementarias: el recomputo del orquestador caza teatro y sobre-entregas antes de gastar el ciclo del checker, y el checker adversarial caza defectos semanticos que el recomputo no ve.</p>
 </section>
 <!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
 <section id="5-arquitectura">
@@ -397,13 +398,17 @@ python examples/human_guide_cases/run_human_guide_cases.py</code></pre>
 <td>2026-07-17</td>
 <td>Actualizada al estado real: epoch 1.14.0 (pineado; releases aparte, ultima v1.19.0), runtime 0.12.0. Novedades de metodo: capa operacional exportable e instancias born-operational con trio propio; politica de roster peon-subordinado-al-maker con revisor siempre en modelo fuerte; capacidad de memoria persistente (repositorio caliente + indice derivado reconstruible + packs de revive con atestacion por fuente) ADOPTADA por demostracion, con su promocion al master planificada para una fase posterior a la ventana de medicion.</td>
 </tr>
+<tr>
+<td>2026-07-24</td>
+<td>Endurecimiento del gate local y consolidacion del export born-operational, todo por el ciclo gobernado de dos capas (recomputo del orquestador + checker adversarial). (1) El gate local en modo completo (<code>HOOK_FULL</code>) dejo de sobre-rechazar arboles limpios y <strong>acota</strong> la materializacion del snapshot a los deliverables realmente indexados, sin debilitar el rechazo de estado roto. (2) El estado gobernado con <strong>JSON malformado</strong> ahora falla de forma <strong>graceful</strong> (mensaje que nombra el archivo, exit no-cero, sin traceback) en el validador y en la poda, conservando el rechazo (integridad intacta). (3) El <code>prune --check</code> tambien <strong>nombra</strong> los archivos de archivo (<code>*_ARCHIVE.json</code>) malformados. (4) La <strong>politica de roster</strong> de la norma (agente-trabajador subordinado al maker; maker fuerte que gobierna y da especificacion completa; checker adversarial siempre fuerte, <code>maker != checker</code>) se <strong>espeja</strong> en el <code>AGENTS.template</code> con el que nace cada instancia nueva → toda instancia born-operational lo lleva en su contrato de roles, con la <strong>fila del checker</strong> añadida a la tabla de roles y la muestra generada minima y coherente. Evidencia viva del ciclo de dos capas: el recomputo del orquestador cazo un test con fixture auto-invalidante que rompia CI y una sobre-materializacion de la muestra (+20K lineas) antes de gastar el ciclo del checker; el checker adversarial cazo una colision de vocabulario (el termino "worker" capturaba al human owner) que el recomputo no vio.</td>
+</tr>
 </tbody></table>
 </section>
 </main>
 </div>
 <footer>
   Generado por <code>scripts/generate_human_guide.py</code>. Fuente unica: el archivo <code>.md</code>.
-  Hash de fuente: <code>38c2304f34bdc1b4</code>. Sin JavaScript, CDN ni recursos externos.
+  Hash de fuente: <code>314dcf9abe36ea76</code>. Sin JavaScript, CDN ni recursos externos.
 </footer>
 </div>
 </body>

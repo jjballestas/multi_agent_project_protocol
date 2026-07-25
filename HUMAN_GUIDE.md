@@ -6,7 +6,7 @@ runtime_version: 0.12.0
 adoption_tier: runtime
 perfiles: [ninguno]
 idioma: es
-actualizado: 2026-07-17
+actualizado: 2026-07-24
 ---
 
 # Guia humana operativa - multi_agent_project_protocol
@@ -55,6 +55,15 @@ Aplica su propio metodo: tareas pequeñas, verificables y de un solo dueño; coo
 decisiones registradas antes de aplicarse; gates de calidad que deben quedar en verde. En esta instancia el
 runtime esta activo como escritor autoritativo: cada transicion de estado pasa por una transaccion atomica
 de intents y la edicion manual del ledger se rechaza como drift.
+
+Cada unidad de trabajo pasa por un **ciclo gobernado de dos capas de revision**: el maker entrega; el
+orquestador hace un **recomputo independiente** (corre los money-shots por el entrypoint real, no confia en
+la evidencia del maker); un **checker adversarial** de capacidad fuerte y **proveedor diverso** (nunca el
+mismo agente que construyo, `maker != checker`) verifica en un clon limpio y emite un veredicto por exit
+code; solo entonces se ratifica y se cierra. Un fallo se devuelve como fix-loop (tope de iteraciones antes
+de escalar al humano). Las dos capas son complementarias: el recomputo del orquestador caza teatro y
+sobre-entregas antes de gastar el ciclo del checker, y el checker adversarial caza defectos semanticos que
+el recomputo no ve.
 
 ## 5. Arquitectura
 <!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
@@ -262,3 +271,4 @@ autocontenido; nadie asume el contexto de otro.
 |---|---|
 | 2026-06-10 | Guia dogfooding creada para la instancia viva (tier runtime, protocol 1.1.0) via el generador |
 | 2026-07-17 | Actualizada al estado real: epoch 1.14.0 (pineado; releases aparte, ultima v1.19.0), runtime 0.12.0. Novedades de metodo: capa operacional exportable e instancias born-operational con trio propio; politica de roster peon-subordinado-al-maker con revisor siempre en modelo fuerte; capacidad de memoria persistente (repositorio caliente + indice derivado reconstruible + packs de revive con atestacion por fuente) ADOPTADA por demostracion, con su promocion al master planificada para una fase posterior a la ventana de medicion. |
+| 2026-07-24 | Endurecimiento del gate local y consolidacion del export born-operational, todo por el ciclo gobernado de dos capas (recomputo del orquestador + checker adversarial). (1) El gate local en modo completo (`HOOK_FULL`) dejo de sobre-rechazar arboles limpios y **acota** la materializacion del snapshot a los deliverables realmente indexados, sin debilitar el rechazo de estado roto. (2) El estado gobernado con **JSON malformado** ahora falla de forma **graceful** (mensaje que nombra el archivo, exit no-cero, sin traceback) en el validador y en la poda, conservando el rechazo (integridad intacta). (3) El `prune --check` tambien **nombra** los archivos de archivo (`*_ARCHIVE.json`) malformados. (4) La **politica de roster** de la norma (agente-trabajador subordinado al maker; maker fuerte que gobierna y da especificacion completa; checker adversarial siempre fuerte, `maker != checker`) se **espeja** en el `AGENTS.template` con el que nace cada instancia nueva → toda instancia born-operational lo lleva en su contrato de roles, con la **fila del checker** añadida a la tabla de roles y la muestra generada minima y coherente. Evidencia viva del ciclo de dos capas: el recomputo del orquestador cazo un test con fixture auto-invalidante que rompia CI y una sobre-materializacion de la muestra (+20K lineas) antes de gastar el ciclo del checker; el checker adversarial cazo una colision de vocabulario (el termino "worker" capturaba al human owner) que el recomputo no vio. |
