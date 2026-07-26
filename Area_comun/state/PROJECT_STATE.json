@@ -73,6 +73,12 @@
             "title": "[DECISION-0104] Detector de higiene de scratch root: FLAGea (no borra) dirs de la metodologia en la raiz del disco fuera del scratch root"
         },
         {
+            "id": "TASK-0296",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0104] Enforcement del detector de scratch discipline: disparo automatico + hardening (depth/allowlist/fail-open warning) -- de detectable a enforced"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

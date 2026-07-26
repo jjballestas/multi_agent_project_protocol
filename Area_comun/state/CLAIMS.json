@@ -34,6 +34,22 @@
             "updated_at": "2026-07-26T16:55:34Z"
         },
         {
+            "claim_id": "CLAIM-0296-register",
+            "expires_at": "2026-07-27T01:49:16Z",
+            "notes": "Register TASK-0296 (enforcement scratch discipline, follow-up R1-R4).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0296",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0296",
+                "Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-0296-register"
+            ],
+            "started_at": "2026-07-26T19:49:16Z",
+            "status": "released",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-26T19:49:16Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0230-route-correction",
             "expires_at": "2026-07-04T00:00:00Z",
             "notes": "Normalized malformed released claim row before final release.",
