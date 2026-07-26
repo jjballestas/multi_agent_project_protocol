@@ -2,6 +2,15 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-26 - TASK-0295 final closure
+
+- Commit `af8e9e8` records the Codex-signed `review_approved -> done` flip after
+  independent Analista OK-CLOSABLE (31/31 vectors, 0 slips) and Arquitecto ratification.
+- Runtime events 6410-6414 close the task, release the closure/confirmation claims, and
+  back the ASCII mailbox confirmation to Arquitecto. Drift remained false.
+- Collaboration validation, encoding, domain neutrality, and diff gates exited 0. Codex
+  performed only the implementer-only done flip and did not review or ratify its own work.
+
 ## 2026-07-24 - TASK-0294 implementation
 
 - Commit `e98f007` adds the `{{AGENT_ANALYST}}` adversarial-checker row to the

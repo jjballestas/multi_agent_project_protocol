@@ -204,6 +204,20 @@
             "updated_at": "2026-07-26T19:37:09Z"
         },
         {
+            "claim_id": "CLAIM-20260726-Codex-TASK-0295-done-memory",
+            "expires_at": "2026-07-27T03:42:50Z",
+            "notes": "Persist TASK-0295 final closure commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0295-done-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-26T19:42:50Z",
+            "status": "released",
+            "task_id": "TASK-0295",
+            "updated_at": "2026-07-26T19:42:50Z"
+        },
+        {
             "claim_id": "CLAIM-20260726-Codex-TASK-0295-final-memory",
             "expires_at": "2026-07-27T01:22:00Z",
             "notes": "Persist TASK-0295 delivery commit context after governed handoff.",
