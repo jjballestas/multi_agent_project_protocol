@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -15,6 +16,8 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[2]
 SCANNER = ROOT / "scripts" / "scan_scratch_discipline.py"
+MONITOR = ROOT / "scripts" / "run_scratch_discipline_monitor.py"
+INSTALLER = ROOT / "scripts" / "install_scratch_discipline_monitor.ps1"
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -71,6 +74,60 @@ def _run(*arguments: str) -> subprocess.CompletedProcess[str]:
     )
 
 
+def _assert_windows_installer_round_trip(scan_root: Path, scratch_root: Path) -> None:
+    if sys.platform != "win32":
+        return
+    import ctypes
+
+    shell = shutil.which("pwsh") or shutil.which("powershell")
+    if not shell:
+        raise AssertionError("Windows installer round-trip requires PowerShell")
+    scan_arg = str(scan_root) + os.sep
+    scratch_arg = str(scratch_root) + os.sep
+    allow_arg = str(scan_root / "canonical-home") + os.sep
+    result = subprocess.run(
+        [
+            shell, "-NoProfile", "-File", str(INSTALLER),
+            "-Python", sys.executable,
+            "-ScanRoot", scan_arg,
+            "-ScratchRoot", scratch_arg,
+            "-KnownRepo", "https://example.invalid/owner/known-repository.git",
+            "-AllowHome", allow_arg,
+            "-MaxDepth", "2",
+            "-WhatIf",
+        ],
+        cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace",
+        check=False,
+    )
+    if result.returncode != 0:
+        raise AssertionError(f"installer preview failed: {result.stdout}{result.stderr}")
+    prefix = "Scheduled task arguments: "
+    line = next((item[len(prefix):] for item in result.stdout.splitlines() if item.startswith(prefix)), None)
+    if line is None:
+        raise AssertionError("installer -WhatIf did not print the composed argument line")
+    argc = ctypes.c_int()
+    command_line_to_argv = ctypes.windll.shell32.CommandLineToArgvW
+    command_line_to_argv.argtypes = [ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_int)]
+    command_line_to_argv.restype = ctypes.POINTER(ctypes.c_wchar_p)
+    parsed_pointer = command_line_to_argv(line, ctypes.byref(argc))
+    if not parsed_pointer:
+        raise AssertionError("CommandLineToArgvW rejected the installer argument line")
+    try:
+        parsed = [parsed_pointer[index] for index in range(argc.value)]
+    finally:
+        ctypes.windll.kernel32.LocalFree(parsed_pointer)
+    intended = [
+        str(MONITOR), "--",
+        "--scan-root", scan_arg.rstrip("\\/"),
+        "--scratch-root", scratch_arg.rstrip("\\/"),
+        "--max-depth", "2",
+        "--known-repo", "https://example.invalid/owner/known-repository.git",
+        "--allow-home", allow_arg.rstrip("\\/"),
+    ]
+    if parsed != intended:
+        raise AssertionError(f"installer argv round-trip mismatch: {parsed!r} != {intended!r}")
+
+
 def main() -> int:
     args = _parser().parse_args()
     designated = args.scratch_root.resolve()
@@ -91,6 +148,8 @@ def main() -> int:
         _write(corrupt / ".git", "gitdir: missing-directory\n")
         _write(scan_root / "unrelated" / "notes.txt", "personal data\n")
         before = _fingerprint(simulated)
+
+        _assert_windows_installer_round_trip(scan_root, allowed)
 
         result = _run(
             "--scan-root",
@@ -114,6 +173,29 @@ def main() -> int:
             raise AssertionError(f"unexpected findings: {sorted(names)}")
         if any("DECISION-0018" not in item["rule"] for item in payload["findings"]):
             raise AssertionError("each finding must carry the actionable rule")
+        monitor_result = subprocess.run(
+            [
+                sys.executable, str(MONITOR),
+                "--scan-root", str(scan_root),
+                "--scratch-root", str(allowed),
+                "--known-repo", known_remote,
+                "--allow-home", str(scan_root / "canonical-home"),
+                "--check", "--json",
+            ],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
+            errors="replace", check=False,
+        )
+        if monitor_result.returncode != 1:
+            raise AssertionError(
+                "monitor invocation without separator must preserve scanner exit 1: "
+                f"{monitor_result.stdout}{monitor_result.stderr}"
+            )
+        monitor_names = {
+            Path(item["path"]).name
+            for item in json.loads(monitor_result.stdout)["findings"]
+        }
+        if monitor_names != names:
+            raise AssertionError(f"monitor lost scanner arguments: {sorted(monitor_names)}")
         after = _fingerprint(simulated)
         if before != after:
             raise AssertionError("scanner modified the fixture tree")

@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import argparse
 from pathlib import Path
 import subprocess
 import sys
@@ -14,12 +13,7 @@ SCANNER = ROOT / "scripts" / "scan_scratch_discipline.py"
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Run the host-local scan and deliver DECISION-0018 anomalies."
-    )
-    parser.add_argument("scanner_arguments", nargs=argparse.REMAINDER)
-    args = parser.parse_args(argv)
-    scanner_args = args.scanner_arguments
+    scanner_args = list(sys.argv[1:] if argv is None else argv)
     if scanner_args[:1] == ["--"]:
         scanner_args = scanner_args[1:]
     result = subprocess.run(
