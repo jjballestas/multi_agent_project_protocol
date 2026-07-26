@@ -12,6 +12,9 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
   findings, stderr, and exit code with the repository as cwd.
 - Scratch cases, collaboration validation, encoding, neutrality, and diff gates exited 0.
   B1 quoting and the previously accepted R1/R2/R3 behavior remain unchanged.
+- Delivery commit `59ff130` moves TASK-0296 back to `in_review`, releases both maker
+  claims, and opens the self-contained handoff for Arquitecto recomputation and independent
+  Analista review. Codex did not review or ratify the remediation.
 
 ## 2026-07-26 - TASK-0295 final closure
 
