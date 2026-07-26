@@ -69,7 +69,7 @@
         {
             "id": "TASK-0295",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[DECISION-0104] Detector de higiene de scratch root: FLAGea (no borra) dirs de la metodologia en la raiz del disco fuera del scratch root"
         },
         {
