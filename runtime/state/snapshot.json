@@ -1,8 +1,9 @@
 {
-  "canonical_hash": "91f7013dc2600145e2c8026fb8e3d276972348c930bc8b6db9688944adb01364",
+  "canonical_hash": "323a73731c0d274e48468f5c71f3660ac93bf5f3a23c9c891f311569aead2312",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
+      "CLAIM-0295-scratch-detector": 1,
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
       "CLAIM-20260619-Arquitecto-close-0121": 1,
       "CLAIM-20260619-Arquitecto-close-0122": 1,
@@ -1056,6 +1057,7 @@
       "DECISION-0100-0101": 1,
       "DECISION-0101": 1,
       "DECISION-0103": 1,
+      "DECISION-0104": 1,
       "GOAL-VISION-NOVA-001": 8,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE": 5,
@@ -2569,6 +2571,7 @@
       "TASK-0292": 10,
       "TASK-0293": 11,
       "TASK-0294": 15,
+      "TASK-0295": 3,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2591,7 +2594,7 @@
       "protocol-prune": 28,
       "protocol-state": 1
     },
-    "events_applied": 5722,
+    "events_applied": 5727,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5381,6 +5384,11 @@
       "codex:task0294:start-claim:20260724T105211Z": 6371,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
+      "d0104:TASK-0295:claim-acquire": 6394,
+      "d0104:TASK-0295:release": 6398,
+      "d0104:TASK-0295:status": 6397,
+      "d0104:TASK-0295:upsert": 6396,
+      "d0104:decision": 6395,
       "eventlog-chain:genesis:v1": 672,
       "front:file-extraction:1F5C13A7B5": 1334,
       "front:file-extraction:1F5C13A7B5:claim-acquire": 1333,
@@ -8317,5 +8325,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6393
+  "up_to_seq": 6398
 }

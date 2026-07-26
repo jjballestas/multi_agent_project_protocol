@@ -24,9 +24,13 @@ Antes de la primera escritura: lee `personal/Arquitecto/STARTUP_PROMPT.md` + `ME
 - **CLEAN-CLONE VALIDATE si `git status` muestra mods SIN COMMITEAR en rutas gobernadas (mailbox/state):** el
   `validate` LOCAL corre sobre el working tree (que YA tiene el fix) -> verde, pero HEAD puede estar ROJO para un
   peer que clona -> su gate ABORTA y bloquea (silent). NO descartes esas mods como "benignas, no mias, las dejo"
-  sin verificar. Corre un clean-clone validate a ruta CORTA (`git clone -c core.longpaths=true <repo> /d/ccv;
-  cd /d/ccv; git checkout origin/main; python scripts/validate_collaboration_state.py`) -- NO al scratchpad largo
-  (MAX_PATH no materializa MSG-*.md de nombre largo -> FileNotFound FALSO, no un fallo real). Si HEAD sale rojo por
+  sin verificar. Corre un clean-clone validate a ruta CORTA **bajo el scratch root designado** (REGLA INQUEBRANTABLE
+  DECISION-0098: TODO clon/temporal vive bajo `D:/Aegis_Scratch/<proyecto>/<proposito>/`, **JAMAS en la raiz del
+  disco** `D:/`; si dudas de la ruta, PREGUNTA al operador): `git clone -c core.longpaths=true <repo>
+  /d/Aegis_Scratch/protocol/ccv; cd /d/Aegis_Scratch/protocol/ccv; git checkout origin/main; python
+  scripts/validate_collaboration_state.py`; **al terminar/stand-down, `rm -rf /d/Aegis_Scratch/protocol/ccv`**
+  (DECISION-0057; nunca la unica copia). La ruta corta bajo Aegis_Scratch sigue siendo MAX_PATH-safe -- NO uses el
+  scratchpad largo (MAX_PATH no materializa MSG-*.md de nombre largo -> FileNotFound FALSO, no un fallo real). Si HEAD sale rojo por
   un fix correcto sin commitear (p.ej. `status: open` en un archivo que vive en `answered/` -> "Mailbox status/
   folder mismatch"), COMMITEA el fix con pathspec explicito (aunque la mod sea de otra sesion); deja NO-commiteado
   solo lo que de verdad no va al repo (`.claude/settings.json` con path de sesion stale). Caso real 13-jul: HEAD

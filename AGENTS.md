@@ -73,6 +73,12 @@ content lives only under `profiles/`).
 - **Backward-incompatible** protocol changes require a decision in `Area_comun/decisions/` plus
   human approval.
 - No secrets committed.
+- **Scratch discipline (DECISION-0098 + DECISION-0104, inviolable):** agents MUST NOT create
+  work/temp/clone/test/instance directories at any disk root (`D:/`, `C:/`, home root). All scratch
+  lives under this instance's single designated scratch root `D:/Aegis_Scratch/<project>/<purpose>/`
+  (short path = MAX_PATH-safe), outside the attested tree, never the only copy, cleaned at
+  stand-down. If the scratch path is unclear (e.g. a new project without a declared scratch root),
+  the agent MUST ask the human owner and wait -- it never improvises at a disk root.
 
 Changes to these boundaries require a decision in `Area_comun/decisions/`.
 

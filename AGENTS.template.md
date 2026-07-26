@@ -81,6 +81,14 @@ These are domain-specific and must be completed by the project instance:
 
 `{{DOMAIN_CRITICAL_BOUNDARIES}}`
 
+Additionally, one boundary is universal to every instance (domain-neutral, do not remove):
+
+- **Scratch discipline (inviolable):** agents MUST NOT create work/temp/clone/test/instance
+  directories at any disk root. All scratch lives under the project's single designated scratch root
+  (a named umbrella declared at instance birth; short path = MAX_PATH-safe), outside the attested
+  tree, never the only copy, cleaned at stand-down. If the scratch path is unclear, the agent MUST
+  ask the human owner and wait -- it never improvises at a disk root.
+
 Changes to these boundaries require a decision in `Area_comun/decisions/` and any human
 approval listed in `{{HUMAN_APPROVAL_POINTS}}`.
 
