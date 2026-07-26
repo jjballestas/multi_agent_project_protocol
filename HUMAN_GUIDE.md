@@ -6,7 +6,7 @@ runtime_version: 0.12.0
 adoption_tier: runtime
 perfiles: [ninguno]
 idioma: es
-actualizado: 2026-07-24
+actualizado: 2026-07-27
 ---
 
 # Guia humana operativa - multi_agent_project_protocol
@@ -243,6 +243,94 @@ operativas (born-operational) con su propio trio de agentes y gobernanza encapsu
 lectura cruzada sin escribir el ledger ajeno. Las transiciones se autorizan por capability segun el
 contenido del trabajo, no por el nombre del participante.
 
+### 18.1 Guardarailes: capacidades y politicas configuradas
+
+[INSTANCIA] Los **guardarailes** son los interruptores de configuracion que ARMAN o desarman los dientes
+del metodo. Casi todos viven en `protocol.config.json`; unos pocos, pensados para moverse sin re-genesis,
+viven en registros externos (`Area_comun/protocol/*.json`). Hay una **cadena dura de dependencias** que el
+validador rechaza si se rompe: `authoritative => enforce => materialize => enabled` (poner uno sin su
+predecesor es un error de config). En esta instancia las cuatro estan ON. La cadena por hash
+(`chain_enabled`) liga el `canonical_hash` del config en el genesis -- por eso el config esta PINEADO (epoch
+1.14.0, sha8 2E35F26E) y un cambio real exige un re-genesis coordinado; lo que debe moverse libremente se
+mantiene FUERA del config pineado.
+
+#### Capacidades y politicas (banderas)
+
+- **`tool_policy`** (ON) -- Allowlist deny-by-default de herramientas por agente + capability + accion +
+  scope: una llamada solo pasa si casa una regla de permiso. *Para* limitar que puede usar cada agente
+  (incluidos conectores de accion). *Usar* cuando quieras acotar el acceso (DECISION-0044/0048).
+- **`event_state.enforce`** (ON) -- EL hard-gate de escritor unico (B.3): rechaza toda edicion manual del
+  ledger que difiera del replay firmado, asi que solo `submit_intent` puede escribir el estado. *Usar* SOLO
+  cuando ambos loops de agente ya rutean cada transicion por `submit_intent`; si no, la primera edicion
+  manual tras el flip rompe al peer (DECISION-0022/0028).
+- **`authoritative`** (ON) -- Marcador declarativo del modo runtime-authoritative; no tiene dientes propios
+  (los pone `enforce`). *Usar* junto a `enforce` para formalizar el modo; encenderlo solo se rechaza.
+- **`supervised_autonomy`** (OFF) -- Habilita el bucle autonomo multi-turno ACOTADO (caps de turnos /
+  checkpoint humano cada k / wall-clock). *Usar* solo con decision + aprobacion humana + caps + rollback
+  ensayado. Riesgo: ejecucion desatendida (DECISION-0024/0027).
+- **`real_invoker`** (OFF) -- Permite que el runtime llame a un LLM REAL (subproceso) en vez del invoker de
+  replay. *Usar* solo para correr los presets CLI en vivo; requiere activacion + aprobacion. Riesgo: gasto
+  y efectos reales. (La ejecucion autonoma real exige `real_invoker` Y `supervised_autonomy` -- ninguno solo
+  la desbloquea.)
+- **`sdd`** (NO adoptado aqui) -- Spec-Driven Development: exige campos de especificacion en las tareas
+  implementables. *Usar* anadiendo el bloque `sdd` para forzar specs (DECISION-0004). En esta instancia NO
+  se aplica (no hay bloque).
+- **`intake_gate`** (ON, registro externo `INTAKE_GATE.json`, desde TASK-0238) -- Exige un intake DoR
+  completo (8 campos) antes de `proposed -> ready`. *Usar* para forzar el Definition-of-Ready; vive fuera
+  del config pineado para poder activarlo/avanzarlo sin re-genesis.
+- **`maintenance`** (ON) -- Politica de poda/higiene: presupuesto de cold-start, cuantas tareas done /
+  claims liberados quedan calientes, y las ventanas de las vistas slim. *Usar* para mantener el estado
+  caliente eficiente en frio (lo consume `prune_state.py`).
+- **`anchor_enabled`** (ON, remote local) -- Ancla periodica del head del log a un backend externo (git
+  remote) + un evento `chain.anchor`. *Usar* para evidencia de manipulacion; requiere un remote alcanzable.
+- **`slim_views_enabled`** (ON) -- Materializa las vistas podadas `*.slim.json` (solo tareas/claims
+  calientes + colas recientes) para un cold-start barato. Depende de `materialize`.
+- **`subagents_enabled`** (OFF) -- Habilita que el orquestador del runtime delegue subtareas a subagentes
+  resumidores acotados. *Usar* para descargar subtrabajo con resumen acotado.
+- **`compaction_enabled`** (ON) -- Compactacion de contexto (resumenes rodantes) y ademas EXIGE un
+  `task_close_summary` al cerrar una tarea a done. *Usar* para mantener el contexto en presupuesto
+  multi-turno.
+- **`cost_attribution_enabled`** (ON) -- Emite eventos `cost.attributed` (marcados `applied:false`, no
+  mutan el estado ni causan drift) con telemetria de coste por handoff/decision/agente. *Usar* para
+  capturar coste en vivo (DECISION-0033).
+
+#### Subsistemas
+
+- **`runtime` (`adoption_tier`)** (ON) -- Declara la instancia tier-runtime (event-sourced + `submit_intent`
+  + ledger atestado). Casi todos los gates `event_state.*` dependen de este tier; coordination-tier = flujo
+  de ledger manual.
+- **`event_auth`** (ON) -- Autenticacion HMAC de CADA evento con claves por agente (los secretos viven fuera
+  del repo; nunca se commitean valores literales).
+- **`event_state.enabled`** (ON) -- Switch maestro del subsistema de estado event-sourced; base de la cadena
+  de dependencias.
+- **`event_state.materialize`** (ON) -- Permite que el replay escriba el estado caliente (`Area_comun/
+  state/*.json` + slim) en disco de forma atomica. Requiere un evento `protocol.genesis` primero.
+- **`event_state.chain` (`chain_enabled`)** (ON) -- Encadena por hash el log (la cadena #4): cada evento
+  liga su `prev_hash` y el genesis liga `canonical_hash(config)`. Da integridad append-only tamper-evident;
+  consecuencia: config PINEADO (un bump real = re-genesis).
+- **`event_state.agent_signatures` (`agent_signatures_enabled`)** (ON, 3 pubkeys) -- Atestacion ed25519 de
+  los eventos `agent.attestation` (las afirmaciones firmadas de review/QA -- el "dataset"). Requiere las
+  pubkeys en `signature_config`; las privadas quedan fuera del arbol.
+- **`agent_registry`** (ON, 3 agentes) -- Fuente de verdad de QUIEN puede actuar y con QUE capability;
+  `submit_intent` gatea cada intent contra ella (p.ej. task_upsert/decision exigen `orchestrator`; review/QA
+  exigen `reviewer`/`qa`). Roster: Arquitecto (architect/reviewer/orquestador/qa), Codex (implementer),
+  Analista (reviewer).
+- **`attested_instancing`** (AUSENTE aqui) -- Ceremonia de instanciacion atestada (firmantes con llave,
+  peones keyless, invariante de frontera). Solo se acuna en instancias PRODUCTO via `new_instance.py`
+  (DECISION-0069/0095/0096). Este repo es el HUB de gobernanza neutral (DECISION-0050), no una instancia
+  producto -- por eso el bloque no existe aqui.
+- **`domain_neutrality`** (ON, denylist de 5 terminos) -- Guarda el core contra terminos de negocio/dominio
+  (denylist + scan sobre templates/runtime/scripts). Una de las dos puertas de calidad nombradas
+  (DECISION-0002).
+- **`quality_policy`** (ON, caps 3/3) -- Acota los fix-loops de review/QA (`max_review_cycles` /
+  `max_qa_cycles`) y PROHIBE self-review y self-QA; fuerza un checkpoint humano al agotar los ciclos.
+  Guarda contra bucles infinitos y contra el rubber-stamping.
+
+> **Como leer esto:** los guardarailes en OFF o ausentes (`supervised_autonomy`, `real_invoker`, `sdd`,
+> `subagents_enabled`, `attested_instancing`) son capacidades DISPONIBLES no activadas aqui -- muestran el
+> techo del metodo, no un hueco. Los ON son los dientes vivos de esta instancia. Encender los de mas riesgo
+> (autonomia real, escritor-unico) exige decision registrada + aprobacion humana + rollback ensayado.
+
 ## 19. Seguridad y datos sensibles
 <!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
 
@@ -272,3 +360,4 @@ autocontenido; nadie asume el contexto de otro.
 | 2026-06-10 | Guia dogfooding creada para la instancia viva (tier runtime, protocol 1.1.0) via el generador |
 | 2026-07-17 | Actualizada al estado real: epoch 1.14.0 (pineado; releases aparte, ultima v1.19.0), runtime 0.12.0. Novedades de metodo: capa operacional exportable e instancias born-operational con trio propio; politica de roster peon-subordinado-al-maker con revisor siempre en modelo fuerte; capacidad de memoria persistente (repositorio caliente + indice derivado reconstruible + packs de revive con atestacion por fuente) ADOPTADA por demostracion, con su promocion al master planificada para una fase posterior a la ventana de medicion. |
 | 2026-07-24 | Endurecimiento del gate local y consolidacion del export born-operational, todo por el ciclo gobernado de dos capas (recomputo del orquestador + checker adversarial). (1) El gate local en modo completo (`HOOK_FULL`) dejo de sobre-rechazar arboles limpios y **acota** la materializacion del snapshot a los deliverables realmente indexados, sin debilitar el rechazo de estado roto. (2) El estado gobernado con **JSON malformado** ahora falla de forma **graceful** (mensaje que nombra el archivo, exit no-cero, sin traceback) en el validador y en la poda, conservando el rechazo (integridad intacta). (3) El `prune --check` tambien **nombra** los archivos de archivo (`*_ARCHIVE.json`) malformados. (4) La **politica de roster** de la norma (agente-trabajador subordinado al maker; maker fuerte que gobierna y da especificacion completa; checker adversarial siempre fuerte, `maker != checker`) se **espeja** en el `AGENTS.template` con el que nace cada instancia nueva → toda instancia born-operational lo lleva en su contrato de roles, con la **fila del checker** añadida a la tabla de roles y la muestra generada minima y coherente. Evidencia viva del ciclo de dos capas: el recomputo del orquestador cazo un test con fixture auto-invalidante que rompia CI y una sobre-materializacion de la muestra (+20K lineas) antes de gastar el ciclo del checker; el checker adversarial cazo una colision de vocabulario (el termino "worker" capturaba al human owner) que el recomputo no vio. |
+| 2026-07-27 | Nuevo apartado **18.1 Guardarailes: capacidades y politicas configuradas** (subseccion de "Roles y capacidades") -- referencia didactica de los interruptores del metodo (tool_policy, event_state.enforce/enabled/materialize/chain/agent_signatures, authoritative, supervised_autonomy, real_invoker, sdd, intake_gate, maintenance, anchor/slim/subagents/compaction/cost_attribution, runtime, event_auth, agent_registry, attested_instancing, domain_neutrality, quality_policy): que es, para que sirve, cuando usarlo y su estado en esta instancia, con la cadena dura de dependencias `authoritative => enforce => materialize => enabled` y la nota de config pineado. Fuente citada al codigo (rutas de config + `file:line` + DECISIONes). |

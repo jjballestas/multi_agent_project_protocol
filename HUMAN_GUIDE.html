@@ -90,7 +90,7 @@
     <span class="chip">Protocol <b>1.14.0</b></span>
     <span class="chip">Runtime <b>0.12.0</b></span>
     <span class="chip">Perfiles <b>ninguno</b></span>
-    <span class="chip">Actualizado <b>2026-07-24</b></span>
+    <span class="chip">Actualizado <b>2026-07-27</b></span>
   </div>
 </header>
 <div class="panorama">Panorama. Este repositorio mantiene y enriquece un protocolo de proyecto multiagente, generico y reutilizable, para trabajo de software (ciclo de vida de tareas, claims, buzon, handoffs, decisiones, reportes humanos y un validador de estado), y ademas se gestiona a si mismo con su propio protocolo (dogfooding). Esta guia permite que cualquier persona o agente nuevo entienda que es la instancia, que hace, como se construye/ejecuta/prueba/opera, como se diagnostica, donde estan las rutas del protocolo, que roles hay y como retomar el contexto.</div>
@@ -359,6 +359,103 @@ python examples/human_guide_cases/run_human_guide_cases.py</code></pre>
 <div class="section-meta"><span class="badge">CORE+INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
 <p>[CORE] Roles genericos del metodo: <strong>operador humano</strong> (aprueba politica, cambios incompatibles y releases), <strong>agente operativo/implementador</strong> (ejecuta el trabajo), <strong>agente revisor/arquitecto</strong> (diseña, revisa y mantiene la coherencia y la neutralidad). La capability requerida sale del CONTENIDO del trabajo, no del nombre del participante.</p>
 <p>[INSTANCIA] Configurados aqui: un agente arquitecto con capabilities de arquitecto/orquestador/qa/revisor; un agente implementador (maker) con capabilities de implementador/ingeniero de pruebas; un agente revisor adversarial (checker) que permanece SIEMPRE en un modelo fuerte; y un operador humano. Politica de roster vigente: los agentes-peon (modelos debiles, p.ej. locales) son ejecutores de codigo SUBORDINADOS al maker -- el maker les asigna sub-tareas con especificacion detallada y responde por el resultado ante el revisor; un peon nunca ocupa rol de revisor, orquestador ni firmante. El metodo tambien soporta instancias nacidas operativas (born-operational) con su propio trio de agentes y gobernanza encapsulada, coordinadas por lectura cruzada sin escribir el ledger ajeno. Las transiciones se autorizan por capability segun el contenido del trabajo, no por el nombre del participante.</p>
+<h3>18.1 Guardarailes: capacidades y politicas configuradas</h3>
+<p>[INSTANCIA] Los <strong>guardarailes</strong> son los interruptores de configuracion que ARMAN o desarman los dientes del metodo. Casi todos viven en <code>protocol.config.json</code>; unos pocos, pensados para moverse sin re-genesis, viven en registros externos (<code>Area_comun/protocol/*.json</code>). Hay una <strong>cadena dura de dependencias</strong> que el validador rechaza si se rompe: <code>authoritative =&gt; enforce =&gt; materialize =&gt; enabled</code> (poner uno sin su predecesor es un error de config). En esta instancia las cuatro estan ON. La cadena por hash (<code>chain_enabled</code>) liga el <code>canonical_hash</code> del config en el genesis -- por eso el config esta PINEADO (epoch 1.14.0, sha8 2E35F26E) y un cambio real exige un re-genesis coordinado; lo que debe moverse libremente se mantiene FUERA del config pineado.</p>
+<h4>Capacidades y politicas (banderas)</h4>
+<ul>
+<li>**<code>tool_policy</code>** (ON) -- Allowlist deny-by-default de herramientas por agente + capability + accion +</li>
+</ul>
+<p>scope: una llamada solo pasa si casa una regla de permiso. *Para* limitar que puede usar cada agente (incluidos conectores de accion). *Usar* cuando quieras acotar el acceso (DECISION-0044/0048).</p>
+<ul>
+<li>**<code>event_state.enforce</code>** (ON) -- EL hard-gate de escritor unico (B.3): rechaza toda edicion manual del</li>
+</ul>
+<p>ledger que difiera del replay firmado, asi que solo <code>submit_intent</code> puede escribir el estado. *Usar* SOLO cuando ambos loops de agente ya rutean cada transicion por <code>submit_intent</code>; si no, la primera edicion manual tras el flip rompe al peer (DECISION-0022/0028).</p>
+<ul>
+<li>**<code>authoritative</code>** (ON) -- Marcador declarativo del modo runtime-authoritative; no tiene dientes propios</li>
+</ul>
+<p>(los pone <code>enforce</code>). *Usar* junto a <code>enforce</code> para formalizar el modo; encenderlo solo se rechaza.</p>
+<ul>
+<li>**<code>supervised_autonomy</code>** (OFF) -- Habilita el bucle autonomo multi-turno ACOTADO (caps de turnos /</li>
+</ul>
+<p>checkpoint humano cada k / wall-clock). *Usar* solo con decision + aprobacion humana + caps + rollback ensayado. Riesgo: ejecucion desatendida (DECISION-0024/0027).</p>
+<ul>
+<li>**<code>real_invoker</code>** (OFF) -- Permite que el runtime llame a un LLM REAL (subproceso) en vez del invoker de</li>
+</ul>
+<p>replay. *Usar* solo para correr los presets CLI en vivo; requiere activacion + aprobacion. Riesgo: gasto y efectos reales. (La ejecucion autonoma real exige <code>real_invoker</code> Y <code>supervised_autonomy</code> -- ninguno solo la desbloquea.)</p>
+<ul>
+<li>**<code>sdd</code>** (NO adoptado aqui) -- Spec-Driven Development: exige campos de especificacion en las tareas</li>
+</ul>
+<p>implementables. *Usar* anadiendo el bloque <code>sdd</code> para forzar specs (DECISION-0004). En esta instancia NO se aplica (no hay bloque).</p>
+<ul>
+<li>**<code>intake_gate</code>** (ON, registro externo <code>INTAKE_GATE.json</code>, desde TASK-0238) -- Exige un intake DoR</li>
+</ul>
+<p>completo (8 campos) antes de <code>proposed -&gt; ready</code>. *Usar* para forzar el Definition-of-Ready; vive fuera del config pineado para poder activarlo/avanzarlo sin re-genesis.</p>
+<ul>
+<li>**<code>maintenance</code>** (ON) -- Politica de poda/higiene: presupuesto de cold-start, cuantas tareas done /</li>
+</ul>
+<p>claims liberados quedan calientes, y las ventanas de las vistas slim. *Usar* para mantener el estado caliente eficiente en frio (lo consume <code>prune_state.py</code>).</p>
+<ul>
+<li>**<code>anchor_enabled</code>** (ON, remote local) -- Ancla periodica del head del log a un backend externo (git</li>
+</ul>
+<p>remote) + un evento <code>chain.anchor</code>. *Usar* para evidencia de manipulacion; requiere un remote alcanzable.</p>
+<ul>
+<li>**<code>slim_views_enabled</code>** (ON) -- Materializa las vistas podadas <code>*.slim.json</code> (solo tareas/claims</li>
+</ul>
+<p>calientes + colas recientes) para un cold-start barato. Depende de <code>materialize</code>.</p>
+<ul>
+<li>**<code>subagents_enabled</code>** (OFF) -- Habilita que el orquestador del runtime delegue subtareas a subagentes</li>
+</ul>
+<p>resumidores acotados. *Usar* para descargar subtrabajo con resumen acotado.</p>
+<ul>
+<li>**<code>compaction_enabled</code>** (ON) -- Compactacion de contexto (resumenes rodantes) y ademas EXIGE un</li>
+</ul>
+<p><code>task_close_summary</code> al cerrar una tarea a done. *Usar* para mantener el contexto en presupuesto multi-turno.</p>
+<ul>
+<li>**<code>cost_attribution_enabled</code>** (ON) -- Emite eventos <code>cost.attributed</code> (marcados <code>applied:false</code>, no</li>
+</ul>
+<p>mutan el estado ni causan drift) con telemetria de coste por handoff/decision/agente. *Usar* para capturar coste en vivo (DECISION-0033).</p>
+<h4>Subsistemas</h4>
+<ul>
+<li>**<code>runtime</code> (<code>adoption_tier</code>)** (ON) -- Declara la instancia tier-runtime (event-sourced + <code>submit_intent</code></li>
+</ul>
+<p>+ ledger atestado). Casi todos los gates <code>event_state.*</code> dependen de este tier; coordination-tier = flujo de ledger manual.</p>
+<ul>
+<li>**<code>event_auth</code>** (ON) -- Autenticacion HMAC de CADA evento con claves por agente (los secretos viven fuera</li>
+</ul>
+<p>del repo; nunca se commitean valores literales).</p>
+<ul>
+<li>**<code>event_state.enabled</code>** (ON) -- Switch maestro del subsistema de estado event-sourced; base de la cadena</li>
+</ul>
+<p>de dependencias.</p>
+<ul>
+<li>**<code>event_state.materialize</code>** (ON) -- Permite que el replay escriba el estado caliente (<code>Area_comun/</code></li>
+</ul>
+<p>state/*.json<code> + slim) en disco de forma atomica. Requiere un evento </code>protocol.genesis<code> primero.</code></p>
+<ul>
+<li>**<code>event_state.chain</code> (<code>chain_enabled</code>)** (ON) -- Encadena por hash el log (la cadena #4): cada evento</li>
+</ul>
+<p>liga su <code>prev_hash</code> y el genesis liga <code>canonical_hash(config)</code>. Da integridad append-only tamper-evident; consecuencia: config PINEADO (un bump real = re-genesis).</p>
+<ul>
+<li>**<code>event_state.agent_signatures</code> (<code>agent_signatures_enabled</code>)** (ON, 3 pubkeys) -- Atestacion ed25519 de</li>
+</ul>
+<p>los eventos <code>agent.attestation</code> (las afirmaciones firmadas de review/QA -- el "dataset"). Requiere las pubkeys en <code>signature_config</code>; las privadas quedan fuera del arbol.</p>
+<ul>
+<li>**<code>agent_registry</code>** (ON, 3 agentes) -- Fuente de verdad de QUIEN puede actuar y con QUE capability;</li>
+</ul>
+<p><code>submit_intent</code> gatea cada intent contra ella (p.ej. task_upsert/decision exigen <code>orchestrator</code>; review/QA exigen <code>reviewer</code>/<code>qa</code>). Roster: Arquitecto (architect/reviewer/orquestador/qa), Codex (implementer), Analista (reviewer).</p>
+<ul>
+<li>**<code>attested_instancing</code>** (AUSENTE aqui) -- Ceremonia de instanciacion atestada (firmantes con llave,</li>
+</ul>
+<p>peones keyless, invariante de frontera). Solo se acuna en instancias PRODUCTO via <code>new_instance.py</code> (DECISION-0069/0095/0096). Este repo es el HUB de gobernanza neutral (DECISION-0050), no una instancia producto -- por eso el bloque no existe aqui.</p>
+<ul>
+<li>**<code>domain_neutrality</code>** (ON, denylist de 5 terminos) -- Guarda el core contra terminos de negocio/dominio</li>
+</ul>
+<p>(denylist + scan sobre templates/runtime/scripts). Una de las dos puertas de calidad nombradas (DECISION-0002).</p>
+<ul>
+<li>**<code>quality_policy</code>** (ON, caps 3/3) -- Acota los fix-loops de review/QA (<code>max_review_cycles</code> /</li>
+</ul>
+<p><code>max_qa_cycles</code>) y PROHIBE self-review y self-QA; fuerza un checkpoint humano al agotar los ciclos. Guarda contra bucles infinitos y contra el rubber-stamping.</p>
+<blockquote><strong>Como leer esto:</strong> los guardarailes en OFF o ausentes (<code>supervised_autonomy</code>, <code>real_invoker</code>, <code>sdd</code>, <code>subagents_enabled</code>, <code>attested_instancing</code>) son capacidades DISPONIBLES no activadas aqui -- muestran el techo del metodo, no un hueco. Los ON son los dientes vivos de esta instancia. Encender los de mas riesgo (autonomia real, escritor-unico) exige decision registrada + aprobacion humana + rollback ensayado.</blockquote>
 </section>
 <!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
 <section id="19-seguridad-y-datos-sensibles">
@@ -402,13 +499,17 @@ python examples/human_guide_cases/run_human_guide_cases.py</code></pre>
 <td>2026-07-24</td>
 <td>Endurecimiento del gate local y consolidacion del export born-operational, todo por el ciclo gobernado de dos capas (recomputo del orquestador + checker adversarial). (1) El gate local en modo completo (<code>HOOK_FULL</code>) dejo de sobre-rechazar arboles limpios y <strong>acota</strong> la materializacion del snapshot a los deliverables realmente indexados, sin debilitar el rechazo de estado roto. (2) El estado gobernado con <strong>JSON malformado</strong> ahora falla de forma <strong>graceful</strong> (mensaje que nombra el archivo, exit no-cero, sin traceback) en el validador y en la poda, conservando el rechazo (integridad intacta). (3) El <code>prune --check</code> tambien <strong>nombra</strong> los archivos de archivo (<code>*_ARCHIVE.json</code>) malformados. (4) La <strong>politica de roster</strong> de la norma (agente-trabajador subordinado al maker; maker fuerte que gobierna y da especificacion completa; checker adversarial siempre fuerte, <code>maker != checker</code>) se <strong>espeja</strong> en el <code>AGENTS.template</code> con el que nace cada instancia nueva → toda instancia born-operational lo lleva en su contrato de roles, con la <strong>fila del checker</strong> añadida a la tabla de roles y la muestra generada minima y coherente. Evidencia viva del ciclo de dos capas: el recomputo del orquestador cazo un test con fixture auto-invalidante que rompia CI y una sobre-materializacion de la muestra (+20K lineas) antes de gastar el ciclo del checker; el checker adversarial cazo una colision de vocabulario (el termino "worker" capturaba al human owner) que el recomputo no vio.</td>
 </tr>
+<tr>
+<td>2026-07-27</td>
+<td>Nuevo apartado <strong>18.1 Guardarailes: capacidades y politicas configuradas</strong> (subseccion de "Roles y capacidades") -- referencia didactica de los interruptores del metodo (tool_policy, event_state.enforce/enabled/materialize/chain/agent_signatures, authoritative, supervised_autonomy, real_invoker, sdd, intake_gate, maintenance, anchor/slim/subagents/compaction/cost_attribution, runtime, event_auth, agent_registry, attested_instancing, domain_neutrality, quality_policy): que es, para que sirve, cuando usarlo y su estado en esta instancia, con la cadena dura de dependencias <code>authoritative =&gt; enforce =&gt; materialize =&gt; enabled</code> y la nota de config pineado. Fuente citada al codigo (rutas de config + <code>file:line</code> + DECISIONes).</td>
+</tr>
 </tbody></table>
 </section>
 </main>
 </div>
 <footer>
   Generado por <code>scripts/generate_human_guide.py</code>. Fuente unica: el archivo <code>.md</code>.
-  Hash de fuente: <code>314dcf9abe36ea76</code>. Sin JavaScript, CDN ni recursos externos.
+  Hash de fuente: <code>54d1e0a4a0344100</code>. Sin JavaScript, CDN ni recursos externos.
 </footer>
 </div>
 </body>
