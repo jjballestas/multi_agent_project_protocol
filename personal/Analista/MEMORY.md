@@ -4821,3 +4821,65 @@ llamadas mas anadir un vector de raiz de volumen al test.
 
 Hook al commitear: `PRUNE DUE (cold_start_tokens 23866 >= 20000; released_ratio 93.33 >= 90)` --
 accion del Arquitecto en su proximo checkpoint, no mia. Senalado otra vez.
+
+## 2026-07-27 -- TASK-0296 RE-REVIEW iter 2 (retirada del TrimEnd): GO / OK-CLOSABLE
+
+Ancla `12b8d77` (cita del Arquitecto `94cdb27`, fix `9691312`); `git diff 94cdb27 12b8d77 -- scripts/
+examples/ Area_comun/protocol/ runtime/ protocol.config.json` = vacio, asi que juzgue sobre
+`12b8d77`. Clon limpio `D:/Aegis_Scratch/multi_agent_project_protocol/an96i2` (+ `an96bank`,
+`an96neg`, `an96base`, fixtures `an96fx2/an96fx3/an96negfx`, todos borrados al terminar).
+Veredicto: `Area_comun/artifacts/Analista-TASK-0296-volume-root-iter2-verdict.md`; mensaje
+`MSG-20260727-Analista-to-Arquitecto-REREVIEW-TASK-0296-iter2.md`. Commit `d93b897` (pusheado).
+
+**B2 CERRADO por comportamiento.** Sin los 4 `.TrimEnd`, `-ScanRoot 'D:/'` -> `--scan-root D:/` y
+`'D:\'` -> `--scan-root D:\`; ambas resuelven `D:\` y la linea compuesta ejecutada como la ejecutaria
+el Task Scheduler (`CreateProcess` con la cadena cruda, `cwd` = raiz del repo) escanea el DISCO:
+exit 1 con las 2 violaciones reales de 0104 de esta maquina, identico a la invocacion directa.
+**B1 no reabierto y ademas MEJOR que en iter 1**: el valor llega verbatim (`...\vol\` con el
+separador final) en vez de recortado, 12 tokens 3/3 flags, incluido `-AllowHome 'D:\home dir\'`
+(espacio + backslash). **Cero B3** en 21 vectores / 14 payloads de quoting (UNC, 3 backslashes,
+comilla embebida, backslashes-antes-de-comilla, solo-separadores, `D:sub`, array nativo de 2 raices).
+Gates: suite 0 (estable 3/3, 3-4 s, 0 residuos), validate 0, encoding 0, neutralidad 0, drift CLEAN
+`up_to_seq=6450`, config `2E35F26E` intacto.
+
+**Residuales declarados no bloqueantes:** RES-1 el designador de unidad pelado `D:` sigue siendo
+relativo a la unidad (`--scan-root D:` con cwd = repo -> exit 0 "OK: no anomalies" con el disco
+sucio); no bloquea porque `D:` NO es una raiz de volumen (`Path('D:').is_absolute()` es False), el
+instalador ahora hace pass-through fiel y el runbook documenta `--scan-root <host-root>`; pero el
+test ENTREGADO fija esa conducta (`ROOT.drive` en el bucle de variantes; `endswith(':')` solo sobre
+`volume_root`), asi que el endurecimiento natural exigira actualizar el test junto al guard. RES-2
+el escape de comilla embebida no lo cubre la suite (mutante sobrevive) aunque funciona. RES-3 la
+asercion de equivalencia (lineas 145-156) es casi tautologica y escanea el volumen del host DOS
+veces comparando stdout/stderr byte a byte -> flake si el disco cambia entre corridas, y rompe la
+host-independencia de un `examples/`. RES-4 `endswith(':')` en la linea 143 es codigo muerto.
+
+LECCIONES nuevas:
+21. **La falsabilidad de un test se PRUEBA mutando el fix, no leyendo el test.** Monte 5 mutantes
+    sobre un esqueleto ligero (solo `scripts/` + `examples/<caso>/`, 32 KB, sin `.git`) y corri la
+    suite entregada contra cada uno. El decisivo fue N3 = **revert COMPLETO a iter 1** (TrimEnd Y
+    `rstrip` de vuelta en la expectativa): murio con `installer changed volume-root vector: 'D:' !=
+    'D:/'`. Ese es exactamente el camino por el que B2 paso en verde la primera vez. Un mutante que
+    SOBREVIVE (N5, escape de comilla) es un residual de cobertura, no necesariamente un defecto:
+    hay que distinguir "no cubierto" de "no funciona" comprobando el comportamiento aparte.
+22. **NUNCA meter rutas Windows en un heredoc de Bash.** `python - <<'PYEOF'` con `"D:\...\fixture\vol\\"`
+    llego a Python con backslashes simples -> `\f` y `\v` se volvieron form-feed y vertical-tab, el
+    argv se corrompio y el harness reporto un falso B1 REABIERTO de 4 tokens sobre el codigo bueno
+    (y tambien sobre el de iter 1). La pista fue `SyntaxWarning: invalid escape sequence '\A'`.
+    Regla: los bancos con rutas van a **fichero real** con `Write` y `r"..."` / `chr(92)`, jamas por
+    heredoc. Casi emito un tercer NO-GO por un artefacto de mi propio harness.
+23. **Distinguir "la herramienta corrompe una entrada valida" de "la entrada no es lo que promete".**
+    B2 era lo primero (destruia `D:/`) = bloqueante. El `D:` pelado es lo segundo (pass-through fiel
+    de una ruta relativa a la unidad) = residual, preexistente en toda la historia de la unidad y
+    fuera de la grafia que documenta el runbook. El criterio del Arquitecto listaba las tres grafias
+    juntas; lo dije en voz alta en vez de rubber-stamp, sin convertirlo en bloqueo.
+24. **Si el fix retira un "cinturon", verificar que lo de abajo aguanta solo.** Retirar el `TrimEnd`
+    solo era seguro porque el scanner ya normaliza separadores finales por su cuenta (`_resolved()`
+    en scan/scratch/allow-home, `rstrip` y `urlparse().path.rstrip('/')` en `_repo_identity`). Lo
+    verifique EJECUTANDO con separador final en los cuatro parametros, no leyendo el fuente.
+
+Gotchas operativas de esta sesion: (a) `cp -r` de un clon del repo son ~3.7 GB y se come el turno --
+esqueleto minimo para mutar; (b) `git commit -F /tmp/f.txt` tras un `&&` que fallo reutilizo un
+`/tmp/f.txt` VIEJO y commiteo con mensaje ajeno ("break governed with valid trailer") -> amend, y en
+adelante el mensaje de commit se escribe con `Write` al scratchpad, nunca a `/tmp` compartido.
+Hook al commitear: `PRUNE DUE (cold_start_tokens 27814 >= 20000; released_ratio 94.12 >= 90)` --
+accion del Arquitecto en su proximo checkpoint, no mia. Lo dejo senalado.
