@@ -248,6 +248,40 @@
             "updated_at": "2026-07-26T17:22:00Z"
         },
         {
+            "claim_id": "CLAIM-20260726-Codex-TASK-0296",
+            "expires_at": "2026-07-27T08:35:00Z",
+            "notes": "Implement host-local scratch discipline enforcement, depth, canonical-home allowlist, and visible git warnings.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296",
+                "Area_comun/state/TASK_INDEX.json#TASK-0296",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0296",
+                "Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md",
+                "scripts/",
+                "examples/scratch_discipline_cases/",
+                "Area_comun/protocol/RUNBOOK_ONBOARDING_COLD_START.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-26T20:35:00Z",
+            "status": "active",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-26T20:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260726-Codex-TASK-0296-runbook",
+            "expires_at": "2026-07-27T08:40:00Z",
+            "notes": "Document host-local automatic scratch-discipline monitor operation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296-runbook",
+                "Area_comun/protocol/RUNBOOK_ONBOARDING_REMOTO.md"
+            ],
+            "started_at": "2026-07-26T20:40:00Z",
+            "status": "active",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-26T20:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-close0294-20260724",
             "expires_at": "2026-07-24T12:11:59Z",
             "notes": "Cierre 0294 (GO checker OK-CLOSABLE; RES-8/9/10 cerrados; fix-loop 1 iter por sobre-materializacion) -> in_review->done + archivo REVIEW/VERDICT",

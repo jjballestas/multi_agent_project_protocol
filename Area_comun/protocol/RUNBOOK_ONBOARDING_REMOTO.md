@@ -171,3 +171,27 @@ Estas operando cuando: clonaste la instancia, tu `.agents/<id>/config.json` esta
 canonico valida verde en tu clon, y completaste 1 tarea de prueba (claim -> entrega -> cierre) solo
 via Git, con tu estado visible en otros clones. Objetivo: <= 1 dia. El tiempo real se registra
 (alimenta HP6) cuando la instancia mide el onboarding (replica employee-run).
+
+# Host-local scratch-discipline enforcement
+
+Run `scripts/run_scratch_discipline_monitor.py` periodically from the host scheduler, never from
+CI. Pass `--scan-root`, `--scratch-root`, `--known-repo`, the canonical repository homes through
+repeatable `--allow-home`, and a deliberate `--max-depth`. Example scheduler command:
+
+```text
+python scripts/run_scratch_discipline_monitor.py -- --scan-root <host-root> --scratch-root <scratch-root> --known-repo <repository> --allow-home <canonical-home> --max-depth 2
+```
+
+Exit `0` means clean, `1` means actionable findings, and `2` means invocation or inspection error.
+The scheduler must retain stdout/stderr and alert the responsible owner on any nonzero exit. Exit
+`1` output is the host-local DECISION-0018 anomaly delivery; the owner records it in the governed
+mailbox. The scanner and monitor never delete, move, or modify scanned paths. Runtime-specific
+values may instead live in an unpinned config under `scratch_discipline.canonical_homes`; do not
+alter an epoch-pinned protocol config to add them.
+
+On Windows, install the periodic trigger with
+`scripts/install_scratch_discipline_monitor.ps1`. It registers a host-local Scheduled Task with a
+configurable interval; `-WhatIf` previews registration without changing host state. Configure the
+host scheduler or its operational wrapper to retain the task's exit code and output and route
+nonzero runs to the responsible owner. Installation is an explicit operator action because it
+changes host scheduler state; normal scans remain read-only.

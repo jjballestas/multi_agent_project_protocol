@@ -84,6 +84,11 @@ def main() -> int:
         _attested_tree(allowed / "compliant")
         _git_tree(scan_root / "stray-clone", known_remote)
         _attested_tree(scan_root / "stray-markers")
+        _attested_tree(scan_root / "canonical-home")
+        _attested_tree(scan_root / "container" / "nested-stray")
+        corrupt = scan_root / "corrupt-git"
+        corrupt.mkdir()
+        _write(corrupt / ".git", "gitdir: missing-directory\n")
         _write(scan_root / "unrelated" / "notes.txt", "personal data\n")
         before = _fingerprint(simulated)
 
@@ -94,6 +99,8 @@ def main() -> int:
             str(allowed),
             "--known-repo",
             known_remote,
+            "--allow-home",
+            str(scan_root / "canonical-home"),
             "--check",
             "--json",
         )
@@ -110,6 +117,22 @@ def main() -> int:
         after = _fingerprint(simulated)
         if before != after:
             raise AssertionError("scanner modified the fixture tree")
+
+        deep_result = _run(
+            "--scan-root", str(scan_root),
+            "--scratch-root", str(allowed),
+            "--known-repo", known_remote,
+            "--allow-home", str(scan_root / "canonical-home"),
+            "--max-depth", "2", "--check", "--json",
+        )
+        deep_names = {
+            Path(item["path"]).name
+            for item in json.loads(deep_result.stdout)["findings"]
+        }
+        if "nested-stray" not in deep_names or "canonical-home" in deep_names:
+            raise AssertionError(f"depth/allowlist failure: {sorted(deep_names)}")
+        if "WARNING: cannot resolve git candidate" not in deep_result.stderr:
+            raise AssertionError("corrupt git candidate must produce a visible warning")
 
         clean_root = designated / f"scratch-discipline-clean-{uuid.uuid4().hex}"
         clean_allowed = clean_root / "designated-scratch"

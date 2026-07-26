@@ -2,7 +2,7 @@
 task_id: TASK-0296
 title: "[DECISION-0104] Enforcement del detector de scratch discipline: disparo automatico + hardening (depth/allowlist/fail-open warning) -- de detectable a enforced"
 type: infra
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal
