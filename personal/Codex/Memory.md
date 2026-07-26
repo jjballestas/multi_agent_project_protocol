@@ -4395,3 +4395,15 @@ issue. Re-run only the necessary evidence path and record the caveat.
   claims, and opens the self-contained Arquitecto handoff. Arquitecto must
   recompute commit `3aa332d` and route it to Analista; no real disk root was
   scanned and no cleanup was performed.
+## 2026-07-26 - TASK-0296 implementation commit 36269a3
+
+- Added host-local scheduled enforcement entrypoints: `scripts/run_scratch_discipline_monitor.py`
+  and `scripts/install_scratch_discipline_monitor.ps1`; installation remains an explicit operator
+  host-state action and is never wired to CI.
+- Hardened `scan_scratch_discipline.py` with `--max-depth` (default 1), repeatable
+  `--allow-home`, optional `scratch_discipline.canonical_homes`, and visible stderr warnings for
+  unresolved git candidates while preserving read-only scanning.
+- Extended the fixture suite for depth 1/2, canonical-home allowlisting, corrupt git warning, and
+  fingerprint stability. Required gates passed; `protocol.config.json` was not modified.
+- TASK-0296 is `in_progress` pending governed delivery to `in_review`; active claims are
+  `CLAIM-20260726-Codex-TASK-0296` and `CLAIM-20260726-Codex-TASK-0296-runbook`.

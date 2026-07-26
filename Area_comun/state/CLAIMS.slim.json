@@ -1,30 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260726-Codex-TASK-0296",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296",
-                "Area_comun/state/TASK_INDEX.json#TASK-0296",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0296",
-                "Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md",
-                "scripts/",
-                "examples/scratch_discipline_cases/",
-                "Area_comun/protocol/RUNBOOK_ONBOARDING_COLD_START.md",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0296"
-        },
-        {
-            "claim_id": "CLAIM-20260726-Codex-TASK-0296-runbook",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296-runbook",
-                "Area_comun/protocol/RUNBOOK_ONBOARDING_REMOTO.md"
-            ],
-            "task_id": "TASK-0296"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

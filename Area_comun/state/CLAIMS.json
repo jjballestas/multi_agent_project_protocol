@@ -263,9 +263,30 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-26T20:35:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0296",
             "updated_at": "2026-07-26T20:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260726-Codex-TASK-0296-delivery",
+            "expires_at": "2026-07-27T08:55:00Z",
+            "notes": "Publish TASK-0296 handoff and transition implementation to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296-runbook",
+                "Area_comun/state/TASK_INDEX.json#TASK-0296",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0296",
+                "Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0296-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-26T20:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-26T20:55:00Z"
         },
         {
             "claim_id": "CLAIM-20260726-Codex-TASK-0296-runbook",
@@ -277,7 +298,7 @@
                 "Area_comun/protocol/RUNBOOK_ONBOARDING_REMOTO.md"
             ],
             "started_at": "2026-07-26T20:40:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0296",
             "updated_at": "2026-07-26T20:40:00Z"
         },
