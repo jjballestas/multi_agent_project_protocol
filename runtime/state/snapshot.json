@@ -1,10 +1,11 @@
 {
-  "canonical_hash": "81faa27eee4ea4b53eb2fcf9494304b83377f536496c1e996813dd4b700eba3e",
+  "canonical_hash": "7c4450be48a4e302ab004431cfc99fde030b065809c6fcbd3416ef302fb80e6e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
       "CLAIM-0295-ratify": 1,
       "CLAIM-0295-scratch-detector": 1,
+      "CLAIM-0296-ratify": 1,
       "CLAIM-0296-register": 1,
       "CLAIM-0296-reject": 1,
       "CLAIM-0296-reject2": 1,
@@ -2582,7 +2583,7 @@
       "TASK-0293": 11,
       "TASK-0294": 15,
       "TASK-0295": 17,
-      "TASK-0296": 28,
+      "TASK-0296": 30,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2605,7 +2606,7 @@
       "protocol-prune": 28,
       "protocol-state": 1
     },
-    "events_applied": 5779,
+    "events_applied": 5782,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8322,6 +8323,9 @@
       "ratifica-0271-20260720T0215": 5057,
       "ratifica-0271b-20260720T0355": 5122,
       "ratifica-0273-20260720T1216": 5297,
+      "ratify0296:TASK-0296:acq": 6451,
+      "ratify0296:TASK-0296:rel": 6453,
+      "ratify0296:TASK-0296:st": 6452,
       "ratify:TASK-0295:claim-acquire": 6407,
       "ratify:TASK-0295:release": 6409,
       "ratify:TASK-0295:status": 6408,
@@ -8388,5 +8392,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6450
+  "up_to_seq": 6453
 }
