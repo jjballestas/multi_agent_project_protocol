@@ -1,11 +1,12 @@
 {
-  "canonical_hash": "14c9b55f0743d7b710090c0db2d5b3e86ef3355854e4309f375d33cf56e41059",
+  "canonical_hash": "5958a48af2f03d84f3e6077a1b463b9f0c5093fda12d8586053e7f6cfb740b24",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
       "CLAIM-0295-ratify": 1,
       "CLAIM-0295-scratch-detector": 1,
       "CLAIM-0296-register": 1,
+      "CLAIM-0296-reject": 1,
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
       "CLAIM-20260619-Arquitecto-close-0121": 1,
       "CLAIM-20260619-Arquitecto-close-0122": 1,
@@ -2577,7 +2578,7 @@
       "TASK-0293": 11,
       "TASK-0294": 15,
       "TASK-0295": 17,
-      "TASK-0296": 13,
+      "TASK-0296": 15,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2600,7 +2601,7 @@
       "protocol-prune": 28,
       "protocol-state": 1
     },
-    "events_applied": 5759,
+    "events_applied": 5762,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8321,6 +8322,9 @@
       "reject-0258-iter1-20260720T0645": 5196,
       "reject-0267-iter1-20260720T0107": 5014,
       "reject-0272-iter1-20260720T1150": 5284,
+      "reject0296:TASK-0296:claim-acquire": 6431,
+      "reject0296:TASK-0296:release": 6433,
+      "reject0296:TASK-0296:status": 6432,
       "release-0267-fix1-delivery-2026-07-20T01:21:02Z": 5026,
       "release-0267-fix1-impl-2026-07-20T01:21:02Z": 5025,
       "release-0267-fix1-status-2026-07-20T01:21:02Z": 5027,
@@ -8363,5 +8367,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6430
+  "up_to_seq": 6433
 }
