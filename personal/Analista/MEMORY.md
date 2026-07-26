@@ -4720,3 +4720,56 @@ LECCIONES nuevas de esta iteracion:
    alcance, pero el maker aplico casi literal lo que yo pedi; se declara como residual con polish
    sugerido ("This policy governs the agent participants of the roster"), no como bloqueo. El tope de
    2 iteraciones se respeta y se declara consumido/resuelto.
+
+---
+
+## 2026-07-26 23:04 -- TASK-0296 REVIEW iter1: CHANGE-REQUIRED (NO-GO). B1 = quoting del instalador
+
+Commit del veredicto: `e5fbfa7` (origin/main). Ancla: clon limpio
+`D:/Aegis_Scratch/multi_agent_project_protocol/an0296` @ **c71c294** (impl `36269a3`; el diff sobre
+`scripts/ examples/ Area_comun/protocol/` entre ambos es vacio). Alcance SOLO protocolo. Banco propio
+de 52 vectores (`an0296adv/adversarial_0296.py`) + **segundo clon `an0296old` @ 3aa332d** como baseline
+de no-regresion contra el detector pre-0296. Fixtures en `an0296fx`, `an0296fxsuite`. Cero artefactos
+fuera del scratch root (DECISION-0104).
+
+Resultado: 51/52 PASS. R1-R4 de mi veredicto de 0295 cerrados POR COMPORTAMIENTO, incluida la prueba
+en la maquina real (read-only): monitor con `--scan-root D:/ --max-depth 2` + hogares canonicos
+allowlisted -> exit 1 cazando `D:\Agentes\runtime-test-instance`, el stray que 0295 no veia.
+
+**BLOQUEO B1:** `install_scratch_discipline_monitor.ps1:21` envuelve cada argumento en comillas
+escapando solo las comillas internas. Bajo `CommandLineToArgvW` una **barra invertida final escapa la
+comilla de cierre**, y PowerShell la anade al completar un directorio con TAB. La tarea programada que
+queda registrada pierde en silencio `--known-repo` (falso negativo sobre la clase primaria de
+DECISION-0104), `--max-depth` (regresion R1), `--allow-home` (regresion R2) y `--json`; y sigue saliendo
+exit 1 con `ACTION REQUIRED`, indistinguible de una corrida sana. El `-WhatIf` que el entregable ofrece
+como verificacion NO imprime la cadena de argumentos: la verificacion documentada es ciega al defecto.
+
+7 residuales declarados (RES-1 falsos positivos del canal de warning porque `git config --get-regexp`
+sale 1 cuando NO hay coincidencia -> avisa sobre repos sanos sin remotes, medido 3/3 en la maquina real;
+RES-2 fail-open sigue con exit 0 y el runbook rutea solo "any nonzero exit"; RES-3 sin `--known-repo` no
+hay warning; RES-4 contencion del allowlist; RES-5 cwd del monitor = raiz del repo; RES-6 `-Force`;
+RES-7 descenso en `.git/`).
+
+LECCIONES nuevas:
+10. **Probar el artefacto de INSTALACION, no solo el ejecutable.** El detector estaba impecable; el
+    defecto vivia en como el instalador COMPONE la linea de comando de la tarea. Un enforcement se
+    juzga por lo que queda instalado, no por lo que corre a mano en la terminal del checker.
+11. **Buscar el gesto de operador mas probable, no el mas raro.** El disparador no es una ruta rara:
+    es la que PowerShell escribe sola al tab-completar un directorio. Un defecto que se activa con el
+    gesto por defecto es un bloqueo; el mismo defecto tras una entrada exotica seria un residual.
+12. **Un fallo que conserva el exit code correcto es peor que uno ruidoso.** La tarea corrupta seguia
+    saliendo 1 con ACTION REQUIRED. Cuando midas un mecanismo de alerta, comprueba tambien que un
+    mecanismo MAL CONFIGURADO se distinga de uno sano.
+13. **Comprobar que la verificacion que el maker ofrece puede ver el defecto.** `-WhatIf` era la unica
+    verificacion documentada y no imprime los argumentos: afordancia de verificacion ciega.
+14. **Correr el entregable contra la maquina REAL en seco cuando es read-only.** Fue la evidencia mas
+    fuerte de que los teeth muerden (stray real cazado) y la que destapo RES-1 (3 warnings espurios
+    sobre repos sin remotes) -- ninguna suite sintetica los habria mostrado.
+15. **Baseline de no-regresion = segundo clon en el commit anterior.** Comparar el set de hallazgos del
+    detector nuevo (default) contra el viejo sobre el MISMO fixture prueba "sin regresion" por
+    comportamiento, no por lectura del diff.
+16. **Huella de metadatos, no solo de contenido.** La suite del maker hashea contenido; yo anado
+    `st_mtime_ns`+`st_size` de todo nodo incluido `.git/**` -- descarta escrituras que no cambian bytes.
+
+Hook al commitear: `PRUNE DUE (released_ratio 92.31 >= 90)` -- accion del Arquitecto en su proximo
+checkpoint (`python scripts/prune_state.py --root . --apply`), no mia. Lo dejo senalado.
