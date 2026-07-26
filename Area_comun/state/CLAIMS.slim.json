@@ -1,20 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260727-Codex-TASK-0296-remediation-2",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0296-remediation-2",
-                "Area_comun/state/TASK_INDEX.json#TASK-0296",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0296",
-                "Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md",
-                "scripts/install_scratch_discipline_monitor.ps1",
-                "examples/scratch_discipline_cases/run_scratch_discipline_cases.py",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0296"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

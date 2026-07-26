@@ -2,6 +2,17 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-27 - TASK-0296 remediation iteration 2
+
+- Commit `9691312` removes all four installer-side `TrimEnd` calls, preserving each
+  operator-provided scan, scratch, known-repository, and canonical-home argument exactly.
+- The Windows regression now verifies trailing-backslash round trips without `rstrip`,
+  covers `D:/`, `D:\\`, and `D:` volume-root vectors without mutation, and compares the
+  composed volume-root monitor invocation against the direct invocation for identical
+  findings, stderr, and exit code with the repository as cwd.
+- Scratch cases, collaboration validation, encoding, neutrality, and diff gates exited 0.
+  B1 quoting and the previously accepted R1/R2/R3 behavior remain unchanged.
+
 ## 2026-07-26 - TASK-0295 final closure
 
 - Commit `af8e9e8` records the Codex-signed `review_approved -> done` flip after
