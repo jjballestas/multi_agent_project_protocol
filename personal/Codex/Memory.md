@@ -4423,3 +4423,6 @@ ratified its own work.
   the suite also covers separator-free monitor invocation.
 - Required suite, neutrality, encoding, collaboration, trailing-separator reproduction, and diff
   gates exited 0. TASK-0296 remains `in_progress` pending governed remediation delivery.
+- Delivery commit `711a798` moves TASK-0296 to `in_review`, releases both remediation claims, and
+  publishes the self-contained Arquitecto handoff. Independent recomputation and Analista re-review
+  remain required; Codex did not self-review or ratify the remediation.
