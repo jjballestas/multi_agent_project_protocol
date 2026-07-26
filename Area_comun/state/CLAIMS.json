@@ -289,6 +289,20 @@
             "updated_at": "2026-07-26T20:55:00Z"
         },
         {
+            "claim_id": "CLAIM-20260726-Codex-TASK-0296-final-memory",
+            "expires_at": "2026-07-27T09:05:00Z",
+            "notes": "Persist TASK-0296 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0296-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-26T21:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-26T21:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260726-Codex-TASK-0296-runbook",
             "expires_at": "2026-07-27T08:40:00Z",
             "notes": "Document host-local automatic scratch-discipline monitor operation.",

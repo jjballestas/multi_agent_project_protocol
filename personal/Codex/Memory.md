@@ -4407,3 +4407,8 @@ issue. Re-run only the necessary evidence path and record the caveat.
   fingerprint stability. Required gates passed; `protocol.config.json` was not modified.
 - TASK-0296 is `in_progress` pending governed delivery to `in_review`; active claims are
   `CLAIM-20260726-Codex-TASK-0296` and `CLAIM-20260726-Codex-TASK-0296-runbook`.
+
+Delivery update: commit `b6d2cbb` moved TASK-0296 to `in_review`, published the self-contained
+handoff and mailbox request to Arquitecto, and released all implementation/delivery claims. The
+implementation awaits independent recomputation and Analista review; Codex has not reviewed or
+ratified its own work.
