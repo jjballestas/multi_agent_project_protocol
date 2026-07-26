@@ -279,7 +279,7 @@
                 "DECISION-0057"
             ],
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0104] Detector de higiene de scratch root: FLAGea (no borra) dirs de la metodologia en la raiz del disco fuera del scratch root",
             "type": "infra"
         },
