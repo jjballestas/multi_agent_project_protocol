@@ -158,6 +158,20 @@
             "updated_at": "2026-07-26T17:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260726-Codex-TASK-0295-final-memory",
+            "expires_at": "2026-07-27T01:22:00Z",
+            "notes": "Persist TASK-0295 delivery commit context after governed handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260726-Codex-TASK-0295-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-26T17:22:00Z",
+            "status": "released",
+            "task_id": "TASK-0295",
+            "updated_at": "2026-07-26T17:22:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-close0294-20260724",
             "expires_at": "2026-07-24T12:11:59Z",
             "notes": "Cierre 0294 (GO checker OK-CLOSABLE; RES-8/9/10 cerrados; fix-loop 1 iter por sobre-materializacion) -> in_review->done + archivo REVIEW/VERDICT",

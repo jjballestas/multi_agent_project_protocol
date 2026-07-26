@@ -4382,3 +4382,7 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - The fixture suite, collaboration validator, encoding scan, domain-neutrality scan, and
   diff gate exited 0. TASK-0295 remains `in_progress` pending governed delivery to
   independent Analista review; Codex did not self-review or ratify it.
+- Delivery commit `ee9864a` moves TASK-0295 to `in_review`, releases both maker
+  claims, and opens the self-contained Arquitecto handoff. Arquitecto must
+  recompute commit `3aa332d` and route it to Analista; no real disk root was
+  scanned and no cleanup was performed.
