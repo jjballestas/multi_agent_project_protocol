@@ -2,7 +2,7 @@
 task_id: TASK-0295
 title: "[DECISION-0104] Detector de higiene de scratch root: FLAGea (no borra) dirs de la metodologia en la raiz del disco fuera del scratch root"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
