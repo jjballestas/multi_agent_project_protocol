@@ -7,6 +7,48 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-26 (27) - TASK-0295 detector de scratch discipline: OK-CLOSABLE (GO) sobre b1b3bbc
+
+- Encargo `MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0295`. Teeth de DECISION-0104 cl.5b (firmada
+  2026-07-26): detector read-only que FLAGea (nunca borra) arboles de metodologia fuera del scratch root.
+  Ancla: HEAD origin/main `b1b3bbc`, impl `3aa332d`; el delta `b1b3bbc..8f1e495` es SOLO el MSG de REVIEW.
+  Veredicto commit `a8fc684` (artefacto `Area_comun/artifacts/Analista-TASK-0295-detector-scratch-discipline-verdict.md`
+  + MSG REVIEW). SOLO PROTOCOLO (el Arquitecto declaro "sin producto en alcance" -- ver la leccion de que
+  hay que declararlo explicito).
+- **VEREDICTO: OK-CLOSABLE (GO), sin iteracion.** Banco adversarial PROPIO de 31 vectores: 31 PASS, 0 SLIPS.
+  4 gates exit 0 en clon limpio (suite del maker / validate / scan_encoding / scan_domain_neutrality).
+- **REGLA 0104 APLICADA A MI PROPIO TRABAJO**: clon limpio y TODOS los fixtures bajo
+  `D:/Aegis_Scratch/multi_agent_project_protocol/{an0295,an0295fx,an0295fix,an0295adv}`. Nada en la raiz
+  del disco. La ruta corta tambien evita MAX_PATH.
+- **Read-only probado mas fuerte que el maker**: el fingerprint del maker solo hashea CONTENIDO; yo compare
+  ademas `st_mtime_ns` + `st_size` de TODO nodo incluido `.git/**` antes/despues de 3 corridas (json, texto,
+  sin --check) -> identico. Mas auditoria de API mutante en el fuente (`.write_text/.mkdir/open(/os.remove/
+  os.rename/shutil.*/.unlink/.rmdir/.touch`) = 0 ocurrencias.
+- **Deteccion probada por FAMILIA, no por el ejemplo del acceptance**: remote scp-like `git@host:o/r.git`
+  contra known dado en https (identidad equivalente), remote de RUTA LOCAL con backslashes, **git worktree**
+  (`.git` como ARCHIVO, config compartida), dir OCULTO con marcadores, marcadores parciales, clon conocido
+  DENTRO del scratch, archivo top-level homonimo, scratch root en MAYUSCULAS + separador final. Set exacto
+  de 6 hallazgos, cero falsos positivos.
+- **Exit codes: lo que importa es el fallo ruidoso.** 1/0/2 exactos, y scan root inexistente / scan root que
+  es un ARCHIVO / `known_repositories` malformado dan **2**, nunca un "limpio" silencioso (ese era el modo
+  de fallo peligroso para unos teeth; no ocurre).
+- **Residuales declarados (no bloquean; el acceptance dice literalmente "directorios de nivel superior")**:
+  R1 (MATERIAL) escaneo de PROFUNDIDAD 1 -- medido en seco: `--scan-root D:/ --scratch-root D:/Aegis_Scratch`
+  da **exit 0, 0 hallazgos** con 12 dirs top-level, mientras `D:\Agentes\runtime-test-instance` tiene los 3
+  marcadores atestados fuera del scratch root a profundidad 2. R2 (MATERIAL) sin allowlist de hogar canonico:
+  `--scan-root D:/Agentes` -> exit 1 flageando el stray real Y el hub legitimo. R3 fail-open silencioso si
+  `git` falla (gitfile corrupto / dubious ownership / git ausente) sin warning. R4 `protocol.config.json` NO
+  tiene campo `scratch_root` (el chequeo 0098 del validador es CONDICIONAL al campo) y nada invoca al
+  detector desde gate/CI/cron -> hoy 0104 cl.5b esta DETECTABLE, no ENFORCED. R5 marcadores en AND estricto
+  (los 3). U1 sin `--check` el exit es 0 aunque haya hallazgos.
+- **Leccion de metodo**: cuando el acceptance limita el alcance (aqui "nivel superior"), la conducta
+  conforme NO es automaticamente conducta util -- correr el detector contra el disco REAL (read-only) es lo
+  que revela que apuntado a la raiz devuelve 0 hallazgos. Distinguir SLIP (viola la letra) de RESIDUAL
+  MATERIAL (cumple la letra y no muerde) y reportar ambos con reproduccion falsable.
+- **Leccion de shell**: en Git Bash, un `>` a `/tmp/x` y un `open('/tmp/x')` desde Python de Windows NO
+  apuntan al mismo sitio (Python resuelve a `<unidad>:/tmp`). Escribir salidas intermedias con ruta absoluta
+  Windows bajo el scratch root.
+
 ## Ultima actualizacion 2026-07-24 (26) - TASK-0294 residuales nuevos de 0293: OK-CLOSABLE (GO) sobre dad27b3
 
 - Encargo `MSG-20260724-Arquitecto-to-Analista-REVIEW-TASK-0294`. Cierra los 3 residuales ACCIONABLES
