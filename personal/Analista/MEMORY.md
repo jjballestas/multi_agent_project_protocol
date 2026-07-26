@@ -4773,3 +4773,51 @@ LECCIONES nuevas:
 
 Hook al commitear: `PRUNE DUE (released_ratio 92.31 >= 90)` -- accion del Arquitecto en su proximo
 checkpoint (`python scripts/prune_state.py --root . --apply`), no mia. Lo dejo senalado.
+
+## 2026-07-27 -- TASK-0296 RE-REVIEW iter 1 (remediacion del argv): NO-GO, segundo NO-GO -> escala
+
+Ancla `833e57e` (fix `31680dd`), delta hasta `origin/main` `8f93429` = solo el MSG. Clon limpio
+`D:/Aegis_Scratch/multi_agent_project_protocol/an96r1`; baseline pre-fix `.../an96pre` en `c71c294`.
+Veredicto: `Area_comun/artifacts/Analista-TASK-0296-argv-remediation-iter1-verdict.md`; mensaje
+`MSG-20260727-Analista-to-Arquitecto-REREVIEW-TASK-0296-iter1.md`. Commit `d593eed` (pusheado).
+
+**B1 CERRADO** (ruta con separador final -> argv integro, mismo set de hallazgos) y puntos 2/3/4
+entregados. Gates verdes: suite 0, validate 0, encoding 0, neutralidad 0, drift CLEAN, config
+`2E35F26E` intacto, 0 API mutante, `-WhatIf` no registra.
+
+**BLOQUEO NUEVO B2 (introducido por la remediacion):** el `TrimEnd([char[]]"\/")` destruye la raiz de
+volumen. `'D:\'.TrimEnd('\','/')` = `'D:'`, y `Path('D:').resolve()` es el **cwd de esa unidad**, no
+la raiz. La tarea corre con `WorkingDirectory = raiz del repo` y el monitor lanza el scanner con
+`cwd = raiz del repo` -> la tarea escanea la raiz del repo y reporta `exit 0` + `OK: no
+scratch-discipline anomalies found.` para siempre, en silencio. Medido end-to-end (CreateProcess con
+la cadena cruda, como el Task Scheduler): pre-fix `-ScanRoot 'D:/'` -> exit 1 + `ANOMALY
+D:\Agentes\runtime-test-instance`; fix -> exit 0 sin hallazgos. **Regresion**: `D:/` funcionaba en
+`c71c294`.
+
+LECCIONES nuevas:
+17. **Una remediacion es una entrega nueva: hay que atacarla, no solo comprobar que cierra el
+    bloqueo anterior.** B1 cerro perfecto; el NO-GO vino del cinturon adicional. Verificar "el fix
+    arregla X" es la mitad del trabajo; la otra es "que rompio el fix".
+18. **Cuidado con las sugerencias propias del veredicto anterior.** El `TrimEnd` lo propuse yo en
+    iter 0. Un checker no puede tratar su propia recomendacion como verificada: hay que juzgarla con
+    la misma hostilidad que el resto. Retirarla en voz alta cuando resulta ser la causa raiz.
+19. **`TrimEnd`/`rstrip` de separadores NO es normalizar en Windows: `X:\` -> `X:` cambia la
+    semantica** de raiz absoluta a ruta relativa a la unidad (silenciosa, resuelve contra el cwd por
+    unidad). Patron a buscar siempre que alguien "limpie" rutas.
+20. **Un test de round-trip que calcula su expectativa con la MISMA transformacion que prueba es
+    tautologico.** El caso nuevo hace `intended = arg.rstrip("\/")`, o sea asume el recorte como la
+    intencion: pasa EN VERDE sobre una raiz de volumen rota. La expectativa debe ser **lo que el
+    operador pidio**, no lo que el codigo hizo.
+21. **Antes de aceptar un cinturon adicional, comprobar si hace falta.** Extraje el bloque de escape
+    real del instalador y lo aplique a un array SIN recortar: round-trip exacto, incluida `D:\` y una
+    ruta con espacio. El quoting corregido por si solo cierra B1 -> el TrimEnd solo aportaba B2.
+22. **Simular el disparador real (Task Scheduler = Execute + Arguments + WorkingDirectory)** pasando
+    la cadena CRUDA a `CreateProcess` (`subprocess.run(str, cwd=...)`): prueba la cadena entera, no
+    solo el parseo con `CommandLineToArgvW`.
+
+Loop declarado agotado (iter 1 de max 2 con re-juicio NO-GO) -> **escalado al operador humano** por
+via del Arquitecto. Contexto justo dado: B1 si cerro, B2 es defecto nuevo, y el fix es suprimir cuatro
+llamadas mas anadir un vector de raiz de volumen al test.
+
+Hook al commitear: `PRUNE DUE (cold_start_tokens 23866 >= 20000; released_ratio 93.33 >= 90)` --
+accion del Arquitecto en su proximo checkpoint, no mia. Senalado otra vez.
