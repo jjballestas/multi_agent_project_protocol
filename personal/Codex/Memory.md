@@ -4367,3 +4367,18 @@ issue. Re-run only the necessary evidence path and record the caveat.
   (109 insertions, 3 deletions); no runtime, scripts, skills, hooks, or extra protocol tree remains.
 - Required validation, encoding, neutrality, drift, attested-instancing, and runtime-instantiation
   gates exited 0. TASK-0294 remains `in_progress` pending governed remediation delivery.
+- Delivery commit `dad27b3` moves TASK-0294 to `in_review`, releases
+  `CLAIM-20260724-Codex-TASK-0294-remediation-1`, and opens the self-contained remediation
+  handoff for independent Analista review. Final drift was clean at seq 6382.
+
+## 2026-07-26 - TASK-0295 implementation
+
+- Commit `3aa332d` adds a read-only, domain-neutral scratch-discipline detector. It accepts
+  one or more scan roots plus a scratch root from CLI/config, matches known Git remotes or
+  the complete attested-marker set, and emits actionable DECISION-0018 findings.
+- The detector contains no delete or move operation. The fixture suite runs only beneath
+  its caller-supplied designated scratch root, proves exact stray/clean exit codes, ignores
+  unrelated directories, and verifies a byte-level tree fingerprint is unchanged.
+- The fixture suite, collaboration validator, encoding scan, domain-neutrality scan, and
+  diff gate exited 0. TASK-0295 remains `in_progress` pending governed delivery to
+  independent Analista review; Codex did not self-review or ratify it.
