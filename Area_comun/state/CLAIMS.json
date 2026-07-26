@@ -1,6 +1,22 @@
 {
     "claims": [
         {
+            "claim_id": "CLAIM-0295-ratify",
+            "expires_at": "2026-07-27T01:25:19Z",
+            "notes": "Ratify TASK-0295 (Analista GO OK-CLOSABLE).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0295",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0295",
+                "Area_comun/tasks/TASK-0295-detector-scratch-root-discipline.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-0295-ratify"
+            ],
+            "started_at": "2026-07-26T19:25:19Z",
+            "status": "released",
+            "task_id": "TASK-0295",
+            "updated_at": "2026-07-26T19:25:19Z"
+        },
+        {
             "claim_id": "CLAIM-0295-scratch-detector",
             "expires_at": "2026-07-26T22:55:34Z",
             "notes": "Seal DECISION-0104 + register TASK-0295 (detector scratch root).",
