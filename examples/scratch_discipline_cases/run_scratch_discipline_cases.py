@@ -85,47 +85,75 @@ def _assert_windows_installer_round_trip(scan_root: Path, scratch_root: Path) ->
     scan_arg = str(scan_root) + os.sep
     scratch_arg = str(scratch_root) + os.sep
     allow_arg = str(scan_root / "canonical-home") + os.sep
-    result = subprocess.run(
-        [
-            shell, "-NoProfile", "-File", str(INSTALLER),
-            "-Python", sys.executable,
-            "-ScanRoot", scan_arg,
-            "-ScratchRoot", scratch_arg,
-            "-KnownRepo", "https://example.invalid/owner/known-repository.git",
-            "-AllowHome", allow_arg,
-            "-MaxDepth", "2",
-            "-WhatIf",
-        ],
-        cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace",
-        check=False,
-    )
-    if result.returncode != 0:
-        raise AssertionError(f"installer preview failed: {result.stdout}{result.stderr}")
-    prefix = "Scheduled task arguments: "
-    line = next((item[len(prefix):] for item in result.stdout.splitlines() if item.startswith(prefix)), None)
-    if line is None:
-        raise AssertionError("installer -WhatIf did not print the composed argument line")
-    argc = ctypes.c_int()
-    command_line_to_argv = ctypes.windll.shell32.CommandLineToArgvW
-    command_line_to_argv.argtypes = [ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_int)]
-    command_line_to_argv.restype = ctypes.POINTER(ctypes.c_wchar_p)
-    parsed_pointer = command_line_to_argv(line, ctypes.byref(argc))
-    if not parsed_pointer:
-        raise AssertionError("CommandLineToArgvW rejected the installer argument line")
-    try:
-        parsed = [parsed_pointer[index] for index in range(argc.value)]
-    finally:
-        ctypes.windll.kernel32.LocalFree(parsed_pointer)
+    def installer_arguments(scan_value: str) -> list[str]:
+        result = subprocess.run(
+            [
+                shell, "-NoProfile", "-File", str(INSTALLER),
+                "-Python", sys.executable,
+                "-ScanRoot", scan_value,
+                "-ScratchRoot", scratch_arg,
+                "-KnownRepo", "https://example.invalid/owner/known-repository.git",
+                "-AllowHome", allow_arg,
+                "-MaxDepth", "2",
+                "-WhatIf",
+            ],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace",
+            check=False,
+        )
+        if result.returncode != 0:
+            raise AssertionError(f"installer preview failed: {result.stdout}{result.stderr}")
+        prefix = "Scheduled task arguments: "
+        line = next((item[len(prefix):] for item in result.stdout.splitlines() if item.startswith(prefix)), None)
+        if line is None:
+            raise AssertionError("installer -WhatIf did not print the composed argument line")
+        argc = ctypes.c_int()
+        command_line_to_argv = ctypes.windll.shell32.CommandLineToArgvW
+        command_line_to_argv.argtypes = [ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_int)]
+        command_line_to_argv.restype = ctypes.POINTER(ctypes.c_wchar_p)
+        parsed_pointer = command_line_to_argv(line, ctypes.byref(argc))
+        if not parsed_pointer:
+            raise AssertionError("CommandLineToArgvW rejected the installer argument line")
+        try:
+            return [parsed_pointer[index] for index in range(argc.value)]
+        finally:
+            ctypes.windll.kernel32.LocalFree(parsed_pointer)
+
+    parsed = installer_arguments(scan_arg)
     intended = [
         str(MONITOR), "--",
-        "--scan-root", scan_arg.rstrip("\\/"),
-        "--scratch-root", scratch_arg.rstrip("\\/"),
+        "--scan-root", scan_arg,
+        "--scratch-root", scratch_arg,
         "--max-depth", "2",
         "--known-repo", "https://example.invalid/owner/known-repository.git",
-        "--allow-home", allow_arg.rstrip("\\/"),
+        "--allow-home", allow_arg,
     ]
     if parsed != intended:
         raise AssertionError(f"installer argv round-trip mismatch: {parsed!r} != {intended!r}")
+
+    volume_root = Path(ROOT.anchor).as_posix()
+    for root_variant in (volume_root, ROOT.anchor, ROOT.drive):
+        variant_parsed = installer_arguments(root_variant)
+        variant_index = variant_parsed.index("--scan-root") + 1
+        if variant_parsed[variant_index] != root_variant:
+            raise AssertionError(
+                f"installer changed volume-root vector: {variant_parsed[variant_index]!r} != {root_variant!r}"
+            )
+    volume_parsed = installer_arguments(volume_root)
+    scan_index = volume_parsed.index("--scan-root") + 1
+    if volume_parsed[scan_index] != volume_root or volume_parsed[scan_index].endswith(":"):
+        raise AssertionError(f"installer collapsed volume root: {volume_parsed[scan_index]!r}")
+    direct = subprocess.run(
+        [sys.executable, *intended[:3], volume_root, *intended[4:]],
+        cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    composed = subprocess.run(
+        [sys.executable, *volume_parsed], cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8", errors="replace", check=False,
+    )
+    if (composed.returncode, composed.stdout, composed.stderr) != (
+        direct.returncode, direct.stdout, direct.stderr
+    ):
+        raise AssertionError("volume-root installer invocation differs from direct monitor invocation")
 
 
 def main() -> int:

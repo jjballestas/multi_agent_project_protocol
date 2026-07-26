@@ -13,10 +13,10 @@ param(
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $monitor = Join-Path $PSScriptRoot "run_scratch_discipline_monitor.py"
 $arguments = @($monitor, "--")
-foreach ($root in $ScanRoot) { $arguments += @("--scan-root", $root.TrimEnd([char[]]"\/")) }
-$arguments += @("--scratch-root", $ScratchRoot.TrimEnd([char[]]"\/"), "--max-depth", [string]$MaxDepth)
-foreach ($repo in $KnownRepo) { $arguments += @("--known-repo", $repo.TrimEnd([char[]]"\/")) }
-foreach ($canonicalPath in $AllowHome) { $arguments += @("--allow-home", $canonicalPath.TrimEnd([char[]]"\/")) }
+foreach ($root in $ScanRoot) { $arguments += @("--scan-root", $root) }
+$arguments += @("--scratch-root", $ScratchRoot, "--max-depth", [string]$MaxDepth)
+foreach ($repo in $KnownRepo) { $arguments += @("--known-repo", $repo) }
+foreach ($canonicalPath in $AllowHome) { $arguments += @("--allow-home", $canonicalPath) }
 
 $quoted = $arguments | ForEach-Object {
     $escaped = $_ -replace '(\\*)"', '$1$1\"'
