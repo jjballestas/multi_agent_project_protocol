@@ -301,7 +301,7 @@
                 "TASK-0295"
             ],
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0104] Enforcement del detector de scratch discipline: disparo automatico + hardening (depth/allowlist/fail-open warning) -- de detectable a enforced",
             "type": "infra"
         },

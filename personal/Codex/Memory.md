@@ -4412,3 +4412,14 @@ Delivery update: commit `b6d2cbb` moved TASK-0296 to `in_review`, published the 
 handoff and mailbox request to Arquitecto, and released all implementation/delivery claims. The
 implementation awaits independent recomputation and Analista review; Codex has not reviewed or
 ratified its own work.
+
+## 2026-07-26 - TASK-0296 remediation iteration 1
+
+- Commit `31680dd` fixes the Windows scheduled-task argument round-trip: path inputs are normalized,
+  embedded quotes and terminal backslashes are escaped for `CommandLineToArgvW`, and WhatIf/Verbose
+  expose the exact composed argument line.
+- The monitor now forwards scanner arguments with or without the optional `--` separator. The
+  Windows-guarded fixture reconstructs argv through `CommandLineToArgvW` and asserts exact equality;
+  the suite also covers separator-free monitor invocation.
+- Required suite, neutrality, encoding, collaboration, trailing-separator reproduction, and diff
+  gates exited 0. TASK-0296 remains `in_progress` pending governed remediation delivery.

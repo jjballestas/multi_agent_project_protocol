@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6966f6b4f0c479f51969300fe7bc5fbeb412d8beac934595292ffaa0943108b8",
+  "canonical_hash": "0854f43c32269edb832cd5205f32fb0f8bbefcf04e7043fd9be0baa49ea173fc",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -780,6 +780,8 @@
       "CLAIM-20260726-Codex-TASK-0295": 1,
       "CLAIM-20260726-Codex-TASK-0295-delivery": 1,
       "CLAIM-20260726-Codex-TASK-0295-final-memory": 1,
+      "CLAIM-20260726-Codex-TASK-0296-remediation-1": 1,
+      "CLAIM-20260726-Codex-TASK-0296-remediation-1-delivery": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2578,7 +2580,7 @@
       "TASK-0293": 11,
       "TASK-0294": 15,
       "TASK-0295": 17,
-      "TASK-0296": 16,
+      "TASK-0296": 18,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2601,7 +2603,7 @@
       "protocol-prune": 28,
       "protocol-state": 1
     },
-    "events_applied": 5763,
+    "events_applied": 5767,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5412,6 +5414,10 @@
       "codex:task0296:in-progress-to-in-review:20260726T205800Z": 6425,
       "codex:task0296:ready-to-in-progress:20260726T203500Z": 6422,
       "codex:task0296:remediation1:claim:2026-07-26T21:21:49Z": 6434,
+      "codex:task0296:remediation1:delivery-claim:2026-07-26T21:26:06Z": 6435,
+      "codex:task0296:remediation1:delivery-release:2026-07-26T21:26:55Z": 6438,
+      "codex:task0296:remediation1:in-review:2026-07-26T21:26:55Z": 6436,
+      "codex:task0296:remediation1:release:2026-07-26T21:26:55Z": 6437,
       "codex:task0296:runbook-claim-release:20260726T205800Z": 6427,
       "codex:task0296:runbook-claim:20260726T204000Z": 6423,
       "codex:task0296:start:claim-acquire:20260726T203500Z": 6421,
@@ -8368,5 +8374,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6434
+  "up_to_seq": 6438
 }
