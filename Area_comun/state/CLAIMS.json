@@ -66,6 +66,22 @@
             "updated_at": "2026-07-26T21:15:19Z"
         },
         {
+            "claim_id": "CLAIM-0296-reject2",
+            "expires_at": "2026-07-27T04:27:55Z",
+            "notes": "Formal rejection of TASK-0296 (Analista NO-GO B1); return to in_progress for maker remediation.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0296",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0296",
+                "Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-0296-reject2"
+            ],
+            "started_at": "2026-07-26T22:27:55Z",
+            "status": "released",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-26T22:27:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0230-route-correction",
             "expires_at": "2026-07-04T00:00:00Z",
             "notes": "Normalized malformed released claim row before final release.",
