@@ -16,12 +16,15 @@ try {
 Write-Host ("Killed PIDs: " + ($killed -join ','))
 Start-Sleep -Seconds 3
 
-# Limpiar el prompt.txt obsoleto (ahora deberia estar desbloqueado)
-$promptFile = Join-Path $PSScriptRoot "..\.protocol-tmp\codex_mailbox_cron\codex_mailbox_cron.prompt.txt"
-try {
-  Remove-Item -LiteralPath $promptFile -Force -ErrorAction Stop
-  Write-Host "Stale prompt.txt removed (lock cleared)."
-} catch { Write-Host ("prompt.txt still locked or absent: " + $_.Exception.Message) }
+# Limpiar el prompt.txt obsoleto (ahora deberia estar desbloqueado) + el estado de reintentos-agotados
+# (retry.json) y residue-first-seen.json, que PERSISTEN en disco y hacen que las tareas pendientes queden
+# como no-procesables tras un restart. NO se toca seen.json (mensajes legitimamente consumidos).
+$rt = Join-Path $PSScriptRoot "..\.protocol-tmp\codex_mailbox_cron"
+foreach ($f in @("codex_mailbox_cron.prompt.txt","codex_mailbox_cron.retry.json","codex_mailbox_cron.residue-first-seen.json")) {
+  $p = Join-Path $rt $f
+  try { Remove-Item -LiteralPath $p -Force -ErrorAction Stop; Write-Host ("Removed stale " + $f) }
+  catch { Write-Host ($f + ": " + $_.Exception.Message) }
+}
 
 # Relanzar el cron de Codex limpio (detached)
 $cron = Join-Path $PSScriptRoot "Codex\codex_mailbox_cron.ps1"
