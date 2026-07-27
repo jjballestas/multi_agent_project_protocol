@@ -61,24 +61,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0294",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[0293/follow-up] Residuales nuevos de 0293: fila checker (RES-8) + muestra coherente (RES-9) + neutralidad examples (RES-10)"
-        },
-        {
-            "id": "TASK-0295",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0104] Detector de higiene de scratch root: FLAGea (no borra) dirs de la metodologia en la raiz del disco fuera del scratch root"
-        },
-        {
-            "id": "TASK-0296",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0104] Enforcement del detector de scratch discipline: disparo automatico + hardening (depth/allowlist/fail-open warning) -- de detectable a enforced"
-        },
-        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
