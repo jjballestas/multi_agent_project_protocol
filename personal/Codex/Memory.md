@@ -4465,3 +4465,16 @@ ratified its own work.
 - Delivery commit `711a798` moves TASK-0296 to `in_review`, releases both remediation claims, and
   publishes the self-contained Arquitecto handoff. Independent recomputation and Analista re-review
   remain required; Codex did not self-review or ratify the remediation.
+
+## 2026-07-27 - TASK-0298 implementation
+
+- Product commit `bf0d477` converts the Zeus-protocol architect bridge from spawning/control to
+  observation-only tailing of configured cron run logs. The bridge has no manager spawn route,
+  `/send` is inert with HTTP 403, the launcher no longer forwards stdin, and the vanilla UI exposes
+  Observar/Desadjuntar without a compose form.
+- Config now supplies `mode`, `observeRunsDir`, `cronPidPath`, and `cronLockPath`, with environment
+  overrides for the observable paths. The bridge reads run logs, writes only its private audit,
+  redacts PII in SSE/audit, detects rollover, and degrades to dormant for a dead cron PID.
+- `node --test`, the executable TASK-0298 slow tests, product diff check, collaboration validation,
+  encoding scan, and domain-neutrality scan exited 0. TASK-0298 remains `in_progress` pending
+  cross-attestation, governed delivery to `in_review`, claim release, and independent review.
