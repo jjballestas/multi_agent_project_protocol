@@ -2,7 +2,7 @@
 task_id: TASK-0300
 title: "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)"
 type: infra
-status: blocked
+status: ready
 owner: Codex
 maker: Codex
 checker: Analista
@@ -27,6 +27,8 @@ intake:
     - (test del harness: repro del cross-atest lento -> exec termina en <=timeout; repro del arbol de procesos -> TREE_KILL deja cero huerfanos. Comando exacto lo define el maker segun como se testea el .ps1.)
     - python scripts/scan_encoding.py
   scope_routes:
+    - scripts/harness/peer_mailbox_cron.ps1
+    - examples/mailbox_retry_cases/
     - personal/Codex/codex_mailbox_cron.ps1
     - personal/codex_cron_recover.ps1
   out_of_scope:
