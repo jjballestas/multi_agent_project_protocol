@@ -2,6 +2,18 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-27 - TASK-0297 implementation
+
+- Commit `d800441` aligns only the legacy PowerShell collaboration validator:
+  claim identifiers are deduplicated with ordinal case-sensitive semantics, and
+  selector syntax is checked only for active claims, matching the canonical Python gate.
+- Live PowerShell and Python validators both exited 0. Scratch adversarial probes
+  exited 1 for an identical-case duplicate claim and for a malformed selector on
+  a hot claim. The Python validator, archived TASK-0280 data, and pinned config
+  were not changed.
+- TASK-0297 remains `in_progress` pending governed delivery to independent review;
+  Codex has not reviewed or ratified the implementation.
+
 ## 2026-07-27 - TASK-0296 final closure
 
 - Commit `32330c9` records the Codex-signed `review_approved -> done` flip after

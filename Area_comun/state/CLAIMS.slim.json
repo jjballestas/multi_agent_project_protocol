@@ -11,6 +11,15 @@
                 "scripts/validate_collaboration_state.ps1"
             ],
             "task_id": "TASK-0297"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "task_id": "TASK-0297"
         }
     ],
     "schema_version": "1.0",

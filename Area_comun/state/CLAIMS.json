@@ -59,6 +59,20 @@
             "updated_at": "2026-07-27T17:24:09Z"
         },
         {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297-memory",
+            "expires_at": "2026-07-28T01:31:05Z",
+            "notes": "Persist TASK-0297 implementation commit context after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T17:31:05Z",
+            "status": "active",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:31:05Z"
+        },
+        {
             "claim_id": "CLAIM-arq-registro0297-20260727",
             "expires_at": "2026-07-28T17:12:11Z",
             "notes": "Registro+promocion TASK-0297 (alinear .ps1 legacy con .py canonico) via submit_intent.",
