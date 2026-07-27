@@ -433,6 +433,20 @@
             "updated_at": "2026-07-26T23:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0296-done-memory",
+            "expires_at": "2026-07-27T01:02:00Z",
+            "notes": "Persist TASK-0296 final closure commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0296-done-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T00:02:00Z",
+            "status": "released",
+            "task_id": "TASK-0296",
+            "updated_at": "2026-07-27T00:02:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260727-Codex-TASK-0296-remediation-2",
             "expires_at": "2026-07-27T02:37:52Z",
             "notes": "Remediate TASK-0296 B2 by preserving volume roots and adding round-trip plus behavioral equivalence coverage.",

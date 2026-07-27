@@ -2,6 +2,16 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-27 - TASK-0296 final closure
+
+- Commit `32330c9` records the Codex-signed `review_approved -> done` flip after
+  independent Analista OK-CLOSABLE and Arquitecto ratification.
+- Runtime events 6454-6456 close the task and release the closure claim; the ASCII
+  mailbox confirmation to Arquitecto is included in the same governed commit.
+- Collaboration validation, encoding, domain neutrality, and diff gates exited 0.
+  Codex performed only the implementer-only done flip and did not review or ratify
+  its own work.
+
 ## 2026-07-27 - TASK-0296 remediation iteration 2
 
 - Commit `9691312` removes all four installer-side `TrimEnd` calls, preserving each
