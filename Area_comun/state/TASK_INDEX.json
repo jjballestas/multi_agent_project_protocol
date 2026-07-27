@@ -256,7 +256,7 @@
                 "DECISION-0018"
             ],
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)",
             "type": "infra"
         },

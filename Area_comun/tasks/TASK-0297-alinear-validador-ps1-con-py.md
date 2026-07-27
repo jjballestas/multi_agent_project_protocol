@@ -2,7 +2,7 @@
 task_id: TASK-0297
 title: "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
