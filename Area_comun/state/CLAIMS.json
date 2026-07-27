@@ -42,6 +42,23 @@
             "updated_at": "2026-07-27T00:26:35Z"
         },
         {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297",
+            "expires_at": "2026-07-28T01:24:09Z",
+            "notes": "Align legacy PowerShell validator with canonical Python semantics for case-sensitive claim IDs and active-only selector checks.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297",
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "scripts/validate_collaboration_state.ps1"
+            ],
+            "started_at": "2026-07-27T17:24:09Z",
+            "status": "active",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:24:09Z"
+        },
+        {
             "claim_id": "CLAIM-arq-registro0297-20260727",
             "expires_at": "2026-07-28T17:12:11Z",
             "notes": "Registro+promocion TASK-0297 (alinear .ps1 legacy con .py canonico) via submit_intent.",

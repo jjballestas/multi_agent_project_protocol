@@ -71,7 +71,9 @@ function Merge-ByArrayField {
     )
     if (-not $Hot) { return $Hot }
     $entries = [System.Collections.Generic.List[object]]::new()
-    $seen = @{}
+    $seen = [System.Collections.Generic.Dictionary[string, bool]]::new(
+        [System.StringComparer]::Ordinal
+    )
     foreach ($source in @(
         @{ Name = "hot"; Data = $Hot },
         @{ Name = "archive"; Data = $Archive }
@@ -1165,8 +1167,8 @@ if ($claims -and $claims.claims) {
         }
         foreach ($scope in @($claim.scope)) {
             if ($scope) {
-                Test-ClaimScopeSelector -Scope ([string]$scope) -ClaimId ([string]$claim.claim_id)
                 if ($claim.status -eq "active") {
+                    Test-ClaimScopeSelector -Scope ([string]$scope) -ClaimId ([string]$claim.claim_id)
                     $mailboxError = Get-MailboxClaimScopeError -Scope ([string]$scope)
                     if ($mailboxError) {
                         Fail "Claim $($claim.claim_id) $mailboxError"

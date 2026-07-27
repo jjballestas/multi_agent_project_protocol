@@ -63,7 +63,7 @@
         {
             "id": "TASK-0297",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)"
         },
         {
