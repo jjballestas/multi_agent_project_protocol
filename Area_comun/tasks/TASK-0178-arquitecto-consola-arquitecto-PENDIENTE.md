@@ -15,6 +15,16 @@ file: Area_comun/tasks/TASK-0178-arquitecto-consola-arquitecto-PENDIENTE.md
 > Requisito del operador (2026-06-25): reemplazar VS Code por el front para coordinar al Arquitecto. NO disenar
 > esta sesion -- queda como tarea pendiente para la proxima ventana (orden del operador).
 
+> DISENO ENTREGADO (2026-07-27): ver `Area_comun/artifacts/DESIGN-0178-aegis-front.md`. REENCUADRADO tras
+> debate + critica adversarial: el "canal conversacional que activa el runtime" se descarta; en su lugar el
+> **Aegis Front** = panel soberano de 3 capas (L1 observacion / L2 asistente no-firmante / L3 firma humana
+> consciente), app auto-provisionable, **open-core Apache** (motor+spec), **front-interno-primero** (operar
+> instancias propias + gobernar la migracion T0 Access->SQL Server + medir -> dataset propio) con el aparato
+> de mercado como fase posterior gateada. Foso = el corpus (no la certificacion, imposible por ISO 17065).
+> CODIGO a construir en `Zeus-protocol` bajo `D:/Agentes/Zeus/`, nunca el hub. LISTO PARA CONSTRUIR. Status
+> sigue `proposed`; se promueve al arrancar el desarrollo (proxima sesion: goal + revision adversarial del
+> primer entregable).
+
 ## Que pide el operador
 Una interface en el front para HABLAR con el Arquitecto en vivo, como en VS Code: el operador escribe, el
 Arquitecto muestra lo que hace y reporta; al enviar un mensaje, el RUNTIME del Arquitecto se ACTIVA. **NO es el
