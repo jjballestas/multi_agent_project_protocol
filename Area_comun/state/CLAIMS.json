@@ -42,6 +42,22 @@
             "updated_at": "2026-07-27T00:26:35Z"
         },
         {
+            "claim_id": "CLAIM-arq-registro0297-20260727",
+            "expires_at": "2026-07-28T17:12:11Z",
+            "notes": "Registro+promocion TASK-0297 (alinear .ps1 legacy con .py canonico) via submit_intent.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0297-20260727"
+            ],
+            "started_at": "2026-07-27T17:12:11Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:12:11Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
