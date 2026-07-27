@@ -283,8 +283,34 @@
                 "DECISION-0095"
             ],
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_review",
             "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)",
+            "type": "feature"
+        },
+        {
+            "created_at": "2026-07-27",
+            "file": "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
+            "id": "TASK-0299",
+            "linked_decisions": [
+                "DECISION-0050",
+                "DECISION-0095",
+                "DECISION-0040"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0178",
+                "TASK-0298",
+                "TASK-0187",
+                "DECISION-0050",
+                "DECISION-0095",
+                "DECISION-0040"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)",
             "type": "feature"
         },
         {

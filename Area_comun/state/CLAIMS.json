@@ -105,6 +105,63 @@
             "updated_at": "2026-07-27T17:31:05Z"
         },
         {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0298",
+            "expires_at": "2026-07-28T08:31:17Z",
+            "notes": "Implement observation-only run-log tail bridge in Zeus-protocol.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0298",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/scripts/architect-runtime-launcher.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/architect-bridge.config.json",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T20:31:17Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T20:31:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0298-delivery",
+            "expires_at": "2026-07-27T22:46:29Z",
+            "notes": "Deliver TASK-0298 product commit bf0d477 for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0298-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0298",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0298-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0298.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T20:46:29Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T20:46:29Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-archive-handoff0298-20260727",
+            "expires_at": "2026-07-28T21:15:56Z",
+            "notes": "Archivar HANDOFF-0298 de Codex (malformada: requires_response sin question; anomalia DECISION-0018) tras consumirla (recomputo PASO + ruteo review a Analista). Green del hub.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0298.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-archive-handoff0298-20260727"
+            ],
+            "started_at": "2026-07-27T21:15:56Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-ARCHIVE-20260727",
+            "updated_at": "2026-07-27T21:15:56Z"
+        },
+        {
             "claim_id": "CLAIM-arq-registro0297-20260727",
             "expires_at": "2026-07-28T17:12:11Z",
             "notes": "Registro+promocion TASK-0297 (alinear .ps1 legacy con .py canonico) via submit_intent.",
@@ -135,6 +192,22 @@
             "status": "released",
             "task_id": "TASK-0298",
             "updated_at": "2026-07-27T20:20:19Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-registro0299-20260727",
+            "expires_at": "2026-07-28T20:43:18Z",
+            "notes": "Registro+promocion TASK-0299 (Aegis L1 unidad 2: observar sesion interactiva via transcript jsonl; fast-follow de 0298). GO retenido hasta que 0298 cierre.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0299",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0299",
+                "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0299-20260727"
+            ],
+            "started_at": "2026-07-27T20:43:18Z",
+            "status": "released",
+            "task_id": "TASK-0299",
+            "updated_at": "2026-07-27T20:43:18Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0282-20260722",

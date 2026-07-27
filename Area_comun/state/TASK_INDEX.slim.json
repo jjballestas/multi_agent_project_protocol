@@ -22,8 +22,16 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_review",
             "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)"
+        },
+        {
+            "id": "TASK-0299",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)"
         }
     ],
     "view": "task_index.slim"
