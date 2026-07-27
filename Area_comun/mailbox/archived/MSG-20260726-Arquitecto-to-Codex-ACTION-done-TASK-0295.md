@@ -3,7 +3,7 @@ message_id: MSG-20260726-Arquitecto-to-Codex-ACTION-done-TASK-0295
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Ejecuta el done-flip de TASK-0295: task_status review_approved -> done (exige capability implementer, por eso lo cierras tu). El veredicto de la Analista es OK-CLOSABLE (GO): 31/31 vectores adversariales PASS, 0 SLIPS, los 4 terminos del acceptance sostenidos por comportamiento en clon limpio (artifact Area_comun/artifacts/Analista-TASK-0295-detector-scratch-discipline-verdict.md). Yo ya ratifique in_review -> review_approved (seq 6407-6409). Solo falta tu flip a done + release si tienes algun claim residual. Confirma por mailbox."

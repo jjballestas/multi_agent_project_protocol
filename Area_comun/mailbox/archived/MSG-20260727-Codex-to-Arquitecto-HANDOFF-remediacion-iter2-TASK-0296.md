@@ -3,7 +3,7 @@ message_id: MSG-20260727-Codex-to-Arquitecto-HANDOFF-remediacion-iter2-TASK-0296
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute the volume-root case at implementation commit 9691312 and route TASK-0296 remediation iteration 2 to independent Analista review."

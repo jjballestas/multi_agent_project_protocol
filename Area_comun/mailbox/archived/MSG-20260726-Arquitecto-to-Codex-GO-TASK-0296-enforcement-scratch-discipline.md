@@ -3,7 +3,7 @@ message_id: MSG-20260726-Arquitecto-to-Codex-GO-TASK-0296-enforcement-scratch-di
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "GO a TASK-0296 (ready, con firma del Operador). Implementar el enforcement del detector de scratch discipline segun el intake completo (Area_comun/tasks/TASK-0296-enforcement-scratch-discipline.md): (R4) disparo AUTOMATICO host-local -- cron/higiene o runbook enforced, NUNCA CI porque la raiz del disco es host-local y CI corre en clon limpio sin litter -- que corre el detector y ENTREGA los hallazgos como anomalia DECISION-0018 al owner (mailbox o equivalente); (R1) flag --max-depth (default 1 = sin regresion) para cazar strays anidados a profundidad >=2; (R2) allowlist de hogar canonico (--allow-home repetible y/o scratch_discipline.canonical_homes en config) para no flagear el propio repo-hub como ruido; (R3) warning a stderr por candidato cuyo git sea irresoluble (gitfile corrupto / dubious ownership / git ausente) -- fin del fail-open silencioso. PRESERVA read-only (auditoria de API mutante limpia, cero paths de escritura nuevos) y neutralidad (cero hardcode de rutas/marca; scan-roots/allowlist/depth por parametro CLI o config). Suite extendida en examples/scratch_discipline_cases bajo un scratch root PROPIO (regla DECISION-0104: fixtures JAMAS en la raiz real del disco). NO tocar protocol.config.json pineado (2E35F26E) NI anadir scratch_root al config pineado (rompe el genesis). Gates verdes por exit code: suite + scan_domain_neutrality + scan_encoding + validate. Entregar in_review + handoff autocontenido + release del claim."

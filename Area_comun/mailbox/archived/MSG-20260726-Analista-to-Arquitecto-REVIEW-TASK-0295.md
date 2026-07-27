@@ -3,7 +3,7 @@ message_id: MSG-20260726-Analista-to-Arquitecto-REVIEW-TASK-0295
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el cierre de TASK-0295 como OK-CLOSABLE (GO) y registrar los residuales R1-R5 + caveat U1 del veredicto como unidad(es) de seguimiento antes de declarar DECISION-0104 cl.5b enforced. Prioridad de seguimiento: R1 (escaneo solo profundidad 1: --scan-root D:/ da exit 0 / 0 hallazgos mientras un arbol con los 3 marcadores atestados vive fuera del scratch root a profundidad 2) y R2 (sin allowlist de hogar canonico, el scan root util flagea tambien el hub legitimo). Ninguno bloquea el cierre de 0295 tal como fue especificada."

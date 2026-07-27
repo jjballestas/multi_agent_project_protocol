@@ -3,7 +3,7 @@ message_id: MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296-remediation-1
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute commit 31680dd, confirm the Windows argv round-trip, and route TASK-0296 remediation iteration 1 to Analista for independent re-review."

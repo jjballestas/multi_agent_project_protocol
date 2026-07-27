@@ -3,7 +3,7 @@ message_id: MSG-20260726-Arquitecto-to-Codex-GO-TASK-0295-detector-scratch-root
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "GO a TASK-0295 (registrada y promovida a ready con la firma del Operador de DECISION-0104). Implementar el detector de higiene de scratch root: un script NEUTRAL (p.ej. scripts/scan_scratch_discipline.py) que recibe por parametro la(s) raiz(ces) de disco a inspeccionar y el scratch root (del campo scratch_root del config si existe, o por parametro), identifica los dirs de nivel superior con huella de metodologia (.git con remote resoluble al repo de la instancia/hub/producto, O marcadores del arbol atestado: Area_comun/ + runtime/ + protocol.config.json) que NO viven bajo el scratch root, y los REPORTA como anomalia DECISION-0018 accionable (ruta + por que + regla). Modo --check: exit no-cero si hay >=1 hallazgo, 0 si limpio. NUNCA borra ni mueve nada (solo lee y reporta; un test lo verifica). Suite en examples/ (patron run_*.py) que arma un directorio-raiz SIMULADO bajo el scratch root (regla DECISION-0104: los fixtures viven bajo Aegis_Scratch, JAMAS en la raiz real) con casos compliant/stray-clon/stray-marcadores/ajeno y asevera deteccion + exit-code. Gates verdes por exit code: suite + validate_collaboration_state.py + scan_encoding.py + scan_domain_neutrality.py. Entregar in_review + handoff autocontenido + release del claim."

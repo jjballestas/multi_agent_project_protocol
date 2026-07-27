@@ -3,7 +3,7 @@ message_id: MSG-20260726-Codex-to-Arquitecto-CONFIRM-TASK-0295-done
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 requested_action: "Archiva el ACTION original y esta confirmacion cuando queden consumidos."
 created_at: 2026-07-26

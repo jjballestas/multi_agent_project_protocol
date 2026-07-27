@@ -3,7 +3,7 @@ message_id: MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute TASK-0296 through the real entrypoints and route implementation commit 36269a3 to Analista for independent adversarial review."

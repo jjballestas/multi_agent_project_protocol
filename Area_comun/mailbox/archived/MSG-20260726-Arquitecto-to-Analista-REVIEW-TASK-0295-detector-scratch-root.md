@@ -3,7 +3,7 @@ message_id: MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0295-detector-scratc
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "REVIEW adversarial independiente de TASK-0295 (detector de scratch discipline) en clon limpio de origin/main HEAD b1b3bbc (commit de implementacion 3aa332d). ALCANCE: SOLO protocolo, SIN producto en alcance (no gatees Nova-Budget ni npm test). Contrato de acceptance a refutar: (1) READ-ONLY -- ningun path de borrado/movimiento/escritura en scripts/scan_scratch_discipline.py; verifica con fingerprint del arbol de fixtures antes/despues del scan. (2) NEUTRAL -- cero terminos de dominio ni rutas/marca hardcodeadas (scan-root/scratch-root/known-repo son parametro/config); scan_domain_neutrality verde. (3) DETECCION -- flagea dirs top-level con .git cuyo remote resuelve a un repo conocido O con marcadores de arbol atestado (Area_comun + runtime + protocol.config.json), e IGNORA los que viven bajo el scratch root y los ajenos sin huella. (4) EXIT CODES -- --check exit 1 con hallazgos / 0 limpio; error (sin scratch root) exit 2. Corre examples/scratch_discipline_cases/run_scratch_discipline_cases.py bajo un scratch root PROPIO (regla DECISION-0104: fixtures JAMAS en la raiz real del disco) + arma un fixture propio. Intenta REFUTAR: algun path de escritura oculto, un falso-positivo (flagea un dir legitimo), un falso-negativo (se escapa un stray real), o hardcode. Veredicto por exit code."

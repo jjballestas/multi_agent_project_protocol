@@ -500,6 +500,98 @@
             "updated_at": "2026-07-26T22:48:09Z"
         },
         {
+            "claim_id": "CLAIM-HYG-20260727-1",
+            "expires_at": "2026-07-27T02:10:03Z",
+            "notes": "mailbox hygiene chains 0295/0296",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260726-Analista-to-Arquitecto-REVIEW-TASK-0295.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Analista-to-Arquitecto-REVIEW-TASK-0295.md",
+                "Area_comun/mailbox/open/MSG-20260726-Analista-to-Arquitecto-REVIEW-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Analista-to-Arquitecto-REVIEW-TASK-0296.md",
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Analista-REREVIEW-TASK-0296-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Analista-REREVIEW-TASK-0296-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0295-detector-scratch-root.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0295-detector-scratch-root.md",
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0296-enforcement.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0296-enforcement.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-HYG-20260727-1"
+            ],
+            "started_at": "2026-07-27T00:10:03Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260727",
+            "updated_at": "2026-07-27T00:10:03Z"
+        },
+        {
+            "claim_id": "CLAIM-HYG-20260727-2",
+            "expires_at": "2026-07-27T02:13:45Z",
+            "notes": "mailbox hygiene chains 0295/0296",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Codex-ACTION-done-TASK-0295.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Codex-ACTION-done-TASK-0295.md",
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Codex-ACTION-remediacion-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Codex-ACTION-remediacion-TASK-0296.md",
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Codex-GO-TASK-0295-detector-scratch-root.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Codex-GO-TASK-0295-detector-scratch-root.md",
+                "Area_comun/mailbox/open/MSG-20260726-Arquitecto-to-Codex-GO-TASK-0296-enforcement-scratch-discipline.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Arquitecto-to-Codex-GO-TASK-0296-enforcement-scratch-discipline.md",
+                "Area_comun/mailbox/open/MSG-20260726-Codex-to-Arquitecto-CONFIRM-TASK-0295-done.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Codex-to-Arquitecto-CONFIRM-TASK-0295-done.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-HYG-20260727-2"
+            ],
+            "started_at": "2026-07-27T00:13:45Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260727",
+            "updated_at": "2026-07-27T00:13:45Z"
+        },
+        {
+            "claim_id": "CLAIM-HYG-20260727-3",
+            "expires_at": "2026-07-27T02:16:57Z",
+            "notes": "mailbox hygiene chains 0295/0296",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0295.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0295.md",
+                "Area_comun/mailbox/open/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296.md",
+                "Area_comun/mailbox/open/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260726-Codex-to-Arquitecto-HANDOFF-TASK-0296-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260727-Analista-to-Arquitecto-REREVIEW-TASK-0296-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Analista-to-Arquitecto-REREVIEW-TASK-0296-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260727-Analista-to-Arquitecto-REREVIEW-TASK-0296-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Analista-to-Arquitecto-REREVIEW-TASK-0296-iter2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-HYG-20260727-3"
+            ],
+            "started_at": "2026-07-27T00:16:57Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260727",
+            "updated_at": "2026-07-27T00:16:57Z"
+        },
+        {
+            "claim_id": "CLAIM-HYG-20260727-4",
+            "expires_at": "2026-07-27T02:19:57Z",
+            "notes": "mailbox hygiene chains 0295/0296",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Analista-REREVIEW-TASK-0296-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Analista-REREVIEW-TASK-0296-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Codex-ACTION-done-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Codex-ACTION-done-TASK-0296.md",
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Codex-ACTION-remediacion-iter2-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Codex-ACTION-remediacion-iter2-TASK-0296.md",
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-remediacion-iter2-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Codex-to-Arquitecto-HANDOFF-remediacion-iter2-TASK-0296.md",
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-RESP-done-TASK-0296.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Codex-to-Arquitecto-RESP-done-TASK-0296.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-HYG-20260727-4"
+            ],
+            "started_at": "2026-07-27T00:19:57Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260727",
+            "updated_at": "2026-07-27T00:19:57Z"
+        },
+        {
             "claim_id": "CLAIM-arq-close0294-20260724",
             "expires_at": "2026-07-24T12:11:59Z",
             "notes": "Cierre 0294 (GO checker OK-CLOSABLE; RES-8/9/10 cerrados; fix-loop 1 iter por sobre-materializacion) -> in_review->done + archivo REVIEW/VERDICT",

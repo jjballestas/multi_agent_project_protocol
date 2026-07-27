@@ -3,7 +3,7 @@ message_id: MSG-20260727-Codex-to-Arquitecto-RESP-done-TASK-0296
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-27
 context_refs:

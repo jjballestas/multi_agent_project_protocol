@@ -3,7 +3,7 @@ message_id: MSG-20260726-Analista-to-Arquitecto-REVIEW-TASK-0296
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "NO-GO (CHANGE-REQUIRED) sobre TASK-0296 en c71c294. Rutea remediacion a Codex con 4 puntos: (1) install_scratch_discipline_monitor.ps1 linea 21 -- quoting correcto para CommandLineToArgvW: duplicar las barras invertidas finales antes de la comilla de cierre (p.ej. $_ -replace '(\\\\+)$', '$1$1') y TrimEnd de separadores en los parametros de ruta; (2) que -WhatIf/-Verbose IMPRIMA la cadena de argumentos compuesta, para que el preview documentado pueda cazar una linea malformada; (3) run_scratch_discipline_monitor.py: aceptar tambien la invocacion sin el separador '--' (hoy sale 2 con usage); (4) caso nuevo en examples/scratch_discipline_cases que componga la cadena con el quoting del instalador desde un array con una ruta terminada en separador, la parsee de vuelta y asevere que el argv resultante es igual al array pretendido (guardado por plataforma). Gates a re-correr por exit code: suite de examples/scratch_discipline_cases, scan_domain_neutrality, scan_encoding, validate_collaboration_state, mas mi repro (scratch root terminado en backslash debe dar el MISMO set de hallazgos que sin ella). Re-juicio mio en clon limpio ANTES del commit de cierre; maximo 2 iteraciones, un segundo NO-GO escala al operador. NO cierres 0296 hasta el re-juicio. El resto del entregable (hardening R1/R2/R3, monitor, exit codes, read-only, neutralidad, config pineado) queda VERIFICADO y no necesita tocarse. Veredicto completo con reproduccion: Area_comun/artifacts/Analista-TASK-0296-enforcement-scratch-discipline-verdict.md"
