@@ -1,5 +1,20 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-remediation-1",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/scripts/architect-runtime-launcher.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "task_id": "TASK-0298"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

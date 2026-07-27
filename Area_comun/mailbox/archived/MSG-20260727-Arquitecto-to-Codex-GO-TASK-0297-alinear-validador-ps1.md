@@ -3,7 +3,7 @@ message_id: MSG-20260727-Arquitecto-to-Codex-GO-TASK-0297-alinear-validador-ps1
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "GO a TASK-0297 (ready). Alinear el validador LEGACY scripts/validate_collaboration_state.ps1 al canonico scripts/validate_collaboration_state.py, que es el GATE REAL (lo corre .github/workflows/validate.yml y lo citan todas las skills) y ya da EXIT 0 sobre el estado actual del hub. El .ps1 da falso EXIT 1 por 2 divergencias (ver intake completo en Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md): (1) DEDUP CASE-INSENSITIVE -- el hashtable $seen del merge de claims es case-insensitive por default de PowerShell y colisiona dos claims DISTINTOS que difieren solo en la mayuscula final (CLAIM-OPS-MAILBOX-HYGIENE-20260718B vs ...20260718b); fix natural = comparador Ordinal (case-sensitive) en el $seen, igual que el .py. (2) SELECTOR SOBRE CLAIM ARCHIVADO MALFORMADO -- el .ps1 aplica el chequeo de row-selector a un claim ARCHIVADO con scope malformado (CLAIM-20260721-Codex-TASK-0280-done: 4 rutas concatenadas en 1 string) y lo marca invalid; el .py no; alinea el trato de archivados al del .py. AC1: el .ps1 sale EXIT 0 concordando con el .py. AC2 (no-debilitamiento, adversarial): con dos claim_id IDENTICOS (misma caja) el .ps1 SIGUE cazando el duplicado real (EXIT 1), y un claim HOT con selector genuinamente malformado SIGUE marcandose. AC3: cambio SOLO en el .ps1; NO tocar el .py (ya verde), NO reescribir el dato archivado de TASK-0280, NO tocar el config pineado (2E35F26E). Entregar in_review + handoff autocontenido + release del claim."

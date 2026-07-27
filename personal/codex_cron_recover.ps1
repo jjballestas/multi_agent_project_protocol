@@ -29,8 +29,8 @@ foreach ($f in @("codex_mailbox_cron.prompt.txt","codex_mailbox_cron.retry.json"
 # Relanzar el cron de Codex limpio (detached)
 $cron = Join-Path $PSScriptRoot "Codex\codex_mailbox_cron.ps1"
 if (Test-Path -LiteralPath $cron) {
-  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron -WindowStyle Hidden
-  Write-Host ("Relaunched Codex cron: " + $cron)
+  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","600" -WindowStyle Hidden
+  Write-Host ("Relaunched Codex cron (ExecTimeout=600s): " + $cron)
 } else {
   Write-Host ("Cron script not found: " + $cron)
 }
