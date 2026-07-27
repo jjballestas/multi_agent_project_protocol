@@ -121,6 +121,22 @@
             "updated_at": "2026-07-27T17:12:11Z"
         },
         {
+            "claim_id": "CLAIM-arq-registro0298-20260727",
+            "expires_at": "2026-07-28T20:20:19Z",
+            "notes": "Registro+promocion TASK-0298 (Aegis Front MVP L1 unidad 1: bridge observacion-tail) via submit_intent.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0298-20260727"
+            ],
+            "started_at": "2026-07-27T20:20:19Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T20:20:19Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",

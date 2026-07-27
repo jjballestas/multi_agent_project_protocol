@@ -16,6 +16,14 @@
             "priority": "normal",
             "status": "in_review",
             "title": "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)"
+        },
+        {
+            "id": "TASK-0298",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)"
         }
     ],
     "view": "task_index.slim"

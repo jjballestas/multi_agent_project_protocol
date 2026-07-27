@@ -261,6 +261,33 @@
             "type": "infra"
         },
         {
+            "created_at": "2026-07-27",
+            "file": "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+            "id": "TASK-0298",
+            "linked_decisions": [
+                "DECISION-0050",
+                "DECISION-0095",
+                "DECISION-0057"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0178",
+                "TASK-0185",
+                "TASK-0186",
+                "TASK-0187",
+                "TASK-0188",
+                "DECISION-0050",
+                "DECISION-0095"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
