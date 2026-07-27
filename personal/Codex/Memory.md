@@ -13,6 +13,9 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
   were not changed.
 - TASK-0297 remains `in_progress` pending governed delivery to independent review;
   Codex has not reviewed or ratified the implementation.
+- Delivery commit `2c217e0` moves TASK-0297 to `in_review`, releases all three
+  Codex claims, and opens the self-contained Arquitecto handoff. Independent
+  Analista review remains required; Codex did not review or ratify the work.
 
 ## 2026-07-27 - TASK-0296 final closure
 
