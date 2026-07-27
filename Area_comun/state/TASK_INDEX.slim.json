@@ -32,6 +32,14 @@
             "priority": "normal",
             "status": "ready",
             "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)"
+        },
+        {
+            "id": "TASK-0300",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)"
         }
     ],
     "view": "task_index.slim"
