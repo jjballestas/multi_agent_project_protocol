@@ -2,6 +2,17 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-28 - TASK-0300 scope blocker
+
+- TASK-0300 is `blocked` before implementation because its declared scope contains only
+  two Codex wrappers, while AC1-AC3 require changing
+  `scripts/harness/peer_mailbox_cron.ps1` and a permanent regression runner under
+  `examples/mailbox_retry_cases/`.
+- `MSG-20260728-Codex-to-Arquitecto-QUESTION-TASK-0300-scope.md` asks Arquitecto one
+  concrete question authorizing that scope expansion. Resume only after a governed
+  answer; do not touch other agents' harnesses, cron deployment/restart, or Zeus product
+  code.
+
 ## 2026-07-27 - TASK-0297 implementation
 
 - Commit `d800441` aligns only the legacy PowerShell collaboration validator:
