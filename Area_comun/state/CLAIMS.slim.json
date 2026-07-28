@@ -1,5 +1,20 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-arq-ratify0297-0300-20260728",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify0297-0300-20260728"
+            ],
+            "task_id": "TASK-0300"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
