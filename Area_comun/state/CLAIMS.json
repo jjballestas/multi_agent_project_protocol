@@ -93,6 +93,22 @@
             "updated_at": "2026-07-28T17:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-done-memory",
+            "expires_at": "2026-07-29T01:15:00Z",
+            "notes": "Persist TASK-0298 final closure commit context after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-done-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T17:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-28T17:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0298-remediation-v3",
             "expires_at": "2026-07-29T03:30:00Z",
             "notes": "Remediate TASK-0298 iteration 2 blockers B1, B2, and B3 with mutation-sensitive regressions.",
@@ -169,6 +185,71 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260728B",
             "updated_at": "2026-07-28T15:04:53Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-milestone1-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Higiene milestone 0297/0298/0300 done: archiva 5 consumidos (batch 1).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0297.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0297.md",
+                "Area_comun/mailbox/open/MSG-20260728-Analista-to-Arquitecto-REVIEW-TASK-0298-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Analista-to-Arquitecto-REVIEW-TASK-0298-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260728-Analista-to-Arquitecto-REVIEW-TASK-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Analista-to-Arquitecto-REVIEW-TASK-0298.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0298-remediation-v3.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0298-remediation-v3.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0298.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-milestone1-20260728"
+            ],
+            "started_at": "2026-07-28T17:05:12Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260728M1",
+            "updated_at": "2026-07-28T17:05:12Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-milestone2-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Higiene milestone 0297/0298/0300 done: archiva 4 consumidos (batch 2).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-liberar-claim-huerfano-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-liberar-claim-huerfano-0298.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-remediar-TASK-0298-v3.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-remediar-TASK-0298-v3.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-GO-TASK-0300-harden-cron-harness.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-GO-TASK-0300-harden-cron-harness.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-RESP-TASK-0300-scope-authorized.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-RESP-TASK-0300-scope-authorized.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-milestone2-20260728"
+            ],
+            "started_at": "2026-07-28T17:05:12Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260728M2",
+            "updated_at": "2026-07-28T17:05:12Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-milestone3-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Higiene milestone 0297/0298/0300 done: archiva 4 consumidos (batch 3).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0298-remediation-v3.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0298-remediation-v3.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0300.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0300.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-QUESTION-TASK-0300-scope.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-QUESTION-TASK-0300-scope.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-RESP-doneflip-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-RESP-doneflip-0298.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-milestone3-20260728"
+            ],
+            "started_at": "2026-07-28T17:05:12Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260728M3",
+            "updated_at": "2026-07-28T17:05:12Z"
         },
         {
             "claim_id": "CLAIM-arq-ratify0298-20260728",

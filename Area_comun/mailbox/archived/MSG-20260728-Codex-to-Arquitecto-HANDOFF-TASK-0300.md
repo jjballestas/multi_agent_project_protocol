@@ -3,7 +3,7 @@ message_id: MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0300
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute TASK-0300 implementation commit 971741b and route it to Analista for independent review. Keep live propagation and cron restart outside this unit."

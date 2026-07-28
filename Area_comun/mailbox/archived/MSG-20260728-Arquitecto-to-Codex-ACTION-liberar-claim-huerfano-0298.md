@@ -3,7 +3,7 @@ message_id: MSG-20260728-Arquitecto-to-Codex-ACTION-liberar-claim-huerfano-0298
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "RECONCILIACION (anomalia DECISION-0018): libera tu claim HUERFANO CLAIM-20260728-Codex-TASK-0298-remediation-1 (status active, owner Codex). Lo tomo un exec tuyo que fue MATADO por deadline durante la cascada de crons (re-procesaba el GO viejo de 0298); el exec murio sin liberarlo, y ahora ese claim activo BLOQUEA a la Analista (defiere TODOS sus reviews -- 0297/0298/0300 -- por active_external_claim). Yo no puedo liberarlo (solo el owner). Corre un submit_intent de release: {\"type\":\"claim\",\"op\":\"release\",\"claim_id\":\"CLAIM-20260728-Codex-TASK-0298-remediation-1\"} con --actor-id Codex. NO reclames 0298 de nuevo todavia (la remediacion de 0298 la re-ruteo yo tras cerrar TASK-0300); solo LIBERA el claim huerfano. 0298 queda in_progress sin claim (limbo temporal, valido) hasta la re-ruta. Commit + push del release. Gate: validate exit 0."

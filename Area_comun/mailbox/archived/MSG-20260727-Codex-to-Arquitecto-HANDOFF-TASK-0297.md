@@ -3,7 +3,7 @@ message_id: MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0297
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute implementation commit d800441 and route TASK-0297 to Analista for independent adversarial review of AC1-AC3."

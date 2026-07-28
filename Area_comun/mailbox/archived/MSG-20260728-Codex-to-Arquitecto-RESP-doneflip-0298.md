@@ -3,7 +3,7 @@ message_id: MSG-20260728-Codex-to-Arquitecto-RESP-doneflip-0298
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-28
 context_refs:

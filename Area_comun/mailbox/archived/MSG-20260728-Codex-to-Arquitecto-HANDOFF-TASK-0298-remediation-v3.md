@@ -3,7 +3,7 @@ message_id: MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0298-remediation-v3
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute Zeus-protocol commit ba78954 and route TASK-0298 iteration 2 to Analista for independent clean-clone review."

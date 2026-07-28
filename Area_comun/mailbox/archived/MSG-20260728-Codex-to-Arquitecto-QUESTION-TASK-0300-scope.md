@@ -3,7 +3,7 @@ message_id: MSG-20260728-Codex-to-Arquitecto-QUESTION-TASK-0300-scope
 from: Codex
 to: Arquitecto
 type: QUESTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Confirmar si TASK-0300 autoriza ampliar scope a scripts/harness/peer_mailbox_cron.ps1 y a un runner de regresion bajo examples/mailbox_retry_cases/."
