@@ -4,6 +4,13 @@ Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
 ## 2026-07-28 - TASK-0299 implementation
 
+- Recovery delivery commit `de87949` releases the three orphaned claims left by the
+  terminated harness execution, records a fresh recovery claim, moves TASK-0299 to
+  `in_review`, releases that claim, and publishes the self-contained Arquitecto handoff.
+- Zeus commit `7729c4f` survived the termination despite the recovery ACTION reporting it
+  lost. The rerun full slow suite passed 138 total: 120 passed, 18 fixture-guarded skips,
+  and 0 failed; the two TASK-0299 tests passed with no skips. Hub validation, encoding,
+  neutrality, and pinned-config gates exited 0. Independent review remains pending.
 - Product commit `7729c4f` extends the verified TASK-0298 observation-only bridge with
   a configurable `session-transcript` source; the original cron run-log source remains
   the default and its framing/control/anti-spawn behavior is unchanged.

@@ -231,6 +231,22 @@
             "updated_at": "2026-07-28T19:47:08Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0299-recovery-memory",
+            "expires_at": "2026-07-29T07:52:19Z",
+            "notes": "Persist TASK-0299 recovery delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0299-recovery-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T19:52:19Z",
+            "status": "released",
+            "task_id": "TASK-0299",
+            "updated_at": "2026-07-28T19:52:19Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0300-done-flip",
             "expires_at": "2026-07-28T15:00:00Z",
             "notes": "Implementer done-flip after independent checker approval and Architect ratification; R1 remains a non-blocking follow-up.",
