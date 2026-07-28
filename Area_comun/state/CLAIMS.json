@@ -40,6 +40,22 @@
             "updated_at": "2026-07-28T13:24:08Z"
         },
         {
+            "claim_id": "CLAIM-arq-register0302-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Registro TASK-0302 (proposed): observabilidad del harness -- heartbeat EXEC_RUNNING elapsed para acabar con la muerte muda 0/0-byte del text-mode. Origen: diagnostico del review-task-hang de la Analista.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0302",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0302",
+                "Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-register0302-20260728"
+            ],
+            "started_at": "2026-07-28T13:32:29Z",
+            "status": "released",
+            "task_id": "TASK-0302",
+            "updated_at": "2026-07-28T13:32:29Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

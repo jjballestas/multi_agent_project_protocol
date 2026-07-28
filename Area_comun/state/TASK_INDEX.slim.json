@@ -32,6 +32,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos (follow-up R1 de TASK-0300)"
+        },
+        {
+            "id": "TASK-0302",
+            "owner": "unassigned",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte"
         }
     ],
     "view": "task_index.slim"
