@@ -40,6 +40,58 @@
             "updated_at": "2026-07-28T13:24:08Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0297-TASK-0300-response",
+            "expires_at": "2026-07-28T15:10:00Z",
+            "notes": "File-scoped claim for the required response to the Architect done-flip request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-RESP-doneflip-0297-0300.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0297-TASK-0300-response",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T13:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T13:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0297-done-flip",
+            "expires_at": "2026-07-28T15:00:00Z",
+            "notes": "Implementer done-flip after independent checker approval and Architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0297-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T13:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-28T13:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-done-flip",
+            "expires_at": "2026-07-28T15:00:00Z",
+            "notes": "Implementer done-flip after independent checker approval and Architect ratification; R1 remains a non-blocking follow-up.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T13:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T13:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-register0302-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Registro TASK-0302 (proposed): observabilidad del harness -- heartbeat EXEC_RUNNING elapsed para acabar con la muerte muda 0/0-byte del text-mode. Origen: diagnostico del review-task-hang de la Analista.",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e215a95db920c35d92ffc9f94db4b02be0593f1555eee44c7f93d27c02b23de8",
+  "canonical_hash": "7d64c31085bd8ab2894dca4c8a8607ad5ea16934cda8b13536c586e051015621",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2645,10 +2645,10 @@
       "TASK-0294": 15,
       "TASK-0295": 17,
       "TASK-0296": 33,
-      "TASK-0297": 10,
+      "TASK-0297": 13,
       "TASK-0298": 12,
       "TASK-0299": 3,
-      "TASK-0300": 19,
+      "TASK-0300": 24,
       "TASK-0301": 2,
       "TASK-0302": 2,
       "TASK-1102": 14,
@@ -2673,7 +2673,7 @@
       "protocol-prune": 30,
       "protocol-state": 1
     },
-    "events_applied": 5901,
+    "events_applied": 5909,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5505,7 +5505,11 @@
       "codex:task0296:runbook-claim-release:20260726T205800Z": 6427,
       "codex:task0296:runbook-claim:20260726T204000Z": 6423,
       "codex:task0296:start:claim-acquire:20260726T203500Z": 6421,
+      "codex:task0297-task0300:response:claim-acquire:20260728": 6579,
+      "codex:task0297-task0300:response:claim-release:20260728": 6580,
       "codex:task0297:delivery-claim:20260727": 6497,
+      "codex:task0297:done-flip:claim-acquire:20260728": 6573,
+      "codex:task0297:done-flip:claim-release:20260728": 6575,
       "codex:task0297:final-memory-claim:20260727": 6502,
       "codex:task0297:final-memory-release:20260727": 6503,
       "codex:task0297:in-review:20260727": 6498,
@@ -5513,6 +5517,7 @@
       "codex:task0297:release-delivery:20260727": 6501,
       "codex:task0297:release-main:20260727": 6499,
       "codex:task0297:release-memory:20260727": 6500,
+      "codex:task0297:review-approved-to-done:20260728": 6574,
       "codex:task0297:start-claim:20260727": 6494,
       "codex:task0297:start-status:20260727": 6495,
       "codex:task0298:changes-requested-to-in-progress:20260728T080000Z": 6529,
@@ -5532,10 +5537,13 @@
       "codex:task0300:delivery-memory-claim:20260728:a1": 6550,
       "codex:task0300:delivery-memory-release:2026-07-28T00:29:52.2517736Z": 6551,
       "codex:task0300:delivery-release:20260728:a1": 6549,
+      "codex:task0300:done-flip:claim-acquire:20260728": 6576,
+      "codex:task0300:done-flip:claim-release:20260728": 6578,
       "codex:task0300:implementation-claim:20260728:a1": 6544,
       "codex:task0300:implementation-release:20260728:a1": 6548,
       "codex:task0300:in-progress-to-in-review:20260728:a1": 6547,
       "codex:task0300:ready-to-in-progress:20260728:a1": 6545,
+      "codex:task0300:review-approved-to-done:20260728": 6577,
       "codex:task0300:scope-block:claim:2026-07-27T23:29:44Z": 6535,
       "codex:task0300:scope-block:release:2026-07-27T23:29:44Z": 6538,
       "codex:task0300:scope-block:start:2026-07-27T23:29:44Z": 6536,
@@ -8578,5 +8586,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6572
+  "up_to_seq": 6580
 }

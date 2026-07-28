@@ -256,7 +256,7 @@
                 "DECISION-0018"
             ],
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)",
             "type": "infra"
         },
@@ -333,7 +333,7 @@
                 "DECISION-0018"
             ],
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)",
             "type": "infra"
         },
