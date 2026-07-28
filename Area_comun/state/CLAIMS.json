@@ -319,6 +319,27 @@
             "updated_at": "2026-07-28T21:19:36Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0303-impl",
+            "expires_at": "2026-07-29T01:52:00Z",
+            "notes": "Implement TASK-0303 delivery-only post-window and bounded liveness-aware deadline handling.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0303-impl",
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T21:52:00Z",
+            "status": "active",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-28T21:52:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0303-retry-1",
             "expires_at": "2026-07-29T01:27:00Z",
             "notes": "Implement TASK-0303 delivery-only post-window and bounded liveness-aware deadline handling.",

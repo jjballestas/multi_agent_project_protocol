@@ -815,6 +815,10 @@ def run_post_delivery_timeout_case() -> None:
         )
         (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+        (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+            '{"tasks":[{"id":"TASK-delivery","owner":"TestPeer","status":"in_review"}]}\n',
+            encoding="ascii",
+        )
         (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
         (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (fixture / "Area_comun/mailbox/open/MSG-post.md").write_text(
@@ -828,7 +832,8 @@ def run_post_delivery_timeout_case() -> None:
         core.write_text(
             "$event='{\"seq\":1,\"actor\":\"TestPeer\",\"applied\":true,"
             "\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture\"},"
-            "\"payload\":{\"intent_type\":\"task_status\"}}'\n"
+            "\"payload\":{\"intent_type\":\"task_status\",\"task_id\":\"TASK-delivery\","
+            "\"transitions\":{\"task_status\":{\"from\":\"in_progress\",\"to\":\"in_review\"}}}}'\n"
             "Add-Content -LiteralPath 'runtime/state/events.jsonl' -Value $event -Encoding ASCII\n"
             "Start-Sleep -Seconds 30\n",
             encoding="ascii",
@@ -848,6 +853,7 @@ def run_post_delivery_timeout_case() -> None:
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20",
                 "-PostDeliveryTimeoutSeconds", "2", "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0",
+                "-ProgressFreshSeconds", "0", "-ProgressHardCapSeconds", "1",
                 cwd=fixture, timeout=15,
             )
         except subprocess.TimeoutExpired as exc:
@@ -866,6 +872,76 @@ def run_post_delivery_timeout_case() -> None:
         assert 1 <= measured <= 4, measured
         assert "TREE_KILL_COMPLETE" in log and "outcome=transient" in log, log
         assert "RETRY_EXHAUSTED" in log, log
+    finally:
+        shutil.rmtree(fixture, ignore_errors=True)
+
+
+def run_pre_delivery_and_liveness_cases() -> None:
+    """Claims do not start delivery timing; progress extends once, while a stale frozen exec is killed."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    assert 'transitions.task_status.to -cne "in_review"' in runner_text
+    assert "EXEC_PROGRESSING" in runner_text and "EXEC_HUNG" in runner_text
+
+    fixture = Path(tempfile.mkdtemp(prefix="task0303-liveness-"))
+    try:
+        (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
+        (fixture / "Area_comun/state").mkdir(parents=True)
+        (fixture / "runtime/state").mkdir(parents=True)
+        (fixture / "runtime").mkdir(exist_ok=True)
+        (fixture / "scripts/harness/prompts").mkdir(parents=True)
+        (fixture / "scripts").mkdir(exist_ok=True)
+        shutil.copy2(RUNNER, fixture / "scripts/harness/peer_mailbox_cron.ps1")
+        shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+        (fixture / "runtime/protocol_replay.py").write_text(
+            "def protocol_state_drift(root): return {'has_drift': False}\n", encoding="ascii"
+        )
+        (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+        (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+        (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+            '{"tasks":[{"id":"TASK-work","owner":"TestPeer","status":"in_progress"}]}\n', encoding="ascii"
+        )
+        (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+        (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+        (fixture / "Area_comun/mailbox/open/MSG-work.md").write_text(
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+            encoding="ascii",
+        )
+        prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+        prompt.write_text("Process @@MESSAGE_PATH@@.\n", encoding="ascii")
+        core = fixture / "progress.ps1"
+        core.write_text(
+            "$claim='{\"seq\":1,\"actor\":\"TestPeer\",\"applied\":true,"
+            "\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture\"},"
+            "\"payload\":{\"intent_type\":\"task_status\",\"task_id\":\"TASK-work\","
+            "\"transitions\":{\"task_status\":{\"from\":\"ready\",\"to\":\"in_progress\"}}}}'\n"
+            "Add-Content runtime/state/events.jsonl $claim -Encoding ASCII\n"
+            "1..20 | ForEach-Object { Write-Error ('working-' + $_); Start-Sleep -Milliseconds 400 }\n",
+            encoding="ascii",
+        )
+        fake = fixture / "progress.cmd"
+        fake.write_text('@powershell.exe -NoProfile -File "%~dp0progress.ps1"\r\n', encoding="ascii")
+        run("git", "init", cwd=fixture)
+        run("git", "config", "user.email", "retry@example.invalid", cwd=fixture)
+        run("git", "config", "user.name", "TestPeer", cwd=fixture)
+        run("git", "add", ".", cwd=fixture)
+        run("git", "commit", "-m", "fixture", cwd=fixture)
+        started = time.monotonic()
+        run(
+            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+            "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+            "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+            "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "2", "-PostDeliveryTimeoutSeconds", "1",
+            "-ProgressFreshSeconds", "0", "-ProgressExtensionSeconds", "2", "-ProgressHardCapSeconds", "3",
+            "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0", cwd=fixture, timeout=15,
+        )
+        elapsed = time.monotonic() - started
+        log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+        assert "POST_DELIVERY_WINDOW_START" not in log, log
+        assert "EXEC_PROGRESSING" in log and "reason=run_log_growing" in log, log
+        assert "EXEC_HUNG" in log and "reason=hard_cap" in log, log
+        assert "TREE_KILL_COMPLETE" in log, log
+        assert elapsed >= 4, elapsed
     finally:
         shutil.rmtree(fixture, ignore_errors=True)
 
@@ -1045,6 +1121,7 @@ def main() -> int:
         run_unstaged_residue_case(sandbox, prompt, fake)
         run_disordered_ledger_case(sandbox, prompt)
         run_post_delivery_timeout_case()
+        run_pre_delivery_and_liveness_cases()
         run_complete_tree_kill_case()
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")

@@ -12,6 +12,9 @@ param(
     [int]$MaxNoCoordinatorRounds = 15,
     [int]$ExecTimeoutSeconds = 3600,
     [int]$PostDeliveryTimeoutSeconds = 300,
+    [int]$ProgressFreshSeconds = 15,
+    [int]$ProgressExtensionSeconds = 60,
+    [int]$ProgressHardCapSeconds = 900,
     [int]$MaxTransientRetries = 3,
     [int]$RetryBackoffSeconds = 30,
     [int]$AbortedResidueMinutes = 5
@@ -299,9 +302,41 @@ function Clear-StaleCronLockIfSafe {
     }
 }
 
-function Stop-ExpiredLeaseProcess {
-    param($Lease)
-    [void](Stop-LeaseProcessTree -Lease $Lease -Reason "deadline")
+function Get-ExecProgressState {
+    param(
+        $Lease,
+        [string]$StdoutPath,
+        [string]$StderrPath,
+        [string]$EventsPath,
+        [long]$PreviousOutputBytes,
+        [long]$PreviousLedgerBytes,
+        [int]$FreshSeconds
+    )
+    $outputBytes = 0L
+    foreach ($path in @($StdoutPath, $StderrPath)) {
+        if (Test-Path -LiteralPath $path -PathType Leaf) {
+            $outputBytes += [long](Get-Item -LiteralPath $path).Length
+        }
+    }
+    $ledgerBytes = if (Test-Path -LiteralPath $EventsPath -PathType Leaf) {
+        [long](Get-Item -LiteralPath $EventsPath).Length
+    } else { 0L }
+    $heartbeatFresh = $false
+    if ($Lease -and $null -ne $Lease.heartbeat_monotonic) {
+        $elapsedTicks = [System.Diagnostics.Stopwatch]::GetTimestamp() - [long]$Lease.heartbeat_monotonic
+        $heartbeatAgeSeconds = [double]$elapsedTicks / [double][System.Diagnostics.Stopwatch]::Frequency
+        $heartbeatFresh = ($heartbeatAgeSeconds -ge 0 -and $heartbeatAgeSeconds -le $FreshSeconds)
+    }
+    $reasons = @()
+    if ($heartbeatFresh) { $reasons += "heartbeat_fresh" }
+    if ($outputBytes -gt $PreviousOutputBytes) { $reasons += "run_log_growing" }
+    if ($ledgerBytes -gt $PreviousLedgerBytes) { $reasons += "ledger_growing" }
+    return [pscustomobject]@{
+        progressing = ($reasons.Count -gt 0)
+        reasons = ($reasons -join ",")
+        output_bytes = $outputBytes
+        ledger_bytes = $ledgerBytes
+    }
 }
 
 function Test-ExistingCronInstance {
@@ -532,6 +567,39 @@ function Get-OwnEvidence {
         $hasUsefulIntent = $intentType -in @("task_status", "task_upsert", "decision")
         if (-not $hasUsefulIntent) { continue }
         return $true
+    }
+    return $false
+}
+
+function Get-OwnDeliveryEvidence {
+    param([long]$LedgerBytesBefore, [string]$LedgerPrefixSha256Before)
+    $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
+    if (-not (Test-Path -LiteralPath $eventsPath)) { return $false }
+    $currentLength = (Get-Item -LiteralPath $eventsPath).Length
+    if ($currentLength -le $LedgerBytesBefore) { return $false }
+    $prefixNow = Get-FilePrefixSha256 -Path $eventsPath -Length $LedgerBytesBefore
+    if (-not $prefixNow -or $prefixNow -cne $LedgerPrefixSha256Before) { return $false }
+    $stream = [System.IO.File]::Open($eventsPath, 'Open', 'Read', 'ReadWrite')
+    try {
+        [void]$stream.Seek($LedgerBytesBefore, 'Begin')
+        $reader = New-Object System.IO.StreamReader($stream, [System.Text.Encoding]::UTF8, $true, 4096, $true)
+        try { $tail = $reader.ReadToEnd() } finally { $reader.Dispose() }
+    } finally { $stream.Dispose() }
+    $taskIndexResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\TASK_INDEX.json")
+    if (-not $taskIndexResult.ok) { return $false }
+    foreach ($line in @($tail -split "\r?\n")) {
+        if ([string]::IsNullOrWhiteSpace($line)) { continue }
+        try { $event = $line | ConvertFrom-Json } catch { continue }
+        if ([string]$event.actor -cne $PeerId -or $event.applied -ne $true) { continue }
+        if ([string]$event.actor_auth.method -cne "ed25519") { continue }
+        $expectedKeyPrefix = $PeerId.ToLowerInvariant() + ":"
+        if (-not ([string]$event.actor_auth.keyid).StartsWith($expectedKeyPrefix, [StringComparison]::Ordinal)) { continue }
+        if ([string]::IsNullOrWhiteSpace([string]$event.actor_auth.sig)) { continue }
+        if ([string]$event.payload.intent_type -cne "task_status") { continue }
+        if ([string]$event.payload.transitions.task_status.to -cne "in_review") { continue }
+        $taskId = [string]$event.payload.task_id
+        $owned = @($taskIndexResult.value.tasks | Where-Object { [string]$_.id -ceq $taskId -and [string]$_.owner -ceq $PeerId })
+        if ($owned.Count -gt 0) { return $true }
     }
     return $false
 }
@@ -949,6 +1017,14 @@ function Invoke-PeerForMessage {
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         $postDeliveryDeadlineUtc = $null
+        $postDeliveryHardDeadlineUtc = $null
+        $execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
+        $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
+        $progressOutputBytes = 0L
+        foreach ($progressPath in @($stdoutPath, $stderrPath)) {
+            if (Test-Path -LiteralPath $progressPath -PathType Leaf) { $progressOutputBytes += [long](Get-Item -LiteralPath $progressPath).Length }
+        }
+        $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
         while (-not $process.WaitForExit(1000)) {
             Update-ExecLeaseHeartbeat
             if (Test-Path -LiteralPath $StopPath) {
@@ -956,21 +1032,49 @@ function Invoke-PeerForMessage {
             }
             if ([DateTime]::UtcNow -gt $deadlineUtc) {
                 $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                Stop-ExpiredLeaseProcess -Lease $lease
-                if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=deadline" }
-                break
+                $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -FreshSeconds $ProgressFreshSeconds
+                if ($progress.progressing -and [DateTime]::UtcNow -lt $execHardDeadlineUtc) {
+                    $progressOutputBytes = $progress.output_bytes
+                    $progressLedgerBytes = $progress.ledger_bytes
+                    $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
+                    if ($deadlineUtc -gt $execHardDeadlineUtc) { $deadlineUtc = $execHardDeadlineUtc }
+                    Write-Log "EXEC_PROGRESSING pid=$($process.Id) reason=$($progress.reasons) next_deadline=$($deadlineUtc.ToString('o')) hard_deadline=$($execHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
+                } else {
+                    $hungReason = if ([DateTime]::UtcNow -ge $execHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
+                    Write-Log "EXEC_HUNG pid=$($process.Id) reason=$hungReason action=terminate message=$($Message.Name)"
+                    [void](Stop-LeaseProcessTree -Lease $lease -Reason "deadline")
+                    if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=deadline" }
+                    break
+                }
             }
             if ($PostDeliveryTimeoutSeconds -gt 0) {
-                $ownEvidence = Get-OwnEvidence -LedgerBytesBefore $ledgerBytesBefore -LedgerPrefixSha256Before $ledgerPrefixSha256Before
-                if ($ownEvidence -and $null -eq $postDeliveryDeadlineUtc) {
+                $deliveryEvidence = Get-OwnDeliveryEvidence -LedgerBytesBefore $ledgerBytesBefore -LedgerPrefixSha256Before $ledgerPrefixSha256Before
+                if ($deliveryEvidence -and $null -eq $postDeliveryDeadlineUtc) {
                     $postDeliveryDeadlineUtc = [DateTime]::UtcNow.AddSeconds($PostDeliveryTimeoutSeconds)
+                    $postDeliveryHardDeadlineUtc = $postDeliveryDeadlineUtc.AddSeconds($ProgressHardCapSeconds)
+                    $progressOutputBytes = 0L
+                    foreach ($progressPath in @($stdoutPath, $stderrPath)) {
+                        if (Test-Path -LiteralPath $progressPath -PathType Leaf) { $progressOutputBytes += [long](Get-Item -LiteralPath $progressPath).Length }
+                    }
+                    $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
                     Write-Log "POST_DELIVERY_WINDOW_START pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds message=$($Message.Name)"
                 } elseif ($null -ne $postDeliveryDeadlineUtc -and [DateTime]::UtcNow -gt $postDeliveryDeadlineUtc) {
                     $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                    Write-Log "POST_DELIVERY_TIMEOUT pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds action=terminate message=$($Message.Name)"
-                    Stop-ExpiredLeaseProcess -Lease $lease
-                    if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=post_delivery" }
-                    break
+                    $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -FreshSeconds $ProgressFreshSeconds
+                    if ($progress.progressing -and [DateTime]::UtcNow -lt $postDeliveryHardDeadlineUtc) {
+                        $progressOutputBytes = $progress.output_bytes
+                        $progressLedgerBytes = $progress.ledger_bytes
+                        $postDeliveryDeadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
+                        if ($postDeliveryDeadlineUtc -gt $postDeliveryHardDeadlineUtc) { $postDeliveryDeadlineUtc = $postDeliveryHardDeadlineUtc }
+                        Write-Log "EXEC_PROGRESSING pid=$($process.Id) phase=post_delivery reason=$($progress.reasons) next_deadline=$($postDeliveryDeadlineUtc.ToString('o')) hard_deadline=$($postDeliveryHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
+                    } else {
+                        $hungReason = if ([DateTime]::UtcNow -ge $postDeliveryHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
+                        Write-Log "POST_DELIVERY_TIMEOUT pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds action=terminate message=$($Message.Name)"
+                        Write-Log "EXEC_HUNG pid=$($process.Id) phase=post_delivery reason=$hungReason action=terminate message=$($Message.Name)"
+                        [void](Stop-LeaseProcessTree -Lease $lease -Reason "post_delivery")
+                        if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=post_delivery" }
+                        break
+                    }
                 }
             }
         }
