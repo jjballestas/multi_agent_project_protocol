@@ -2,6 +2,18 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-28 - TASK-0298 final closure
+
+- Commit `6a6bd0a` records the Codex-signed `review_approved -> done` flip after
+  independent Analista OK-CLOSABLE and Arquitecto ratification.
+- Runtime events 6594-6596 close TASK-0298 and release the closure claim. The
+  ASCII mailbox confirmation records the environment-dependent suite count:
+  136/136/0 with the eventauth fixture and 118 passed plus 18 guarded skips in a
+  bare clean clone; none of those skips covers the three closed blockers.
+- Collaboration validation, encoding, and domain-neutrality gates exited 0.
+  Codex performed only the implementer-only done flip and did not review or
+  ratify its own work.
+
 ## 2026-07-28 - TASK-0298 remediation iteration 2 implementation
 
 - Product commit `ba78954` frames observation-tail output on complete lines, retains
