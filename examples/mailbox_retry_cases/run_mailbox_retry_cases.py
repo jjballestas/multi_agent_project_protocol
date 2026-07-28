@@ -798,6 +798,126 @@ def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
     fake.unlink()
 
 
+def run_post_delivery_timeout_case() -> None:
+    """A signed delivery starts a shorter bounded window for slow post-delivery work."""
+    fixture = Path(tempfile.mkdtemp(prefix="task0300-post-delivery-"))
+    try:
+        (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
+        (fixture / "Area_comun/state").mkdir(parents=True)
+        (fixture / "runtime/state").mkdir(parents=True)
+        (fixture / "runtime").mkdir(exist_ok=True)
+        (fixture / "scripts/harness/prompts").mkdir(parents=True)
+        (fixture / "scripts").mkdir(exist_ok=True)
+        shutil.copy2(RUNNER, fixture / "scripts/harness/peer_mailbox_cron.ps1")
+        shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+        (fixture / "runtime/protocol_replay.py").write_text(
+            "def protocol_state_drift(root): return {'has_drift': False}\n", encoding="ascii"
+        )
+        (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+        (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+        (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+        (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+        (fixture / "Area_comun/mailbox/open/MSG-post.md").write_text(
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+            encoding="ascii",
+        )
+        prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+        prompt.write_text("Process @@MESSAGE_PATH@@.\n", encoding="ascii")
+        core = fixture / "slow-post.ps1"
+        core.write_text(
+            "$event='{\"seq\":1,\"actor\":\"TestPeer\",\"applied\":true,"
+            "\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture\"},"
+            "\"payload\":{\"intent_type\":\"task_status\"}}'\n"
+            "Add-Content -LiteralPath 'runtime/state/events.jsonl' -Value $event -Encoding ASCII\n"
+            "Start-Sleep -Seconds 30\n",
+            encoding="ascii",
+        )
+        fake = fixture / "slow-post.cmd"
+        fake.write_text('@powershell.exe -NoProfile -File "%~dp0slow-post.ps1"\r\n', encoding="ascii")
+        run("git", "init", cwd=fixture)
+        run("git", "config", "user.email", "retry@example.invalid", cwd=fixture)
+        run("git", "config", "user.name", "TestPeer", cwd=fixture)
+        run("git", "add", ".", cwd=fixture)
+        run("git", "commit", "-m", "fixture", cwd=fixture)
+        started = time.monotonic()
+        try:
+            run(
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+                "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+                "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20",
+                "-PostDeliveryTimeoutSeconds", "2", "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0",
+                cwd=fixture, timeout=15,
+            )
+        except subprocess.TimeoutExpired as exc:
+            log_path = fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log"
+            raise AssertionError(log_path.read_text(encoding="utf-8") if log_path.exists() else "timeout without log") from exc
+        elapsed = time.monotonic() - started
+        log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+        assert elapsed < 18, elapsed
+        assert "POST_DELIVERY_WINDOW_START" in log and "POST_DELIVERY_TIMEOUT" in log, log
+        window_started = re.search(r"(?m)^(\S+) POST_DELIVERY_WINDOW_START", log)
+        window_expired = re.search(r"(?m)^(\S+) POST_DELIVERY_TIMEOUT", log)
+        assert window_started and window_expired
+        measured = time.mktime(time.strptime(window_expired.group(1), "%Y-%m-%dT%H:%M:%S")) - time.mktime(
+            time.strptime(window_started.group(1), "%Y-%m-%dT%H:%M:%S")
+        )
+        assert 1 <= measured <= 4, measured
+        assert "TREE_KILL_COMPLETE" in log and "outcome=transient" in log, log
+        assert "RETRY_EXHAUSTED" in log, log
+    finally:
+        shutil.rmtree(fixture, ignore_errors=True)
+
+
+def run_complete_tree_kill_case() -> None:
+    """The real kill helper removes a root, child and grandchild process tree."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    match = re.search(r"(?ms)^function Stop-LeaseProcessTree \{.*?^\}", runner_text)
+    if not match:
+        raise AssertionError("Stop-LeaseProcessTree function not found")
+    fixture = Path(tempfile.mkdtemp(prefix="task0300-tree-kill-"))
+    try:
+        grand = fixture / "grand.ps1"
+        child = fixture / "child.ps1"
+        root = fixture / "root.ps1"
+        grand.write_text("Set-Content grand.pid $PID -Encoding ASCII; Start-Sleep -Seconds 60\n", encoding="ascii")
+        child.write_text(
+            "Set-Content child.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','grand.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
+            encoding="ascii",
+        )
+        root.write_text(
+            "Set-Content root.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','child.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
+            encoding="ascii",
+        )
+        process = subprocess.Popen(["powershell.exe", "-NoProfile", "-File", str(root)], cwd=fixture)
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and not all((fixture / name).exists() for name in ("root.pid", "child.pid", "grand.pid")):
+            time.sleep(0.1)
+        pids = [int((fixture / name).read_text().strip()) for name in ("root.pid", "child.pid", "grand.pid")]
+        probe = fixture / "kill.ps1"
+        probe.write_text(
+            "$ErrorActionPreference='Stop'\n$LogPath='kill.log'\n"
+            "function Write-Log { param([string]$Message) Add-Content -LiteralPath $LogPath -Value $Message -Encoding ASCII }\n"
+            "function Test-LeaseProcessMatches { param($Lease) return $true }\n"
+            + match.group(0)
+            + f"\n$lease=[pscustomobject]@{{pid={pids[0]};cmdline='fixture-agent';task_or_msg_id='tree'}}\n"
+            "if (-not (Stop-LeaseProcessTree -Lease $lease -Reason 'regression')) { exit 31 }\n",
+            encoding="ascii",
+        )
+        run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=fixture)
+        time.sleep(0.5)
+        alive = []
+        for pid in pids:
+            check = subprocess.run(["powershell.exe", "-NoProfile", "-Command", f"if(Get-Process -Id {pid} -ErrorAction SilentlyContinue){{exit 1}}" ])
+            if check.returncode != 0:
+                alive.append(pid)
+        assert not alive, alive
+        process.wait(timeout=5)
+    finally:
+        shutil.rmtree(fixture, ignore_errors=True)
+
+
 def main() -> int:
     sandbox = Path(tempfile.mkdtemp(prefix="mailbox-retry-"))
     try:
@@ -924,6 +1044,8 @@ def main() -> int:
         run_unreadable_head_case(sandbox, prompt, fake)
         run_unstaged_residue_case(sandbox, prompt, fake)
         run_disordered_ledger_case(sandbox, prompt)
+        run_post_delivery_timeout_case()
+        run_complete_tree_kill_case()
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         governed_predirty = {

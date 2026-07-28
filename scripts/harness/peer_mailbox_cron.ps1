@@ -11,6 +11,7 @@ param(
     [int]$IntervalSeconds = 300,
     [int]$MaxNoCoordinatorRounds = 15,
     [int]$ExecTimeoutSeconds = 3600,
+    [int]$PostDeliveryTimeoutSeconds = 300,
     [int]$MaxTransientRetries = 3,
     [int]$RetryBackoffSeconds = 30,
     [int]$AbortedResidueMinutes = 5
@@ -214,9 +215,54 @@ function Stop-LeaseProcessTree {
         return $false
     }
     try {
+        # Snapshot the complete descendant set before terminating the root. taskkill /T
+        # normally handles this, but fast-exiting intermediates can re-parent grandchildren
+        # before taskkill reaches them. The snapshot gives us a compensating sweep.
+        $descendants = @()
+        $pending = [System.Collections.Generic.Queue[int]]::new()
+        $pending.Enqueue([int]$Lease.pid)
+        $seenPids = @{}
+        $childrenByParent = @{}
+        foreach ($candidate in @(Get-CimInstance Win32_Process -ErrorAction Stop)) {
+            if ($null -eq $candidate.ParentProcessId -or $null -eq $candidate.ProcessId) { continue }
+            $candidateParent = [int]$candidate.ParentProcessId
+            if (-not $childrenByParent.ContainsKey($candidateParent)) {
+                $childrenByParent[$candidateParent] = @()
+            }
+            $childrenByParent[$candidateParent] += [int]$candidate.ProcessId
+        }
+        while ($pending.Count -gt 0) {
+            $parentPid = $pending.Dequeue()
+            if (-not $childrenByParent.ContainsKey($parentPid)) { continue }
+            foreach ($childPid in @($childrenByParent[$parentPid])) {
+                if (-not $seenPids.ContainsKey($childPid)) {
+                    $seenPids[$childPid] = $true
+                    $descendants += $childPid
+                    $pending.Enqueue($childPid)
+                }
+            }
+        }
         Write-Log "TREE_KILL pid=$($Lease.pid) reason=$Reason message=$($Lease.task_or_msg_id)"
-        $taskkill = Start-Process -FilePath "taskkill.exe" -ArgumentList @("/PID", [string]$Lease.pid, "/T", "/F") -WindowStyle Hidden -Wait -PassThru
-        return ($taskkill.ExitCode -eq 0)
+        $killOrder = @($descendants)
+        [array]::Reverse($killOrder)
+        foreach ($childPid in $killOrder) {
+            Stop-Process -Id $childPid -Force -ErrorAction SilentlyContinue
+        }
+        Stop-Process -Id ([int]$Lease.pid) -Force -ErrorAction SilentlyContinue
+        Start-Sleep -Milliseconds 100
+        if (Get-Process -Id ([int]$Lease.pid) -ErrorAction SilentlyContinue) {
+            $taskkill = Start-Process -FilePath "taskkill.exe" -ArgumentList @("/PID", [string]$Lease.pid, "/T", "/F") -WindowStyle Hidden -Wait -PassThru
+            if ($taskkill.ExitCode -ne 0) {
+                Write-Log "TREE_KILL_FAIL pid=$($Lease.pid) error=taskkill_exit_$($taskkill.ExitCode)"
+            }
+        }
+        $survivors = @($descendants | Where-Object { Get-Process -Id $_ -ErrorAction SilentlyContinue })
+        if ($survivors.Count -gt 0) {
+            Write-Log "TREE_KILL_INCOMPLETE pid=$($Lease.pid) survivors=$($survivors -join ',')"
+            return $false
+        }
+        Write-Log "TREE_KILL_COMPLETE pid=$($Lease.pid) descendants=$($descendants.Count)"
+        return (-not (Get-Process -Id ([int]$Lease.pid) -ErrorAction SilentlyContinue))
     } catch {
         Write-Log "TREE_KILL_FAIL pid=$($Lease.pid) error=$($_.Exception.Message)"
         return $false
@@ -902,6 +948,7 @@ function Invoke-PeerForMessage {
         $null = $process.Handle  # cache the handle or ExitCode reads null when the exec finishes before the first WaitForExit
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
+        $postDeliveryDeadlineUtc = $null
         while (-not $process.WaitForExit(1000)) {
             Update-ExecLeaseHeartbeat
             if (Test-Path -LiteralPath $StopPath) {
@@ -910,8 +957,21 @@ function Invoke-PeerForMessage {
             if ([DateTime]::UtcNow -gt $deadlineUtc) {
                 $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
                 Stop-ExpiredLeaseProcess -Lease $lease
-                $process.WaitForExit()
+                if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=deadline" }
                 break
+            }
+            if ($PostDeliveryTimeoutSeconds -gt 0) {
+                $ownEvidence = Get-OwnEvidence -LedgerBytesBefore $ledgerBytesBefore -LedgerPrefixSha256Before $ledgerPrefixSha256Before
+                if ($ownEvidence -and $null -eq $postDeliveryDeadlineUtc) {
+                    $postDeliveryDeadlineUtc = [DateTime]::UtcNow.AddSeconds($PostDeliveryTimeoutSeconds)
+                    Write-Log "POST_DELIVERY_WINDOW_START pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds message=$($Message.Name)"
+                } elseif ($null -ne $postDeliveryDeadlineUtc -and [DateTime]::UtcNow -gt $postDeliveryDeadlineUtc) {
+                    $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+                    Write-Log "POST_DELIVERY_TIMEOUT pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds action=terminate message=$($Message.Name)"
+                    Stop-ExpiredLeaseProcess -Lease $lease
+                    if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=post_delivery" }
+                    break
+                }
             }
         }
         $agentResponse = ""

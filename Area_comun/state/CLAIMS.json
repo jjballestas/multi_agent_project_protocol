@@ -180,6 +180,27 @@
             "updated_at": "2026-07-27T23:31:29Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-implementation",
+            "expires_at": "2026-07-28T07:40:39.7806020Z",
+            "notes": "Implement bounded post-delivery timeout and descendant-complete tree termination with permanent regressions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/codex_cron_recover.ps1",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T23:40:39.7519647Z",
+            "status": "active",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-27T23:40:39.7519647Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0300-scope-block",
             "expires_at": "2026-07-28T07:29:44Z",
             "notes": "Block TASK-0300 pending approval to edit the generic harness and permanent regression bank required by AC1-AC3.",
