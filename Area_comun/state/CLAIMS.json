@@ -299,6 +299,45 @@
             "updated_at": "2026-07-28T13:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0303",
+            "expires_at": "2026-07-29T00:19:36Z",
+            "notes": "Implement TASK-0303 harness delivery trigger and bounded liveness-aware timeout handling.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0303",
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T21:19:36Z",
+            "status": "released",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-28T21:19:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0303-retry-1",
+            "expires_at": "2026-07-29T01:27:00Z",
+            "notes": "Implement TASK-0303 delivery-only post-window and bounded liveness-aware deadline handling.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0303-retry-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T21:27:00Z",
+            "status": "released",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-28T21:27:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-archive-stalego0299-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Archiva el GO-0299 OBSOLETO (precondicion 0299=ready ya no aplica tras el flaw; superseded por la ACTION de recovery).",
@@ -312,6 +351,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260728GO",
             "updated_at": "2026-07-28T19:32:43Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-assign0303-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Asigna TASK-0303 a Codex (owner unassigned->Codex) para que pueda reclamar/flipear ready->in_progress (el runtime exigia orchestrator con owner unassigned). Codex refuso gobernadamente y lo pidio.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-assign0303-20260728"
+            ],
+            "started_at": "2026-07-28T21:45:48Z",
+            "status": "released",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-28T21:45:48Z"
         },
         {
             "claim_id": "CLAIM-arq-hygiene-doneflip-hold-20260728",

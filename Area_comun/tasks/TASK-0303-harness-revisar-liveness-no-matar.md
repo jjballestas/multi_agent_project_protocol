@@ -4,7 +4,7 @@ file: Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md
 title: "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar un exec que progresa) + post-delivery gatilla en in_review no en el reclamo"
 status: ready
 type: infra
-owner: unassigned
+owner: Codex
 reviewer: Analista
 priority: high
 depends_on: []
