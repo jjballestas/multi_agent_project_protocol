@@ -3,7 +3,7 @@ message_id: MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0297-0300
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DONE-FLIP (implementer): flip TASK-0297 y TASK-0300 de review_approved -> done. Ambas RATIFICADAS por el Arquitecto (checker) tras review adversarial de fallback en clon limpio con contexto fresco (la Analista headless quedo caida por un review-task-hang, separado del LLM que funciona). 0297 GO: concordancia .ps1<->.py + no-debilitamiento (dup real y selector malformado activo siguen cazandose) verificados por inyeccion. 0300 GO: los 2 fixes (post-delivery timeout + tree-kill de arbol completo) verificados por MUTACION real (neutralizar el enforcement / vaciar el snapshot hace fallar los casos -> no vacuos); regresion PASS, gates verdes, fondo intacto, scope limpio. RESIDUAL NO-BLOQUEANTE en 0300 (R1): el caso run_complete_tree_kill_case usa un arbol INTACTO y no ejercita la re-parentacion de nietos (el escenario real del incidente) -> lo ruteo como follow-up de endurecimiento aparte (NO bloquea el cierre; el mecanismo del fix es correcto y AC2 se cumple literal). Haz el done-flip de ambas + persiste memoria + release. Gate: validate exit 0."

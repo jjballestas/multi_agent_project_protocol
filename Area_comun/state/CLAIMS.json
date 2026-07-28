@@ -92,6 +92,25 @@
             "updated_at": "2026-07-28T13:00:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-doneflip-hold-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Higiene: archiva done-flip ACTION + RESP consumidos (0297/0300 done). HOLD de la remediacion-v2: no puede completar con Codex ExecTimeout=600/post-delivery=300 (el propio done-flip fue matado pre-commit); re-ruteo tras la decision de timeout del operador.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0297-0300.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0297-0300.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-RESP-doneflip-0297-0300.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-RESP-doneflip-0297-0300.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-remediar-TASK-0298-v2.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-remediar-TASK-0298-v2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-doneflip-hold-20260728"
+            ],
+            "started_at": "2026-07-28T15:04:53Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260728B",
+            "updated_at": "2026-07-28T15:04:53Z"
+        },
+        {
             "claim_id": "CLAIM-arq-register0302-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Registro TASK-0302 (proposed): observabilidad del harness -- heartbeat EXEC_RUNNING elapsed para acabar con la muerte muda 0/0-byte del text-mode. Origen: diagnostico del review-task-hang de la Analista.",
