@@ -398,6 +398,22 @@
             "updated_at": "2026-07-28T17:05:12Z"
         },
         {
+            "claim_id": "CLAIM-arq-promote0303-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Promocion de TASK-0303 (harness revisa liveness antes de matar + post-delivery en in_review) proposed->ready para GO a Codex. Intake DoR completo.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-promote0303-20260728"
+            ],
+            "started_at": "2026-07-28T21:04:42Z",
+            "status": "released",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-28T21:04:42Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratify0298-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Ratificacion de la remediacion iter2 de TASK-0298 (Zeus@ba78954). GO convergente de 2 capas: Analista OK-CLOSABLE (3 blockers cerrados, 3 mutantes mueren, suite 136/136/0 con fixture, gates verdes) + recompute independiente del Arquitecto GO (3 mutantes mueren; caveat de 18 skips ambientales = R1 de la Analista, no bloqueante). Flip in_review->review_approved; Codex hace el done-flip.",

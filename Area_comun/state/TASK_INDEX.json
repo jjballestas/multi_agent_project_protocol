@@ -382,7 +382,7 @@
                 "TASK-0302"
             ],
             "reviewer": "Analista",
-            "status": "proposed",
+            "status": "ready",
             "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review",
             "type": "infra"
         },
