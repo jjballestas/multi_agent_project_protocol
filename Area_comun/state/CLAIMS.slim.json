@@ -1,49 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260728-Codex-TASK-0299",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0299",
-                "Area_comun/state/TASK_INDEX.json#TASK-0299",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0299",
-                "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
-                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
-                "D:/Agentes/Zeus/Zeus-protocol/architect-bridge.config.json",
-                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
-                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0299"
-        },
-        {
-            "claim_id": "CLAIM-20260728-Codex-TASK-0299-delivery",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0299-delivery",
-                "Area_comun/state/TASK_INDEX.json#TASK-0299",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0299",
-                "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0299-Codex-to-Arquitecto.md",
-                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0299.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0299"
-        },
-        {
-            "claim_id": "CLAIM-20260728-Codex-TASK-0299-memory",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0299-memory",
-                "personal/Codex/Memory.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0299"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

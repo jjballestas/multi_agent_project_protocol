@@ -167,7 +167,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-28T17:55:45Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0299",
             "updated_at": "2026-07-28T17:55:45Z"
         },
@@ -187,7 +187,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-28T18:04:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0299",
             "updated_at": "2026-07-28T18:04:58Z"
         },
@@ -203,9 +203,32 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-28T18:02:44Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0299",
             "updated_at": "2026-07-28T18:02:44Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0299-recovery",
+            "expires_at": "2026-07-29T07:47:08Z",
+            "notes": "Recover TASK-0299 after harness termination; verify surviving product commit and deliver to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0299-recovery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0299",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0299",
+                "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0299-Codex-to-Arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0299.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/architect-bridge.config.json",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T19:47:08Z",
+            "status": "released",
+            "task_id": "TASK-0299",
+            "updated_at": "2026-07-28T19:47:08Z"
         },
         {
             "claim_id": "CLAIM-20260728-Codex-TASK-0300-done-flip",

@@ -2,7 +2,7 @@
 task_id: TASK-0299
 title: "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)"
 type: feature
-status: in_progress
+status: in_review
 owner: Codex
 maker: Codex
 checker: Analista
