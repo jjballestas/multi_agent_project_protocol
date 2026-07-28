@@ -27,8 +27,15 @@ foreach ($f in @("analista_mailbox_cron.prompt.txt","analista_mailbox_cron.lock"
 # Relanzar el cron de la Analista limpio (detached)
 $cron = Join-Path $PSScriptRoot "Analista\analista_mailbox_cron.ps1"
 if (Test-Path -LiteralPath $cron) {
-  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","600","-AgentModel","claude-opus-4-8" -WindowStyle Hidden
-  Write-Host ("Relaunched Analista cron (ExecTimeout=600s, AgentModel=claude-opus-4-8): " + $cron)
+  # ExecTimeout=3600 a proposito (NO 600): las reviews adversariales de la Analista tardan 12-37 min
+  # (clone limpio + validate ~2min x2 + scan gates + analisis + verdict + commit). El 600 que se bajo
+  # para MATAR RAPIDO los hangs de npm-test de CODEX mataba TODAS las reviews en el deadline (evidencia:
+  # 4/4 execs killed reason=deadline a exactamente 600s, 0/0-byte por --output-format text = muerte muda).
+  # Los timeouts son PER-AGENTE: Codex se queda en 600 (execs de implementacion rapidos + ventana
+  # post-entrega); la Analista necesita 3600. Las reviews salen solas al terminar (~15-20 min tipico);
+  # el 3600 es solo tope de seguridad. Diagnostico: 2026-07-28 (ver project-state-snapshot).
+  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","3600","-AgentModel","claude-opus-4-8" -WindowStyle Hidden
+  Write-Host ("Relaunched Analista cron (ExecTimeout=3600s, AgentModel=claude-opus-4-8): " + $cron)
 } else {
   Write-Host ("Cron script not found: " + $cron)
 }
