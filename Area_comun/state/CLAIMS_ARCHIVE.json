@@ -37254,6 +37254,434 @@
             "status": "released",
             "task_id": "TASK-0294",
             "updated_at": "2026-07-24T11:26:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-002635-prune-arquitecto",
+            "expires_at": "2026-07-27",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-27T00:26:35Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-27T00:26:35Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297",
+            "expires_at": "2026-07-28T01:24:09Z",
+            "notes": "Align legacy PowerShell validator with canonical Python semantics for case-sensitive claim IDs and active-only selector checks.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297",
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "scripts/validate_collaboration_state.ps1"
+            ],
+            "started_at": "2026-07-27T17:24:09Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:24:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297-delivery",
+            "expires_at": "2026-07-28T01:32:58Z",
+            "notes": "Publish TASK-0297 self-contained handoff and governed in-review transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0297-Codex-to-Arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0297.md"
+            ],
+            "started_at": "2026-07-27T17:32:58Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:32:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297-final-memory",
+            "expires_at": "2026-07-28T01:36:18Z",
+            "notes": "Persist TASK-0297 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T17:36:18Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:36:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0297-memory",
+            "expires_at": "2026-07-28T01:31:05Z",
+            "notes": "Persist TASK-0297 implementation commit context after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0297-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T17:31:05Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:31:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0298",
+            "expires_at": "2026-07-28T08:31:17Z",
+            "notes": "Implement observation-only run-log tail bridge in Zeus-protocol.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0298",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/scripts/architect-runtime-launcher.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/architect-bridge.config.json",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T20:31:17Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T20:31:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260727-Codex-TASK-0298-delivery",
+            "expires_at": "2026-07-27T22:46:29Z",
+            "notes": "Deliver TASK-0298 product commit bf0d477 for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0298-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260727-Codex-TASK-0298",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0298-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0298.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T20:46:29Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T20:46:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-orphan-release-memory",
+            "expires_at": "2026-07-28T03:47:59.7218779Z",
+            "notes": "Persist orphan claim release commit c4708b7 context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-orphan-release-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T01:47:59.7218779Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-28T01:47:59.7218779Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-remediation-1",
+            "expires_at": "2026-07-28T16:00:00Z",
+            "notes": "Remediate TASK-0298 B1 PII framing, B2 fail-closed anti-spawn guard, and B3 live launcher invariant tests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/scripts/architect-runtime-launcher.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-07-28T08:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-28T08:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-block-memory",
+            "expires_at": "2026-07-28T01:31:29Z",
+            "notes": "Persist TASK-0300 scope blocker context before commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-block-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T23:31:29Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-27T23:31:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-delivery",
+            "expires_at": "2026-07-28T08:02:06.3770581Z",
+            "notes": "Deliver TASK-0300 implementation for independent review and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0300-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0300.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T00:02:06.3537540Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T00:02:06.3537540Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-delivery-memory",
+            "expires_at": "2026-07-28T02:17:36.6856587Z",
+            "notes": "Persist TASK-0300 delivery commit context after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-delivery-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T00:17:36.6856587Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T00:17:36.6856587Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-implementation",
+            "expires_at": "2026-07-28T07:40:39.7806020Z",
+            "notes": "Implement bounded post-delivery timeout and descendant-complete tree termination with permanent regressions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/codex_cron_recover.ps1",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-27T23:40:39.7519647Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-27T23:40:39.7519647Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-scope-block",
+            "expires_at": "2026-07-28T07:29:44Z",
+            "notes": "Block TASK-0300 pending approval to edit the generic harness and permanent regression bank required by AC1-AC3.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-scope-block",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-QUESTION-TASK-0300-scope.md"
+            ],
+            "started_at": "2026-07-27T23:29:44Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-27T23:29:44Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-archive-handoff0298-20260727",
+            "expires_at": "2026-07-28T21:15:56Z",
+            "notes": "Archivar HANDOFF-0298 de Codex (malformada: requires_response sin question; anomalia DECISION-0018) tras consumirla (recomputo PASO + ruteo review a Analista). Green del hub.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Codex-to-Arquitecto-HANDOFF-TASK-0298.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-archive-handoff0298-20260727"
+            ],
+            "started_at": "2026-07-27T21:15:56Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-ARCHIVE-20260727",
+            "updated_at": "2026-07-27T21:15:56Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-archive-reorder-20260728",
+            "expires_at": "2026-07-28T23:18:06Z",
+            "notes": "Reorden para priorizar TASK-0300 (fix de harness) antes de la remediacion de 0298: archivar los 2 GO viejos consumidos de Codex (0297/0298-observacion) + HOLD la remediacion de 0298 (se re-rutea tras cerrar+desplegar 0300). Deja TASK-0300 como el unico pendiente de Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Codex-GO-TASK-0297-alinear-validador-ps1.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Codex-GO-TASK-0297-alinear-validador-ps1.md",
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Codex-GO-TASK-0298-aegis-bridge-observacion.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Codex-GO-TASK-0298-aegis-bridge-observacion.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-remediar-TASK-0298.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-remediar-TASK-0298.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-archive-reorder-20260728"
+            ],
+            "started_at": "2026-07-27T23:18:06Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-ARCHIVE-20260728",
+            "updated_at": "2026-07-27T23:18:06Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-stalereviews-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Higiene: archiva 3 REVIEW-to-Analista stale (0297/0300 ya review_approved por review de fallback; 0298 ya NO-GO'd) para relanzar la Analista con slate limpio tras el fix de ExecTimeout.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0297-validador-ps1.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0297-validador-ps1.md",
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0298-aegis-bridge.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0298-aegis-bridge.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0300-harness.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0300-harness.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-stalereviews-20260728"
+            ],
+            "started_at": "2026-07-28T13:21:40Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260728",
+            "updated_at": "2026-07-28T13:21:40Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-nogo0298-20260728",
+            "expires_at": "2026-07-28T22:23:40Z",
+            "notes": "NO-GO (CHANGE-REQUIRED) de la Analista sobre 0298: flip in_review->changes_requested (rechazo del reviewer, invariante handoff-release) antes de que Codex reclame para remediar los 3 bloqueantes B1(AC5 PII progresivo)/B2(AC4 guarda anti-spawn falla abierta)/B3(AC6 test.skip).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-nogo0298-20260728"
+            ],
+            "started_at": "2026-07-27T22:23:40Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T22:23:40Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratify0297-0300-20260728",
+            "expires_at": "2026-07-29T12:39:40Z",
+            "notes": "Ratificacion (checker Arquitecto via review adversarial de fallback en clon limpio): 0297 GO (concordancia .ps1/.py + no-debilitamiento) y 0300 GO (2 fixes falsables, R1 residual no-bloqueante). Flip in_review->review_approved; Codex hace el done-flip.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify0297-0300-20260728"
+            ],
+            "started_at": "2026-07-28T12:39:40Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T12:39:40Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-register0301-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Registro de TASK-0301 (proposed): follow-up de endurecimiento R1 de TASK-0300 -- fixture de re-parentacion de nietos en run_complete_tree_kill_case.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0301",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0301",
+                "Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-register0301-20260728"
+            ],
+            "started_at": "2026-07-28T12:57:48Z",
+            "status": "released",
+            "task_id": "TASK-0301",
+            "updated_at": "2026-07-28T12:57:48Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-registro0297-20260727",
+            "expires_at": "2026-07-28T17:12:11Z",
+            "notes": "Registro+promocion TASK-0297 (alinear .ps1 legacy con .py canonico) via submit_intent.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0297",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0297",
+                "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0297-20260727"
+            ],
+            "started_at": "2026-07-27T17:12:11Z",
+            "status": "released",
+            "task_id": "TASK-0297",
+            "updated_at": "2026-07-27T17:12:11Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-registro0298-20260727",
+            "expires_at": "2026-07-28T20:20:19Z",
+            "notes": "Registro+promocion TASK-0298 (Aegis Front MVP L1 unidad 1: bridge observacion-tail) via submit_intent.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0298-20260727"
+            ],
+            "started_at": "2026-07-27T20:20:19Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-27T20:20:19Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-registro0299-20260727",
+            "expires_at": "2026-07-28T20:43:18Z",
+            "notes": "Registro+promocion TASK-0299 (Aegis L1 unidad 2: observar sesion interactiva via transcript jsonl; fast-follow de 0298). GO retenido hasta que 0298 cierre.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0299",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0299",
+                "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0299-20260727"
+            ],
+            "started_at": "2026-07-27T20:43:18Z",
+            "status": "released",
+            "task_id": "TASK-0299",
+            "updated_at": "2026-07-27T20:43:18Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-registro0300-20260728",
+            "expires_at": "2026-07-28T22:31:03Z",
+            "notes": "Registro+promocion TASK-0300 (endurecer harness de crons: timeout cross-atest + TREE_KILL completo) via submit_intent.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0300-20260728"
+            ],
+            "started_at": "2026-07-27T22:31:03Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-27T22:31:03Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0282-20260722",
+            "expires_at": "2026-07-21T23:34:04Z",
+            "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva.md",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0282-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281.md"
+            ],
+            "started_at": "2026-07-21T23:09:04Z",
+            "status": "released",
+            "task_id": "TASK-0282",
+            "updated_at": "2026-07-21T23:09:04Z"
         }
     ]
 }
