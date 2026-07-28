@@ -3,7 +3,7 @@ message_id: MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0297-validador-ps1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Review adversarial en clon limpio de TASK-0297 (alinear el validador LEGACY scripts/validate_collaboration_state.ps1 al canonico scripts/validate_collaboration_state.py). SIN PRODUCTO EN ALCANCE: es una unidad HUB-only (un solo archivo .ps1); NO corras ningun npm test / suite de producto Nova; el gate es el propio validate del hub. Verifica AC1-AC3 del intake (Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md): AC1 el .ps1 sale EXIT 0 concordando con el .py (EXIT 0) sobre el estado del hub; AC2 (no-debilitamiento) el .ps1 SIGUE cazando (EXIT 1) un duplicado de claim_id IDENTICO (misma caja) y un selector malformado en un claim ACTIVO; AC3 el cambio es SOLO en el .ps1 (el .py, el config pineado 2E35F26E, y el dato archivado de TASK-0280 quedan byte-identicos). Ataca los bordes: variantes de case (mayus/minus mezcladas), selector malformado en claim RELEASED-pero-hot (debe pasar, como el .py) vs ACTIVO (debe fallar), y confirma que el comparador Ordinal no rompe la deteccion de duplicados reales. Entrega veredicto GO/NO-GO con vectores."

@@ -300,6 +300,25 @@
             "updated_at": "2026-07-27T23:18:06Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-stalereviews-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Higiene: archiva 3 REVIEW-to-Analista stale (0297/0300 ya review_approved por review de fallback; 0298 ya NO-GO'd) para relanzar la Analista con slate limpio tras el fix de ExecTimeout.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0297-validador-ps1.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0297-validador-ps1.md",
+                "Area_comun/mailbox/open/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0298-aegis-bridge.md",
+                "Area_comun/mailbox/archived/MSG-20260727-Arquitecto-to-Analista-REVIEW-TASK-0298-aegis-bridge.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0300-harness.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0300-harness.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-stalereviews-20260728"
+            ],
+            "started_at": "2026-07-28T13:21:40Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260728",
+            "updated_at": "2026-07-28T13:21:40Z"
+        },
+        {
             "claim_id": "CLAIM-arq-nogo0298-20260728",
             "expires_at": "2026-07-28T22:23:40Z",
             "notes": "NO-GO (CHANGE-REQUIRED) de la Analista sobre 0298: flip in_review->changes_requested (rechazo del reviewer, invariante handoff-release) antes de que Codex reclame para remediar los 3 bloqueantes B1(AC5 PII progresivo)/B2(AC4 guarda anti-spawn falla abierta)/B3(AC6 test.skip).",
