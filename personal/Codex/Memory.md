@@ -4574,3 +4574,13 @@ ratified its own work.
   as requested by Arquitecto; Codex did not reclaim or resume remediation.
 - Runtime event seq 6552 reports drift false. Collaboration validation, encoding, and
   domain-neutrality gates exited 0 before the commit, and the commit was pushed to `origin/main`.
+
+## 2026-07-28 - TASK-0299 closure
+
+- Zeus product commit `7729c4f` implements observation-only interactive transcript tailing with
+  progressive-line PII redaction; independent Analista review and Arquitecto recomputation both
+  ratified AC1-AC6 and killed all four mutants without a TASK-0298 regression.
+- Protocol commit `a16bd5c` performs the Codex-authorized `review_approved -> done` transition and
+  releases `CLAIM-20260728-Codex-TASK-0299-done`. Collaboration validation, encoding scan, and
+  domain-neutrality scan exited 0. The structural event fields caveat is non-blocking and belongs
+  to a future polish task; Codex did not self-review or self-ratify TASK-0299.
