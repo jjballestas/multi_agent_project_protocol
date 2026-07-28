@@ -20,7 +20,7 @@ Start-Sleep -Seconds 3
 # (retry.json) y residue-first-seen.json, que PERSISTEN en disco y hacen que las tareas pendientes queden
 # como no-procesables tras un restart. NO se toca seen.json (mensajes legitimamente consumidos).
 $rt = Join-Path $PSScriptRoot "..\.protocol-tmp\codex_mailbox_cron"
-foreach ($f in @("codex_mailbox_cron.prompt.txt","codex_mailbox_cron.retry.json","codex_mailbox_cron.residue-first-seen.json")) {
+foreach ($f in @("codex_mailbox_cron.prompt.txt","codex_mailbox_cron.retry.json","codex_mailbox_cron.residue-first-seen.json","codex_mailbox_cron.stop")) {
   $p = Join-Path $rt $f
   try { Remove-Item -LiteralPath $p -Force -ErrorAction Stop; Write-Host ("Removed stale " + $f) }
   catch { Write-Host ($f + ": " + $_.Exception.Message) }

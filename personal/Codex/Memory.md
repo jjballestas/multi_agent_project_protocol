@@ -2,6 +2,21 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-28 - TASK-0299 implementation
+
+- Product commit `7729c4f` extends the verified TASK-0298 observation-only bridge with
+  a configurable `session-transcript` source; the original cron run-log source remains
+  the default and its framing/control/anti-spawn behavior is unchanged.
+- Transcript selection matches configured project cwd and git branch, chooses newest
+  mtime with lexical-path tie breaking, and returns dormant when no file matches.
+- Complete JSONL lines produce redacted assistant/user/system observation events while
+  queue-operation, ai-title, and file-history noise is ignored. Progressive partial-line
+  buffering keeps split email/NIT PII out of both SSE and audit output.
+- Full slow product tests passed 138 total: 120 passed and 18 environment-guarded skips.
+  Four targeted mutants (selection, parsing, redaction, dormant matching) each exited 1.
+- TASK-0299 remains `in_progress` pending governed hub delivery and independent review;
+  Codex did not review or ratify the implementation.
+
 ## 2026-07-28 - TASK-0298 final closure
 
 - Commit `6a6bd0a` records the Codex-signed `review_approved -> done` flip after
