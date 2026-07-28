@@ -180,6 +180,26 @@
             "updated_at": "2026-07-27T23:31:29Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-delivery",
+            "expires_at": "2026-07-28T08:02:06.3770581Z",
+            "notes": "Deliver TASK-0300 implementation for independent review and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0300",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
+                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0300-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0300.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T00:02:06.3537540Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T00:02:06.3537540Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0300-implementation",
             "expires_at": "2026-07-28T07:40:39.7806020Z",
             "notes": "Implement bounded post-delivery timeout and descendant-complete tree termination with permanent regressions.",
@@ -196,7 +216,7 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-27T23:40:39.7519647Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0300",
             "updated_at": "2026-07-27T23:40:39.7519647Z"
         },

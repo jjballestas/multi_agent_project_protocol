@@ -38,7 +38,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)"
         }
     ],

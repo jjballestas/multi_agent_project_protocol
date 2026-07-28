@@ -2,7 +2,7 @@
 task_id: TASK-0300
 title: "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 maker: Codex
 checker: Analista

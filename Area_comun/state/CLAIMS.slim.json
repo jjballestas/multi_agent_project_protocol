@@ -13,22 +13,6 @@
                 "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
             ],
             "task_id": "TASK-0298"
-        },
-        {
-            "claim_id": "CLAIM-20260728-Codex-TASK-0300-implementation",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-implementation",
-                "Area_comun/state/TASK_INDEX.json#TASK-0300",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0300",
-                "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "personal/Codex/codex_mailbox_cron.ps1",
-                "personal/codex_cron_recover.ps1",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0300"
         }
     ],
     "schema_version": "1.0",
