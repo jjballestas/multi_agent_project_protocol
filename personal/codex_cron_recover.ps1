@@ -29,13 +29,15 @@ foreach ($f in @("codex_mailbox_cron.prompt.txt","codex_mailbox_cron.retry.json"
 # Relanzar el cron de Codex limpio (detached)
 $cron = Join-Path $PSScriptRoot "Codex\codex_mailbox_cron.ps1"
 if (Test-Path -LiteralPath $cron) {
-  # ExecTimeout=1800 / PostDelivery=600 (operador aprobo 2026-07-28, reversa del 600/300 previo).
-  # Evidencia: el 600/300 mataba hasta el CIERRE de un done-flip trivial (el post-delivery de 300s corto a
-  # Codex durante memory-persist+commit) y hacia imposible la remediacion de 0298 (clone Zeus + fix + node
-  # --test). La proteccion anti-hang real ya la da TASK-0300 (tree-kill de arbol completo + bound post-entrega),
-  # asi que el 600 crudo ya no hace falta como defensa. Codex es per-agente. Ver leccion analista-review-timeout.
-  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","1800","-PostDeliveryTimeoutSeconds","600" -WindowStyle Hidden
-  Write-Host ("Relaunched Codex cron (ExecTimeout=1800s, PostDeliveryTimeout=600s): " + $cron)
+  # ExecTimeout=1800 (operador aprobo) / PostDelivery=1800 (subido de 600 -- el 600 era numero del Arquitecto).
+  # FLAW DEL HARNESS (cazado 2026-07-28 con TASK-0299): la ventana post-entrega arranca ante CUALQUIER escritura
+  # al ledger, y un GO de una tarea `ready` hace que Codex flipee ready->in_progress AL INICIO -> el post-delivery
+  # de 600s arrancaba a los 3 min y mataba a Codex a mitad de IMPLEMENTACION (deadline a los 10 min). Con
+  # PostDelivery=1800=ExecTimeout, la ventana post-entrega ya no mata antes del ExecTimeout (que es el bound real;
+  # el tree-kill de TASK-0300 sigue limpiando zombies). Fix PROPIO pendiente: el post-delivery debe gatillar en la
+  # transicion a in_review (la ENTREGA), no en cualquier escritura. Ver leccion + follow-up de TASK-0300/0302.
+  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","1800","-PostDeliveryTimeoutSeconds","1800" -WindowStyle Hidden
+  Write-Host ("Relaunched Codex cron (ExecTimeout=1800s, PostDeliveryTimeout=1800s): " + $cron)
 } else {
   Write-Host ("Cron script not found: " + $cron)
 }
