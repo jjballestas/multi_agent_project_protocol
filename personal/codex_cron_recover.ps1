@@ -29,8 +29,13 @@ foreach ($f in @("codex_mailbox_cron.prompt.txt","codex_mailbox_cron.retry.json"
 # Relanzar el cron de Codex limpio (detached)
 $cron = Join-Path $PSScriptRoot "Codex\codex_mailbox_cron.ps1"
 if (Test-Path -LiteralPath $cron) {
-  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","600","-PostDeliveryTimeoutSeconds","300" -WindowStyle Hidden
-  Write-Host ("Relaunched Codex cron (ExecTimeout=600s, PostDeliveryTimeout=300s): " + $cron)
+  # ExecTimeout=1800 / PostDelivery=600 (operador aprobo 2026-07-28, reversa del 600/300 previo).
+  # Evidencia: el 600/300 mataba hasta el CIERRE de un done-flip trivial (el post-delivery de 300s corto a
+  # Codex durante memory-persist+commit) y hacia imposible la remediacion de 0298 (clone Zeus + fix + node
+  # --test). La proteccion anti-hang real ya la da TASK-0300 (tree-kill de arbol completo + bound post-entrega),
+  # asi que el 600 crudo ya no hace falta como defensa. Codex es per-agente. Ver leccion analista-review-timeout.
+  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","1800","-PostDeliveryTimeoutSeconds","600" -WindowStyle Hidden
+  Write-Host ("Relaunched Codex cron (ExecTimeout=1800s, PostDeliveryTimeout=600s): " + $cron)
 } else {
   Write-Host ("Cron script not found: " + $cron)
 }
