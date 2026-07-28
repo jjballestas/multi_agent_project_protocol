@@ -4503,3 +4503,13 @@ ratified its own work.
 - `node --test`, the executable TASK-0298 slow tests, product diff check, collaboration validation,
   encoding scan, and domain-neutrality scan exited 0. TASK-0298 remains `in_progress` pending
   cross-attestation, governed delivery to `in_review`, claim release, and independent review.
+
+## 2026-07-28 - TASK-0300 delivery
+
+- Implementation commit `971741b` bounds post-delivery cross-attestation independently of the
+  outer execution deadline and terminates the complete descendant process tree.
+- Permanent mailbox retry regressions exercise the slow cross-attestation timeout and a
+  child-grandchild process fixture, including mutation controls for both contracts.
+- Delivery commit `a6911fd` moves TASK-0300 to `in_review`, releases the maker claims, and publishes
+  the self-contained handoff for Arquitecto to route to Analista. Codex did not deploy/restart any
+  harness, modify another agent harness, touch Zeus, or review/ratify its own work.

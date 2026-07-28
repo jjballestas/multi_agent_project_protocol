@@ -200,6 +200,20 @@
             "updated_at": "2026-07-28T00:02:06.3537540Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0300-delivery-memory",
+            "expires_at": "2026-07-28T02:17:36.6856587Z",
+            "notes": "Persist TASK-0300 delivery commit context after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0300-delivery-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T00:17:36.6856587Z",
+            "status": "released",
+            "task_id": "TASK-0300",
+            "updated_at": "2026-07-28T00:17:36.6856587Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0300-implementation",
             "expires_at": "2026-07-28T07:40:39.7806020Z",
             "notes": "Implement bounded post-delivery timeout and descendant-complete tree termination with permanent regressions.",
