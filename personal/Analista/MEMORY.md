@@ -4929,3 +4929,50 @@ esqueleto minimo para mutar; (b) `git commit -F /tmp/f.txt` tras un `&&` que fal
 adelante el mensaje de commit se escribe con `Write` al scratchpad, nunca a `/tmp` compartido.
 Hook al commitear: `PRUNE DUE (cold_start_tokens 27814 >= 20000; released_ratio 94.12 >= 90)` --
 accion del Arquitecto en su proximo checkpoint, no mia. Lo dejo senalado.
+
+---
+
+## TASK-0299 (2026-07-28) - bridge observa la sesion INTERACTIVA via transcript jsonl - GO / OK-CLOSABLE
+
+Veredicto: **OK-CLOSABLE (GO)**, iter 1, 0 slips. Commit `2cc21b2` en el hub (02c99a5 -> 2cc21b2).
+Ancla producto Zeus@`7729c4f` (== origin/main). Suite lenta exit 0: 138/120/18. Fast-follow de 0298
+que cierra su riesgo E1 (el bridge solo veia el modo cron). Segunda fuente = `session-transcript`.
+
+Lecciones/tecnica de este review:
+1. **AC4 era la misma clase que el B1 de 0298 (PII partida entre escrituras incrementales).** La
+   defensa real: `pollTranscript` bufferiza bytes incompletos en `pending` hasta el ultimo `0x0a` y
+   SOLO publica lineas completas; `redactPublicText` corre sobre el cuerpo REENSAMBLADO antes de SSE
+   y audit. Lo verifique con el test dado (correo partido `exa|mple.com` en dos appendFile+60ms) y
+   ademas probando la FAMILIA completa (email/NIT/cedula/telefono/cuenta/SQL) con payloads propios,
+   extrayendo `redactPublicText` a un `.mjs` desechable.
+2. **Insight clave sobre el framing incremental:** partir una linea jsonl a la mitad NUNCA fuga en
+   claro porque el fragmento es JSON invalido -> `JSON.parse` falla -> se descarta (PERDIDA, no fuga).
+   O sea, el valor de seguridad del buffer es "no corromper/perder entradas partidas"; el no-fuga lo
+   garantiza (a) procesar solo lineas JSON completas y (b) la redaccion. Por eso el mutante que
+   revierte el buffer NO produce una fuga limpia sino un HANG: la entrada partida se pierde, el 3er
+   evento redactado nunca llega, y `readSseEvents(...,3)` se cuelga dentro de `await reader.read()`
+   pasando su deadline de 5s -> lo capture como SIGKILL/exit 137 con `timeout --signal=KILL 75`.
+3. **Los 4 mutantes de Codex MUEREN re-inyectados** (copia desechable, `--test-name-pattern`, restaurar
+   con `diff -q` vs backup): (1) desempate `localeCompare` invertido -> deterministic fail; (2)
+   `isRelevantTranscriptEntry -> true` -> ruido surface, fail; (3a) quitar `redactPublicText` -> FUGA
+   VISIBLE en el SSE (`persona@example.com` en claro), fail exit 1; (3b) anular buffer -> hang/137;
+   (4) match cwd+branch siempre-true -> `'alive' !== 'dormant'`, fail.
+4. **Los 18 skips son ambientales, no control.** Todos = guard `cloneProtocolFixture`
+   (`tests/staticContract.test.js:3517-3524`) por fixture externo `event_auth` ausente en clon
+   limpio. Verifique el motivo unico + que ninguno es un test de 0299 + que los 2 tests de 0299
+   CORREN (no estan entre los skips). No confiar en el conteo reportado: recontarlo.
+5. **Residuos declarados (best-effort del AC4, NO bloqueantes, dichos en voz alta):** nombres propios
+   en texto libre (`Juan Perez`) no se redactan; ids numericos cortos sin etiqueta (`codigo 482913`)
+   tampoco; y los campos metadata `role`/`entryType`/`entryTimestamp` pasan por `ascii(stripControl)`
+   pero NO por `redactPublicText` (ni en SSE ni en el sanitizador de audit :1543) -- son enums
+   estructurales, no PII, el CUERPO si se redacta. Honesto, no rubber-stamp, no bloqueo.
+6. **Gates del hub:** validate/encoding/neutralidad exit 0; `git diff --exit-code -- protocol.config.json`
+   exit 0 (fondo 2E35F26E / epoch 1.14.0 intocable; 0299 es commit de Zeus, no toca el hub).
+7. **Trailer gate del hook:** `Task-Id` + `Ops-Reason` deben ir en el MISMO bloque final SIN linea en
+   blanco entre ellos. Con `git commit -m` separados quedan en paragrafos distintos y el gate rechaza
+   ("missing exact final trailer"). Fix: un solo `-m "Task-Id: TASK-0299\nOps-Reason: ..."` con newline
+   literal (no doble). Ademas los untracked hay que `git add`-earlos ANTES de commitear con pathspec
+   (si no: "pathspec did not match any file(s) known to git").
+8. **PRUNE DUE** al commitear (released_ratio 92.31 >= 90): warning, el commit local continua; es
+   accion del Arquitecto en su checkpoint (mailbox_archive/prune exige capability orchestrator que yo
+   no tengo). Lo dejo senalado, no lo corro.
