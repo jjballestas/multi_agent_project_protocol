@@ -24,6 +24,14 @@
             "priority": "normal",
             "status": "ready",
             "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)"
+        },
+        {
+            "id": "TASK-0301",
+            "owner": "unassigned",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos (follow-up R1 de TASK-0300)"
         }
     ],
     "view": "task_index.slim"

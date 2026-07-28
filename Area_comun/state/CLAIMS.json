@@ -335,6 +335,22 @@
             "updated_at": "2026-07-28T12:39:40Z"
         },
         {
+            "claim_id": "CLAIM-arq-register0301-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Registro de TASK-0301 (proposed): follow-up de endurecimiento R1 de TASK-0300 -- fixture de re-parentacion de nietos en run_complete_tree_kill_case.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0301",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0301",
+                "Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-register0301-20260728"
+            ],
+            "started_at": "2026-07-28T12:57:48Z",
+            "status": "released",
+            "task_id": "TASK-0301",
+            "updated_at": "2026-07-28T12:57:48Z"
+        },
+        {
             "claim_id": "CLAIM-arq-registro0297-20260727",
             "expires_at": "2026-07-28T17:12:11Z",
             "notes": "Registro+promocion TASK-0297 (alinear .ps1 legacy con .py canonico) via submit_intent.",

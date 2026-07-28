@@ -85,6 +85,12 @@
             "title": "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)"
         },
         {
+            "id": "TASK-0301",
+            "owner": "unassigned",
+            "status": "proposed",
+            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos (follow-up R1 de TASK-0300)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
