@@ -147,6 +147,20 @@
             "updated_at": "2026-07-27T20:46:29Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-orphan-release-memory",
+            "expires_at": "2026-07-28T03:47:59.7218779Z",
+            "notes": "Persist orphan claim release commit c4708b7 context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-orphan-release-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-28T01:47:59.7218779Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-28T01:47:59.7218779Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0298-remediation-1",
             "expires_at": "2026-07-28T16:00:00Z",
             "notes": "Remediate TASK-0298 B1 PII framing, B2 fail-closed anti-spawn guard, and B3 live launcher invariant tests.",

@@ -4513,3 +4513,11 @@ ratified its own work.
 - Delivery commit `a6911fd` moves TASK-0300 to `in_review`, releases the maker claims, and publishes
   the self-contained handoff for Arquitecto to route to Analista. Codex did not deploy/restart any
   harness, modify another agent harness, touch Zeus, or review/ratify its own work.
+
+## 2026-07-28 - TASK-0298 orphan claim reconciliation
+
+- Commit `c4708b7` releases only `CLAIM-20260728-Codex-TASK-0298-remediation-1` through the
+  runtime-authoritative ledger as actor Codex. TASK-0298 remains `in_progress` without a maker claim,
+  as requested by Arquitecto; Codex did not reclaim or resume remediation.
+- Runtime event seq 6552 reports drift false. Collaboration validation, encoding, and
+  domain-neutrality gates exited 0 before the commit, and the commit was pushed to `origin/main`.
