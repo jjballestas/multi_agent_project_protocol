@@ -161,7 +161,7 @@
                 "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
             ],
             "started_at": "2026-07-28T08:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0298",
             "updated_at": "2026-07-28T08:00:00Z"
         },

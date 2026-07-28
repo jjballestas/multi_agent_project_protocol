@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6e8edc8898416179ada169b8a9461998ecdc68e2ba9daf56ea8bed4423fed012",
+  "canonical_hash": "69bf9176b50e9dc43ebfbfc30e6dc19228a0f822efde9cc2fc90747adaa01c58",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -794,6 +794,7 @@
       "CLAIM-20260727-Codex-TASK-0297-memory": 1,
       "CLAIM-20260727-Codex-TASK-0298": 1,
       "CLAIM-20260727-Codex-TASK-0298-delivery": 1,
+      "CLAIM-20260728-Codex-TASK-0298-remediation-1": 1,
       "CLAIM-20260728-Codex-TASK-0300-block-memory": 1,
       "CLAIM-20260728-Codex-TASK-0300-scope-block": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -2660,7 +2661,7 @@
       "protocol-prune": 29,
       "protocol-state": 1
     },
-    "events_applied": 5880,
+    "events_applied": 5881,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5507,6 +5508,7 @@
       "codex:task0298:delivery:release-delivery:5fae736b-8174-42e0-a5d2-922509ba9b87": 6517,
       "codex:task0298:delivery:release-work:223c22c2-981d-47c2-87a9-6f052e8c94ef": 6516,
       "codex:task0298:delivery:status:2b10a778-abea-4243-8a8b-c1bac95f373e": 6515,
+      "codex:task0298:release-orphan-remediation-1:20260728": 6552,
       "codex:task0298:remediation1-claim:20260728T080000Z": 6528,
       "codex:task0298:start:claim:57d6040f-c0e9-40fc-80a7-25b3b241ef0b": 6508,
       "codex:task0298:start:status:be6436c1-160a-411d-adc9-eca8218e5e41": 6509,
@@ -8544,5 +8546,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6551
+  "up_to_seq": 6552
 }
