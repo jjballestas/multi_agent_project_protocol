@@ -380,6 +380,22 @@
             "updated_at": "2026-07-28T16:45:25Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratify0299-20260728",
+            "expires_at": "2026-07-29T23:59:59Z",
+            "notes": "Ratificacion de TASK-0299 (bridge observa sesion interactiva, Zeus@7729c4f). GO convergente 2 capas: Analista OK-CLOSABLE + recompute independiente del Arquitecto (AC1-AC6, 4 mutantes mueren incl. AC4 PII progresiva, sin regresion 0298). Caveat menor no bloqueante (campos estructurales role/entryType/timestamp no pasan por redactPublicText; sin vector PII ahi). Flip in_review->review_approved; Codex done-flip.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0299",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0299",
+                "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify0299-20260728"
+            ],
+            "started_at": "2026-07-28T20:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0299",
+            "updated_at": "2026-07-28T20:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-register0302-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Registro TASK-0302 (proposed): observabilidad del harness -- heartbeat EXEC_RUNNING elapsed para acabar con la muerte muda 0/0-byte del text-mode. Origen: diagnostico del review-task-hang de la Analista.",

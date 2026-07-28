@@ -7,12 +7,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0299",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)"
-        },
-        {
             "id": "TASK-0301",
             "owner": "unassigned",
             "status": "proposed",
