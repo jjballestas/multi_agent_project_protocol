@@ -27,8 +27,8 @@ foreach ($f in @("analista_mailbox_cron.prompt.txt","analista_mailbox_cron.lock"
 # Relanzar el cron de la Analista limpio (detached)
 $cron = Join-Path $PSScriptRoot "Analista\analista_mailbox_cron.ps1"
 if (Test-Path -LiteralPath $cron) {
-  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","600" -WindowStyle Hidden
-  Write-Host ("Relaunched Analista cron (ExecTimeout=600s): " + $cron)
+  Start-Process powershell -ArgumentList "-NoProfile","-File",$cron,"-ExecTimeoutSeconds","600","-AgentModel","claude-opus-4-8" -WindowStyle Hidden
+  Write-Host ("Relaunched Analista cron (ExecTimeout=600s, AgentModel=claude-opus-4-8): " + $cron)
 } else {
   Write-Host ("Cron script not found: " + $cron)
 }
