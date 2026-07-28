@@ -330,7 +330,7 @@
                 "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify0297-0300-20260728"
             ],
             "started_at": "2026-07-28T12:39:40Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0300",
             "updated_at": "2026-07-28T12:39:40Z"
         },
