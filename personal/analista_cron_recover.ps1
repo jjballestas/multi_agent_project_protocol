@@ -18,7 +18,7 @@ Start-Sleep -Seconds 3
 
 # Limpiar estado stale del exec anterior (lock + exec-lease + prompt) para arranque limpio
 $base = Join-Path $PSScriptRoot "..\.protocol-tmp\analista_mailbox_cron"
-foreach ($f in @("analista_mailbox_cron.prompt.txt","analista_mailbox_cron.lock","analista_mailbox_cron.exec-lease.json","analista_mailbox_cron.retry.json","analista_mailbox_cron.residue-first-seen.json")) {
+foreach ($f in @("analista_mailbox_cron.prompt.txt","analista_mailbox_cron.lock","analista_mailbox_cron.exec-lease.json","analista_mailbox_cron.retry.json","analista_mailbox_cron.residue-first-seen.json","analista_mailbox_cron.stop")) {
   $p = Join-Path $base $f
   try { Remove-Item -LiteralPath $p -Force -ErrorAction Stop; Write-Host ("Removed stale " + $f) }
   catch { Write-Host ($f + ": " + $_.Exception.Message) }
