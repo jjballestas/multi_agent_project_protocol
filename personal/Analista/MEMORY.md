@@ -7,6 +7,52 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-28 (28) - TASK-0298 remediacion iter2 bridge observacion-tail: OK-CLOSABLE (GO) sobre Zeus@ba78954
+
+- Encargo `MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0298-remediation-v3`. PRODUCTO ZEUS EN ALCANCE
+  (a diferencia de 0297/0300 hub-only). Ancla producto `ba78954` (== origin/main de Zeus-protocol); hub
+  `024dcda`. Veredicto commit `cb1168a` (artefacto `...-verdict-iter2.md` + MSG REVIEW). Supersede iter1
+  (`76bf94e`, CHANGE-REQUIRED). Es el re-juicio (max 2 iter); este cierra en GO.
+- **VEREDICTO: OK-CLOSABLE (GO).** Los 3 bloqueantes de iter1 remediados y verificados POR MUTACION, no
+  por nombre de test. Suite lenta en clon limpio `D:/Aegis_Scratch/protocol/zp0298v3`:
+  `ZEUS_RUN_SLOW_TESTS=1 PROTOCOL_REPO_PATH=<hub> node --test` -> exit 0, 136/136/0, **0 skips** (coincide
+  con Codex).
+- **B1 (AC5, el grave)**: fix = framing por LINEA COMPLETA en `pollRunLog` (emite hasta el ultimo `\n`,
+  guarda el resto en `session.pending`, avanza offset solo por lo emitido; `flushPendingRunLog` en
+  detach/rollover con tope 8192, redactado). Mi SONDA PROPIA (productor progresivo 4 chars/40ms, poll
+  25ms -- el caso que rompia iter1) NO fuga: 0 literales en SSE+audit, marcador `[EMAIL-REDACTED]`
+  presente. Mutante M-B1 (revertir framing: `boundary=combined.length-1`) -> el test entregado Y mi sonda
+  FALLAN (fuga). GOTCHA de mi harness: el helper `readSseEvents` del repo BLOQUEA para siempre en un
+  stream quieto si `minEvents` es inalcanzable (colgo mi sonda a 45s); escribi un reader SSE propio con
+  tope de reloj (AbortController+setTimeout). Otra: unir eventos con `|` puede ENMASCARAR un literal
+  partido entre eventos -> asevero ADEMAS que el marcador de redaccion aparece (prueba que la redaccion
+  disparo sobre linea entera).
+- **B2 (AC4/I3)**: `spawn` import RETIRADO de server.js (cierra R1 de iter1). Test fail-CLOSED a nivel
+  FICHERO: `assert.ok(manager)` (la extraccion debe existir) + `assert.doesNotMatch(source, /\bspawn\s*\(/)`.
+  Mutante M-B2 (spawn en el manager + rename global `isProcessAlive`->`isPidAlive` = ancla del extractor
+  rota) -> FALLA en `assert.ok(manager, "...extraction must exist")` (ya no falla ABIERTA por el viejo
+  `|| ""`). Faceta independiente: spawn inyectado con ancla INTACTA -> la guarda de fichero sola lo caza.
+- **B3 (AC6)**: 8 cuerpos `test.skip` legacy BORRADOS; 3 tests VIVOS (instancia unica fail-closed, SIGTERM
+  limpia lock, escaneo de escritores gobernados). Mutante M-B3 (`acquireLock();` comentado) -> el test de
+  instancia unica FALLA por timeout esperando el lock. Faceta que cierra SLIP-2 de iter1: inyectar
+  `Area_comun/state/TASK_INDEX.json` en el launcher -> el escaneo de escritores gobernados lo caza.
+- **Los 3 mutantes REQUERIDOS mueren** (exit nonzero), re-inyectados por mi en copias desechables
+  (`probe/mB2/mB2anchor/mB3`). Recomendados de iter1 quedaron MEJORADOS: SLIP-4 (orden monotono por sello
+  del nombre; mtime retirado del sort) y SLIP-5 (error explicito ante fuente ilegible/vacia).
+- **Gates del hub**: validate/scan_encoding/scan_domain_neutrality exit 0; `git diff --exit-code --
+  protocol.config.json` exit 0 (epoch 1.14.0 / 2E35F26E intocable). `ba78954` confirmado en origin/main.
+- **Residuales declarados no bloqueantes**: R1 (unico `t.skip` en `staticContract.test.js:3419` = guarda
+  condicional de disponibilidad de fixture, NO test de B3; "0 skips" es correcto y dependiente-de-entorno:
+  no dispara porque `PROTOCOL_REPO_PATH`=hub que tiene `secrets/eventauth-arquitecto.key`; el default
+  `D:/Agentes/Zeus/NOVA/Aegis` ya no existe). R2 (borde 8192 sin salto de linea: fragmento parcial, el
+  literal completo nunca aparece). R3 (residuales de iter1 que el fix no toca: app.js control-path, R5
+  stripControl).
+- **GOTCHAS operativos**: (a) trailer gate del commit-msg exige `Task-Id`+`Ops-Reason` en UN SOLO bloque
+  final SIN linea en blanco entre ellos -> con multiples `-m` hay que meter ambos trailers en el ULTIMO
+  `-m` juntos. (b) PRUNE DUE (cold_start_tokens>=20000) senalado en el commit -- NO lo corro yo (es del
+  Arquitecto en su checkpoint). (c) commit AS Analista via `GIT_AUTHOR_*`/`GIT_COMMITTER_*`=analista@local
+  (el git user del entorno es Codex).
+
 ## Ultima actualizacion 2026-07-26 (27) - TASK-0295 detector de scratch discipline: OK-CLOSABLE (GO) sobre b1b3bbc
 
 - Encargo `MSG-20260726-Arquitecto-to-Analista-REVIEW-TASK-0295`. Teeth de DECISION-0104 cl.5b (firmada
