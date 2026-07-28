@@ -283,7 +283,7 @@
                 "DECISION-0095"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)",
             "type": "feature"
         },
