@@ -2,7 +2,7 @@
 task_id: TASK-0298
 title: "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)"
 type: feature
-status: review_approved
+status: done
 owner: Codex
 maker: Codex
 checker: Analista
