@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cdc24a84847c98cbcf58ed5f408663d50ac5d529ae0931c39405148c2474c1b7",
+  "canonical_hash": "f60b5e957b8d4083e05bff068aabbfe00a5df680bdf09f72e70a118006721730",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -797,6 +797,8 @@
       "CLAIM-20260728-132408-prune-arquitecto": 1,
       "CLAIM-20260728-Codex-TASK-0298-orphan-release-memory": 1,
       "CLAIM-20260728-Codex-TASK-0298-remediation-1": 1,
+      "CLAIM-20260728-Codex-TASK-0298-remediation-v3": 1,
+      "CLAIM-20260728-Codex-TASK-0298-remediation-v3-delivery": 1,
       "CLAIM-20260728-Codex-TASK-0300-block-memory": 1,
       "CLAIM-20260728-Codex-TASK-0300-scope-block": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -2651,7 +2653,7 @@
       "TASK-0295": 17,
       "TASK-0296": 33,
       "TASK-0297": 13,
-      "TASK-0298": 12,
+      "TASK-0298": 15,
       "TASK-0299": 3,
       "TASK-0300": 24,
       "TASK-0301": 2,
@@ -2678,7 +2680,7 @@
       "protocol-prune": 30,
       "protocol-state": 1
     },
-    "events_applied": 5914,
+    "events_applied": 5919,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5533,6 +5535,11 @@
       "codex:task0298:orphan-release-memory-claim:20260728": 6553,
       "codex:task0298:orphan-release-memory-release:20260728": 6554,
       "codex:task0298:release-orphan-remediation-1:20260728": 6552,
+      "codex:task0298:remediation-v3-claim-release:20260728T161000Z": 6589,
+      "codex:task0298:remediation-v3-claim:20260728T153000Z": 6586,
+      "codex:task0298:remediation-v3-delivery-claim-release:20260728T161000Z": 6590,
+      "codex:task0298:remediation-v3-delivery-claim:20260728T160500Z": 6587,
+      "codex:task0298:remediation-v3-in-review:20260728T161000Z": 6588,
       "codex:task0298:remediation1-claim:20260728T080000Z": 6528,
       "codex:task0298:start:claim:57d6040f-c0e9-40fc-80a7-25b3b241ef0b": 6508,
       "codex:task0298:start:status:be6436c1-160a-411d-adc9-eca8218e5e41": 6509,
@@ -8596,5 +8603,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6585
+  "up_to_seq": 6590
 }

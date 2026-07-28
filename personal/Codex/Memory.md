@@ -2,6 +2,25 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-28 - TASK-0298 remediation iteration 2 implementation
+
+- Product commit `ba78954` frames observation-tail output on complete lines, retains
+  partial bytes across polls, and bounds pending-tail flushes at detach/rollover so
+  progressively written PII is redacted before SSE and audit publication.
+- The dead `spawn` import is removed and the anti-spawn contract now fails closed on
+  missing manager extraction while also asserting zero `spawn(` calls in the complete
+  server source.
+- Legacy skipped control tests were removed. Live launcher tests now enforce the
+  governed-writer scan, single-instance lock, termination cleanup, and the presence of
+  `acquireLock()` without restoring stdin forwarding.
+- All three required mutants died: broken line framing, spawn plus broken extraction
+  anchor, and removed launcher lock. Full slow product suite passed 136/136 with zero
+  skips. A clean clone at `ba78954` also passed 136/136 with zero skips.
+- The governed delivery moved TASK-0298 to `in_review`, released both Codex claims,
+  and opened `MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0298-remediation-v3.md`.
+  Arquitecto recomputation and independent Analista iteration-2 review are pending;
+  Codex did not review or ratify the remediation.
+
 ## 2026-07-28 - TASK-0300 implementation
 
 - Commit `971741b` adds a configurable post-delivery timeout to the canonical mailbox

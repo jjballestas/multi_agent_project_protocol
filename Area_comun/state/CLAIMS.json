@@ -74,6 +74,47 @@
             "updated_at": "2026-07-28T13:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-remediation-v3",
+            "expires_at": "2026-07-29T03:30:00Z",
+            "notes": "Remediate TASK-0298 iteration 2 blockers B1, B2, and B3 with mutation-sensitive regressions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-remediation-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/scripts/architect-runtime-launcher.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T15:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-28T15:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260728-Codex-TASK-0298-remediation-v3-delivery",
+            "expires_at": "2026-07-28T18:05:00Z",
+            "notes": "Deliver TASK-0298 remediation iteration 2 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260728-Codex-TASK-0298-remediation-v3-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0298",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0298",
+                "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0298-Codex-to-Arquitecto-remediation-v3.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0298-remediation-v3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-28T16:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0298",
+            "updated_at": "2026-07-28T16:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260728-Codex-TASK-0300-done-flip",
             "expires_at": "2026-07-28T15:00:00Z",
             "notes": "Implementer done-flip after independent checker approval and Architect ratification; R1 remains a non-blocking follow-up.",
