@@ -2,6 +2,20 @@
 
 Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
 
+## 2026-07-28 - TASK-0300 implementation
+
+- Commit `971741b` adds a configurable post-delivery timeout to the canonical mailbox
+  cron harness. Once Codex-signed delivery evidence appears, slow remaining work is
+  terminated after the bounded window with explicit diagnostics and the existing
+  transient retry semantics.
+- Process-tree termination snapshots all descendants, kills them deepest-first, applies
+  a root fallback, and reports incomplete cleanup. Permanent Windows regressions prove a
+  simulated slow post-delivery step terminates near its configured timeout and a real
+  root/child/grandchild tree leaves zero survivors.
+- The full mailbox retry suite, collaboration validation, encoding, neutrality, drift,
+  and diff gates exited 0. No other agent harness, product code, cron restart, or live
+  deployment was touched. TASK-0300 remains `in_progress` pending governed delivery.
+
 ## 2026-07-28 - TASK-0300 scope blocker
 
 - TASK-0300 is `blocked` before implementation because its declared scope contains only
