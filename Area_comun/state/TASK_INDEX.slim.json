@@ -32,6 +32,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte"
+        },
+        {
+            "id": "TASK-0303",
+            "owner": "unassigned",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review"
         }
     ],
     "view": "task_index.slim"
