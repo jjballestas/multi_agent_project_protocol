@@ -21,7 +21,7 @@
         {
             "id": "TASK-0303",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review"
         }
     ],

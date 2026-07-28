@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-24 Europe/Madrid, during TASK-0256 implementation.
+Last updated: 2026-07-28 Europe/Madrid, during TASK-0303 implementation.
+
+## 2026-07-28 - TASK-0303 implementation
+
+- Commit `e266d07` makes post-delivery timing start only on a Codex-signed
+  owner transition to `in_review`; claim and `ready -> in_progress` events do
+  not start that window.
+- Exec and post-delivery expiry now classify fresh heartbeat, growing run logs,
+  or ledger growth as progress, extend by a configurable bounded interval, and
+  terminate the complete process tree only on no progress or the hard cap.
+- The mailbox retry suite covers pre-delivery work, progressing execution,
+  stale/frozen termination, post-delivery termination, and complete descendant
+  cleanup. Required validation, encoding, neutrality, config-identity, and diff
+  gates exited 0. TASK-0303 remains `in_progress` pending governed delivery.
 
 ## 2026-07-28 - TASK-0299 implementation
 
