@@ -42,6 +42,43 @@
             "updated_at": "2026-07-29T14:35:06Z"
         },
         {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0305",
+            "expires_at": "2026-07-30T04:20:00Z",
+            "notes": "Implement TASK-0305 state-once refactor and differential/adversarial tests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0305",
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "runtime/eventlog.py",
+                "runtime/submit_intent.py",
+                "tests/test_submit_intent_state_once.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T20:20:00Z",
+            "status": "active",
+            "task_id": "TASK-0305",
+            "updated_at": "2026-07-29T20:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reg0305-20260729",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Registra + promueve 0305 (refactor submit_intent atestacion-neutral, palanca A) a ready/owner Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reg0305-20260729"
+            ],
+            "started_at": "2026-07-29T19:41:27Z",
+            "status": "released",
+            "task_id": "TASK-0305",
+            "updated_at": "2026-07-29T19:41:27Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

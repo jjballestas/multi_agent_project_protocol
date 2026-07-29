@@ -245,6 +245,22 @@
             "type": "build"
         },
         {
+            "created_at": "2026-07-29",
+            "file": "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+            "id": "TASK-0305",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0303"
+            ],
+            "reviewer": "Analista",
+            "status": "in_progress",
+            "title": "Refactor submit_intent: verificar el log UNA vez por submit (quitar el multiplicador 3x/(N+2)x) - atestacion-neutral",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

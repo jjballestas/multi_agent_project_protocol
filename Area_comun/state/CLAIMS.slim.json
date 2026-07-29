@@ -1,5 +1,22 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0305",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0305",
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "runtime/eventlog.py",
+                "runtime/submit_intent.py",
+                "tests/test_submit_intent_state_once.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0305"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

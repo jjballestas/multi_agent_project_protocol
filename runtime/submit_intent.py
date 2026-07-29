@@ -728,9 +728,14 @@ def transaction_event_keys(actor_id: str, normalized_intents: list[dict[str, Any
     return [idempotency_key(actor_id, normalized) for normalized in normalized_intents]
 
 
-def existing_events_for_keys(writer: EventWriter, keys: list[str]) -> dict[str, dict[str, Any]]:
+def existing_events_for_keys(
+    writer: EventWriter,
+    keys: list[str],
+    verified_state: dict[str, Any] | None = None,
+) -> dict[str, dict[str, Any]]:
     result: dict[str, dict[str, Any]] = {}
-    state_keys = writer.state().get("idempotency_keys", {})
+    state = verified_state if verified_state is not None else writer.state()
+    state_keys = state.get("idempotency_keys", {})
     events = writer.events()
     for key in keys:
         seq = state_keys.get(key)
@@ -1101,8 +1106,13 @@ def ensure_event_state_config_valid(root: Path) -> None:
         raise IntentValidationError(f"invalid event_state config: {error}")
 
 
-def existing_idempotent_event(writer: EventWriter, key: str) -> dict[str, Any] | None:
-    seq = writer.state().get("idempotency_keys", {}).get(key)
+def existing_idempotent_event(
+    writer: EventWriter,
+    key: str,
+    verified_state: dict[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    state = verified_state if verified_state is not None else writer.state()
+    seq = state.get("idempotency_keys", {}).get(key)
     if not seq:
         return None
     for event in writer.events():
@@ -1287,7 +1297,8 @@ def submit_intent(
     with ledger_file_lock(root):
         log_repair = repair_torn_event_tail(root)
         writer = EventWriter(root)
-        existing = existing_idempotent_event(writer, key)
+        verified_state = writer.state()
+        existing = existing_idempotent_event(writer, key, verified_state)
         if existing is not None:
             coherent_before = idempotent_state_is_coherent(root, normalized)
             state_before = load_state(root)
@@ -1296,7 +1307,7 @@ def submit_intent(
             try:
                 materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
                 task_files_updated = apply_file_side_effects(root, normalized, state_before)
-                runtime_snapshot = writer.write_snapshot()
+                runtime_snapshot = writer.write_snapshot(verified_state)
                 drift_after = protocol_state_drift(root)
                 if drift_after.get("has_drift"):
                     raise IntentApplyError(f"protocol state drift remains after submit_intent retry: {drift_after.get('entries')}")
@@ -1337,6 +1348,7 @@ def submit_intent(
                     idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
                 )
                 writer = EventWriter(root)
+                verified_state = writer.state()
 
             payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
             event = writer.append_event(
@@ -1346,12 +1358,13 @@ def submit_intent(
                 idempotency_key=key,
                 payload=payload,
                 ts=timestamp,
+                verified_state=verified_state,
             )
             verify_appended_events(writer, [event])
             snapshot = current_protocol_snapshot(root)
             materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
             task_files_updated = apply_file_side_effects(root, normalized, state_before)
-            runtime_snapshot = writer.write_snapshot()
+            runtime_snapshot = writer.write_snapshot(verified_state)
             drift_after = protocol_state_drift(root)
             if drift_after.get("has_drift"):
                 raise IntentApplyError(f"protocol state drift remains after submit_intent: {drift_after.get('entries')}")
@@ -1408,7 +1421,8 @@ def submit_intents(
     with ledger_file_lock(root):
         log_repair = repair_torn_event_tail(root)
         writer = EventWriter(root)
-        existing = existing_events_for_keys(writer, keys)
+        verified_state = writer.state()
+        existing = existing_events_for_keys(writer, keys, verified_state)
         if existing:
             if len(existing) != len(keys):
                 raise IntentApplyError("partial transaction idempotency state exists; refusing to continue")
@@ -1424,7 +1438,7 @@ def submit_intents(
                 task_files_updated: list[str] = []
                 for normalized in normalized_intents:
                     task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
-                runtime_snapshot = writer.write_snapshot()
+                runtime_snapshot = writer.write_snapshot(verified_state)
                 drift_after = protocol_state_drift(root)
                 if drift_after.get("has_drift"):
                     raise IntentApplyError(f"protocol state drift remains after submit_intents retry: {drift_after.get('entries')}")
@@ -1473,6 +1487,7 @@ def submit_intents(
                     idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
                 )
                 writer = EventWriter(root)
+                verified_state = writer.state()
 
             events: list[dict[str, Any]] = []
             for index, normalized in enumerate(normalized_intents, start=1):
@@ -1490,6 +1505,7 @@ def submit_intents(
                         idempotency_key=keys[index - 1],
                         payload=payload,
                         ts=timestamp,
+                        verified_state=verified_state,
                     )
                 )
 
@@ -1500,7 +1516,7 @@ def submit_intents(
             task_files_updated: list[str] = []
             for normalized, state_before in zip(normalized_intents, states_before):
                 task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
-            runtime_snapshot = writer.write_snapshot()
+            runtime_snapshot = writer.write_snapshot(verified_state)
             drift_after = protocol_state_drift(root)
             if drift_after.get("has_drift"):
                 raise IntentApplyError(f"protocol state drift remains after submit_intents: {drift_after.get('entries')}")

@@ -835,7 +835,11 @@ class EventWriter:
         events = self.events()
         return (int(events[-1].get("seq") or 0) + 1) if events else 1
 
-    def chain_anchor(self, config: dict[str, Any]) -> str:
+    def chain_anchor(
+        self,
+        config: dict[str, Any],
+        verified_state: dict[str, Any] | None = None,
+    ) -> str:
         events = self.events()
         if not events:
             return compute_genesis_prev_hash(self.root / "protocol.config.json")
@@ -860,7 +864,12 @@ class EventWriter:
         }
         if observability_enabled(config):
             genesis["trace_id"] = event_trace_id(genesis)
-        atomic_append_jsonl(self.log_path, sign_event(genesis, config, root=self.root))
+        genesis = sign_event(genesis, config, root=self.root)
+        atomic_append_jsonl(self.log_path, genesis)
+        if verified_state is not None:
+            advanced = replay_events([genesis], base_state=verified_state, config=config, root=self.root)
+            verified_state.clear()
+            verified_state.update(advanced)
         return str(genesis["prev_hash"])
 
     def append_event(
@@ -875,8 +884,9 @@ class EventWriter:
         applied: bool = True,
         actor_auth: dict[str, Any] | None = None,
         ts: str | None = None,
+        verified_state: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        state = self.state()
+        state = verified_state if verified_state is not None else self.state()
         if idempotency_key and idempotency_key in state.get("idempotency_keys", {}):
             seq = int(state["idempotency_keys"][idempotency_key])
             for event in self.events():
@@ -904,7 +914,7 @@ class EventWriter:
         if actor_auth is None and actor_auth_enforce_enabled(config, self.root):
             event["actor_auth"] = sign_actor_auth(event, config, root=self.root)
         if chain_enabled(config):
-            previous_hash = self.chain_anchor(config)
+            previous_hash = self.chain_anchor(config, verified_state)
             event["seq"] = self.next_seq()
             if actor_auth is None and actor_auth_enforce_enabled(config, self.root):
                 event["actor_auth"] = sign_actor_auth(event, config, root=self.root)
@@ -914,6 +924,10 @@ class EventWriter:
             event["prev_hash"] = compute_event_prev_hash(event, previous_hash)
         event = sign_event(event, config, root=self.root)
         atomic_append_jsonl(self.log_path, event)
+        if verified_state is not None:
+            advanced = replay_events([event], base_state=state, config=config, root=self.root)
+            verified_state.clear()
+            verified_state.update(advanced)
         return event
 
     def append_agent_attestation(
@@ -1059,8 +1073,9 @@ class EventWriter:
         lease_until: str,
         idempotency_key: str,
         claim_id: str | None = None,
+        verified_state: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        state = self.state()
+        state = verified_state if verified_state is not None else self.state()
         fencing = int(state.get("fencing_tokens", {}).get(task_id) or 0) + 1
         payload = {"task_id": task_id, "owner": owner, "lease_until": lease_until}
         if claim_id:
@@ -1072,6 +1087,7 @@ class EventWriter:
             idempotency_key=idempotency_key,
             fencing_token=fencing,
             payload=payload,
+            verified_state=verified_state,
         )
 
     def apply_intent(
@@ -1083,8 +1099,9 @@ class EventWriter:
         attempt_id: str,
         fencing_token: int,
         payload: dict[str, Any] | None = None,
+        verified_state: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        state = self.state()
+        state = verified_state if verified_state is not None else self.state()
         current_fencing = int(state.get("fencing_tokens", {}).get(task_id) or 0)
         key = f"{actor_id}:{task_id}:{transition}:{attempt_id}:{fencing_token}"
         if fencing_token < current_fencing:
@@ -1100,6 +1117,7 @@ class EventWriter:
                     "current_fencing_token": current_fencing,
                     **(payload or {}),
                 },
+                verified_state=verified_state,
             )
         return self.append_event(
             event_type="intent.applied",
@@ -1108,10 +1126,19 @@ class EventWriter:
             idempotency_key=key,
             fencing_token=fencing_token,
             payload={"transition": transition, "attempt_id": attempt_id, **(payload or {})},
+            verified_state=verified_state,
         )
 
-    def write_snapshot(self) -> dict[str, Any]:
-        snapshot = rebuild_snapshot(self.root)
+    def write_snapshot(self, verified_state: dict[str, Any] | None = None) -> dict[str, Any]:
+        if verified_state is None:
+            snapshot = rebuild_snapshot(self.root)
+        else:
+            events = self.events()
+            snapshot = {
+                "up_to_seq": int(events[-1]["seq"]) if events else 0,
+                "state": deepcopy(verified_state),
+            }
+            snapshot["canonical_hash"] = canonical_hash(snapshot["state"])
         write_snapshot(self.root, snapshot)
         return snapshot
 
