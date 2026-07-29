@@ -7881,6 +7881,116 @@
             "status": "done",
             "title": "[DECISION-0104] Enforcement del detector de scratch discipline: disparo automatico + hardening (depth/allowlist/fail-open warning) -- de detectable a enforced",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-27",
+            "file": "Area_comun/tasks/TASK-0297-alinear-validador-ps1-con-py.md",
+            "id": "TASK-0297",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "DECISION-0018"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-27",
+            "file": "Area_comun/tasks/TASK-0298-aegis-bridge-observacion-tail.md",
+            "id": "TASK-0298",
+            "linked_decisions": [
+                "DECISION-0050",
+                "DECISION-0095",
+                "DECISION-0057"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0178",
+                "TASK-0185",
+                "TASK-0186",
+                "TASK-0187",
+                "TASK-0188",
+                "DECISION-0050",
+                "DECISION-0095"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)",
+            "type": "feature"
+        },
+        {
+            "created_at": "2026-07-27",
+            "file": "Area_comun/tasks/TASK-0299-aegis-bridge-observar-sesion-interactiva.md",
+            "id": "TASK-0299",
+            "linked_decisions": [
+                "DECISION-0050",
+                "DECISION-0095",
+                "DECISION-0040"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0178",
+                "TASK-0298",
+                "TASK-0187",
+                "DECISION-0050",
+                "DECISION-0095",
+                "DECISION-0040"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)",
+            "type": "feature"
+        },
+        {
+            "created_at": "2026-07-28",
+            "file": "Area_comun/tasks/TASK-0300-harden-cron-harness-zeus-bridge.md",
+            "id": "TASK-0300",
+            "linked_decisions": [
+                "DECISION-0095",
+                "DECISION-0018"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0236",
+                "TASK-0237",
+                "TASK-0298",
+                "DECISION-0095",
+                "DECISION-0018"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-28",
+            "file": "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+            "id": "TASK-0303",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0300",
+                "TASK-0302"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review",
+            "type": "infra"
         }
     ]
 }

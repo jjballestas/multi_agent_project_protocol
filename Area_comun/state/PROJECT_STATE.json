@@ -61,30 +61,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0297",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Alinear el validador legacy .ps1 con el canonico .py (falso rojo por dedup case-insensitive + selector sobre claim archivado malformado)"
-        },
-        {
-            "id": "TASK-0298",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Aegis Front MVP L1 unidad 1: convertir el architect-bridge de control-spawn a observacion-tail (firehose de la sesion real del Arquitecto via run-logs del cron; observation-only, read-only, dual-session-safe)"
-        },
-        {
-            "id": "TASK-0299",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Aegis Front MVP L1 unidad 2 (fast-follow de 0298): el bridge observa TAMBIEN la sesion INTERACTIVA del Arquitecto tailando su transcript jsonl de Claude Code (redactado, observation-only)"
-        },
-        {
-            "id": "TASK-0300",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Endurecer el harness de los crons de mailbox para ciclos de tareas del bridge de Zeus: timeout de cross-atestacion (no colgar al deadline) + TREE_KILL que limpia el arbol completo (cero procesos huerfanos)"
-        },
-        {
             "id": "TASK-0301",
             "owner": "unassigned",
             "status": "proposed",
@@ -95,12 +71,6 @@
             "owner": "unassigned",
             "status": "proposed",
             "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte"
-        },
-        {
-            "id": "TASK-0303",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review"
         },
         {
             "id": "TASK-0304",
