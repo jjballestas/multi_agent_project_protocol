@@ -57,9 +57,45 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-29T12:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0302",
             "updated_at": "2026-07-29T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0302-delivery",
+            "expires_at": "2026-07-30T00:30:00Z",
+            "notes": "Governed TASK-0302 delivery, handoff, status transition, and maker claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0302-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0302",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0302",
+                "Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0302-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0302.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T12:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0302",
+            "updated_at": "2026-07-29T12:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0302-msgfix",
+            "expires_at": "2026-07-29T13:45:00Z",
+            "notes": "Add the required compact mailbox question field and release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0302-msgfix",
+                "Area_comun/mailbox/open/MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0302.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T12:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0302",
+            "updated_at": "2026-07-29T12:45:00Z"
         },
         {
             "claim_id": "CLAIM-20260729-Codex-TASK-0304",

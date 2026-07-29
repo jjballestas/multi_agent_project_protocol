@@ -22,7 +22,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte + dar al watchdog una senal de vida fiable"
         }
     ],

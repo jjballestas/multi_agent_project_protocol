@@ -2,6 +2,19 @@
 
 Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 
+## 2026-07-29 - TASK-0302 implementation
+
+- Commit `6d96522` adds the configurable `HeartbeatSeconds` harness parameter
+  (default 60 seconds, 0 disables it) and emits `EXEC_RUNNING` with PID,
+  elapsed seconds, and message name while the peer exec remains alive.
+- The heartbeat changes logging only. Outcome classification, retry/backoff,
+  post-delivery timing, progress/liveness decisions, and process-tree cleanup
+  are unchanged; `protocol.config.json` remains byte-identical.
+- The permanent regression runs a long text-mode exec at a one-second cadence,
+  requires at least three heartbeat lines, and proves the emission-removal
+  mutant produces zero. The complete mailbox retry suite and required gates
+  exited 0. TASK-0302 is `in_progress` pending governed delivery.
+
 ## 2026-07-29 - TASK-0304 implementation
 
 - Delivery commit `f1da7a6` moves TASK-0304 to `in_review`, releases both

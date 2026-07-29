@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fa1b4c402574551c10eec6a36127bb37dc6832cbb81d72e81e09b0093ff17528",
+  "canonical_hash": "25b0dd9c04822aa6208538becce9e2261bd3d5707a8653e410408da66516f706",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -807,6 +807,9 @@
       "CLAIM-20260728-Codex-TASK-0300-scope-block": 1,
       "CLAIM-20260728-Codex-TASK-0303-retry-1": 1,
       "CLAIM-20260729-014337-prune-arquitecto": 1,
+      "CLAIM-20260729-Codex-TASK-0302": 1,
+      "CLAIM-20260729-Codex-TASK-0302-delivery": 1,
+      "CLAIM-20260729-Codex-TASK-0302-msgfix": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2712,7 +2715,7 @@
       "TASK-0299": 21,
       "TASK-0300": 24,
       "TASK-0301": 2,
-      "TASK-0302": 7,
+      "TASK-0302": 10,
       "TASK-0303": 20,
       "TASK-0304": 15,
       "TASK-1102": 14,
@@ -2737,7 +2740,7 @@
       "protocol-prune": 31,
       "protocol-state": 1
     },
-    "events_applied": 6039,
+    "events_applied": 6045,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5641,7 +5644,13 @@
       "codex:task0300:scope-block:start:2026-07-27T23:29:44Z": 6536,
       "codex:task0300:scope-block:status:2026-07-27T23:29:44Z": 6537,
       "codex:task0302:claim-acquire:20260729": 6709,
+      "codex:task0302:delivery-claim-acquire:20260729": 6711,
+      "codex:task0302:delivery-claim-release:20260729": 6714,
+      "codex:task0302:in-progress-to-in-review:20260729": 6712,
+      "codex:task0302:msgfix-claim-acquire:20260729": 6715,
+      "codex:task0302:msgfix-claim-release:20260729": 6716,
       "codex:task0302:ready-to-in-progress:20260729": 6710,
+      "codex:task0302:work-claim-release:20260729": 6713,
       "codex:task0303:delivery-claim:2026-07-28T22:03:38Z": 6657,
       "codex:task0303:delivery-release:2026-07-28T22:03:38Z": 6660,
       "codex:task0303:done-claim:20260729T013317Z": 6667,
@@ -8780,5 +8789,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6710
+  "up_to_seq": 6716
 }
