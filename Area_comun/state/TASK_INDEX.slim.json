@@ -11,11 +11,11 @@
         },
         {
             "id": "TASK-0301",
-            "owner": "unassigned",
+            "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
-            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos (follow-up R1 de TASK-0300)"
+            "status": "ready",
+            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos"
         }
     ],
     "view": "task_index.slim"

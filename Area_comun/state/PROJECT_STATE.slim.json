@@ -8,9 +8,9 @@
         },
         {
             "id": "TASK-0301",
-            "owner": "unassigned",
-            "status": "proposed",
-            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos (follow-up R1 de TASK-0300)"
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos"
         }
     ],
     "next_actions": [
