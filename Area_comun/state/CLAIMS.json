@@ -188,6 +188,22 @@
             "updated_at": "2026-07-29T10:12:55Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratify0302-20260729",
+            "expires_at": "2026-07-30T23:59:59Z",
+            "notes": "Ratificacion TASK-0302 (heartbeat EXEC_RUNNING de observabilidad, SOLO logging). GO CONVERGENTE LIMPIO de 2 capas en clon limpio (6d96522): Analista OK-CLOSABLE + recompute del Arquitecto; AC1-AC4, diff PURAMENTE ADITIVO (8 lineas +, 0 borrados), CERO cambio en outcome/0300/0303/0304 (liveness lee events.jsonl no el cron log), mutante muere, .ps1 valido, config byte-identico. Flip in_review->review_approved; Codex done-flip.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0302",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0302",
+                "Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify0302-20260729"
+            ],
+            "started_at": "2026-07-29T12:20:10Z",
+            "status": "released",
+            "task_id": "TASK-0302",
+            "updated_at": "2026-07-29T12:20:10Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratify0304-20260729",
             "expires_at": "2026-07-30T23:59:59Z",
             "notes": "Ratificacion TASK-0304 (heartbeat fiel a liveness real, self-bump retirado). GO CONVERGENTE LIMPIO de 2 capas en clon limpio (45bed5d): Analista OK-CLOSABLE + recompute del Arquitecto; AC1-AC4, mutantes mueren en LAS 2 DIRECCIONES (re-inyectar self-bump rompe el frozen-case; matar-progressing rompe 0303), sin regresion, .ps1 valido, config byte-identico. Sin residual bloqueante (obs menor: heartbeat_monotonic write-only). Cierra el ultimo residual de la directiva del operador. Flip in_review->review_approved; Codex done-flip.",

@@ -2,7 +2,7 @@
 task_id: TASK-0302
 file: Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md
 title: "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte + dar al watchdog una senal de vida fiable"
-status: in_review
+status: review_approved
 type: feature
 owner: Codex
 reviewer: Analista
