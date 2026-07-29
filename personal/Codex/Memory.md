@@ -13,7 +13,10 @@ Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 - The permanent regression runs a long text-mode exec at a one-second cadence,
   requires at least three heartbeat lines, and proves the emission-removal
   mutant produces zero. The complete mailbox retry suite and required gates
-  exited 0. TASK-0302 is `in_progress` pending governed delivery.
+  exited 0.
+- Delivery commit `35e2e0d` moves TASK-0302 to `in_review`, releases every
+  Codex claim, and publishes the self-contained Arquitecto handoff. Independent
+  Analista review remains required; Codex did not review or ratify its own work.
 
 ## 2026-07-29 - TASK-0304 implementation
 
