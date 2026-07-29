@@ -4,6 +4,9 @@ Last updated: 2026-07-28 Europe/Madrid, during TASK-0303 implementation.
 
 ## 2026-07-28 - TASK-0303 implementation
 
+- Delivery commit `c5a71eb` moves TASK-0303 to `in_review`, releases both
+  Codex claims, and publishes the self-contained Arquitecto/Analista handoff.
+  Independent review is pending; Codex did not review or ratify its own work.
 - Commit `e266d07` makes post-delivery timing start only on a Codex-signed
   owner transition to `in_review`; claim and `ready -> in_progress` events do
   not start that window.

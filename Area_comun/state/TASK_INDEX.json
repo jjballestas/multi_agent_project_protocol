@@ -382,8 +382,25 @@
                 "TASK-0302"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-29",
+            "file": "Area_comun/tasks/TASK-0304-heartbeat-liveness-real-no-selfbump.md",
+            "id": "TASK-0304",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0303",
+                "TASK-0302"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0",
             "type": "infra"
         },
         {

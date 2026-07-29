@@ -19,10 +19,10 @@
             "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte"
         },
         {
-            "id": "TASK-0303",
+            "id": "TASK-0304",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review"
+            "status": "proposed",
+            "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0"
         }
     ],
     "next_actions": [

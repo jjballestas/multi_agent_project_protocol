@@ -544,6 +544,22 @@
             "updated_at": "2026-07-28T20:30:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratify0303-20260729",
+            "expires_at": "2026-07-30T23:59:59Z",
+            "notes": "Ratificacion TASK-0303 (harness revisa liveness antes de matar + post-delivery en in_review). GO CONVERGENTE de 2 capas en clon limpio (e266d07): Analista OK-CLOSABLE + recompute del Arquitecto; AC1-AC5, 4 mutantes mueren, sin regresion 0300/RETRY, .ps1 valido, config byte-identico. RESIDUAL convergente no bloqueante (Analista R1 = mi hallazgo): el heartbeat se auto-refresca -> hung-detection temprana solo por hard_cap; el run-log/ledger cubre el caso REAL (0299 tenia log creciendo); gap de cobertura. Follow-up = TASK-0304. Flip in_review->review_approved; Codex done-flip.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify0303-20260729"
+            ],
+            "started_at": "2026-07-29T01:20:06Z",
+            "status": "released",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-29T01:20:06Z"
+        },
+        {
             "claim_id": "CLAIM-arq-register0302-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Registro TASK-0302 (proposed): observabilidad del harness -- heartbeat EXEC_RUNNING elapsed para acabar con la muerte muda 0/0-byte del text-mode. Origen: diagnostico del review-task-hang de la Analista.",
@@ -574,6 +590,22 @@
             "status": "released",
             "task_id": "TASK-0303",
             "updated_at": "2026-07-28T20:04:40Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-register0304-20260729",
+            "expires_at": "2026-07-30T23:59:59Z",
+            "notes": "Registro TASK-0304 (proposed, owner Codex): el heartbeat de exec-lease debe reflejar liveness real (no auto-refrescarse) + cobertura frozen-exec con FreshSeconds>0. Residual R1 convergente de 0303.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0304",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0304",
+                "Area_comun/tasks/TASK-0304-heartbeat-liveness-real-no-selfbump.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-register0304-20260729"
+            ],
+            "started_at": "2026-07-29T01:24:14Z",
+            "status": "released",
+            "task_id": "TASK-0304",
+            "updated_at": "2026-07-29T01:24:14Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",

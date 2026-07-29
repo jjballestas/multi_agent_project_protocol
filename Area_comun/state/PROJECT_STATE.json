@@ -99,8 +99,14 @@
         {
             "id": "TASK-0303",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review"
+        },
+        {
+            "id": "TASK-0304",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
