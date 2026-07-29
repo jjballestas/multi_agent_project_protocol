@@ -4627,3 +4627,13 @@ ratified its own work.
   encoding scan, and domain-neutrality scan exited 0 before commit.
 - TASK-0304 remains proposed as the explicit follow-up for truthful heartbeat liveness and a
   frozen-exec regression with `ProgressFreshSeconds > 0`; no TASK-0304 work was started.
+
+## 2026-07-29 - TASK-0304 closure
+
+- Protocol commit `e173c8c` performs the Codex-signed `review_approved -> done` transition after
+  independent Analista review and Arquitecto ratification, and releases
+  `CLAIM-20260729-Codex-TASK-0304-done` in the same runtime transaction.
+- Runtime events 6702-6704 are signed as Codex and report drift false. Collaboration validation,
+  encoding scan, and domain-neutrality scan exited 0 before commit.
+- This closes the final residual of the operator directive to verify real exec liveness before
+  termination. The write-only `heartbeat_monotonic` field is a non-blocking future cleanup note.
