@@ -381,6 +381,22 @@
             "updated_at": "2026-07-28T21:27:00Z"
         },
         {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0303-done",
+            "expires_at": "2026-07-29T03:33:17Z",
+            "notes": "Implementer done flip after independent Analista review and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0303-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0303",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0303",
+                "Area_comun/tasks/TASK-0303-harness-revisar-liveness-no-matar.md"
+            ],
+            "started_at": "2026-07-29T01:33:17Z",
+            "status": "released",
+            "task_id": "TASK-0303",
+            "updated_at": "2026-07-29T01:33:17Z"
+        },
+        {
             "claim_id": "CLAIM-arq-archive-stalego0299-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Archiva el GO-0299 OBSOLETO (precondicion 0299=ready ya no aplica tras el flaw; superseded por la ACTION de recovery).",
