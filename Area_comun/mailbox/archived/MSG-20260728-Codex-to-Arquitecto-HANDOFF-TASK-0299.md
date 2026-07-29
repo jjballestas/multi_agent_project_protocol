@@ -3,7 +3,7 @@ message_id: MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0299
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute TASK-0299 at Zeus commit 7729c4f and route independent Analista review."

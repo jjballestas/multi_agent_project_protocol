@@ -428,6 +428,67 @@
             "updated_at": "2026-07-28T21:45:48Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygfinal1-20260729",
+            "expires_at": "2026-07-30T23:59:59Z",
+            "notes": "Higiene final tanda 0299/0303 (todo done): batch 1, 4 consumidos.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260728-Analista-to-Arquitecto-REVIEW-TASK-0299.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Analista-to-Arquitecto-REVIEW-TASK-0299.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0299.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Analista-REVIEW-TASK-0299.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0299.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0299.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-ACTION-recuperar-TASK-0299.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-ACTION-recuperar-TASK-0299.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygfinal1-20260729"
+            ],
+            "started_at": "2026-07-29T01:39:27Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260729F1",
+            "updated_at": "2026-07-29T01:39:27Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygfinal2-20260729",
+            "expires_at": "2026-07-30T23:59:59Z",
+            "notes": "Higiene final tanda 0299/0303 (todo done): batch 2, 4 consumidos.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-GO-TASK-0303-confirm.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-GO-TASK-0303-confirm.md",
+                "Area_comun/mailbox/open/MSG-20260728-Arquitecto-to-Codex-GO-TASK-0303.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Arquitecto-to-Codex-GO-TASK-0303.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0299.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0299.md",
+                "Area_comun/mailbox/open/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0303.md",
+                "Area_comun/mailbox/archived/MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0303.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygfinal2-20260729"
+            ],
+            "started_at": "2026-07-29T01:39:27Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260729F2",
+            "updated_at": "2026-07-29T01:39:27Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygfinal3-20260729",
+            "expires_at": "2026-07-30T23:59:59Z",
+            "notes": "Higiene final tanda 0299/0303 (todo done): batch 3, 3 consumidos.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260729-Analista-to-Arquitecto-REVIEW-TASK-0303.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Analista-to-Arquitecto-REVIEW-TASK-0303.md",
+                "Area_comun/mailbox/open/MSG-20260729-Arquitecto-to-Analista-REVIEW-TASK-0303.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Arquitecto-to-Analista-REVIEW-TASK-0303.md",
+                "Area_comun/mailbox/open/MSG-20260729-Arquitecto-to-Codex-ACTION-doneflip-0303.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Arquitecto-to-Codex-ACTION-doneflip-0303.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygfinal3-20260729"
+            ],
+            "started_at": "2026-07-29T01:39:27Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260729F3",
+            "updated_at": "2026-07-29T01:39:27Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hygiene-doneflip-hold-20260728",
             "expires_at": "2026-07-29T23:59:59Z",
             "notes": "Higiene: archiva done-flip ACTION + RESP consumidos (0297/0300 done). HOLD de la remediacion-v2: no puede completar con Codex ExecTimeout=600/post-delivery=300 (el propio done-flip fue matado pre-commit); re-ruteo tras la decision de timeout del operador.",

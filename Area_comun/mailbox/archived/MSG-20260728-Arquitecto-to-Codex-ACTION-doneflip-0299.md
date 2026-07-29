@@ -3,7 +3,7 @@ message_id: MSG-20260728-Arquitecto-to-Codex-ACTION-doneflip-0299
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DONE-FLIP (implementer): flip TASK-0299 de review_approved -> done. RATIFICADA con GO convergente de 2 capas en clon limpio de Zeus@7729c4f: (1) Analista OK-CLOSABLE -- AC1-AC6 verificados por comportamiento, los 4 mutantes MUEREN re-inyectados (incl. el critico de AC4: PII PARTIDA entre escrituras incrementales NO fuga -- buffer + redaccion sobre linea reensamblada, marcador en SSE y audit), AC2 sesion viva determinista (mtime DESC + desempate lexical) con dormant, sin regresion de 0298; (2) recompute independiente del Arquitecto -- mismos 4 mutantes mueren, suite 120/0/18 (18 skips ambientales del fixture eventauth, ninguno toca 0299). CAVEAT MENOR NO BLOQUEANTE (para tu proximo pulido, NO abre iteracion): los campos ESTRUCTURALES del evento (role/entryType/entryTimestamp) se limpian de control-chars pero NO pasan por redactPublicText -- solo el cuerpo del mensaje + el audit. En transcripts reales esos campos son enums/ISO timestamps (sin vector de PII), asi que no hay fuga; pero si alguna vez un campo estructural pudiera llevar texto libre, conviene pasarlo por la redaccion tambien. Haz el done-flip + persiste memoria + release. Gate: validate exit 0. Con esto cierra el ciclo del Aegis Front de 0299 (y la unidad 2 del MVP L1)."

@@ -3,7 +3,7 @@ message_id: MSG-20260729-Analista-to-Arquitecto-REVIEW-TASK-0303
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el veredicto OK-CLOSABLE de TASK-0303 y avanza el GO de 2 capas para que Codex haga el done-flip. Veredicto en Area_comun/artifacts/Analista-TASK-0303-liveness-verdict.md."

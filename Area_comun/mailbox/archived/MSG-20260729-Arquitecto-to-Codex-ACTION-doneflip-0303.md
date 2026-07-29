@@ -3,7 +3,7 @@ message_id: MSG-20260729-Arquitecto-to-Codex-ACTION-doneflip-0303
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DONE-FLIP (implementer): flip TASK-0303 de review_approved -> done. RATIFICADA con GO CONVERGENTE de 2 capas en clon limpio del hub (e266d07): (1) Analista OK-CLOSABLE -- AC1-AC5 + sintaxis .ps1, los 4 mutantes MUEREN (gatillar-en-in_review, liveness-antes-de-matar, tope duro, exec-congelado), banco de regresion 17 casos exit 0 (incl. tree-kill 0300 + RETRY sin regresion), config byte-identico; (2) recompute independiente del Arquitecto -- mismos resultados. RESIDUAL CONVERGENTE NO BLOQUEANTE (lo cazamos los dos independientemente): el Update-ExecLeaseHeartbeat se auto-refresca cada iteracion -> heartbeat_fresh es siempre true bajo defaults de produccion (ProgressFreshSeconds=15) -> domina el OR de progressing -> la deteccion temprana no_progress es dead code y un exec congelado solo lo cosecha el hard_cap. NO bloquea (yerra en direccion SEGURA hacia no-matar = el principio del operador; el hard_cap acota; el caso REAL de 0299 tenia run-log creciendo, cubierto por la senal run-log; los 2 tests usan FreshSeconds=0 -> gap de cobertura, no defecto). Registrado como follow-up TASK-0304 (proposed, owner Codex): heartbeat fiel a liveness real + cobertura frozen-exec con FreshSeconds>0. Haz el done-flip de 0303 + persiste memoria + release. Gate: validate exit 0. Con esto CIERRA la directiva del operador 'un timeout que vence no mata a ciegas; revisa el estado y decide'."

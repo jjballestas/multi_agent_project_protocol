@@ -3,7 +3,7 @@ message_id: MSG-20260728-Codex-to-Arquitecto-HANDOFF-TASK-0303
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute implementation commit e266d07 and route TASK-0303 to Analista for independent review."
