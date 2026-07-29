@@ -1077,51 +1077,94 @@ def run_frozen_exec_with_production_freshness_case() -> None:
 
 
 def run_complete_tree_kill_case() -> None:
-    """The real kill helper removes a root, child and grandchild process tree."""
+    """The real kill helper removes intact and mid-kill re-parented process trees."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     match = re.search(r"(?ms)^function Stop-LeaseProcessTree \{.*?^\}", runner_text)
     if not match:
         raise AssertionError("Stop-LeaseProcessTree function not found")
-    fixture = Path(tempfile.mkdtemp(prefix="task0300-tree-kill-"))
-    try:
-        grand = fixture / "grand.ps1"
-        child = fixture / "child.ps1"
-        root = fixture / "root.ps1"
-        grand.write_text("Set-Content grand.pid $PID -Encoding ASCII; Start-Sleep -Seconds 60\n", encoding="ascii")
-        child.write_text(
-            "Set-Content child.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','grand.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
-            encoding="ascii",
-        )
-        root.write_text(
-            "Set-Content root.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','child.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
-            encoding="ascii",
-        )
-        process = subprocess.Popen(["powershell.exe", "-NoProfile", "-File", str(root)], cwd=fixture)
-        deadline = time.monotonic() + 10
-        while time.monotonic() < deadline and not all((fixture / name).exists() for name in ("root.pid", "child.pid", "grand.pid")):
-            time.sleep(0.1)
-        pids = [int((fixture / name).read_text().strip()) for name in ("root.pid", "child.pid", "grand.pid")]
-        probe = fixture / "kill.ps1"
-        probe.write_text(
-            "$ErrorActionPreference='Stop'\n$LogPath='kill.log'\n"
-            "function Write-Log { param([string]$Message) Add-Content -LiteralPath $LogPath -Value $Message -Encoding ASCII }\n"
-            "function Test-LeaseProcessMatches { param($Lease) return $true }\n"
-            + match.group(0)
-            + f"\n$lease=[pscustomobject]@{{pid={pids[0]};cmdline='fixture-agent';task_or_msg_id='tree'}}\n"
-            "if (-not (Stop-LeaseProcessTree -Lease $lease -Reason 'regression')) { exit 31 }\n",
-            encoding="ascii",
-        )
-        run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=fixture)
-        time.sleep(0.5)
-        alive = []
-        for pid in pids:
-            check = subprocess.run(["powershell.exe", "-NoProfile", "-Command", f"if(Get-Process -Id {pid} -ErrorAction SilentlyContinue){{exit 1}}" ])
-            if check.returncode != 0:
-                alive.append(pid)
-        assert not alive, alive
-        process.wait(timeout=5)
-    finally:
-        shutil.rmtree(fixture, ignore_errors=True)
+
+    sweep = """        foreach ($childPid in $killOrder) {
+            Stop-Process -Id $childPid -Force -ErrorAction SilentlyContinue
+        }"""
+    assert sweep in match.group(0)
+    no_compensating_sweep = match.group(0).replace(sweep, "", 1)
+
+    def exercise(candidate: str, reparent_during_snapshot: bool) -> list[int]:
+        fixture = Path(tempfile.mkdtemp(prefix="task0301-reparent-tree-kill-"))
+        process = None
+        pids: list[int] = []
+        try:
+            grand = fixture / "grand.ps1"
+            child = fixture / "child.ps1"
+            root = fixture / "root.ps1"
+            grand.write_text("Set-Content grand.pid $PID -Encoding ASCII; Start-Sleep -Seconds 60\n", encoding="ascii")
+            child.write_text(
+                "Set-Content child.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','grand.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
+                encoding="ascii",
+            )
+            root.write_text(
+                "Set-Content root.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','child.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
+                encoding="ascii",
+            )
+            process = subprocess.Popen(["powershell.exe", "-NoProfile", "-File", str(root)], cwd=fixture)
+            deadline = time.monotonic() + 10
+            pid_files = ("root.pid", "child.pid", "grand.pid")
+            while time.monotonic() < deadline and not all((fixture / name).exists() for name in pid_files):
+                time.sleep(0.1)
+            assert all((fixture / name).exists() for name in pid_files), "process tree did not start"
+            pids = [int((fixture / name).read_text().strip()) for name in pid_files]
+            reparent_hook = ""
+            if reparent_during_snapshot:
+                reparent_hook = (
+                    f"$script:IntermediatePid={pids[1]}\n"
+                    "function Get-CimInstance {\n"
+                    "  [CmdletBinding()] param([string]$ClassName)\n"
+                    "  $snapshot=@(CimCmdlets\\Get-CimInstance $ClassName -ErrorAction Stop)\n"
+                    "  Stop-Process -Id $script:IntermediatePid -Force -ErrorAction Stop\n"
+                    "  Wait-Process -Id $script:IntermediatePid -ErrorAction SilentlyContinue\n"
+                    "  return $snapshot\n"
+                    "}\n"
+                )
+            probe = fixture / "kill.ps1"
+            probe.write_text(
+                "$ErrorActionPreference='Stop'\n$LogPath='kill.log'\n"
+                "function Write-Log { param([string]$Message) Add-Content -LiteralPath $LogPath -Value $Message -Encoding ASCII }\n"
+                "function Test-LeaseProcessMatches { param($Lease) return $true }\n"
+                + reparent_hook
+                + candidate
+                + f"\n$lease=[pscustomobject]@{{pid={pids[0]};cmdline='fixture-agent';task_or_msg_id='tree'}}\n"
+                "$null=Stop-LeaseProcessTree -Lease $lease -Reason 'regression'\n",
+                encoding="ascii",
+            )
+            run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=fixture)
+            time.sleep(0.5)
+            alive = []
+            for pid in pids:
+                check = subprocess.run(
+                    ["powershell.exe", "-NoProfile", "-Command", f"if(Get-Process -Id {pid} -ErrorAction SilentlyContinue){{exit 1}}"]
+                )
+                if check.returncode != 0:
+                    alive.append(pid)
+            return alive
+        finally:
+            for pid in pids:
+                subprocess.run(
+                    ["powershell.exe", "-NoProfile", "-Command", f"Stop-Process -Id {pid} -Force -ErrorAction SilentlyContinue"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            if process is not None:
+                try:
+                    process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+            shutil.rmtree(fixture, ignore_errors=True)
+
+    assert exercise(match.group(0), reparent_during_snapshot=False) == []
+    reparent_survivors = exercise(match.group(0), reparent_during_snapshot=True)
+    assert reparent_survivors == [], reparent_survivors
+    mutant_survivors = exercise(no_compensating_sweep, reparent_during_snapshot=True)
+    assert len(mutant_survivors) == 1, mutant_survivors
 
 
 def main() -> int:

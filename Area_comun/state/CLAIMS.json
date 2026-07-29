@@ -42,6 +42,39 @@
             "updated_at": "2026-07-29T01:43:37Z"
         },
         {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0301",
+            "expires_at": "2026-07-29T20:52:38Z",
+            "notes": "Implement reparented-grandchild tree-kill regression fixture only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0301 Area_comun/state/TASK_INDEX.json#TASK-0301 Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0301 Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md examples/mailbox_retry_cases/run_mailbox_retry_cases.py runtime/state/events.jsonl runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T12:52:38Z",
+            "status": "released",
+            "task_id": "TASK-0301",
+            "updated_at": "2026-07-29T12:52:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0301-recovery",
+            "expires_at": "2026-07-29T20:54:14Z",
+            "notes": "Recover malformed TASK-0301 claim scope and implement test-only fixture.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0301-recovery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0301",
+                "Area_comun/state/TASK_INDEX.json#TASK-0301",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0301",
+                "Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T12:54:14Z",
+            "status": "active",
+            "task_id": "TASK-0301",
+            "updated_at": "2026-07-29T12:54:14Z"
+        },
+        {
             "claim_id": "CLAIM-20260729-Codex-TASK-0302",
             "expires_at": "2026-07-30T00:00:00Z",
             "notes": "Implement TASK-0302 configurable EXEC_RUNNING observability heartbeat and falsifiable regression; logging only.",
