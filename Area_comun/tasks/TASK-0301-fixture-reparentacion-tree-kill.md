@@ -2,7 +2,7 @@
 task_id: TASK-0301
 file: Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md
 title: "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista

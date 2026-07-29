@@ -1,21 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260729-Codex-TASK-0301-recovery",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0301-recovery",
-                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0301",
-                "Area_comun/state/TASK_INDEX.json#TASK-0301",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0301",
-                "Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0301"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

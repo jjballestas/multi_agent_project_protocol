@@ -256,7 +256,7 @@
                 "TASK-0300"
             ],
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos",
             "type": "infra"
         },

@@ -2,6 +2,19 @@
 
 Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 
+## 2026-07-29 - TASK-0301 implementation
+
+- Commit `ccd80b7` extends only the mailbox retry regression bank with a real
+  root-child-grandchild fixture whose intermediate process exits after the
+  process snapshot and before root termination, leaving the grandchild outside
+  `taskkill /T` reach.
+- The production helper kills every survivor through its compensating snapshot
+  sweep. A mutation that removes that sweep leaves exactly one live grandchild,
+  proving the regression is non-vacuous. The intact TASK-0300 vector remains.
+- The full mailbox retry suite, collaboration validation, encoding,
+  domain-neutrality, and diff gates exited 0. The harness and pinned config are
+  byte-identical. TASK-0301 remains `in_progress` pending governed delivery.
+
 ## 2026-07-29 - TASK-0302 implementation
 
 - Commit `6d96522` adds the configurable `HeartbeatSeconds` harness parameter
@@ -4653,3 +4666,13 @@ ratified its own work.
   encoding scan, and domain-neutrality scan exited 0 before commit.
 - This closes the final residual of the operator directive to verify real exec liveness before
   termination. The write-only `heartbeat_monotonic` field is a non-blocking future cleanup note.
+
+## 2026-07-29 - TASK-0302 closure
+
+- Protocol commit `bf29ae3` performs the Codex-signed `review_approved -> done` transition after
+  independent Analista review and Arquitecto ratification, and releases
+  `CLAIM-20260729-Codex-TASK-0302-done` in the same runtime transaction.
+- Runtime events 6720-6722 are signed as Codex and report drift false. Collaboration validation,
+  encoding scan, and domain-neutrality scan exited 0 before commit.
+- TASK-0302 is closed as an observability-only heartbeat change; Codex did not review or ratify
+  its own implementation. TASK-0301 remains the only stated hardening backlog item.
