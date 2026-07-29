@@ -3,7 +3,7 @@ message_id: MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0304
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute commit 45bed5d and route TASK-0304 to Analista for independent adversarial review."

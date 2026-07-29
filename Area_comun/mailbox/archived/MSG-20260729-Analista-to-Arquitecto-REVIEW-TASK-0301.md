@@ -3,7 +3,7 @@ message_id: MSG-20260729-Analista-to-Arquitecto-REVIEW-TASK-0301
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el veredicto OK-CLOSABLE de TASK-0301 y avanza el GO de 2 capas para que Codex haga el done-flip (ultima del backlog de endurecimiento). Veredicto completo en Area_comun/artifacts/Analista-TASK-0301-reparent-tree-kill-verdict.md."

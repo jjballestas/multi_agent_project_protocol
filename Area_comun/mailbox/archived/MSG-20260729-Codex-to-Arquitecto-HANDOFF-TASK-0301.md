@@ -3,7 +3,7 @@ message_id: MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0301
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute commit ccd80b7 and route TASK-0301 to Analista for independent review."

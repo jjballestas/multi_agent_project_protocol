@@ -61,24 +61,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0301",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos"
-        },
-        {
-            "id": "TASK-0302",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte + dar al watchdog una senal de vida fiable"
-        },
-        {
-            "id": "TASK-0304",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0"
-        },
-        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

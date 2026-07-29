@@ -3,7 +3,7 @@ message_id: MSG-20260729-Arquitecto-to-Codex-ACTION-doneflip-0302
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DONE-FLIP (implementer): flip TASK-0302 de review_approved -> done. RATIFICADA con GO CONVERGENTE LIMPIO de 2 capas en clon limpio (6d96522): Analista OK-CLOSABLE + recompute independiente del Arquitecto. AC1-AC4: EXEC_RUNNING a cadencia configurable (HeartbeatSeconds=60, 0=off), caso de regresion falsable no vacuo (quitar la emision -> banco RED), y sobre todo AC3 SOLO-LOGGING blindado -- el diff es PURAMENTE ADITIVO (8 lineas +, 0 borrados), locals aislados, CERO cambio en la clasificacion de outcome, retry, la ventana post-entrega (0300), ni la logica de liveness/no_progress/hard_cap/tree-kill (0303/0304); la Analista noto que la liveness lee events.jsonl no el cron log donde va EXEC_RUNNING. .ps1 valido, config byte-identico. Haz el done-flip + persiste memoria + release. Gate: validate exit 0. Con esto cierra 0302; queda solo 0301 (fixture tree-kill) del backlog de endurecimiento."

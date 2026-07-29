@@ -3,7 +3,7 @@ message_id: MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0302
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute TASK-0302 implementation commit 6d96522 and route the self-contained handoff to Analista for independent review."

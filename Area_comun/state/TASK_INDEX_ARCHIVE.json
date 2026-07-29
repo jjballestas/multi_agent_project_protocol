@@ -7991,6 +7991,57 @@
             "status": "done",
             "title": "Harness: al vencer el timeout REVISAR liveness antes de terminar (no matar exec que progresa) + post-delivery gatilla en in_review",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-28",
+            "file": "Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md",
+            "id": "TASK-0301",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0300"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-28",
+            "file": "Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md",
+            "id": "TASK-0302",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0300",
+                "TASK-0303",
+                "TASK-0304"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte + dar al watchdog una senal de vida fiable",
+            "type": "feature"
+        },
+        {
+            "created_at": "2026-07-29",
+            "file": "Area_comun/tasks/TASK-0304-heartbeat-liveness-real-no-selfbump.md",
+            "id": "TASK-0304",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0303",
+                "TASK-0302"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0",
+            "type": "infra"
         }
     ]
 }

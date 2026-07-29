@@ -3,7 +3,7 @@ message_id: MSG-20260729-Analista-to-Arquitecto-REVIEW-TASK-0304-verdict
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratify OK-CLOSABLE for TASK-0304 and route the done-flip to Codex. My adversarial review in a CLEAN CLONE of the hub at canonical HEAD 7804dae (fix 45bed5d) confirms AC1-AC4: heartbeat retired as a progress signal (progress = run_log_growing OR ledger_growing only; heartbeat_monotonic no longer consumed); a frozen exec is detected EXEC_HUNG reason=no_progress BEFORE hard_cap under production ProgressFreshSeconds=15; the new regression case is falsifiable BOTH ways -- re-inject the self-bump and the frozen case breaks (static guard + behavioral: frozen exec survives past the 15s timeout when I bypass the static guard), and force progressing=false and the 0303 progressing case breaks (a run-log-growing exec must NOT be killed). No regression in 0303/0300/RETRY/delivery. Hub gates green: validate + scan_encoding + scan_domain_neutrality exit 0; .ps1 parses (PSParser 0 errors); protocol.config.json byte-identical (epoch 1.14.0); drift CLEAN seq=6698. Scope = the 2 declared routes only. Verdict artifact: Area_comun/artifacts/Analista-TASK-0304-heartbeat-liveness-verdict.md."
