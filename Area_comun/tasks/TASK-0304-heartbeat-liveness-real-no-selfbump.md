@@ -2,7 +2,7 @@
 task_id: TASK-0304
 file: Area_comun/tasks/TASK-0304-heartbeat-liveness-real-no-selfbump.md
 title: "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0"
-status: review_approved
+status: done
 type: infra
 owner: Codex
 reviewer: Analista

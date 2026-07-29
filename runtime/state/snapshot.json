@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "5de26fa758cf6871f3c1b8e7d3b4a95e19a2b5506da48e4570c0e7d6d62491e4",
+  "canonical_hash": "a210ed6cf255019dad95d920e86cd501655416a83503f4418c005e0d62c907a6",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2713,7 +2713,7 @@
       "TASK-0301": 2,
       "TASK-0302": 2,
       "TASK-0303": 20,
-      "TASK-0304": 12,
+      "TASK-0304": 15,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2736,7 +2736,7 @@
       "protocol-prune": 31,
       "protocol-state": 1
     },
-    "events_applied": 6030,
+    "events_applied": 6033,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5655,8 +5655,11 @@
       "codex:task0304:claim-acquire:20260729": 6693,
       "codex:task0304:delivery-claim-acquire:20260729": 6695,
       "codex:task0304:delivery-claim-release:20260729": 6698,
+      "codex:task0304:done-flip:claim-acquire:20260729T111911Z": 6702,
+      "codex:task0304:done-flip:claim-release:20260729T111911Z": 6704,
       "codex:task0304:in-progress-to-in-review:20260729": 6696,
       "codex:task0304:ready-to-in-progress:20260729": 6694,
+      "codex:task0304:review-approved-to-done:20260729T111911Z": 6703,
       "codex:task0304:work-claim-release:20260729": 6697,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -8770,5 +8773,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6701
+  "up_to_seq": 6704
 }
