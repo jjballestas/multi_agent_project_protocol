@@ -2,6 +2,15 @@
 
 Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 
+## 2026-07-29 - TASK-0301 closure
+
+- Commit `2b14127` performs the Codex implementer done-flip after independent
+  Analista review and Arquitecto ratification: TASK-0301 is `done` and the
+  closure claim is released. Codex did not review or ratify its own work.
+- Collaboration validation, encoding, domain-neutrality, and diff gates exited
+  0. TASK-0300/TASK-0303/TASK-0304/TASK-0302/TASK-0301 are all closed, so the
+  harness-hardening backlog is complete.
+
 ## 2026-07-29 - TASK-0301 implementation
 
 - Commit `ccd80b7` extends only the mailbox retry regression bank with a real
@@ -14,6 +23,9 @@ Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 - The full mailbox retry suite, collaboration validation, encoding,
   domain-neutrality, and diff gates exited 0. The harness and pinned config are
   byte-identical. TASK-0301 remains `in_progress` pending governed delivery.
+- Delivery commit `49b893c` moves TASK-0301 to `in_review`, releases every Codex
+  claim, and publishes the self-contained Arquitecto handoff. Independent
+  Analista review remains required; Codex did not review or ratify its work.
 
 ## 2026-07-29 - TASK-0302 implementation
 
