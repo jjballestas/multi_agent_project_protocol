@@ -76,6 +76,24 @@
             "updated_at": "2026-07-29T13:05:07Z"
         },
         {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0301-done",
+            "expires_at": "2026-07-29T22:10:00Z",
+            "notes": "Implementer done-flip after independent review and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0301-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0301",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0301",
+                "Area_comun/tasks/TASK-0301-fixture-reparentacion-tree-kill.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T14:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0301",
+            "updated_at": "2026-07-29T14:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260729-Codex-TASK-0301-msgfix",
             "expires_at": "2026-07-29T13:40:08Z",
             "notes": "Add required compact-mailbox question field to TASK-0301 handoff.",
