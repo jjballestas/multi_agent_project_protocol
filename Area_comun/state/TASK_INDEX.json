@@ -264,16 +264,18 @@
             "created_at": "2026-07-28",
             "file": "Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md",
             "id": "TASK-0302",
-            "owner": "unassigned",
+            "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
             "project": "multi_agent_project_protocol",
             "relates_to": [
-                "TASK-0300"
+                "TASK-0300",
+                "TASK-0303",
+                "TASK-0304"
             ],
             "reviewer": "Analista",
-            "status": "proposed",
-            "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte",
+            "status": "ready",
+            "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte + dar al watchdog una senal de vida fiable",
             "type": "feature"
         },
         {
