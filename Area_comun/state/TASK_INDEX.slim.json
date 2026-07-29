@@ -24,14 +24,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "Heartbeat de exec en el harness de crons (EXEC_RUNNING elapsed) para acabar con la muerte muda 0/0-byte"
-        },
-        {
-            "id": "TASK-0304",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0"
         }
     ],
     "view": "task_index.slim"
