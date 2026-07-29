@@ -58,7 +58,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-29T20:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0305",
             "updated_at": "2026-07-29T20:20:00Z"
         },

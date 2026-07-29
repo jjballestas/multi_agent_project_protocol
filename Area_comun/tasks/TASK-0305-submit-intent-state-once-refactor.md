@@ -2,7 +2,7 @@
 task_id: TASK-0305
 file: Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md
 title: "Refactor submit_intent: verificar el log UNA vez por submit (quitar el multiplicador 3x/(N+2)x) - atestacion-neutral"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista

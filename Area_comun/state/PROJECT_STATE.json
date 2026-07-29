@@ -63,7 +63,7 @@
         {
             "id": "TASK-0305",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Refactor submit_intent: verificar el log UNA vez por submit (quitar el multiplicador 3x/(N+2)x) - atestacion-neutral"
         },
         {
