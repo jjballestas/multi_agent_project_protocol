@@ -63,7 +63,7 @@
         {
             "id": "TASK-0301",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Endurecer run_complete_tree_kill_case con fixture de re-parentacion de nietos"
         },
         {
