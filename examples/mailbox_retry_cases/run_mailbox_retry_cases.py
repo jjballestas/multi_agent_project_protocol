@@ -876,6 +876,73 @@ def run_post_delivery_timeout_case() -> None:
         shutil.rmtree(fixture, ignore_errors=True)
 
 
+def run_exec_running_heartbeat_case() -> None:
+    """A long text-mode exec emits configurable liveness logs, and removing them fails."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    heartbeat_line = (
+        'Write-Log "EXEC_RUNNING pid=$($process.Id) '
+        'elapsed=$($elapsedSeconds)s message=$($Message.Name)"'
+    )
+    assert heartbeat_line in runner_text
+
+    def exercise(candidate: str) -> int:
+        fixture = Path(tempfile.mkdtemp(prefix="task0302-exec-running-"))
+        try:
+            (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
+            (fixture / "Area_comun/state").mkdir(parents=True)
+            (fixture / "runtime/state").mkdir(parents=True)
+            (fixture / "runtime").mkdir(exist_ok=True)
+            (fixture / "scripts/harness/prompts").mkdir(parents=True)
+            (fixture / "scripts").mkdir(exist_ok=True)
+            (fixture / "scripts/harness/peer_mailbox_cron.ps1").write_text(candidate, encoding="utf-8")
+            shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+            (fixture / "runtime/protocol_replay.py").write_text(
+                "def protocol_state_drift(root): return {'has_drift': False}\n", encoding="ascii"
+            )
+            (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+            (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+            (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+                '{"tasks":[{"id":"TASK-heartbeat","owner":"TestPeer","status":"in_progress"}]}\n',
+                encoding="ascii",
+            )
+            (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+            (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+            (fixture / "Area_comun/mailbox/open/MSG-heartbeat.md").write_text(
+                "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+                "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+                encoding="ascii",
+            )
+            prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+            prompt.write_text("Process @@MESSAGE_PATH@@.\n", encoding="ascii")
+            slow = fixture / "slow-heartbeat.ps1"
+            slow.write_text("Start-Sleep -Seconds 4\n", encoding="ascii")
+            fake = fixture / "slow-heartbeat.cmd"
+            fake.write_text('@powershell.exe -NoProfile -File "%~dp0slow-heartbeat.ps1"\r\n', encoding="ascii")
+            run("git", "init", cwd=fixture)
+            run("git", "config", "user.email", "retry@example.invalid", cwd=fixture)
+            run("git", "config", "user.name", "TestPeer", cwd=fixture)
+            run("git", "add", ".", cwd=fixture)
+            run("git", "commit", "-m", "fixture", cwd=fixture)
+            run(
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                str(fixture / "scripts/harness/peer_mailbox_cron.ps1"),
+                "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+                "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20", "-HeartbeatSeconds", "1",
+                "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0", cwd=fixture, timeout=15,
+            )
+            log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(
+                encoding="utf-8"
+            )
+            return len(re.findall(r"(?m) EXEC_RUNNING pid=\d+ elapsed=\d+s message=MSG-heartbeat\.md$", log))
+        finally:
+            shutil.rmtree(fixture, ignore_errors=True)
+
+    assert exercise(runner_text) >= 3
+    mutant = runner_text.replace(heartbeat_line, "", 1)
+    assert exercise(mutant) == 0
+
+
 def run_pre_delivery_and_liveness_cases() -> None:
     """Claims do not start delivery timing; progress extends once, while a stale frozen exec is killed."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
@@ -1183,6 +1250,7 @@ def main() -> int:
         run_unreadable_head_case(sandbox, prompt, fake)
         run_unstaged_residue_case(sandbox, prompt, fake)
         run_disordered_ledger_case(sandbox, prompt)
+        run_exec_running_heartbeat_case()
         run_post_delivery_timeout_case()
         run_pre_delivery_and_liveness_cases()
         run_frozen_exec_with_production_freshness_case()

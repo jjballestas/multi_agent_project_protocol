@@ -11,6 +11,7 @@ param(
     [int]$IntervalSeconds = 300,
     [int]$MaxNoCoordinatorRounds = 15,
     [int]$ExecTimeoutSeconds = 3600,
+    [ValidateRange(0, 2147483647)][int]$HeartbeatSeconds = 60,
     [int]$PostDeliveryTimeoutSeconds = 300,
     [int]$ProgressFreshSeconds = 15,
     [int]$ProgressExtensionSeconds = 60,
@@ -1009,6 +1010,8 @@ function Invoke-PeerForMessage {
         $null = $process.Handle  # cache the handle or ExitCode reads null when the exec finishes before the first WaitForExit
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
+        $execStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+        $nextHeartbeatSeconds = $HeartbeatSeconds
         $postDeliveryDeadlineUtc = $null
         $postDeliveryHardDeadlineUtc = $null
         $execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
@@ -1020,6 +1023,11 @@ function Invoke-PeerForMessage {
         $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
         while (-not $process.WaitForExit(1000)) {
             Update-ExecLeaseHeartbeat
+            if ($HeartbeatSeconds -gt 0 -and $execStopwatch.Elapsed.TotalSeconds -ge $nextHeartbeatSeconds) {
+                $elapsedSeconds = [int][Math]::Floor($execStopwatch.Elapsed.TotalSeconds)
+                Write-Log "EXEC_RUNNING pid=$($process.Id) elapsed=$($elapsedSeconds)s message=$($Message.Name)"
+                $nextHeartbeatSeconds = $elapsedSeconds + $HeartbeatSeconds
+            }
             if (Test-Path -LiteralPath $StopPath) {
                 Write-Log "Stop marker detected; waiting for current exec pid=$($process.Id)"
             }

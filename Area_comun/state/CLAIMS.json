@@ -42,6 +42,26 @@
             "updated_at": "2026-07-29T01:43:37Z"
         },
         {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0302",
+            "expires_at": "2026-07-30T00:00:00Z",
+            "notes": "Implement TASK-0302 configurable EXEC_RUNNING observability heartbeat and falsifiable regression; logging only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0302",
+                "Area_comun/state/TASK_INDEX.json#TASK-0302",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0302",
+                "Area_comun/tasks/TASK-0302-observabilidad-exec-heartbeat-harness.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T12:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0302",
+            "updated_at": "2026-07-29T12:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260729-Codex-TASK-0304",
             "expires_at": "2026-07-29T23:00:00Z",
             "notes": "Implement TASK-0304 truthful exec liveness and frozen-exec regression with production freshness.",
