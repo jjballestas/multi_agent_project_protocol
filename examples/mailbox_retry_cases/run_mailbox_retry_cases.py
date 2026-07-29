@@ -946,6 +946,69 @@ def run_pre_delivery_and_liveness_cases() -> None:
         shutil.rmtree(fixture, ignore_errors=True)
 
 
+def run_frozen_exec_with_production_freshness_case() -> None:
+    """A self-bumped lease heartbeat cannot keep a frozen exec alive."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    progress_match = re.search(r"(?ms)^function Get-ExecProgressState \{.*?^\}", runner_text)
+    if not progress_match:
+        raise AssertionError("Get-ExecProgressState function not found")
+    assert "heartbeat_fresh" not in progress_match.group(0)
+
+    fixture = Path(tempfile.mkdtemp(prefix="task0304-frozen-production-freshness-"))
+    try:
+        (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
+        (fixture / "Area_comun/state").mkdir(parents=True)
+        (fixture / "runtime/state").mkdir(parents=True)
+        (fixture / "runtime").mkdir(exist_ok=True)
+        (fixture / "scripts/harness/prompts").mkdir(parents=True)
+        (fixture / "scripts").mkdir(exist_ok=True)
+        shutil.copy2(RUNNER, fixture / "scripts/harness/peer_mailbox_cron.ps1")
+        shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+        (fixture / "runtime/protocol_replay.py").write_text(
+            "def protocol_state_drift(root): return {'has_drift': False}\n", encoding="ascii"
+        )
+        (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+        (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+        (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+            '{"tasks":[{"id":"TASK-frozen","owner":"TestPeer","status":"in_progress"}]}\n', encoding="ascii"
+        )
+        (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+        (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+        (fixture / "Area_comun/mailbox/open/MSG-frozen.md").write_text(
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+            encoding="ascii",
+        )
+        prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+        prompt.write_text("Process @@MESSAGE_PATH@@.\n", encoding="ascii")
+        frozen = fixture / "frozen.ps1"
+        frozen.write_text("Start-Sleep -Seconds 30\n", encoding="ascii")
+        fake = fixture / "frozen.cmd"
+        fake.write_text('@powershell.exe -NoProfile -File "%~dp0frozen.ps1"\r\n', encoding="ascii")
+        run("git", "init", cwd=fixture)
+        run("git", "config", "user.email", "retry@example.invalid", cwd=fixture)
+        run("git", "config", "user.name", "TestPeer", cwd=fixture)
+        run("git", "add", ".", cwd=fixture)
+        run("git", "commit", "-m", "fixture", cwd=fixture)
+        started = time.monotonic()
+        run(
+            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+            "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+            "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+            "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "2", "-PostDeliveryTimeoutSeconds", "1",
+            "-ProgressFreshSeconds", "15", "-ProgressExtensionSeconds", "2", "-ProgressHardCapSeconds", "8",
+            "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0", cwd=fixture, timeout=15,
+        )
+        elapsed = time.monotonic() - started
+        log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+        assert "EXEC_HUNG" in log and "reason=no_progress" in log, log
+        assert "reason=hard_cap" not in log, log
+        assert "TREE_KILL_COMPLETE" in log, log
+        assert elapsed < 12, elapsed
+    finally:
+        shutil.rmtree(fixture, ignore_errors=True)
+
+
 def run_complete_tree_kill_case() -> None:
     """The real kill helper removes a root, child and grandchild process tree."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
@@ -1122,6 +1185,7 @@ def main() -> int:
         run_disordered_ledger_case(sandbox, prompt)
         run_post_delivery_timeout_case()
         run_pre_delivery_and_liveness_cases()
+        run_frozen_exec_with_production_freshness_case()
         run_complete_tree_kill_case()
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")

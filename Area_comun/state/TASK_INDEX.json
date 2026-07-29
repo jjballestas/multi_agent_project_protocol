@@ -289,7 +289,7 @@
                 "TASK-0302"
             ],
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0",
             "type": "infra"
         },

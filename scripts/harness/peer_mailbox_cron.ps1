@@ -321,14 +321,7 @@ function Get-ExecProgressState {
     $ledgerBytes = if (Test-Path -LiteralPath $EventsPath -PathType Leaf) {
         [long](Get-Item -LiteralPath $EventsPath).Length
     } else { 0L }
-    $heartbeatFresh = $false
-    if ($Lease -and $null -ne $Lease.heartbeat_monotonic) {
-        $elapsedTicks = [System.Diagnostics.Stopwatch]::GetTimestamp() - [long]$Lease.heartbeat_monotonic
-        $heartbeatAgeSeconds = [double]$elapsedTicks / [double][System.Diagnostics.Stopwatch]::Frequency
-        $heartbeatFresh = ($heartbeatAgeSeconds -ge 0 -and $heartbeatAgeSeconds -le $FreshSeconds)
-    }
     $reasons = @()
-    if ($heartbeatFresh) { $reasons += "heartbeat_fresh" }
     if ($outputBytes -gt $PreviousOutputBytes) { $reasons += "run_log_growing" }
     if ($ledgerBytes -gt $PreviousLedgerBytes) { $reasons += "ledger_growing" }
     return [pscustomobject]@{
