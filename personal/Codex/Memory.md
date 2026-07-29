@@ -4600,3 +4600,13 @@ ratified its own work.
   releases `CLAIM-20260728-Codex-TASK-0299-done`. Collaboration validation, encoding scan, and
   domain-neutrality scan exited 0. The structural event fields caveat is non-blocking and belongs
   to a future polish task; Codex did not self-review or self-ratify TASK-0299.
+
+## 2026-07-29 - TASK-0303 closure
+
+- Protocol commit `7b34733` performs the Codex-authorized `review_approved -> done` transition after
+  independent Analista review and Arquitecto ratification, and releases
+  `CLAIM-20260729-Codex-TASK-0303-done` in the same runtime transaction.
+- Runtime events 6667-6669 are signed as Codex and report drift false. Collaboration validation,
+  encoding scan, and domain-neutrality scan exited 0 before commit.
+- TASK-0304 remains proposed as the explicit follow-up for truthful heartbeat liveness and a
+  frozen-exec regression with `ProgressFreshSeconds > 0`; no TASK-0304 work was started.
