@@ -1,6 +1,23 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-28 Europe/Madrid, during TASK-0303 implementation.
+Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
+
+## 2026-07-29 - TASK-0304 implementation
+
+- Commit `45bed5d` removes the self-bumped exec-lease heartbeat from
+  `Get-ExecProgressState`; executable progress is now derived only from growing
+  run logs or the runtime ledger. Lease heartbeat maintenance remains available
+  for lease ownership and stale-lock behavior, but cannot keep a frozen exec alive.
+- A new production-freshness regression runs with `ProgressFreshSeconds=15`,
+  freezes both run-log and ledger output, and requires `reason=no_progress`
+  before the hard cap with complete tree cleanup. The test also rejects any
+  reintroduction of `heartbeat_fresh` into the progress function.
+- The complete mailbox retry suite, collaboration validation, encoding,
+  domain-neutrality, PowerShell parsing, and diff gates exited 0.
+- TASK-0304 is `in_progress` under
+  `CLAIM-20260729-Codex-TASK-0304`; next action is governed delivery to
+  `in_review`, claim release, and a self-contained Arquitecto handoff for
+  independent Analista review.
 
 ## 2026-07-28 - TASK-0303 implementation
 
