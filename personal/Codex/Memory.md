@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
+Last updated: 2026-07-30 Europe/Madrid, after TASK-0306 closure.
 
 ## 2026-07-30 - TASK-0306 implementation
 
@@ -19,6 +19,16 @@ Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 - TASK-0306 remains `in_progress` pending governed delivery to `in_review`,
   release of all Codex claims, and independent review. Codex did not implement
   compacting TASK-0307 and did not review or ratify its own work.
+- Delivery commit `3df7135` moves TASK-0306 to `in_review`, releases all four
+  Codex claims, and publishes the self-contained handoff and mailbox request
+  for Arquitecto recomputation plus independent Analista review. All declared
+  gates exited 0 immediately before delivery.
+- After independent Analista review and Arquitecto ratification, commit
+  `cd226fb` applies the implementer-only `review_approved -> done` transition
+  and releases the closure claim. Codex did not review or ratify its own work.
+- Collaboration validation, encoding, and domain-neutrality gates exited 0
+  immediately before the closure commit. TASK-0307 remains the separate
+  compacting palanca C.
 
 ## 2026-07-30 - TASK-0305 governed delivery
 

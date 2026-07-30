@@ -123,6 +123,22 @@
             "updated_at": "2026-07-30T04:05:25Z"
         },
         {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-done-memory",
+            "expires_at": "2026-07-30T05:38:15Z",
+            "notes": "Persist TASK-0306 ratified closure commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-done-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:38:15Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:38:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260730-Codex-TASK-0306-doneflip",
             "expires_at": "2026-07-30T06:37:00Z",
             "notes": "Apply ratified TASK-0306 review_approved to done transition.",
