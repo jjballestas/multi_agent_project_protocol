@@ -3,7 +3,7 @@ message_id: MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0307
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el veredicto OK-CLOSABLE de TASK-0307 (palanca C, compactacion fisica del log) y proceder con el done-flip via Codex. Mi review adversarial en clon limpio (hub @1831bdd) confirma los 6 AC por comportamiento, con reconstruccion INDEPENDIENTE del set completo de eventos. Cierra la tanda A+B+C."

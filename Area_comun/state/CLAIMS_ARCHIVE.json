@@ -38743,6 +38743,395 @@
             "status": "released",
             "task_id": "TASK-0304",
             "updated_at": "2026-07-29T11:11:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260729-143506-prune-arquitecto",
+            "expires_at": "2026-07-29",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-29T14:35:06Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-29T14:35:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260729-Codex-TASK-0305",
+            "expires_at": "2026-07-30T04:20:00Z",
+            "notes": "Implement TASK-0305 state-once refactor and differential/adversarial tests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260729-Codex-TASK-0305",
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "runtime/eventlog.py",
+                "runtime/submit_intent.py",
+                "tests/test_submit_intent_state_once.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-29T20:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0305",
+            "updated_at": "2026-07-29T20:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0305-done-flip",
+            "expires_at": "2026-07-30T05:30:38Z",
+            "notes": "Implementer done-flip after independent checker approval and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0305-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T03:30:38Z",
+            "status": "released",
+            "task_id": "TASK-0305",
+            "updated_at": "2026-07-30T03:30:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306",
+            "expires_at": "2026-07-30T11:57:58Z",
+            "notes": "TASK-0306 signed checkpoint and incremental live replay implementation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "runtime/eventlog.py",
+                "event-state.runtime.json",
+                "examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T03:57:58Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T03:57:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-delivery",
+            "expires_at": "2026-07-30T12:05:25Z",
+            "notes": "TASK-0306 delivery, memory checkpoint, and independent review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0306-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:05:25Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:05:25Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-done-memory",
+            "expires_at": "2026-07-30T05:38:15Z",
+            "notes": "Persist TASK-0306 ratified closure commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-done-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:38:15Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:38:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-doneflip",
+            "expires_at": "2026-07-30T06:37:00Z",
+            "notes": "Apply ratified TASK-0306 review_approved to done transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-doneflip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:37:00Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:37:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-memory",
+            "expires_at": "2026-07-30T12:04:54Z",
+            "notes": "TASK-0306 post-commit durable memory checkpoint.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:04:54Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:04:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-registry",
+            "expires_at": "2026-07-30T12:02:55Z",
+            "notes": "TASK-0306 tracked checkpoint policy registry creation under runtime.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-registry",
+                "runtime",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:02:55Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:02:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0307",
+            "expires_at": "2026-07-30T12:47:40Z",
+            "notes": "Implement DECISION-0105 palanca C physical log compaction and fail-safe checkpoint parsing.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0307",
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "runtime/eventlog.py",
+                "runtime/CHECKPOINT_POLICY.json",
+                "examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:47:40Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T04:47:40Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0307-delivery",
+            "expires_at": "2026-07-30T06:51:54Z",
+            "notes": "Governed delivery of TASK-0307 implementation for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0307-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0307-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0307.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:51:54Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T04:51:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0307-done",
+            "expires_at": "2026-07-30T07:25:00Z",
+            "notes": "Implementer done-flip after independent Analista review and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0307-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T05:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T05:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-dec0105-0306-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Registra DECISION-0105 (checkpoint firmado B+C) + registra/promueve TASK-0306 (palanca B) a ready/owner Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/decisions/DECISION-0105-verified-checkpoint-incremental-verify-compaction.md",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-dec0105-0306-20260730"
+            ],
+            "started_at": "2026-07-30T03:50:47Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T03:50:47Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg0305-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Higiene: archiva los 6 consumidos del ciclo 0305 (palanca A).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260729-Arquitecto-to-Codex-GO-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Arquitecto-to-Codex-GO-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-completar-entrega-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-completar-entrega-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0305.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg0305-20260730"
+            ],
+            "started_at": "2026-07-30T03:37:07Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-0305-20260730",
+            "updated_at": "2026-07-30T03:37:07Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg0306-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Higiene: archiva los 5 consumidos del ciclo 0306 (palanca B).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-GO-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-GO-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0306.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg0306-20260730"
+            ],
+            "started_at": "2026-07-30T04:41:32Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-0306-20260730",
+            "updated_at": "2026-07-30T04:41:32Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg0307-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Higiene: archiva los 5 consumidos del ciclo 0307 (palanca C, cierre A+B+C).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-GO-TASK-0307.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-GO-TASK-0307.md",
+                "Area_comun/mailbox/open/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0307.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0307.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0307.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0307.md",
+                "Area_comun/mailbox/open/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0307.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0307.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0307.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0307.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg0307-20260730"
+            ],
+            "started_at": "2026-07-30T05:30:28Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-0307-20260730",
+            "updated_at": "2026-07-30T05:30:28Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratify-0305-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Ratifica 0305 in_review->review_approved: gate de 2 capas converge GO (recompute Arquitecto + Analista OK-CLOSABLE); identidad byte-a-byte del ledger probada independientemente por ambas capas.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify-0305-20260730"
+            ],
+            "started_at": "2026-07-30T03:24:24Z",
+            "status": "released",
+            "task_id": "TASK-0305",
+            "updated_at": "2026-07-30T03:24:24Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratify-0306-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Ratifica 0306 in_review->review_approved: gate de 2 capas converge GO; fail-safe airtight + offline no debilitado + byte-identico, probado independientemente por ambas capas.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify-0306-20260730"
+            ],
+            "started_at": "2026-07-30T04:30:45Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:30:45Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratify-0307-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Ratifica 0307 in_review->review_approved: gate de 2 capas converge GO con numeros identicos (union 6157 ev, canonical_hash 07f0d6db, cero perdida); cierra la tanda A+B+C de perf del ledger.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify-0307-20260730"
+            ],
+            "started_at": "2026-07-30T05:17:45Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T05:17:45Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reg0305-20260729",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Registra + promueve 0305 (refactor submit_intent atestacion-neutral, palanca A) a ready/owner Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0305",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0305",
+                "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reg0305-20260729"
+            ],
+            "started_at": "2026-07-29T19:41:27Z",
+            "status": "released",
+            "task_id": "TASK-0305",
+            "updated_at": "2026-07-29T19:41:27Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reg0307-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Registra + promueve TASK-0307 (palanca C, compactacion fisica) a ready/owner Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reg0307-20260730"
+            ],
+            "started_at": "2026-07-30T04:42:15Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T04:42:15Z"
         }
     ]
 }

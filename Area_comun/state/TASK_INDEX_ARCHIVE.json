@@ -8042,6 +8042,56 @@
             "status": "done",
             "title": "Harness: el exec-lease heartbeat debe reflejar liveness REAL (no auto-refrescarse) + cobertura frozen-exec con ProgressFreshSeconds>0",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-29",
+            "file": "Area_comun/tasks/TASK-0305-submit-intent-state-once-refactor.md",
+            "id": "TASK-0305",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "TASK-0303"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Refactor submit_intent: verificar el log UNA vez por submit (quitar el multiplicador 3x/(N+2)x) - atestacion-neutral",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-30",
+            "file": "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+            "id": "TASK-0306",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "DECISION-0105",
+                "TASK-0305"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-30",
+            "file": "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+            "id": "TASK-0307",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "DECISION-0105",
+                "TASK-0306"
+            ],
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "Palanca C (DECISION-0105): compactacion fisica del log sobre el limite del checkpoint firmado + pulido fail-closed",
+            "type": "infra"
         }
     ]
 }

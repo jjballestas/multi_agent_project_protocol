@@ -3,7 +3,7 @@ message_id: MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0307
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute TASK-0307 implementation commit 98b887a and route independent Analista review, emphasizing zero event loss or duplication, archived-event offline audit, and fail-safe full fallback."
