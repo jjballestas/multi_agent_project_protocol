@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "0ff008146d15d17fd58293991c0892113934d9ab8c8ddc288f351244993526e5",
+  "canonical_hash": "07f0d6db1824161412c20b2bc1a36f5bbbc79f977ec1be12747b840adc29307e",
   "integrity": {
-    "canonical_hash": "0ff008146d15d17fd58293991c0892113934d9ab8c8ddc288f351244993526e5",
+    "canonical_hash": "07f0d6db1824161412c20b2bc1a36f5bbbc79f977ec1be12747b840adc29307e",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "42add9f908d742915604702ddd2191a48d43cf508f78c6813c9c3a067a28dc1a",
-    "signature": "70221de437f0487488002cf685e1d0fd022ef9e043f0606500cc326b3b235425",
-    "up_to_seq": 6824
+    "prev_hash": "efd07d7e6a551a25d523d24ebea0e64f0978eb89309ff5448c5037dcf99a765f",
+    "signature": "13da298e1986d41f5cfd315f6a0ca748faee5f282eabb80b942d04c30fe59ea8",
+    "up_to_seq": 6828
   },
   "state": {
     "aggregate_versions": {
@@ -2777,7 +2777,7 @@
       "TASK-0304": 15,
       "TASK-0305": 12,
       "TASK-0306": 20,
-      "TASK-0307": 5,
+      "TASK-0307": 9,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2800,7 +2800,7 @@
       "protocol-prune": 32,
       "protocol-state": 1
     },
-    "events_applied": 6153,
+    "events_applied": 6157,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5774,7 +5774,11 @@
       "codex:task0306:registry-claim:20260730": 6796,
       "codex:task0306:review-approved-to-done:2026-07-30T04:37:00Z": 6808,
       "codex:task0307:claim:2026-07-30T04:47:40Z": 6823,
+      "codex:task0307:delivery-claim:2026-07-30T04:51:54Z": 6825,
+      "codex:task0307:in-progress-to-in-review:2026-07-30T04:53:02Z": 6826,
       "codex:task0307:ready-to-in-progress:2026-07-30T04:47:40Z": 6824,
+      "codex:task0307:release-delivery:2026-07-30T04:53:02Z": 6828,
+      "codex:task0307:release-work:2026-07-30T04:53:02Z": 6827,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -8957,5 +8961,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6824
+  "up_to_seq": 6828
 }

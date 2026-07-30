@@ -75,7 +75,7 @@
         {
             "id": "TASK-0307",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Palanca C (DECISION-0105): compactacion fisica del log sobre el limite del checkpoint firmado + pulido fail-closed"
         },
         {
