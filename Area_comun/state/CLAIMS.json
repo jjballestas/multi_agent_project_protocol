@@ -189,6 +189,27 @@
             "updated_at": "2026-07-30T04:02:55Z"
         },
         {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0307",
+            "expires_at": "2026-07-30T12:47:40Z",
+            "notes": "Implement DECISION-0105 palanca C physical log compaction and fail-safe checkpoint parsing.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0307",
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "runtime/eventlog.py",
+                "runtime/CHECKPOINT_POLICY.json",
+                "examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:47:40Z",
+            "status": "active",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T04:47:40Z"
+        },
+        {
             "claim_id": "CLAIM-arq-dec0105-0306-20260730",
             "expires_at": "2026-07-31T23:59:59Z",
             "notes": "Registra DECISION-0105 (checkpoint firmado B+C) + registra/promueve TASK-0306 (palanca B) a ready/owner Codex.",

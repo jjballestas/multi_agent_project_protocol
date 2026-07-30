@@ -1,4 +1,5 @@
 {
+  "compaction_threshold": 1024,
   "max_incremental_events": 128,
   "schema_version": "1.0"
 }

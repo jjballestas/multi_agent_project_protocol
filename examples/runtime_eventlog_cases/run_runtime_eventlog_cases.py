@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 import tempfile
 from copy import deepcopy
@@ -16,6 +17,8 @@ sys.path.insert(0, str(ROOT))
 from runtime.eventlog import (  # noqa: E402
     EventLogError,
     EventWriter,
+    archive_hash_path,
+    archive_integrity,
     assert_snapshot_matches,
     canonical_json,
     canonical_hash,
@@ -56,7 +59,7 @@ def checkpoint_fixture(root: Path) -> EventWriter:
     )
     (root / "runtime").mkdir(parents=True, exist_ok=True)
     (root / "runtime" / "CHECKPOINT_POLICY.json").write_text(
-        json.dumps({"max_incremental_events": 8}, indent=2),
+        json.dumps({"max_incremental_events": 8, "compaction_threshold": 1024}, indent=2),
         encoding="ascii",
     )
     return EventWriter(root)
@@ -308,6 +311,130 @@ def case_signed_checkpoint_incremental_and_fail_safe() -> None:
         assert validate_chain(tampered_events, json.loads((root / "protocol.config.json").read_text()), root=root)["valid"] is False
 
 
+def case_checkpoint_compaction_preserves_union_and_offline_audit() -> None:
+    with tempfile.TemporaryDirectory(prefix="eventlog-compaction-") as temp:
+        root = Path(temp)
+        writer = checkpoint_fixture(root)
+        policy_path = root / "runtime" / "CHECKPOINT_POLICY.json"
+        policy_path.write_text(
+            json.dumps({"max_incremental_events": 8, "compaction_threshold": 1}, indent=2),
+            encoding="ascii",
+        )
+        claim = writer.acquire_claim(
+            task_id="TASK-1006",
+            owner="Codex",
+            lease_until="2026-06-06T12:30:00Z",
+            idempotency_key="Codex:TASK-1006:claim:attempt-1:0",
+        )
+        writer.apply_intent(
+            task_id="TASK-1006",
+            actor_id="Codex",
+            transition="submit",
+            attempt_id="attempt-1",
+            fencing_token=int(claim["fencing_token"]),
+        )
+        before = writer.events()
+        before_state = replay_events(
+            before,
+            config=json.loads((root / "protocol.config.json").read_text()),
+            root=root,
+        )
+        writer.write_snapshot(before_state)
+        archives = sorted((root / "runtime" / "state" / "archives").glob("events-*.jsonl"))
+        assert len(archives) == 1
+        assert archive_integrity(root) == {"valid": True, "checked": 1}
+        assert read_jsonl_torn_safe(writer.log_path) == []
+        after = writer.events()
+        assert canonical_json(after) == canonical_json(before)
+        after_state = replay_events(
+            after,
+            config=json.loads((root / "protocol.config.json").read_text()),
+            root=root,
+        )
+        assert canonical_hash(after_state) == canonical_hash(before_state)
+        assert validate_chain(
+            after,
+            json.loads((root / "protocol.config.json").read_text()),
+            root=root,
+        )["valid"] is True
+
+        writer.apply_intent(
+            task_id="TASK-1006",
+            actor_id="Codex",
+            transition="review",
+            attempt_id="attempt-2",
+            fencing_token=int(claim["fencing_token"]),
+        )
+        full_events = writer.events()
+        full_state = replay_events(
+            full_events,
+            config=json.loads((root / "protocol.config.json").read_text()),
+            root=root,
+        )
+        verified_seqs: list[int] = []
+        original_verify = verify_event_auth
+
+        def counting_verify(event, config, *, root=None):
+            verified_seqs.append(int(event.get("seq") or 0))
+            return original_verify(event, config, root=root)
+
+        with patch("runtime.eventlog.verify_event_auth", counting_verify):
+            incremental_state = writer.state()
+        assert verified_seqs == [int(full_events[-1]["seq"])]
+        assert canonical_json(incremental_state) == canonical_json(full_state)
+
+        archive_payload = read_jsonl_torn_safe(archives[0])
+        archive_payload[0]["payload"]["owner"] = "Mallory"
+        archives[0].write_text(
+            "".join(canonical_json(event) + "\n" for event in archive_payload),
+            encoding="utf-8",
+        )
+        assert archive_integrity(root)["valid"] is False
+        verified_seqs.clear()
+        with patch("runtime.eventlog.verify_event_auth", counting_verify):
+            writer.state()
+        assert verified_seqs == [int(event["seq"]) for event in writer.events()]
+        assert validate_chain(
+            writer.events(),
+            json.loads((root / "protocol.config.json").read_text()),
+            root=root,
+        )["valid"] is False
+
+        archive_hash_path(archives[0]).write_text(
+            hashlib.sha256(archives[0].read_bytes()).hexdigest() + "\n",
+            encoding="ascii",
+        )
+        assert archive_integrity(root)["valid"] is True
+        assert validate_chain(
+            writer.events(),
+            json.loads((root / "protocol.config.json").read_text()),
+            root=root,
+        )["valid"] is False
+
+        malformed_snapshot = json.loads(
+            (root / "runtime" / "state" / "snapshot.json").read_text(encoding="utf-8")
+        )
+        malformed_snapshot["up_to_seq"] = "not-a-number"
+        assert verify_snapshot_checkpoint(root, malformed_snapshot, writer.events()) == {
+            "trusted": False,
+            "reason": "invalid_checkpoint_sequence",
+        }
+        policy_path.write_text(
+            json.dumps(
+                {"max_incremental_events": "not-a-number", "compaction_threshold": 1024},
+                indent=2,
+            ),
+            encoding="ascii",
+        )
+        valid_snapshot = json.loads(
+            (root / "runtime" / "state" / "snapshot.json").read_text(encoding="utf-8")
+        )
+        assert verify_snapshot_checkpoint(root, valid_snapshot, writer.events()) == {
+            "trusted": False,
+            "reason": "invalid_checkpoint_policy",
+        }
+
+
 def main() -> int:
     cases = [
         case_seq_writer_only_and_torn_write,
@@ -316,6 +443,7 @@ def main() -> int:
         case_snapshot_replay_hash_and_mismatch_gate,
         case_negative_replay_does_not_call_external_effects,
         case_signed_checkpoint_incremental_and_fail_safe,
+        case_checkpoint_compaction_preserves_union_and_offline_audit,
     ]
     failures = []
     for case in cases:

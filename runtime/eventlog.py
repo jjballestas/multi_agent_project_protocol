@@ -45,7 +45,9 @@ ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT = EVENT_STATE_RUNTIME_CONFIG_DEFAULT
 CHECKPOINT_INTEGRITY_METHOD = "hmac-sha256"
 CHECKPOINT_SIGNING_ACTOR = "runtime"
 CHECKPOINT_DEFAULT_MAX_INCREMENTAL_EVENTS = 128
+CHECKPOINT_DEFAULT_COMPACTION_THRESHOLD = 1024
 CHECKPOINT_POLICY_PATH = Path("runtime") / "CHECKPOINT_POLICY.json"
+ARCHIVE_HASH_SUFFIX = ".sha256"
 
 
 class EventLogError(RuntimeError):
@@ -694,17 +696,27 @@ def checkpoint_runtime_config(config: dict[str, Any] | None, root: Path | None =
             checkpoint = payload
     if not isinstance(checkpoint, dict):
         checkpoint = {}
-    return {
-        "max_incremental_events": int(
-            checkpoint.get("max_incremental_events", CHECKPOINT_DEFAULT_MAX_INCREMENTAL_EVENTS)
-        )
-    }
+    try:
+        return {
+            "max_incremental_events": int(
+                checkpoint.get("max_incremental_events", CHECKPOINT_DEFAULT_MAX_INCREMENTAL_EVENTS)
+            ),
+            "compaction_threshold": int(
+                checkpoint.get("compaction_threshold", CHECKPOINT_DEFAULT_COMPACTION_THRESHOLD)
+            ),
+        }
+    except (TypeError, ValueError) as exc:
+        raise EventLogError("checkpoint runtime registry contains a non-numeric limit") from exc
 
 
 def checkpoint_signable_payload(snapshot: dict[str, Any], checkpoint_event: dict[str, Any]) -> dict[str, Any]:
+    try:
+        up_to_seq = int(snapshot.get("up_to_seq") or 0)
+    except (TypeError, ValueError) as exc:
+        raise EventLogError("checkpoint up_to_seq must be numeric") from exc
     return {
         "canonical_hash": str(snapshot.get("canonical_hash") or ""),
-        "up_to_seq": int(snapshot.get("up_to_seq") or 0),
+        "up_to_seq": up_to_seq,
         "prev_hash": str(checkpoint_event.get("prev_hash") or ""),
     }
 
@@ -751,11 +763,19 @@ def verify_snapshot_checkpoint(
     if str(integrity.get("method") or "") != CHECKPOINT_INTEGRITY_METHOD:
         return {"trusted": False, "reason": "unsupported_method"}
 
-    ordered = sorted(events if events is not None else all_events(root), key=lambda item: int(item.get("seq") or 0))
+    if archive_integrity(root).get("valid") is not True:
+        return {"trusted": False, "reason": "invalid_archive_integrity"}
+    try:
+        ordered = sorted(
+            events if events is not None else all_events(root),
+            key=lambda item: int(item.get("seq") or 0),
+        )
+        up_to_seq = int(stored.get("up_to_seq") or 0)
+        head_seq = int(ordered[-1].get("seq") or 0) if ordered else 0
+    except (TypeError, ValueError):
+        return {"trusted": False, "reason": "invalid_checkpoint_sequence"}
     if not ordered:
         return {"trusted": False, "reason": "empty_log"}
-    up_to_seq = int(stored.get("up_to_seq") or 0)
-    head_seq = int(ordered[-1].get("seq") or 0)
     try:
         limit = (
             int(max_incremental_events)
@@ -842,6 +862,29 @@ def write_snapshot(root: Path, snapshot: dict[str, Any]) -> None:
 
 def all_events(root: Path) -> list[dict[str, Any]]:
     return sorted(events_in_log_order(root), key=lambda event: int(event.get("seq") or 0))
+
+
+def archive_hash_path(path: Path) -> Path:
+    return path.with_name(path.name + ARCHIVE_HASH_SUFFIX)
+
+
+def archive_integrity(root: Path) -> dict[str, Any]:
+    """Verify every compacted file before the live path trusts its checkpoint."""
+    archive_dir = root / ARCHIVE_DIR
+    if not archive_dir.exists():
+        return {"valid": True, "checked": 0}
+    checked = 0
+    for path in sorted(archive_dir.glob("events-*.jsonl")):
+        digest_path = archive_hash_path(path)
+        try:
+            expected = digest_path.read_text(encoding="ascii").strip().lower()
+            actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        except OSError:
+            return {"valid": False, "reason": "archive_hash_unreadable", "path": str(path)}
+        if len(expected) != 64 or not hmac.compare_digest(expected, actual):
+            return {"valid": False, "reason": "archive_hash_mismatch", "path": str(path)}
+        checked += 1
+    return {"valid": True, "checked": checked}
 
 
 def events_in_log_order(root: Path) -> list[dict[str, Any]]:
@@ -1298,6 +1341,17 @@ class EventWriter:
                 except (EventAuthSecretResolutionError, EventLogError):
                     snapshot.pop("integrity", None)
         write_snapshot(self.root, snapshot)
+        try:
+            policy = checkpoint_runtime_config(read_protocol_config(self.root), self.root)
+            threshold = int(policy["compaction_threshold"])
+        except (EventLogError, TypeError, ValueError):
+            threshold = -1
+        if (
+            snapshot.get("integrity")
+            and threshold >= 0
+            and len(read_jsonl_torn_safe(self.log_path)) > threshold
+        ):
+            self.compact_through(int(snapshot["up_to_seq"]))
         return snapshot
 
     def compact_through(self, up_to_seq: int) -> Path | None:
@@ -1308,15 +1362,24 @@ class EventWriter:
             return None
         archive_path = self.root / ARCHIVE_DIR / f"events-{archive_events[0]['seq']:06d}-{archive_events[-1]['seq']:06d}.jsonl"
         archive_path.parent.mkdir(parents=True, exist_ok=True)
-        archive_path.write_text(
-            "".join(json.dumps(event, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for event in archive_events),
-            encoding="utf-8",
-        )
+        archive_bytes = "".join(
+            json.dumps(event, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+            for event in archive_events
+        ).encode("utf-8")
+        archive_temp = archive_path.with_suffix(archive_path.suffix + ".tmp")
+        archive_temp.write_bytes(archive_bytes)
+        archive_temp.replace(archive_path)
+        digest_path = archive_hash_path(archive_path)
+        digest_temp = digest_path.with_suffix(digest_path.suffix + ".tmp")
+        digest_temp.write_text(hashlib.sha256(archive_bytes).hexdigest() + "\n", encoding="ascii")
+        digest_temp.replace(digest_path)
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
-        self.log_path.write_text(
+        log_temp = self.log_path.with_suffix(self.log_path.suffix + ".tmp")
+        log_temp.write_text(
             "".join(json.dumps(event, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for event in remaining),
             encoding="utf-8",
         )
+        log_temp.replace(self.log_path)
         return archive_path
 
 

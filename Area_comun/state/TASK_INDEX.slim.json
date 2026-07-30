@@ -14,7 +14,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Palanca C (DECISION-0105): compactacion fisica del log sobre el limite del checkpoint firmado + pulido fail-closed"
         }
     ],
