@@ -2,7 +2,7 @@
 task_id: TASK-0307
 file: Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md
 title: "Palanca C (DECISION-0105): compactacion fisica del log sobre el limite del checkpoint firmado + pulido fail-closed"
-status: review_approved
+status: done
 type: infra
 owner: Codex
 reviewer: Analista

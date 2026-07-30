@@ -230,6 +230,24 @@
             "updated_at": "2026-07-30T04:51:54Z"
         },
         {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0307-done",
+            "expires_at": "2026-07-30T07:25:00Z",
+            "notes": "Implementer done-flip after independent Analista review and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0307-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T05:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T05:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-dec0105-0306-20260730",
             "expires_at": "2026-07-31T23:59:59Z",
             "notes": "Registra DECISION-0105 (checkpoint firmado B+C) + registra/promueve TASK-0306 (palanca B) a ready/owner Codex.",
