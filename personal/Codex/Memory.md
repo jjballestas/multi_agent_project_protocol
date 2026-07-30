@@ -19,6 +19,13 @@ Last updated: 2026-07-30 Europe/Madrid, during TASK-0307 implementation.
 - TASK-0307 remains `in_progress` under
   `CLAIM-20260730-Codex-TASK-0307`; governed delivery and live compaction have
   not yet run. Codex has not reviewed or ratified its own work.
+- Delivery commit `5365725` moves TASK-0307 to `in_review`, releases both Codex
+  claims, publishes the self-contained handoff, and performs the first governed
+  live compaction: sequences 672-6825 moved to the hashed archive while the
+  hot log retained sequences 6826-6828. Full validation over archive plus tail,
+  encoding, neutrality, differential, and the seven-case event-log suite all
+  exited 0. Independent Arquitecto recomputation and Analista review are
+  pending; Codex did not review or ratify its own work.
 
 ## 2026-07-30 - TASK-0306 implementation
 
