@@ -7,6 +7,46 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-30 (34) - TASK-0306 palanca B (checkpoint firmado + verificacion incremental): OK-CLOSABLE sobre hub@4540f5b
+
+- Encargo `MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0306`. HUB-ONLY, maxima rigurosidad (cambia el
+  MODELO DE CONFIANZA del camino vivo). El snapshot gana `integrity` = HMAC-SHA256 con la clave de INSTANCIA
+  `runtime` (`runtime-hmac:v1`) sobre `(canonical_hash(state), up_to_seq, prev_hash@up_to_seq)`.
+  `EventWriter.state()` (la ruta real de submit_intent via `writer.state()`) siembra desde el checkpoint si es
+  de CONFIANZA y verifica SOLO `seq>up_to_seq`; si no, `replay_events(TODOS)` (full). Impl `18c175f`, entrega
+  `3df7135`, padre del impl `4024481`, HEAD canonico `4540f5b`. Veredicto commit `d155987` (artefacto
+  `Area_comun/artifacts/Analista-TASK-0306-checkpoint-incremental-verdict.md` + MSG REVIEW a Arquitecto). Push OK.
+  Clon limpio `D:/Aegis_Scratch/protocol/r306` checkout 4540f5b, gates por EXIT code.
+- **VEREDICTO: OK-CLOSABLE.** NO me fie del banco del autor: escribi mi PROPIO arnes (`_adv_review.py`, fixture
+  propio con clave distinta, mezcla mas rica) y ataque 11 vectores de checkpoint invalido con payloads NUEVOS.
+- **AC3 (EL critico, fail-safe airtight):** por CADA invalido verifique DOS cosas -- (i) `verify_snapshot_checkpoint`
+  da `trusted:False`+reason esperado; (ii) el CALLER REAL (`EventWriter.state`) verifica TODOS los eventos
+  (parchee `verify_event_auth` con contador -> `verified_seqs==[todos]`). Cero skip. Las 3 fugas centrales que
+  el instructor temia CAEN a full: state manipulado + `canonical_hash` almacenado RECOMPUTADO -> el check
+  RECOMPUTA `canonical_hash(stored['state'])` (eventlog.py:778-780) y no confia el campo almacenado ->
+  `checkpoint_metadata_mismatch` (integrity vieja) / `invalid_signature` (si tocan integrity sin el secreto) /
+  `invalid_signature` (re-firmado con secreto equivocado). Forjar exige el secreto de instancia = modelo
+  declarado, respaldado por AC4.
+- **AC4 (offline NO debilitado):** evento VIEJO manipulado (`seq<=up_to_seq`) que el vivo "confiaria" SIGUE
+  cazado offline por `validate_chain` (valid=False) + drift por `assert_snapshot_matches` (rebuild full,
+  validate_collaboration_state.py:1322). `verify_snapshot_checkpoint` se usa SOLO en `EventWriter.state()`; el
+  validador offline no lo toca (`events_in_log_order`+validate_chain+agent_signatures+assert_snapshot_matches).
+- **AC2 (byte-identico):** diferencial propio -> sembrado==full en estado y snapshot byte-a-byte; solo la cola
+  verificada (`verified=[7,8]`, up_to_seq=6).
+- **AC1/AC5:** HMAC de instancia sin clave nueva; `max_incremental_events` en `runtime/CHECKPOINT_POLICY.json`
+  (fuera del config pineado, confirmado ausente del config); `protocol.config.json` byte-identico vs padre del
+  impl (ni aparece en la lista del commit) sin genesis/cadena; alcance 3 rutas + escritos gobernados; fallback
+  `verified_state=None`=rebuild full intacto.
+- **Leccion / gotcha del clon limpio:** el clon NO trae `.protocol-secrets/` -> sobre el snapshot VIVO,
+  `verify_snapshot_checkpoint` cae a `unresolved_key` -> full (fail-safe correcto por DECISION-0046). La rama de
+  CONFIANZA hay que ejercitarla con fixture propio (clave controlada), no con el snapshot vivo. Esta vez NO copie
+  secrets del hub (a diferencia de 0305): el fixture propio es mas limpio y reproducible para atacar la familia.
+- **Residuales declarados (no bloqueantes):** (1) HMAC de instancia es forjable por quien tenga el secreto
+  runtime -- por DISENO (DECISION-0105 G1/G2), frontera dura = gate offline; (2) `up_to_seq`/K_max no-numerico
+  puede abortar el submit por excepcion = fail-CLOSED (para en error, nunca skip inseguro). Gates: banco +
+  validate/validate_chain + scan_encoding + scan_domain_neutrality exit 0; arnes propio 31/31 PASS.
+- Ciclo: mi veredicto -> Arquitecto ratifica -> Codex done-flip. Con B cerrada sigue C (TASK-0307, compactacion).
+
 ## Ultima actualizacion 2026-07-30 (33) - TASK-0305 MOTOR DEL LEDGER: verificar el log 1 vez por submit: OK-CLOSABLE sobre hub@625ab32
 
 - Encargo `MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0305`. HUB-ONLY, maxima rigurosidad (motor del
