@@ -4751,3 +4751,13 @@ ratified its own work.
   encoding scan, and domain-neutrality scan exited 0 before commit.
 - TASK-0302 is closed as an observability-only heartbeat change; Codex did not review or ratify
   its own implementation. TASK-0301 remains the only stated hardening backlog item.
+
+## 2026-07-30 - TASK-0307 closure
+
+- Protocol commit `d487221` performs the Codex-signed `review_approved -> done` transition after
+  independent Analista review and Arquitecto ratification, and releases
+  `CLAIM-20260730-Codex-TASK-0307-done` in the same runtime transaction.
+- Collaboration validation, encoding scan, domain-neutrality scan, and `git diff --check` exited 0
+  before commit. TASK-0307 closes the A+B+C ledger performance batch; the pre-existing absence of
+  seq 1..671 remains a non-blocking shared residual and was not caused by TASK-0307.
+- Codex performed only the implementer done-flip and did not review or ratify its own work.
