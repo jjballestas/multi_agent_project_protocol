@@ -327,6 +327,22 @@
             "updated_at": "2026-07-30T04:30:45Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratify-0307-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Ratifica 0307 in_review->review_approved: gate de 2 capas converge GO con numeros identicos (union 6157 ev, canonical_hash 07f0d6db, cero perdida); cierra la tanda A+B+C de perf del ledger.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratify-0307-20260730"
+            ],
+            "started_at": "2026-07-30T05:17:45Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T05:17:45Z"
+        },
+        {
             "claim_id": "CLAIM-arq-reg0305-20260729",
             "expires_at": "2026-07-31T23:59:59Z",
             "notes": "Registra + promueve 0305 (refactor submit_intent atestacion-neutral, palanca A) a ready/owner Codex.",
