@@ -1,5 +1,13 @@
 {
-  "canonical_hash": "3f9c3767b460905e7b3cc794ebb4a0ea1f85ec4fb2cefdee7b8579e418f55acb",
+  "canonical_hash": "faa02809a68d473082b8537a402770a407438cb7f40ac49e0ac576c7cebcaf6f",
+  "integrity": {
+    "canonical_hash": "faa02809a68d473082b8537a402770a407438cb7f40ac49e0ac576c7cebcaf6f",
+    "key_id": "runtime-hmac:v1",
+    "method": "hmac-sha256",
+    "prev_hash": "ff0907a8464f077fdeb91e18775ddf488220e6eb022ddb91fb755d256d4700b2",
+    "signature": "2459a47b6eb1acd16b0f1f333b63f0943353593ee5a0cc18e8a61dcd5c8aedd3",
+    "up_to_seq": 6809
+  },
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2760,7 +2768,7 @@
       "TASK-0303": 20,
       "TASK-0304": 15,
       "TASK-0305": 12,
-      "TASK-0306": 15,
+      "TASK-0306": 18,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2783,7 +2791,7 @@
       "protocol-prune": 32,
       "protocol-state": 1
     },
-    "events_applied": 6135,
+    "events_applied": 6138,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5745,12 +5753,15 @@
       "codex:task0306:claim:20260730": 6794,
       "codex:task0306:delivery-claim-release:20260730": 6803,
       "codex:task0306:delivery-claim:20260730": 6798,
+      "codex:task0306:doneflip:claim-acquire:2026-07-30T04:37:00Z": 6807,
+      "codex:task0306:doneflip:claim-release:2026-07-30T04:37:00Z": 6809,
       "codex:task0306:in-progress-to-in-review:20260730": 6799,
       "codex:task0306:memory-claim-release:20260730": 6802,
       "codex:task0306:memory-claim:20260730": 6797,
       "codex:task0306:ready-to-in-progress:20260730": 6795,
       "codex:task0306:registry-claim-release:20260730": 6801,
       "codex:task0306:registry-claim:20260730": 6796,
+      "codex:task0306:review-approved-to-done:2026-07-30T04:37:00Z": 6808,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -8922,5 +8933,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6806
+  "up_to_seq": 6809
 }

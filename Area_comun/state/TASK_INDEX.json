@@ -273,7 +273,7 @@
                 "TASK-0305"
             ],
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe",
             "type": "infra"
         },

@@ -123,6 +123,24 @@
             "updated_at": "2026-07-30T04:05:25Z"
         },
         {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-doneflip",
+            "expires_at": "2026-07-30T06:37:00Z",
+            "notes": "Apply ratified TASK-0306 review_approved to done transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-doneflip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:37:00Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:37:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260730-Codex-TASK-0306-memory",
             "expires_at": "2026-07-30T12:04:54Z",
             "notes": "TASK-0306 post-commit durable memory checkpoint.",
