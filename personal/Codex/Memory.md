@@ -1,6 +1,24 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-30 Europe/Madrid, after TASK-0306 closure.
+Last updated: 2026-07-30 Europe/Madrid, during TASK-0307 implementation.
+
+## 2026-07-30 - TASK-0307 implementation
+
+- Commit `98b887a` implements DECISION-0105 palanca C in the hub only. A signed
+  checkpoint compacts a hot log above `compaction_threshold` into a complete
+  `events-<lo>-<hi>.jsonl` archive plus SHA-256 sidecar; the hot log retains
+  only events after the checkpoint boundary.
+- The live checkpoint path rejects missing or mismatched archive hashes and
+  falls back to full verification. The offline path still reads archives plus
+  the hot log and audits the complete chain. Non-numeric checkpoint sequence
+  and policy limits now degrade to an untrusted checkpoint instead of raising.
+- The permanent differential case proves identical ordered events and
+  canonical state before/after compaction, hot-tail-only event-auth checks,
+  full fallback on archive hash mismatch, offline detection of an archived
+  event mutation, and graceful malformed-limit handling.
+- TASK-0307 remains `in_progress` under
+  `CLAIM-20260730-Codex-TASK-0307`; governed delivery and live compaction have
+  not yet run. Codex has not reviewed or ratified its own work.
 
 ## 2026-07-30 - TASK-0306 implementation
 
