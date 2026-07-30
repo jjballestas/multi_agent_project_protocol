@@ -2,7 +2,7 @@
 task_id: TASK-0306
 file: Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md
 title: "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe"
-status: in_review
+status: review_approved
 type: infra
 owner: Codex
 reviewer: Analista
