@@ -1,5 +1,13 @@
 {
-  "canonical_hash": "4654ab6e3da4bdb72842202cac4a5b41280f192560ebe0e0065b1560ce8bbaad",
+  "canonical_hash": "e0da7ef7fee9b286c22ce1d44b618b4e72adb331f248205e94f146cd631f6035",
+  "integrity": {
+    "canonical_hash": "e0da7ef7fee9b286c22ce1d44b618b4e72adb331f248205e94f146cd631f6035",
+    "key_id": "runtime-hmac:v1",
+    "method": "hmac-sha256",
+    "prev_hash": "a1a34a75b7a553f60878d53728b331fffbd8f77f094a2409fa14a388f619aff7",
+    "signature": "2e910ae3bc95fbf0bc79b012c95ad3c4f6e88e87cf1d0696132ddc5e572442b3",
+    "up_to_seq": 6796
+  },
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2759,7 +2767,7 @@
       "TASK-0303": 20,
       "TASK-0304": 15,
       "TASK-0305": 12,
-      "TASK-0306": 3,
+      "TASK-0306": 6,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2782,7 +2790,7 @@
       "protocol-prune": 32,
       "protocol-state": 1
     },
-    "events_applied": 6122,
+    "events_applied": 6125,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5740,6 +5748,9 @@
       "codex:task0305:done-flip:claim-release:20260730T033038Z": 6780,
       "codex:task0305:ready-to-in-progress:20260729": 6772,
       "codex:task0305:review-approved-to-done:20260730T033038Z": 6779,
+      "codex:task0306:claim:20260730": 6794,
+      "codex:task0306:ready-to-in-progress:20260730": 6795,
+      "codex:task0306:registry-claim:20260730": 6796,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -8908,5 +8919,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6793
+  "up_to_seq": 6796
 }

@@ -42,6 +42,10 @@ EVENT_STATE_RUNTIME_CONFIG_ENV = "EVENT_STATE_RUNTIME_CONFIG_PATH"
 EVENT_STATE_RUNTIME_CONFIG_DEFAULT = "event-state.runtime.json"
 ACTOR_AUTH_RUNTIME_CONFIG_ENV = EVENT_STATE_RUNTIME_CONFIG_ENV
 ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT = EVENT_STATE_RUNTIME_CONFIG_DEFAULT
+CHECKPOINT_INTEGRITY_METHOD = "hmac-sha256"
+CHECKPOINT_SIGNING_ACTOR = "runtime"
+CHECKPOINT_DEFAULT_MAX_INCREMENTAL_EVENTS = 128
+CHECKPOINT_POLICY_PATH = Path("runtime") / "CHECKPOINT_POLICY.json"
 
 
 class EventLogError(RuntimeError):
@@ -676,6 +680,137 @@ def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None, *, r
     return {"valid": True, "reason": "valid"}
 
 
+def checkpoint_runtime_config(config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
+    checkpoint: Any = None
+    if root is not None:
+        path = root.resolve() / CHECKPOINT_POLICY_PATH
+        if path.exists():
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8-sig"))
+            except Exception as exc:
+                raise EventLogError(f"invalid checkpoint runtime registry: {path}") from exc
+            if not isinstance(payload, dict):
+                raise EventLogError("checkpoint runtime registry must be a JSON object")
+            checkpoint = payload
+    if not isinstance(checkpoint, dict):
+        checkpoint = {}
+    return {
+        "max_incremental_events": int(
+            checkpoint.get("max_incremental_events", CHECKPOINT_DEFAULT_MAX_INCREMENTAL_EVENTS)
+        )
+    }
+
+
+def checkpoint_signable_payload(snapshot: dict[str, Any], checkpoint_event: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "canonical_hash": str(snapshot.get("canonical_hash") or ""),
+        "up_to_seq": int(snapshot.get("up_to_seq") or 0),
+        "prev_hash": str(checkpoint_event.get("prev_hash") or ""),
+    }
+
+
+def sign_snapshot_checkpoint(
+    snapshot: dict[str, Any],
+    checkpoint_event: dict[str, Any],
+    config: dict[str, Any],
+    *,
+    root: Path,
+) -> dict[str, Any]:
+    secret = signing_secret(config, CHECKPOINT_SIGNING_ACTOR, root=root)
+    if not secret:
+        raise EventLogError("checkpoint signing key missing for runtime")
+    payload = checkpoint_signable_payload(snapshot, checkpoint_event)
+    signature = hmac.new(
+        secret.encode("utf-8"),
+        canonical_json(payload).encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    return {
+        "method": CHECKPOINT_INTEGRITY_METHOD,
+        "key_id": signing_key_id(config, CHECKPOINT_SIGNING_ACTOR, root=root),
+        "signature": signature,
+        **payload,
+    }
+
+
+def verify_snapshot_checkpoint(
+    root: Path,
+    snapshot: dict[str, Any] | None = None,
+    events: list[dict[str, Any]] | None = None,
+    *,
+    max_incremental_events: int | None = None,
+) -> dict[str, Any]:
+    """Return a trusted replay base or a fail-safe reason for full verification."""
+    try:
+        stored = snapshot if snapshot is not None else load_snapshot(root)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return {"trusted": False, "reason": "invalid_snapshot"}
+    integrity = stored.get("integrity")
+    if not isinstance(integrity, dict):
+        return {"trusted": False, "reason": "missing_integrity"}
+    if str(integrity.get("method") or "") != CHECKPOINT_INTEGRITY_METHOD:
+        return {"trusted": False, "reason": "unsupported_method"}
+
+    ordered = sorted(events if events is not None else all_events(root), key=lambda item: int(item.get("seq") or 0))
+    if not ordered:
+        return {"trusted": False, "reason": "empty_log"}
+    up_to_seq = int(stored.get("up_to_seq") or 0)
+    head_seq = int(ordered[-1].get("seq") or 0)
+    try:
+        limit = (
+            int(max_incremental_events)
+            if max_incremental_events is not None
+            else checkpoint_runtime_config(read_protocol_config(root), root)["max_incremental_events"]
+        )
+    except (EventLogError, TypeError, ValueError):
+        return {"trusted": False, "reason": "invalid_checkpoint_policy"}
+    if up_to_seq <= 0 or up_to_seq > head_seq:
+        return {"trusted": False, "reason": "checkpoint_out_of_range"}
+    if limit < 0 or head_seq - up_to_seq > limit:
+        return {"trusted": False, "reason": "stale_checkpoint"}
+
+    checkpoint_event = next(
+        (event for event in ordered if int(event.get("seq") or 0) == up_to_seq),
+        None,
+    )
+    if checkpoint_event is None:
+        return {"trusted": False, "reason": "checkpoint_event_missing"}
+    state_hash = canonical_hash(stored.get("state") or {})
+    if state_hash != str(stored.get("canonical_hash") or ""):
+        return {"trusted": False, "reason": "state_hash_mismatch"}
+    expected_payload = checkpoint_signable_payload(stored, checkpoint_event)
+    if any(integrity.get(key) != value for key, value in expected_payload.items()):
+        return {"trusted": False, "reason": "checkpoint_metadata_mismatch"}
+
+    config = read_protocol_config(root)
+    try:
+        secret = signing_secret(config, CHECKPOINT_SIGNING_ACTOR, root=root)
+    except EventAuthSecretResolutionError:
+        return {"trusted": False, "reason": "unresolved_key"}
+    if not secret:
+        return {"trusted": False, "reason": "missing_key"}
+    if str(integrity.get("key_id") or "") != signing_key_id(
+        config, CHECKPOINT_SIGNING_ACTOR, root=root
+    ):
+        return {"trusted": False, "reason": "key_id_mismatch"}
+    expected_signature = hmac.new(
+        secret.encode("utf-8"),
+        canonical_json(expected_payload).encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    if not hmac.compare_digest(str(integrity.get("signature") or ""), expected_signature):
+        return {"trusted": False, "reason": "invalid_signature"}
+    return {
+        "trusted": True,
+        "reason": "valid",
+        "up_to_seq": up_to_seq,
+        "base_state": deepcopy(stored.get("state") or {}),
+        "incremental_events": [
+            event for event in ordered if int(event.get("seq") or 0) > up_to_seq
+        ],
+    }
+
+
 def empty_snapshot() -> dict[str, Any]:
     return {
         "up_to_seq": 0,
@@ -829,7 +964,17 @@ class EventWriter:
         return all_events(self.root)
 
     def state(self) -> dict[str, Any]:
-        return replay_events(self.events(), config=read_protocol_config(self.root), root=self.root)
+        events = self.events()
+        config = read_protocol_config(self.root)
+        checkpoint = verify_snapshot_checkpoint(self.root, events=events)
+        if checkpoint.get("trusted") is True:
+            return replay_events(
+                checkpoint["incremental_events"],
+                base_state=checkpoint["base_state"],
+                config=config,
+                root=self.root,
+            )
+        return replay_events(events, config=config, root=self.root)
 
     def next_seq(self) -> int:
         events = self.events()
@@ -1139,6 +1284,19 @@ class EventWriter:
                 "state": deepcopy(verified_state),
             }
             snapshot["canonical_hash"] = canonical_hash(snapshot["state"])
+        events = self.events()
+        if events:
+            config = read_protocol_config(self.root)
+            if event_auth_enabled(config):
+                try:
+                    snapshot["integrity"] = sign_snapshot_checkpoint(
+                        snapshot,
+                        events[-1],
+                        config,
+                        root=self.root,
+                    )
+                except (EventAuthSecretResolutionError, EventLogError):
+                    snapshot.pop("integrity", None)
         write_snapshot(self.root, snapshot)
         return snapshot
 

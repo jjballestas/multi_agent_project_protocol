@@ -6,7 +6,9 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+from copy import deepcopy
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -15,11 +17,49 @@ from runtime.eventlog import (  # noqa: E402
     EventLogError,
     EventWriter,
     assert_snapshot_matches,
+    canonical_json,
     canonical_hash,
     read_jsonl_torn_safe,
     rebuild_snapshot,
+    replay_events,
     replay_without_side_effects,
+    verify_event_auth,
+    verify_snapshot_checkpoint,
 )
+from runtime.protocol_replay import validate_chain  # noqa: E402
+
+
+def checkpoint_fixture(root: Path) -> EventWriter:
+    (root / "secrets").mkdir(parents=True)
+    (root / "secrets" / "runtime.key").write_text("runtime-fixture-secret", encoding="ascii")
+    (root / "secrets" / "codex.key").write_text("codex-fixture-secret", encoding="ascii")
+    config = {
+        "event_auth": {
+            "enabled": True,
+            "method": "hmac-sha256",
+            "keys": {
+                "runtime": {
+                    "key_id": "runtime-hmac:v1",
+                    "secret_file": "secrets/runtime.key",
+                },
+                "Codex": {
+                    "key_id": "codex-hmac:v1",
+                    "secret_file": "secrets/codex.key",
+                },
+            },
+        },
+        "event_state": {"chain_enabled": True},
+    }
+    (root / "protocol.config.json").write_text(
+        json.dumps(config, indent=2, sort_keys=True),
+        encoding="ascii",
+    )
+    (root / "runtime").mkdir(parents=True, exist_ok=True)
+    (root / "runtime" / "CHECKPOINT_POLICY.json").write_text(
+        json.dumps({"max_incremental_events": 8}, indent=2),
+        encoding="ascii",
+    )
+    return EventWriter(root)
 
 
 def case_seq_writer_only_and_torn_write() -> None:
@@ -168,6 +208,106 @@ def case_negative_replay_does_not_call_external_effects() -> None:
         assert canonical_hash(before["state"]) == canonical_hash(after["state"])
 
 
+def case_signed_checkpoint_incremental_and_fail_safe() -> None:
+    with tempfile.TemporaryDirectory(prefix="eventlog-checkpoint-") as temp:
+        root = Path(temp)
+        writer = checkpoint_fixture(root)
+        claim = writer.acquire_claim(
+            task_id="TASK-1005",
+            owner="Codex",
+            lease_until="2026-06-06T12:30:00Z",
+            idempotency_key="Codex:TASK-1005:claim:attempt-1:0",
+        )
+        writer.apply_intent(
+            task_id="TASK-1005",
+            actor_id="Codex",
+            transition="submit",
+            attempt_id="attempt-1",
+            fencing_token=int(claim["fencing_token"]),
+        )
+        snapshot = writer.write_snapshot()
+        assert snapshot["integrity"]["key_id"] == "runtime-hmac:v1"
+        assert verify_snapshot_checkpoint(root, snapshot, writer.events())["trusted"] is True
+
+        writer.apply_intent(
+            task_id="TASK-1005",
+            actor_id="Codex",
+            transition="review",
+            attempt_id="attempt-2",
+            fencing_token=int(claim["fencing_token"]),
+        )
+        events = writer.events()
+        full_state = replay_events(events, config=json.loads((root / "protocol.config.json").read_text()), root=root)
+        original_verify = verify_event_auth
+        verified_seqs: list[int] = []
+
+        def counting_verify(event, config, *, root=None):
+            verified_seqs.append(int(event.get("seq") or 0))
+            return original_verify(event, config, root=root)
+
+        with patch("runtime.eventlog.verify_event_auth", counting_verify):
+            incremental_state = writer.state()
+        assert verified_seqs == [int(events[-1]["seq"])]
+        assert canonical_json(incremental_state) == canonical_json(full_state)
+        incremental_snapshot = writer.write_snapshot(incremental_state)
+        full_snapshot = {
+            "up_to_seq": int(events[-1]["seq"]),
+            "state": full_state,
+            "canonical_hash": canonical_hash(full_state),
+        }
+        assert canonical_json(
+            {key: incremental_snapshot[key] for key in full_snapshot}
+        ) == canonical_json(full_snapshot)
+
+        snapshot_path = root / "runtime" / "state" / "snapshot.json"
+        valid = json.loads(snapshot_path.read_text(encoding="utf-8"))
+        fail_safe_cases = []
+
+        bad_signature = deepcopy(valid)
+        bad_signature["integrity"]["signature"] = "0" * 64
+        fail_safe_cases.append(("invalid_signature", bad_signature, None))
+
+        bad_state = deepcopy(valid)
+        bad_state["state"]["aggregate_versions"]["TASK-1005"] = 999
+        fail_safe_cases.append(("state_hash_mismatch", bad_state, None))
+
+        stale = deepcopy(valid)
+        fail_safe_cases.append(("stale_checkpoint", stale, -1))
+
+        for expected_reason, candidate, limit in fail_safe_cases:
+            snapshot_path.write_text(json.dumps(candidate, indent=2, sort_keys=True), encoding="utf-8")
+            verdict = verify_snapshot_checkpoint(
+                root,
+                candidate,
+                events,
+                max_incremental_events=limit,
+            )
+            assert verdict == {"trusted": False, "reason": expected_reason}
+            verified_seqs.clear()
+            runtime_override = {"max_incremental_events": limit if limit is not None else 8}
+            (root / "runtime" / "CHECKPOINT_POLICY.json").write_text(
+                json.dumps(runtime_override, indent=2),
+                encoding="ascii",
+            )
+            with patch("runtime.eventlog.verify_event_auth", counting_verify):
+                writer.state()
+            assert verified_seqs == [int(event["seq"]) for event in events], (
+                expected_reason,
+                verified_seqs,
+                [int(event["seq"]) for event in events],
+            )
+
+        snapshot_path.write_text(json.dumps(valid, indent=2, sort_keys=True), encoding="utf-8")
+        (root / "runtime" / "CHECKPOINT_POLICY.json").write_text(
+            json.dumps({"max_incremental_events": 8}, indent=2),
+            encoding="ascii",
+        )
+        tampered_events = deepcopy(events)
+        tampered_events[0]["payload"]["owner"] = "Mallory"
+        assert verify_snapshot_checkpoint(root, valid, tampered_events)["trusted"] is True
+        assert validate_chain(tampered_events, json.loads((root / "protocol.config.json").read_text()), root=root)["valid"] is False
+
+
 def main() -> int:
     cases = [
         case_seq_writer_only_and_torn_write,
@@ -175,6 +315,7 @@ def main() -> int:
         case_lease_reclaim_and_stale_fencing_rejection,
         case_snapshot_replay_hash_and_mismatch_gate,
         case_negative_replay_does_not_call_external_effects,
+        case_signed_checkpoint_incremental_and_fail_safe,
     ]
     failures = []
     for case in cases:

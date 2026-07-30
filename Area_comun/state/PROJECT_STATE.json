@@ -69,7 +69,7 @@
         {
             "id": "TASK-0306",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe"
         },
         {
