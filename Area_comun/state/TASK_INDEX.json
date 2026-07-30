@@ -261,6 +261,23 @@
             "type": "infra"
         },
         {
+            "created_at": "2026-07-30",
+            "file": "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+            "id": "TASK-0306",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "DECISION-0105",
+                "TASK-0305"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

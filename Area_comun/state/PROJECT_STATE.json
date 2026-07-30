@@ -67,6 +67,12 @@
             "title": "Refactor submit_intent: verificar el log UNA vez por submit (quitar el multiplicador 3x/(N+2)x) - atestacion-neutral"
         },
         {
+            "id": "TASK-0306",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -185,7 +191,8 @@
         "DECISION-0100",
         "DECISION-0101",
         "DECISION-0103",
-        "DECISION-0104"
+        "DECISION-0104",
+        "DECISION-0105"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

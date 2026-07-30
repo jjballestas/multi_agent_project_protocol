@@ -81,6 +81,23 @@
             "updated_at": "2026-07-30T03:30:38Z"
         },
         {
+            "claim_id": "CLAIM-arq-dec0105-0306-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Registra DECISION-0105 (checkpoint firmado B+C) + registra/promueve TASK-0306 (palanca B) a ready/owner Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/decisions/DECISION-0105-verified-checkpoint-incremental-verify-compaction.md",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-dec0105-0306-20260730"
+            ],
+            "started_at": "2026-07-30T03:50:47Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T03:50:47Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hyg0305-20260730",
             "expires_at": "2026-07-31T23:59:59Z",
             "notes": "Higiene: archiva los 6 consumidos del ciclo 0305 (palanca A).",
