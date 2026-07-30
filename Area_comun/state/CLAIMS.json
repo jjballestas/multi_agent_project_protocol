@@ -97,9 +97,46 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-30T03:57:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0306",
             "updated_at": "2026-07-30T03:57:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-delivery",
+            "expires_at": "2026-07-30T12:05:25Z",
+            "notes": "TASK-0306 delivery, memory checkpoint, and independent review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0306",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
+                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0306-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:05:25Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:05:25Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-Codex-TASK-0306-memory",
+            "expires_at": "2026-07-30T12:04:54Z",
+            "notes": "TASK-0306 post-commit durable memory checkpoint.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-30T04:04:54Z",
+            "status": "released",
+            "task_id": "TASK-0306",
+            "updated_at": "2026-07-30T04:04:54Z"
         },
         {
             "claim_id": "CLAIM-20260730-Codex-TASK-0306-registry",
@@ -113,7 +150,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-30T04:02:55Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0306",
             "updated_at": "2026-07-30T04:02:55Z"
         },

@@ -14,7 +14,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe"
         }
     ],

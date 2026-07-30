@@ -1,33 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260730-Codex-TASK-0306",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306",
-                "Area_comun/state/TASK_INDEX.json#TASK-0306",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0306",
-                "Area_comun/tasks/TASK-0306-checkpoint-firmado-verificacion-incremental.md",
-                "runtime/eventlog.py",
-                "event-state.runtime.json",
-                "examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0306"
-        },
-        {
-            "claim_id": "CLAIM-20260730-Codex-TASK-0306-registry",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260730-Codex-TASK-0306-registry",
-                "runtime",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0306"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

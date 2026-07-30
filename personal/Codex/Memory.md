@@ -2,6 +2,34 @@
 
 Last updated: 2026-07-29 Europe/Madrid, during TASK-0304 implementation.
 
+## 2026-07-30 - TASK-0306 implementation
+
+- Commit `18c175f` implements the DECISION-0105 palanca B in the hub only:
+  `snapshot.json` checkpoints carry runtime-instance HMAC integrity, and
+  `EventWriter.state()` trusts them only after signature, state hash, event
+  boundary, key id, and freshness checks.
+- The tracked `runtime/CHECKPOINT_POLICY.json` sets `max_incremental_events=128`
+  outside pinned `protocol.config.json`. Invalid, missing, manipulated, or
+  stale checkpoints fall back to the complete replay path.
+- The executable differential/fail-safe case proves byte-identical state,
+  invalid-signature/state-tamper/stale full fallback, and that offline
+  `validate_chain` still rejects an old tampered event. On the live 6,125-event
+  log, event-auth checks fell from 6,125 to 0 at a current checkpoint
+  (4.1455s -> 0.1078s in the read-only measurement).
+- TASK-0306 remains `in_progress` pending governed delivery to `in_review`,
+  release of all Codex claims, and independent review. Codex did not implement
+  compacting TASK-0307 and did not review or ratify its own work.
+
+## 2026-07-30 - TASK-0305 governed delivery
+
+- Commit `608a61b` atomically moves TASK-0305 from `in_progress` to `in_review`
+  and releases `CLAIM-20260729-Codex-TASK-0305`.
+- The self-contained handoff remains open for Arquitecto recomputation and
+  independent Analista review of implementation commit `625ab32`.
+- Collaboration validation, encoding, domain-neutrality, and diff gates exited
+  0. Codex did not rerun implementation tests or change code during closure and
+  did not review or ratify its own work.
+
 ## 2026-07-29 - TASK-0301 closure
 
 - Commit `2b14127` performs the Codex implementer done-flip after independent
