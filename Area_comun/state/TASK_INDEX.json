@@ -278,6 +278,23 @@
             "type": "infra"
         },
         {
+            "created_at": "2026-07-30",
+            "file": "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+            "id": "TASK-0307",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "DECISION-0105",
+                "TASK-0306"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "Palanca C (DECISION-0105): compactacion fisica del log sobre el limite del checkpoint firmado + pulido fail-closed",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

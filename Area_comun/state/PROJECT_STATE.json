@@ -73,6 +73,12 @@
             "title": "Palanca B (DECISION-0105): checkpoint firmado + verificacion incremental entre submits (O(nuevos)) con fail-safe"
         },
         {
+            "id": "TASK-0307",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Palanca C (DECISION-0105): compactacion fisica del log sobre el limite del checkpoint firmado + pulido fail-closed"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

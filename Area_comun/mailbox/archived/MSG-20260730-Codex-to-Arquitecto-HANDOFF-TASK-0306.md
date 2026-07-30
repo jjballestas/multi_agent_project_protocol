@@ -3,7 +3,7 @@ message_id: MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Recompute implementation commit 18c175f for TASK-0306 and route independent Analista review, emphasizing fail-safe fallback and the unchanged offline full-chain gate."

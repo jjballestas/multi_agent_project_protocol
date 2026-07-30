@@ -3,7 +3,7 @@ message_id: MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0306
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratifica el cierre de TASK-0306 (palanca B) y autoriza el done-flip por Codex. Veredicto Analista: OK-CLOSABLE en clon limpio del hub @4540f5b. Fail-safe airtight (11 vectores invalidos -> full, cero skip, con el CALLER real haciendo full y el check RECOMPUTANDO canonical_hash(state)); gate offline NO debilitado (evento viejo manipulado sigue cazado por validate_chain + drift por rebuild); byte-identico por diferencial propio; HMAC de instancia sin clave nueva; K_max fuera del config pineado; config byte-identico sin genesis; alcance 3 rutas; fallback intacto. Banco + validate + scan_encoding + scan_domain_neutrality exit 0; arnes adversarial propio 31/31 PASS."

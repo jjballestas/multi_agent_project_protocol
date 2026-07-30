@@ -231,6 +231,29 @@
             "updated_at": "2026-07-30T03:37:07Z"
         },
         {
+            "claim_id": "CLAIM-arq-hyg0306-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Higiene: archiva los 5 consumidos del ciclo 0306 (palanca B).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-GO-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-GO-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Codex-to-Arquitecto-HANDOFF-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0306.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0306.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0306.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg0306-20260730"
+            ],
+            "started_at": "2026-07-30T04:41:32Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-0306-20260730",
+            "updated_at": "2026-07-30T04:41:32Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratify-0305-20260730",
             "expires_at": "2026-07-31T23:59:59Z",
             "notes": "Ratifica 0305 in_review->review_approved: gate de 2 capas converge GO (recompute Arquitecto + Analista OK-CLOSABLE); identidad byte-a-byte del ledger probada independientemente por ambas capas.",
@@ -277,6 +300,22 @@
             "status": "released",
             "task_id": "TASK-0305",
             "updated_at": "2026-07-29T19:41:27Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reg0307-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Registra + promueve TASK-0307 (palanca C, compactacion fisica) a ready/owner Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0307",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0307",
+                "Area_comun/tasks/TASK-0307-compactacion-fisica-log-checkpoint.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reg0307-20260730"
+            ],
+            "started_at": "2026-07-30T04:42:15Z",
+            "status": "released",
+            "task_id": "TASK-0307",
+            "updated_at": "2026-07-30T04:42:15Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
