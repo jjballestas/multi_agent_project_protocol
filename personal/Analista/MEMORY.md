@@ -7,6 +7,51 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-07-30 (35) - TASK-0307 palanca C (compactacion fisica del log): OK-CLOSABLE sobre hub@1831bdd
+
+- Encargo `MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0307`. HUB-ONLY, RIESGO ALTO (el motor del ledger
+  MUEVE eventos fisicamente). YA compactado en vivo: `runtime/state/archives/events-000672-006825.jsonl`(+.sha256)
+  con 6154 eventos (seq 672..6825), cola caliente `events.jsonl` 3 eventos (6826..6828). Snapshot up_to_seq=6828,
+  canonical_hash=07f0d6db, integrity.prev_hash=efd07d7e. Impl `98b887a`, entrega `5365725` (donde se ANADIO el
+  archivo a git -> el clon limpio SI lo trae), padre impl `2fd10a6`, HEAD `1831bdd`. Veredicto commit `4369521`
+  (artefacto `Area_comun/artifacts/Analista-TASK-0307-compaction-verdict.md` + MSG REVIEW a Arquitecto). Push OK.
+  Clon limpio `D:/Aegis_Scratch/protocol/ccv0307` checkout 1831bdd, gates por EXIT code.
+- **VEREDICTO: OK-CLOSABLE.** Los 6 AC verifican por comportamiento.
+- **AC2 (EL critico, cero perdida):** reconstrui YO el set completo (lei archivo + cola a mano, sin fiarme de
+  `events_in_log_order`) y recompute la cadena con los helpers puros. Union=6157 eventos, seq 672..6828
+  CONTIGUOS (0 huecos, 0 dup, sin solape archivo/cola), 6156 enlaces prev_hash recomputados 0 rotos incl. la
+  COSTURA 6825->6826, sidecar SHA-256 casa, head.prev_hash==integrity.prev_hash, y replay(union) da el MISMO
+  canonical_hash 07f0d6db del snapshot firmado. Cadena = lista enlazada por hash -> cualquier perdida/dup/reorden
+  rompe un enlace. Union es superset del padre (672..6822 todos en el archivo). recon.py -> AC2_RECON_VERDICT=PASS.
+- **AC4 (offline lee archivos + fail-safe):** mute el evento seq 3672 DENTRO del archivo y RECOMPUTE el sidecar
+  (atacante que arregla el hash) -> `validate_collaboration_state.py` sigue exit 1 (`chain invalid: corruption at
+  seq 3672`, snapshot mismatch, actor_auth). El sidecar es solo el atajo del camino vivo; la frontera dura es
+  validate_chain full sobre la union. Fail-safe vivo (banco sintetico): byte corrupto sin arreglar sidecar ->
+  `archive_integrity valid=False` -> `verify_snapshot_checkpoint trusted=False invalid_archive_integrity` ->
+  `EventWriter.state()` cae a full, NO lanza.
+- **AC3 (O(cola) byte-identico):** el clon NO trae la clave `runtime` (gitignoreada) -> el camino de CONFIANZA
+  vivo NO es ejercitable sobre el snapshot del clon (cae a `unresolved_key`->full, fail-safe correcto). Lo cubri
+  con BANCO SINTETICO propio (clave real `tb-secret`, chain+event_auth, 8 eventos->snapshot->compacta->3 mas de
+  cola): instrumente `verify_event_auth` con contador -> camino vivo autentica 3 (solo la cola seq9..11) vs 11
+  (full), byte-identico. Trusted up_to_seq=8, incremental=3.
+- **AC5 (fail-closed graceful):** up_to_seq="NaN"->`invalid_checkpoint_sequence`; max_incremental_events="lots"
+  ->`invalid_checkpoint_policy`; ambos trusted:False y `state()` completa sin excepcion.
+- **AC1/AC6:** compact_through cableado en `write_snapshot` (si integrity y hot>umbral). Umbral
+  compaction_threshold=1024 en `runtime/CHECKPOINT_POLICY.json` (FUERA del config pineado, ausente del config).
+  MUEVE no borra (union completa 6157). Config byte-identico vs padre impl y vs 2fd10a6 (exit 0), sin genesis.
+  Alcance codigo: eventlog.py + CHECKPOINT_POLICY.json(+1) + banco.
+- **Residuales declarados (no bloquean):** R1 union arranca en seq 672 (1..671 ya ausentes en el padre 2fd10a6,
+  PRE-existente, no efecto de 0307; gate valida verde desde 672 -- si se quisiera exigir el genesis fisico en el
+  prefijo archivado seria DECISION aparte). R2 camino de confianza vivo no ejercitable en clon (clave gitignoreada)
+  -> banco sintetico (fail-safe por DECISION-0046). R3 compact_through asume hot log ascendente para el nombre
+  (garantizado por append-only).
+- **Gates clon limpio:** banco(7)+validate+scan_encoding+scan_domain_neutrality+git diff --check = exit 0.
+  scan_domain_neutrality es LENTO (escanea el archivo de 8.5MB) -> correrlo con timeout propio, no en el lote de 2min.
+- **Gotcha reusado:** el clon limpio NO trae `.protocol-secrets/` -> el camino de confianza vivo hay que
+  ejercitarlo con banco sintetico con clave de fixture; el offline (cadena prev_hash) SI se audita sin secreto.
+- Ciclo: mi veredicto -> Arquitecto ratifica -> Codex done-flip. Con C cerrada, la tanda de perf del ledger
+  (A+B+C) completa. Prune vencido senalado por el hook (es del Arquitecto), no corrido por mi.
+
 ## Ultima actualizacion 2026-07-30 (34) - TASK-0306 palanca B (checkpoint firmado + verificacion incremental): OK-CLOSABLE sobre hub@4540f5b
 
 - Encargo `MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0306`. HUB-ONLY, maxima rigurosidad (cambia el
