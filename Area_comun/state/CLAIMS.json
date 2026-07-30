@@ -81,6 +81,31 @@
             "updated_at": "2026-07-30T03:30:38Z"
         },
         {
+            "claim_id": "CLAIM-arq-hyg0305-20260730",
+            "expires_at": "2026-07-31T23:59:59Z",
+            "notes": "Higiene: archiva los 6 consumidos del ciclo 0305 (palanca A).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260729-Arquitecto-to-Codex-GO-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Arquitecto-to-Codex-GO-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Analista-to-Arquitecto-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Analista-REVIEW-TASK-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-completar-entrega-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-completar-entrega-0305.md",
+                "Area_comun/mailbox/open/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0305.md",
+                "Area_comun/mailbox/archived/MSG-20260730-Arquitecto-to-Codex-ACTION-doneflip-0305.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg0305-20260730"
+            ],
+            "started_at": "2026-07-30T03:37:07Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-0305-20260730",
+            "updated_at": "2026-07-30T03:37:07Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratify-0305-20260730",
             "expires_at": "2026-07-31T23:59:59Z",
             "notes": "Ratifica 0305 in_review->review_approved: gate de 2 capas converge GO (recompute Arquitecto + Analista OK-CLOSABLE); identidad byte-a-byte del ledger probada independientemente por ambas capas.",

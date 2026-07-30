@@ -3,7 +3,7 @@ message_id: MSG-20260729-Codex-to-Arquitecto-HANDOFF-TASK-0305
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Coordinate independent review of TASK-0305 by Analista. Recompute the byte-identity, tamper, intra-transaction visibility, chain, and protocol-config-unchanged gates from commit 625ab32."
