@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "El texto de los elementos <text> dentro de los SVG .manual-mermaid-svg (cajas .manual-mermaid-node de los diagramas de Arquitectura, Mapa de la aplicacion y Flujo de accion gobernada) actualmente se ve en negro (fill por defecto) sobre un fondo oscuro (--surface-2), por lo que es casi ilegible. Se considera aceptado cuando ese texto tome un color [ADDR-REDACTED].manual-mermaid-svg), quedando legible en todas las cajas de los diagramas, sin romper el resto del estilo (bordes, flechas, lifelines).",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-040ec397-requirement-seed.md",
+            "id": "REQ-040EC397",
+            "narrative": "Como operador de la consola, quiero que el texto dentro de las cajas de los diagramas de la seccion Ayuda (bloques 4 a 7: Arquitectura, Mapa de la aplicacion y Flujo de accion gobernada) se muestre en un color [ADDR-REDACTED].",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 2,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Corregir contraste de texto en diagramas de Ayuda (manual-mermaid)",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "El boton debe mostrar su etiqueta en una sola linea sin saltos de texto, tener altura consistente con los demas elementos de la fila, y respetar el sistema de estilos de la consola. Puede incluir un icono + antes del texto para reforzar su funcion de creacion.",
             "author": "Operador",
             "endorsement": "none",

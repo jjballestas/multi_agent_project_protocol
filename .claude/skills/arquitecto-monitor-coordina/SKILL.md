@@ -103,6 +103,19 @@ Emite una vez por episodio (flag `alerted`) y se resetea cuando el lock se va o 
 entregas cubre los DOS desenlaces de un exec: entrega (commit/MSG) o cuelgue (silencioso). El fix PERMANENTE del
 cuelgue es TASK-0236/0237 (harness + hang-proof del npm test); el watchdog es el control compensatorio mientras tanto.
 
+**FALSO POSITIVO EN TEXT-MODE -- NO MATES SIN VERIFICAR LIVENESS REAL (leccion 2026-07/08, aplicada ~5x):** con
+`claude --output-format text` el exec BUFEA stdout hasta el final y deja `runs/*.err.log` en **0 bytes**, asi que su
+mtime NUNCA se refresca -> este watchdog lo ve "CONGELADO" y falso-positivea en CADA review (las reviews del Analista
+tardan 12-37min). El err.log 0-byte NO prueba cuelgue. Cuando dispare, **REVISA LIVENESS REAL antes de tocar nada**
+(directiva del operador "revisar, no matar a ciegas", ver [[feedback-timeout-revisar-no-matar]]): (1) el hijo
+`claude.exe` del exec (`Get-CimInstance Win32_Process -Filter ParentProcessId=<execpid>`) con **CPU>0 + ws~450-480MB**
+= trabajando; (2) el clon de review bajo `D:/Aegis_Scratch/protocol/` con actividad reciente; (3) la edad del exec
+(EXEC_START del cron log) dentro de la ventana 12-37min; (4) `submit_intent` colgado en fase commit? Solo si el hijo
+claude esta MUERTO o el exec supera con mucho la ventana Y sin progreso, es cuelgue real. Antes de ratificar/escribir
+el ledger tras una entrega, verifica ademas que el peer no este a mitad de commit (verdict/HANDOFF untracked + exec
+vivo -> espera su EXEC_EXIT). El TASK-0302 (heartbeat EXEC_RUNNING) da al watchdog una senal de vida fiable en el
+cron log; usala en vez del err.log cuando este disponible.
+
 ## 1c. TERCER monitor OBLIGATORIO: watchdog de higiene de mailbox (enforcer del cada-5)
 La regla de higiene cada-5 es DISCIPLINA DE MODELO y se cae bajo carga alta (F2 2026-07-03: cascadas rapidas +
 peers en exec -> el auto-poll por turno degenera a "vigilar el bloqueo actual" y suelta el conteo de consumidos;

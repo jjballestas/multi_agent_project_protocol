@@ -42,6 +42,22 @@
             "updated_at": "2026-07-30T05:30:37Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-REQ-040EC397",
+            "expires_at": "2026-07-30T18:16:40.142Z",
+            "notes": "Front requirement-intake relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-FRONT-REQ-040EC397",
+                "Area_comun/state/TASK_INDEX.json#REQ-040EC397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-040EC397",
+                "Area_comun/tasks/req-040ec397-requirement-seed.md"
+            ],
+            "started_at": "2026-07-30T18:06:40.142Z",
+            "status": "released",
+            "task_id": "REQ-040EC397",
+            "updated_at": "2026-07-30T18:06:40.142Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

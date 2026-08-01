@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-040EC397",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Corregir contraste de texto en diagramas de Ayuda (manual-mermaid)"
+        },
+        {
             "id": "TASK-0178",
             "owner": "Arquitecto",
             "phase": "P2",
