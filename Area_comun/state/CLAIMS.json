@@ -63,6 +63,32 @@
             "updated_at": "2026-08-02T18:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-0313-close",
+            "expires_at": "2026-08-02T23:59:00Z",
+            "notes": "Cierre TASK-0313 in_review->done tras OK-CLOSABLE del Analista (P4a, 2 capas verdes) + higiene hilo 0313 (4 msgs).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0313.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0313.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0313.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0313.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0313.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0313.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0313-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0313-verdict.md"
+            ],
+            "started_at": "2026-08-02T18:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Codex-TASK-0313",
             "expires_at": "2026-08-03T02:04:08Z",
             "notes": "Implement SPEC-0115 product worker roster and LLM link in Zeus-protocol, off by default.",
