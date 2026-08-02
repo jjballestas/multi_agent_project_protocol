@@ -67,18 +67,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0311",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Front Zeus-protocol: indicador de estado de runtime + boton lanzar/detener agente conocido (SPEC-0113 / DECISION-0107), off-by-default"
-        },
-        {
-            "id": "TASK-0312",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Front Zeus-protocol: supervisor event-driven de runtimes de agentes + re-habilitar/limpiar .stop (SPEC-0114 / DECISION-0108), off-by-default"
-        },
-        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
