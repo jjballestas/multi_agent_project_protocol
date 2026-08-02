@@ -89,6 +89,27 @@
             "updated_at": "2026-08-02T15:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-0312",
+            "expires_at": "2026-08-02T21:00:00Z",
+            "notes": "Registro DECISION-0108 (accepted) + TASK-0312 (Alcance C supervisor event-driven, SPEC-0114) -> ready + GO Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0108-front-supervisor.md",
+                "Area_comun/specs/SPEC-0114-front-supervisor.md",
+                "Area_comun/tasks/TASK-0312-front-supervisor.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0312.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T15:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0312",
+            "updated_at": "2026-08-02T15:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Codex-TASK-0311",
             "expires_at": "2026-08-02T20:00:00Z",
             "notes": "Implement SPEC-0113 runtime indicator and allowlisted start/stop controls in Zeus-protocol, off by default.",
