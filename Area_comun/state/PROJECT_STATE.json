@@ -69,7 +69,7 @@
         {
             "id": "TASK-0311",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Front Zeus-protocol: indicador de estado de runtime + boton lanzar/detener agente conocido (SPEC-0113 / DECISION-0107), off-by-default"
         },
         {

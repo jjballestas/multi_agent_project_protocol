@@ -2,7 +2,7 @@
 task_id: TASK-0311
 file: Area_comun/tasks/TASK-0311-front-runtime-indicator-launch.md
 title: "Front Zeus-protocol: indicador de estado de runtime + boton lanzar/detener agente conocido (SPEC-0113 / DECISION-0107), off-by-default"
-status: in_review
+status: done
 type: product
 owner: Codex
 reviewer: Analista
