@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c7e3d38b8f3a828b3d686e165c3760bf7f260717d25ca61a3f376f2c7f0bbc38",
+  "canonical_hash": "14155b47c4113773ced8e9b3854f07ef815fc988fc29471a743a5f3f8221035c",
   "integrity": {
-    "canonical_hash": "c7e3d38b8f3a828b3d686e165c3760bf7f260717d25ca61a3f376f2c7f0bbc38",
+    "canonical_hash": "14155b47c4113773ced8e9b3854f07ef815fc988fc29471a743a5f3f8221035c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "14a31eaa2056c4ecf47f49083e7054055c70167f9e13efe4bf43c9929a897d60",
-    "signature": "61d04af3f27d5d6c48899e73c704258caea28fdc266e8f740d719c9bb55d138f",
-    "up_to_seq": 6974
+    "prev_hash": "e23d36f15eaccf9d89bf784ef5f19c09b89189346c47f84742610b758e2004ea",
+    "signature": "1df75e4247ed822de409e4dfe5717ea6df97d1574bbaab536017c84d38554377",
+    "up_to_seq": 6982
   },
   "state": {
     "aggregate_versions": {
@@ -2829,7 +2829,7 @@
       "TASK-0309": 14,
       "TASK-0310": 27,
       "TASK-0311": 13,
-      "TASK-0312": 25,
+      "TASK-0312": 33,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2852,7 +2852,7 @@
       "protocol-prune": 34,
       "protocol-state": 1
     },
-    "events_applied": 6303,
+    "events_applied": 6311,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5950,6 +5950,14 @@
       "codex:task0312:memory:claim-acquire:20260802": 6953,
       "codex:task0312:memory:claim-release:20260802": 6954,
       "codex:task0312:ready-to-in-progress:20260802": 6952,
+      "codex:task0312:remediation-2:changes-requested-to-in-progress:20260802": 6976,
+      "codex:task0312:remediation-2:claim-acquire:20260802": 6975,
+      "codex:task0312:remediation-2:delivery-claim-release:20260802": 6981,
+      "codex:task0312:remediation-2:delivery-claim:20260802": 6978,
+      "codex:task0312:remediation-2:implementation-claim-release:20260802": 6980,
+      "codex:task0312:remediation-2:in-progress-to-in-review:20260802": 6979,
+      "codex:task0312:remediation-2:memory-claim-release:20260802": 6982,
+      "codex:task0312:remediation-2:memory-claim:20260802": 6977,
       "codex:task0312:remediation1:claim-release:2026-08-02T16:57:26Z": 6969,
       "codex:task0312:remediation1:claim:2026-08-02T16:38:57Z": 6964,
       "codex:task0312:remediation1:final-memory-claim:2026-08-02T16:58:56Z": 6970,
@@ -9159,5 +9167,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6974
+  "up_to_seq": 6982
 }

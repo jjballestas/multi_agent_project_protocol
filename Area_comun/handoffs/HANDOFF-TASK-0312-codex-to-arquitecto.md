@@ -6,11 +6,20 @@ to: Arquitecto
 status: ready_for_review
 created: 2026-08-02T16:10:00Z
 product_repo: D:/Agentes/Zeus/Zeus-protocol
-product_commit: 97c359e14ad41ef506b9d198ad47a761cbdc82c7
-updated: 2026-08-02T16:56:00Z
+product_commit: ff02135a04590302a553b04a3f87d90cbafd6a6c
+updated: 2026-08-02T18:20:00Z
 ---
 
 # TASK-0312 implementation handoff
+
+## Remediation iteration 2
+
+- Product commit `ff02135a04590302a553b04a3f87d90cbafd6a6c` makes explicit operator stop write the durable `.stop` marker before checking whether the runtime is alive. A stop while idle-parked therefore remains sovereign and requires explicit re-enable.
+- The supervisor-owned idle and OFF parks remain transient and never write the operator marker.
+- The permanent live-process regression now covers all three required phases: parked operator stop -> queued work remains blocked until re-enable; alive operator stop -> blocked until re-enable; OFF -> AUTO -> auto-revive.
+- The new parked-stop assertions fail against product commit `97c359e` because its dormant early return does not create `.stop`.
+- Targeted live-cycle test exited 0. Working-tree and clean-clone `npm test` at `ff02135` each reported 143 total, 123 passed, 20 slow-tier skips, 0 failed. Clean-clone syntax checks for `src/server.js` and `tests/staticContract.test.js` exited 0.
+- Product commit `ff02135` is pushed to `origin/main`.
 
 ## Remediation iteration 1
 
@@ -41,4 +50,4 @@ updated: 2026-08-02T16:56:00Z
 
 ## Independent review requested
 
-Arquitecto should route product commit `97c359e` to Analista for remediation re-review, focused on the live-cycle regression and preserved operator-stop gate. Codex is the maker and did not review or ratify this work.
+Arquitecto should route product commit `ff02135` to Analista for final remediation re-review, focused on operator stop while already parked plus preservation of the alive-stop and OFF/AUTO phases. Codex is the maker and did not review or ratify this work.

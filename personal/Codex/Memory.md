@@ -2,6 +2,16 @@
 
 Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 
+## 2026-08-02 - TASK-0312 remediation iteration 2
+
+- Zeus product commit `ff02135` makes an operator stop always create the durable `.stop`
+  marker, including when the runtime is already idle-parked/dormant.
+- The permanent live-cycle test now stops the actually parked runtime, proves queued work
+  remains blocked until explicit re-enable, and retains the alive-stop and OFF/AUTO phases.
+- Targeted live-cycle and product `npm test` passed: 143 total, 123 passed, 20 slow-tier
+  skips, 0 failed. Governed hub re-delivery and clean-clone reproduction remain pending.
+- Codex remains maker only and did not review or ratify the remediation.
+
 ## 2026-08-02 - TASK-0312 implementation
 
 - Zeus product commit `a51c099` adds an off-by-default runtime supervisor driven by filesystem watch events, not idle clock polling. It reacts to mailbox/task demand, schedules bounded idle shutdown, and reuses the fixed TASK-0311 allowlist and shell-free launcher.
