@@ -1,6 +1,27 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-02 Europe/Madrid, during TASK-0309 implementation.
+Last updated: 2026-08-02 Europe/Madrid, during TASK-0310 implementation.
+
+## 2026-08-02 - TASK-0310 implementation
+
+- Product commit `767f41f` hardens the existing operator-agent prompt console for
+  SPEC-0112: the product registry flag is off by default, the endpoint is inert
+  while disabled, and execute additionally requires auto-commit-push readiness.
+- The server accepts only Arquitecto/Codex/Analista and only the bounded prompt
+  shape. It constructs REQUEST/QUESTION mailbox Markdown with honest Operador
+  authorship, Arquitecto relay, no endorsement, optional response contract,
+  structural PII redaction, and ASCII output. Client authorship/raw-message
+  injection and unconfirmed execute are permanent negative tests.
+- The UI now performs dry-run preview before a browser confirmation, warns about
+  public PII, supports response requests, and keeps the mailbox thread read-only.
+- Product tests passed 140 total, 118 passed, 22 slow-tier skips, 0 failed. The
+  full slow command passed 120 and skipped 19 environment-guarded fixture cases.
+  Browser inspection was attempted through the approved in-app surface, but no
+  browser backend was available; contract and endpoint fixtures remain green.
+- Hub delivery commit `aedafc9` moves TASK-0310 to `in_review`, releases all
+  three Codex claims, and publishes the self-contained Arquitecto handoff.
+  Product commit `767f41f` is pushed to `origin/main`; independent Analista
+  review remains required. Codex did not review or ratify its own work.
 
 ## 2026-08-02 - TASK-0309 implementation
 
