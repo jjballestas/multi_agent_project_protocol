@@ -5416,3 +5416,36 @@ Arquitecto, requires_response). Producto Zeus-protocol @a51c099, hub HEAD 359943
 - Bucle de fix: remediar separando el fail-safe del operador del idle/OFF-park transitorio (no escribir el
   .stop persistente en park del supervisor, o limpiar en el revive un .stop AUTORADO por el supervisor
   distinguido por contenido) preservando AC4b; test nuevo del ciclo vivo completo. Max 2 iter, luego humano.
+
+## 2026-08-02 -- TASK-0312 r2 CHANGE-REQUIRED (fix cierra el SLIP pero EXPONE un escape nuevo)
+Veredicto commit 8f741b7 (artifact Analista-TASK-0312-supervisor-park-revive-r2-verdict.md + MSG REVIEW
+a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (baseline a51c099), hub HEAD
+74aad88->8f741b7, config 2E35F26E pineado, drift false. Clon limpio D:/Aegis_Scratch/Zp/r0312r2.
+- r1 SLIP CERRADO (verificado en harness real): idle-park ya NO escribe .stop; parkIfIdle solo AUTO + sin
+  trabajo encolado; stopEntry solo termina proceso + record (server.js:1715-1725). PHASE_A: idle-park sin
+  .stop -> AUTO-REVIVE con pid fresco (55884->8764), sin reenable. OFF->AUTO revive. operator-stop-VIVO
+  escribe .stop y bloquea hasta reenable (PHASE_C).
+- npm test clon limpio 97c359e exit 0 (143/123/0/20). Test nuevo del ciclo vivo CORRE (no skip) y PASA.
+  BASELINE NEGATIVO decisivo: overlay del test NUEVO sobre server VIEJO a51c099 -> FALLA exit 1 (no
+  tautologico). Metodo reutilizable: `git show <fixcommit>:tests/file > tests/file` sobre clon del commit
+  viejo para probar que el test discrimina pre/post-fix.
+- ESCAPE NUEVO PROBADO (PHASE_B, harness real): operator STOP contra un agente YA idle-parked (dormant) es
+  un no-op silencioso -> applyRuntimeControlAction early-return "already-dormant" SIN escribir .stop
+  (server.js:1660-1661, antes del writeFile operator-front en 1664) -> inyecto trabajo -> el supervisor
+  AUTO-REVIVE; ninguna decision "blocked". El stop soberano del operador NO pega. Causa: el bloqueo
+  durable solo se arma en la rama live-kill; la rama "already-dormant" retorna ok sin armarlo. Pre-fix era
+  inocuo (el idle-park ya dejaba .stop); la remediacion quito ese .stop y volvio el stop-on-parked un
+  no-op. Dentro del blast radius del cambio bajo revision -> gatea el cierre (paridad con r1: la
+  automatizacion no debe pisar la intencion del operador).
+- Por que el test shipped lo pierde: solo hace operator-stop mientras el agente esta VIVO (revive primero,
+  luego stop). Nunca stop-contra-parked -> analogo exacto de por que el test de r1 perdio el SLIP de r1.
+- LECCION (family-not-example): cuando el fix cambia la SEMANTICA de un marcador compartido (aqui: quitar
+  el .stop del idle-park), re-probar TODAS las ramas que dependian del efecto colateral, no solo el caso
+  ejemplo del SLIP. El operator-stop tenia DOS ramas (alive / already-dormant) y el fix solo dejo durable
+  la primera.
+- Bucle de fix: operator STOP debe armar el bloqueo durable tambien en la rama already-dormant (escribir
+  .stop sin depender de live-pid) preservando idle/OFF-park transitorio sin .stop; test nuevo
+  operator-stop-WHILE-PARKED (queda blocked hasta reenable; falla @97c359e, pasa tras fix); no regresar el
+  ciclo vivo r1. Remediacion-1 RECHAZADA -> 1 iteracion mas, luego escalar al humano.
+- Nota estado: prune DUE (released_ratio 90>=90) -> lo corre el Arquitecto en su checkpoint coordinado, no
+  el checker; CI es el borde duro. No lo toque.
