@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "23781df8de2ad24ffdb3259f09dd9ff160f4e266019da741bf0fda804e9fc930",
+  "canonical_hash": "a8cb586425f3a7e5a92f0b2df9604c5f3b1a0faf9ccb79a5d0344b3870c5d94c",
   "integrity": {
-    "canonical_hash": "23781df8de2ad24ffdb3259f09dd9ff160f4e266019da741bf0fda804e9fc930",
+    "canonical_hash": "a8cb586425f3a7e5a92f0b2df9604c5f3b1a0faf9ccb79a5d0344b3870c5d94c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2cda88bcf60d4ed82f191350e072a396f68fce2a6b4c3d9a82680bd3177f9f28",
-    "signature": "bf41443f90e1431d2f4ba3f0cd661dbd6df769980846089f8224cd1fefef6010",
-    "up_to_seq": 6925
+    "prev_hash": "972ba07c60ed267abdd91d3a979d777a5ea73b77878f85487a2f2fbc3ae3351e",
+    "signature": "2cf46327e2fc014f059cfa1d985d0a01fd9a6e4d5d836e202acb484b7ba5dcd3",
+    "up_to_seq": 6930
   },
   "state": {
     "aggregate_versions": {
@@ -834,6 +834,7 @@
       "CLAIM-20260802-Arquitecto-0310": 1,
       "CLAIM-20260802-Arquitecto-0310-close": 1,
       "CLAIM-20260802-Arquitecto-0310-reject": 1,
+      "CLAIM-20260802-Arquitecto-0311": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1168,6 +1169,7 @@
       "DECISION-0104": 1,
       "DECISION-0105": 1,
       "DECISION-0106": 1,
+      "DECISION-0107": 1,
       "GOAL-VISION-NOVA-001": 8,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE": 5,
@@ -2817,6 +2819,7 @@
       "TASK-0308": 9,
       "TASK-0309": 14,
       "TASK-0310": 27,
+      "TASK-0311": 3,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2839,7 +2842,7 @@
       "protocol-prune": 34,
       "protocol-state": 1
     },
-    "events_applied": 6254,
+    "events_applied": 6259,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3715,6 +3718,7 @@
       "arq:upd0124:rel": 718,
       "arq:upd0124:reupsert-pathfix": 717,
       "arquitecto:0106:register": 6886,
+      "arquitecto:0107:register": 6927,
       "arquitecto:0166-changes2:claim-acquire": 1601,
       "arquitecto:0166-changes2:claim-release": 1603,
       "arquitecto:0166-changes2:status": 1602,
@@ -3784,6 +3788,10 @@
       "arquitecto:0310:reject-claim-acquire": 6898,
       "arquitecto:0310:reject-claim-release": 6900,
       "arquitecto:0310:upsert": 6887,
+      "arquitecto:0311:claim-acquire": 6926,
+      "arquitecto:0311:claim-release": 6930,
+      "arquitecto:0311:ready": 6929,
+      "arquitecto:0311:upsert": 6928,
       "arquitecto:a2-camino-b:claim-acquire": 2126,
       "arquitecto:a2-camino-b:claim-release": 2129,
       "arquitecto:a2-camino-b:decision": 2127,
@@ -9097,5 +9105,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6925
+  "up_to_seq": 6930
 }
