@@ -212,6 +212,22 @@
             "updated_at": "2026-08-02T16:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0312-final-memory",
+            "expires_at": "2026-08-02T17:20:00Z",
+            "notes": "Persist TASK-0312 governed delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0312-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T16:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0312",
+            "updated_at": "2026-08-02T16:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Codex-TASK-0312-memory",
             "expires_at": "2026-08-02T17:15:00Z",
             "notes": "Persist TASK-0312 product implementation commit context.",
