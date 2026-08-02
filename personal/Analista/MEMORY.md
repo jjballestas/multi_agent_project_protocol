@@ -5304,3 +5304,29 @@ Lecciones/tecnica de este review:
 8. **PRUNE DUE** al commitear (released_ratio 92.31 >= 90): warning, el commit local continua; es
    accion del Arquitecto en su checkpoint (mailbox_archive/prune exige capability orchestrator que yo
    no tengo). Lo dejo senalado, no lo corro.
+
+## 2026-08-02 -- TASK-0310 CAMBIO-REQUERIDO (consola prompt operador->agente, front Zeus-protocol)
+Veredicto commit 67986ed (artifact + MSG a Arquitecto). Producto @767f41f, hub @d7ce511.
+- SEGURIDAD (foco de la review) = VERDE en recompute independiente: builder server-side real
+  (assertAllowedKeys top-level 5 campos + agentPrompt 5 -> rechaza from/actor/relayed_by/endorsement/
+  author/actorId/intents 400), atribucion pineada server (from Operador/relayed_by Arquitecto hardcode/
+  endorsement none), destino {Arquitecto,Codex,Analista}, messageType REQUEST/QUESTION, off-by-default
+  403 (dry_run+execute), persistencia 503, confirm 409, relay-mismatch fail-safe 500, redaccion PII
+  server-side ante ataque directo, YAML-injection neutralizada por stripControl. Probe propio 27/27 PASS.
+- SLIP-1 (CONFIRMED, gatea cierre): AC4 "el MSG compuesto pasa validate" FALLA para requires_response:true.
+  Metodo decisivo: extraer el MSG del endpoint (dry_run = byte-identico a execute, server.js:1103-1116 sin
+  post-proceso) y pasarlo por la FUNCION validate_mailbox del HEAD citado EN AISLAMIENTO (rapido, sin el
+  replay lento de 3 min ni los secretos event_auth). Resultado: QUESTION+rr -> falta requested_action
+  (validator linea 1188 incondicional); REQUEST+rr -> falta question (linea 1193, compact porque siempre
+  hay one_line_summary). Solo REQUEST+requires_response:false pasa. Ruta UI (app.js:1276) casilla marcada
+  = QUESTION+rr = FALLA. El unico test que lo cubria (slow mailbox_send execute) esta SKIPPED por faltar
+  secretos event_auth -> el hueco de cobertura coincide con el defecto; AC4 nunca se ejercio.
+- LECCION reutilizable: cuando un gate lento (validate con chain-replay) o env-guarded (secretos fuera del
+  repo) bloquea la reproduccion, EXTRAER la funcion-guarda del HEAD citado y alimentarla con el output REAL
+  del builder es el camino de recompute mas decisivo. No confiar en test names ni en "test:slow exit 0" si
+  el test clave esta entre los skips.
+- LECCION: mi propio MSG requires_response:true DEBE llevar requested_action + question + response_owner +
+  one_line_summary + context_refs para pasar el mismo validador (dogfooding del fix que pido).
+- Fix pedido a Codex: buildMailboxSendMarkdown emite AMBOS requested_action y question si requires_response;
+  + test rapido sin secretos que pase la salida por validate_mailbox en las 4 combinaciones. Re-juicio
+  Analista, max 2 iteraciones antes de escalar. Clon limpio en D:/Aegis_Scratch/zp0310 (DECISION-0104).
