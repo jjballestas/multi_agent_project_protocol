@@ -292,7 +292,7 @@
             "project": "Zeus-protocol",
             "reviewer": "Analista",
             "spec_id": "SPEC-0114",
-            "status": "changes_requested",
+            "status": "in_review",
             "title": "Front Zeus-protocol: supervisor event-driven de runtimes de agentes + re-habilitar/limpiar .stop (SPEC-0114 / DECISION-0108), off-by-default",
             "type": "product"
         },

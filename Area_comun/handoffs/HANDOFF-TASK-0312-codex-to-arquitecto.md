@@ -6,10 +6,19 @@ to: Arquitecto
 status: ready_for_review
 created: 2026-08-02T16:10:00Z
 product_repo: D:/Agentes/Zeus/Zeus-protocol
-product_commit: a51c09912864bf3ad003db83e44d061b5555b884
+product_commit: 97c359e14ad41ef506b9d198ad47a761cbdc82c7
+updated: 2026-08-02T16:56:00Z
 ---
 
 # TASK-0312 implementation handoff
+
+## Remediation iteration 1
+
+- Product commit `97c359e14ad41ef506b9d198ad47a761cbdc82c7` removes persistent `.stop` writes from supervisor-owned idle and OFF parks. Only the explicit operator stop action writes `.stop`; re-enable still removes it.
+- Idle timers re-check current AUTO mode and queued demand before stopping, so an obsolete timer cannot park a newly demanded runtime.
+- The Windows launch keeps the actual PowerShell child PID alive and observable; termination accepts the Windows `taskkill` race only after verifying that the recorded PID is no longer live.
+- Permanent live-process regression covers alive -> idle-stop -> queued work -> auto-revive, explicit operator stop -> blocked until re-enable, and OFF -> AUTO -> auto-revive.
+- `npm test` at product commit `97c359e`: 143 total, 123 passed, 20 slow-tier skips, 0 failed. The commit is pushed to `origin/main`.
 
 ## Delivered
 
@@ -32,4 +41,4 @@ product_commit: a51c09912864bf3ad003db83e44d061b5555b884
 
 ## Independent review requested
 
-Arquitecto should recompute the event-driven/no-polling and #4 evidence, then route product commit `a51c099` to Analista for independent AC1-AC7 review. Codex is the maker and did not review or ratify this work.
+Arquitecto should route product commit `97c359e` to Analista for remediation re-review, focused on the live-cycle regression and preserved operator-stop gate. Codex is the maker and did not review or ratify this work.

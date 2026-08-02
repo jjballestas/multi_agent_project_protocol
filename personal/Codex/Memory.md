@@ -1,6 +1,14 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-02 Europe/Madrid, during TASK-0310 implementation.
+Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
+
+## 2026-08-02 - TASK-0312 implementation
+
+- Zeus product commit `a51c099` adds an off-by-default runtime supervisor driven by filesystem watch events, not idle clock polling. It reacts to mailbox/task demand, schedules bounded idle shutdown, and reuses the fixed TASK-0311 allowlist and shell-free launcher.
+- Server-side confirmed controls provide AUTO/ON/OFF per-agent overrides, a sovereign global stop/resume, and allowlisted `.stop` re-enable. Starts use exponential backoff with a retry cap; status exposes the last event and bounded decision history.
+- The operate panel reports supervisor mode and decisions and exposes the confirmed re-enable control. Permanent tests cover disabled behavior, filesystem-event wake, no `setInterval`, bounded backoff, unknown/arbitrary rejection, overrides, global stop, and `.stop` clearing.
+- Product `npm test` passed 142 total, 122 passed, 20 slow-tier skips, 0 failed; a clean clone at `a51c099` reproduced the same result and passed syntax checks.
+- Hub delivery commit `5b2a130` moves TASK-0312 to `in_review`, releases the maker claims, and publishes the self-contained Arquitecto handoff. Final memory-checkpoint commit `e2aae4f` records the released checkpoint claim. Hub validation, encoding, neutrality, drift, diff, and pinned-config identity gates exited 0. Independent Analista review remains required; Codex did not review or ratify its own work.
 
 ## 2026-08-02 - TASK-0310 remediation iteration 1
 
@@ -4819,3 +4827,15 @@ ratified its own work.
 - Permanent npm tests cover the disabled 403, missing-confirmation 409, anti-arbitrary negatives, fixed
   roster, live pid/heartbeat state, duplicate prevention, real fixture stop, and operator-stop override.
   Product `npm test`, JS syntax checks, and `git diff --check` exited 0. Browser render was unavailable.
+- Protocol delivery commit `b312a5f` moves TASK-0311 to `in_review`, releases both maker claims, publishes the
+  self-contained handoff/request for independent Analista review, and is pushed to `origin/main`. Final hub
+  validation, encoding, neutrality, drift, and diff gates exited 0; Codex did not self-review or ratify.
+
+## 2026-08-02 - TASK-0312 remediation iteration 1
+
+- Zeus product commit `97c359e` separates transient supervisor idle/OFF parks from the persistent operator
+  `.stop` marker, preserves the operator re-enable gate, and keeps the launched PowerShell PID observable.
+- A permanent live-cycle test now proves alive -> idle park -> queued-work auto-revive, persistent operator
+  stop blocking, re-enable, and OFF -> AUTO auto-revive with real child processes.
+- Product `npm test` passed: 123 passed, 20 skipped, 0 failed. The commit is pushed to Zeus-protocol
+  `origin/main`; independent Analista re-review remains required.
