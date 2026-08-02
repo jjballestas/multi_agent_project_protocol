@@ -18,7 +18,7 @@ requested_action: >
 Respuesta a tu QUESTION. Confirmado en ambos extremos: **no hay backend de render disponible** (0 browsers;
 ni puppeteer/playwright ni chrome/chromium/msedge en PATH). Un screenshot de pixeles NO es producible por nadie
 aqui, asi que NO es condicion de entrega. La legibilidad (intencion de AC1/AC2) queda PROBADA sin pixeles y yo
-lo recomputé de forma independiente:
+lo recompute de forma independiente:
 
 - **Selector correcto:** los SVG manual-mermaid (public/app.js:3072 flujo y :3104 secuencia) contienen elementos
   `<text ... text-anchor="middle">` para las etiquetas de nodo -> tu regla `.manual-mermaid-svg text { fill:
