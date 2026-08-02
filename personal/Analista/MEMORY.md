@@ -5330,3 +5330,29 @@ Veredicto commit 67986ed (artifact + MSG a Arquitecto). Producto @767f41f, hub @
 - Fix pedido a Codex: buildMailboxSendMarkdown emite AMBOS requested_action y question si requires_response;
   + test rapido sin secretos que pase la salida por validate_mailbox en las 4 combinaciones. Re-juicio
   Analista, max 2 iteraciones antes de escalar. Clon limpio en D:/Aegis_Scratch/zp0310 (DECISION-0104).
+
+## 2026-08-02 -- TASK-0310 r2 OK-CERRABLE (cierre del bucle de fix, iteracion 2/2)
+Veredicto commit 95f2722 (artifact Analista-TASK-0310-r2-slip1-verdict.md + MSG REVIEW a Arquitecto).
+Producto @826be23 (padre 767f41f), hub @42d9bcd, config 2e35f26e pineado, drift 0.
+- SLIP-1 CERRADO. El fix (diff 767f41f..826be23, 6 lineas de src) confina a buildMailboxSendMarkdown:
+  para requires_response:true emite INCONDICIONALMENTE response_owner + requested_action + question.
+- Metodo decisivo (reutilizable): reconstrui la salida EXACTA del builder VIEJO y NUEVO y las pase por la
+  FUNCION validate_mailbox del hub en aislamiento -> NUEVA 0 errores / VIEJA 767f41f 3 errores en las 4
+  combinaciones. Detalle clave: sanitizeAgentPrompt FUERZA requires_response=true si messageType=QUESTION
+  (server.js:1143), asi que 3 de las 4 combos son rr:true internamente. Drive directo del validador =
+  espejo del recompute de r1, mas decisivo que confiar en el test.
+- Test 4-combos MEANINGFUL comprobado por superposicion: overlay SOLO el test nuevo (826be23) sobre el src
+  VIEJO (767f41f) en clon limpio -> el test FALLA (AssertionError, MSG QUESTION sin requested_action);
+  sobre src nuevo -> PASA. Confirma que el hueco se cierra en la CAPA DEL VALIDADOR, no solo en el regex.
+  OJO: en la "rejects impersonation" test el regex de linea 1071 dispara ANTES que el assert del validador
+  (linea 1120); por eso corri el drive directo del validador aparte para probar el gate real.
+- Sin regresion de seguridad: diff de 6 lineas no toca las guardas; los 2 tests TASK-0310 PASS @826be23
+  (impersonacion: cliente from/actor/relayed_by/raw/destino-ajeno/execute-sin-confirm rechazados; off-by-
+  default 403). Fondo #4 intocado. npm test clon limpio (D:/Aegis_Scratch/z310) exit 0 (140/118/22/0).
+- El fix coincidio EXACTO con lo que prescribi en r1 -> bucle de fix limpio, 1 iteracion, sin nuevo slip.
+- Residuales no bloqueantes: R1 question==requested_action (contrato compact lo exige, validador solo mira
+  presencia); R2 test acoplado al hub via PROTOCOL_REPO_PATH + shell-out python (caveat CI portable);
+  R3 execute completo no reproducible por secretos event_auth; R4 UI sin veredicto visual (sin navegador).
+- LECCION: cuando el test bajo revision tiene un assert de forma (regex del markdown) ANTES del assert del
+  gate real (validador), correr el gate real por separado para no dar por bueno un "falla/pasa" que en
+  realidad lo decide el assert cosmetico previo.
