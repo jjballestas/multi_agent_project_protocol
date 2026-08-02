@@ -15,7 +15,7 @@
         {
             "id": "TASK-0310",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Front Zeus-protocol: consola de prompt operador->agente (compose de MSG gobernado + vista de hilo), off-by-default (SPEC-0112 / DECISION-0106)"
         }
     ],

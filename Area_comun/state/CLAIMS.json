@@ -238,6 +238,65 @@
             "updated_at": "2026-08-02T11:06:17Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310",
+            "expires_at": "2026-08-02T16:43:14Z",
+            "notes": "Implement SPEC-0112 operator-agent prompt console in Zeus-protocol, off by default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T12:43:14Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T12:43:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-config",
+            "expires_at": "2026-08-02T16:49:00Z",
+            "notes": "Add the off-by-default operator prompt capability flag outside pinned protocol config.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-config",
+                "D:/Agentes/Zeus/Zeus-protocol/commit-push.config.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T12:49:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T12:49:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-delivery",
+            "expires_at": "2026-08-02T14:52:10Z",
+            "notes": "Deliver TASK-0310 product commit and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0310-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T12:52:10Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T12:52:10Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-040EC397",
             "expires_at": "2026-07-30T18:16:40.142Z",
             "notes": "Front requirement-intake relay claim.",
