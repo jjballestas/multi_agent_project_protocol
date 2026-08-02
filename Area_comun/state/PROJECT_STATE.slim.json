@@ -11,12 +11,6 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
-        },
-        {
-            "id": "TASK-0308",
-            "owner": "Arquitecto",
-            "status": "in_review",
-            "title": "Medicion pre-registrada H1-H3 sobre el corpus sellado TFM-dataset-N500 (informe de auditoria + datos crudos, dos brazos adversariales)"
         }
     ],
     "next_actions": [

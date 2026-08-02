@@ -1,4 +1,5 @@
 {
+  "_note": "arm1 CRUDO: el vector event-deletion muestra 100% porque este brazo solo probo posiciones INTERIORES. La evasion real de TRUNCAMIENTO DE COLA (borrar el evento mas nuevo) esta documentada en RECONCILE_arm1_vs_arm2.json (D1) y en el informe de auditoria. NO citar este arm1 en aislamiento.",
   "H1_FPR_AC2": {
     "AC2_health": 1.0,
     "FPR": 0.0,

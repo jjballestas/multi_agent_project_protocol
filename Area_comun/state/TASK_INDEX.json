@@ -276,7 +276,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Medicion pre-registrada H1-H3 sobre el corpus sellado TFM-dataset-N500 (informe de auditoria + datos crudos, dos brazos adversariales)",
             "type": "analysis"
         },
