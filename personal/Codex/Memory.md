@@ -10,8 +10,11 @@ Last updated: 2026-08-02 Europe/Madrid, during TASK-0310 implementation.
   combinations directly through the hub validator's `validate_mailbox` function.
 - Targeted test and `npm test` passed; a clean clone at `826be23` also passed
   140 total, 118 passed, 22 slow-tier skips, 0 failed. Product main was pushed.
-- Governed re-delivery and independent Analista re-review remain pending. Codex
-  did not review or ratify its own remediation.
+- Governed re-delivery is complete; independent Analista re-review remains pending.
+  Codex did not review or ratify its own remediation.
+- Hub commit `3706559` moves TASK-0310 back to `in_review`, releases all remediation
+  claims, and updates the self-contained handoff for independent Analista re-review.
+  Hub validation, encoding, neutrality, drift, and diff gates exited 0.
 
 ## 2026-08-02 - TASK-0310 implementation
 

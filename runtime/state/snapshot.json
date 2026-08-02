@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "eda23cbd12771d5b467cd43246d2d7bb291af7e1d5b954648f45b3231ebbca6e",
+  "canonical_hash": "6abec73f90d235ac410cd02fd730282bc0e2ace5b46f0820f181e960562e26f4",
   "integrity": {
-    "canonical_hash": "eda23cbd12771d5b467cd43246d2d7bb291af7e1d5b954648f45b3231ebbca6e",
+    "canonical_hash": "6abec73f90d235ac410cd02fd730282bc0e2ace5b46f0820f181e960562e26f4",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "497ac3eeacb7ec3f72b25d88dde3510e1fc735edc69c4ab0fee53e46e4036016",
-    "signature": "85a2dd2d08ead2a2c536e9aee9dd053165b6b69e9cf341eca3c4e4b71be4bb4b",
-    "up_to_seq": 6910
+    "prev_hash": "4aaefbe2f67f95ef78cd43a2c8d7341997e4da4853b9d51354191d40997d6f02",
+    "signature": "8e84e88a346f12bcca080b9c19006051c1142de6e88ce2a12a974250051b2dfd",
+    "up_to_seq": 6912
   },
   "state": {
     "aggregate_versions": {
@@ -2807,7 +2807,7 @@
       "TASK-0307": 14,
       "TASK-0308": 9,
       "TASK-0309": 14,
-      "TASK-0310": 23,
+      "TASK-0310": 25,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2830,7 +2830,7 @@
       "protocol-prune": 33,
       "protocol-state": 1
     },
-    "events_applied": 6239,
+    "events_applied": 6241,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5868,6 +5868,8 @@
       "codex:task0310:release-main:20260802T125445Z": 6895,
       "codex:task0310:remediation-claim-acquire:20260802T140000Z": 6901,
       "codex:task0310:remediation-delivery-claim-acquire:20260802T142000Z": 6904,
+      "codex:task0310:remediation-final-memory-claim-acquire:20260802T144500Z": 6911,
+      "codex:task0310:remediation-final-memory-claim-release:20260802T145000Z": 6912,
       "codex:task0310:remediation-handoff-fix-claim-acquire:20260802T143000Z": 6909,
       "codex:task0310:remediation-handoff-fix-claim-release:20260802T143500Z": 6910,
       "codex:task0310:remediation-in-progress-to-in-review:20260802T142500Z": 6905,
@@ -9073,5 +9075,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6910
+  "up_to_seq": 6912
 }
