@@ -158,6 +158,27 @@
             "updated_at": "2026-08-02T11:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-0310",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Registro DECISION-0106 (accepted) + TASK-0310 (Alcance A consola de prompt, SPEC-0112) -> ready + GO Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0106-operator-prompt-console.md",
+                "Area_comun/specs/SPEC-0112-operator-prompt-console.md",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T10:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T10:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Codex-TASK-0309",
             "expires_at": "2026-08-02T14:50:10Z",
             "notes": "Implement SPEC-0111 text contrast fix in Zeus-protocol with static contract regression.",
