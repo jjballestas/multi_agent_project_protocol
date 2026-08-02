@@ -5387,3 +5387,32 @@ Producto @826be23 (padre 767f41f), hub @42d9bcd, config 2e35f26e pineado, drift 
 - LECCION: cuando el test bajo revision tiene un assert de forma (regex del markdown) ANTES del assert del
   gate real (validador), correr el gate real por separado para no dar por bueno un "falla/pasa" que en
   realidad lo decide el assert cosmetico previo.
+
+## 2026-08-02 -- TASK-0312 CHANGE-REQUIRED (supervisor idle-stop envenena el auto-revive)
+Veredicto commit d025a4f (artifact Analista-TASK-0312-supervisor-event-driven-verdict.md + MSG REVIEW a
+Arquitecto, requires_response). Producto Zeus-protocol @a51c099, hub HEAD 359943a->d025a4f, config
+2E35F26E pineado, drift 0. npm test clon limpio (D:/Aegis_Scratch/Zp/r0312) exit 0 (142/122/20/0).
+- GREEN: event-driven (watch(), sin setInterval de trabajo, solo setTimeout one-shot de idle; sin quema
+  ociosa), sandbox/allowlist FIJO de 0107 (unknown 400, campo arbitrario 400 via assertAllowedKeys,
+  shell:false + script fijo, uno-y-solo-uno), off-by-default (403), #4 hub byte-identico (solo 3 files de
+  producto), backoff+maxRetries, reenable unlink .stop.
+- DEFECTO PROBADO (harness real: server child + eventos fs): stopEntry escribe el MISMO marcador .stop
+  persistente del stop del operador tanto en idle-threshold como en OFF (server.js:1712); el camino de
+  auto-revive trata CUALQUIER .stop como bloqueo duro (server.js:1742 "blocked: operator-stop-marker") y
+  el boton manual 0107 tambien (server.js:1643, 409). => tras el PRIMER sleep ocioso el supervisor NUNCA
+  vuelve a levantar al agente ante trabajo encolado; solo un reenable HUMANO lo restaura. Rompe el bucle
+  sleep<->revive (DECISION-0057 / AC1<->AC2) que es el proposito de la tarea. Mismo bug: OFF->AUTO tampoco
+  auto-revive.
+- Por que el test shipped lo pierde (tests/staticContract.test.js:1856): su runtime fixture nunca esta
+  vivo (script ausente -> "start-failed: script unavailable"), asi que la escritura de .stop en idle NUNCA
+  se alcanza y el .stop solo se prueba en el camino del operador. El ciclo AC1<->AC2 queda sin test.
+- METODO decisivo (reutilizable): para probar un ciclo de estado que el test evita, monta el runtime VIVO
+  de verdad (spawn sleeper + escribe su pid en pidPath -> status=alive porque runtimeControlState hace
+  pid?alive:dormant), deja disparar el idle one-shot, verifica el .stop escrito, luego inyecta trabajo y
+  lee las decisions del /api. taskkill del server puede no matar mi sleeper (artefacto del harness); lo
+  mato yo para modelar fielmente el "runtime abajo" de produccion.
+- Residual secundario declarado (no bloqueante): hung-but-alive no detectado (staleAfterMs/ageMs se
+  computan pero nunca se usan; pid vivo + heartbeat congelado = "alive" -> "keep", nunca reinicia).
+- Bucle de fix: remediar separando el fail-safe del operador del idle/OFF-park transitorio (no escribir el
+  .stop persistente en park del supervisor, o limpiar en el revive un .stop AUTORADO por el supervisor
+  distinguido por contenido) preservando AC4b; test nuevo del ciclo vivo completo. Max 2 iter, luego humano.
