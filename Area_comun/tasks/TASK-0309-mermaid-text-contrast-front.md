@@ -2,7 +2,7 @@
 task_id: TASK-0309
 file: Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md
 title: "Front Zeus-protocol: contraste de texto legible en diagramas manual-mermaid de la seccion Ayuda (SPEC-0111 / REQ-040EC397)"
-status: ready
+status: in_review
 type: product
 owner: Codex
 reviewer: Analista

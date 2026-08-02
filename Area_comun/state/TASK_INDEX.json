@@ -290,7 +290,7 @@
             "project": "Zeus-protocol",
             "reviewer": "Analista",
             "spec_id": "SPEC-0111",
-            "status": "ready",
+            "status": "in_review",
             "title": "Front Zeus-protocol: contraste de texto legible en diagramas manual-mermaid de la seccion Ayuda (SPEC-0111 / REQ-040EC397)",
             "type": "product"
         },
