@@ -1,0 +1,113 @@
+{
+  "H1_FPR_AC2": {
+    "AC2_health": 1.0,
+    "FPR": 0.0,
+    "eligible_total": 500,
+    "eligible_verifiable": 500,
+    "thresholds": {
+      "AC2": 0.99,
+      "FPR": 0
+    },
+    "unsigned_in_window": 0
+  },
+  "H1_detection": {
+    "A3_note": "0 chain.anchor in corpus (declared-window); synthetic rollback DETECTED",
+    "K_per_vector": 25,
+    "all_100pct": true,
+    "evasions": [],
+    "threshold": "TPR=100%/vector",
+    "vectors": {
+      "A1-event-deletion": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      },
+      "A1-event-insertion": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      },
+      "A1-event-reordering": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      },
+      "A1-payload-alteration": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      },
+      "A2-cross-attribution": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      },
+      "A2-invalid-signature": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      },
+      "A2-unregistered-keyid": {
+        "detected": 25,
+        "injected": 25,
+        "tpr": 1.0
+      }
+    }
+  },
+  "H2_overhead": {
+    "latency": {
+      "base_median": 118.169,
+      "base_p95": 174.385,
+      "delta_median": 363.793,
+      "delta_p95": 663.043,
+      "four_median": 481.962,
+      "four_p95": 837.428,
+      "pass_median": false,
+      "pass_p95": false,
+      "threshold_median_ms": 50,
+      "threshold_p95_ms": 200
+    },
+    "latency_grows_On": true,
+    "marginal_crypto_ms_per_event": 0.0304,
+    "storage": {
+      "base_avg": 786.1,
+      "delta_bytes": 359.0,
+      "four_avg": 1145.1,
+      "pass": true,
+      "threshold_bytes": 4096
+    },
+    "tokens": {
+      "delta_pct": 0.0,
+      "justification": "#4 adds fixed-size cryptographic fields (actor_auth sig ~88B b64, keyid, prev_hash 64 hex, event_auth HMAC) to runtime/state/events.jsonl, which is NOT loaded into agent context (agents read materialized state + mailbox, not the raw event log). Runtime signs HASHES, not text (DECISION-0033/0040) -> 0% token overhead on the agent coordination path.",
+      "pass": true,
+      "threshold_pct": 5
+    }
+  },
+  "H3_verifiability": {
+    "agreement_pct": 100.0,
+    "anchor_checked": 0,
+    "chain_valid": true,
+    "external_replay_exit": 0,
+    "has_drift": false,
+    "of": 500,
+    "secret_independent_valid": 500,
+    "secrets_present_in_clone": false
+  },
+  "arm": "ARQUITECTO (arm 1)",
+  "corpus": {
+    "commit": "e3646ae01fff1f59a5d7882bfd7c8d744ff1c5f9",
+    "core": "e1dc631",
+    "epoch": "1.14.0",
+    "tag": "TFM-dataset-N500"
+  },
+  "fase0_seal": {
+    "config_sha256": "2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354",
+    "eligible": 500,
+    "per_agent": {
+      "Analista": 52,
+      "Arquitecto": 253,
+      "Codex": 195
+    },
+    "pins_5of5_byte_identical": true
+  }
+}

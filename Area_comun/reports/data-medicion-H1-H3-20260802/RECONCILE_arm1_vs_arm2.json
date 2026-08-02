@@ -1,0 +1,34 @@
+{
+  "purpose": "diff-entre-brazos: reconcile arm1 (Arquitecto) vs arm2 (independent). Every arm2 catch RE-VERIFIED by arm1 owner before acceptance.",
+  "agreements": [
+    "corpus 500 eligible {Arq 253, Codex 195, Analista 52}, seq 2221-2720, 0 anchors, 0 unsigned, baseline accepted",
+    "H1 FPR = 0/500; AC2 = 500/500 = 100%",
+    "H1 detection = 100% for payload-alteration, event-insertion, event-reordering, cross-attribution, unregistered-keyid, invalid-signature",
+    "H2 storage delta ~359-387 B/event (<<4KB); H2 tokens ~0%; marginal crypto <0.1ms/event",
+    "H2 end-to-end submit latency FAILS thresholds and grows O(n) (both arms)",
+    "H3 500/500 secret-independent verify, has_drift=False, agreement 100%"
+  ],
+  "discrepancies_arm2_caught_and_reverified": [
+    {
+      "id": "D1-tail-truncation",
+      "arm2_claim": "H1 event-deletion is 96.67% not 100%: deleting the newest event (tail/log truncation, seq 2720) EVADES the pipeline.",
+      "arm1_reverification": "CONFIRMED. delete last 1/2/5 -> pipeline ACCEPTED (evasion). delete interior seq2500 -> DETECTED (chain gap at seq 2501). Root: prev_hash chain has no head-pin; corpus has 0 anchors -> log-tip truncation undetectable.",
+      "arm1_original_miss": "arm1 fase1 targeted evenly-spread INTERIOR eligible positions, never the last log event -> reported event-deletion 100% (false).",
+      "impact": "H1 detection strict-100%-per-vector NOT met for event-deletion. This is the DECLARED A3 'unanchored head' limitation (pre-registro s.8), not a new surprise.",
+      "status": "ACCEPTED (real gap)"
+    },
+    {
+      "id": "D2-vacuous-external-verifier",
+      "arm2_claim": "runtime/protocol_replay.py --check-drift is a NO-OP at tag TFM-dataset-N500 (no __main__); its exit 0 is vacuous.",
+      "arm1_reverification": "CONFIRMED. grep '__main__' runtime/protocol_replay.py at the tag = 0 hits. My arm1 'external_replay_exit=0' was vacuous (a false positive as an external check).",
+      "correct_external_gate": "scripts/validate_collaboration_state.py --root . -> exit 0 (calls protocol_state_drift) + programmatic protocol_state_drift() has_drift=False.",
+      "impact": "H3 verdict UNCHANGED (still CONFIRMED via the real gate + 500/500 secret-independent verify), but the evidence CITATION corrected: do NOT cite protocol_replay --check-drift.",
+      "status": "ACCEPTED (citation corrected)"
+    }
+  ],
+  "latency_magnitude_difference": {
+    "arm1_delta_median_ms": 363.8, "arm2_delta_median_ms": 722.2,
+    "explanation": "Different K/host jitter + Windows path-resolution overhead; both are wall-clock. The ON/OFF ratio and O(n) growth are structural and reproducible; absolute ms are environment-sensitive. Same verdict (FAIL end-to-end)."
+  },
+  "methodology_evidence": "Two independent adversarial arms, blind to each other's code, converged on all core facts and the second arm caught a false-100% (D1) and a false-positive external check (D2) in the first arm. This is live evidence that diff-entre-brazos catches subdeterminations."
+}

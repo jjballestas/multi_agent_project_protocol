@@ -269,6 +269,18 @@
             "type": "build"
         },
         {
+            "created_at": "2026-08-02",
+            "file": "Area_comun/tasks/TASK-0308-medicion-preregistrada-h1-h3.md",
+            "id": "TASK-0308",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "normal",
+            "reviewer": "Analista",
+            "status": "in_review",
+            "title": "Medicion pre-registrada H1-H3 sobre el corpus sellado TFM-dataset-N500 (informe de auditoria + datos crudos, dos brazos adversariales)",
+            "type": "analysis"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

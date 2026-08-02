@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informe de auditoria - Atestacion de autoria multi-agente (TFM) - Medicion H1-H3</title>
+<style>
+  :root { --ink:#111; --mut:#555; --line:#bbb; --soft:#f4f4f4; --bad:#7a1f1f; --ok:#1f4d1f; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: "Georgia", "Times New Roman", serif; color: var(--ink);
+    line-height: 1.5; max-width: 900px; margin: 0 auto; padding: 40px 32px 80px;
+    background: #fff; font-size: 15px;
+  }
+  h1,h2,h3 { font-family: "Georgia", serif; line-height: 1.25; }
+  h1 { font-size: 1.7em; margin: 0 0 4px; }
+  h2 { font-size: 1.2em; margin: 2em 0 0.5em; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  h3 { font-size: 1.02em; margin: 1.3em 0 0.4em; }
+  .sub { color: var(--mut); font-size: 1.02em; margin: 0 0 1.2em; }
+  .cover { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 8px; }
+  .meta { color: var(--mut); font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 0.8em 0; font-size: 0.9em; }
+  th,td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: bold; }
+  code, .mono { font-family: "Consolas","Courier New",monospace; font-size: 0.86em; word-break: break-all; }
+  .ok { color: var(--ok); font-weight: bold; }
+  .bad { color: var(--bad); font-weight: bold; }
+  .note { color: var(--mut); font-size: 0.9em; }
+  ul,ol { margin: 0.4em 0 0.8em; padding-left: 1.5em; }
+  li { margin: 0.25em 0; }
+  blockquote { margin: 0.6em 0; padding: 8px 14px; background: var(--soft); border-left: 3px solid var(--line); color: #333; font-size: 0.92em; }
+  .small { font-size: 0.85em; }
+  header.print-only, footer.print-only { display: none; }
+  @media print {
+    body { max-width: none; padding: 0 12mm; font-size: 11pt; }
+    h2 { page-break-after: avoid; }
+    table, blockquote { page-break-inside: avoid; }
+    header.print-only { display: block; position: fixed; top: 0; left: 0; right: 0;
+      font-size: 8pt; color: #666; border-bottom: 0.5pt solid #ccc; padding: 2mm 12mm; }
+    footer.print-only { display: block; position: fixed; bottom: 0; left: 0; right: 0;
+      font-size: 8pt; color: #666; text-align: center; padding: 2mm 0; }
+    footer.print-only .pg::after { content: counter(page); }
+    @page { margin: 18mm 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="print-only">Auditoria TFM - Atestacion de autoria multi-agente - Medicion H1-H3 - corpus TFM-dataset-N500</header>
+<footer class="print-only"><span class="pg">Pagina </span></footer>
+
+<section class="cover">
+  <h1>Informe de auditoria &mdash; Medicion H1&ndash;H3</h1>
+  <p class="sub">Atestacion de autoria multi-agente (TFM) &mdash; sobre el corpus sellado N=500</p>
+  <p class="meta">
+    Autor (maker): <strong>Arquitecto</strong> &middot; Ratifica: <strong>Operador (John Ballestas)</strong> &middot;
+    Verificacion adversarial (checker): <strong>Analista</strong><br>
+    Fecha/hora: <strong>2026-08-02 10:12 (UTC+2, local)</strong> &middot; <strong>2026-08-02T08:12Z (UTC)</strong> &middot;
+    Version del informe: <strong>1.0</strong><br>
+    Pre-registro de referencia: PRE-REGISTRO-H1-H3-v2.md (FROZEN v2.0, hereda v1.0) &middot;
+    Freeze del operador: FIRMA-OPERADOR-FREEZE-PRE-REGISTRO-v2.md (des-ciega la medicion)
+  </p>
+</section>
+
+<h2>1. Tabla de control del documento</h2>
+<table>
+  <tr><th>Item</th><th>Valor</th></tr>
+  <tr><td>Corpus (tag inmutable)</td><td class="mono">TFM-dataset-N500</td></tr>
+  <tr><td>Commit del corpus</td><td class="mono">e3646ae01fff1f59a5d7882bfd7c8d744ff1c5f9</td></tr>
+  <tr><td>Ledger medido</td><td class="mono">runtime/state/events.jsonl (en ese commit)</td></tr>
+  <tr><td>Sistema bajo medicion (core)</td><td class="mono">e1dc631 &middot; protocol_version (epoch) 1.14.0 &middot; 3 firmantes (Arquitecto, Codex, Analista)</td></tr>
+  <tr><td>Pin 1 &mdash; runtime/eventlog.py</td><td class="mono">sha256 59a8ae8764ac327598ba2da4759e7cbc75ea46b0cde214a636518a3a9a70dedd</td></tr>
+  <tr><td>Pin 2 &mdash; scripts/validate_collaboration_state.py</td><td class="mono">sha256 eb04799f266debafb13a61f7f5e673f5d831683b18532bb8807f12dafd65c5ab</td></tr>
+  <tr><td>Pin 3 &mdash; protocol.config.json</td><td class="mono">sha256 2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354</td></tr>
+  <tr><td>Pin 4 &mdash; event-state.runtime.json (override A2)</td><td class="mono">sha256 b9706842f32e30b4a3054c65bf5f26a7a327567bddb885438ed7fedfa05111cf</td></tr>
+  <tr><td>Pin 5 &mdash; PRE-REGISTRO-H1-H3-v2.md</td><td class="mono">sha256 e8277cc7d52f015c6f9396f3d4261cb8c3f0f7a331b3e865cd76f418028a5e6d</td></tr>
+  <tr><td>Estado del dataset (recontado)</td><td><strong>500 / 500</strong> eventos elegibles</td></tr>
+  <tr><td>Desglose por agente (recontado)</td><td>Arquitecto <strong>253</strong> (50.6%) &middot; Codex <strong>195</strong> (39.0%) &middot; Analista <strong>52</strong> (10.4%)</td></tr>
+  <tr><td>Ventana de seq</td><td class="mono">2221 .. 2720 (DATASET_START_SEQ = 2221)</td></tr>
+  <tr><td>Firma / ratificacion del operador</td><td>Pendiente (este informe se somete al gate maker != checker del Analista antes de la ratificacion)</td></tr>
+</table>
+<p class="note">Los 5 pineados se verificaron byte-identicos en un clon limpio del tag (pins 1&ndash;3 y 5 desde el arbol
+git; pin 4 es gitignored y se verifico contra la copia local viva). El sello del dataset (N=500, desglose)
+se recomputo independientemente y coincide exactamente con el reporte de sello del 2026-06-30.</p>
+
+<h2>2. Resumen ejecutivo &mdash; veredicto por hipotesis</h2>
+<p>Etiquetado <strong>conservador contra el umbral literal &sect;5</strong> (decision del operador 2026-08-02):
+donde la metrica pre-registrada admite mas de una lectura, se etiqueta contra la lectura literal y se
+caracteriza el hallazgo sin maquillaje. Los numeros crudos de <strong>ambos brazos</strong> constan en el anexo.</p>
+<table>
+  <tr><th>Hipotesis / metrica</th><th>Umbral &sect;5</th><th>Observado</th><th>Veredicto</th></tr>
+  <tr><td>H1 &mdash; deteccion, 6 vectores (alteracion de payload, insercion, reordenamiento, atribucion cruzada, keyid no registrado, firma invalida)</td><td>TPR = 100%/vector</td><td>100% (0 evasiones)</td><td class="ok">CONFIRMADA</td></tr>
+  <tr><td>H1 &mdash; deteccion, vector borrado de evento</td><td>TPR = 100%</td><td>Interior 100%; <strong>truncamiento de cola EVADE</strong></td><td class="bad">REFUTADA (segun enunciado)</td></tr>
+  <tr><td>H1 &mdash; FPR (falsos rechazos sobre 500 legitimos)</td><td>= 0%</td><td>0 / 500 = 0%</td><td class="ok">CONFIRMADA</td></tr>
+  <tr><td>H1 &mdash; salud AC2</td><td>&ge; 99%</td><td>500 / 500 = 100%</td><td class="ok">CONFIRMADA</td></tr>
+  <tr><td>H2 &mdash; almacenamiento</td><td>&le; 4 KB/ev</td><td>+359 a +387 B/ev</td><td class="ok">CONFIRMADA</td></tr>
+  <tr><td>H2 &mdash; tokens</td><td>&le; 5%</td><td>~0% (estructural)</td><td class="ok">CONFIRMADA</td></tr>
+  <tr><td>H2 &mdash; latencia (Delta submit_intent end-to-end)</td><td>mediana &le; 50 ms; p95 &le; 200 ms</td><td>Delta mediana 364&ndash;722 ms; crece O(n)</td><td class="bad">REFUTADA (segun enunciado)</td></tr>
+  <tr><td>H3 &mdash; verificabilidad independiente (clon limpio, solo publicas)</td><td>acuerdo = 100% + match hash</td><td>500/500 sin secretos; drift = False</td><td class="ok">CONFIRMADA</td></tr>
+</table>
+<blockquote><strong>Lectura honesta.</strong> Las dos refutaciones no impugnan el <em>diseno</em> de #4: (a) el
+truncamiento de cola es la limitacion A3 &ldquo;cabeza no anclada&rdquo; que el propio pre-registro declara
+(ventana declarada) y que solo aplica porque el corpus no lleva anclas vivas; (b) la latencia end-to-end es un
+artefacto O(n) del <em>core sellado</em> (re-verificacion de firmas del log entero por submit) que se corrigio
+<em>despues</em> del sello (DECISION-0105) y que, por el compromiso audit-first, no es retro-aplicable al core
+medido. El coste marginal de la criptografia de #4 es 0.03&ndash;0.07 ms/evento. Que la propia medicion &mdash;
+corrida con dos brazos adversariales independientes &mdash; cazara estos dos puntos es evidencia de que el
+metodo detecta defectos reales de su sujeto.</blockquote>
+
+<h2>3. Metodologia</h2>
+<h3>3.1 Modelo de amenaza (A1&ndash;A4)</h3>
+<ul>
+  <li><strong>A1 &mdash; integridad del log:</strong> alteracion de payload, borrado, insercion, reordenamiento
+      (rompe la cadena prev_hash). Detector: <code>validate_chain</code>.</li>
+  <li><strong>A2 &mdash; atribucion de autoria:</strong> firmar como otro agente, keyid no registrado, firma
+      Ed25519 invalida (rompe <code>actor_auth</code>). Detector: <code>verify_actor_auth</code> por evento.</li>
+  <li><strong>A3 &mdash; anclaje externo:</strong> rollback del ancla / cabeza no anclada. Detector:
+      <code>verify_anchor_monotonicity</code>. <em>Independencia DEBIL declarada (ancla en el mismo disco).</em></li>
+  <li><strong>A4 &mdash; fuera de alcance</strong> (no medido).</li>
+</ul>
+<h3>3.2 Criterio de elegibilidad (pre-registrado)</h3>
+<p>Un evento cuenta al corpus si y solo si: <code>seq &ge; 2221</code> (DATASET_START_SEQ, post-baseline)
+<strong>y</strong> <code>type == "intent.applied"</code> <strong>y</strong> <code>actor_auth.method == "ed25519"</code>.
+La atestacion de autoria medida (A2/H1) es el campo <code>actor_auth</code> Ed25519 del evento de intent
+(Camino B, DECISION-0065), no el evento <code>agent.attestation</code> del Camino A (fuera de alcance).</p>
+<h3>3.3 Umbrales pre-comprometidos (&sect;5, citados textual)</h3>
+<blockquote>
+H1: deteccion = 100% (por vector, AC3) &middot; AC2 &ge; 99% &middot; FPR = 0.<br>
+H2: Delta latencia mediana &le; 50 ms/ev y p95 &le; 200 ms/ev &middot; Delta almacenamiento &le; 4 KB/ev &middot;
+Delta tokens &le; 5%.<br>
+H3: acuerdo del verificador externo = 100% &middot; match hash canonico clon-limpio (con secretos) == (sin secretos).
+</blockquote>
+<h3>3.4 Diseno de dos brazos adversariales (diff-entre-brazos)</h3>
+<p>La medicion se ejecuto en <strong>dos brazos independientes</strong>, cada uno sobre su propio clon limpio del
+tag y con su propia implementacion, ciegos entre si:</p>
+<ul>
+  <li><strong>Brazo 1 (Arquitecto):</strong> pipeline de deteccion sobre copias del corpus; K = 25 ataques/vector
+      en posiciones interiores esparcidas.</li>
+  <li><strong>Brazo 2 (recomputo independiente):</strong> misma spec, implementacion propia; K = 30 ataques/vector
+      <em>incluyendo el primer y el ultimo evento</em>.</li>
+</ul>
+<p>Regla de integridad vinculante: toda medicion corre sobre el corpus del <strong>tag</strong> (no el arbol vivo);
+la inyeccion de ataques es <strong>programatica y reproducible</strong> (conteos, jamas juicio de un agente); H3
+corre en clon limpio solo con claves publicas; los fallos se reportan sin maquillaje; las hipotesis/metricas/umbrales
+estan congelados &mdash; esto solo mide.</p>
+
+<h2>4. Hallazgos por hipotesis</h2>
+
+<h3>4.1 H1 &mdash; Deteccion, FPR y salud</h3>
+<p><strong>Corpus intacto aceptado</strong> por el pipeline en ambos brazos (sin falso rechazo). Deteccion por vector
+(un ataque esta detectado si el pipeline #4 rechaza el corpus mutado):</p>
+<table>
+  <tr><th>Vector</th><th>Clase</th><th>Brazo 1 (K=25)</th><th>Brazo 2 (K=30)</th><th>TPR</th></tr>
+  <tr><td>Alteracion de payload</td><td>A1</td><td>25/25</td><td>30/30</td><td class="ok">100%</td></tr>
+  <tr><td>Borrado de evento (interior)</td><td>A1</td><td>25/25</td><td>29/30</td><td class="bad">96.67% (cola evade)</td></tr>
+  <tr><td>Insercion de evento</td><td>A1</td><td>25/25</td><td>30/30</td><td class="ok">100%</td></tr>
+  <tr><td>Reordenamiento de eventos</td><td>A1</td><td>25/25</td><td>30/30</td><td class="ok">100%</td></tr>
+  <tr><td>Atribucion cruzada</td><td>A2</td><td>25/25</td><td>30/30</td><td class="ok">100%</td></tr>
+  <tr><td>Keyid no registrado</td><td>A2</td><td>25/25</td><td>30/30</td><td class="ok">100%</td></tr>
+  <tr><td>Firma Ed25519 invalida</td><td>A2</td><td>25/25</td><td>30/30</td><td class="ok">100%</td></tr>
+  <tr><td>Rollback del ancla</td><td>A3</td><td colspan="2">Corpus con 0 anclas &mdash; no ejercitable (ventana declarada); rollback sintetico rechazado.</td><td>N/A</td></tr>
+</table>
+<p><strong>Evasion (sin maquillaje):</strong> borrar el evento mas nuevo del log (truncamiento de cola, seq 2720)
+<em>evade</em> el pipeline: una cadena prev_hash no puede detectar el truncamiento de su propia punta, y el corpus
+no tiene anclas (0 eventos <code>chain.anchor</code>) que fijen la cabeza. Re-verificado por el brazo 1: borrar los
+ultimos 1/2/5 eventos -&gt; corpus ACEPTADO; borrar un evento interior -&gt; DETECTADO (gap de seq). Es exactamente
+la clase de amenaza A3 &ldquo;cabeza no anclada&rdquo; que el pre-registro declara. El detector de anclas funciona
+(rechaza un rollback sintetico de <code>head_seq</code>), pero el corpus sellado no lo ejercita.</p>
+<p><strong>FPR y salud AC2</strong> (ambos brazos): sobre los 500 eventos legitimos, 0 falsos rechazos
+(<strong>FPR = 0%</strong>); los 500 verifican -&gt; <strong>AC2 = 100%</strong> (&ge; 99%); 0 eventos
+<code>intent.applied</code> no firmados dentro de la ventana.</p>
+
+<h3>4.2 H2 &mdash; Sobrecoste acotado (#4 vs baseline sin #4)</h3>
+<p><strong>Almacenamiento:</strong> Delta +359 B/ev (brazo 1) / +381&ndash;387 B/ev (brazo 2), desglose ~
+prev_hash 79 B + event_auth (HMAC) 197 B + actor_auth 104 B. <span class="ok">CONFIRMADA</span> (&lt;&lt; 4 KB).</p>
+<p><strong>Tokens:</strong> Delta ~0%. <span class="ok">CONFIRMADA</span>. Justificacion estructural: los campos de
+#4 (firma, prev_hash, HMAC) son de tamano fijo y viven en <code>runtime/state/events.jsonl</code>, que <em>no</em>
+entra en el contexto del agente (el agente lee estado materializado + mailbox, no el log crudo; <code>events.jsonl</code>
+no esta en <code>token_cost.coldstart_globs</code>). El runtime firma HASHES, no texto (DECISION-0033/0040).</p>
+<p><strong>Latencia:</strong> la metrica &ldquo;ms/evento del camino submit_intent&rdquo; resulto <strong>bimodal</strong>
+(subdeterminacion cazada por el diff-entre-brazos):</p>
+<table>
+  <tr><th>Lectura</th><th>Brazo 1</th><th>Brazo 2</th><th>Umbral</th><th>Resultado</th></tr>
+  <tr><td>Coste marginal de la criptografia de #4 (firmar 1 evento: ed25519 + prev_hash + HMAC)</td><td>0.030 ms/ev</td><td>0.073 ms/ev</td><td>&le; 50 ms</td><td class="ok">PASA (~1000x margen)</td></tr>
+  <tr><td>Delta end-to-end de submit_intent (mediana / p95)</td><td>364 / 663 ms</td><td>722 / 1252 ms</td><td>50 / 200 ms</td><td class="bad">FALLA (crece O(n))</td></tr>
+</table>
+<p>El veredicto contra la metrica literal (&ldquo;camino submit_intent&rdquo;, end-to-end) es <strong class="bad">REFUTADA</strong>.
+Causa raiz (ambos brazos, confirmada por perfilado): el core sellado re-verifica las firmas del log <em>entero</em> en
+<em>cada</em> submit (replay por estado/idempotencia/snapshot), dando coste O(n) por submit y O(n<sup>2</sup>) sobre la
+corrida; la latencia crece con el tamano del log. Es el &ldquo;dolor raiz&rdquo; que DECISION-0105 (palancas A+B+C)
+corrigio <em>despues</em> del sello; por audit-first el core medido no lo incorpora. Las magnitudes absolutas son
+wall-clock en host Windows (sensibles al entorno); el <em>ratio</em> ON/OFF y el crecimiento O(n) son estructurales y
+reproducibles.</p>
+
+<h3>4.3 H3 &mdash; Verificabilidad independiente (clon limpio, solo publicas)</h3>
+<p>En un clon limpio del tag <strong>sin secretos en disco</strong> (solo <code>signature_config.public_keys</code>),
+los <strong>500/500</strong> eventos <code>actor_auth</code> Ed25519 verifican validos (<strong>acuerdo 100%</strong>,
+0 desacuerdos). <code>protocol_state_drift</code>: <code>has_drift = False</code> (estado materializado == replay
+firmado; hash canonico reproducible <span class="mono">dd2fd60e&hellip;</span>). Gate CI real
+<code>validate_collaboration_state.py</code>: exit 0. <span class="ok">CONFIRMADA</span>.</p>
+<blockquote class="small"><strong>Correccion de cita (integridad).</strong> El comando literal
+<code>runtime/protocol_replay.py --check-drift</code> es un <em>no-op</em> en el commit del tag (el modulo no tiene
+bloque <code>__main__</code>), por lo que su &ldquo;exit 0&rdquo; es <strong>vacuo</strong> y no debe citarse como
+verificacion externa. La verificacion real de drift es programatica (<code>protocol_state_drift()</code>) + el gate
+<code>validate_collaboration_state.py</code>. El brazo 2 lo cazo; el brazo 1 lo re-verifico y corrige aqui.</blockquote>
+
+<h2>5. Consolidacion (veredicto mecanico contra &sect;5)</h2>
+<ul>
+  <li><strong>H1:</strong> deteccion 100% en 6/7 vectores + FPR 0% + AC2 100% <span class="ok">(CONFIRMADO)</span>;
+      la clausula universal &ldquo;100% en TODO vector&rdquo; queda <span class="bad">REFUTADA por el truncamiento de
+      cola</span> &mdash; limitacion A3 declarada (cabeza no anclada; corpus sin anclas).</li>
+  <li><strong>H2:</strong> almacenamiento y tokens <span class="ok">CONFIRMADOS</span>; latencia end-to-end
+      <span class="bad">REFUTADA</span> (artefacto O(n) del core sellado; coste marginal de #4 trivial).</li>
+  <li><strong>H3:</strong> <span class="ok">CONFIRMADA</span> (verificabilidad independiente sin secretos, 100%).</li>
+</ul>
+
+<h2>6. Limitaciones declaradas (&sect;8) y alcance</h2>
+<ul>
+  <li><strong>A2 independencia DEBIL:</strong> ceremonia unica, sin custodios de claves separados.</li>
+  <li><strong>A3 independencia DEBIL:</strong> ancla en el mismo disco; ademas el corpus tiene 0 anclas &mdash; la
+      cabeza no esta anclada, por lo que el truncamiento de la punta del log es indetectable (el gap de H1
+      borrado-de-evento). El detector de anclas si funciona; el corpus no lo ejercita.</li>
+  <li><strong>Sujeto = medidor:</strong> el mismo actor genera y mide; por eso H3 (verificabilidad por terceros sin
+      secretos) es la que aporta credibilidad externa.</li>
+  <li><strong>A4</strong> fuera de alcance.</li>
+  <li><strong>H2 latencia:</strong> magnitudes wall-clock en host Windows; el ratio ON/OFF y el crecimiento O(n) son
+      lo estructural.</li>
+</ul>
+
+<h2>7. Anexo de evidencia</h2>
+<h3>7.1 Comandos y verificadores</h3>
+<ul class="small">
+  <li>Conteo del corpus: filtro <code>seq&ge;2221 AND type==intent.applied AND actor_auth.method==ed25519</code> sobre <code>runtime/state/events.jsonl</code> &rarr; 500 {253/195/52}.</li>
+  <li>A1: <code>validate_chain(events, config, root)</code>. A2: <code>verify_actor_auth(event, config, root)</code> por evento (solo publicas). A3: <code>verify_anchor_monotonicity(events, config)</code>.</li>
+  <li>H3 drift: <code>protocol_state_drift(root)</code> (has_drift=False) + <code>scripts/validate_collaboration_state.py</code> (exit 0). <em>No</em> usar <code>protocol_replay.py --check-drift</code> (vacuo en el tag).</li>
+  <li>H2: <code>runtime.submit_intent.submit_intent</code> en instancias frescas (ON: chain+event_auth+actor_auth_enforce; OFF: los tres apagados), K&ge;120 ops/brazo, cronometraje por op.</li>
+</ul>
+<h3>7.2 Datos crudos reproducibles</h3>
+<p class="small">Adjuntos junto a este informe en <code>Area_comun/reports/data-medicion-H1-H3-20260802/</code>:
+<code>CONSOLIDATED_arm1.json</code>, <code>CONSOLIDATED_arm2.json</code>, <code>RECONCILE_arm1_vs_arm2.json</code>,
+y los drivers <code>fase1_attacks.py</code> / <code>fase3_overhead.py</code>. Todo re-ejecutable sobre un clon limpio
+del tag para un verificador externo.</p>
+<h3>7.3 Hash canonico (H3, sin secretos)</h3>
+<p class="small mono">estado materializado / replay firmado: dd2fd60eef525589f0ed8f1d581f45bfed584ab3ba2b3dc6c5624fbbbcc10ff0 (has_drift=False)</p>
+
+<h2>8. Pie de firma y ratificacion</h2>
+<p class="small">
+Redactado por el Arquitecto (maker) el 2026-08-02 10:12 (UTC+2). Sometido al gate <strong>maker != checker</strong>:
+el Analista verifica adversarialmente que la inyeccion fue programatica/reproducible (no juicio de agente), que los
+conteos cuadran y que el veredicto contra &sect;5 es correcto, antes de dar el informe por final. Ratificacion del
+operador pendiente tras el veredicto del Analista.<br><br>
+REGLA PERMANENTE: este informe lleva hora real (local UTC+2 y UTC) + estado del dataset recontado por agente.
+Fondo intocable no tocado: dataset N=500, config 2e35f26e, epoch 1.14.0.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "arm": "arm2_independent",
+  "clone": "D:/Aegis_Scratch/protocol/sn500b",
+  "tag": "TFM-dataset-N500",
+  "commit": "e3646ae01fff1f59a5d7882bfd7c8d744ff1c5f9",
+  "corpus": {"eligible": 500, "breakdown": {"Arquitecto": 253, "Codex": 195, "Analista": 52},
+             "seq_window": [2221, 2720], "chain_anchor_events": 0, "unsigned_in_window": 0,
+             "matches_preregistration": true, "baseline_unmutated_accepted": true},
+  "H1_detection": {
+    "K_per_vector": 30,
+    "positions_include_first_and_last": true,
+    "A1_payload_alteration": {"tpr_pct": 100.0, "detected": "30/30"},
+    "A1_event_deletion": {"tpr_pct": 96.67, "detected": "29/30", "evasion_seq": [2720],
+      "note": "tail/log-truncation of newest event evades: prev_hash chain cannot detect truncation of its own tip; 0 anchors -> no head-pin. Interior deletions 100% detected (seq gap)."},
+    "A1_event_insertion": {"tpr_pct": 100.0, "detected": "30/30"},
+    "A1_event_reordering": {"tpr_pct": 100.0, "detected": "30/30"},
+    "A2_cross_attribution": {"tpr_pct": 100.0, "detected": "30/30"},
+    "A2_unregistered_keyid": {"tpr_pct": 100.0, "detected": "30/30"},
+    "A2_invalid_signature": {"tpr_pct": 100.0, "detected": "30/30"},
+    "A3_anchor_rollback": {"corpus_anchors": 0, "checked_on_corpus": 0, "synthetic_rollback_rejected": true,
+      "status": "declared-window / NOT exercisable on this corpus"}
+  },
+  "H1_FPR_AC2": {"FPR_pct": 0.0, "false_rejections_over_500": 0, "AC2_pct": 100.0,
+                 "verifiable_authored": 500, "author_relevant": 500, "unsigned_in_window": 0},
+  "H2_overhead": {
+    "reading1_marginal_crypto_us_per_event": {"ed25519_sign_us": 63.5, "sha256_prevhash_us": 3.2,
+      "hmac_event_auth_us": 6.5, "total_us": 73.2, "ms": 0.073, "pass_vs_50ms": true},
+    "reading2_end_to_end_submit_delta_ms": {"ON_median_ms": 838.9, "ON_p95_ms": 1426.4,
+      "OFF_median_ms": 132.8, "OFF_p95_ms": 178.3, "delta_median_ms": 722.2, "delta_p95_ms": 1251.6,
+      "pass_median": false, "pass_p95": false,
+      "root_cause": "replay_events re-verifies event_auth+actor_auth for EVERY event on EVERY replay; submit_intent triggers replay several times per call -> O(n) per submit, O(n^2) over the run (sealed-core dolor raiz, fixed post-seal by DECISION-0105)."},
+    "storage_delta_bytes_per_event": {"fresh_instance": 381.0, "real_corpus": 386.7,
+      "breakdown": {"prev_hash": 79, "event_auth": 197, "actor_auth": 104}, "pass_vs_4096": true},
+    "tokens": {"delta_pct": "~0", "pass_vs_5pct": true,
+      "reasoning": "events.jsonl not in token_cost.coldstart_globs; agent context = AGENTS.md+README+TASK_PROTOCOL+*.slim.json (state, not per-event crypto). #4 per-event fields never enter agent context."},
+    "latency_grows_with_log_size": {"ON_first_decile_ms": 80.0, "ON_last_decile_ms": 1426.2,
+      "OFF_first_decile_ms": 72.2, "OFF_last_decile_ms": 165.7, "confirms_On": true}
+  },
+  "H3_verifiability": {"eligible_verified_public_keys_only": 500, "verified_valid": 500, "agreement_pct": 100.0,
+    "has_drift": false, "drift_up_to_seq": 2720,
+    "materialized_state_canonical_hash": "dd2fd60eef525589f0ed8f1d581f45bfed584ab3ba2b3dc6c5624fbbbcc10ff0",
+    "replay_hash_equals_materialized": true,
+    "external_verifier_note": "runtime/protocol_replay.py --check-drift is a NO-OP at this tag (no __main__) -> its exit 0 is VACUOUS; real gate = scripts/validate_collaboration_state.py (exit 0) + programmatic protocol_state_drift()."},
+  "subdeterminations_flagged_by_arm2": [
+    "H1 event-deletion 100% vs 96.67% hinges on whether spread positions include the LAST event (tail truncation).",
+    "H1/A3 anchor rollback NON-exercisable on corpus (0 anchors); only synthetic rollback rejected.",
+    "H2 'ms/evento' is bimodal: marginal crypto 0.073ms (PASS) vs end-to-end submit delta 722ms (FAIL).",
+    "H3 literal protocol_replay.py --check-drift exit 0 is vacuous (no __main__) -> must not be cited as a passing external check."
+  ]
+}
