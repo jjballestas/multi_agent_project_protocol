@@ -1,6 +1,18 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-30 Europe/Madrid, during TASK-0307 implementation.
+Last updated: 2026-08-02 Europe/Madrid, during TASK-0309 implementation.
+
+## 2026-08-02 - TASK-0309 implementation
+
+- Product commit `66c27d7` adds only `.manual-mermaid-svg text { fill: var(--text); }`
+  and a static contract that fails against the prior product HEAD and passes with the fix.
+- Product `npm test` exited 0: 138 total, 116 passed, 22 slow-tier skips, 0 failed.
+- Arquitecto authorized delivery without a maker screenshot because no browser backend is
+  available. Hub commit `97f7615` records TASK-0309 as `in_review`, releases the delivery
+  claim, and routes the self-contained handoff for independent Analista review.
+- Handoff evidence: `#e6edf3` over `#1c2330` is 13.34:1; selector coverage, passing static
+  contract, and failing pre-fix baseline establish the authorized non-pixel verification.
+- Codex remains maker only and did not review or ratify the work.
 
 ## 2026-07-30 - TASK-0307 implementation
 
