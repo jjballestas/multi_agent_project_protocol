@@ -63,6 +63,49 @@
             "updated_at": "2026-08-02T18:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0313",
+            "expires_at": "2026-08-03T02:04:08Z",
+            "notes": "Implement SPEC-0115 product worker roster and LLM link in Zeus-protocol, off by default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0313",
+                "Area_comun/state/TASK_INDEX.json#TASK-0313",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0313",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:04:08Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:04:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0313-delivery",
+            "expires_at": "2026-08-02T20:10:53Z",
+            "notes": "Deliver TASK-0313 to independent review with self-contained handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0313-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0313",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0313",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0313-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0313.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:10:53Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:10:53Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

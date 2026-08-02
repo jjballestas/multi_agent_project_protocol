@@ -15,7 +15,7 @@
         {
             "id": "TASK-0313",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Front Zeus-protocol: formulario de alta de worker de producto (no-firmante) + enlace a LLM (SPEC-0115 / DECISION-0109 Nivel 1), off-by-default"
         }
     ],

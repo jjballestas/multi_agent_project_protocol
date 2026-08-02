@@ -2,7 +2,7 @@
 task_id: TASK-0313
 file: Area_comun/tasks/TASK-0313-front-worker-roster.md
 title: "Front Zeus-protocol: formulario de alta de worker de producto (no-firmante) + enlace a LLM (SPEC-0115 / DECISION-0109 Nivel 1), off-by-default"
-status: ready
+status: in_review
 type: product
 owner: Codex
 reviewer: Analista

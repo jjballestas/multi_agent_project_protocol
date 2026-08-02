@@ -2,6 +2,12 @@
 
 Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 
+## 2026-08-02 - TASK-0313 implementation
+
+- Zeus product commit `8ba0155` adds the off-by-default product-worker roster builder with dry-run preview, explicit confirmation, server-side canonical composition, edit/remove, LLM linkage, and a visible governance-ceremony boundary.
+- The server rejects foreign/raw/signing fields, persists empty ledger capabilities plus `ledger: denied`, never emits submit_intent, and leaves the hub config/event/snapshot byte-identical in permanent tests.
+- Product `npm test` passed 144 total, 124 passed, 20 slow-tier skips, 0 failed. Governed delivery and clean-clone verification remain pending; Codex has not reviewed or ratified its own work.
+
 ## 2026-08-02 - TASK-0312 remediation iteration 2
 
 - Zeus product commit `ff02135` makes an operator stop always create the durable `.stop`
