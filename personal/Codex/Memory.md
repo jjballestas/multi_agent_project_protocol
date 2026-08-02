@@ -4839,3 +4839,5 @@ ratified its own work.
   stop blocking, re-enable, and OFF -> AUTO auto-revive with real child processes.
 - Product `npm test` passed: 123 passed, 20 skipped, 0 failed. The commit is pushed to Zeus-protocol
   `origin/main`; independent Analista re-review remains required.
+- Protocol delivery commit `31a6e61` moves TASK-0312 back to `in_review`, releases the remediation claims,
+  publishes the updated handoff and review request, and is pushed to protocol `origin/main`.
