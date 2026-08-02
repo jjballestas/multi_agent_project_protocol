@@ -4808,3 +4808,14 @@ ratified its own work.
   before commit. TASK-0307 closes the A+B+C ledger performance batch; the pre-existing absence of
   seq 1..671 remains a non-blocking shared residual and was not caused by TASK-0307.
 - Codex performed only the implementer done-flip and did not review or ratify its own work.
+
+## 2026-08-02 - TASK-0311 implementation
+
+- Zeus product commit `686592d` implements the read-only runtime indicator and the off-by-default,
+  server-side lifecycle control for the fixed Arquitecto/Codex/Analista allowlist.
+- The endpoint accepts only agentId/action/confirmation, rejects arbitrary command/path/args and unknown
+  agents, prevents duplicate starts from a live pidfile, writes an operator stop marker before taskkill,
+  and refuses to restart while that marker remains.
+- Permanent npm tests cover the disabled 403, missing-confirmation 409, anti-arbitrary negatives, fixed
+  roster, live pid/heartbeat state, duplicate prevention, real fixture stop, and operator-stop override.
+  Product `npm test`, JS syntax checks, and `git diff --check` exited 0. Browser render was unavailable.

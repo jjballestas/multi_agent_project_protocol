@@ -63,6 +63,65 @@
             "updated_at": "2026-08-02T14:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0311",
+            "expires_at": "2026-08-02T20:00:00Z",
+            "notes": "Implement SPEC-0113 runtime indicator and allowlisted start/stop controls in Zeus-protocol, off by default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0311",
+                "Area_comun/state/TASK_INDEX.json#TASK-0311",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0311",
+                "Area_comun/tasks/TASK-0311-front-runtime-indicator-launch.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T15:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0311",
+            "updated_at": "2026-08-02T15:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0311-delivery",
+            "expires_at": "2026-08-02T16:10:00Z",
+            "notes": "Deliver TASK-0311 implementation to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0311-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0311",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0311",
+                "Area_comun/tasks/TASK-0311-front-runtime-indicator-launch.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0311-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0311.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T15:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0311",
+            "updated_at": "2026-08-02T15:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0311-memory",
+            "expires_at": "2026-08-02T16:07:00Z",
+            "notes": "Persist TASK-0311 product implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0311-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T15:07:00Z",
+            "status": "released",
+            "task_id": "TASK-0311",
+            "updated_at": "2026-08-02T15:07:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

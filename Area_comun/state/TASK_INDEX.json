@@ -278,7 +278,7 @@
             "project": "Zeus-protocol",
             "reviewer": "Analista",
             "spec_id": "SPEC-0113",
-            "status": "ready",
+            "status": "in_review",
             "title": "Front Zeus-protocol: indicador de estado de runtime + boton lanzar/detener agente conocido (SPEC-0113 / DECISION-0107), off-by-default",
             "type": "product"
         },
