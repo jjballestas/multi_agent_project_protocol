@@ -129,6 +129,25 @@
             "updated_at": "2026-08-02T16:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-0312-reject2",
+            "expires_at": "2026-08-02T22:00:00Z",
+            "notes": "Rechazo TASK-0312 in_review->changes_requested tras CHANGE-REQUIRED r2 (escape PHASE_B operator-stop-on-parked); rutea remediacion-2 (final).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0312-front-supervisor.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-ACTION-TASK-0312-remediar-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T17:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0312",
+            "updated_at": "2026-08-02T17:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Codex-TASK-0311",
             "expires_at": "2026-08-02T20:00:00Z",
             "notes": "Implement SPEC-0113 runtime indicator and allowlisted start/stop controls in Zeus-protocol, off by default.",
