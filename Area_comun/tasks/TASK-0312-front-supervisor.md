@@ -2,7 +2,7 @@
 task_id: TASK-0312
 file: Area_comun/tasks/TASK-0312-front-supervisor.md
 title: "Front Zeus-protocol: supervisor event-driven de runtimes de agentes + re-habilitar/limpiar .stop (SPEC-0114 / DECISION-0108), off-by-default"
-status: ready
+status: in_review
 type: product
 owner: Codex
 reviewer: Analista

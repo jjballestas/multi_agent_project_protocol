@@ -22,7 +22,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_review",
             "title": "Front Zeus-protocol: supervisor event-driven de runtimes de agentes + re-habilitar/limpiar .stop (SPEC-0114 / DECISION-0108), off-by-default"
         }
     ],

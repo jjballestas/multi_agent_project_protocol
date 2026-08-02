@@ -169,6 +169,65 @@
             "updated_at": "2026-08-02T15:07:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0312",
+            "expires_at": "2026-08-03T00:00:00Z",
+            "notes": "Implement SPEC-0114 event-driven runtime supervisor in Zeus-protocol, off by default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0312",
+                "Area_comun/state/TASK_INDEX.json#TASK-0312",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0312",
+                "Area_comun/tasks/TASK-0312-front-supervisor.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T16:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0312",
+            "updated_at": "2026-08-02T16:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0312-delivery",
+            "expires_at": "2026-08-02T17:10:00Z",
+            "notes": "Deliver TASK-0312 implementation to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0312-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0312",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0312",
+                "Area_comun/tasks/TASK-0312-front-supervisor.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0312-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0312.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T16:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0312",
+            "updated_at": "2026-08-02T16:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0312-memory",
+            "expires_at": "2026-08-02T17:15:00Z",
+            "notes": "Persist TASK-0312 product implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0312-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T16:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0312",
+            "updated_at": "2026-08-02T16:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
