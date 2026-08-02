@@ -6,7 +6,8 @@ Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 
 - Zeus product commit `8ba0155` adds the off-by-default product-worker roster builder with dry-run preview, explicit confirmation, server-side canonical composition, edit/remove, LLM linkage, and a visible governance-ceremony boundary.
 - The server rejects foreign/raw/signing fields, persists empty ledger capabilities plus `ledger: denied`, never emits submit_intent, and leaves the hub config/event/snapshot byte-identical in permanent tests.
-- Product `npm test` passed 144 total, 124 passed, 20 slow-tier skips, 0 failed. Governed delivery and clean-clone verification remain pending; Codex has not reviewed or ratified its own work.
+- Product and clean-clone `npm test` passed 144 total, 124 passed, 20 slow-tier skips, 0 failed.
+- Hub delivery commit `ae4cbb5` moves TASK-0313 to `in_review`, releases both Codex claims, and publishes the self-contained handoff for Arquitecto recomputation and independent Analista review. Codex did not review or ratify its own work.
 
 ## 2026-08-02 - TASK-0312 remediation iteration 2
 
