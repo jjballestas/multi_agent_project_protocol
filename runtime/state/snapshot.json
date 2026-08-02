@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "5ae57a3e09b8e6c658d74bddfb3e5d5d3e3b1b0450253c581a320ae6a4020b8d",
+  "canonical_hash": "65c15a89db2b1072404fc25058db07de7a3d65dbae694d210589bd567796ba4f",
   "integrity": {
-    "canonical_hash": "5ae57a3e09b8e6c658d74bddfb3e5d5d3e3b1b0450253c581a320ae6a4020b8d",
+    "canonical_hash": "65c15a89db2b1072404fc25058db07de7a3d65dbae694d210589bd567796ba4f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "665172167d46268440183009efc7fda4ac20aeb35c06d31703df8714c8d3bcd7",
-    "signature": "6112e9b19e9fa0d50423e60e86c53fa34018390ab0e27c02884825fe7f6f15b8",
-    "up_to_seq": 6897
+    "prev_hash": "4d02adfe2780985098f564a3e4691fef6df3462cce78cf355e7cc2e01e507994",
+    "signature": "46666c0817c150c143801a717a9b440027a10276cf87f524c94af7865e28e4af",
+    "up_to_seq": 6900
   },
   "state": {
     "aggregate_versions": {
@@ -831,6 +831,7 @@
       "CLAIM-20260802-Arquitecto-0309": 1,
       "CLAIM-20260802-Arquitecto-0309-close": 1,
       "CLAIM-20260802-Arquitecto-0310": 1,
+      "CLAIM-20260802-Arquitecto-0310-reject": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2806,7 +2807,7 @@
       "TASK-0307": 14,
       "TASK-0308": 9,
       "TASK-0309": 14,
-      "TASK-0310": 11,
+      "TASK-0310": 13,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2829,7 +2830,7 @@
       "protocol-prune": 33,
       "protocol-state": 1
     },
-    "events_applied": 6226,
+    "events_applied": 6229,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3757,9 +3758,12 @@
       "arquitecto:0309:done": 6877,
       "arquitecto:0309:ready": 6865,
       "arquitecto:0309:upsert": 6864,
+      "arquitecto:0310:changes-requested": 6899,
       "arquitecto:0310:claim-acquire": 6885,
       "arquitecto:0310:claim-release": 6889,
       "arquitecto:0310:ready": 6888,
+      "arquitecto:0310:reject-claim-acquire": 6898,
+      "arquitecto:0310:reject-claim-release": 6900,
       "arquitecto:0310:upsert": 6887,
       "arquitecto:a2-camino-b:claim-acquire": 2126,
       "arquitecto:a2-camino-b:claim-release": 2129,
@@ -9059,5 +9063,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 6897
+  "up_to_seq": 6900
 }
