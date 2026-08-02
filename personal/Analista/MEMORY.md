@@ -5471,3 +5471,35 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
 - ITERACION FINAL: veredicto OK-CLOSABLE ruteado al Arquitecto (MSG requires_response, requested_action=ratificar
   + flip a done; el checker NO cierra). Bucle de fix cerrado en 2 iteraciones (r2 CHANGE-REQUIRED -> r3 OK), sin
   escalar al humano.
+
+## TASK-0313 r1 FINAL (2026-08-02 20:30 CEST) -- VEREDICTO: OK-CLOSABLE (93a4f93)
+- Alcance: keyless product-worker BUILDER en el front Zeus-protocol (P4a / Nivel 1 de DECISION-0109 + SPEC-0115).
+  Maker Codex, producto commit 8ba0155 (public/* + src/server.js +113/-1 + tests). Hub HEAD 35cf295, intacto.
+- Clon limpio @8ba0155 en D:/Aegis_Scratch/z0313 (NO /d/ raiz; regla DECISION-0104). npm install + npm test
+  exit 0: 144/124/0/20 (20 skips slow-tier). Coincide con el reporte del maker.
+- HARNESS ADVERSARIAL PROPIO (adv_harness.mjs): server como subproceso contra roster temp, hub fingerprinted
+  antes/despues. 59/59 PASS. Ejerci la FAMILIA por criterio, no el ejemplo dado:
+  * off-by-default con env unset/"0"/"true"/"1x"/"" -> TODOS 403 en builder POST, GET y register (solo el "1"
+    exacto habilita; ZEUS_PRODUCT_WORKER_BUILDER_ENABLED).
+  * anti-injection AC2: top-level actor/signature/rawEntry/foreign + inner ledgerCapabilities/governanceAgent/
+    signing/enabled/publicKeyPem/role/defaultEndpoint + __proto__ pollution -> TODOS 400, nada persiste. El
+    server hard-codea signing.ledger=denied, ledgerCapabilities=[], governanceAgent=false. assertAllowedKeys
+    (top ["mode","confirm","operation","worker","id"]) + sanitizeProductWorkerBuilderFields (worker
+    ["id","provider","endpoint","model","capabilities","governanceRequested"]).
+  * keyless AC3: persistido enabled=false, authority all-false, submitIntentEmitted=false; el path NUNCA llama
+    submit_intent. publicProductWorker NO filtra publicKeyPem en el GET.
+  * Nivel 2 AC5: governanceRequested=true SOLO graba governanceCeremony="pending"; governanceAgent sigue false;
+    sin write a agent_registry ni signer set.
+  * LLM AC4: create/edit-model/remove OK en extractors.runtime.json (fuera del config pinned); remove-unknown 404;
+    ids traversal ../.. -> 400.
+- Gates hub @35cf295: validate.py exit 0; protocol_replay --check-drift verdict=CLEAN up_to_seq=7013; gate.py 0;
+  scan_encoding 0; scan_domain_neutrality 0. #4 byte-identico antes/despues (protocol.config 2E35F26E, events,
+  snapshot). agent_registry vive DENTRO de protocol.config.json -> cubierto por su byte-identidad.
+- 3 RESIDUALES NO-BLOQUEANTES: (1) el builder acepta cualquier endpoint HTTP(S) (el register fuerza loopback-only
+  local-vlm); inerte aqui (keyless, enabled=false, no se ejecuta) pero el BORDE DE EJECUCION futuro debe
+  re-validar loopback/allow-list (SSRF). (2) el builder no puede hacer vivo a un worker (siempre enabled=false,
+  sin keypair en el path mutate) -> mas fuerte que los AC. (3) el marcador "pending" es display-only, nada actua.
+- METODO reutilizable: para servidores que arrancan al import (server.listen top-level), spawnear `node src/server.js`
+  con env que apunte el roster a temp + PORT propio, esperar "listening" en stdout, y batir la familia por fetch.
+- Veredicto OK-CLOSABLE ruteado al Arquitecto (MSG requires_response, requested_action=ratificar+flip a done; el
+  checker NO cierra). Sin CHANGE-REQUIRED, sin escalamiento.
