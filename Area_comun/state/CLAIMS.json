@@ -108,6 +108,26 @@
             "updated_at": "2026-08-02T08:52:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-0309",
+            "expires_at": "2026-08-02T16:00:00Z",
+            "notes": "Registro TASK-0309 (front Zeus-protocol: contraste texto manual-mermaid, SPEC-0111/REQ-040EC397) -> ready + GO a Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md",
+                "Area_comun/specs/SPEC-0111-manual-mermaid-text-contrast.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0309.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T09:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0309",
+            "updated_at": "2026-08-02T09:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-040EC397",
             "expires_at": "2026-07-30T18:16:40.142Z",
             "notes": "Front requirement-intake relay claim.",

@@ -11,6 +11,12 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
+        },
+        {
+            "id": "TASK-0309",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Front Zeus-protocol: contraste de texto legible en diagramas manual-mermaid de la seccion Ayuda (SPEC-0111 / REQ-040EC397)"
         }
     ],
     "next_actions": [

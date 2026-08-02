@@ -73,6 +73,12 @@
             "title": "Medicion pre-registrada H1-H3 sobre el corpus sellado TFM-dataset-N500 (informe de auditoria + datos crudos, dos brazos adversariales)"
         },
         {
+            "id": "TASK-0309",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Front Zeus-protocol: contraste de texto legible en diagramas manual-mermaid de la seccion Ayuda (SPEC-0111 / REQ-040EC397)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
