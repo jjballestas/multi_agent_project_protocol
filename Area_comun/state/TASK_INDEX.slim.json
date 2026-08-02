@@ -16,14 +16,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
-        },
-        {
-            "id": "TASK-0312",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "Front Zeus-protocol: supervisor event-driven de runtimes de agentes + re-habilitar/limpiar .stop (SPEC-0114 / DECISION-0108), off-by-default"
         }
     ],
     "view": "task_index.slim"

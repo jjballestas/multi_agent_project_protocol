@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0312
-status: open
+status: archived
 created: 2026-08-02T18:20:00Z
 requires_response: false
 requested_action: Route product commit ff02135 to Analista for final independent remediation review.
