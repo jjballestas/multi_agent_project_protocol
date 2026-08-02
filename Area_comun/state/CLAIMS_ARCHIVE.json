@@ -39132,6 +39132,432 @@
             "status": "released",
             "task_id": "TASK-0307",
             "updated_at": "2026-07-30T04:42:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260730-053037-prune-arquitecto",
+            "expires_at": "2026-07-30",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-30T05:30:37Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-30T05:30:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0308",
+            "expires_at": "2026-08-02T15:00:00Z",
+            "notes": "TASK-0308 medicion pre-registrada H1-H3 sobre corpus sellado N=500: informe de auditoria + datos crudos (dos brazos). Maker Arquitecto, checker Analista.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0308-medicion-preregistrada-h1-h3.md",
+                "Area_comun/reports/REPORT-20260802-medicion-H1-H3-audit.html",
+                "Area_comun/reports/data-medicion-H1-H3-20260802",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0308.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T08:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0308",
+            "updated_at": "2026-08-02T08:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0308-close",
+            "expires_at": "2026-08-02T15:00:00Z",
+            "notes": "Cierre TASK-0308 review_approved->done tras ratificacion del operador sobre el informe + higiene mailbox (3 consumidos).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0308-medicion-preregistrada-h1-h3.md",
+                "Area_comun/reports/REPORT-20260802-medicion-H1-H3-audit.html",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-RESP-0308.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-RESP-0308.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T09:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0308",
+            "updated_at": "2026-08-02T09:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0308-ratify",
+            "expires_at": "2026-08-02T15:00:00Z",
+            "notes": "Ratifica TASK-0308 in_review->review_approved tras GO OK-CLOSABLE del Analista (gate maker != checker). Done queda a ratificacion del operador.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0308-medicion-preregistrada-h1-h3.md",
+                "Area_comun/reports/data-medicion-H1-H3-20260802/CONSOLIDATED_arm1.json",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-RESP-0308.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T08:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0308",
+            "updated_at": "2026-08-02T08:52:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0309",
+            "expires_at": "2026-08-02T16:00:00Z",
+            "notes": "Registro TASK-0309 (front Zeus-protocol: contraste texto manual-mermaid, SPEC-0111/REQ-040EC397) -> ready + GO a Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md",
+                "Area_comun/specs/SPEC-0111-manual-mermaid-text-contrast.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0309.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T09:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0309",
+            "updated_at": "2026-08-02T09:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0309-close",
+            "expires_at": "2026-08-02T17:00:00Z",
+            "notes": "Cierre TASK-0309 in_review->done tras GO OK-CLOSABLE del Analista (2 capas verdes) + higiene del hilo 0309 (6 mensajes).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0309.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0309.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-QUESTION-TASK-0309-browser.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Codex-to-Arquitecto-QUESTION-TASK-0309-browser.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-ACTION-TASK-0309-deliver.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Codex-ACTION-TASK-0309-deliver.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0309.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0309.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0309.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0309.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0309.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0309.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T11:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0309",
+            "updated_at": "2026-08-02T11:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0310",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Registro DECISION-0106 (accepted) + TASK-0310 (Alcance A consola de prompt, SPEC-0112) -> ready + GO Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0106-operator-prompt-console.md",
+                "Area_comun/specs/SPEC-0112-operator-prompt-console.md",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T10:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T10:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0310-close",
+            "expires_at": "2026-08-02T19:00:00Z",
+            "notes": "Cierre TASK-0310 in_review->done tras OK-CERRABLE del Analista (r2, SLIP-1 cerrado, 2 capas verdes) + higiene del hilo 0310 (7 mensajes).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0310.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0310.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0310.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0310.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0310.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0310.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-ACTION-TASK-0310-remediar.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Codex-ACTION-TASK-0310-remediar.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0310-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0310-r2.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0310-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0310-r2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0310-reject",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Rechazo formal TASK-0310 in_review->changes_requested tras CAMBIO-REQUERIDO del Analista (SLIP-1 AC4); rutea remediacion a Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-ACTION-TASK-0310-remediar.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T13:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T13:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0309",
+            "expires_at": "2026-08-02T14:50:10Z",
+            "notes": "Implement SPEC-0111 text contrast fix in Zeus-protocol with static contract regression.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0309",
+                "Area_comun/state/TASK_INDEX.json#TASK-0309",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0309",
+                "Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T10:50:10Z",
+            "status": "released",
+            "task_id": "TASK-0309",
+            "updated_at": "2026-08-02T10:50:10Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0309-browser-blocker",
+            "expires_at": "2026-08-02T13:05:00Z",
+            "notes": "Record the unavailable browser backend blocker and one concrete question to Arquitecto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0309-browser-blocker",
+                "Area_comun/state/TASK_INDEX.json#TASK-0309",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0309",
+                "Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-QUESTION-TASK-0309-browser.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T11:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0309",
+            "updated_at": "2026-08-02T11:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0309-delivery",
+            "expires_at": "2026-08-02T13:06:17Z",
+            "notes": "Deliver authorized non-browser evidence and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0309-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0309",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0309",
+                "Area_comun/tasks/TASK-0309-mermaid-text-contrast-front.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0309-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0309.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T11:06:17Z",
+            "status": "released",
+            "task_id": "TASK-0309",
+            "updated_at": "2026-08-02T11:06:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310",
+            "expires_at": "2026-08-02T16:43:14Z",
+            "notes": "Implement SPEC-0112 operator-agent prompt console in Zeus-protocol, off by default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T12:43:14Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T12:43:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-config",
+            "expires_at": "2026-08-02T16:49:00Z",
+            "notes": "Add the off-by-default operator prompt capability flag outside pinned protocol config.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-config",
+                "D:/Agentes/Zeus/Zeus-protocol/commit-push.config.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T12:49:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T12:49:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-delivery",
+            "expires_at": "2026-08-02T14:52:10Z",
+            "notes": "Deliver TASK-0310 product commit and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0310-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T12:52:10Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T12:52:10Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Remediate TASK-0310 AC4 response-contract slip and add fast validation coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-delivery",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Publish TASK-0310 remediation handoff and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0310-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-final-memory",
+            "expires_at": "2026-08-02T16:45:00Z",
+            "notes": "Persist TASK-0310 remediation delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-handoff-fix",
+            "expires_at": "2026-08-02T16:30:00Z",
+            "notes": "Repair TASK-0310 remediation handoff response contract after gate failure.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-handoff-fix",
+                "Area_comun/handoffs/HANDOFF-TASK-0310-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-memory",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Persist TASK-0310 remediation product commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-FRONT-REQ-040EC397",
+            "expires_at": "2026-07-30T18:16:40.142Z",
+            "notes": "Front requirement-intake relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-FRONT-REQ-040EC397",
+                "Area_comun/state/TASK_INDEX.json#REQ-040EC397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-040EC397",
+                "Area_comun/tasks/req-040ec397-requirement-seed.md"
+            ],
+            "started_at": "2026-07-30T18:06:40.142Z",
+            "status": "released",
+            "task_id": "REQ-040EC397",
+            "updated_at": "2026-07-30T18:06:40.142Z"
         }
     ]
 }
