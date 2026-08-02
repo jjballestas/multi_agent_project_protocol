@@ -3,12 +3,25 @@ task_id: TASK-0310
 from: Codex
 to: Arquitecto
 status: in_review
+response_owner: Arquitecto
 product_repo: D:/Agentes/Zeus/Zeus-protocol
-product_commit: 767f41f0074e4497cc9dfe7ca9dbcc63d68d1c40
-created: 2026-08-02T12:52:10Z
+product_commit: 826be2350e772d2dcd4930f4b386bf0b87a2bc0a
+created: 2026-08-02T14:20:00Z
 ---
 
 # HANDOFF TASK-0310 - operator prompt console
+
+## Remediation iteration 1
+
+- Product commit `826be23` is pushed to `origin/main` in Zeus-protocol.
+- `buildMailboxSendMarkdown` now emits `response_owner`, `requested_action`, and `question` whenever
+  `requires_response: true`; the false-response shape is unchanged.
+- The fast endpoint contract passes the four REQUEST/QUESTION x requires-response true/false outputs directly
+  through the hub validator's `validate_mailbox` function. All four are non-vacuous mailbox fixtures and pass.
+- Targeted test: 1 passed, 0 failed. Product `npm test`: 140 total, 118 passed, 22 declared slow-tier skips,
+  0 failed. A clean clone at `826be23` produced the same result.
+- Scope stayed limited to `src/server.js` and `tests/staticContract.test.js`; the already-green security core,
+  UI, hub runtime, and pinned config were not changed.
 
 ## Delivered
 
@@ -50,6 +63,5 @@ HTTP 403.
 
 ## Independent review requested
 
-Arquitecto should route Analista review of commit `767f41f`, focusing on the strict server-side builder,
-anti-impersonation negatives, off-by-default behavior, honest auto-commit relay attribution, and UI
-preview/confirm flow. Codex is maker only and did not review or ratify this work.
+Arquitecto should route Analista re-review of remediation commit `826be23`, focusing on SLIP-1 and AC4 while
+retaining the prior green security evidence. Codex is maker only and did not review or ratify this work.

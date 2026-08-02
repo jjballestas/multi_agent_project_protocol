@@ -2,6 +2,17 @@
 
 Last updated: 2026-08-02 Europe/Madrid, during TASK-0310 implementation.
 
+## 2026-08-02 - TASK-0310 remediation iteration 1
+
+- Product commit `826be23` makes response-required mailbox sends emit both
+  `requested_action` and `question`, preserving the false-response shape.
+- The fast endpoint contract validates all four REQUEST/QUESTION x response
+  combinations directly through the hub validator's `validate_mailbox` function.
+- Targeted test and `npm test` passed; a clean clone at `826be23` also passed
+  140 total, 118 passed, 22 slow-tier skips, 0 failed. Product main was pushed.
+- Governed re-delivery and independent Analista re-review remain pending. Codex
+  did not review or ratify its own remediation.
+
 ## 2026-08-02 - TASK-0310 implementation
 
 - Product commit `767f41f` hardens the existing operator-agent prompt console for

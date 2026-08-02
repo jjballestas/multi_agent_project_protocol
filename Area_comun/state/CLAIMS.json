@@ -316,6 +316,79 @@
             "updated_at": "2026-08-02T12:52:10Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Remediate TASK-0310 AC4 response-contract slip and add fast validation coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-delivery",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Publish TASK-0310 remediation handoff and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0310",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0310",
+                "Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0310-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-handoff-fix",
+            "expires_at": "2026-08-02T16:30:00Z",
+            "notes": "Repair TASK-0310 remediation handoff response contract after gate failure.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-handoff-fix",
+                "Area_comun/handoffs/HANDOFF-TASK-0310-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0310.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0310-remediation-memory",
+            "expires_at": "2026-08-02T18:00:00Z",
+            "notes": "Persist TASK-0310 remediation product commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0310-remediation-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T14:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0310",
+            "updated_at": "2026-08-02T14:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-040EC397",
             "expires_at": "2026-07-30T18:16:40.142Z",
             "notes": "Front requirement-intake relay claim.",

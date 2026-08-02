@@ -2,7 +2,7 @@
 task_id: TASK-0310
 file: Area_comun/tasks/TASK-0310-consola-prompt-operador-front.md
 title: "Front Zeus-protocol: consola de prompt operador->agente (compose de MSG gobernado + vista de hilo), off-by-default (SPEC-0112 / DECISION-0106)"
-status: changes_requested
+status: in_review
 type: product
 owner: Codex
 reviewer: Analista
