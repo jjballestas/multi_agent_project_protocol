@@ -63,6 +63,31 @@
             "updated_at": "2026-08-02T08:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-0308-close",
+            "expires_at": "2026-08-02T15:00:00Z",
+            "notes": "Cierre TASK-0308 review_approved->done tras ratificacion del operador sobre el informe + higiene mailbox (3 consumidos).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0308-medicion-preregistrada-h1-h3.md",
+                "Area_comun/reports/REPORT-20260802-medicion-H1-H3-audit.html",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0308.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-RESP-0308.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-RESP-0308.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T09:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0308",
+            "updated_at": "2026-08-02T09:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Arquitecto-0308-ratify",
             "expires_at": "2026-08-02T15:00:00Z",
             "notes": "Ratifica TASK-0308 in_review->review_approved tras GO OK-CLOSABLE del Analista (gate maker != checker). Done queda a ratificacion del operador.",

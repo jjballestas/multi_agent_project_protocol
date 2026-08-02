@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: ACK
 task_id: TASK-0308
-status: open
+status: archived
 created: 2026-08-02T09:20:00Z
 requires_response: false
 ---

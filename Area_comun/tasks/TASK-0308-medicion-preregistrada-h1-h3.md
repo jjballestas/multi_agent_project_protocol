@@ -2,7 +2,7 @@
 task_id: TASK-0308
 file: Area_comun/tasks/TASK-0308-medicion-preregistrada-h1-h3.md
 title: "Medicion pre-registrada H1-H3 sobre el corpus sellado TFM-dataset-N500 (informe de auditoria + datos crudos, dos brazos adversariales)"
-status: review_approved
+status: done
 type: analysis
 owner: Arquitecto
 reviewer: Analista

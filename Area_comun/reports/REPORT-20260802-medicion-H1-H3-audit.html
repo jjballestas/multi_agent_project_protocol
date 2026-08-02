@@ -78,7 +78,7 @@
   <tr><td>Estado del dataset (recontado)</td><td><strong>500 / 500</strong> eventos elegibles</td></tr>
   <tr><td>Desglose por agente (recontado)</td><td>Arquitecto <strong>253</strong> (50.6%) &middot; Codex <strong>195</strong> (39.0%) &middot; Analista <strong>52</strong> (10.4%)</td></tr>
   <tr><td>Ventana de seq</td><td class="mono">2221 .. 2720 (DATASET_START_SEQ = 2221)</td></tr>
-  <tr><td>Firma / ratificacion del operador</td><td>Pendiente (este informe se somete al gate maker != checker del Analista antes de la ratificacion)</td></tr>
+  <tr><td>Firma / ratificacion del operador</td><td><strong>RATIFICADO</strong> por el Operador (John Ballestas) el 2026-08-02 (UTC+2), tras el GO OK-CLOSABLE del Analista (gate maker != checker). TASK-0308 -&gt; done.</td></tr>
 </table>
 <p class="note">Los 5 pineados se verificaron byte-identicos en un clon limpio del tag (pins 1&ndash;3 y 5 desde el arbol
 git; pin 4 es gitignored y se verifico contra la copia local viva). El sello del dataset (N=500, desglose)
@@ -248,8 +248,9 @@ del tag para un verificador externo.</p>
 <p class="small">
 Redactado por el Arquitecto (maker) el 2026-08-02 10:12 (UTC+2). Sometido al gate <strong>maker != checker</strong>:
 el Analista verifica adversarialmente que la inyeccion fue programatica/reproducible (no juicio de agente), que los
-conteos cuadran y que el veredicto contra &sect;5 es correcto, antes de dar el informe por final. Ratificacion del
-operador pendiente tras el veredicto del Analista.<br><br>
+conteos cuadran y que el veredicto contra &sect;5 es correcto, antes de dar el informe por final. Veredicto del Analista:
+OK-CLOSABLE (recomputo independiente; artefacto Analista-TASK-0308-medicion-H1-H3-verdict.md).
+<strong>Informe RATIFICADO por el Operador (John Ballestas) el 2026-08-02 (UTC+2); TASK-0308 -&gt; done.</strong><br><br>
 REGLA PERMANENTE: este informe lleva hora real (local UTC+2 y UTC) + estado del dataset recontado por agente.
 Fondo intocable no tocado: dataset N=500, config 2e35f26e, epoch 1.14.0.
 </p>
