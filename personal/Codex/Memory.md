@@ -9,7 +9,10 @@ Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 - The permanent live-cycle test now stops the actually parked runtime, proves queued work
   remains blocked until explicit re-enable, and retains the alive-stop and OFF/AUTO phases.
 - Targeted live-cycle and product `npm test` passed: 143 total, 123 passed, 20 slow-tier
-  skips, 0 failed. Governed hub re-delivery and clean-clone reproduction remain pending.
+  skips, 0 failed; a clean clone at `ff02135` reproduced the same result and syntax checks.
+- Hub delivery commit `0cb3cf1` moves TASK-0312 to `in_review`, releases every remediation
+  claim, and publishes the self-contained final-remediation handoff. Independent Analista
+  re-review remains required.
 - Codex remains maker only and did not review or ratify the remediation.
 
 ## 2026-08-02 - TASK-0312 implementation
