@@ -67,6 +67,12 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
+            "id": "TASK-0313",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Front Zeus-protocol: formulario de alta de worker de producto (no-firmante) + enlace a LLM (SPEC-0115 / DECISION-0109 Nivel 1), off-by-default"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -189,7 +195,8 @@
         "DECISION-0105",
         "DECISION-0106",
         "DECISION-0107",
-        "DECISION-0108"
+        "DECISION-0108",
+        "DECISION-0109"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
