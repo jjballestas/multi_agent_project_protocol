@@ -89,6 +89,22 @@
             "updated_at": "2026-08-02T18:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260802-Arquitecto-p4b-runbook",
+            "expires_at": "2026-08-02T23:59:00Z",
+            "notes": "Promocion del runbook P4b (ceremonia re-genesis, ejecucion diferida) a Area_comun/protocol/ como deliverable gobernado de P4b (gobernado por DECISION-0109).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/protocol/RUNBOOK-P4b-governance-signer-onboarding.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:40:00Z",
+            "status": "released",
+            "task_id": "OPS-P4B-RUNBOOK-20260802",
+            "updated_at": "2026-08-02T18:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260802-Codex-TASK-0313",
             "expires_at": "2026-08-03T02:04:08Z",
             "notes": "Implement SPEC-0115 product worker roster and LLM link in Zeus-protocol, off by default.",
