@@ -5449,3 +5449,25 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   ciclo vivo r1. Remediacion-1 RECHAZADA -> 1 iteracion mas, luego escalar al humano.
 - Nota estado: prune DUE (released_ratio 90>=90) -> lo corre el Arquitecto en su checkpoint coordinado, no
   el checker; CI es el borde duro. No lo toque.
+
+## TASK-0312 r3 FINAL (2026-08-02 19:47 CEST) -- VEREDICTO: OK-CLOSABLE (167fd6f)
+- Remediacion-2 producto ff02135 (Zeus-protocol, sobre 97c359e). CIERRA el escape PHASE_B que yo probe en r2:
+  applyRuntimeControlAction ahora escribe .stop (mkdir+writeFile operator-front) ANTES del early-return
+  dormant; la rama already-dormant retorna {action:"stopped", alreadyDormant:true} CON el marcador armado.
+  server.js:1660-1664. Operator STOP contra parkeado -> queda blocked/operator-stop-marker hasta reenable.
+- LAS 3 FASES verdes @ff02135 en clon limpio (D:/Aegis_Scratch/zeus/0312r3): PHASE_A idle-park->auto-revive
+  (revivedPid!=initialPid), PHASE_B stop-while-parked->blocked, PHASE_C stop-while-alive->blocked. El test
+  vivo (server real + child PowerShell real + fs markers reales) CORRE (no skip) y pasa 8.2s.
+- BASELINE NEGATIVO decisivo (metodo reutilizable): clon @97c359e + `git checkout ff02135 -- tests/...` ->
+  server VIEJO + test NUEVO -> `node --test --test-name-pattern` FALLA exit 1: alreadyDormant actual undefined
+  vs expected true. El test discrimina pre/post-fix, no es tautologico.
+- npm test full clon limpio exit 0: 143/123/0/20. Hub validate/encoding/neutrality exit 0; config sha
+  2E35F26E...B354 byte-identico (drift nil); commit producto toca solo src/server.js (+6/-3) y tests (+10).
+- 2 RESIDUALES NO-BLOQUEANTES declarados: (1) TOCTOU teorico stop-while-parked vs launch concurrente en el
+  mismo evento -- NO es regresion (r1 no armaba marcador), el start re-chequea .stop, la durabilidad del
+  marcador siempre se cumple, auto-sana a blocked en la siguiente ventana idle; no reproducible determinista.
+  (2) reenable NO dispara evaluate -> revive en el proximo evento fs (funciona en la practica); comportamiento
+  previo, no es stop-escape. Ambos fuera del alcance r3.
+- ITERACION FINAL: veredicto OK-CLOSABLE ruteado al Arquitecto (MSG requires_response, requested_action=ratificar
+  + flip a done; el checker NO cierra). Bucle de fix cerrado en 2 iteraciones (r2 CHANGE-REQUIRED -> r3 OK), sin
+  escalar al humano.
