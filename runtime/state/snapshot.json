@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "64aec476fb2d2cbb9489d7dd3365caf9e154bd8b998a0a89751ba9a9b472a3e0",
+  "canonical_hash": "145cd836262c9e377167e773085f654c07f34ae11f401a48167b8e23aecbd876",
   "integrity": {
-    "canonical_hash": "64aec476fb2d2cbb9489d7dd3365caf9e154bd8b998a0a89751ba9a9b472a3e0",
+    "canonical_hash": "145cd836262c9e377167e773085f654c07f34ae11f401a48167b8e23aecbd876",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "a3fc6acba5395917d72d9e2a87a701c4b4bd4d10445bbd6de5f12cbd4d943500",
-    "signature": "77f783f586b6092223ecd0476106c3b15bb6133802c8e52bd8d53f79b0ce6cf3",
-    "up_to_seq": 7080
+    "prev_hash": "1fba7cbc991a8372a5d33b220bd366f33c8ddff2eb1ace272a4225d9bd4c9f45",
+    "signature": "0095fbfe095e181b75f6131a4737f25d7d8425873b49857ed4ed81d8d0658fb4",
+    "up_to_seq": 7084
   },
   "state": {
     "aggregate_versions": {
@@ -853,6 +853,7 @@
       "CLAIM-20260806-Arquitecto-TASK-0316-registro": 1,
       "CLAIM-20260806-Arquitecto-TASK-0317-registro": 1,
       "CLAIM-20260806-Arquitecto-hygiene-lote1": 1,
+      "CLAIM-20260806-Codex-TASK-0316": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2869,7 +2870,7 @@
       "TASK-0313": 11,
       "TASK-0314": 30,
       "TASK-0315": 6,
-      "TASK-0316": 5,
+      "TASK-0316": 8,
       "TASK-0317": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2893,7 +2894,7 @@
       "protocol-prune": 36,
       "protocol-state": 1
     },
-    "events_applied": 6409,
+    "events_applied": 6413,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6067,6 +6068,10 @@
       "codex:task0314:remediation-r1:memory-claim:2026-08-06T04:01:10Z": 7052,
       "codex:task0314:remediation-r1:memory-release:2026-08-06T04:01:45Z": 7053,
       "codex:task0314:review-approved-to-done:20260806T055000Z": 7079,
+      "codex:task0316:claim-acquire-test-scope:20260806T054949Z": 7084,
+      "codex:task0316:claim-acquire:20260806T054719Z": 7081,
+      "codex:task0316:claim-release-for-test-scope:20260806T054949Z": 7083,
+      "codex:task0316:ready-to-in-progress:20260806T054719Z": 7082,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -9306,5 +9311,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7080
+  "up_to_seq": 7084
 }

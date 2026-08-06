@@ -14,6 +14,12 @@ $LegacyIdentityLiteralFiles = @(
     "scripts/prune_state.py"
 )
 $GenericIdentityTokens = @("agent", "human", "humano", "owner")
+$RequiredScanGlobs = @(
+    "scripts/**/*.py",
+    "scripts/**/*.ps1",
+    "Area_comun/protocol/*.json"
+)
+$RequiredExemptGlobs = @("runtime/memory/**")
 
 function Convert-GlobToRegex {
     param([string]$Pattern)
@@ -104,7 +110,9 @@ function Test-IdentityScanPath {
     param([string]$RelativePath)
 
     return (($RelativePath.StartsWith("runtime/") -and $RelativePath.EndsWith(".py")) -or
-        ($RelativePath.StartsWith("scripts/") -and ($RelativePath.EndsWith(".py") -or $RelativePath.EndsWith(".ps1"))))
+        ($RelativePath.StartsWith("scripts/") -and
+            (($RelativePath.ToCharArray() | Where-Object { $_ -eq "/" }).Count -eq 1) -and
+            ($RelativePath.EndsWith(".py") -or $RelativePath.EndsWith(".ps1"))))
 }
 
 $resolvedRoot = (Resolve-Path $Root).Path
@@ -122,6 +130,16 @@ if (-not $neutrality -or $neutrality.enabled -eq $false) {
 $denylist = @($neutrality.denylist)
 $scanGlobs = @($neutrality.scan_globs)
 $exemptGlobs = @($neutrality.exempt_globs)
+foreach ($pattern in $RequiredScanGlobs) {
+    if ($scanGlobs -notcontains $pattern) {
+        $scanGlobs += $pattern
+    }
+}
+foreach ($pattern in $RequiredExemptGlobs) {
+    if ($exemptGlobs -notcontains $pattern) {
+        $exemptGlobs += $pattern
+    }
+}
 
 $scanTerms = @()
 foreach ($term in $denylist) {

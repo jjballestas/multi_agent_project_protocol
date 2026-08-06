@@ -25,12 +25,26 @@ LEGACY_IDENTITY_LITERAL_FILES = {
     "scripts/prune_state.py",
 }
 GENERIC_IDENTITY_TOKENS = {"agent", "human", "humano", "owner"}
+REQUIRED_SCAN_GLOBS = (
+    "scripts/**/*.py",
+    "scripts/**/*.ps1",
+    "Area_comun/protocol/*.json",
+)
+REQUIRED_EXEMPT_GLOBS = ("runtime/memory/**",)
+
+
+def append_required_patterns(configured: list[str], required: tuple[str, ...]) -> list[str]:
+    return [*configured, *(pattern for pattern in required if pattern not in configured)]
 
 
 def identity_scan_path(relative_path: str) -> bool:
     return (
         (relative_path.startswith("runtime/") and relative_path.endswith(".py"))
-        or (relative_path.startswith("scripts/") and relative_path.endswith((".py", ".ps1")))
+        or (
+            relative_path.startswith("scripts/")
+            and relative_path.count("/") == 1
+            and relative_path.endswith((".py", ".ps1"))
+        )
     )
 
 
@@ -140,8 +154,10 @@ def main() -> int:
         return 0
 
     denylist = neutrality.get("denylist") or []
-    scan_globs = neutrality.get("scan_globs") or []
-    exempt_globs = neutrality.get("exempt_globs") or []
+    scan_globs = append_required_patterns(neutrality.get("scan_globs") or [], REQUIRED_SCAN_GLOBS)
+    exempt_globs = append_required_patterns(
+        neutrality.get("exempt_globs") or [], REQUIRED_EXEMPT_GLOBS
+    )
     if (root / "connectors").exists() and "connectors/**" not in scan_globs:
         scan_globs = [*scan_globs, "connectors/**"]
     if (root / "skills").exists() and "skills/**" not in scan_globs:
