@@ -2,6 +2,20 @@
 
 Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 
+## 2026-08-06 - TASK-0314 remediation iteration 1
+
+- Implementation commit `d1252f4` resolves review findings F1/F2/F3/R4: omission
+  declarations are deterministic aggregates with bounded recent details and a convergent
+  degradation loop; timestamp metadata uses a finite grammar and retains PII checks; and
+  `priority: medium` is accepted.
+- The P11 regression now creates 305 additional memory sources and proves that a raw
+  per-source omission declaration exceeds 65,536 bytes while the emitted pack remains
+  within budget and declares aggregate counts plus degraded detail.
+- The 57-test memory suite passed. Real-corpus packs for Arquitecto, Codex, and Analista
+  all exited 0 below 131,072 bytes without changing the configured budget.
+- TASK-0314 remains `in_progress` pending clean-clone recomputation, governed delivery to
+  `in_review`, claim release, and independent re-review. Codex remains maker only.
+
 ## 2026-08-06 - TASK-0314 implementation
 
 - Hub commit `378021d` ports the six-script F1 hybrid-memory engine and resolves P1-P12 from
