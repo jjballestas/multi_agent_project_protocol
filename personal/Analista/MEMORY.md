@@ -5811,3 +5811,62 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   mio; esta ejecucion solo tenia asignado el de 0317. Lo senale en el mensaje para que no se lea
   como consumido. Sin claims activos al escribir; commit por pathspec explicito; validate, encoding
   y neutralidad exit 0 antes y despues del commit.
+
+## 2026-08-06 -- TASK-0319 (harness: inanicion por defers pre-exec) -- CAMBIO-REQUERIDO sobre a7c6e96
+
+- VEREDICTO: 7/8 AC en verde, bloqueo por **AC6**. Artefacto
+  `Area_comun/artifacts/Analista-TASK-0319-harness-defer-starvation-verdict.md`, commit `9959a0a`.
+- **LECCION CENTRAL -- EL MOCK OCULTA EL FORMATO QUE ESTA EN DISCUSION.** El test del maker
+  (`test_residue_excludes_foreign_personal_and_caps_diagnostics`) mockea `Get-GitStatusPorcelainUtf8`
+  con una cadena sintetica de solo registros `?? <ruta>`. El defecto vivia justo en la codificacion
+  REAL que el mock no produce. Cuando el AC habla de un FORMATO (salida de git, de un parser, de un
+  protocolo), la sonda tiene que alimentar el productor REAL, no una cadena a mano. Yo cargue por AST
+  las funciones reales del .ps1 y las corri contra repos git de verdad en scratch: ahi salio a la
+  primera.
+- **EL DEFECTO CONCRETO, para reconocer el patron:** `git status --porcelain=v1 -z` NO usa ` -> `
+  para renombrados; emite DOS registros NUL-separados, `R  <nueva>` y luego `<vieja>` **sin prefijo
+  de estado**. Un filtro que asume `XY <ruta>` y hace `Substring(3)` a todos amputa 3 caracteres a la
+  ruta vieja. Y si la fila `R` se filtra, el huerfano pierde el emparejamiento `$index++` de mas
+  abajo. Resultado medido: `residue_state=live` donde AC6 exige `none`, y un `paths_json` con una
+  ruta FANTASMA (`sonal/Analista/...`).
+- **CODIGO MUERTO QUE PARECE COBERTURA.** La rama ` -> ` no puede dispararse jamas (git no la emite
+  bajo `-z`; en Windows `>` ni es caracter legal de nombre). Convencio a DOS lectores independientes
+  (handoff del maker y recomputo del Arquitecto, que escribio literalmente "maneja renombres (` -> `)").
+  **REGLA: cuando un revisor justifica un PASS citando una rama concreta, comprobar que esa rama es
+  ALCANZABLE antes de aceptarla.**
+- **MATIZ SOBRE MI PROPIA LECCION DE 0317 ("la direccion del fallo manda").** No es un comodin. Aqui
+  la direccion "conservadora" (un defer de mas) ES el dano que el AC persigue: AC6 existe para que un
+  area privada ajena deje de generar defers. Preguntar siempre: conservador *respecto de que*
+  garantia. En AC7 equivocarse de mas es gratis; en AC6 no.
+- ACOTE EL IMPACTO CON HONESTIDAD y aun asi bloquee: no es regresion y se auto-degrada a `aborted` a
+  los 5 min (`AbortedResidueMinutes`). Bloqueo por **AC falsado sobre vector ordinario** (`git mv` en
+  la carpeta de borradores del propio peer), no por magnitud. Decirlo explicito evita que el bloqueo
+  se lea como alarmismo.
+- RESPONDI SUS DOS PREGUNTAS CON DATO, NO CON OPINION:
+  (1) La alternancia de causas reinicia el reloj para siempre -- CONFIRMADO (12 sondeos alternando
+  con presupuesto de 1s -> cero `RETRY_EXHAUSTED`), pero ACEPTABLE: es literalmente lo que pide AC3, y
+  un tope absoluto re-crea el defecto que la tarea elimina, solo que con constante mayor. Lo que falta
+  es OBSERVABILIDAD: no hay ningun campo monotono (`defers` vuelve a 1 y `defer_started_at` se
+  resella en cada cambio de causa). Pedi `first_defer_at` -> `total_age_seconds` en `RETRY_DEFER`.
+  (2) Las entradas terminales previas no se auto-curan (seleccion linea 942 descarta `exhausted=true`;
+  `Reset-PreExecDefer` no corre hasta 1008) -- CONFIRMADO, pero recomende NO curarlas por olfateo de
+  esquema: "sin `defer_reason` = obsoleta" es heuristica de un solo uso que al dia siguiente es codigo
+  muerto permanente, **la misma clase de rama que acababa de falsar**. Re-armado correcto = la FIRMA
+  del mensaje, que ya es content-addressed.
+- HALLAZGO LATERAL: el handoff declara `validate_collaboration_state.py` PASS, pero en clon limpio
+  sobre `a7c6e96` sale **exit 1** (drift de los tres `*.slim.json` bajo `enforce`, hard-fail B.3).
+  Verde en `092b9b0` y `b9698d6`. **REGLA: verificar los gates sobre el commit que el handoff CITA,
+  no solo sobre HEAD; un drift transitorio de mitad de entrega se ve ahi y en ningun otro sitio.**
+- TECNICA REUTILIZABLE: sonda PowerShell que extrae funciones por AST
+  (`[Parser]::ParseFile` + `FindAll(FunctionDefinitionAst)` + `Invoke-Expression $node.Extent.Text`)
+  y las corre con `$Root`/`$PeerId` inyectados. Permite ejercer una funcion del harness contra un
+  repo git real sin lanzar el cron. Sondas en `D:/Aegis_Scratch/mapp/p0319/`.
+- GOTCHA: `git clone` completo del hub tarda >2 min y revienta el timeout por defecto de Bash;
+  reutilizar un clon existente con `git checkout <sha>` y subir el timeout.
+- GOTCHA: `>` no es caracter legal de nombre de archivo en Windows, asi que el vector ` -> ` inyectado
+  en un nombre NO es reproducible en esta plataforma; declararlo como no alcanzable, no como no probado.
+- COORDINACION: sin claims de peer sobre mis rutas; commit por pathspec explicito de mis DOS archivos
+  (habia entrega del Arquitecto a medio escribir en `Area_comun/state/*` y `runtime/state/*` -- no la
+  toque). Clean-clone-validate sobre MI commit `9959a0a` antes de push: validate y encoding exit 0.
+  Push OK; el Arquitecto commiteo encima (`2b7b7fc`) en el arbol compartido y subio en el mismo push.
+  Aviso de poda vencida (`cold_start_tokens`) -- es del checkpoint coordinado del Arquitecto, no mio.
