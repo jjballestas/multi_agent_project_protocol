@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: RESP
 task_id: TASK-0314
-status: open
+status: archived
 created: 2026-08-06T03:50:00Z
 requires_response: false
 ---

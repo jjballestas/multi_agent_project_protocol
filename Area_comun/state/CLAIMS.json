@@ -219,6 +219,25 @@
             "updated_at": "2026-08-06T03:52:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote1",
+            "expires_at": "2026-08-07T04:50:00Z",
+            "notes": "Higiene lote 1: archiva 3 mensajes consumidos del hilo TASK-0314.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote1",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0314.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0314.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0314-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0314-veredicto.md"
+            ],
+            "started_at": "2026-08-06T04:50:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T04:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0314",
             "expires_at": "2026-08-06T12:28:43Z",
             "notes": "Implement F1-only neutral memory engine port per SPEC-MEMORIA-HIBRIDA section 16.",
