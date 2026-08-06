@@ -24,16 +24,16 @@
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
         },
         {
-            "id": "TASK-0319",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)"
-        },
-        {
             "id": "TASK-0320",
             "owner": "Codex",
             "status": "proposed",
             "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318"
+        },
+        {
+            "id": "TASK-0321",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv"
         }
     ],
     "view": "task_index.slim"

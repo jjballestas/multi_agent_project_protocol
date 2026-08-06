@@ -288,7 +288,7 @@
             "file": "Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md",
             "id": "TASK-0319",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)",
             "type": "refactor"
         },
@@ -298,6 +298,14 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0321-diskproof-emparejamiento-renombrados.md",
+            "id": "TASK-0321",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv",
             "type": "infra"
         },
         {
