@@ -15,6 +15,8 @@ Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
   collaboration validation. Full drift reported round_trip=pass and bidirectional-pass.
 - Codex remains maker only. TASK-0314 is being delivered for Arquitecto recomputation and
   independent Analista review; Codex did not review or ratify its own work.
+- Delivery commit `e272bff` moves TASK-0314 to `in_review`, releases all implementation and
+  delivery claims, and publishes the self-contained handoff plus response-routed mailbox request.
 
 ## 2026-08-02 - TASK-0313 implementation
 
