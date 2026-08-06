@@ -764,6 +764,46 @@ higiene gobernada del hub (DECISION-0018). El indexador falla CERRADO en H1: eso
 9. NO se modifican `validate_collaboration_state.*` ni `submit_intent.py` (s.1 fuera de alcance de
    F1); los comandos nuevos se corren APARTE, en el checkpoint de higiene.
 
+### 16.7 Ledger de residuales del port (C1 del veredicto r2 de TASK-0316; 2026-08-06)
+
+Registro trazable de lo que el port dejo abierto o movio despues de cerrar. Existe para que quien
+recompute TASK-0314 manana no lea una regresion silenciosa sin poder explicarla.
+
+**Delta declarado sobre el AC5 de TASK-0314: warnings del build 219 -> 227.**
+- Causa: TASK-0316 AC4 saco del enum `STATUS_VALUES` los dos valores de vocabulario de instancia
+  (`DRAFT-PENDIENTE-DE-FIRMA-DEL-OPERADOR`, `draft (pendiente GO operador)`) por ser fuga de dominio
+  hacia el nucleo neutral. 8 artefactos TRACKEADOS los usan y pasan a emitir warning.
+- Medicion A/B del checker sobre el mismo commit: delta **+8**; **0** sobre corpus gobernado (los 8
+  son borradores de `personal/Arquitecto/`); **1** solo archivo estaba antes limpio (7 de los 8 ya
+  warneaban por otras claves ad-hoc del mismo frontmatter); **0** warnings eliminados.
+- Efecto semantico: perdida del campo `status` en el indice para esos 8 borradores.
+- **No bloqueo el cierre de 0316** por decision del checker, con tres razones: (a) ningun gate por
+  exit code regresa -- build, round-trip y drift `--fast`/`--full` verdes en clon pristino, y CI no
+  ejecuta la base de memoria en ningun paso; (b) la clausula del AC5 protege *metadata bien formada
+  del hub*, y estos son borradores personales con vocabulario que no esta en el ciclo de vida de
+  AGENTS.md s.6 -- leerla de otro modo la convierte en un veto a purgar el enum, lo contrario de su
+  proposito; (c) conservar los dos valores para proteger un conteo seria comprar una metrica
+  cosmetica apagando un defecto real, la misma inversion que el checker reporto en r1 de 0316.
+- **Cierre esperado:** TASK-0318 debe devolver el conteo a 219 **sin** reintroducir vocabulario de
+  instancia en el nucleo, y dejarlo escrito.
+
+**Hecho estructural declarado: el enum queda MEDIO purgado.** Salieron 2 valores y quedan 6 del
+mismo vocabulario de instancia (`GO-PROMOVER-OFF`, `OK-CERRABLE`, `OK_CERRABLE`, `cambio-requerido`,
+`hallazgo-confirmado`, `draft-reviewed-informal`), que sobreviven solo porque no son nombres de
+agente y la regla de identidad no los ve. El nucleo neutral no queda neutral: queda **arbitrario**.
+Se adjudica a TASK-0318 con el alcance de los 6, no de los 2.
+
+**Residuales abiertos del motor** (de los veredictos r1/r2 de TASK-0314 y r1/r2 de TASK-0316):
+R1 patron de telefono demasiado ancho por el lado de la exencion (valores con forma de id lo saltan;
+opcion autorizada por P5) -- R2 IBAN solo en forma contigua -- R3 el barrido de plano publico del
+`--full` no recibe los terminos de dominio de la instancia -- R5-0314 falso positivo de timestamps con
+offset negativo (**adjudicado a TASK-0317**) -- R6 suelo no degradable del revive pack al 37-47 pct del
+techo -- R5-0316 la allowlist de archivo completo sobre `peer_mailbox_cron.ps1` ciega el defecto de
+identidad que se acaba de corregir en el.
+
+**Regla vigente:** el motor NO se declara listo para exportar a instancias mientras TASK-0317 y
+TASK-0318 sigan abiertas.
+
 ### 16.6 Fuera de alcance del port
 
 F2 (stubs/manifests, `--propose-cold`), F3 (enfriado real: exige DECISION de activacion +

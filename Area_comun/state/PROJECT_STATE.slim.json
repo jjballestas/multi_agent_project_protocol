@@ -13,16 +13,16 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0316",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean"
-        },
-        {
             "id": "TASK-0317",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
+        },
+        {
+            "id": "TASK-0318",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Vocabulario de estado extensible por instancia: sacar los 6 valores de instancia que quedan en STATUS_VALUES sin perder validacion, via MEMORY_INDEX_POLICY.json con contrato de falsacion"
         }
     ],
     "next_actions": [
