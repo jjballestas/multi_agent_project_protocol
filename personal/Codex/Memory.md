@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, during TASK-0317 remediation iteration 1.
+Last updated: 2026-08-06 Europe/Madrid, during TASK-0319 remediation iteration 1.
+
+## 2026-08-06 - TASK-0319 remediation iteration 1 implementation
+
+- Implementation commit `d28277d` parses real `git status --porcelain=v1 -z` rename/copy
+  records as destination/source pairs before applying the foreign-personal exclusion.
+- A pair is discarded only when both paths are inside another peer's private personal area;
+  retained pairs preserve the source record for the existing paired traversal, while diagnostics
+  report only real destination paths.
+- The permanent negative now creates a real scratch Git repository, stages a foreign-personal
+  rename with `git mv`, asserts the exact two-record NUL stream, and proves residue `none` with
+  no diagnostic paths. The harness suite passes 13 tests and the falsification inventory reports
+  29/29 contracts with five TASK-0319 boundaries.
+- Encoding, neutrality, collaboration validation, and diff gates exited 0 before the commit.
+  TASK-0319 remains `in_progress` under its remediation claim pending clean-clone verification
+  and governed delivery to independent re-review.
 
 ## 2026-08-06 - TASK-0317 remediation iteration 1
 
