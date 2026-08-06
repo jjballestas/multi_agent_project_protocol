@@ -1,5 +1,21 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0319-remediation-1",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0319-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0319",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0319",
+                "Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0319"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

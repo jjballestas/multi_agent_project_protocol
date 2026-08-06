@@ -677,19 +677,35 @@ function Get-StagedResidueState {
     $statusResult = Get-GitStatusPorcelainUtf8
     if (-not $statusResult.ok) { return "unknown" }
     $statusRaw = [string]$statusResult.raw
-    $status = @($statusRaw -split [char]0 | Where-Object { $_ } | Where-Object {
-        if ($_.Length -lt 4) { return $true }
-        $candidate = $_.Substring(3).Replace("\", "/")
-        if ($candidate -match ' -> ') { $candidate = ($candidate -split ' -> ', 2)[1] }
-        if ($candidate -notmatch '^personal/([^/]+)(?:/|$)') { return $true }
-        return ($Matches[1] -ieq $PeerId)
-    })
-    $script:LastResiduePaths = @($status | ForEach-Object {
-        if ($_.Length -lt 4) { return }
-        $candidate = $_.Substring(3).Replace("\", "/")
-        if ($candidate -match ' -> ') { $candidate = ($candidate -split ' -> ', 2)[1] }
-        $candidate
-    } | Select-Object -First $ResidueDiagnosticPathLimit)
+    $records = @($statusRaw -split [char]0 | Where-Object { $_ })
+    $status = @()
+    for ($index = 0; $index -lt $records.Count; $index++) {
+        $row = $records[$index]
+        if ($row.Length -lt 4) { return "unknown" }
+        $candidate = $row.Substring(3).Replace("\", "/")
+        $candidateIsRelevant = ($candidate -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
+        if ($row.Substring(0, 2) -match '[RC]') {
+            if (($index + 1) -ge $records.Count) { return "unknown" }
+            $sourceRow = $records[$index + 1]
+            $source = $sourceRow.Replace("\", "/")
+            $sourceIsRelevant = ($source -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
+            if ($candidateIsRelevant -or $sourceIsRelevant) {
+                $status += $row
+                $status += $sourceRow
+            }
+            $index++
+            continue
+        }
+        if ($candidateIsRelevant) { $status += $row }
+    }
+    $diagnosticPaths = @()
+    for ($index = 0; $index -lt $status.Count -and $diagnosticPaths.Count -lt $ResidueDiagnosticPathLimit; $index++) {
+        $row = $status[$index]
+        if ($row.Length -lt 4) { return "unknown" }
+        $diagnosticPaths += $row.Substring(3).Replace("\", "/")
+        if ($row.Substring(0, 2) -match '[RC]') { $index++ }
+    }
+    $script:LastResiduePaths = @($diagnosticPaths)
     if ($status.Count -eq 0) {
         if (Test-Path -LiteralPath $ResiduePath) { Remove-Item -LiteralPath $ResiduePath -Force -ErrorAction SilentlyContinue }
         return "none"

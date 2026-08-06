@@ -30,6 +30,8 @@ FALSIFICATION_CONTRACTS = (
             'assert healthy["mixed"]["exhausted"] is False',
             'assert healthy["stable"]["exhausted"] is True',
             'assert mutant["mixed"]["exhausted"] is True',
+            'assert rename["state"] == "none"',
+            'assert rename["paths"] == []',
         ),
         "exercised_by": "test_preexec_defer_budget_kills_shared_counter_mutant",
     },
@@ -274,6 +276,43 @@ $cleared = $script:state[$message.Name]
         return run_powershell(script, root)
 
 
+def real_foreign_personal_rename_probe() -> dict:
+    with make_tempdir("residue-rename-") as tmp:
+        root = Path(tmp)
+        old_path = f"personal/{REVIEWER}/draft-old.md"
+        new_path = f"personal/{REVIEWER}/draft-new.md"
+        source = root / old_path
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text("draft\n", encoding="ascii")
+        (root / ".gitignore").write_text("probe.ps1\n", encoding="ascii")
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+            ("git", "add", ".gitignore", old_path),
+            ("git", "commit", "-m", "fixture"),
+            ("git", "mv", old_path, new_path),
+        ):
+            subprocess.run(command, cwd=root, check=True, capture_output=True)
+        script = function_loader(
+            HARNESS_PATH,
+            ("Get-GitStatusPorcelainUtf8", "Get-StagedResidueState"),
+        ) + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$ResiduePath = Join-Path $Root "residue.json"
+$AbortedResidueMinutes = 5
+$ResidueDiagnosticPathLimit = 10
+$script:LastResiduePaths = @()
+function Write-Utf8NoBom {{ param($Path, $Content) [IO.File]::WriteAllText($Path, $Content, [Text.UTF8Encoding]::new($false)) }}
+$statusResult = Get-GitStatusPorcelainUtf8
+$records = @([string]$statusResult.raw -split [char]0 | Where-Object {{ $_ }})
+$state = Get-StagedResidueState
+[ordered]@{{ records = $records; state = $state; paths = @($script:LastResiduePaths) }} | ConvertTo-Json -Depth 6 -Compress
+"""
+        return run_powershell(script, root)
+
+
 def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-PREEXEC-DEFER-STARVATION"""
     healthy = defer_probe(HARNESS_PATH)
@@ -297,6 +336,13 @@ def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
         mutant = defer_probe(mutant_path)
     assert mutant["mixed"]["exhausted"] is True
+    rename = real_foreign_personal_rename_probe()
+    assert rename["records"] == [
+        f"R  personal/{REVIEWER}/draft-new.md",
+        f"personal/{REVIEWER}/draft-old.md",
+    ]
+    assert rename["state"] == "none"
+    assert rename["paths"] == []
 
 
 def test_residue_excludes_foreign_personal_and_caps_diagnostics() -> None:
