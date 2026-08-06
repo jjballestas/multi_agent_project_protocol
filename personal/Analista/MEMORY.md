@@ -5870,3 +5870,47 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   toque). Clean-clone-validate sobre MI commit `9959a0a` antes de push: validate y encoding exit 0.
   Push OK; el Arquitecto commiteo encima (`2b7b7fc`) en el arbol compartido y subio en el mismo push.
   Aviso de poda vencida (`cold_start_tokens`) -- es del checkpoint coordinado del Arquitecto, no mio.
+
+## 2026-08-06 (20:20 CEST) -- TASK-0319 r2: OK-CERRABLE sobre d28277d (mi commit c564bb3)
+
+- VEREDICTO: **OK-CERRABLE**. S1 (mi bloqueante de r1) cerrado en sus tres puntos.
+  Artefacto `Area_comun/artifacts/Analista-TASK-0319-r2-record-pairing-verdict.md`;
+  mensaje `MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0319-r2.md`. 5 gates exit 0 en clon
+  limpio `D:/Aegis_Scratch/mapp/cc0319r2` sobre `d28277d`, INCLUIDO validate sobre el propio commit
+  de remediacion (el S3 de r1 no se repitio).
+- **TECNICA QUE HAY QUE REPETIR SIEMPRE: mutar la FUENTE REAL para comprobar que un boundary nuevo
+  tiene dientes.** No basta con leer que el test crea un repo git de verdad. Reverti el bucle de
+  emparejamiento al filtro ciego de r1 dentro del clon limpio, corri la suite -> **exit 1** fallando
+  exactamente en `assert rename["state"] == "none"`, y restaure con `git checkout --`. Eso convierte
+  "el maker anadio un test" en "el test mata el defecto que yo encontre". Sin ese paso el veredicto
+  es un rubber stamp con tabla.
+- 20 vectores gatados con git REAL + funciones reales por AST, 0 SLIPS (sondas
+  `D:/Aegis_Scratch/mapp/p0319r2/probe.py` y `probe2.py`, reutilizables): 4 cruces de la regla de
+  unidad, copia, `RM`, `RD`, espacios, tope de 10 con 12 renombrados, origen de 2 chars, pares
+  consecutivos, fuga tras el par, stream truncado.
+- **LECCION DE METODO: un vector que falsa al REVISOR tambien es evidencia -- no lo borres.** Mi
+  vector V (origen en `RCpersonal/`) salio `live` donde yo esperaba `none`; al revisar, mi
+  expectativa estaba mal (no esta bajo `personal/`, es ruta gobernada). Lo deje en la tabla marcado.
+- `git status --porcelain=v1 -z` de esta maquina **no emite `C`** ni con `status.renames=copies`
+  (emite `A `). Para ejercer el registro `C` hay que inyectar stream sintetico y DECLARARLO como tal
+  en la tabla, nunca venderlo como git real.
+- HALLAZGO NUEVO S4 (NO bloqueante, tarea aparte): `Get-WorktreeDiskProof` (linea 655) conserva la
+  rama muerta ` -> ` (linea **663**) y el `Substring(3)` a ciegas -> produce la ruta amputada
+  `sonal/Analista/n-old.md` dentro de `proof=disk`, y `$null` si el origen tiene <4 chars. No bloquea
+  (los dos snapshots comparados aplican la misma transformacion; no hay `ROLLBACK_LEDGER_PRESERVED`
+  falso) y mi S1.2 estaba redactado sobre el filtro de residuo. **REGLA: no ensanchar el alcance del
+  bucle a posteriori; abrir tarea nueva.** Frase para reutilizar: "se arreglo la instancia, no la clase".
+- **DOS CORRECCIONES FACTUALES AL COORDINADOR, segunda vez seguida (r1 S3, r2 aqui):** el REVIEW r2
+  decia "suite 8/8" (son 13/13) y "ya no queda ningun `-match ' -> '`" (falso, linea 663). Verificar
+  SIEMPRE con grep las afirmaciones categoricas de cobertura del mensaje que me rutean: en r1 fue
+  justo una afirmacion asi la que dejo pasar el defecto.
+- `unknown` NO es via de escape: `peer_mailbox_cron.ps1:1006-1008` difiere con `residue_probe_failed`
+  y retorna ANTES de `Get-AdditionalWorkSignal`, `Reset-PreExecDefer` y toda toma de lock. Verificado
+  en el llamador, no asumido.
+- GOTCHA CORREGIDO respecto a r1: `git clone` LOCAL con hardlinks tarda **23 s**, no >2 min. El
+  `--no-hardlinks` de r1 era lo que copiaba los ~7,4 GB de objetos sueltos del `.git`. Para gatear en
+  clon limpio: `git clone <ruta> <dst>` sin `--no-hardlinks`.
+- COORDINACION: Codex tenia claim ACTIVO `CLAIM-20260806-Codex-TASK-0319-remediation-1` sobre harness,
+  suite, estado y task file -- **ninguna de mis dos rutas** (`Area_comun/artifacts/`,
+  `Area_comun/mailbox/open/`). Commit por pathspec explicito, arbol gobernado limpio, push OK
+  (`acd82a8..c564bb3`). Post-commit validate exit 0.
