@@ -161,6 +161,46 @@ def _section(title: str, entries: Iterable[tuple[str, str]]) -> str:
     return "\n".join(lines)
 
 
+def _omission_recency(entry: dict[str, Any]) -> str:
+    return str(
+        entry.get("recency_at")
+        or entry.get("valid_from")
+        or entry.get("updated_at")
+        or entry.get("created_at")
+        or ""
+    )
+
+
+def _omission_summary(
+    omitted_entries: list[dict[str, Any]], detail_limit: int
+) -> dict[str, Any]:
+    by_kind: dict[str, dict[str, int]] = {}
+    for entry in omitted_entries:
+        kind = str(entry.get("kind") or "unknown")
+        aggregate = by_kind.setdefault(kind, {"count": 0, "bytes": 0})
+        aggregate["count"] += 1
+        aggregate["bytes"] += int(entry.get("bytes") or 0)
+    ranked = sorted(
+        omitted_entries,
+        key=lambda entry: (
+            _omission_recency(entry),
+            str(entry.get("kind") or ""),
+            str(entry.get("path") or ""),
+        ),
+        reverse=True,
+    )
+    details = ranked[:detail_limit]
+    return {
+        "aggregation": "count-and-bytes-by-kind-with-recent-details",
+        "by_kind": {kind: by_kind[kind] for kind in sorted(by_kind)},
+        "details_included": len(details),
+        "details_omitted": len(omitted_entries) - len(details),
+        "omitted_bytes_total": sum(int(entry.get("bytes") or 0) for entry in omitted_entries),
+        "omitted_entries_total": len(omitted_entries),
+        "recent_details": details,
+    }
+
+
 def compose_pack(
     root: Path,
     agent_id: str,
@@ -278,7 +318,8 @@ def compose_pack(
                 )
                 omitted_entries.append(
                     {"kind": "task", "path": path, "sha256": source.sha256,
-                     "bytes": source_size, "reason": "inline budget"}
+                     "bytes": source_size, "recency_at": task.get("updated_at")
+                     or task.get("created_at") or "", "reason": "inline budget"}
                 )
         if active_claims:
             task_entries.append(
@@ -320,7 +361,9 @@ def compose_pack(
                 )
                 omitted_entries.append(
                     {"kind": "mailbox", "path": str(path), "sha256": source.sha256,
-                     "bytes": source_size, "reason": "inline budget"}
+                     "bytes": source_size, "recency_at": metadata.get("updated_at")
+                     or metadata.get("created_at") or metadata.get("created") or "",
+                     "reason": "inline budget"}
                 )
 
         decision_entries: list[tuple[str, str]] = []
@@ -431,33 +474,6 @@ def compose_pack(
     finally:
         connection.close()
 
-    body = "\n".join(
-        [
-            f"# Revive pack: {agent_id}",
-            "",
-            f"- agent_id: {agent_id}",
-            f"- git_commit: {commit}",
-            f"- authority_note: {NO_AUTHORITY_NOTE}",
-            f"- budget_bytes: {max_bytes}",
-            f"- inline_source_budget_bytes: {max_inline_source_bytes}",
-            f"- inline_source_bytes: {inline_source_bytes}",
-            "",
-            _section("1. Memoria vigente", memory_entries),
-            _section("2. Tareas vivas y claims activos", task_entries),
-            _section("3. Mailbox open dirigido al agente", mailbox_entries),
-            _section("4. Decisiones activas aplicables", decision_entries),
-            _section("5. Task context cache fresco", context_entries),
-            _section(
-                "6. Fuentes omitidas del cuerpo por presupuesto",
-                [
-                    (
-                        "Declaracion de exclusion",
-                        json.dumps(omitted_entries, ensure_ascii=True, sort_keys=True, indent=2),
-                    )
-                ] if omitted_entries else [],
-            ),
-        ]
-    )
     attestations = [
         "## ATESTACION DE FUENTES",
         "",
@@ -468,23 +484,66 @@ def compose_pack(
         attestations.append(
             f"| `{source.path}` | `{source.commit}` | `{source.sha256}` |"
         )
-    without_estimate = body + "\n" + "\n".join(attestations) + "\n"
-    token_estimate = max(
-        1,
-        (len(without_estimate.encode("utf-8")) + chars_per_token - 1) // chars_per_token,
-    )
-    pack = (
-        body
-        + f"\n- token_estimate: {token_estimate}\n\n"
-        + "\n".join(attestations)
-        + "\n"
-    )
-    encoded = pack.replace("\r\n", "\n").encode("utf-8")
-    if len(encoded) > max_bytes:
-        raise ValueError(
-            f"revive pack exceeds declared budget: {len(encoded)} > {max_bytes} bytes"
+    def render(detail_limit: int) -> bytes:
+        omission_declaration = (
+            json.dumps(
+                _omission_summary(omitted_entries, detail_limit),
+                ensure_ascii=True,
+                sort_keys=True,
+                indent=2,
+            )
+            if omitted_entries
+            else ""
         )
-    return encoded
+        body = "\n".join(
+            [
+                f"# Revive pack: {agent_id}",
+                "",
+                f"- agent_id: {agent_id}",
+                f"- git_commit: {commit}",
+                f"- authority_note: {NO_AUTHORITY_NOTE}",
+                f"- budget_bytes: {max_bytes}",
+                f"- inline_source_budget_bytes: {max_inline_source_bytes}",
+                f"- inline_source_bytes: {inline_source_bytes}",
+                "",
+                _section("1. Memoria vigente", memory_entries),
+                _section("2. Tareas vivas y claims activos", task_entries),
+                _section("3. Mailbox open dirigido al agente", mailbox_entries),
+                _section("4. Decisiones activas aplicables", decision_entries),
+                _section("5. Task context cache fresco", context_entries),
+                _section(
+                    "6. Fuentes omitidas del cuerpo por presupuesto",
+                    [("Declaracion de exclusion", omission_declaration)]
+                    if omitted_entries
+                    else [],
+                ),
+            ]
+        )
+        without_estimate = body + "\n" + "\n".join(attestations) + "\n"
+        token_estimate = max(
+            1,
+            (len(without_estimate.encode("utf-8")) + chars_per_token - 1)
+            // chars_per_token,
+        )
+        pack = (
+            body
+            + f"\n- token_estimate: {token_estimate}\n\n"
+            + "\n".join(attestations)
+            + "\n"
+        )
+        return pack.replace("\r\n", "\n").encode("utf-8")
+
+    detail_limit = len(omitted_entries)
+    while True:
+        encoded = render(detail_limit)
+        if len(encoded) <= max_bytes:
+            return encoded
+        if detail_limit == 0:
+            raise ValueError(
+                "revive pack fixed content exceeds declared budget after "
+                f"deterministic omission degradation: {len(encoded)} > {max_bytes} bytes"
+            )
+        detail_limit //= 2
 
 
 def _validate_output(root: Path, output: Path) -> Path:

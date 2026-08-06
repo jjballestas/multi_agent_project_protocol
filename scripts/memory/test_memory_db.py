@@ -238,6 +238,12 @@ class MemoryDbTests(unittest.TestCase):
                 root / "personal/Codex/OLD.md",
                 "---\ncreated_at: 2026-01-01\n---\noldest-marker\n" + ("o" * 20000),
             )
+            for index in range(305):
+                write(
+                    root / f"personal/Codex/OMITTED-{index:03d}.md",
+                    f"---\ncreated_at: 2025-01-{(index % 28) + 1:02d}\n---\n"
+                    + ("x" * 1024),
+                )
             commit_fixture(root)
             memory_db.build(root)
             pack = revive_pack.compose_pack(root, "Codex")
@@ -248,7 +254,48 @@ class MemoryDbTests(unittest.TestCase):
             self.assertNotIn("oldest-marker", text)
             self.assertIn("personal/Codex/OLD.md", text)
             self.assertIn("inline budget", text)
+            self.assertRegex(text, r'"omitted_entries_total": 30[0-9]')
+            self.assertIn('"details_omitted":', text)
+            self.assertGreater(
+                len(json.dumps([
+                    {"kind": "memory", "memory_id": f"memory-{index:03d}",
+                     "path": f"personal/Codex/OMITTED-{index:03d}.md",
+                     "sha256": "f" * 64, "bytes": 1024,
+                     "valid_from": f"2025-01-{(index % 28) + 1:02d}",
+                     "valid_until": None, "reason": "inline budget"}
+                    for index in range(305)
+                ], indent=2)),
+                65536,
+            )
             self.assertRegex(text, r"- token_estimate: \d+")
+
+    def test_timestamp_pii_suffix_is_rejected(self) -> None:
+        accepted, warnings = memory_db.validate_metadata(
+            {"created_at": "2026-06-19Tperson@example.invalid"}, {"Codex"}
+        )
+        self.assertEqual({}, accepted)
+        self.assertEqual(["rejected frontmatter key created_at"], warnings)
+
+    def test_supported_timestamps_and_medium_priority_are_accepted(self) -> None:
+        timestamps = (
+            "2026-06-19",
+            "2026-06-19T09:28:23Z",
+            "2026-06-19T09:28:23+02:00",
+            "2026-06-19T092823Z",
+            "2026-06-19T09:28:23.123456Z",
+            "2026-06-19T09:28:23",
+        )
+        for timestamp in timestamps:
+            accepted, warnings = memory_db.validate_metadata(
+                {"created_at": timestamp}, {"Codex"}
+            )
+            self.assertEqual({"created_at": timestamp}, accepted)
+            self.assertEqual([], warnings)
+        accepted, warnings = memory_db.validate_metadata(
+            {"priority": "medium"}, {"Codex"}
+        )
+        self.assertEqual({"priority": "medium"}, accepted)
+        self.assertEqual([], warnings)
 
     def test_p12_empty_supersedes_is_valid_and_produces_no_edge(self) -> None:
         accepted, warnings = memory_db.validate_metadata(

@@ -86,9 +86,13 @@ TYPE_VALUES = {
     "protocol", "requirement", "review-verdict", "review_result",
     "review_verdict", "status_note",
 }
-PRIORITY_VALUES = {"low", "normal", "high", "critical"}
+PRIORITY_VALUES = {"low", "normal", "medium", "high", "critical"}
 ID_RE = re.compile(r"^[A-Z]+-[0-9A-Za-z._-]+$")
-DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(?:T[^\s]+)?$")
+DATE_RE = re.compile(
+    r"^\d{4}-\d{2}-\d{2}"
+    r"(?:T(?:\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?|\d{6})"
+    r"(?:Z|[+-]\d{2}:\d{2})?)?$"
+)
 PATH_RE = re.compile(r"^[A-Za-z0-9._/\\-]+$")
 TITLE_MAX_LENGTH = 500
 STRUCTURAL_PII_PATTERNS = (
@@ -576,7 +580,7 @@ def validate_metadata(
             valid = isinstance(value, str) and bool(PATH_RE.fullmatch(value)) and ".." not in Path(value).parts
             if valid:
                 value = value.replace("\\", "/")
-        if valid and key not in {"created_at", "updated_at", "closed_at"} and contains_pii(value, domain_pii_terms):
+        if valid and contains_pii(value, domain_pii_terms):
             valid = False
         if valid:
             accepted[key] = value
