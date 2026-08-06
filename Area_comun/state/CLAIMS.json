@@ -56,6 +56,22 @@
             "updated_at": "2026-08-06T11:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0318-promocion",
+            "expires_at": "2026-08-07T11:20:00Z",
+            "notes": "GO del operador: promueve TASK-0318 (enum extensible por instancia) a ready.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0318-promocion",
+                "Area_comun/state/TASK_INDEX.json#TASK-0318",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0318",
+                "Area_comun/tasks/TASK-0318-enum-status-extensible-por-instancia.md"
+            ],
+            "started_at": "2026-08-06T11:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0318",
+            "updated_at": "2026-08-06T11:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-TASK-0318-registro",
             "expires_at": "2026-08-07T11:25:00Z",
             "notes": "Encargo C2 del veredicto r2 de TASK-0316: registra la tarea del enum extensible; queda proposed a la espera de GO.",

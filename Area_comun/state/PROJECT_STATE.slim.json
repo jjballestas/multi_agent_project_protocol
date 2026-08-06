@@ -21,7 +21,7 @@
         {
             "id": "TASK-0318",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Vocabulario de estado extensible por instancia: sacar los 6 valores de instancia que quedan en STATUS_VALUES sin perder validacion, via MEMORY_INDEX_POLICY.json con contrato de falsacion"
         }
     ],
