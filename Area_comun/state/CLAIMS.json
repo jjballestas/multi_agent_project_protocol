@@ -42,6 +42,44 @@
             "updated_at": "2026-08-06T20:13:56Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-0321-ratifica-0323",
+            "expires_at": "2026-08-07T20:50:00Z",
+            "notes": "Ratifica OK-CERRABLE de 0321 y registra R3 como TASK-0323.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-0321-ratifica-0323",
+                "Area_comun/state/TASK_INDEX.json#TASK-0321",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0321",
+                "Area_comun/tasks/TASK-0321-diskproof-emparejamiento-renombrados.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0323",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0323",
+                "Area_comun/tasks/TASK-0323-porcelain-sin-z-lectores.md"
+            ],
+            "started_at": "2026-08-06T20:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0321",
+            "updated_at": "2026-08-06T20:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0317-remediation-2",
+            "expires_at": "2026-08-06T22:39:17Z",
+            "notes": "Implement TASK-0317 remediation iteration 2 falsification contract for date-exemption placement.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0317-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0317",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
+                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T20:39:17Z",
+            "status": "active",
+            "task_id": "TASK-0317",
+            "updated_at": "2026-08-06T20:39:17Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

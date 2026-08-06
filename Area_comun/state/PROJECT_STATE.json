@@ -69,7 +69,7 @@
         {
             "id": "TASK-0317",
             "owner": "Codex",
-            "status": "changes_requested",
+            "status": "in_progress",
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
         },
         {
@@ -81,7 +81,7 @@
         {
             "id": "TASK-0321",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv"
         },
         {
@@ -89,6 +89,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Estrechar DATE_RE con validacion de rangos: baja la poblacion de cadenas portadoras del 2,9 por ciento al 0,05 por ciento"
+        },
+        {
+            "id": "TASK-0323",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Lectores de git status --porcelain SIN -z fabrican rutas inexistentes: el barredor de zombis falla ABIERTO"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
