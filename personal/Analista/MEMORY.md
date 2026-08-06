@@ -5964,3 +5964,67 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
 - GOTCHA util: `git worktree add --detach <dst> <commit>` desde el clon limpio es la forma barata de
   tener un arbol MUTABLE para mutaciones sin ensuciar el clon donde corren los gates (y sin pagar un
   segundo clone). `git worktree remove --force` al terminar.
+
+## 2026-08-06 (22:25 CEST) -- TASK-0321 diskproof: OK-CERRABLE sobre 0a008f06 (mi commit e2286c4)
+
+- Encargo `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0321`. **SIN PRODUCTO EN ALCANCE**
+  (declarado en la primera linea). Continuacion directa de MI hallazgo S4 del veredicto r2 de 0319:
+  el mismo defecto de emparejamiento vivo en `Get-WorktreeDiskProof`. Artefacto
+  `Area_comun/artifacts/Analista-TASK-0321-diskproof-pairing-verdict.md`, pusheado
+  (`53e380f6..e2286c4b`). Seis AC PASAN, 0 SLIPS en 25 vectores.
+- Anclaje: arreglo `0a008f06`, entrega `2fb770cc`, pre-arreglo `38b46096`, gates en `53e380f6`.
+  Dos clones: `--depth 1` para el codigo y `--shared` para los gates.
+- **LECCION DE CLONADO -- `--depth 1` HACE ROJO EL VALIDADOR.** El clon superficial dio
+  `VALIDATE_EXIT=1` con `commit_trailers could not scan git history from 57f6250f...: rev-list
+  ... exit 128`: no es un defecto de la entrega, es que el clon no tiene la historia desde el
+  genesis. Casi lo reporto como bloqueante. **Para gatear `validate` hace falta historia
+  completa**; la forma barata en este repo (7 GB de objetos sueltos) es `git clone --shared`,
+  que no copia objetos y da todas las refs. `--depth 1` sirve para leer/ejecutar codigo, no para
+  gatear el protocolo.
+- **METODO QUE FUNCIONO: NUEVO vs VIEJO en el MISMO repo y el MISMO instante.** Cargo las dos
+  versiones de la funcion por AST (`Parser::ParseFile` + `FunctionDefinitionAst` +
+  `Invoke-Expression`) desde el `.ps1` entregado y desde `git show 0a008f06^:<ruta>` volcado a
+  fichero, y las corro contra el mismo repo git recien creado. La falsacion del AC1 sale sola y
+  es incontestable: `s/disk-old.md`, `older/old name.md`, `e-old.md`, `/c/deep-old.md`, y dos
+  rutas destruidas a `.md` con dos renombrados.
+- **BUSCAR EL DESALINEO, NO SOLO LA RUTA AMPUTADA.** El modo de fallo caro de un parser por pares
+  no es la ruta del par, es el CORRIMIENTO que contamina todo lo posterior. Lo ataque con cinco
+  vectores dedicados (renombrado entremezclado con modificado/borrado/untracked, dos renombrados
+  seguidos, par + normal, normal + par + normal, dos pares seguidos). Ninguno desalineo.
+- **PowerShell 5.1, gotchas verificados y no supuestos:** `Where-Object { $_ }` **conserva** la
+  cadena `"0"` (solo cae la vacia) -- lo probe antes de escribir nada, era una hipotesis de
+  escape razonable y era falsa. Y `$null.Replace(...)` es error NO terminante: el script sigue,
+  exit code 0, la variable queda `$null`.
+- **DOS DE MIS SEIS MUTACIONES ERAN EQUIVALENTES Y LO VERIFIQUE ANTES DE REPORTARLAS.** Sobrevivir
+  la suite no prueba hueco de cobertura. (a) Quitar la guarda de limites sobrevive porque
+  `IsNullOrWhiteSpace($null)` ya cierra el caso: solo quitando LAS DOS guardas se fabrica
+  `[null, moved.md]`. (b) Invertir el orden del par sobrevive porque la funcion hace
+  `Sort-Object { $_.path }` antes de serializar, asi que el orden interno no es observable.
+  Reportarlas como huecos habria sido vender dos falsos hallazgos. Huecos REALES: rama `C`,
+  reintroduccion de la rama muerta, y rechazo de origen en blanco.
+- **HALLAZGO NUEVO R3, fuera de alcance: el defecto HERMANO en los lectores SIN `-z`.** El
+  Arquitecto pidio ampliar el barrido a otros scripts y ahi aparecio:
+  `sweep_cron_zombies.dirty_paths()` convierte `?? "personal/caf\303\251.md"` en
+  `'"personal/caf/303/251.md"'` -- sin `-z` manda `core.quotepath`, git entrecomilla y escapa en
+  octal, y el `.replace("\\","/")` convierte las barras de escape en separadores. Su consumidor
+  `dirty_claimed_route()` falla **ABIERTA**: el barredor de zombis puede matar a un peer que
+  escribe una ruta reclamada. Mismo patron en `runtime/orchestrator.py:667` y `:688` y en el
+  espejo de `examples/full_runtime_instance/`. **No es S4** (ahi ` -> ` si lo emite git). Ruteado
+  como pregunta al Arquitecto, no tocado.
+- Descarte ademas la hipotesis del **duplicado obsoleto del harness**: `find` da una sola copia y
+  `test_new_instance_exports_identical_harness` pasa. Merecia la pena mirarlo: un exportador que
+  publica el parser viejo seria un AC5 fallado invisible al grep del archivo entregado.
+- **ATRIBUIR ANTES DE REPORTAR, otra vez.** `prune_state --check` daba exit 1 en el ancla y la CI
+  falla con eso. Antes de escribirlo como bloqueante lo medi en cuatro commits: ya estaba vencida
+  en `38b46096`, **antes** de TASK-0321. El Arquitecto la corrio en `53e380f6` mientras yo
+  revisaba y el gate quedo verde. De bloqueante a nota de trazabilidad.
+- Discrepancia de cifras menor, anotada sin dramatizar: el recomputo del Arquitecto cita 8/8 en la
+  suite del harness y son **14** casos. El exit code es lo que gatea.
+- COORDINACION: 0 claims activos sobre mis rutas al escribir, arbol gobernado sin mods rastreadas.
+  El arbol avanzo durante la revision (`6dfdd4c7` -> `d192d32d` -> `53e380f6`): **re-`git fetch`
+  justo antes de commitear**, no al empezar (segunda vez seguida que salva el commit). Pathspec
+  explicito en el `git commit`, nunca `git add` pelado. Trailers `Task-Id` + `Ops-Reason` +
+  `Co-Authored-By`. Ojo: `check_commit_trailers.py --root .` da exit 2, es error de USO (espera un
+  fichero de mensaje de commit); el gate real de trailers va dentro de `validate`, que dio 0.
+- Limpieza: `git worktree remove --force` de los cuatro arboles temporales de la atribucion de la
+  poda + `git worktree prune`. Scratch bajo `D:/Aegis_Scratch/mapp/` (DECISION-0104).
