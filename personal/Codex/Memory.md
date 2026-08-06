@@ -17,8 +17,11 @@ Last updated: 2026-08-06 Europe/Madrid, during TASK-0316 remediation iteration 1
   neutrality regression, 27/27 falsification inventory, both neutrality scanners, encoding,
   collaboration validation, and diff checks. A clean clone at `52d0a38` passed every requested
   gate with empty status and measured configured/effective coverage at 124 -> 136 (delta +12), all
-  six memory scripts included, and zero runtime-memory files. Governed delivery is pending; Codex
-  remains maker only.
+  six memory scripts included, and zero runtime-memory files.
+- Delivery commit `5491375` moves TASK-0316 back to `in_review`, releases all three remediation
+  claims, and publishes the self-contained handoff plus response-routed mailbox request for
+  Arquitecto recomputation and independent Analista re-review. Codex remains maker only and did
+  not review or ratify the remediation.
 
 ## 2026-08-06 - TASK-0316 implementation
 
