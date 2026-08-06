@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, during TASK-0319 remediation iteration 1.
+Last updated: 2026-08-06 Europe/Madrid, after TASK-0319 closure.
+
+## 2026-08-06 - TASK-0319 closure
+
+- Governed commit `f59ab01b` moved TASK-0319 from `review_approved` to `done`
+  after independent Analista approval and Arquitecto ratification.
+- Runtime events 7234-7236 atomically acquired the Codex closure claim, applied
+  the implementer-only done-flip, and released the claim; all three events are
+  signed as Codex and drift remained false.
+- Collaboration validation, encoding, and domain-neutrality gates exited 0 before
+  the closure commit. Codex did not review or ratify its own work.
 
 ## 2026-08-06 - TASK-0319 remediation iteration 1 implementation
 
