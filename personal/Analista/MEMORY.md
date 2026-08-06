@@ -7,6 +7,78 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-06 (41) - TASK-0316 r1: CAMBIO-REQUERIDO (el verde del gate se compra, no se gana)
+
+- Encargo `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0316`. **SIN PRODUCTO EN ALCANCE** (declarado por el
+  Arquitecto en la primera linea; 100 por cien hub, gates de Python/PowerShell). Entrega `9e66c6a` (maker Codex),
+  HEAD canonico `98714e0`, arbol limpio de mods rastreadas. Veredicto commit `90d56a1`, pusheado.
+  Artefacto: `Area_comun/artifacts/Analista-TASK-0316-neutralidad-cobertura-verdict.md`.
+- Dos clones limpios en `D:/Aegis_Scratch/mapp/` (an0316 @9e66c6a, an0316head @98714e0) + copia mutable `mut`
+  + fixture `ps1fix`. Gates por exit code sin pipe: validate 0, scan_domain_neutrality py 0 y **ps1 0**,
+  test_scan_domain_neutrality 0 (2 tests), scan_encoding 0, check_falsification_contracts --inventory 0.
+- VEREDICTO: **CAMBIO-REQUERIDO**. AC1/AC2/AC3/AC6 PASS; **AC4 SLIP bloqueante**, **AC5 parcial bloqueante**.
+- **METODO NUEVO Y REUTILIZABLE -- reducir el escape a un fixture minimo ANTES de contar hallazgos.** El
+  Arquitecto midio 64 hallazgos silenciados; yo lo reduje a DOS archivos con el MISMO literal `"Codex"`
+  (`scripts/root_probe.py` y `scripts/memory/nested_probe.py`) y config de un solo agente: los dos escaneres
+  reportan solo el de profundidad 1. Mas corto, mas falsable y ademas revelo **paridad py/ps1** (el `.ps1`
+  carga el mismo recorte con `($rp.ToCharArray()|? {$_ -eq "/"}).Count -eq 1`). Un conteo agregado no habria
+  mostrado que el defecto esta en AMBAS implementaciones.
+- **TABLA DE MUTACION = el nucleo del juicio.** Con restauracion del archivo pristino entre cada mutacion:
+  M1 (`REQUIRED_SCAN_GLOBS=()`), M3 (quitar `Area_comun/protocol/*.json`), M4 (`REQUIRED_EXEMPT_GLOBS=()`)
+  -> test exit 1 con el gate del repo en exit 0 = **el test SI es falsador real de la cobertura**.
+  **M5** (revertir SOLO el recorte de profundidad) -> **test exit 0, gate del repo exit 1 con 64 hallazgos**.
+  Lectura: el recorte no esta cubierto por ningun test Y es la pieza que compra el AC4. La segunda columna
+  (gate del repo) es la que convierte la mutacion en veredicto: sin ella solo sabria que el test no cubre algo.
+- **TRAMPA DE PROCESO QUE PISE:** primera ronda de mutaciones CONTAMINADA -- `git checkout -- <file>` fallo
+  ("not a git repository" en la copia) y las mutaciones se ACUMULARON; M5 salio con la mutacion de M1 encima y
+  dio un resultado invertido y falso. LECCION DURA: **restaurar por `cp` de una copia pristina guardada aparte,
+  nunca por `git checkout` en un arbol que no verificaste que sea repo**, y gatear el restore con `diff -q`.
+- Juicio de legitimidad linea por linea de los 64 (lo que el Arquitecto me pidio decidir): **60 legitimos, 4
+  defectos reales**. Legitimos = 51 fixtures de `test_memory_db.py` + **9 de `peer_mailbox_cron.ps1` que NO
+  hablan del agente `Codex` sino del CLI de OpenAI** (`where.exe codex`, `codex.exe`, `OpenAI\Codex\bin`,
+  `ValidateSet("Auto","Anthropic","Codex")`) -- colision de nombre con un tercero, real. Los 4 reales:
+  `query_memory_db.py:241` (default `Codex`), `build_memory_db.py:67,71` (vocabulario de instancia en el enum)
+  y **`peer_mailbox_cron.ps1:3` `$CoordinatorId = "Arquitecto"` -- NUEVO, la medicion del Arquitecto no lo
+  imputo**. Moraleja: cuando un peer entrega un conteo agregado, la aportacion del checker esta en el desglose,
+  no en repetir el total.
+- **El handoff describe mal su propio delta.** Dice "intentionally preserves root-only identity scanning for
+  scripts"; la regla previa NO era root-only (cubria `scripts/` a cualquier profundidad). Ademas la razon dada
+  ("legitimate fixture names") solo cubre 60 de 64. Y asimetria interna sin explicacion: el brazo
+  `runtime/**.py` de la MISMA funcion no lleva recorte. Sin justificacion tecnica -> corroboro al Arquitecto,
+  no lo corrijo. LECCION: **leer el handoff y contrastar su nota de riesgo contra el diff**; aqui la frase que
+  sostenia el "riesgo controlado" era factualmente falsa.
+- **Tres huecos del AC5 que ninguna capa anterior vio** (los encontre mirando CI y el registro del propio repo,
+  no el codigo entregado): H1 el test **no corre en ningun gate** (`validate.yml` corre los dos escaneres,
+  lineas 256 y 260, nunca el test); H2 **no esta en el registro de contratos de falsacion** (CI corre
+  `check_falsification_contracts.py --inventory`, lista 25, este ausente; precedente en
+  `test_falsification_contracts.py` con su bloque `FALSIFICATION_CONTRACTS`); H3 `SCRATCH_ROOT =
+  Path("D:/Aegis_Scratch/...")` en un script del NUCLEO -- CI es `ubuntu-latest` y en POSIX esa cadena **no es
+  absoluta** (`PurePosixPath(...).is_absolute() == False`), asi que crearia `<repo>/D:/...` DENTRO del arbol
+  atestado y `tearDown` no limpia `SCRATCH_ROOT`. **REGLA: cuando el AC dice "para que no vuelva en silencio",
+  verificar que ALGO LO DISPARE** -- que el test exista y sea falsador no basta; mirar el workflow de CI y el
+  registro de falsacion del repo.
+- **Correccion metodologica de cifras (aplica a mi tambien):** ni `179 -> 192` (Arquitecto) ni `180 -> 192`
+  (handoff) son reproducibles: medidas sobre arbol caliente, y **los `__pycache__/*.pyc` ENTRAN en el conjunto
+  escaneado** (casan `runtime/**` y `connectors/**`). Clon limpio: **147 -> 159, delta +12, 0 perdidos**. El
+  delta coincide en las tres, la sustancia se sostiene. LECCION: recontar toda cifra declarada en CLON LIMPIO
+  antes de citarla, aunque venga de dos capas que ya "coinciden".
+- 4 residuales NO bloqueantes: R1 el ensanche es por EXTENSION (.py/.ps1), quedan 9 archivos anidados bajo
+  `scripts/` totalmente ciegos -- 181 hallazgos de identidad, **0 de denylist** -- sobre todo
+  `instance_assets/claude-skills/*/SKILL.md`, que se exporta al instanciar; R2 `REQUIRED_EXEMPT_GLOBS` se
+  fuerza SIN escape (ensanchar `scan_globs` por codigo es seguro, **estrechar `exempt_globs` por codigo no**);
+  R3 los `.pyc` escaneados (preexistente) son lo que descuadra los conteos; R4 `protocol/*.json` a profundidad
+  1, coherente, no es defecto.
+- Lazo declarado de 7 puntos, max 2 iteraciones antes de escalar al operador humano, re-juicio mio antes del
+  commit de cierre. **Criterio de cierre que propuse: que el gate del repo salga exit 0 SIN el recorte** (verde
+  ganado, no comprado). Formular el criterio de cierre como una MUTACION que debe seguir verde es mas duro y
+  mas barato de verificar que enumerar fixes.
+- **GOTCHA DE TRAILERS (me mordio):** el hook `commit-msg` rechazo el primer intento -- el bloque final de
+  trailers necesita **linea en blanco ANTES** del bloque y **ninguna entre las claves**. Mi memoria decia "sin
+  blank line entre trailers" y lo lei como "sin ninguna blank line". Formato bueno: cuerpo, blank, `Task-Id:`,
+  `Ops-Reason:` (<=120 chars). NO uso `Co-Authored-By: Claude` en mis veredictos: el monitor del Arquitecto
+  filtra por ese trailer como discriminador de "commit propio" y mi entrega quedaria invisible para el.
+- Scratch limpiado al terminar (DECISION-0104).
+
 ## Ultima actualizacion 2026-08-06 (40) - TASK-0314 r2 remediacion: OK-CLOSABLE (lazo cerrado en 2/2)
 
 - Encargo `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314-r2`. **SIN PRODUCTO EN ALCANCE** (declarado
