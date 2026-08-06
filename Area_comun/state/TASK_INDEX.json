@@ -293,6 +293,14 @@
             "type": "infra"
         },
         {
+            "file": "Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md",
+            "id": "TASK-0319",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)",
+            "type": "refactor"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
