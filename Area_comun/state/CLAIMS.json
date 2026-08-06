@@ -113,6 +113,56 @@
             "updated_at": "2026-08-06T19:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote10",
+            "expires_at": "2026-08-07T20:15:00Z",
+            "notes": "Higiene lote 10: veredictos r2 consumidos y RESP entregada.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote10",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0317-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0317-r2.md",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0319-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0319-r2.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0318.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0318.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0317-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0317-r2.md"
+            ],
+            "started_at": "2026-08-06T20:15:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T20:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote11",
+            "expires_at": "2026-08-07T20:20:00Z",
+            "notes": "Higiene lote 11: ACTIONs y GOs entregados y los 3 handoff consumidos.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote11",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0319-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0319-r2.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-0317-0319-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-0317-0319-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0318-doneflip.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0318-doneflip.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0319-doneflip.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0319-doneflip.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0321.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0321.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0317-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0317-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0319-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0319-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0321.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0321.md"
+            ],
+            "started_at": "2026-08-06T20:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T20:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote8",
             "expires_at": "2026-08-07T16:20:00Z",
             "notes": "Higiene lote 8: los 3 veredictos consumidos y el REVIEW de 0317 ya respondido.",
