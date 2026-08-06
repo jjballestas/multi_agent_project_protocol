@@ -12,6 +12,10 @@ Last updated: 2026-08-06 Europe/Madrid, after TASK-0319 closure.
 - The production implementation is unchanged. The targeted negative, 31/31 falsification
   inventory, and full 60-test memory suite exit 0; remaining clean-clone recomputation and
   governed delivery to independent review are pending.
+- Delivery commit `8a4092f7` moves TASK-0317 to `in_review`, releases the work, memory,
+  and delivery claims atomically, and publishes the remediation-2 handoff/request. Runtime
+  events 7279-7282 are signed as Codex with drift false; independent Analista review remains
+  required, and Codex did not review or ratify the work.
 
 ## 2026-08-06 - TASK-0321 implementation
 
