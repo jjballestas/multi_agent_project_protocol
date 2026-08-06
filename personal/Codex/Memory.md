@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, during TASK-0316 remediation iteration 1.
+Last updated: 2026-08-06 Europe/Madrid, during TASK-0317 implementation.
+
+## 2026-08-06 - TASK-0317 implementation
+
+- Implementation commit `614b644` prevents the phone detector from starting a candidate inside
+  timestamp seconds, so valid ISO-8601 timestamps with 5-6 fractional digits and negative UTC
+  offsets are accepted without widening `DATE_RE` or exempting date metadata from PII checks.
+- The timestamp regression now generates the complete 333-member grammar family and retains all
+  11 rejected suffix vectors from the independent TASK-0314 r2 verdict.
+- Clean clone `614b644` passed all 57 tests, the real build (4,182 artifacts, 315 events, 227
+  warnings and zero date-key warnings), fast/full drift, encoding, neutrality, collaboration
+  validation, diff checks, and empty status. Full drift reported round_trip=pass and
+  bidirectional-pass without writing the database.
+- TASK-0317 is `in_review` with all Codex claims released. The self-contained handoff and mailbox
+  request route commit `614b644` to Arquitecto for recomputation and independent Analista review;
+  Codex did not review or ratify its own work.
 
 ## 2026-08-06 - TASK-0316 remediation iteration 1
 
