@@ -2,6 +2,23 @@
 
 Last updated: 2026-08-06 Europe/Madrid, after TASK-0319 closure.
 
+## 2026-08-06 - TASK-0321 implementation
+
+- Implementation commit `0a008f06` makes `Get-WorktreeDiskProof` parse real
+  `git status --porcelain=v1 -z` rename/copy records as destination/source pairs.
+- The proof preserves both exact paths, reports the renamed destination as present and
+  its source as absent, removes the unreachable ` -> ` branch, and fails closed when a
+  paired source record is missing.
+- The permanent real-Git boundary reproduces the pre-fix amputated source path, kills a
+  source-stripping mutant, and is declared in the falsification inventory. The harness
+  suite passes 14 tests and the inventory reports 30/30 contracts.
+- Pre-commit collaboration validation, encoding, neutrality, falsification inventory,
+  harness suite, and diff gates exited 0. Detached clean clone `0a008f06` repeated all gates,
+  including 14 harness tests and 30/30 falsification contracts, with clean status.
+- The governed delivery moves TASK-0321 to `in_review`, releases both maker claims, and
+  publishes the self-contained handoff plus response-routed review request. Codex remains maker
+  only and did not review or ratify the work.
+
 ## 2026-08-06 - TASK-0319 closure
 
 - Governed commit `f59ab01b` moved TASK-0319 from `review_approved` to `done`
