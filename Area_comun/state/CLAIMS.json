@@ -27,35 +27,17 @@
             "updated_at": "2026-07-03T09:01:07Z"
         },
         {
-            "claim_id": "CLAIM-20260806-070703-prune-arquitecto",
+            "claim_id": "CLAIM-20260806-110001-prune-arquitecto",
             "expires_at": "2026-08-06",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Arquitecto",
             "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json"
+                "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-08-06T07:07:03Z",
+            "started_at": "2026-08-06T11:00:01Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-08-06T07:07:03Z"
-        },
-        {
-            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0317-promocion",
-            "expires_at": "2026-08-07T11:00:00Z",
-            "notes": "GO del operador: promueve TASK-0317 (residual R5) a ready.",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0317-promocion",
-                "Area_comun/state/TASK_INDEX.json#TASK-0317",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
-                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md"
-            ],
-            "started_at": "2026-08-06T11:00:00Z",
-            "status": "released",
-            "task_id": "TASK-0317",
-            "updated_at": "2026-08-06T11:00:00Z"
+            "updated_at": "2026-08-06T11:00:01Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
