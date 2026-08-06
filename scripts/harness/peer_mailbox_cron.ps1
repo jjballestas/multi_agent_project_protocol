@@ -17,6 +17,7 @@ param(
     [int]$ProgressExtensionSeconds = 60,
     [int]$ProgressHardCapSeconds = 900,
     [int]$MaxTransientRetries = 3,
+    [ValidateRange(1, 2147483647)][int]$PreExecDeferTimeoutSeconds = 7200,
     [int]$RetryBackoffSeconds = 30,
     [int]$AbortedResidueMinutes = 5
 )
@@ -89,6 +90,9 @@ $LeasePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.exec-lease.json"
 $SeenPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.seen.json"
 $RetryPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.retry.json"
 $ResiduePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.residue-first-seen.json"
+$ResidueDiagnosticPathLimit = 10
+$script:LastResiduePaths = @()
+$script:LastAdditionalSignalDetail = ""
 $RunsDir = Join-Path $RuntimeDir "runs"
 $StartedAtUtc = [DateTime]::UtcNow
 $NoCoordinatorRounds = 0
@@ -673,11 +677,23 @@ function Get-StagedResidueState {
     $statusResult = Get-GitStatusPorcelainUtf8
     if (-not $statusResult.ok) { return "unknown" }
     $statusRaw = [string]$statusResult.raw
-    if ([string]::IsNullOrEmpty($statusRaw)) {
+    $status = @($statusRaw -split [char]0 | Where-Object { $_ } | Where-Object {
+        if ($_.Length -lt 4) { return $true }
+        $candidate = $_.Substring(3).Replace("\", "/")
+        if ($candidate -match ' -> ') { $candidate = ($candidate -split ' -> ', 2)[1] }
+        if ($candidate -notmatch '^personal/([^/]+)(?:/|$)') { return $true }
+        return ($Matches[1] -ieq $PeerId)
+    })
+    $script:LastResiduePaths = @($status | ForEach-Object {
+        if ($_.Length -lt 4) { return }
+        $candidate = $_.Substring(3).Replace("\", "/")
+        if ($candidate -match ' -> ') { $candidate = ($candidate -split ' -> ', 2)[1] }
+        $candidate
+    } | Select-Object -First $ResidueDiagnosticPathLimit)
+    if ($status.Count -eq 0) {
         if (Test-Path -LiteralPath $ResiduePath) { Remove-Item -LiteralPath $ResiduePath -Force -ErrorAction SilentlyContinue }
         return "none"
     }
-    $status = @($statusRaw -split [char]0 | Where-Object { $_ })
     $cutoff = [DateTime]::UtcNow.AddMinutes(-$AbortedResidueMinutes)
     $firstSeen = @{}
     if (Test-Path -LiteralPath $ResiduePath) {
@@ -730,6 +746,7 @@ function Read-JsonWithDeadline {
 function Get-AdditionalWorkSignal {
     # Claims and live peer leases reinforce a defer. Their absence is never used
     # as permission to override the dirty-tree veto.
+    $script:LastAdditionalSignalDetail = ""
     $claimsResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\CLAIMS.json")
     if (-not $claimsResult.ok) { return "claims_unreadable" }
     $now = [DateTime]::UtcNow
@@ -743,28 +760,52 @@ function Get-AdditionalWorkSignal {
         if ($leaseFile.FullName -eq $LeasePath) { continue }
         $leaseResult = Read-JsonWithDeadline -Path $leaseFile.FullName
         if (-not $leaseResult.ok) { return "peer_lease_unreadable" }
-        if (Test-LeaseProcessMatches -Lease $leaseResult.value) { return "active_peer_lease" }
+        if (Test-LeaseProcessMatches -Lease $leaseResult.value) {
+            $leaseOwner = [string]$leaseResult.value.owner
+            if ([string]::IsNullOrWhiteSpace($leaseOwner)) { $leaseOwner = "unknown" }
+            $leaseOwner = $leaseOwner -replace '[^A-Za-z0-9_.-]', '_'
+            $script:LastAdditionalSignalDetail = "peer=$leaseOwner"
+            return "active_peer_lease"
+        }
     }
     return "none"
 }
 
 function Register-PreExecDefer {
-    param([System.IO.FileInfo]$Message, [string]$Reason, [string]$Outcome = "deferred")
+    param([System.IO.FileInfo]$Message, [string]$Reason, [string]$Detail = "", [string]$Outcome = "deferred")
     $signature = Get-MessageSignature -Message $Message
     $retry = Read-RetryState
     $same = $retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)
     $attempts = if ($same -and $null -ne $retry[$Message.Name].attempts) { [int]$retry[$Message.Name].attempts } else { 0 }
-    $defers = if ($same -and $null -ne $retry[$Message.Name].defers) { [int]$retry[$Message.Name].defers + 1 } else { 1 }
-    $terminal = ($defers -ge $MaxTransientRetries)
+    $sameReason = $same -and ([string]$retry[$Message.Name].defer_reason -eq $Reason)
+    $startedAt = [DateTime]::UtcNow
+    if ($sameReason -and $null -ne $retry[$Message.Name].defer_started_at) {
+        try { $startedAt = [DateTime]::Parse([string]$retry[$Message.Name].defer_started_at).ToUniversalTime() }
+        catch { $sameReason = $false; $startedAt = [DateTime]::UtcNow }
+    }
+    $defers = if ($sameReason -and $null -ne $retry[$Message.Name].defers) { [int]$retry[$Message.Name].defers + 1 } else { 1 }
+    $elapsedSeconds = [Math]::Max(0, [int][Math]::Floor(([DateTime]::UtcNow - $startedAt).TotalSeconds))
+    $terminal = ($sameReason -and $elapsedSeconds -ge $PreExecDeferTimeoutSeconds)
     $effectiveOutcome = if ($terminal) { "defer_terminal" } else { $Outcome }
-    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempts; defers = $defers; exhausted = $terminal; outcome = $effectiveOutcome; reason = $Reason; updated_at = [DateTime]::UtcNow.ToString("o") }
+    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempts; defers = $defers; defer_reason = $Reason; defer_started_at = $startedAt.ToString("o"); exhausted = $terminal; outcome = $effectiveOutcome; reason = $Reason; detail = $Detail; updated_at = [DateTime]::UtcNow.ToString("o") }
     Write-RetryState -State $retry
-    if ($defers -ge $MaxTransientRetries) {
-        Write-Log "RETRY_EXHAUSTED defers=$defers attempts=$attempts signal=watchdog outcome=defer_terminal reason=$Reason message=$($Message.Name)"
+    $detailSuffix = if ([string]::IsNullOrWhiteSpace($Detail)) { "" } else { " detail=$Detail" }
+    if ($terminal) {
+        Write-Log "RETRY_EXHAUSTED defers=$defers attempts=$attempts elapsed_seconds=$elapsedSeconds timeout_seconds=$PreExecDeferTimeoutSeconds signal=watchdog outcome=defer_terminal reason=$Reason$detailSuffix message=$($Message.Name)"
     } else {
-        Write-Log "RETRY_DEFER defer=$defers max=$MaxTransientRetries reason=$Reason message=$($Message.Name)"
+        Write-Log "RETRY_DEFER defer=$defers attempts=$attempts elapsed_seconds=$elapsedSeconds timeout_seconds=$PreExecDeferTimeoutSeconds reason=$Reason$detailSuffix message=$($Message.Name)"
         if ($RetryBackoffSeconds -gt 0) { Start-Sleep -Seconds $RetryBackoffSeconds }
     }
+}
+
+function Reset-PreExecDefer {
+    param([System.IO.FileInfo]$Message)
+    $signature = Get-MessageSignature -Message $Message
+    $retry = Read-RetryState
+    if (-not $retry.ContainsKey($Message.Name) -or ([string]$retry[$Message.Name].signature -ne $signature)) { return }
+    $attempts = if ($null -ne $retry[$Message.Name].attempts) { [int]$retry[$Message.Name].attempts } else { 0 }
+    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempts; defers = 0; exhausted = $false; outcome = "pre_exec_clear"; updated_at = [DateTime]::UtcNow.ToString("o") }
+    Write-RetryState -State $retry
 }
 
 function Test-LedgerManagedPath {
@@ -951,7 +992,9 @@ function Invoke-PeerForMessage {
         return
     }
     if ($residueState -eq "live") {
-        Register-PreExecDefer -Message $Message -Reason "worktree_residue_live"
+        $residuePathsJson = ConvertTo-Json -InputObject @($script:LastResiduePaths) -Compress
+        $residueDetail = "paths_json=$residuePathsJson"
+        Register-PreExecDefer -Message $Message -Reason "worktree_residue_live" -Detail $residueDetail
         return
     }
     if ($residueState -eq "aborted") {
@@ -959,9 +1002,10 @@ function Invoke-PeerForMessage {
     }
     $additionalSignal = Get-AdditionalWorkSignal
     if ($additionalSignal -ne "none") {
-        Register-PreExecDefer -Message $Message -Reason $additionalSignal
+        Register-PreExecDefer -Message $Message -Reason $additionalSignal -Detail $script:LastAdditionalSignalDetail
         return
     }
+    Reset-PreExecDefer -Message $Message
     New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
     $agentPath = $ResolvedAgentPath
     $execArgs = Get-AgentArguments

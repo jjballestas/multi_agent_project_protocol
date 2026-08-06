@@ -134,15 +134,22 @@ preserve old behavior:
   legacy fallback only and never override a token, non-zero exit, or signed own evidence.
 - `seen.json` is written only after confirmed work or a definitive, principled negative.
   Transient and unconfirmed aborts stay
-  unseen and use `retry.json`: three attempts by default, 30-second backoff, then a
+  unseen and use `retry.json`: three agent-exec attempts by default, 30-second backoff, then a
   `RETRY_EXHAUSTED ... signal=watchdog` log record. A changed message signature resets
-  the retry budget. Pre-exec defers (ledger, snapshots, residue probe, or fresh index/worktree
-  residue) have their own counter and watchdog signal but consume no agent-attempt budget;
-  they remain eligible and resume automatically when the environmental veto clears.
+  the retry budget. Pre-exec defers (ledger, snapshots, residue probe, claims, peer leases,
+  or fresh index/worktree residue) never consume `-MaxTransientRetries`: they use a stable-cause
+  wall-clock budget, `-PreExecDeferTimeoutSeconds` (default 7200). The default is twice the
+  default 3600-second exec deadline, so a normal 30-60 minute peer turn cannot starve the other
+  queue. A cause change or one clear observation resets that defer window. One unchanged cause
+  that survives the full window still ends in `defer_terminal`; this preserves bounded recovery
+  from a real stuck condition.
 - The pre-exec residue gate uses full NUL-delimited `git status --porcelain -z`, not only the
   index. Paths with spaces or non-ASCII bytes are never quoted or escape-parsed. Fresh
-  unstaged residue therefore defers with a retry signal. The probe runs inside the lock's
-  cleanup path. A lock without an exec lease is
+  unstaged residue therefore defers with a retry signal. `worktree_residue_live` logs up to
+  10 causal paths, and `active_peer_lease` logs the lease owner. Another peer's private
+  `personal/<id>/` tree is excluded from residue because DECISION-0016 makes it non-writable
+  by the invoking peer; the invoking peer's own personal tree remains visible. The probe runs
+  inside the lock's cleanup path. A lock without an exec lease is
   self-healed as orphaned; the complete lock-held setup is covered by one cleanup path.
 - Transient rollback snapshots the pre-exec index and restores only that index while HEAD
   is stable: it unstages to the captured HEAD, then gates `git apply --cached` by exit code.
@@ -169,7 +176,9 @@ preserve old behavior:
   active claim, a peer write in flight, resource-lock contention, or dirty/staged residue
   left by an aborted exec. Non-retryable causes are principled checker NO-GO/change_required,
   explicit scope rejection, and out-of-scope refusal. These are consumed once and never
-  retried automatically.
+  retried automatically. Active external claims and active peer leases remain hard pre-exec
+  vetoes; the defer budget changes only how long the runner waits before declaring a stable
+  condition terminal and never permits concurrent execs or bypasses DECISION-0020.
 - Before a transient return, the runner unstages and restores only paths that were absent
   from the pre-exec status snapshot. Pre-existing user or peer changes are preserved.
   Staged files newer than `-AbortedResidueMinutes` are treated as live work and defer the

@@ -2,7 +2,7 @@
 task_id: TASK-0319
 file: Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md
 title: "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)"
-status: ready
+status: in_progress
 type: refactor
 owner: Codex
 reviewer: Analista

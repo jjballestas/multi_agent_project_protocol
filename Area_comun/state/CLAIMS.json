@@ -257,6 +257,29 @@
             "updated_at": "2026-08-06T12:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0319",
+            "expires_at": "2026-08-07T02:02:51Z",
+            "notes": "Implement stable-cause wall-clock pre-exec defer budgets, diagnostics, private-area exclusion, permanent regression coverage, and exported parity.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0319",
+                "Area_comun/state/TASK_INDEX.json#TASK-0319",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0319",
+                "Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/new_instance.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T14:02:51Z",
+            "status": "active",
+            "task_id": "TASK-0319",
+            "updated_at": "2026-08-06T14:02:51Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
