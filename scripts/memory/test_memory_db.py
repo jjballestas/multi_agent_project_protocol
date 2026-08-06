@@ -394,9 +394,26 @@ class MemoryDbTests(unittest.TestCase):
 
     def test_timestamp_exemption_is_phone_only_and_falsifiable(self) -> None:
         """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY"""
-        timestamp = "2026-06-19T09:28:23.123456-05:00"
+        dates = ("2026-01-01", "2026-06-19", "2026-12-31")
+        times = ("09:28:23", "092823", "00:00:00", "23:59:59")
+        fractions = ("", ".1", ".12", ".123", ".1234", ".12345", ".123456")
+        offsets = ("", "Z", "+02:00", "-05:00", "-12:30")
+        timestamps = set(dates)
+        timestamps.update(
+            timestamp
+            for date in dates
+            for time_value in times
+            for fraction in fractions
+            for offset in offsets
+            if memory_db.DATE_RE.fullmatch(
+                timestamp := f"{date}T{time_value}{fraction}{offset}"
+            )
+        )
+        self.assertEqual(333, len(timestamps))
         domain_term = "2026"
-        self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))
+        for timestamp in timestamps:
+            with self.subTest(implementation="source", timestamp=timestamp):
+                self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))
 
         source = MODULE_PATH.read_text(encoding="utf-8")
         phone_guard = "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
@@ -425,7 +442,9 @@ class MemoryDbTests(unittest.TestCase):
                 spec.loader.exec_module(mutant)
             finally:
                 sys.modules.pop(spec.name, None)
-            self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))
+            for timestamp in timestamps:
+                with self.subTest(implementation="mutant", timestamp=timestamp):
+                    self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))
 
     def test_p12_empty_supersedes_is_valid_and_produces_no_edge(self) -> None:
         accepted, warnings = memory_db.validate_metadata(
