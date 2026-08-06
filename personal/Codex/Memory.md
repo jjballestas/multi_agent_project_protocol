@@ -11,8 +11,11 @@ Last updated: 2026-08-06 Europe/Madrid, during TASK-0317 remediation iteration 1
 - The unchanged generated 333-member timestamp family and all 11 rejected suffix vectors pass;
   the full 59-test memory suite, real rebuild, encoding, neutrality, collaboration, and diff
   gates exited 0 before the implementation commit.
-- TASK-0317 remains `in_progress` until the exact implementation commit is recomputed in a
-  clean clone and the governed remediation handoff is published. Codex remains maker only.
+- The exact implementation commit passed all required gates in a detached clean clone; the
+  combined command exited 0 after a 4,203-artifact, 386-event rebuild and ended with clean status.
+- Delivery commit `590efdc` moves TASK-0317 to `in_review`, releases all three maker claims,
+  and publishes the updated self-contained handoff plus response-routed review request. Codex
+  remains maker only and did not review or ratify the remediation.
 
 ## 2026-08-06 - TASK-0318 closure
 
