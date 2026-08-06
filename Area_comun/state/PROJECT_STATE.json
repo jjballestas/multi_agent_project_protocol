@@ -75,7 +75,7 @@
         {
             "id": "TASK-0316",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean"
         },
         {

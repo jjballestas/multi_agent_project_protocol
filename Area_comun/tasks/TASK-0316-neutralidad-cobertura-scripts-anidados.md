@@ -2,7 +2,7 @@
 task_id: TASK-0316
 file: Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md
 title: "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean"
-status: in_review
+status: changes_requested
 type: infra
 owner: Codex
 reviewer: Analista
