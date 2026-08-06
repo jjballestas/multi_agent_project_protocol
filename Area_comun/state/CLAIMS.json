@@ -128,6 +128,29 @@
             "updated_at": "2026-08-06T05:47:19Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0316-delivery",
+            "expires_at": "2026-08-06T17:56:10Z",
+            "notes": "Deliver TASK-0316 implementation for Arquitecto recomputation and independent Analista review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0316",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0316",
+                "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0316-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0316.md",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T05:56:10Z",
+            "status": "released",
+            "task_id": "TASK-0316",
+            "updated_at": "2026-08-06T05:56:10Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0316-test",
             "expires_at": "2026-08-06T17:49:49Z",
             "notes": "Implement and regression-test required neutrality coverage without changing pinned config.",
@@ -144,7 +167,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-06T05:49:49Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0316",
             "updated_at": "2026-08-06T05:49:49Z"
         },

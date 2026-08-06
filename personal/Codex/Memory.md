@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, after TASK-0314 closure.
+Last updated: 2026-08-06 Europe/Madrid, during TASK-0316 implementation.
+
+## 2026-08-06 - TASK-0316 implementation
+
+- Implementation commit `9e66c6a` makes the Python and PowerShell neutrality scanners
+  auto-append nested `scripts/**/*.py`, nested `scripts/**/*.ps1`, and
+  `Area_comun/protocol/*.json` coverage without modifying pinned config.
+- `runtime/memory/**` is auto-exempted because revive packs are generated there and may
+  inline governed corpus. Root-level script identity scanning retains its prior surface;
+  the newly covered nested scripts receive domain-denylist scanning without false identity hits.
+- The pre-fix scratch probe exited 0 despite planted domain terms. The fixed inventory is
+  192 files, including all six `scripts/memory/` files and the policy JSON, versus 180 files,
+  zero memory scripts, and no policy JSON before the fix. The permanent Python/PowerShell
+  regression passed 2/2, and the live neutrality, encoding, collaboration, and diff gates exited 0.
+- TASK-0316 remains `in_progress` under `CLAIM-20260806-Codex-TASK-0316-test` pending
+  clean-clone verification and governed delivery. Codex has not reviewed or ratified its work.
 
 ## 2026-08-06 - TASK-0314 closure
 

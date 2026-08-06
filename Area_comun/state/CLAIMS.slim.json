@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260806-Codex-TASK-0316-test",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-test",
-                "Area_comun/state/TASK_INDEX.json#TASK-0316",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0316",
-                "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md",
-                "scripts/scan_domain_neutrality.py",
-                "scripts/scan_domain_neutrality.ps1",
-                "scripts/test_scan_domain_neutrality.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0316"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
