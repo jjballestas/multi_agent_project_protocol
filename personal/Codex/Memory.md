@@ -14,8 +14,11 @@ Last updated: 2026-08-06 Europe/Madrid, during TASK-0316 implementation.
   192 files, including all six `scripts/memory/` files and the policy JSON, versus 180 files,
   zero memory scripts, and no policy JSON before the fix. The permanent Python/PowerShell
   regression passed 2/2, and the live neutrality, encoding, collaboration, and diff gates exited 0.
-- TASK-0316 remains `in_progress` under `CLAIM-20260806-Codex-TASK-0316-test` pending
-  clean-clone verification and governed delivery. Codex has not reviewed or ratified its work.
+- Clean clone `9e66c6a` passed the permanent regression, neutrality, encoding,
+  collaboration validation, and empty-status gates.
+- Delivery commit `e282d77` moves TASK-0316 to `in_review`, releases every maker claim,
+  and publishes the self-contained handoff for Arquitecto recomputation and independent
+  Analista review. Codex has not reviewed or ratified its work.
 
 ## 2026-08-06 - TASK-0314 closure
 
