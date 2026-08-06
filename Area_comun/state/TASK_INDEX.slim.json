@@ -20,7 +20,7 @@
         {
             "id": "TASK-0317",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
         },
         {
@@ -38,7 +38,7 @@
         {
             "id": "TASK-0323",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Lectores de git status --porcelain SIN -z fabrican rutas inexistentes: el barredor de zombis falla ABIERTO"
         }
     ],

@@ -31,9 +31,28 @@ description: >-
    quedan HUERFANOS (reparentados), vivos horas, reteniendo puertos (4173/4289 del frontserver), locks,
    memoria -> **cuelgan el siguiente exec** (conflicto de recurso) y el ciclo se repite.
 
-Sintoma de cuelgue (distinguir de "lento-pero-vivo"): `Get-Process -Id <pid>` da **CPU ~0** y el
-`runs/*.err.log` mas nuevo esta **0 bytes y congelado >13min** (el LLM nunca produjo salida). Un exec vivo
-consume CPU y su err.log crece.
+Sintoma de cuelgue (distinguir de "lento-pero-vivo"): `Get-Process -Id <pid>` da **CPU ~0** y
+**NI `runs/*.out.log` NI `runs/*.err.log`** han producido una sola linea pasado el margen real de la
+tarea. Un exec vivo consume CPU.
+
+> **RECALIBRADO 2026-08-06 tras un falso positivo en vivo.** La regla anterior era "`err.log` 0 bytes
+> congelado **>13min**", y marca como colgado un exec perfectamente sano. Dos correcciones:
+> 1. **Mira `out.log`, no solo `err.log`.** Con `-AgentProvider Anthropic` la salida normal va a
+>    **stdout**, y un `err.log` a 0 bytes es el estado **SANO** (sin errores), no una senal de cuelgue.
+> 2. **13 minutos es demasiado poco.** Las reviews del Analista tardan **12-37 min** y su salida
+>    aparece **AL FINAL**, no de forma continua: durante casi todo el exec los dos logs estan a 0. Usa
+>    un margen por encima del maximo observado (**45 min**) o derivalo del `-ExecTimeoutSeconds` de ese
+>    peer, y **antes de matar comprueba CPU acumulada y tamano de proceso**: la regla es REVISAR, no
+>    matar (ver [[feedback-timeout-revisar-no-matar]]).
+>
+> El coste de equivocarse aqui no es simetrico: un falso positivo mata trabajo bueno y ademas ensena
+> al operador a ignorar la alarma.
+>
+> 3. **Mide la CPU del ARBOL, no del pid del log.** El pid que publica `*_mailbox_cron.log` es el
+>    **envoltorio PowerShell**; el trabajo lo hace un hijo (`claude.exe` / `codex.exe`). Caso real
+>    2026-08-06: el padre marcaba **0,31 s** de CPU mientras el hijo llevaba **25 s y 519 MB**.
+>    Medir solo la raiz garantiza el falso positivo. Recorre los hijos recursivamente y suma; si el
+>    arbol consume CPU, el exec esta VIVO aunque sus logs esten a cero.
 
 ## 2. CAZAR (detectar los huerfanos) -- comando probado
 Un proceso node/python/git es ZOMBIE si (a) su proceso PADRE ya NO esta vivo (huerfano/reparentado) Y
