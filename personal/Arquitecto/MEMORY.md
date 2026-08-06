@@ -1005,7 +1005,7 @@
 - **2 defectos reales (verificados por mi en codigo Zeus src/server.js):** (1) AC1 falso-vivo: `ageMs =
   Math.max(0, now - mtimeMs)` (~1117) -> heartbeat con mtime FUTURO clampa a 0 -> reporta `alive` (debe ser
   dormant). (2) AC2 bypass allowlist: `ascii(stripControl(agentId))` (~1039) ANTES del `allowlist.get` (~1045)
-  -> `"Arquitecto "` normaliza a `Arquitecto` -> activa en vez de 400. Mi pasada de checker uso EvilBot/
+  -> `"Arquitecto\x00"` normaliza a `Arquitecto` -> activa en vez de 400. Mi pasada de checker uso EvilBot/
   traversal/`;rm` pero NO un id valido + control char NI mtime futuro -> los perdi. VALOR de maker!=checker!=
   analista demostrado.
 - **Coordinacion (orden del operador "actua como arquitecto, coordina, despierta dormidos"):** ambos agentes

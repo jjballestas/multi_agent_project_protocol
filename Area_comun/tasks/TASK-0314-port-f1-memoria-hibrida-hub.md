@@ -2,7 +2,7 @@
 task_id: TASK-0314
 file: Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md
 title: "F1-PORT: promover el motor de memoria hibrida de la instancia a master NEUTRAL del hub (SPEC-MEMORIA-HIBRIDA s.16; DECISION-0100 s.2)"
-status: ready
+status: in_progress
 type: feature
 owner: Codex
 reviewer: Analista

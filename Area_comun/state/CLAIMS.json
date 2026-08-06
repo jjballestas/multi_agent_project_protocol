@@ -165,6 +165,64 @@
             "updated_at": "2026-08-06T00:17:14Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0315-higiene-corpus",
+            "expires_at": "2026-08-07T00:55:00Z",
+            "notes": "Higiene de corpus H1 (de-duplicar answered/archived) + H3 (bytes de control) hallada por el indexador de memoria hibrida.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0315-higiene-corpus",
+                "Area_comun/state/TASK_INDEX.json#TASK-0315",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0315",
+                "Area_comun/tasks/TASK-0315-higiene-corpus-h1-h3.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Operador-carril-A-mirror-stall.md",
+                "Area_comun/mailbox/answered/MSG-20260628-Arquitecto-to-Analista-REPASS2-TASK-0208.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo.md",
+                "Area_comun/artifacts/ANALISTA-REQ-31100EAF-ingestion-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0166-fix.md",
+                "personal/Arquitecto/MEMORY.md"
+            ],
+            "started_at": "2026-08-06T00:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0315",
+            "updated_at": "2026-08-06T00:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314",
+            "expires_at": "2026-08-06T12:28:43Z",
+            "notes": "Implement F1-only neutral memory engine port per SPEC-MEMORIA-HIBRIDA section 16.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "scripts/",
+                ".gitignore",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T00:28:43Z",
+            "status": "active",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T00:28:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-policy",
+            "expires_at": "2026-08-06T12:35:00Z",
+            "notes": "Add the versioned, per-instance memory indexing policy outside pinned protocol.config.json.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-policy",
+                "Area_comun/protocol/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T00:35:00Z",
+            "status": "active",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T00:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
