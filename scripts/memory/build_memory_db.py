@@ -97,7 +97,7 @@ STRUCTURAL_PII_PATTERNS = (
     re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b", re.I),
     re.compile(r"\b(?:NIF|NIE|NIT|DNI|SSN)\b", re.I),
 )
-PHONE_CANDIDATE_RE = re.compile(r"(?<!\d)(?<!\d{2}:)(?:\+?\d[\d .()-]{7,}\d)")
+PHONE_CANDIDATE_RE = re.compile(r"(?:\+?\d[\d .()-]{7,}\d)")
 SECRET_SUFFIXES = {".key", ".pem"}
 TEXT_SUFFIXES = {".md", ".json", ".jsonl", ".txt", ".yaml", ".yml"}
 EVENTS_PATH = Path("runtime/state/events.jsonl")
@@ -551,7 +551,7 @@ def contains_pii(value: Any, domain_pii_terms: Iterable[str] = ()) -> bool:
             return True
         if any(pattern.search(normalized) for pattern in STRUCTURAL_PII_PATTERNS[1:3]):
             return True
-        if not ID_RE.fullmatch(item):
+        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):
             for candidate in PHONE_CANDIDATE_RE.finditer(item):
                 digits = re.sub(r"\D", "", candidate.group(0))
                 if 9 <= len(digits) <= 15:

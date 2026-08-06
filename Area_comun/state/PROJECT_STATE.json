@@ -69,7 +69,7 @@
         {
             "id": "TASK-0317",
             "owner": "Codex",
-            "status": "changes_requested",
+            "status": "in_progress",
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
         },
         {

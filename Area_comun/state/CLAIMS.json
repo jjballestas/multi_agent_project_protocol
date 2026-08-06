@@ -78,6 +78,26 @@
             "updated_at": "2026-08-06T16:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0317-remediation-1",
+            "expires_at": "2026-08-07T00:17:13Z",
+            "notes": "TASK-0317 remediation iteration 1 implementation per independent changes-requested verdict.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0317-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0317",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
+                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T16:17:13Z",
+            "status": "active",
+            "task_id": "TASK-0317",
+            "updated_at": "2026-08-06T16:17:13Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0318-done-flip",
             "expires_at": "2026-08-06T18:02:07Z",
             "notes": "Implementer done-flip after independent checker approval and architect ratification.",
