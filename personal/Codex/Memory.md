@@ -1,6 +1,73 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, during TASK-0317 implementation.
+Last updated: 2026-08-06 Europe/Madrid, during TASK-0317 remediation iteration 1.
+
+## 2026-08-06 - TASK-0317 remediation iteration 1
+
+- Implementation commit `3d64a7c` replaces the broad phone-regex lookbehinds with the
+  independently measured `DATE_RE.fullmatch` exemption inside the phone heuristic only.
+- Full-date matches no longer trigger the phone heuristic, while structural PII and domain
+  terms remain checked and arbitrary free-text titles retain the original phone detector.
+- The unchanged generated 333-member timestamp family and all 11 rejected suffix vectors pass;
+  the full 59-test memory suite, real rebuild, encoding, neutrality, collaboration, and diff
+  gates exited 0 before the implementation commit.
+- TASK-0317 remains `in_progress` until the exact implementation commit is recomputed in a
+  clean clone and the governed remediation handoff is published. Codex remains maker only.
+
+## 2026-08-06 - TASK-0318 closure
+
+- Runtime events 7197-7199 atomically acquired the Codex closure claim, moved
+  TASK-0318 from `review_approved` to `done`, and released the claim after
+  independent Analista approval and Arquitecto ratification.
+- All three ledger events are signed as Codex, drift was false at sequence 7199,
+  and TASK-0318 has no active maker claim. Codex performed only the implementer
+  done-flip and did not review or ratify its own work.
+- Concurrent Arquitecto mailbox hygiene subsequently materialized through sequence
+  7209 and committed the consistent combined snapshot as `16e0584`, authored as
+  Codex with Arquitecto co-authorship.
+
+## 2026-08-06 - TASK-0319 implementation
+
+- Implementation commit `a7c6e96` separates pre-exec defer exhaustion from
+  `MaxTransientRetries`: defers now use a 7,200-second stable-cause wall-clock window,
+  reset on a cause change or clear observation, while actual exec attempts retain the
+  existing count budget.
+- A stable cause beyond the wall-clock budget still reaches `defer_terminal`. Active
+  external claims, live peer leases, the dirty-tree veto, and the single-exec lock remain
+  hard gates.
+- Residue diagnostics report at most 10 causal paths, live lease diagnostics identify the
+  peer, and another peer's DECISION-0016 private personal area is excluded while the
+  invoking peer's own personal area remains visible.
+- The permanent negative recreates the old mixed-cause shared-counter starvation in the
+  designated scratch tree and kills it against the fixed implementation. The suite also
+  proves stable-cause termination, clear/reset behavior, diagnostics, claim veto retention,
+  foreign-personal exclusion, and byte-identical `new_instance.py` export.
+- Pre-commit gates passed: 13 harness tests, 29/29 falsification inventory, encoding,
+  neutrality, collaboration validation, and diff checks. Governed delivery to independent
+  review is commit `092b9b0`: TASK-0319 is `in_review`, both maker claims are released,
+  and the self-contained handoff is routed to Arquitecto. Codex did not review or ratify
+  the work.
+- The out-of-scope legacy mailbox-retry runner was reported as a DECISION-0018 anomaly: its
+  real-loop fixture omits the already-mandatory `CoordinatorId`, and its older count-based
+  defer expectations need separately scoped alignment with TASK-0319.
+
+## 2026-08-06 - TASK-0318 implementation
+
+- Implementation commit `5a699bb` removes all eight instance-local status values from the
+  finite core vocabulary and declares them in the live governed memory-index policy.
+- `extra_status_values` is loaded once with the instance policy, bounded to 128 unique printable
+  values, additive to the core, and defaults closed for policies created before the field existed.
+- The shipped policy template declares an empty extension, so new instances inherit no hub-local
+  statuses. The permanent negative removes one declaration and proves that its artifact warns
+  again; the inventory discovers it and CI runs the complete memory suite.
+- Pre-commit gates passed: 59 memory tests, real build and fast drift at implementation base,
+  28/28 falsification inventory, neutrality, encoding, collaboration validation, and diff checks.
+- Exact clean clone `5a699bb` passed 59 tests, built 4,186 artifacts and 329 events with exactly
+  219 warnings, passed fast/full drift with `round_trip=pass` and `bidirectional-pass`, inventoried
+  28/28 falsification contracts, passed neutrality/encoding/collaboration/diff gates, and ended clean.
+- Delivery commit `b994e1d` moves TASK-0318 to `in_review`, releases both maker claims, and publishes
+  the self-contained handoff plus response-routed mailbox request. Codex did not review or ratify
+  the work; Arquitecto recomputation and independent Analista review remain required.
 
 ## 2026-08-06 - TASK-0317 implementation
 
@@ -16,6 +83,8 @@ Last updated: 2026-08-06 Europe/Madrid, during TASK-0317 implementation.
 - TASK-0317 is `in_review` with all Codex claims released. The self-contained handoff and mailbox
   request route commit `614b644` to Arquitecto for recomputation and independent Analista review;
   Codex did not review or ratify its own work.
+- Delivery commit `803f714` records the in-review transition, released claims, final evidence,
+  and response-routed handoff. No TASK-0317 maker claim remains active.
 
 ## 2026-08-06 - TASK-0316 remediation iteration 1
 
@@ -4959,3 +5028,12 @@ ratified its own work.
   `origin/main`; independent Analista re-review remains required.
 - Protocol delivery commit `31a6e61` moves TASK-0312 back to `in_review`, releases the remediation claims,
   publishes the updated handoff and review request, and is pushed to protocol `origin/main`.
+
+## 2026-08-06 - TASK-0316 closure
+
+- Protocol commit `d32abd0` performs the Codex-signed `review_approved -> done` transition after
+  independent Analista approval and Arquitecto ratification, and releases
+  `CLAIM-20260806-Codex-TASK-0316-done-flip` in the same runtime transaction.
+- Runtime events 7150-7152 are signed as Codex and report drift false. Collaboration validation,
+  encoding scan, domain-neutrality scan, and `git diff --check` exited 0 before commit.
+- Codex performed only the implementer done-flip and did not review or ratify its own work.
