@@ -269,34 +269,12 @@
             "type": "build"
         },
         {
-            "created_at": "2026-08-02",
-            "file": "Area_comun/tasks/TASK-0313-front-worker-roster.md",
-            "id": "TASK-0313",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "project": "Zeus-protocol",
-            "reviewer": "Analista",
-            "spec_id": "SPEC-0115",
-            "status": "done",
-            "title": "Front Zeus-protocol: formulario de alta de worker de producto (no-firmante) + enlace a LLM (SPEC-0115 / DECISION-0109 Nivel 1), off-by-default",
-            "type": "product"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
             "id": "TASK-0314",
             "owner": "Codex",
             "status": "in_review",
             "title": "F1-PORT: promover el motor de memoria hibrida de la instancia a master NEUTRAL del hub (SPEC-MEMORIA-HIBRIDA s.16; DECISION-0100 s.2)",
             "type": "feature"
-        },
-        {
-            "file": "Area_comun/tasks/TASK-0315-higiene-corpus-h1-h3.md",
-            "id": "TASK-0315",
-            "owner": "Arquitecto",
-            "status": "done",
-            "title": "Higiene de corpus H1/H3: de-duplicar 3 mensajes presentes a la vez en answered/ y archived/, y restaurar 7 bytes de control incrustados en 3 archivos",
-            "type": "triage"
         },
         {
             "file": "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md",

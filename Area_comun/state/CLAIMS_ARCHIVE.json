@@ -39982,6 +39982,364 @@
             "status": "released",
             "task_id": "TASK-0312",
             "updated_at": "2026-08-02T16:54:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-175406-prune-arquitecto",
+            "expires_at": "2026-08-02",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-08-02T17:54:06Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-02T17:54:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0313",
+            "expires_at": "2026-08-02T23:30:00Z",
+            "notes": "Registro DECISION-0109 (accepted) + TASK-0313 (P4a worker roster, SPEC-0115) -> ready + GO Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0109-front-worker-roster.md",
+                "Area_comun/specs/SPEC-0115-front-worker-roster.md",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0313.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-0313-close",
+            "expires_at": "2026-08-02T23:59:00Z",
+            "notes": "Cierre TASK-0313 in_review->done tras OK-CLOSABLE del Analista (P4a, 2 capas verdes) + higiene hilo 0313 (4 msgs).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0313.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Codex-GO-TASK-0313.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0313.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0313.md",
+                "Area_comun/mailbox/open/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0313.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0313.md",
+                "Area_comun/mailbox/open/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0313-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260802-Analista-to-Arquitecto-REVIEW-TASK-0313-verdict.md"
+            ],
+            "started_at": "2026-08-02T18:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Arquitecto-p4b-runbook",
+            "expires_at": "2026-08-02T23:59:00Z",
+            "notes": "Promocion del runbook P4b (ceremonia re-genesis, ejecucion diferida) a Area_comun/protocol/ como deliverable gobernado de P4b (gobernado por DECISION-0109).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/protocol/RUNBOOK-P4b-governance-signer-onboarding.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:40:00Z",
+            "status": "released",
+            "task_id": "OPS-P4B-RUNBOOK-20260802",
+            "updated_at": "2026-08-02T18:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0313",
+            "expires_at": "2026-08-03T02:04:08Z",
+            "notes": "Implement SPEC-0115 product worker roster and LLM link in Zeus-protocol, off by default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0313",
+                "Area_comun/state/TASK_INDEX.json#TASK-0313",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0313",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:04:08Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:04:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260802-Codex-TASK-0313-delivery",
+            "expires_at": "2026-08-02T20:10:53Z",
+            "notes": "Deliver TASK-0313 to independent review with self-contained handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260802-Codex-TASK-0313-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0313",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0313",
+                "Area_comun/tasks/TASK-0313-front-worker-roster.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0313-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260802-Codex-to-Arquitecto-HANDOFF-TASK-0313.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-02T18:10:53Z",
+            "status": "released",
+            "task_id": "TASK-0313",
+            "updated_at": "2026-08-02T18:10:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0314-rechazo-r1",
+            "expires_at": "2026-08-07T03:35:00Z",
+            "notes": "Rechazo formal r1 del Arquitecto tras veredicto CHANGE-REQUIRED del Analista (F1 AC7, F2 AC2, F3 AC5).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0314-rechazo-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md"
+            ],
+            "started_at": "2026-08-06T03:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T03:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0314-registro",
+            "expires_at": "2026-08-07T00:17:14Z",
+            "notes": "Registro gobernado del F1-PORT de la memoria hibrida al hub (SPEC s.16). El Arquitecto registra; el maker es Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0314-registro",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "Area_comun/specs/SPEC-MEMORIA-HIBRIDA.md"
+            ],
+            "started_at": "2026-08-06T00:17:14Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T00:17:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0315-higiene-corpus",
+            "expires_at": "2026-08-07T00:55:00Z",
+            "notes": "Higiene de corpus H1 (de-duplicar answered/archived) + H3 (bytes de control) hallada por el indexador de memoria hibrida.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0315-higiene-corpus",
+                "Area_comun/state/TASK_INDEX.json#TASK-0315",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0315",
+                "Area_comun/tasks/TASK-0315-higiene-corpus-h1-h3.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Operador-carril-A-mirror-stall.md",
+                "Area_comun/mailbox/answered/MSG-20260628-Arquitecto-to-Analista-REPASS2-TASK-0208.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo.md",
+                "Area_comun/artifacts/ANALISTA-REQ-31100EAF-ingestion-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0166-fix.md",
+                "personal/Arquitecto/MEMORY.md"
+            ],
+            "started_at": "2026-08-06T00:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0315",
+            "updated_at": "2026-08-06T00:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0316-registro",
+            "expires_at": "2026-08-07T03:52:00Z",
+            "notes": "Registro del hallazgo F4 (ceguera del gate de neutralidad) como tarea propia; queda proposed a la espera de GO del operador.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0316-registro",
+                "Area_comun/state/TASK_INDEX.json#TASK-0316",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0316",
+                "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md"
+            ],
+            "started_at": "2026-08-06T03:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0316",
+            "updated_at": "2026-08-06T03:52:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote1",
+            "expires_at": "2026-08-07T04:50:00Z",
+            "notes": "Higiene lote 1: archiva 3 mensajes consumidos del hilo TASK-0314.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote1",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0314.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0314.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0314-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0314-veredicto.md"
+            ],
+            "started_at": "2026-08-06T04:50:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T04:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314",
+            "expires_at": "2026-08-06T12:28:43Z",
+            "notes": "Implement F1-only neutral memory engine port per SPEC-MEMORIA-HIBRIDA section 16.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "scripts/",
+                ".gitignore",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T00:28:43Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T00:28:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-delivery",
+            "expires_at": "2026-08-06T04:16:00Z",
+            "notes": "Publish TASK-0314 review handoff and persist maker memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0314-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0314.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T02:16:00Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T02:16:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-final-memory",
+            "expires_at": "2026-08-06T03:20:00Z",
+            "notes": "Persist TASK-0314 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T02:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T02:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-policy",
+            "expires_at": "2026-08-06T12:35:00Z",
+            "notes": "Add the versioned, per-instance memory indexing policy outside pinned protocol.config.json.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-policy",
+                "Area_comun/protocol/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T00:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T00:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-remediation-r1",
+            "expires_at": "2026-08-06T11:39:07Z",
+            "notes": "Remediate TASK-0314 review findings F1, F2, F3, and R4 only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-remediation-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "scripts/memory/revive_pack.py",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T03:39:07Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T03:39:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-remediation-r1-delivery",
+            "expires_at": "2026-08-06T07:29:15Z",
+            "notes": "Publish TASK-0314 remediation r1 clean-clone evidence and return to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-remediation-r1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0314-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0314.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T04:29:15Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T04:29:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-remediation-r1-final-memory",
+            "expires_at": "2026-08-06T06:34:18Z",
+            "notes": "Persist TASK-0314 remediation r1 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-remediation-r1-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T04:34:18Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T04:34:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-remediation-r1-memory",
+            "expires_at": "2026-08-06T06:01:10Z",
+            "notes": "Persist TASK-0314 remediation r1 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-remediation-r1-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T04:01:10Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T04:01:10Z"
         }
     ]
 }
