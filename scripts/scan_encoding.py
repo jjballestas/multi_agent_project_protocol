@@ -26,6 +26,7 @@ MOJIBAKE_SIGNATURES = (
     "\ufffd",
 )
 SKIP_DIRS = {".git", ".venv", "venv", "__pycache__", "node_modules"}
+SKIP_RELATIVE_DIRS = {"runtime/memory"}
 SKIP_SUFFIXES = {".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip"}
 
 
@@ -41,16 +42,23 @@ def iter_files(root: Path, patterns: tuple[str, ...]) -> set[Path]:
     files: set[Path] = set()
     for pattern in patterns:
         for path in root.glob(pattern):
-            if should_scan(path):
+            if should_scan(path, root):
                 files.add(path)
     return files
 
 
-def should_scan(path: Path) -> bool:
+def should_scan(path: Path, root: Path | None = None) -> bool:
     if not path.is_file():
         return False
     if path.suffix.lower() in SKIP_SUFFIXES:
         return False
+    if root is not None:
+        try:
+            relative = path.resolve().relative_to(root.resolve()).as_posix()
+        except ValueError:
+            relative = ""
+        if any(relative == item or relative.startswith(f"{item}/") for item in SKIP_RELATIVE_DIRS):
+            return False
     return not any(part in SKIP_DIRS for part in path.parts)
 
 
@@ -82,7 +90,7 @@ def scan_mojibake(root: Path) -> list[Finding]:
         scan_root = root / root_name
         if not scan_root.exists():
             continue
-        for path in sorted(p for p in scan_root.rglob("*") if should_scan(p)):
+        for path in sorted(p for p in scan_root.rglob("*") if should_scan(p, root)):
             text = path.read_text(encoding="utf-8-sig", errors="replace")
             for line_number, line in enumerate(text.splitlines(), start=1):
                 for signature in MOJIBAKE_SIGNATURES:

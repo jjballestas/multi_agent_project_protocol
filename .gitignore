@@ -9,6 +9,7 @@ Thumbs.db
 
 # Runtime execution traces (local audit; deterministic per run, regenerable)
 runtime/runs/
+runtime/memory/
 runtime/state/.ledger.lock
 
 # Repo-local transient temp dirs: runtime write-path staging/backups + golden test fixtures.

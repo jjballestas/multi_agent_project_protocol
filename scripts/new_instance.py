@@ -67,6 +67,7 @@ CANONICAL_TEMPLATE_FILES = {
     "Area_comun/state/PROJECT_STATE.template.json": "Area_comun/state/PROJECT_STATE.json",
     "Area_comun/state/TASK_INDEX.template.json": "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/CLAIMS.template.json": "Area_comun/state/CLAIMS.json",
+    "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json": "Area_comun/protocol/MEMORY_INDEX_POLICY.json",
 }
 
 # Operational layer shipped with instances (DECISION-0096): the generic peer runner +
@@ -93,6 +94,8 @@ GATE_SCRIPT_FILES = [
     "generate_human_guide.py",
     "keygen_agent.py",
 ]
+
+MEMORY_SCRIPT_DIR = "scripts/memory"
 
 COPIED_DIRS = [
     ".githooks",
@@ -371,6 +374,18 @@ def copy_gate_scripts(source: Path, target: Path) -> None:
             raise FileNotFoundError(f"Missing gate script: {source_file}")
         shutil.copy2(source_file, target_scripts / filename)
 
+    source_memory = source / MEMORY_SCRIPT_DIR
+    if not source_memory.exists():
+        raise FileNotFoundError(f"Missing memory script directory: {source_memory}")
+    target_memory = target / MEMORY_SCRIPT_DIR
+    if target_memory.exists():
+        shutil.rmtree(target_memory)
+    shutil.copytree(
+        source_memory,
+        target_memory,
+        ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+    )
+
 
 def copy_peer_harness(source: Path, target: Path) -> None:
     """Ship the operational layer: the generic peer runner + neutral role prompts.
@@ -497,7 +512,13 @@ def ensure_protocol_secrets_gitignored(target: Path) -> None:
     lines = []
     if gitignore.exists():
         lines = gitignore.read_text(encoding="utf-8-sig").splitlines()
-    required = ["protocol-secrets/", ".protocol-secrets/", "Aegis_Scratch/", ".protocol-tmp/"]
+    required = [
+        "protocol-secrets/",
+        ".protocol-secrets/",
+        "Aegis_Scratch/",
+        ".protocol-tmp/",
+        "runtime/memory/",
+    ]
     changed = False
     for item in required:
         if item not in lines:

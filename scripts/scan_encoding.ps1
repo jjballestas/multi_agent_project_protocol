@@ -6,6 +6,7 @@ $ErrorActionPreference = "Stop"
 
 $ResolvedRoot = (Resolve-Path $Root).Path
 $SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")
+$SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))
 $SkipSuffixes = @(".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip")
 $MojibakeSignatures = @(
     [string][char]0x00c3,
@@ -31,6 +32,9 @@ function Get-RelativePath {
 function Should-Scan {
     param([System.IO.FileInfo]$File)
     if ($SkipSuffixes -contains $File.Extension.ToLowerInvariant()) { return $false }
+    foreach ($directory in $SkipAbsoluteDirs) {
+        if ($File.FullName -eq $directory -or $File.FullName.StartsWith("$directory\", [System.StringComparison]::OrdinalIgnoreCase)) { return $false }
+    }
     foreach ($part in $File.FullName.Split([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)) {
         if ($SkipDirs -contains $part) { return $false }
     }

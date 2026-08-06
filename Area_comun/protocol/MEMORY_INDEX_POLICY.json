@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "domain_pii_terms": [],
+  "identity_aliases": [
+    "Agente-BD",
+    "Asesor",
+    "Claude",
+    "Claude (Architect Analysis)",
+    "Claude (architect)",
+    "Claude-analista",
+    "Codex (Implementation)",
+    "Codex (implementer)",
+    "Operador",
+    "todos"
+  ],
+  "revive_pack": {
+    "max_bytes": 131072,
+    "max_inline_source_bytes": 65536,
+    "chars_per_token": 4
+  }
+}
