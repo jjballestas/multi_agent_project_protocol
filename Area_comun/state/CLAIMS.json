@@ -42,6 +42,22 @@
             "updated_at": "2026-08-06T04:44:46Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0314-ratifica-r2",
+            "expires_at": "2026-08-07T05:35:00Z",
+            "notes": "Ratificacion del veredicto OK-CLOSABLE del Analista sobre la remediacion r1 (d1252f4).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0314-ratifica-r2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md"
+            ],
+            "started_at": "2026-08-06T05:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T05:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-TASK-0316-promocion",
             "expires_at": "2026-08-07T05:10:00Z",
             "notes": "GO del operador: reasigna owner a Codex y promueve a ready.",
@@ -56,6 +72,22 @@
             "status": "released",
             "task_id": "TASK-0316",
             "updated_at": "2026-08-06T05:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0317-registro",
+            "expires_at": "2026-08-07T05:45:00Z",
+            "notes": "Registro del residual R5 del veredicto r2; queda proposed a la espera de GO del operador.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0317-registro",
+                "Area_comun/state/TASK_INDEX.json#TASK-0317",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
+                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md"
+            ],
+            "started_at": "2026-08-06T05:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0317",
+            "updated_at": "2026-08-06T05:45:00Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",

@@ -69,7 +69,7 @@
         {
             "id": "TASK-0314",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "F1-PORT: promover el motor de memoria hibrida de la instancia a master NEUTRAL del hub (SPEC-MEMORIA-HIBRIDA s.16; DECISION-0100 s.2)"
         },
         {
@@ -77,6 +77,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean"
+        },
+        {
+            "id": "TASK-0317",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
