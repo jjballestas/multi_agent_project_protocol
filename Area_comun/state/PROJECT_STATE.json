@@ -85,6 +85,12 @@
             "title": "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)"
         },
         {
+            "id": "TASK-0320",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

@@ -293,6 +293,14 @@
             "type": "refactor"
         },
         {
+            "file": "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
+            "id": "TASK-0320",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

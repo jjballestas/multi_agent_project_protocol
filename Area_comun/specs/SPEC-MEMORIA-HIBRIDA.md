@@ -802,7 +802,25 @@ techo -- R5-0316 la allowlist de archivo completo sobre `peer_mailbox_cron.ps1` 
 identidad que se acaba de corregir en el.
 
 **Regla vigente:** el motor NO se declara listo para exportar a instancias mientras TASK-0317 y
-TASK-0318 sigan abiertas.
+TASK-0320 sigan abiertas (TASK-0318 cerro el vocabulario de `status`; TASK-0320 cierra el de `type`).
+
+**Anadido 2026-08-06 tras el veredicto OK-CERRABLE de TASK-0318 (encargos C1 y C3 del checker):**
+
+- **Linea base del vocabulario declarado (C3), para que una deriva futura sea visible:**
+  `extra_status_values` = **8 declarados / 8 en uso / 0 muertos**. Si un recuento futuro encuentra
+  declarados que ya nadie usa, eso es vocabulario muerto acumulandose en la politica de la instancia
+  y toca purgarlo; el mecanismo no lo detecta solo.
+- **Propiedad verificada que conviene no perder (medida por el checker sobre el corpus real):** la
+  declaracion **solo surte efecto ATESTADA**. Editar `MEMORY_INDEX_POLICY.json` sin commitear no
+  concede nada -- el indexador lee el blob de git, asi que el conteo se queda en 219. Quitar las 8
+  declaraciones y commitear lo lleva a 234, con exactamente 15 warnings de `status`, los 15
+  artefactos que las usan. Es lo que hace del mecanismo una validacion y no documentacion.
+- **R2 heredado, declarado (C2):** la politica admite latitud no-ASCII en sus valores, igual que
+  `domain_pii_terms` e `identity_aliases`, porque esa ruta queda fuera del alcance de
+  `scan_encoding`. No lo introdujo TASK-0318; se registra para que no se descubra como sorpresa.
+- **R1 adjudicado a TASK-0320:** el enum hermano `TYPE_VALUES` conserva 10 fichas de ceremonia de
+  instancia (6 en castellano), el mismo defecto que `status` acaba de cerrar y con el mecanismo
+  curativo ya probado.
 
 ### 16.6 Fuera de alcance del port
 

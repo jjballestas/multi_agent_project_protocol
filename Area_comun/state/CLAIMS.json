@@ -42,6 +42,23 @@
             "updated_at": "2026-08-06T14:34:28Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0320-registro",
+            "expires_at": "2026-08-07T16:00:00Z",
+            "notes": "Encargo R1 del veredicto de TASK-0318: registra la tarea del enum TYPE_VALUES; queda proposed a la espera de GO.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0320-registro",
+                "Area_comun/state/TASK_INDEX.json#TASK-0320",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0320",
+                "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
+                "Area_comun/specs/SPEC-MEMORIA-HIBRIDA.md"
+            ],
+            "started_at": "2026-08-06T16:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0320",
+            "updated_at": "2026-08-06T16:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote6",
             "expires_at": "2026-08-07T14:40:00Z",
             "notes": "Higiene lote 6: archiva 4 consumidos de los hilos 0316-0318.",
