@@ -23,6 +23,10 @@ LEGACY_IDENTITY_LITERAL_FILES = {
     "runtime/metrics.py",
     "runtime/router.py",
     "scripts/prune_state.py",
+    # Fixture roster names exercise multi-agent indexing without shipping defaults.
+    "scripts/memory/test_memory_db.py",
+    # The provider-name collision refers to a third-party CLI, not a protocol agent.
+    "scripts/harness/peer_mailbox_cron.ps1",
 }
 GENERIC_IDENTITY_TOKENS = {"agent", "human", "humano", "owner"}
 REQUIRED_SCAN_GLOBS = (
@@ -42,7 +46,6 @@ def identity_scan_path(relative_path: str) -> bool:
         (relative_path.startswith("runtime/") and relative_path.endswith(".py"))
         or (
             relative_path.startswith("scripts/")
-            and relative_path.count("/") == 1
             and relative_path.endswith((".py", ".ps1"))
         )
     )

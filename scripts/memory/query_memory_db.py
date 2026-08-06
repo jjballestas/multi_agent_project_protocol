@@ -238,7 +238,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--db", type=Path, default=memory_db.DB_PATH)
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--force-fallback", action="store_true", help=argparse.SUPPRESS)
-    parser.add_argument("--requested-by", default="Codex")
+    parser.add_argument("--requested-by")
     parser.add_argument("--task-id")
     parser.add_argument("--reason")
     args = parser.parse_args(argv)
@@ -246,6 +246,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         parser.error("provide exactly one query or --retrieve ARTIFACT_ID")
     if args.limit < 1 or args.limit > 100:
         parser.error("--limit must be between 1 and 100")
+    if args.retrieve and not args.requested_by:
+        parser.error("--requested-by is required with --retrieve")
     return args
 
 

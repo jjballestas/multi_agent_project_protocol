@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)][string]$PeerId,
-    [string]$CoordinatorId = "Arquitecto",
+    [Parameter(Mandatory = $true)][string]$CoordinatorId,
     [string[]]$AcceptedTypes = @("GO", "REQUEST", "ACTION", "HANDOFF", "REVIEW", "QUESTION", "DECISION"),
     [string]$PromptFile = "",
     [string]$Root = "",

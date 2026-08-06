@@ -64,11 +64,10 @@ STATUS_VALUES = {
     "blocked", "cancelled", "open", "answered", "archived", "superseded",
     "active", "draft", "draft-reviewed-informal", "accepted", "approved",
     "for_review", "for_implementation", "for_decision", "change_required",
-    "DRAFT-PENDIENTE-DE-FIRMA-DEL-OPERADOR", "GO-PROMOVER-OFF",
+    "GO-PROMOVER-OFF",
     "OK-CERRABLE", "OK_CERRABLE", "cambio-requerido", "delivered", "final",
     "hallazgo-confirmado", "ok", "ready_for_implementation",
     "ready_for_independent_review", "ready_for_review", "reviewed", "submitted",
-    "draft (pendiente GO operador)",
 }
 TYPE_VALUES = {
     "feature", "implementation", "refactor", "integration", "migration",

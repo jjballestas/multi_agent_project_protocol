@@ -255,6 +255,9 @@ jobs:
       - name: Scan domain neutrality
         run: python scripts/scan_domain_neutrality.py --root .
 
+      - name: Test domain neutrality coverage and falsification
+        run: python scripts/test_scan_domain_neutrality.py
+
       - name: Scan domain neutrality with PowerShell
         shell: pwsh
         run: ./scripts/scan_domain_neutrality.ps1 -Root .

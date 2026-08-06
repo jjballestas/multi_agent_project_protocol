@@ -11,7 +11,11 @@ $LegacyIdentityLiteralFiles = @(
     "runtime/ledger_ops.py",
     "runtime/metrics.py",
     "runtime/router.py",
-    "scripts/prune_state.py"
+    "scripts/prune_state.py",
+    # Fixture roster names exercise multi-agent indexing without shipping defaults.
+    "scripts/memory/test_memory_db.py",
+    # The provider-name collision refers to a third-party CLI, not a protocol agent.
+    "scripts/harness/peer_mailbox_cron.ps1"
 )
 $GenericIdentityTokens = @("agent", "human", "humano", "owner")
 $RequiredScanGlobs = @(
@@ -111,7 +115,6 @@ function Test-IdentityScanPath {
 
     return (($RelativePath.StartsWith("runtime/") -and $RelativePath.EndsWith(".py")) -or
         ($RelativePath.StartsWith("scripts/") -and
-            (($RelativePath.ToCharArray() | Where-Object { $_ -eq "/" }).Count -eq 1) -and
             ($RelativePath.EndsWith(".py") -or $RelativePath.EndsWith(".ps1"))))
 }
 

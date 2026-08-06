@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "2af713807ddf3df06542fe397dbf436aaccd8938cbc216d944a8f404befbc771",
+  "canonical_hash": "911e5021c943347a4c99e696d4af70b9d3ebb2dc1c57a493b6da17691579a61d",
   "integrity": {
-    "canonical_hash": "2af713807ddf3df06542fe397dbf436aaccd8938cbc216d944a8f404befbc771",
+    "canonical_hash": "911e5021c943347a4c99e696d4af70b9d3ebb2dc1c57a493b6da17691579a61d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "ccf2bfe55798a012520ef7cb8009d1716538b6b009c39d0343ba94aba1b8650e",
-    "signature": "04a79543b02a662d179d2dfd52cae26da7dd587ca8c9a3f0cdb4e9cb3ac7ba62",
-    "up_to_seq": 7103
+    "prev_hash": "b88f3761cd740c0d5caa210642a56e109c1e0d62dfc187ab3c7a6f862cba20e7",
+    "signature": "f3c9505d7dec194469a9c0463aec32c66a50004235551d56189f698665889959",
+    "up_to_seq": 7106
   },
   "state": {
     "aggregate_versions": {
@@ -2883,7 +2883,7 @@
       "TASK-0313": 11,
       "TASK-0314": 30,
       "TASK-0315": 6,
-      "TASK-0316": 12,
+      "TASK-0316": 15,
       "TASK-0317": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2907,7 +2907,7 @@
       "protocol-prune": 36,
       "protocol-state": 1
     },
-    "events_applied": 6432,
+    "events_applied": 6435,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6088,6 +6088,9 @@
       "codex:task0316:delivery-claim-release:20260806T055648Z": 7088,
       "codex:task0316:in-progress-to-in-review:20260806T055648Z": 7087,
       "codex:task0316:ready-to-in-progress:20260806T054719Z": 7082,
+      "codex:task0316:remediation1:changes-requested-to-in-progress:20260806": 7105,
+      "codex:task0316:remediation1:claim-acquire:20260806": 7104,
+      "codex:task0316:remediation1:readme-claim:20260806": 7106,
       "codex:task0316:test-claim-release:20260806T055610Z": 7085,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -9343,5 +9346,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7103
+  "up_to_seq": 7106
 }

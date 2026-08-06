@@ -209,6 +209,49 @@
             "updated_at": "2026-08-06T05:56:10Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0316-remediation1",
+            "expires_at": "2026-08-06T19:00:00Z",
+            "notes": "TASK-0316 remediation iteration 1 for identity coverage, neutral defaults, portable falsification, CI wiring, and contract inventory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0316",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0316",
+                "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py",
+                "scripts/memory/query_memory_db.py",
+                "scripts/memory/build_memory_db.py",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0316-codex-to-arquitecto.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T07:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0316",
+            "updated_at": "2026-08-06T07:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0316-remediation1-readme",
+            "expires_at": "2026-08-06T19:05:00Z",
+            "notes": "Keep the exported harness documentation aligned with the required neutral coordinator parameter.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-remediation1-readme",
+                "scripts/harness/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T07:05:00Z",
+            "status": "active",
+            "task_id": "TASK-0316",
+            "updated_at": "2026-08-06T07:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0316-test",
             "expires_at": "2026-08-06T17:49:49Z",
             "notes": "Implement and regression-test required neutrality coverage without changing pinned config.",

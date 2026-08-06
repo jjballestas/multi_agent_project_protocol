@@ -27,7 +27,7 @@ Runtime tokens substituted into the prompt template per execution:
 | `@@MESSAGE_PATH@@` | root-relative path of the message being processed (required in template) |
 | `@@ROOT@@` | absolute path of the governance root (forward slashes) |
 | `@@PEER_ID@@` | the `-PeerId` argument |
-| `@@COORDINATOR_ID@@` | the `-CoordinatorId` argument (default `Arquitecto`) |
+| `@@COORDINATOR_ID@@` | the required `-CoordinatorId` argument |
 
 Tokens use `@@...@@` on purpose: `{{...}}` is reserved by the instancing renderer
 (`new_instance.py`) and must not appear in shipped files.
