@@ -31,12 +31,14 @@ intake:
     - "AC3 (sin re-genesis): el fix NO modifica protocol.config.json. El config esta pineado por el hash del genesis (chain.genesis liga canonical_hash del config), asi que ampliar scan_globs ahi exigiria una ceremonia de re-genesis. El fix va en el CODIGO del escaner, con el mismo patron de auto-append que ya aplica a connectors/** y skills/**."
     - "AC4 (sin falsos positivos): validate_collaboration_state.py, scan_encoding.py y el propio scan_domain_neutrality.py salen exit 0 sobre el arbol real tras el fix; ningun archivo legitimo del repo pasa a fallar."
     - "AC5 (regresion): test que planta un termino de dominio en un script anidado y exige exit != 0, para que la ceguera no pueda volver en silencio."
+    - "AC6 (exencion de artefactos generados): runtime/memory/ queda EXENTO del escaner de neutralidad. Hoy scan_globs incluye runtime/** y exempt_globs trae runtime/state/** pero NO runtime/memory/, mientras revive_pack.py se niega a escribir fuera de runtime/memory/ (guard explicito) y los packs inlinean corpus gobernado por diseno: usar la herramienta como esta disenada deja el gate en ROJO hasta borrar el pack. Reproducido en vivo el 2026-08-06. La exencion va por la misma via de codigo que AC3 (sin tocar el config pineado), y con test que demuestre que un pack generado ya no ensucia el gate."
   verification_cmd:
     - "python scripts/scan_domain_neutrality.py --root ."
     - "python scripts/validate_collaboration_state.py --root ."
   scope_routes:
     - scripts/scan_domain_neutrality.py
     - scripts/scan_domain_neutrality.ps1
+    - scripts/test_scan_domain_neutrality.py
   out_of_scope: >
     Modificar protocol.config.json o cualquier clave pineada por el genesis; re-genesis; el lazo de
     remediacion de TASK-0314 (F1/F2/F3/R4, que son del maker); los residuales R1-R3 del veredicto.
