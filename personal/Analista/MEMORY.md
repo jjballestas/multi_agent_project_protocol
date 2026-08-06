@@ -5687,3 +5687,57 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   con env que apunte el roster a temp + PORT propio, esperar "listening" en stdout, y batir la familia por fetch.
 - Veredicto OK-CLOSABLE ruteado al Arquitecto (MSG requires_response, requested_action=ratificar+flip a done; el
   checker NO cierra). Sin CHANGE-REQUIRED, sin escalamiento.
+
+## TASK-0316 r2 FINAL (2026-08-06 09:39 CEST) -- VEREDICTO: OK-CERRABLE (52d0a38, HEAD dccda71 -> mi commit b51bf72)
+- Alcance HUB, sin producto. Remediacion r1 de mi CAMBIO-REQUERIDO de r1 (veredicto
+  Analista-TASK-0316-neutralidad-cobertura-verdict.md). Mi veredicto r2:
+  Area_comun/artifacts/Analista-TASK-0316-remediacion-r1-verdict.md.
+- TRES CLONES, todos a 52d0a38, declarando cual corrio que, para no contaminarme:
+  pr (pristino) = escaneres/test/contratos/encoding/validate/cobertura/TODAS las mutaciones;
+  r1c = bateria de la base de memoria (build/drift/round-trip); r2c = el A/B controlado.
+- F1 CERRADO. La prueba que yo mismo pedi en r1 punto 8: con el recorte AUSENTE el gate del repo sale
+  exit 0 (en r1 salia exit 1 con 64). El verde se GANA, ya no se compra. Contabilidad 60+4=64 CUADRA:
+  quitar las 2 entradas de LEGACY_IDENTITY_LITERAL_FILES da exit 1 con exactamente 60 (51
+  test_memory_db.py + 9 peer_mailbox_cron.ps1). Los 4 defectos probados uno a uno (--retrieve sin
+  --requested-by exit 2 y sin filtrar None por la rama query; CoordinatorId Mandatory no cuelga
+  ningun cron porque los 2 invocadores vivos ya lo pasaban explicito).
+- F2 CERRADO. M5 MATADO EN LAS DOS IMPLEMENTACIONES: reinsertar el recorte en el .py -> test exit 1;
+  reinsertarlo SOLO en el .ps1 -> test exit 1 (lo caza test_powershell_scanner_...). El registro de
+  falsacion NO es cosmetico: falsificar un boundary declarado o el exercised_by -> contracts exit 1.
+- METODO NUEVO REUTILIZABLE -- A/B CONTROLADO SOBRE EL MISMO COMMIT. Para medir el efecto de un cambio
+  sobre un conteo (warnings), NO comparar contra el commit anterior (confunde el efecto con el
+  crecimiento del corpus): parchear el MISMO clon restaurando solo lo quitado, reconstruir y comparar
+  CONJUNTOS, no totales. Resultado: 219 -> 227, delta +8, 0 eliminados. Y el dato que decide:
+  0 archivos del corpus gobernado, 1 SOLO archivo antes limpio (los otros 7 ya warneaban por
+  decision_id/spec_id/task_id). El diff de conjuntos dice lo que el diff de totales esconde.
+- REGLA: antes de declarar que una clausula de un AC "se rompe", comprobar si esa clausula es un GATE
+  POR EXIT CODE o solo prosa. Aqui CI no ejecuta la base de memoria en ningun paso (grep -i memory
+  sobre .github/workflows = 0). Los 3 gates duros del AC5 de 0314 (build, drift --fast, drift --full,
+  round-trip byte a byte) los recompute VERDES. Por eso no bloquea.
+- LO QUE NINGUNA CAPA IMPUTO Y ES EL ARGUMENTO FUERTE: el enum queda MEDIO PURGADO. Salen 2 valores de
+  vocabulario de instancia y quedan 6 (GO-PROMOVER-OFF, OK-CERRABLE, OK_CERRABLE, cambio-requerido,
+  hallazgo-confirmado, draft-reviewed-informal); sobreviven solo porque no son nombres de agente.
+- SOBRE PROPUESTAS DE MECANISMO (extra_status_values): aceptar la FORMA y ponerle las restricciones que
+  la devuelven a ser validacion en vez de documentacion -- (i) aditivo y cerrado en carga desde un
+  artefacto GOBERNADO, (ii) template vacio + un NEGATIVO PERMANENTE QUE LO MATE (sin contrato de
+  falsacion, extensible == apagado), (iii) que absorba TODO el vocabulario, no lo que un gate cazo.
+- R5 NUEVO Y ES COSTE DE MI PROPIA RECOMENDACION R1, LO DIGO: la allowlist de ARCHIVO COMPLETO sobre
+  peer_mailbox_cron.ps1 CIEGA el defecto 3 recien corregido -- reintroducir $CoordinatorId="Arquitecto"
+  deja los TRES gates en verde. Busque un arreglo mas fino: el match es case-insensitive
+  (scan_domain_neutrality.py:129 re.IGNORECASE), volverlo sensible debilita el guard global y aun deja
+  2 de los 9. LECCION: cuando recomiendo una allowlist por archivo, medir y declarar QUE deja de
+  vigilarse; mitigacion barata = un negativo permanente sobre el defecto concreto.
+- R6: el brazo PowerShell del falsador hace skipTest si no hay pwsh -> el kill de M5-ps1 solo esta
+  garantizado donde exista PowerShell; la dependencia no esta afirmada por el test.
+- R7 (anclaje): la correccion del handoff (mi punto 7 de r1, con retractacion explicita, bien hecha)
+  esta en 5491375, NO en 52d0a38. CASI LO REPORTO COMO DEFECTO por leer el handoff en el clon del
+  commit de implementacion. REGLA: cuando el commit citado es solo el de implementacion, verificar los
+  artefactos de coordinacion en HEAD antes de imputar que faltan.
+- R3 DE R1 SUBIO DE ANOTADO A DEMOSTRADO EN VIVO, contra mi: mi primera medicion de cobertura salio
+  128->139 con 1 perdido porque el clon ya tenia el runtime/memory/index.db que YO habia generado.
+  La valida es la del clon pristino: 124 -> 136, +12, 0 perdidos (y coincide EXACTO con el maker, por
+  primera vez en esta tarea). REGLA DURA: medir cobertura solo en clon sin construir nada, y barrer
+  __pycache__ entre pasos.
+- Bucle de fix cerrado en 1 iteracion (r1 CAMBIO-REQUERIDO -> r2 OK-CERRABLE), sin escalar al humano.
+  Ruteado al Arquitecto con requested_action = ratificar + C1 (registrar el 219->227 en el ledger de
+  residuales de 0314) + C2 (abrir la tarea del enum). El checker NO cierra.
