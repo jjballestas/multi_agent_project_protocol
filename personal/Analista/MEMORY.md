@@ -7,6 +7,65 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-06 (39) - TASK-0314 F1-PORT memoria hibrida al hub: CHANGE-REQUIRED
+
+- Encargo `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314`. **SIN PRODUCTO EN ALCANCE** (declarado
+  por el Arquitecto): 100 por cien hub, gates de Python. Commit de impl `378021d`, protocol HEAD `070ddae`.
+  Contrato = SPEC-MEMORIA-HIBRIDA s.16 (P1-P12 + DoD de 9 puntos). Clon limpio propio
+  `D:/Aegis_Scratch/protocol/ana314`. Veredicto commit `9f24d05` (artefacto
+  `Area_comun/artifacts/Analista-TASK-0314-port-memoria-hibrida-verdict.md` + MSG REVIEW rr=true).
+- **VEREDICTO: CHANGE-REQUIRED.** 3 slips bloqueantes + 1 hueco de contrato + 4 residuales.
+- Gates recomputados por exit code: suite 55/55 (253 s), build 4154 artefactos / 211 eventos / 15 tablas /
+  schema 1 / fk 1, `--fast` (database_read false), `--full` (round_trip pass, sweep bidirectional-pass,
+  database_written false), scan_encoding, scan_domain_neutrality, validate -> TODOS 0; `git status
+  --porcelain` vacio tras build y tras `--full` (I2). Frontera respetada (no toca validador, submit_intent,
+  config pineado, registry, genesis, runtime/state).
+- **F1 (P11/AC7) -- confirme el bloqueante del Arquitecto PERO corregi su causa.** Reproduje: Arquitecto
+  exit 2 (161465 B), Codex exit 2 (194752 B), Analista exit 0 (37166 B) contra 131072 de presupuesto.
+  El Arquitecto atribuia el exceso a "sesiones/tareas/mailbox/decisiones sin inlinear". FALSO.
+  **Metodo decisivo reutilizable:** monkeypatch de `memory_index_policy` para elevar `max_bytes` y poder
+  MEDIR el pack que se descarta, luego descomponerlo por secciones. Resultado: el inline SI respeta su
+  tope (35894 y 41957 <= 65536); lo que revienta es **la propia declaracion de omisiones (seccion 6)**:
+  119293 B = 74 pct del pack del Arquitecto, 139406 B = 72 pct del de Codex, un objeto JSON por archivo
+  omitido (291 y 300 entradas). **El mecanismo de degradacion es lo que rompe el presupuesto** -> subir
+  `max_bytes` no converge. Leccion: cuando un tope "no acota", medir la COMPOSICION del artefacto que
+  desborda, no asumir que el exceso viene de lo obvio.
+- **F2 (AC2) -- fuga PII por clave de fecha, probada extremo a extremo.** `build_memory_db.py:579` exime
+  `created_at`/`updated_at`/`closed_at` de `contains_pii`, y `DATE_RE` admite cola libre `T[^\s]+`.
+  Build real sobre fixture -> fila `('TASK-9001','2026-06-19Tvictim@example.invalid',None)`, y
+  `_publicable_pii_errors` devuelve `[]`. **La exencion es gratuita**: probe 6 formatos de timestamp bien
+  formados y NINGUNO dispara `contains_pii` -> se apago una validacion que nunca habria disparado.
+  Leccion: ante una exencion, probar si el caso que dice evitar existe siquiera.
+- **F3 (AC5) -- 19 de los 238 warnings son `priority: medium`**, metadata BIEN FORMADA del hub, no H2.
+  Descompuse los 238 por clave (spec_id 123 / task_id 86 / priority 19 / decision_id 6 / to 2 /
+  relates_to 1 / supersedes 1) e inspeccione los 4 no obvios uno a uno: malformacion real. AC5 exige
+  que los restantes sean SOLO malformacion. El Arquitecto lo llamo "hallazgo menor"; contra la letra de
+  AC5 es el criterio que rompe. Leccion: contar los warnings POR CLAVE, no aceptar el agregado "son
+  todos H2".
+- **F4 -- el gate de neutralidad NO cubre lo entregado, pero NO es del maker.** `scan_globs` trae
+  `scripts/*.py` y `glob_to_regex` mapea `*` a `[^/]*` (no cruza `/`) -> `scripts/memory/**` (3863 lineas)
+  y `Area_comun/protocol/MEMORY_INDEX_POLICY.json` nunca se escanean. **Falsificado, no deducido:** con
+  "binance spot backtest trading" dentro de `scripts/memory/build_memory_db.py` y `domain_pii_terms:
+  ["trading","binance"]` en el policy -> exit 0; el mismo termino en un `scripts/poison.py` plano ->
+  exit 1; en el clon real selecciona 127 archivos, ninguno bajo `scripts/memory/`. **Atribucion correcta:**
+  el `out_of_scope` de la tarea prohibia tocar `protocol.config.json` y `scan_domain_neutrality.py` no
+  estaba en `scope_routes` -> hueco de contrato del Arquitecto, tarea aparte, NO imputable al cierre.
+  Leccion: antes de imputar un gate vacio, leer `scope_routes`/`out_of_scope` para ver si el maker tenia
+  ruta para arreglarlo.
+- Residuales declarados: R1 el fix de P5 exime del patron de telefono a TODO valor con forma de id
+  (`contains_pii("TEL-34612345678")` False) -- pero s.16.3 lo AUTORIZA expresamente, asi que va como riesgo
+  conocido, no defecto; R2 IBAN solo se detecta contiguo (con espacios o guiones escapa), preexistente;
+  R3 `_publicable_pii_errors` no aplica los `domain_pii_terms` de la instancia (inocuo en el hub, material
+  en Nova-Payroll); R4 el test de P11 produce 1 omision -> no puede fallar como falla el corpus real.
+- Contraste pedido sobre H2/P12b: **coincido con el Arquitecto**, reescribir 206 artefactos gobernados
+  para complacer al indice seria la direccion equivocada; mi unica divergencia es de perimetro (los 19 de
+  `priority` no son H2).
+- Lo que ataque y NO rompi (consta en el veredicto): la politica configurable esta acotada de verdad;
+  enums finitos (36 status / 69 type) que rechazan texto libre; P12 acepta `[]` y rechaza `""`/`None`/`{}`/
+  `["not an id"]`; `--fast` no abre la DB y `--full` conecta `mode=ro`; el clon interno del round-trip usa
+  `tempfile` (no raiz de disco); el pack solo lee `agent_memory` del propio agente.
+- Lazo declarado: maximo 2 iteraciones antes de escalar al operador humano.
+
 ## Ultima actualizacion 2026-08-02 (38) - TASK-0311 runtime-control (indicador + lanzar/detener agente conocido, front Zeus-protocol): OK-CLOSABLE
 
 - Encargo `MSG-20260802-Arquitecto-to-Analista-REVIEW-TASK-0311`. PRODUCTO = repo Zeus-protocol
