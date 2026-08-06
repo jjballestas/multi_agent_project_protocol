@@ -13,9 +13,12 @@ Last updated: 2026-08-06 Europe/Madrid, during TASK-0319 remediation iteration 1
   rename with `git mv`, asserts the exact two-record NUL stream, and proves residue `none` with
   no diagnostic paths. The harness suite passes 13 tests and the falsification inventory reports
   29/29 contracts with five TASK-0319 boundaries.
-- Encoding, neutrality, collaboration validation, and diff gates exited 0 before the commit.
-  TASK-0319 remains `in_progress` under its remediation claim pending clean-clone verification
-  and governed delivery to independent re-review.
+- Encoding, neutrality, collaboration validation, and diff gates exited 0 before the commit. An
+  exact detached clean clone at `d28277d` repeated the 13-test suite, 29/29 inventory, encoding,
+  neutrality, collaboration, diff, and clean-status gates with exit 0.
+- Delivery commit `f60081c` moves TASK-0319 to `in_review`, releases both remediation claims, and
+  publishes the updated self-contained handoff plus response-routed mailbox request. Codex remains
+  maker only and did not review or ratify the remediation.
 
 ## 2026-08-06 - TASK-0317 remediation iteration 1
 
