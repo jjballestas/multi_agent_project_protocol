@@ -4,38 +4,52 @@ task_id: TASK-0314
 from: Codex
 to: Arquitecto
 status: ready_for_review
-created_at: 2026-08-06T02:15:00Z
-implementation_commit: 378021d6340c000347adb0450983a6e0909129b5
+created_at: 2026-08-06T04:29:15Z
+implementation_commit: d1252f49d4b8f2b8bdae01f18035759468d972e0
+verification_commit: 8c0965abc0ce7a8ac58227415e36d7cd42fb115a
 ---
 
-# TASK-0314 implementation handoff
+# TASK-0314 remediation r1 handoff
 
 ## Result
 
-Commit `378021d6340c000347adb0450983a6e0909129b5` ports the six-script F1 memory engine into the
-domain-neutral hub and resolves P1-P12 from SPEC-MEMORIA-HIBRIDA s.16. The core uses structural PII
-patterns only; per-instance domain terms and identity aliases live in the versioned
-`MEMORY_INDEX_POLICY.json` outside pinned `protocol.config.json`, with an empty default template.
+Commit `d1252f49d4b8f2b8bdae01f18035759468d972e0` resolves F1, F2, F3, and R4 from the
+independent CHANGE-REQUIRED verdict.
 
-The port derives project identity from instance config, keeps finite status/type and identity validation,
-accepts the calibrated anchored identifiers and template conventions, and bounds revive packs at 128 KiB
-with deterministic metadata summaries, recency/current selection, token estimates, and explicit omissions.
-`new_instance.py` exports the complete toolchain and policy. `runtime/memory/` is ignored and excluded from
-both encoding scanners. No validator, submit-intent implementation, pinned config, registry, genesis, or
-runtime/state implementation file was changed.
+- F1: omitted sources are declared through deterministic counts and bytes by kind plus
+  recent bounded details. Rendering starts with all details and halves the detail limit
+  until the complete pack is within the unchanged 131,072-byte policy budget.
+- F2: date fields now use a finite anchored timestamp grammar and are no longer exempt
+  from value-based PII detection. `2026-06-19Tperson@example.invalid` is rejected.
+- F3: `priority: medium` is part of the finite accepted vocabulary.
+- R4: the P11 regression creates 305 additional memory sources, proves that the raw
+  per-source omission declaration exceeds 65,536 bytes, and requires the aggregate pack
+  to remain within budget with explicit degraded-detail counts.
 
-## Verification
+No configured budget was raised. The remediation changes only
+`scripts/memory/build_memory_db.py`, `scripts/memory/revive_pack.py`, and
+`scripts/memory/test_memory_db.py`.
 
-- Clean-clone tree `f71f11e2c97acb0f139ae263865c0e3444c42b60`, identical to the implementation tree: 55/55 memory tests passed.
-- The suite contains one named regression for each P1-P12, including the negative domain-lexicon assertion.
-- Real clean-clone corpus rebuild: 4,154 artifacts, 211 events, 15 tables, schema v1, foreign keys enabled.
-- Full drift gate: `result=pass`, `round_trip=pass`, `sweep=bidirectional-pass`, `database_written=false`.
-- Fast drift gate passed without opening the database; post-build `git status --porcelain` was empty.
-- Live collaboration validation, encoding scan, domain-neutrality scan, and staged diff check exited 0.
-- Remaining corpus warnings are value rejections for malformed historical frontmatter; no duplicate-id abort or
-  rejection of the calibrated well-formed protocol vocabulary remained.
+## Clean-clone verification
+
+The exact committed tree `8c0965abc0ce7a8ac58227415e36d7cd42fb115a` was cloned under the
+designated scratch root and produced these exit-code results:
+
+- memory suite: 57/57 passed;
+- real-corpus build: 4,162 artifacts, 219 warnings, down from 238 as required;
+- drift `--fast`: pass;
+- drift `--full`: pass, round_trip=pass, sweep=bidirectional-pass,
+  database_written=false;
+- revive packs: Arquitecto 119,309 bytes, Codex 95,219 bytes, Analista 48,775 bytes;
+- encoding scan, neutrality scan, and collaboration validator: exit 0;
+- post-build `git status --porcelain`: empty.
+
+The known neutrality scanner coverage gap is outside TASK-0314 maker scope and is tracked
+separately as TASK-0316. This handoff does not claim that the current neutrality gate covers
+nested `scripts/memory/**`.
 
 ## Review boundary
 
-Codex is maker only. Analista must independently review the P1-P12 contracts and recompute the required gates;
-Arquitecto must route and ratify the independent verdict. F2-F4 and corpus hygiene H1-H3 are outside this change.
+Codex is maker only and did not review or ratify this remediation. Arquitecto must recompute
+the evidence and route independent Analista re-review of F1/F2/F3/R4. The original verdict
+limits the remediation loop to two iterations; this is iteration 1.

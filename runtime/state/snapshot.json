@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "b12567bd84d70c058b96ec540e2ae56391dc385d30d87a5dea20f0f91971217f",
+  "canonical_hash": "174ef8614ab1f5579e79000d76b58fad413c150a4982c20396923399067f70ce",
   "integrity": {
-    "canonical_hash": "b12567bd84d70c058b96ec540e2ae56391dc385d30d87a5dea20f0f91971217f",
+    "canonical_hash": "174ef8614ab1f5579e79000d76b58fad413c150a4982c20396923399067f70ce",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "697184bb04ba249a08da559864f12ded0ea5bab17088b9e4f83358ed8fa7319b",
-    "signature": "3f672ea103dcb88f6e7b479e6aa960ed809def165d5530173407ba790f6d8d5f",
-    "up_to_seq": 7053
+    "prev_hash": "73786c0d5560bd4c6c83c21a3a16b896a9c8cf60817ab94b161851bad0e2ad55",
+    "signature": "70a68a72ab2081bee6dcc7e80c4ece33942c3b277214cbc5c82b6b18364b9ad6",
+    "up_to_seq": 7057
   },
   "state": {
     "aggregate_versions": {
@@ -2858,7 +2858,7 @@
       "TASK-0311": 13,
       "TASK-0312": 37,
       "TASK-0313": 11,
-      "TASK-0314": 19,
+      "TASK-0314": 23,
       "TASK-0315": 6,
       "TASK-0316": 2,
       "TASK-1102": 14,
@@ -2883,7 +2883,7 @@
       "protocol-prune": 35,
       "protocol-state": 1
     },
-    "events_applied": 6382,
+    "events_applied": 6386,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6046,6 +6046,10 @@
       "codex:task0314:ready-to-in-progress:20260806T002843Z": 7028,
       "codex:task0314:remediation-r1:changes-requested-to-in-progress:2026-08-06T03:39:07Z": 7051,
       "codex:task0314:remediation-r1:claim-acquire:2026-08-06T03:39:07Z": 7050,
+      "codex:task0314:remediation-r1:claim-release:2026-08-06T04:31:36Z": 7056,
+      "codex:task0314:remediation-r1:delivery-claim-release:2026-08-06T04:31:36Z": 7057,
+      "codex:task0314:remediation-r1:delivery-claim:2026-08-06T04:29:15Z": 7054,
+      "codex:task0314:remediation-r1:in-progress-to-in-review:2026-08-06T04:31:36Z": 7055,
       "codex:task0314:remediation-r1:memory-claim:2026-08-06T04:01:10Z": 7052,
       "codex:task0314:remediation-r1:memory-release:2026-08-06T04:01:45Z": 7053,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -9269,5 +9273,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7053
+  "up_to_seq": 7057
 }
