@@ -656,11 +656,22 @@ function Get-WorktreeDiskProof {
     $statusResult = Get-GitStatusPorcelainUtf8
     if (-not $statusResult.ok) { return $null }
     $raw = [string]$statusResult.raw
-    $rows = @()
-    foreach ($entry in @($raw -split [char]0 | Where-Object { $_ })) {
+    $records = @($raw -split [char]0 | Where-Object { $_ })
+    $paths = @()
+    for ($index = 0; $index -lt $records.Count; $index++) {
+        $entry = $records[$index]
         if ($entry.Length -lt 4) { return $null }
-        $path = $entry.Substring(3).Replace("\", "/")
-        if ($path -match ' -> ') { $path = ($path -split ' -> ', 2)[1] }
+        $paths += $entry.Substring(3).Replace("\", "/")
+        if ($entry.Substring(0, 2) -match '[RC]') {
+            if (($index + 1) -ge $records.Count) { return $null }
+            $source = $records[$index + 1].Replace("\", "/")
+            if ([string]::IsNullOrWhiteSpace($source)) { return $null }
+            $paths += $source
+            $index++
+        }
+    }
+    $rows = @()
+    foreach ($path in $paths) {
         $full = Join-Path $Root $path
         if (Test-Path -LiteralPath $full -PathType Leaf) {
             $item = Get-Item -LiteralPath $full

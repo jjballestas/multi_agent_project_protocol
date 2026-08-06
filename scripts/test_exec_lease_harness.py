@@ -35,6 +35,18 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_preexec_defer_budget_kills_shared_counter_mutant",
     },
+    {
+        "id": "NEG-HARNESS-WORKTREE-DISK-PROOF-RENAME-PAIRING",
+        "negative": "Worktree disk proof must preserve both real paths in a porcelain v1 -z rename pair and fail closed on a missing source record.",
+        "mutation": "source.replace(paired_source, stripped_source, 1)",
+        "boundaries": (
+            'assert healthy["paths"] == [new_path, old_path]',
+            'assert healthy["exists"] == [True, False]',
+            'assert mutant["paths"] != healthy["paths"]',
+            'assert malformed is None',
+        ),
+        "exercised_by": "test_worktree_disk_proof_pairs_real_git_rename_records",
+    },
 )
 
 
@@ -313,6 +325,73 @@ $state = Get-StagedResidueState
         return run_powershell(script, root)
 
 
+def real_worktree_disk_proof_rename_probe(source_path: Path = HARNESS_PATH) -> dict:
+    with make_tempdir("disk-proof-rename-") as tmp:
+        root = Path(tmp)
+        old_path = f"personal/{REVIEWER}/disk-old.md"
+        new_path = f"personal/{REVIEWER}/disk-new.md"
+        source = root / old_path
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text("proof\n", encoding="ascii")
+        (root / ".gitignore").write_text("probe.ps1\n", encoding="ascii")
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+            ("git", "add", ".gitignore", old_path),
+            ("git", "commit", "-m", "fixture"),
+            ("git", "mv", old_path, new_path),
+        ):
+            subprocess.run(command, cwd=root, check=True, capture_output=True)
+        script = function_loader(
+            source_path,
+            ("Get-GitStatusPorcelainUtf8", "Get-WorktreeDiskProof"),
+        ) + f"""
+$Root = {ps_literal(root)}
+$statusResult = Get-GitStatusPorcelainUtf8
+$records = @([string]$statusResult.raw -split [char]0 | Where-Object {{ $_ }})
+$proof = Get-WorktreeDiskProof
+[ordered]@{{ records = $records; proof = $proof }} | ConvertTo-Json -Depth 6 -Compress
+"""
+        result = run_powershell(script, root)
+    result["proof"] = json.loads(result["proof"]) if result["proof"] is not None else None
+    result["paths"] = [row["path"] for row in result["proof"]] if result["proof"] is not None else None
+    result["exists"] = [row["exists"] for row in result["proof"]] if result["proof"] is not None else None
+    return result
+
+
+def test_worktree_disk_proof_pairs_real_git_rename_records() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-WORKTREE-DISK-PROOF-RENAME-PAIRING"""
+    old_path = f"personal/{REVIEWER}/disk-old.md"
+    new_path = f"personal/{REVIEWER}/disk-new.md"
+    healthy = real_worktree_disk_proof_rename_probe()
+    assert healthy["records"] == [f"R  {new_path}", old_path]
+    assert healthy["paths"] == [new_path, old_path]
+    assert healthy["exists"] == [True, False]
+
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    paired_source = '$source = $records[$index + 1].Replace("\\", "/")'
+    stripped_source = '$source = $records[$index + 1].Substring(3).Replace("\\", "/")'
+    mutant_source = source.replace(paired_source, stripped_source, 1)
+    assert mutant_source != source
+    with make_tempdir("disk-proof-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = real_worktree_disk_proof_rename_probe(mutant_path)
+    assert mutant["paths"] != healthy["paths"]
+
+    with make_tempdir("disk-proof-malformed-") as tmp:
+        root = Path(tmp)
+        script = function_loader(HARNESS_PATH, ("Get-WorktreeDiskProof",)) + f"""
+$Root = {ps_literal(root)}
+function Get-GitStatusPorcelainUtf8 {{ return [pscustomobject]@{{ ok = $true; raw = "R  moved.md`0" }} }}
+$proof = Get-WorktreeDiskProof
+[ordered]@{{ proof = $proof }} | ConvertTo-Json -Compress
+"""
+        malformed = run_powershell(script, root)["proof"]
+    assert malformed is None
+
+
 def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-PREEXEC-DEFER-STARVATION"""
     healthy = defer_probe(HARNESS_PATH)
@@ -432,6 +511,7 @@ def main() -> int:
         test_harnesses_use_tree_kill_and_single_instance_guard,
         test_stop_order_requires_exact_line_not_contains,
         test_preexec_defer_budget_kills_shared_counter_mutant,
+        test_worktree_disk_proof_pairs_real_git_rename_records,
         test_residue_excludes_foreign_personal_and_caps_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
         test_new_instance_exports_identical_harness,

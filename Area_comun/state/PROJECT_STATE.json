@@ -93,7 +93,7 @@
         {
             "id": "TASK-0321",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv"
         },
         {

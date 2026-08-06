@@ -2,7 +2,7 @@
 task_id: TASK-0321
 file: Area_comun/tasks/TASK-0321-diskproof-emparejamiento-renombrados.md
 title: "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv"
-status: ready
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
