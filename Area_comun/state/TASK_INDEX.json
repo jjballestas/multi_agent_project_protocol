@@ -288,7 +288,7 @@
             "file": "Area_comun/tasks/TASK-0318-enum-status-extensible-por-instancia.md",
             "id": "TASK-0318",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Vocabulario de estado extensible por instancia: sacar los 6 valores de instancia que quedan en STATUS_VALUES sin perder validacion, via MEMORY_INDEX_POLICY.json con contrato de falsacion",
             "type": "infra"
         },
