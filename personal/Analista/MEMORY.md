@@ -6028,3 +6028,65 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   fichero de mensaje de commit); el gate real de trailers va dentro de `validate`, que dio 0.
 - Limpieza: `git worktree remove --force` de los cuatro arboles temporales de la atribucion de la
   poda + `git worktree prune`. Scratch bajo `D:/Aegis_Scratch/mapp/` (DECISION-0104).
+
+## 2026-08-07 (01:10 CEST) -- TASK-0317 r3 contrato de colocacion: CAMBIO-REQUERIDO sobre f2c6c315 (mi commit c49cc3a9)
+
+- **Pregunta del Arquitecto:** el contrato `NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY` tiene dientes de
+  verdad, o se puede mover la exencion sin que ningun gate lo note? Respuesta medida: **caza 4 de
+  las 5 formas que construi; la quinta pasa el stack completo en verde.**
+- **METODO QUE FUNCIONO Y REPITO: el mutante como FUENTE REAL, no como cadena en un test.** Para
+  cada vector escribi el mutante en `scripts/memory/build_memory_db.py` de un sandbox y pregunte lo
+  unico que importa: *si un maker commiteara esta regresion, falla el gate?* Cazados: A (exencion
+  extraida a funcion aparte + `continue` al tope), B (movida debajo del telefono, encima del
+  dominio), D (exencion calculada en sitio y reusada para saltar el dominio). No cazado por el
+  contrato pero cazado por otro test: C (ensanchar `DATE_RE` -> 11 subtests de
+  `test_timestamp_pii_suffix_is_rejected`, AC2 con dientes mecanicos).
+- **EL SLIP (E) y su leccion generalizable:** un contrato de falsacion cuyo unico diente conductual
+  sobre la fuente real es `assertTrue(f(UN_EJEMPLO))` solo fija **un punto del espacio**. Movi al
+  tope del bucle una exencion mas ESTRECHA que el payload del contrato
+  (`re.fullmatch(r"\d{4}-\d{2}-\d{2}", item)` + `continue`): deja intacto el timestamp del contrato,
+  respeta las dos cadenas-fixture (`count == 1`), y **pasa `check_falsification_contracts
+  --inventory` exit 0 y `test_memory_db.py` 60/60 OK en clon limpio CON historia**, mientras
+  `contains_pii("2026-06-19", ["2026"])` pasa de `True` a `False`. Cuando revises un contrato,
+  pregunta siempre: *que subconjunto del espacio cubre el payload, y que queda fuera?*
+- **El argumento que convierte el hallazgo en bloqueo, no en residual:** el escape cae DENTRO del
+  enunciado del propio contrato ("Moving the date exemption above the phone heuristic..."), asi que
+  es el contrato fallando su propia promesa. Y reproduce el patron que el AC3 de esa misma tarea
+  llama textualmente *"parte del defecto"* (fijar ejemplos que esquivan la mitad negativa).
+- **CONTROL OBLIGADO ANTES DE CANTAR "CAZADO" O "SE CUELA":** mi primer sandbox era `git archive`
+  sin `.git`, y ahi `test_current_tree_build_does_not_change_tracked_status` da ERROR **siempre**,
+  tambien en el arbol SIN mutar. Corri el control sin mutar, vi el mismo error, y repeti E en el
+  clon con historia -> alli el gate entero es verde. Sin ese control habria vendido un falso cazado.
+- **REMEDIACION PROBADA, NO PROPUESTA A CIEGAS.** El generador de familia ya existe 30 lineas mas
+  arriba en la misma clase (`test_memory_db.py:365-381`, 333 cadenas). Barrido sobre esa familia:
+  **0 de 333** en f2c6c315 (verde hoy, no obliga a tocar produccion) y **3 de 333** en el mutante E
+  (`2026-01-01`, `2026-06-19`, `2026-12-31`). Dar la remediacion medida cambia el tono del veredicto
+  de "no me fio" a "cuesta una iteracion".
+- **GOTCHA DE CLON LIMPIO, para el runbook:** gatear en clon **superficial** (`--depth`) da un
+  FALSO ROJO de `validate`: `commit_trailers could not scan git history from 57f6250f...` porque el
+  commit base no esta en el grafo. `git fetch --unshallow` y el mismo comando da exit 0. Casi lo
+  reporto como bloqueante.
+- Gates recomputados en el clon limpio (f2c6c315, tree limpio), todo por exit code: `validate` 0,
+  `scan_encoding` 0, `scan_domain_neutrality` 0, `prune --check` 0,
+  `check_falsification_contracts --inventory` 0, `test_memory_db.py` 0 (60/60, 323 s),
+  build 0 (4225 artefactos, 219 warnings, **0 de clave de fecha** = AC4 literal),
+  drift `--fast` 0 y `--full` 0 (`"result":"pass"`).
+- Cableado verificado, no inferido: `--inventory` lista el contrato con runner
+  `scripts\memory\test_memory_db.py`; el checker exige `mutation` y cada `boundaries` **literales**
+  dentro del cuerpo del `exercised_by`; CI lo corre en `validate.yml:47-50` y el fichero cierra con
+  `unittest.main`. No repetimos 0316.
+- **ALCANCE DEL BLOQUEO, declarado explicito para que no se re-litigue:** el fix funcional que
+  aprobe en r2 sobre `3d64a7c` esta intacto y sigue correcto (lo re-medi). El cambio pedido se
+  limita a la asercion conductual del test nuevo.
+- Residuales declarados: R3-1 aserciones de texto-fuente fragiles pero **fail-closed** (fueron las
+  que cazaron B; el mensaje `1 != 0` no explica la garantia); R3-2 el credito de AC2 es de
+  `test_timestamp_pii_suffix_is_rejected`, no de este contrato (interactua con TASK-0322);
+  R3-3 el falso rojo del clon superficial.
+- COORDINACION: 0 claims activos sobre mis rutas; arbol gobernado sin mods rastreadas ajenas;
+  `git fetch` justo antes de commitear (origin/main habia avanzado a `e6736185`). Pathspec explicito
+  en el `git commit`, nunca `git add` pelado. Trailers `Task-Id` + `Ops-Reason` + `Co-Authored-By`.
+  Scratch bajo `D:/Aegis_Scratch/hub/an0317/` (DECISION-0104), pendiente de limpiar al stand-down.
+- Bucle declarado: r4 acotada a `scripts/memory/test_memory_db.py`; gates
+  `test_memory_db.py` + `check_falsification_contracts --inventory` + `validate` + `scan_encoding` +
+  drift; **re-juicio antes del commit de cierre re-corriendo el mutante E y exigiendo que FALLE**;
+  maximo 2 iteraciones antes de escalar al operador.
