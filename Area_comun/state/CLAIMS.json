@@ -231,9 +231,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-06T07:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0316",
             "updated_at": "2026-08-06T07:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0316-remediation1-message",
+            "expires_at": "2026-08-06T19:12:00Z",
+            "notes": "Publish the TASK-0316 remediation iteration 1 independent-review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-remediation1-message",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0316-remediacion-r1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T07:12:00Z",
+            "status": "released",
+            "task_id": "TASK-0316",
+            "updated_at": "2026-08-06T07:12:00Z"
         },
         {
             "claim_id": "CLAIM-20260806-Codex-TASK-0316-remediation1-readme",
@@ -247,7 +263,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-06T07:05:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0316",
             "updated_at": "2026-08-06T07:05:00Z"
         },

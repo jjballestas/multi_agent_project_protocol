@@ -1,39 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260806-Codex-TASK-0316-remediation1",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-remediation1",
-                "Area_comun/state/TASK_INDEX.json#TASK-0316",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0316",
-                "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md",
-                "scripts/scan_domain_neutrality.py",
-                "scripts/scan_domain_neutrality.ps1",
-                "scripts/test_scan_domain_neutrality.py",
-                "scripts/memory/query_memory_db.py",
-                "scripts/memory/build_memory_db.py",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/HANDOFF-TASK-0316-codex-to-arquitecto.md",
-                "personal/Codex/Memory.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0316"
-        },
-        {
-            "claim_id": "CLAIM-20260806-Codex-TASK-0316-remediation1-readme",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0316-remediation1-readme",
-                "scripts/harness/README.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0316"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -1,6 +1,24 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, during TASK-0316 implementation.
+Last updated: 2026-08-06 Europe/Madrid, during TASK-0316 remediation iteration 1.
+
+## 2026-08-06 - TASK-0316 remediation iteration 1
+
+- Implementation commit `52d0a38` removes the nested-script identity depth cutoff from both
+  scanners and uses explicit file allowlisting only for the fixture roster and third-party CLI
+  name collision.
+- Four real neutral-core defects are removed: retrieval now requires a caller-supplied agent id,
+  two instance-local status literals left the finite core enum, and the exported cron requires an
+  explicit coordinator id. The harness documentation matches the required parameter.
+- The regression now uses portable `tempfile` scratch, exercises root and nested identity probes
+  in both scanner entrypoints, kills a depth-cutoff mutant, declares the permanent negative in the
+  falsification inventory, and runs in CI.
+- Live gates passed by exit code: 57 memory tests, harness contract/parser checks, the 3-test
+  neutrality regression, 27/27 falsification inventory, both neutrality scanners, encoding,
+  collaboration validation, and diff checks. A clean clone at `52d0a38` passed every requested
+  gate with empty status and measured configured/effective coverage at 124 -> 136 (delta +12), all
+  six memory scripts included, and zero runtime-memory files. Governed delivery is pending; Codex
+  remains maker only.
 
 ## 2026-08-06 - TASK-0316 implementation
 
