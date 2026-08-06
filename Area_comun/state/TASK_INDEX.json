@@ -279,8 +279,8 @@
         {
             "file": "Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md",
             "id": "TASK-0316",
-            "owner": "Arquitecto",
-            "status": "proposed",
+            "owner": "Codex",
+            "status": "ready",
             "title": "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean",
             "type": "infra"
         },

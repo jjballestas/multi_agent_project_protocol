@@ -2,9 +2,9 @@
 task_id: TASK-0316
 file: Area_comun/tasks/TASK-0316-neutralidad-cobertura-scripts-anidados.md
 title: "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean"
-status: proposed
+status: ready
 type: infra
-owner: Arquitecto
+owner: Codex
 reviewer: Analista
 priority: high
 project: multi_agent_project_protocol
@@ -45,6 +45,9 @@ intake:
   risk: medium
   estimate: S
 notes: >
+  GO del operador 2026-08-06. Owner reasignado a Codex (implementador) con el Analista de
+  checker: el Arquitecto redacto el contrato y los AC, asi que no debe ademas codificarlo y
+  auto-certificarlo. La responsabilidad arquitectonica del hallazgo sigue siendo del Arquitecto.
   Hallazgo F4 del veredicto del Analista sobre TASK-0314
   (Area_comun/artifacts/Analista-TASK-0314-port-memoria-hibrida-verdict.md), falsificado por el
   checker plantando terminos de dominio y verificado INDEPENDIENTEMENTE por el Arquitecto:
