@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "21455ba8e0c171c86d8d98e0c6a123774583546f2c4bf3343013617cdef1efc3",
+  "canonical_hash": "a566da65d76923cd62fd7f188b0601c3ce5c7e145a30bf18d64a70f9e7e29a2b",
   "integrity": {
-    "canonical_hash": "21455ba8e0c171c86d8d98e0c6a123774583546f2c4bf3343013617cdef1efc3",
+    "canonical_hash": "a566da65d76923cd62fd7f188b0601c3ce5c7e145a30bf18d64a70f9e7e29a2b",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "73fe151df0ae23a3edad8e068b9322fdcbc9eb4fda563dce46384dee8248d5d3",
-    "signature": "9bcfbadc70ee5410309d9421bcbe8a023ad00d95db4da27119484adbde7d51eb",
-    "up_to_seq": 7288
+    "prev_hash": "a5d0d90abc7f04eb01e2020551c200582c586fa96a5a03d0efe60221fac8d9ea",
+    "signature": "aafee897527b76cb69b15832ba689eb0e657f3f1afa5650d4cd7d4e1632b9244",
+    "up_to_seq": 7291
   },
   "state": {
     "aggregate_versions": {
@@ -2959,7 +2959,7 @@
       "TASK-0318": 13,
       "TASK-0319": 24,
       "TASK-0320": 4,
-      "TASK-0321": 10,
+      "TASK-0321": 13,
       "TASK-0322": 3,
       "TASK-0323": 2,
       "TASK-1102": 14,
@@ -2984,7 +2984,7 @@
       "protocol-prune": 41,
       "protocol-state": 1
     },
-    "events_applied": 6617,
+    "events_applied": 6620,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6266,9 +6266,12 @@
       "codex:task0319:start:claim": 7163,
       "codex:task0321:delivery-claim": 7248,
       "codex:task0321:delivery-claim-release": 7251,
+      "codex:task0321:done-flip:claim-acquire:20260806T232322Z": 7289,
+      "codex:task0321:done-flip:claim-release:20260806T232322Z": 7291,
       "codex:task0321:implementation-claim-release": 7250,
       "codex:task0321:in-progress-to-in-review": 7249,
       "codex:task0321:ready-to-in-progress": 7247,
+      "codex:task0321:review-approved-to-done:20260806T232322Z": 7290,
       "codex:task0321:start:claim": 7246,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -9605,5 +9608,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7288
+  "up_to_seq": 7291
 }
