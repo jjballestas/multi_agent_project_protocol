@@ -40,6 +40,25 @@
             "updated_at": "2026-08-06T16:00:58Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-0317-rn2-0322",
+            "expires_at": "2026-08-07T19:15:00Z",
+            "notes": "Devuelve 0317 para plegar R-N2 (contrato de colocacion) y registra R-N1/R-N3 como TASK-0322.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-0317-rn2-0322",
+                "Area_comun/state/TASK_INDEX.json#TASK-0317",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
+                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0322",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0322",
+                "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md"
+            ],
+            "started_at": "2026-08-06T19:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0317",
+            "updated_at": "2026-08-06T19:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-0319-ratifica-0321-registro",
             "expires_at": "2026-08-07T18:30:00Z",
             "notes": "Ratifica OK-CERRABLE de 0319 y registra S4 como TASK-0321.",
@@ -76,6 +95,22 @@
             "status": "released",
             "task_id": "TASK-0320",
             "updated_at": "2026-08-06T18:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-go-0322",
+            "expires_at": "2026-08-07T19:40:00Z",
+            "notes": "GO del operador para TASK-0322.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-go-0322",
+                "Area_comun/state/TASK_INDEX.json#TASK-0322",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0322",
+                "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md"
+            ],
+            "started_at": "2026-08-06T19:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0322",
+            "updated_at": "2026-08-06T19:40:00Z"
         },
         {
             "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote8",
