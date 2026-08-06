@@ -27,97 +27,17 @@
             "updated_at": "2026-07-03T09:01:07Z"
         },
         {
-            "claim_id": "CLAIM-20260806-143428-prune-arquitecto",
+            "claim_id": "CLAIM-20260806-160058-prune-arquitecto",
             "expires_at": "2026-08-06",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Arquitecto",
             "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json"
+                "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-08-06T14:34:28Z",
+            "started_at": "2026-08-06T16:00:58Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-08-06T14:34:28Z"
-        },
-        {
-            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0320-registro",
-            "expires_at": "2026-08-07T16:00:00Z",
-            "notes": "Encargo R1 del veredicto de TASK-0318: registra la tarea del enum TYPE_VALUES; queda proposed a la espera de GO.",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0320-registro",
-                "Area_comun/state/TASK_INDEX.json#TASK-0320",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0320",
-                "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
-                "Area_comun/specs/SPEC-MEMORIA-HIBRIDA.md"
-            ],
-            "started_at": "2026-08-06T16:00:00Z",
-            "status": "released",
-            "task_id": "TASK-0320",
-            "updated_at": "2026-08-06T16:00:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote6",
-            "expires_at": "2026-08-07T14:40:00Z",
-            "notes": "Higiene lote 6: archiva 4 consumidos de los hilos 0316-0318.",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote6",
-                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0316-r2.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-RESP-TASK-0316-r2.md",
-                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0316-doneflip.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0316-doneflip.md",
-                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0317.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0317.md",
-                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0318.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0318.md"
-            ],
-            "started_at": "2026-08-06T14:40:00Z",
-            "status": "released",
-            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
-            "updated_at": "2026-08-06T14:40:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote7",
-            "expires_at": "2026-08-07T14:45:00Z",
-            "notes": "Higiene lote 7: archiva los 3 handoff consumidos y el REVIEW de 0318 ya respondido con veredicto.",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote7",
-                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0317.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0317.md",
-                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0318.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0318.md",
-                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0319.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0319.md",
-                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0318.md",
-                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0318.md"
-            ],
-            "started_at": "2026-08-06T14:45:00Z",
-            "status": "released",
-            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
-            "updated_at": "2026-08-06T14:45:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260806-Arquitecto-rechazo-0317-0319",
-            "expires_at": "2026-08-07T16:10:00Z",
-            "notes": "Rechazo formal de 0317 y 0319 tras sendos veredictos CAMBIO-REQUERIDO del Analista.",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-rechazo-0317-0319",
-                "Area_comun/state/TASK_INDEX.json#TASK-0317",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
-                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0319",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0319",
-                "Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md"
-            ],
-            "started_at": "2026-08-06T16:10:00Z",
-            "status": "released",
-            "task_id": "TASK-0319",
-            "updated_at": "2026-08-06T16:10:00Z"
+            "updated_at": "2026-08-06T16:00:58Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
