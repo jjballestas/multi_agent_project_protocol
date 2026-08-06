@@ -334,6 +334,22 @@
             "updated_at": "2026-08-06T04:29:15Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0314-remediation-r1-final-memory",
+            "expires_at": "2026-08-06T06:34:18Z",
+            "notes": "Persist TASK-0314 remediation r1 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0314-remediation-r1-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T04:34:18Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T04:34:18Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0314-remediation-r1-memory",
             "expires_at": "2026-08-06T06:01:10Z",
             "notes": "Persist TASK-0314 remediation r1 implementation commit context.",

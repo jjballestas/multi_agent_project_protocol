@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "174ef8614ab1f5579e79000d76b58fad413c150a4982c20396923399067f70ce",
+  "canonical_hash": "69dcee95fec74e63768ad5b4347799b49d72b2aac879b85cacdac3dbeb25ef51",
   "integrity": {
-    "canonical_hash": "174ef8614ab1f5579e79000d76b58fad413c150a4982c20396923399067f70ce",
+    "canonical_hash": "69dcee95fec74e63768ad5b4347799b49d72b2aac879b85cacdac3dbeb25ef51",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "73786c0d5560bd4c6c83c21a3a16b896a9c8cf60817ab94b161851bad0e2ad55",
-    "signature": "70a68a72ab2081bee6dcc7e80c4ece33942c3b277214cbc5c82b6b18364b9ad6",
-    "up_to_seq": 7057
+    "prev_hash": "d87cd5c6c7517c7bf224575ff0cebe3c0fab507dd003084f0f8725b22b41b29b",
+    "signature": "654a32c2d40b28b86fe13bcf486d81ad7260c20497cafc76d1299817bf446ba1",
+    "up_to_seq": 7059
   },
   "state": {
     "aggregate_versions": {
@@ -2858,7 +2858,7 @@
       "TASK-0311": 13,
       "TASK-0312": 37,
       "TASK-0313": 11,
-      "TASK-0314": 23,
+      "TASK-0314": 25,
       "TASK-0315": 6,
       "TASK-0316": 2,
       "TASK-1102": 14,
@@ -2883,7 +2883,7 @@
       "protocol-prune": 35,
       "protocol-state": 1
     },
-    "events_applied": 6386,
+    "events_applied": 6388,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6049,6 +6049,8 @@
       "codex:task0314:remediation-r1:claim-release:2026-08-06T04:31:36Z": 7056,
       "codex:task0314:remediation-r1:delivery-claim-release:2026-08-06T04:31:36Z": 7057,
       "codex:task0314:remediation-r1:delivery-claim:2026-08-06T04:29:15Z": 7054,
+      "codex:task0314:remediation-r1:final-memory-claim:2026-08-06T04:34:18Z": 7058,
+      "codex:task0314:remediation-r1:final-memory-release:2026-08-06T04:34:51Z": 7059,
       "codex:task0314:remediation-r1:in-progress-to-in-review:2026-08-06T04:31:36Z": 7055,
       "codex:task0314:remediation-r1:memory-claim:2026-08-06T04:01:10Z": 7052,
       "codex:task0314:remediation-r1:memory-release:2026-08-06T04:01:45Z": 7053,
@@ -9273,5 +9275,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7057
+  "up_to_seq": 7059
 }

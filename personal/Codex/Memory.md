@@ -11,10 +11,14 @@ Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 - The P11 regression now creates 305 additional memory sources and proves that a raw
   per-source omission declaration exceeds 65,536 bytes while the emitted pack remains
   within budget and declares aggregate counts plus degraded detail.
-- The 57-test memory suite passed. Real-corpus packs for Arquitecto, Codex, and Analista
-  all exited 0 below 131,072 bytes without changing the configured budget.
-- TASK-0314 remains `in_progress` pending clean-clone recomputation, governed delivery to
-  `in_review`, claim release, and independent re-review. Codex remains maker only.
+- Clean clone `8c0965a` passed 57/57 tests, a 4,162-artifact build with exactly 219
+  warnings, fast/full drift with round-trip and bidirectional sweep, encoding,
+  neutrality, collaboration validation, and empty post-build status.
+- Real-corpus packs for Arquitecto, Codex, and Analista were 119,309, 95,219, and
+  48,775 bytes respectively, all below 131,072 without changing the configured budget.
+- Delivery commit `75342eb` returns TASK-0314 to `in_review`, releases all maker claims,
+  and publishes the remediation handoff for Arquitecto recomputation and independent
+  Analista re-review. Codex remains maker only and did not review or ratify the work.
 
 ## 2026-08-06 - TASK-0314 implementation
 
