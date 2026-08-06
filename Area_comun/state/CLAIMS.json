@@ -73,6 +73,44 @@
             "updated_at": "2026-08-06T11:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote4",
+            "expires_at": "2026-08-07T11:40:00Z",
+            "notes": "Higiene lote 4: archiva 4 consumidos del hilo TASK-0316.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote4",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0316.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0316.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0316.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0316.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0316-remediacion-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0316-remediacion-r1.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0316-remediacion-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0316-remediacion-r1.md"
+            ],
+            "started_at": "2026-08-06T11:40:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T11:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote5",
+            "expires_at": "2026-08-07T11:45:00Z",
+            "notes": "Higiene lote 5: archiva el REVIEW r2 y su veredicto, ya respondidos.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote5",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0316-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0316-r2.md",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0316-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0316-r2.md"
+            ],
+            "started_at": "2026-08-06T11:45:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T11:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0317",
             "expires_at": "2026-08-06T23:02:09Z",
             "notes": "Fix timestamp negative-offset phone-pattern false positive and add generated-family regression without widening DATE_RE.",
