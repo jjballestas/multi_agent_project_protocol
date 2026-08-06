@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "dfb55bbd78cef5af096af86a8ecdfac3af5a28b328c40b2e1749365867a17b47",
+  "canonical_hash": "8bdbd6da8111c67553d14e1c91678f6ba7ad36d54bc2e729004c92f19fc29d97",
   "integrity": {
-    "canonical_hash": "dfb55bbd78cef5af096af86a8ecdfac3af5a28b328c40b2e1749365867a17b47",
+    "canonical_hash": "8bdbd6da8111c67553d14e1c91678f6ba7ad36d54bc2e729004c92f19fc29d97",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "0bbe83371bbf82e2a4291c465ed59ca0e73baff7995cc3376d00befa3a25d9d7",
-    "signature": "11ebcae93940b672fce28fc71b5b5b60eb13196afc146d9720d30e6782af546b",
-    "up_to_seq": 7233
+    "prev_hash": "90f33b87e238a413648745ccc9abec0b8c75f27ba37ef325080dc6e677599201",
+    "signature": "e1b37455b5cd40eabe90921221f4b8d65325b082b199e63cabf4a88ae0279f18",
+    "up_to_seq": 7236
   },
   "state": {
     "aggregate_versions": {
@@ -2934,7 +2934,7 @@
       "TASK-0316": 24,
       "TASK-0317": 20,
       "TASK-0318": 13,
-      "TASK-0319": 19,
+      "TASK-0319": 22,
       "TASK-0320": 4,
       "TASK-0321": 2,
       "TASK-1102": 14,
@@ -2959,7 +2959,7 @@
       "protocol-prune": 40,
       "protocol-state": 1
     },
-    "events_applied": 6562,
+    "events_applied": 6565,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6183,6 +6183,8 @@
       "codex:task0318:review-approved-to-done:20260806T160207Z": 7198,
       "codex:task0319:delivery-claim-release": 7168,
       "codex:task0319:delivery:claim": 7165,
+      "codex:task0319:done-flip:claim-acquire:20260806T190356Z": 7234,
+      "codex:task0319:done-flip:claim-release:20260806T190356Z": 7236,
       "codex:task0319:implementation-claim-release": 7167,
       "codex:task0319:in-progress-to-in-review": 7166,
       "codex:task0319:ready-to-in-progress": 7164,
@@ -6192,6 +6194,7 @@
       "codex:task0319:remediation1:delivery-claim-release": 7225,
       "codex:task0319:remediation1:implementation-claim-release": 7224,
       "codex:task0319:remediation1:in-progress-to-in-review": 7223,
+      "codex:task0319:review-approved-to-done:20260806T190356Z": 7235,
       "codex:task0319:start:claim": 7163,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -9525,5 +9528,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7233
+  "up_to_seq": 7236
 }
