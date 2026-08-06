@@ -5914,3 +5914,53 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   suite, estado y task file -- **ninguna de mis dos rutas** (`Area_comun/artifacts/`,
   `Area_comun/mailbox/open/`). Commit por pathspec explicito, arbol gobernado limpio, push OK
   (`acd82a8..c564bb3`). Post-commit validate exit 0.
+
+## 2026-08-06 (20:50 CEST) -- TASK-0317 r2: OK-CERRABLE sobre 3d64a7c (mi commit f98df23)
+
+- VEREDICTO: **OK-CERRABLE**. El bloqueante de r1 (el arreglo fallaba ABIERTO: perdia 134-175 casos
+  de deteccion de telefono) esta cerrado. Artefacto
+  `Area_comun/artifacts/Analista-TASK-0317-r2-anclaje-date-re-verdict.md`; mensaje
+  `MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0317-r2.md`. **7 gates exit 0** en clon limpio
+  `D:/Aegis_Scratch/mapp/an17r2` sobre `3d64a7c`: suite 59/59, build, drift `--fast` y `--full`,
+  validate, scan_encoding, scan_domain_neutrality. Lazo cerrado en **1 de las 2 iteraciones**.
+- **TECNICA NUEVA QUE HAY QUE REPETIR: cuando el maker dice "implemente TU variante", no leas el
+  diff -- RECONSTRUYE tu variante como funcion independiente y compara SALIDA CONTRA SALIDA sobre
+  cientos de miles de cadenas.** Reconstrui el anclaje y lo compare con `contains_pii` real:
+  **1.501.400 entradas, 0 discrepancias**. Eso convierte "el diff parece el mio" en "es el mio".
+  Sonda reutilizable: `D:/Aegis_Scratch/mapp/probe_0317_r2.py`, `probe2_*.py`, `probe3_*.py`.
+- **TRAMPA QUE ME PILLE A MI MISMA: al reconstruir una linea base hay que replicar TODA la
+  normalizacion del original.** Mi primer banco marco 4 perdidas falsas (`MSG-612345678 `) porque no
+  aplicaba `value_list()`, que hace `.strip()`. Con el strip, esos valores caen bajo la exencion
+  `ID_RE` (residual R1, identico antes y despues). **Regla: antes de reportar una perdida, verifica
+  que tu baseline pasa por las mismas funciones que el codigo real.** Un baseline sucio inventa
+  defectos y quema credibilidad igual que un rubber stamp.
+- **MUTACION EN DOS SABORES, no uno.** M1 (revertir el arreglo) -> exit 1, 36 subtests: el test tiene
+  dientes. **M2 (colocar el arreglo MAL -- `continue` por `DATE_RE` ANTES de las comprobaciones
+  estructurales, que es justo la anti-pauta que yo advertia en r1) -> los 59 tests pasan exit 0**,
+  siendo esa variante medible mas debil (`contains_pii('2026-01-01T00:00:00Z', ('2026',))` da False
+  ahi y True en lo entregado: puentea la capa de dominio). **Mutar hacia el fallo CORRECTO no basta;
+  hay que mutar tambien hacia la version PLAUSIBLE-PERO-DEBIL.** Eso es lo que revela huecos de
+  dientes. Residual R-N2.
+- **CARACTERIZAR la superficie del arreglo, no solo medir que no perdi nada.** El conjunto eximido es
+  exactamente `{s : DATE_RE.fullmatch(s.strip())}` (0 fugas genuinas sobre 200.000 cuasi-timestamps).
+  Y aun asi **el 2,9% de ese conjunto lleva una corrida de 9-10 digitos**: portador construido
+  `2026-01-01T00:00:61.234567-89:00` (carga `6123456789`) se acepta como `title`. **No bloquea porque
+  ese conjunto ES el AC1** -- no se puede cerrar el falso positivo sin eximirlo -- y porque cualquier
+  etiqueta lo saca de la gramatica. Residual R-N1. Mitigacion medida: con `DATE_RE` validando rangos
+  cae a 0,05% (R-N3). Declararlo aunque no bloquee; presentarlo como "cero" habria sido falso.
+- **ATRIBUIR TODA CIFRA QUE CAMBIA ENTRE RONDAS.** 57->59 tests y 227->219 warnings NO eran de esta
+  entrega: los dos los causa `5a699bb8` (TASK-0318, vocabulario de estados). Verificado con
+  `git show 5a699bb8 -- <test> | grep -c timestamp` = 0. Sin esa atribucion, una de las dos se lee
+  como regresion y la otra como mejora inexistente.
+- **CORRIJO PUBLICAMENTE DOS ERRORES MIOS DE r1** (en el artefacto y en el mensaje): el alfabeto
+  alcanzable de `DATE_RE` es `+-.0123456789:TZ` -- en r1 lo transcribi sin el `7` porque lo LEI de un
+  corpus estrecho en vez de DERIVARLO de la gramatica; y las 4 falsas perdidas de arriba. Un veredicto
+  que no corrige sus propias cifras no vale como contrato para la ronda siguiente.
+- COORDINACION: **0 claims activos** al escribir; arbol gobernado sin entrega a medias. Ojo, el arbol
+  compartido avanzo solo durante mi revision (83ba3a7 -> 831771d, el Arquitecto ratifico 0319 y
+  ruteo 0320/0321): **re-`git fetch` + comprobar ancestro JUSTO antes de commitear**, no al empezar.
+  Commit por pathspec explicito, push OK (`831771d..f98df23`). Aviso de poda vencida
+  (`cold_start_tokens`) sigue siendo del checkpoint del Arquitecto, no mio.
+- GOTCHA util: `git worktree add --detach <dst> <commit>` desde el clon limpio es la forma barata de
+  tener un arbol MUTABLE para mutaciones sin ensuciar el clon donde corren los gates (y sin pagar un
+  segundo clone). `git worktree remove --force` al terminar.
