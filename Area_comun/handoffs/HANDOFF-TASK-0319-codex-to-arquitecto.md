@@ -4,63 +4,49 @@ task_id: TASK-0319
 from: Codex
 to: Arquitecto
 status: in_review
-created_at: 2026-08-06T14:18:00Z
-implementation_commit: a7c6e96317a07b2e6316d96e28b2b70741763c51
+created_at: 2026-08-06T17:45:00Z
+implementation_commit: d28277d77871f0c8ac3d0847e38ae882e3c3fe25
+remediation_of: Area_comun/artifacts/Analista-TASK-0319-harness-defer-starvation-verdict.md
 ---
 
-# HANDOFF TASK-0319 - stable-cause wall-clock pre-exec defer budget
+# HANDOFF TASK-0319 - remediation 1 for porcelain rename pairs
 
 ## Result
 
-Commit `a7c6e96317a07b2e6316d96e28b2b70741763c51` removes pre-exec defers from
-`MaxTransientRetries`. Actual transient exec failures still consume `attempts` and retain the
-existing count budget. A pre-exec veto instead records `defer_reason` and `defer_started_at`, resets
-when the cause changes or one observation reaches the executable path, and becomes terminal only
-when the same cause survives `PreExecDeferTimeoutSeconds`.
+Commit `d28277d77871f0c8ac3d0847e38ae882e3c3fe25` closes blocking finding S1 without
+changing the accepted stable-cause defer design. `Get-StagedResidueState` now parses the NUL stream
+from `git status --porcelain=v1 -z` as units: an `R` or `C` destination record consumes its following
+source-path record, and both records are kept or discarded together. The dead ` -> ` branch is gone.
 
-The default is 7,200 seconds: twice the existing 3,600-second exec deadline and safely above the
-observed 30-60 minute peer turns. A genuinely stuck unchanged cause still reaches
-`defer_terminal`. The dirty-tree veto, active external claim veto, active peer lease veto, and
-single-exec lock remain intact.
-
-`worktree_residue_live` now records `paths_json` with at most 10 causal paths. An active live lease
-records `peer=<owner>`. Another peer's `personal/<id>/` tree is removed from residue computation,
-while the invoking peer's own personal tree remains visible.
+A rename pair is excluded only when both source and destination belong to another peer's private
+`personal/<id>/` area. Cross-boundary renames remain residue. Retained pairs preserve the source row
+for the existing paired traversal, while bounded diagnostics emit only the real destination path.
 
 ## AC evidence
 
-- AC1: the permanent negative seeds the historical mixed sequence at `defers=2` under
-  `active_peer_lease`, changes the cause to `worktree_residue_live`, and applies the old shared-count
-  mutant. The mutant reaches its third defer and becomes terminal; the fixed implementation resets
-  to defer 1 and stays eligible. The fixture runs under the designated scratch root on Windows.
-- AC2: the same behavioral probe preserves `attempts=2` across pre-exec defers and clear/reset;
-  `MaxTransientRetries` is absent from the fixed pre-exec terminal predicate.
-- AC3/AC4: a cause change resets defer count and clock; a clear observation resets defer state; the
-  same cause seeded beyond a 300-second test budget reaches `defer_terminal`.
-- AC5: the residue probe retains only 10 own causal paths, and the live-lease probe emits
-  `peer=Analista`.
-- AC6: foreign `personal/Analista/**` residue is ignored, while `personal/Codex/**` residue remains
-  live and diagnostic.
-- AC7: the behavioral probe confirms `active_external_claim`; source contract tests retain the live
-  lease veto, lock, PID guard, and process-tree termination.
-- AC8: `new_instance.copy_peer_harness` exports a byte-identical generic runner. CI now runs the
-  13-case harness suite, and `NEG-HARNESS-PREEXEC-DEFER-STARVATION` is declared in the 29/29
-  falsification inventory.
+- S1/AC6: a real scratch Git repository commits `personal/Analista/draft-old.md`, stages `git mv`
+  to `draft-new.md`, and feeds the real two-record NUL output through the production functions.
+  The result is `none` with `diagnostic_paths=[]`.
+- AC5: the same boundary prevents the amputated phantom path. Existing diagnostics remain capped
+  at 10 destination paths.
+- AC1-AC4/AC7: the accepted defer budget, reset, stable-cause terminal behavior, and all writer
+  vetoes are unchanged; the existing behavioral and mutation checks remain green.
+- AC8: the exported harness remains byte-identical. The permanent contract now declares five
+  boundaries, including the real rename state and empty diagnostics, in the 29/29 inventory.
 
 Codex is the maker only and did not review or ratify this work.
 
 task_id: TASK-0319
 status: in_review
-executive_summary: Commit a7c6e96 replaces the shared three-poll pre-exec budget with a resettable stable-cause wall-clock budget while preserving bounded terminal handling and every single-writer veto. The permanent mutant reproduces the old mixed-cause starvation and is killed by the fixed behavior.
+executive_summary: Commit d28277d closes S1 by parsing real porcelain -z rename records as destination/source pairs and eliminates phantom diagnostics. Re-judgement against the checker finding passes: a staged foreign-personal git mv yields residue none and no paths, while the accepted TASK-0319 behavior remains green.
 artifacts:
-  - path_or_commit: a7c6e96317a07b2e6316d96e28b2b70741763c51
+  - path_or_commit: d28277d77871f0c8ac3d0847e38ae882e3c3fe25
   - path_or_commit: scripts/harness/peer_mailbox_cron.ps1
-  - path_or_commit: scripts/harness/README.md
   - path_or_commit: scripts/test_exec_lease_harness.py
-  - path_or_commit: .github/workflows/validate.yml
+  - path_or_commit: Area_comun/artifacts/Analista-TASK-0319-harness-defer-starvation-verdict.md
 gates:
   - command: python scripts/test_exec_lease_harness.py
-    result: PASS (13 cases, including old-counter mutant, stable timeout, reset, diagnostics, veto, and export)
+    result: PASS (13 cases, including real staged rename, old-counter mutant, diagnostics, veto, and export)
   - command: python scripts/check_falsification_contracts.py --root . --inventory
     result: PASS (29 permanent negatives, 29 declared, 0 missing)
   - command: python scripts/scan_encoding.py --root .
@@ -73,5 +59,7 @@ gates:
     result: PASS
   - command: python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
     result: FAIL (pre-existing fixture omits mandatory CoordinatorId and exits before exercising TASK-0319)
-next_recommended: Arquitecto recomputes commit a7c6e96 and routes TASK-0319 to Analista for independent review; separately repair the stale mailbox-retry fixture invocation before treating that optional suite as evidence.
-risks: The legacy mailbox-retry runner is independently red because its real-loop fixture omits the already-mandatory CoordinatorId; its older count-based defer expectations also require a separately scoped alignment with this approved contract.
+  - command: clean clone at d28277d; same six gates plus clean git status
+    result: PASS
+next_recommended: Arquitecto recomputes commit d28277d and routes TASK-0319 to Analista for independent re-review of S1 before any ratification.
+risks: R1-R4 from the independent verdict remain explicitly non-blocking and out of this remediation scope; the legacy mailbox-retry runner remains separately red for its pre-existing CoordinatorId fixture defect.
