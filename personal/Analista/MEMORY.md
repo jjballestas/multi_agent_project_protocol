@@ -5741,3 +5741,73 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
 - Bucle de fix cerrado en 1 iteracion (r1 CAMBIO-REQUERIDO -> r2 OK-CERRABLE), sin escalar al humano.
   Ruteado al Arquitecto con requested_action = ratificar + C1 (registrar el 219->227 en el ledger de
   residuales de 0314) + C2 (abrir la tarea del enum). El checker NO cierra.
+
+## TASK-0317 (2026-08-06, 17:20 local UTC+2) -- CAMBIO-REQUERIDO sobre 614b644, commit del veredicto 42194e0
+
+- ENTREGA: una linea. `PHONE_CANDIDATE_RE` pasa de `(?:\+?\d[\d .()-]{7,}\d)` a
+  `(?<!\d)(?<!\d{2}:)(?:\+?\d[\d .()-]{7,}\d)`, mas el test regenerado a familia de 333.
+  Cierra mi R5 de TASK-0314 (timestamps ISO con offset negativo y fraccion de 5-6 digitos).
+- LOS CUATRO AC PASAN Y LOS RECOMPUTE EN CLON LIMPIO `D:/Aegis_Scratch/mapp/an0317/cc` @ 614b644:
+  familia PROPIA de 1355 (mas ancha que las 333 del test: 5 fechas x 6 horas x 7 fracciones x 9
+  offsets filtradas por DATE_RE) con 0 falsos positivos y 160 rechazos bajo el patron previo; 11
+  vectores de cola con 0 fugas; suite 57/57 exit 0 (344 s); build exit 0; drift --fast y --full
+  exit 0 `result: pass`; 227 warnings, 0 de claves de fecha. El 227 vs "219" del contrato es el
+  delta +8 que ya confirme en 0316, NO regresion de esta entrega.
+- KILL DE MUTACION EJECUTADO (no por lectura): revertir la linea de produccion deja
+  `test_supported_timestamps_...` en exit 1 con 36 subtests caidos. El `assertEqual(333, ...)` es
+  lo que impide que la familia se vacie en silencio si alguien estrecha DATE_RE. Test con dientes.
+- POR QUE BLOQUEO AUNQUE 4/4 AC PASEN -- **DIRECCION DEL FALLO**. R5 fallaba CERRADO (descartaba el
+  campo, warning, nunca admitia PII). Esto falla ABIERTO: un telefono real entra al indice como
+  `title` ACEPTADO. Cambiar un falso positivo fail-closed por un falso negativo fail-open en el
+  componente cuya razon de ser es ser cerrado por defecto en PII es EMPEORAR, aunque el contador de
+  AC diga 4/4. **REGLA NUEVA: contar AC no es el veredicto; la direccion del fallo manda.**
+- LAS DOS ATENUANTES DEL ARQUITECTO, REFUTADAS CON MEDICION (el las trajo de buena fe como
+  residual "estrecho"):
+  (a) "exige adyacencia sin espacio" -> FALSO. Solo cuentan los DOS caracteres previos al primer
+      digito; el telefono puede llevar espacios: `09:555 123 4567` y `09:28:612 345 678` se pierden.
+      Su sonda 4 (`09:28: 612345678`) sobrevive porque el espacio esta TRAS los dos puntos.
+  (b) "acotado por la allowlist de claves y por DATE_RE" -> FALSO para la superficie ancha:
+      `contains_pii` (build_memory_db.py:609) corre sobre TODO valor aceptado y `title_is_safe`
+      (:536) sobre `title`, TEXTO LIBRE de 500 caracteres sin gramatica. `reunion a las
+      09:28:612345678` -> ACEPTADO. **LECCION: cuando evaluo un cambio a un predicado compartido,
+      enumerar TODOS sus llamadores antes de aceptar el argumento de acotamiento del proponente.**
+- LOS DOS LOOKBEHINDS NO SON INDEPENDIENTES (el mensaje los describia como dos guardas separadas).
+  Atribucion por fuzz de 600k: `(?<!\d)` solo = 0 perdidas; `(?<!\d{2}:)` solo = 98; los dos juntos
+  = 175. El segundo bloquea la RECUPERACION del primero: tras `NN:` el motor arranca un caracter mas
+  adelante y `(?<!\d)` lo mata, y asi hasta agotar la corrida -> desaparece el numero entero.
+  Corolario: NO hay rollback parcial, los dos son necesarios para cerrar R5.
+  **TECNICA: atribuir la perdida a CADA guarda por separado y a la combinacion; las interacciones
+  entre lookbehinds no se ven razonandolas, se ven midiendolas.**
+- PERDIDA MEDIDA: 160 en rejilla estructurada (35 prefijos x 8 telefonos x 5 sufijos), 134 en fuzz
+  500k (semilla 20260806), 175 en fuzz 600k (semilla 9001), 110 formas distintas en fuzz 400k.
+  Semillas fijas SIEMPRE, para que el Arquitecto pueda reproducir el numero exacto.
+- NO ME QUEDE EN "CAMBIO-REQUERIDO": CONSTRUI Y CORRI LA ALTERNATIVA que el propio Arquitecto
+  sospechaba (su punto 4). Ancla en DATE_RE, precedente en la MISMA linea (ya exime lo que
+  `ID_RE.fullmatch` acepta entero): revertir el patron + `if not ID_RE.fullmatch(item) and not
+  DATE_RE.fullmatch(item):`. Resultado: iguala AC1 (0 falsos positivos sobre 1355) y AC2 (0 vectores
+  perdidos), pasa SIN TOCARLO el mismo test de AC3 y la SUITE COMPLETA 57/57 exit 0, y pierde **0**
+  en rejilla y en fuzz 500k. DOMINA ESTRICTAMENTE al mismo coste de una linea.
+  Seguridad verificada, no asumida: el charset de toda cadena que DATE_RE acepta ENTERA es
+  `+-.012345689:TZ`, con 0 coincidencias de email/IBAN/documento sobre las 1355 -> no cabe PII en la
+  gramatica; los 11 vectores caen igual porque ninguno hace fullmatch (el sufijo rompe el anclaje).
+  Dos condiciones que puse en el handoff porque son faciles de perder: la exencion va DENTRO del
+  bloque del heuristico de telefono (nunca `return False` temprano en `contains_pii`, eso eximiria
+  los patrones estructurales y reabriria F2), y el `assertEqual(333, ...)` se queda.
+  **REGLA: cuando el proponente pregunta "es esta el ancla correcta?", responder con la variante
+  CONSTRUIDA Y MEDIDA contra los mismos gates, no con una opinion. Convierte un debate en un dato.**
+- CONFIRMA MI PROPIO r2 DE 0314: "R5 y R1 son la misma superficie vista por sus dos lados". Anclar en
+  DATE_RE ataca la superficie; estrechar el patron de telefono la mueve de lado. R1 sigue abierto.
+- LAZO DECLARADO: remediacion con el ancla DATE_RE; gates por exit code en clon limpio; rejuicio mio
+  sobre el commit de remediacion exigiendo **0 perdidas** en el diferencial contra el patron
+  pre-0317; maximo 2 iteraciones antes de escalar al operador. Pedi ademas al Arquitecto mantener la
+  regla de s.16.7 (no declarar el motor listo para exportar) hasta que cierre la REMEDIACION.
+- GOTCHA DE HERRAMIENTA (me costo dos intentos): el Python es de Windows, asi que rutas `/tmp/...`
+  pasadas a `python -c` fallan con FileNotFoundError aunque bash las resuelva; usar el scratchpad con
+  ruta Windows. Y `check_memory_db_drift.py --full` escribe ruido de git (detached HEAD) antes del
+  JSON: parsear la ULTIMA linea que empieza por `{`, no el fichero entero.
+- GOTCHA: `importlib` para cargar build_memory_db.py fuera de su paquete exige
+  `sys.modules["mdb"] = mdb` ANTES de `exec_module`, o los `@dataclass` revientan.
+- COORDINACION: `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0319` sigue ABIERTO sin veredicto
+  mio; esta ejecucion solo tenia asignado el de 0317. Lo senale en el mensaje para que no se lea
+  como consumido. Sin claims activos al escribir; commit por pathspec explicito; validate, encoding
+  y neutralidad exit 0 antes y despues del commit.
