@@ -99,7 +99,7 @@ STRUCTURAL_PII_PATTERNS = (
     re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b", re.I),
     re.compile(r"\b(?:NIF|NIE|NIT|DNI|SSN)\b", re.I),
 )
-PHONE_CANDIDATE_RE = re.compile(r"(?:\+?\d[\d .()-]{7,}\d)")
+PHONE_CANDIDATE_RE = re.compile(r"(?<!\d)(?<!\d{2}:)(?:\+?\d[\d .()-]{7,}\d)")
 SECRET_SUFFIXES = {".key", ".pem"}
 TEXT_SUFFIXES = {".md", ".json", ".jsonl", ".txt", ".yaml", ".yml"}
 EVENTS_PATH = Path("runtime/state/events.jsonl")

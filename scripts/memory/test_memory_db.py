@@ -270,27 +270,51 @@ class MemoryDbTests(unittest.TestCase):
             self.assertRegex(text, r"- token_estimate: \d+")
 
     def test_timestamp_pii_suffix_is_rejected(self) -> None:
-        accepted, warnings = memory_db.validate_metadata(
-            {"created_at": "2026-06-19Tperson@example.invalid"}, {"Codex"}
+        suffix_vectors = (
+            "2026-06-19Tperson@example.invalid",
+            "2026-06-19TES9121000418450200051332",
+            "2026-06-19T+34612345678",
+            "2026-06-19T612345678",
+            "2026-06-19T0000000000000",
+            "2026-06-19TDNI",
+            "2026-06-19Ttrading",
+            "2026-06-19T../../etc/passwd",
+            "2026-06-19T<script>",
+            "2026-06-19T09:28:23Z;DROP",
+            "2026-06-19T\x00",
         )
-        self.assertEqual({}, accepted)
-        self.assertEqual(["rejected frontmatter key created_at"], warnings)
+        for timestamp in suffix_vectors:
+            with self.subTest(timestamp=timestamp):
+                accepted, warnings = memory_db.validate_metadata(
+                    {"created_at": timestamp}, {"Codex"}
+                )
+                self.assertEqual({}, accepted)
+                self.assertEqual(["rejected frontmatter key created_at"], warnings)
 
     def test_supported_timestamps_and_medium_priority_are_accepted(self) -> None:
-        timestamps = (
-            "2026-06-19",
-            "2026-06-19T09:28:23Z",
-            "2026-06-19T09:28:23+02:00",
-            "2026-06-19T092823Z",
-            "2026-06-19T09:28:23.123456Z",
-            "2026-06-19T09:28:23",
-        )
-        for timestamp in timestamps:
-            accepted, warnings = memory_db.validate_metadata(
-                {"created_at": timestamp}, {"Codex"}
+        dates = ("2026-01-01", "2026-06-19", "2026-12-31")
+        times = ("09:28:23", "092823", "00:00:00", "23:59:59")
+        fractions = ("", ".1", ".12", ".123", ".1234", ".12345", ".123456")
+        offsets = ("", "Z", "+02:00", "-05:00", "-12:30")
+        timestamps = set(dates)
+        timestamps.update(
+            timestamp
+            for date in dates
+            for time_value in times
+            for fraction in fractions
+            for offset in offsets
+            if memory_db.DATE_RE.fullmatch(
+                timestamp := f"{date}T{time_value}{fraction}{offset}"
             )
-            self.assertEqual({"created_at": timestamp}, accepted)
-            self.assertEqual([], warnings)
+        )
+        self.assertEqual(333, len(timestamps))
+        for timestamp in timestamps:
+            with self.subTest(timestamp=timestamp):
+                accepted, warnings = memory_db.validate_metadata(
+                    {"created_at": timestamp}, {"Codex"}
+                )
+                self.assertEqual({"created_at": timestamp}, accepted)
+                self.assertEqual([], warnings)
         accepted, warnings = memory_db.validate_metadata(
             {"priority": "medium"}, {"Codex"}
         )
