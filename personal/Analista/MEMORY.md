@@ -7,6 +7,59 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-06 (40) - TASK-0314 r2 remediacion: OK-CLOSABLE (lazo cerrado en 2/2)
+
+- Encargo `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314-r2`. **SIN PRODUCTO EN ALCANCE** (declarado
+  otra vez por el Arquitecto). Impl `d1252f4`, protocol HEAD `0a66a36`. Veredicto commit `1794bce`
+  (artefacto `Area_comun/artifacts/Analista-TASK-0314-remediacion-r2-verdict.md` + MSG rr=true).
+- **VEREDICTO: OK-CLOSABLE.** F1, F2, F3 y R4 cerrados por COMPORTAMIENTO. 2 residuales nuevos (R5, R6).
+  El cierre (flip a done + reporte) es del Arquitecto; yo no cierro.
+- **TRES clones limpios en paralelo, uno por proposito** -- patron que repito: `ana314b` suite (57/57,
+  341 s), `ana314c` corpus (build + gates + packs), `ana314d` MUTACION. Lanzar suite y build en
+  background a la vez, en clones DISTINTOS (el build escribe runtime/memory/index.db y colisionaria).
+- **F1 terminacion: prueba por construccion + falsacion.** El lazo `detail_limit //= 2` es estrictamente
+  decreciente (`1//2==0`) y ninguna rama lo aumenta -> termina en floor(log2 n)+1 pasos. Lo FALSEE
+  ademas forzando el peor caso con monkeypatch `max_bytes=1`: aborta en 13.35 s con mensaje propio
+  ("fixed content exceeds... after deterministic omission degradation"), no se cuelga. **METODO
+  REUTILIZABLE: el mismo monkeypatch de `memory_index_policy` que use en r1 para MEDIR el pack
+  descartado sirve ahora para MEDIR EL SUELO NO DEGRADABLE** (forzar max_bytes=1 -> el mensaje de error
+  trae el tamano a detail_limit=0). Suelos: 55750 / 61544 / 48393 / 3003 = 37-47 pct del techo (R6).
+- **Determinismo: componer DOS VECES y comparar bytes**, no leer el `sorted()`. 4/4 identicos.
+- **Cobertura por familia, no por ejemplo -- aqui es donde cace lo nuevo.** El Arquitecto verifico los 6
+  timestamps de MI r1 y dio PASS. Genere la FAMILIA COMPLETA de la gramatica (333 cadenas: 3 fechas x 4
+  horas x 7 fracciones x 5 offsets) y aparecieron **18 rechazos de metadata legitima**: `contains_pii`
+  falsea positivo porque el patron de telefono `\+?\d[\d .()-]{7,}\d` lleva el GUION en su clase, y el
+  guion del offset UTC **negativo** puentea la fraccion de segundo -> 9-10 digitos >= umbral 9.
+  Condicion exacta: offset negativo Y 5-6 digitos de fraccion. `2026-06-19T09:28:23.123456-05:00`
+  (= salida de `datetime.now(tz).isoformat()` en huso americano) queda RECHAZADO. **R5: regresion NUEVA
+  introducida por la propia remediacion.** No bloquea: 0 ocurrencias en el corpus (escanee 4586
+  archivos, 134 valores distintos de created_at/updated_at/closed_at) y falla CERRADO (descarta campo,
+  no admite PII). Va como tarea aparte, NO como 3a iteracion (mi lazo declarado era de 2 y los 4 items
+  contratados estaban cerrados).
+- **Prueba de cierre de F2 por ALFABETO, no por muestreo.** Extraje el alfabeto alcanzable a traves de la
+  nueva `DATE_RE`: `+-.0123456789:TZ`. Sin `@` y sin dos letras consecutivas -> email e IBAN **no caben
+  en el lenguaje**. Eso es mas fuerte que "probe N vectores y no paso ninguno". Ademas: la capa que de
+  verdad cierra el agujero es quitar la exencion (aplica contains_pii a TODAS las claves); la gramatica
+  es defensa en profundidad.
+- **R4 se verifica MUTANDO, no leyendo.** `git checkout d1252f4~1 -- scripts/memory/revive_pack.py` en un
+  clon aparte (revierte SOLO el fix, deja el test nuevo) -> el test FALLA exit 1 (135556 > 65536). El
+  `assertGreater(..., 65536)` del fixture compara contra el `max_bytes` LOCAL de la politica del test,
+  que es el umbral correcto; verificar eso evita cantar "test decorativo" por error.
+- F3: recompute el desglose de warnings POR CLAVE (219: spec_id 123, task_id 86, decision_id 6, to 2,
+  supersedes 1, relates_to 1); 0 de `priority` y 0 de claves de fecha. El titular "238 -> 219" no basta.
+- **Salvedad honesta que declare sobre mi propio exit 0:** mi neutralidad exit 0 vale solo porque escribi
+  los packs FUERA del repo. Al materializarlos en `runtime/memory/` el gate se pone ROJO
+  (`pack_Arquitecto.md:811: trading/spot/binance/backtest`). Confirma el AC6 de TASK-0316 del Arquitecto,
+  con dos precisiones que le pase: el pack NO ensucia `git status` (gitignored) y `_validate_output` solo
+  restringe rutas DENTRO del repo (escribir fuera esta permitido, exit 0) -- su frase "se niega a escribir
+  fuera de runtime/memory/" sobreestima el guard.
+- AC1 / F4: NO bloquea. TASK-0316 ya `ready` con GO del operador (owner Codex, checker yo). Pedi que el
+  cierre diga "AC1 verificado por lectura y test unitario", NO "verificado por gate".
+- Gates r2 por exit code: suite 57/57, build 4162 artefactos, `--fast`, `--full` (round_trip pass, sweep
+  bidirectional-pass, database_written false), encoding, neutralidad, validate -> TODOS 0; `git status
+  --porcelain` vacio tras build y tras `--full`. Packs: 119309 / 95219 / 48775 / 3008 (anadi `Operador`,
+  el 4o registrado, que faltaba en la tabla del Arquitecto y del maker).
+
 ## Ultima actualizacion 2026-08-06 (39) - TASK-0314 F1-PORT memoria hibrida al hub: CHANGE-REQUIRED
 
 - Encargo `MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314`. **SIN PRODUCTO EN ALCANCE** (declarado
