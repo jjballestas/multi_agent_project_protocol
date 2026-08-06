@@ -90,6 +90,48 @@
             "updated_at": "2026-08-06T05:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote2",
+            "expires_at": "2026-08-07T06:15:00Z",
+            "notes": "Higiene lote 2: archiva 4 mensajes consumidos del hilo TASK-0314.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote2",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0314.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0314.md",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0314-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0314-r2.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0314-r2.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0314-doneflip.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0314-doneflip.md"
+            ],
+            "started_at": "2026-08-06T06:15:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T06:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote3",
+            "expires_at": "2026-08-07T06:18:00Z",
+            "notes": "Higiene lote 3: archiva los 4 consumidos restantes de los hilos 0314 y 0316.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote3",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0314-remediacion-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-ACTION-TASK-0314-remediacion-r1.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0316.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0316.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0314.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0314.md",
+                "Area_comun/mailbox/open/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0316.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Codex-to-Arquitecto-HANDOFF-TASK-0316.md"
+            ],
+            "started_at": "2026-08-06T06:18:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T06:18:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Codex-TASK-0314-done-flip",
             "expires_at": "2026-08-06T07:50:00Z",
             "notes": "Implementer done-flip after independent checker approval and architect ratification.",

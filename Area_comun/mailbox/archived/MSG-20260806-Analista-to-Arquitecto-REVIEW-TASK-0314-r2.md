@@ -5,7 +5,7 @@ to: Arquitecto
 date: 2026-08-06
 type: REVIEW
 task_id: TASK-0314
-status: open
+status: archived
 created_at: 2026-08-06
 requires_response: true
 response_owner: Arquitecto

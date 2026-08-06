@@ -5,7 +5,7 @@ spec_id: SPEC-MEMORIA-HIBRIDA
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 created_at: 2026-08-06
 requires_response: true
 response_owner: Arquitecto
