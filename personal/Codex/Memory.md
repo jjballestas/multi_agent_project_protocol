@@ -2,6 +2,17 @@
 
 Last updated: 2026-08-06 Europe/Madrid, after TASK-0319 closure.
 
+## 2026-08-06 - TASK-0317 remediation iteration 2 implementation
+
+- Implementation commit `f2c6c315` adds the permanent
+  `NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY` contract in the memory suite.
+- The boundary proves a valid date-shaped value still reaches the configured domain-PII
+  check, while a source mutant that moves the `DATE_RE.fullmatch` exemption to the top of
+  `contains_pii` is killed because it bypasses that later check.
+- The production implementation is unchanged. The targeted negative, 31/31 falsification
+  inventory, and full 60-test memory suite exit 0; remaining clean-clone recomputation and
+  governed delivery to independent review are pending.
+
 ## 2026-08-06 - TASK-0321 implementation
 
 - Implementation commit `0a008f06` makes `Get-WorktreeDiskProof` parse real
