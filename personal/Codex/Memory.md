@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
+Last updated: 2026-08-06 Europe/Madrid, after TASK-0314 closure.
+
+## 2026-08-06 - TASK-0314 closure
+
+- Governed commit `c63da9e` moved TASK-0314 from `review_approved` to `done`
+  after independent Analista approval and Arquitecto ratification.
+- The atomic transaction acquired and released
+  `CLAIM-20260806-Codex-TASK-0314-done-flip`; all three events are signed as
+  Codex and the task has no active maker claim.
+- Collaboration validation, encoding scan, and domain-neutrality scan all exited
+  0 before the closure commit. Unrelated untracked files were preserved.
 
 ## 2026-08-06 - TASK-0314 remediation iteration 1
 
