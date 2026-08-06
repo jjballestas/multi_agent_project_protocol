@@ -13,6 +13,16 @@
     "Operador",
     "todos"
   ],
+  "extra_status_values": [
+    "DRAFT-PENDIENTE-DE-FIRMA-DEL-OPERADOR",
+    "GO-PROMOVER-OFF",
+    "OK-CERRABLE",
+    "OK_CERRABLE",
+    "cambio-requerido",
+    "draft (pendiente GO operador)",
+    "draft-reviewed-informal",
+    "hallazgo-confirmado"
+  ],
   "revive_pack": {
     "max_bytes": 131072,
     "max_inline_source_bytes": 65536,

@@ -59,16 +59,14 @@ INTRINSIC_ID_KEYS = {
     "mailbox": "message_id", "handoff": "handoff_id",
     "requirement": "requirement_id",
 }
-STATUS_VALUES = {
+CORE_STATUS_VALUES = frozenset({
     "proposed", "ready", "claimed", "in_progress", "in_review", "done",
     "blocked", "cancelled", "open", "answered", "archived", "superseded",
-    "active", "draft", "draft-reviewed-informal", "accepted", "approved",
+    "active", "draft", "accepted", "approved",
     "for_review", "for_implementation", "for_decision", "change_required",
-    "GO-PROMOVER-OFF",
-    "OK-CERRABLE", "OK_CERRABLE", "cambio-requerido", "delivered", "final",
-    "hallazgo-confirmado", "ok", "ready_for_implementation",
+    "delivered", "final", "ok", "ready_for_implementation",
     "ready_for_independent_review", "ready_for_review", "reviewed", "submitted",
-}
+})
 TYPE_VALUES = {
     "feature", "implementation", "refactor", "integration", "migration",
     "security", "release", "discovery", "analysis", "review",
@@ -448,7 +446,10 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
     policy = json.loads(git_blob(root, commit, POLICY_PATH).decode("utf-8-sig"))
     if not isinstance(policy, dict) or policy.get("schema_version") != 1:
         raise ValueError(f"{POLICY_PATH} must use schema_version 1")
-    allowed = {"schema_version", "domain_pii_terms", "identity_aliases", "revive_pack"}
+    allowed = {
+        "schema_version", "domain_pii_terms", "identity_aliases",
+        "extra_status_values", "revive_pack",
+    }
     if set(policy) - allowed:
         raise ValueError(f"{POLICY_PATH} contains unknown keys")
     for key, limit in (("domain_pii_terms", 128), ("identity_aliases", 128)):
@@ -465,6 +466,21 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
             raise ValueError(f"{POLICY_PATH}.{key} contains an invalid value")
         if len(set(values)) != len(values):
             raise ValueError(f"{POLICY_PATH}.{key} contains duplicates")
+    extra_status_values = policy.setdefault("extra_status_values", [])
+    if not isinstance(extra_status_values, list) or len(extra_status_values) > 128:
+        raise ValueError(f"{POLICY_PATH}.extra_status_values must be a bounded array")
+    if not all(
+        isinstance(value, str)
+        and 0 < len(value) <= 100
+        and value.isprintable()
+        and value == value.strip()
+        for value in extra_status_values
+    ):
+        raise ValueError(f"{POLICY_PATH}.extra_status_values contains an invalid value")
+    if len(set(extra_status_values)) != len(extra_status_values):
+        raise ValueError(f"{POLICY_PATH}.extra_status_values contains duplicates")
+    if set(extra_status_values) & CORE_STATUS_VALUES:
+        raise ValueError(f"{POLICY_PATH}.extra_status_values duplicates core status values")
     revive = policy.get("revive_pack")
     if not isinstance(revive, dict) or set(revive) != {
         "max_bytes", "max_inline_source_bytes", "chars_per_token"
@@ -478,7 +494,11 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
     return policy
 
 
-def configured_agents(root: Path, commit: str) -> set[str]:
+def configured_agents(
+    root: Path,
+    commit: str,
+    policy: dict[str, Any] | None = None,
+) -> set[str]:
     config = instance_config(root, commit)
     agents = {
         str(item["id"])
@@ -488,8 +508,14 @@ def configured_agents(root: Path, commit: str) -> set[str]:
     human_owner = config.get("agent_roles", {}).get("human_owner")
     if isinstance(human_owner, str) and human_owner:
         agents.add(human_owner)
-    agents.update(str(item) for item in memory_index_policy(root, commit)["identity_aliases"])
+    if policy is None:
+        policy = memory_index_policy(root, commit)
+    agents.update(str(item) for item in policy["identity_aliases"])
     return agents
+
+
+def configured_status_values(policy: dict[str, Any]) -> frozenset[str]:
+    return CORE_STATUS_VALUES | frozenset(policy["extra_status_values"])
 
 
 def configured_project(root: Path, commit: str) -> str:
@@ -539,6 +565,7 @@ def validate_metadata(
     frontmatter: dict[str, Any],
     agents: set[str],
     domain_pii_terms: Iterable[str] = (),
+    status_values: Iterable[str] = CORE_STATUS_VALUES,
 ) -> tuple[dict[str, Any], list[str]]:
     accepted: dict[str, Any] = {}
     warnings: list[str] = []
@@ -568,7 +595,7 @@ def validate_metadata(
         elif key == "title":
             valid = isinstance(value, str) and title_is_safe(value, domain_pii_terms)
         elif key == "status":
-            valid = isinstance(value, str) and value in STATUS_VALUES
+            valid = isinstance(value, str) and value in status_values
         elif key == "type":
             valid = isinstance(value, str) and value in TYPE_VALUES
         elif key == "priority":
@@ -659,7 +686,8 @@ def derive_agent_id(relative_path: str, declared_agent_id: str | None = None) ->
 
 def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[str]]:
     policy = memory_index_policy(root, commit)
-    agents = configured_agents(root, commit)
+    agents = configured_agents(root, commit, policy)
+    status_values = configured_status_values(policy)
     domain_pii_terms = policy["domain_pii_terms"]
     artifacts: list[SourceArtifact] = []
     warnings: list[str] = []
@@ -672,7 +700,9 @@ def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[
         if artifact_type == "memory":
             declared = frontmatter.get("agent_id")
             derive_agent_id(relative, str(declared) if declared is not None else None)
-        metadata, item_warnings = validate_metadata(frontmatter, agents, domain_pii_terms)
+        metadata, item_warnings = validate_metadata(
+            frontmatter, agents, domain_pii_terms, status_values
+        )
         artifact_id = artifact_id_for(artifact_type, relative, metadata)
         if artifact_id in seen_ids:
             raise ValueError(f"duplicate artifact_id {artifact_id}: {seen_ids[artifact_id]} and {relative}")

@@ -46,6 +46,7 @@ jobs:
         run: |
           python scripts/check_falsification_contracts.py --root . --inventory
           python scripts/test_falsification_contracts.py
+          python scripts/memory/test_memory_db.py
 
       - name: Check human guide template HTML
         run: python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check

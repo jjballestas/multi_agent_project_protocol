@@ -51,6 +51,19 @@ revive_pack = importlib.util.module_from_spec(REVIVE_SPEC)
 sys.modules[REVIVE_SPEC.name] = revive_pack
 REVIVE_SPEC.loader.exec_module(revive_pack)
 
+FALSIFICATION_CONTRACTS = (
+    {
+        "id": "NEG-MEMORY-INSTANCE-STATUS-DECLARATION",
+        "negative": "Removing a declared instance status makes its artifact warn again.",
+        "mutation": "policy[\"extra_status_values\"].remove(declared_status)",
+        "boundaries": (
+            "self.assertNotIn(expected_warning, declared_warnings)",
+            "self.assertIn(expected_warning, undeclared_warnings)",
+        ),
+        "exercised_by": "test_p09_instance_status_policy_is_closed_and_falsifiable",
+    },
+)
+
 
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -82,6 +95,7 @@ def make_fixture(root: Path) -> None:
                 "schema_version": 1,
                 "domain_pii_terms": [],
                 "identity_aliases": [],
+                "extra_status_values": [],
                 "revive_pack": {
                     "max_bytes": 131072,
                     "max_inline_source_bytes": 65536,
@@ -207,6 +221,53 @@ class MemoryDbTests(unittest.TestCase):
         self.assertEqual(
             ["rejected frontmatter key status", "rejected frontmatter key type"], warnings
         )
+
+    def test_p09_instance_status_policy_is_closed_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-INSTANCE-STATUS-DECLARATION"""
+        declared_status = "instance-only-status"
+        expected_warning = (
+            "Area_comun/tasks/TASK-STATUS.md: rejected frontmatter key status"
+        )
+        with tempfile.TemporaryDirectory(prefix="memory-status-policy-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            policy_path = root / memory_db.POLICY_PATH
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy["extra_status_values"] = [declared_status]
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            write(
+                root / "Area_comun/tasks/TASK-STATUS.md",
+                "---\ntask_id: TASK-STATUS\ntitle: Status policy fixture\n"
+                f"status: {declared_status}\ntype: feature\nowner: Codex\n---\n",
+            )
+            declared_commit = commit_fixture(root, "declare instance status")
+            _, declared_warnings = memory_db.load_artifacts(root, declared_commit)
+            self.assertNotIn(expected_warning, declared_warnings)
+
+            policy["extra_status_values"].remove(declared_status)
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            undeclared_commit = commit_fixture(root, "remove instance status declaration")
+            _, undeclared_warnings = memory_db.load_artifacts(root, undeclared_commit)
+            self.assertIn(expected_warning, undeclared_warnings)
+
+    def test_p09_core_statuses_exclude_instance_vocabulary_and_template_is_empty(self) -> None:
+        instance_values = {
+            "DRAFT-PENDIENTE-DE-FIRMA-DEL-OPERADOR",
+            "GO-PROMOVER-OFF",
+            "OK-CERRABLE",
+            "OK_CERRABLE",
+            "cambio-requerido",
+            "draft (pendiente GO operador)",
+            "draft-reviewed-informal",
+            "hallazgo-confirmado",
+        }
+        self.assertFalse(instance_values & memory_db.CORE_STATUS_VALUES)
+        template = json.loads(
+            (ROOT / "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual([], template["extra_status_values"])
 
     def test_p10_template_conventions_and_placeholder_ids_are_excluded(self) -> None:
         self.assertTrue(memory_db.is_excluded("Area_comun/specs/SPEC_TEMPLATE.md"))

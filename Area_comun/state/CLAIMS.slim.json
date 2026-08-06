@@ -1,5 +1,24 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0318",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0318",
+                "Area_comun/state/TASK_INDEX.json#TASK-0318",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0318",
+                "Area_comun/tasks/TASK-0318-enum-status-extensible-por-instancia.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "Area_comun/protocol/MEMORY_INDEX_POLICY.json",
+                "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0318"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
