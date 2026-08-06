@@ -59,6 +59,25 @@
             "updated_at": "2026-08-06T18:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-go-0320-0321",
+            "expires_at": "2026-08-07T18:45:00Z",
+            "notes": "GO del operador para TASK-0320 y TASK-0321.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-go-0320-0321",
+                "Area_comun/state/TASK_INDEX.json#TASK-0320",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0320",
+                "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0321",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0321",
+                "Area_comun/tasks/TASK-0321-diskproof-emparejamiento-renombrados.md"
+            ],
+            "started_at": "2026-08-06T18:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0320",
+            "updated_at": "2026-08-06T18:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote8",
             "expires_at": "2026-08-07T16:20:00Z",
             "notes": "Higiene lote 8: los 3 veredictos consumidos y el REVIEW de 0317 ya respondido.",
