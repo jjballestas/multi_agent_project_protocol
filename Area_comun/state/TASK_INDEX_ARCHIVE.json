@@ -8198,6 +8198,22 @@
             "status": "done",
             "title": "Ceguera del gate de neutralidad de dominio: scan_globs no cruza subdirectorios, asi que scripts/memory/** y los JSON de Area_comun/protocol/ nunca se escanean",
             "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0318-enum-status-extensible-por-instancia.md",
+            "id": "TASK-0318",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Vocabulario de estado extensible por instancia: sacar los 6 valores de instancia que quedan en STATUS_VALUES sin perder validacion, via MEMORY_INDEX_POLICY.json con contrato de falsacion",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0319-harness-inanicion-defer-terminal.md",
+            "id": "TASK-0319",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)",
+            "type": "refactor"
         }
     ]
 }
