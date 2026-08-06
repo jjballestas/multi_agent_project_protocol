@@ -40,6 +40,62 @@
             "updated_at": "2026-08-06T16:00:58Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote8",
+            "expires_at": "2026-08-07T16:20:00Z",
+            "notes": "Higiene lote 8: los 3 veredictos consumidos y el REVIEW de 0317 ya respondido.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote8",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0317.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0317.md",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0318.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0318.md",
+                "Area_comun/mailbox/open/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0319.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Analista-to-Arquitecto-REVIEW-TASK-0319.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0317.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0317.md"
+            ],
+            "started_at": "2026-08-06T16:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T16:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Arquitecto-hygiene-lote9",
+            "expires_at": "2026-08-07T16:25:00Z",
+            "notes": "Higiene lote 9: el REVIEW de 0319 con veredicto entregado y su GO consumido.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-hygiene-lote9",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0319.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Analista-REVIEW-TASK-0319.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0319.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0319.md"
+            ],
+            "started_at": "2026-08-06T16:25:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260806",
+            "updated_at": "2026-08-06T16:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260806-Codex-TASK-0318-done-flip",
+            "expires_at": "2026-08-06T18:02:07Z",
+            "notes": "Implementer done-flip after independent checker approval and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Codex-TASK-0318-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0318",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0318",
+                "Area_comun/tasks/TASK-0318-enum-status-extensible-por-instancia.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-06T16:02:07Z",
+            "status": "released",
+            "task_id": "TASK-0318",
+            "updated_at": "2026-08-06T16:02:07Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
