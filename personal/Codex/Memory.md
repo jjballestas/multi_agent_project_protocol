@@ -2,6 +2,20 @@
 
 Last updated: 2026-08-02 Europe/Madrid, during TASK-0312 implementation.
 
+## 2026-08-06 - TASK-0314 implementation
+
+- Hub commit `378021d` ports the six-script F1 hybrid-memory engine and resolves P1-P12 from
+  SPEC-MEMORIA-HIBRIDA s.16 without changing pinned config, validators, submit_intent, registry,
+  genesis, or runtime/state implementation.
+- Domain PII terms and identity aliases are versioned per instance outside pinned config; the
+  default domain list is empty. Validation remains finite/value-based, and revive packs are
+  deterministic, metadata-derived, bounded to 128 KiB, token-estimated, and omission-explicit.
+- The identical clean-clone tree passed 55/55 tests, real-corpus rebuild (4,154 artifacts), fast
+  and full drift gates, byte-stable round-trip, read-only status, encoding, neutrality, and
+  collaboration validation. Full drift reported round_trip=pass and bidirectional-pass.
+- Codex remains maker only. TASK-0314 is being delivered for Arquitecto recomputation and
+  independent Analista review; Codex did not review or ratify its own work.
+
 ## 2026-08-02 - TASK-0313 implementation
 
 - Zeus product commit `8ba0155` adds the off-by-default product-worker roster builder with dry-run preview, explicit confirmation, server-side canonical composition, edit/remove, LLM linkage, and a visible governance-ceremony boundary.
