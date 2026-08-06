@@ -73,6 +73,12 @@
             "title": "Front Zeus-protocol: formulario de alta de worker de producto (no-firmante) + enlace a LLM (SPEC-0115 / DECISION-0109 Nivel 1), off-by-default"
         },
         {
+            "id": "TASK-0314",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "F1-PORT: promover el motor de memoria hibrida de la instancia a master NEUTRAL del hub (SPEC-MEMORIA-HIBRIDA s.16; DECISION-0100 s.2)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

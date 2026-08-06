@@ -148,6 +148,23 @@
             "updated_at": "2026-08-02T18:10:53Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0314-registro",
+            "expires_at": "2026-08-07T00:17:14Z",
+            "notes": "Registro gobernado del F1-PORT de la memoria hibrida al hub (SPEC s.16). El Arquitecto registra; el maker es Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0314-registro",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md",
+                "Area_comun/specs/SPEC-MEMORIA-HIBRIDA.md"
+            ],
+            "started_at": "2026-08-06T00:17:14Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T00:17:14Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

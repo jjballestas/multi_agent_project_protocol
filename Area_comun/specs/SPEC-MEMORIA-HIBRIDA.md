@@ -2,10 +2,10 @@
 spec_id: SPEC-MEMORIA-HIBRIDA
 title: "Memoria hibrida: repo caliente + archivo frio verificable + DB derivada reconstruible (implementacion del REQ v0.3.0)"
 status: draft-reviewed-informal
-version: 0.2.1
-date: 2026-07-17
+version: 0.3.0
+date: 2026-08-06
 author: Arquitecto
-review: "adversarial informal (subagent anti-rubber-stamp) 2026-07-14: 2 BLOCKER + 7 MAJOR + 5 MINOR, TODOS reales e INCORPORADOS en esta version (registro en s.15); review FORMAL del Analista pendiente de reactivacion de su harness. v0.2.1 (2026-07-17): provision F1 del adversarial extracted-vs-inferred (veredicto Analista 476ceac, aceptado por Operador en GO Fase A): contrato de mapeo frontmatter->edge_type (s.5.1b) + invariante I9 F1-no-infiere (s.4) + DoD F1 (s.13); patron epistemico DIFERIDO-LIMPIO a F4"
+review: "adversarial informal (subagent anti-rubber-stamp) 2026-07-14: 2 BLOCKER + 7 MAJOR + 5 MINOR, TODOS reales e INCORPORADOS en esta version (registro en s.15); review FORMAL del Analista pendiente de reactivacion de su harness. v0.2.1 (2026-07-17): provision F1 del adversarial extracted-vs-inferred (veredicto Analista 476ceac, aceptado por Operador en GO Fase A): contrato de mapeo frontmatter->edge_type (s.5.1b) + invariante I9 F1-no-infiere (s.4) + DoD F1 (s.13); patron epistemico DIFERIDO-LIMPIO a F4. v0.3.0 (2026-08-06): s.16 contrato del F1-PORT al hub -- medicion del motor de la instancia contra el corpus REAL del hub (viabilidad demostrada) + 12 hallazgos de neutralidad/calibracion/escala con su accion requerida + 3 defectos de higiene del corpus (remediacion separada) + DoD del port"
 derives_from: "personal/operador/requerimientos-futuros/memoria-hibrida-db-archivo-frio/REQ-MEMORIA-HIBRIDA-DB-ARCHIVO-FRIO.md (v0.3.0, RUTA UNICA por DECISION-0081)"
 linked_decisions: [DECISION-0081, DECISION-0026, DECISION-0016, DECISION-0020, DECISION-0022, DECISION-0040, DECISION-0061, DECISION-0096]
 authority: "SPEC de diseno (papel). NO autoriza mover historia canonica ni activar el archivado: eso exige la DECISION de activacion que el REQ s.0.4 requiere. El build no arranca antes del cierre de la ventana medida (compromiso audit-first) salvo GO explicito del operador por fase."
@@ -669,3 +669,104 @@ runtime REAL (eventlog.py/submit_intent.py/validate) y la ventana audit-first. R
 Lo verificado SIN hallazgo por el checker (fidelidad de las 15 tablas columna-por-columna,
 trazabilidad AC1-AC15 y tests s.16, FTS5 disponible, torn-safe read del events.jsonl, herencia
 completa del fuera-de-alcance) queda como evidencia de cobertura, no como garantia.
+
+## 16. F1-PORT AL HUB - contrato de neutralizacion y calibracion (2026-08-06)
+
+### 16.1 Precondicion y alcance
+
+DECISION-0100 s.2 agendo la promocion del motor probado (`scripts/memory/` de la instancia
+Nova-Payroll) a master neutral del hub para "Fase 3+, POST-ventana-medida (post-30-jul)". La
+ventana medida CERRO con el estudio pre-registrado H1-H3 ejecutado y cerrado el 2026-08-02
+(TASK-0308 done). El operador dio GO explicito el 2026-08-06 con alcance **F1 SOLO** y ejecucion
+por **Codex (maker) + Analista (checker)**, la cadena de s.13. Esta seccion es el contrato que el
+maker implementa; no reabre metricas, DDL ni invariantes (s.3/s.4 mandan tal cual).
+
+### 16.2 Evidencia de viabilidad (medida, no supuesta)
+
+El Arquitecto clono el hub a scratch (`D:/Aegis_Scratch/protocol/memhib/hub`, DECISION-0104),
+copio los 6 archivos del motor de la instancia (fuente: Nova-Payroll HEAD 0a33fed) y los corrio
+contra el **corpus real del hub**. Resultado:
+
+| Prueba | Resultado sobre el corpus del hub |
+|---|---|
+| build normal | 4150 artefactos, 197 eventos, 15 tablas, `schema_version` 1, `foreign_keys` 1, ~90 s |
+| build `--rebuild` | mismos 4150 artefactos, ~128 s |
+| round-trip AC5 (s.6) | **PASS byte a byte** (dump canonico de 7 346 333 bytes identico entre build A y build B) |
+| `check_memory_db_drift --fast` | `result: pass`, `database_read: false` (I5 respetado: el gate rapido no abre la DB) |
+| `check_memory_db_drift --full` | `result: pass`, `round_trip: pass`, `sweep: bidirectional-pass`, `database_written: false`, exit 0 |
+| I2 read-only | tras correr el indexador, `git status --porcelain` no reporta NINGUN archivo trackeado modificado |
+| query (FTS5-metadata) | recupera `SPEC-MEMORIA-HIBRIDA` y `DECISION-0100` con su grafo de aristas real (`decision_for`, `mentions`) |
+| retrieve por id | emite el blob de `DECISION-0100` con verificacion sha + fila en `retrieval_log` |
+| revive_pack | compone las 5 secciones + atestacion de fuentes, deterministico; **1 535 306 bytes** para el Arquitecto (ver P11) |
+| suite de tests | 42 tests: 40 verdes, 1 FAIL y 1 ERROR, ambos por gaps REALES del hub (P10 y el entregable de `scan_encoding`) |
+
+Lectura: el motor **funciona sobre nuestro corpus** y sus gates fallan cerrado donde deben. Lo que
+falta es neutralidad de dominio y calibracion al vocabulario del hub, no arquitectura.
+
+### 16.3 Hallazgos del port (P1-P12) y accion requerida
+
+Clasificacion: **NEU** = neutralidad de dominio (frontera dura AGENTS.md s.4 / CLAUDE.md regla 1);
+**CAL** = calibracion al corpus del hub; **ESC** = escala.
+
+| Id | Clase | Hallazgo (evidencia medida) | Accion requerida en el master del hub |
+|---|---|---|---|
+| P1 | NEU | `PII_TITLE_PATTERNS[2]` = `\b(?:salario\|salary\|iban\|empleado\|employee\|nombre)\b` y la funcion `contains_payroll_pii()` meten lexico de NOMINA en el nucleo. Ademas `nombre` es palabra corriente en espanol: `contains_payroll_pii("nombre del agente")` -> True | El nucleo conserva SOLO patrones ESTRUCTURALES (email, patron IBAN-like, palabras clave de id fiscal, telefono). El lexico de dominio pasa a lista CONFIGURABLE por instancia (archivo fuera del config pineado, patron `COMMIT_TRAILERS.json`), **vacia por defecto**. Renombrar la funcion a nombre neutro (`contains_pii`) |
+| P2 | NEU | `build_memory_db.py:881` escribe la columna `project` con el literal `"Nova-Payroll"` | Derivar `project` del `protocol.config.json` de la instancia; jamas literal |
+| P3 | NEU | `DUMP_FORMAT = "nova-memory-derived-v1"` (el nombre del formato es parte del contrato de round-trip) | Nombre neutro del protocolo; documentar que cambiarlo invalida dumps previos |
+| P4 | NEU | Docstrings citan "this Aegis instance" y "Zeus-protocol-Aegis/scripts/memdb.py" | Reescribir en terminos del protocolo; conservar el registro del supersede M6 como nota, sin marca de producto |
+| P5 | CAL | El patron de telefono `(?:\+?\d[\d .()-]{7,}\d)` da FALSO POSITIVO sobre los ids con fecha-hora del protocolo: `contains_payroll_pii("MSG-20260619-092823-Codex-to-Arquitecto-...")` -> True | Excluir del patron de telefono los ids que casan `ID_RE`, o exigir separadores/longitud que no case una marca de tiempo `YYYYMMDD-HHMMSS` |
+| P6 | CAL | `ID_RE = ^[A-Z]+-[0-9A-Za-z-]+$` no admite punto: rechaza 24 ids reales del hub (`...GO-front-etapa6.1-...`, `...TASK-0253-P4.1-baseline`, `...release-v0.10.0`) | Ampliar el juego de caracteres del id a `[0-9A-Za-z._-]` manteniendo el ancla de prefijo en mayusculas |
+| P7 | CAL | `ASCII_TITLE_RE` rechaza titulos legitimos con tilde (`"...basados en evaluacion SOTA..."` con `o` acentuada) y titulos de mas de 200 caracteres: 49 rechazos | Aceptar UTF-8 imprimible en `title` (el gate de bytes del repo es `scan_encoding`, no el indexador) y elevar/declarar el tope de longitud. La validacion PII por VALOR se mantiene |
+| P8 | CAL | `owner`/`from`/`to` se validan SOLO contra `agent_registry` = {Arquitecto, Codex, Analista}: 935 rechazos por participantes reales del hub (`Operador` 493, `Claude` 405 -- id historico del Arquitecto --, `Claude-analista` 24, `operador humano` 5) | Contrato explicito de identidades validas = `agent_registry` UNION `agents.human_owner` del config UNION alias historicos declarados en un archivo versionado fuera del config pineado. NUNCA texto libre (la validacion por VALOR de s.7 se conserva) |
+| P9 | CAL | `TYPE_VALUES`/`STATUS_VALUES` no cubren el vocabulario real del hub: 982 rechazos de `type` (`HANDOFF` 429, `product` 72, `DECISION` 67, `requirement` 51, `DIRECTIVA` 35, `DIRECTIVE` 34) y 189 de `status` (`ready_for_review` 144, `final` 18, `delivered` 4, `submitted` 4, `cambio-requerido` 2) | Ampliar ambos enums al vocabulario efectivo del protocolo, documentando la fuente de cada valor. Los enums siguen siendo FINITOS (no texto libre) |
+| P10 | CAL | La exclusion de plantillas solo cubre `*.template.*`; el hub usa ademas `*_TEMPLATE.md` -> colision dura `duplicate artifact_id SPEC-XXXX-short-name` entre `SPEC_TEMPLATE.md` y `ACCEPTANCE_CRITERIA_TEMPLATE.md`, que **aborta el build entero** | Anadir la convencion `*_TEMPLATE.*` a `is_excluded()`. Recomendado ademas: ignorar ids-placeholder (`XXXX`) como defensa en profundidad |
+| P11 | ESC | `revive_pack.py` no tiene tope: inlinea el cuerpo integro de todo `personal/<id>/**` -> **1,5 MB** para el Arquitecto del hub (inutilizable como pack de arranque). No surgio en la instancia porque sus areas personales son pequenas | Acotar el pack: presupuesto declarado (bytes/tokens), seleccion por `is_current` + recencia, y resumen determinista (s.7: derivado de metadata, jamas del cuerpo por LLM) cuando el cuerpo no entra. Emitir `token_estimate` como pide s.5.5 y declarar en el pack lo que quedo fuera |
+| P12 | CAL | `supersedes: []` (lista vacia declarada) se RECHAZA en vez de aceptarse como vacia: 116 rechazos | Aceptar la lista vacia como valor valido sin arista; el rechazo se reserva para valores malformados |
+
+Regla del port: **ningun hallazgo se resuelve relajando una garantia**. P5-P9 y P12 amplian el
+dominio de valores ACEPTADOS pero conservan la validacion por VALOR de s.7 (enums finitos, regex
+ancladas, PII por valor); ninguno introduce texto libre en el indice.
+
+### 16.4 Defectos del corpus del hub que el indexador caza (remediacion SEPARADA)
+
+No son trabajo del port; se registran aqui porque bloquean o degradan el build y su correccion es
+higiene gobernada del hub (DECISION-0018). El indexador falla CERRADO en H1: eso es correcto.
+
+- **H1 (bloqueante):** 3 mensajes existen a la vez en `mailbox/answered/` y `mailbox/archived/`
+  con blobs DIVERGENTES -> `duplicate artifact_id` aborta el build:
+  `MSG-20260619-Arquitecto-to-Operador-carril-A-mirror-stall`,
+  `MSG-20260628-Arquitecto-to-Analista-REPASS2-TASK-0208`,
+  `MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo`.
+- **H2 (degrada):** frontmatter malformado en el corpus historico: `task_id`/`spec_id` con valor
+  `none` (82 + 16), `null`, RUTAS en vez de ids (`Area_comun/specs/SPEC-0038-...`), y listas por
+  coma en un campo escalar (`TASK-0102,TASK-0103`). El rechazo del indexador es correcto.
+- **H3 (menor):** 3 archivos del arbol contienen un byte NUL literal, entre ellos
+  `personal/Arquitecto/MEMORY.md` -- lo que vuelve "binario" cualquier pack que los inlinee.
+
+### 16.5 DoD del F1-PORT
+
+1. `scripts/memory/{build_memory_db,query_memory_db,dump_memory_db,check_memory_db_drift,revive_pack,test_memory_db}.py`
+   en el hub, con P1-P12 resueltos segun s.16.3.
+2. `python scripts/scan_domain_neutrality.py --root .` exit 0 y `python scripts/scan_encoding.py --root .`
+   exit 0 con los scripts nuevos dentro del arbol.
+3. Suite de tests VERDE COMPLETA en clon limpio, incluidos los 2 casos que hoy fallan
+   (`test_scan_encoding_excludes_runtime_memory`, `test_current_tree_build_does_not_change_tracked_status`),
+   mas tests NUEVOS que cubran cada hallazgo P1-P12 (uno por hallazgo, incluido un negativo que
+   demuestre que el lexico de dominio ya no vive en el nucleo).
+4. `.gitignore` += `runtime/memory/`; `scripts/scan_encoding.py` (y su `.ps1`) excluyen esa ruta.
+5. Sobre el corpus del hub en clon limpio: build sin error duro; round-trip AC5 byte a byte;
+   `--fast` y `--full` verdes por EXIT CODE. Los warnings restantes deben ser SOLO H2 (frontmatter
+   realmente malformado), no metadata bien formada del hub.
+6. I2 verificado: `git status --porcelain` vacio tras correr el indexador sobre un arbol limpio.
+7. `revive_pack` acotado (P11) con presupuesto declarado y `token_estimate` en el pack.
+8. Export a instancias (DECISION-0096, born-operational): `scripts/new_instance.py` publica
+   `scripts/memory/` en la instancia nueva, con test que lo demuestre.
+9. NO se modifican `validate_collaboration_state.*` ni `submit_intent.py` (s.1 fuera de alcance de
+   F1); los comandos nuevos se corren APARTE, en el checkpoint de higiene.
+
+### 16.6 Fuera de alcance del port
+
+F2 (stubs/manifests, `--propose-cold`), F3 (enfriado real: exige DECISION de activacion +
+`MEMORY_HOT_COLD_RULES.json` + regla anti-B1 de s.5.3), F4 (FTS de contenido, embeddings,
+contradicciones) y la remediacion H1-H3 de s.16.4. El fondo intocable del hub (config `2E35F26E`,
+epoch `1.14.0`, dataset N=500) no se toca: el indexador es read-only y no escribe el ledger.
