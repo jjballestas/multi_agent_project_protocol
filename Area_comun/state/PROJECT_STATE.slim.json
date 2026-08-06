@@ -15,13 +15,13 @@
         {
             "id": "TASK-0317",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
         },
         {
             "id": "TASK-0319",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Inanicion estructural del harness: un exec largo de un peer mata para siempre la cola del otro (contador de defers unico sobre causas transitorias legitimas)"
         },
         {
