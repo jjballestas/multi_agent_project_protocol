@@ -62,6 +62,16 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_p09_instance_status_policy_is_closed_and_falsifiable",
     },
+    {
+        "id": "NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY",
+        "negative": "Moving the date exemption above the phone heuristic bypasses later PII checks.",
+        "mutation": "mutant_source = source.replace(normalized_line, early_date_exemption).replace(phone_guard, id_guard)",
+        "boundaries": (
+            "self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))",
+            "self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))",
+        ),
+        "exercised_by": "test_timestamp_exemption_is_phone_only_and_falsifiable",
+    },
 )
 
 
@@ -381,6 +391,41 @@ class MemoryDbTests(unittest.TestCase):
         )
         self.assertEqual({"priority": "medium"}, accepted)
         self.assertEqual([], warnings)
+
+    def test_timestamp_exemption_is_phone_only_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY"""
+        timestamp = "2026-06-19T09:28:23.123456-05:00"
+        domain_term = "2026"
+        self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))
+
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        phone_guard = "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
+        early_date_exemption = (
+            "        if DATE_RE.fullmatch(item):\n"
+            "            continue\n"
+            "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+        )
+        id_guard = "        if not ID_RE.fullmatch(item):\n"
+        normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+        self.assertEqual(1, source.count(phone_guard))
+        self.assertEqual(1, source.count(normalized_line))
+        mutant_source = source.replace(normalized_line, early_date_exemption).replace(phone_guard, id_guard)
+        self.assertNotEqual(source, mutant_source)
+
+        with tempfile.TemporaryDirectory(prefix="memory-date-exemption-mutant-") as temp:
+            mutant_path = Path(temp) / "build_memory_db_mutant.py"
+            write(mutant_path, mutant_source)
+            spec = importlib.util.spec_from_file_location(
+                "build_memory_db_date_exemption_mutant", mutant_path
+            )
+            assert spec and spec.loader
+            mutant = importlib.util.module_from_spec(spec)
+            sys.modules[spec.name] = mutant
+            try:
+                spec.loader.exec_module(mutant)
+            finally:
+                sys.modules.pop(spec.name, None)
+            self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))
 
     def test_p12_empty_supersedes_is_valid_and_produces_no_edge(self) -> None:
         accepted, warnings = memory_db.validate_metadata(
