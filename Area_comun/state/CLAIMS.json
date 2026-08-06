@@ -148,6 +148,22 @@
             "updated_at": "2026-08-02T18:10:53Z"
         },
         {
+            "claim_id": "CLAIM-20260806-Arquitecto-TASK-0314-rechazo-r1",
+            "expires_at": "2026-08-07T03:35:00Z",
+            "notes": "Rechazo formal r1 del Arquitecto tras veredicto CHANGE-REQUIRED del Analista (F1 AC7, F2 AC2, F3 AC5).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260806-Arquitecto-TASK-0314-rechazo-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0314",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0314",
+                "Area_comun/tasks/TASK-0314-port-f1-memoria-hibrida-hub.md"
+            ],
+            "started_at": "2026-08-06T03:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0314",
+            "updated_at": "2026-08-06T03:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260806-Arquitecto-TASK-0314-registro",
             "expires_at": "2026-08-07T00:17:14Z",
             "notes": "Registro gobernado del F1-PORT de la memoria hibrida al hub (SPEC s.16). El Arquitecto registra; el maker es Codex.",
