@@ -32,7 +32,7 @@
         {
             "id": "TASK-0324",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer"
         },
         {

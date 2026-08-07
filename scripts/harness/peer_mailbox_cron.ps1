@@ -337,6 +337,18 @@ function Get-ExecProgressState {
     }
 }
 
+function Get-PostDeliveryDeadlineAfterProgress {
+    param(
+        [DateTime]$CurrentDeadlineUtc,
+        [DateTime]$HardDeadlineUtc,
+        [DateTime]$ExecDeadlineUtc
+    )
+    $nextDeadlineUtc = $CurrentDeadlineUtc
+    if ($ExecDeadlineUtc -gt $nextDeadlineUtc) { $nextDeadlineUtc = $ExecDeadlineUtc }
+    if ($nextDeadlineUtc -gt $HardDeadlineUtc) { $nextDeadlineUtc = $HardDeadlineUtc }
+    return $nextDeadlineUtc
+}
+
 function Test-ExistingCronInstance {
     if (-not (Test-Path -LiteralPath $PidPath)) {
         return $false
@@ -1110,6 +1122,9 @@ function Invoke-PeerForMessage {
                     $progressLedgerBytes = $progress.ledger_bytes
                     $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
                     if ($deadlineUtc -gt $execHardDeadlineUtc) { $deadlineUtc = $execHardDeadlineUtc }
+                    if ($null -ne $postDeliveryDeadlineUtc) {
+                        $postDeliveryDeadlineUtc = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $postDeliveryDeadlineUtc -HardDeadlineUtc $postDeliveryHardDeadlineUtc -ExecDeadlineUtc $deadlineUtc
+                    }
                     Write-Log "EXEC_PROGRESSING pid=$($process.Id) reason=$($progress.reasons) next_deadline=$($deadlineUtc.ToString('o')) hard_deadline=$($execHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
                 } else {
                     $hungReason = if ([DateTime]::UtcNow -ge $execHardDeadlineUtc) { "hard_cap" } else { "no_progress" }

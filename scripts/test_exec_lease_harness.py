@@ -63,6 +63,20 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_zombie_sweeper_parses_real_git_quoted_rename_paths",
     },
+    {
+        "id": "NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE",
+        "negative": "The post-delivery window must inherit a later main progress deadline without exceeding its own hard deadline.",
+        "mutation": "source.replace(progress_sync, ignore_progress, 1)",
+        "boundaries": (
+            'assert healthy["after_second_progress"] == "2026-08-07T02:44:41.0000000Z"',
+            'assert healthy["alive_at_original_timeout"] is True',
+            'assert healthy["no_progress_times_out"] is True',
+            'assert healthy["clamped_deadline"] == "2026-08-07T02:55:40.0000000Z"',
+            'assert healthy["hard_cap_times_out"] is True',
+            'assert mutant["alive_at_original_timeout"] is False',
+        ),
+        "exercised_by": "test_post_delivery_window_honors_main_progress_extensions",
+    },
 )
 
 
@@ -273,6 +287,57 @@ foreach ($name in $wanted) {{
     Invoke-Expression $node.Extent.Text
 }}
 """
+
+
+def post_delivery_deadline_probe(source: Path) -> dict:
+    with make_tempdir("post-delivery-deadline-") as tmp:
+        root = Path(tmp)
+        script = function_loader(source, ("Get-PostDeliveryDeadlineAfterProgress",)) + """
+$base = [DateTime]::Parse("2026-08-07T02:44:00Z").ToUniversalTime()
+$hard = [DateTime]::Parse("2026-08-07T02:55:40Z").ToUniversalTime()
+$afterFirst = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $base -HardDeadlineUtc $hard -ExecDeadlineUtc ([DateTime]::Parse("2026-08-07T02:43:41Z").ToUniversalTime())
+$afterSecond = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $afterFirst -HardDeadlineUtc $hard -ExecDeadlineUtc ([DateTime]::Parse("2026-08-07T02:44:41Z").ToUniversalTime())
+$atOriginalTimeout = [DateTime]::Parse("2026-08-07T02:44:01Z").ToUniversalTime()
+$afterOvershoot = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $afterSecond -HardDeadlineUtc $hard -ExecDeadlineUtc ([DateTime]::Parse("2026-08-07T03:00:00Z").ToUniversalTime())
+$afterHardCap = [DateTime]::Parse("2026-08-07T02:55:41Z").ToUniversalTime()
+[ordered]@{
+    after_first_progress = $afterFirst.ToString("o")
+    after_second_progress = $afterSecond.ToString("o")
+    alive_at_original_timeout = ($atOriginalTimeout -le $afterSecond)
+    no_progress_times_out = ($atOriginalTimeout -gt $base)
+    clamped_deadline = $afterOvershoot.ToString("o")
+    hard_cap_times_out = ($afterHardCap -gt $afterOvershoot)
+} | ConvertTo-Json -Compress
+"""
+        return run_powershell(script, root)
+
+
+def test_post_delivery_window_honors_main_progress_extensions() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    wiring = (
+        "$postDeliveryDeadlineUtc = Get-PostDeliveryDeadlineAfterProgress "
+        "-CurrentDeadlineUtc $postDeliveryDeadlineUtc -HardDeadlineUtc "
+        "$postDeliveryHardDeadlineUtc -ExecDeadlineUtc $deadlineUtc"
+    )
+    assert wiring in source
+    healthy = post_delivery_deadline_probe(HARNESS_PATH)
+    assert healthy["after_first_progress"] == "2026-08-07T02:44:00.0000000Z"
+    assert healthy["after_second_progress"] == "2026-08-07T02:44:41.0000000Z"
+    assert healthy["alive_at_original_timeout"] is True
+    assert healthy["no_progress_times_out"] is True
+    assert healthy["clamped_deadline"] == "2026-08-07T02:55:40.0000000Z"
+    assert healthy["hard_cap_times_out"] is True
+
+    progress_sync = "if ($ExecDeadlineUtc -gt $nextDeadlineUtc) { $nextDeadlineUtc = $ExecDeadlineUtc }"
+    ignore_progress = "if ($ExecDeadlineUtc -gt $nextDeadlineUtc) { $nextDeadlineUtc = $CurrentDeadlineUtc }"
+    mutant_source = source.replace(progress_sync, ignore_progress, 1)
+    assert mutant_source != source
+    with make_tempdir("post-delivery-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = post_delivery_deadline_probe(mutant_path)
+    assert mutant["alive_at_original_timeout"] is False
 
 
 def defer_probe(source: Path) -> dict:
@@ -606,6 +671,7 @@ def main() -> int:
         test_harnesses_use_per_exec_prompt_files,
         test_harnesses_use_tree_kill_and_single_instance_guard,
         test_stop_order_requires_exact_line_not_contains,
+        test_post_delivery_window_honors_main_progress_extensions,
         test_preexec_defer_budget_kills_shared_counter_mutant,
         test_worktree_disk_proof_pairs_real_git_rename_records,
         test_zombie_sweeper_parses_real_git_quoted_rename_paths,
