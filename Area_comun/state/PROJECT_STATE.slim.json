@@ -15,7 +15,7 @@
         {
             "id": "TASK-0322",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Estrechar DATE_RE con validacion de rangos de componente: el conjunto de confianza se reduce ~3,7e3 veces (la densidad de portadoras NO baja; 2,9/0,05 pct son relativos al muestreador del AC1)"
         },
         {

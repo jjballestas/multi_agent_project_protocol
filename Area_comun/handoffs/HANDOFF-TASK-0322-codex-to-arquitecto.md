@@ -38,9 +38,11 @@ percent after. The material change is absolute size: the accepted language shrin
 about 3,695 times and its carrier subset about 3,699 times, or 3.6 orders of magnitude.
 
 The carrier family also becomes less controllable. Its leading pair is `SS`, now
-bounded to 00-59, and its trailing pair is offset `HH`, now bounded to 00-14. A
-Spanish mobile number beginning with 6 or 7 no longer fits this family because it
-would require `SS >= 60`; the former grammar allowed that placement.
+bounded to 00-59, and its trailing pair is offset `HH`, now bounded to 00-14. In
+the 5-digit-fraction subfamily, a Spanish mobile number beginning with 6 or 7 no
+longer fits because the 9-digit run forces its first digit into `SS`. In the
+6-digit-fraction subfamily, the run has 10 digits and a mobile number can still
+fit shifted by one position.
 
 ## Acceptance evidence
 
