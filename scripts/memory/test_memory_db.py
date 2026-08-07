@@ -65,6 +65,17 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_p09_instance_status_policy_is_closed_and_falsifiable",
     },
     {
+        "id": "NEG-MEMORY-INSTANCE-TYPE-DECLARATION",
+        "negative": "Removing a declared instance type makes its artifact warn again.",
+        "mutation": "policy[\"extra_type_values\"].remove(declared_type)",
+        "boundaries": (
+            "self.assertIn(expected_warning, unattested_warnings)",
+            "self.assertNotIn(expected_warning, declared_warnings)",
+            "self.assertIn(expected_warning, undeclared_warnings)",
+        ),
+        "exercised_by": "test_p09_instance_type_policy_is_attested_closed_and_falsifiable",
+    },
+    {
         "id": "NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY",
         "negative": "Moving the date exemption above the phone heuristic bypasses later PII checks.",
         "mutation": "mutant_source = source.replace(normalized_line, early_date_exemption).replace(phone_guard, id_guard)",
@@ -138,6 +149,7 @@ def make_fixture(root: Path) -> None:
                 "domain_pii_terms": [],
                 "identity_aliases": [],
                 "extra_status_values": [],
+                "extra_type_values": [],
                 "revive_pack": {
                     "max_bytes": 131072,
                     "max_inline_source_bytes": 65536,
@@ -310,6 +322,51 @@ class MemoryDbTests(unittest.TestCase):
             )
         )
         self.assertEqual([], template["extra_status_values"])
+
+    def test_p09_instance_type_policy_is_attested_closed_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-INSTANCE-TYPE-DECLARATION"""
+        declared_type = "instance-only-type"
+        expected_warning = "Area_comun/tasks/TASK-TYPE.md: rejected frontmatter key type"
+        with tempfile.TemporaryDirectory(prefix="memory-type-policy-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            write(
+                root / "Area_comun/tasks/TASK-TYPE.md",
+                "---\ntask_id: TASK-TYPE\ntitle: Type policy fixture\n"
+                f"status: ready\ntype: {declared_type}\nowner: Codex\n---\n",
+            )
+            artifact_commit = commit_fixture(root, "add instance type artifact")
+            policy_path = root / memory_db.POLICY_PATH
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy["extra_type_values"] = [declared_type]
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+
+            _, unattested_warnings = memory_db.load_artifacts(root, artifact_commit)
+            self.assertIn(expected_warning, unattested_warnings)
+
+            declared_commit = commit_fixture(root, "declare instance type")
+            _, declared_warnings = memory_db.load_artifacts(root, declared_commit)
+            self.assertNotIn(expected_warning, declared_warnings)
+
+            policy["extra_type_values"].remove(declared_type)
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            undeclared_commit = commit_fixture(root, "remove instance type declaration")
+            _, undeclared_warnings = memory_db.load_artifacts(root, undeclared_commit)
+            self.assertIn(expected_warning, undeclared_warnings)
+
+    def test_p09_core_types_exclude_instance_vocabulary_and_template_is_empty(self) -> None:
+        instance_values = {
+            "CAMBIO", "CONSULTA", "COORD", "DIRECTIVA", "FIRMA", "GO",
+            "RECONCILE", "REPORTE", "RESP", "RESPUESTA",
+        }
+        self.assertEqual(59, len(memory_db.TYPE_VALUES))
+        self.assertFalse(instance_values & memory_db.TYPE_VALUES)
+        template = json.loads(
+            (ROOT / "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual([], template["extra_type_values"])
 
     def test_p10_template_conventions_and_placeholder_ids_are_excluded(self) -> None:
         self.assertTrue(memory_db.is_excluded("Area_comun/specs/SPEC_TEMPLATE.md"))

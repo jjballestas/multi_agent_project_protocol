@@ -3,6 +3,7 @@
   "domain_pii_terms": [],
   "identity_aliases": [],
   "extra_status_values": [],
+  "extra_type_values": [],
   "revive_pack": {
     "max_bytes": 131072,
     "max_inline_source_bytes": 65536,

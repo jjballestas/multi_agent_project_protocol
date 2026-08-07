@@ -40,6 +40,26 @@
             "updated_at": "2026-08-07T07:56:30Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0320",
+            "expires_at": "2026-08-07T14:37:58Z",
+            "notes": "Implement the approved TASK-0320 instance type vocabulary externalization.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0320",
+                "Area_comun/state/TASK_INDEX.json#TASK-0320",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0320",
+                "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "Area_comun/protocol/MEMORY_INDEX_POLICY.json",
+                "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json"
+            ],
+            "started_at": "2026-08-07T08:37:58Z",
+            "status": "active",
+            "task_id": "TASK-0320",
+            "updated_at": "2026-08-07T08:37:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0324-remediation-2",
             "expires_at": "2026-08-07T15:56:40Z",
             "notes": "Remediate TASK-0324 AC4 live-path falsification, R1 boundary evidence, and R2 inherited-deadline observability.",

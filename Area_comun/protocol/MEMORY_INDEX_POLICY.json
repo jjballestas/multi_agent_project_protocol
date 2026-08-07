@@ -23,6 +23,18 @@
     "draft-reviewed-informal",
     "hallazgo-confirmado"
   ],
+  "extra_type_values": [
+    "CAMBIO",
+    "CONSULTA",
+    "COORD",
+    "DIRECTIVA",
+    "FIRMA",
+    "GO",
+    "RECONCILE",
+    "REPORTE",
+    "RESP",
+    "RESPUESTA"
+  ],
   "revive_pack": {
     "max_bytes": 131072,
     "max_inline_source_bytes": 65536,

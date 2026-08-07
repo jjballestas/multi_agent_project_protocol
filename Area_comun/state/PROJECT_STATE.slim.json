@@ -15,7 +15,7 @@
         {
             "id": "TASK-0320",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318"
         },
         {
