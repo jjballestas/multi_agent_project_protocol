@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, during TASK-0317 remediation iteration 4.
+Last updated: 2026-08-07 Europe/Madrid, during TASK-0323 implementation.
+
+## 2026-08-07 - TASK-0323 implementation
+
+- Implementation commit `0ee452ed` converts every operational path-decoding reader of
+  `git status` to NUL-delimited porcelain v1 parsing: the zombie sweeper, both runtime
+  orchestrator readers, and the shipped full-runtime mirror.
+- Rename/copy records preserve destination and source as a pair; quoted/non-ASCII paths
+  remain exact, and malformed pairs fail closed instead of producing invented routes.
+- The permanent real-Git negative independently reproduces the old rename-source loss and
+  C-quoted path fabrication, exercises all three Python parsers, and kills removal of `-z`.
+- Live gates passed: 15 harness tests, 32/32 falsification inventory, collaboration,
+  encoding, neutrality, Python compile, and diff checks. Exact-commit clean-clone gates
+  and governed delivery to independent review remain pending.
 
 ## 2026-08-07 - TASK-0317 remediation iteration 4
 

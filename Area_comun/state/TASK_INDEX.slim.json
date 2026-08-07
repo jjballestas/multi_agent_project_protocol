@@ -38,7 +38,7 @@
         {
             "id": "TASK-0323",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Lectores de git status --porcelain SIN -z fabrican rutas inexistentes: el barredor de zombis falla ABIERTO"
         }
     ],
