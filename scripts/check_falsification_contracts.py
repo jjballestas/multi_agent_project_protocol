@@ -17,6 +17,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 from falsification_contracts import validate_contracts
 
 
@@ -34,35 +36,46 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def workflow_commands(path: Path) -> str:
-    """Return only executable ``run`` fields from a GitHub Actions workflow."""
-    lines = path.read_text(encoding="utf-8-sig").splitlines()
-    commands: list[str] = []
-    index = 0
-    while index < len(lines):
-        match = re.match(r"^(\s*)(?:-\s+)?run:\s*(.*)$", lines[index])
-        if not match:
-            index += 1
+def workflow_steps(path: Path) -> list[tuple[str, dict[str, object], dict[str, object]]]:
+    """Return real steps nested under real workflow jobs."""
+    document = yaml.safe_load(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(document, dict):
+        raise ValueError(f"{path}: workflow must be a mapping")
+    jobs = document.get("jobs")
+    if not isinstance(jobs, dict):
+        raise ValueError(f"{path}: workflow must define a jobs mapping")
+    found: list[tuple[str, dict[str, object], dict[str, object]]] = []
+    for job_id, raw_job in jobs.items():
+        if not isinstance(raw_job, dict):
             continue
-        indent = len(match.group(1))
-        value = match.group(2).strip()
-        if value in {"|", ">", "|-", ">-", "|+", ">+"}:
-            index += 1
-            while index < len(lines):
-                line = lines[index]
-                if line.strip() and len(line) - len(line.lstrip()) <= indent:
-                    break
-                commands.append(line.strip())
-                index += 1
+        steps = raw_job.get("steps")
+        if not isinstance(steps, list):
             continue
-        commands.append(value.strip("'\""))
-        index += 1
-    return "\n".join(commands).replace("\\", "/")
+        for raw_step in steps:
+            if isinstance(raw_step, dict):
+                found.append((str(job_id), raw_job, raw_step))
+    return found
 
 
-def command_executes(commands: str, relative_path: Path) -> bool:
-    candidate = relative_path.as_posix()
-    return re.search(rf"(?<![\w./-]){re.escape(candidate)}(?![\w./-])", commands) is not None
+def command_invokes_runner(command: str, relative_path: Path) -> bool:
+    """Recognize a direct Python invocation, not a textual mention such as echo."""
+    candidate = re.escape(relative_path.as_posix())
+    python = r"(?:python(?:3(?:\.\d+)*)?(?:\.exe)?|py(?:\.exe)?(?:\s+-3)?)"
+    option = r"(?:\s+-[A-Za-z0-9]+)*"
+    invocation = re.compile(
+        rf"^\s*{python}{option}\s+[\"']?{candidate}[\"']?(?:\s|$)",
+        re.IGNORECASE,
+    )
+    return any(invocation.search(line.replace("\\", "/")) for line in command.splitlines())
+
+
+def step_gates_runner(
+    job: dict[str, object], step: dict[str, object], relative_path: Path
+) -> bool:
+    command = step.get("run")
+    if not isinstance(command, str) or not command_invokes_runner(command, relative_path):
+        return False
+    return job.get("continue-on-error") is not True and step.get("continue-on-error") is not True
 
 
 def declarations(path: Path) -> list[dict[str, object]]:
@@ -144,10 +157,13 @@ def main() -> int:
     missing = sorted(existing_ids - declared_ids)
     stale = sorted(declared_ids - existing_ids)
     workflow_path = (root / args.workflow).resolve() if args.workflow else None
-    commands = ""
+    steps: list[tuple[str, dict[str, object], dict[str, object]]] = []
     if workflow_path is not None:
         if workflow_path.is_file():
-            commands = workflow_commands(workflow_path)
+            try:
+                steps = workflow_steps(workflow_path)
+            except (OSError, ValueError, yaml.YAMLError) as exc:
+                errors.append(str(exc))
         else:
             errors.append(f"workflow file does not exist: {workflow_path}")
     for negative_id in missing:
@@ -166,14 +182,19 @@ def main() -> int:
         for boundary in contract.boundaries:
             if boundary not in source:
                 errors.append(f"{contract.id}: assertion boundary not found beside the test: {boundary}")
-        if workflow_path is not None and commands:
+        if workflow_path is not None and steps:
             runner = owners[contract.id].relative_to(root)
-            if not command_executes(commands, runner):
+            if not any(step_gates_runner(job, step, runner) for _, job, step in steps):
                 errors.append(f"{contract.id}: runner is not executed by workflow: {runner}")
-    if workflow_path is not None and commands:
+    if workflow_path is not None and steps:
         runners = {owners[contract.id].relative_to(root) for contract in contracts}
-        executed_runners = {runner for runner in runners if command_executes(commands, runner)}
-        executed_contracts = sum(command_executes(commands, owners[item.id].relative_to(root)) for item in contracts)
+        executed_runners = {
+            runner for runner in runners if any(step_gates_runner(job, step, runner) for _, job, step in steps)
+        }
+        executed_contracts = sum(
+            any(step_gates_runner(job, step, owners[item.id].relative_to(root)) for _, job, step in steps)
+            for item in contracts
+        )
         print(
             "FALSIFICATION_EXECUTION "
             f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)}"

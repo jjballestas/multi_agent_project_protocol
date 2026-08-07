@@ -23,7 +23,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install Python test dependencies
-        run: python -m pip install jsonschema
+        run: python -m pip install jsonschema pyyaml
 
       - name: Validate repository dogfood instance
         run: python scripts/validate_collaboration_state.py --root .
@@ -277,8 +277,16 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Execute every previously dormant falsification runner
-        run: |
-          python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
-          python examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py
-          python examples/runtime_turn_cases/run_post_gate_obstacle_cases.py
+      - name: Install falsification runner dependencies
+        run: python -m pip install jsonschema
+
+      - name: Execute mailbox retry falsification runner
+        run: python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
+
+      - name: Execute runtime turn falsification runner
+        if: always()
+        run: python examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py
+
+      - name: Execute post-gate falsification runner
+        if: always()
+        run: python examples/runtime_turn_cases/run_post_gate_obstacle_cases.py

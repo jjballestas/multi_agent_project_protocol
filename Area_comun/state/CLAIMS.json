@@ -42,6 +42,27 @@
             "updated_at": "2026-08-07T14:38:14Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-remediation-2",
+            "expires_at": "2026-08-07T23:15:00Z",
+            "notes": "Remediation iteration 2: make each runner failure gate CI, install jsonschema, and parse executable workflow steps structurally.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0330",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0330",
+                "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+                ".github/workflows/validate.yml",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T17:15:00Z",
+            "status": "active",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T17:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0333-delivery",
             "expires_at": "2026-08-07T18:51:40Z",
             "notes": "Deliver TASK-0333 to independent review with self-contained handoff.",

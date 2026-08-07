@@ -26,13 +26,16 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-FALSIFICATION-RUNNER-WIRING",
-        "negative": "A declared contract whose owner is absent from workflow run commands is rejected.",
-        "mutation": '.replace("python examples/orphan/run_orphan.py\\n", "")',
+        "negative": "A declared contract must have a direct, failure-gating invocation inside a real workflow job.",
+        "mutation": '.replace("run: python examples/orphan/run_orphan.py", "run: echo python examples/orphan/run_orphan.py")',
         "boundaries": (
             "assert wired.returncode == 0",
             "assert orphan.returncode != 0",
             'assert "runner is not executed by workflow" in orphan.stdout',
             "assert healed.returncode == 0",
+            "assert continued.returncode != 0",
+            "assert echoed.returncode != 0",
+            "assert removed_job.returncode != 0",
         ),
         "exercised_by": "main",
     },
@@ -100,7 +103,14 @@ def main() -> int:
         )
         workflow = fixture / ".github/workflows/validate.yml"
         workflow.parent.mkdir(parents=True)
-        workflow.write_text("steps:\n  - run: python examples/cases/run_cases.py\n", encoding="ascii")
+        workflow.write_text(
+            "jobs:\n"
+            "  falsification-runners:\n"
+            "    runs-on: ubuntu-latest\n"
+            "    steps:\n"
+            "      - run: python examples/cases/run_cases.py\n",
+            encoding="ascii",
+        )
         wired = run(fixture, workflow)
         assert wired.returncode == 0, wired.stdout + wired.stderr
         orphan_runner = fixture / "examples/orphan/run_orphan.py"
@@ -116,18 +126,40 @@ def main() -> int:
         assert orphan.returncode != 0, orphan.stdout + orphan.stderr
         assert "runner is not executed by workflow" in orphan.stdout, orphan.stdout
         workflow.write_text(
-            workflow.read_text(encoding="ascii") + "  - run: python examples/orphan/run_orphan.py\n",
+            workflow.read_text(encoding="ascii") + "      - run: python examples/orphan/run_orphan.py\n",
             encoding="ascii",
         )
         healed = run(fixture, workflow)
         assert healed.returncode == 0, healed.stdout + healed.stderr
-        mutant_workflow = workflow.with_name("mutant.yml")
-        mutant_workflow.write_text(
-            workflow.read_text(encoding="ascii").replace("python examples/orphan/run_orphan.py\n", ""),
+        continued_workflow = workflow.with_name("continued.yml")
+        continued_workflow.write_text(
+            workflow.read_text(encoding="ascii").replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - continue-on-error: true\n        run: python examples/orphan/run_orphan.py\n",
+            ),
             encoding="ascii",
         )
-        mutant = run(fixture, mutant_workflow)
-        assert mutant.returncode != 0, mutant.stdout + mutant.stderr
+        continued = run(fixture, continued_workflow)
+        assert continued.returncode != 0, continued.stdout + continued.stderr
+        echoed_workflow = workflow.with_name("echoed.yml")
+        echoed_workflow.write_text(
+            workflow.read_text(encoding="ascii").replace("run: python examples/orphan/run_orphan.py", "run: echo python examples/orphan/run_orphan.py"),
+            encoding="ascii",
+        )
+        echoed = run(fixture, echoed_workflow)
+        assert echoed.returncode != 0, echoed.stdout + echoed.stderr
+        removed_job_workflow = workflow.with_name("removed-job.yml")
+        removed_job_workflow.write_text(
+            "jobs:\n"
+            "  decoy:\n"
+            "    runs-on: ubuntu-latest\n"
+            "    steps:\n"
+            "      - run: python examples/cases/run_cases.py\n"
+            "      - run: echo python examples/orphan/run_orphan.py\n",
+            encoding="ascii",
+        )
+        removed_job = run(fixture, removed_job_workflow)
+        assert removed_job.returncode != 0, removed_job.stdout + removed_job.stderr
     with tempfile.TemporaryDirectory(prefix="falsification-off-glob-") as temp:
         fixture = Path(temp)
         outside_old_glob = fixture / "scripts/test_outside_old_glob.py"
