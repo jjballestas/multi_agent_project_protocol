@@ -7125,3 +7125,73 @@ ruta bajo revision y **corregi el anclaje del artefacto** antes de commitear en 
 referencia caduca.
 
 Bucle declarado: **maximo 2 iteraciones**, escalo al operador a la tercera.
+
+---
+
+## TASK-0335 (2026-08-07, `dbe9a508`) -- CHANGE-REQUIRED estrecho, iteracion 1 de 2
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0335-semantica-terminal-retry-verdict.md`.
+Commits mios: `7442cb15` (veredicto) + `2720cbc4` (release del claim).
+
+### La tecnica que resolvio el foco principal: INVERTIR LA EXPECTATIVA
+
+Para distinguir "la asercion afirma algo cierto" de "la asercion no afirma nada" (vacuidad), no
+basta con ver que el caso pasa ni con instrumentar que la linea se alcanza. Lo que lo decide es
+**darle la vuelta a la expectativa y comprobar que revienta**:
+
+    mutante de orden con expect_any_terminal=True        -> ASSERTION FAILED  (correcto)
+    mutante de causa con expect_expected_terminal=True   -> ASSERTION FAILED  (correcto)
+
+Si la asercion fuera vacua, invertir la expectativa la dejaria igual de verde. Es el complemento
+exacto de la leccion `contrato-ata-el-helper-no-el-efecto`: alli el mutante era dejar la linea
+inalcanzable; aqui el meta-mutante es pedirle a la asercion que afirme lo contrario.
+**Guardar esta receta: sirve para cualquier negativo sospechoso de ser vacuo.**
+
+Complemento util: instrumentar el punto de juicio para volcar **los datos que la asercion va a
+juzgar** (aqui, los eventos ya parseados). Ver `events=[]` en el mutante de orden y
+`reason=ledger_unreadable_wrong_cause` en el de causa vale mas que cualquier lectura del diff.
+
+### Probar independencia de formato: reordenar TODA la linea, no solo anadir un campo
+
+El foco pedia "anade un campo nuevo en medio". Hice la version fuerte: campos nuevos inyectados en
+medio **y reorden completo** de las tres lineas `RETRY_EXHAUSTED` de produccion (en el clon de
+scratch). Si el parser fuera parcialmente posicional, el reorden lo caza y el campo suelto no.
+
+### Contar rojos: revertir CADA reparacion una a una
+
+El maker declaro **nueve** rojos adicionales. Verifique **ocho**. Dos tecnicas segun el acoplamiento:
+
+- caso independiente de la cola -> ejecutarlo **directamente en el clon del PADRE** (`dbe9a508^`).
+  Los 4 casos focales (`run_post_delivery_timeout_case`, `run_exec_running_heartbeat_case`,
+  `run_pre_delivery_and_liveness_cases`, `run_frozen_exec_with_production_freshness_case`) no toman
+  argumentos: se llaman sueltos. 4/4 rojos reales.
+- caso acoplado a la cola -> **revertir esa reparacion sola sobre el commit ARREGLADO** y correr.
+  Revert rojo = la reparacion atacaba un rojo real; revert verde = no era rojo.
+
+El noveno se cayo asi: revertir `run_disordered_ledger_case` a la subcadena vieja **deja la corrida
+verde**, porque esa subcadena sigue siendo contigua en produccion hoy. Endurecimiento preventivo
+correcto, pero **no un rojo**. Sin la sonda de revert habria firmado el 9 del handoff.
+**Regla: un numero declarado no se ratifica leyendo el diff; se ratifica revirtiendo.**
+
+### El slip que casi se cuela: una relajacion escondida en un cambio de fixture
+
+`== "peer-task-edit\n"` -> `.endswith("peer-task-edit\n")`. Parece forzado por el cambio de fixture
+(le anadieron frontmatter), y no lo esta: **corri la cola completa con la igualdad exacta contra el
+valor que el propio fixture escribe y sale verde**. La relajacion era gratuita, y cae justo sobre el
+metadato nuevo (`task_id`, `scope_routes`) del que depende la admision por scope.
+**Ante cualquier `==` que pasa a `in`/`startswith`/`endswith`: correr la version exacta antes de
+aceptar que era necesaria.** La aritmetica del escape en tres lineas convence mas que el argumento.
+
+### Operativa (confirmada otra vez)
+
+`git clone --local --shared --no-checkout` desde la ruta local: instantaneo, sin copiar los ~7 GB de
+objetos sueltos. Dos clones, `cc` (arreglo) y `par` (padre), bajo `D:/Aegis_Scratch/hub/t0335/`.
+Las sondas cargan el runner **por `importlib`**, repuntan `ROOT`/`RUNNER`/`LEDGER_HEAD` al clon,
+stubean los casos que no interesan y cortan con una excepcion centinela: cada experimento cuesta
+segundos en vez de la corrida completa. Sondas guardadas en `D:/Aegis_Scratch/hub/t0335/*.py`.
+Cuidado al capturar el resultado: un `except BaseException` traga el `sys.exit(0)` y lo pinta como
+RED; la linea GREEN previa es la autoritativa.
+
+Claim `CLAIM-20260807-Analista-TASK-0335-review` creado tras escribir los artefactos
+(artifacts-before-claim) y **liberado en el mismo turno** tras el push. Bucle declarado: maximo 2
+iteraciones, escalo al operador a la tercera.
