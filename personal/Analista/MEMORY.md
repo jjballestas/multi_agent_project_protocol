@@ -6698,3 +6698,117 @@ frozenset | R7 nueve grafias vivas de REVIEW sin dueno.
 0 claims activos al escribir; rutas gobernadas limpias; pathspec explicito; 0 bytes >127 en mis dos
 ficheros; `validate` y `scan_encoding` exit 0 antes y despues del commit. Pregunta abierta al
 Arquitecto en el mensaje: si R3 sube a tarea propia inmediata o queda como residual del SPEC s.16.7.
+## 2026-08-07 17:58 (UTC+2) -- TASK-0325 RE-JUICIO r2 (iteracion 1/2): CHANGE-REQUIRED sobre 21d12870 (mis commits 84d8bbbf + 0551cf59)
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0325-early-exit-r2-verdict.md`. Mensaje efectivo:
+`Area_comun/mailbox/open/MSG-...-REVIEW-TASK-0325-slip3.md` (el primer intento fue enterrado, ver abajo).
+Clones limpios `D:/Aegis_Scratch/map/r0325r2` (matriz) y `.../r0325r2b` (suite completa), ambos detached
+en `21d12870`. `build_memory_db.py` sha256[:16] `5b49ffe9e5eb5180`, restaurado y verificado por hash tras
+cada mutante.
+
+### Lo que confirme cumplido (los 4 puntos que fije en r1 + el foco del Arquitecto)
+
+Punto 1, mi tabla de 4 filas con mis mutantes sobre produccion: E1 `break` estrecho **CATCH exit 1**,
+E0 `continue` **CATCH exit 1**, `break` y `continue` inocuos en el bucle del telefono **PASS exit 0**.
+SLIP-0325-1 y SLIP-0325-2 cerrados. Punto 2, el numero que decidia: suite completa con E1 en produccion
+**exit 1, `Ran 66 tests ... FAILED (failures=1)`** (en r1 daba exit 0). Punto 3, AC4: los 4 tests
+dirigidos exit 0 y la suite sin mutar `Ran 66 tests ... OK`. Punto 4: id renombrado a
+`NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT`, `boundaries=4`, inventario exit 0, cero referencias vivas al
+id viejo (las 3 que quedan son registros historicos: handoff, mensaje archivado, memoria de Codex).
+
+Foco del Arquitecto (verdad vacia sobre el visitante NUEVO): **REFUTADO 8/8**. Lado test: `visit_Break`
+sin recoger, `visit_Continue` sin recoger, entrada por el nodo del bucle (`visit_For` se lo come todo),
+recorrido vacio -> exit 1 los cuatro. Lado produccion: bucle borrado, `contains_pii` renombrada con
+alias publico, bucle envuelto en `if`, segundo bucle directo -> exit 1 los cuatro. **La razon vale como
+patron reutilizable:** el contrato afirma las dos direcciones -- lista vacia sobre la fuente Y lista NO
+vacia sobre el mutante (`assertNotEqual([], mutant_break_early_exits)`). Un selector que deje de
+encontrar cosas rompe la segunda. **Un negativo con las dos direcciones no admite verdad vacia; con una
+sola, si.** Esto es lo que hay que exigir en cualquier guarda por seleccion (AST, grep, inventario).
+
+### El hallazgo nuevo: SLIP-0325-3, cortar por NODO en vez de por VINCULACION
+
+`break` en la clausula `else` de un bucle anidado **se vincula al bucle EXTERNO** (verificado en Python
+antes de acusar). El visitante hace `visit_For -> return None`: salta el nodo anidado **entero, `orelse`
+incluido**, y por tanto no lo ve. Mutante N1 = el bypass estrecho de E1 movido a ese `else` (con
+`for _nested in ():` cuyo cuerpo nunca corre, asi que el `else` siempre se ejecuta):
+
+- **Comportamiento identico a E1**: `contains_pii` devuelve False sobre
+  `["2026-06-19T09:28:23+05:45", "contact me at a@b.com"]` y sobre la variante con telefono.
+- **Contrato AST exit 0** y **suite completa `Ran 66 tests in 238.841s ... OK` exit 0**.
+- N2 (`continue` en `while ... else` anidado) tiene el mismo hueco.
+
+**No es un poste movido, y esa distincion es la que hace defendible el segundo CHANGE-REQUIRED:** el
+propio fichero de tarea declara la propiedad como *no early exit **owned by the outer** item loop ...
+ignoring control flow **rebound by nested** For/AsyncFor/While*. El `else` de un bucle anidado **no es
+control de flujo re-vinculado**. La entrega no falla mi criterio: falla **su propia declaracion**.
+Cuando puedas anclar el bloqueo en la declaracion del maker en vez de en tu gusto, el CHANGE-REQUIRED
+deja de ser opinable.
+
+**Acote el defecto en vez de exagerarlo** (esto es lo que hace que un CHANGE-REQUIRED se acepte):
+`try`, `with`, `match` y `def` anidado los clasifica **bien** (4/4 correctos via `generic_visit`), y los
+inocuos en bucles anidados (N3 cuerpo, N4 dos niveles) no dan falso positivo. **La unica arista mal
+cortada es el `orelse` de los tres tipos de bucle.**
+
+**Entregue el parche ya medido, no un diseno**: 6 lineas, recorrer `node.orelse` en
+`visit_For`/`visit_AsyncFor`/`visit_While`. Lo aplique al test en el clon y re-corri la matriz entera:
+**9/9 filas correctas** (E0/E1/N1/N2 CATCH; base/N3/N4/I1/I2 PASS). **Leccion de eficacia: cuando pidas
+una segunda vuelta, llega con el parche verificado y la tabla, no con la peticion.** Costo ~2 minutos y
+quita toda discusion sobre si el arreglo introduce falsos positivos.
+
+**Aviso de alcance que deje escrito**: SLIP-0325-3 **no** lo cubre R0325-1 (ni por tanto TASK-0332).
+R0325-1 habla de *reestructuracion* y *filtrado en helper externo*, formas que no usan `break`/`continue`.
+N1 **es** un `break`, de la clase exacta que la guarda enumera, en el nivel de bucle exacto que dice
+acotar. **Cuidado con la tentacion de mandar un defecto a un residual ya contratado: si la forma del
+defecto esta dentro de lo que la guarda enumera, es defecto, no residual.**
+
+### Residual nuevo (informativo)
+
+R0325-4: el visitante recoge tambien del `orelse` del bucle **externo**, que se vincularia a un bucle
+que lo encierre. Hoy inalcanzable (`contains_pii` no anida el bucle de items). Escrito para que un
+refactor futuro no lo lea como intencional.
+
+### ANOMALIA OPERATIVA que me costo un commit -- higiene que archiva por NOMBRE ANTICIPADO
+
+Escribi el mensaje del veredicto en `open/` como `...-REVIEW-TASK-0325-r2-verdict`. El lote de higiene
+del Arquitecto `arq-hyg-lote24` lo movio a `archived/` con `status: archived` **entre mi escritura y mi
+commit**. Resultado: `git commit -- <artefacto> <mensaje>` metio **solo el artefacto** (1 file changed),
+porque `git commit -- pathspec` commitea el **arbol de trabajo** de esas rutas y el fichero ya no estaba
+alli; y como no estaba en HEAD, tampoco registro un borrado. **Salio exit 0 y parecio correcto.**
+
+Lo grave esta en el ledger: `seq 7589 intent_type=mailbox_archive
+message_id=MSG-...-REVIEW-TASK-0325-r2-verdict timestamp 2026-08-07T15:48:52Z`, y yo cree el fichero
+alrededor de las **15:53Z**. **El intent archiva un mensaje que todavia no existia** -- el espejo del
+punto 4 de DECISION-0020 (nunca listar en un `scope` un artefacto no creado aun) aplicado al mailbox.
+
+**Lecciones duras, las tres:**
+
+1. **Tras commitear con pathspec, VERIFICAR que aterrizo lo que creia.** `git show --stat HEAD` y
+   contar ficheros. Un `git commit -- <rutas>` con una ruta que ha desaparecido del arbol sale **exit 0
+   sin commitear nada de ella**. Gatear por exit code NO basta aqui: hay que gatear por **contenido del
+   commit**. Es la version mailbox de `mergeado-no-es-desplegado`.
+2. **Un mensaje enterrado NO deja rojo.** `validate` sale exit 0 con un `requires_response: true` en
+   `archived/` sin responder. Si no vuelvo a mirar `open/` despues de commitear, el veredicto se pierde
+   en silencio y la tarea se cierra sin mi voz. **Anadido al cierre de toda review: `git ls-files
+   Area_comun/mailbox/open/ | grep <task>` antes de dar el turno por terminado.**
+3. **Reemitir con id NUEVO, no reusar el pre-archivado.** Reusar el id dejaria el ledger diciendo
+   "archived" con el fichero en `open/`. Use `...-REVIEW-TASK-0325-slip3` tras comprobar por `grep` en
+   `events.jsonl` que ese id no aparece. Y **no toque** la copia pre-archivada ni el resultado de
+   higiene: ruta e intent ajenos (DECISION-0018 = senalar al dueno, no arreglar en silencio).
+
+Reporte la anomalia dentro del propio mensaje reemitido, al Arquitecto como dueno responsable. Correccion
+en caliente: mientras escribia, su commit `55368b06` metio la copia pre-archivada en canonico, asi que
+**no hay drift**; corregi esa frase antes de commitear en vez de publicar una afirmacion falsa. Queda
+solo el defecto de criterio: archivar **por mensaje consumido**, nunca por nombre esperado.
+
+### Coordinacion
+
+Ventana compartida movida: el peer escribio el ledger completo (CLAIMS/PROJECT_STATE/TASK_INDEX/
+events/snapshot) a mitad de mi turno. **Espere a estabilidad** (2 sondeos de 10s con el mismo
+`git status` de rutas gobernadas) antes de commitear, y use **pathspec explicito en el COMMIT**, no solo
+en el `add`. 0 claims activos en los tres chequeos. 0 bytes >127 en mis dos ficheros. `validate`,
+`scan_encoding` y `scan_domain_neutrality` exit 0 antes y despues. Push: `55368b06..0551cf59`. Confirmada
+otra vez `push-no-retenible`: mi commit `84d8bbbf` salio publicado por el push del peer antes del mio.
+
+Bucle de fix declarado: **iteracion 2 de 2**; si a la tercera vuelta persiste un escape de la misma
+familia, escalo al operador humano. Pregunta abierta al Arquitecto: parche de 6 lineas ahora, o cerrar
+0325 con SLIP-0325-3 como residual **bloqueante** con dueno y tarea propia **distinta de TASK-0332**.
