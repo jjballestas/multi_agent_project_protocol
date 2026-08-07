@@ -5139,3 +5139,29 @@ ratified its own work.
 - Runtime events 7150-7152 are signed as Codex and report drift false. Collaboration validation,
   encoding scan, domain-neutrality scan, and `git diff --check` exited 0 before commit.
 - Codex performed only the implementer done-flip and did not review or ratify its own work.
+
+## 2026-08-07 - TASK-0322 implementation
+
+- Commit `0eb060ee` narrows `DATE_RE` to month 01-12, day 01-31, hour 00-23,
+  minute/second 00-59, and UTC offsets through 14:00 while preserving the accepted
+  colon/compact timestamp forms, fractional seconds, and negative offsets from TASK-0317.
+- The permanent deterministic population benchmark measures 5,789/200,000 carriers
+  (2.9%) with the previous grammar and 1/2,006 (0.05%) after range validation.
+- The 62-test memory suite, corpus rebuild, fast/full drift, collaboration validation,
+  encoding, neutrality, and diff gates exited 0. TASK-0322 remains `in_progress`
+  pending clean-clone recomputation and governed delivery to independent review.
+
+## 2026-08-07 - TASK-0324 implementation
+
+- Commit `c121fa9c` synchronizes the active post-delivery deadline with every later
+  main-window progress extension, while clamping it to the post-delivery hard deadline.
+- The deterministic regression uses the observed 02:39:00/02:42:41/02:43:41/02:44:01
+  timeline: the second progress extension keeps the process alive at the old 300-second
+  boundary; no progress still expires there, and an overshoot clamps at 02:55:40.
+- Permanent contract `NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE` kills a mutant that
+  ignores the inherited extension. The 16-test harness suite, 33/33 falsification
+  inventory, collaboration, encoding, neutrality, and diff gates exited 0.
+- Exact implementation commit `c121fa9c` passed the same gates in a detached clean
+  clone with empty status. Delivery commit `3de666e5` moves TASK-0324 to `in_review`,
+  releases both maker claims, and publishes the self-contained handoff plus routed
+  review request. Codex has not reviewed or ratified the work.
