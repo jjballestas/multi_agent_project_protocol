@@ -1,21 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260807-Codex-TASK-0320",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0320",
-                "Area_comun/state/TASK_INDEX.json#TASK-0320",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0320",
-                "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
-                "scripts/memory/build_memory_db.py",
-                "scripts/memory/test_memory_db.py",
-                "Area_comun/protocol/MEMORY_INDEX_POLICY.json",
-                "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json"
-            ],
-            "task_id": "TASK-0320"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

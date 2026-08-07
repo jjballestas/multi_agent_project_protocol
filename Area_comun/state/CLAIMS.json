@@ -55,9 +55,38 @@
                 "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json"
             ],
             "started_at": "2026-08-07T08:37:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0320",
             "updated_at": "2026-08-07T08:37:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0320-delivery",
+            "expires_at": "2026-08-07T11:24:18Z",
+            "notes": "Create the self-contained TASK-0320 delivery handoff before final release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0320-delivery",
+                "Area_comun/handoffs/"
+            ],
+            "started_at": "2026-08-07T09:24:18Z",
+            "status": "released",
+            "task_id": "TASK-0320",
+            "updated_at": "2026-08-07T09:24:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0320-delivery-exact",
+            "expires_at": "2026-08-07T11:26:06Z",
+            "notes": "Cover the concrete TASK-0320 handoff and independent review request for delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0320-delivery-exact",
+                "Area_comun/handoffs/HANDOFF-TASK-0320-codex-to-analista.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Analista-REVIEW-TASK-0320.md"
+            ],
+            "started_at": "2026-08-07T09:26:06Z",
+            "status": "released",
+            "task_id": "TASK-0320",
+            "updated_at": "2026-08-07T09:26:06Z"
         },
         {
             "claim_id": "CLAIM-20260807-Codex-TASK-0324-remediation-2",
