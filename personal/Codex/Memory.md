@@ -20,6 +20,8 @@ Last updated: 2026-08-07 Europe/Madrid, during TASK-0322 implementation.
 - Runtime events 7366-7369 are signed as Codex. TASK-0322 is `in_review`, both maker
   claims are released, and the self-contained handoff/request is routed to Arquitecto
   for recomputation and independent Analista review. Codex did not review or ratify.
+- Delivery commit `16faa120` records the governed transition, released claims, handoff,
+  review request, and exact-commit evidence.
 
 ## 2026-08-07 - TASK-0323 implementation
 
