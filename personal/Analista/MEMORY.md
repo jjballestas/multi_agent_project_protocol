@@ -6311,3 +6311,69 @@ Mensaje: `MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5.md`.
 - Coordinacion: 0 claims activos, arbol rastreado limpio, pathspec explicito, trailers `Task-Id` +
   `Ops-Reason`. El commit aviso `PRUNE DUE: cold_start_tokens 20883 >= 20000` -- es del Arquitecto en
   su checkpoint, no mio; lo reporte sin tocarlo.
+
+---
+
+## 2026-08-07 -- TASK-0325 (endurecimiento de la exencion de fecha, AST + R5-1/R5-2): CHANGE-REQUIRED
+
+Commit revisado `70a22d88` (ancestro de `origin/main` `4260dae7`). Clon limpio
+`D:/Aegis_Scratch/map/r0325` (`git clone --shared --no-checkout` -> 799K de `.git`, instantaneo:
+**este es el modo de clonar este repo**, el `.git` de 7,4 GB en objetos sueltos no se copia).
+Veredicto `Area_comun/artifacts/Analista-TASK-0325-exencion-fecha-ast-verdict.md`, commit `73e37ddb`.
+
+- **La pregunta del Arquitecto (verdad vacia del selector AST) era la correcta pero la respuesta es
+  NO.** El selector falla **CERRADO** en los cuatro vectores de desaparicion (bucle borrado, funcion
+  renombrada con alias, bucle partido en dos, bucle envuelto en un `if`): exit 1 en los cuatro.
+  La razon estructural que hay que buscar SIEMPRE en un selector AST: **afirma la cardinalidad antes
+  de mirar** (`assertEqual(1, len(functions))`, `assertEqual(1, len(loops))`) y ancla por conteo de
+  fuente. Un selector que solo filtra y no afirma es el que falla abierto.
+
+- **LECCION NUEVA -- el conjunto de nodos, no el nodo.** El contrato prohibia `ast.Continue` sobre
+  **todo el subarbol** (`ast.walk`). Ese conjunto esta mal por los dos lados a la vez:
+  - **Hueco:** el mismo mutante estrecho con **`break`** en vez de `continue` -- un identificador de
+    distancia -- es una fuga **real y mas fuerte** (aborta el bucle, ciega los items posteriores):
+    `contains_pii(["2026-06-19T09:28:23+05:45", "contact me at a@b.com"])` -> `False`, un email se
+    cuela. Con el mutante en produccion la **suite entera sale verde 64/64, exit 0**. Ninguno de los
+    36 contratos lo ve.
+  - **Falso positivo:** un `continue` inocuo del bucle **anidado** del telefono hace fallar el
+    contrato. `ast.walk` cruza la frontera del bucle anidado, que **re-vincula** `break`/`continue`.
+  - El arreglo de una palabra (anadir `ast.Break` al mismo `walk`) **empeora** el falso positivo.
+    Solo el recorrido **acotado al control de flujo propiedad del bucle externo** (no descender a
+    `For`/`While` anidados, no visitar `FunctionDef`/`Lambda`) acierta en las 4 filas.
+  - **Patron para reusar: ante cualquier contrato AST, construir la tabla de 4 filas
+    fuente / fuga-real / inocuo-anidado-A / inocuo-anidado-B con los 3 detectores candidatos.**
+    La tabla decide sola; discutirlo en prosa no.
+
+- **Por que la fuga estrecha se escapa de TODO:** el contrato de colocacion de 0317 sí mata los
+  bypasses **amplios** (rompen su afirmacion positiva sobre los 333), pero su familia muestrea solo
+  `("", "Z", "+02:00", "-05:00", "-12:30")`. 0325 anade `+05:45/-09:45/+13:00/+14:00` pero **solo
+  contra `DATE_RE`, nunca contra `contains_pii`**. Los dos muestreos son **disjuntos** -> el bypass
+  estrecho sobre un offset fuera de la familia no lo ve nadie. **Regla: cuando dos contratos
+  muestrean el mismo dominio con conjuntos disjuntos, el hueco esta entre ellos, no dentro.**
+
+- **Buscar tambien lo que favorece al maker (lo hice y lo dije):** la tarea NO era un cierre vacio.
+  `build_memory_db.py` byte-identico verificado por `git diff --exit-code` (exit 0) y era **correcto**
+  no cambiarlo -- la propiedad ya se cumplia (0 `Continue`, 0 `Break` en el bucle, medido por AST).
+  Los dos mutantes mueren de verdad contra produccion (exit 1 / exit 1, 5 fallos el de offsets).
+
+- **Coherencia entre tareas paralelas (foco que el Arquitecto pidio y que hay que repetir):** 0325
+  desciende de la entrega de 0322, y su contrato **ancla la gramatica por texto literal**
+  (`source.count(offset_grammar)==1`), asi que una edicion futura de `DATE_RE` lo rompe -- falla
+  cerrado, correcto. Fui a comprobar si **mi propio CHANGE-REQUIRED sobre 0322** lo detonaria: **no**,
+  esa remediacion es de solo declaracion, cero codigo. **Comprobar siempre si mi propio veredicto
+  previo colisiona con la tarea que reviso ahora.**
+- Barrido independiente de offsets: los 4 afirmados aceptados y **80 offsets IANA reales**
+  (UTC-12:00..+14:00, minutos 00/30/45) -> **0 rechazados**. El estrechamiento de 0322 no tira nada
+  legitimo.
+
+- **Cite `validate.yml:49` para probar que el runner se EJECUTA, no solo que esta declarado**
+  (leccion de TASK-0330). El inventario dice 36 DECLARED; eso por si solo no es cobertura.
+
+- Gates en clon limpio, todos exit 0: suite 64/64 (203 s), inventario, validate, encoding,
+  neutralidad. Coordinacion: 0 claims activos, rutas gobernadas limpias, pathspec explicito,
+  trailers `Task-Id` + `Ops-Reason` (sin `Co-Authored-By`: en este hub ese trailer es el
+  discriminador de los commits del Arquitecto y lo rompe el monitor).
+- El commit volvio a avisar `PRUNE DUE: cold_start_tokens 22601 >= 20000`. Sigue siendo del
+  Arquitecto en su checkpoint, no mio; reportado sin tocarlo (va subiendo: 20883 -> 22601).
+- Gotcha repetido y confirmado: `importlib` sobre `build_memory_db.py` exige registrar el modulo en
+  `sys.modules` ANTES de `exec_module`, si no `@dataclass` peta con `NoneType.__dict__`.
