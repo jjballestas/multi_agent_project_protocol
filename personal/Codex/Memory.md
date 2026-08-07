@@ -5283,3 +5283,18 @@ ratified its own work.
   claims, and publishes the self-contained handoff plus direct independent-review
   request to Analista. Runtime seq 7432 reports drift false; Codex did not review
   or ratify the delivery.
+
+## 2026-08-07 - TASK-0331 implementation
+
+- Commit `379a9124` makes peer exec admission scope-aware for both active external
+  claims and live peer leases, while malformed, empty, missing, or unreadable scope
+  remains fail-closed.
+- A shared `CreateNew` admission file serializes the check-and-reserve critical
+  section; each reservation publishes normalized material work scope before the
+  process starts. Disjoint declared work remains eligible to overlap.
+- Four permanent negatives kill both claim-scope direction mutants, both lease-scope
+  direction mutants, a peer-specific admission-lock mutant, and a dirty-veto bypass.
+  The 21-test harness passed three consecutive full runs; falsification inventory is
+  43/43 and the collaboration, encoding, neutrality, and diff gates exited 0.
+- TASK-0331 remains `in_progress` pending governed delivery to independent Analista
+  review. Codex has not reviewed or ratified its own implementation.
