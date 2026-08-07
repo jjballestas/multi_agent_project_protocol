@@ -34,6 +34,8 @@ intake:
     - "AC4 (sin relajar): no se marca el caso como skip, no se debilita ninguna otra asercion del fixture y no se toca produccion."
     - "AC5 (CI verde): tras el arreglo, run_mailbox_retry_cases.py exit 0 y el paso de CI que TASK-0330 cableo pasa a verde. Se declara el recuento final de contratos ejecutados."
     - "AC6 (sin regresion): suites del harness, inventario de contratos y gates del repo exit 0 en clon limpio."
+    - "AC7 (AMPLIADO 2026-08-07, punto 4 del veredicto de 0330): el inventario de rojos del runner de retry estaba INCOMPLETO. Se exploran y declaran TODOS los rojos restantes -- el 7o, 8o y 9o quedaron sin declarar y la cola posterior a la linea 1390 sin explorar. Esta tarea NO cierra sobre la premisa de que el sexto era el ultimo."
+    - "AC8 (AMPLIADO 2026-08-07, punto 5 del veredicto de 0330): `retry-ledger-head-defer-order` NO se ejecuta hoy -- la linea 785 revienta antes de llegar a la 802 -- y su mitad mutante es VACUA porque `terminal_line` es una subcadena que ningun log de produccion satisface, de modo que `expect_terminal=False` pasaria hiciera lo que hiciera produccion. Al reparar la asercion del sexto rojo, ese negativo debe quedar ALCANZABLE y verificado por mutacion en las dos direcciones, dentro de este alcance y no despues."
   verification_cmd:
     - "python examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
     - "python scripts/test_exec_lease_harness.py"
@@ -82,3 +84,16 @@ Por eso el AC2 no pide actualizar la subcadena: pide que la asercion compruebe *
 estado terminal por la causa esperada**, para que el siguiente cambio de formato no la vuelva a
 romper. Y el AC3 exige que siga cayendo cuando debe -- una asercion que deja de fallar no esta
 arreglada, esta apagada.
+
+## Ampliacion 2026-08-07 tras el veredicto de TASK-0330
+
+Esta tarea se contrato sobre el inventario del maker dando por hecho que el sexto rojo era el
+ultimo. **No lo era**: el checker encontro un septimo, octavo y noveno sin declarar, y la cola del
+runner posterior a la linea 1390 sin explorar. El error de encuadre es del Arquitecto -- tomo un
+inventario ajeno sin verificar que estuviera cerrado, que es la misma clase de fallo que este hilo
+lleva todo el dia corrigiendo: aceptar una afirmacion util sin falsarla.
+
+Entra ademas el residual del foco E: el negativo que protege el arreglo de ORDEN de produccion
+autorizado en 0330 es hoy **codigo muerto con una mitad vacua**. Repararlo pertenece aqui porque
+depende de la misma subcadena obsoleta; dejarlo para despues seria cerrar 0330 con su unica
+ampliacion de produccion sin guardian real.
