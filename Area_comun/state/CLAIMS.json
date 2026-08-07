@@ -74,7 +74,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T23:34:12Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0335",
             "updated_at": "2026-08-07T23:34:12Z"
         },
@@ -199,6 +199,62 @@
             "status": "released",
             "task_id": "TASK-0333",
             "updated_at": "2026-08-07T22:32:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0335-cross0334-blocked-wip",
+            "expires_at": "2026-08-08T02:50:30Z",
+            "notes": "Preserve authorized TASK-0335 remediation and scope-inventory edits pending one TASK-0334 fixture-only scope decision.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0335-cross0334-blocked-wip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0335-codex-to-arquitecto.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T23:50:30Z",
+            "status": "active",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T23:50:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0335-cross0334-question",
+            "expires_at": "2026-08-08T00:20:30Z",
+            "notes": "Publish one blocking question about the TASK-0334 fixture dependency regression.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0335-cross0334-question",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-QUESTION-TASK-0335-cross-task-0334.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T23:50:30Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T23:50:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0335-remediation-1-inventory",
+            "expires_at": "2026-08-08T02:46:11Z",
+            "notes": "Resume remediation iteration 1 with full harness-fixture scope inventory authorized by Arquitecto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0335-remediation-1-inventory",
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0335-codex-to-arquitecto.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T23:46:11Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T23:46:11Z"
         },
         {
             "claim_id": "CLAIM-arq-20260808-ratifica-0325",
