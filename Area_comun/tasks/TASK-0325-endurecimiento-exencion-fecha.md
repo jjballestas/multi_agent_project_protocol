@@ -2,7 +2,7 @@
 task_id: TASK-0325
 file: Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md
 title: "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -67,3 +67,18 @@ Residuals retained without remediation in this task:
   `("", "Z", "+02:00", "-05:00", "-12:30")`; TASK-0325 samples
   `+05:45/-09:45/+13:00/+14:00` only against `DATE_RE`, not `contains_pii`. A future behavioral
   contract should unify those samples.
+
+## Remediation iteration 2
+
+The visitor now cuts nested loops by control-flow ownership instead of skipping each complete
+loop node: it ignores the nested body but visits the nested loop's `orelse`, whose `break` or
+`continue` remains owned by the enclosing item loop. Mutation boundaries N1 (`for ... else`
+with `break`) and N2 (`while ... else` with `continue`) pin both escape forms. Production remains
+out of scope and byte-identical.
+
+Residual retained without remediation in this task:
+
+- `R0325-4`: the visitor conservatively scans both `loop.body` and `loop.orelse` for the outer item
+  loop. A `break` in that outer `orelse` would bind to an enclosing loop rather than the item loop;
+  this is currently unreachable because `contains_pii` does not nest the item loop. A future
+  refactor must not interpret this conservative scan as intentional ownership semantics.

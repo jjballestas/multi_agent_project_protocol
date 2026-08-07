@@ -104,6 +104,8 @@ FALSIFICATION_CONTRACTS = (
             "self.assertNotEqual([], mutant_break_early_exits)",
             "self.assertEqual([], nested_break_early_exits)",
             "self.assertEqual([], nested_continue_early_exits)",
+            "self.assertNotEqual([], nested_else_break_early_exits)",
+            "self.assertNotEqual([], nested_else_continue_early_exits)",
         ),
         "exercised_by": "test_contains_pii_item_loop_has_no_early_exit",
     },
@@ -746,14 +748,18 @@ class MemoryDbTests(unittest.TestCase):
                 def visit_Continue(self, node: ast.Continue) -> None:
                     self.early_exits.append(node)
 
+                def _nested_loop(self, node: ast.For | ast.AsyncFor | ast.While) -> None:
+                    for statement in node.orelse:
+                        self.visit(statement)
+
                 def visit_For(self, node: ast.For) -> None:
-                    return None
+                    self._nested_loop(node)
 
                 def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
-                    return None
+                    self._nested_loop(node)
 
                 def visit_While(self, node: ast.While) -> None:
-                    return None
+                    self._nested_loop(node)
 
                 def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
                     return None
@@ -785,6 +791,20 @@ class MemoryDbTests(unittest.TestCase):
         )
         nested_break = "        for nested_item in ():\n            break\n"
         nested_continue = "        for nested_item in ():\n            continue\n"
+        nested_else_break = (
+            "        for nested_item in ():\n"
+            "            pass\n"
+            "        else:\n"
+            "            if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
+            "                break\n"
+        )
+        nested_else_continue = (
+            "        while False:\n"
+            "            pass\n"
+            "        else:\n"
+            "            if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
+            "                continue\n"
+        )
         self.assertEqual(1, source.count(normalized_line))
         mutant_continue_source = source.replace(
             normalized_line, early_continue + normalized_line
@@ -796,16 +816,28 @@ class MemoryDbTests(unittest.TestCase):
         nested_continue_source = source.replace(
             normalized_line, nested_continue + normalized_line
         )
+        nested_else_break_source = source.replace(
+            normalized_line, nested_else_break + normalized_line
+        )
+        nested_else_continue_source = source.replace(
+            normalized_line, nested_else_continue + normalized_line
+        )
         self.assertNotEqual(source, mutant_continue_source)
         self.assertNotEqual(source, mutant_break_source)
         mutant_continue_early_exits = item_loop_early_exits(mutant_continue_source)
         mutant_break_early_exits = item_loop_early_exits(mutant_break_source)
         nested_break_early_exits = item_loop_early_exits(nested_break_source)
         nested_continue_early_exits = item_loop_early_exits(nested_continue_source)
+        nested_else_break_early_exits = item_loop_early_exits(nested_else_break_source)
+        nested_else_continue_early_exits = item_loop_early_exits(
+            nested_else_continue_source
+        )
         self.assertNotEqual([], mutant_continue_early_exits)
         self.assertNotEqual([], mutant_break_early_exits)
         self.assertEqual([], nested_break_early_exits)
         self.assertEqual([], nested_continue_early_exits)
+        self.assertNotEqual([], nested_else_break_early_exits)
+        self.assertNotEqual([], nested_else_continue_early_exits)
 
     def test_valid_offset_complement_is_falsifiable(self) -> None:
         """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-OFFSET-COVERAGE"""
