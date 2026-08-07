@@ -97,12 +97,6 @@
             "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
         },
         {
-            "id": "TASK-0330",
-            "owner": "Codex",
-            "status": "done",
-            "title": "23 de 37 contratos de falsacion tienen un runner que CI nunca ejecuta, y uno de esos runners lleva roto desde TASK-0316: la cobertura declarada no es cobertura verificada"
-        },
-        {
             "id": "TASK-0331",
             "owner": "Codex",
             "status": "in_review",

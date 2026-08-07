@@ -8262,6 +8262,14 @@
             "status": "done",
             "title": "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca",
             "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+            "id": "TASK-0330",
+            "owner": "Codex",
+            "status": "done",
+            "title": "23 de 37 contratos de falsacion tienen un runner que CI nunca ejecuta, y uno de esos runners lleva roto desde TASK-0316: la cobertura declarada no es cobertura verificada",
+            "type": "infra"
         }
     ]
 }
