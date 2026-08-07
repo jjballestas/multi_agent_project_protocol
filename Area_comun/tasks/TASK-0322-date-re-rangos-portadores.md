@@ -2,7 +2,7 @@
 task_id: TASK-0322
 file: Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md
 title: "Estrechar DATE_RE con validacion de rangos de componente: el conjunto de confianza se reduce ~3,7e3 veces (la densidad de portadoras NO baja; 2,9/0,05 pct son relativos al muestreador del AC1)"
-status: in_review
+status: review_approved
 type: infra
 owner: Codex
 reviewer: Analista
