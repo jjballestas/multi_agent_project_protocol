@@ -6249,3 +6249,65 @@ Mensaje: `MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5.md`.
 - Coordinacion: 0 claims de peers sobre `Area_comun/artifacts/` ni `mailbox/open/`; arbol rastreado
   limpio antes de commitear; pathspec explicito; trailers `Task-Id` + `Ops-Reason` + `Co-Authored-By`.
   El commit aviso `PRUNE DUE: released_ratio 90.91 >= 90` -- es del Arquitecto en su checkpoint, no mio.
+
+## 2026-08-07 -- TASK-0322 (estrechar DATE_RE con rangos): CHANGE-REQUIRED, y por la CIFRA, no por el codigo
+
+- Veredicto `f70da577`; artefacto
+  `Area_comun/artifacts/Analista-TASK-0322-date-re-rangos-portadores-verdict.md`. Anclaje `ff81d5fe`
+  (fix `0eb060ee`, mutante `dd3692f9`). `origin/main` avanzo a `d077d995` (TASK-0326) mientras yo
+  revisaba: comprobe `git diff ff81d5fe d077d995 -- scripts/memory/build_memory_db.py` **vacio** y lo
+  declare en el anclaje. **Regla:** si el head se mueve durante la revision, no re-ancles a ciegas ni
+  calles -- diffea el artefacto bajo revision y declara si sigue siendo bit a bit el mismo.
+
+- **TECNICA NUEVA, LA MEJOR DE ESTA REVISION: no muestrees la monotonia, DECIDELA.** El foco pedia
+  "toda cadena aceptada por la nueva debe estar aceptada por la vieja". Las dos gramaticas son
+  regulares -> `pip install greenery`, `parse(...).to_fsm()`, y `(fn - fo).empty()` responde EXACTO.
+  Salio `True` (subconjunto propio) y de regalo los cardinales: 2,222e24 -> 6,014e20, reduccion
+  3.695x. **Un teorema cierra un foco de monotonia que 7 millones de muestras solo pueden sugerir.**
+  Gotchas: greenery no acepta `\d` (expandir a `[0-9]`), los patrones van implicitamente anclados
+  (equivale a `fullmatch`), y `Fsm.strings()` pide `otherchars`. Dejar el empirico igualmente como
+  traza reproducible sin la libreria.
+
+- **EL HALLAZGO (patron a guardar): metrica cierta bajo su metodo y FALSA como se lee.** El maker
+  declaraba "portadoras del 2,9 pct al 0,05 pct", y es reproducible exacto con su seed. Pero es una
+  propiedad de SU MUESTREADOR, no de la gramatica. Medido sobre el lenguaje: la **densidad** de
+  portadoras NO baja (49,50 -> 49,44 pct); lo que baja 3.699x es el **cardinal absoluto**. El 0,05
+  sale porque el filtro mas duro del generador es el offset (841/10.000 por signo), asi que las
+  formas con offset -- las unicas que pueden ser portadoras -- quedan infrarrepresentadas entre los
+  supervivientes. **Regla: ante un porcentaje de superficie residual, pregunta SIEMPRE "porcentaje de
+  que poblacion, generada como", y recalculalo con una medida independiente del generador.**
+
+- **Como se identifica un residual de verdad: por FORMA, no por conteo.** Mapee las **33 formas** de
+  `L(nueva)` (solo-fecha; dos-puntos x fraccion 0..6 x zona {nada,Z,+,-}; compacta x zona) y probe
+  4.000 instancias por forma: **el caracter de portadora es constante dentro de cada forma**. Son 2
+  de 33: dos puntos + fraccion de 5 o 6 digitos + offset **NEGATIVO**. El `+` no cuenta porque no
+  esta en la clase de `PHONE_CANDIDATE_RE` (el `\+?` inicial solo alcanza `+HH`). La portadora del
+  sorteo era `9592-12-22T10:41:54.27956-07:53` (tramo `54.27956-07`, 9 digitos). **Un residual "de 1"
+  casi nunca es 1: es una muestra de una familia. Caracteriza la familia.**
+- Dato a favor del maker que tampoco estaba declarado (buscarlos siempre, no solo los contra):
+  dentro de la familia el espacio controlable tambien se estrecho, `SS` 00-99 -> 00-59 y offset `HH`
+  00-99 -> 00-14, asi que un movil espanol (6x/7x) ya no cabe. Antes cabia.
+
+- **Focos cerrados sin fiarme de los nombres de los tests:** exhaustivo sobre 10^4 mes x dia, 10^6
+  `hh:mm:ss`, 10^6 `hhmmss`, 2e4 offsets (mas fuerte que la tabla de 14 vectores del maker: 13 son
+  adyacentes exactos, el 14 es compuesto). Mutante **mio** en clon aparte revirtiendo la gramatica en
+  el PRODUCTO -> 15 fallos + `2006 != 200000`: dientes reales. Direccion del fallo por comportamiento
+  sobre 1.500.000 entradas: **0** regresiones de deteccion, 28.736/200.000 detecciones ganadas.
+
+- **Matiz que anadi al foco `fullmatch` y que conviene recordar: el ancla `$` NO basta sola.** Sobre
+  `'2026-01-01\n'`, `fullmatch` da False pero `match` da **True** (`$` casa antes del salto final).
+  La garantia entera descansa en que la llamada sea `fullmatch`. Residual R2: eso solo tiene dientes
+  en 1 de los 3 consumidores de `DATE_RE` (`NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY` fija por conteo de
+  fuente la linea de `contains_pii`); las lineas 593 y 800 no las fija nadie.
+- Residual R3 (heredado): `\d` en Python **no es ASCII**. `DATE_RE` no declara `re.ASCII`, asi que
+  acepta digitos Unicode y `validate_metadata` traga sin aviso un `created_at` con ano indo-arabigo.
+  Comprobe que la monotonia aguanta tambien ahi (podia haberse roto por ahi y nadie lo habria visto).
+  El estrechamiento ademas recorta esa superficie: mes y dia con primer digito literal ASCII.
+
+- Gotchas de entorno de esta corrida: `importlib` sobre `build_memory_db.py` exige registrar el
+  modulo en `sys.modules` ANTES de `exec_module` (si no, `@dataclass` peta con `NoneType.__dict__`);
+  la consola es cp1252, para imprimir Unicode hay que `PYTHONIOENCODING=utf-8`; y en Bash de Windows
+  las rutas `/d/...` dentro de un script Python se resuelven a `D:\d\...`, hay que escribir `D:/...`.
+- Coordinacion: 0 claims activos, arbol rastreado limpio, pathspec explicito, trailers `Task-Id` +
+  `Ops-Reason`. El commit aviso `PRUNE DUE: cold_start_tokens 20883 >= 20000` -- es del Arquitecto en
+  su checkpoint, no mio; lo reporte sin tocarlo.
