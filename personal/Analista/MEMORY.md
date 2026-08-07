@@ -7,7 +7,78 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
-## Ultima actualizacion 2026-08-07 (46) - TASK-0333 el tercer lector y el inventario: OK-CLOSABLE
+## Ultima actualizacion 2026-08-07 (47) - TASK-0330 re-juicio iter 2: CHANGE-REQUIRED + ESCALADO
+
+- Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0330-r2`. **SIN PRODUCTO EN ALCANCE.**
+- Remediacion `f6d88cb7`; handoff juzgado sobre `744d4a1d` (lo reescribio `f1e302cc`).
+  Veredicto **CHANGE-REQUIRED + escalado al operador** en `33778347`
+  (artifact `Area_comun/artifacts/Analista-TASK-0330-r2-gate-por-efecto-verdict.md`).
+
+### Leccion 1: el CI real puede darte el experimento gratis (no inyectes mutante si no hace falta)
+
+Me pidieron forzar un fallo del primer runner y ver el job en `failure`. No hizo falta tocar nada:
+el primer runner **ya estaba rojo** por el sexto rojo de TASK-0335, asi que la corrida natural
+31204963761 sobre `f6d88cb7` ES el experimento -- y es mejor evidencia que un mutante mio porque no
+toca el arbol. Paso 5 `failure` (`##[error] exit code 1`), job `failure`, pasos 6 y 7 corriendo
+detras por `if: always()` con sus OK finales. Antes de buscar como inyectar un rojo, mirar si el
+arbol ya trae uno.
+**Herramienta:** `gh run view <id> --json jobs` da paso-por-paso con conclusion; `--log --job=<id>`
+da las lineas. Es la unica forma de ver el modo "job verde con rojos dentro".
+
+### Leccion 2: el gate mataba exactamente sus propias boundaries, y nada mas
+
+De 14 mutantes del workflow, **9 sobrevivieron**. Los 3 que murieron son literalmente los 3
+declarados como boundaries de `NEG-FALSIFICATION-RUNNER-WIRING`. Un contrato cuyas boundaries son
+los escapes que ya mueren **no es falsable: es una foto de si mismo**. Regla nueva para mi: cuando
+juzgue un contrato, comparar su lista de boundaries contra una bateria de mutantes que YO invente;
+si coinciden 1:1 con lo que muere, el contrato no esta midiendo, esta describiendo.
+Bateria reproducible: `D:/Aegis_Scratch/mapp/analista-0330-r2/probe/mutants.py`.
+
+### Leccion 3: la propiedad no es del comando, es de la contribucion del paso al job
+
+El Arquitecto pregunto "un comando por paso o razonar sobre el shell efectivo?". Ambas miran el
+COMANDO; la propiedad tiene cuatro factores independientes:
+
+    (a) el paso llega a ejecutarse       if de paso, if de job, needs:, on: del workflow
+    (b) el runner se invoca de verdad    no echo, no --help, no ruta solo mencionada
+    (c) el fallo del runner cae al paso  shell / adornos que traguen el exit code
+    (d) el fallo del paso cae al job     continue-on-error en CUALQUIER grafia
+
+Ningun razonamiento de shell arregla (a): `if: false` no es cuestion de shell. Y "un comando por
+paso" **no es necesario** (GitHub corre `shell: bash` como `bash --noprofile --norc -eo pipefail`,
+asi que 3 comandos en bash SI gatean) **ni suficiente** (`python r.py ; exit 0`, `|| exit 0`,
+`2>$null; exit 0`, `--help` son UNA linea y no gatean). La regla correcta es **invocacion unica y
+sin adornos**: sobre-aproximacion conservadora, cierta en pwsh (GitHub anade `exit $LASTEXITCODE`),
+bash/sh (`-e`) y cmd a la vez, y por eso **no necesita modelo de shell**. Generalizable: ante la
+duda entre "regla comoda" y "modelo completo", una sobre-aproximacion conservadora y decidible gana
+a un modelo incompleto que reparte verdes con cara de rigor.
+
+### Leccion 4: un mutante puede morir POR ACCIDENTE del regex
+
+`python r.py; exit 0` moria... porque la invocacion se ancla con `(?:\s|$)` detras de la ruta y
+`r.py;` no casa. Un espacio (`r.py ; exit 0`) y pasa. **Un mutante que muere no prueba que el gate
+lo entienda**: hay que probar la variante adyacente para distinguir diseno de casualidad.
+
+### Lo que si pasa (no fue un rechazo del trabajo)
+
+AC1, AC2, AC3, AC5, AC6 cumplidos. **AC5 verificado literal**: el handoff NO afirma "47 ejecutados",
+lo desmiente en texto, y sus 4 recuentos (17/37, 8/22, 25/59, 48/48) los recompute yo desde la
+salida `DECLARED` del gate y cuadran. Particion de mis puntos 4 y 5 a TASK-0335 **verificada real**:
+AC7 y AC8 los recogen con el detalle tecnico intacto (no basta con que te digan que se particiono).
+
+### Residuales que arrastro
+
+1. El gate de AC4 **sigue SKIPPED en todo CI**: el job `validate` muere en el paso 6
+   (`UnboundLocalError: InvalidSignature`, `runtime/eventlog.py:414`, falta `cryptography`) y el
+   paso 11 nunca corre. Anterior a 0330, sin dueno asignado. Lo llevo declarado 2 veredictos.
+2. `check_falsification_contracts.py` hace `import yaml` sin manifiesto de requisitos en el repo;
+   `pyyaml` solo se instala en el job `validate`. Falla cerrado, no es verde falso.
+3. **PRUNE DUE** disparado por mi propio commit (`cold_start_tokens 20556 >= 20000`). Es del
+   Arquitecto, lo senalo y no lo corro.
+
+Escalado por tope: iteracion 2 de 2 con el punto bloqueante abierto, como habia declarado.
+
+## Actualizacion 2026-08-07 (46) - TASK-0333 el tercer lector y el inventario: OK-CLOSABLE
 
 - Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0333`. **SIN PRODUCTO EN ALCANCE.**
 - Entrega `303a1d70`, HEAD protocolar `330ef691`. Veredicto **OK-CLOSABLE** en `b462dd30`
