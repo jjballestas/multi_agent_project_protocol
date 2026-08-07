@@ -13,6 +13,10 @@ Last updated: 2026-08-07 Europe/Madrid, during TASK-0324 remediation iteration 2
   log now exposes the effective inherited `post_delivery_deadline`.
 - R4 remains intentionally open: both branches still share progress counters; this
   remediation protects and observes the compensating deadline inheritance only.
+- Delivery commit `a8cc5284` moves TASK-0324 to `in_review`, releases both maker
+  claims, and publishes the corrected self-contained handoff plus response-routed
+  mailbox request. Runtime events reach sequence 7421 with drift false. Codex did not
+  review or ratify the remediation.
 
 ## 2026-08-07 - TASK-0326 implementation
 
