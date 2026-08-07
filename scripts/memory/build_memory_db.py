@@ -540,7 +540,7 @@ def value_list(value: Any) -> list[str]:
     return [str(value).strip()]
 
 
-def title_is_safe(value: str, domain_pii_terms: Iterable[str] = ()) -> bool:
+def title_is_safe(value: str, domain_pii_terms: Iterable[str]) -> bool:
     return (
         0 < len(value) <= TITLE_MAX_LENGTH
         and value.isprintable()
@@ -548,7 +548,7 @@ def title_is_safe(value: str, domain_pii_terms: Iterable[str] = ()) -> bool:
     )
 
 
-def contains_pii(value: Any, domain_pii_terms: Iterable[str] = ()) -> bool:
+def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:
     domain_patterns = tuple(
         re.compile(rf"\b{re.escape(term)}\b", re.I) for term in domain_pii_terms
     )
@@ -764,15 +764,22 @@ def metadata_terms(artifact_id: str, metadata: dict[str, Any]) -> list[tuple[str
     return sorted(terms)
 
 
-def require_safe_text(value: Any, field: str, *, pii_check: bool = True) -> str:
+def require_safe_text(
+    value: Any,
+    field: str,
+    *,
+    domain_pii_terms: Iterable[str],
+    pii_check: bool = True,
+) -> str:
     if not isinstance(value, str) or not value or any(ord(char) > 127 for char in value):
         raise ValueError(f"{field} must be non-empty ASCII text")
-    if pii_check and contains_pii(value):
+    if pii_check and contains_pii(value, domain_pii_terms):
         raise ValueError(f"{field} contains prohibited PII")
     return value
 
 
 def load_cold_packs(root: Path, commit: str) -> list[tuple[Any, ...]]:
+    domain_pii_terms = memory_index_policy(root, commit)["domain_pii_terms"]
     rows: list[tuple[Any, ...]] = []
     seen: set[str] = set()
     for relative in git_tree_paths(root, commit):
@@ -796,14 +803,23 @@ def load_cold_packs(root: Path, commit: str) -> list[tuple[Any, ...]]:
             isinstance(item, dict) for item in artifacts
         ):
             raise ValueError(f"cold-pack artifacts must be objects: {relative}")
-        pack_id = require_safe_text(header.get("pack_id"), "pack_id")
+        pack_id = require_safe_text(
+            header.get("pack_id"), "pack_id", domain_pii_terms=domain_pii_terms
+        )
         if pack_id in seen:
             raise ValueError(f"duplicate cold-pack id: {pack_id}")
-        pack_type = require_safe_text(header.get("pack_type"), "pack_type")
-        path = require_safe_text(header.get("path"), "path").replace("\\", "/")
-        git_ref = require_safe_text(header.get("git_ref"), "git_ref")
+        pack_type = require_safe_text(
+            header.get("pack_type"), "pack_type", domain_pii_terms=domain_pii_terms
+        )
+        path = require_safe_text(
+            header.get("path"), "path", domain_pii_terms=domain_pii_terms
+        ).replace("\\", "/")
+        git_ref = require_safe_text(
+            header.get("git_ref"), "git_ref", domain_pii_terms=domain_pii_terms
+        )
         created_at = require_safe_text(
-            header.get("created_at"), "created_at", pii_check=False
+            header.get("created_at"), "created_at",
+            domain_pii_terms=domain_pii_terms, pii_check=False
         )
         if not DATE_RE.fullmatch(created_at):
             raise ValueError(f"invalid cold-pack created_at: {created_at}")
@@ -837,16 +853,25 @@ def load_hot_cold_rules(root: Path, commit: str) -> list[tuple[Any, ...]]:
         raise ValueError("canonical hot/cold rules require a rules object array")
     rows: list[tuple[Any, ...]] = []
     seen: set[str] = set()
+    domain_pii_terms = memory_index_policy(root, commit)["domain_pii_terms"]
     for item in rules:
-        rule_id = require_safe_text(item.get("rule_id"), "rule_id")
+        rule_id = require_safe_text(
+            item.get("rule_id"), "rule_id", domain_pii_terms=domain_pii_terms
+        )
         if rule_id in seen:
             raise ValueError(f"duplicate hot/cold rule id: {rule_id}")
-        artifact_type = require_safe_text(item.get("artifact_type"), "artifact_type")
+        artifact_type = require_safe_text(
+            item.get("artifact_type"), "artifact_type",
+            domain_pii_terms=domain_pii_terms,
+        )
         if artifact_type not in ARTIFACT_TYPES:
             raise ValueError(f"invalid rule artifact_type: {artifact_type}")
-        selector = require_safe_text(item.get("selector"), "selector")
+        selector = require_safe_text(
+            item.get("selector"), "selector", domain_pii_terms=domain_pii_terms
+        )
         target = require_safe_text(
-            item.get("target_retention_class"), "target_retention_class"
+            item.get("target_retention_class"), "target_retention_class",
+            domain_pii_terms=domain_pii_terms,
         )
         if target not in {"hot", "warm", "cold", "sealed", "do_not_archive"}:
             raise ValueError(f"invalid target_retention_class: {target}")
@@ -868,7 +893,9 @@ def load_hot_cold_rules(root: Path, commit: str) -> list[tuple[Any, ...]]:
             bool_values.append(int(value))
         decision = item.get("created_by_decision")
         if decision is not None:
-            decision = require_safe_text(decision, "created_by_decision")
+            decision = require_safe_text(
+                decision, "created_by_decision", domain_pii_terms=domain_pii_terms
+            )
         if bool_values[2] and not decision:
             raise ValueError("enabled hot/cold rule requires created_by_decision")
         rows.append(

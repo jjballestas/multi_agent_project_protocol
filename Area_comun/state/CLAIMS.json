@@ -297,6 +297,47 @@
             "updated_at": "2026-08-07T10:54:11Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0327",
+            "expires_at": "2026-08-07T15:27:04Z",
+            "notes": "Implement the instance-domain PII fail-closed call contract and three behavioral negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0327",
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/check_memory_db_drift.py",
+                "scripts/memory/query_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T13:27:04Z",
+            "status": "active",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-07T13:27:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0327-blocked-message",
+            "expires_at": "2026-08-07T15:39:48Z",
+            "notes": "Record the pre-existing TASK-0330 falsification-gate blocker and one question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0327-blocked-message",
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0327-preexisting-red.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T13:39:48Z",
+            "status": "released",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-07T13:39:48Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330",
             "expires_at": "2026-08-07T17:03:04Z",
             "notes": "Implement TASK-0330 verified falsification execution coverage.",

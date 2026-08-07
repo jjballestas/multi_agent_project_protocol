@@ -65,7 +65,10 @@ def fast_check(root: Path, *, at: str = "HEAD") -> dict[str, Any]:
     }
 
 
-def _publicable_pii_errors(connection: sqlite3.Connection) -> list[str]:
+def _publicable_pii_errors(
+    connection: sqlite3.Connection,
+    domain_pii_terms: list[str],
+) -> list[str]:
     errors: list[str] = []
     rows = connection.execute(
         """
@@ -96,7 +99,9 @@ def _publicable_pii_errors(connection: sqlite3.Connection) -> list[str]:
         if pii_state != "clean" or finding_count not in (0, None):
             errors.append(f"publicable artifact is not classified clean: {artifact_id}")
         for value in (title, summary_short, summary_long, owner, excerpt):
-            if value is not None and memory_db.contains_pii(str(value)):
+            if value is not None and memory_db.contains_pii(
+                str(value), domain_pii_terms
+            ):
                 errors.append(f"publicable artifact contains PII: {artifact_id}")
                 break
     return errors
@@ -128,7 +133,10 @@ def _sweep_database(
             errors.append(f"database sha256 differs from git blob: {artifact_id}")
     for artifact_id in sorted(set(source_by_id) - db_ids):
         errors.append(f"canonical artifact has no database row: {artifact_id}")
-    errors.extend(_publicable_pii_errors(connection))
+    domain_pii_terms = memory_db.memory_index_policy(root, commit)[
+        "domain_pii_terms"
+    ]
+    errors.extend(_publicable_pii_errors(connection, domain_pii_terms))
     return errors
 
 

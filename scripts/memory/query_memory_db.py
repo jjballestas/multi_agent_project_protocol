@@ -193,7 +193,8 @@ def retrieve(
         actual_sha = memory_db.sha256_bytes(blob)
         if actual_sha != str(expected_sha):
             raise ValueError(f"sha256 mismatch for artifact_id: {artifact_id}")
-        agents = memory_db.configured_agents(root, str(commit))
+        policy = memory_db.memory_index_policy(root, str(commit))
+        agents = memory_db.configured_agents(root, str(commit), policy)
         if requested_by not in agents:
             raise ValueError("requested_by must be a configured agent id")
         if task_id is not None and not memory_db.ID_RE.fullmatch(task_id):
@@ -202,7 +203,7 @@ def retrieve(
             if (
                 not reason
                 or any(ord(char) > 127 for char in reason)
-                or memory_db.contains_pii(reason)
+                or memory_db.contains_pii(reason, policy["domain_pii_terms"])
             ):
                 raise ValueError("reason must be non-empty ASCII without PII")
         retrieved_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace(

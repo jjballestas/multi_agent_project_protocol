@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "af84d5b83a200c79782b80cbcdabac063c4b05643755bbcddbd6cc5469b56f8c",
+  "canonical_hash": "a9f2d37f5829666157af896cf7fd873829bd0302fa64ce1ea93cb22fc581bd1d",
   "integrity": {
-    "canonical_hash": "af84d5b83a200c79782b80cbcdabac063c4b05643755bbcddbd6cc5469b56f8c",
+    "canonical_hash": "a9f2d37f5829666157af896cf7fd873829bd0302fa64ce1ea93cb22fc581bd1d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "528708a649a224d4ecf3adfc166bf360d1d6bd30c6135656c55807bcbbf8611e",
-    "signature": "1050c2e259740adbbed243cc63bb716d5adb8b1f7b22e107e54ef267f897dc79",
-    "up_to_seq": 7534
+    "prev_hash": "e76252432bd275d9efc65fca115076e1447c4d26f70c044d928922a2df852c10",
+    "signature": "5705d52003b6cd9b5d4f9748413a0a7647455cfdbcfb78143ca6a502669209c4",
+    "up_to_seq": 7539
   },
   "state": {
     "aggregate_versions": {
@@ -3051,7 +3051,7 @@
       "TASK-0324": 20,
       "TASK-0325": 16,
       "TASK-0326": 13,
-      "TASK-0327": 3,
+      "TASK-0327": 8,
       "TASK-0328": 2,
       "TASK-0329": 2,
       "TASK-0330": 25,
@@ -3081,7 +3081,7 @@
       "protocol-prune": 44,
       "protocol-state": 1
     },
-    "events_applied": 6863,
+    "events_applied": 6868,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6566,6 +6566,11 @@
       "codex:task0326:in-progress-to-in-review:20260807T070918Z": 7396,
       "codex:task0326:ready-to-in-progress:20260807T070208Z": 7394,
       "codex:task0326:review-approved-to-done:20260807T105411Z": 7474,
+      "codex:task0327:blocked-message-claim:20260807T133948Z": 7537,
+      "codex:task0327:blocked-message-release:20260807T133948Z": 7539,
+      "codex:task0327:claim:20260807T132704Z": 7535,
+      "codex:task0327:in-progress-to-blocked:20260807T133948Z": 7538,
+      "codex:task0327:ready-to-in-progress:20260807T132704Z": 7536,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
       "codex:task0330:fourth-red-memory-acquire:20260807T131400Z": 7533,
@@ -9948,5 +9953,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7534
+  "up_to_seq": 7539
 }

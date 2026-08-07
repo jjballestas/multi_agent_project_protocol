@@ -117,6 +117,36 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_valid_offset_complement_is_falsifiable",
     },
+    {
+        "id": "NEG-MEMORY-DOMAIN-PII-PUBLICATION",
+        "negative": "Ignoring instance terms authorizes a publicable database row with domain PII.",
+        "mutation": "memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])",
+        "boundaries": (
+            "self.assertIn(expected_error, guarded_errors)",
+            "self.assertNotIn(expected_error, mutant_errors)",
+        ),
+        "exercised_by": "test_domain_pii_publication_gate_is_attested_and_falsifiable",
+    },
+    {
+        "id": "NEG-MEMORY-DOMAIN-PII-INGESTION",
+        "negative": "Ignoring instance terms admits a cold-pack field containing domain PII.",
+        "mutation": "memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])",
+        "boundaries": (
+            "with self.assertRaisesRegex(ValueError, \"contains prohibited PII\")",
+            "self.assertEqual(1, len(mutant_rows))",
+        ),
+        "exercised_by": "test_domain_pii_ingestion_gate_is_attested_and_falsifiable",
+    },
+    {
+        "id": "NEG-MEMORY-DOMAIN-PII-RETRIEVAL-REASON",
+        "negative": "Ignoring instance terms writes a retrieval reason containing domain PII.",
+        "mutation": "memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])",
+        "boundaries": (
+            "with self.assertRaisesRegex(ValueError, \"without PII\")",
+            "self.assertEqual(1, retrieval_log_count)",
+        ),
+        "exercised_by": "test_domain_pii_retrieval_reason_is_attested_and_falsifiable",
+    },
 )
 
 
@@ -206,8 +236,14 @@ class MemoryDbTests(unittest.TestCase):
         core = MODULE_PATH.read_text(encoding="utf-8").casefold()
         for term in legacy_terms:
             self.assertNotIn(term, core)
-            self.assertFalse(memory_db.contains_pii(term))
+            self.assertFalse(memory_db.contains_pii(term, []))
             self.assertTrue(memory_db.contains_pii(term, [term]))
+
+    def test_p01_domain_pii_parameters_are_required(self) -> None:
+        with self.assertRaises(TypeError):
+            memory_db.contains_pii("safe")
+        with self.assertRaises(TypeError):
+            memory_db.title_is_safe("safe")
 
     def test_p02_project_is_derived_from_instance_config(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-project-") as temp:
@@ -231,9 +267,11 @@ class MemoryDbTests(unittest.TestCase):
 
     def test_p05_protocol_timestamp_id_is_not_a_phone(self) -> None:
         self.assertFalse(
-            memory_db.contains_pii("MSG-20260619-092823-Codex-to-Arquitecto")
+            memory_db.contains_pii(
+                "MSG-20260619-092823-Codex-to-Arquitecto", []
+            )
         )
-        self.assertTrue(memory_db.contains_pii("+34 612 345 678"))
+        self.assertTrue(memory_db.contains_pii("+34 612 345 678", []))
 
     def test_p06_ids_accept_dots_but_remain_anchored(self) -> None:
         self.assertIsNotNone(memory_db.ID_RE.fullmatch("MSG-release-v0.10.0"))
@@ -242,10 +280,14 @@ class MemoryDbTests(unittest.TestCase):
 
     def test_p07_titles_accept_bounded_printable_unicode_and_keep_pii_gate(self) -> None:
         title = "Evaluación técnica " + ("a" * 210) + " con precisión"
-        self.assertTrue(memory_db.title_is_safe(title))
-        self.assertFalse(memory_db.title_is_safe("x" * (memory_db.TITLE_MAX_LENGTH + 1)))
-        self.assertFalse(memory_db.title_is_safe("line\nbreak"))
-        self.assertFalse(memory_db.title_is_safe("contact person@example.invalid"))
+        self.assertTrue(memory_db.title_is_safe(title, []))
+        self.assertFalse(
+            memory_db.title_is_safe("x" * (memory_db.TITLE_MAX_LENGTH + 1), [])
+        )
+        self.assertFalse(memory_db.title_is_safe("line\nbreak", []))
+        self.assertFalse(
+            memory_db.title_is_safe("contact person@example.invalid", [])
+        )
 
     def test_p08_identities_are_registry_human_owner_or_declared_aliases_only(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-identities-") as temp:
@@ -1696,6 +1738,90 @@ Body is not indexed.
                     with self.assertRaises(ValueError):
                         check_memory_db_drift.full_check(root)
 
+    def test_domain_pii_publication_gate_is_attested_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DOMAIN-PII-PUBLICATION"""
+        domain_term = "Acme SL"
+        expected_error = "publicable artifact contains PII: TASK-DOMAIN-PUBLIC"
+        with tempfile.TemporaryDirectory(prefix="memory-domain-public-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            policy_path = root / memory_db.POLICY_PATH
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy["domain_pii_terms"] = [domain_term]
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            write(
+                root / "Area_comun/tasks/TASK-DOMAIN-PUBLIC.md",
+                "---\ntask_id: TASK-DOMAIN-PUBLIC\ntitle: Safe public title\n"
+                "status: ready\ntype: feature\nowner: Codex\n---\n",
+            )
+            commit = commit_fixture(root, "declare domain PII and public artifact")
+            memory_db.build(root)
+            artifacts, _warnings = memory_db.load_artifacts(root, commit)
+            connection = sqlite3.connect(root / memory_db.DB_PATH)
+            connection.execute(
+                "UPDATE artifacts SET title=?,is_pii_safe=1 WHERE artifact_id=?",
+                (domain_term, "TASK-DOMAIN-PUBLIC"),
+            )
+            connection.commit()
+            guarded_errors = check_memory_db_drift._sweep_database(
+                root, connection, artifacts, commit
+            )
+            self.assertIn(expected_error, guarded_errors)
+
+            original_contains_pii = memory_db.contains_pii
+            memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])
+            try:
+                mutant_errors = check_memory_db_drift._sweep_database(
+                    root, connection, artifacts, commit
+                )
+            finally:
+                memory_db.contains_pii = original_contains_pii
+                connection.close()
+            self.assertNotIn(expected_error, mutant_errors)
+
+    def test_domain_pii_ingestion_gate_is_attested_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DOMAIN-PII-INGESTION"""
+        domain_term = "Acme SL"
+        with tempfile.TemporaryDirectory(prefix="memory-domain-ingest-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            manifest = {
+                "pack_id": domain_term,
+                "pack_type": "task_history",
+                "path": "Area_comun/archive/cold-packs/domain-fixture",
+                "git_ref": "refs/heads/main",
+                "created_at": "2026-08-07",
+                "artifacts": [],
+            }
+            write(
+                root
+                / "Area_comun/archive/cold-packs/domain-fixture/pack.manifest.json",
+                json.dumps(manifest, sort_keys=True) + "\n",
+            )
+            unattested_commit = commit_fixture(root, "add domain pack fixture")
+            self.assertEqual(
+                1, len(memory_db.load_cold_packs(root, unattested_commit))
+            )
+
+            policy_path = root / memory_db.POLICY_PATH
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy["domain_pii_terms"] = [domain_term]
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            self.assertEqual(
+                1, len(memory_db.load_cold_packs(root, unattested_commit))
+            )
+            attested_commit = commit_fixture(root, "declare domain PII")
+            with self.assertRaisesRegex(ValueError, "contains prohibited PII"):
+                memory_db.load_cold_packs(root, attested_commit)
+
+            original_contains_pii = memory_db.contains_pii
+            memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])
+            try:
+                mutant_rows = memory_db.load_cold_packs(root, attested_commit)
+            finally:
+                memory_db.contains_pii = original_contains_pii
+            self.assertEqual(1, len(mutant_rows))
+
     def test_full_gate_round_trip_passes_without_writing_source_repo(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-full-pass-") as temp:
             root = Path(temp)
@@ -1807,6 +1933,58 @@ Body is not indexed.
                 connection.execute("SELECT COUNT(*) FROM retrieval_log").fetchone()[0],
             )
             connection.close()
+
+    def test_domain_pii_retrieval_reason_is_attested_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DOMAIN-PII-RETRIEVAL-REASON"""
+        domain_term = "Acme SL"
+        with tempfile.TemporaryDirectory(prefix="memory-domain-reason-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            policy_path = root / memory_db.POLICY_PATH
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy["domain_pii_terms"] = [domain_term]
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            content = (
+                "---\ntask_id: TASK-DOMAIN-REASON\ntitle: Safe retrieval title\n"
+                "status: ready\ntype: feature\nowner: Codex\n---\nbody\n"
+            )
+            write(root / "Area_comun/tasks/TASK-DOMAIN-REASON.md", content)
+            commit_fixture(root, "declare domain PII and retrieval artifact")
+            db = root / memory_db.DB_PATH
+            memory_db.build(root)
+            with self.assertRaisesRegex(ValueError, "without PII"):
+                query_memory_db.retrieve(
+                    root,
+                    "TASK-DOMAIN-REASON",
+                    requested_by="Codex",
+                    task_id=None,
+                    reason=domain_term,
+                )
+            connection = sqlite3.connect(db)
+            self.assertEqual(
+                0,
+                connection.execute("SELECT COUNT(*) FROM retrieval_log").fetchone()[0],
+            )
+            connection.close()
+
+            original_contains_pii = memory_db.contains_pii
+            memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])
+            try:
+                query_memory_db.retrieve(
+                    root,
+                    "TASK-DOMAIN-REASON",
+                    requested_by="Codex",
+                    task_id=None,
+                    reason=domain_term,
+                )
+            finally:
+                memory_db.contains_pii = original_contains_pii
+            connection = sqlite3.connect(db)
+            retrieval_log_count = connection.execute(
+                "SELECT COUNT(*) FROM retrieval_log"
+            ).fetchone()[0]
+            connection.close()
+            self.assertEqual(1, retrieval_log_count)
 
     def test_revive_pack_is_deterministic_complete_attested_and_agent_scoped(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-revive-") as temp:
