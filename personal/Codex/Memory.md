@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, during TASK-0322 implementation.
+Last updated: 2026-08-07 Europe/Madrid, during TASK-0325 implementation.
+
+## 2026-08-07 - TASK-0325 implementation
+
+- Implementation commit `70a22d88` adds two permanent mutation-tested guards without
+  changing `build_memory_db.py` or the TASK-0317 date-exemption behavior.
+- `NEG-MEMORY-DATE-EXEMPTION-NO-CONTINUE` parses the real `contains_pii` AST and
+  rejects any `continue` in its item loop; an adversarial `+05:45` early-bypass
+  source mutant proves the guard detects the distinct R5-1 escape.
+- `NEG-MEMORY-DATE-OFFSET-COVERAGE` restores the R5-2 restricted-offset mutant and
+  proves `+05:45`, `-09:45`, `+13:00`, and `+14:00` remain accepted by the source
+  grammar and rejected by the mutant.
+- The CI-wired memory suite passed 64 tests, the falsification inventory passed
+  36/36, and collaboration, encoding, neutrality, and diff gates exited 0.
+- TASK-0325 remains `in_progress` under the Codex maker claim pending exact-commit
+  clean-clone recomputation and governed delivery to independent review.
 
 ## 2026-08-07 - TASK-0322 implementation resumed
 

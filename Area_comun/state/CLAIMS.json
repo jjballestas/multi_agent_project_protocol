@@ -242,9 +242,42 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T05:50:10Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0325",
             "updated_at": "2026-08-07T05:50:10Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0325-delivery",
+            "expires_at": "2026-08-07T10:22:02Z",
+            "notes": "Publish TASK-0325 exact-commit evidence and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0325-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0325-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0325.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T06:22:02Z",
+            "status": "released",
+            "task_id": "TASK-0325",
+            "updated_at": "2026-08-07T06:22:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0325-memory",
+            "expires_at": "2026-08-07T09:56:36Z",
+            "notes": "Persist TASK-0325 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0325-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T05:56:36Z",
+            "status": "released",
+            "task_id": "TASK-0325",
+            "updated_at": "2026-08-07T05:56:36Z"
         },
         {
             "claim_id": "CLAIM-arq-hygiene-20260807-doneflip",
