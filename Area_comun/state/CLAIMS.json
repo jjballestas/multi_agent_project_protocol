@@ -58,6 +58,50 @@
             "updated_at": "2026-08-07T22:32:26Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-1",
+            "expires_at": "2026-08-08T06:38:00Z",
+            "notes": "TASK-0331 remediation iteration 1: reserved-lease self-heal, archived-task resolution, glob fail-closed, and behavioral dirty-veto contract.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T22:38:00Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-07T22:38:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-1-v2",
+            "expires_at": "2026-08-08T06:40:00Z",
+            "notes": "TASK-0331 remediation iteration 1 over existing implementation routes and embedded falsification inventory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-1-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T22:40:00Z",
+            "status": "active",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-07T22:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0333-done-flip",
             "expires_at": "2026-08-08T00:32:26Z",
             "notes": "Implementer done-flip after independent checker approval and architect ratification.",

@@ -151,12 +151,47 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_atomic_exec_admission_kills_peer_specific_lock_mutant",
     },
     {
-        "id": "NEG-HARNESS-DIRTY-VETO-PRECEDES-SCOPE-ADMISSION",
-        "negative": "Scope-aware admission cannot bypass the existing fail-closed dirty-tree veto.",
-        "mutation": "source.replace(live_residue_guard",
+        "id": "NEG-HARNESS-RESERVED-LEASE-SELF-HEAL",
+        "negative": "Startup self-heal must remove a dead reserved lease that has reservation_deadline but no running deadline.",
+        "mutation": "source.replace(target, mutant_target, 1)",
         "boundaries": (
-            "assert preserves_dirty_veto(source) is True",
-            "assert preserves_dirty_veto(mutant_source) is False",
+            'assert healthy["lock_exists"] is False',
+            'assert healthy["lease_exists"] is False',
+            'assert mutant["lock_exists"] is True',
+            'assert mutant["lease_exists"] is True',
+            'assert any(line.startswith("SELF_HEAL_FAIL ") for line in mutant["logs"])',
+        ),
+        "exercised_by": "test_reserved_lease_self_heal_kills_running_deadline_mutant",
+    },
+    {
+        "id": "NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION",
+        "negative": "Message work resolution must consult the cold task archive when the task is absent from the pruned hot index.",
+        "mutation": "source.replace(archive_index, hot_index, 1)",
+        "boundaries": (
+            'assert healthy["task_id"] == "TASK-1001"',
+            'assert "src/target" in healthy["work_scope"]',
+            'assert mutant is None',
+        ),
+        "exercised_by": "test_archived_task_work_resolution_kills_hot_only_mutant",
+    },
+    {
+        "id": "NEG-HARNESS-GLOB-SCOPE-FAILS-CLOSED",
+        "negative": "Claim routes containing glob metacharacters are ambiguous material scope and must veto instead of being compared as literals.",
+        "mutation": "source.replace(glob_guard, dead_glob_guard, 1)",
+        "boundaries": (
+            'assert healthy == ["active_external_claim", "active_external_claim"]',
+            'assert mutant == ["none", "none"]',
+        ),
+        "exercised_by": "test_glob_claim_scope_fails_closed_and_kills_guard_mutant",
+    },
+    {
+        "id": "NEG-HARNESS-DIRTY-VETO-PRECEDES-SCOPE-ADMISSION",
+        "negative": "Live dirty-tree residue must behaviorally stop execution before scope admission, including when the guard text remains present but is made unreachable.",
+        "mutation": "source.replace(live_residue_guard, dead_wiring + live_residue_guard, 1)",
+        "boundaries": (
+            'assert healthy["admission_calls"] == 0',
+            'assert healthy["defer_reasons"] == ["worktree_residue_live"]',
+            'assert mutant["admission_calls"] == 1',
         ),
         "exercised_by": "test_dirty_tree_veto_still_precedes_scope_admission",
     },
@@ -375,6 +410,7 @@ foreach ($name in $wanted) {{
 SCOPE_FUNCTIONS = (
     "Get-Field",
     "Read-JsonWithDeadline",
+    "Get-TaskRowById",
     "ConvertTo-ComparableRoute",
     "ConvertTo-ComparableScope",
     "Test-ScopeIntersection",
@@ -404,10 +440,117 @@ intake:
         root / "Area_comun/state/TASK_INDEX.json",
         {"tasks": [{"id": "TASK-1001", "file": task_rel, "status": "ready"}]},
     )
+    write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"tasks": []})
     message = root / "Area_comun/mailbox/open/MSG-scope-TASK-1001.md"
     message.parent.mkdir(parents=True, exist_ok=True)
     message.write_text("task_id: TASK-1001\n", encoding="ascii")
     return message
+
+
+def reserved_lease_self_heal_probe(source: Path) -> dict:
+    with make_tempdir("reserved-self-heal-") as tmp:
+        root = Path(tmp)
+        lock_path = root / "peer.lock"
+        lease_path = root / "peer.exec-lease.json"
+        lock_path.write_text("lock\n", encoding="ascii")
+        write_json(
+            lease_path,
+            {
+                "owner": IMPLEMENTER,
+                "task_or_msg_id": "MSG-probe-TASK-1001.md",
+                "task_id": "TASK-1001",
+                "state": "reserved",
+                "reserved_at": "2026-08-07T22:00:00Z",
+                "reservation_deadline": "2099-01-01T00:00:00Z",
+            },
+        )
+        script = function_loader(source, ("Clear-StaleCronLockIfSafe",)) + f"""
+$LockPath = {ps_literal(lock_path)}
+$LeasePath = {ps_literal(lease_path)}
+$PeerId = "{IMPLEMENTER}"
+$script:logs = @()
+function Test-LeaseProcessMatches {{ param($Lease) return $false }}
+function Stop-LeaseProcessTree {{ param($Lease, $Reason) return $false }}
+function Write-Log {{ param([string]$Line) $script:logs += $Line }}
+Clear-StaleCronLockIfSafe
+[ordered]@{{ lock_exists=(Test-Path -LiteralPath $LockPath); lease_exists=(Test-Path -LiteralPath $LeasePath); logs=@($script:logs) }} | ConvertTo-Json -Depth 4 -Compress
+"""
+        return run_powershell(script, root)
+
+
+def archived_task_descriptor_probe(source: Path) -> dict | None:
+    with make_tempdir("archived-task-scope-") as tmp:
+        root = Path(tmp)
+        message = write_scope_fixture(root)
+        hot = root / "Area_comun/state/TASK_INDEX.json"
+        archive = root / "Area_comun/state/TASK_INDEX_ARCHIVE.json"
+        archived_row = json.loads(hot.read_text(encoding="utf-8"))["tasks"][0]
+        write_json(hot, {"tasks": []})
+        write_json(archive, {"tasks": [archived_row]})
+        script = function_loader(source, SCOPE_FUNCTIONS) + f"""
+$Root = {ps_literal(root)}
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$result = Get-MessageWorkDescriptor -Message $Message
+if ($null -eq $result) {{ "null" }} else {{ $result | ConvertTo-Json -Depth 4 -Compress }}
+"""
+        result = run_powershell(script, root)
+        return None if result == "null" else result
+
+
+def glob_claim_probe(source: Path) -> list[str]:
+    with make_tempdir("glob-claim-scope-") as tmp:
+        root = Path(tmp)
+        message = write_scope_fixture(root)
+        claims = root / "Area_comun/state/CLAIMS.json"
+        own_lease = root / ".protocol-tmp/implementer/implementer.exec-lease.json"
+        script = function_loader(source, SCOPE_FUNCTIONS) + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$LeasePath = {ps_literal(own_lease)}
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$script:LastAdditionalSignalDetail = ""
+function Test-LeaseProcessMatches {{ param($Lease) return $true }}
+function Set-Claims {{ param([string]$Scope) [IO.Directory]::CreateDirectory((Split-Path -Parent {ps_literal(claims)})) | Out-Null; [IO.File]::WriteAllText({ps_literal(claims)}, ('{{"claims":[{{"owner":"{REVIEWER}","status":"active","expires_at":"2099-01-01T00:00:00Z","scope":["' + $Scope + '"]}}]}}')) }}
+Set-Claims "*"
+$star = Get-AdditionalWorkSignal -Message $Message
+Set-Claims "src/**"
+$recursive = Get-AdditionalWorkSignal -Message $Message
+@($star, $recursive) | ConvertTo-Json -Compress
+"""
+        return run_powershell(script, root)
+
+
+def dirty_veto_probe(source: Path) -> dict:
+    with make_tempdir("dirty-veto-") as tmp:
+        root = Path(tmp)
+        message = root / "Area_comun/mailbox/open/MSG-probe-TASK-1001.md"
+        message.parent.mkdir(parents=True, exist_ok=True)
+        message.write_text("task_id: TASK-1001\n", encoding="ascii")
+        script = function_loader(source, ("Invoke-PeerForMessage",)) + f"""
+$Root = {ps_literal(root)}
+$LockPath = Join-Path $Root "peer.lock"
+$RunsDir = Join-Path $Root "runs"
+$ResolvedAgentPath = "agent"
+$PromptTemplate = "@@MESSAGE_PATH@@ @@ROOT@@ @@PEER_ID@@ @@COORDINATOR_ID@@"
+$PeerId = "{IMPLEMENTER}"
+$CoordinatorId = "{CHECKER}"
+$AbortedResidueMinutes = 5
+$script:LastResiduePaths = @("dirty.txt")
+$script:deferReasons = @()
+$script:admissionCalls = 0
+function Clear-StaleCronLockIfSafe {{}}
+function Get-StagedResidueState {{ return "live" }}
+function Register-PreExecDefer {{ param($Message, [string]$Reason, [string]$Detail) $script:deferReasons += $Reason }}
+function Write-Log {{ param([string]$Line) }}
+function Get-AgentArguments {{ return @() }}
+function Get-AgentInvocation {{ param($AgentPath, $Arguments) return [pscustomobject]@{{ FilePath=$AgentPath; Arguments=@() }} }}
+function Write-Utf8NoBom {{ param($Path, $Content) [IO.Directory]::CreateDirectory((Split-Path -Parent $Path)) | Out-Null; [IO.File]::WriteAllText($Path, $Content) }}
+function Acquire-ExecReservation {{ param($Message) $script:admissionCalls += 1; return [pscustomobject]@{{ ok=$false; reason="probe_stop"; detail="" }} }}
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+Invoke-PeerForMessage -Message $Message
+[ordered]@{{ admission_calls=$script:admissionCalls; defer_reasons=@($script:deferReasons) }} | ConvertTo-Json -Depth 4 -Compress
+"""
+        return run_powershell(script, root)
 
 
 def claim_scope_probe(source: Path) -> dict:
@@ -1261,19 +1404,77 @@ def test_atomic_exec_admission_kills_peer_specific_lock_mutant() -> None:
     assert mutant["lease_count"] == 2
 
 
+def test_reserved_lease_self_heal_kills_running_deadline_mutant() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-RESERVED-LEASE-SELF-HEAL"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    reservation_deadline_read = "[string]$lease.reservation_deadline"
+    running_deadline_read = "[string]$lease.deadline"
+    assert source.count(reservation_deadline_read) >= 2
+    target = "$deadlineValue = if ([string]$lease.state -ceq \"reserved\") {\n            [string]$lease.reservation_deadline"
+    mutant_target = "$deadlineValue = if ([string]$lease.state -ceq \"reserved\") {\n            [string]$lease.deadline"
+    assert source.count(target) == 1
+    mutant_source = source.replace(target, mutant_target, 1)
+    with make_tempdir("reserved-self-heal-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = reserved_lease_self_heal_probe(mutant_path)
+    healthy = reserved_lease_self_heal_probe(HARNESS_PATH)
+    assert healthy["lock_exists"] is False
+    assert healthy["lease_exists"] is False
+    assert mutant["lock_exists"] is True
+    assert mutant["lease_exists"] is True
+    assert any(line.startswith("SELF_HEAL_FAIL ") for line in mutant["logs"])
+
+
+def test_archived_task_work_resolution_kills_hot_only_mutant() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    archive_index = '"Area_comun\\state\\TASK_INDEX_ARCHIVE.json"'
+    hot_index = '"Area_comun\\state\\TASK_INDEX.json"'
+    assert source.count(archive_index) == 1
+    mutant_source = source.replace(archive_index, hot_index, 1)
+    with make_tempdir("archived-task-hot-only-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = archived_task_descriptor_probe(mutant_path)
+    healthy = archived_task_descriptor_probe(HARNESS_PATH)
+    assert healthy is not None
+    assert healthy["task_id"] == "TASK-1001"
+    assert "src/target" in healthy["work_scope"]
+    assert mutant is None
+
+
+def test_glob_claim_scope_fails_closed_and_kills_guard_mutant() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-GLOB-SCOPE-FAILS-CLOSED"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    glob_guard = "if ($normalized -match '[*?\\[\\]]') { return $null }"
+    dead_glob_guard = "if ($false) { return $null }"
+    assert source.count(glob_guard) == 1
+    mutant_source = source.replace(glob_guard, dead_glob_guard, 1)
+    with make_tempdir("glob-scope-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = glob_claim_probe(mutant_path)
+    healthy = glob_claim_probe(HARNESS_PATH)
+    assert healthy == ["active_external_claim", "active_external_claim"]
+    assert mutant == ["none", "none"]
+
+
 def test_dirty_tree_veto_still_precedes_scope_admission() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-DIRTY-VETO-PRECEDES-SCOPE-ADMISSION"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
     live_residue_guard = 'if ($residueState -eq "live") {'
-    mutant_source = source.replace(live_residue_guard, 'if ($false) {', 1)
-
-    def preserves_dirty_veto(text: str) -> bool:
-        start = text.index("function Invoke-PeerForMessage")
-        body = text[start:]
-        return live_residue_guard in body and body.index(live_residue_guard) < body.index("Acquire-ExecReservation -Message $Message")
-
-    assert preserves_dirty_veto(source) is True
-    assert preserves_dirty_veto(mutant_source) is False
+    dead_wiring = '$residueState = "clean"\n    '
+    assert source.count(live_residue_guard) == 1
+    mutant_source = source.replace(live_residue_guard, dead_wiring + live_residue_guard, 1)
+    with make_tempdir("dirty-veto-dead-wiring-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = dirty_veto_probe(mutant_path)
+    healthy = dirty_veto_probe(HARNESS_PATH)
+    assert healthy["admission_calls"] == 0
+    assert healthy["defer_reasons"] == ["worktree_residue_live"]
+    assert mutant["admission_calls"] == 1
 
 
 def test_new_instance_exports_identical_harness() -> None:
@@ -1311,6 +1512,9 @@ def main() -> int:
         test_scope_aware_claim_veto_kills_both_direction_mutants,
         test_scope_aware_lease_veto_kills_both_direction_mutants,
         test_atomic_exec_admission_kills_peer_specific_lock_mutant,
+        test_reserved_lease_self_heal_kills_running_deadline_mutant,
+        test_archived_task_work_resolution_kills_hot_only_mutant,
+        test_glob_claim_scope_fails_closed_and_kills_guard_mutant,
         test_dirty_tree_veto_still_precedes_scope_admission,
         test_new_instance_exports_identical_harness,
     ]

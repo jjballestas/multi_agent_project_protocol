@@ -295,7 +295,12 @@ function Clear-StaleCronLockIfSafe {
     try {
         $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
         $leaseMatches = Test-LeaseProcessMatches -Lease $lease
-        $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime()
+        $deadlineValue = if ([string]$lease.state -ceq "reserved") {
+            [string]$lease.reservation_deadline
+        } else {
+            [string]$lease.deadline
+        }
+        $deadline = [DateTime]::Parse($deadlineValue).ToUniversalTime()
         if ($leaseMatches) {
             if ([DateTime]::UtcNow -le $deadline) {
                 return
@@ -845,11 +850,24 @@ function Read-JsonWithDeadline {
     return [pscustomobject]@{ ok = $false; value = $null }
 }
 
+function Get-TaskRowById {
+    param([string]$TaskId)
+    $rows = @()
+    foreach ($relativeIndex in @("Area_comun\state\TASK_INDEX.json", "Area_comun\state\TASK_INDEX_ARCHIVE.json")) {
+        $indexResult = Read-JsonWithDeadline -Path (Join-Path $Root $relativeIndex)
+        if (-not $indexResult.ok -or $null -eq $indexResult.value) { return $null }
+        $rows += @($indexResult.value.tasks | Where-Object { [string]$_.id -ceq $TaskId })
+    }
+    if ($rows.Count -ne 1 -or [string]::IsNullOrWhiteSpace([string]$rows[0].file)) { return $null }
+    return $rows[0]
+}
+
 function ConvertTo-ComparableRoute {
     param($Route)
     if ($Route -isnot [string]) { return $null }
     $normalized = $Route.Trim().Trim('"').Replace("\", "/")
     if ([string]::IsNullOrWhiteSpace($normalized)) { return $null }
+    if ($normalized -match '[*?\[\]]') { return $null }
     if ($normalized.StartsWith("./", [StringComparison]::Ordinal)) { $normalized = $normalized.Substring(2) }
     $normalized = $normalized.Split('#', 2)[0].TrimEnd('/')
     if ([string]::IsNullOrWhiteSpace($normalized)) { return $null }
@@ -892,11 +910,9 @@ function Get-MessageWorkDescriptor {
         $content = Get-Content -LiteralPath $Message.FullName -Raw -Encoding UTF8
         $taskId = Get-Field -Content $content -Name "task_id"
         if ($taskId -notmatch '^TASK-[0-9]{4}$') { return $null }
-        $indexResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\TASK_INDEX.json")
-        if (-not $indexResult.ok -or $null -eq $indexResult.value) { return $null }
-        $taskRows = @($indexResult.value.tasks | Where-Object { [string]$_.id -ceq $taskId })
-        if ($taskRows.Count -ne 1 -or [string]::IsNullOrWhiteSpace([string]$taskRows[0].file)) { return $null }
-        $taskFile = [string]$taskRows[0].file
+        $taskRow = Get-TaskRowById -TaskId $taskId
+        if ($null -eq $taskRow) { return $null }
+        $taskFile = [string]$taskRow.file
         $taskPath = Join-Path $Root $taskFile
         if (-not (Test-Path -LiteralPath $taskPath -PathType Leaf)) { return $null }
         $taskContent = Get-Content -LiteralPath $taskPath -Raw -Encoding UTF8
@@ -922,11 +938,9 @@ function Get-LeaseWorkScope {
         if ($match.Success) { $taskId = $match.Value }
     }
     if ($taskId -notmatch '^TASK-[0-9]{4}$') { return $null }
-    $taskIndexResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\TASK_INDEX.json")
-    if (-not $taskIndexResult.ok) { return $null }
-    $taskRows = @($taskIndexResult.value.tasks | Where-Object { [string]$_.id -ceq $taskId })
-    if ($taskRows.Count -ne 1) { return $null }
-    $taskFile = [string]$taskRows[0].file
+    $taskRow = Get-TaskRowById -TaskId $taskId
+    if ($null -eq $taskRow) { return $null }
+    $taskFile = [string]$taskRow.file
     if ([string]::IsNullOrWhiteSpace($taskFile)) { return $null }
     $taskPath = Join-Path $Root $taskFile
     if (-not (Test-Path -LiteralPath $taskPath -PathType Leaf)) { return $null }

@@ -2,7 +2,7 @@
 task_id: TASK-0331
 file: Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md
 title: "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -89,8 +89,10 @@ revisar. Evidencia por comportamiento, no por lectura del codigo.
 ## Por que esto no es una urgencia pero si un impuesto
 
 Falla CERRADO: bloquea trabajo, no lo corrompe, y el diferimiento tiene 7200 s de margen antes de
-volverse terminal, asi que no se pierde ningun mensaje. Por la regla de direccion del fallo que
-gobierna este hilo, eso lo situa por debajo de los residuales que fallan abiertos.
+volverse terminal. Ese margen protege causas transitorias; no protege una ambiguedad estructural,
+que llega a terminal y exige rearme manual. Por la regla de direccion del fallo que gobierna este
+hilo, eso lo situa por debajo de los residuales que fallan abiertos, pero no autoriza afirmar que
+ningun mensaje se pierde.
 
 Pero se cobra el solape entero entre maker y checker, que es la premisa de rendimiento del ciclo de
 dos capas. Y explica algo que yo venia leyendo mal: al Analista ocioso mientras Codex trabaja lo
@@ -112,3 +114,30 @@ es el fallo que DECISION-0020 existe para evitar. Por eso AC3 es innegociable y 
 cualquier ambiguedad es VETAR. La direccion del fallo hoy es CERRADA (bloquea, no corrompe), asi
 que el arreglo no debe convertirla en abierta a cambio de rendimiento: si el checker no logra un
 criterio de interseccion que le convenza, es preferible dejar el veto como esta y declararlo.
+
+## Remediacion 1 (2026-08-08)
+
+- `Clear-StaleCronLockIfSafe` selecciona `reservation_deadline` para una lease en
+  `state=reserved`; una reserva sin `deadline` y sin proceso vivo ya se elimina junto con el lock.
+  `NEG-HARNESS-RESERVED-LEASE-SELF-HEAL` mata el mutante que vuelve a leer el deadline de running.
+- La resolucion de trabajo consulta `TASK_INDEX.json` y `TASK_INDEX_ARCHIVE.json` como una sola
+  poblacion. `NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION` mata el mutante que consulta dos veces el
+  indice caliente y deja de resolver una tarea archivada.
+- Una ruta declarada con `*`, `?`, `[` o `]` no se interpreta como literal ni como glob: el scope
+  queda ambiguo y veta. `NEG-HARNESS-GLOB-SCOPE-FAILS-CLOSED` mata el mutante que elimina ese veto.
+- `NEG-HARNESS-DIRTY-VETO-PRECEDES-SCOPE-ADMISSION` ahora ejecuta el camino real: con residuo live
+  no llama a admision; un mutante que mantiene el texto del guard pero vuelve limpio el estado si
+  alcanza la admision y muere.
+
+Frontera explicita: un mensaje sin `task_id` valido, sin tarea en ninguno de los dos indices, sin
+fichero de tarea o sin `scope_routes` resoluble conserva `message_scope_ambiguous`. Esa causa no se
+disuelve por tiempo: tras el presupuesto de defer llega a `defer_terminal` y el mensaje no se
+ejecuta hasta rearme manual. El arreglo evita esa perdida para tareas podadas al archivo, no para
+mensajes estructuralmente irresolubles.
+
+Medicion honesta del solape: el log observado por el checker da un techo atacable de 255,2 minutos
+(4 h 15 min, 60 por ciento de 422,2 minutos diferidos). No demuestra que todo ese techo se recupere:
+solo el subconjunto con scopes declarados y disjuntos puede solaparse. El arbol Git y `.git/index`
+siguen siendo recursos compartidos no declarados en `scope_routes`; el veto de arbol sucio es una
+sonda previa y no una exclusion de vida completa. Las escrituras del ledger siguen serializadas por
+el lock real de `submit_intent` en esta instancia authoritative.
