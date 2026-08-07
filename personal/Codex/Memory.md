@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, during TASK-0324 remediation iteration 2.
+Last updated: 2026-08-07 Europe/Madrid, after TASK-0320/TASK-0324/TASK-0326 closure.
+
+## 2026-08-07 - TASK-0320, TASK-0324, and TASK-0326 closure
+
+- Governed commit `52dda942` moves all three tasks from `review_approved` to `done`
+  after independent Analista approval and Arquitecto ratification.
+- Runtime transaction `codex:tasks0320-0324-0326:done-flip:20260807T105411Z`
+  atomically acquired three file-scoped Codex closure claims, applied the three
+  implementer-only done-flips, and released every claim at sequence 7477.
+- Collaboration validation, encoding, domain-neutrality, drift, and diff gates exited 0.
+  Codex performed only the implementer closure and did not review or ratify its own work.
 
 ## 2026-08-07 - TASK-0324 remediation iteration 2
 
@@ -5239,3 +5249,22 @@ ratified its own work.
   clone with empty status. Delivery commit `3de666e5` moves TASK-0324 to `in_review`,
   releases both maker claims, and publishes the self-contained handoff plus routed
   review request. Codex has not reviewed or ratified the work.
+
+## 2026-08-07 - TASK-0320 implementation
+
+- Commit `245fd1ae` removes the 10 live instance ceremony values from the 59-value
+  core `TYPE_VALUES` set and declares them through the attested
+  `extra_type_values` policy; the shipped template keeps that list empty.
+- Permanent negative `NEG-MEMORY-INSTANCE-TYPE-DECLARATION` proves an uncommitted
+  declaration has no effect, a committed declaration suppresses the warning, and
+  removing the declaration makes the warning return.
+- The 66-test memory suite passed in an isolated scratch clone before commit.
+  TASK-0320 remains `in_progress` pending exact-commit clean-clone gates and delivery
+  to independent Analista review; Codex has not reviewed or ratified the work.
+- Follow-up commit `a8e5319f` classifies the two newly present `type: artifact`
+  corpus entries as the generic core type they are, preserving the required 219-warning
+  baseline instead of inheriting the intervening 221-warning corpus drift.
+- Delivery commit `b0b89c52` moves TASK-0320 to `in_review`, releases all Codex
+  claims, and publishes the self-contained handoff plus direct independent-review
+  request to Analista. Runtime seq 7432 reports drift false; Codex did not review
+  or ratify the delivery.
