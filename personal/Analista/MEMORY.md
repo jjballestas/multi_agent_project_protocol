@@ -6090,3 +6090,62 @@ a Arquitecto requires_response). Producto Zeus-protocol remediacion 97c359e (bas
   `test_memory_db.py` + `check_falsification_contracts --inventory` + `validate` + `scan_encoding` +
   drift; **re-juicio antes del commit de cierre re-corriendo el mutante E y exigiendo que FALLE**;
   maximo 2 iteraciones antes de escalar al operador.
+
+## 2026-08-07 04:15 (UTC+2) -- TASK-0317 r5: OK-CERRABLE sobre 0d686650 (commit 626f20bc)
+
+Cierro el hilo que bloquee en r3. Veredicto **OK-CERRABLE con dos residuales declarados**.
+Artefacto: `Area_comun/artifacts/Analista-TASK-0317-barrido-familia-r5-verdict.md`.
+Mensaje: `MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5.md`.
+
+- **RE-JUICIO CUMPLIDO TAL COMO LO DECLARE EN R3:** reconstrui el mutante E como fuente real y
+  exigi que FALLARA. Falla: 3 subtests rotos (`2026-01-01`, `2026-06-19`, `2026-12-31`), exit 1,
+  exactamente los 3 de 333 que habia predicho. No lo di por bueno leyendo el diff.
+- **VERIFICAR UN NUMERO MAGICO = DERIVARLO ANTES DE CONTARLO.** Para 333 hice la forma cerrada
+  primero (3 fechas x 3 horas con dos puntos x 7 fracciones x 5 offsets = 315, + 3x1x1x5 = 15 de
+  hora compacta sin fraccion, + 3 fechas desnudas) y solo despues confirme el conteo. Ademas
+  comprobe **por que** caen 90 de las 420 del cartesiano: son exactamente las de hora compacta con
+  fraccion, que la alternancia de `DATE_RE` prohibe. Asi se distingue "derivado" de "cuajado a
+  posteriori" sin depender de la palabra del maker.
+- **UNA GUARDA SE MIDE EN LOS DOS SENTIDOS.** No basta con que `assertEqual(333)` pase hoy: hay que
+  romperla a proposito. Estrechar `DATE_RE` dentro de la gramatica -> `333 != 318` exit 1; ensancharla
+  -> `333 != 423` exit 1. Sin esas dos mediciones la frase "protege de la degradacion silenciosa"
+  es prosa.
+- **ESCAPES NUEVOS QUE ENCONTRE (y por que NO bloquee).** Dos mutantes nuevos, ambos con el stack
+  entero VERDE (`inventory` 0, suite 60/60 OK):
+  - **mF (R5-1):** exencion temprana con predicado disjunto de los 333 puntos (offsets con minutos
+    `:45`). `contains_pii` pasa de True a False para `+05:45`/`-09:45`. Es la misma clase que el
+    SLIP de r3, pero adversarial a medida.
+  - **mN (R5-2):** estrechamiento de `DATE_RE` confinado al COMPLEMENTO de la gramatica enumerada
+    (offsets a horas 00-12 y minutos 00/30). El conteo sigue en 333, las dos `assertEqual(333)`
+    pasan, y sin embargo `validate_metadata` empieza a RECHAZAR `+05:45` (Nepal), `+13:00` (Tonga),
+    `+14:00` (Kiribati). Falla cerrado. Es superficie de TASK-0322, no de la colocacion.
+- **LECCION DE JUICIO, la mas importante de esta ronda: distinguir el escape PLAUSIBLE del
+  ADVERSARIAL A MEDIDA.** En r3 bloquee bien porque lo que se colaba eran las **fechas desnudas**,
+  la forma mas comun del corpus, producible por un refactor sin querer. Aqui lo que se cuela es un
+  predicado elegido a mano para esquivar los puntos de muestreo. Lo verifique por el otro lado: el
+  refactor plausible (`datetime.fromisoformat` + `continue`) **si cae**. Bloquear otra vez habria
+  sido **mover la porteria**: mi propia remediacion prescrita en r3 fue literalmente este barrido, y
+  yo mismo declare maximo 2 iteraciones. Un checker que exige que un muestreo finito agote un
+  lenguaje infinito no deja cerrar nada nunca.
+- **CUANDO NO BLOQUEO, ENTREGO EL ARREGLO ACOTADO MEDIDO.** En vez de muestrear puntos, afirmar la
+  propiedad sobre el AST: el bucle de `contains_pii` no puede contener ningun `continue`. Medido en
+  las 4 fuentes: verde en `0d686650`, caza mE y mF, una linea, cero produccion. Va como insumo de
+  seguimiento junto a TASK-0322, no como condicion de cierre.
+- **GOTCHA DE HERRAMIENTA QUE ME COSTO DOS INTENTOS FALSOS:** los heredocs `<<'PY'` con regex de
+  Python me llegaron con los backslashes mutilados y el `str.replace` no aplico -> los "mutantes"
+  eran copias SIN MUTAR y el test pasaba en verde. **Casi canto un falso PASS.** Dos defensas que
+  adopto: (1) `assert s.count(OLD) == 1` antes de cada replace, que fue lo que lo cazo; (2) escribir
+  el script de mutacion a FICHERO con la herramienta Write y ejecutarlo, nunca por heredoc. Y ojo al
+  copiar una linea de fuente: la de `DATE_RE` termina en `)"`, no en `)`.
+- Gates recomputados en clon limpio con historia (`D:/Aegis_Scratch/hub/an17r5/cc`, checkout de
+  `0d686650`, `git status` vacio), todo por exit code: `validate` 0, `scan_encoding` 0,
+  `scan_domain_neutrality` 0, `prune --check` 0, `check_falsification_contracts --inventory` 0,
+  `test_memory_db.py` 0 (60/60, 373 s), build 0 (**4231** artefactos, **0** warnings de clave de
+  fecha), drift `--fast` 0 y `--full` 0 (`"result":"pass"`).
+- COORDINACION: 0 claims activos; `git fetch` antes de commitear (origin/main habia avanzado a
+  `27143899` por higiene + poda del Arquitecto **en el arbol compartido**, asi que mi HEAD ya era
+  ese sin que yo lo tocara -- comprobar con `rev-list --left-right --count`, no asumir). Pathspec
+  explicito en el `git commit`. Trailers `Task-Id` + `Ops-Reason` + `Co-Authored-By`. Scratch en
+  `D:/Aegis_Scratch/hub/an17r5/` (DECISION-0104), pendiente de limpiar al stand-down.
+- Pendiente del lado del Arquitecto: ratificar, rutear el done-flip (destraba **TASK-0320**) y
+  decidir si mete el chequeo AST antes del flip o lo registra con TASK-0322.
