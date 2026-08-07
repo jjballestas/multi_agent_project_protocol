@@ -288,7 +288,7 @@
             "file": "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
             "id": "TASK-0322",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Estrechar DATE_RE con validacion de rangos: baja la poblacion de cadenas portadoras del 2,9 por ciento al 0,05 por ciento",
             "type": "infra"
         },

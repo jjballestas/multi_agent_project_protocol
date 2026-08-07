@@ -1,6 +1,25 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, during TASK-0323 implementation.
+Last updated: 2026-08-07 Europe/Madrid, during TASK-0322 implementation.
+
+## 2026-08-07 - TASK-0322 implementation resumed
+
+- Implementation commit `0eb060ee` narrows `DATE_RE` to bounded month, day, time,
+  and UTC-offset components and adds the deterministic 200,000-member carrier benchmark.
+- Permanent-negative commit `dd3692f9` adds
+  `NEG-MEMORY-DATE-RANGE-VALIDATION`, which restores the old broad grammar in a
+  source mutant and proves every declared out-of-range vector is accepted by the mutant.
+- The 62-test memory suite passed. The measured population remains 5,789/200,000
+  carriers (2.9 percent) before narrowing and 1/2,006 (0.05 percent) afterward.
+- Live build indexed 4,254 artifacts and 540 events; fast/full drift, 34/34
+  falsification inventory, encoding, neutrality, collaboration, and diff gates passed.
+- Exact-commit detached clean clone `dd3692f9` passed all gates: 62 memory tests,
+  build of 4,254 artifacts/540 events with zero date-key warnings, fast/full drift,
+  34/34 falsification inventory, encoding, neutrality, collaboration, diff, and
+  clean status.
+- Runtime events 7366-7369 are signed as Codex. TASK-0322 is `in_review`, both maker
+  claims are released, and the self-contained handoff/request is routed to Arquitecto
+  for recomputation and independent Analista review. Codex did not review or ratify.
 
 ## 2026-08-07 - TASK-0323 implementation
 
