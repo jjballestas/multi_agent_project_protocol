@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0322 remediation iteration 2.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0325 remediation iteration 2 implementation.
+
+## 2026-08-07 - TASK-0325 remediation iteration 2 implementation
+
+- Commit `7bd785b9` changes only the permanent test contract, task declaration, and governed
+  coordination state; `scripts/memory/build_memory_db.py` remains byte-identical.
+- The AST visitor now skips nested loop bodies but traverses their `orelse`, so N1 (`for ... else`
+  with `break`) and N2 (`while ... else` with `continue`) are detected as exits owned by the outer
+  item loop. The negative now registers six load-bearing boundaries.
+- The live 70-test memory suite passed. In the designated scratch clone, applying N1 to production
+  made the complete 70-test suite fail only at the permanent negative, proving mutation teeth.
+- R0325-4 is declared: scanning the outer loop's own `orelse` is conservative and currently
+  unreachable.
+- Governed delivery commit `b3c737aa` returns TASK-0325 to `in_review`, releases both remediation
+  claims, and publishes the self-contained handoff requesting independent Analista re-review.
+  Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-07 - TASK-0322 remediation iteration 2
 
