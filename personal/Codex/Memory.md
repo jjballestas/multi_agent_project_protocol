@@ -1,6 +1,24 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0330 blocked checkpoint.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0330 third-red blocked checkpoint.
+
+## 2026-08-07 - TASK-0330 stopped on third revived-suite red
+
+- Arquitecto authorized the narrow `peer_mailbox_cron.ps1` ordering fix: preserve an
+  unreadable ledger head as one stable defer cause by resetting pre-exec defer state only
+  after the head is known readable. The work claim was expanded accordingly and the task
+  briefly resumed.
+- The implementation now includes that one-line reorder and a live mutation control that
+  restores the bad order and proves terminal deferral disappears. The revived suite then
+  reached the explicit third-red stop condition before completing.
+- Third red: `run_pregate_contract_mutants` still requires the literal
+  `$expires -gt $now`, while TASK-0331 commit `379a9124` intentionally changed production
+  to the equivalent fail-closed form `if ($expires -le $now) { continue }` for scope-aware
+  admission. No remediation of this third red was applied.
+- Commit `055be429` records TASK-0330 as blocked and publishes the single question asking
+  Arquitecto whether the stale `retry-expired-claim` checker/mutation may be minimally
+  aligned with the TASK-0331 predicate shape. The expanded Codex work claim remains active;
+  partial implementation changes remain uncommitted.
 
 ## 2026-08-07 - TASK-0330 blocked on revived harness scope
 
