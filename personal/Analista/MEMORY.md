@@ -6506,3 +6506,80 @@ exit code. Suite 17/17 verde en TRES corridas; inventario, validate, encoding, n
   `-remediation-2-delivery`) estan `released`; 0 claims activos en `CLAIMS.json`.
 - Coordinacion: 0 claims activos, rutas gobernadas limpias antes de escribir, pathspec explicito en el
   commit, encoding scan propio (0 bytes >127 en mis dos ficheros) antes de commitear.
+
+## 2026-08-07 12:55 (UTC+2) -- TASK-0320 veredicto OK-CLOSABLE (commit 8637b7db)
+
+Revisado `a8e5319f` (+ `245fd1ae`) en clon limpio `D:/Aegis_Scratch/multi_agent_project_protocol/an0320`.
+Seis AC verdes por comportamiento. Veredicto:
+`Area_comun/artifacts/Analista-TASK-0320-enum-type-vocabulario-instancia-verdict.md`.
+
+**REINCIDENCIA, CUARTA VEZ, y ya no es despiste sino un fallo de metodo:** volvi a meter
+`Co-Authored-By: Claude ...` en el commit del veredicto (`8637b7db`), el trailer con el que el monitor
+del Arquitecto filtra sus PROPIOS commits. Mi veredicto queda invisible para su monitor otra vez. Lo
+anote ya en 0324 con la instruccion exacta ("es una linea que no se escribe") y aun asi la escribi,
+porque copie el heredoc del veredicto anterior entero. **La leccion real no es "acordarse": es NO
+COPIAR el bloque de trailers de un commit previo.** Escribir `Task-Id` y `Ops-Reason` a mano, dos
+lineas, y nada mas. Este commit de memoria va sin el trailer para que su monitor vea la entrega.
+
+### Lo que aprendi de tecnica en esta revision
+
+- **Medir la baseline del PADRE con el script DEL PADRE, no con el del commit revisado.** Un AC de
+  no-regresion contra un numero fijo ("no gana warnings frente a 219") no dice nada sin saber que
+  producia el arbol justo antes. Aqui el padre `b4e32ed2` daba **221**, no 219, y dos de esos warnings
+  eran rechazos de `type` sobre veredictos MIOS (`type: artifact`). Sin el segundo clon habria leido
+  "219 -> 219, nada se movio" cuando en realidad se repararon dos warnings ajenos ensanchando el nucleo
+  neutral. **Un clon del padre cuesta poco y convierte una cifra en un delta.**
+- **Convertir la pregunta de criterio en hipotesis falsables y matarlas con el corpus.** El Arquitecto
+  preguntaba "cual fue el criterio del corte". En vez de opinar: H1 "es castellano" -> REFUTADA (4 de
+  10 no lo son, 0 castellanos dentro); H2 "es ficha de buzon" -> REFUTADA (quedan **26** valores
+  solo-buzon en el nucleo). Y luego el caso limpio que ninguna regla explica: **`RECONCILE` fuera y
+  `REMINDER` dentro**, ambos 1 uso, ingles, solo-buzon, sin gemelo. Un par simetrico a lados opuestos
+  del corte vale mas que tres parrafos de argumentacion.
+- **Buscar el ANCLA antes de juzgar un juicio.** El hallazgo de fondo salio de una pregunta simple:
+  contra que se mide "generico". Respuesta: **ningun `*.template.*` del repo enumera el vocabulario de
+  tipos**. El enum se define a si mismo. Con eso, "aplicado uniformemente" deja de ser comprobable en
+  cualquier corte, y la critica pasa de "este reparto esta mal" a "no hay contra que repartir", que es
+  accionable. **Cuando el AC pide uniformidad, buscar primero si existe la regla externa.**
+- **Contar donde VIVE cada valor, no solo cuantas veces aparece.** El censo por bucket
+  (`mailbox/` vs `tasks/` vs `artifacts/` vs `specs/`) es lo que produjo los 26 y el par
+  RECONCILE/REMINDER. Un `Counter` de valores solo habria dado la lista de vivos.
+- **Mutante que SOBREVIVE = el hallazgo, no el fallo.** M4: cambiar `release` (muerto, 0 usos) por
+  `GESTION` (ceremonia castellana nueva) deja el nucleo en 60 valores, la lista negra fija de diez no
+  lo toca y `assertEqual(60, len(TYPE_VALUES))` **pasa en exit 0**. Otra vez
+  `nombrar-la-propiedad-no-la-forma`: la guarda ata la CIFRA, no la propiedad "el nucleo no contiene
+  ceremonia de instancia". Y el hueco donde cabe son los **3 valores muertos del nucleo**, que nadie
+  cuenta. Los dos residuales encajan uno en otro: R5 (nadie cuenta el muerto) es lo que hace R4
+  explotable.
+- **Los mutantes que MUEREN tambien hay que correrlos, para no confundir "sin dientes" con "no lo
+  probe".** M1 (politica ignorada) y M2 (leer de disco en vez del blob de git) matan el negativo en
+  exit 1: la atestacion tiene dientes reales. M3a/M3b son doble seguro contra la regresion concreta.
+- **La pregunta "esta declarado" y la pregunta "CI lo ejecuta" son distintas** (leccion
+  `contratos-declarados-no-son-ejecutados`). Esta vez la verifique y salio bien:
+  `.github/workflows/validate.yml` corre `scripts/memory/test_memory_db.py` en un paso incondicional.
+  Comprobarlo cuesta un grep y evita firmar cobertura falsa.
+- **Correr el gate VECINO que el handoff no lista.** Otra vez pago: `new_instance.py` no estaba en la
+  tabla de gates y sale **exit 1** -- el protocolo no puede instanciarse desde `378021d6` (TASK-0314),
+  por un falso positivo de `PLACEHOLDER_RE = \{\{([A-Z0-9_]+)\}\}` sobre el cuantificador
+  `[0-9a-f]{{40}}` de un f-string en `test_memory_db.py`. **Lo verifique en el padre antes de
+  reportarlo** (mismo exit 1, mismo mensaje) para no colgarle a 0320 un defecto ajeno. Es R3, la
+  anomalia DECISION-0018 mas grave del lote.
+- **Gate por exit code, con cuidado con `/tmp` en Windows.** El `python -c` que parseaba el JSON de
+  `drift --full` fallo con `FileNotFoundError: \tmp\dfull.txt` (Python nativo no resuelve el `/tmp` de
+  git-bash) y el harness reporto el compuesto como **exit 1**. El drift era exit 0. **No confundir el
+  exit del pipe con el exit del gate**: leer siempre la linea `EXIT=` del propio comando, y pasar el
+  fichero por `grep ... | python -c` con stdin en vez de abrirlo por ruta.
+
+### Residuales que deje abiertos (7)
+
+R1 `artifact` al nucleo sin pasar por AC1 (declarado por el maker, neutro, no bloqueante) |
+R2 sin ancla externa de "generico" (tarea propia sugerida) | **R3 `new_instance.py` exit 1,
+instanciacion rota, preexistente TASK-0314 (tarea propia sugerida, prioridad sobre R2)** |
+R4 guarda de forma ata la cifra | R5 nadie cuenta el muerto del nucleo (3 de 60:
+`HUMAN_REQUIRED`, `refactor`, `release`) | R6 `TYPE_VALUES` mutable frente a `CORE_STATUS_VALUES`
+frozenset | R7 nueve grafias vivas de REVIEW sin dueno.
+
+### Coordinacion
+
+0 claims activos al escribir; rutas gobernadas limpias; pathspec explicito; 0 bytes >127 en mis dos
+ficheros; `validate` y `scan_encoding` exit 0 antes y despues del commit. Pregunta abierta al
+Arquitecto en el mensaje: si R3 sube a tarea propia inmediata o queda como residual del SPEC s.16.7.
