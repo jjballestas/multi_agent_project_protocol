@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import ast
 import json
 import importlib.util
 import os
@@ -46,6 +47,21 @@ FALSIFICATION_CONTRACTS = (
             'assert malformed is None',
         ),
         "exercised_by": "test_worktree_disk_proof_pairs_real_git_rename_records",
+    },
+    {
+        "id": "NEG-CRON-ZOMBIE-SWEEPER-PORCELAIN-Z-PATHS",
+        "negative": "The zombie sweeper must preserve exact quoted and renamed paths from real Git porcelain output.",
+        "mutation": "source.replace(nul_command, line_command, 1)",
+        "boundaries": (
+            "assert expected <= healthy",
+            "assert expected <= set(runtime_parser(real_z_raw))",
+            "assert expected <= set(mirror_parser(real_z_raw))",
+            "assert not expected <= legacy",
+            "assert mutant_failed_closed is True",
+            "assert b\" -> \" in legacy_raw",
+            "assert b'\"' in legacy_raw",
+        ),
+        "exercised_by": "test_zombie_sweeper_parses_real_git_quoted_rename_paths",
     },
 )
 
@@ -392,6 +408,86 @@ $proof = Get-WorktreeDiskProof
     assert malformed is None
 
 
+def load_sweeper_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_python_function(path: Path, name: str):
+    source = path.read_text(encoding="utf-8")
+    tree = ast.parse(source, filename=str(path))
+    function = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == name)
+    namespace: dict[str, object] = {}
+    exec(compile(ast.Module(body=[function], type_ignores=[]), str(path), "exec"), namespace)
+    return namespace[name]
+
+
+def test_zombie_sweeper_parses_real_git_quoted_rename_paths() -> None:
+    """PERMANENT_NEGATIVE: NEG-CRON-ZOMBIE-SWEEPER-PORCELAIN-Z-PATHS"""
+    with make_tempdir("zombie-porcelain-") as tmp:
+        root = Path(tmp)
+        old_path = "tracked-old.md"
+        new_path = "tracked-new.md"
+        quoted_path = "untracked cafe\N{LATIN SMALL LETTER E WITH ACUTE} path.md"
+        (root / old_path).write_text("tracked\n", encoding="ascii")
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+            ("git", "add", old_path),
+            ("git", "commit", "-m", "fixture"),
+            ("git", "mv", old_path, new_path),
+        ):
+            subprocess.run(command, cwd=root, check=True, capture_output=True)
+        (root / quoted_path).write_text("untracked\n", encoding="ascii")
+
+        legacy_raw = subprocess.run(
+            ["git", "status", "--porcelain=v1"], cwd=root, check=True, capture_output=True
+        ).stdout
+        assert b" -> " in legacy_raw
+        assert b'"' in legacy_raw
+        legacy: set[str] = set()
+        for line in legacy_raw.decode("ascii").splitlines():
+            path = line[3:].strip()
+            if " -> " in path:
+                path = path.split(" -> ", 1)[1]
+            legacy.add(path.replace("\\", "/"))
+
+        expected = {old_path, new_path, quoted_path}
+        healthy = sweep.dirty_paths(root)
+        assert expected <= healthy
+        real_z_raw = subprocess.run(
+            ["git", "status", "--porcelain=v1", "-z"], cwd=root, check=True, capture_output=True
+        ).stdout
+        runtime_parser = load_python_function(ROOT / "runtime/orchestrator.py", "parse_porcelain_v1_z")
+        mirror_parser = load_python_function(
+            ROOT / "examples/full_runtime_instance/runtime/orchestrator.py", "parse_porcelain_v1_z"
+        )
+        assert expected <= set(runtime_parser(real_z_raw))
+        assert expected <= set(mirror_parser(real_z_raw))
+        assert not expected <= legacy
+
+        source_path = ROOT / "scripts/sweep_cron_zombies.py"
+        source = source_path.read_text(encoding="utf-8")
+        nul_command = '["git", "status", "--porcelain=v1", "-z"]'
+        line_command = '["git", "status", "--porcelain=v1"]'
+        mutant_source = source.replace(nul_command, line_command, 1)
+        assert mutant_source != source
+        mutant_path = root / "sweep_cron_zombies_mutant.py"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = load_sweeper_module(mutant_path, "sweep_cron_zombies_task0323_mutant")
+        try:
+            mutant.dirty_paths(root)
+        except ValueError:
+            mutant_failed_closed = True
+        else:
+            mutant_failed_closed = False
+        assert mutant_failed_closed is True
+
+
 def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-PREEXEC-DEFER-STARVATION"""
     healthy = defer_probe(HARNESS_PATH)
@@ -512,6 +608,7 @@ def main() -> int:
         test_stop_order_requires_exact_line_not_contains,
         test_preexec_defer_budget_kills_shared_counter_mutant,
         test_worktree_disk_proof_pairs_real_git_rename_records,
+        test_zombie_sweeper_parses_real_git_quoted_rename_paths,
         test_residue_excludes_foreign_personal_and_caps_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
         test_new_instance_exports_identical_harness,

@@ -304,7 +304,7 @@
             "file": "Area_comun/tasks/TASK-0323-porcelain-sin-z-lectores.md",
             "id": "TASK-0323",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Lectores de git status --porcelain SIN -z fabrican rutas inexistentes: el barredor de zombis falla ABIERTO",
             "type": "infra"
         },

@@ -1,6 +1,30 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-06 Europe/Madrid, after TASK-0319 closure.
+Last updated: 2026-08-07 Europe/Madrid, during TASK-0317 remediation iteration 4.
+
+## 2026-08-07 - TASK-0317 remediation iteration 4
+
+- Implementation commit `0d686650` replaces the single timestamp payload in
+  `NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY` with the existing 333-member generated
+  timestamp family. Production code remains unchanged.
+- The 60-test memory suite and 31-contract falsification inventory exited 0 locally.
+  Exact-commit clean-clone gates also passed: build 4231 artifacts/466 events,
+  drift fast/full, collaboration, encoding, neutrality, diff, and clean status.
+- The focused permanent contract killed mutant E with exactly 3 failures, the
+  date-only members `2026-01-01`, `2026-06-19`, and `2026-12-31`.
+- TASK-0317 was delivered to `in_review`; all Codex remediation claims were
+  released atomically at runtime seq 7297. Delivery commit `ee9c0dde` publishes
+  the self-contained handoff and review request. Independent Analista re-review remains.
+
+## 2026-08-07 - TASK-0321 closure
+
+- Governed commit `8e07aa14` moves TASK-0321 from `review_approved` to `done`
+  after independent Analista approval and Arquitecto ratification.
+- Runtime events atomically acquired the Codex closure claim, applied the
+  implementer-only done-flip, and released the claim; every action is signed as Codex.
+- Collaboration validation, encoding, domain-neutrality, and diff gates exited 0.
+  Codex did not review or ratify its own work.
+- TASK-0320 remains `ready` and must not start until TASK-0317 closes, per its GO.
 
 ## 2026-08-06 - TASK-0317 remediation iteration 2 implementation
 

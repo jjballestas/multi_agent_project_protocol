@@ -74,17 +74,37 @@ def active_claims_for_owner(root: Path, owner: str) -> list[dict]:
     return [c for c in claims if c.get("status") == "active" and c.get("owner") == owner]
 
 
-def dirty_paths(root: Path) -> set[str]:
-    proc = run(["git", "status", "--porcelain=v1"], root)
+def parse_porcelain_v1_z(raw: bytes) -> set[str]:
     paths: set[str] = set()
-    for line in proc.stdout.splitlines():
-        if not line:
+    records = raw.split(b"\0")
+    index = 0
+    while index < len(records):
+        record = records[index]
+        index += 1
+        if not record:
             continue
-        path = line[3:].strip()
-        if " -> " in path:
-            path = path.split(" -> ", 1)[1]
-        paths.add(path.replace("\\", "/"))
+        if len(record) < 4 or record[2:3] != b" ":
+            raise ValueError("malformed git status --porcelain=v1 -z record")
+        status = record[:2]
+        paths.add(record[3:].decode("utf-8", errors="surrogateescape").replace("\\", "/"))
+        if b"R" in status or b"C" in status:
+            if index >= len(records) or not records[index]:
+                raise ValueError("missing source path in git status --porcelain=v1 -z pair")
+            paths.add(records[index].decode("utf-8", errors="surrogateescape").replace("\\", "/"))
+            index += 1
     return paths
+
+
+def dirty_paths(root: Path) -> set[str]:
+    proc = subprocess.run(
+        ["git", "status", "--porcelain=v1", "-z"],
+        cwd=root,
+        capture_output=True,
+        check=False,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError("git status --porcelain=v1 -z failed")
+    return parse_porcelain_v1_z(proc.stdout)
 
 
 def dirty_claimed_route(root: Path, owner: str) -> bool:

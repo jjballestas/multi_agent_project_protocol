@@ -131,40 +131,46 @@ def normalize_report_path(path: str) -> str:
     return path.replace("\\", "/").split("#", 1)[0].strip("/")
 
 
+def parse_porcelain_v1_z(raw: bytes) -> list[str]:
+    records = raw.split(b"\0")
+    paths: list[str] = []
+    index = 0
+    while index < len(records):
+        record = records[index]
+        index += 1
+        if not record:
+            continue
+        if len(record) < 4 or record[2:3] != b" ":
+            raise ValueError("malformed git status --porcelain=v1 -z record")
+        status = record[:2]
+        paths.append(record[3:].decode("utf-8", errors="surrogateescape").replace("\\", "/"))
+        if b"R" in status or b"C" in status:
+            if index >= len(records) or not records[index]:
+                raise ValueError("missing source path in git status --porcelain=v1 -z pair")
+            paths.append(records[index].decode("utf-8", errors="surrogateescape").replace("\\", "/"))
+            index += 1
+    return sorted(paths)
+
+
 def dirty_worktree_paths(root: Path) -> list[str]:
-    completed = subprocess.run(["git", "status", "--porcelain"], cwd=root, text=True, capture_output=True, check=False)
+    completed = subprocess.run(
+        ["git", "status", "--porcelain=v1", "-z"], cwd=root, capture_output=True, check=False
+    )
     if completed.returncode != 0:
         return []
-    paths: list[str] = []
-    for line in completed.stdout.splitlines():
-        if not line.strip():
-            continue
-        payload = line[3:].strip()
-        if " -> " in payload:
-            payload = payload.split(" -> ", 1)[1]
-        paths.append(payload.replace("\\", "/"))
-    return sorted(paths)
+    return parse_porcelain_v1_z(completed.stdout)
 
 
 def dirty_tracked_worktree_paths(root: Path) -> list[str]:
     completed = subprocess.run(
-        ["git", "status", "--porcelain", "--untracked-files=no"],
+        ["git", "status", "--porcelain=v1", "-z", "--untracked-files=no"],
         cwd=root,
-        text=True,
         capture_output=True,
         check=False,
     )
     if completed.returncode != 0:
         return []
-    paths: list[str] = []
-    for line in completed.stdout.splitlines():
-        if not line.strip():
-            continue
-        payload = line[3:].strip()
-        if " -> " in payload:
-            payload = payload.split(" -> ", 1)[1]
-        paths.append(payload.replace("\\", "/"))
-    return sorted(paths)
+    return parse_porcelain_v1_z(completed.stdout)
 
 
 def unreported_dirty_paths(root: Path, report: dict[str, Any], *, baseline_dirty: set[str]) -> list[str]:

@@ -206,6 +206,29 @@
             "updated_at": "2026-08-06T23:23:22Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0323",
+            "expires_at": "2026-08-07T04:47:48Z",
+            "notes": "Implement TASK-0323 NUL-delimited porcelain parsing across operational readers and permanent real-git falsification coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0323",
+                "Area_comun/state/TASK_INDEX.json#TASK-0323",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0323",
+                "Area_comun/tasks/TASK-0323-porcelain-sin-z-lectores.md",
+                "scripts/sweep_cron_zombies.py",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/orchestrator.py",
+                "examples/full_runtime_instance/runtime/orchestrator.py",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T00:47:48Z",
+            "status": "active",
+            "task_id": "TASK-0323",
+            "updated_at": "2026-08-07T00:47:48Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
