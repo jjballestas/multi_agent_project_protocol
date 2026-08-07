@@ -7,7 +7,65 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
-## Ultima actualizacion 2026-08-07 (43) - TASK-0320 ADENDA (preguntas A y B): veredicto SIN CAMBIO
+## Ultima actualizacion 2026-08-07 (44) - TASK-0322 r2 RE-JUICIO: CHANGE-REQUIRED (iteracion 2 de 2)
+
+- Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0322-r2`. **SIN PRODUCTO EN ALCANCE.**
+  Commit de remediacion `3a1ffd75`; head canonico al revisar `825a43b0`, derivo a `dea83cf9` sin tocar
+  nada mio. Mi veredicto commit `57337b6e`, pusheado. Artefacto:
+  `Area_comun/artifacts/Analista-TASK-0322-r2-declaracion-verdict.md`. Clon limpio
+  `D:/Aegis_Scratch/mapp/a322r2`, gates corridos en LOS DOS heads.
+- **CHANGE-REQUIRED por dos declaraciones, cero codigo.** Lo demas PASS: la declaracion esta bien en
+  tarea, handoff y SPEC (verifique transcripcion, no presencia); identidad byte a byte confirmada por
+  diff; suite/inventario/validate/encoding/neutralidad/build/drift en exit 0.
+- **LECCION 1 -- "corregir el titulo" son CINCO archivos, no uno.** El titulo de una tarea vive en el
+  `.md` **y** en `TASK_INDEX.json`, `TASK_INDEX.slim.json`, `PROJECT_STATE.json` y
+  `PROJECT_STATE.slim.json`. El Arquitecto corrigio el `.md` y creyo cerrado el punto; los cuatro de
+  estado seguian literales con la lectura de densidad. Y **AGENTS.md seccion 0 pone `TASK_INDEX.json`
+  ANTES del archivo de tarea**: la frase superada es la primera que lee un agente en frio. Cuando pida
+  "corregir una declaracion", **barrer con `git grep` la frase entera sobre el arbol commiteado**, no
+  mirar el archivo que la tarea nombra. El maker (Codex) lo habia senalado como anomalia
+  DECISION-0018 en su handoff; el aviso se recibio y no se ejecuto -> un aviso de peer NO es una
+  reparacion, hay que verificar el efecto.
+- **LECCION 2 (la cara) -- el numero bonito lo puse YO.** En la iteracion 1 declare, como dato a favor
+  del maker, que "un movil espanol que empiece por 6 o 7 ya no cabe: exigiria SS >= 60". Codex lo
+  transcribio fiel al handoff y a la SPEC, y el Arquitecto lo destaco en el REVIEW como fortaleza
+  anadida. **Es falso para la mitad de la familia.** Testigo:
+  `2026-01-01T00:00:06.123456-07:00` -> `DATE_RE.fullmatch` True, racha `0612345607`, contiene
+  `612345607`, `contains_pii` **False** (exento); los mismos digitos fuera de forma de fecha si se
+  cazan. La razon: mi inferencia suponia que el movil empieza en el PRIMER digito de la racha, y eso
+  solo vale con fraccion de 5 digitos (racha de 9, alineacion forzada). Con fraccion de 6 la racha
+  `SS.ffffff-HH` mide **10**, el movil de 9 cabe desplazado una posicion y su primer digito cae en el
+  SEGUNDO de `SS`, que `SS <= 59` deja libre. Barrido por racha: 0/2.700 con fraccion 5, 540/2.700 con
+  fraccion 6; por colocacion directa entran 30.000.000 de moviles ES (15 pct del espacio `[67]\d{8}`).
+- **Regla que saco de la leccion 2: una cota sobre un COMPONENTE no es una cota sobre la RACHA.** Antes
+  de afirmar que una cota excluye un patron, contar la LONGITUD de la racha y probar TODAS las
+  alineaciones, no solo la que empieza en el borde. Y no regalar "datos a favor" del maker sin el mismo
+  rigor que exijo a sus cifras: un extra que consuela y es falso es peor que ningun extra.
+- **Bug de mi propia sonda que casi me hace firmar lo contrario:** buscar el patron sobre
+  `"".join(runs(s))` cruza el limite entre rachas y da 900/900 falsos positivos. **Buscar SIEMPRE por
+  racha individual**, nunca sobre la concatenacion.
+- **GOTCHA de clon limpio SUPERFICIAL -- da FALSO ROJO.** Con `git clone --depth 60`,
+  `validate_collaboration_state.py` sale **exit 1** con
+  `commit_trailers could not scan git history from 57f6250f...`: la base del escaneo de trailers esta
+  **773** commits atras. Con `--depth 820` sale exit 0. El clon superficial miente en la direccion
+  contraria a la habitual (el arbol caliente da falso verde; el clon corto da falso rojo). Receta:
+  `git rev-list --count <base>..HEAD` para dimensionar la profundidad antes de concluir rojo.
+  Bonus: el clon shallow tarda 2 s y ocupa 35 MB (99 MB a depth 820) frente a los ~7 GB del clon
+  completo por los objetos sueltos del `.git`.
+- **Residuales nuevos que deje:** R5, el docstring `test_memory_db.py:603` sigue publicando
+  `2.9% -> 0.05%` sin calificar -- NO lo pedi en esta iteracion porque tocarlo rompe la identidad byte
+  a byte que el Arquitecto fijo como alcance; debe viajar con la tarea futura de la asercion por forma.
+  R6, `validate` **no cruza el `title`** del archivo de tarea contra el de `TASK_INDEX`, por eso S2
+  existe **en verde**; candidato a negativo permanente con dientes.
+- **Coordinacion:** 0 claims activos antes y despues; pathspec explicito en `git add` y en el commit;
+  0 bytes >127 y 0 CRLF en mis dos ficheros; validate/encoding/neutralidad exit 0 antes y despues.
+  `PRUNE DUE` (cold_start_tokens 20177 >= 20000) senalado en el commit, **no corrido: es del
+  Arquitecto**. Pregunta abierta en el mensaje: acotar la afirmacion del movil a la subfamilia de
+  fraccion 5, o retirarla entera.
+- **Tope consumido: esta era la iteracion 2 de 2.** Si llega una tercera con cualquiera de los dos
+  puntos abierto, **escalo al operador humano**.
+
+## 2026-08-07 (43) - TASK-0320 ADENDA (preguntas A y B): veredicto SIN CAMBIO
 
 - Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0320`, que **NO era una segunda review**
   sino una adenda de dos preguntas al veredicto ya emitido. **SIN PRODUCTO EN ALCANCE.** Commit
