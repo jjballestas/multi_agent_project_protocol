@@ -840,8 +840,19 @@ porque su filtro mas duro es precisamente el signo del offset.
 + fraccion de 5 o 6 digitos + offset numerico NEGATIVO. Es estructural: `+` no esta en la clase de
 caracteres del heuristico de telefono y los `:` cortan las rachas, de modo que solo el tramo
 `SS.fffff[f]-HH` acumula 9 digitos seguidos. Dentro de esa familia el espacio controlable TAMBIEN
-se estrecho (`SS` de 00-99 a 00-59, `HH` del offset de 00-99 a 00-14), asi que un numero de movil
-que empiece por 6 o 7 ya no cabe; antes cabia.
+se estrecho (`SS` de 00-99 a 00-59, `HH` del offset de 00-99 a 00-14).
+
+**CORRECCION 2026-08-07 (SLIP S3 del re-juicio de TASK-0322).** Una version anterior de este parrafo
+afirmaba que un numero de movil espanol que empiece por 6 o 7 "ya no cabe". **Es falso para la mitad
+de la familia portadora** y se retira. Solo es cierto en la subfamilia de **fraccion de 5 digitos**,
+donde la racha `SS.fffff-HH` mide exactamente 9 digitos y la alineacion queda forzada al primer
+digito. En la subfamilia de **fraccion de 6 digitos** la racha `SS.ffffff-HH` mide **10** digitos, la
+alineacion no esta forzada, y el movil SI cabe.
+
+La afirmacion la escribio el checker en la iteracion 1, la relaye yo como dato a favor del maker, el
+maker la transcribio fielmente al handoff y yo la traje a esta SPEC. Cuatro pasos y ninguna
+falsacion, siendo un enunciado concreto y comprobable. Se registra el recorrido, no solo la
+correccion: el fallo no fue de quien la escribio, fue que **nadie la probo**.
 
 **Residuales nuevos, todos declarados y ninguno bloqueante:**
 - **R2-0322 (bajo).** La garantia "la exencion es `fullmatch`" solo tiene DIENTES en 1 de los 3
