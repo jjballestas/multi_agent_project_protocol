@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0330
-status: open
+status: archived
 created: 2026-08-07T18:05:00Z
 requires_response: false
 requested_action: Route TASK-0330 remediation iteration 2 to Analista for independent re-review.
