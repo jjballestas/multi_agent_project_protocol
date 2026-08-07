@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8c08b9228ff6ef0ed090fd7295e74a1ffcfbddb4a86cabc113d3cb38fbbec97c",
+  "canonical_hash": "fc0a1b2612da359ed7993635be9faff1ec1406b86da37405b85325a846006969",
   "integrity": {
-    "canonical_hash": "8c08b9228ff6ef0ed090fd7295e74a1ffcfbddb4a86cabc113d3cb38fbbec97c",
+    "canonical_hash": "fc0a1b2612da359ed7993635be9faff1ec1406b86da37405b85325a846006969",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "40658e839df3c68244acd56e565a22fe24d12ddb2e968f57b3846ab2e260ff30",
-    "signature": "108896aeb08072f7804368cc509604bff18c772b40b37e8b5ff8f151a41576b5",
-    "up_to_seq": 7613
+    "prev_hash": "42ecb15ed39973c6cbbb3d8703690fea1bf1d1eb82ac9aea9772fcf20a09525b",
+    "signature": "09373f4835ae46987078e2c5baa022dd133aa61e97520d70b9596527a6b856a7",
+    "up_to_seq": 7620
   },
   "state": {
     "aggregate_versions": {
@@ -986,6 +986,7 @@
       "CLAIM-arq-0281-it3-20260721": 1,
       "CLAIM-arq-20260807-ratifica-0324-0320": 1,
       "CLAIM-arq-20260807-ratifica-0326": 1,
+      "CLAIM-arq-20260807-ratifica-0333": 1,
       "CLAIM-arq-20260807-rechazo-0322-0325": 1,
       "CLAIM-arq-20260807-rechazo-0324": 1,
       "CLAIM-arq-20260807-registro-0327-0334": 1,
@@ -1078,6 +1079,7 @@
       "CLAIM-arq-hygiene-20260807-lote24": 1,
       "CLAIM-arq-hygiene-20260807-lote25": 1,
       "CLAIM-arq-hygiene-20260807-lote26": 1,
+      "CLAIM-arq-hygiene-20260807-lote27": 1,
       "CLAIM-arq-hygiene-20260807-supersede": 1,
       "CLAIM-arq-hygiene-doneflip-hold-20260728": 1,
       "CLAIM-arq-hygiene-milestone1-20260728": 1,
@@ -2671,6 +2673,7 @@
       "MSG-20260807-Analista-to-Arquitecto-REVIEW-TASK-0325-r2-verdict": 1,
       "MSG-20260807-Analista-to-Arquitecto-REVIEW-TASK-0325-slip3": 1,
       "MSG-20260807-Analista-to-Arquitecto-REVIEW-TASK-0330-verdict": 1,
+      "MSG-20260807-Analista-to-Arquitecto-REVIEW-TASK-0333-verdict": 1,
       "MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5": 1,
       "MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0320": 1,
       "MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0322": 1,
@@ -2693,6 +2696,7 @@
       "MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0326": 1,
       "MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0330": 1,
       "MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0331": 1,
+      "MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0333": 1,
       "MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0317-remediacion-r4": 1,
       "MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0322-reanudar": 1,
       "MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0322-remediacion": 1,
@@ -2820,7 +2824,7 @@
       "OPS-MAILBOX-HYGIENE-20260729F2": 1,
       "OPS-MAILBOX-HYGIENE-20260729F3": 1,
       "OPS-MAILBOX-HYGIENE-20260806": 11,
-      "OPS-MAILBOX-HYGIENE-20260807": 16,
+      "OPS-MAILBOX-HYGIENE-20260807": 17,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3099,7 +3103,7 @@
       "TASK-0330": 34,
       "TASK-0331": 9,
       "TASK-0332": 2,
-      "TASK-0333": 8,
+      "TASK-0333": 10,
       "TASK-0334": 2,
       "TASK-0335": 3,
       "TASK-1102": 14,
@@ -3124,7 +3128,7 @@
       "protocol-prune": 45,
       "protocol-state": 1
     },
-    "events_applied": 6942,
+    "events_applied": 6949,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3406,10 +3410,17 @@
       "arq-l26-0": 7611,
       "arq-l26-1": 7612,
       "arq-l26-9": 7613,
+      "arq-l27-0": 7617,
+      "arq-l27-1": 7618,
+      "arq-l27-2": 7619,
+      "arq-l27-9": 7620,
       "arq-r2-0": 7399,
       "arq-r2-1": 7400,
       "arq-r2-2": 7401,
       "arq-r2-3": 7402,
+      "arq-r33-0": 7614,
+      "arq-r33-1": 7615,
+      "arq-r33-2": 7616,
       "arq-r35-0": 7550,
       "arq-r35-1": 7551,
       "arq-r35-2": 7552,
@@ -10070,5 +10081,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7613
+  "up_to_seq": 7620
 }

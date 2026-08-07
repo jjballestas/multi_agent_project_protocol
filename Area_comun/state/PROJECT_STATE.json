@@ -117,7 +117,7 @@
         {
             "id": "TASK-0333",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Hay un TERCER lector de git status sin --untracked-files=all, y alimenta el gate que rechaza turnos con cambios no declarados: declarar un directorio esconde el subarbol entero"
         },
         {
