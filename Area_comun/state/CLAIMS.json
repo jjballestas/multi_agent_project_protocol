@@ -226,6 +226,32 @@
             "updated_at": "2026-08-07T11:16:28Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-expanded-work",
+            "expires_at": "2026-08-07T17:57:58Z",
+            "notes": "Resume TASK-0330 with the narrowly authorized harness ordering fix.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-expanded-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0330",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0330",
+                "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_turn_cases/run_post_gate_obstacle_cases.py",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                ".github/workflows/validate.yml",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:57:58Z",
+            "status": "active",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T11:57:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330-question",
             "expires_at": "2026-08-07T17:14:53Z",
             "notes": "Publish the TASK-0330 scope question after revived-suite evidence.",
@@ -240,6 +266,22 @@
             "status": "released",
             "task_id": "TASK-0330",
             "updated_at": "2026-08-07T11:14:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-third-red-question",
+            "expires_at": "2026-08-07T18:01:28Z",
+            "notes": "Publish the TASK-0330 third-red scope question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-third-red-question",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-third-red.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T12:01:28Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T12:01:28Z"
         },
         {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330-work",
@@ -261,7 +303,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T11:04:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0330",
             "updated_at": "2026-08-07T11:04:00Z"
         },
