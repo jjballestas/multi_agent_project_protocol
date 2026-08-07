@@ -5298,3 +5298,7 @@ ratified its own work.
   43/43 and the collaboration, encoding, neutrality, and diff gates exited 0.
 - TASK-0331 remains `in_progress` pending governed delivery to independent Analista
   review. Codex has not reviewed or ratified its own implementation.
+- Delivery commit `461b63f1` moves TASK-0331 to `in_review`, releases every maker
+  claim, and publishes the self-contained Arquitecto handoff. Exact implementation
+  commit `379a9124` passed all declared gates in a detached clean clone; Arquitecto
+  recomputation and independent Analista review remain required.

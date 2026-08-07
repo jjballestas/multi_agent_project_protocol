@@ -283,6 +283,22 @@
             "updated_at": "2026-08-07T11:42:30Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0331-final-memory",
+            "expires_at": "2026-08-07T12:44:49Z",
+            "notes": "Persist TASK-0331 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0331-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:44:49Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-07T11:44:49Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0331-memory",
             "expires_at": "2026-08-07T13:36:52Z",
             "notes": "Persist TASK-0331 implementation commit context.",
