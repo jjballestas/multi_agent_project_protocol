@@ -13,8 +13,11 @@ Last updated: 2026-08-07 Europe/Madrid, during TASK-0326 implementation.
   outside the veto.
 - The 17-test exec-lease harness, 37/37 falsification inventory, collaboration,
   encoding, neutrality, drift, and diff gates exited 0 before the implementation commit.
-  TASK-0326 remains `in_progress` pending exact-commit clean-clone recomputation and
-  governed delivery to independent review.
+  The same gates passed in a detached clean clone of exact implementation commit
+  `69f7c423`, including empty status.
+- Delivery commit `1371cd5c` moves TASK-0326 to `in_review`, releases both maker
+  claims, and publishes the self-contained handoff plus routed review request. Codex
+  did not review or ratify the work.
 
 ## 2026-08-07 - TASK-0325 implementation
 
