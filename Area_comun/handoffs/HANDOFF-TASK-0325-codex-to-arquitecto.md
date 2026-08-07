@@ -4,52 +4,73 @@ task_id: TASK-0325
 from: Codex
 to: Arquitecto
 status: ready_for_review
-created_at: 2026-08-07T06:22:02Z
-implementation_commit: 70a22d88ed17591faf606da515729a6a3f8bbbd6
+created_at: 2026-08-07T13:05:00Z
+implementation_commit: 21d1287076094d386188a48bff436e88d0d50eb5
 ---
 
-# TASK-0325 implementation handoff
+# TASK-0325 remediation iteration 1 handoff
 
 ## Result
 
-The date exemption behavior approved in TASK-0317 is unchanged. The implementation
-adds two permanent, CI-wired falsification contracts in
-`scripts/memory/test_memory_db.py`; `scripts/memory/build_memory_db.py` is byte
-unchanged by this task.
+The remediation changes only `scripts/memory/test_memory_db.py` and the task declaration.
+`scripts/memory/build_memory_db.py` remains byte-identical. The permanent negative is now
+`NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT`: it detects `break` and `continue` owned by the outer
+`contains_pii` item loop, but stops at nested loops and nested functions or lambdas where control
+flow is rebound or isolated.
 
-## AC evidence
+## Checker finding re-judgement
 
-- AC1 / R5-1: `NEG-MEMORY-DATE-EXEMPTION-NO-CONTINUE` parses the real module AST,
-  selects the sole direct item loop in `contains_pii`, and requires that its full
-  subtree contain no `ast.Continue`. The source passes. An adversarial source mutant
-  inserts an early `continue` for a valid `+05:45` date and the AST boundary detects it.
-- AC2 / R5-2: `NEG-MEMORY-DATE-OFFSET-COVERAGE` reconstructs the measured restricted
-  offset mutant. The source accepts `+05:45`, `-09:45`, `+13:00`, and `+14:00`; the
-  mutant rejects all four. This closes the complement-of-the-333-family residual
-  directly instead of relying on the family-size assertion.
-- AC3: both contracts are declared in `FALSIFICATION_CONTRACTS`, contain permanent
-  negative markers, execute in `test_memory_db.py`, and are therefore run by the
-  existing CI job. Inventory is 36/36.
-- AC4: production code is unchanged. The prior phone-only exemption contract, all 11
-  rejected suffix vectors, and the 333-member family remain in the 64-test passing
-  suite.
+| Production variant | Scoped detector |
+|---|---|
+| Source | PASS |
+| Narrow outer-loop `break` for `+05:45` | CATCH |
+| Innocent `break` in nested phone loop | PASS |
+| Innocent `continue` in nested phone loop | PASS |
 
-## Verification
+The original narrow outer-loop `continue` mutant is also CATCH. In a scratch clone carrying the
+new contract, applying the checker E1 `break` mutation to production made the complete suite red:
+66 tests ran and only `test_contains_pii_item_loop_has_no_early_exit` failed, exit 1. The same suite
+against the unmodified source passed 66 tests, exit 0.
 
-Live tree before commit, all exit 0:
+## AC4 and permanent-negative evidence
 
-- `python scripts/memory/test_memory_db.py` - 64 tests passed.
-- `python scripts/check_falsification_contracts.py --root . --inventory` - 36/36.
-- collaboration validation, encoding scan, neutrality scan, and `git diff --check`.
-- corpus build - 4,256 artifacts, 547 events; fast and full drift checks passed.
+- The complete suite includes the 11 rejected suffix vectors, the 333-member timestamp family,
+  and all four complement offsets. It passed in the live tree and in a clean detached clone of
+  `21d1287076094d386188a48bff436e88d0d50eb5`.
+- Falsification inventory is 44 declared of 44 permanent negatives. The renamed negative has four
+  registered boundaries: source empty, outer-loop break detected, nested break ignored, and nested
+  continue ignored.
+- Collaboration validation, encoding scan, domain-neutrality scan, `git diff --check`, and clean
+  clone status all exited 0.
 
-Detached clean clone of exact commit `70a22d88ed17591faf606da515729a6a3f8bbbd6`,
-all exit 0:
+## Declared residuals
 
-- memory suite - 64 tests passed.
-- falsification inventory - 36/36.
-- collaboration validation, encoding scan, neutrality scan, `git diff --check`, and
-  empty `git status --short`.
+- `R0325-1`: this remains a syntactic guard. A narrow restructuring or external helper over an
+  offset outside the TASK-0317 sampled family may still evade the AST and placement contracts.
+- `R0325-2`: TASK-0317 samples `("", "Z", "+02:00", "-05:00", "-12:30")`, while TASK-0325
+  samples `+05:45/-09:45/+13:00/+14:00` only against `DATE_RE`. Unifying them requires the future
+  behavioral contract requested by Arquitecto and is not fixed here.
 
-Codex is the maker. Codex has not reviewed or ratified this work. Arquitecto should
-recompute the evidence and route the exact commit to Analista for independent review.
+Codex is the maker and has not reviewed or ratified this remediation. Arquitecto should route
+commit `21d1287076094d386188a48bff436e88d0d50eb5` to Analista for independent re-review.
+
+task_id: TASK-0325
+status: in_review
+executive_summary: The AST guard now catches outer-loop break and continue without false positives in nested loops. Production is byte-identical; R0325-1 and R0325-2 remain explicitly declared.
+artifacts:
+  - path_or_commit: 21d1287076094d386188a48bff436e88d0d50eb5
+  - path_or_commit: scripts/memory/test_memory_db.py
+  - path_or_commit: Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md
+gates:
+  - command: python scripts/memory/test_memory_db.py
+    result: PASS
+  - command: python scripts/check_falsification_contracts.py --root . --inventory
+    result: PASS
+  - command: python scripts/validate_collaboration_state.py
+    result: PASS
+  - command: python scripts/scan_encoding.py
+    result: PASS
+  - command: python scripts/scan_domain_neutrality.py
+    result: PASS
+next_recommended: Route commit 21d1287076094d386188a48bff436e88d0d50eb5 to Analista for independent re-review.
+risks: R0325-1 and R0325-2 require a future behavioral contract; no production change is included.

@@ -1,6 +1,25 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0322 remediation iteration 1 delivery.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0325 remediation implementation.
+
+## 2026-08-07 - TASK-0325 remediation implementation
+
+- Commit `21d12870` replaces the keyword-specific date-exemption AST guard with
+  `NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT`.
+- The detector records `break` and `continue` owned by the outer `contains_pii` item loop,
+  while nested loops and nested functions/lambdas rebind or isolate their control flow.
+- The four-way decision table is encoded: source PASS, narrow outer-loop break CATCH,
+  nested-loop break PASS, and nested-loop continue PASS. The original outer-loop continue
+  mutant remains CATCH as an additional boundary.
+- A clean scratch mutation run with the outer-loop break made the complete 66-test suite red
+  only at the permanent negative; the unmutated live suite passed 66 tests. Production code
+  remains byte-identical.
+- `R0325-1` and `R0325-2` are declared in the task and intentionally remain for a future
+  behavioral contract. The detached clean clone of `21d12870` passed the full 66-test suite,
+  falsification inventory, collaboration, encoding, neutrality, diff, and clean-status gates.
+- TASK-0325 is back in `in_review`, all Codex remediation claims are released, and the updated
+  handoff plus mailbox route request independent Analista re-review. Codex did not review or
+  ratify the remediation.
 
 ## 2026-08-07 - TASK-0322 remediation iteration 1
 

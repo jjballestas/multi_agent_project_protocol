@@ -238,6 +238,27 @@
             "updated_at": "2026-08-07T12:35:56Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0325-remediation-1-delivery",
+            "expires_at": "2026-08-07T14:53:51Z",
+            "notes": "TASK-0325 remediation iteration 1 delivery and independent review routing.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0325-remediation-1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0325",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0325",
+                "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
+                "scripts/memory/test_memory_db.py",
+                "Area_comun/handoffs/HANDOFF-TASK-0325-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0325-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T12:53:51Z",
+            "status": "released",
+            "task_id": "TASK-0325",
+            "updated_at": "2026-08-07T12:53:51Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0325-remediation-1-handoff",
             "expires_at": "2026-08-07T20:43:36Z",
             "notes": "TASK-0325 remediation iteration 1: scoped AST early-exit guard, break mutation, residual declarations, and review handoff.",
@@ -253,7 +274,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T12:43:36Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0325",
             "updated_at": "2026-08-07T12:43:36Z"
         },
