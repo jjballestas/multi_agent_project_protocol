@@ -151,6 +151,22 @@
             "updated_at": "2026-08-06T23:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Arquitecto-TASK-0324-registro",
+            "expires_at": "2026-08-08T01:15:00Z",
+            "notes": "Registra el defecto del temporizador de post-entrega observado dos veces.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Arquitecto-TASK-0324-registro",
+                "Area_comun/state/TASK_INDEX.json#TASK-0324",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0324",
+                "Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md"
+            ],
+            "started_at": "2026-08-07T01:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0324",
+            "updated_at": "2026-08-07T01:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0317-remediation-4",
             "expires_at": "2026-08-07T03:43:30Z",
             "notes": "Implement TASK-0317 remediation iteration 4 family sweep in the falsification contract.",

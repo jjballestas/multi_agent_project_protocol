@@ -309,6 +309,14 @@
             "type": "infra"
         },
         {
+            "file": "Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md",
+            "id": "TASK-0324",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "1e9f98d2c88cc125b11aeac53533fb8857d2b583e7edbe463af843eab4004762",
+  "canonical_hash": "6e993e40be2a31aa26373fb9af9ed22cf468c190ff6d631ba4134d3cfba94c74",
   "integrity": {
-    "canonical_hash": "1e9f98d2c88cc125b11aeac53533fb8857d2b583e7edbe463af843eab4004762",
+    "canonical_hash": "6e993e40be2a31aa26373fb9af9ed22cf468c190ff6d631ba4134d3cfba94c74",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "b679f917632ea3470ea58956cf2b038a583255322f042497fa799337144c8acf",
-    "signature": "831d78c901e091c0d43a62c6c5668ad88f71c79f91e6162e20f9ca633fe776d3",
-    "up_to_seq": 7305
+    "prev_hash": "b72d44ebf0e400354ccdd16728850e63e4ab374280738be3bbfe1fbf7b05b88d",
+    "signature": "b01f91da8518ea18a6b8ef35fd248fd2ee58623f77ee14b86900ff60cf42725c",
+    "up_to_seq": 7308
   },
   "state": {
     "aggregate_versions": {
@@ -898,6 +898,7 @@
       "CLAIM-20260806-Codex-TASK-0318": 1,
       "CLAIM-20260806-Codex-TASK-0318-delivery": 1,
       "CLAIM-20260807-Arquitecto-0317r4-go0323": 1,
+      "CLAIM-20260807-Arquitecto-TASK-0324-registro": 1,
       "CLAIM-20260807-Codex-TASK-0317-remediation-4": 1,
       "CLAIM-20260807-Codex-TASK-0317-remediation-4-delivery": 1,
       "CLAIM-20260807-Codex-TASK-0323": 1,
@@ -2967,6 +2968,7 @@
       "TASK-0321": 13,
       "TASK-0322": 3,
       "TASK-0323": 7,
+      "TASK-0324": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2989,7 +2991,7 @@
       "protocol-prune": 41,
       "protocol-state": 1
     },
-    "events_applied": 6634,
+    "events_applied": 6637,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3132,6 +3134,9 @@
       "arq-0321ok-20260806T2050Z-r3": 7276,
       "arq-0321ok-20260806T2050Z-s1": 7274,
       "arq-0321ok-20260806T2050Z-u2": 7275,
+      "arq-0324-20260807T0115Z-c0": 7306,
+      "arq-0324-20260807T0115Z-r2": 7308,
+      "arq-0324-20260807T0115Z-u1": 7307,
       "arq-go0322-20260806T1940Z-0-claim": 7243,
       "arq-go0322-20260806T1940Z-1-status": 7244,
       "arq-go0322-20260806T1940Z-2-release": 7245,
@@ -9627,5 +9632,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7305
+  "up_to_seq": 7308
 }
