@@ -27,15 +27,21 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-FALSIFICATION-RUNNER-WIRING",
         "negative": "A declared contract must have a direct, failure-gating invocation inside a real workflow job.",
-        "mutation": '.replace("run: python examples/orphan/run_orphan.py", "run: echo python examples/orphan/run_orphan.py")',
+        "mutation": "run: echo python examples/orphan/run_orphan.py",
         "boundaries": (
-            "assert wired.returncode == 0",
-            "assert orphan.returncode != 0",
-            'assert "runner is not executed by workflow" in orphan.stdout',
-            "assert healed.returncode == 0",
-            "assert continued.returncode != 0",
+            "assert multiline_pwsh.returncode != 0",
+            "assert multiline_bash.returncode == 0",
+            "assert step_if_false.returncode != 0",
+            "assert step_if_event.returncode != 0",
+            "assert bash_or_true.returncode != 0",
+            "assert semicolon_exit.returncode != 0",
+            "assert continued_expression.returncode != 0",
+            "assert continued_string.returncode != 0",
+            "assert continued_literal.returncode != 0",
             "assert echoed.returncode != 0",
-            "assert removed_job.returncode != 0",
+            "assert job_needs.returncode != 0",
+            "assert job_if_false.returncode != 0",
+            "assert dispatch_only.returncode != 0",
         ),
         "exercised_by": "main",
     },
@@ -103,16 +109,6 @@ def main() -> int:
         )
         workflow = fixture / ".github/workflows/validate.yml"
         workflow.parent.mkdir(parents=True)
-        workflow.write_text(
-            "jobs:\n"
-            "  falsification-runners:\n"
-            "    runs-on: ubuntu-latest\n"
-            "    steps:\n"
-            "      - run: python examples/cases/run_cases.py\n",
-            encoding="ascii",
-        )
-        wired = run(fixture, workflow)
-        assert wired.returncode == 0, wired.stdout + wired.stderr
         orphan_runner = fixture / "examples/orphan/run_orphan.py"
         orphan_runner.parent.mkdir(parents=True)
         orphan_runner.write_text(
@@ -122,44 +118,152 @@ def main() -> int:
             "    candidate = 'MUTATE'\n    assert 'ASSERT_OLD'\n    assert 'ASSERT_NEW'\n",
             encoding="ascii",
         )
-        orphan = run(fixture, workflow)
-        assert orphan.returncode != 0, orphan.stdout + orphan.stderr
-        assert "runner is not executed by workflow" in orphan.stdout, orphan.stdout
-        workflow.write_text(
-            workflow.read_text(encoding="ascii") + "      - run: python examples/orphan/run_orphan.py\n",
-            encoding="ascii",
-        )
-        healed = run(fixture, workflow)
-        assert healed.returncode == 0, healed.stdout + healed.stderr
-        continued_workflow = workflow.with_name("continued.yml")
-        continued_workflow.write_text(
-            workflow.read_text(encoding="ascii").replace(
-                "      - run: python examples/orphan/run_orphan.py\n",
-                "      - continue-on-error: true\n        run: python examples/orphan/run_orphan.py\n",
-            ),
-            encoding="ascii",
-        )
-        continued = run(fixture, continued_workflow)
-        assert continued.returncode != 0, continued.stdout + continued.stderr
-        echoed_workflow = workflow.with_name("echoed.yml")
-        echoed_workflow.write_text(
-            workflow.read_text(encoding="ascii").replace("run: python examples/orphan/run_orphan.py", "run: echo python examples/orphan/run_orphan.py"),
-            encoding="ascii",
-        )
-        echoed = run(fixture, echoed_workflow)
-        assert echoed.returncode != 0, echoed.stdout + echoed.stderr
-        removed_job_workflow = workflow.with_name("removed-job.yml")
-        removed_job_workflow.write_text(
+        baseline = (
+            "on:\n"
+            "  push:\n"
+            "  pull_request:\n"
             "jobs:\n"
-            "  decoy:\n"
-            "    runs-on: ubuntu-latest\n"
+            "  falsification-runners:\n"
+            "    runs-on: windows-latest\n"
             "    steps:\n"
             "      - run: python examples/cases/run_cases.py\n"
-            "      - run: echo python examples/orphan/run_orphan.py\n",
-            encoding="ascii",
+            "      - run: python examples/orphan/run_orphan.py\n"
         )
-        removed_job = run(fixture, removed_job_workflow)
-        assert removed_job.returncode != 0, removed_job.stdout + removed_job.stderr
+
+        def mutated(name: str, source: str) -> subprocess.CompletedProcess[str]:
+            candidate = workflow.with_name(f"{name}.yml")
+            candidate.write_text(source, encoding="ascii")
+            return run(fixture, candidate)
+
+        workflow.write_text(baseline, encoding="ascii")
+        wired = run(fixture, workflow)
+        assert wired.returncode == 0, wired.stdout + wired.stderr
+
+        multiline = baseline.replace(
+            "      - run: python examples/orphan/run_orphan.py\n",
+            "      - run: |\n"
+            "          echo before\n"
+            "          python examples/orphan/run_orphan.py\n"
+            "          echo after\n",
+        )
+        multiline_pwsh = mutated("m1-multiline-pwsh", multiline)
+        assert multiline_pwsh.returncode != 0, multiline_pwsh.stdout + multiline_pwsh.stderr
+
+        multiline_bash = mutated(
+            "m2-multiline-bash",
+            multiline.replace("      - run: |\n", "      - shell: bash\n        run: |\n", 1),
+        )
+        assert multiline_bash.returncode == 0, multiline_bash.stdout + multiline_bash.stderr
+
+        step_if_false = mutated(
+            "m3-step-if-false",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - if: false\n        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert step_if_false.returncode != 0, step_if_false.stdout + step_if_false.stderr
+
+        step_if_event = mutated(
+            "m4-step-if-event",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - if: github.event_name == 'schedule'\n"
+                "        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert step_if_event.returncode != 0, step_if_event.stdout + step_if_event.stderr
+
+        bash_or_true = mutated(
+            "m5-bash-or-true",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - shell: bash\n"
+                "        run: python examples/orphan/run_orphan.py || true\n",
+            ),
+        )
+        assert bash_or_true.returncode != 0, bash_or_true.stdout + bash_or_true.stderr
+
+        semicolon_exit = mutated(
+            "m6-semicolon-exit",
+            baseline.replace(
+                "run: python examples/orphan/run_orphan.py",
+                "run: python examples/orphan/run_orphan.py; exit 0",
+            ),
+        )
+        assert semicolon_exit.returncode != 0, semicolon_exit.stdout + semicolon_exit.stderr
+
+        continued_expression = mutated(
+            "m7-continued-expression",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - continue-on-error: ${{ true }}\n"
+                "        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert continued_expression.returncode != 0, continued_expression.stdout + continued_expression.stderr
+
+        continued_string = mutated(
+            "m8-continued-string",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - continue-on-error: 'true'\n"
+                "        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert continued_string.returncode != 0, continued_string.stdout + continued_string.stderr
+
+        continued_literal = mutated(
+            "m9-continued-literal",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - continue-on-error: true\n"
+                "        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert continued_literal.returncode != 0, continued_literal.stdout + continued_literal.stderr
+
+        echoed = mutated(
+            "m10-echoed",
+            baseline.replace(
+                "run: python examples/orphan/run_orphan.py",
+                "run: echo python examples/orphan/run_orphan.py",
+            ),
+        )
+        assert echoed.returncode != 0, echoed.stdout + echoed.stderr
+
+        job_needs = mutated(
+            "m11-job-needs",
+            baseline.replace(
+                "    runs-on: windows-latest\n",
+                "    needs: validate\n    runs-on: windows-latest\n",
+            ),
+        )
+        assert job_needs.returncode != 0, job_needs.stdout + job_needs.stderr
+
+        job_if_false = mutated(
+            "m12-job-if-false",
+            baseline.replace(
+                "    runs-on: windows-latest\n",
+                "    if: false\n    runs-on: windows-latest\n",
+            ),
+        )
+        assert job_if_false.returncode != 0, job_if_false.stdout + job_if_false.stderr
+
+        dispatch_only = mutated(
+            "m13-dispatch-only",
+            baseline.replace("  push:\n  pull_request:\n", "  workflow_dispatch:\n"),
+        )
+        assert dispatch_only.returncode != 0, dispatch_only.stdout + dispatch_only.stderr
+
+        no_op_help = mutated(
+            "anchored-no-op-help",
+            baseline.replace(
+                "run: python examples/orphan/run_orphan.py",
+                "run: python examples/orphan/run_orphan.py --help",
+            ),
+        )
+        assert no_op_help.returncode != 0, no_op_help.stdout + no_op_help.stderr
     with tempfile.TemporaryDirectory(prefix="falsification-off-glob-") as temp:
         fixture = Path(temp)
         outside_old_glob = fixture / "scripts/test_outside_old_glob.py"

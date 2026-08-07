@@ -40,6 +40,24 @@
             "updated_at": "2026-08-07T18:10:38Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-done-flip",
+            "expires_at": "2026-08-08T01:03:42Z",
+            "notes": "Implementer done-flip after checker escalation and architect partition ratification; no global execution certification asserted.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0330",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0330",
+                "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T19:03:42Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T19:03:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0335-delivery",
             "expires_at": "2026-08-08T02:51:24Z",
             "notes": "Deliver TASK-0335 to in_review, persist maker evidence, and route independent review.",
@@ -78,6 +96,59 @@
             "status": "released",
             "task_id": "TASK-0335",
             "updated_at": "2026-08-07T18:29:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0336",
+            "expires_at": "2026-08-08T01:03:42Z",
+            "notes": "Bind runner wiring certification to reachability, invocation, exit propagation, and job contribution; mutation-prove all thirteen boundaries.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0336",
+                "Area_comun/state/TASK_INDEX.json#TASK-0336",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
+                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T19:03:42Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-07T19:03:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0336-delivery",
+            "expires_at": "2026-08-08T01:18:22Z",
+            "notes": "Deliver TASK-0336 evidence and request independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0336-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0336-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0336.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T19:18:22Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-07T19:18:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0336-finalfix",
+            "expires_at": "2026-08-07T19:53:27Z",
+            "notes": "Remove the handoff trailing blank line detected by the commit whitespace gate.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0336-finalfix",
+                "Area_comun/handoffs/HANDOFF-TASK-0336-codex-to-arquitecto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T19:23:27Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-07T19:23:27Z"
         },
         {
             "claim_id": "CLAIM-arq-20260807-registro-0336",

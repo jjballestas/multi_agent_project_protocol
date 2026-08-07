@@ -36,11 +36,22 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def workflow_steps(path: Path) -> list[tuple[str, dict[str, object], dict[str, object]]]:
-    """Return real steps nested under real workflow jobs."""
+def workflow_steps(path: Path) -> tuple[bool, list[tuple[str, dict[str, object], dict[str, object]]]]:
+    """Return trigger coverage and real steps nested under real workflow jobs."""
     document = yaml.safe_load(path.read_text(encoding="utf-8-sig"))
     if not isinstance(document, dict):
         raise ValueError(f"{path}: workflow must be a mapping")
+    # PyYAML uses YAML 1.1 and therefore parses an unquoted GitHub ``on`` key as True.
+    raw_triggers = document.get("on", document.get(True))
+    if isinstance(raw_triggers, str):
+        triggers = {raw_triggers}
+    elif isinstance(raw_triggers, list):
+        triggers = {str(item) for item in raw_triggers}
+    elif isinstance(raw_triggers, dict):
+        triggers = {str(item) for item in raw_triggers}
+    else:
+        triggers = set()
+    required_triggers = {"push", "pull_request"}
     jobs = document.get("jobs")
     if not isinstance(jobs, dict):
         raise ValueError(f"{path}: workflow must define a jobs mapping")
@@ -54,28 +65,77 @@ def workflow_steps(path: Path) -> list[tuple[str, dict[str, object], dict[str, o
         for raw_step in steps:
             if isinstance(raw_step, dict):
                 found.append((str(job_id), raw_job, raw_step))
-    return found
+    return required_triggers <= triggers, found
 
 
-def command_invokes_runner(command: str, relative_path: Path) -> bool:
-    """Recognize a direct Python invocation, not a textual mention such as echo."""
+def shell_guarantees_abort(job: dict[str, object], step: dict[str, object]) -> bool:
+    """Recognize GitHub shell modes that abort a multiline script on first failure."""
+    shell = step.get("shell")
+    if shell == "bash":
+        return True
+    runs_on = job.get("runs-on")
+    return shell is None and isinstance(runs_on, str) and runs_on.startswith(("ubuntu-", "macos-"))
+
+
+def command_gates_runner(
+    command: str,
+    relative_path: Path,
+    job: dict[str, object],
+    step: dict[str, object],
+) -> bool:
+    """Require one undecorated invocation, with a narrow safe multiline exception."""
     candidate = re.escape(relative_path.as_posix())
     python = r"(?:python(?:3(?:\.\d+)*)?(?:\.exe)?|py(?:\.exe)?(?:\s+-3)?)"
-    option = r"(?:\s+-[A-Za-z0-9]+)*"
     invocation = re.compile(
-        rf"^\s*{python}{option}\s+[\"']?{candidate}[\"']?(?:\s|$)",
+        rf"{python}\s+(?:{candidate}|\"{candidate}\"|'{candidate}')",
         re.IGNORECASE,
     )
-    return any(invocation.search(line.replace("\\", "/")) for line in command.splitlines())
+    lines = [
+        line.strip().replace("\\", "/")
+        for line in command.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    direct_invocations = [line for line in lines if invocation.fullmatch(line)]
+    if len(lines) == 1:
+        return len(direct_invocations) == 1
+    # GitHub's named bash shell runs with ``bash --noprofile --norc -eo pipefail``.
+    # A plain runner line therefore propagates failure even inside a multiline block.
+    return shell_guarantees_abort(job, step) and len(direct_invocations) == 1
+
+
+def condition_allows_execution(value: object) -> bool:
+    """Accept only conditions that do not select a branch or event-specific path."""
+    if value is None:
+        return True
+    if not isinstance(value, str):
+        return False
+    normalized = re.sub(r"\s+", "", value).lower()
+    if normalized.startswith("${{") and normalized.endswith("}}"):
+        normalized = normalized[3:-2]
+    return normalized in {"always()", "success()"}
+
+
+def failure_reaches_job(mapping: dict[str, object]) -> bool:
+    """Only an absent or literal false continue-on-error preserves the failure."""
+    return "continue-on-error" not in mapping or mapping["continue-on-error"] is False
 
 
 def step_gates_runner(
-    job: dict[str, object], step: dict[str, object], relative_path: Path
+    workflow_triggers: bool,
+    job: dict[str, object],
+    step: dict[str, object],
+    relative_path: Path,
 ) -> bool:
     command = step.get("run")
-    if not isinstance(command, str) or not command_invokes_runner(command, relative_path):
+    if not workflow_triggers:
         return False
-    return job.get("continue-on-error") is not True and step.get("continue-on-error") is not True
+    if "needs" in job or "needs" in step:
+        return False
+    if not condition_allows_execution(job.get("if")) or not condition_allows_execution(step.get("if")):
+        return False
+    if not failure_reaches_job(job) or not failure_reaches_job(step):
+        return False
+    return isinstance(command, str) and command_gates_runner(command, relative_path, job, step)
 
 
 def declarations(path: Path) -> list[dict[str, object]]:
@@ -157,11 +217,12 @@ def main() -> int:
     missing = sorted(existing_ids - declared_ids)
     stale = sorted(declared_ids - existing_ids)
     workflow_path = (root / args.workflow).resolve() if args.workflow else None
+    required_triggers_present = False
     steps: list[tuple[str, dict[str, object], dict[str, object]]] = []
     if workflow_path is not None:
         if workflow_path.is_file():
             try:
-                steps = workflow_steps(workflow_path)
+                required_triggers_present, steps = workflow_steps(workflow_path)
             except (OSError, ValueError, yaml.YAMLError) as exc:
                 errors.append(str(exc))
         else:
@@ -184,19 +245,35 @@ def main() -> int:
                 errors.append(f"{contract.id}: assertion boundary not found beside the test: {boundary}")
         if workflow_path is not None and steps:
             runner = owners[contract.id].relative_to(root)
-            if not any(step_gates_runner(job, step, runner) for _, job, step in steps):
+            if not any(
+                step_gates_runner(required_triggers_present, job, step, runner)
+                for _, job, step in steps
+            ):
                 errors.append(f"{contract.id}: runner is not executed by workflow: {runner}")
     if workflow_path is not None and steps:
         runners = {owners[contract.id].relative_to(root) for contract in contracts}
         executed_runners = {
-            runner for runner in runners if any(step_gates_runner(job, step, runner) for _, job, step in steps)
+            runner
+            for runner in runners
+            if any(
+                step_gates_runner(required_triggers_present, job, step, runner)
+                for _, job, step in steps
+            )
         }
         executed_contracts = sum(
-            any(step_gates_runner(job, step, owners[item.id].relative_to(root)) for _, job, step in steps)
+            any(
+                step_gates_runner(
+                    required_triggers_present,
+                    job,
+                    step,
+                    owners[item.id].relative_to(root),
+                )
+                for _, job, step in steps
+            )
             for item in contracts
         )
         print(
-            "FALSIFICATION_EXECUTION "
+            "FALSIFICATION_EXECUTION_GUARANTEED "
             f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)}"
         )
     print(
