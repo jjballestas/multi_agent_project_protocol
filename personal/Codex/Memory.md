@@ -9,8 +9,9 @@ Last updated: 2026-08-07 Europe/Madrid, TASK-0322 remediation iteration 2.
   subfamily has a 10-digit run and can carry a mobile number shifted one position.
 - No production code or tests changed. Collaboration, encoding, neutrality, diff,
   and runtime-drift gates passed before the commit.
-- TASK-0322 remains `in_progress` under the remediation claim until governed
-  delivery returns it to `in_review` and releases the claim.
+- Governed delivery commit `e2284a5d` returns TASK-0322 to `in_review`, releases
+  all Codex claims, and publishes the self-contained mailbox handoff requesting
+  independent Analista re-review. Codex did not review or ratify the work.
 
 ## 2026-08-07 - TASK-0335 implementation
 
