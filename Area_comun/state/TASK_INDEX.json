@@ -312,7 +312,7 @@
             "file": "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
             "id": "TASK-0327",
             "owner": "Codex",
-            "status": "blocked",
+            "status": "in_progress",
             "title": "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion",
             "type": "infra"
         },
@@ -370,6 +370,14 @@
             "owner": "Codex",
             "status": "ready",
             "title": "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+            "id": "TASK-0335",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no",
             "type": "infra"
         },
         {
