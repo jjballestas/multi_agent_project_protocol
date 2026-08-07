@@ -6344,7 +6344,7 @@ Veredicto `Area_comun/artifacts/Analista-TASK-0325-exencion-fecha-ast-verdict.md
     fuente / fuga-real / inocuo-anidado-A / inocuo-anidado-B con los 3 detectores candidatos.**
     La tabla decide sola; discutirlo en prosa no.
 
-- **Por que la fuga estrecha se escapa de TODO:** el contrato de colocacion de 0317 sí mata los
+- **Por que la fuga estrecha se escapa de TODO:** el contrato de colocacion de 0317 SI mata los
   bypasses **amplios** (rompen su afirmacion positiva sobre los 333), pero su familia muestrea solo
   `("", "Z", "+02:00", "-05:00", "-12:30")`. 0325 anade `+05:45/-09:45/+13:00/+14:00` pero **solo
   contra `DATE_RE`, nunca contra `contains_pii`**. Los dos muestreos son **disjuntos** -> el bypass
