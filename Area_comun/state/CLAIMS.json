@@ -80,6 +80,28 @@
             "updated_at": "2026-08-07T22:38:00Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-1-delivery",
+            "expires_at": "2026-08-08T00:52:00Z",
+            "notes": "Deliver TASK-0331 remediation iteration 1 to independent review and persist exact-commit evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-1-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-1-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediation-1.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T22:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-07T22:52:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-1-v2",
             "expires_at": "2026-08-08T06:40:00Z",
             "notes": "TASK-0331 remediation iteration 1 over existing implementation routes and embedded falsification inventory.",
@@ -97,7 +119,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T22:40:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0331",
             "updated_at": "2026-08-07T22:40:00Z"
         },

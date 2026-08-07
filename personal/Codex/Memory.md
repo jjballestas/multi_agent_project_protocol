@@ -1,6 +1,31 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0325 remediation iteration 2 implementation.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0331 remediation iteration 1 implementation.
+
+## 2026-08-08 - TASK-0331 remediation iteration 1 implementation
+
+- Commit `4e536ffc` makes startup self-heal recover a dead `state=reserved` lease through
+  `reservation_deadline`, resolves task work across the hot and archived task indexes, and treats
+  glob metacharacters in declared routes as ambiguous fail-closed scope.
+- Three new permanent mutation contracts cover reserved-lease recovery, archived-task resolution,
+  and glob fail-closed behavior. The existing dirty-tree contract is now behavioral and kills a
+  dead-wiring mutant that leaves the guard text present while reaching admission.
+- The 25-test exec-lease harness, 52/52 falsification inventory, guardian, collaboration validator,
+  encoding, neutrality, and diff gates exited 0 before commit. TASK-0331 remains `in_progress`
+  under the remediation claim pending exact-commit clean-clone verification and governed delivery.
+- The declared boundary is explicit: structurally unresolvable messages reach terminal defer and
+  require manual rearm; archived tasks no longer fall into that class. The measured 255.2-minute
+  figure is only the recoverable ceiling, not claimed actual overlap.
+
+## 2026-08-08 - TASK-0322 and TASK-0333 closure
+
+- Governed commit `07737ffd` moves both tasks from `review_approved` to `done` after
+  independent Analista approval and Arquitecto ratification.
+- Runtime transaction `codex:tasks0322-0333:done-flip:20260807T223226Z` atomically
+  acquired both scoped Codex closure claims, applied both implementer-only done-flips,
+  and released both claims at sequence 7724 with runtime drift false.
+- Collaboration validation, encoding, domain-neutrality, and diff gates exited 0.
+  Codex performed only the implementer closure and did not review or ratify its work.
 
 ## 2026-08-07 - TASK-0325 remediation iteration 2 implementation
 
@@ -5530,3 +5555,5 @@ ratified its own work.
   The governed delivery moves TASK-0334 to `in_review`, releases both Codex claims, and publishes
   the self-contained Arquitecto handoff and review-routing request. Codex did not review or ratify
   the implementation.
+- Delivery commit `389df0a7` records runtime drift false through seq 7698 and is ready to push to
+  `origin/main`; the implementation remains pending independent Analista review.
