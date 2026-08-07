@@ -73,6 +73,16 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_timestamp_exemption_is_phone_only_and_falsifiable",
     },
+    {
+        "id": "NEG-MEMORY-DATE-RANGE-VALIDATION",
+        "negative": "Restoring the broad timestamp grammar accepts out-of-range components.",
+        "mutation": "mutant_source = source.replace(narrow_date_re_source, broad_date_re_source)",
+        "boundaries": (
+            "self.assertIsNone(memory_db.DATE_RE.fullmatch(timestamp))",
+            "self.assertIsNotNone(mutant.DATE_RE.fullmatch(timestamp))",
+        ),
+        "exercised_by": "test_timestamp_ranges_reject_syntactic_non_dates",
+    },
 )
 
 
@@ -394,6 +404,7 @@ class MemoryDbTests(unittest.TestCase):
         self.assertEqual([], warnings)
 
     def test_timestamp_ranges_reject_syntactic_non_dates(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-RANGE-VALIDATION"""
         valid_boundaries = (
             "0000-01-01",
             "9999-12-31T23:59:59.123456Z",
@@ -429,6 +440,42 @@ class MemoryDbTests(unittest.TestCase):
                 )
                 self.assertEqual({}, accepted)
                 self.assertEqual(["rejected frontmatter key created_at"], warnings)
+
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        narrow_date_re_source = (
+            'DATE_RE = re.compile(\n'
+            '    r"^\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])"\n'
+            '    r"(?:T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,6})?"\n'
+            '    r"|(?:[01]\\d|2[0-3])[0-5]\\d[0-5]\\d)"\n'
+            '    r"(?:Z|[+-](?:(?:0\\d|1[0-3]):[0-5]\\d|14:00))?)?$"\n'
+            ')\n'
+        )
+        broad_date_re_source = (
+            'DATE_RE = re.compile(\n'
+            '    r"^\\d{4}-\\d{2}-\\d{2}"\n'
+            '    r"(?:T(?:\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?|\\d{6})"\n'
+            '    r"(?:Z|[+-]\\d{2}:\\d{2})?)?$"\n'
+            ')\n'
+        )
+        self.assertEqual(1, source.count(narrow_date_re_source))
+        mutant_source = source.replace(narrow_date_re_source, broad_date_re_source)
+        self.assertNotEqual(source, mutant_source)
+        with tempfile.TemporaryDirectory(prefix="memory-date-range-mutant-") as temp:
+            mutant_path = Path(temp) / "build_memory_db_mutant.py"
+            write(mutant_path, mutant_source)
+            spec = importlib.util.spec_from_file_location(
+                "build_memory_db_date_range_mutant", mutant_path
+            )
+            assert spec and spec.loader
+            mutant = importlib.util.module_from_spec(spec)
+            sys.modules[spec.name] = mutant
+            try:
+                spec.loader.exec_module(mutant)
+            finally:
+                sys.modules.pop(spec.name, None)
+            for timestamp in invalid_ranges:
+                with self.subTest(mutant=timestamp):
+                    self.assertIsNotNone(mutant.DATE_RE.fullmatch(timestamp))
 
     def test_timestamp_range_narrowing_reduces_carrier_population(self) -> None:
         """Measure the published 2.9% -> 0.05% carrier-population benchmark."""
