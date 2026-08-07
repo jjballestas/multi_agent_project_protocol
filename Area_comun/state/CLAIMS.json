@@ -67,6 +67,31 @@
             "updated_at": "2026-08-07T03:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Arquitecto-hygiene-lote14",
+            "expires_at": "2026-08-08T03:20:00Z",
+            "notes": "Higiene lote 14: los 2 GO muertos SUPERSEDIDOS por el re-armado, y el ciclo de veredictos de 0317-r5 y 0323.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Arquitecto-hygiene-lote14",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0320.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0320.md",
+                "Area_comun/mailbox/open/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0322.md",
+                "Area_comun/mailbox/archived/MSG-20260806-Arquitecto-to-Codex-GO-TASK-0322.md",
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5.md",
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0323.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0323.md",
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0317-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0317-r5.md",
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0323.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0323.md"
+            ],
+            "started_at": "2026-08-07T03:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260807",
+            "updated_at": "2026-08-07T03:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
