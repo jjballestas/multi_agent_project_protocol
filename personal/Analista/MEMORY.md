@@ -1,4 +1,4 @@
-﻿# MEMORY - Analista (voz analista; firma "Analista", antes "Claude-analista") - multi_agent_project_protocol
+# MEMORY - Analista (voz analista; firma "Analista", antes "Claude-analista") - multi_agent_project_protocol
 
 > FIRMA (2026-06-15, orden del operador): firmo como **Analista** (sin prefijo "Claude-", que confunde con
 > el arquitecto Claude). Mensajes from: Analista / to: Analista. Carpeta personal/Analista/ por ahora.
@@ -6,6 +6,73 @@
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+
+## Ultima actualizacion 2026-08-07 (46) - TASK-0333 el tercer lector y el inventario: OK-CLOSABLE
+
+- Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0333`. **SIN PRODUCTO EN ALCANCE.**
+- Entrega `303a1d70`, HEAD protocolar `330ef691`. Veredicto **OK-CLOSABLE** en `b462dd30`
+  (artifact `Area_comun/artifacts/Analista-TASK-0333-tercer-lector-inventario-verdict.md`).
+
+### Lo que el arreglo hace bien y lo verifique
+
+`dirty_worktree_paths` pasa a `--untracked-files=all` en el runtime vivo Y en el espejo enviado
+`examples/full_runtime_instance/`. Extraje las cinco funciones decodificadoras verbatim y las corri
+contra repos git REALES con mis payloads. AC1 reproducido (legacy ve `['work/']`, no-declarados `[]`,
+turno PASA con 2 ficheros ocultos); arreglado ve las 3 rutas y RECHAZA.
+
+**Matriz de mutacion aplicada AL FICHERO REAL** (no al sintetico), gateada por exit del runner:
+opcion borrada y **CODIGO MUERTO `[...][:4]`** mueren en el vivo Y en el espejo (4/4 exit 1). El
+contrato ejerce el mirror contra el repositorio real (`assert mirror_paths == expected_paths`), no
+lo compara por texto -- por eso el mutante de 0324 muere aqui. Las 5 funciones son **byte-identicas**
+live vs mirror.
+
+### La leccion nueva: ver mas ficheros no es ver todos los ficheros
+
+`--untracked-files=all` **NO muestra ficheros ignorados, ni siquiera bajo el propio directorio
+untracked**. Medido con `.gitignore` real: el turno declara sus 3 rutas exactas, `unreported=[]`,
+PASA, y deja `work/hidden/payload.log` y `rt_state/injected.py` sin declarar. Falsifica la frase del
+handoff "the turn gate now sees every file below an untracked directory". En este repo el ignore
+cubre `runtime/runs/`, `runtime/memory/`, `.protocol-tmp/`, `.agents/`, `secrets/`. La familia del
+COLAPSO DE DIRECTORIO queda cerrada; la del PUNTO CIEGO DEL GATE no.
+
+### El inventario estaba trazado sobre el sustantivo equivocado
+
+Confirme los cinco como todos los lectores de `git status` que decodifican rutas (barrido propio; el
+`.ps1` tiene UN solo punto de entrada `:643` con dos consumidores `:674`/`:706`). Tres precisiones:
+
+1. **La clase "sonda" SI decide algo.** Las aserciones de solo-lectura que comparan
+   `status --short` antes/despues son **ciegas**: inyecte `work/hidden/INJECTED.py` en un `work/` ya
+   untracked y la salida es identica. Pueden certificar "no toque el arbol" en falso.
+2. **Hay que inventariar "decodificadores de rutas operativas", no "lectores de git status".**
+   `peer_mailbox_cron.ps1:1086/:1251` usa `ls-files --others --exclude-standard -z` y hace ese
+   trabajo. Lo probe: **NO es ciego** al colapso (enumera fichero a fichero), asi que no hay cuarto
+   por esa via -- pero el inventario no lo habria cubierto.
+3. `connectors/git_readonly` **DENIEGA** `--untracked-files=all` y `--porcelain=v1`: el canal
+   sancionado de solo-lectura solo permite las dos formas CIEGAS. No abre agujero hoy (los cinco
+   lectores llaman a subprocess directo) pero es la superficie que se exporta.
+
+### R6: cableado en CI que no puede enrojecer el job
+
+El contrato esta declarado (`--inventory`, boundaries=7) y `validate.yml:283` lo ejecuta, pero es el
+**2 de 3** comandos en un bloque `run:` de un job `windows-latest` **sin `shell:`**. Reproduje el
+envoltorio de GitHub (`$ErrorActionPreference='stop'` + `exit $LASTEXITCODE`) con fallo-luego-exito:
+**exit 0**. Mismo defecto que medi en el CI real en 0330 (run 31195169744). NO se lo cobre a 0333:
+es de TASK-0330 y su remediacion 2 ya estaba enrutada en `b8caf658`, el commit padre inmediato.
+**Cobrar dos veces el mismo defecto a dos tareas distintas no es rigor, es ruido.**
+
+### Operativa
+
+Clon por hardlink desde la ruta local: 1 segundo (`.git` ya son 317 MB, el `gc` aguanta). Todo bajo
+`D:/Aegis_Scratch/mapp/` (DECISION-0104): `rv0333` anclaje intacto, `mut` para las mutaciones, `rig`
+para el banco propio. **Gotcha del entorno**: en el Bash tool, `Path("/d/...")` desde Python resuelve
+a `D:\d\...` -- hay que escribir `D:/...` en el codigo Python aunque el shell acepte `/d/`.
+**Aviso honesto que deje escrito**: `test_exec_lease_harness.py` salio exit 1 en
+`post_delivery_timeout_fired` con los seis gates encadenados y exit 0 aislado -- sensible a la carga,
+no regresion; un gate que se cae bajo carga miente algun dia en CI (R7). PRUNE DUE
+(cold_start_tokens 22323>=20000) senalado, NO corrido: es del Arquitecto.
+
+Bucle declarado: no aplica (OK-CLOSABLE). Tres tareas propuestas: R1 (ignore), R2 (conector), R4
+(sondas de solo-lectura), con el inventario del AC2 redefinido por "decodificador de rutas".
 
 ## Ultima actualizacion 2026-08-07 (45) - TASK-0331 admision con scope y atomica: CHANGE-REQUIRED
 
