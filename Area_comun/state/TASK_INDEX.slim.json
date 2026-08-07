@@ -40,12 +40,6 @@
             "owner": "Codex",
             "status": "in_progress",
             "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
-        },
-        {
-            "id": "TASK-0326",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca"
         }
     ],
     "view": "task_index.slim"

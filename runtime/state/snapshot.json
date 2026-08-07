@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "aac2af0a1db8814e9556191e65206ed54b3efe45875d9f128a32e608553165c9",
+  "canonical_hash": "a66dff0d3ce3df1c4081bffe534e81e55108dccfebb453ecbb952e333a3b109d",
   "integrity": {
-    "canonical_hash": "aac2af0a1db8814e9556191e65206ed54b3efe45875d9f128a32e608553165c9",
+    "canonical_hash": "a66dff0d3ce3df1c4081bffe534e81e55108dccfebb453ecbb952e333a3b109d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "23a791da40829ba3b2963ce73537fd012a236f7c1c6277d3f20703d4132e48a3",
-    "signature": "035adc9c0569d9c2213b1afae996ef4a75ee159983acb6d4410cb7b5252c2a06",
-    "up_to_seq": 7421
+    "prev_hash": "fb918836be68d1c6e40850b3f385040c461a6859047270443eac0904f651c782",
+    "signature": "dc7608643de3f7cdb2ee1f056dfcc22d8f28420b10d3a674a0b7bb81f208e508",
+    "up_to_seq": 7424
   },
   "state": {
     "aggregate_versions": {
@@ -974,6 +974,7 @@
       "CLAIM-arq-0281-0282-20260721": 1,
       "CLAIM-arq-0281-cierre-20260721": 1,
       "CLAIM-arq-0281-it3-20260721": 1,
+      "CLAIM-arq-20260807-ratifica-0326": 1,
       "CLAIM-arq-20260807-rechazo-0322-0325": 1,
       "CLAIM-arq-20260807-rechazo-0324": 1,
       "CLAIM-arq-alta0280-20260720": 1,
@@ -3024,7 +3025,7 @@
       "TASK-0323": 11,
       "TASK-0324": 15,
       "TASK-0325": 9,
-      "TASK-0326": 8,
+      "TASK-0326": 10,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3047,7 +3048,7 @@
       "protocol-prune": 44,
       "protocol-state": 1
     },
-    "events_applied": 6750,
+    "events_applied": 6753,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3282,6 +3283,9 @@
       "arq-rn2-v3-20260806T1930Z-1-task_status": 7240,
       "arq-rn2-v3-20260806T1930Z-2-task_upsert": 7241,
       "arq-rn2-v3-20260806T1930Z-3-claim": 7242,
+      "arq-rt-0": 7422,
+      "arq-rt-1": 7423,
+      "arq-rt-2": 7424,
       "arq-sup-0": 7363,
       "arq-sup-1": 7364,
       "arq-sup-2": 7365,
@@ -9801,5 +9805,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7421
+  "up_to_seq": 7424
 }
