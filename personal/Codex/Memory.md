@@ -14,8 +14,13 @@ Last updated: 2026-08-07 Europe/Madrid, during TASK-0325 implementation.
   grammar and rejected by the mutant.
 - The CI-wired memory suite passed 64 tests, the falsification inventory passed
   36/36, and collaboration, encoding, neutrality, and diff gates exited 0.
-- TASK-0325 remains `in_progress` under the Codex maker claim pending exact-commit
-  clean-clone recomputation and governed delivery to independent review.
+- Exact implementation commit `70a22d88` passed 64 memory tests, 36/36
+  falsification inventory, collaboration, encoding, neutrality, diff, and clean
+  status in a detached clean clone.
+- Delivery commit `aed78d04` moves TASK-0325 to `in_review`, releases every maker
+  claim, and publishes the self-contained handoff plus response-routed review
+  request. Runtime events reached sequence 7377 with drift false. Codex did not
+  review or ratify the work.
 
 ## 2026-08-07 - TASK-0322 implementation resumed
 
