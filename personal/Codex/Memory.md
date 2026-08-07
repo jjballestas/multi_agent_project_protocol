@@ -5468,3 +5468,19 @@ ratified its own work.
 - Delivery commit `f1e302cc` returns TASK-0330 to `in_review`, releases both remediation claims,
   publishes the exact CI evidence and honest counts, and requests independent Analista re-review.
   Runtime drift is false; Codex did not review or ratify the implementation.
+
+## 2026-08-07 - TASK-0336 implementation and TASK-0330 ratified close
+
+- Commit `68349d7f` makes the falsification wiring gate certify four factors: workflow/job/step
+  reachability, end-anchored direct invocation, shell exit propagation, and job-level failure
+  propagation. Its affirmative output is now explicitly bounded as
+  `FALSIFICATION_EXECUTION_GUARANTEED`.
+- `NEG-FALSIFICATION-RUNNER-WIRING` has exactly the thirteen M1-M13 outcomes as load-bearing
+  boundaries: twelve unsafe mutants die and the legitimate multiline bash block passes. An extra
+  `--help` no-op is rejected by the anchored invocation rule.
+- The canonical workflow remains unchanged and certifies 8/8 runners and 48/48 contracts under the
+  strengthened rule. The falsification tests, all three revived TASK-0330 runner suites,
+  collaboration validator, encoding, neutrality, and drift gates exited 0.
+- TASK-0330 is `done` under Arquitecto's ratified partition without restating the old global
+  certification. TASK-0336 is `in_review`, every Codex claim is released, and the self-contained
+  handoff requests independent review. Codex has not reviewed or ratified the work.
