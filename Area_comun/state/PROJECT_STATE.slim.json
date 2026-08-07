@@ -13,12 +13,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0325",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
-        },
-        {
             "id": "TASK-0327",
             "owner": "Codex",
             "status": "in_review",
