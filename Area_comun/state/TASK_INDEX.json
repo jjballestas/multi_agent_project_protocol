@@ -285,14 +285,6 @@
             "type": "infra"
         },
         {
-            "file": "Area_comun/tasks/TASK-0321-diskproof-emparejamiento-renombrados.md",
-            "id": "TASK-0321",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv",
-            "type": "infra"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
             "id": "TASK-0322",
             "owner": "Codex",

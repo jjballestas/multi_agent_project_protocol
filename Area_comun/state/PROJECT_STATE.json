@@ -79,12 +79,6 @@
             "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318"
         },
         {
-            "id": "TASK-0321",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El mismo defecto de emparejamiento de renombrados sigue vivo en Get-WorktreeDiskProof: la prueba de disco se corrompe con un git mv"
-        },
-        {
             "id": "TASK-0322",
             "owner": "Codex",
             "status": "ready",
