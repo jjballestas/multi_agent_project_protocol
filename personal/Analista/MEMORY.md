@@ -7195,3 +7195,81 @@ RED; la linea GREEN previa es la autoritativa.
 Claim `CLAIM-20260807-Analista-TASK-0335-review` creado tras escribir los artefactos
 (artifacts-before-claim) y **liberado en el mismo turno** tras el push. Bucle declarado: maximo 2
 iteraciones, escalo al operador a la tercera.
+
+---
+
+## 2026-08-07 -- TASK-0336 (gate de cableado por los cuatro factores). Veredicto CHANGE-REQUIRED estrecho, iteracion 1 de 2
+
+Commits `b1a0d123` (veredicto) + `7450605f` (release del claim). Anclaje `185d34c6`; la punta avanzo
+a `0815b3b9` a mitad de la revision sin tocar rutas de alcance -- lo verifique con `git diff --stat`
+por ruta antes de firmar, en vez de rehacer el clon.
+
+### La tecnica que valio la revision: MATRIZ DE FALSABILIDAD POR FRONTERA
+
+El foco pedia "que cada uno de los trece mutantes MATE". La forma ingenua -- correr el runner con una
+guarda relajada y mirar que assert cae -- **solo ensena el PRIMERO**, porque la cadena de `assert`
+aborta ahi. Con eso, seis de trece fronteras parecian no matar nunca.
+
+La forma correcta: **evaluar cada fixture POR SEPARADO, fuera de la cadena de asserts**, contra N
+relajaciones DIRIGIDAS del checker (una por clausula de guarda, mas variantes que discriminan mitades:
+ancla-al-inicio vs ancla-al-final; solo-bool-rechazado vs solo-string-rechazado). Frontera portante =
+alguna relajacion la voltea. Resultado real: 13/13 portantes, cero vacuas.
+
+Dos subproductos que la matriz regala gratis y que ninguna otra tecnica da:
+
+1. **Relajacion que no voltea NADA = guarda sin frontera.** `R6` (borrar `failure_reaches_job(job)`)
+   no movio ni una: la guarda de `continue-on-error` de JOB existe y funciona, pero ningun mutante la
+   ejerce. Un maker puede borrarla manana con el contrato verde. Es el criterio del AC4 aplicado a la
+   guarda en vez de al escape.
+2. **Hay que incluir relajaciones que ENDURECEN**, no solo que aflojan, o el lado de ACEPTACION del
+   contrato (la unica frontera `== 0`) queda sin probar. `R14` (quitar la excepcion de bash) es lo
+   unico que voltea M2.
+
+### El hallazgo: shell NOMINAL vs shell EFECTIVO
+
+El gate concede la excepcion de bloque multilinea mirando `shell: bash` (o `runs-on: ubuntu-*`) y
+contando una invocacion. **Nunca mira si otra linea del bloque desarma el modo.** Probado con bash
+real bajo la invocacion exacta de GitHub (`bash --noprofile --norc -eo pipefail script`), runner que
+sale con 3: `set +e` / `trap 'exit 0' ERR` / `set +e -o pipefail` -> **paso exit 0**, y el checker
+imprime `FALSIFICATION_EXECUTION_GUARANTEED runners=1/1 contracts=1/1` con exit 0.
+
+**Regla general:** cuando un gate acepta algo razonando sobre un MODO DECLARADO (shell, flag, config),
+la pregunta adversarial no es "el modo es correcto?" sino "**que puede hacer el contenido para
+desarmar el modo?**". Aqui bastaban dos palabras dentro del bloque que el gate ya estaba leyendo.
+
+### Medir el shell, no argumentarlo
+
+El maker escribio la justificacion como comentario ("a plain runner line therefore propagates
+failure"). No la discuti: escribi los seis bloques a `s.sh` y los corri con los flags exactos de
+GitHub. Seis lineas de bash zanjaron lo que una discusion sobre semantica de shells no zanja.
+**Un desacuerdo sobre semantica de shell se resuelve ejecutando el shell.**
+
+### Honestidad del muestreo: reportar tambien la sonda que NO escapo
+
+Probe `runner & / wait $! || true / runner` esperando escape. Sale con 3: la aceptacion del gate era
+correcta. Lo escribi en el veredicto. Un muestreo del que solo se publican los aciertos no es un
+muestreo. Igual con cuatro "slips" del primer barrido que resultaron ser **YAML mal formado mio**
+(`- if: ...` seguido de `- run: ...` crea DOS pasos, no uno): los rehice con la clave y el `run:` en
+el MISMO item y tres de los cuatro desaparecieron. **Antes de firmar un slip sobre un fixture YAML,
+verificar que el fixture dice lo que crees.** El propio contrato del maker lo hacia bien -- copiar su
+forma habria evitado el rodeo.
+
+### Trampa del clon superficial
+
+`git clone --depth 1` -> `validate_collaboration_state.py` da **exit 1** con
+`commit_trailers could not scan git history from 57f6250f`. **No es un rojo del entregable**: es la
+historia ausente. `git fetch --depth 900` (810 commits en el rango) y da exit 0. El clon superficial
+miente en la direccion CONTRARIA a la habitual (el arbol caliente miente en verde; el superficial
+miente en rojo). Declararlo siempre en el anclaje.
+
+### Operativa
+
+`git clone --depth 1 --no-local file:///D:/...` = 1,4 s (evita los ~7 GB de objetos sueltos), luego
+profundizar solo si un gate necesita historia. Sandbox de mutacion aparte (`mut/`) copiando solo
+`scripts/` + `examples/` (3,3 MB): el runner usa `ROOT = parents[1]`, asi que esa estructura basta.
+Clon en `D:/Aegis_Scratch/mapp/r0336/{cc,mut}`; sondas en el scratchpad de sesion.
+
+Forma del intent de claim por CLI (la del event log NO sirve tal cual): top-level
+`{"claim": {"op": "acquire", "claim_id": ..., "idempotency_key": ..., "claim": {...anidado...}}}`.
+`--intent <fichero>`, no `--intent-file`. Claim creado tras escribir los artefactos y **liberado en
+el mismo turno** tras el push. Bucle: maximo 2 iteraciones, escalo al operador a la tercera.
