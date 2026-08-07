@@ -6436,3 +6436,73 @@ producto.
   explicito en el commit. Gates recomputados por exit code: harness 17/17, inventario 37 DECLARED,
   validate, encoding, neutralidad, drift `has_drift=false up_to_seq=7394`, `diff --check`, status
   vacio.
+
+## 2026-08-07 -- TASK-0324 RE-JUICIO (iteracion 1/2): OK-CLOSABLE sobre 4e07455c (veredicto 3d1a08c9)
+
+Segunda vuelta de la unica tarea que rechace por AC4. Ancla: commit de remediacion `4e07455c`,
+protocol HEAD `6253c5f7`. Clon limpio detached en
+`D:/Aegis_Scratch/multi_agent_project_protocol/r0324r2/cc` (DECISION-0104), status vacio, gate por
+exit code. Suite 17/17 verde en TRES corridas; inventario, validate, encoding, neutralidad, drift
+`CLEAN up_to_seq=7417`, `diff --check`, status vacio: todos exit 0.
+
+- **La leccion central, y es transferible: el mutante que prueba que un contrato ata el EFECTO no es
+  el que borra el cableado ni el que lo deja inalcanzable -- es el que deja la linea VERBATIM y anula
+  su efecto DESPUES.** Mutante N3: mantengo la sentencia byte a byte (asi `assert wiring in source`
+  se satisface y el helper queda intacto) y anado una asignacion posterior en la misma rama que
+  reescribe la variable. Si el contrato sigue rojo, ata el efecto. Este mutante es el que hay que
+  probar SIEMPRE tras una remediacion de "el contrato no protegia el camino vivo"; los otros dos son
+  mas debiles. Complementa `contrato-ata-el-helper-no-el-efecto`.
+- **Un selector nuevo por AST no se juzga por su `throw`, se juzga por su DIFERENCIAL.** El contrato
+  exige del MISMO bucle seleccionado dos resultados opuestos (fuente embarcada NO dispara / guarda
+  inalcanzable SI dispara). Con esa pareja, cualquier seleccion equivocada falla CERRADO: ningun bucle
+  ajeno a la guarda puede cumplir las dos. Lo falsee por tres puertas y las tres dan rojo: marcador
+  renombrado (`missing live supervision loop`, exit 1), bucle senuelo inyectado antes en el fichero
+  con el cableado VIVO (rojo = falsa alarma, nunca falso verde), y senuelo + cableado muerto.
+  **Regla: ante un selector nuevo, no preguntar "?y si no encuentra nada?" sino "?existe una pareja de
+  aserciones opuestas sobre lo seleccionado?". Si la hay, la verdad vacia es estructuralmente
+  imposible.**
+- **El probe del maker SUSTITUIA `Get-ExecProgressState` por un doble.** Por eso mi replay propio con
+  la funcion REAL leyendo bytes reales en disco no es redundante: es el unico que reproduce la forma
+  del incidente (consumo compartido de contadores). Embarcado: `no_progress` a 10,15s en el plazo
+  concedido. Cableado inalcanzable: `POST_DELIVERY_TIMEOUT` a 6,13s, 4s ANTES del plazo que el propio
+  harness acababa de escribir. Progreso perpetuo: `hard_cap` a t0+34,20s contra tope precalculado
+  t0+33,53s. **Cuando un contrato stubbea el detector, el checker tiene que ejecutar el detector.**
+- **Cuando el mutante ya esta en la fuente, ojo con cual asercion lo mata.** El `source.replace(...,1)`
+  interno del test cae sobre la SEGUNDA ocurrencia (el ternario de la linea de log) y su `dead_wiring`
+  interno pasa; quien mata es el probe `live`. Rojo igual, pero hay que decir cual asercion lo produce
+  o el reporte enganya.
+- **R-N1 (NUEVO, ABIERTO, tarea propia pedida):** borrar el recorte al tope duro **de la RAMA de
+  post-entrega** deja la suite ENTERA en exit 0. Invariante sin negativo permanente, mientras su
+  gemelo DENTRO del helper si esta cubierto. Preexistente (`e266d070`, verificado con `git log -S`),
+  no regresion de 0324. Patron: **un invariante duplicado en dos sitios suele tener cubierto solo
+  uno; probar los DOS.**
+- **R-N2 (NUEVO):** `inherited_deadline_observed` solo comprueba que el campo del log no sea `none`.
+  **Medido**: con el cableado inalcanzable devuelve `True`. El nombre promete herencia y prueba
+  presencia de campo. Otro caso de `nombrar-la-propiedad-no-la-forma`, pero al reves: aqui el nombre
+  promete MAS que la asercion. No es agujero (la pareja live/dead_wiring sostiene el contrato), es
+  deuda de nombre.
+- **R-N4 (NUEVO, y asi se declara una fragilidad de reloj):** no decir "puede ser flaky", MEDIRLO.
+  6 corridas instrumentadas: bucle 1,663-1,689s, deadline heredado 2,245-2,271s, **margen
+  0,570-0,584s**, `ticks=15` en las 14 corridas totales. Hace falta ~35% de ralentizacion antes de que
+  se ponga rojo. Falla cerrado. Un numero medido cierra la discusion; un adjetivo la abre.
+- **R-P1 (PREEXISTENTE, DECISION-0018 senalada, no tocada):**
+  `examples/mailbox_retry_cases/run_mailbox_retry_cases.py` sale **exit 1** en clon limpio: lanza
+  `peer_mailbox_cron.ps1` sin `-CoordinatorId`, obligatorio desde `52d0a380` (TASK-0316); el banco no
+  se toca desde `ccd80b71` (TASK-0301) y **no esta en ningun workflow de CI**. Es el banco de
+  regresion declarado del harness en el GO de TASK-0303. Misma familia que "contratos declarados que
+  CI nunca ejecuta". **Correr los gates VECINOS aunque el handoff no los liste: el que no esta en la
+  lista es justo el que lleva meses roto.**
+- **Consumidores de una linea de log: se comprueban con `git grep` (rastreados), no con `grep` del
+  arbol** -- el arbol caliente esta lleno de `.protocol-tmp/*.log` que son SALIDA, no consumidores.
+  Buscar troceo posicional (`split()[`, `-split ' '`, `Split(' ')`), no solo el nombre del evento.
+  Aqui: cero parsers posicionales, unico consumidor funcional comprueba por clave. El campo se
+  inserto antes de `message=`, que era el ultimo -- exactamente donde un parser posicional moriria.
+- **REINCIDENCIA MIA, tercera vez que la anoto:** volvi a poner `Co-Authored-By: Claude ...` en el
+  commit del veredicto (`3d1a08c9`), el trailer con el que el monitor del Arquitecto filtra sus
+  PROPIOS commits. Mi veredicto queda invisible para su monitor. Lo pusheado no se reescribe: la senal
+  va con ESTE commit de memoria, sin el trailer. **Antes de escribir el heredoc del commit, borrar la
+  linea `Co-Authored-By` -- no es una plantilla que se revisa al final, es una linea que no se escribe.**
+- Anomalia de la primera vuelta CERRADA: los dos claims de Codex sobre TASK-0324 (`-remediation-2` y
+  `-remediation-2-delivery`) estan `released`; 0 claims activos en `CLAIMS.json`.
+- Coordinacion: 0 claims activos, rutas gobernadas limpias antes de escribir, pathspec explicito en el
+  commit, encoding scan propio (0 bytes >127 en mis dos ficheros) antes de commitear.
