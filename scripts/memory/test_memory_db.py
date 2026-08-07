@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import ast
 import importlib.util
 import json
 import random
@@ -82,6 +83,26 @@ FALSIFICATION_CONTRACTS = (
             "self.assertIsNotNone(mutant.DATE_RE.fullmatch(timestamp))",
         ),
         "exercised_by": "test_timestamp_ranges_reject_syntactic_non_dates",
+    },
+    {
+        "id": "NEG-MEMORY-DATE-EXEMPTION-NO-CONTINUE",
+        "negative": "An early continue in the contains_pii item loop bypasses later checks.",
+        "mutation": "mutant_source = source.replace(normalized_line, early_continue + normalized_line)",
+        "boundaries": (
+            "self.assertEqual([], source_continues)",
+            "self.assertNotEqual([], mutant_continues)",
+        ),
+        "exercised_by": "test_contains_pii_item_loop_has_no_early_continue",
+    },
+    {
+        "id": "NEG-MEMORY-DATE-OFFSET-COVERAGE",
+        "negative": "Restricting valid timezone offsets outside the sampled family rejects legitimate timestamps.",
+        "mutation": "mutant_source = source.replace(offset_grammar, restricted_offset_grammar)",
+        "boundaries": (
+            "self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))",
+            "self.assertIsNone(mutant.DATE_RE.fullmatch(timestamp))",
+        ),
+        "exercised_by": "test_valid_offset_complement_is_falsifiable",
     },
 )
 
@@ -597,6 +618,77 @@ class MemoryDbTests(unittest.TestCase):
             for timestamp in timestamps:
                 with self.subTest(implementation="mutant", timestamp=timestamp):
                     self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))
+
+    def test_contains_pii_item_loop_has_no_early_continue(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-EXEMPTION-NO-CONTINUE"""
+
+        def contains_pii_loop(source_text: str) -> ast.For:
+            tree = ast.parse(source_text)
+            functions = [
+                node
+                for node in tree.body
+                if isinstance(node, ast.FunctionDef) and node.name == "contains_pii"
+            ]
+            self.assertEqual(1, len(functions))
+            loops = [node for node in functions[0].body if isinstance(node, ast.For)]
+            self.assertEqual(1, len(loops))
+            return loops[0]
+
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        source_continues = [
+            node for node in ast.walk(contains_pii_loop(source)) if isinstance(node, ast.Continue)
+        ]
+        self.assertEqual([], source_continues)
+
+        normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+        early_continue = (
+            "        if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
+            "            continue\n"
+        )
+        self.assertEqual(1, source.count(normalized_line))
+        mutant_source = source.replace(normalized_line, early_continue + normalized_line)
+        self.assertNotEqual(source, mutant_source)
+        mutant_continues = [
+            node
+            for node in ast.walk(contains_pii_loop(mutant_source))
+            if isinstance(node, ast.Continue)
+        ]
+        self.assertNotEqual([], mutant_continues)
+
+    def test_valid_offset_complement_is_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-OFFSET-COVERAGE"""
+        valid_offsets = (
+            "2026-06-19T09:28:23+05:45",
+            "2026-06-19T09:28:23-09:45",
+            "2026-06-19T09:28:23+13:00",
+            "2026-06-19T09:28:23+14:00",
+        )
+        for timestamp in valid_offsets:
+            with self.subTest(implementation="source", timestamp=timestamp):
+                self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))
+
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        offset_grammar = '    r"(?:Z|[+-](?:(?:0\\d|1[0-3]):[0-5]\\d|14:00))?)?$"\n'
+        restricted_offset_grammar = '    r"(?:Z|[+-](?:0\\d|1[0-2]):(?:00|30))?)?$"\n'
+        self.assertEqual(1, source.count(offset_grammar))
+        mutant_source = source.replace(offset_grammar, restricted_offset_grammar)
+        self.assertNotEqual(source, mutant_source)
+        with tempfile.TemporaryDirectory(prefix="memory-date-offset-mutant-") as temp:
+            mutant_path = Path(temp) / "build_memory_db_mutant.py"
+            write(mutant_path, mutant_source)
+            spec = importlib.util.spec_from_file_location(
+                "build_memory_db_date_offset_mutant", mutant_path
+            )
+            assert spec and spec.loader
+            mutant = importlib.util.module_from_spec(spec)
+            sys.modules[spec.name] = mutant
+            try:
+                spec.loader.exec_module(mutant)
+            finally:
+                sys.modules.pop(spec.name, None)
+            for timestamp in valid_offsets:
+                with self.subTest(implementation="mutant", timestamp=timestamp):
+                    self.assertIsNone(mutant.DATE_RE.fullmatch(timestamp))
 
     def test_p12_empty_supersedes_is_valid_and_produces_no_edge(self) -> None:
         accepted, warnings = memory_db.validate_metadata(
