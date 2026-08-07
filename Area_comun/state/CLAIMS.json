@@ -405,6 +405,22 @@
             "updated_at": "2026-08-07T11:57:58Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-fifth-red-question",
+            "expires_at": "2026-08-07T19:55:36Z",
+            "notes": "Publish the TASK-0330 fifth-red stop question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-fifth-red-question",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-fifth-red.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T13:55:36Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T13:55:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330-fourth-red-memory",
             "expires_at": "2026-08-07T19:14:00Z",
             "notes": "Persist TASK-0330 fourth-red checkpoint and correct mailbox whitespace.",

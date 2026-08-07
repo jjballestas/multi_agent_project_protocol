@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "a9d3bc986bce5e12a559cebbf9d1d5ba27df333133cdec3463c70d916efa7336",
+  "canonical_hash": "3c587868f3703fed6b633abe5670ac196de9e5bfcdc5ecef49af99032dd9c1c1",
   "integrity": {
-    "canonical_hash": "a9d3bc986bce5e12a559cebbf9d1d5ba27df333133cdec3463c70d916efa7336",
+    "canonical_hash": "3c587868f3703fed6b633abe5670ac196de9e5bfcdc5ecef49af99032dd9c1c1",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "cb698911399a3e35ed56d2b78e4917eeef9982999e60f0e545e12e62af34054c",
-    "signature": "a767aab87d40414a7cbd86a9775357f7f61598dcdf6b83240309e87798e83700",
-    "up_to_seq": 7540
+    "prev_hash": "36d5e559f1b7d46b4fe469f8c6082d119f43fdb1c612a53ebe27bb29b3c9cd51",
+    "signature": "4209b74bc58830eb2a2a8e6b5fdfd7be9aaf6a54d59a4e1f479eb38a4762052a",
+    "up_to_seq": 7543
   },
   "state": {
     "aggregate_versions": {
@@ -3054,7 +3054,7 @@
       "TASK-0327": 8,
       "TASK-0328": 2,
       "TASK-0329": 2,
-      "TASK-0330": 26,
+      "TASK-0330": 29,
       "TASK-0331": 9,
       "TASK-0332": 2,
       "TASK-0333": 2,
@@ -3081,7 +3081,7 @@
       "protocol-prune": 44,
       "protocol-state": 1
     },
-    "events_applied": 6869,
+    "events_applied": 6872,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6573,6 +6573,9 @@
       "codex:task0327:ready-to-in-progress:20260807T132704Z": 7536,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
+      "codex:task0330:fifth-red-question-acquire:20260807T135536Z": 7541,
+      "codex:task0330:fifth-red-question-release:20260807T135536Z": 7543,
+      "codex:task0330:fifth-red-to-blocked:20260807T135536Z": 7542,
       "codex:task0330:fourth-red-memory-acquire:20260807T131400Z": 7533,
       "codex:task0330:fourth-red-memory-release:20260807T131400Z": 7534,
       "codex:task0330:fourth-red-question-acquire:20260807T131100Z": 7530,
@@ -9954,5 +9957,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7540
+  "up_to_seq": 7543
 }

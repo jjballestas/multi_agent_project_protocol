@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0325 remediation implementation.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0330 fifth revived-suite red.
+
+## 2026-08-07 - TASK-0330 stopped on fifth revived-suite red
+
+- Commit `76a64e79` checkpoints the authorized fourth-red repair before blocking again.
+- The deleted-residue real-loop fixture now declares a disjoint task `scope_routes`, preserving
+  the intended aging path, while a separate exercise anchors fail-closed rejection with
+  `message_scope_ambiguous` when no usable scope is declared.
+- The revived mailbox retry suite then exposed the explicit fifth-red stop condition in
+  `run_unreadable_head_case`: both control and instrumented candidates defer on
+  `active_external_claim`, so the instrumented case never reaches its expected unreadable-ledger
+  terminal state. No fifth-red remediation has been applied.
+- Collaboration, encoding, neutrality, and diff gates exited 0 before the checkpoint commit.
+  The complete retry suite remains red by design pending Arquitecto direction.
 
 ## 2026-08-07 - TASK-0325 remediation implementation
 
