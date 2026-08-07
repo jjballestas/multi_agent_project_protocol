@@ -7,6 +7,71 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (48) - TASK-0334 repos embebidos: CHANGE-REQUIRED (iter 1 de 2)
+
+- Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0334`. **SIN PRODUCTO EN ALCANCE.**
+- Entrega `7692a561`; veredicto **CHANGE-REQUIRED** en `f795d04a`
+  (artifact `Area_comun/artifacts/ANALISTA-TASK-0334-repo-embebido-invisible-veredicto.md`).
+- Gates en clon limpio sobre el commit exacto, por exit code: harness 22/22, contratos 49/49 y 8/8
+  cableados, validate, encoding, neutralidad, drift 0, arbol vacio.
+
+### Leccion 1: arreglar la CEGUERA de un lector puede romper OTRO consumidor del mismo lector
+
+El fix hace que `Get-GitStatusPorcelainUtf8` / `dirty_paths` interroguen cada repo embebido por
+separado. Correcto para `dirty_claimed_route` (sobre-detectar VETA = protege). Pero el MISMO lector
+alimenta `Get-StagedResidueState`, donde sobre-detectar **BLOQUEA** el exec del peer. **Direcciones
+de seguridad opuestas sobre un lector compartido.** Al interrogar el embebido se descarta el
+`.gitignore` del padre: en este hub `.protocol-tmp/` esta ignorado y ahi viven 3 de los 6 embebidos
+-> +1471 rutas. Falsacion: fixture con la forma del hub -> pre-fix `RESIDUE_STATE=none`, post-fix
+`RESIDUE_STATE=live`. **Al revisar un lector compartido: enumerar TODOS sus consumidores y preguntar
+en que direccion es segura la sobre-deteccion en cada uno.**
+
+### Leccion 2: "no dispara hoy" no es "no dispara" -- decir POR QUE no dispara
+
+Los 6 embebidos tienen mtime de 14 a 45 dias, asi que hoy caen en `aborted` (solo loguea) y no en
+`live`. Es casualidad de fechas, no diseno. Medir las mtimes y **escribir la condicion exacta que lo
+enciende** (una escritura dentro de la ventana de `AbortedResidueMinutes`) convierte "creo que es
+grave" en un hecho comprobable.
+
+### Leccion 3: el coste hay que medirlo en el lector que DE VERDAD corre
+
+El handoff media solo Python (walk 0.06 s). El de la hot path es el de PowerShell: walk 0.748 s,
+status compuesto 1.490 s, `Get-WorktreeDiskProof` 0.847 -> 2.990 s y payload 153 KB -> 534 KB,
+calculado DOS veces por rollback y comparado byte a byte. **Un coste declarado en el lenguaje
+equivocado no responde el foco.**
+
+### Leccion 4: mutante de codigo muerto -- construir la forma DURA, no fiarse de la del commit
+
+El mutante del commit sustituye el punto de llamada (la funcion queda definida = ya es "presente
+pero inalcanzable"). La forma mas dura es **definida Y llamada pero neutralizada por dentro**
+(`return` al principio del cuerpo). La construi en los dos lectores: contrato rojo en ambos ->
+muertos. Un `assert linea in source` habria sobrevivido a las dos.
+
+### Leccion 5: fail-closed se comprueba en los CONSUMIDORES, y siempre con control positivo
+
+`ok=false` no es un veto: hay que ver que `Get-StagedResidueState` da `unknown` (->
+`Register-PreExecDefer`) y `Get-WorktreeDiskProof` da `$null` (-> `ROLLBACK_DEFER`), y que el
+sweeper no produce decision de kill. Y **el control positivo es obligatorio**: el mismo fixture sin
+claim tiene que dar `action=kill`, o el test de fail-closed es vacio.
+
+### O1 encontrado de paso (fuera de alcance, DECISION-0018)
+
+`process_info()` de `sweep_cron_zombies.py` devuelve `None` para PIDs **vivos** en esta maquina:
+`Get-CimInstance` ya entrega `CreationDate` como `DateTime`, asi que
+`ManagementDateTimeConverter::ToDateTime` lanza y el powershell sale 1. Toda lease viva sale
+`cleanup_only / process_dead` -> con `--kill` se le borran lock y lease a un proceso corriendo, y ese
+camino retorna ANTES de `dirty_claimed_route`. Lo descubri porque el end-to-end del camino
+destructivo no arrancaba. **Cuando un experimento no arranca, el motivo suele ser un hallazgo.**
+
+### Operativa
+
+`git clone --local --no-checkout` (instantaneo, historia completa) a `D:/Aegis_Scratch/mapp0334/cc`.
+Sondas PowerShell extrayendo funciones con el `function_loader` por AST del propio
+`test_exec_lease_harness.py` -- permite ejecutar UNA funcion del harness contra un `$Root` de fixture
+sin arrancar el cron. Para probar el guard de residuo contra el hub vivo hay que apuntar
+`$ResiduePath` a scratch: la funcion ESCRIBE ese fichero. Comparar pre/post extrayendo el fuente
+viejo con `git show <commit>^:<path>`.
+
 ## Ultima actualizacion 2026-08-07 (47) - TASK-0330 re-juicio iter 2: CHANGE-REQUIRED + ESCALADO
 
 - Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0330-r2`. **SIN PRODUCTO EN ALCANCE.**
