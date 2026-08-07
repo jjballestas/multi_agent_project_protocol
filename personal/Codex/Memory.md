@@ -1,6 +1,22 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0327 delivery.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0335 implementation.
+
+## 2026-08-07 - TASK-0335 implementation
+
+- Implementation commit `dbe9a508` replaces positional RETRY_EXHAUSTED substring checks with
+  parsed key/value assertions over terminal state, expected watchdog signal, and expected cause.
+- The permanent negative now exercises both falsification directions: the bad-order mutant never
+  reaches terminal, while the wrong-cause mutant reaches terminal but fails the expected-cause
+  property.
+- Complete runner exploration repaired every remaining stale fixture through the tail: two more
+  positional log checks, four scope-ambiguous focused fixtures, and three main-loop scope/claims
+  fixtures. Production code is untouched.
+- The full mailbox retry runner and harness suite pass; CI executes 48/48 contracts across 8/8
+  runners; collaboration, encoding, neutrality, and diff gates pass.
+- Governed delivery commit `70abf878` moves TASK-0335 to `in_review`, releases both maker claims,
+  publishes the self-contained handoff, and asks Arquitecto to route independent Analista review.
+  Codex has not reviewed or ratified the implementation.
 
 ## 2026-08-07 - TASK-0327 implementation
 
