@@ -359,7 +359,7 @@ class MemoryDbTests(unittest.TestCase):
             "CAMBIO", "CONSULTA", "COORD", "DIRECTIVA", "FIRMA", "GO",
             "RECONCILE", "REPORTE", "RESP", "RESPUESTA",
         }
-        self.assertEqual(59, len(memory_db.TYPE_VALUES))
+        self.assertEqual(60, len(memory_db.TYPE_VALUES))
         self.assertFalse(instance_values & memory_db.TYPE_VALUES)
         template = json.loads(
             (ROOT / "Area_comun/protocol/MEMORY_INDEX_POLICY.template.json").read_text(

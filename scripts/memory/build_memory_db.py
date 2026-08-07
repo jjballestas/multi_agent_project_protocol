@@ -76,7 +76,7 @@ TYPE_VALUES = {
     "DIRECTIVE", "HANDOFF", "INFO", "QUESTION", "REMINDER", "REQUEST",
     "RESPONSE", "REVIEW-RESPONSE", "REVIEW_REQUEST",
     "REVIEW_RESULT", "REVIEW_VERDICT", "TASK_ASSIGNMENT", "adversarial_review",
-    "anomaly", "build", "connector", "coordination", "design", "design-spec",
+    "anomaly", "artifact", "build", "connector", "coordination", "design", "design-spec",
     "doc", "docs", "evidence", "fix", "handoff", "infra", "product",
     "protocol", "requirement", "review-verdict", "review_result",
     "review_verdict", "status_note",
