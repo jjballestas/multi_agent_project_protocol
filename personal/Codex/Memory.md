@@ -1,6 +1,18 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, during TASK-0326 implementation.
+Last updated: 2026-08-07 Europe/Madrid, during TASK-0324 remediation iteration 2.
+
+## 2026-08-07 - TASK-0324 remediation iteration 2
+
+- Implementation commit `4e07455c` binds the permanent negative to the literal live
+  supervision `WhileStatementAst`, not only to the pure deadline helper.
+- The compressed live-loop probe survives with the shipped wiring and fires
+  `POST_DELIVERY_TIMEOUT` when an independent mutant makes the synchronization branch
+  unreachable, reproducing the checker finding.
+- The declared post-delivery hard cap is corrected to 02:59:00, and the main progress
+  log now exposes the effective inherited `post_delivery_deadline`.
+- R4 remains intentionally open: both branches still share progress counters; this
+  remediation protects and observes the compensating deadline inheritance only.
 
 ## 2026-08-07 - TASK-0326 implementation
 
