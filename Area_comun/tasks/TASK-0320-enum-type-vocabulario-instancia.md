@@ -2,7 +2,7 @@
 task_id: TASK-0320
 file: Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md
 title: "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318"
-status: review_approved
+status: done
 type: infra
 owner: Codex
 reviewer: Analista
