@@ -42042,6 +42042,80 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260807",
             "updated_at": "2026-08-07T04:59:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-065801-prune-arquitecto",
+            "expires_at": "2026-08-07",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-08-07T06:58:01Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-07T06:58:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0326",
+            "expires_at": "2026-08-07T11:02:08Z",
+            "notes": "Converge real Git status options across the Python zombie sweeper and PowerShell worktree reader, with a permanent untracked-directory falsification case.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0326",
+                "Area_comun/state/TASK_INDEX.json#TASK-0326",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0326",
+                "Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md",
+                "scripts/sweep_cron_zombies.py",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T07:02:08Z",
+            "status": "released",
+            "task_id": "TASK-0326",
+            "updated_at": "2026-08-07T07:02:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0326-delivery",
+            "expires_at": "2026-08-07T08:09:18Z",
+            "notes": "Publish TASK-0326 exact-commit evidence and release maker claims for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0326-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0326",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0326",
+                "Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0326-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0326.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T07:09:18Z",
+            "status": "released",
+            "task_id": "TASK-0326",
+            "updated_at": "2026-08-07T07:09:18Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260807-rechazo-0322-0325",
+            "expires_at": "2026-08-08T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0322",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0322",
+                "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0325",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0325",
+                "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260807-rechazo-0322-0325"
+            ],
+            "started_at": "2026-08-07T07:55:17Z",
+            "status": "released",
+            "task_id": "TASK-0322",
+            "updated_at": "2026-08-07T07:55:17Z"
         }
     ]
 }

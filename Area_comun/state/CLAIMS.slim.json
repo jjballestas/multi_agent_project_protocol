@@ -1,5 +1,22 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0324-remediation-2",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0324-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0324",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0324",
+                "Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0324-codex-to-arquitecto.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0324"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

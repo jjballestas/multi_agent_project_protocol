@@ -822,6 +822,47 @@ TASK-0320 sigan abiertas (TASK-0318 cerro el vocabulario de `status`; TASK-0320 
   instancia (6 en castellano), el mismo defecto que `status` acaba de cerrar y con el mecanismo
   curativo ya probado.
 
+**Anadido 2026-08-07 tras el veredicto CHANGE-REQUIRED de TASK-0322 (residuales R2-R4 del checker).**
+
+La monotonia del estrechamiento de `DATE_RE` quedo **DEMOSTRADA**, no muestreada: ambas gramaticas
+son regulares, se construyeron los automatas finitos y se calculo la diferencia de lenguajes --
+`L(NEW) - L(OLD) = vacio`, con `L(NEW)` subconjunto PROPIO. El lenguaje aceptado se reduce a
+**1/3.695** del anterior (3,6 ordenes de magnitud). Ninguna cadena nueva entro en el lenguaje.
+
+**Correccion de encuadre que afecta al registro permanente.** Las cifras `2,9 pct -> 0,05 pct` del
+AC1/AC5 son **relativas al muestreador**, no densidades del lenguaje. Medido sobre el lenguaje
+entero, la densidad de portadoras NO baja (49,50 pct -> 49,44 pct); lo que baja 3.699 veces es el
+CARDINAL de portadoras (1,100e24 -> 2,973e20), en proporcion exacta con la reduccion del lenguaje.
+El generador infrarrepresenta las formas con offset -- las unicas que pueden ser portadoras --
+porque su filtro mas duro es precisamente el signo del offset.
+
+**La familia portadora, nombrada por FORMA (2 de las 33 formas de `L(NEW)`):** forma con dos puntos
++ fraccion de 5 o 6 digitos + offset numerico NEGATIVO. Es estructural: `+` no esta en la clase de
+caracteres del heuristico de telefono y los `:` cortan las rachas, de modo que solo el tramo
+`SS.fffff[f]-HH` acumula 9 digitos seguidos. Dentro de esa familia el espacio controlable TAMBIEN
+se estrecho (`SS` de 00-99 a 00-59, `HH` del offset de 00-99 a 00-14), asi que un numero de movil
+que empiece por 6 o 7 ya no cabe; antes cabia.
+
+**Residuales nuevos, todos declarados y ninguno bloqueante:**
+- **R2-0322 (bajo).** La garantia "la exencion es `fullmatch`" solo tiene DIENTES en 1 de los 3
+  consumidores: `NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY` fija por conteo de fuente la linea de
+  `contains_pii`. Las llamadas de `validate_metadata` y del lector de cold-packs no estan fijadas
+  por ninguna asercion -- relajarlas a `match` no rompe ningun test. Heredado, no lo introdujo 0322.
+- **R3-0322 (bajo).** `DATE_RE` usa `\d` sin `re.ASCII`, asi que acepta digitos decimales Unicode.
+  `validate_metadata` admite sin aviso un `created_at` con ano en indo-arabigo. El gate
+  `scan_encoding` del repo impide que llegue a un artefacto gobernado, pero el indexador por si solo
+  no lo para. El estrechamiento RECORTA superficie Unicode de paso, porque el primer digito de mes
+  y dia paso a ser clase ASCII literal.
+- **R4-0322 (informativo).** El tercer consumidor de `DATE_RE` (cold-packs) no lo ejercita el corpus
+  real: `cold_pack_count: 0` en clon limpio. El estrechamiento hace que ese camino lance `ValueError`
+  sobre mas entradas -- direccion correcta, falla ruidoso -- pero sin evidencia de corpus.
+
+**Leccion metodologica que conviene no perder:** la asercion permanente de 0322 (`5789`/`2006`/`1`)
+es un candado sobre un flujo de RNG. Caza el ensanche, pero no distingue "el lenguaje se ensancho
+hasta admitir una tercera forma portadora" de "cambio el generador de Python". Una asercion sobre el
+MAPA DE FORMAS distingue las dos cosas; una sobre conteos del muestreador, no. Fijar propiedades,
+no muestras.
+
 ### 16.6 Fuera de alcance del port
 
 F2 (stubs/manifests, `--propose-cold`), F3 (enfriado real: exige DECISION de activacion +

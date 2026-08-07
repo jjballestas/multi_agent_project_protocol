@@ -26,7 +26,7 @@
         {
             "id": "TASK-0322",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Estrechar DATE_RE con validacion de rangos: baja la poblacion de cadenas portadoras del 2,9 por ciento al 0,05 por ciento"
         },
         {
@@ -38,7 +38,7 @@
         {
             "id": "TASK-0325",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
         },
         {
