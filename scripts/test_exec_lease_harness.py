@@ -64,6 +64,20 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_zombie_sweeper_parses_real_git_quoted_rename_paths",
     },
     {
+        "id": "NEG-CRON-STATUS-UNTRACKED-FILE-CONVERGENCE",
+        "negative": "Both Git status readers must enumerate individual files inside untracked directories so file-scoped claims remain visible without broadening unrelated-owner vetoes.",
+        "mutation": 'source.replace(untracked_option, "", 1)',
+        "boundaries": (
+            "assert collapsed_paths == {untracked_dir}",
+            "assert healthy_paths == {untracked_path}",
+            "assert powershell_paths == [f\"?? {untracked_path}\"]",
+            'assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True',
+            'assert mutant.dirty_claimed_route(root, IMPLEMENTER) is False',
+            'assert sweep.dirty_claimed_route(root, REVIEWER) is False',
+        ),
+        "exercised_by": "test_git_status_readers_enumerate_untracked_files_without_overbroad_veto",
+    },
+    {
         "id": "NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE",
         "negative": "The post-delivery window must inherit a later main progress deadline without exceeding its own hard deadline.",
         "mutation": "source.replace(progress_sync, ignore_progress, 1)",
@@ -525,7 +539,10 @@ def test_zombie_sweeper_parses_real_git_quoted_rename_paths() -> None:
         healthy = sweep.dirty_paths(root)
         assert expected <= healthy
         real_z_raw = subprocess.run(
-            ["git", "status", "--porcelain=v1", "-z"], cwd=root, check=True, capture_output=True
+            ["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"],
+            cwd=root,
+            check=True,
+            capture_output=True,
         ).stdout
         runtime_parser = load_python_function(ROOT / "runtime/orchestrator.py", "parse_porcelain_v1_z")
         mirror_parser = load_python_function(
@@ -537,8 +554,8 @@ def test_zombie_sweeper_parses_real_git_quoted_rename_paths() -> None:
 
         source_path = ROOT / "scripts/sweep_cron_zombies.py"
         source = source_path.read_text(encoding="utf-8")
-        nul_command = '["git", "status", "--porcelain=v1", "-z"]'
-        line_command = '["git", "status", "--porcelain=v1"]'
+        nul_command = '["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"]'
+        line_command = '["git", "status", "--porcelain=v1", "--untracked-files=all"]'
         mutant_source = source.replace(nul_command, line_command, 1)
         assert mutant_source != source
         mutant_path = root / "sweep_cron_zombies_mutant.py"
@@ -551,6 +568,91 @@ def test_zombie_sweeper_parses_real_git_quoted_rename_paths() -> None:
         else:
             mutant_failed_closed = False
         assert mutant_failed_closed is True
+
+
+def test_git_status_readers_enumerate_untracked_files_without_overbroad_veto() -> None:
+    """PERMANENT_NEGATIVE: NEG-CRON-STATUS-UNTRACKED-FILE-CONVERGENCE"""
+    with make_tempdir("status-untracked-files-") as tmp:
+        root = Path(tmp)
+        claims_path = root / "Area_comun/state/CLAIMS.json"
+        claims_path.parent.mkdir(parents=True)
+        claims_path.write_text('{"claims": []}\n', encoding="ascii")
+        (root / ".gitignore").write_text("probe.ps1\n", encoding="ascii")
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+            ("git", "add", ".gitignore", "Area_comun/state/CLAIMS.json"),
+            ("git", "commit", "-m", "fixture"),
+        ):
+            subprocess.run(command, cwd=root, check=True, capture_output=True)
+
+        untracked_dir = "work/"
+        untracked_path = "work/nested/item.txt"
+        nested = root / untracked_path
+        nested.parent.mkdir(parents=True)
+        nested.write_text("dirty\n", encoding="ascii")
+        claims_path.write_text(
+            json.dumps(
+                {
+                    "claims": [
+                        {
+                            "owner": IMPLEMENTER,
+                            "status": "active",
+                            "scope": [untracked_path],
+                        }
+                    ]
+                }
+            )
+            + "\n",
+            encoding="ascii",
+        )
+        subprocess.run(
+            ("git", "add", "Area_comun/state/CLAIMS.json"),
+            cwd=root,
+            check=True,
+            capture_output=True,
+        )
+        subprocess.run(
+            ("git", "commit", "-m", "claim fixture"),
+            cwd=root,
+            check=True,
+            capture_output=True,
+        )
+
+        collapsed_raw = subprocess.run(
+            ("git", "status", "--porcelain=v1", "-z"),
+            cwd=root,
+            check=True,
+            capture_output=True,
+        ).stdout
+        collapsed_paths = sweep.parse_porcelain_v1_z(collapsed_raw)
+        healthy_paths = sweep.dirty_paths(root)
+
+        script = function_loader(HARNESS_PATH, ("Get-GitStatusPorcelainUtf8",)) + f"""
+$Root = {ps_literal(root)}
+$statusResult = Get-GitStatusPorcelainUtf8
+$records = @([string]$statusResult.raw -split [char]0 | Where-Object {{ $_ }})
+[ordered]@{{ ok = $statusResult.ok; records = $records }} | ConvertTo-Json -Compress
+"""
+        powershell = run_powershell(script, root)
+        powershell_paths = powershell["records"]
+
+        source = (ROOT / "scripts/sweep_cron_zombies.py").read_text(encoding="utf-8")
+        untracked_option = ', "--untracked-files=all"'
+        mutant_source = source.replace(untracked_option, "", 1)
+        assert mutant_source != source
+        mutant_path = root / "sweep_cron_zombies_untracked_mutant.py"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = load_sweeper_module(mutant_path, "sweep_cron_zombies_task0326_mutant")
+
+        assert collapsed_paths == {untracked_dir}
+        assert healthy_paths == {untracked_path}
+        assert powershell["ok"] is True
+        assert powershell_paths == [f"?? {untracked_path}"]
+        assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True
+        assert mutant.dirty_claimed_route(root, IMPLEMENTER) is False
+        assert sweep.dirty_claimed_route(root, REVIEWER) is False
 
 
 def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
@@ -675,6 +777,7 @@ def main() -> int:
         test_preexec_defer_budget_kills_shared_counter_mutant,
         test_worktree_disk_proof_pairs_real_git_rename_records,
         test_zombie_sweeper_parses_real_git_quoted_rename_paths,
+        test_git_status_readers_enumerate_untracked_files_without_overbroad_veto,
         test_residue_excludes_foreign_personal_and_caps_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
         test_new_instance_exports_identical_harness,

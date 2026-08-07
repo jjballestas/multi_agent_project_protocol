@@ -97,7 +97,7 @@ def parse_porcelain_v1_z(raw: bytes) -> set[str]:
 
 def dirty_paths(root: Path) -> set[str]:
     proc = subprocess.run(
-        ["git", "status", "--porcelain=v1", "-z"],
+        ["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"],
         cwd=root,
         capture_output=True,
         check=False,

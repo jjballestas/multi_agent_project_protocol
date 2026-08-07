@@ -42,6 +42,27 @@
             "updated_at": "2026-08-07T06:58:01Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0326",
+            "expires_at": "2026-08-07T11:02:08Z",
+            "notes": "Converge real Git status options across the Python zombie sweeper and PowerShell worktree reader, with a permanent untracked-directory falsification case.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0326",
+                "Area_comun/state/TASK_INDEX.json#TASK-0326",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0326",
+                "Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md",
+                "scripts/sweep_cron_zombies.py",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T07:02:08Z",
+            "status": "active",
+            "task_id": "TASK-0326",
+            "updated_at": "2026-08-07T07:02:08Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
