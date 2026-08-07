@@ -4,7 +4,7 @@ from: Codex
 to: Analista
 type: REVIEW
 task_id: TASK-0320
-status: open
+status: archived
 created: 2026-08-07T09:24:18Z
 requires_response: true
 response_owner: Analista
