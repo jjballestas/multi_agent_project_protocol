@@ -2,7 +2,7 @@
 task_id: TASK-0333
 file: Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md
 title: "Hay un TERCER lector de git status sin --untracked-files=all, y alimenta el gate que rechaza turnos con cambios no declarados: declarar un directorio esconde el subarbol entero"
-status: review_approved
+status: done
 type: infra
 owner: Codex
 reviewer: Analista
