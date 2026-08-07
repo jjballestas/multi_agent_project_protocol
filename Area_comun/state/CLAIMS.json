@@ -132,6 +132,26 @@
             "updated_at": "2026-08-07T03:16:30Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0322",
+            "expires_at": "2026-08-07T07:29:53Z",
+            "notes": "Implement DATE_RE range validation and measured carrier-population regression.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0322",
+                "Area_comun/state/TASK_INDEX.json#TASK-0322",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0322",
+                "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T03:29:53Z",
+            "status": "active",
+            "task_id": "TASK-0322",
+            "updated_at": "2026-08-07T03:29:53Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0323-done-flip",
             "expires_at": "2026-08-07T05:16:30Z",
             "notes": "Implementer done-flip after independent checker approval and architect ratification.",

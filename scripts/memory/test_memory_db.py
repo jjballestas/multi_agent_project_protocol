@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import random
 import re
 import shutil
 import sqlite3
@@ -391,6 +392,110 @@ class MemoryDbTests(unittest.TestCase):
         )
         self.assertEqual({"priority": "medium"}, accepted)
         self.assertEqual([], warnings)
+
+    def test_timestamp_ranges_reject_syntactic_non_dates(self) -> None:
+        valid_boundaries = (
+            "0000-01-01",
+            "9999-12-31T23:59:59.123456Z",
+            "2026-02-31T000000+00:00",
+            "2026-06-19T23:59:59-13:59",
+            "2026-06-19T00:00:00+14:00",
+            "2026-06-19T00:00:00-14:00",
+        )
+        invalid_ranges = (
+            "2026-00-01",
+            "2026-13-01",
+            "2026-01-00",
+            "2026-01-32",
+            "2026-01-01T24:00:00Z",
+            "2026-01-01T00:60:00Z",
+            "2026-01-01T00:00:60Z",
+            "2026-01-01T240000Z",
+            "2026-01-01T006000Z",
+            "2026-01-01T000060Z",
+            "2026-01-01T00:00:00+15:00",
+            "2026-01-01T00:00:00-14:01",
+            "2026-01-01T00:00:00+00:60",
+            "2026-01-01T00:00:61.234567-89:00",
+        )
+        for timestamp in valid_boundaries:
+            with self.subTest(valid=timestamp):
+                self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))
+        for timestamp in invalid_ranges:
+            with self.subTest(invalid=timestamp):
+                self.assertIsNone(memory_db.DATE_RE.fullmatch(timestamp))
+                accepted, warnings = memory_db.validate_metadata(
+                    {"created_at": timestamp}, {"Codex"}
+                )
+                self.assertEqual({}, accepted)
+                self.assertEqual(["rejected frontmatter key created_at"], warnings)
+
+    def test_timestamp_range_narrowing_reduces_carrier_population(self) -> None:
+        """Measure the published 2.9% -> 0.05% carrier-population benchmark."""
+        broad_date_re = re.compile(
+            r"^\d{4}-\d{2}-\d{2}"
+            r"(?:T(?:\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?|\d{6})"
+            r"(?:Z|[+-]\d{2}:\d{2})?)?$"
+        )
+        generator = random.Random(20260805)
+        syntactic_population: list[str] = []
+        for _ in range(200_000):
+            date = (
+                f"{generator.randrange(10_000):04d}-"
+                f"{generator.randrange(100):02d}-{generator.randrange(100):02d}"
+            )
+            if generator.random() < 0.22:
+                timestamp = date
+            else:
+                if generator.random() < 0.5:
+                    time = (
+                        f"{generator.randrange(100):02d}:"
+                        f"{generator.randrange(100):02d}:"
+                        f"{generator.randrange(100):02d}"
+                    )
+                    fraction_length = generator.randrange(7)
+                    fraction = (
+                        ""
+                        if fraction_length == 0
+                        else "." + "".join(
+                            str(generator.randrange(10))
+                            for _ in range(fraction_length)
+                        )
+                    )
+                else:
+                    time = f"{generator.randrange(1_000_000):06d}"
+                    fraction = ""
+                if generator.random() < 0.52:
+                    offset = (
+                        f"{generator.choice('+-')}"
+                        f"{generator.randrange(100):02d}:"
+                        f"{generator.randrange(100):02d}"
+                    )
+                else:
+                    offset = "" if generator.random() < 0.5 else "Z"
+                timestamp = f"{date}T{time}{fraction}{offset}"
+            self.assertIsNotNone(broad_date_re.fullmatch(timestamp))
+            syntactic_population.append(timestamp)
+
+        def carries_phone_candidate(value: str) -> bool:
+            return any(
+                9 <= len(re.sub(r"\D", "", match.group(0))) <= 15
+                for match in memory_db.PHONE_CANDIDATE_RE.finditer(value)
+            )
+
+        broad_carriers = sum(map(carries_phone_candidate, syntactic_population))
+        narrowed_population = [
+            value for value in syntactic_population if memory_db.DATE_RE.fullmatch(value)
+        ]
+        narrowed_carriers = sum(map(carries_phone_candidate, narrowed_population))
+        self.assertEqual(5_789, broad_carriers)
+        self.assertEqual(2.9, round(100 * broad_carriers / len(syntactic_population), 1))
+        self.assertEqual(2_006, len(narrowed_population))
+        self.assertEqual(1, narrowed_carriers)
+        self.assertEqual(
+            0.05,
+            round(100 * narrowed_carriers / len(narrowed_population), 2),
+        )
 
     def test_timestamp_exemption_is_phone_only_and_falsifiable(self) -> None:
         """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY"""
