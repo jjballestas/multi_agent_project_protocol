@@ -6377,3 +6377,62 @@ Veredicto `Area_comun/artifacts/Analista-TASK-0325-exencion-fecha-ast-verdict.md
   Arquitecto en su checkpoint, no mio; reportado sin tocarlo (va subiendo: 20883 -> 22601).
 - Gotcha repetido y confirmado: `importlib` sobre `build_memory_db.py` exige registrar el modulo en
   `sys.modules` ANTES de `exec_module`, si no `@dataclass` peta con `NoneType.__dict__`.
+
+## 2026-08-07 10:35 (UTC+2) -- TASK-0326 (convergencia --untracked-files de los dos lectores): OK-CERRABLE sobre 69f7c423 (mi commit b8cf0dff)
+
+Cuarta de la serie de lectores de git status (0319, 0321, 0323, 0326). Las tres anteriores eran de
+PARSEO; esta de OPCIONES. Nace de MI residual R4 de 0323. Una linea de produccion
+(`sweep_cron_zombies.py:100`) y 109 de test. Alcance declarado por el Arquitecto: SOLO el hub, sin
+producto.
+
+- **Cuando la cadena de mutacion declarada solo cubre una mitad, lo decide la EJECUCION.** El
+  Arquitecto dudo (con razon) porque `source.replace(untracked_option, "", 1)` tiene forma de
+  literal de lista de Python. Pero el test CARGA Y EJECUTA la funcion real de PowerShell
+  (`function_loader(HARNESS_PATH, ("Get-GitStatusPorcelainUtf8",))`) y asevera su salida. **Una
+  asercion incondicional sobre la salida de la funcion real es una guardia igual de dura o mas que
+  un mutante** -- no hay que exigir simetria de mecanismo, hay que medir cual muere.
+- **El mutante que hay que probar SIEMPRE (leccion de 0324, ahora confirmada como plantilla):**
+  no basta quitar la linea, hay que dejarla PRESENTE E INALCANZABLE. Aqui:
+  `[..., "--untracked-files=all"][:4]`. Sobrevivio a `assert mutant_source != source` y murio en
+  `assert healthy_paths == {untracked_path}` -> el contrato ata el EFECTO, no el helper. El
+  equivalente en PowerShell (`"..." -replace ' --untracked-files=all',''`) tambien murio.
+  **Cuatro mutantes: quitar-PS, muerto-PS, quitar-PY, muerto-PY. Los cuatro caen.**
+- **Probar tambien que la DECLARACION esta pineada:** borre del test la linea de la asercion de
+  PowerShell y `check_falsification_contracts --inventory` da exit 1
+  (`assertion boundary not found beside the test`). `check_falsification_contracts.py:118-125` exige
+  que la `mutation` y las N `boundaries` aparezcan LITERALMENTE en la funcion ejercitadora.
+- **Direccion del ensanche: probarla por ESTRUCTURA y por VECTORES, no por prosa.** Estructura:
+  `dirty_paths` tiene UN solo consumidor y solo convierte `kill` en `skip`
+  (`decision_for_lease:205`); `cleanup_only` se decide ANTES. Vectores: reconstrui el lector viejo
+  y compare la DECISION completa sobre 13 casos -> **cero inversiones**. Los que hay que incluir
+  siempre son los NEGATIVOS: owner ajeno (sin veto), claim `released` (sin veto), prefijo hermano
+  (`work/ab` no casa con `work/abc/one.txt`), gitignored (invisible).
+- **Cite `validate.yml:237-238` para probar que el runner se EJECUTA** (leccion de 0330, ya
+  interiorizada). Paso `run:` propio, sin `if:`, sin `continue-on-error`.
+- **El delta cero tambien es un hallazgo:** el lado de PowerShell YA traia la opcion, asi que este
+  commit NO puede aumentar los `defer_terminal` del peer. Decirlo evita que se le atribuya un
+  riesgo que no tiene.
+- **Medir en el ARBOL VIVO ademas del fixture (read-only).** 9 directorios colapsados hoy en el hub,
+  todos bajo `personal/`; 742 -> 780 registros; tres rutas REALES pasan de `old_veto=False` a
+  `new_veto=True`. Un fixture prueba el mecanismo; el arbol vivo prueba que es portante HOY.
+- **R1 (NUEVO, ABIERTO):** hay un TERCER lector, `runtime/orchestrator.py:680 dirty_worktree_paths`,
+  sin la opcion. Un turno que declara `changed_paths ["work/"]` esconde un subarbol entero del gate
+  de `orchestrator.py:1033` (cero `unreported`). Misma raiz, consumidor distinto.
+- **R2 (NUEVO, ABIERTO, y la familia NO se cierra con opciones):** `--untracked-files=all` **no
+  desciende a un repo git EMBEBIDO**; ni `--ignored` lo hace. `work/inner` como repo anidado ->
+  el lector ARREGLADO ve solo `work/inner/` y `dirty_claimed_route` da `False` -> el barredor mata
+  trabajo vivo. **Esa forma existe en el hub HOY: `personal/Codex/task0294_runtime/` tiene su
+  propio `.git`.** Leccion transferible: **cuando una tarea cierra "un directorio sin rastrear se
+  colapsa", hay que preguntar por los OTROS mecanismos de colapso, no solo por el que la opcion
+  arregla.**
+- **METIDA DE PATA OPERATIVA MIA, no repetir:** puse `Co-Authored-By: Claude ...` en el commit del
+  veredicto (b8cf0dff). En ESTE hub ese trailer es el discriminador con el que el monitor del
+  Arquitecto filtra sus PROPIOS commits, asi que mi veredicto queda INVISIBLE para su monitor.
+  **Los commits del Analista en este hub NO llevan `Co-Authored-By`**, solo `Task-Id` y
+  `Ops-Reason`. Lo ya pusheado no se reescribe: la senal de despertar se manda con el commit de
+  memoria (este), que va SIN el trailer.
+- Coordinacion: 0 claims activos, rutas gobernadas limpias, clon limpio en
+  `D:/Aegis_Scratch/map/an0326/cc` (DECISION-0104, ruta corta, fuera del arbol atestado), pathspec
+  explicito en el commit. Gates recomputados por exit code: harness 17/17, inventario 37 DECLARED,
+  validate, encoding, neutralidad, drift `has_drift=false up_to_seq=7394`, `diff --check`, status
+  vacio.
