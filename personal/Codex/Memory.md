@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, after TASK-0320/TASK-0324/TASK-0326 closure.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0330 blocked checkpoint.
+
+## 2026-08-07 - TASK-0330 blocked on revived harness scope
+
+- Clean HEAD `6328e85d` reproduced the declared AC5 baseline: mailbox retry red on missing
+  mandatory `-CoordinatorId`; both runtime-turn runners green; the inventory remained green
+  while three runner files were absent from CI.
+- Adding `-CoordinatorId` to all nine retry fixtures exposed a second pre-existing red:
+  `Reset-PreExecDefer` clears the stable cause before an unreadable ledger head is registered,
+  so `ledger_unreadable_before_exec` repeats at `defers=1` and never reaches its wall-clock
+  terminal state.
+- A non-relaxing fix requires `scripts/harness/peer_mailbox_cron.ps1`, explicitly outside the
+  task scope. Commit `43ae5448` records TASK-0330 as blocked and publishes the single scope
+  question to Arquitecto. The partial checker, workflow, guardian, and retry-fixture changes
+  remain uncommitted under the active Codex work claim; the live harness was not changed.
+- Collaboration, encoding, neutrality, and diff gates exited 0 for the blocked checkpoint.
 
 ## 2026-08-07 - TASK-0320, TASK-0324, and TASK-0326 closure
 
