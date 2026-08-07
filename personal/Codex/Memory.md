@@ -5431,3 +5431,5 @@ ratified its own work.
 - Exact commit `303a1d70` passed the same gates in a detached clean clone. TASK-0333 is now
   `in_review`, all maker claims are released, and the self-contained handoff requests independent
   Analista review; Codex has not reviewed or ratified the work.
+- Delivery commit `80dd5e95` records runtime events through seq 7603 with drift false and publishes
+  the handoff plus Arquitecto review-routing request.
