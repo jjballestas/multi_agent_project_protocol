@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "dc249447f890b60a2c9bacf220877b9e5b871bdda476bbd11aab343a591a6423",
+  "canonical_hash": "f01be7673273aaa1b442f0a331db6b15ef3cbe3f577ef30edf6dfdf8a30bb21b",
   "integrity": {
-    "canonical_hash": "dc249447f890b60a2c9bacf220877b9e5b871bdda476bbd11aab343a591a6423",
+    "canonical_hash": "f01be7673273aaa1b442f0a331db6b15ef3cbe3f577ef30edf6dfdf8a30bb21b",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "982e9894354bf567a34395318304fb991ed342de114c9cccf3815ab15d9da2fa",
-    "signature": "dda45475da93d2cdbb3e59302fa6c6b37e3d6b99282aff6ff0e1df23ce8aaadd",
-    "up_to_seq": 7666
+    "prev_hash": "f3981c2bb0914728eef6cc91f0aa1b419b709fab2d14ed15cbb9e10385fb5785",
+    "signature": "876101c3ca918cad1a196305701858701a4593bb860d2bedaa87b58329d747f3",
+    "up_to_seq": 7667
   },
   "state": {
     "aggregate_versions": {
@@ -902,6 +902,7 @@
       "CLAIM-20260807-075630-prune-arquitecto": 1,
       "CLAIM-20260807-143814-prune-arquitecto": 1,
       "CLAIM-20260807-181038-prune-arquitecto": 1,
+      "CLAIM-20260807-Analista-TASK-0335-review": 1,
       "CLAIM-20260807-Arquitecto-0317r4-go0323": 1,
       "CLAIM-20260807-Arquitecto-TASK-0324-registro": 1,
       "CLAIM-20260807-Arquitecto-cierre-0317-0323": 1,
@@ -3143,7 +3144,7 @@
       "protocol-prune": 46,
       "protocol-state": 1
     },
-    "events_applied": 6995,
+    "events_applied": 6996,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3234,6 +3235,7 @@
       "TASK-1204-doneflip-hub-response-claim-20260707": 4396,
       "TASK-1204-doneflip-hub-response-release-20260707": 4397,
       "analista-0335-review-claim-20260807-1955": 7666,
+      "analista-0335-review-release-20260807-2005": 7667,
       "analista-task0203-claim-acquire-v2": 2311,
       "analista-task0203-claim-release": 2312,
       "analista:TASK-0226-remediation-review:claim-acquire-v2": 2728,
@@ -10142,5 +10144,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7666
+  "up_to_seq": 7667
 }

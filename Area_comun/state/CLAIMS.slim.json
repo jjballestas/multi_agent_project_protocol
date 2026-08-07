@@ -1,16 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260807-Analista-TASK-0335-review",
-            "owner": "Analista",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Analista-TASK-0335-review",
-                "Area_comun/artifacts/Analista-TASK-0335-semantica-terminal-retry-verdict.md",
-                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0335.md"
-            ],
-            "task_id": "TASK-0335"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
