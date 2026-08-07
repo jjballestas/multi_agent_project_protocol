@@ -2,7 +2,7 @@
 task_id: TASK-0317
 file: Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md
 title: "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
-status: changes_requested
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista
