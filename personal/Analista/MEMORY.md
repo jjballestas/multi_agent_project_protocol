@@ -6812,3 +6812,90 @@ otra vez `push-no-retenible`: mi commit `84d8bbbf` salio publicado por el push d
 Bucle de fix declarado: **iteracion 2 de 2**; si a la tercera vuelta persiste un escape de la misma
 familia, escalo al operador humano. Pregunta abierta al Arquitecto: parche de 6 lineas ahora, o cerrar
 0325 con SLIP-0325-3 como residual **bloqueante** con dueno y tarea propia **distinta de TASK-0332**.
+
+---
+
+## 2026-08-07 18:35 -- TASK-0330 r1: el gate contaba MENCIONES en el YAML, y el CI real lo desmintio
+
+Veredicto **CHANGE-REQUIRED** sobre `be549858`. Artefacto
+`Area_comun/artifacts/Analista-TASK-0330-contratos-ejecutados-verdict.md`, mensaje
+`MSG-20260807-Analista-to-Arquitecto-REVIEW-TASK-0330-verdict.md`, commit `57e94476`, push
+`12458b5a..57e94476`.
+
+### La leccion de metodo, que es la que vale
+
+La tarea existia para separar "declarado" de "ejecutado". La entrega lo hizo una capa, y **repitio el
+mismo defecto en la siguiente**: `check_falsification_contracts.py --workflow` mide que la RUTA del
+runner aparezca en el texto de algun campo `run:`. Eso es **mencion**, no ejecucion. Tres escapes que
+reproduje, todos EXIT 0 cantando `contracts=47/47`: `continue-on-error: true` sobre el paso, los
+runners solo `echo`ados, y **el job entero borrado** dejando las rutas en un `echo` cualquiera.
+
+Pero lo decisivo no lo saque leyendo el YAML: lo saque **mirando el CI de verdad**. `gh run view
+<id> --json jobs` + `gh run view <id> --log`. El job `falsification-runners` sale **success** con dos
+de los tres runners **rojos dentro**:
+
+    shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+    run_mailbox_retry_cases.py         -> AssertionError        (tragado)
+    run_runtime_turn_obstacle_cases.py -> ModuleNotFoundError: jsonschema  (tragado)
+    run_post_gate_obstacle_cases.py    -> OK                    -> $LASTEXITCODE=0 -> paso verde
+
+**REGLA NUEVA, permanente: `runs-on: windows-latest` + `run:` multilinea SIN `shell:` = pwsh, y el
+fallo de un comando intermedio NO rompe el paso.** El paso hereda el codigo del **ultimo** comando.
+Un job puede estar verde con casi todo su contenido rojo. Y el rojo "declarado y visible" del
+handoff estaba visible en la fuente y **silenciado en el gate**.
+
+Corolario del corolario: el job nuevo tampoco copio el `pip install jsonschema` del job `validate`,
+asi que 6 contratos **no ejecutan ni un caso** en CI. De 23 contratos dormidos, **1** quedo realmente
+gateado.
+
+### Herramienta que incorporo al arranque de toda review de CI
+
+`gh run list` / `gh run view --json jobs --jq` / `gh run view --log`. **El YAML declara; el run
+demuestra.** Es la version CI de `mergeado-no-es-desplegado`: leer el workflow no es comprobar el
+gate. Ademas descubri asi un residual heredado: el job `validate` muere en el paso 6 con
+`UnboundLocalError: InvalidSignature` (`runtime/eventlog.py:414`, `cryptography` ausente en CI) desde
+**antes** de la tarea (confirmado en el run de `064aefe5`), y como GitHub salta lo posterior, el paso
+que corre el gate nuevo aparece **skipped en todos los runs**.
+
+### Cavar por detras del rojo declarado
+
+El handoff decia "RED only at the declared sixth fixture assertion". **Eso no es verificable desde
+una corrida que aborta en el caso 12 de 20.** Repare la subcadena obsoleta **como sonda** (en copia
+de trabajo, jamas propuesta como parche) y aparecieron un 7o rojo (misma familia), un 8o
+(`EXEC_RUNNING` sale 0 y el mutante tambien: **contrato vacuo**) y un 9o (`message_scope_ambiguous`),
+mas una cola sin ejecutar. **Cuando un runner muere a medias, "solo hay un rojo" es una hipotesis, no
+un dato.** Sondear hacia adelante cuesta 3 corridas de 50s y cambia el veredicto.
+
+### La otra cara: un negativo puede existir y estar MUERTO
+
+`retry-ledger-head-defer-order` tiene su mutacion en la linea 802, tres lineas **despues** del assert
+que revienta siempre (785). Nunca corre. Peor: como la subcadena esperada no puede casar con ningun
+log, `terminal` es siempre False y la mitad `expect_terminal=False` es **vacua** -- pasaria hiciera lo
+que hiciera produccion. Es `contrato-ata-el-helper-no-el-efecto` en su forma pura: el guardian lo
+cuenta como ejecutado porque solo comprueba `mutation in function_source`. **Un negativo situado
+detras de un assert que falla es codigo muerto contado como cobertura.**
+
+### Lo que SI aguanto mi mutante mas duro
+
+`retry-expired-claim` reescrito a forma conductual. Le aplique el mutante de codigo muerto: dejar el
+literal `if ($expires -le $now) { continue }` **intacto** y envenenar `$now = [DateTime]::UtcNow` a
+`[DateTime]::MinValue`. **Murio por comportamiento**, no por forma. Ese es el modelo.
+
+### Recuento: recomputar con AST, nunca aceptar el numero del handoff
+
+Parsear `FALSIFICATION_CONTRACTS` con `ast.literal_eval` y sumar `boundaries` por runner. Confirme
+los 23 contratos / 47 fronteras del Arquitecto en `0eb060ee`. El "47" del handoff era **otro 47**:
+los contratos del repo entero en `be549858`. Dos numeros iguales por casualidad encadenados como si
+fueran el mismo. En `be549858` esos runners ya son 24 contratos / 52 fronteras.
+
+### Operativa
+
+Clon limpio por **hardlink** desde la ruta local (`git clone /d/Agentes/...`): **1 segundo**, no los
+7 GB que temia. Todo bajo `D:/Aegis_Scratch/mapp/analista-0330/` (DECISION-0104), con copias
+separadas `cc` (anclaje intacto), `mut`, `mut2`, `mut3` para cada mutacion. 0 claims activos en los
+tres chequeos, 0 bytes >127, `validate` y `scan_encoding` exit 0 antes y despues, pathspec explicito
+en el COMMIT. `origin/main` se movio a `12458b5a` a mitad de turno: verifique que no tocaba ninguna
+ruta bajo revision y **corregi el anclaje del artefacto** antes de commitear en vez de publicar una
+referencia caduca.
+
+Bucle declarado: **maximo 2 iteraciones**, escalo al operador a la tercera.
