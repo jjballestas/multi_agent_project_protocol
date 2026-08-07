@@ -115,9 +115,14 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "retry-expired-claim",
-        "negative": "an expired external claim does not defer launch",
-        "mutation": 'replace("$expires -gt $now", "$true", 1)',
-        "boundaries": ('assert probe(signal.group(0)) == "none"', 'assert probe(mutant) == "active_external_claim"'),
+        "negative": "an expired external claim does not defer launch while a live claim does",
+        "mutation": 'current.replace("$expires -le $now", "$expires -gt $now", 1)',
+        "boundaries": (
+            'assert_claim_behavior(current, label="current")',
+            'assert_claim_behavior(old_form, label="old-form")',
+            'assert probe(mutant, EXPIRED) == "active_external_claim"',
+            'assert probe(mutant, LIVE) == "none"',
+        ),
         "exercised_by": "run_expired_claim_behavior_case",
     },
     {
@@ -298,7 +303,6 @@ def run_pregate_contract_mutants() -> None:
                 "outcome=defer_terminal" in candidate,
                 "exhausted = $terminal" in candidate,
                 "Read-JsonWithDeadline" in candidate,
-                "$expires -gt $now" in candidate,
                 prelock >= 0 and lock_write > prelock,
             )
         )
@@ -431,7 +435,7 @@ def run_large_stderr_drain_case(sandbox: Path) -> None:
 
 
 def run_expired_claim_behavior_case(sandbox: Path) -> None:
-    """An expired claim is inactive, and removing the expiry predicate changes behavior.
+    """Expired claims are inactive and live claims are active across equivalent predicates.
     PERMANENT_NEGATIVE: retry-expired-claim
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
@@ -441,12 +445,16 @@ def run_expired_claim_behavior_case(sandbox: Path) -> None:
         raise AssertionError("claim signal helpers not found")
     claims = sandbox / "Area_comun/state/CLAIMS.json"
     original_claims = claims.read_bytes()
-    claims.write_text(
-        '{"claims":[{"owner":"Other","status":"active","expires_at":"2000-01-01T00:00:00Z"}]}\n',
-        encoding="ascii",
-    )
+    expired = "2000-01-01T00:00:00Z"
+    live = "2999-01-01T00:00:00Z"
 
-    def probe(helper: str) -> str:
+    def probe(helper: str, expires_at: str) -> str:
+        claims.write_text(
+            '{"claims":[{"owner":"Other","status":"active","expires_at":"'
+            + expires_at
+            + '"}]}\n',
+            encoding="ascii",
+        )
         path = sandbox / "claim-expiry-probe.ps1"
         path.write_text(
             "$Root=(Get-Location).Path\n$PeerId='TestPeer'\n$LeasePath=''\n"
@@ -456,9 +464,22 @@ def run_expired_claim_behavior_case(sandbox: Path) -> None:
         )
         return run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(path), cwd=sandbox).stdout.strip()
 
-    assert probe(signal.group(0)) == "none", "expired claim counted as active"
-    mutant = signal.group(0).replace("$expires -gt $now", "$true", 1)
-    assert probe(mutant) == "active_external_claim", "expiry-filter mutant was not killed"
+    current = signal.group(0)
+    current_predicate = "if ($expires -le $now) { continue }"
+    old_predicate = "if (-not ($expires -gt $now)) { continue }"
+    assert current_predicate in current, "current expiry predicate not found"
+
+    def assert_claim_behavior(helper: str, *, label: str) -> None:
+        assert probe(helper, expired) == "none", f"{label}: expired claim counted as active"
+        assert probe(helper, live) == "active_external_claim", f"{label}: live claim counted as inactive"
+
+    assert_claim_behavior(current, label="current")
+    old_form = current.replace(current_predicate, old_predicate, 1)
+    assert_claim_behavior(old_form, label="old-form")
+    mutant = current.replace("$expires -le $now", "$expires -gt $now", 1)
+    assert mutant != current, "expiry predicate mutation did not apply"
+    assert probe(mutant, expired) == "active_external_claim", "broken predicate accepted an expired claim"
+    assert probe(mutant, live) == "none", "broken predicate rejected a live claim"
     (sandbox / "claim-expiry-probe.ps1").unlink(missing_ok=True)
     claims.write_bytes(original_claims)
 
