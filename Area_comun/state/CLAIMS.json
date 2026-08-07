@@ -185,6 +185,71 @@
             "updated_at": "2026-08-07T10:54:11Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330",
+            "expires_at": "2026-08-07T17:03:04Z",
+            "notes": "Implement TASK-0330 verified falsification execution coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330",
+                "Area_comun/state/TASK_INDEX.json#TASK-0330",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0330",
+                "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_turn_cases/run_post_gate_obstacle_cases.py",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                ".github/workflows/validate.yml",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:03:04Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T11:03:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-question",
+            "expires_at": "2026-08-07T17:14:53Z",
+            "notes": "Publish the TASK-0330 scope question after revived-suite evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-question",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-scope.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:14:53Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T11:14:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-work",
+            "expires_at": "2026-08-07T17:04:00Z",
+            "notes": "Implement TASK-0330 with scope limited to existing artifacts.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0330",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0330",
+                "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_turn_cases/run_post_gate_obstacle_cases.py",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:04:00Z",
+            "status": "active",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T11:04:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260807-ratifica-0324-0320",
             "expires_at": "2026-08-08T00:00:00Z",
             "owner": "Arquitecto",
