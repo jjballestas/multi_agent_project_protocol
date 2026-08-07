@@ -2,7 +2,7 @@
 task_id: TASK-0324
 file: Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md
 title: "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
