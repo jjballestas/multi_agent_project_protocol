@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0330 third-red blocked checkpoint.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0322 remediation iteration 1 delivery.
+
+## 2026-08-07 - TASK-0322 remediation iteration 1
+
+- Commit `3a1ffd75` delivers a declaration-only correction; production and test code
+  remain unchanged.
+- The task contract and handoff now name the residual as 2 of 33 language forms:
+  colon-time with a 5- or 6-digit fraction and a negative numeric offset.
+- The 2.9 percent and 0.05 percent figures are explicitly AC1 sampler-relative,
+  not language densities. The accepted language shrinks about 3,695 times and its
+  carrier subset about 3,699 times (about 3.7e3, or 3.6 orders of magnitude).
+- Bounding `SS` to 00-59 and offset `HH` to 00-14 narrows control within the
+  surviving family; a Spanish mobile prefix of 6 or 7 cannot occupy `SS` anymore.
+- TASK-0322 is back in `in_review`, both remediation claims are released, and the
+  routed handoff asks Arquitecto to reconcile the stale TASK_INDEX title before
+  independent Analista re-review. Codex did not review or ratify the work.
 
 ## 2026-08-07 - TASK-0330 stopped on third revived-suite red
 
