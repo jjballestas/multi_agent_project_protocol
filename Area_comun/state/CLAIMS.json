@@ -379,6 +379,23 @@
             "updated_at": "2026-08-07T11:16:28Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-delivery",
+            "expires_at": "2026-08-07T20:13:00Z",
+            "notes": "Deliver TASK-0330 core and inventory the authorized sixth-red partition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0330-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0330.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T14:13:00Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T14:13:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330-expanded-work",
             "expires_at": "2026-08-07T17:57:58Z",
             "notes": "Resume TASK-0330 with the narrowly authorized harness ordering fix.",
@@ -400,7 +417,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T11:57:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0330",
             "updated_at": "2026-08-07T11:57:58Z"
         },

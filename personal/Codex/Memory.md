@@ -1,6 +1,18 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0330 fifth revived-suite red.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0330 sixth revived-suite red.
+
+## 2026-08-07 - TASK-0330 checkpoint at sixth revived-suite red
+
+- Commit `8db7e799` applies the authorized fifth-red fixture repair: the shared fixture now has
+  a valid empty claims array and a disjoint resolvable task scope, while the unreadable-head
+  assertions and mutation remain unchanged.
+- `NEG-HARNESS-SCOPE-AWARE-EXTERNAL-CLAIM` already proves missing, empty, non-array, and
+  non-parseable claim scope fails closed, so no duplicate malformed-claims assertion was added.
+- The falsification inventory and guardian are green. The complete retry suite now reaches a
+  sixth revived red: `run_unreadable_head_case` expects a stale terminal-line substring without
+  the emitted elapsed/timeout fields. Per Arquitecto's partition order, this red remains visible
+  and must be inventoried in the TASK-0330 delivery rather than repaired in this task.
 
 ## 2026-08-07 - TASK-0330 stopped on fifth revived-suite red
 
