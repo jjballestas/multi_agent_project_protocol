@@ -33,4 +33,3 @@ and changes no production file.
 
 question: May I update only the deleted-residue fixture to declare an explicit disjoint work_scope and continue TASK-0330, preserving its residue-aging mutation and stopping again if another red appears?
 requested_action: Decide whether the narrow fourth-red fixture repair is authorized.
-

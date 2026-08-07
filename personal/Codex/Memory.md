@@ -5354,3 +5354,16 @@ ratified its own work.
   claim, and publishes the self-contained Arquitecto handoff. Exact implementation
   commit `379a9124` passed all declared gates in a detached clean clone; Arquitecto
   recomputation and independent Analista review remain required.
+
+## 2026-08-07 - TASK-0330 fourth revived-suite blocker
+
+- Commit `92de6361` converts `retry-expired-claim` from a syntax-pinned assertion to a
+  behavioral contract: both equivalent expiry predicate forms pass, while an inverted
+  predicate fails for both expired and live claims.
+- The revived retry suite then exposed a fourth red: the deleted-residue fixture becomes
+  `message_scope_ambiguous` after residue aging because TASK-0331 made admission fail-closed
+  for messages without usable `work_scope`. Production behavior is consistent with the
+  ratified TASK-0331 contract; the stale fixture still expects `EXEC_START`.
+- TASK-0330 is `blocked`, the expanded maker claim remains active, and
+  `MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-fourth-red.md` asks for the narrow
+  fixture-only repair. Codex stopped before changing that fixture or production.
