@@ -42,6 +42,31 @@
             "updated_at": "2026-08-07T01:29:57Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Arquitecto-cierre-0317-0323",
+            "expires_at": "2026-08-08T03:10:00Z",
+            "notes": "Ratifica 0317 y 0323; registra los seguimientos 0325 y 0326.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Arquitecto-cierre-0317-0323",
+                "Area_comun/state/TASK_INDEX.json#TASK-0317",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0317",
+                "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0323",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0323",
+                "Area_comun/tasks/TASK-0323-porcelain-sin-z-lectores.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0325",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0325",
+                "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0326",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0326",
+                "Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md"
+            ],
+            "started_at": "2026-08-07T03:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0317",
+            "updated_at": "2026-08-07T03:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

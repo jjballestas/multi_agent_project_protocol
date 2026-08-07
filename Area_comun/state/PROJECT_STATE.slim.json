@@ -13,12 +13,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0317",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)"
-        },
-        {
             "id": "TASK-0320",
             "owner": "Codex",
             "status": "ready",
@@ -31,16 +25,22 @@
             "title": "Estrechar DATE_RE con validacion de rangos: baja la poblacion de cadenas portadoras del 2,9 por ciento al 0,05 por ciento"
         },
         {
-            "id": "TASK-0323",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Lectores de git status --porcelain SIN -z fabrican rutas inexistentes: el barredor de zombis falla ABIERTO"
-        },
-        {
             "id": "TASK-0324",
             "owner": "Codex",
             "status": "proposed",
             "title": "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer"
+        },
+        {
+            "id": "TASK-0325",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
+        },
+        {
+            "id": "TASK-0326",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca"
         }
     ],
     "next_actions": [
