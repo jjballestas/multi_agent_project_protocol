@@ -5419,3 +5419,15 @@ ratified its own work.
 - TASK-0330 is `blocked`, the expanded maker claim remains active, and
   `MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-fourth-red.md` asks for the narrow
   fixture-only repair. Codex stopped before changing that fixture or production.
+
+## 2026-08-07 - TASK-0333 implementation
+
+- Commit `303a1d70` makes the live runtime and shipped full-runtime mirror enumerate every
+  file in untracked subtrees before enforcing the turn report's `changed_paths` declaration.
+- Permanent negative `NEG-TURN-UNTRACKED-SUBTREE-MUST-BE-DECLARED` uses a real Git repo and
+  kills both option-removal and unreachable-option mutants; correctly declared exact paths
+  still pass. The runtime-turn runner, 21-test exec-lease harness, 48/48 falsification
+  inventory, collaboration validator, encoding, neutrality, compile, and diff gates exited 0.
+- Exact commit `303a1d70` passed the same gates in a detached clean clone. TASK-0333 is now
+  `in_review`, all maker claims are released, and the self-contained handoff requests independent
+  Analista review; Codex has not reviewed or ratified the work.

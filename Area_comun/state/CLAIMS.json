@@ -42,6 +42,27 @@
             "updated_at": "2026-08-07T14:38:14Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0333-delivery",
+            "expires_at": "2026-08-07T18:51:40Z",
+            "notes": "Deliver TASK-0333 to independent review with self-contained handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-work-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0333",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0333",
+                "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0333-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0333.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T16:51:40Z",
+            "status": "released",
+            "task_id": "TASK-0333",
+            "updated_at": "2026-08-07T16:51:40Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0333-work",
             "expires_at": "2026-08-07T22:37:30Z",
             "notes": "Implement TASK-0333 git status reader convergence and behavioral falsification contract.",
@@ -101,7 +122,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T16:47:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0333",
             "updated_at": "2026-08-07T16:47:00Z"
         },
