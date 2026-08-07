@@ -2,7 +2,7 @@
 task_id: TASK-0326
 file: Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md
 title: "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista

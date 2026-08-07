@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, during TASK-0325 implementation.
+Last updated: 2026-08-07 Europe/Madrid, during TASK-0326 implementation.
+
+## 2026-08-07 - TASK-0326 implementation
+
+- Commit `69f7c423` makes the Python zombie sweeper request the same Git status mode as
+  the PowerShell worktree reader: porcelain v1, NUL-delimited records, and explicit
+  `--untracked-files=all` enumeration.
+- Permanent contract `NEG-CRON-STATUS-UNTRACKED-FILE-CONVERGENCE` uses a real Git
+  repository to prove the default collapsed `work/` record misses a file-scoped claim,
+  while both corrected readers expose `work/nested/item.txt` and unrelated owners remain
+  outside the veto.
+- The 17-test exec-lease harness, 37/37 falsification inventory, collaboration,
+  encoding, neutrality, drift, and diff gates exited 0 before the implementation commit.
+  TASK-0326 remains `in_progress` pending exact-commit clean-clone recomputation and
+  governed delivery to independent review.
 
 ## 2026-08-07 - TASK-0325 implementation
 

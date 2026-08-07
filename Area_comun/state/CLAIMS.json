@@ -58,9 +58,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T07:02:08Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0326",
             "updated_at": "2026-08-07T07:02:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0326-delivery",
+            "expires_at": "2026-08-07T08:09:18Z",
+            "notes": "Publish TASK-0326 exact-commit evidence and release maker claims for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0326-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0326",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0326",
+                "Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0326-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0326.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T07:09:18Z",
+            "status": "released",
+            "task_id": "TASK-0326",
+            "updated_at": "2026-08-07T07:09:18Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
