@@ -56,9 +56,45 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T20:26:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0322",
             "updated_at": "2026-08-07T20:26:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0322-remediation-2-delivery",
+            "expires_at": "2026-08-08T04:28:49Z",
+            "notes": "Deliver TASK-0322 remediation iteration 2 and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0322-remediation-2-delivery",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0322-remediation-2.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T20:28:49Z",
+            "status": "released",
+            "task_id": "TASK-0322",
+            "updated_at": "2026-08-07T20:28:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0322-remediation-2-message-fix",
+            "expires_at": "2026-08-07T21:30:39Z",
+            "notes": "Repair the TASK-0322 remediation 2 mailbox response contract after gate rejection.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0322-remediation-2-message-fix",
+                "Area_comun/state/TASK_INDEX.json#TASK-0322",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0322",
+                "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0322-remediation-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T20:30:39Z",
+            "status": "released",
+            "task_id": "TASK-0322",
+            "updated_at": "2026-08-07T20:30:39Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",

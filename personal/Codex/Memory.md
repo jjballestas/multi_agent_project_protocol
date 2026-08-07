@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0335 implementation.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0322 remediation iteration 2.
+
+## 2026-08-07 - TASK-0322 remediation iteration 2
+
+- Commit `d2379a9b` corrects the maker handoff's mobile-carrier statement: the
+  exclusion holds only for the 5-digit-fraction subfamily; the 6-digit-fraction
+  subfamily has a 10-digit run and can carry a mobile number shifted one position.
+- No production code or tests changed. Collaboration, encoding, neutrality, diff,
+  and runtime-drift gates passed before the commit.
+- TASK-0322 remains `in_progress` under the remediation claim until governed
+  delivery returns it to `in_review` and releases the claim.
 
 ## 2026-08-07 - TASK-0335 implementation
 
