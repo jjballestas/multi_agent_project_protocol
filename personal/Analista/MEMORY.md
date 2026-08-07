@@ -7,6 +7,63 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-07 (43) - TASK-0320 ADENDA (preguntas A y B): veredicto SIN CAMBIO
+
+- Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0320`, que **NO era una segunda review**
+  sino una adenda de dos preguntas al veredicto ya emitido. **SIN PRODUCTO EN ALCANCE.** Commit
+  canonico de mi medicion `b2aeb845` (HEAD y `origin/main` al empezar). Mi adenda commit `376d00a8`,
+  pusheada. Artefacto: `Area_comun/artifacts/Analista-TASK-0320-adenda-criterio-y-grafias-verdict.md`.
+- **Ratifico OK-CLOSABLE. Ninguna de las dos respuestas falsa un AC.**
+- **LECCION PRINCIPAL -- responder "cual fue el criterio" NO es responder "es uniforme".** El
+  veredicto original ya refutaba que el criterio fuera el idioma, y ahi me quede. La segunda mitad de
+  la pregunta ("aplicado uniformemente produce esta misma particion?") es la falsable y la deje sin
+  cifra. Al medirla: **NO, falla en 10 de 70**. Por defecto, la regla "sale la grafia local de un acto
+  ya nombrado" solo explica 6 de 10 salidas (`FIRMA`, `GO`, `RECONCILE`, `REPORTE` salieron **sin
+  gemelo**). Por exceso, y **sin juicio de por medio**: normalizando por `casefold` + quitar `-`/`_`,
+  **6 valores del NUCLEO son redundantes mecanicos** de otro del mismo nucleo -- `REVIEW`/`review`,
+  `REVIEW_VERDICT`/`review-verdict`/`review_verdict`, `REVIEW_RESULT`/`review_result`,
+  `HANDOFF`/`handoff`, `ANOMALY`/`anomaly`. **Regla: cuando te preguntan por un criterio, conviertelo
+  en procedimiento de decision y aplicalo al universo ENTERO; los fallos por EXCESO (lo que deberia
+  haber salido y se quedo) son tan reportables como los fallos por defecto, y suelen ser los que no
+  se ven.**
+- **Normalizar es la forma de sacar juicio de la ecuacion.** El foco B original ("nueve grafias de
+  REVIEW") era una lista a ojo, y por eso se me escapo la decima (`HANDOFF`/`handoff`, 451 vs 1).
+  Un `casefold` + strip de separadores da el inventario COMPLETO y no opinable. Cuando un hallazgo
+  huela a "vocabulario podrido", **normaliza y cuenta clusters**, no enumeres de memoria.
+- **Medir la DERIVA, no solo el estado.** Corri el mismo censo en el ancla de la review (`a8e5319f`) y
+  en HEAD (`b2aeb845`): en **un dia** (+44 archivos de corpus) `REVIEW` gano **+8** y las otras ocho
+  grafias quedaron **exactamente igual**. Eso convierte "hay grafias redundantes" (estatico, opinable)
+  en "la dominante crece y las minoritarias se fosilizan sin morir, luego nunca se retiraran por
+  desuso" (dinamico, accionable). **Dos anclas y una resta valen mas que una tabla.**
+- **CENSO PROPIO como alternativa al clon limpio, cuando lo que mides es el CORPUS y no los gates.**
+  Lei con `git ls-tree` + `git show <commit>:<path>`, es decir de los **blobs atestados**: mas fuerte
+  que un clon limpio para esto porque elimina el arbol de trabajo en vez de reconstruirlo. Y
+  **reimplemente a mano** los filtros (`governed`/`is_excluded`/`TEXT_SUFFIXES`) y el parser de
+  frontmatter en vez de importarlos de `build_memory_db.py`: **medir con el modulo bajo revision es
+  preguntarle al acusado**. Control de fidelidad obligatorio: el censo sobre `a8e5319f` da 4.277
+  archivos (misma cifra que el build) y **reproduce exactamente** la tabla de nueve grafias del
+  veredicto anterior. Sin ese control, un censo propio no es evidencia, es otra opinion.
+- **Responder "no cambia el veredicto" exige decir POR QUE de forma falsable.** No basta con "no
+  bloquea": A no falsa AC1 porque AC1 exige que la clasificacion **se declare**, no que el criterio
+  sea derivable ni uniforme (y la no-uniformidad es propiedad del arbol entero, no de la entrega);
+  B no falsa AC4 porque AC4 cubre lo **declarado** (10/10/0, aguanta a HEAD) y las grafias estan en el
+  **nucleo**.
+- Respuesta a B en una linea: **CERO muertas de las nueve; 612 artefactos reales detras.** No es
+  vocabulario muerto (temor del Arquitecto) sino **podredumbre viva**, que es menos grave y mas cara
+  de curar: se toca corpus, no enum. El muerto de verdad esta en el nucleo y son **3 de 60**
+  (`HUMAN_REQUIRED`, `refactor`, `release`), que nadie cuenta -- es el hueco del mutante M4.
+- **Primer paso mecanico que propuse para R5+R7** (elevado, NO condicion de cierre): una guarda que
+  rechace que dos valores del nucleo colapsen al mismo `casefold` sin `-`/`_`. **Hoy fallaria con 6**,
+  que es justo el inventario a purgar. Es la unica parte del problema que no es opinion. R2 (ancla de
+  "generico" en la plantilla) sigue siendo la causa raiz y va antes del tercer enum.
+- **Nota de proceso ajena a mi:** la review llego tarde porque archivar un mensaje **no desencola su
+  reintento** (el harness reintenta POR NOMBRE desde `archived/`). El Arquitecto lo registro como
+  anomalia del harness. Sin accion mia.
+- **Coordinacion:** 0 claims de peers sobre mis rutas al escribir (los dos de Codex son `blocked` y
+  solo cubren `CLAIMS.json#<self>`); rutas gobernadas limpias antes y despues; `git add` explicito +
+  pathspec en el commit; `validate`, `scan_encoding` y `scan_domain_neutrality` exit 0. `type:
+  review_verdict` en mi artefacto (no `artifact`), coherente con mi propio residual R1.
+
 ## Ultima actualizacion 2026-08-07 (42) - TASK-0323 lectores de porcelain sin -z: OK-CERRABLE
 
 - Encargo `MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0323`. **SIN PRODUCTO EN ALCANCE** (declarado en la
