@@ -5510,3 +5510,23 @@ ratified its own work.
 - TASK-0330 is `done` under Arquitecto's ratified partition without restating the old global
   certification. TASK-0336 is `in_review`, every Codex claim is released, and the self-contained
   handoff requests independent review. Codex has not reviewed or ratified the work.
+
+## 2026-08-07 - TASK-0334 implementation
+
+- Commit `7692a561` makes both destructive-work readers discover physical embedded Git repositories
+  at arbitrary depth, query each repository separately, and compose its dirty paths relative to the
+  hub root. Filesystem discovery and status failures remain fail-closed; symlink/reparse targets are
+  not followed.
+- Permanent contract `NEG-CRON-STATUS-EMBEDDED-REPOSITORY-DIRTY-CLAIM` proves the parent repository
+  misses a nested dirty file under all three tested option sets, both repaired readers find it, both
+  root-only mutants miss it, and discovery failures veto action.
+- The live hub inventory found exactly six embedded repositories. Synthetic active claims against a
+  dirty file under `.protocol-tmp/task0267-speed/...` and `personal/Codex/task0294_runtime/` both
+  produced a termination veto. Discovery cost measured 0.0613 seconds plus one status call per repo.
+- The 22-test harness, 49/49 falsification inventory, collaboration validator, encoding, neutrality,
+  compile, and diff gates exited 0 before the implementation commit. TASK-0334 remains `in_progress`
+  pending exact-commit clean-clone recomputation and governed delivery to independent review.
+- Exact commit `7692a561` passed the declared gates in a detached clean clone with empty status.
+  The governed delivery moves TASK-0334 to `in_review`, releases both Codex claims, and publishes
+  the self-contained Arquitecto handoff and review-routing request. Codex did not review or ratify
+  the implementation.

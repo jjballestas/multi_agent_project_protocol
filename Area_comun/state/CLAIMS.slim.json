@@ -1,24 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260807-Codex-TASK-0334",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0334",
-                "Area_comun/state/TASK_INDEX.json#TASK-0334",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0334",
-                "Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md",
-                "scripts/sweep_cron_zombies.py",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                "scripts/test_exec_lease_harness.py",
-                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
-                ".github/workflows/validate.yml",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0334"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

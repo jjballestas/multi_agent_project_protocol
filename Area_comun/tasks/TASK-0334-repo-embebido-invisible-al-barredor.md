@@ -2,7 +2,7 @@
 task_id: TASK-0334
 file: Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md
 title: "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista

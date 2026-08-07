@@ -152,9 +152,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T21:07:44Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0334",
             "updated_at": "2026-08-07T21:07:44Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0334-delivery",
+            "expires_at": "2026-08-08T03:21:14Z",
+            "notes": "Publish TASK-0334 exact-commit evidence and release all maker claims for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0334-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0334",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0334",
+                "Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0334-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0334.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T21:21:14Z",
+            "status": "released",
+            "task_id": "TASK-0334",
+            "updated_at": "2026-08-07T21:21:14Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
