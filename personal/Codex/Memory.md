@@ -5433,3 +5433,19 @@ ratified its own work.
   Analista review; Codex has not reviewed or ratified the work.
 - Delivery commit `80dd5e95` records runtime events through seq 7603 with drift false and publishes
   the handoff plus Arquitecto review-routing request.
+
+## 2026-08-07 - TASK-0330 remediation iteration 2 implementation
+
+- Commit `f6d88cb7` splits the three falsification runners into separate failure-gating CI steps,
+  installs jsonschema in that job, and keeps the later two runners observable with `if: always()`.
+- The workflow guard now parses YAML jobs and steps, recognizes direct Python invocation, and
+  rejects step/job `continue-on-error`, echo-only mentions, and paths left outside a real job.
+- Real GitHub Actions run 31204963761 proves the known first-runner exit 1 makes the
+  `falsification-runners` job fail. Jsonschema installs and both later runners reach their final OK.
+- Current exact counts are 48 repository contracts across 8 runners. The three formerly dormant
+  runner files own 25 contracts/59 boundaries; the two runners completing green in this CI run
+  own 8/22. The retry runner's 17/37 are invoked and enforced but do not fully complete pending
+  TASK-0335; no claim that all 25 completed is valid yet.
+- Local validation, encoding, neutrality, structural checker, checker mutants, runtime-turn,
+  post-gate, compile, and diff gates exited 0. The retry runner remains red only at the known
+  TASK-0335 assertion in `run_unreadable_head_case`.

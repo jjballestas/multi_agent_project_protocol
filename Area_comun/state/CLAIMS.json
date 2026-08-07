@@ -58,9 +58,27 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T17:15:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0330",
             "updated_at": "2026-08-07T17:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0330-remediation-2-delivery",
+            "expires_at": "2026-08-08T00:05:00Z",
+            "notes": "Publish TASK-0330 remediation iteration 2 evidence and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0330-remediation-2-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0330-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0330-remediacion-2.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T18:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0330",
+            "updated_at": "2026-08-07T18:05:00Z"
         },
         {
             "claim_id": "CLAIM-20260807-Codex-TASK-0333-delivery",
