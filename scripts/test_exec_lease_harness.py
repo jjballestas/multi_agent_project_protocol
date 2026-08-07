@@ -80,14 +80,17 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE",
         "negative": "The post-delivery window must inherit a later main progress deadline without exceeding its own hard deadline.",
-        "mutation": "source.replace(progress_sync, ignore_progress, 1)",
+        "mutation": "dead_wiring_source = source.replace(live_guard, dead_guard, 1)",
         "boundaries": (
             'assert healthy["after_second_progress"] == "2026-08-07T02:44:41.0000000Z"',
             'assert healthy["alive_at_original_timeout"] is True',
             'assert healthy["no_progress_times_out"] is True',
-            'assert healthy["clamped_deadline"] == "2026-08-07T02:55:40.0000000Z"',
+            'assert healthy["clamped_deadline"] == "2026-08-07T02:59:00.0000000Z"',
             'assert healthy["hard_cap_times_out"] is True',
             'assert mutant["alive_at_original_timeout"] is False',
+            'assert live["post_delivery_timeout_fired"] is False',
+            'assert live["inherited_deadline_observed"] is True',
+            'assert dead_wiring["post_delivery_timeout_fired"] is True',
         ),
         "exercised_by": "test_post_delivery_window_honors_main_progress_extensions",
     },
@@ -308,12 +311,12 @@ def post_delivery_deadline_probe(source: Path) -> dict:
         root = Path(tmp)
         script = function_loader(source, ("Get-PostDeliveryDeadlineAfterProgress",)) + """
 $base = [DateTime]::Parse("2026-08-07T02:44:00Z").ToUniversalTime()
-$hard = [DateTime]::Parse("2026-08-07T02:55:40Z").ToUniversalTime()
+$hard = [DateTime]::Parse("2026-08-07T02:59:00Z").ToUniversalTime()
 $afterFirst = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $base -HardDeadlineUtc $hard -ExecDeadlineUtc ([DateTime]::Parse("2026-08-07T02:43:41Z").ToUniversalTime())
 $afterSecond = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $afterFirst -HardDeadlineUtc $hard -ExecDeadlineUtc ([DateTime]::Parse("2026-08-07T02:44:41Z").ToUniversalTime())
 $atOriginalTimeout = [DateTime]::Parse("2026-08-07T02:44:01Z").ToUniversalTime()
 $afterOvershoot = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $afterSecond -HardDeadlineUtc $hard -ExecDeadlineUtc ([DateTime]::Parse("2026-08-07T03:00:00Z").ToUniversalTime())
-$afterHardCap = [DateTime]::Parse("2026-08-07T02:55:41Z").ToUniversalTime()
+$afterHardCap = [DateTime]::Parse("2026-08-07T02:59:01Z").ToUniversalTime()
 [ordered]@{
     after_first_progress = $afterFirst.ToString("o")
     after_second_progress = $afterSecond.ToString("o")
@@ -322,6 +325,78 @@ $afterHardCap = [DateTime]::Parse("2026-08-07T02:55:41Z").ToUniversalTime()
     clamped_deadline = $afterOvershoot.ToString("o")
     hard_cap_times_out = ($afterHardCap -gt $afterOvershoot)
 } | ConvertTo-Json -Compress
+"""
+        return run_powershell(script, root)
+
+
+def post_delivery_live_loop_probe(source: Path) -> dict:
+    with make_tempdir("post-delivery-live-loop-") as tmp:
+        root = Path(tmp)
+        stdout_path = root / "stdout.log"
+        stderr_path = root / "stderr.log"
+        events_path = root / "events.jsonl"
+        lease_path = root / "lease.json"
+        script = function_loader(source, ("Get-PostDeliveryDeadlineAfterProgress",)) + f"""
+$whileNode = $ast.FindAll({{ param($item)
+    $item -is [System.Management.Automation.Language.WhileStatementAst] -and
+    $item.Extent.Text.Contains("POST_DELIVERY_WINDOW_START")
+}}, $true) | Select-Object -First 1
+if (-not $whileNode) {{ throw "missing live supervision loop" }}
+$script:logs = @()
+$script:progressCalls = 0
+$script:stopped = $false
+$script:ticks = 0
+function Write-Log {{ param([string]$Line) $script:logs += $Line }}
+function Update-ExecLeaseHeartbeat {{}}
+function Get-OwnDeliveryEvidence {{ return $true }}
+function Stop-LeaseProcessTree {{ $script:stopped = $true; return $true }}
+function Get-ExecProgressState {{
+    $script:progressCalls += 1
+    if ($script:progressCalls -eq 1) {{
+        return [pscustomobject]@{{ progressing = $true; output_bytes = 1L; ledger_bytes = 0L; reasons = "probe_progress" }}
+    }}
+    return [pscustomobject]@{{ progressing = $false; output_bytes = 1L; ledger_bytes = 0L; reasons = "none" }}
+}}
+$process = [pscustomobject]@{{ Id = 4242 }}
+$process | Add-Member ScriptMethod WaitForExit {{
+    param([int]$Milliseconds)
+    $script:ticks += 1
+    Start-Sleep -Milliseconds 100
+    return ($script:ticks -ge 15)
+}}
+$Message = [pscustomobject]@{{ Name = "MSG-probe.md" }}
+$Root = {ps_literal(root)}
+$stdoutPath = {ps_literal(stdout_path)}
+$stderrPath = {ps_literal(stderr_path)}
+$eventsPath = {ps_literal(events_path)}
+$LeasePath = {ps_literal(lease_path)}
+$StopPath = Join-Path $Root "STOP"
+[IO.File]::WriteAllText($stdoutPath, "")
+[IO.File]::WriteAllText($stderrPath, "")
+[IO.File]::WriteAllText($eventsPath, "")
+[IO.File]::WriteAllText($LeasePath, '{{}}')
+$HeartbeatSeconds = 0
+$nextHeartbeatSeconds = 0
+$execStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+$PostDeliveryTimeoutSeconds = 1
+$ProgressHardCapSeconds = 3
+$ProgressExtensionSeconds = 2
+$ProgressFreshSeconds = 1
+$ledgerBytesBefore = 0L
+$ledgerPrefixSha256Before = "probe"
+$progressOutputBytes = 0L
+$progressLedgerBytes = 0L
+$postDeliveryDeadlineUtc = $null
+$postDeliveryHardDeadlineUtc = $null
+$deadlineUtc = [DateTime]::UtcNow.AddMilliseconds(150)
+$execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
+Invoke-Expression $whileNode.Extent.Text
+[ordered]@{{
+    post_delivery_timeout_fired = [bool]($script:logs -match '^POST_DELIVERY_TIMEOUT ')
+    inherited_deadline_observed = [bool]($script:logs -match 'post_delivery_deadline=(?!none)')
+    stopped = $script:stopped
+    ticks = $script:ticks
+}} | ConvertTo-Json -Compress
 """
         return run_powershell(script, root)
 
@@ -340,7 +415,7 @@ def test_post_delivery_window_honors_main_progress_extensions() -> None:
     assert healthy["after_second_progress"] == "2026-08-07T02:44:41.0000000Z"
     assert healthy["alive_at_original_timeout"] is True
     assert healthy["no_progress_times_out"] is True
-    assert healthy["clamped_deadline"] == "2026-08-07T02:55:40.0000000Z"
+    assert healthy["clamped_deadline"] == "2026-08-07T02:59:00.0000000Z"
     assert healthy["hard_cap_times_out"] is True
 
     progress_sync = "if ($ExecDeadlineUtc -gt $nextDeadlineUtc) { $nextDeadlineUtc = $ExecDeadlineUtc }"
@@ -352,6 +427,20 @@ def test_post_delivery_window_honors_main_progress_extensions() -> None:
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
         mutant = post_delivery_deadline_probe(mutant_path)
     assert mutant["alive_at_original_timeout"] is False
+
+    live = post_delivery_live_loop_probe(HARNESS_PATH)
+    assert live["post_delivery_timeout_fired"] is False
+    assert live["inherited_deadline_observed"] is True
+
+    live_guard = "if ($null -ne $postDeliveryDeadlineUtc) {"
+    dead_guard = "if ($false -and $null -ne $postDeliveryDeadlineUtc) {"
+    dead_wiring_source = source.replace(live_guard, dead_guard, 1)
+    assert dead_wiring_source != source
+    with make_tempdir("post-delivery-dead-wiring-") as tmp:
+        dead_wiring_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        dead_wiring_path.write_text(dead_wiring_source, encoding="utf-8", newline="\n")
+        dead_wiring = post_delivery_live_loop_probe(dead_wiring_path)
+    assert dead_wiring["post_delivery_timeout_fired"] is True
 
 
 def defer_probe(source: Path) -> dict:

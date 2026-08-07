@@ -1125,7 +1125,8 @@ function Invoke-PeerForMessage {
                     if ($null -ne $postDeliveryDeadlineUtc) {
                         $postDeliveryDeadlineUtc = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $postDeliveryDeadlineUtc -HardDeadlineUtc $postDeliveryHardDeadlineUtc -ExecDeadlineUtc $deadlineUtc
                     }
-                    Write-Log "EXEC_PROGRESSING pid=$($process.Id) reason=$($progress.reasons) next_deadline=$($deadlineUtc.ToString('o')) hard_deadline=$($execHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
+                    $effectivePostDeliveryDeadline = if ($null -ne $postDeliveryDeadlineUtc) { $postDeliveryDeadlineUtc.ToString('o') } else { "none" }
+                    Write-Log "EXEC_PROGRESSING pid=$($process.Id) reason=$($progress.reasons) next_deadline=$($deadlineUtc.ToString('o')) hard_deadline=$($execHardDeadlineUtc.ToString('o')) post_delivery_deadline=$effectivePostDeliveryDeadline message=$($Message.Name)"
                 } else {
                     $hungReason = if ([DateTime]::UtcNow -ge $execHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
                     Write-Log "EXEC_HUNG pid=$($process.Id) reason=$hungReason action=terminate message=$($Message.Name)"
