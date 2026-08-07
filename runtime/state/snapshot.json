@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "b9aaad3e4a95a9fc8eaad1a6aca9bd85500fa68a6547e21c123572d20131868a",
+  "canonical_hash": "1e9f98d2c88cc125b11aeac53533fb8857d2b583e7edbe463af843eab4004762",
   "integrity": {
-    "canonical_hash": "b9aaad3e4a95a9fc8eaad1a6aca9bd85500fa68a6547e21c123572d20131868a",
+    "canonical_hash": "1e9f98d2c88cc125b11aeac53533fb8857d2b583e7edbe463af843eab4004762",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "dbaac0976d2771cb50622c40ab687909b801bb69e7dc8054f41d7c9a3fff9f91",
-    "signature": "556577bd0c1ddb5e4b1e8702e833b0c0487ac7b4fd70856a38814843b596953c",
-    "up_to_seq": 7303
+    "prev_hash": "b679f917632ea3470ea58956cf2b038a583255322f042497fa799337144c8acf",
+    "signature": "831d78c901e091c0d43a62c6c5668ad88f71c79f91e6162e20f9ca633fe776d3",
+    "up_to_seq": 7305
   },
   "state": {
     "aggregate_versions": {
@@ -902,6 +902,7 @@
       "CLAIM-20260807-Codex-TASK-0317-remediation-4-delivery": 1,
       "CLAIM-20260807-Codex-TASK-0323": 1,
       "CLAIM-20260807-Codex-TASK-0323-delivery": 1,
+      "CLAIM-20260807-Codex-TASK-0323-final-memory": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2965,7 +2966,7 @@
       "TASK-0320": 4,
       "TASK-0321": 13,
       "TASK-0322": 3,
-      "TASK-0323": 6,
+      "TASK-0323": 7,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2988,7 +2989,7 @@
       "protocol-prune": 41,
       "protocol-state": 1
     },
-    "events_applied": 6632,
+    "events_applied": 6634,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6286,6 +6287,8 @@
       "codex:task0323:claim-acquire:20260807T004748Z": 7298,
       "codex:task0323:delivery-claim-acquire:20260807T010243Z": 7300,
       "codex:task0323:delivery-claim-release:20260807T010521Z": 7303,
+      "codex:task0323:final-memory-claim-acquire:20260807T010903Z": 7304,
+      "codex:task0323:final-memory-claim-release:20260807T010949Z": 7305,
       "codex:task0323:in-progress-to-in-review:20260807T010521Z": 7301,
       "codex:task0323:ready-to-in-progress:20260807T004748Z": 7299,
       "codex:task0323:work-claim-release:20260807T010521Z": 7302,
@@ -9624,5 +9627,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7303
+  "up_to_seq": 7305
 }

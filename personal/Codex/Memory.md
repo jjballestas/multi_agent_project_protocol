@@ -11,9 +11,11 @@ Last updated: 2026-08-07 Europe/Madrid, during TASK-0323 implementation.
   remain exact, and malformed pairs fail closed instead of producing invented routes.
 - The permanent real-Git negative independently reproduces the old rename-source loss and
   C-quoted path fabrication, exercises all three Python parsers, and kills removal of `-z`.
-- Live gates passed: 15 harness tests, 32/32 falsification inventory, collaboration,
-  encoding, neutrality, Python compile, and diff checks. Exact-commit clean-clone gates
-  and governed delivery to independent review remain pending.
+- Live and exact-commit clean-clone gates passed: 15 harness tests, 32/32 falsification
+  inventory, collaboration, encoding, neutrality, Python compile, diff, and clean status.
+- Delivery commit `3df488fa` moves TASK-0323 to `in_review`, releases both maker claims,
+  and publishes the self-contained handoff plus response-routed review request. Runtime
+  events reached seq 7303 with drift false. Codex did not review or ratify the work.
 
 ## 2026-08-07 - TASK-0317 remediation iteration 4
 
