@@ -44,7 +44,7 @@ jobs:
 
       - name: Validate falsification contracts and guardian controls
         run: |
-          python scripts/check_falsification_contracts.py --root . --inventory
+          python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory
           python scripts/test_falsification_contracts.py
           python scripts/memory/test_memory_db.py
 
@@ -265,3 +265,20 @@ jobs:
       - name: Scan domain neutrality with PowerShell
         shell: pwsh
         run: ./scripts/scan_domain_neutrality.ps1 -Root .
+
+  falsification-runners:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Execute every previously dormant falsification runner
+        run: |
+          python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
+          python examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py
+          python examples/runtime_turn_cases/run_post_gate_obstacle_cases.py

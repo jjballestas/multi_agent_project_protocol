@@ -24,12 +24,27 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "main",
     },
+    {
+        "id": "NEG-FALSIFICATION-RUNNER-WIRING",
+        "negative": "A declared contract whose owner is absent from workflow run commands is rejected.",
+        "mutation": '.replace("python examples/orphan/run_orphan.py\\n", "")',
+        "boundaries": (
+            "assert wired.returncode == 0",
+            "assert orphan.returncode != 0",
+            'assert "runner is not executed by workflow" in orphan.stdout',
+            "assert healed.returncode == 0",
+        ),
+        "exercised_by": "main",
+    },
 )
 
 
-def run(root: Path) -> subprocess.CompletedProcess[str]:
+def run(root: Path, workflow: Path | None = None) -> subprocess.CompletedProcess[str]:
+    command = [sys.executable, str(ROOT / "scripts/check_falsification_contracts.py"), "--root", str(root)]
+    if workflow is not None:
+        command.extend(("--workflow", str(workflow)))
     return subprocess.run(
-        [sys.executable, str(ROOT / "scripts/check_falsification_contracts.py"), "--root", str(root)],
+        command,
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -46,7 +61,7 @@ def run_with_checker(checker: Path, root: Path) -> subprocess.CompletedProcess[s
 
 
 def main() -> int:
-    """PERMANENT_NEGATIVE: NEG-FALSIFICATION-GUARDIAN"""
+    """PERMANENT_NEGATIVE: NEG-FALSIFICATION-GUARDIAN, NEG-FALSIFICATION-RUNNER-WIRING"""
     clean = run(ROOT)
     assert clean.returncode == 0, clean.stdout + clean.stderr
     with tempfile.TemporaryDirectory(prefix="falsification-contract-") as temp:
@@ -72,6 +87,47 @@ def main() -> int:
         assert undeclared.returncode != 0, undeclared.stdout + undeclared.stderr
         assert "permanent_negatives=2 declared=1 missing=1" in undeclared.stdout, undeclared.stdout
         assert "NEG-SHADOW" in undeclared.stdout, undeclared.stdout
+    with tempfile.TemporaryDirectory(prefix="falsification-workflow-") as temp:
+        fixture = Path(temp)
+        runner = fixture / "examples/cases/run_cases.py"
+        runner.parent.mkdir(parents=True)
+        runner.write_text(
+            "FALSIFICATION_CONTRACTS = ({'id':'NEG-WIRED','negative':'n','mutation':'MUTATE',"
+            "'boundaries':('ASSERT_OLD','ASSERT_NEW'),'exercised_by':'case_negative'},)\n"
+            "def case_negative():\n    '''PERMANENT_NEGATIVE: NEG-WIRED'''\n"
+            "    candidate = 'MUTATE'\n    assert 'ASSERT_OLD'\n    assert 'ASSERT_NEW'\n",
+            encoding="ascii",
+        )
+        workflow = fixture / ".github/workflows/validate.yml"
+        workflow.parent.mkdir(parents=True)
+        workflow.write_text("steps:\n  - run: python examples/cases/run_cases.py\n", encoding="ascii")
+        wired = run(fixture, workflow)
+        assert wired.returncode == 0, wired.stdout + wired.stderr
+        orphan_runner = fixture / "examples/orphan/run_orphan.py"
+        orphan_runner.parent.mkdir(parents=True)
+        orphan_runner.write_text(
+            "FALSIFICATION_CONTRACTS = ({'id':'NEG-ORPHAN','negative':'n','mutation':'MUTATE',"
+            "'boundaries':('ASSERT_OLD','ASSERT_NEW'),'exercised_by':'case_negative'},)\n"
+            "def case_negative():\n    '''PERMANENT_NEGATIVE: NEG-ORPHAN'''\n"
+            "    candidate = 'MUTATE'\n    assert 'ASSERT_OLD'\n    assert 'ASSERT_NEW'\n",
+            encoding="ascii",
+        )
+        orphan = run(fixture, workflow)
+        assert orphan.returncode != 0, orphan.stdout + orphan.stderr
+        assert "runner is not executed by workflow" in orphan.stdout, orphan.stdout
+        workflow.write_text(
+            workflow.read_text(encoding="ascii") + "  - run: python examples/orphan/run_orphan.py\n",
+            encoding="ascii",
+        )
+        healed = run(fixture, workflow)
+        assert healed.returncode == 0, healed.stdout + healed.stderr
+        mutant_workflow = workflow.with_name("mutant.yml")
+        mutant_workflow.write_text(
+            workflow.read_text(encoding="ascii").replace("python examples/orphan/run_orphan.py\n", ""),
+            encoding="ascii",
+        )
+        mutant = run(fixture, mutant_workflow)
+        assert mutant.returncode != 0, mutant.stdout + mutant.stderr
     with tempfile.TemporaryDirectory(prefix="falsification-off-glob-") as temp:
         fixture = Path(temp)
         outside_old_glob = fixture / "scripts/test_outside_old_glob.py"

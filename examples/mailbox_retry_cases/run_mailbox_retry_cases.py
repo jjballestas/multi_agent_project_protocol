@@ -127,6 +127,17 @@ FALSIFICATION_CONTRACTS = (
         "boundaries": ('assert output == "aborted"', 'assert mutant_output == "live"'),
         "exercised_by": "run_nul_residue_path_cases",
     },
+    {
+        "id": "retry-ledger-head-defer-order",
+        "negative": "an unreadable ledger head keeps one stable defer cause until terminal",
+        "mutation": "runner_text.replace(good_order, bad_order, 1)",
+        "boundaries": (
+            "exercise(instrumented_runner, expect_terminal=True)",
+            "exercise(mutant_runner, expect_terminal=False)",
+            "assert terminal is expect_terminal",
+        ),
+        "exercised_by": "run_unreadable_head_case",
+    },
 )
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
 LEDGER_HEAD = ROOT / "scripts" / "ledger_head.py"
@@ -344,10 +355,11 @@ def run_deleted_residue_real_loop_case() -> None:
             command = [
                 "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
                 str(fixture / "scripts/harness/peer_mailbox_cron.ps1"),
-                "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "10",
-                "-MaxTransientRetries", "2", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+                "-MaxTransientRetries", "2", "-PreExecDeferTimeoutSeconds", "1",
+                "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
             ]
             run(*command, cwd=fixture, timeout=20)
             log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
@@ -676,8 +688,15 @@ def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProces
 
 
 def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
-    """A valid old own event must not confirm work when the head helper fails."""
+    """PERMANENT_NEGATIVE: retry-ledger-head-defer-order
+
+    A valid old own event must not confirm work when the head helper fails, and
+    resetting the stable defer before the readability check must kill the test.
+    """
     helper = sandbox / "scripts/ledger_head.py"
+    instrumented_runner = sandbox / "scripts/harness/peer_mailbox_cron.ps1"
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    instrumented_runner.write_text(runner_text, encoding="utf-8")
     helper.write_text("raise SystemExit(23)\n", encoding="ascii")
     events = sandbox / "runtime/state/events.jsonl"
     events.write_text(
@@ -685,44 +704,72 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
         '"keyid":"testpeer:v1","sig":"old-signature"}}\n',
         encoding="ascii",
     )
-    runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
-    runtime.mkdir(parents=True)
-    (runtime / "testpeer_mailbox_cron.lock").write_text("orphan\n", encoding="ascii")
-    command = [
-        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-        "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
-        "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
-        "-MaxNoCoordinatorRounds", "6", "-ExecTimeoutSeconds", "20",
-        "-MaxTransientRetries", "5", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
-    ]
-    process = subprocess.Popen(command, cwd=sandbox, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    log_path = runtime / "testpeer_mailbox_cron.log"
-    deadline = time.monotonic() + 15
-    log = ""
-    while time.monotonic() < deadline:
-        if log_path.exists():
-            log = log_path.read_text(encoding="utf-8")
-            if "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=defer_terminal reason=ledger_unreadable_before_exec" in log:
-                break
-        time.sleep(0.1)
-    else:
-        process.kill()
-        stdout, stderr = process.communicate()
-        raise AssertionError(f"unreadable-head deferral missing:\n{log}\n{stdout}\n{stderr}")
-    (runtime / "testpeer_mailbox_cron.stop").write_text("stop\n", encoding="ascii")
-    process.communicate(timeout=10)
-    assert process.returncode == 0, log
-    assert not (sandbox / ".protocol-tmp/fake-count.txt").exists(), "agent ran with an unreadable ledger head"
-    seen_path = runtime / "testpeer_mailbox_cron.seen.json"
-    seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
-    assert "MSG-retry.md" not in seen, "old own evidence consumed the message"
-    assert "outcome=confirmed" not in log, log
-    assert "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=defer_terminal reason=ledger_unreadable_before_exec" in log, log
-    assert "SELF_HEAL_ORPHAN_LOCK owner=TestPeer reason=missing_lease" in log, log
-    assert not (runtime / "testpeer_mailbox_cron.lock").exists(), "head failure left an orphan lock"
-    shutil.rmtree(sandbox / ".protocol-tmp")
+    run("git", "add", "scripts/harness/peer_mailbox_cron.ps1", "scripts/ledger_head.py", "runtime/state/events.jsonl", cwd=sandbox)
+    run("git", "commit", "-m", "fixture unreadable ledger head", cwd=sandbox)
+    terminal_line = (
+        "RETRY_EXHAUSTED defers=3 attempts=0 signal=watchdog "
+        "outcome=defer_terminal reason=ledger_unreadable_before_exec"
+    )
+
+    def exercise(runner: Path, *, expect_terminal: bool) -> None:
+        runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+        runtime.mkdir(parents=True)
+        (runtime / "testpeer_mailbox_cron.lock").write_text("orphan\n", encoding="ascii")
+        command = [
+            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(runner),
+            "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(sandbox), "-PromptFile", str(prompt),
+            "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+            "-MaxNoCoordinatorRounds", "6", "-ExecTimeoutSeconds", "20",
+            "-MaxTransientRetries", "5", "-PreExecDeferTimeoutSeconds", "2",
+            "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+        ]
+        process = subprocess.Popen(command, cwd=sandbox, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        log_path = runtime / "testpeer_mailbox_cron.log"
+        deadline = time.monotonic() + 12
+        log = ""
+        while time.monotonic() < deadline and process.poll() is None:
+            if log_path.exists():
+                log = log_path.read_text(encoding="utf-8")
+                if terminal_line in log:
+                    break
+            time.sleep(0.1)
+        terminal = terminal_line in log
+        assert terminal is expect_terminal, log
+        (runtime / "testpeer_mailbox_cron.stop").write_text("stop\n", encoding="ascii")
+        process.communicate(timeout=10)
+        assert process.returncode == 0, log
+        assert not (sandbox / ".protocol-tmp/fake-count.txt").exists(), "agent ran with an unreadable ledger head"
+        seen_path = runtime / "testpeer_mailbox_cron.seen.json"
+        seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
+        assert "MSG-retry.md" not in seen, "old own evidence consumed the message"
+        assert "outcome=confirmed" not in log, log
+        assert "SELF_HEAL_ORPHAN_LOCK owner=TestPeer reason=missing_lease" in log, log
+        assert not (runtime / "testpeer_mailbox_cron.lock").exists(), "head failure left an orphan lock"
+        shutil.rmtree(sandbox / ".protocol-tmp")
+
+    exercise(instrumented_runner, expect_terminal=True)
+    good_order = (
+        "        $ledgerHeadBefore = Get-LedgerHead\n"
+        "        if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason \"ledger_unreadable_before_exec\"; return }\n"
+        "        Reset-PreExecDefer -Message $Message\n"
+    )
+    bad_order = (
+        "        Reset-PreExecDefer -Message $Message\n"
+        "        $ledgerHeadBefore = Get-LedgerHead\n"
+        "        if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason \"ledger_unreadable_before_exec\"; return }\n"
+    )
+    mutant_text = runner_text.replace(good_order, bad_order, 1)
+    assert mutant_text != runner_text, "ledger-head defer-order mutation did not apply"
+    mutant_runner = instrumented_runner
+    mutant_runner.write_text(mutant_text, encoding="utf-8")
+    run("git", "add", "scripts/harness/peer_mailbox_cron.ps1", cwd=sandbox)
+    run("git", "commit", "-m", "mutate ledger head defer order", cwd=sandbox)
+    exercise(mutant_runner, expect_terminal=False)
+    shutil.copy2(RUNNER, instrumented_runner)
     shutil.copy2(LEDGER_HEAD, helper)
     events.write_text("", encoding="ascii")
+    run("git", "add", "scripts/harness/peer_mailbox_cron.ps1", "scripts/ledger_head.py", "runtime/state/events.jsonl", cwd=sandbox)
+    run("git", "commit", "-m", "restore readable ledger head fixture", cwd=sandbox)
 
 
 def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
@@ -735,10 +782,11 @@ def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     recovery_fake.write_text("@echo OUTCOME: definitive\r\n", encoding="ascii")
     command = [
         "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-        "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+        "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(sandbox), "-PromptFile", str(prompt),
         "-AgentExe", str(recovery_fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
         "-MaxNoCoordinatorRounds", "8", "-ExecTimeoutSeconds", "20",
-        "-MaxTransientRetries", "3", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "60",
+        "-MaxTransientRetries", "3", "-PreExecDeferTimeoutSeconds", "2",
+        "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "60",
     ]
     process = subprocess.Popen(command, cwd=sandbox, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     log_path = runtime / "testpeer_mailbox_cron.log"
@@ -783,7 +831,7 @@ def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
     fake.write_text("@echo no new evidence\r\n", encoding="ascii")
     command = [
         "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-        "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+        "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(sandbox), "-PromptFile", str(prompt),
         "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
         "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20",
         "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
@@ -849,7 +897,7 @@ def run_post_delivery_timeout_case() -> None:
         try:
             run(
                 "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-                "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20",
                 "-PostDeliveryTimeoutSeconds", "2", "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0",
@@ -926,7 +974,7 @@ def run_exec_running_heartbeat_case() -> None:
             run(
                 "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
                 str(fixture / "scripts/harness/peer_mailbox_cron.ps1"),
-                "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20", "-HeartbeatSeconds", "1",
                 "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0", cwd=fixture, timeout=15,
@@ -996,7 +1044,7 @@ def run_pre_delivery_and_liveness_cases() -> None:
         started = time.monotonic()
         run(
             "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-            "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+            "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
             "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
             "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "2", "-PostDeliveryTimeoutSeconds", "1",
             "-ProgressFreshSeconds", "0", "-ProgressExtensionSeconds", "2", "-ProgressHardCapSeconds", "3",
@@ -1060,7 +1108,7 @@ def run_frozen_exec_with_production_freshness_case() -> None:
         started = time.monotonic()
         run(
             "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-            "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+            "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
             "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
             "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "2", "-PostDeliveryTimeoutSeconds", "1",
             "-ProgressFreshSeconds", "15", "-ProgressExtensionSeconds", "2", "-ProgressHardCapSeconds", "8",
@@ -1311,7 +1359,7 @@ def main() -> int:
         try:
             result = run(
                 "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-                "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+                "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(sandbox), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "6", "-ExecTimeoutSeconds", "20",
                 "-MaxTransientRetries", "5", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",

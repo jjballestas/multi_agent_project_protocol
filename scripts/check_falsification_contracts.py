@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import re
 import sys
 from pathlib import Path
 
@@ -26,7 +27,42 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".")
     parser.add_argument("--inventory", action="store_true")
+    parser.add_argument(
+        "--workflow",
+        help="Workflow file whose run commands must execute every declared contract owner.",
+    )
     return parser.parse_args()
+
+
+def workflow_commands(path: Path) -> str:
+    """Return only executable ``run`` fields from a GitHub Actions workflow."""
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    commands: list[str] = []
+    index = 0
+    while index < len(lines):
+        match = re.match(r"^(\s*)(?:-\s+)?run:\s*(.*)$", lines[index])
+        if not match:
+            index += 1
+            continue
+        indent = len(match.group(1))
+        value = match.group(2).strip()
+        if value in {"|", ">", "|-", ">-", "|+", ">+"}:
+            index += 1
+            while index < len(lines):
+                line = lines[index]
+                if line.strip() and len(line) - len(line.lstrip()) <= indent:
+                    break
+                commands.append(line.strip())
+                index += 1
+            continue
+        commands.append(value.strip("'\""))
+        index += 1
+    return "\n".join(commands).replace("\\", "/")
+
+
+def command_executes(commands: str, relative_path: Path) -> bool:
+    candidate = relative_path.as_posix()
+    return re.search(rf"(?<![\w./-]){re.escape(candidate)}(?![\w./-])", commands) is not None
 
 
 def declarations(path: Path) -> list[dict[str, object]]:
@@ -107,6 +143,13 @@ def main() -> int:
     existing_ids = set(existing)
     missing = sorted(existing_ids - declared_ids)
     stale = sorted(declared_ids - existing_ids)
+    workflow_path = (root / args.workflow).resolve() if args.workflow else None
+    commands = ""
+    if workflow_path is not None:
+        if workflow_path.is_file():
+            commands = workflow_commands(workflow_path)
+        else:
+            errors.append(f"workflow file does not exist: {workflow_path}")
     for negative_id in missing:
         path, function_name = existing[negative_id]
         errors.append(
@@ -123,6 +166,18 @@ def main() -> int:
         for boundary in contract.boundaries:
             if boundary not in source:
                 errors.append(f"{contract.id}: assertion boundary not found beside the test: {boundary}")
+        if workflow_path is not None and commands:
+            runner = owners[contract.id].relative_to(root)
+            if not command_executes(commands, runner):
+                errors.append(f"{contract.id}: runner is not executed by workflow: {runner}")
+    if workflow_path is not None and commands:
+        runners = {owners[contract.id].relative_to(root) for contract in contracts}
+        executed_runners = {runner for runner in runners if command_executes(commands, runner)}
+        executed_contracts = sum(command_executes(commands, owners[item.id].relative_to(root)) for item in contracts)
+        print(
+            "FALSIFICATION_EXECUTION "
+            f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)}"
+        )
     print(
         "FALSIFICATION_INVENTORY "
         f"permanent_negatives={len(existing_ids)} declared={len(declared_ids)} missing={len(missing)}"

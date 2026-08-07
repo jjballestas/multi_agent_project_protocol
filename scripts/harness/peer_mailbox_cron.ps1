@@ -1237,11 +1237,11 @@ function Invoke-PeerForMessage {
         return
     }
     try {
-        Reset-PreExecDefer -Message $Message
         Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
         $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
         $ledgerHeadBefore = Get-LedgerHead
         if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason "ledger_unreadable_before_exec"; return }
+        Reset-PreExecDefer -Message $Message
         $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
         $ledgerBytesBefore = if (Test-Path -LiteralPath $eventsPath) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0 }
         $ledgerPrefixSha256Before = if (Test-Path -LiteralPath $eventsPath) { Get-FilePrefixSha256 -Path $eventsPath -Length $ledgerBytesBefore } else { "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" }
