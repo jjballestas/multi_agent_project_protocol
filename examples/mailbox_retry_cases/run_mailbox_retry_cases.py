@@ -137,9 +137,11 @@ FALSIFICATION_CONTRACTS = (
         "negative": "an unreadable ledger head keeps one stable defer cause until terminal",
         "mutation": "runner_text.replace(good_order, bad_order, 1)",
         "boundaries": (
-            "exercise(instrumented_runner, expect_terminal=True)",
-            "exercise(mutant_runner, expect_terminal=False)",
-            "assert terminal is expect_terminal",
+            "assert terminal is expect_any_terminal, log",
+            "assert expected_terminal is expect_expected_terminal, log",
+            '"ledger_unreadable_wrong_cause"',
+            "expect_any_terminal=False",
+            "expect_any_terminal=True",
         ),
         "exercised_by": "run_unreadable_head_case",
     },
@@ -722,6 +724,20 @@ def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProces
     return subprocess.run(args, cwd=cwd, text=True, capture_output=True, timeout=timeout, check=True)
 
 
+def retry_exhausted_events(log: str) -> list[dict[str, str]]:
+    events = []
+    for line in log.splitlines():
+        if "RETRY_EXHAUSTED" not in line:
+            continue
+        fields = {}
+        for token in line.split("RETRY_EXHAUSTED", 1)[1].split():
+            if "=" in token:
+                key, value = token.split("=", 1)
+                fields[key] = value
+        events.append(fields)
+    return events
+
+
 def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     """PERMANENT_NEGATIVE: retry-ledger-head-defer-order
 
@@ -741,12 +757,12 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     )
     run("git", "add", "scripts/harness/peer_mailbox_cron.ps1", "scripts/ledger_head.py", "runtime/state/events.jsonl", cwd=sandbox)
     run("git", "commit", "-m", "fixture unreadable ledger head", cwd=sandbox)
-    terminal_line = (
-        "RETRY_EXHAUSTED defers=3 attempts=0 signal=watchdog "
-        "outcome=defer_terminal reason=ledger_unreadable_before_exec"
-    )
-
-    def exercise(runner: Path, *, expect_terminal: bool) -> None:
+    def exercise(
+        runner: Path,
+        *,
+        expect_expected_terminal: bool,
+        expect_any_terminal: bool,
+    ) -> None:
         runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
         runtime.mkdir(parents=True)
         (runtime / "testpeer_mailbox_cron.lock").write_text("orphan\n", encoding="ascii")
@@ -765,11 +781,22 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
         while time.monotonic() < deadline and process.poll() is None:
             if log_path.exists():
                 log = log_path.read_text(encoding="utf-8")
-                if terminal_line in log:
-                    break
+            events = retry_exhausted_events(log)
+            if any(event.get("outcome") == "defer_terminal" for event in events):
+                break
             time.sleep(0.1)
-        terminal = terminal_line in log
-        assert terminal is expect_terminal, log
+        events = retry_exhausted_events(log)
+        terminal = any(event.get("outcome") == "defer_terminal" for event in events)
+        expected_terminal = any(
+            event.get("defers") == "3"
+            and event.get("attempts") == "0"
+            and event.get("signal") == "watchdog"
+            and event.get("outcome") == "defer_terminal"
+            and event.get("reason") == "ledger_unreadable_before_exec"
+            for event in events
+        )
+        assert terminal is expect_any_terminal, log
+        assert expected_terminal is expect_expected_terminal, log
         (runtime / "testpeer_mailbox_cron.stop").write_text("stop\n", encoding="ascii")
         process.communicate(timeout=10)
         assert process.returncode == 0, log
@@ -782,7 +809,11 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
         assert not (runtime / "testpeer_mailbox_cron.lock").exists(), "head failure left an orphan lock"
         shutil.rmtree(sandbox / ".protocol-tmp")
 
-    exercise(instrumented_runner, expect_terminal=True)
+    exercise(
+        instrumented_runner,
+        expect_expected_terminal=True,
+        expect_any_terminal=True,
+    )
     good_order = (
         "        $ledgerHeadBefore = Get-LedgerHead\n"
         "        if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason \"ledger_unreadable_before_exec\"; return }\n"
@@ -799,7 +830,25 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     mutant_runner.write_text(mutant_text, encoding="utf-8")
     run("git", "add", "scripts/harness/peer_mailbox_cron.ps1", cwd=sandbox)
     run("git", "commit", "-m", "mutate ledger head defer order", cwd=sandbox)
-    exercise(mutant_runner, expect_terminal=False)
+    exercise(
+        mutant_runner,
+        expect_expected_terminal=False,
+        expect_any_terminal=False,
+    )
+    wrong_cause_text = runner_text.replace(
+        'Register-PreExecDefer -Message $Message -Reason "ledger_unreadable_before_exec"',
+        'Register-PreExecDefer -Message $Message -Reason "ledger_unreadable_wrong_cause"',
+        1,
+    )
+    assert wrong_cause_text != runner_text, "ledger-head wrong-cause mutation did not apply"
+    mutant_runner.write_text(wrong_cause_text, encoding="utf-8")
+    run("git", "add", "scripts/harness/peer_mailbox_cron.ps1", cwd=sandbox)
+    run("git", "commit", "-m", "mutate ledger head defer cause", cwd=sandbox)
+    exercise(
+        mutant_runner,
+        expect_expected_terminal=False,
+        expect_any_terminal=True,
+    )
     shutil.copy2(RUNNER, instrumented_runner)
     shutil.copy2(LEDGER_HEAD, helper)
     events.write_text("", encoding="ascii")
@@ -830,7 +879,14 @@ def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     while time.monotonic() < deadline:
         if log_path.exists():
             log = log_path.read_text(encoding="utf-8")
-            if "RETRY_EXHAUSTED defers=3 attempts=0 signal=watchdog outcome=defer_terminal reason=worktree_residue_live" in log:
+            if any(
+                event.get("defers") == "3"
+                and event.get("attempts") == "0"
+                and event.get("signal") == "watchdog"
+                and event.get("outcome") == "defer_terminal"
+                and event.get("reason") == "worktree_residue_live"
+                for event in retry_exhausted_events(log)
+            ):
                 break
         time.sleep(0.1)
     else:
@@ -876,7 +932,12 @@ def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
     log = (runtime / "testpeer_mailbox_cron.log").read_text(encoding="utf-8")
     assert "outcome=unconfirmed" in log, log
     assert "outcome=confirmed" not in log, log
-    assert "RETRY_EXHAUSTED attempts=1 signal=watchdog outcome=unconfirmed" in log, log
+    assert any(
+        event.get("attempts") == "1"
+        and event.get("signal") == "watchdog"
+        and event.get("outcome") == "unconfirmed"
+        for event in retry_exhausted_events(log)
+    ), log
     shutil.rmtree(sandbox / ".protocol-tmp")
     fake.unlink()
 
@@ -899,13 +960,21 @@ def run_post_delivery_timeout_case() -> None:
         (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
         (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
-            '{"tasks":[{"id":"TASK-delivery","owner":"TestPeer","status":"in_review"}]}\n',
+            '{"tasks":[{"id":"TASK-0300","owner":"TestPeer","status":"in_review",'
+            '"file":"Area_comun/tasks/TASK-0300-post-delivery.md"}]}\n',
+            encoding="ascii",
+        )
+        task_file = fixture / "Area_comun/tasks/TASK-0300-post-delivery.md"
+        task_file.parent.mkdir(parents=True)
+        task_file.write_text(
+            "---\ntask_id: TASK-0300\nfile: Area_comun/tasks/TASK-0300-post-delivery.md\n"
+            "intake:\n  scope_routes:\n    - post-delivery-output.txt\n---\n",
             encoding="ascii",
         )
         (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
         (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (fixture / "Area_comun/mailbox/open/MSG-post.md").write_text(
-            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0300\nstatus: open\n"
             "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
             encoding="ascii",
         )
@@ -915,7 +984,7 @@ def run_post_delivery_timeout_case() -> None:
         core.write_text(
             "$event='{\"seq\":1,\"actor\":\"TestPeer\",\"applied\":true,"
             "\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture\"},"
-            "\"payload\":{\"intent_type\":\"task_status\",\"task_id\":\"TASK-delivery\","
+            "\"payload\":{\"intent_type\":\"task_status\",\"task_id\":\"TASK-0300\","
             "\"transitions\":{\"task_status\":{\"from\":\"in_progress\",\"to\":\"in_review\"}}}}'\n"
             "Add-Content -LiteralPath 'runtime/state/events.jsonl' -Value $event -Encoding ASCII\n"
             "Start-Sleep -Seconds 30\n",
@@ -968,7 +1037,7 @@ def run_exec_running_heartbeat_case() -> None:
     )
     assert heartbeat_line in runner_text
 
-    def exercise(candidate: str) -> int:
+    def exercise(candidate: str) -> tuple[int, str]:
         fixture = Path(tempfile.mkdtemp(prefix="task0302-exec-running-"))
         try:
             (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
@@ -985,13 +1054,21 @@ def run_exec_running_heartbeat_case() -> None:
             (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
             (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
             (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
-                '{"tasks":[{"id":"TASK-heartbeat","owner":"TestPeer","status":"in_progress"}]}\n',
+                '{"tasks":[{"id":"TASK-0302","owner":"TestPeer","status":"in_progress",'
+                '"file":"Area_comun/tasks/TASK-0302-heartbeat.md"}]}\n',
+                encoding="ascii",
+            )
+            task_file = fixture / "Area_comun/tasks/TASK-0302-heartbeat.md"
+            task_file.parent.mkdir(parents=True)
+            task_file.write_text(
+                "---\ntask_id: TASK-0302\nfile: Area_comun/tasks/TASK-0302-heartbeat.md\n"
+                "intake:\n  scope_routes:\n    - heartbeat-output.txt\n---\n",
                 encoding="ascii",
             )
             (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
             (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
             (fixture / "Area_comun/mailbox/open/MSG-heartbeat.md").write_text(
-                "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+                "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0302\nstatus: open\n"
                 "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
                 encoding="ascii",
             )
@@ -1017,13 +1094,18 @@ def run_exec_running_heartbeat_case() -> None:
             log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(
                 encoding="utf-8"
             )
-            return len(re.findall(r"(?m) EXEC_RUNNING pid=\d+ elapsed=\d+s message=MSG-heartbeat\.md$", log))
+            return (
+                len(re.findall(r"(?m) EXEC_RUNNING pid=\d+ elapsed=\d+s message=MSG-heartbeat\.md$", log)),
+                log,
+            )
         finally:
             shutil.rmtree(fixture, ignore_errors=True)
 
-    assert exercise(runner_text) >= 3
+    heartbeat_count, heartbeat_log = exercise(runner_text)
+    assert heartbeat_count >= 3, heartbeat_log
     mutant = runner_text.replace(heartbeat_line, "", 1)
-    assert exercise(mutant) == 0
+    mutant_count, mutant_log = exercise(mutant)
+    assert mutant_count == 0, mutant_log
 
 
 def run_pre_delivery_and_liveness_cases() -> None:
@@ -1048,12 +1130,20 @@ def run_pre_delivery_and_liveness_cases() -> None:
         (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
         (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
-            '{"tasks":[{"id":"TASK-work","owner":"TestPeer","status":"in_progress"}]}\n', encoding="ascii"
+            '{"tasks":[{"id":"TASK-0303","owner":"TestPeer","status":"in_progress",'
+            '"file":"Area_comun/tasks/TASK-0303-liveness.md"}]}\n', encoding="ascii"
+        )
+        task_file = fixture / "Area_comun/tasks/TASK-0303-liveness.md"
+        task_file.parent.mkdir(parents=True)
+        task_file.write_text(
+            "---\ntask_id: TASK-0303\nfile: Area_comun/tasks/TASK-0303-liveness.md\n"
+            "intake:\n  scope_routes:\n    - liveness-output.txt\n---\n",
+            encoding="ascii",
         )
         (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
         (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (fixture / "Area_comun/mailbox/open/MSG-work.md").write_text(
-            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0303\nstatus: open\n"
             "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
             encoding="ascii",
         )
@@ -1063,7 +1153,7 @@ def run_pre_delivery_and_liveness_cases() -> None:
         core.write_text(
             "$claim='{\"seq\":1,\"actor\":\"TestPeer\",\"applied\":true,"
             "\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture\"},"
-            "\"payload\":{\"intent_type\":\"task_status\",\"task_id\":\"TASK-work\","
+            "\"payload\":{\"intent_type\":\"task_status\",\"task_id\":\"TASK-0303\","
             "\"transitions\":{\"task_status\":{\"from\":\"ready\",\"to\":\"in_progress\"}}}}'\n"
             "Add-Content runtime/state/events.jsonl $claim -Encoding ASCII\n"
             "1..20 | ForEach-Object { Write-Error ('working-' + $_); Start-Sleep -Milliseconds 400 }\n",
@@ -1120,12 +1210,20 @@ def run_frozen_exec_with_production_freshness_case() -> None:
         (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
         (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
-            '{"tasks":[{"id":"TASK-frozen","owner":"TestPeer","status":"in_progress"}]}\n', encoding="ascii"
+            '{"tasks":[{"id":"TASK-0304","owner":"TestPeer","status":"in_progress",'
+            '"file":"Area_comun/tasks/TASK-0304-frozen.md"}]}\n', encoding="ascii"
+        )
+        task_file = fixture / "Area_comun/tasks/TASK-0304-frozen.md"
+        task_file.parent.mkdir(parents=True)
+        task_file.write_text(
+            "---\ntask_id: TASK-0304\nfile: Area_comun/tasks/TASK-0304-frozen.md\n"
+            "intake:\n  scope_routes:\n    - frozen-output.txt\n---\n",
+            encoding="ascii",
         )
         (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
         (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (fixture / "Area_comun/mailbox/open/MSG-frozen.md").write_text(
-            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0304\nstatus: open\n"
             "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
             encoding="ascii",
         )
@@ -1336,7 +1434,7 @@ def main() -> int:
             "    '{\"seq\":3,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"},\"payload\":{\"intent_type\":\"decision\",\"decision_id\":\"DECISION-test\"}}'\n"
             "  )\n"
             "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $events -Encoding ASCII\n"
-            "  Set-Content -Path (Join-Path $root 'Area_comun/state/CLAIMS.json') -Value '{\"seq\":3}' -Encoding ASCII\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/state/CLAIMS.json') -Value '{\"seq\":3,\"claims\":[]}' -Encoding ASCII\n"
             "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
@@ -1392,9 +1490,12 @@ def main() -> int:
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         governed_predirty = {
-            "Area_comun/tasks/TASK-fixture.md": "peer-task-edit\n",
+            "Area_comun/tasks/TASK-fixture.md": (
+                "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-fixture.md\n"
+                "intake:\n  scope_routes:\n    - unrelated-scope.txt\n---\npeer-task-edit\n"
+            ),
             "Area_comun/mailbox/archived/MSG-predirty.md": "peer-msg-edit\n",
-            "Area_comun/state/CLAIMS.json": '{"seq":0,"peer":"edit"}\n',
+            "Area_comun/state/CLAIMS.json": '{"seq":0,"claims":[],"peer":"edit"}\n',
             "runtime/state/events.jsonl": "",
         }
         for relative, content in governed_predirty.items():
@@ -1454,7 +1555,9 @@ def main() -> int:
         assert (sandbox / "Area_comun/decisions/DECISION-test.md").exists(), "signed decision document was destroyed"
         assert (sandbox / "ambiguous-residue.txt").exists(), "mid-log ambiguity was rolled back"
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "exec-content\n", "worktree content was rewritten"
-        assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii") == "peer-task-edit\n"
+        assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii").endswith(
+            "peer-task-edit\n"
+        )
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
         assert predirty_status.startswith(" M "), f"pre-exec index state was not restored: {predirty_status!r}"
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
