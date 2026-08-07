@@ -6197,3 +6197,55 @@ Mensaje: `MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0317-r5.md`.
   `D:/Aegis_Scratch/hub/an17r5/` (DECISION-0104), pendiente de limpiar al stand-down.
 - Pendiente del lado del Arquitecto: ratificar, rutear el done-flip (destraba **TASK-0320**) y
   decidir si mete el chequeo AST antes del flip o lo registra con TASK-0322.
+
+## 2026-08-07 -- TASK-0324 (ventana de post-entrega hereda las extensiones): CHANGE-REQUIRED
+
+- Ancla: implementacion `c121fa9c`, HEAD del protocolo `2d293eac` al empezar; mi veredicto quedo en
+  `9c1eb64f` (artefacto `Area_comun/artifacts/Analista-TASK-0324-post-delivery-progress-deadline-verdict.md`
+  + `MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0324.md`). Clon limpio detached en
+  `D:/Aegis_Scratch/multi_agent_project_protocol/rev0324/cc` (DECISION-0104), pendiente de limpiar.
+- **TECNICA NUEVA Y REUTILIZABLE: ejecutar el BUCLE VIVO, no solo la funcion pura.** El repo ya trae
+  `function_loader`, que extrae `FunctionDefinitionAst` por nombre. Se puede hacer lo mismo con un
+  `WhileStatementAst` (`$ast.FindAll({ $_ -is [...WhileStatementAst] -and $_.Extent.Text -match 'ANCLA' })`)
+  y lanzarlo con `Invoke-Expression $loop.Extent.Text` tras declarar a mano las variables del preambulo
+  y simular solo la I/O (`Write-Log`, el objeto proceso con `Add-Member ScriptMethod WaitForExit`,
+  `Stop-LeaseProcessTree`). **Reloj comprimido** (deadline en t0+3,5 s, extension 6 s, tope 30 s) y
+  **ficheros reales en disco** para que la deteccion de progreso embarcada sea la de verdad. Coste
+  ~11 s por corrida. Con eso el foco "esta en el camino vivo?" se responde por COMPORTAMIENTO.
+- **EL PATRON DE DEFECTO QUE ENCONTRE (guardar): contrato que ata el HELPER y una SUBCADENA, no el
+  EFECTO.** El fix eran 12 lineas de helper + 3 de cableado. La sonda del negativo permanente llamaba
+  al helper aislado y la unica atadura al camino vivo era `assert wiring in source`. Mutante que lo
+  mata todo sin ser detectado: **dejar la sentencia byte a byte identica y volver inalcanzable su rama
+  guarda** (`if ($false -and $null -ne ...)`). La subcadena sigue ahi, la sonda no toca esa rama ->
+  suite exit 0 e inventario exit 0, y yo tenia medido que ese mutante reproduce el defecto original.
+  **Espejo de TASK-0319:** alli la cobertura ERA codigo muerto; aqui la cobertura es real pero el
+  contrato no distingue vivo de muerto. Probar SIEMPRE el mutante de codigo-muerto cuando el AC de
+  falsacion cubra un helper extraido.
+- **Por que aqui SI bloquee y en 0317-r5 no.** No es mover la porteria: el mutante no es adversarial
+  a medida contra puntos de muestreo, es la regresion mas plausible que existe (alguien reordena la
+  guarda o mete el cableado en otra rama) y el helper por si solo no arregla nada. El AC4 pide
+  literalmente "mutar el harness para que ignore las extensiones y exija que el test caiga"; lo hice y
+  no cayo.
+- **Focos que SI pasaron, y como los cerre sin fiarme de los nombres de los tests:** clamp por los dos
+  lados con payloads mios (10 dirigidos + **120 ternas aleatorias** con la invariante `current<=hard`)
+  -> exactamente `min(max(current,exec),hard)`, cero acortamientos; tope duro con progreso perpetuo ->
+  muere por `reason=hard_cap` en el instante precalculado, cinco extensiones y ni un segundo mas.
+- **Gotcha de gate que casi me hace reportar exits falsos:** `out=$(cmd 2>&1 | tail -3); echo $?`
+  devuelve el exit de `tail`, SIEMPRE 0. Hay que correr `cmd >/dev/null 2>&1; echo $?` por separado.
+  Lo repeti todo con exits reales antes de escribir nada.
+- **Aritmetica que descuadra en la evidencia del maker (residual R1):** con `ProgressHardCapSeconds=900`
+  y base de post-entrega 02:44:00, el tope de ESA ventana es 02:59:00. El 02:55:40 que el handoff y el
+  boundary presentan como tope de post-entrega era el tope del deadline PRINCIPAL, que es lo que
+  imprimian las lineas `EXEC_PROGRESSING` del log del incidente. Recalcular siempre los numeros del
+  handoff contra los defaults del `param()`, no aceptarlos del log.
+- Causa raiz NO removida (R4): las dos ramas siguen compartiendo `$progressOutputBytes`/`$progressLedgerBytes`
+  y la principal sigue consumiendo la senal; el fix compensa por deadline. Y R2: con la herencia activa
+  `EXEC_PROGRESSING ... phase=post_delivery` deja de aparecer (`pd_progress_extensions=0` en mis tres
+  corridas), asi que el plazo efectivo de la ventana desaparece del log -- justo el contraste que
+  permitio diagnosticar el defecto.
+- Anomalia DECISION-0018 senalada, no tocada: `TASK-0324` en `in_review` con
+  `CLAIM-20260807-Codex-TASK-0324` todavia activo (AGENTS.md s.7 exige liberarlo en el mismo paso);
+  mismo patron en 0322 y 0325, que no revise.
+- Coordinacion: 0 claims de peers sobre `Area_comun/artifacts/` ni `mailbox/open/`; arbol rastreado
+  limpio antes de commitear; pathspec explicito; trailers `Task-Id` + `Ops-Reason` + `Co-Authored-By`.
+  El commit aviso `PRUNE DUE: released_ratio 90.91 >= 90` -- es del Arquitecto en su checkpoint, no mio.
