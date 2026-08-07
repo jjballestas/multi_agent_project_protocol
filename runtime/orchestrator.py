@@ -679,7 +679,10 @@ def parse_porcelain_v1_z(raw: bytes) -> list[str]:
 
 def dirty_worktree_paths(root: Path) -> list[str]:
     completed = subprocess.run(
-        ["git", "status", "--porcelain=v1", "-z"], cwd=root, capture_output=True, check=False
+        ["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"],
+        cwd=root,
+        capture_output=True,
+        check=False,
     )
     if completed.returncode != 0:
         return []

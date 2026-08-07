@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "720ffa8383c25ac7af959cede4d63695b2d8f9dc56a7cb6a3713525b7964730d",
+  "canonical_hash": "60196250175ced7bee8afade4925fdf0b95f0ce57646e8e9e6ec2612fee1d8f2",
   "integrity": {
-    "canonical_hash": "720ffa8383c25ac7af959cede4d63695b2d8f9dc56a7cb6a3713525b7964730d",
+    "canonical_hash": "60196250175ced7bee8afade4925fdf0b95f0ce57646e8e9e6ec2612fee1d8f2",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "61db7eed8ff7831b34b37d8b5befed1028db2c794374e6a349d9ad64afd767da",
-    "signature": "a5701529c1c5d69159e4c0ad9079aaacc281491772e673044fd876b3f52639a3",
-    "up_to_seq": 7593
+    "prev_hash": "01fe697fe8a6c14477cfb3e6683e58f1eb0cdb0dc832497fdcf89c55fdb25873",
+    "signature": "d9f49490b2fc80adc57e85bf075d6343f4e6dda7024a73d9bd4336f8872bd018",
+    "up_to_seq": 7599
   },
   "state": {
     "aggregate_versions": {
@@ -924,6 +924,8 @@
       "CLAIM-20260807-Codex-TASK-0331-memory": 1,
       "CLAIM-20260807-Codex-TASK-0331-work": 1,
       "CLAIM-20260807-Codex-TASK-0331-work-v2": 1,
+      "CLAIM-20260807-Codex-TASK-0333-work": 1,
+      "CLAIM-20260807-Codex-TASK-0333-work-v2": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3087,7 +3089,7 @@
       "TASK-0330": 34,
       "TASK-0331": 9,
       "TASK-0332": 2,
-      "TASK-0333": 2,
+      "TASK-0333": 6,
       "TASK-0334": 2,
       "TASK-0335": 3,
       "TASK-1102": 14,
@@ -3112,7 +3114,7 @@
       "protocol-prune": 45,
       "protocol-state": 1
     },
-    "events_applied": 6922,
+    "events_applied": 6928,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6679,6 +6681,12 @@
       "codex:task0331:memory-claim-release:20260807T113800Z": 7496,
       "codex:task0331:status-in-progress:20260807T112129Z": 7488,
       "codex:task0331:work-v2-release:20260807T114330Z": 7499,
+      "codex:task0333:claim-acquire:20260807T163730Z": 7594,
+      "codex:task0333:claim-v1-release:20260807T164300Z": 7597,
+      "codex:task0333:claim-v2-acquire:20260807T164300Z": 7596,
+      "codex:task0333:claim-v2-release:20260807T164700Z": 7599,
+      "codex:task0333:claim-v3-acquire:20260807T164700Z": 7598,
+      "codex:task0333:status-in-progress:20260807T163730Z": 7595,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -10038,5 +10046,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7593
+  "up_to_seq": 7599
 }

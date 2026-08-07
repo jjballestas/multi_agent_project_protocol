@@ -42,6 +42,70 @@
             "updated_at": "2026-08-07T14:38:14Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0333-work",
+            "expires_at": "2026-08-07T22:37:30Z",
+            "notes": "Implement TASK-0333 git status reader convergence and behavioral falsification contract.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0333",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0333",
+                "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T16:37:30Z",
+            "status": "released",
+            "task_id": "TASK-0333",
+            "updated_at": "2026-08-07T16:37:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0333-work-v2",
+            "expires_at": "2026-08-07T22:43:00Z",
+            "notes": "Implement TASK-0333 in existing runtime turn runner and embedded falsification inventory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-work-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0333",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0333",
+                "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T16:43:00Z",
+            "status": "released",
+            "task_id": "TASK-0333",
+            "updated_at": "2026-08-07T16:43:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0333-work-v3",
+            "expires_at": "2026-08-07T22:47:00Z",
+            "notes": "Implement TASK-0333 and keep the shipped full-runtime mirror behaviorally aligned.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-work-v3",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0333-work-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0333",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0333",
+                "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+                "runtime/orchestrator.py",
+                "examples/full_runtime_instance/runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T16:47:00Z",
+            "status": "active",
+            "task_id": "TASK-0333",
+            "updated_at": "2026-08-07T16:47:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260807-titulo-0322",
             "expires_at": "2026-08-08T00:00:00Z",
             "owner": "Arquitecto",

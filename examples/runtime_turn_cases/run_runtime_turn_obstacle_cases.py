@@ -3,15 +3,18 @@
 
 from __future__ import annotations
 
+import ast
 import sys
 import tempfile
 import json
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 import runtime.turn_validate as turn_validate  # noqa: E402
+import runtime.orchestrator as orchestrator  # noqa: E402
 from examples.runtime_turn_cases.run_runtime_turn_semantic_cases import build_fixture_root  # noqa: E402
 
 
@@ -77,6 +80,21 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "main",
     },
+    {
+        "id": "NEG-TURN-UNTRACKED-SUBTREE-MUST-BE-DECLARED",
+        "negative": "The unreported-change gate must reject every undeclared file inside an untracked subtree, even when the report declares the collapsed directory record.",
+        "mutation": "removed_source = source.replace",
+        "boundaries": (
+            'assert collapsed_paths == ["work/"]',
+            "assert collapsed_unreported == []",
+            "assert healthy_unreported == expected_paths",
+            "assert correctly_declared == []",
+            "assert mirror_paths == expected_paths",
+            "assert removed_unreported == []",
+            "assert dead_code_unreported == []",
+        ),
+        "exercised_by": "exercise_untracked_subtree_gate",
+    },
 )
 
 DELIVERY_ERROR = "semantic: delivery turn is missing the obstacles block; use [] when there was no friction"
@@ -87,8 +105,95 @@ REVERT_ERROR = "semantic: objective friction (revert:action-summary-proxy) requi
 ATTEMPT_ERROR = "semantic: objective friction (attempt>1) requires non-empty obstacles"
 
 
+def load_dirty_path_functions(source: str) -> dict[str, object]:
+    wanted = {
+        "normalize_report_path",
+        "parse_porcelain_v1_z",
+        "dirty_worktree_paths",
+        "unreported_dirty_paths",
+    }
+    tree = ast.parse(source)
+    body = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in wanted]
+    assert {node.name for node in body} == wanted
+    namespace: dict[str, object] = {"Path": Path, "subprocess": subprocess, "Any": object}
+    exec(compile(ast.Module(body=body, type_ignores=[]), "<orchestrator-dirty-functions>", "exec"), namespace)
+    return namespace
+
+
+def exercise_untracked_subtree_gate() -> None:
+    """PERMANENT_NEGATIVE: NEG-TURN-UNTRACKED-SUBTREE-MUST-BE-DECLARED"""
+    with tempfile.TemporaryDirectory(prefix="runtime-turn-untracked-") as temp:
+        root = Path(temp)
+        subprocess.run(("git", "init"), cwd=root, check=True, capture_output=True)
+        subprocess.run(("git", "config", "user.email", "fixture@example.invalid"), cwd=root, check=True)
+        subprocess.run(("git", "config", "user.name", "Fixture"), cwd=root, check=True)
+        (root / ".gitkeep").write_text("", encoding="ascii")
+        subprocess.run(("git", "add", ".gitkeep"), cwd=root, check=True)
+        subprocess.run(("git", "commit", "-m", "fixture"), cwd=root, check=True, capture_output=True)
+
+        expected_paths = [
+            "work/declared_note.md",
+            "work/hidden/backdoor.py",
+            "work/hidden/deep/more.py",
+        ]
+        for relative in expected_paths:
+            path = root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("probe\n", encoding="ascii")
+
+        collapsed_raw = subprocess.run(
+            ("git", "status", "--porcelain=v1", "-z"),
+            cwd=root,
+            check=True,
+            capture_output=True,
+        ).stdout
+        collapsed_paths = orchestrator.parse_porcelain_v1_z(collapsed_raw)
+        declared_directory = {"changed_paths": ["work/"]}
+        collapsed_unreported = [
+            path
+            for path in collapsed_paths
+            if orchestrator.normalize_report_path(path) != orchestrator.normalize_report_path("work/")
+        ]
+        healthy_unreported = orchestrator.unreported_dirty_paths(
+            root, declared_directory, baseline_dirty=set()
+        )
+        correctly_declared = orchestrator.unreported_dirty_paths(
+            root, {"changed_paths": expected_paths}, baseline_dirty=set()
+        )
+
+        mirror_source = (ROOT / "examples/full_runtime_instance/runtime/orchestrator.py").read_text(
+            encoding="utf-8"
+        )
+        mirror = load_dirty_path_functions(mirror_source)
+        mirror_paths = mirror["dirty_worktree_paths"](root)
+
+        source = (ROOT / "runtime/orchestrator.py").read_text(encoding="utf-8")
+        live_command = '["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"]'
+        removed_source = source.replace(live_command, '["git", "status", "--porcelain=v1", "-z"]', 1)
+        dead_code_source = source.replace(live_command, f"{live_command}[:4]", 1)
+        assert removed_source != source
+        assert dead_code_source != source
+        removed = load_dirty_path_functions(removed_source)
+        dead_code = load_dirty_path_functions(dead_code_source)
+        removed_unreported = removed["unreported_dirty_paths"](
+            root, declared_directory, baseline_dirty=set()
+        )
+        dead_code_unreported = dead_code["unreported_dirty_paths"](
+            root, declared_directory, baseline_dirty=set()
+        )
+
+        assert collapsed_paths == ["work/"]
+        assert collapsed_unreported == []
+        assert healthy_unreported == expected_paths
+        assert correctly_declared == []
+        assert mirror_paths == expected_paths
+        assert removed_unreported == []
+        assert dead_code_unreported == []
+
+
 def main() -> int:
     """PERMANENT_NEGATIVE: NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-STATUS-FRICTION-OBSTACLES, NEG-TURN-REVIEW-FRICTION-OBSTACLES, NEG-TURN-CHECKS-FRICTION-OBSTACLES, NEG-TURN-REVERT-PROXY-OBSTACLES, NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER"""
+    exercise_untracked_subtree_gate()
     delivery_missing = {
         "outcome": "ok",
         "transitions": {"task_status": {"from": "in_progress", "to": "in_review"}},
