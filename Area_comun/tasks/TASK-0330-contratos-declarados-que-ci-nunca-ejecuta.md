@@ -2,7 +2,7 @@
 task_id: TASK-0330
 file: Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md
 title: "23 de 37 contratos de falsacion tienen un runner que CI nunca ejecuta, y uno de esos runners lleva roto desde TASK-0316: la cobertura declarada no es cobertura verificada"
-status: blocked
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista

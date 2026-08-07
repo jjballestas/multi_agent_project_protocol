@@ -322,7 +322,7 @@ def run_deleted_residue_real_loop_case() -> None:
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
 
-    def exercise(candidate: str, expect_exec: bool) -> None:
+    def exercise(candidate: str, expect_exec: bool, *, declare_scope: bool = True) -> None:
         fixture = Path(tempfile.mkdtemp(prefix="task0284-deleted-loop-"))
         try:
             (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
@@ -342,8 +342,20 @@ def run_deleted_residue_real_loop_case() -> None:
             tracked.write_text("tracked\n", encoding="ascii")
             message = fixture / "Area_comun/mailbox/open/MSG-delete.md"
             message.write_text(
-                "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+                "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0001\nstatus: open\n"
                 "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+                encoding="ascii",
+            )
+            task_file = fixture / "Area_comun/tasks/TASK-0001-deleted-residue.md"
+            task_file.parent.mkdir(parents=True)
+            task_file.write_text(
+                "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-0001-deleted-residue.md\n"
+                + ("intake:\n  scope_routes:\n    - unrelated-scope.txt\n" if declare_scope else "")
+                + "---\n",
+                encoding="ascii",
+            )
+            (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+                '{"tasks":[{"id":"TASK-0001","file":"Area_comun/tasks/TASK-0001-deleted-residue.md"}]}\n',
                 encoding="ascii",
             )
             prompt = fixture / "scripts/harness/prompts/test.prompt.md"
@@ -369,7 +381,8 @@ def run_deleted_residue_real_loop_case() -> None:
             log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
             assert ("EXEC_START " in log) is expect_exec, log
             if not expect_exec:
-                assert "outcome=defer_terminal reason=worktree_residue_live" in log, log
+                expected_reason = "worktree_residue_live" if declare_scope else "message_scope_ambiguous"
+                assert f"outcome=defer_terminal reason={expected_reason}" in log, log
         finally:
             shutil.rmtree(fixture, ignore_errors=True)
 
@@ -377,6 +390,7 @@ def run_deleted_residue_real_loop_case() -> None:
     mutant = runner_text.replace("$firstSeen.ContainsKey($relative)", "$false", 1)
     assert mutant != runner_text, "first-seen mutant was not applied"
     exercise(mutant, expect_exec=False)
+    exercise(runner_text, expect_exec=False, declare_scope=False)
 
 
 def run_large_stderr_drain_case(sandbox: Path) -> None:
