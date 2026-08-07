@@ -87,6 +87,7 @@ $PidPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.pid"
 $StopPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.stop"
 $LockPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.lock"
 $LeasePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.exec-lease.json"
+$ExecAdmissionPath = Join-Path $Root ".protocol-tmp\peer-exec-admission.lock"
 $SeenPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.seen.json"
 $RetryPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.retry.json"
 $ResiduePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.residue-first-seen.json"
@@ -165,6 +166,8 @@ function Write-ExecLease {
     param(
         [System.Diagnostics.Process]$Process,
         [string]$MessageName,
+        [string]$TaskId,
+        [string[]]$WorkScope,
         [string[]]$Arguments,
         [DateTime]$DeadlineUtc
     )
@@ -173,6 +176,9 @@ function Write-ExecLease {
         schema_version = 1
         owner = $PeerId
         task_or_msg_id = $MessageName
+        task_id = $TaskId
+        work_scope = @($WorkScope)
+        state = "running"
         pid = $Process.Id
         process_start_time_utc = Get-ProcessStartTimeUtc -Process $Process
         cmdline_hash = Get-CmdlineHash -Text $cmdline
@@ -782,32 +788,193 @@ function Read-JsonWithDeadline {
     return [pscustomobject]@{ ok = $false; value = $null }
 }
 
+function ConvertTo-ComparableRoute {
+    param($Route)
+    if ($Route -isnot [string]) { return $null }
+    $normalized = $Route.Trim().Trim('"').Replace("\", "/")
+    if ([string]::IsNullOrWhiteSpace($normalized)) { return $null }
+    if ($normalized.StartsWith("./", [StringComparison]::Ordinal)) { $normalized = $normalized.Substring(2) }
+    $normalized = $normalized.Split('#', 2)[0].TrimEnd('/')
+    if ([string]::IsNullOrWhiteSpace($normalized)) { return $null }
+    # Runtime-authoritative ledger routes are coordinated by submit_intent itself.
+    # Treating their common container as material task overlap would serialize every peer.
+    if ($normalized -match '^(?i:Area_comun/state|runtime/state)(?:/|$)') { return $null }
+    return $normalized.ToLowerInvariant()
+}
+
+function ConvertTo-ComparableScope {
+    param($Scope)
+    if ($Scope -isnot [System.Array] -or $Scope.Count -eq 0) { return $null }
+    $routes = @()
+    foreach ($route in $Scope) {
+        if ($route -isnot [string] -or [string]::IsNullOrWhiteSpace($route)) { return $null }
+        $normalized = ConvertTo-ComparableRoute -Route $route
+        if ($null -ne $normalized) { $routes += $normalized }
+    }
+    if ($routes.Count -eq 0) { return $null }
+    return @($routes | Sort-Object -Unique)
+}
+
+function Test-ScopeIntersection {
+    param([string[]]$Left, [string[]]$Right)
+    foreach ($leftRoute in @($Left)) {
+        foreach ($rightRoute in @($Right)) {
+            if ($leftRoute -ceq $rightRoute -or
+                $leftRoute.StartsWith($rightRoute + "/", [StringComparison]::Ordinal) -or
+                $rightRoute.StartsWith($leftRoute + "/", [StringComparison]::Ordinal)) {
+                return $true
+            }
+        }
+    }
+    return $false
+}
+
+function Get-MessageWorkDescriptor {
+    param([System.IO.FileInfo]$Message)
+    try {
+        $content = Get-Content -LiteralPath $Message.FullName -Raw -Encoding UTF8
+        $taskId = Get-Field -Content $content -Name "task_id"
+        if ($taskId -notmatch '^TASK-[0-9]{4}$') { return $null }
+        $indexResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\TASK_INDEX.json")
+        if (-not $indexResult.ok -or $null -eq $indexResult.value) { return $null }
+        $taskRows = @($indexResult.value.tasks | Where-Object { [string]$_.id -ceq $taskId })
+        if ($taskRows.Count -ne 1 -or [string]::IsNullOrWhiteSpace([string]$taskRows[0].file)) { return $null }
+        $taskFile = [string]$taskRows[0].file
+        $taskPath = Join-Path $Root $taskFile
+        if (-not (Test-Path -LiteralPath $taskPath -PathType Leaf)) { return $null }
+        $taskContent = Get-Content -LiteralPath $taskPath -Raw -Encoding UTF8
+        $scopeMatch = [regex]::Match($taskContent, '(?ms)^  scope_routes:\s*\r?\n(?<body>(?:    - [^\r\n]+\r?\n)+)')
+        if (-not $scopeMatch.Success) { return $null }
+        $declared = @([regex]::Matches($scopeMatch.Groups['body'].Value, '(?m)^    -\s+(.+?)\s*$') | ForEach-Object { $_.Groups[1].Value.Trim().Trim('"') })
+        $scope = ConvertTo-ComparableScope -Scope @($declared + $taskFile)
+        if ($null -eq $scope) { return $null }
+        return [pscustomobject]@{ task_id = $taskId; work_scope = @($scope) }
+    } catch {
+        return $null
+    }
+}
+
+function Get-LeaseWorkScope {
+    param($Lease)
+    if ($Lease.PSObject.Properties['work_scope']) {
+        return ConvertTo-ComparableScope -Scope $Lease.work_scope
+    }
+    $taskId = [string]$Lease.task_id
+    if ([string]::IsNullOrWhiteSpace($taskId)) {
+        $match = [regex]::Match([string]$Lease.task_or_msg_id, 'TASK-[0-9]{4}')
+        if ($match.Success) { $taskId = $match.Value }
+    }
+    if ($taskId -notmatch '^TASK-[0-9]{4}$') { return $null }
+    $taskIndexResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\TASK_INDEX.json")
+    if (-not $taskIndexResult.ok) { return $null }
+    $taskRows = @($taskIndexResult.value.tasks | Where-Object { [string]$_.id -ceq $taskId })
+    if ($taskRows.Count -ne 1) { return $null }
+    $taskFile = [string]$taskRows[0].file
+    if ([string]::IsNullOrWhiteSpace($taskFile)) { return $null }
+    $taskPath = Join-Path $Root $taskFile
+    if (-not (Test-Path -LiteralPath $taskPath -PathType Leaf)) { return $null }
+    try {
+        $taskContent = Get-Content -LiteralPath $taskPath -Raw -Encoding UTF8
+        $scopeMatch = [regex]::Match($taskContent, '(?ms)^  scope_routes:\s*\r?\n(?<body>(?:    - [^\r\n]+\r?\n)+)')
+        if (-not $scopeMatch.Success) { return $null }
+        $declared = @([regex]::Matches($scopeMatch.Groups['body'].Value, '(?m)^    -\s+(.+?)\s*$') | ForEach-Object { $_.Groups[1].Value.Trim().Trim('"') })
+        return ConvertTo-ComparableScope -Scope @($declared + $taskFile)
+    } catch {
+        return $null
+    }
+}
+
 function Get-AdditionalWorkSignal {
+    param([System.IO.FileInfo]$Message)
     # Claims and live peer leases reinforce a defer. Their absence is never used
     # as permission to override the dirty-tree veto.
     $script:LastAdditionalSignalDetail = ""
+    $messageWork = Get-MessageWorkDescriptor -Message $Message
     $claimsResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\CLAIMS.json")
-    if (-not $claimsResult.ok) { return "claims_unreadable" }
+    if (-not $claimsResult.ok -or $null -eq $claimsResult.value) { return "claims_unreadable" }
     $now = [DateTime]::UtcNow
     foreach ($claim in @($claimsResult.value.claims)) {
         if ([string]$claim.owner -eq $PeerId -or [string]$claim.status -eq "released") { continue }
-        try { $expires = [DateTime]::Parse([string]$claim.expires_at).ToUniversalTime() } catch { continue }
-        if ($expires -gt $now) { return "active_external_claim" }
+        try { $expires = [DateTime]::Parse([string]$claim.expires_at).ToUniversalTime() } catch { return "active_external_claim" }
+        if ($expires -le $now) { continue }
+        if ($null -eq $messageWork) { return "active_external_claim" }
+        $claimScope = ConvertTo-ComparableScope -Scope $claim.scope
+        if ($null -eq $claimScope) { return "active_external_claim" }
+        if (Test-ScopeIntersection -Left $messageWork.work_scope -Right $claimScope) { return "active_external_claim" }
     }
     $tmpRoot = Join-Path $Root ".protocol-tmp"
     foreach ($leaseFile in @(Get-ChildItem -LiteralPath $tmpRoot -Recurse -File -Filter "*.exec-lease.json" -ErrorAction SilentlyContinue)) {
         if ($leaseFile.FullName -eq $LeasePath) { continue }
         $leaseResult = Read-JsonWithDeadline -Path $leaseFile.FullName
         if (-not $leaseResult.ok) { return "peer_lease_unreadable" }
-        if (Test-LeaseProcessMatches -Lease $leaseResult.value) {
+        $lease = $leaseResult.value
+        $reservationLive = $false
+        if ([string]$lease.state -ceq "reserved") {
+            try { $reservationLive = ([DateTime]::Parse([string]$lease.reservation_deadline).ToUniversalTime() -gt $now) }
+            catch { return "peer_lease_unreadable" }
+        }
+        if ($reservationLive -or (Test-LeaseProcessMatches -Lease $lease)) {
             $leaseOwner = [string]$leaseResult.value.owner
             if ([string]::IsNullOrWhiteSpace($leaseOwner)) { $leaseOwner = "unknown" }
             $leaseOwner = $leaseOwner -replace '[^A-Za-z0-9_.-]', '_'
             $script:LastAdditionalSignalDetail = "peer=$leaseOwner"
-            return "active_peer_lease"
+            if ($null -eq $messageWork) { return "active_peer_lease" }
+            $leaseScope = Get-LeaseWorkScope -Lease $lease
+            if ($null -eq $leaseScope) { return "active_peer_lease" }
+            if (Test-ScopeIntersection -Left $messageWork.work_scope -Right $leaseScope) { return "active_peer_lease" }
         }
     }
     return "none"
+}
+
+function Acquire-ExecReservation {
+    param([System.IO.FileInfo]$Message)
+    $admission = $null
+    try {
+        $admission = New-Object System.IO.FileStream(
+            $ExecAdmissionPath,
+            [System.IO.FileMode]::CreateNew,
+            [System.IO.FileAccess]::Write,
+            [System.IO.FileShare]::None,
+            1,
+            [System.IO.FileOptions]::DeleteOnClose
+        )
+    } catch [System.IO.IOException] {
+        return [pscustomobject]@{ ok = $false; reason = "exec_admission_busy"; detail = ""; work = $null }
+    }
+    try {
+        $signal = Get-AdditionalWorkSignal -Message $Message
+        if ($signal -ne "none") {
+            return [pscustomobject]@{ ok = $false; reason = $signal; detail = $script:LastAdditionalSignalDetail; work = $null }
+        }
+        $work = Get-MessageWorkDescriptor -Message $Message
+        if ($null -eq $work) {
+            return [pscustomobject]@{ ok = $false; reason = "message_scope_ambiguous"; detail = ""; work = $null }
+        }
+        $reservation = [ordered]@{
+            schema_version = 1
+            owner = $PeerId
+            task_or_msg_id = $Message.Name
+            task_id = $work.task_id
+            work_scope = @($work.work_scope)
+            state = "reserved"
+            reserved_at = [DateTime]::UtcNow.ToString("o")
+            reservation_deadline = [DateTime]::UtcNow.AddSeconds(30).ToString("o")
+        }
+        try {
+            $leaseStream = New-Object System.IO.FileStream($LeasePath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::Read)
+            try {
+                $bytes = [Text.Encoding]::UTF8.GetBytes((($reservation | ConvertTo-Json -Depth 8) + "`n"))
+                $leaseStream.Write($bytes, 0, $bytes.Length)
+                $leaseStream.Flush($true)
+            } finally { $leaseStream.Dispose() }
+        } catch [System.IO.IOException] {
+            return [pscustomobject]@{ ok = $false; reason = "own_lease_exists"; detail = ""; work = $null }
+        }
+        return [pscustomobject]@{ ok = $true; reason = "none"; detail = ""; work = $work }
+    } finally {
+        if ($null -ne $admission) { $admission.Dispose() }
+    }
 }
 
 function Register-PreExecDefer {
@@ -1039,12 +1206,6 @@ function Invoke-PeerForMessage {
     if ($residueState -eq "aborted") {
         Write-Log "RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=$AbortedResidueMinutes message=$($Message.Name)"
     }
-    $additionalSignal = Get-AdditionalWorkSignal
-    if ($additionalSignal -ne "none") {
-        Register-PreExecDefer -Message $Message -Reason $additionalSignal -Detail $script:LastAdditionalSignalDetail
-        return
-    }
-    Reset-PreExecDefer -Message $Message
     New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
     $agentPath = $ResolvedAgentPath
     $execArgs = Get-AgentArguments
@@ -1070,7 +1231,13 @@ function Invoke-PeerForMessage {
     $ledgerHeadBefore = $null
     $headBefore = ""
     $untrackedBefore = @()
+    $reservation = Acquire-ExecReservation -Message $Message
+    if (-not $reservation.ok) {
+        Register-PreExecDefer -Message $Message -Reason $reservation.reason -Detail $reservation.detail
+        return
+    }
     try {
+        Reset-PreExecDefer -Message $Message
         Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
         $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
         $ledgerHeadBefore = Get-LedgerHead
@@ -1091,7 +1258,7 @@ function Invoke-PeerForMessage {
         $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
         $process = Start-Process -FilePath $invocation.FilePath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         $null = $process.Handle  # cache the handle or ExitCode reads null when the exec finishes before the first WaitForExit
-        Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
+        Write-ExecLease -Process $process -MessageName $Message.Name -TaskId $reservation.work.task_id -WorkScope $reservation.work.work_scope -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         $execStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
         $nextHeartbeatSeconds = $HeartbeatSeconds

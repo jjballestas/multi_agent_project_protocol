@@ -94,6 +94,54 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_post_delivery_window_honors_main_progress_extensions",
     },
+    {
+        "id": "NEG-HARNESS-SCOPE-AWARE-EXTERNAL-CLAIM",
+        "negative": "An external claim must veto intersecting material routes without vetoing disjoint work, and malformed claim scope remains fail-closed.",
+        "mutation": "source.replace(claim_intersection",
+        "boundaries": (
+            'assert healthy["disjoint"] == "none"',
+            'assert healthy["intersecting"] == "active_external_claim"',
+            'assert healthy["malformed"] == [',
+            'assert allow_mutant["intersecting"] == "none"',
+            'assert veto_mutant["disjoint"] == "active_external_claim"',
+        ),
+        "exercised_by": "test_scope_aware_claim_veto_kills_both_direction_mutants",
+    },
+    {
+        "id": "NEG-HARNESS-SCOPE-AWARE-PEER-LEASE",
+        "negative": "A live peer lease must veto intersecting declared work without vetoing disjoint work, while ambiguous lease scope remains fail-closed.",
+        "mutation": "source.replace(lease_intersection",
+        "boundaries": (
+            'assert healthy["disjoint"] == "none"',
+            'assert healthy["intersecting"] == "active_peer_lease"',
+            'assert healthy["ambiguous"] == "active_peer_lease"',
+            'assert allow_mutant["intersecting"] == "none"',
+            'assert veto_mutant["disjoint"] == "active_peer_lease"',
+        ),
+        "exercised_by": "test_scope_aware_lease_veto_kills_both_direction_mutants",
+    },
+    {
+        "id": "NEG-HARNESS-ATOMIC-EXEC-ADMISSION",
+        "negative": "Simultaneous overlapping peer probes must serialize an atomic check-and-reserve critical section before either exec starts.",
+        "mutation": "source.replace(shared_admission_path, peer_specific_admission_path, 1)",
+        "boundaries": (
+            'assert healthy["admitted"] == 1',
+            'assert mutant["admitted"] == 2',
+            'assert healthy["lease_count"] == 1',
+            'assert mutant["lease_count"] == 2',
+        ),
+        "exercised_by": "test_atomic_exec_admission_kills_peer_specific_lock_mutant",
+    },
+    {
+        "id": "NEG-HARNESS-DIRTY-VETO-PRECEDES-SCOPE-ADMISSION",
+        "negative": "Scope-aware admission cannot bypass the existing fail-closed dirty-tree veto.",
+        "mutation": "source.replace(live_residue_guard",
+        "boundaries": (
+            "assert preserves_dirty_veto(source) is True",
+            "assert preserves_dirty_veto(mutant_source) is False",
+        ),
+        "exercised_by": "test_dirty_tree_veto_still_precedes_scope_admission",
+    },
 )
 
 
@@ -303,7 +351,152 @@ foreach ($name in $wanted) {{
     if (-not $node) {{ throw "missing function $name" }}
     Invoke-Expression $node.Extent.Text
 }}
+    """
+
+
+SCOPE_FUNCTIONS = (
+    "Get-Field",
+    "Read-JsonWithDeadline",
+    "ConvertTo-ComparableRoute",
+    "ConvertTo-ComparableScope",
+    "Test-ScopeIntersection",
+    "Get-MessageWorkDescriptor",
+    "Get-LeaseWorkScope",
+    "Get-AdditionalWorkSignal",
+)
+
+
+def write_scope_fixture(root: Path) -> Path:
+    task_rel = "Area_comun/tasks/TASK-1001-scope-probe.md"
+    task_path = root / task_rel
+    task_path.parent.mkdir(parents=True, exist_ok=True)
+    task_path.write_text(
+        """---
+task_id: TASK-1001
+file: Area_comun/tasks/TASK-1001-scope-probe.md
+status: ready
+intake:
+  scope_routes:
+    - src/target
+---
+""",
+        encoding="ascii",
+    )
+    write_json(
+        root / "Area_comun/state/TASK_INDEX.json",
+        {"tasks": [{"id": "TASK-1001", "file": task_rel, "status": "ready"}]},
+    )
+    message = root / "Area_comun/mailbox/open/MSG-scope-TASK-1001.md"
+    message.parent.mkdir(parents=True, exist_ok=True)
+    message.write_text("task_id: TASK-1001\n", encoding="ascii")
+    return message
+
+
+def claim_scope_probe(source: Path) -> dict:
+    with make_tempdir("claim-scope-") as tmp:
+        root = Path(tmp)
+        message = write_scope_fixture(root)
+        claims = root / "Area_comun/state/CLAIMS.json"
+        own_lease = root / ".protocol-tmp/implementer/implementer.exec-lease.json"
+        script = function_loader(source, SCOPE_FUNCTIONS) + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$LeasePath = {ps_literal(own_lease)}
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$script:LastAdditionalSignalDetail = ""
+function Test-LeaseProcessMatches {{ param($Lease) return $true }}
+function Set-Claims {{ param([string]$Json) [IO.Directory]::CreateDirectory((Split-Path -Parent {ps_literal(claims)})) | Out-Null; [IO.File]::WriteAllText({ps_literal(claims)}, $Json) }}
+$base = '{{"claims":[{{"owner":"{REVIEWER}","status":"active","expires_at":"2099-01-01T00:00:00Z","scope":REPLACE}}]}}'
+Set-Claims ($base.Replace('REPLACE', '["src/other/file.py"]'))
+$disjoint = Get-AdditionalWorkSignal -Message $Message
+Set-Claims ($base.Replace('REPLACE', '["src/target/file.py"]'))
+$intersecting = Get-AdditionalWorkSignal -Message $Message
+Set-Claims ($base.Replace(',"scope":REPLACE', ''))
+$missing = Get-AdditionalWorkSignal -Message $Message
+Set-Claims ($base.Replace('REPLACE', '[]'))
+$empty = Get-AdditionalWorkSignal -Message $Message
+Set-Claims ($base.Replace('REPLACE', '"src/target"'))
+$nonArray = Get-AdditionalWorkSignal -Message $Message
+Set-Claims '{{not-json'
+$unreadable = Get-AdditionalWorkSignal -Message $Message
+[ordered]@{{ disjoint=$disjoint; intersecting=$intersecting; malformed=@($missing,$empty,$nonArray,$unreadable) }} | ConvertTo-Json -Compress
 """
+        return run_powershell(script, root)
+
+
+def lease_scope_probe(source: Path) -> dict:
+    with make_tempdir("lease-scope-") as tmp:
+        root = Path(tmp)
+        message = write_scope_fixture(root)
+        write_json(root / "Area_comun/state/CLAIMS.json", {"claims": []})
+        lease = root / ".protocol-tmp/reviewer/reviewer.exec-lease.json"
+        own_lease = root / ".protocol-tmp/implementer/implementer.exec-lease.json"
+        script = function_loader(source, SCOPE_FUNCTIONS) + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$LeasePath = {ps_literal(own_lease)}
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$script:LastAdditionalSignalDetail = ""
+function Test-LeaseProcessMatches {{ param($Lease) return $true }}
+function Set-Lease {{ param([string]$Json) [IO.Directory]::CreateDirectory((Split-Path -Parent {ps_literal(lease)})) | Out-Null; [IO.File]::WriteAllText({ps_literal(lease)}, $Json) }}
+$base = '{{"owner":"{REVIEWER}","pid":1,"state":"running","work_scope":REPLACE}}'
+Set-Lease ($base.Replace('REPLACE', '["src/other/file.py"]'))
+$disjoint = Get-AdditionalWorkSignal -Message $Message
+Set-Lease ($base.Replace('REPLACE', '["src/target/file.py"]'))
+$intersecting = Get-AdditionalWorkSignal -Message $Message
+Set-Lease '{{"owner":"{REVIEWER}","pid":1,"state":"running","task_or_msg_id":"unknown"}}'
+$ambiguous = Get-AdditionalWorkSignal -Message $Message
+[ordered]@{{ disjoint=$disjoint; intersecting=$intersecting; ambiguous=$ambiguous }} | ConvertTo-Json -Compress
+"""
+        return run_powershell(script, root)
+
+
+def atomic_admission_probe(source: Path) -> dict:
+    with make_tempdir("atomic-admission-") as tmp:
+        root = Path(tmp)
+        message_a = write_scope_fixture(root)
+        message_b = message_a.with_name("MSG-scope-2-TASK-1001.md")
+        message_b.write_text(message_a.read_text(encoding="ascii"), encoding="ascii")
+        write_json(root / "Area_comun/state/CLAIMS.json", {"claims": []})
+        (root / ".protocol-tmp").mkdir(parents=True, exist_ok=True)
+        gate = root / "start.gate"
+        function_names = SCOPE_FUNCTIONS + ("Acquire-ExecReservation",)
+        processes: list[subprocess.Popen[str]] = []
+        for peer, message in ((IMPLEMENTER, message_a), (REVIEWER, message_b)):
+            peer_lower = peer.lower()
+            lease = root / f".protocol-tmp/{peer_lower}/{peer_lower}.exec-lease.json"
+            lease.parent.mkdir(parents=True, exist_ok=True)
+            script = function_loader(source, function_names) + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{peer}"
+$LeasePath = {ps_literal(lease)}
+$ExecAdmissionPath = Join-Path $Root ".protocol-tmp/peer-exec-admission.lock"
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$script:LastAdditionalSignalDetail = ""
+function Test-LeaseProcessMatches {{ param($Lease) return $true }}
+while (-not (Test-Path -LiteralPath {ps_literal(gate)})) {{ Start-Sleep -Milliseconds 5 }}
+$result = Acquire-ExecReservation -Message $Message
+[ordered]@{{ ok=[bool]$result.ok; reason=[string]$result.reason }} | ConvertTo-Json -Compress
+"""
+            script_path = root / f"probe-{peer_lower}.ps1"
+            script_path.write_text(script, encoding="utf-8", newline="\n")
+            processes.append(
+                subprocess.Popen(
+                    [powershell_executable(), "-NoProfile", "-NonInteractive", "-File", str(script_path)],
+                    cwd=root,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                )
+            )
+        gate.write_text("go\n", encoding="ascii")
+        results = []
+        for process in processes:
+            stdout, stderr = process.communicate(timeout=30)
+            assert process.returncode == 0, stderr + stdout
+            results.append(json.loads(stdout))
+        lease_count = len(list((root / ".protocol-tmp").glob("*/*.exec-lease.json")))
+        return {"admitted": sum(1 for result in results if result["ok"]), "lease_count": lease_count, "results": results}
 
 
 def post_delivery_deadline_probe(source: Path) -> dict:
@@ -838,6 +1031,92 @@ $claimSignal = Get-AdditionalWorkSignal
     assert result["claim_signal"] == "active_external_claim"
 
 
+def test_scope_aware_claim_veto_kills_both_direction_mutants() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-SCOPE-AWARE-EXTERNAL-CLAIM"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    claim_intersection = "if (Test-ScopeIntersection -Left $messageWork.work_scope -Right $claimScope) { return \"active_external_claim\" }"
+    assert source.count(claim_intersection) == 1
+    healthy = claim_scope_probe(HARNESS_PATH)
+    with make_tempdir("claim-allow-mutant-") as tmp:
+        allow_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        allow_path.write_text(source.replace(claim_intersection, 'if ($false) { return "active_external_claim" }', 1), encoding="utf-8", newline="\n")
+        allow_mutant = claim_scope_probe(allow_path)
+    with make_tempdir("claim-veto-mutant-") as tmp:
+        veto_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        veto_path.write_text(source.replace(claim_intersection, 'if ($true) { return "active_external_claim" }', 1), encoding="utf-8", newline="\n")
+        veto_mutant = claim_scope_probe(veto_path)
+    assert healthy["disjoint"] == "none"
+    assert healthy["intersecting"] == "active_external_claim"
+    assert healthy["malformed"] == [
+        "active_external_claim",
+        "active_external_claim",
+        "active_external_claim",
+        "claims_unreadable",
+    ]
+    assert allow_mutant["intersecting"] == "none"
+    assert veto_mutant["disjoint"] == "active_external_claim"
+
+
+def test_scope_aware_lease_veto_kills_both_direction_mutants() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-SCOPE-AWARE-PEER-LEASE"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    lease_intersection = "if (Test-ScopeIntersection -Left $messageWork.work_scope -Right $leaseScope) { return \"active_peer_lease\" }"
+    assert source.count(lease_intersection) == 1
+    healthy = lease_scope_probe(HARNESS_PATH)
+    with make_tempdir("lease-allow-mutant-") as tmp:
+        allow_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        allow_path.write_text(source.replace(lease_intersection, 'if ($false) { return "active_peer_lease" }', 1), encoding="utf-8", newline="\n")
+        allow_mutant = lease_scope_probe(allow_path)
+    with make_tempdir("lease-veto-mutant-") as tmp:
+        veto_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        veto_path.write_text(source.replace(lease_intersection, 'if ($true) { return "active_peer_lease" }', 1), encoding="utf-8", newline="\n")
+        veto_mutant = lease_scope_probe(veto_path)
+    assert healthy["disjoint"] == "none"
+    assert healthy["intersecting"] == "active_peer_lease"
+    assert healthy["ambiguous"] == "active_peer_lease"
+    assert allow_mutant["intersecting"] == "none"
+    assert veto_mutant["disjoint"] == "active_peer_lease"
+
+
+def test_atomic_exec_admission_kills_peer_specific_lock_mutant() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-ATOMIC-EXEC-ADMISSION"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    signal_line = "$signal = Get-AdditionalWorkSignal -Message $Message"
+    delayed_source = source.replace(signal_line, signal_line + "\n        Start-Sleep -Milliseconds 250", 1)
+    assert delayed_source != source
+    shared_admission_path = "            $ExecAdmissionPath,"
+    peer_specific_admission_path = '            ($ExecAdmissionPath + "." + $PeerId),'
+    assert delayed_source.count(shared_admission_path) == 1
+    mutant_source = delayed_source.replace(shared_admission_path, peer_specific_admission_path, 1)
+    with make_tempdir("atomic-healthy-source-") as tmp:
+        healthy_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        healthy_path.write_text(delayed_source, encoding="utf-8", newline="\n")
+        healthy = atomic_admission_probe(healthy_path)
+    with make_tempdir("atomic-mutant-source-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = atomic_admission_probe(mutant_path)
+    assert healthy["admitted"] == 1
+    assert healthy["lease_count"] == 1
+    assert mutant["admitted"] == 2
+    assert mutant["lease_count"] == 2
+
+
+def test_dirty_tree_veto_still_precedes_scope_admission() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-DIRTY-VETO-PRECEDES-SCOPE-ADMISSION"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    live_residue_guard = 'if ($residueState -eq "live") {'
+    mutant_source = source.replace(live_residue_guard, 'if ($false) {', 1)
+
+    def preserves_dirty_veto(text: str) -> bool:
+        start = text.index("function Invoke-PeerForMessage")
+        body = text[start:]
+        return live_residue_guard in body and body.index(live_residue_guard) < body.index("Acquire-ExecReservation -Message $Message")
+
+    assert preserves_dirty_veto(source) is True
+    assert preserves_dirty_veto(mutant_source) is False
+
+
 def test_new_instance_exports_identical_harness() -> None:
     spec = importlib.util.spec_from_file_location("new_instance_task0319", ROOT / "scripts/new_instance.py")
     assert spec is not None and spec.loader is not None
@@ -869,6 +1148,10 @@ def main() -> int:
         test_git_status_readers_enumerate_untracked_files_without_overbroad_veto,
         test_residue_excludes_foreign_personal_and_caps_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
+        test_scope_aware_claim_veto_kills_both_direction_mutants,
+        test_scope_aware_lease_veto_kills_both_direction_mutants,
+        test_atomic_exec_admission_kills_peer_specific_lock_mutant,
+        test_dirty_tree_veto_still_precedes_scope_admission,
         test_new_instance_exports_identical_harness,
     ]
     for test in tests:
