@@ -40,6 +40,20 @@
             "updated_at": "2026-08-07T18:10:38Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Analista-TASK-0335-review",
+            "expires_at": "2026-08-08T02:00:00Z",
+            "notes": "Revision adversarial TASK-0335 iteracion 1 de 2",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Analista-TASK-0335-review",
+                "Area_comun/artifacts/Analista-TASK-0335-semantica-terminal-retry-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0335.md"
+            ],
+            "started_at": "2026-08-07T19:55:00Z",
+            "status": "active",
+            "task_id": "TASK-0335"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330-done-flip",
             "expires_at": "2026-08-08T01:03:42Z",
             "notes": "Implementer done-flip after checker escalation and architect partition ratification; no global execution certification asserted.",
