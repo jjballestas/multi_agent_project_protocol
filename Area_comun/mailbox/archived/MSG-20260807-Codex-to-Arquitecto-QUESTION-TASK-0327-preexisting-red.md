@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: QUESTION
 task_id: TASK-0327
-status: open
+status: archived
 created: 2026-08-07T13:40:00Z
 requires_response: true
 response_owner: Arquitecto

@@ -15,7 +15,7 @@ Last updated: 2026-08-07 Europe/Madrid, TASK-0327 delivery.
 - The live policy has zero domain terms and the built corpus has zero publicable artifacts, so
   widening changes 0 to 0 live flags; the controlled fixture changes 0/1 to 1/1.
 - TASK-0327 is delivered to `in_review`, both maker claims are released, and independent Analista
-  review is requested. Codex has not reviewed or ratified the work.
+  review is requested by delivery commit `875bdcba`. Codex has not reviewed or ratified the work.
 
 ## 2026-08-07 - TASK-0330 delivery
 
