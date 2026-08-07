@@ -1,20 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260807-Codex-TASK-0335-work",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0335-work",
-                "Area_comun/state/TASK_INDEX.json#TASK-0335",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
-                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0335"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -40,6 +40,27 @@
             "updated_at": "2026-08-07T18:10:38Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0335-delivery",
+            "expires_at": "2026-08-08T02:51:24Z",
+            "notes": "Deliver TASK-0335 to in_review, persist maker evidence, and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0335-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0335-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0335.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T18:51:24Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T18:51:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0335-work",
             "expires_at": "2026-08-08T02:29:01Z",
             "notes": "Implement TASK-0335 semantic terminal-state assertion and complete remaining retry-runner exploration.",
@@ -54,7 +75,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T18:29:01Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0335",
             "updated_at": "2026-08-07T18:29:01Z"
         },

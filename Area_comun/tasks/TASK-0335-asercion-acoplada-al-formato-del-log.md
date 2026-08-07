@@ -2,7 +2,7 @@
 task_id: TASK-0335
 file: Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md
 title: "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista
@@ -97,3 +97,20 @@ Entra ademas el residual del foco E: el negativo que protege el arreglo de ORDEN
 autorizado en 0330 es hoy **codigo muerto con una mitad vacua**. Repararlo pertenece aqui porque
 depende de la misma subcadena obsoleta; dejarlo para despues seria cerrar 0330 con su unica
 ampliacion de produccion sin guardian real.
+
+## Entrega del maker 2026-08-07
+
+Commit de implementacion: `dbe9a50829c7aae5ef32273113823635b8901e47`.
+
+- El sexto rojo ya no compara una subcadena posicional. El runner parsea los campos `key=value` de
+  cada evento `RETRY_EXHAUSTED` y afirma terminal, watchdog, contadores y causa esperada sin depender
+  del orden ni de campos intermedios.
+- La falsacion tiene las dos direcciones exigidas: el mutante de orden no alcanza terminal; el
+  mutante de causa alcanza terminal pero no por `ledger_unreadable_before_exec`.
+- La exploracion completa encontro nueve rojos adicionales despues del sexto: dos aserciones
+  posicionales mas; cuatro fixtures focales sin task id/scope resoluble; y tres roturas en la cola
+  principal por `CLAIMS.json` no parseable o por destruir el scope del task fixture. Todos quedaron
+  reparados dentro del runner, sin tocar produccion ni omitir casos.
+- `run_mailbox_retry_cases.py` recorre ahora la cola completa y sale 0. El gate de CI declara 8/8
+  runners y 48/48 contratos ejecutados; el inventario declara 48/48 sin faltantes.
+- Codex entrega como maker y no revisa ni ratifica su propio trabajo.

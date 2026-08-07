@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "fb8fd8fad8dbe0fd0f22b042bde5e90d4d380cd47c24fe540fa930f12086454d",
+  "canonical_hash": "10cf145a2a428ecfd4bad27d629d0f0fb81a42abb33fc4b563079a3f4e9c024c",
   "integrity": {
-    "canonical_hash": "fb8fd8fad8dbe0fd0f22b042bde5e90d4d380cd47c24fe540fa930f12086454d",
+    "canonical_hash": "10cf145a2a428ecfd4bad27d629d0f0fb81a42abb33fc4b563079a3f4e9c024c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "803754bba1b0014fcc5124662169b4ac6def513be8dbd4c5f1485042a469e5a0",
-    "signature": "f783675d234ba64568695bf6a6a3b86873feb7d35d88df7b7bdc4bcae9f56761",
-    "up_to_seq": 7641
+    "prev_hash": "b23326530c06b00a5a6742f06534dd6957e9e1f02f0ae1a3606e3bc5f58c9703",
+    "signature": "53898a7aca060f3109e4ec19dda4897712dd280c6dabfa5c47099124ecfeda47",
+    "up_to_seq": 7645
   },
   "state": {
     "aggregate_versions": {
@@ -3111,7 +3111,7 @@
       "TASK-0332": 2,
       "TASK-0333": 10,
       "TASK-0334": 2,
-      "TASK-0335": 5,
+      "TASK-0335": 9,
       "TASK-0336": 3,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -3135,7 +3135,7 @@
       "protocol-prune": 46,
       "protocol-state": 1
     },
-    "events_applied": 6970,
+    "events_applied": 6974,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6740,7 +6740,11 @@
       "codex:task0333:status-in-review:20260807T165140Z": 7601,
       "codex:task0333:work-release:20260807T165140Z": 7602,
       "codex:task0335:claim-acquire:20260807T182901Z": 7635,
+      "codex:task0335:delivery-claim-acquire:20260807T185124Z": 7642,
+      "codex:task0335:delivery-claim-release:20260807T185319Z": 7645,
       "codex:task0335:status-in-progress:20260807T182901Z": 7636,
+      "codex:task0335:status-in-review:20260807T185319Z": 7643,
+      "codex:task0335:work-claim-release:20260807T185319Z": 7644,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -10109,5 +10113,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7641
+  "up_to_seq": 7645
 }
