@@ -99,7 +99,7 @@
         {
             "id": "TASK-0330",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "23 de 37 contratos de falsacion tienen un runner que CI nunca ejecuta, y uno de esos runners lleva roto desde TASK-0316: la cobertura declarada no es cobertura verificada"
         },
         {
@@ -129,8 +129,14 @@
         {
             "id": "TASK-0335",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
+        },
+        {
+            "id": "TASK-0336",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
