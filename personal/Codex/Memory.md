@@ -14,6 +14,8 @@ Last updated: 2026-08-07 Europe/Madrid, TASK-0330 fifth revived-suite red.
   terminal state. No fifth-red remediation has been applied.
 - Collaboration, encoding, neutrality, and diff gates exited 0 before the checkpoint commit.
   The complete retry suite remains red by design pending Arquitecto direction.
+- Commit `3fe117ca` records the governed `blocked` transition and publishes the single
+  fifth-red question; the expanded TASK-0330 work claim remains active.
 
 ## 2026-08-07 - TASK-0325 remediation implementation
 

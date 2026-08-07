@@ -120,8 +120,8 @@ FALSIFICATION_CONTRACTS = (
         "boundaries": (
             'assert_claim_behavior(current, label="current")',
             'assert_claim_behavior(old_form, label="old-form")',
-            'assert probe(mutant, EXPIRED) == "active_external_claim"',
-            'assert probe(mutant, LIVE) == "none"',
+            'assert probe(mutant, expired) == "active_external_claim"',
+            'assert probe(mutant, live) == "none"',
         ),
         "exercised_by": "run_expired_claim_behavior_case",
     },
@@ -1270,15 +1270,23 @@ def main() -> int:
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "Area_comun/state").mkdir(parents=True)
-        (sandbox / "Area_comun/state/CLAIMS.json").write_text('{"seq":0}\n', encoding="ascii")
+        (sandbox / "Area_comun/state/CLAIMS.json").write_text('{"seq":0,"claims":[]}\n', encoding="ascii")
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
         (sandbox / "Area_comun/tasks").mkdir(parents=True)
         (sandbox / "Area_comun/decisions").mkdir(parents=True)
-        (sandbox / "Area_comun/tasks/TASK-fixture.md").write_text("baseline-task\n", encoding="ascii")
+        (sandbox / "Area_comun/tasks/TASK-fixture.md").write_text(
+            "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-fixture.md\n"
+            "intake:\n  scope_routes:\n    - unrelated-scope.txt\n---\nbaseline-task\n",
+            encoding="ascii",
+        )
+        (sandbox / "Area_comun/state/TASK_INDEX.json").write_text(
+            '{"tasks":[{"id":"TASK-0001","file":"Area_comun/tasks/TASK-fixture.md"}]}\n',
+            encoding="ascii",
+        )
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
         message.write_text(
-            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+            "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0001\nstatus: open\n"
             "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
             encoding="ascii",
         )
