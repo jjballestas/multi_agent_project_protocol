@@ -96,15 +96,49 @@ def parse_porcelain_v1_z(raw: bytes) -> set[str]:
 
 
 def dirty_paths(root: Path) -> set[str]:
+    root = root.resolve()
+    dirty: set[str] = set()
+    for repository_root in repository_roots(root):
+        dirty.update(repository_dirty_paths(root, repository_root))
+    return dirty
+
+
+def repository_roots(root: Path) -> list[Path]:
+    """Return every physical Git worktree below root, at arbitrary depth.
+
+    Detection is one filesystem walk (O(directories)); symlinked directories are not
+    followed.  Any traversal error raises, so callers that authorize termination fail
+    closed.  Each detected repository adds one Git status invocation.
+    """
+    root = root.resolve()
+    repositories = [root]
+
+    def fail(error: OSError) -> None:
+        raise error
+
+    for current, directories, files in os.walk(root, topdown=True, onerror=fail, followlinks=False):
+        current_path = Path(current)
+        has_marker = ".git" in directories or ".git" in files
+        if current_path != root and has_marker:
+            repositories.append(current_path)
+        directories[:] = [name for name in directories if name != ".git"]
+    return repositories
+
+
+def repository_dirty_paths(root: Path, repository_root: Path) -> set[str]:
     proc = subprocess.run(
         ["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"],
-        cwd=root,
+        cwd=repository_root,
         capture_output=True,
         check=False,
     )
     if proc.returncode != 0:
         raise RuntimeError("git status --porcelain=v1 -z failed")
-    return parse_porcelain_v1_z(proc.stdout)
+    prefix = repository_root.relative_to(root).as_posix()
+    paths = parse_porcelain_v1_z(proc.stdout)
+    if not prefix or prefix == ".":
+        return paths
+    return {f"{prefix}/{path}" for path in paths}
 
 
 def dirty_claimed_route(root: Path, owner: str) -> bool:

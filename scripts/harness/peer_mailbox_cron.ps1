@@ -636,10 +636,11 @@ function Get-LedgerHead {
     }
 }
 
-function Get-GitStatusPorcelainUtf8 {
+function Invoke-GitStatusPorcelainUtf8 {
+    param([string]$RepositoryRoot)
     $start = New-Object System.Diagnostics.ProcessStartInfo
     $start.FileName = "git"
-    $start.WorkingDirectory = $Root
+    $start.WorkingDirectory = $RepositoryRoot
     $start.Arguments = "status --porcelain=v1 -z --untracked-files=all"
     $start.UseShellExecute = $false
     $start.CreateNoWindow = $true
@@ -668,6 +669,62 @@ function Get-GitStatusPorcelainUtf8 {
     } finally {
         $process.Dispose()
     }
+}
+
+function Get-EmbeddedRepositoryRoots {
+    # Walk every physical descendant (no depth cap), pruning .git internals and
+    # reparse-point targets. Any enumeration failure is handled as a veto upstream.
+    $rootItem = Get-Item -LiteralPath $Root -Force -ErrorAction Stop
+    $pending = New-Object 'System.Collections.Generic.Stack[System.IO.DirectoryInfo]'
+    $pending.Push($rootItem)
+    $repositories = @($rootItem.FullName)
+    while ($pending.Count -gt 0) {
+        $directory = $pending.Pop()
+        $children = @(Get-ChildItem -LiteralPath $directory.FullName -Force -ErrorAction Stop)
+        $hasMarker = @($children | Where-Object { $_.Name -ceq ".git" }).Count -gt 0
+        if ($directory.FullName -cne $rootItem.FullName -and $hasMarker) {
+            $repositories += $directory.FullName
+        }
+        foreach ($child in $children) {
+            if (-not $child.PSIsContainer -or $child.Name -ceq ".git") { continue }
+            if (($child.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { continue }
+            $pending.Push($child)
+        }
+    }
+    return @($repositories)
+}
+
+function Get-GitStatusPorcelainUtf8 {
+    try { $repositoryRoots = @(Get-EmbeddedRepositoryRoots) }
+    catch { return [pscustomobject]@{ ok = $false; raw = ""; reason = "repository_discovery_failed" } }
+    $combined = @()
+    foreach ($repoPath in $repositoryRoots) {
+        $result = Invoke-GitStatusPorcelainUtf8 -RepositoryRoot $repoPath
+        if (-not $result.ok) { return $result }
+        $records = @([string]$result.raw -split [char]0 | Where-Object { $_ })
+        $rootFull = [IO.Path]::GetFullPath($Root).TrimEnd([char[]]@('\', '/'))
+        $repoFull = [IO.Path]::GetFullPath($repoPath).TrimEnd([char[]]@('\', '/'))
+        if ($repoFull.Equals($rootFull, [StringComparison]::OrdinalIgnoreCase)) {
+            $prefix = "."
+        } elseif ($repoFull.StartsWith($rootFull + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+            $prefix = $repoFull.Substring($rootFull.Length + 1).Replace("\", "/")
+        } else {
+            return [pscustomobject]@{ ok = $false; raw = ""; reason = "repository_outside_root" }
+        }
+        for ($index = 0; $index -lt $records.Count; $index++) {
+            $entry = $records[$index]
+            if ($entry.Length -lt 4) { return [pscustomobject]@{ ok = $false; raw = ""; reason = "malformed_status" } }
+            $pathPrefix = if ($prefix -ceq ".") { "" } else { $prefix.TrimEnd('/') + "/" }
+            $combined += $entry.Substring(0, 3) + $pathPrefix + $entry.Substring(3)
+            if ($entry.Substring(0, 2) -match '[RC]') {
+                if (($index + 1) -ge $records.Count) { return [pscustomobject]@{ ok = $false; raw = ""; reason = "malformed_status" } }
+                $combined += $pathPrefix + $records[$index + 1]
+                $index++
+            }
+        }
+    }
+    $raw = if ($combined.Count -eq 0) { "" } else { [string]::Join([char]0, $combined) + [char]0 }
+    return [pscustomobject]@{ ok = $true; raw = $raw }
 }
 
 function Get-WorktreeDiskProof {

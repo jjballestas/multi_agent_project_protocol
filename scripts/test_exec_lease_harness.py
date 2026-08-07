@@ -78,6 +78,24 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_git_status_readers_enumerate_untracked_files_without_overbroad_veto",
     },
     {
+        "id": "NEG-CRON-STATUS-EMBEDDED-REPOSITORY-DIRTY-CLAIM",
+        "negative": "Both Git status readers must query embedded repositories at arbitrary physical depth so a file-scoped dirty claim vetoes termination; disabling discovery must reproduce the destructive false negative.",
+        "mutation": "source.replace(discovery",
+        "boundaries": (
+            "assert live_path not in parent_variants[0]",
+            "assert live_path not in parent_variants[1]",
+            "assert live_path not in parent_variants[2]",
+            "assert live_path in sweep.dirty_paths(root)",
+            "assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True",
+            "assert live_path in powershell_paths",
+            "assert mutant.dirty_claimed_route(root, IMPLEMENTER) is False",
+            "assert live_path not in powershell_mutant_paths",
+            "assert python_discovery_failed_closed is True",
+            "assert powershell_discovery_failure[\"ok\"] is False",
+        ),
+        "exercised_by": "test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven",
+    },
+    {
         "id": "NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE",
         "negative": "The post-delivery window must inherit a later main progress deadline without exceeding its own hard deadline.",
         "mutation": "dead_wiring_source = source.replace(live_guard, dead_guard, 1)",
@@ -685,7 +703,12 @@ def real_foreign_personal_rename_probe() -> dict:
             subprocess.run(command, cwd=root, check=True, capture_output=True)
         script = function_loader(
             HARNESS_PATH,
-            ("Get-GitStatusPorcelainUtf8", "Get-StagedResidueState"),
+            (
+                "Invoke-GitStatusPorcelainUtf8",
+                "Get-EmbeddedRepositoryRoots",
+                "Get-GitStatusPorcelainUtf8",
+                "Get-StagedResidueState",
+            ),
         ) + f"""
 $Root = {ps_literal(root)}
 $PeerId = "{IMPLEMENTER}"
@@ -722,7 +745,12 @@ def real_worktree_disk_proof_rename_probe(source_path: Path = HARNESS_PATH) -> d
             subprocess.run(command, cwd=root, check=True, capture_output=True)
         script = function_loader(
             source_path,
-            ("Get-GitStatusPorcelainUtf8", "Get-WorktreeDiskProof"),
+            (
+                "Invoke-GitStatusPorcelainUtf8",
+                "Get-EmbeddedRepositoryRoots",
+                "Get-GitStatusPorcelainUtf8",
+                "Get-WorktreeDiskProof",
+            ),
         ) + f"""
 $Root = {ps_literal(root)}
 $statusResult = Get-GitStatusPorcelainUtf8
@@ -911,7 +939,10 @@ def test_git_status_readers_enumerate_untracked_files_without_overbroad_veto() -
         collapsed_paths = sweep.parse_porcelain_v1_z(collapsed_raw)
         healthy_paths = sweep.dirty_paths(root)
 
-        script = function_loader(HARNESS_PATH, ("Get-GitStatusPorcelainUtf8",)) + f"""
+        script = function_loader(
+            HARNESS_PATH,
+            ("Invoke-GitStatusPorcelainUtf8", "Get-EmbeddedRepositoryRoots", "Get-GitStatusPorcelainUtf8"),
+        ) + f"""
 $Root = {ps_literal(root)}
 $statusResult = Get-GitStatusPorcelainUtf8
 $records = @([string]$statusResult.raw -split [char]0 | Where-Object {{ $_ }})
@@ -935,6 +966,134 @@ $records = @([string]$statusResult.raw -split [char]0 | Where-Object {{ $_ }})
         assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True
         assert mutant.dirty_claimed_route(root, IMPLEMENTER) is False
         assert sweep.dirty_claimed_route(root, REVIEWER) is False
+
+
+def test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven() -> None:
+    """PERMANENT_NEGATIVE: NEG-CRON-STATUS-EMBEDDED-REPOSITORY-DIRTY-CLAIM"""
+    with make_tempdir("embedded-repository-") as tmp:
+        root = Path(tmp)
+        claims_path = root / "Area_comun/state/CLAIMS.json"
+        claims_path.parent.mkdir(parents=True)
+        claims_path.write_text('{"claims": []}\n', encoding="ascii")
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+            ("git", "add", "Area_comun/state/CLAIMS.json"),
+            ("git", "commit", "-m", "outer fixture"),
+        ):
+            subprocess.run(command, cwd=root, check=True, capture_output=True)
+
+        embedded = root / "work/level/inner"
+        embedded.mkdir(parents=True)
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+        ):
+            subprocess.run(command, cwd=embedded, check=True, capture_output=True)
+        live_path = "work/level/inner/live_work.md"
+        (root / live_path).write_text("live\n", encoding="ascii")
+        claims_path.write_text(
+            json.dumps(
+                {
+                    "claims": [
+                        {"owner": IMPLEMENTER, "status": "active", "scope": [live_path]}
+                    ]
+                }
+            )
+            + "\n",
+            encoding="ascii",
+        )
+        subprocess.run(("git", "add", "Area_comun/state/CLAIMS.json"), cwd=root, check=True)
+        subprocess.run(("git", "commit", "-m", "claim fixture"), cwd=root, check=True, capture_output=True)
+
+        parent_variants = []
+        for options in ((), ("--untracked-files=all",), ("--untracked-files=all", "--ignored")):
+            raw = subprocess.run(
+                ("git", "status", "--porcelain=v1", "-z", *options),
+                cwd=root,
+                check=True,
+                capture_output=True,
+            ).stdout
+            parent_variants.append(sweep.parse_porcelain_v1_z(raw))
+
+        loader = function_loader(
+            HARNESS_PATH,
+            ("Invoke-GitStatusPorcelainUtf8", "Get-EmbeddedRepositoryRoots", "Get-GitStatusPorcelainUtf8"),
+        )
+        script = loader + f"""
+$Root = {ps_literal(root)}
+$result = Get-GitStatusPorcelainUtf8
+$records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
+[ordered]@{{ ok = $result.ok; paths = @($records | ForEach-Object {{ if ($_.Length -ge 4) {{ $_.Substring(3).Replace("\\", "/") }} }}) }} | ConvertTo-Json -Compress
+"""
+        powershell = run_powershell(script, root)
+        powershell_paths = set(powershell["paths"])
+
+        source_path = ROOT / "scripts/sweep_cron_zombies.py"
+        source = source_path.read_text(encoding="utf-8")
+        discovery = "for repository_root in repository_roots(root):"
+        mutant_source = source.replace(discovery, "for repository_root in [root]:", 1)
+        assert mutant_source != source
+        mutant_path = root / "sweep_cron_zombies_embedded_mutant.py"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = load_sweeper_module(mutant_path, "sweep_cron_zombies_task0334_mutant")
+
+        harness_source = HARNESS_PATH.read_text(encoding="utf-8")
+        ps_discovery = "$repositoryRoots = @(Get-EmbeddedRepositoryRoots)"
+        ps_mutant_source = harness_source.replace(ps_discovery, "$repositoryRoots = @($Root)", 1)
+        assert ps_mutant_source != harness_source
+        ps_mutant_path = root / "peer_mailbox_cron_embedded_mutant.ps1"
+        ps_mutant_path.write_text(ps_mutant_source, encoding="utf-8", newline="\n")
+        mutant_loader = function_loader(
+            ps_mutant_path,
+            ("Invoke-GitStatusPorcelainUtf8", "Get-EmbeddedRepositoryRoots", "Get-GitStatusPorcelainUtf8"),
+        )
+        mutant_script = mutant_loader + f"""
+$Root = {ps_literal(root)}
+$result = Get-GitStatusPorcelainUtf8
+$records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
+[ordered]@{{ ok = $result.ok; paths = @($records | ForEach-Object {{ if ($_.Length -ge 4) {{ $_.Substring(3).Replace("\\", "/") }} }}) }} | ConvertTo-Json -Compress
+"""
+        powershell_mutant = run_powershell(mutant_script, root)
+        powershell_mutant_paths = set(powershell_mutant["paths"])
+
+        original_discovery = sweep.repository_roots
+        try:
+            def fail_discovery(_root: Path) -> list[Path]:
+                raise OSError("fixture discovery failure")
+
+            sweep.repository_roots = fail_discovery
+            try:
+                sweep.dirty_claimed_route(root, IMPLEMENTER)
+            except OSError:
+                python_discovery_failed_closed = True
+            else:
+                python_discovery_failed_closed = False
+        finally:
+            sweep.repository_roots = original_discovery
+
+        failure_script = loader + f"""
+$Root = {ps_literal(root)}
+function Get-EmbeddedRepositoryRoots {{ throw "fixture discovery failure" }}
+$result = Get-GitStatusPorcelainUtf8
+[ordered]@{{ ok = $result.ok; reason = $result.reason }} | ConvertTo-Json -Compress
+"""
+        powershell_discovery_failure = run_powershell(failure_script, root)
+
+        assert live_path not in parent_variants[0]
+        assert live_path not in parent_variants[1]
+        assert live_path not in parent_variants[2]
+        assert live_path in sweep.dirty_paths(root)
+        assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True
+        assert powershell["ok"] is True
+        assert live_path in powershell_paths, sorted(powershell_paths)
+        assert mutant.dirty_claimed_route(root, IMPLEMENTER) is False
+        assert powershell_mutant["ok"] is True
+        assert live_path not in powershell_mutant_paths
+        assert python_discovery_failed_closed is True
+        assert powershell_discovery_failure["ok"] is False
 
 
 def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
@@ -1146,6 +1305,7 @@ def main() -> int:
         test_worktree_disk_proof_pairs_real_git_rename_records,
         test_zombie_sweeper_parses_real_git_quoted_rename_paths,
         test_git_status_readers_enumerate_untracked_files_without_overbroad_veto,
+        test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven,
         test_residue_excludes_foreign_personal_and_caps_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
         test_scope_aware_claim_veto_kills_both_direction_mutants,
