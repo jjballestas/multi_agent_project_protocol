@@ -7273,3 +7273,67 @@ Forma del intent de claim por CLI (la del event log NO sirve tal cual): top-leve
 `{"claim": {"op": "acquire", "claim_id": ..., "idempotency_key": ..., "claim": {...anidado...}}}`.
 `--intent <fichero>`, no `--intent-file`. Claim creado tras escribir los artefactos y **liberado en
 el mismo turno** tras el push. Bucle: maximo 2 iteraciones, escalo al operador a la tercera.
+
+## 2026-08-07 -- TASK-0322 r3 (OK-CLOSABLE, commit 3ae3b990, head juzgado 749dbe87)
+
+### Falsar TAMBIEN la correccion, no solo la afirmacion original
+
+En r2 refute una afirmacion mia ("un movil ES que empiece por 6 o 7 ya no cabe"). En r3 el maker la
+ACOTO en vez de retirarla. La tentacion era leer la frase nueva y darla por buena porque me daba la
+razon. **Probe las DOS mitades por separado**, incluida la que me favorecia:
+
+- mitad "no cabe" (frac5): 0 de 900 combinaciones legales `(SS,HH)`, 0 portadoras en 5.400 cadenas
+  por fuerza bruta, 5 de 5 colocaciones dirigidas `DATE_RE=False`.
+- mitad "si cabe" (frac6): 5 moviles reales colocados, `DATE_RE=True` + portadores +
+  `contains_pii=False`; colocacion sin desplazar `DATE_RE=False`.
+
+**Una correccion sin falsar es la misma clase de objeto que la afirmacion que corrige.** "Se retiro
+una afirmacion falsa" suena a ciclo cerrado e invita a no volver a mirar.
+
+### Probar el ANTES/DESPUES de un "ya no cabe"
+
+Una frase de mejora tiene dos partes: que hoy no pasa **y que ayer si pasaba**. Corri las 5 cadenas
+contra la gramatica VIEJA: `OLD_accepts=True` en las cinco. Si el antes tambien lo rechazaba, la
+frase seria un adorno que promete una mejora inexistente -- el mismo defecto con el signo cambiado.
+
+### Medir el MECANISMO antes de juzgar la redaccion
+
+No discutir si la racha "tiene 9 o 10 digitos": extraerla. `PHONE_CANDIDATE_RE.finditer` +
+`re.sub(r"\D","")` forma por forma. Descubrimiento util: `+` **no** esta en la clase
+`[\d .()-]` (solo `\+?` al inicio), asi que el offset POSITIVO corta la racha y solo el negativo
+acumula. Barrido exhaustivo de todas las formas hora x offset: max 8 digitos en todas menos
+frac5-neg (9) y frac6-neg (10). **Es exhaustivo sobre formas porque la longitud de racha depende de
+la forma, no del valor de los digitos.**
+
+### La direccion del error decide si bloquea
+
+R7: la SPEC dice "el movil SI cabe" sin cota; lo medido es el **15 pct** (los 2 ultimos digitos caen
+sobre el `HH` del offset, que solo admite 00-13 y 14; barrido de las 100 terminaciones -> 15/85).
+**Sobre-avisa: declara mas residual del que hay.** Eso no puede producir falsa tranquilidad, que es
+la unica direccion que bloquea. Residual, no iteracion 3. **Y dejar la cifra escrita en el veredicto
+para que el registro pueda citarla sin volver a medirla.**
+
+### Anclar en el HEAD, no solo en el commit citado
+
+La instruccion citaba `d2379a9b` (parte maker). El punto S2 lo cerraba `55368b06` (parte Arquitecto).
+**Juzgar solo el commit citado habria dejado S2 sin comprobar.** Anclar en el head canonico (que
+contiene los dos) y correr los gates ademas en el commit citado. Una remediacion puede viajar en
+varios commits de manos distintas.
+
+### Identidad byte a byte cuando OTRAS tareas tocan el mismo fichero
+
+`git diff <c>^ <c> -- scripts/ | wc -c` = 0 por commit, mas md5 del bloque bajo revision en TODOS los
+heads de la cadena. Encima de 0322 aterrizaron 0325/0327/0330/0334 tocando los mismos ficheros: el
+diff por commit prueba que la remediacion no toco codigo, el md5 por head prueba que el artefacto
+juzgado sigue siendo el mismo.
+
+### Operativa que funciono
+
+`git clone --local --no-checkout` sobre el mismo disco = instantaneo y con historia COMPLETA (evita
+la trampa del clon superficial: `--depth` da falso rojo en `commit_trailers`). Sonda con
+`importlib.util` sobre el fichero del clon; **registrar el modulo en `sys.modules` antes de
+`exec_module`** o los `@dataclass` del modulo revientan. Gates: validate + scan_encoding +
+scan_domain_neutrality + `protocol_replay --check-drift`, por exit code, en los dos heads. Trailers
+`Task-Id:` + `Ops-Reason:`; evitar prefijo `fix/revert/hotfix` en el asunto o el gate exige
+`Fixes-Task`. El aviso `PRUNE DUE` del hook de commit es advisory y es paso del Arquitecto: no lo
+toco.
