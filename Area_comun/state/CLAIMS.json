@@ -40,6 +40,30 @@
             "updated_at": "2026-08-07T21:47:53Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-20260807-lote32",
+            "expires_at": "2026-08-08T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0322-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0322-r3.md",
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0335.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0335.md",
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0336.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0336.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0322-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0322-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0325-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0325-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0334.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0334.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260807-lote32"
+            ],
+            "started_at": "2026-08-07T21:52:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260807",
+            "updated_at": "2026-08-07T21:52:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
