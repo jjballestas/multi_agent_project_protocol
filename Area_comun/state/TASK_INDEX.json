@@ -272,7 +272,7 @@
             "file": "Area_comun/tasks/TASK-0317-timestamp-offset-negativo-falso-positivo.md",
             "id": "TASK-0317",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "Falso positivo del indexador: timestamps ISO-8601 con offset UTC negativo y fraccion larga se rechazan (el guion del offset puentea el patron de telefono)",
             "type": "infra"
         },
@@ -296,7 +296,7 @@
             "file": "Area_comun/tasks/TASK-0323-porcelain-sin-z-lectores.md",
             "id": "TASK-0323",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "Lectores de git status --porcelain SIN -z fabrican rutas inexistentes: el barredor de zombis falla ABIERTO",
             "type": "infra"
         },
@@ -304,7 +304,7 @@
             "file": "Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md",
             "id": "TASK-0324",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer",
             "type": "infra"
         },
@@ -312,7 +312,7 @@
             "file": "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
             "id": "TASK-0325",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2",
             "type": "infra"
         },
@@ -320,7 +320,7 @@
             "file": "Area_comun/tasks/TASK-0326-convergencia-untracked-files-lectores.md",
             "id": "TASK-0326",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca",
             "type": "infra"
         },

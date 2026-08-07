@@ -32,19 +32,19 @@
         {
             "id": "TASK-0324",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer"
         },
         {
             "id": "TASK-0325",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
         },
         {
             "id": "TASK-0326",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca"
         }
     ],

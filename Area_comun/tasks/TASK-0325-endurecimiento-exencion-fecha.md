@@ -2,7 +2,7 @@
 task_id: TASK-0325
 file: Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md
 title: "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
-status: proposed
+status: ready
 type: infra
 owner: Codex
 reviewer: Analista
