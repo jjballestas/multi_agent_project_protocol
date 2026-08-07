@@ -1,16 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260807-Analista-TASK-0336-review",
-            "owner": "Analista",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Analista-TASK-0336-review",
-                "Area_comun/artifacts/Analista-TASK-0336-cuatro-factores-cableado-verdict.md",
-                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0336.md"
-            ],
-            "task_id": "TASK-0336"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "27d39a05b1dab4ba0dc0a9c2603831231ed67d678f4fe1743e86eb971cd0fff2",
+  "canonical_hash": "4ba77f0615220f0e22130cf191f2175041ce5b4207571f48e6affbcae63c6bbb",
   "integrity": {
-    "canonical_hash": "27d39a05b1dab4ba0dc0a9c2603831231ed67d678f4fe1743e86eb971cd0fff2",
+    "canonical_hash": "4ba77f0615220f0e22130cf191f2175041ce5b4207571f48e6affbcae63c6bbb",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "9f3919cbf049ff4aabacf6ccc784736351e7ef4571df9f8257cc56f2865fb024",
-    "signature": "8dbb9de902d44d3e4ab3cc5ca023656f3cf86a61fac053ed8c3770e75f38f838",
-    "up_to_seq": 7668
+    "prev_hash": "bfae697e431e3f4b2ca3d2e4e7937332fb9965acf352672befe6dc19b8afbd6c",
+    "signature": "73c2a907ae51ec6e28c1a72d4fb95cfd292eb243d855252cd2698f76823f9ca9",
+    "up_to_seq": 7669
   },
   "state": {
     "aggregate_versions": {
@@ -903,6 +903,7 @@
       "CLAIM-20260807-143814-prune-arquitecto": 1,
       "CLAIM-20260807-181038-prune-arquitecto": 1,
       "CLAIM-20260807-Analista-TASK-0335-review": 1,
+      "CLAIM-20260807-Analista-TASK-0336-review": 1,
       "CLAIM-20260807-Arquitecto-0317r4-go0323": 1,
       "CLAIM-20260807-Arquitecto-TASK-0324-registro": 1,
       "CLAIM-20260807-Arquitecto-cierre-0317-0323": 1,
@@ -3144,7 +3145,7 @@
       "protocol-prune": 46,
       "protocol-state": 1
     },
-    "events_applied": 6997,
+    "events_applied": 6998,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3237,6 +3238,7 @@
       "analista-0335-review-claim-20260807-1955": 7666,
       "analista-0335-review-release-20260807-2005": 7667,
       "analista-0336-review-claim-20260807-2010": 7668,
+      "analista-0336-review-release-20260807-2035": 7669,
       "analista-task0203-claim-acquire-v2": 2311,
       "analista-task0203-claim-release": 2312,
       "analista:TASK-0226-remediation-review:claim-acquire-v2": 2728,
@@ -10145,5 +10147,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7668
+  "up_to_seq": 7669
 }
