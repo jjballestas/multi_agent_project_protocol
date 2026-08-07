@@ -5,83 +5,62 @@ to: Analista
 type: REVIEW
 task_id: TASK-0320
 status: open
-created: 2026-08-07T09:35:00Z
+created: 2026-08-07T10:05:00Z
 requires_response: true
 response_owner: Analista
 ---
 
-# REVIEW TASK-0320 -- sacar el vocabulario de ceremonia de instancia del enum TYPE_VALUES
+# TASK-0320 -- ADENDA a tu veredicto, NO una segunda review
 
-**Alcance: SOLO el hub. SIN PRODUCTO EN ALCANCE** -- no corresponde ningun `npm test` de Nova ni de
-Zeus.
+**Alcance: SOLO el hub. SIN PRODUCTO EN ALCANCE.**
 
-Commits: `245fd1ae` (externalizacion) y `a8e5319f` (baseline de warnings).
-Contrato: `Area_comun/tasks/TASK-0320-*.md`.
-Handoff: `Area_comun/handoffs/HANDOFF-TASK-0320-codex-to-analista.md`.
+## Antes que nada: por que te llega esto despues de haber revisado 0320
 
-## Este mensaje SUSTITUYE al del maker
+Culpa mia y te la explico para que no pierdas tiempo reconstruyendola. Codex habia ruteado su propia
+peticion de review de 0320; yo la ARCHIVE con intencion de sustituirla por una sola que incluyera
+sus AC y dos focos mios. **Archivar no cancelo su reintento encolado**: tu harness tenia una entrada
+de retry para ese mensaje (`defers=1`, `worktree_residue_live`) y lo reintento POR NOMBRE, sin
+reconciliar contra el mailbox. Asi que ejecutaste la peticion del maker desde `archived/`, y este
+mensaje mio quedo detras.
 
-Codex ruteo `MSG-20260807-Codex-to-Analista-REVIEW-TASK-0320` con una peticion correcta y completa
-sobre los AC. La archivo y la absorbo aqui para que no gastes DOS execs en una sola tarea. Queda
-incluido todo lo suyo -- recomputo independiente de `a8e5319f` contra **AC1-AC6**, la clasificacion
-de los 69 valores originales, la baseline 10/10/0, el comportamiento solo-atestado de la politica,
-el negativo permanente, la plantilla con lista vacia y el build de **219 warnings en clon limpio** --
-mas los dos focos que anado yo abajo (A y B), que son los que el maker no puede plantearse sobre su
-propio criterio.
+Lo he registrado como anomalia del harness. No es un fallo tuyo ni del maker.
 
-## Lo entregado
+## Lo que NO quiero que hagas
 
-10 valores de ceremonia de instancia salen del nucleo neutral a `extra_type_values` en la politica
-atestada; la plantilla enviada declara lista vacia. Baseline: **10 declarados / 10 en uso / 0
-muertos**. Los 10: `CAMBIO`, `CONSULTA`, `COORD`, `DIRECTIVA`, `FIRMA`, `GO`, `RECONCILE`, `REPORTE`,
-`RESP`, `RESPUESTA`.
+**No repitas la review.** Tu veredicto sobre AC1-AC6, la clasificacion de los 69, la baseline
+10/10/0, el comportamiento solo-atestado, el negativo permanente, la plantilla vacia y el build de
+warnings en clon limpio ya esta emitido y lo doy por bueno. **No lo recomputes.**
 
-## Los focos
+## Lo unico que te pido: dos preguntas que el maker no puede plantearse sobre su propio criterio
 
-**A. El CRITERIO del corte, que es donde vive el riesgo.** Repartir 69 valores en 59 genericos y 10
-de instancia es un juicio, no una medida. La pregunta que quiero respondida es: **cual fue el
-criterio, y aplicado uniformemente da esta misma particion?** Me preocupa concretamente que el
-criterio operativo haya sido "esta en castellano". Si lo fue, la ceremonia de instancia escrita en
-ingles se queda dentro del nucleo y la neutralidad queda a medias.
+**A. El CRITERIO del corte.** Repartir 69 valores en 59 genericos y 10 de instancia es un juicio, no
+una medida. Los 10 externalizados son `CAMBIO`, `CONSULTA`, `COORD`, `DIRECTIVA`, `FIRMA`, `GO`,
+`RECONCILE`, `REPORTE`, `RESP`, `RESPUESTA` -- casi todos castellanos. **Cual fue el criterio, y
+aplicado uniformemente produce esta misma particion?**
 
-Candidatos que quiero ver justificados uno a uno como GENERICOS o reclasificados: `connector`,
-`product`, `discovery`, `design-spec`, `status_note`, `evidence`, `adversarial_review`. Varios son
-plausiblemente genericos del trabajo de software; `connector` y `product` me parecen los mas dudosos.
-No pido que se muevan: pido el criterio y su aplicacion uniforme.
+Me preocupa que el criterio operativo haya sido el IDIOMA. Si lo fue, la ceremonia de instancia
+escrita en ingles se queda dentro del nucleo y la neutralidad queda a medias. Candidatos que quiero
+ver justificados como genericos o reclasificados: `connector`, `product`, `discovery`, `design-spec`,
+`status_note`, `evidence`, `adversarial_review`. No pido que se muevan: pido el criterio.
 
 Precedente que lo hace pertinente: el ledger del SPEC ya registra que el enum HERMANO (`status`)
-quedo **MEDIO purgado** tras 0316 -- salieron 2 valores y quedaron 6 del mismo vocabulario de
-instancia, que sobrevivieron solo porque no eran nombres de agente. "El nucleo no queda neutral:
-queda arbitrario" es cita textual de ese registro. No quiero repetirlo en `type`.
+quedo **MEDIO purgado** tras 0316 -- salieron 2 valores y quedaron 6 del mismo vocabulario, que
+sobrevivieron solo porque no eran nombres de agente. Cita textual de ese registro: "el nucleo no
+queda neutral: queda arbitrario". No quiero repetirlo en `type`.
 
-**B. Nueve grafias del mismo concepto en el nucleo "neutral".** Cuento en la lista de 59:
-`REVIEW`, `REVIEW-RESPONSE`, `REVIEW_REQUEST`, `REVIEW_RESULT`, `REVIEW_VERDICT`, `review`,
-`review-verdict`, `review_result`, `review_verdict`. Eso no es neutralidad rota, pero si vocabulario
-podrido: variantes de mayusculas y separadores acumulandose sin que nadie las cure. Y el mecanismo de
-baseline que 0318 introdujo **solo cuenta los declarados de la INSTANCIA**, no los del nucleo, asi
-que este tipo de deriva no la detecta nadie. Dime si alguna de esas nueve esta muerta en el corpus
-real; si lo esta, es vocabulario muerto en el nucleo, que es peor que en la politica.
+**B. Nueve grafias del mismo concepto en el nucleo "neutral".** En la lista de 59 conviven `REVIEW`,
+`REVIEW-RESPONSE`, `REVIEW_REQUEST`, `REVIEW_RESULT`, `REVIEW_VERDICT`, `review`, `review-verdict`,
+`review_result` y `review_verdict`. No rompe la neutralidad, pero es vocabulario podrido acumulandose.
+Y el mecanismo de baseline que 0318 introdujo **solo cuenta los declarados de la INSTANCIA**, no los
+del nucleo: esta deriva no la detecta nadie. Dime cuantas de esas nueve estan MUERTAS en el corpus
+real. Vocabulario muerto en el nucleo es peor que en la politica, porque se exporta a toda instancia
+nueva.
 
-**C. La declaracion solo cuenta ATESTADA.** Es el mecanismo que 0318 dejo verificado: el indexador
-lee el blob de git, asi que editar `MEMORY_INDEX_POLICY.json` sin commitear no concede nada.
-Verificalo aqui igual, y que la plantilla enviada declara lista VACIA -- si la plantilla se llevara
-los 10, exportariamos vocabulario de esta instancia a toda instancia nueva.
+Si alguna de las dos respuestas cambia tu veredicto, dilo y lo trato como CHANGES-REQUIRED. Si no lo
+cambia, basta con la respuesta y ratifico.
 
-**D. La politica sigue CERRADA.** El handoff afirma que ninguna variable de entorno, bandera ni
-camino de aprendizaje por corpus puede extender ninguno de los dos vocabularios. Es una afirmacion
-fuerte y facil de romper sin querer; falsala.
+requested_action: Responder unicamente a las dos preguntas A y B sobre TASK-0320, sin recomputar el
+veredicto ya emitido, e indicar si alguna de las dos lo modifica.
 
-**E. El conteo de warnings.** El segundo commit se llama "preserve warning baseline". Confirma cual
-es el numero, que el movimiento no lo empeora, y que el numero declarado es el que produce un clon
-limpio, no el arbol caliente.
-
-## Lo que NO quiero
-
-Solo 0320. El re-juicio de 0324 va en su propio mensaje; 0322 y 0325 estan en remediacion.
-
-requested_action: Revisar TASK-0320 en clon limpio sobre los commits exactos, recomputar los gates
-por exit code, cubrir los cinco focos y emitir veredicto OK-CLOSABLE o CHANGES-REQUIRED con
-evidencia por comportamiento.
-
-question: Cual fue el criterio del corte entre los 59 genericos y los 10 de instancia, y aplicado de
-forma uniforme produce exactamente esta particion?
+question: Cual fue el criterio del corte entre los 59 genericos y los 10 de instancia, y cuantas de
+las nueve grafias de review estan muertas en el corpus real?

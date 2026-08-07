@@ -131,6 +131,24 @@
             "updated_at": "2026-08-07T08:04:30Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260807-ratifica-0324-0320",
+            "expires_at": "2026-08-08T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0324",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0324",
+                "Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0320",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0320",
+                "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260807-ratifica-0324-0320"
+            ],
+            "started_at": "2026-08-07T10:45:10Z",
+            "status": "released",
+            "task_id": "TASK-0324",
+            "updated_at": "2026-08-07T10:45:10Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260807-ratifica-0326",
             "expires_at": "2026-08-08T00:00:00Z",
             "owner": "Arquitecto",
@@ -144,6 +162,42 @@
             "status": "released",
             "task_id": "TASK-0326",
             "updated_at": "2026-08-07T08:34:20Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260807-registro-0327-0334",
+            "expires_at": "2026-08-08T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0329",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0329",
+                "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0330",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0330",
+                "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0332",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0332",
+                "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0333",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0333",
+                "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0334",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0334",
+                "Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260807-registro-0327-0334"
+            ],
+            "started_at": "2026-08-07T10:43:59Z",
+            "status": "released",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-07T10:43:59Z"
         },
         {
             "claim_id": "CLAIM-arq-hygiene-20260807-lote17",
@@ -198,6 +252,26 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260807",
             "updated_at": "2026-08-07T09:34:20Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260807-lote19",
+            "expires_at": "2026-08-08T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0320.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0320.md",
+                "Area_comun/mailbox/open/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0324-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Analista-to-Arquitecto-VEREDICTO-TASK-0324-r2.md",
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0324-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Analista-REVIEW-TASK-0324-r2.md",
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0326.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0326.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260807-lote19"
+            ],
+            "started_at": "2026-08-07T10:50:24Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260807",
+            "updated_at": "2026-08-07T10:50:24Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",

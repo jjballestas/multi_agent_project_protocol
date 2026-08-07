@@ -1,0 +1,77 @@
+---
+task_id: TASK-0328
+file: Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md
+title: "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono"
+status: ready
+type: infra
+owner: Codex
+reviewer: Analista
+priority: high
+project: multi_agent_project_protocol
+relates_to:
+  - TASK-0314
+  - TASK-0322
+  - TASK-0327
+created_at: 2026-08-07
+intake:
+  type: fix
+  goal: >
+    `STRUCTURAL_PII_PATTERNS[1]` es `\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b`: exige la forma CONTIGUA.
+    Un IBAN escrito como lo escriben las personas -- agrupado en bloques de cuatro, que es la
+    presentacion estandar -- no casa. Y tampoco lo rescata el heuristico de telefono: ese captura
+    la cadena de digitos y espacios pero luego exige entre 9 y 15 digitos, y un IBAN tiene entre
+    15 y 34, asi que cae fuera de la banda por arriba.
+    Medido: la forma contigua da True; la agrupada da False, tambien embebida en texto corriente.
+    El residual se registro en el ledger del port de TASK-0314 como "R2 IBAN solo en forma
+    contigua" y no llego a adjudicarse a ninguna tarea.
+  acceptance:
+    - "AC1 (falsacion previa): se demuestra sobre el motor real que la forma agrupada devuelve False y que no la rescata ninguna otra guarda, incluido el heuristico de telefono. Se declara por que la banda de 9-15 digitos no la alcanza."
+    - "AC2 (deteccion de la forma real): el patron pasa a cubrir la agrupacion en bloques con separadores, manteniendo el rango de longitud valido del formato. La deteccion se mide sobre casos de las dos formas."
+    - "AC3 (direccion del fallo, con presupuesto declarado): ensanchar un patron de PII sube el riesgo de falso positivo. Se mide la poblacion de cadenas del corpus que pasan a marcarse y se declara el numero; si aparece un falso positivo, se acota con una guarda que falle CERRADO, nunca relajando la deteccion."
+    - "AC4 (interaccion con TASK-0322 declarada): 0322 estrecha las bandas del heuristico. Se verifica y se DECLARA si alguna cobertura de esta tarea dependia incidentalmente de ese heuristico, para que el estrechamiento no abra un hueco por la puerta de atras."
+    - "AC5 (contrato): negativo permanente con las dos formas del identificador, declarado en el registro y cableado en CI, verificado por MUTACION que cae al revertir el patron."
+    - "AC6 (sin regresion): test_memory_db.py, gates del repo y contratos de falsacion exit 0 en clon limpio."
+  verification_cmd:
+    - "python scripts/memory/test_memory_db.py"
+    - "python scripts/check_falsification_contracts.py --root ."
+    - "python scripts/validate_collaboration_state.py --root ."
+    - "python scripts/scan_domain_neutrality.py --root ."
+  scope_routes:
+    - scripts/memory/build_memory_db.py
+    - scripts/memory/test_memory_db.py
+    - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
+  out_of_scope: >
+    No se toca el paso de terminos de dominio a los call sites (eso es TASK-0327), ni la exencion
+    de fecha (0325), ni las bandas del heuristico de telefono (0322). El patron sigue siendo
+    ESTRUCTURAL y neutral: cubre la forma de un identificador de cuenta, sin terminos de negocio.
+  risk: medium
+  estimate: S
+---
+
+# TASK-0328 -- el IBAN solo se detecta si esta escrito de corrido
+
+## Evidencia medida (2026-08-07)
+
+    contains_pii("ES9121000418450200051332")                        -> True
+    contains_pii("ES91 2100 0418 4502 0005 1332")                   -> False
+    contains_pii("cuenta: ES91 2100 0418 4502 0005 1332 del ...")   -> False
+
+## Por que no lo rescata el heuristico de telefono
+
+`PHONE_CANDIDATE_RE` si captura la cadena de digitos y espacios, pero el filtro posterior exige
+`9 <= digitos <= 15`. Un IBAN tiene entre 15 y 34 digitos segun el pais; el del ejemplo tiene 22.
+Se sale de la banda por arriba, asi que el candidato se descarta. La guarda existe, mira el valor
+correcto y lo deja pasar.
+
+## La ironia que conviene registrar
+
+La forma que el patron SI detecta -- todo de corrido -- es la que produce una maquina. La que NO
+detecta es la que produce una persona copiando de su banco, que es exactamente el caso por el que
+existe un detector de PII en un corpus de artefactos escritos a mano.
+
+## Riesgo declarado (medium)
+
+Ensanchar un patron con separadores puede empezar a casar cadenas que no son cuentas
+(referencias con prefijo de dos letras y bloques numericos). El AC3 obliga a medir la
+poblacion afectada y a declarar el numero antes de dar la tarea por cerrada, en vez de
+descubrirlo como ruido en produccion.

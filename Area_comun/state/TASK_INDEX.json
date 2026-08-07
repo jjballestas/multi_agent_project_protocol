@@ -272,7 +272,7 @@
             "file": "Area_comun/tasks/TASK-0320-enum-type-vocabulario-instancia.md",
             "id": "TASK-0320",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "El enum hermano TYPE_VALUES conserva fichas de ceremonia de instancia (6 en castellano): sacarlas por la misma via ya probada en TASK-0318",
             "type": "infra"
         },
@@ -288,7 +288,7 @@
             "file": "Area_comun/tasks/TASK-0324-post-delivery-timeout-ignora-extensiones.md",
             "id": "TASK-0324",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "La ventana de post-entrega termina a los 300s fijos aunque calcule extensiones por progreso y un hard_deadline posterior: corta el paso de memoria del peer",
             "type": "infra"
         },
@@ -306,6 +306,70 @@
             "owner": "Codex",
             "status": "review_approved",
             "title": "Convergencia de los dos lectores de estado: sin --untracked-files=all git colapsa el directorio y un claim acotado a fichero dentro de el no casa nunca",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+            "id": "TASK-0327",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+            "id": "TASK-0328",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+            "id": "TASK-0329",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+            "id": "TASK-0330",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "23 de 37 contratos de falsacion tienen un runner que CI nunca ejecuta, y uno de esos runners lleva roto desde TASK-0316: la cobertura declarada no es cobertura verificada",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+            "id": "TASK-0331",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+            "id": "TASK-0332",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+            "id": "TASK-0333",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Hay un TERCER lector de git status sin --untracked-files=all, y alimenta el gate que rechaza turnos con cambios no declarados: declarar un directorio esconde el subarbol entero",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md",
+            "id": "TASK-0334",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub",
             "type": "infra"
         },
         {
