@@ -20,10 +20,33 @@ Commit `dd3692f93d8c0d599a4d6001dc96841dd349f621` adds the permanent
 `NEG-MEMORY-DATE-RANGE-VALIDATION` source mutant. It restores the former broad
 grammar and proves that all 14 declared out-of-range vectors become accepted.
 
+This remediation changes declarations only. Production and test code remain untouched.
+
+## Carrier family and metric qualification
+
+The residual is a family, not one sampled string: 2 of the 33 language forms are
+phone-candidate carriers. They are the colon-time forms with a 5- or 6-digit
+fraction and a negative numeric offset. Colons break digit runs and `+` is outside
+the phone heuristic character class, so only `SS.fffff[f]-HH` can accumulate the
+required 9 consecutive digits. The deterministic sample that survived was
+`9592-12-22T10:41:54.27956-07:53`.
+
+The published 2.9 percent and 0.05 percent figures are relative only to the AC1
+deterministic sampler. They are not language densities. Exact-language analysis by
+the independent checker measured carrier density at 49.50 percent before and 49.44
+percent after. The material change is absolute size: the accepted language shrinks
+about 3,695 times and its carrier subset about 3,699 times, or 3.6 orders of magnitude.
+
+The carrier family also becomes less controllable. Its leading pair is `SS`, now
+bounded to 00-59, and its trailing pair is offset `HH`, now bounded to 00-14. A
+Spanish mobile number beginning with 6 or 7 no longer fits this family because it
+would require `SS >= 60`; the former grammar allowed that placement.
+
 ## Acceptance evidence
 
 - AC1: deterministic seed `20260805` generates 200,000 strings accepted by the
-  old grammar. The phone-candidate carrier count is 5,789, or 2.9 percent.
+  old grammar. The phone-candidate carrier count is 5,789, or 2.9 percent within
+  this sampler, not the density of the old language.
 - AC2: boundary tests accept months 01/12, days 01/31, hours 00/23, minute and
   second 00/59, offsets through `+14:00` and `-14:00`, and reject every adjacent
   out-of-range component. Calendar validity beyond component ranges is intentionally
@@ -34,7 +57,9 @@ grammar and proves that all 14 declared out-of-range vectors become accepted.
   `NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY` contract still proves that DATE_RE only
   exempts the phone heuristic and cannot bypass later configured PII checks.
 - AC5: after range narrowing, 2,006 generated strings remain in the accepted
-  population and exactly 1 is a phone-candidate carrier: 0.05 percent.
+  sampler population and exactly 1 is a phone-candidate carrier: 0.05 percent
+  within that sampler. The language-level result is the approximately 3.7e3-fold
+  absolute reduction and the 2-of-33 residual family declared above.
 - AC6: every gate below passed by exit code in a detached clean clone of the exact
   implementation head.
 
@@ -56,9 +81,12 @@ Detached clone of `dd3692f93d8c0d599a4d6001dc96841dd349f621` under the designate
 
 1. Remove the bounded grammar through the declared mutant and confirm all 14 invalid
    component vectors become accepted.
-2. Recompute the seeded population and confirm 5,789/200,000 before and 1/2,006 after.
+2. Recompute the seeded population and confirm 5,789/200,000 before and 1/2,006 after,
+   treating both ratios only as sampler-relative measurements.
 3. Confirm the corpus build adds no date-key warnings and the 11 suffix vectors remain
    rejected.
 4. Confirm the date exemption remains inside the phone heuristic only.
+5. Confirm the residual family is exactly the two colon-time forms with 5- or
+   6-digit fractions and negative numeric offsets.
 
 Codex is the maker only and did not review or ratify this work.

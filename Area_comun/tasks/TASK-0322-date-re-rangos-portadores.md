@@ -2,7 +2,7 @@
 task_id: TASK-0322
 file: Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md
 title: "Estrechar DATE_RE con validacion de rangos de componente: el conjunto de confianza se reduce ~3,7e3 veces (la densidad de portadoras NO baja; 2,9/0,05 pct son relativos al muestreador del AC1)"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista
@@ -19,16 +19,17 @@ intake:
     TASK-0317 anclo la exencion del heuristico de telefono en `DATE_RE`, que es la decision correcta y
     esta cerrada. Pero `DATE_RE` acepta hoy combinaciones que no son fechas reales (no valida rangos:
     admite meses, dias, horas o minutos fuera de dominio), y toda cadena que la gramatica acepta queda
-    EXENTA del chequeo. El checker midio la superficie: estrechar la gramatica con validacion de rangos
-    baja la poblacion de cadenas portadoras -- las que pasan DATE_RE y por tanto podrian transportar
-    algo -- del 2,9 por ciento al 0,05 por ciento. No es un agujero conocido, es reducir en casi dos
-    ordenes de magnitud el conjunto sobre el que habria que confiar.
+    EXENTA del chequeo. Estrechar la gramatica con validacion de rangos reduce el lenguaje aceptado
+    unas 3.695 veces y el cardinal absoluto de portadoras unas 3.699 veces (3,6 ordenes de magnitud).
+    La densidad de portadoras del lenguaje no baja: las cifras 2,9 y 0,05 por ciento pertenecen solo
+    al muestreador determinista del AC1. El residual estructural son 2 de las 33 formas del lenguaje:
+    forma con dos puntos, fraccion de 5 o 6 digitos y offset numerico negativo.
   acceptance:
-    - "AC1 (medicion de partida): se reproduce la cifra del checker sobre la gramatica actual (2,9 por ciento de portadoras) y se declara el metodo, para que el despues sea comparable."
+    - "AC1 (medicion de partida): se reproduce la cifra del checker sobre la gramatica actual (2,9 por ciento de portadoras dentro del muestreador determinista, no como densidad del lenguaje) y se declara el metodo, para que el despues sea comparable."
     - "AC2 (rangos): DATE_RE valida dominios reales -- mes 01-12, dia 01-31, hora 00-23, minuto y segundo 00-59, offset con horas 00-14 -- sin dejar de aceptar ningun formato legitimo."
     - "AC3 (sin regresion en el corpus): los valores de created_at/updated_at/closed_at del corpus real que hoy se aceptan siguen aceptandose, medido en CLON LIMPIO. Cero warnings nuevos de claves de fecha."
     - "AC4 (F2 sigue cerrada): los 11 vectores de cola del veredicto de 0314 siguen rechazados, y la exencion sigue sin permitir que una cadena con PII pase entera."
-    - "AC5 (medicion final declarada): se declara la poblacion de portadoras despues del cambio; el objetivo es el 0,05 por ciento que midio el checker, y si no se alcanza se explica por que."
+    - "AC5 (medicion final declarada): se declara el 0,05 por ciento dentro del mismo muestreador determinista, se nombra el residual como 2 de 33 formas (dos puntos + fraccion de 5 o 6 digitos + offset negativo) y se declara la reduccion absoluta aproximada de 3,7e3 veces; ninguna de las dos cifras muestrales se presenta como densidad del lenguaje."
     - "AC6 (sin regresion general): suite completa verde, build y drift exit 0, todo por exit code en clon limpio."
   verification_cmd:
     - "python scripts/memory/test_memory_db.py"
