@@ -40,6 +40,65 @@
             "updated_at": "2026-08-07T21:47:53Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0335-blocked",
+            "expires_at": "2026-08-08T00:33:30Z",
+            "notes": "Record deterministic cross-task gate failure and route one scope question to Arquitecto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0335-blocked",
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-QUESTION-TASK-0335-gate-scope.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T23:33:30Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T23:33:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0335-blocked-wip",
+            "expires_at": "2026-08-08T01:34:12Z",
+            "notes": "Preserve the two completed remediation edits while TASK-0335 awaits scope ownership decision.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0335-blocked-wip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0335-codex-to-arquitecto.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T23:34:12Z",
+            "status": "active",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T23:34:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0335-remediation-1",
+            "expires_at": "2026-08-08T01:28:28Z",
+            "notes": "Remediation iteration 1: restore exact governed-file assertion and correct measured AC7 declaration.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0335-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0335-codex-to-arquitecto.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T23:28:28Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-07T23:28:28Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0322-done-flip",
             "expires_at": "2026-08-08T00:32:26Z",
             "notes": "Implementer done-flip after independent checker approval and architect ratification.",
