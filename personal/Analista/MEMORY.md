@@ -7402,3 +7402,83 @@ scan_domain_neutrality + `protocol_replay --check-drift`, por exit code, en los 
 `Task-Id:` + `Ops-Reason:`; evitar prefijo `fix/revert/hotfix` en el asunto o el gate exige
 `Fixes-Task`. El aviso `PRUNE DUE` del hook de commit es advisory y es paso del Arquitecto: no lo
 toco.
+
+## TASK-0325 r3 -- el corte por vinculacion (OK-CLOSABLE)
+
+### Serializar las mutaciones o el clon miente
+
+Lance una suite completa en segundo plano que **mutaba produccion en el clon** y a la vez segui
+midiendo sondas en ese mismo clon. Todas las sondas salieron del mismo color, porque lo que estaban
+midiendo era el mutante del otro driver. **Un driver que muta produccion es dueno exclusivo del clon
+mientras corre.** Solucion: dos clones (`r0325r3` para suites largas, `r0325r3b` para sondas) y
+serializar dentro de cada uno. La senal de contaminacion es que sondas de signo contrario devuelven
+todas el mismo exit.
+
+### Toda sonda tiene que AFIRMAR que su mutacion se aplico
+
+Escribi un driver por heredoc con un ancla que llevaba barras invertidas
+(`normalized = re.sub(r"[_/\.-]+", " ", item)`) y el heredoc me la mangio: `source.count(ancla)` era
+**0**, el `replace` no cambiaba nada, y las cinco sondas salieron **verdes**. Verde por no haber
+mutado nada se lee identico a verde por no haber fuga. Reglas: driver a **fichero** (Write) y no a
+heredoc cuando el ancla lleva `\`; y **`assert mutated != source`** en cada caso, ademas del assert de
+unicidad del ancla. Una sonda que no muta es una sonda que miente en la direccion tranquilizadora.
+
+### "Produccion byte-identica" es ambiguo sin decir respecto a que
+
+El commit de remediacion no tocaba produccion (`git diff <c>^ <c> -- prod` vacio) y esa parte era
+cierta. Pero entre mi ancla de r2 y la de r3 se colo `fef3f6b7` (TASK-0327) con 41+/14- en el mismo
+fichero: el sha de produccion cambio de `5b49ffe9e5eb5180` a `b42257a39d4faa62`. **Comparar contra el
+commit padre Y contra mi propia ancla anterior.** Antes de acusar, comprobe que el AST del bucle
+vigilado era identico entre las dos anclas: el matiz era del anclaje, no un defecto. Pero AC4 habia
+que re-medirlo sobre la produccion nueva, no reciclar la cifra de r2.
+
+### El mutante que separa dientes de decoracion es el de cableado INALCANZABLE
+
+Para contestar "N1/N2 son fronteras del contrato o estan verificadas de paso?" no sirve borrar el
+cableado. Sirve **T5**: dejar `_nested_loop` definido y llamado desde `visit_For`/`visit_AsyncFor`/
+`visit_While`, y vaciarle el cuerpo a `return None`. Es la regresion exacta de r2, y es lo que un
+contrato que solo compruebe `assert linea in source` deja pasar. Salio rojo -> las fronteras nuevas
+tienen dientes.
+
+### Barrer la familia de la REGLA nueva, no solo las filas que yo nombre
+
+La remediacion cambio la **regla de corte** (de por-nodo a por-vinculacion), y una regla nueva puede
+abrir falsos positivos por un lado mientras cierra fugas por el otro. Ademas de N1/N2 tire trece
+sondas de propiedad: `try/else`, `except`, `finally`, `match/case`, `orelse` a dos niveles, bucles
+dentro de un `def` anidado, cuerpos anidados inocuos. 13/13. **Cuando cambia la regla, se re-verifica
+la familia entera, no el sintoma reportado.**
+
+### La raya entre "defecto de la guarda" y "residual con dueno"
+
+Encontre X1: `return False` estrecho, **misma fuga exacta que E1** (mismo email, mismo telefono) y
+suite entera en verde. Y aun asi **no bloquee**. Criterio, y es el mismo con el que si bloquee en r2:
+
+- En r2 bloquee porque N1 **ERA un `break`**, la clase exacta que la guarda enumera, en el nivel de
+  bucle exacto que dice acotar. Defecto de la guarda.
+- X1 es **otra clase de sentencia**, y la guarda **estructuralmente no puede cubrirla**: el bucle
+  tiene **cuatro `return True` legitimos**, asi que un `visit_Return` pondria el contrato rojo sobre
+  la fuente limpia, y filtrar por valor se rompe con `return bool(0)`.
+
+Consecuencia identica no implica misma familia. **Lo que decide es si la guarda podia cubrirlo.** Si
+no podia, es residual con dueno nombrado (aqui TASK-0332, que ya lo tiene en AC2/AC3/AC4), nunca
+observacion suelta, y con aviso explicito de que si esa tarea cierra sin cubrirlo se queda huerfano.
+
+### Un negativo declarado puede prometer mas perimetro del que cablea
+
+`NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT` declara "an early exit ... bypasses later PII checks" y
+cablea solo `break`/`continue`. Un agente frio que lea el inventario creera cubierto lo que X1
+demuestra que no. Es falsa seguridad en la declaracion, no en el codigo. **Registrarlo (R0325-5) en
+vez de estrechar la redaccion a mano**: el rename a NO-EARLY-EXIT fue una mejora real de r1 (por el
+entro `break`), y cambiar el texto sin el contrato por comportamiento delante mueve una frase sin
+mover un diente.
+
+### Operativa
+
+Clon `git clone` local (hardlinks, instantaneo en el mismo disco) + `git checkout <commit>` detached
++ `git status --short` vacio al abrir y al cerrar. Cada driver restaura produccion en `finally` y
+verifica sha256. Contrato aislado via `python -m unittest test_memory_db.MemoryDbTests.<test>` con
+`cwd=scripts/memory` (0,25 s por corrida frente a 250 s de la suite completa): la matriz de mutantes
+va en el aislado, y la suite completa solo para el numero que decide. Verificar que CI **ejecuta** el
+runner (`.github/workflows/validate.yml:49`), no que lo declara. Gates por exit code: validate,
+scan_encoding, scan_domain_neutrality, `protocol_replay --check-drift`. Trailers `Task-Id:` +
+`Ops-Reason:`; commit con pathspec explicito a mis dos ficheros.
