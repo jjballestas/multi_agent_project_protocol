@@ -96,14 +96,16 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_timestamp_ranges_reject_syntactic_non_dates",
     },
     {
-        "id": "NEG-MEMORY-DATE-EXEMPTION-NO-CONTINUE",
-        "negative": "An early continue in the contains_pii item loop bypasses later checks.",
-        "mutation": "mutant_source = source.replace(normalized_line, early_continue + normalized_line)",
+        "id": "NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT",
+        "negative": "An early exit from the contains_pii item loop bypasses later PII checks.",
+        "mutation": "mutant_break_source = source.replace(normalized_line, early_break + normalized_line)",
         "boundaries": (
-            "self.assertEqual([], source_continues)",
-            "self.assertNotEqual([], mutant_continues)",
+            "self.assertEqual([], source_early_exits)",
+            "self.assertNotEqual([], mutant_break_early_exits)",
+            "self.assertEqual([], nested_break_early_exits)",
+            "self.assertEqual([], nested_continue_early_exits)",
         ),
-        "exercised_by": "test_contains_pii_item_loop_has_no_early_continue",
+        "exercised_by": "test_contains_pii_item_loop_has_no_early_exit",
     },
     {
         "id": "NEG-MEMORY-DATE-OFFSET-COVERAGE",
@@ -676,8 +678,8 @@ class MemoryDbTests(unittest.TestCase):
                 with self.subTest(implementation="mutant", timestamp=timestamp):
                     self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))
 
-    def test_contains_pii_item_loop_has_no_early_continue(self) -> None:
-        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-EXEMPTION-NO-CONTINUE"""
+    def test_contains_pii_item_loop_has_no_early_exit(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT"""
 
         def contains_pii_loop(source_text: str) -> ast.For:
             tree = ast.parse(source_text)
@@ -691,26 +693,77 @@ class MemoryDbTests(unittest.TestCase):
             self.assertEqual(1, len(loops))
             return loops[0]
 
+        def item_loop_early_exits(source_text: str) -> list[ast.stmt]:
+            class OuterLoopControlFlow(ast.NodeVisitor):
+                def __init__(self) -> None:
+                    self.early_exits: list[ast.stmt] = []
+
+                def visit_Break(self, node: ast.Break) -> None:
+                    self.early_exits.append(node)
+
+                def visit_Continue(self, node: ast.Continue) -> None:
+                    self.early_exits.append(node)
+
+                def visit_For(self, node: ast.For) -> None:
+                    return None
+
+                def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
+                    return None
+
+                def visit_While(self, node: ast.While) -> None:
+                    return None
+
+                def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+                    return None
+
+                def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+                    return None
+
+                def visit_Lambda(self, node: ast.Lambda) -> None:
+                    return None
+
+            loop = contains_pii_loop(source_text)
+            visitor = OuterLoopControlFlow()
+            for statement in (*loop.body, *loop.orelse):
+                visitor.visit(statement)
+            return visitor.early_exits
+
         source = MODULE_PATH.read_text(encoding="utf-8")
-        source_continues = [
-            node for node in ast.walk(contains_pii_loop(source)) if isinstance(node, ast.Continue)
-        ]
-        self.assertEqual([], source_continues)
+        source_early_exits = item_loop_early_exits(source)
+        self.assertEqual([], source_early_exits)
 
         normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         early_continue = (
             "        if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
             "            continue\n"
         )
+        early_break = (
+            "        if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
+            "            break\n"
+        )
+        nested_break = "        for nested_item in ():\n            break\n"
+        nested_continue = "        for nested_item in ():\n            continue\n"
         self.assertEqual(1, source.count(normalized_line))
-        mutant_source = source.replace(normalized_line, early_continue + normalized_line)
-        self.assertNotEqual(source, mutant_source)
-        mutant_continues = [
-            node
-            for node in ast.walk(contains_pii_loop(mutant_source))
-            if isinstance(node, ast.Continue)
-        ]
-        self.assertNotEqual([], mutant_continues)
+        mutant_continue_source = source.replace(
+            normalized_line, early_continue + normalized_line
+        )
+        mutant_break_source = source.replace(normalized_line, early_break + normalized_line)
+        nested_break_source = source.replace(
+            normalized_line, nested_break + normalized_line
+        )
+        nested_continue_source = source.replace(
+            normalized_line, nested_continue + normalized_line
+        )
+        self.assertNotEqual(source, mutant_continue_source)
+        self.assertNotEqual(source, mutant_break_source)
+        mutant_continue_early_exits = item_loop_early_exits(mutant_continue_source)
+        mutant_break_early_exits = item_loop_early_exits(mutant_break_source)
+        nested_break_early_exits = item_loop_early_exits(nested_break_source)
+        nested_continue_early_exits = item_loop_early_exits(nested_continue_source)
+        self.assertNotEqual([], mutant_continue_early_exits)
+        self.assertNotEqual([], mutant_break_early_exits)
+        self.assertEqual([], nested_break_early_exits)
+        self.assertEqual([], nested_continue_early_exits)
 
     def test_valid_offset_complement_is_falsifiable(self) -> None:
         """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-OFFSET-COVERAGE"""

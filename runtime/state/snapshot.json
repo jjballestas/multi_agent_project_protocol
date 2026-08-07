@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "3a7f3fbbb7a40a142895242f448d2f1c37510674f594c9c024a76b4e0cbda5e6",
+  "canonical_hash": "42781241285b5043f861b841966eb7b5d21f0355c2fa9305177e7118b1640d8f",
   "integrity": {
-    "canonical_hash": "3a7f3fbbb7a40a142895242f448d2f1c37510674f594c9c024a76b4e0cbda5e6",
+    "canonical_hash": "42781241285b5043f861b841966eb7b5d21f0355c2fa9305177e7118b1640d8f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "4755ce82e41bd37a76ac904a6ace7dd02160400b6976eae8d02ac083aa24be24",
-    "signature": "9432c1a9022f36b27fdf70f0484f9b39224b37f1adeb5bc2831789dee6eb8aa1",
-    "up_to_seq": 7521
+    "prev_hash": "57f2928ea4463cdc66f16280cb8c7d409628f26eb5333adb5cbf8ec5b0c1b88d",
+    "signature": "e7b3514f517e1b1954668c763049df4fac38e642d9528c07965c6f5c90e25759",
+    "up_to_seq": 7524
   },
   "state": {
     "aggregate_versions": {
@@ -3049,7 +3049,7 @@
       "TASK-0322": 18,
       "TASK-0323": 11,
       "TASK-0324": 20,
-      "TASK-0325": 9,
+      "TASK-0325": 12,
       "TASK-0326": 13,
       "TASK-0327": 3,
       "TASK-0328": 2,
@@ -3081,7 +3081,7 @@
       "protocol-prune": 44,
       "protocol-state": 1
     },
-    "events_applied": 6850,
+    "events_applied": 6853,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6549,6 +6549,9 @@
       "codex:task0325:memory-claim-acquire:20260807T055636Z": 7372,
       "codex:task0325:memory-claim-release:20260807T062404Z": 7376,
       "codex:task0325:ready-to-in-progress:20260807T055010Z": 7371,
+      "codex:task0325:remediation-1:claim-acquire-handoff:20260807": 7524,
+      "codex:task0325:remediation-1:claim-acquire:20260807": 7522,
+      "codex:task0325:remediation-1:claim-release-for-expand:20260807": 7523,
       "codex:task0325:work-claim-release:20260807T062404Z": 7375,
       "codex:task0326:claim-acquire:20260807T070208Z": 7393,
       "codex:task0326:delivery:claim-acquire:20260807T070918Z": 7395,
@@ -9935,5 +9938,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7521
+  "up_to_seq": 7524
 }

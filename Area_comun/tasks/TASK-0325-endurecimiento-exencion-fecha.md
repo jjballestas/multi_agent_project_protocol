@@ -49,3 +49,21 @@ notes: >
   no completar lo entregado.
   0317 llevaba cinco iteraciones; agrupar tres endurecimientos en una unidad revisable rinde mas que
   una sexta.
+
+## Remediation iteration 1
+
+The checker finding changes the AST guard from a keyword-specific assertion to the declared
+property: no early exit owned by the outer `contains_pii` item loop. The test must detect both
+`continue` and `break` at that loop level while ignoring control flow rebound by nested
+`For`/`AsyncFor`/`While` nodes and code inside nested `FunctionDef`/`AsyncFunctionDef`/`Lambda`
+nodes. Production remains out of scope and byte-identical.
+
+Residuals retained without remediation in this task:
+
+- `R0325-1`: the guard remains syntactic. Broad restructuring and helper-based filtering are
+  caught by the TASK-0317 placement contract, but a narrow restructuring over an offset outside
+  its sampled family may still evade both contracts.
+- `R0325-2`: the TASK-0317 family and TASK-0325 offset complement are disjoint. TASK-0317 samples
+  `("", "Z", "+02:00", "-05:00", "-12:30")`; TASK-0325 samples
+  `+05:45/-09:45/+13:00/+14:00` only against `DATE_RE`, not `contains_pii`. A future behavioral
+  contract should unify those samples.

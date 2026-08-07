@@ -219,6 +219,45 @@
             "updated_at": "2026-08-07T08:04:30Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0325-remediation-1",
+            "expires_at": "2026-08-07T20:35:56Z",
+            "notes": "TASK-0325 remediation iteration 1: scope AST control-flow detection to the outer item loop, cover break and continue, rename the negative, and declare residuals.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0325-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0325",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0325",
+                "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T12:35:56Z",
+            "status": "released",
+            "task_id": "TASK-0325",
+            "updated_at": "2026-08-07T12:35:56Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0325-remediation-1-handoff",
+            "expires_at": "2026-08-07T20:43:36Z",
+            "notes": "TASK-0325 remediation iteration 1: scoped AST early-exit guard, break mutation, residual declarations, and review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0325-remediation-1-handoff",
+                "Area_comun/state/TASK_INDEX.json#TASK-0325",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0325",
+                "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
+                "scripts/memory/test_memory_db.py",
+                "Area_comun/handoffs/HANDOFF-TASK-0325-codex-to-arquitecto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T12:43:36Z",
+            "status": "active",
+            "task_id": "TASK-0325",
+            "updated_at": "2026-08-07T12:43:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260807-Codex-TASK-0326-done-flip",
             "expires_at": "2026-08-07T12:54:11Z",
             "notes": "Implementer done-flip after independent checker approval and architect ratification.",
