@@ -312,7 +312,7 @@
             "file": "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
             "id": "TASK-0327",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion",
             "type": "infra"
         },

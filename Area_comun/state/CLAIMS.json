@@ -314,7 +314,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-07T13:27:04Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0327",
             "updated_at": "2026-08-07T13:27:04Z"
         },
@@ -336,6 +336,23 @@
             "status": "released",
             "task_id": "TASK-0327",
             "updated_at": "2026-08-07T13:39:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0327-delivery",
+            "expires_at": "2026-08-07T20:31:31Z",
+            "notes": "Deliver TASK-0327 clean-clone evidence and independent review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0327-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0327-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0327.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T14:31:31Z",
+            "status": "released",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-07T14:31:31Z"
         },
         {
             "claim_id": "CLAIM-20260807-Codex-TASK-0330",

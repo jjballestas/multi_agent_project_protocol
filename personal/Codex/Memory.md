@@ -1,6 +1,31 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-07 Europe/Madrid, TASK-0330 sixth revived-suite red.
+Last updated: 2026-08-07 Europe/Madrid, TASK-0327 delivery.
+
+## 2026-08-07 - TASK-0327 implementation
+
+- Implementation commit `fef3f6b7` removes the empty default from `contains_pii` and
+  `title_is_safe`, then routes the attested git-blob policy terms into the publication sweep,
+  ingestion safe-text checks, and retrieval-reason audit guard.
+- Three consequence-based permanent negatives kill empty-term mutations for publication,
+  ingestion, and retrieval audit. `title_is_safe` was a latent signature defect; its production
+  call site already supplied the terms.
+- Exact clean HEAD `be549858` passed all 70 memory tests, 47/47 falsification inventory,
+  collaboration, encoding, neutrality, diff, and clean-status gates.
+- The live policy has zero domain terms and the built corpus has zero publicable artifacts, so
+  widening changes 0 to 0 live flags; the controlled fixture changes 0/1 to 1/1.
+- TASK-0327 is delivered to `in_review`, both maker claims are released, and independent Analista
+  review is requested. Codex has not reviewed or ratified the work.
+
+## 2026-08-07 - TASK-0330 delivery
+
+- Delivery commit `be549858` moves TASK-0330 to `in_review`, releases both maker claims, and
+  publishes the self-contained handoff plus Arquitecto routing request.
+- The delivered core wires all three orphaned runners into CI and makes the falsification checker
+  reject declared-but-unwired runners. Inventory and guardian gates are green at 47/47.
+- The sixth revived red remains visible and unskipped in `run_unreadable_head_case`: its stale
+  terminal-line substring omits the now-emitted elapsed/timeout fields. Arquitecto ordered this
+  red partitioned into a follow-up; Codex did not repair, review, or ratify it.
 
 ## 2026-08-07 - TASK-0330 checkpoint at sixth revived-suite red
 
