@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "d870c5ea787fda346025d5bf1be08b68f08411408833e2697de9c65bed9eaf5c",
+  "canonical_hash": "a961ab5d5fdfdf4d596f5ce73187b4471b868e1491473b71b20d135e6a2607c7",
   "integrity": {
-    "canonical_hash": "d870c5ea787fda346025d5bf1be08b68f08411408833e2697de9c65bed9eaf5c",
+    "canonical_hash": "a961ab5d5fdfdf4d596f5ce73187b4471b868e1491473b71b20d135e6a2607c7",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "3ba030876797c5a392d12d0116428acff414c3d3fcde48d4ea19b36e04d2d32a",
-    "signature": "ba87c2bdb4b9173aa06e49cc212bbcf02e2e39a2945c22c312918cb3bc3b3cf3",
-    "up_to_seq": 7486
+    "prev_hash": "8466a195b6eeb54d030acf2f2bf0af8b6dbde51b86beae05f4c98600fdcacd51",
+    "signature": "a7c7f4f60764377ecb4818196cbf0ae58fcf133566e8ec07fd964e0ab9990f5f",
+    "up_to_seq": 7494
   },
   "state": {
     "aggregate_versions": {
@@ -918,6 +918,7 @@
       "CLAIM-20260807-Codex-TASK-0325-delivery": 1,
       "CLAIM-20260807-Codex-TASK-0325-final-memory": 1,
       "CLAIM-20260807-Codex-TASK-0325-memory": 1,
+      "CLAIM-20260807-Codex-TASK-0331-work": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1059,6 +1060,7 @@
       "CLAIM-arq-hygiene-20260807-lote17": 1,
       "CLAIM-arq-hygiene-20260807-lote18": 1,
       "CLAIM-arq-hygiene-20260807-lote19": 1,
+      "CLAIM-arq-hygiene-20260807-lote20": 1,
       "CLAIM-arq-hygiene-20260807-supersede": 1,
       "CLAIM-arq-hygiene-doneflip-hold-20260728": 1,
       "CLAIM-arq-hygiene-milestone1-20260728": 1,
@@ -2668,6 +2670,7 @@
       "MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0322-reanudar": 1,
       "MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0324-remediacion": 1,
       "MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0317-0323": 1,
+      "MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0324-0326": 1,
       "MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0326": 1,
       "MSG-20260807-Arquitecto-to-Codex-GO-0320-0322-rearme": 1,
       "MSG-20260807-Arquitecto-to-Codex-GO-TASK-0320": 1,
@@ -2683,6 +2686,7 @@
       "MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0324-remediation-2": 1,
       "MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0325": 1,
       "MSG-20260807-Codex-to-Arquitecto-HANDOFF-TASK-0326": 1,
+      "MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-scope": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2767,7 +2771,7 @@
       "OPS-MAILBOX-HYGIENE-20260729F2": 1,
       "OPS-MAILBOX-HYGIENE-20260729F3": 1,
       "OPS-MAILBOX-HYGIENE-20260806": 11,
-      "OPS-MAILBOX-HYGIENE-20260807": 9,
+      "OPS-MAILBOX-HYGIENE-20260807": 10,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3044,7 +3048,7 @@
       "TASK-0328": 2,
       "TASK-0329": 2,
       "TASK-0330": 11,
-      "TASK-0331": 2,
+      "TASK-0331": 5,
       "TASK-0332": 2,
       "TASK-0333": 2,
       "TASK-0334": 2,
@@ -3070,7 +3074,7 @@
       "protocol-prune": 44,
       "protocol-state": 1
     },
-    "events_applied": 6815,
+    "events_applied": 6823,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3304,6 +3308,10 @@
       "arq-l19-3": 7466,
       "arq-l19-4": 7467,
       "arq-l19-9": 7468,
+      "arq-l20-0": 7491,
+      "arq-l20-1": 7492,
+      "arq-l20-2": 7493,
+      "arq-l20-9": 7494,
       "arq-r2-0": 7399,
       "arq-r2-1": 7400,
       "arq-r2-2": 7401,
@@ -6533,6 +6541,10 @@
       "codex:task0326:in-progress-to-in-review:20260807T070918Z": 7396,
       "codex:task0326:ready-to-in-progress:20260807T070208Z": 7394,
       "codex:task0326:review-approved-to-done:20260807T105411Z": 7474,
+      "codex:task0331:claim-acquire:20260807T112129Z": 7487,
+      "codex:task0331:claim-v1-release:20260807T112600Z": 7490,
+      "codex:task0331:claim-v2-acquire:20260807T112600Z": 7489,
+      "codex:task0331:status-in-progress:20260807T112129Z": 7488,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -9889,5 +9901,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7486
+  "up_to_seq": 7494
 }

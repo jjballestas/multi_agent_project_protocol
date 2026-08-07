@@ -266,6 +266,48 @@
             "updated_at": "2026-08-07T11:04:00Z"
         },
         {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0331-work",
+            "expires_at": "2026-08-07T17:21:29Z",
+            "notes": "Implement TASK-0331 scope-aware claims and leases plus atomic exec acquisition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0331-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:21:29Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-07T11:21:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260807-Codex-TASK-0331-work-v2",
+            "expires_at": "2026-08-07T17:26:00Z",
+            "notes": "Implement TASK-0331 in existing harness and embedded falsification inventory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0331-work-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260807-Codex-TASK-0331-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-07T11:26:00Z",
+            "status": "active",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-07T11:26:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260807-ratifica-0324-0320",
             "expires_at": "2026-08-08T00:00:00Z",
             "owner": "Arquitecto",
@@ -407,6 +449,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260807",
             "updated_at": "2026-08-07T10:50:24Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260807-lote20",
+            "expires_at": "2026-08-08T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-scope.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Codex-to-Arquitecto-QUESTION-TASK-0330-scope.md",
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0324-0326.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Codex-ACTION-doneflip-0324-0326.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260807-lote20"
+            ],
+            "started_at": "2026-08-07T11:25:21Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260807",
+            "updated_at": "2026-08-07T11:25:21Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
