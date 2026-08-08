@@ -2,7 +2,7 @@
 task_id: TASK-0331
 file: Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md
 title: "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -150,3 +150,17 @@ sin `reservation_deadline`; todos convergen en el primer rearranque y permanecen
 garantia de resolucion de tareas archivadas queda limitada a contratos con `scope_routes`: la
 medicion del checker recupero 228 de 1.033 mensajes y encontro 272 de 365 contratos archivados sin
 esa declaracion.
+
+Remediacion 3: las publicaciones de lease running y cada latido reemplazan el JSON mediante un
+fichero temporal en el mismo directorio, de modo que un lector ve la version completa anterior o
+la completa nueva. El autocurado reintenta una lectura ilegible tres veces y despues solo elimina
+la lease si una identidad de proceso parseable demuestra que el dueno no vive. Si el dueno vive o
+la liveness sigue siendo desconocida, conserva lease y lock y emite
+`SELF_HEAL_UNREADABLE_LEASE` con `liveness=live|unknown action=preserve`; una huerfana demostrada
+emite `SELF_HEAL_ORPHAN_LEASE liveness=dead action=remove`. El lock publica identidad PID+start de
+su supervisor durante la reserva y del proceso hijo desde su arranque; ademas, una segunda instancia
+sale por el guard de PID antes de intentar autocurado. El negativo permanente usa procesos reales:
+preserva leases truncada, vacia y sin deadline de un dueno vivo, y mata el mutante que vuelve a leer
+`deadline` en vez de `reservation_deadline`. Frontera: una lease ilegible sin evidencia parseable de
+dueno se conserva deliberadamente; falla cerrado y requiere intervencion en vez de arriesgar borrar
+un exec vivo.

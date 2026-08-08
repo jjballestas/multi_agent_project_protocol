@@ -188,7 +188,7 @@ function Write-ExecLease {
         heartbeat_monotonic = [System.Diagnostics.Stopwatch]::GetTimestamp()
         shutdown_policy = "stop_after_current_turn"
     }
-    Write-Utf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
+    Write-AtomicUtf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
 }
 
 function Update-ExecLeaseHeartbeat {
@@ -198,7 +198,7 @@ function Update-ExecLeaseHeartbeat {
     try {
         $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
         $lease.heartbeat_monotonic = [System.Diagnostics.Stopwatch]::GetTimestamp()
-        Write-Utf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
+        Write-AtomicUtf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
     } catch {
         Write-Log "LEASE_HEARTBEAT_FAIL error=$($_.Exception.Message)"
     }
@@ -291,32 +291,32 @@ function Clear-StaleCronLockIfSafe {
         }
         return
     }
+    $lease = $null; $leaseMatches = $false
     try {
-        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction SilentlyContinue
+        foreach ($readAttempt in 1..3) {
+            try { $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop; if ($null -eq $lease) { throw "lease is empty or invalid" }; break }
+            catch { if ($readAttempt -eq 3) { throw }; Start-Sleep -Milliseconds 25 }
+        }
         $leaseMatches = Test-LeaseProcessMatches -Lease $lease
         $deadlineState = "pre_deadline"
         if ($leaseMatches) {
-            $deadlineValue = if ([string]$lease.state -ceq "reserved") {
-                [string]$lease.reservation_deadline
-            } else {
-                [string]$lease.deadline
-            }
+            $deadlineValue = if ([string]$lease.state -ceq "reserved") { [string]$lease.reservation_deadline } else { [string]$lease.deadline }
             $deadline = [DateTime]::Parse($deadlineValue).ToUniversalTime()
-            if ([DateTime]::UtcNow -le $deadline) {
-                return
-            }
-            if (-not (Stop-LeaseProcessTree -Lease $lease -Reason "orphan_expired")) {
-                return
-            }
+            if ([DateTime]::UtcNow -le $deadline) { return }
+            if (-not (Stop-LeaseProcessTree -Lease $lease -Reason "orphan_expired")) { return }
             $deadlineState = "expired"
         }
         Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
         Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
         Write-Log "SELF_HEAL_STALE_LOCK owner=$PeerId pid=$($lease.pid) message=$($lease.task_or_msg_id) state=$deadlineState"
     } catch {
-        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
-        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
-        Write-Log "SELF_HEAL_STALE_LOCK owner=$PeerId state=unreadable_lease"
+        $ownerEvidence = $null
+        if ($leaseMatches) { $ownerEvidence = $lease }
+        elseif (Test-Path -LiteralPath $LockPath) { try { $ownerEvidence = Get-Content -LiteralPath $LockPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop } catch { $ownerEvidence = $null } }
+        if ($null -ne $ownerEvidence -and (Test-LeaseProcessMatches -Lease $ownerEvidence)) { Write-Log "SELF_HEAL_UNREADABLE_LEASE owner=$PeerId liveness=live action=preserve"; return }
+        if ($null -eq $ownerEvidence) { Write-Log "SELF_HEAL_UNREADABLE_LEASE owner=$PeerId liveness=unknown action=preserve"; return }
+        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue; Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        Write-Log "SELF_HEAL_ORPHAN_LEASE owner=$PeerId liveness=dead action=remove"
     }
 }
 
@@ -1310,7 +1310,7 @@ function Invoke-PeerForMessage {
     $ledgerHeadBefore = $null
     $headBefore = ""
     $untrackedBefore = @()
-    Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
+    Write-ExecLockEvidence -Process (Get-Process -Id $PID) -MessageName $Message.Name
     $reservation = Acquire-ExecReservation -Message $Message
     if (-not $reservation.ok) {
         Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
@@ -1338,6 +1338,7 @@ function Invoke-PeerForMessage {
         $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
         $process = Start-Process -FilePath $invocation.FilePath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         $null = $process.Handle  # cache the handle or ExitCode reads null when the exec finishes before the first WaitForExit
+        Write-ExecLockEvidence -Process $process -MessageName $Message.Name
         Write-ExecLease -Process $process -MessageName $Message.Name -TaskId $reservation.work.task_id -WorkScope $reservation.work.work_scope -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         $execStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
@@ -1462,16 +1463,44 @@ function Invoke-PeerForMessage {
     }
 }
 
+function Write-AtomicUtf8NoBom {
+    param([string]$Path, [string]$Content)
+    $temporaryPath = "$Path.tmp.$PID.$([Guid]::NewGuid().ToString('N'))"
+    try {
+        Write-Utf8NoBom -Path $temporaryPath -Content $Content
+        if (Test-Path -LiteralPath $Path) {
+            [System.IO.File]::Replace($temporaryPath, $Path, $null)
+        } else {
+            [System.IO.File]::Move($temporaryPath, $Path)
+        }
+    } finally {
+        if (Test-Path -LiteralPath $temporaryPath) {
+            Remove-Item -LiteralPath $temporaryPath -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
+function Write-ExecLockEvidence {
+    param([System.Diagnostics.Process]$Process, [string]$MessageName)
+    $evidence = [ordered]@{
+        owner = $PeerId
+        task_or_msg_id = $MessageName
+        pid = $Process.Id
+        process_start_time_utc = Get-ProcessStartTimeUtc -Process $Process
+    }
+    Write-AtomicUtf8NoBom -Path $LockPath -Content (($evidence | ConvertTo-Json -Depth 4) + "`n")
+}
+
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
 # Resolve the agent executable ONCE at startup (fail-fast with a clear error instead of a
 # perpetual LOOP_ERROR every interval when the CLI is missing -- F8, inherited failure mode).
 $ResolvedAgentPath = Get-AgentExecutable
-Clear-StaleCronLockIfSafe
 if (Test-ExistingCronInstance) {
     Write-Log "INSTANCE_ALREADY_RUNNING pid_file=$PidPath; exiting."
     exit 0
 }
+Clear-StaleCronLockIfSafe
 Write-CronPid
 if (Test-Path -LiteralPath $StopPath) {
     Remove-Item -LiteralPath $StopPath -Force
