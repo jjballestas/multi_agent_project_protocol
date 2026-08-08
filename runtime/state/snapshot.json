@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "ec959841b77a1e2312390ade5396b548eb1a35d22918ba208335ac952a8b699c",
+  "canonical_hash": "c51008d9fcb37d49afa251000babc45ff5ebcbff651cded49c1092c84ddaa0a5",
   "integrity": {
-    "canonical_hash": "ec959841b77a1e2312390ade5396b548eb1a35d22918ba208335ac952a8b699c",
+    "canonical_hash": "c51008d9fcb37d49afa251000babc45ff5ebcbff651cded49c1092c84ddaa0a5",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2032933f51e6a23879f8ec4fabc59ab1b3fc83b635b266596d53ea86e5c25d94",
-    "signature": "1df7bb9d35cf0c2200a52d83a5ef46f7b457fd620c498c5f65c253c70287da0e",
-    "up_to_seq": 8205
+    "prev_hash": "7412abb99375b700fac7d0781a6f7f7835088ca5c5eb9ea5e6a860d3258437b7",
+    "signature": "87cac6ec19ec32ecfa364cd95db7b073693dfa7e34e4feb55af68d8e3edbb14e",
+    "up_to_seq": 8209
   },
   "state": {
     "aggregate_versions": {
@@ -1034,6 +1034,7 @@
       "CLAIM-arq-20260808-ratifica-0334": 1,
       "CLAIM-arq-20260808-ratifica-0335": 1,
       "CLAIM-arq-20260809-0331-adj6": 1,
+      "CLAIM-arq-20260809-0336-adj5": 1,
       "CLAIM-arq-alta0280-20260720": 1,
       "CLAIM-arq-alta0281-20260721": 1,
       "CLAIM-arq-ap0301b-20260729": 1,
@@ -3301,7 +3302,7 @@
       "TASK-0324": 20,
       "TASK-0325": 25,
       "TASK-0326": 13,
-      "TASK-0327": 22,
+      "TASK-0327": 23,
       "TASK-0328": 17,
       "TASK-0329": 32,
       "TASK-0330": 44,
@@ -3310,7 +3311,7 @@
       "TASK-0333": 13,
       "TASK-0334": 21,
       "TASK-0335": 33,
-      "TASK-0336": 48,
+      "TASK-0336": 50,
       "TASK-0337": 2,
       "TASK-0338": 2,
       "TASK-0339": 1,
@@ -3343,7 +3344,7 @@
       "protocol-prune": 57,
       "protocol-state": 1
     },
-    "events_applied": 7534,
+    "events_applied": 7538,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3534,6 +3535,9 @@
       "arq-332a-002": 7988,
       "arq-332a-003": 7989,
       "arq-332a-099": 7990,
+      "arq-336e-000": 8207,
+      "arq-336e-001": 8208,
+      "arq-336e-099": 8209,
       "arq-336r4-000": 7992,
       "arq-336r4-001": 7993,
       "arq-336r4-002": 7994,
@@ -7198,6 +7202,7 @@
       "codex:task0327:remediation-1:delivery-claim-release:20260808T130800Z": 8000,
       "codex:task0327:remediation-1:implementation-claim-release:20260808T130800Z": 7999,
       "codex:task0327:remediation-1:in-progress-to-in-review:20260808T130800Z": 7998,
+      "codex:task0327:remediation-2:claim-acquire:20260808T233519Z": 8206,
       "codex:task0328:remediation1:delivery-release:20260808T202700Z": 8171,
       "codex:task0328:remediation1:msgfix-release:20260808T203100Z": 8173,
       "codex:task0328:remediation1:status-in-review:20260808T202700Z": 8169,
@@ -10881,5 +10886,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8205
+  "up_to_seq": 8209
 }

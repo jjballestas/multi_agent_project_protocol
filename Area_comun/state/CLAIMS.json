@@ -40,6 +40,26 @@
             "updated_at": "2026-08-08T21:35:28Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0327-remediation-2",
+            "expires_at": "2026-08-09T07:35:19Z",
+            "notes": "TASK-0327 remediation iteration 2: derive the complete production-module and parameter-bearing AST-node sets for the no-default property.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0327-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0327-codex-to-arquitecto.md",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T23:35:19Z",
+            "status": "active",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-08T23:35:19Z"
+        },
+        {
             "claim_id": "CLAIM-20260809-Codex-TASK-0329-remediation-3",
             "expires_at": "2026-08-09T02:12:20Z",
             "notes": "Implement TASK-0329 remediation 3 for an independent parity oracle and restored inventory drift detection.",
@@ -108,6 +128,21 @@
             "status": "released",
             "task_id": "TASK-0331",
             "updated_at": "2026-08-08T22:22:08Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260809-0336-adj5",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0336",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
+                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260809-0336-adj5"
+            ],
+            "started_at": "2026-08-08T23:37:18Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-08T23:37:18Z"
         },
         {
             "claim_id": "CLAIM-arq-hygiene-20260809-lote56",
