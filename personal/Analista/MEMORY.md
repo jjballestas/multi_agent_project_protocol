@@ -7913,3 +7913,75 @@ solo compara pre/post mutacion, no.** Ese es el patron que le faltaba a 0324.
   .github/workflows/validate.yml` -> `54/54 missing=0`. Ese flag es el que responde a TASK-0330.
 - Coste de fallar-cerrado medido: +1 linea al principio de `test_memory_db.py` -> **58 hallazgos**.
   Declararlo como residual: un gate que se pone rojo por un cambio inocuo invita a que lo relajen.
+
+## 2026-08-08 -- TASK-0331 r4: CHANGE-REQUIRED (commit 659bb839, ancla 4c4e2665 / HEAD 06e83983)
+
+Cuarta vuelta. Veredicto: **no aterrizo en medio, solto un extremo y piso el otro.**
+
+### La leccion que vale mas que el hallazgo: medir el DELTA, no el estado
+
+El Arquitecto pregunto "estamos en medio o cambiamos de extremo?". Una matriz sobre la version
+NUEVA sola no puede responder eso. Lo que respondio fue correr **el mismo producto cartesiano
+contra r3 (4c4e2665) y contra r2 (9def3214)** y diffear celda a celda:
+
+    destruccion con dueno VIVO:    54 celdas (r2) -> 22 (r3)    mejora real
+    NO-convergencia dueno MUERTO:   0 nuevos (r2) -> 15 (r3)    regresion nueva
+    celdas que r3 recupera y r2 no: 0
+
+Sin el brazo r2 yo habria reportado "15 encalles" sin poder decir si eran nuevos. **Cuando la
+pregunta es sobre una TENSION entre dos fallos opuestos, el ancla es la version anterior, no solo
+la actual.** Sacar el .ps1 viejo con `git show <commit>:<path> > ref/` y apuntar la misma sonda.
+
+### El patron del defecto (tercera vuelta seguida que cierra uno abriendo otro)
+
+`Test-LeaseProcessMatches` es de **DOS valores**: su `$false` significa a la vez "proceso
+probadamente muerto" y "no tengo identidad que comprobar". El modelo de tres estados
+(live/unknown/dead) que el Arquitecto creia implementado solo existe a medias: `unknown` se emite
+cuando el OBJETO de evidencia falta, nunca cuando la COMPROBACION es inconcluyente. De ahi salen
+los dos escapes, uno por cada lado. **Cuando la vuelta N arregla el defecto de la vuelta N-1 y crea
+uno simetrico, el problema ya no es la rama: es que falta un valor de verdad.** Eso es lo que pedi
+como pieza 1 de la remediacion 4, antes de tocar ninguna rama.
+
+### Lo que la sonda del maker no puede ver (y por que hay que construir la propia)
+
+Los dos negativos de r3 se llaman como las dos direcciones, pero **ambos solo escriben locks con
+identidad parseable** -- que es justo el subconjunto donde el codigo acierta. Punto ciego SIMETRICO:
+los dos escapes viven fuera de el. Regla: cuando un contrato promete dos direcciones, comprobar que
+las CUATRO esquinas del cruce estan pobladas, no que existan los dos nombres.
+
+Corolario ya visto en 0331 r1: `NEG-HARNESS-RESERVED-LEASE-SELF-HEAL` pasa porque su fixture
+`reserved` **inyecta un `pid` que la reserva real nunca tiene** (`Acquire-ExecReservation` no
+escribe pid). El arreglo de r1 -- honrar `reservation_deadline` -- lleva tres vueltas declarado
+cerrado y es **codigo inalcanzable para la forma real**. Verificar siempre el fixture contra la
+forma que el ESCRITOR produce, no contra la que el lector acepta.
+
+### Escapes por la ruta que NO estaba en los focos
+
+El Arquitecto pidio cuatro focos; el hallazgo G9 salio de la **segunda mitad de una frase** del foco
+A ("y que el peer siga viendo active_peer_lease"). Medido: lease ajena de **0 bytes -> `none`**, no
+veta; solo espacios -> `none`; bytes NUL -> si veta. Causa: `"" | ConvertFrom-Json` no lanza, asi
+que `Read-JsonWithDeadline` devuelve `ok=true, value=$null` y el guard concluye "legible y vacio".
+**Las dos mitades del sistema clasifican el MISMO fichero al reves**: el autocurado lo conserva
+como "posible exec vivo" y el peer lo ignora. Preservar mas alargo la vida del fallo abierto.
+Leer las clausulas subordinadas del encargo como vectores propios.
+
+### Alcanzabilidad: declararla, no inflarla
+
+Confirme el defecto de decision con el dueno VIVO delante (S1/S2/S3) pero **no demostre el
+disparador** del `catch` de `Get-ProcessStartTimeUtc` en operacion normal. Lo dije asi en el
+veredicto en vez de vender las 22 celdas como bugs vivos, y descarte explicitamente `json_array` y
+`json_scalar_number` como artefactos de mi sonda. Un veredicto que separa "defecto confirmado" de
+"alcanzabilidad no demostrada" sigue siendo bloqueante y no se puede desmontar por exageracion.
+
+### Operativa
+
+- Sonda propia por AST: `Parser::ParseFile` + `FindAll(FunctionDefinitionAst)` + `Invoke-Expression`
+  carga las funciones REALES del `.ps1` y permite stubear solo `Write-Log`/`Stop-LeaseProcessTree`.
+  Control obligatorio en cada tanda (S4: identidad correcta -> conserva) para probar que la sonda
+  DISTINGUE y no aprueba por construccion.
+- Dueno vivo = `Start-Process` real + `$child.Handle` antes de leer `StartTime`; dueno muerto =
+  proceso real ya terminado (`WaitForExit`), no un pid inventado.
+- Clon: `git clone --no-hardlinks` del hub tardo lo aceptable con `.git` de 457 MB, pero
+  `--local` (hardlinks) sigue siendo la opcion barata cuando no se muta el clon.
+- `pwsh` SI existe en esta sesion (a diferencia de la nota anterior); `shutil.which("pwsh") or
+  shutil.which("powershell")` resolvio sin skip.
