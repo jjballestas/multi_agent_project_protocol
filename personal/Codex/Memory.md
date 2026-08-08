@@ -18,8 +18,12 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
   continuation mechanisms, prior discrimination of 23/31 boundaries, and the shared root with
   TASK-0338. The task-specific suite reports 59/59 contracts and 37 wiring boundaries.
 - Collaboration, encoding, neutrality, drift, compile, task-specific, inventory, and diff gates
-  exited 0 before commit. TASK-0336 remains `in_progress` under the remediation claim pending exact-
-  commit clean-clone verification and governed delivery; Codex has not reviewed or ratified it.
+  exited 0 before commit and against exact commit `90477ff7` in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0336r4-90477ff7` with empty status.
+- Delivery commit `ccf6ce14` moves TASK-0336 to `in_review`, releases all four Codex claims, and
+  publishes the self-contained handoff plus Arquitecto routing request. Runtime drift is false
+  through sequence 8058. Independent Analista r5 review is required; Codex has not reviewed or
+  ratified the remediation.
 
 ## 2026-08-08 - TASK-0332 remediation iteration 1 implementation
 
