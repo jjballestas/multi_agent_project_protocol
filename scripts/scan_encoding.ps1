@@ -33,7 +33,10 @@ function Should-Scan {
     param([System.IO.FileInfo]$File)
     if ($SkipSuffixes -contains $File.Extension.ToLowerInvariant()) { return $false }
     foreach ($directory in $SkipAbsoluteDirs) {
-        if ($File.FullName -eq $directory -or $File.FullName.StartsWith("$directory\", [System.StringComparison]::OrdinalIgnoreCase)) { return $false }
+        # Compare one host-native directory boundary, never a literal slash shape.
+        $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+        $directoryPrefix = $directory.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar
+        if ($File.FullName -eq $directory -or $File.FullName.StartsWith($directoryPrefix, [System.StringComparison]::OrdinalIgnoreCase)) { return $false }
     }
     foreach ($part in $File.FullName.Split([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)) {
         if ($SkipDirs -contains $part) { return $false }
