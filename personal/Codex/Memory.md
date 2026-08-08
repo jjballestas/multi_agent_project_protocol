@@ -6027,3 +6027,15 @@ ratified its own work.
   `python examples/mailbox_status_cases/run_mailbox_status_cases.py` in their task verification.
 - TASK-0344 remains `in_progress` until a real Actions run reports the named step green and the
   exact commit passes the required clean-clone gates. Codex remains maker only.
+
+## 2026-08-08 - TASK-0344 delivery
+
+- GitHub Actions run `31267480822` reports `Run mailbox status validation cases` success.
+- Delivery commit `205eea94` moves TASK-0344 to `in_review`, releases the Codex delivery claim,
+  and publishes the self-contained handoff. Runtime events 8126-8127 are signed as Codex with
+  drift false.
+- Collaboration validation, encoding, neutrality, the five-case mailbox runner, and diff checks
+  exited 0 immediately before delivery. The live global prune check separately reports routine
+  maintenance due at a 95-percent released-claim ratio; Codex did not absorb that Architect-owned
+  maintenance into TASK-0344.
+- Independent review remains required. Codex did not review or ratify its implementation.
