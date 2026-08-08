@@ -279,6 +279,22 @@
             "updated_at": "2026-08-08T15:50:11Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0340-memory",
+            "expires_at": "2026-08-08T17:59:11Z",
+            "notes": "Persist TASK-0340 implementation commit and pending real-CI evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0340-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T15:59:11Z",
+            "status": "released",
+            "task_id": "TASK-0340",
+            "updated_at": "2026-08-08T15:59:11Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hygiene-20260808-lote50",
             "expires_at": "2026-08-08T23:59:00Z",
             "owner": "Arquitecto",

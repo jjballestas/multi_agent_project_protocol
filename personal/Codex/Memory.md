@@ -2,6 +2,22 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 
+## 2026-08-08 - TASK-0340 actor-auth CI verification implementation
+
+- Commit `81ca947b` makes missing `cryptography` an explicit `EventLogError` stating that
+  actor-auth verification is unavailable, instead of evaluating an unbound
+  `InvalidSignature` exception type.
+- The GitHub Actions `validate` job now installs `cryptography` beside `jsonschema` and
+  `pyyaml`, so its existing Ed25519 runner exercises real signature verification.
+- Permanent negatives `NEG-ACTOR-AUTH-CRYPTO-DEPENDENCY` and
+  `NEG-ACTOR-AUTH-CI-DEPENDENCY` kill the former crash and a workflow mutation that removes
+  the dependency. The falsification inventory is 61/61 across 9/9 wired runners.
+- A Python `-S` probe reproduces `UnboundLocalError` against the previous source and the
+  declared `EventLogError` against the implementation. Collaboration, encoding,
+  neutrality, actor-auth, compile, drift, falsification, and diff gates exited 0.
+- TASK-0340 remains `in_progress` under `CLAIM-20260808-Codex-TASK-0340`; AC6 still requires
+  a real GitHub Actions run whose `validate` job is green before governed delivery.
+
 ## 2026-08-08 - TASK-0336 remediation iteration 4 implementation
 
 - Commit `90477ff7` makes the recognized-command grammar use the effective shell's command
