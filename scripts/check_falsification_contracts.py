@@ -90,22 +90,43 @@ def configured_shell(
     return None
 
 
+def effective_shell_kind(
+    workflow_defaults: dict[str, object],
+    job: dict[str, object],
+    step: dict[str, object],
+) -> str | None:
+    """Resolve only shell families whose single-command exit semantics are known."""
+    shell = configured_shell(workflow_defaults, job, step)
+    if shell == "bash":
+        return "bash"
+    if shell in {"pwsh", "powershell"}:
+        return "powershell"
+    if shell == "cmd":
+        return "cmd"
+    if shell is not None:
+        return None
+    runs_on = job.get("runs-on")
+    if not isinstance(runs_on, str):
+        return None
+    if runs_on.startswith(("ubuntu-", "macos-")):
+        return "bash"
+    if runs_on.startswith("windows-"):
+        return "powershell"
+    return None
+
+
 def shell_guarantees_abort(
     workflow_defaults: dict[str, object],
     job: dict[str, object],
     step: dict[str, object],
 ) -> bool:
     """Recognize GitHub shell modes that abort a multiline script on first failure."""
-    shell = configured_shell(workflow_defaults, job, step)
-    if shell == "bash":
-        return True
-    runs_on = job.get("runs-on")
-    return shell is None and isinstance(runs_on, str) and runs_on.startswith(("ubuntu-", "macos-"))
+    return effective_shell_kind(workflow_defaults, job, step) == "bash"
 
 
 def bash_line_continues(raw_line: str) -> bool:
     """Detect an executable Bash line whose final backslash consumes the next newline."""
-    if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+    if not raw_line.strip(" \t") or raw_line.lstrip(" \t").startswith("#"):
         return False
     trailing_backslashes = len(raw_line) - len(raw_line.rstrip("\\"))
     return trailing_backslashes % 2 == 1
@@ -120,8 +141,8 @@ def recognized_command_form(
 ) -> str | None:
     """Return the short, fail-closed command form proved by the static gate.
 
-    The whitelist has two members: one undecorated runner invocation, or one
-    aborting Bash block made only of a single runner invocation, inert ``echo``
+    The whitelist has two members: one undecorated runner invocation under a
+    resolved shell family, or one aborting Bash block made only of a single runner invocation, inert ``echo``
     commands, undecorated Python processes, blank lines, and standalone comments.
     Any executable Bash line continuation is outside the grammar. This makes a
     following physical comment incapable of splicing the runner into an earlier
@@ -139,15 +160,21 @@ def recognized_command_form(
         rf"{python}\s+[A-Za-z0-9_./:=,-]+(?:\s+[A-Za-z0-9_./:=,-]+)*",
         re.IGNORECASE,
     )
-    physical_lines = command.splitlines()
+    shell_kind = effective_shell_kind(workflow_defaults, job, step)
+    if shell_kind is None:
+        return None
+    # Bash ends commands at LF. Python-only line separators remain inside the
+    # same command and must not manufacture extra whitelist members. Trim only
+    # horizontal layout whitespace; other controls are command-significant.
+    physical_lines = command.split("\n")
     executable_lines = [
-        line.strip()
+        line.strip(" \t")
         for line in physical_lines
-        if line.strip() and not line.lstrip().startswith("#")
+        if line.strip(" \t") and not line.lstrip(" \t").startswith("#")
     ]
     if len(executable_lines) == 1 and invocation.fullmatch(executable_lines[0]):
         return "single_runner"
-    if not shell_guarantees_abort(workflow_defaults, job, step):
+    if shell_kind != "bash" or not shell_guarantees_abort(workflow_defaults, job, step):
         return None
     if any(bash_line_continues(line) for line in physical_lines):
         return None
@@ -351,7 +378,9 @@ def main() -> int:
             "FALSIFICATION_STATIC_WIRING "
             f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)} "
             "scope=trigger_keys+conditions+recognized_step_form+job_failure "
-            "residuals=trigger_filters,working_directory,yaml_1_1_scalars"
+            "residuals=trigger_filters,working_directory,yaml_1_1_scalars,"
+            "safe_forms_outside_whitelist,line_continuation_mechanism_redundancy,"
+            "contract_discrimination_23_of_31,twin_TASK_0338"
         )
     print(
         "FALSIFICATION_INVENTORY "

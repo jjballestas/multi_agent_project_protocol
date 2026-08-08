@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import tempfile
@@ -58,8 +59,14 @@ FALSIFICATION_CONTRACTS = (
             "assert multiline_splice_workflow_bash.returncode != 0",
             "assert multiline_unknown_command.returncode != 0",
             "assert current_step_always.returncode == 0",
-            "assert \"FALSIFICATION_EXECUTION_GUARANTEED\" not in wired.stdout",
-            "assert \"residuals=trigger_filters,working_directory,yaml_1_1_scalars\" in wired.stdout",
+            "assert single_runner_bash.returncode == 0",
+            "assert single_runner_pwsh.returncode == 0",
+            "assert single_runner_unknown_shell.returncode != 0",
+            "assert single_runner_matrix_shell.returncode != 0",
+            "assert shell_separator_mismatches == []",
+            "assert bounded_static_certification(wired.stdout)",
+            "assert not bounded_static_certification(affirmative_certification.stdout)",
+            "assert \"contract_discrimination_23_of_31,twin_TASK_0338\" in wired.stdout",
         ),
         "exercised_by": "main",
     },
@@ -85,6 +92,20 @@ def run_with_checker(checker: Path, root: Path) -> subprocess.CompletedProcess[s
         text=True,
         capture_output=True,
     )
+
+
+def bounded_static_certification(output: str) -> bool:
+    """Accept a count only when its label and scope remain explicitly static."""
+    certification = next(
+        (line for line in output.splitlines() if line.startswith("FALSIFICATION_STATIC_WIRING ")),
+        None,
+    )
+    if certification is None:
+        return False
+    forbidden_claims = ("execution", "executed", "guarantee", "guaranteed")
+    if any(claim in certification.casefold() for claim in forbidden_claims):
+        return False
+    return "scope=trigger_keys+conditions+recognized_step_form+job_failure" in certification
 
 
 def main() -> int:
@@ -156,8 +177,68 @@ def main() -> int:
         workflow.write_text(baseline, encoding="ascii")
         wired = run(fixture, workflow)
         assert wired.returncode == 0, wired.stdout + wired.stderr
-        assert "FALSIFICATION_EXECUTION_GUARANTEED" not in wired.stdout, wired.stdout
-        assert "residuals=trigger_filters,working_directory,yaml_1_1_scalars" in wired.stdout, wired.stdout
+        assert bounded_static_certification(wired.stdout), wired.stdout
+        assert "contract_discrimination_23_of_31,twin_TASK_0338" in wired.stdout, wired.stdout
+
+        checker_source = (ROOT / "scripts/check_falsification_contracts.py").read_text(encoding="ascii")
+        affirmative_checker = fixture / "affirmative_check_falsification_contracts.py"
+        shutil.copy2(ROOT / "scripts/falsification_contracts.py", fixture / "falsification_contracts.py")
+        affirmative_checker.write_text(
+            checker_source.replace(
+                '"FALSIFICATION_STATIC_WIRING "',
+                '"FALSIFICATION_EXECUTION guaranteed=yes "',
+                1,
+            ).replace(
+                '"scope=trigger_keys+conditions+recognized_step_form+job_failure "',
+                '"scope=full_execution_guarantee "',
+                1,
+            ),
+            encoding="ascii",
+        )
+        affirmative_certification = run_with_checker(affirmative_checker, fixture)
+        assert affirmative_certification.returncode == 0, (
+            affirmative_certification.stdout + affirmative_certification.stderr
+        )
+        assert not bounded_static_certification(affirmative_certification.stdout), (
+            affirmative_certification.stdout
+        )
+
+        single_runner_bash = mutated(
+            "single-runner-bash",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - shell: bash\n        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert single_runner_bash.returncode == 0, single_runner_bash.stdout + single_runner_bash.stderr
+
+        single_runner_pwsh = mutated(
+            "single-runner-pwsh",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - shell: pwsh\n        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert single_runner_pwsh.returncode == 0, single_runner_pwsh.stdout + single_runner_pwsh.stderr
+
+        single_runner_unknown_shell = mutated(
+            "single-runner-unknown-shell",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - shell: custom {0}\n        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert single_runner_unknown_shell.returncode != 0, (
+            single_runner_unknown_shell.stdout + single_runner_unknown_shell.stderr
+        )
+
+        single_runner_matrix_shell = mutated(
+            "single-runner-matrix-shell",
+            baseline.replace("runs-on: windows-latest", "runs-on: ${{ matrix.os }}"),
+        )
+        assert single_runner_matrix_shell.returncode != 0, (
+            single_runner_matrix_shell.stdout + single_runner_matrix_shell.stderr
+        )
 
         multiline = baseline.replace(
             "      - run: python examples/orphan/run_orphan.py\n",
@@ -212,6 +293,53 @@ def main() -> int:
             ),
         )
         assert workflow_defaults_bash.returncode == 0, workflow_defaults_bash.stdout + workflow_defaults_bash.stderr
+
+        # Derive the whole Python-only separator class instead of naming the
+        # currently known characters. Every coordinate and effective-Bash
+        # source must remain one Bash command and stay outside the whitelist.
+        python_only_separators = [
+            chr(codepoint)
+            for codepoint in range(sys.maxunicode + 1)
+            if chr(codepoint) != "\n" and len(f"left{chr(codepoint)}right".splitlines()) == 2
+        ]
+        shell_sources = {
+            "step": lambda source: source.replace(
+                "      - run: COMMAND\n", "      - shell: bash\n        run: COMMAND\n"
+            ),
+            "implicit": lambda source: source.replace(
+                "runs-on: windows-latest", "runs-on: ubuntu-latest"
+            ),
+            "job-default": lambda source: source.replace(
+                "    runs-on: windows-latest\n",
+                "    runs-on: windows-latest\n    defaults:\n      run:\n        shell: bash\n",
+            ),
+            "workflow-default": lambda source: source.replace(
+                "jobs:\n", "defaults:\n  run:\n    shell: bash\njobs:\n"
+            ),
+        }
+        coordinates = (
+            lambda separator: f"echo before{separator}python examples/orphan/run_orphan.py",
+            lambda separator: f"python examples/orphan/run_orphan.py{separator}echo after",
+        )
+        shell_separator_mismatches: list[str] = []
+        separator_template = baseline.replace(
+            "      - run: python examples/orphan/run_orphan.py\n",
+            "      - run: COMMAND\n",
+        )
+        for separator in python_only_separators:
+            for coordinate_index, command_builder in enumerate(coordinates):
+                encoded_command = json.dumps(command_builder(separator), ensure_ascii=True)
+                for source_name, source_builder in shell_sources.items():
+                    candidate = source_builder(separator_template).replace("COMMAND", encoded_command)
+                    result = mutated(
+                        f"shell-separator-{ord(separator):04x}-{coordinate_index}-{source_name}",
+                        candidate,
+                    )
+                    if result.returncode == 0:
+                        shell_separator_mismatches.append(
+                            f"U+{ord(separator):04X}:{coordinate_index}:{source_name}"
+                        )
+        assert shell_separator_mismatches == [], shell_separator_mismatches
 
         continuation_block = multiline.replace(
             "          echo before\n", "          echo before \\\n", 1
