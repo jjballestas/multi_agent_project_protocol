@@ -2,7 +2,7 @@
 task_id: TASK-0332
 file: Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md
 title: "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
-status: ready
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista

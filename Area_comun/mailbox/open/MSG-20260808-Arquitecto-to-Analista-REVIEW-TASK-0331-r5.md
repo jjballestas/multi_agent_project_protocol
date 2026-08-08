@@ -76,7 +76,37 @@ fija numeros de linea y sus ~56 lineas nuevas los desplazaban). Verifica que el 
 **EL MISMO** -- las mismas ocho ocurrencias, solo reubicadas -- y que no se ha colado ninguna linea
 distinta. Re-fijar coordenadas a mano es justo el momento en que se exime algo que no tocaba.
 
+**F. REGRESION QUE YA HE MEDIDO YO -- no la busques, verificala y juzgala.**
+
+Esta la encontre despues de mandarte el encargo, revisando por que CI lleva rojo. La entrega **rompe
+un contrato de falsacion que CI ejecuta**, y es reproducible en local:
+
+    python examples/mailbox_retry_cases/run_mailbox_retry_cases.py   ->  exit 1
+    AssertionError: TASK-0284 pre-gate contract is incomplete   (linea 342)
+
+Condicion que falla, medida una a una: el contrato exige que
+`Write-Utf8NoBom -Path $LockPath` aparezca DESPUES de `$residueState = Get-StagedResidueState`.
+**La cadena del lock ya no existe en el fichero** -- `find` devuelve -1 -- porque la remediacion 4
+la renombro o la reestructuro. Las otras ocho condiciones del contrato pasan.
+
+En el CI del 6-ago este job estaba VERDE y solo fallaba `validate`; hoy falla tambien
+`falsification-runners`. O sea: **es regresion de esta entrega**, no deuda heredada.
+
+Lo que quiero de ti aqui, y no es que confirmes un exit code que ya tengo:
+
+1. **Si el reemplazo es correcto en el fondo.** Puede que la escritura del lock ahora sea mejor
+   (atomica, con otro helper) y lo unico roto sea la cadena que el contrato mira. Si es asi, lo que
+   hay que arreglar es el CONTRATO, no la implementacion, y quiero que lo digas con esas palabras.
+2. **Si el contrato deberia seguir existiendo en esa forma.** Ata NUEVE SUBCADENAS LITERALES del
+   harness. Es la cuarta vez que un refactor legitimo lo rompe -- 0316, 0319, 0321 y ahora 0331 --
+   y es exactamente el patron del borrador DECISION-0105 que tambien te he mandado a revisar.
+3. **Si hay algo mas de la entrega que ningun gate de su verification_cmd mira.** El
+   `verification_cmd` de 0331 NO incluye este runner, y `check_falsification_contracts.py` sale
+   verde porque comprueba DECLARACION, no ejecucion. Por eso la entrega pudo declararse verde con
+   esto roto. Busca si hay mas huecos de ese tipo.
+
 ## Nota
+
 
 Cuarta vuelta, y como en las anteriores cada una cerro algo real y encontro algo real. Si al cerrar
 esta aparece un estado vecino, dimelo y particiono: ya tengo TASK-0337 contratada para el guard de

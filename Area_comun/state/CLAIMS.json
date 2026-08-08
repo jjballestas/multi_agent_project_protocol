@@ -129,6 +129,46 @@
             "updated_at": "2026-08-08T07:41:27Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0332",
+            "expires_at": "2026-08-08T21:44:23Z",
+            "notes": "Implement TASK-0332 unified behavioral offset sampling and permanent falsification coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332",
+                "Area_comun/state/TASK_INDEX.json#TASK-0332",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0332",
+                "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+                "scripts/memory/test_memory_db.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T09:44:23Z",
+            "status": "released",
+            "task_id": "TASK-0332",
+            "updated_at": "2026-08-08T09:44:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0332-v2",
+            "expires_at": "2026-08-08T21:46:00Z",
+            "notes": "Implement TASK-0332 in the existing memory test runner and its embedded falsification inventory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332",
+                "Area_comun/state/TASK_INDEX.json#TASK-0332",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0332",
+                "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T09:46:00Z",
+            "status": "active",
+            "task_id": "TASK-0332",
+            "updated_at": "2026-08-08T09:46:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-3",
             "expires_at": "2026-08-08T21:45:00Z",
             "notes": "Remediation 3: replace escape enumeration with a short fail-closed whitelist of proven runner-step forms.",
@@ -257,6 +297,21 @@
             "status": "released",
             "task_id": "TASK-0338",
             "updated_at": "2026-08-08T08:36:09Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-0340-registro",
+            "expires_at": "2026-08-08T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0340",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0340",
+                "Area_comun/tasks/TASK-0340-el-validador-canonico-lleva-seis-dias-crashing-en-CI.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0340-registro"
+            ],
+            "started_at": "2026-08-08T09:53:05Z",
+            "status": "released",
+            "task_id": "TASK-0340",
+            "updated_at": "2026-08-08T09:53:05Z"
         },
         {
             "claim_id": "CLAIM-arq-hygiene-20260808-lote41",

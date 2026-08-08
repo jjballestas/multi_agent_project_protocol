@@ -39,7 +39,7 @@
         {
             "id": "TASK-0332",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
         },
         {
@@ -65,6 +65,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "La exencion de identidad liga (linea, termino) y no el motivo que la justifica"
+        },
+        {
+            "id": "TASK-0340",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala"
         }
     ],
     "next_actions": [
