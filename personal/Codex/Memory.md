@@ -6039,3 +6039,18 @@ ratified its own work.
   maintenance due at a 95-percent released-claim ratio; Codex did not absorb that Architect-owned
   maintenance into TASK-0344.
 - Independent review remains required. Codex did not review or ratify its implementation.
+
+## 2026-08-08 - TASK-0345 implementation pending real CI
+
+- Commit `fe7c1dea` replaces the relative-URI calculation in the PowerShell neutrality scanner
+  with a resolved-root, host-native boundary that also works in Windows PowerShell 5.1. The
+  encoding scanner now uses case-sensitive path comparison off Windows.
+- The task contains the complete seven-entry PowerShell CI inventory across separators,
+  absolute/relative paths, line splitting, filesystem case, and line endings. TASK-0338's one
+  known `Get-Content` line-reader mismatch remains bounded and explicitly unabsorbed.
+- Permanent negatives `NEG-POWERSHELL-HOST-ASSUMPTION-CLASS` and
+  `NEG-POWERSHELL-LINUX-JOB-WIRING` cover the four known forms and the dedicated
+  `powershell-linux-parity` ubuntu job. Local required gates passed; PowerShell 7 POSIX evidence
+  and a real Actions run id remain required before delivery.
+- TASK-0345 remains `in_progress` under claim `CLAIM-20260808-Codex-TASK-0345-v3`. Codex is the
+  maker and has not reviewed or ratified the work.
