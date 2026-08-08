@@ -99,7 +99,7 @@
         {
             "id": "TASK-0345",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla"
         }
     ],
