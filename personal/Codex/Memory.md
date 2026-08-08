@@ -16,6 +16,18 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0343 implementation committed.
   drift, compile, and diff gates exited 0. TASK-0343 remains `in_progress`
   pending exact-commit clean-clone gates and a real green Actions step.
 
+## 2026-08-08 - TASK-0343 delivery
+
+- Exact implementation commit `26b33967` passed the complete runner, 64/64
+  contract inventory, collaboration validator, encoding, neutrality, and diff
+  gates in clean clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0343-26b33967`
+  with empty status.
+- Real Actions run 31270228630 reports `Execute mailbox retry falsification runner`
+  success. Its separate neutrality failure is outside TASK-0343.
+- Delivery commit `844a1f5f` moves TASK-0343 to `in_review`, releases both Codex
+  claims, and publishes the self-contained handoff to Arquitecto. Independent
+  review of `26b33967` remains required; Codex did not self-review or ratify.
+
 ## 2026-08-08 - TASK-0343 pre-fix CI diagnosis
 
 - Diagnostic commits `1788d63f` and `071b5a1a` leave the brittle rollback assertion
