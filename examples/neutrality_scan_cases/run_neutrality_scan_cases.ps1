@@ -93,3 +93,4 @@ if ($failed) {
 }
 
 Write-Host "OK: neutrality scan cases passed."
+exit 0

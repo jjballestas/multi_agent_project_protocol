@@ -89,7 +89,7 @@ curso.
 | `scripts/scan_domain_neutrality.ps1` | raiz absoluta, frontera con separador nativo y salida POSIX | el `Get-Content` conocido queda acotado a una ocurrencia bajo TASK-0338 | frontera de ruta segun host; regex y terminos deliberadamente insensibles, igual que Python | ruta neutral; troceado no absorbido, protegido contra expansion y referido a TASK-0338 |
 | `examples/sdd_validation_cases/run_sdd_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad Python/PowerShell en CI Linux |
 | `examples/compact_comms_validation_cases/run_compact_comms_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad Python/PowerShell en CI Linux |
-| `examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad de veredicto y salida en CI Linux |
+| `examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad de veredicto y salida en CI Linux, con `exit 0` explicito para no filtrar el ultimo negativo esperado |
 | `examples/llm_turn_wrapper_cases/run_llm_turn_wrapper_cases.ps1` | `Join-Path` | delega el contrato al runner Python | no compara rutas | neutral; smoke wrapper en CI Linux |
 
 La cuarta averia no necesita helper compartido: una raiz resuelta y una frontera con el separador

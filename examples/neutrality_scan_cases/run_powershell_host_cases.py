@@ -53,6 +53,16 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "case_linux_job_wiring",
     },
+    {
+        "id": "NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK",
+        "negative": "A PowerShell parity runner must not leak LASTEXITCODE from its final expected-negative child process.",
+        "mutation": 'mutant_runner = runner_text.replace("\\nexit 0\\n", "\\n", 1)',
+        "boundaries": (
+            "assert runner_has_explicit_success_exit(runner_text)",
+            "assert not runner_has_explicit_success_exit(mutant_runner)",
+        ),
+        "exercised_by": "case_expected_negative_exit",
+    },
 )
 
 
@@ -95,6 +105,10 @@ def linux_job_is_failure_gating(workflow_text: str) -> bool:
         for step in steps
         if isinstance(step, dict) and step.get("run") in required
     )
+
+
+def runner_has_explicit_success_exit(source: str) -> bool:
+    return source.rstrip().endswith("exit 0")
 
 
 def case_inventory() -> None:
@@ -161,11 +175,22 @@ def case_linux_job_wiring() -> None:
     assert not linux_job_is_failure_gating(mutant_workflow)
 
 
+def case_expected_negative_exit() -> None:
+    """PERMANENT_NEGATIVE: NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK"""
+    runner_path = ROOT / "examples" / "neutrality_scan_cases" / "run_neutrality_scan_cases.ps1"
+    runner_text = runner_path.read_text(encoding="utf-8-sig")
+    assert runner_has_explicit_success_exit(runner_text)
+    mutant_runner = runner_text.replace("\nexit 0\n", "\n", 1)
+    assert mutant_runner != runner_text
+    assert not runner_has_explicit_success_exit(mutant_runner)
+
+
 def main() -> int:
     case_inventory()
     case_known_form_mutations()
     case_linux_job_wiring()
-    print("OK: 7 CI PowerShell entry points x 5 host dimensions; 4 known-form mutations; Linux job wiring.")
+    case_expected_negative_exit()
+    print("OK: 7 CI PowerShell entry points x 5 host dimensions; 5 host mutations; Linux job wiring.")
     return 0
 
 
