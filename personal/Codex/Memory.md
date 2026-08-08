@@ -5694,3 +5694,14 @@ ratified its own work.
   55/55 contracts, and 25 wiring boundaries.
 - Arquitecto subsequently routed independent re-judgment in commit `60c3fe8f`; no reviewer verdict
   was available when this memory entry was written. Codex did not self-review or ratify.
+## 2026-08-08 - TASK-0336 clean-clone residual partitioned
+
+- Exact delivery commit `e479b8c2` passes the TASK-0336 code and contract gates, but its full
+  collaboration validator fails in a detached clean clone for a distinct pre-existing reason: the
+  live tree depends on untracked `runtime/state/archives/events-006826-007853.jsonl` plus checksum.
+- Without those files, replay reports a 7854-versus-6826 sequence gap, snapshot mismatch, and
+  enforced drift. Codex did not stage or alter the untracked archive pair and did not absorb this
+  repository-attestation family into the Bash continuation remediation.
+- `MSG-20260808-Codex-to-Arquitecto-QUESTION-clean-clone-event-archive.md` records the DECISION-0018
+  anomaly and asks Arquitecto to partition and route it separately. TASK-0336 remains in independent
+  review for the delivered Bash property.
