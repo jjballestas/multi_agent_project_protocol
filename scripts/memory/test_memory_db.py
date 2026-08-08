@@ -149,8 +149,8 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_domain_pii_retrieval_reason_is_attested_and_falsifiable",
     },
+    {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True), source_results)", "self.assertEqual((False, True), mutant_results[\"restructured\"])", "self.assertEqual((False, True), mutant_results[\"filtered\"])", "self.assertEqual((False, False), mutant_results[\"early_return\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
 )
-
 
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -2210,6 +2210,112 @@ Body is not indexed.
             self.assertNotEqual(0, process.returncode)
             self.assertEqual(b"", process.stdout)
             self.assertIn(b"sha256 mismatch", process.stderr)
+
+    def test_date_offset_pii_behavior_is_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR"""
+        numeric_offsets = tuple(
+            f"{sign}{hour:02d}:{minute:02d}"
+            for sign in "+-"
+            for hour in range(15)
+            for minute in range(60)
+            if hour < 14 or minute == 0
+        )
+        valid_offsets = ("", "Z", *numeric_offsets)
+        self.assertEqual(1_684, len(valid_offsets))
+        domain_term = "2026"
+        email = "contact@example.invalid"
+        for offset in valid_offsets:
+            timestamp = f"2026-06-19T09:28:23{offset}"
+            with self.subTest(implementation="source", offset=offset):
+                self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))
+                source_results = (
+                    memory_db.contains_pii(timestamp, [domain_term]),
+                    memory_db.contains_pii([timestamp, email], []),
+                )
+                self.assertEqual((True, True), source_results)
+
+        target_timestamp = "2026-06-19T09:28:23+06:15"
+        old_behavior_offsets = ("", "Z", "+02:00", "-05:00", "-12:30")
+        old_grammar_offsets = ("+05:45", "-09:45", "+13:00", "+14:00")
+        self.assertNotIn("+06:15", old_behavior_offsets)
+        self.assertNotIn("+06:15", old_grammar_offsets)
+
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+        loop_body = (
+            normalized_line
+            + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
+            + "            return True\n"
+            + "        if any(pattern.search(normalized) for pattern in STRUCTURAL_PII_PATTERNS[1:3]):\n"
+            + "            return True\n"
+            + "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
+            + "            for candidate in PHONE_CANDIDATE_RE.finditer(item):\n"
+            + "                digits = re.sub(r\"\\D\", \"\", candidate.group(0))\n"
+            + "                if 9 <= len(digits) <= 15:\n"
+            + "                    return True\n"
+            + "        if any(pattern.search(normalized) for pattern in domain_patterns):\n"
+            + "            return True\n"
+        )
+        self.assertEqual(1, source.count(loop_body))
+        restructured_body = (
+            "        if not (DATE_RE.fullmatch(item) and item.endswith(\"+06:15\")):\n"
+            + "".join(f"    {line}" for line in loop_body.splitlines(keepends=True))
+        )
+        restructured_source = source.replace(loop_body, restructured_body)
+
+        function_anchor = "def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:\n"
+        filter_helper = (
+            "def without_target_offset(items: Iterable[str]) -> list[str]:\n"
+            "    return [item for item in items if not item.endswith(\"+06:15\")]\n\n\n"
+        )
+        self.assertEqual(1, source.count(function_anchor))
+        filtered_source = source.replace(
+            function_anchor, filter_helper + function_anchor, 1
+        ).replace(
+            "    for item in value_list(value):\n",
+            "    for item in without_target_offset(value_list(value)):\n",
+            1,
+        )
+
+        early_return = (
+            "        if DATE_RE.fullmatch(item) and item.endswith(\"+06:15\"):\n"
+            "            return False\n"
+        )
+        self.assertEqual(1, source.count(normalized_line))
+        early_return_source = source.replace(
+            normalized_line, early_return + normalized_line, 1
+        )
+        mutant_sources = {
+            "restructured": restructured_source,
+            "filtered": filtered_source,
+            "early_return": early_return_source,
+        }
+        for mutant_source in mutant_sources.values():
+            self.assertNotEqual(source, mutant_source)
+
+        mutant_results: dict[str, tuple[bool, bool]] = {}
+        with tempfile.TemporaryDirectory(prefix="memory-date-offset-pii-mutants-") as temp:
+            for name, mutant_source in mutant_sources.items():
+                mutant_path = Path(temp) / f"build_memory_db_{name}_mutant.py"
+                write(mutant_path, mutant_source)
+                spec = importlib.util.spec_from_file_location(
+                    f"build_memory_db_date_offset_{name}_mutant", mutant_path
+                )
+                assert spec and spec.loader
+                mutant = importlib.util.module_from_spec(spec)
+                sys.modules[spec.name] = mutant
+                try:
+                    spec.loader.exec_module(mutant)
+                    mutant_results[name] = (
+                        mutant.contains_pii(target_timestamp, [domain_term]),
+                        mutant.contains_pii([target_timestamp, email], []),
+                    )
+                finally:
+                    sys.modules.pop(spec.name, None)
+
+        self.assertEqual((False, True), mutant_results["restructured"])
+        self.assertEqual((False, True), mutant_results["filtered"])
+        self.assertEqual((False, False), mutant_results["early_return"])
 
 
 if __name__ == "__main__":
