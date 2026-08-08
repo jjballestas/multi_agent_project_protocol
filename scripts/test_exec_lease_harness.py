@@ -79,7 +79,7 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-CRON-STATUS-EMBEDDED-REPOSITORY-DIRTY-CLAIM",
-        "negative": "Both Git status readers must query embedded repositories at arbitrary physical depth so a file-scoped dirty claim vetoes termination; disabling discovery must reproduce the destructive false negative.",
+        "negative": "The destructive claim-veto readers must query embedded repositories at arbitrary physical depth so a file-scoped dirty claim vetoes termination; disabling discovery must reproduce the destructive false negative.",
         "mutation": "source.replace(discovery",
         "boundaries": (
             "assert live_path not in parent_variants[0]",
@@ -94,6 +94,21 @@ FALSIFICATION_CONTRACTS = (
             "assert powershell_discovery_failure[\"ok\"] is False",
         ),
         "exercised_by": "test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven",
+    },
+    {
+        "id": "NEG-HARNESS-PARENT-IGNORE-BOUNDARY",
+        "negative": "Embedded-repository expansion remains enabled for destructive claim vetoes but must not make residue or disk-proof readers block on a path ignored by the parent repository.",
+        "mutation": "source.replace(blocking_status_call, expanded_status_call)",
+        "boundaries": (
+            'assert healthy["parent_paths"] == []',
+            'assert ignored_path in healthy["expanded_paths"]',
+            'assert healthy["residue"] == "none"',
+            'assert ignored_path not in healthy["proof"]',
+            'assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True',
+            'assert mutant["residue"] == "live"',
+            'assert ignored_path in mutant["proof"]',
+        ),
+        "exercised_by": "test_parent_ignore_boundary_separates_claim_veto_from_blocking_readers",
     },
     {
         "id": "NEG-HARNESS-POST-DELIVERY-PROGRESS-DEADLINE",
@@ -1167,7 +1182,7 @@ def test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven() ->
         )
         script = loader + f"""
 $Root = {ps_literal(root)}
-$result = Get-GitStatusPorcelainUtf8
+$result = Get-GitStatusPorcelainUtf8 -IncludeEmbeddedRepositories
 $records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
 [ordered]@{{ ok = $result.ok; paths = @($records | ForEach-Object {{ if ($_.Length -ge 4) {{ $_.Substring(3).Replace("\\", "/") }} }}) }} | ConvertTo-Json -Compress
 """
@@ -1184,8 +1199,8 @@ $records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
         mutant = load_sweeper_module(mutant_path, "sweep_cron_zombies_task0334_mutant")
 
         harness_source = HARNESS_PATH.read_text(encoding="utf-8")
-        ps_discovery = "$repositoryRoots = @(Get-EmbeddedRepositoryRoots)"
-        ps_mutant_source = harness_source.replace(ps_discovery, "$repositoryRoots = @($Root)", 1)
+        ps_discovery = "if ($IncludeEmbeddedRepositories) {"
+        ps_mutant_source = harness_source.replace(ps_discovery, "if ($false) {", 1)
         assert ps_mutant_source != harness_source
         ps_mutant_path = root / "peer_mailbox_cron_embedded_mutant.ps1"
         ps_mutant_path.write_text(ps_mutant_source, encoding="utf-8", newline="\n")
@@ -1195,7 +1210,7 @@ $records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
         )
         mutant_script = mutant_loader + f"""
 $Root = {ps_literal(root)}
-$result = Get-GitStatusPorcelainUtf8
+$result = Get-GitStatusPorcelainUtf8 -IncludeEmbeddedRepositories
 $records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
 [ordered]@{{ ok = $result.ok; paths = @($records | ForEach-Object {{ if ($_.Length -ge 4) {{ $_.Substring(3).Replace("\\", "/") }} }}) }} | ConvertTo-Json -Compress
 """
@@ -1220,7 +1235,7 @@ $records = @([string]$result.raw -split [char]0 | Where-Object {{ $_ }})
         failure_script = loader + f"""
 $Root = {ps_literal(root)}
 function Get-EmbeddedRepositoryRoots {{ throw "fixture discovery failure" }}
-$result = Get-GitStatusPorcelainUtf8
+$result = Get-GitStatusPorcelainUtf8 -IncludeEmbeddedRepositories
 [ordered]@{{ ok = $result.ok; reason = $result.reason }} | ConvertTo-Json -Compress
 """
         powershell_discovery_failure = run_powershell(failure_script, root)
@@ -1237,6 +1252,100 @@ $result = Get-GitStatusPorcelainUtf8
         assert live_path not in powershell_mutant_paths
         assert python_discovery_failed_closed is True
         assert powershell_discovery_failure["ok"] is False
+
+
+def test_parent_ignore_boundary_separates_claim_veto_from_blocking_readers() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-PARENT-IGNORE-BOUNDARY"""
+    with make_tempdir("parent-ignore-boundary-") as tmp:
+        root = Path(tmp)
+        claims_path = root / "Area_comun/state/CLAIMS.json"
+        claims_path.parent.mkdir(parents=True)
+        ignored_path = ".protocol-tmp/zc/note.md"
+        claims_path.write_text(
+            json.dumps(
+                {
+                    "claims": [
+                        {"owner": IMPLEMENTER, "status": "active", "scope": [ignored_path]}
+                    ]
+                }
+            )
+            + "\n",
+            encoding="ascii",
+        )
+        (root / ".gitignore").write_text(
+            ".protocol-tmp/\nprobe.ps1\nresidue.json\n", encoding="ascii"
+        )
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+            ("git", "add", ".gitignore", "Area_comun/state/CLAIMS.json"),
+            ("git", "commit", "-m", "outer fixture"),
+        ):
+            subprocess.run(command, cwd=root, check=True, capture_output=True)
+
+        embedded = root / ".protocol-tmp/zc"
+        embedded.mkdir(parents=True)
+        for command in (
+            ("git", "init"),
+            ("git", "config", "user.name", "Fixture"),
+            ("git", "config", "user.email", "fixture@example.invalid"),
+        ):
+            subprocess.run(command, cwd=embedded, check=True, capture_output=True)
+        (root / ignored_path).write_text("live\n", encoding="ascii")
+
+        functions = (
+            "Write-Utf8NoBom",
+            "Invoke-GitStatusPorcelainUtf8",
+            "Get-EmbeddedRepositoryRoots",
+            "Get-GitStatusPorcelainUtf8",
+            "Get-WorktreeDiskProof",
+            "Get-StagedResidueState",
+        )
+
+        def probe(harness_path: Path) -> dict[str, object]:
+            loader = function_loader(harness_path, functions)
+            script = loader + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$ResiduePath = Join-Path $Root "residue.json"
+$AbortedResidueMinutes = 5
+$ResidueDiagnosticPathLimit = 10
+$script:LastResiduePaths = @()
+$parent = Get-GitStatusPorcelainUtf8
+$expanded = Get-GitStatusPorcelainUtf8 -IncludeEmbeddedRepositories
+$parentRecords = @([string]$parent.raw -split [char]0 | Where-Object {{ $_ }})
+$expandedRecords = @([string]$expanded.raw -split [char]0 | Where-Object {{ $_ }})
+$residue = Get-StagedResidueState
+$proofValue = Get-WorktreeDiskProof
+$proof = if ($null -eq $proofValue) {{ "" }} else {{ [string]$proofValue }}
+[ordered]@{{
+    parent_paths = @($parentRecords | ForEach-Object {{ if ($_.Length -ge 4) {{ $_.Substring(3) }} }})
+    expanded_paths = @($expandedRecords | ForEach-Object {{ if ($_.Length -ge 4) {{ $_.Substring(3) }} }})
+    residue = $residue
+    proof = $proof
+}} | ConvertTo-Json -Depth 6 -Compress
+"""
+            return run_powershell(script, root)
+
+        healthy = probe(HARNESS_PATH)
+        source = HARNESS_PATH.read_text(encoding="utf-8")
+        blocking_status_call = "$statusResult = Get-GitStatusPorcelainUtf8"
+        expanded_status_call = "$statusResult = Get-GitStatusPorcelainUtf8 -IncludeEmbeddedRepositories"
+        assert source.count(blocking_status_call) == 2
+        mutant_source = source.replace(blocking_status_call, expanded_status_call)
+        with make_tempdir("parent-ignore-boundary-mutant-") as mutant_tmp:
+            mutant_path = Path(mutant_tmp) / "peer_mailbox_cron.ps1"
+            mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+            mutant = probe(mutant_path)
+
+        assert healthy["parent_paths"] == []
+        assert ignored_path in healthy["expanded_paths"], healthy
+        assert healthy["residue"] == "none"
+        assert ignored_path not in healthy["proof"]
+        assert sweep.dirty_claimed_route(root, IMPLEMENTER) is True
+        assert mutant["residue"] == "live"
+        assert ignored_path in mutant["proof"]
 
 
 def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
@@ -1507,6 +1616,7 @@ def main() -> int:
         test_zombie_sweeper_parses_real_git_quoted_rename_paths,
         test_git_status_readers_enumerate_untracked_files_without_overbroad_veto,
         test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven,
+        test_parent_ignore_boundary_separates_claim_veto_from_blocking_readers,
         test_residue_excludes_foreign_personal_and_caps_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
         test_scope_aware_claim_veto_kills_both_direction_mutants,

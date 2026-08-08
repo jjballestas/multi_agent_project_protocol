@@ -700,8 +700,14 @@ function Get-EmbeddedRepositoryRoots {
 }
 
 function Get-GitStatusPorcelainUtf8 {
-    try { $repositoryRoots = @(Get-EmbeddedRepositoryRoots) }
-    catch { return [pscustomobject]@{ ok = $false; raw = ""; reason = "repository_discovery_failed" } }
+    param([switch]$IncludeEmbeddedRepositories)
+    # Blocking/comparison callers keep the parent view so its ignore policy remains authoritative.
+    # Claim-veto probes opt into embedded repositories, where over-detection is the safe direction.
+    $repositoryRoots = @($Root)
+    if ($IncludeEmbeddedRepositories) {
+        try { $repositoryRoots = @(Get-EmbeddedRepositoryRoots) }
+        catch { return [pscustomobject]@{ ok = $false; raw = ""; reason = "repository_discovery_failed" } }
+    }
     $combined = @()
     foreach ($repoPath in $repositoryRoots) {
         $result = Invoke-GitStatusPorcelainUtf8 -RepositoryRoot $repoPath

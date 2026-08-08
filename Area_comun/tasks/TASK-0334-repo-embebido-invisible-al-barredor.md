@@ -2,7 +2,7 @@
 task_id: TASK-0334
 file: Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md
 title: "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -48,7 +48,6 @@ intake:
     - scripts/sweep_cron_zombies.py
     - scripts/harness/peer_mailbox_cron.ps1
     - scripts/test_exec_lease_harness.py
-    - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
   out_of_scope: >
     No se toca la convergencia de opciones de TASK-0326, que es correcta y suficiente para lo suyo.
     No entra el tercer lector de `runtime/orchestrator.py` (va en su propia tarea). No se BORRA ni se
@@ -100,3 +99,23 @@ Escanear repos embebidos tiene coste por invocacion de git; medirlo y declararlo
 lectores corren en el camino caliente de cada ciclo de cron. Riesgo mayor: una deteccion
 incompleta que haga creer que la familia esta cerrada. Por eso el AC5 exige declarar el limite
 de profundidad en vez de dejarlo implicito.
+
+## Remediation iteration 1 - consumer-specific safety direction
+
+The expanded embedded-repository set remains available to the destructive claim-veto path, where
+over-detection prevents termination. `Get-StagedResidueState` and `Get-WorktreeDiskProof` use the
+parent repository view, so paths deliberately excluded by the parent's `.gitignore` do not create
+exec deferrals or rollback-drift comparisons.
+
+`NEG-HARNESS-PARENT-IGNORE-BOUNDARY` fixes both sides by behavior: an uncommitted file inside an
+embedded repository below a parent-ignored route still makes the file-scoped claim veto true, while
+the blocking residue reader remains `none` and the disk proof excludes that path. A mutant that
+feeds the expanded set into both blocking readers makes residue `live` and adds the ignored path to
+the proof.
+
+Known limits remain explicit:
+
+- R1: a live file ignored by the embedded repository's own `.gitignore` remains invisible to Git
+  status and can therefore escape the claim veto. This pre-existing family is not closed here.
+- R2: a partial or empty `.git` marker can resolve status against the parent and generate prefixed
+  phantom routes. The direction remains fail-safe for termination but may over-detect.
