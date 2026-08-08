@@ -242,10 +242,10 @@ class MemoryDbTests(unittest.TestCase):
             self.assertTrue(memory_db.contains_pii(term, [term]))
 
     def test_p01_domain_pii_parameters_are_required(self) -> None:
-        module_paths = (MODULE_PATH, DRIFT_MODULE_PATH, QUERY_MODULE_PATH)
+        module_paths = tuple(sorted(p for p in Path(__file__).parent.glob("*.py") if not p.name.startswith("test_")))
         violations = domain_pii_default_violations(module_paths)
         self.assertEqual([], violations)
-        # The property covers every function in all three memory-engine modules.
+        # Directory placement and structural ast.arguments define both complete sets.
 
     def test_p02_project_is_derived_from_instance_config(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-project-") as temp:
@@ -2504,16 +2504,17 @@ def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:
     for module_path in module_paths:
         tree = ast.parse(module_path.read_text(encoding="utf-8"))
         for node in ast.walk(tree):
-            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            arguments = getattr(node, "args", None)
+            if not isinstance(arguments, ast.arguments):
                 continue
-            positional = [*node.args.posonlyargs, *node.args.args]
+            positional = [*arguments.posonlyargs, *arguments.args]
             positional_defaults = (
-                positional[-len(node.args.defaults) :] if node.args.defaults else []
+                positional[-len(arguments.defaults) :] if arguments.defaults else []
             )
             for argument in positional_defaults:
                 if argument.arg == "domain_pii_terms":
                     violations.append(f"{module_path.name}:{argument.lineno}")
-            for argument, default in zip(node.args.kwonlyargs, node.args.kw_defaults):
+            for argument, default in zip(arguments.kwonlyargs, arguments.kw_defaults):
                 if argument.arg == "domain_pii_terms" and default is not None:
                     violations.append(f"{module_path.name}:{argument.lineno}")
     return violations
