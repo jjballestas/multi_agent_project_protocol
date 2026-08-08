@@ -151,6 +151,12 @@
             "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra"
         },
         {
+            "id": "TASK-0345",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

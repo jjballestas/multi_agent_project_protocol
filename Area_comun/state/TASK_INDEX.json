@@ -397,6 +397,16 @@
             "type": "implementation"
         },
         {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
+            "id": "TASK-0345",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
