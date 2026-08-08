@@ -121,6 +121,14 @@ cerrarla se declara explicitamente que queda pendiente de despliegue, y el despl
 buscando un artefacto que solo el codigo nuevo produciria -- un fichero de lock, un campo nuevo en el
 log. "Esta en `done`" no es evidencia de nada operativo.
 
+**R7 -- La direccion del fallo es del par CAMBIO-CONSUMIDOR, no del cambio.**
+Antes de ensanchar o estrechar lo que un lector compartido observa, se enumeran **todos** sus
+consumidores y se declara la direccion para cada uno. El mismo dato de mas puede PROTEGER a quien
+decide a quien no matar y ENCALLAR a quien decide cuando empezar. Cuando las direcciones difieren,
+se separan los conjuntos y **la separacion se clava con un negativo permanente**: si alguien unifica
+los lectores "por coherencia" -- que es la tentacion natural tras cerrar una familia -- el contrato
+tiene que caer.
+
 **R8 -- El gate no es el fichero que editaste. Enumera sus GEMELOS antes de darlo por cerrado.**
 Un mecanismo con implementaciones paralelas -- escaner Python y escaner PowerShell en paridad
 declarada, runtime vivo y mirror enviado a instancias, dos lectores del mismo `git status` -- no
@@ -134,13 +142,21 @@ nueva**: se cerro el agujero en la mitad que no se exporta.
 Corolario para quien encarga el trabajo: **si preguntas por "los otros ocho FICHEROS", te contestan
 por ficheros.** La familia hay que nombrarla en el eje correcto -- y a veces hay dos ejes.
 
-**R7 -- La direccion del fallo es del par CAMBIO-CONSUMIDOR, no del cambio.**
-Antes de ensanchar o estrechar lo que un lector compartido observa, se enumeran **todos** sus
-consumidores y se declara la direccion para cada uno. El mismo dato de mas puede PROTEGER a quien
-decide a quien no matar y ENCALLAR a quien decide cuando empezar. Cuando las direcciones difieren,
-se separan los conjuntos y **la separacion se clava con un negativo permanente**: si alguien unifica
-los lectores "por coherencia" -- que es la tentacion natural tras cerrar una familia -- el contrato
-tiene que caer.
+**R9 -- Estrechar la forma no es atar la propiedad.**
+Una remediacion de esta familia no cierra por hacer el criterio MAS ESTRECHO que el anterior: cierra
+cuando el criterio **sobrevive a un cambio de coordenada, de orden y de formato**. Al encargarla se
+nombra la propiedad en NEGATIVO y en terminos del efecto -- p.ej. *"no debe existir ninguna edicion
+de un solo escaner que produzca veredictos distintos sobre el mismo arbol con la suite en verde"* --
+y la forma se deja explicitamente al maker.
+Medido: **tres de las catorce ocurrencias (10, 12, 14) son remediaciones de este patron que
+reintrodujeron el patron.** Al pedir "ata la propiedad", la respuesta natural del implementador es
+ofrecer otra forma mas estrecha -- una linea en vez de un fichero entero, `shell: bash` en vez de
+nada, un regex mas especifico. Estrechar reduce el dano y por eso PARECE un arreglo, y en magnitud
+lo es: 0329 paso de 8289 lineas ciegas a 91 pares, un -98,9 %. Pero no cambia la CLASE del defecto y
+el siguiente cambio legitimo vuelve a romperlo.
+Corolario para el revisor: la pregunta no es "cierra el caso que lo destapo", es **"que edicion
+legitima futura vuelve a romperlo"**. Y corolario para quien encarga: reconocer la mejora por
+separado, para que la particion del residual no se lea como un reproche.
 
 **Contrapeso honesto a R6, medido el 2026-08-08.** La brecha "mergeado no es desplegado" que R6
 persigue cerrar **nos protegio por accidente**: la remediacion 2 de TASK-0331 introdujo un
