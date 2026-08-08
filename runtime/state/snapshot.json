@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "f3f88826593f4a782958c1b865d299ceeb96443d85af9b9025f9a5b28f77e0fd",
+  "canonical_hash": "2dbce83691d423143e15381b8120ecceba8a1410554c4c959372b04b458ad705",
   "integrity": {
-    "canonical_hash": "f3f88826593f4a782958c1b865d299ceeb96443d85af9b9025f9a5b28f77e0fd",
+    "canonical_hash": "2dbce83691d423143e15381b8120ecceba8a1410554c4c959372b04b458ad705",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "94498b3c6740e5bbda4eff03de911ef2605568994284dc6d460b2b7acb54fbad",
-    "signature": "662ac34134b1cbc497747efbf8cca62a5ba83781377f856868659246b911b2a3",
-    "up_to_seq": 8108
+    "prev_hash": "92ef893561ce5438daf5bc11847438c25d96d20102b49fd2326699467aa7c074",
+    "signature": "19a077a86451ac61e47236dfd6fe57d57a1b4d2d2fd96a840a1b77ddf733d730",
+    "up_to_seq": 8110
   },
   "state": {
     "aggregate_versions": {
@@ -3280,7 +3280,7 @@
       "TASK-0341": 2,
       "TASK-0342": 11,
       "TASK-0343": 3,
-      "TASK-0344": 5,
+      "TASK-0344": 7,
       "TASK-0345": 3,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -3304,7 +3304,7 @@
       "protocol-prune": 55,
       "protocol-state": 1
     },
-    "events_applied": 7437,
+    "events_applied": 7439,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7276,7 +7276,9 @@
       "codex:task0336:remediation4:memory-release:20260808T153700Z": 8056,
       "codex:task0336:remediation4:work-release:20260808T153700Z": 8055,
       "codex:task0344:claim:2026-08-08T16:36:00Z": 8103,
+      "codex:task0344:delivery-claim:2026-08-08T16:47:19Z": 8109,
       "codex:task0344:in-progress:2026-08-08T16:36:00Z": 8104,
+      "codex:task0344:release-implementation-claim:2026-08-08T16:47:19Z": 8110,
       "codex:tasks0325-0334-0335:done-flip:claim-acquire:20260808T084041Z": 7924,
       "codex:tasks0325-0334-0335:done-flip:claim-release:20260808T084041Z": 7928,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -10745,5 +10747,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8108
+  "up_to_seq": 8110
 }
