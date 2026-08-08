@@ -2,7 +2,7 @@
 task_id: TASK-0328
 file: Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md
 title: "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono"
-status: ready
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -75,3 +75,24 @@ Ensanchar un patron con separadores puede empezar a casar cadenas que no son cue
 (referencias con prefijo de dos letras y bloques numericos). El AC3 obliga a medir la
 poblacion afectada y a declarar el numero antes de dar la tarea por cerrada, en vez de
 descubrirlo como ruido en produccion.
+
+## Implementacion y medicion de Codex (2026-08-08)
+
+- La deteccion ahora liga la propiedad estructural: prefijo ASCII de dos letras, dos
+  digitos de control y cuerpo alfanumerico de 10 a 30 caracteres. Los separadores
+  horizontales admitidos pueden aparecer con agrupaciones arbitrarias y mezclarse:
+  espacio, tabulador, espacio no separable, espacio fino, espacio fino no separable,
+  punto, guion, barra y barra inversa.
+- La guarda de checksum sobre el identificador compactado evita aceptar referencias
+  ordinarias que solo tienen la misma silueta. Ante un candidato estructural, solo un
+  checksum valido abre la deteccion; la evaluacion no degrada silenciosamente a otra
+  heuristica.
+- AC3 medido sobre las 22,176 cadenas de metadata elegibles del corpus gobernado en
+  HEAD: el patron ampliado produjo 10 candidatos nuevos brutos; la guarda rechazo los
+  10; cadenas nuevas marcadas: 0; falsos positivos nuevos observados: 0.
+- AC4 medido: ni la forma contigua ni la agrupada entra en la banda telefonica de
+  9 a 15 digitos. Con el detector estructural desactivado, ambas devuelven False. La
+  cobertura de esta tarea no depende del heuristico estrechado por TASK-0322.
+- AC5 queda en `NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION`. El mutante conserva el
+  nuevo patron en una rama inalcanzable y restaura como rama viva el patron contiguo:
+  la forma contigua sigue dando True y la agrupada cae a False.

@@ -150,7 +150,7 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_domain_pii_retrieval_reason_is_attested_and_falsifiable",
     },
     {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True), source_results)", "self.assertEqual((False, True), mutant_results[\"restructured\"])", "self.assertEqual((False, True), mutant_results[\"filtered\"])", "self.assertEqual((False, False), mutant_results[\"early_return\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
-)
+    {"id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION", "negative": "Making the separator-aware detector unreachable restores the contiguous-only gap while leaving its guard text present.", "mutation": "mutant_source = source.replace(pattern_line, unreachable_pattern_line, 1)", "boundaries": ("self.assertEqual((True, True), source_results)", "self.assertEqual((True, False), mutant_results)", "self.assertEqual((False, False), phone_only_results)"), "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable"},)
 
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -2246,7 +2246,7 @@ Body is not indexed.
             normalized_line
             + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
             + "            return True\n"
-            + "        if any(pattern.search(normalized) for pattern in STRUCTURAL_PII_PATTERNS[1:3]):\n"
+            + "        if any(account_identifier_checksum_is_valid(candidate.group(0)) for candidate in STRUCTURAL_PII_PATTERNS[1].finditer(item)) or STRUCTURAL_PII_PATTERNS[2].search(normalized):\n"
             + "            return True\n"
             + "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
             + "            for candidate in PHONE_CANDIDATE_RE.finditer(item):\n"
@@ -2316,6 +2316,87 @@ Body is not indexed.
         self.assertEqual((False, True), mutant_results["restructured"])
         self.assertEqual((False, True), mutant_results["filtered"])
         self.assertEqual((False, False), mutant_results["early_return"])
+
+    def test_account_identifier_presentations_are_structural_and_falsifiable(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION"""
+        compact = "ES9121000418450200051332"
+        grouped = "ES91 2100 0418 4502 0005 1332"
+        presentations = (
+            compact,
+            grouped,
+            "ES91-21000418-45020005-1332",
+            "ES91\u00a021000418\u200945020005\u202f1332",
+            "ES91 2100-04184502\u202f0005 1332",
+        )
+        for presentation in presentations:
+            with self.subTest(presentation=presentation):
+                self.assertTrue(memory_db.contains_pii(presentation, []))
+
+        protocol_like = "MSG-20260707-Maker-to-Checker-GO-1105-infra-fixture"
+        self.assertIsNotNone(memory_db.STRUCTURAL_PII_PATTERNS[1].search(protocol_like))
+        self.assertFalse(memory_db.contains_pii(protocol_like, []))
+
+        minimum = "GB82WEST123456"
+        maximum = "GB82" + ("A" * 30)
+        self.assertEqual(14, len(minimum))
+        self.assertEqual(34, len(maximum))
+        self.assertIsNotNone(memory_db.STRUCTURAL_PII_PATTERNS[1].fullmatch(minimum))
+        self.assertIsNotNone(memory_db.STRUCTURAL_PII_PATTERNS[1].fullmatch(maximum))
+        self.assertIsNone(memory_db.STRUCTURAL_PII_PATTERNS[1].fullmatch("GB82" + ("A" * 9)))
+        self.assertIsNone(memory_db.STRUCTURAL_PII_PATTERNS[1].fullmatch("GB82" + ("A" * 31)))
+
+        def phone_band_detects(value: str) -> bool:
+            return any(
+                9 <= len(re.sub(r"\D", "", candidate.group(0))) <= 15
+                for candidate in memory_db.PHONE_CANDIDATE_RE.finditer(value)
+            )
+
+        self.assertEqual((False, False), tuple(map(phone_band_detects, (compact, grouped))))
+        original_patterns = memory_db.STRUCTURAL_PII_PATTERNS
+        memory_db.STRUCTURAL_PII_PATTERNS = (
+            original_patterns[0],
+            re.compile(r"(?!x)x"),
+            original_patterns[2],
+        )
+        try:
+            phone_only_results = tuple(
+                memory_db.contains_pii(value, []) for value in (compact, grouped)
+            )
+        finally:
+            memory_db.STRUCTURAL_PII_PATTERNS = original_patterns
+        self.assertEqual((False, False), phone_only_results)
+
+        source_results = tuple(
+            memory_db.contains_pii(value, []) for value in (compact, grouped)
+        )
+        self.assertEqual((True, True), source_results)
+        source = MODULE_PATH.read_text(encoding="utf-8")
+        pattern_line = '    re.compile(r"(?<![A-Z0-9])[A-Z]{2}[ \\t\\u00a0\\u2009\\u202f._/\\\\-]*\\d{2}(?:[ \\t\\u00a0\\u2009\\u202f._/\\\\-]*[A-Z0-9]){10,30}(?![ \\t\\u00a0\\u2009\\u202f._/\\\\-]*[A-Z0-9])", re.I | re.ASCII),\n'
+        unreachable_pattern_line = (
+            '    re.compile(r"(?<![A-Z0-9])[A-Z]{2}[ \\t\\u00a0\\u2009\\u202f._/\\\\-]*\\d{2}(?:[ \\t\\u00a0\\u2009\\u202f._/\\\\-]*[A-Z0-9]){10,30}(?![ \\t\\u00a0\\u2009\\u202f._/\\\\-]*[A-Z0-9])", re.I | re.ASCII) '
+            'if False else re.compile(r"\\b[A-Z]{2}\\d{2}[A-Z0-9]{10,30}\\b", re.I | re.ASCII),\n'
+        )
+        self.assertEqual(1, source.count(pattern_line))
+        mutant_source = source.replace(pattern_line, unreachable_pattern_line, 1)
+        self.assertNotEqual(source, mutant_source)
+
+        with tempfile.TemporaryDirectory(prefix="memory-account-id-mutant-") as temp:
+            mutant_path = Path(temp) / "build_memory_db_mutant.py"
+            write(mutant_path, mutant_source)
+            spec = importlib.util.spec_from_file_location(
+                "build_memory_db_account_id_mutant", mutant_path
+            )
+            assert spec and spec.loader
+            mutant = importlib.util.module_from_spec(spec)
+            sys.modules[spec.name] = mutant
+            try:
+                spec.loader.exec_module(mutant)
+                mutant_results = tuple(
+                    mutant.contains_pii(value, []) for value in (compact, grouped)
+                )
+            finally:
+                sys.modules.pop(spec.name, None)
+        self.assertEqual((True, False), mutant_results)
 
 
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:

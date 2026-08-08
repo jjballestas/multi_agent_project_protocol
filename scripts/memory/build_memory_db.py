@@ -93,7 +93,7 @@ PATH_RE = re.compile(r"^[A-Za-z0-9._/\\-]+$")
 TITLE_MAX_LENGTH = 500
 STRUCTURAL_PII_PATTERNS = (
     re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.I),
-    re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b", re.I),
+    re.compile(r"(?<![A-Z0-9])[A-Z]{2}[ \t\u00a0\u2009\u202f._/\\-]*\d{2}(?:[ \t\u00a0\u2009\u202f._/\\-]*[A-Z0-9]){10,30}(?![ \t\u00a0\u2009\u202f._/\\-]*[A-Z0-9])", re.I | re.ASCII),
     re.compile(r"\b(?:NIF|NIE|NIT|DNI|SSN)\b", re.I),
 )
 PHONE_CANDIDATE_RE = re.compile(r"(?:\+?\d[\d .()-]{7,}\d)")
@@ -103,7 +103,7 @@ EVENTS_PATH = Path("runtime/state/events.jsonl")
 LEDGER_LOCK_PATH = Path("runtime/state/.ledger.lock")
 RULES_PATH = "Area_comun/protocol/MEMORY_HOT_COLD_RULES.json"
 POLICY_PATH = "Area_comun/protocol/MEMORY_INDEX_POLICY.json"
-
+def account_identifier_checksum_is_valid(value: str) -> bool: compact = re.sub(r"[ \t\u00a0\u2009\u202f._/\\-]+", "", value).upper(); return int("".join(str(ord(char) - 55) if "A" <= char <= "Z" else char for char in compact[4:] + compact[:4])) % 97 == 1
 
 DDL = r"""
 CREATE TABLE artifacts (
@@ -556,7 +556,7 @@ def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:
         normalized = re.sub(r"[_/\\.-]+", " ", item)
         if STRUCTURAL_PII_PATTERNS[0].search(item):
             return True
-        if any(pattern.search(normalized) for pattern in STRUCTURAL_PII_PATTERNS[1:3]):
+        if any(account_identifier_checksum_is_valid(candidate.group(0)) for candidate in STRUCTURAL_PII_PATTERNS[1].finditer(item)) or STRUCTURAL_PII_PATTERNS[2].search(normalized):
             return True
         if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):
             for candidate in PHONE_CANDIDATE_RE.finditer(item):
