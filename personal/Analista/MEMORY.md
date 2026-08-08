@@ -7,6 +7,91 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (55) - TASK-0331 r5: CHANGE-REQUIRED (la frontera era correcta; el VEREDICTO que la alimenta no estaba atado)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r5`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `e9719613` (padre `a4a400e8`), HEAD hub al revisar `36931ef4`. Clon limpio
+  `D:/Aegis_Scratch/mapp/rev0331r5/cc`. Veredicto **CHANGE-REQUIRED** en `48fe2761` (artifact
+  `Area_comun/artifacts/Analista-TASK-0331-tabla-24-celdas-verdict.md`).
+
+### LECCION PRINCIPAL: cuando el encargo pregunta por la FRONTERA, medir la FUNCION QUE LA DECIDE
+
+El Arquitecto preguntaba si el estado `unknown` (que exige operador) se alcanza en operacion normal.
+La respuesta honesta fue **NO** -- y la consegui extrayendo `Get-LeaseProcessState` del harness
+entregado y corriendola contra procesos reales que arranque y mate yo: `taskkill /PID <p> /T /F` ->
+`dead` -> autocurado sin operador. **Pero al abrir esa funcion para medirla aparecio el bloqueante**:
+tiene SEIS salidas de veredicto y el contrato observa TRES.
+
+**Contar las salidas de la funcion que decide, no las celdas de la tabla que consume la decision.**
+La tabla de 24 celdas era correcta; el hueco estaba un marco mas abajo.
+
+### El hallazgo: `assert count(<literal>) == N` es un tripwire de FORMA, se rodea con codigo muerto
+
+`test_exec_lease_harness.py:1901` hace `assert process_body.count('        return "unknown"') == 3` y
+muta solo la PRIMERA ocurrencia. Las otras dos quedan sujetas por el conteo. Tres mutantes que
+**preservan el conteo** (literal presente, inalcanzable) sobreviven al `verification_cmd` entero
+(`test_exec_lease_harness.py` exit 0 + `check_falsification_contracts.py` exit 0):
+
+- **M1** `catch { return "dead"; return "unknown" }` en el catch de `StartTime`.
+- **M2** idem en el catch de `Get-Process`.
+- **M3** `if ($true) { return "live" }` antes de la comparacion de start-time (PID-reuse blind).
+
+Y mi PRIMER intento (cambiar el literal sin dejar codigo muerto) enrojecio **por el conteo**, o sea
+por FORMA: exactamente el patron de DECISION-0105/TASK-0341 dentro del contrato que corona la entrega.
+
+**Regla: ante `assert count(literal) == N`, el mutante correcto NO es cambiar el literal sino dejarlo
+inalcanzable.** `if ($true) { return X }` antes / `return X` antes del literal declarado.
+
+### Como medir "reachability" en vez de aceptarla declarada
+
+Censo con la propia funcion entregada sobre TODOS los procesos vivos: **157 de 580 (27,1 %)**
+clasifican `unknown` porque su `StartTime` es ilegible desde contexto no elevado. Ese numero (a) da
+la respuesta cuantitativa que el encargo pedia y (b) **es el material de test que le falta al
+maker**. Un censo de la maquina convierte "es raro" en un numero y en un fixture.
+
+Ojo: `Get-Process | % { $_.StartTime }` NO lanza de forma capturable en PS (devuelve $null con error
+no terminante), asi que el barrido ingenuo cuenta 0 ilegibles. **Barrer llamando a la funcion bajo
+revision, no reimplementando su condicion.**
+
+### CONTAMINACION PROPIA -- casi firmo un rojo ajeno como regresion
+
+Corri los gates de neutralidad **mientras un driver de mutacion mio corria en background sobre el
+MISMO clon**. Su linea insertada desplazaba el fichero: `test_scan_domain_neutrality.py` exit 1 y el
+gemelo PS senalando lineas +1. Iba a firmarlo como regresion de la entrega. Re-corridos con
+`git status --porcelain` vacio comprobado ANTES y DESPUES: los tres verdes.
+
+**"El arbol caliente miente" aplica a MI BANCO tambien: nunca medir un gate mientras un driver mio
+muta el mismo clon.** Serializar o usar clones separados. Lo declare en el veredicto.
+
+### Atribucion: `git log -S` antes de aceptar "es regresion de esta entrega"
+
+El Arquitecto me dio el rojo de `run_mailbox_retry_cases.py` como "regresion de la remediacion 4".
+Lo era de la **remediacion 3**: `git log -S 'Write-Utf8NoBom -Path $LockPath'` -> `4c4e2665`, y el
+PADRE `a4a400e8` ya falla con la misma asercion y la misma unica condicion. **Correr el gate en el
+PADRE siempre, antes de atribuir.**
+
+Y el fondo: el orden que el contrato protege SE MANTIENE (offsets 62938 < 79099); solo cambio el
+nombre del helper (`Write-Utf8NoBom` -> `Write-AtomicUtf8NoBom`). **Lo que hay que arreglar es el
+CONTRATO, no la implementacion.** Agravante: `assert contract(text)` revienta ANTES de evaluar sus
+mutantes -> el contrato no esta solo rojo, esta **INERTE**.
+
+### Hueco de cobertura reutilizable: contar los LECTORES del fichero tocado
+
+Seis ficheros leen `scripts/harness/peer_mailbox_cron.ps1`; el `verification_cmd` de 0331 nombra dos.
+**Cuatro lectores ejecutados por CI del fichero que la tarea reescribe estaban fuera de su puerta de
+aceptacion.** `grep -rl <fichero> --include=*.py --include=*.yml` y cruzar con `verification_cmd` y
+con `.github/workflows/*.yml` es un chequeo de 30 segundos que encuentra el rojo que el maker no vio.
+
+### Operativa
+
+- Clon barato en arbol compartido: `git clone --local` (el `.git` pesa ~7 GB, el hardlink lo evita).
+- `24 declaradas / 18 fixtures distintos`: rehice los fixtures del probe y los hashee. Las 6
+  duplicadas son `{unreadable,empty,identityless} x {live,dead} x lock-absent`, donde el eje `dueno`
+  no es una entrada. **Cero de las 24 ejercen la funcion de liveness real** (todas la stubean).
+- Gate del pre-commit: el bloque final de trailers debe ser CONTIGUO (`Task-Id`/`Ops-Reason`/
+  `Co-Authored-By` sin linea en blanco entre medias), o el hook rechaza.
+- `PRUNE DUE` senalado al commitear, no corrido (es del Arquitecto).
+
 ## Ultima actualizacion 2026-08-08 (54) - DRAFT-DECISION-0105: CHANGE-REQUIRED (revisar un ARTEFACTO DE RAZONAMIENTO, no una entrega)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-DRAFT-DECISION-0105`. **SIN PRODUCTO EN
