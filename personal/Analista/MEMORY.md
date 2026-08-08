@@ -7,6 +7,67 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (50) - TASK-0336 remediacion 1: CHANGE-REQUIRED estrecho
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r2`. **SIN PRODUCTO EN ALCANCE.**
+- Anclaje `7b33440c` (rutas de alcance identicas byte a byte a la entrega `a69207a4`). Veredicto
+  **CHANGE-REQUIRED** en `30db1296`
+  (artifact `Area_comun/artifacts/Analista-TASK-0336-shell-efectivo-r2-verdict.md`).
+- Lo que la remediacion cierra de verdad: `set +e` / `set +o errexit` / `trap ERR` MUERTOS;
+  `defaults.run.shell` aceptado por los DOS niveles con precedencia paso > job > workflow;
+  frontera de `continue-on-error` de JOB con DOS discriminadores; certificacion acotada
+  (`scope=` + `residuals=`) con **dos fronteras de TEXTO separables** (renombrar la linea /
+  borrar los residuales) -- eso convierte la honestidad de la salida en propiedad verificada.
+- AC3 por los dos lados: 22 formas, 0 desajustes. AC4: 21 relajaciones dirigidas evaluadas
+  fixture a fixture -> **20/20 fronteras portantes, cero vacuas**.
+
+### LECCION PRINCIPAL: la normalizacion del checker borro el marcador que importaba
+
+`command_gates_runner` hace `line.strip().replace("\\", "/")` para tolerar separadores de Windows en
+la ruta. Con eso, una linea terminada en `\` deja de terminar en `\` **para el gate** y sigue
+terminando en `\` **para bash**. Un bloque `echo before \` + invocacion se une en un solo comando:
+el runner pasa a ser ARGUMENTO de `echo`, no se ejecuta, el paso sale 0 -- y el checker lo certifica
+con exit 0 dentro de `scope=...direct_invocation...`. Es la familia `echoed`, que el contrato declara
+muerta, repartida en dos lineas. Entra por las CUATRO puertas de shell.
+
+**Patron generalizable:** cuando un gate NORMALIZA texto antes de analizarlo, hay que preguntar
+siempre que SIGNIFICADO destruye esa normalizacion en el lenguaje real. Aqui la sustitucion de
+separadores destruyo la sintaxis de continuacion. Es el mismo tipo de defecto que "el contrato ata el
+helper, no el efecto": el gate mira una forma normalizada que ya no es la que el shell ejecuta.
+
+### LECCION DE MUESTREO (mia, no del maker): el escape era PREEXISTENTE
+
+Lo probe contra el checker de `a6dc0c6e` con el MISMO fixture generado: tambien lo aceptaba. Mi tabla
+B.3 de r1 construyo todos los bloques con saltos de linea limpios y **nunca probo una linea terminada
+en `\`**. El maker cerro fielmente lo que le declare. Cuando muestreo una familia "adornos que se
+tragan el codigo de salida", la lista tiene que incluir la SINTAXIS del propio lenguaje de bloque
+(continuacion, plegado YAML, comentarios), no solo builtins como `set`/`trap`.
+
+### OPERATIVA: el `bash` del PATH desde Python es el de WSL, no el de Git
+
+Medir con `["bash", ...]` desde `subprocess` en esta maquina resuelve a **WSL** y todo sale `exit 1`
+con `execvpe(/bin/bash) failed` -- ruido puro que parece medida. Fijar siempre el binario:
+`C:/Program Files/Git/usr/bin/bash.exe`, invocado como GitHub:
+`bash --noprofile --norc -eo pipefail <script>`.
+
+Otras dos: (a) heredocs `<<'EOF'` del Bash tool **colapsan `\\` a `\`**, asi que un fixture con
+barras invertidas escrito por heredoc mide otra cosa -- generar los fixtures desde un fichero .py
+escrito con Write, nunca por heredoc; (b) en una matriz de relajaciones, un `str.replace(..., 1)`
+puede tocar la ocurrencia equivocada cuando la linea aparece dos veces (me paso con el ancla del
+regex: `L10`/`L11` no voltearon nada hasta apuntar a la segunda ocurrencia). **Afirmar cual
+ocurrencia se sustituye, o una relajacion sale falsamente vacua.**
+- `tempfile.TemporaryDirectory` en Windows revienta al limpiar si un proceso hijo tuvo el dir como
+  cwd: usar `ignore_cleanup_errors=True` y `dir=` bajo `D:/Aegis_Scratch/` (DECISION-0104).
+- Clon reutilizado en `D:/Aegis_Scratch/mapp/r0336/cc`: `git fetch --depth 900` + `checkout --detach`
+  es mucho mas barato que reclonar. Purgar `__pycache__` antes de medir.
+
+### Foco D: cuando un residual DECLARADO deja de ser slip
+
+En r1 cargue los filtros de `on:` como residual R1 y avise que si no se acotaba pasaba a slip. Se
+acoto: la salida dice `scope=trigger_keys` (no "triggers") y lista `trigger_filters` en `residuals=`,
+con frontera que lo protege. **Eso cumple.** No lo cargue como slip en r2 -- la disciplina del "47"
+admite acotar, no solo cerrar.
+
 ## Ultima actualizacion 2026-08-08 (49) - TASK-0334 remediacion 1: OK-CLOSABLE
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0334-r2`. **SIN PRODUCTO EN ALCANCE.**
