@@ -2,6 +2,21 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 
+## 2026-08-08 - TASK-0342 platform-independent encoding exclusions
+
+- Commit `7bbc0253` replaces the PowerShell scanner's literal Windows separator with a
+  host-native directory boundary built from `System.IO.Path` separators.
+- Permanent negative `NEG-ENCODING-SKIP-PATH-SEPARATOR` compares Python and PowerShell
+  findings on the same tree, keeps a binary `runtime/memory/index.db` excluded, detects the
+  same legitimate visible finding, and restores the literal-backslash bug by mutation.
+- The test scratch lives under the designated per-project Aegis scratch umbrella on Windows
+  and POSIX. Local Windows lacks PowerShell 7, so POSIX parity and mutation are explicitly
+  unmeasured locally and must be established by the required real CI run.
+- Local collaboration, Python and Windows-PowerShell encoding, neutrality, 62/62
+  falsification inventory across 10/10 wired runners, compile, drift, and diff gates exited
+  0. TASK-0342 remains `in_progress`; TASK-0340 remains separately claimed and waits on the
+  same real `validate` job outcome.
+
 ## 2026-08-08 - TASK-0340 actor-auth CI verification implementation
 
 - Commit `81ca947b` makes missing `cryptography` an explicit `EventLogError` stating that

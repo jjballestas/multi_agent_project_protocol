@@ -377,6 +377,22 @@
             "updated_at": "2026-08-08T16:15:20Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0342-memory",
+            "expires_at": "2026-08-08T18:19:03Z",
+            "notes": "Persist TASK-0342 implementation and pending POSIX CI evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0342-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T16:19:03Z",
+            "status": "released",
+            "task_id": "TASK-0342",
+            "updated_at": "2026-08-08T16:19:03Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260808-0342",
             "expires_at": "2026-08-08T23:59:00Z",
             "owner": "Arquitecto",
