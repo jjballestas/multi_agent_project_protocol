@@ -167,10 +167,12 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-HARNESS-RESERVED-LEASE-SELF-HEAL",
-        "negative": "Startup self-heal must remove proven-dead own leases across the no-lock, truncated, empty, and missing-reservation-deadline states and remain converged across restarts.",
-        "mutation": "source.replace(lock_evidence_branch, unknown_evidence_mutant, 1)",
+        "negative": "Startup self-heal must remove unreadable leases only with proven-dead owner evidence; an identityless no-lock reservation must be preserved behind an explicit recovery marker.",
+        "mutation": "source.replace(lock_liveness_promotion, dead_evidence_ignored, 1)",
         "boundaries": (
             'assert set(healthy) == expected_states',
+            'assert all(row["lock_exists"] and row["lease_exists"] for row in unknown_rounds)',
+            'assert "liveness=unknown action=preserve" in healthy["reserved_without_lock"]["logs"][0]',
             'assert all(not row["lock_exists"] and not row["lease_exists"] for row in healthy_rounds)',
             'assert all(row["lease_exists"] for row in mutant["truncated_with_lock"]["rounds"])',
             'assert all(len(result["rounds"]) == 3 for result in healthy.values())',
@@ -188,6 +190,26 @@ FALSIFICATION_CONTRACTS = (
             'assert "liveness=live action=preserve" in mutant["reserved_live"]["logs"][0]',
         ),
         "exercised_by": "test_live_unreadable_lease_is_preserved_and_deadline_mutant_dies",
+    },
+    {
+        "id": "NEG-HARNESS-LEASE-OWNER-LOCK-STATE-TABLE",
+        "negative": "The 24 lease-owner-lock cells must share one tri-state decision: remove only proven-dead owners, preserve and visibly lock unknown owners, and keep malformed peer leases fail-closed.",
+        "mutation": "source.replace(unknown_default, dead_default, 1)",
+        "boundaries": (
+            "assert len(healthy) == 24",
+            "assert process_states == {\"live\": \"live\", \"dead\": \"dead\", \"unknown\": \"unknown\"}",
+            "assert nullish == {\"empty\": \"peer_lease_unreadable\", \"whitespace\": \"peer_lease_unreadable\"}",
+            "assert row[\"lease_exists\"] is should_preserve",
+            "assert row[\"before\"] == expected_before",
+            "assert row[\"after\"] == expected_after",
+            "assert row[\"lock_exists\"] is True",
+            "assert collapsed_unknown[unknown_absent][\"lease_exists\"] is False",
+            "assert ignored_lock[dead_with_lock][\"lease_exists\"] is True",
+            "assert open_guard[identityless_unknown][\"before\"] == \"none\"",
+            "assert no_marker[unknown_absent][\"lock_exists\"] is False",
+            "assert process_mutant[\"unknown\"] == \"dead\"",
+        ),
+        "exercised_by": "test_lease_owner_lock_state_table_is_complete_and_mutation_proven",
     },
     {
         "id": "NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION",
@@ -360,8 +382,9 @@ def test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup() -> None:
         next_function = "function Stop-ExpiredLeaseProcess" if "function Stop-ExpiredLeaseProcess" in text[start:] else "function Get-ExecProgressState"
         end = text.index(next_function, start)
         body = text[start:end]
-        assert body.index("Test-LeaseProcessMatches") < body.index("[DateTime]::Parse")
-        assert "pre_deadline" in body
+        liveness_check = "Get-LeaseProcessState" if "Get-LeaseProcessState" in body else "Test-LeaseProcessMatches"
+        assert body.index(liveness_check) < body.index("[DateTime]::Parse")
+        assert "liveness" in body or "pre_deadline" in body
 
 
 def test_harnesses_use_per_exec_prompt_files() -> None:
@@ -522,13 +545,12 @@ def orphan_lease_self_heal_matrix_probe(source: Path) -> dict:
                     encoding="ascii",
                 )
             lease_path.write_text(case["content"], encoding="ascii")
-            script = function_loader(source, ("Clear-StaleCronLockIfSafe",)) + f"""
+            script = function_loader(source, ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Clear-StaleCronLockIfSafe")) + f"""
 $LockPath = {ps_literal(lock_path)}
 $LeasePath = {ps_literal(lease_path)}
 $PeerId = "{IMPLEMENTER}"
 $script:logs = @()
 $script:rounds = @()
-function Test-LeaseProcessMatches {{ param($Lease) return $false }}
 function Stop-LeaseProcessTree {{ param($Lease, $Reason) return $false }}
 function Write-Log {{ param([string]$Line) $script:logs += $Line }}
 1..3 | ForEach-Object {{
@@ -548,7 +570,7 @@ def live_lease_self_heal_probe(source: Path) -> dict:
             root = Path(tmp)
             lock_path = root / "peer.lock"
             lease_path = root / "peer.exec-lease.json"
-            script = function_loader(source, ("Clear-StaleCronLockIfSafe", "Test-LeaseProcessMatches")) + f'''
+            script = function_loader(source, ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Clear-StaleCronLockIfSafe")) + f'''
 $LockPath = {ps_literal(lock_path)}
 $LeasePath = {ps_literal(lease_path)}
 $PeerId = "{IMPLEMENTER}"
@@ -578,6 +600,156 @@ try {{
 }}
 '''
             results[mode] = run_powershell(script, root)
+    return results
+
+
+def lease_process_state_probe(source: Path) -> dict[str, str]:
+    script = function_loader(source, ("Get-LeaseProcessState",)) + '''
+$engine = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
+$child = Start-Process -FilePath $engine -ArgumentList @("-NoProfile", "-Command", "Start-Sleep -Seconds 30") -PassThru -WindowStyle Hidden
+$deadChild = Start-Process -FilePath $engine -ArgumentList @("-NoProfile", "-Command", "Start-Sleep -Seconds 30") -PassThru -WindowStyle Hidden
+try {
+    $null = $child.Handle
+    $null = $deadChild.Handle
+    $live = [pscustomobject]@{ pid=$child.Id; process_start_time_utc=$child.StartTime.ToUniversalTime().ToString("o") }
+    $dead = [pscustomobject]@{ pid=$deadChild.Id; process_start_time_utc=$deadChild.StartTime.ToUniversalTime().ToString("o") }
+    Stop-Process -Id $deadChild.Id -Force -ErrorAction Stop
+    $deadChild.WaitForExit()
+    $unknown = [pscustomobject]@{ pid=$child.Id; process_start_time_utc="" }
+    [ordered]@{
+        live=(Get-LeaseProcessState -Lease $live)
+        dead=(Get-LeaseProcessState -Lease $dead)
+        unknown=(Get-LeaseProcessState -Lease $unknown)
+    } | ConvertTo-Json -Compress
+} finally {
+    if (-not $child.HasExited) { Stop-Process -Id $child.Id -Force -ErrorAction SilentlyContinue }
+    if (-not $deadChild.HasExited) { Stop-Process -Id $deadChild.Id -Force -ErrorAction SilentlyContinue }
+}
+'''
+    with make_tempdir("lease-process-state-") as tmp:
+        return run_powershell(script, Path(tmp))
+
+
+def lease_owner_lock_state_table_probe(source: Path, selected: set[str] | None = None) -> dict:
+    forms = ("readable", "unreadable", "empty", "identityless")
+    owners = ("live", "dead", "unknown")
+    lock_states = ("present", "absent")
+    results = {}
+    probe_source = source.read_text(encoding="utf-8").replace(
+        "[int]$TimeoutMilliseconds = 2000",
+        "[int]$TimeoutMilliseconds = 50",
+        1,
+    )
+    with make_tempdir("lease-state-table-source-") as source_tmp:
+        probe_path = Path(source_tmp) / "peer_mailbox_cron.ps1"
+        probe_path.write_text(probe_source, encoding="utf-8", newline="\n")
+        for form in forms:
+            for owner in owners:
+                for lock_state in lock_states:
+                    cell = f"{form}|{owner}|{lock_state}"
+                    if selected is not None and cell not in selected:
+                        continue
+                    with make_tempdir(f"lease-state-{form}-{owner}-{lock_state}-") as tmp:
+                        root = Path(tmp)
+                        message = write_scope_fixture(root)
+                        write_json(root / "Area_comun/state/CLAIMS.json", {"claims": []})
+                        peer_dir = root / ".protocol-tmp/reviewer"
+                        peer_dir.mkdir(parents=True, exist_ok=True)
+                        lease = peer_dir / "reviewer.exec-lease.json"
+                        lock = peer_dir / "reviewer.lock"
+                        own_lease = root / ".protocol-tmp/implementer/implementer.exec-lease.json"
+                        if form == "readable":
+                            lease_content = json.dumps(
+                                {
+                                    "owner": REVIEWER,
+                                    "state": "running",
+                                    "deadline": "2099-01-01T00:00:00Z",
+                                    "work_scope": ["src/target"],
+                                    "probe_liveness": owner,
+                                }
+                            )
+                        elif form == "identityless":
+                            lease_content = json.dumps(
+                                {
+                                    "owner": REVIEWER,
+                                    "state": "running",
+                                    "deadline": "2099-01-01T00:00:00Z",
+                                    "work_scope": ["src/target"],
+                                }
+                            )
+                        elif form == "unreadable":
+                            lease_content = "{"
+                        else:
+                            lease_content = ""
+                        lease.write_text(lease_content, encoding="ascii")
+                        if lock_state == "present":
+                            write_json(lock, {"owner": REVIEWER, "probe_liveness": owner})
+                        script = function_loader(
+                            probe_path,
+                            SCOPE_FUNCTIONS + ("Clear-StaleCronLockIfSafe",),
+                        ) + f'''
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$PeerLeasePath = {ps_literal(lease)}
+$PeerLockPath = {ps_literal(lock)}
+$OwnLeasePath = {ps_literal(own_lease)}
+$LeasePath = $OwnLeasePath
+$LockPath = $PeerLockPath
+$script:logs = @()
+$script:LastAdditionalSignalDetail = ""
+function Get-LeaseProcessState {{
+    param($Lease)
+    if ($null -ne $Lease -and $Lease.PSObject.Properties['probe_liveness']) {{ return [string]$Lease.probe_liveness }}
+    return "unknown"
+}}
+function Test-LeaseProcessMatches {{ param($Lease) return ((Get-LeaseProcessState -Lease $Lease) -ceq "live") }}
+function Stop-LeaseProcessTree {{ param($Lease, $Reason) return $false }}
+function Write-Log {{ param([string]$Line) $script:logs += $Line }}
+$before = Get-AdditionalWorkSignal -Message $Message
+$LeasePath = $PeerLeasePath
+Clear-StaleCronLockIfSafe
+$leaseExists = Test-Path -LiteralPath $PeerLeasePath
+$lockExists = Test-Path -LiteralPath $PeerLockPath
+$LeasePath = $OwnLeasePath
+$script:LastAdditionalSignalDetail = ""
+$after = Get-AdditionalWorkSignal -Message $Message
+[ordered]@{{ before=$before; after=$after; lease_exists=$leaseExists; lock_exists=$lockExists; logs=@($script:logs) }} | ConvertTo-Json -Depth 5 -Compress
+'''
+                        results[cell] = run_powershell(script, root)
+    return results
+
+
+def nullish_peer_lease_guard_probe(source: Path) -> dict[str, str]:
+    results = {}
+    probe_source = source.read_text(encoding="utf-8").replace(
+        "[int]$TimeoutMilliseconds = 2000",
+        "[int]$TimeoutMilliseconds = 50",
+        1,
+    )
+    with make_tempdir("nullish-peer-source-") as source_tmp:
+        probe_path = Path(source_tmp) / "peer_mailbox_cron.ps1"
+        probe_path.write_text(probe_source, encoding="utf-8", newline="\n")
+        for name, content in (("empty", ""), ("whitespace", " \r\n\t")):
+            with make_tempdir(f"nullish-peer-{name}-") as tmp:
+                root = Path(tmp)
+                message = write_scope_fixture(root)
+                write_json(root / "Area_comun/state/CLAIMS.json", {"claims": []})
+                lease = root / ".protocol-tmp/reviewer/reviewer.exec-lease.json"
+                lease.parent.mkdir(parents=True, exist_ok=True)
+                lease.write_text(content, encoding="ascii")
+                own_lease = root / ".protocol-tmp/implementer/implementer.exec-lease.json"
+                script = function_loader(probe_path, SCOPE_FUNCTIONS) + f'''
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$LeasePath = {ps_literal(own_lease)}
+$script:LastAdditionalSignalDetail = ""
+function Get-LeaseProcessState {{ param($Lease) return "unknown" }}
+function Test-LeaseProcessMatches {{ param($Lease) return $false }}
+(Get-AdditionalWorkSignal -Message $Message) | ConvertTo-Json -Compress
+'''
+                results[name] = run_powershell(script, root)
     return results
 
 
@@ -1604,10 +1776,10 @@ def test_atomic_exec_admission_kills_peer_specific_lock_mutant() -> None:
 def test_orphan_lease_self_heal_matrix_requires_dead_owner_evidence() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-RESERVED-LEASE-SELF-HEAL"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
-    lock_evidence_branch = '        elseif (Test-Path -LiteralPath $LockPath) { try { $ownerEvidence = Get-Content -LiteralPath $LockPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop } catch { $ownerEvidence = $null } }'
-    unknown_evidence_mutant = '        elseif (Test-Path -LiteralPath $LockPath) { $ownerEvidence = $null }'
-    assert source.count(lock_evidence_branch) == 1
-    mutant_source = source.replace(lock_evidence_branch, unknown_evidence_mutant, 1)
+    lock_liveness_promotion = '                if ($lockLiveness -ne "unknown") { $liveness = $lockLiveness }'
+    dead_evidence_ignored = '                if ($false) { $liveness = $lockLiveness }'
+    assert source.count(lock_liveness_promotion) == 1
+    mutant_source = source.replace(lock_liveness_promotion, dead_evidence_ignored, 1)
     with make_tempdir("orphan-self-heal-mutant-") as tmp:
         mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
@@ -1621,7 +1793,10 @@ def test_orphan_lease_self_heal_matrix_requires_dead_owner_evidence() -> None:
     }
     assert set(healthy) == expected_states
     assert all(len(result["rounds"]) == 3 for result in healthy.values())
-    for state in expected_states:
+    unknown_rounds = healthy["reserved_without_lock"]["rounds"]
+    assert all(row["lock_exists"] and row["lease_exists"] for row in unknown_rounds)
+    assert "liveness=unknown action=preserve" in healthy["reserved_without_lock"]["logs"][0]
+    for state in expected_states - {"reserved_without_lock"}:
         healthy_rounds = healthy[state]["rounds"]
         assert all(not row["lock_exists"] and not row["lease_exists"] for row in healthy_rounds)
     assert all(row["lease_exists"] for row in mutant["truncated_with_lock"]["rounds"])
@@ -1657,6 +1832,84 @@ def test_live_unreadable_lease_is_preserved_and_deadline_mutant_dies() -> None:
     assert mutant["reserved_live"]["lease_exists"] is True
     assert mutant["reserved_live"]["logs"]
     assert "liveness=live action=preserve" in mutant["reserved_live"]["logs"][0]
+
+
+def test_lease_owner_lock_state_table_is_complete_and_mutation_proven() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-LEASE-OWNER-LOCK-STATE-TABLE"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    process_states = lease_process_state_probe(HARNESS_PATH)
+    assert process_states == {"live": "live", "dead": "dead", "unknown": "unknown"}
+    nullish = nullish_peer_lease_guard_probe(HARNESS_PATH)
+    assert nullish == {"empty": "peer_lease_unreadable", "whitespace": "peer_lease_unreadable"}
+
+    healthy = lease_owner_lock_state_table_probe(HARNESS_PATH)
+    assert len(healthy) == 24
+    for cell, row in healthy.items():
+        form, owner, lock_state = cell.split("|")
+        effective = owner if form == "readable" or lock_state == "present" else "unknown"
+        should_preserve = effective != "dead"
+        if form == "readable":
+            expected_before = {"live": "active_peer_lease", "dead": "none", "unknown": "peer_lease_unreadable"}[owner]
+        else:
+            expected_before = "peer_lease_unreadable"
+        expected_after = expected_before if should_preserve else "none"
+        assert row["lease_exists"] is should_preserve
+        assert row["before"] == expected_before
+        assert row["after"] == expected_after
+        if effective == "unknown" and lock_state == "absent":
+            assert row["lock_exists"] is True
+            assert any("SELF_HEAL_MANUAL_RECOVERY_REQUIRED" in line for line in row["logs"])
+        if effective == "dead":
+            assert row["lock_exists"] is False
+            assert any("liveness=dead action=remove" in line for line in row["logs"])
+
+    unknown_default = '$liveness = if ($leaseReadable) { Get-LeaseProcessState -Lease $lease } else { "unknown" }'
+    dead_default = '$liveness = if ($leaseReadable) { Get-LeaseProcessState -Lease $lease } else { "dead" }'
+    lock_liveness_promotion = '                if ($lockLiveness -ne "unknown") { $liveness = $lockLiveness }'
+    dead_evidence_ignored = '                if ($false) { $liveness = $lockLiveness }'
+    unknown_guard = '        if ($leaseLiveness -ceq "unknown") { return "peer_lease_unreadable" }'
+    open_unknown_guard = '        if ($false) { return "peer_lease_unreadable" }'
+    marker_guard = '        if (-not (Test-Path -LiteralPath $LockPath)) {'
+    no_marker_guard = '        if ($false) {'
+    missing_identity = '        return "unknown"'
+    missing_identity_dead = '        return "dead"'
+    for original in (unknown_default, lock_liveness_promotion, unknown_guard, marker_guard):
+        assert source.count(original) == 1
+
+    unknown_absent = "unreadable|dead|absent"
+    dead_with_lock = "unreadable|dead|present"
+    identityless_unknown = "identityless|unknown|present"
+    with make_tempdir("lease-state-collapse-unknown-") as tmp:
+        path = Path(tmp) / "peer_mailbox_cron.ps1"
+        path.write_text(source.replace(unknown_default, dead_default, 1), encoding="utf-8", newline="\n")
+        collapsed_unknown = lease_owner_lock_state_table_probe(path, {unknown_absent})
+    with make_tempdir("lease-state-ignore-lock-") as tmp:
+        path = Path(tmp) / "peer_mailbox_cron.ps1"
+        path.write_text(source.replace(lock_liveness_promotion, dead_evidence_ignored, 1), encoding="utf-8", newline="\n")
+        ignored_lock = lease_owner_lock_state_table_probe(path, {dead_with_lock})
+    with make_tempdir("lease-state-open-guard-") as tmp:
+        path = Path(tmp) / "peer_mailbox_cron.ps1"
+        path.write_text(source.replace(unknown_guard, open_unknown_guard, 1), encoding="utf-8", newline="\n")
+        open_guard = lease_owner_lock_state_table_probe(path, {identityless_unknown})
+    with make_tempdir("lease-state-no-marker-") as tmp:
+        path = Path(tmp) / "peer_mailbox_cron.ps1"
+        path.write_text(source.replace(marker_guard, no_marker_guard, 1), encoding="utf-8", newline="\n")
+        no_marker = lease_owner_lock_state_table_probe(path, {unknown_absent})
+    with make_tempdir("lease-state-process-collapse-") as tmp:
+        path = Path(tmp) / "peer_mailbox_cron.ps1"
+        start = source.index("function Get-LeaseProcessState")
+        end = source.index("function Test-LeaseProcessMatches", start)
+        process_body = source[start:end]
+        assert process_body.count(missing_identity) == 3
+        mutant_body = process_body.replace(missing_identity, missing_identity_dead, 1)
+        path.write_text(source[:start] + mutant_body + source[end:], encoding="utf-8", newline="\n")
+        process_mutant = lease_process_state_probe(path)
+
+    assert collapsed_unknown[unknown_absent]["lease_exists"] is False
+    assert ignored_lock[dead_with_lock]["lease_exists"] is True
+    assert open_guard[identityless_unknown]["before"] == "none"
+    assert no_marker[unknown_absent]["lock_exists"] is False
+    assert process_mutant["unknown"] == "dead"
 
 
 def test_archived_task_work_resolution_kills_hot_only_mutant() -> None:
@@ -1748,6 +2001,7 @@ def main() -> int:
         test_atomic_exec_admission_kills_peer_specific_lock_mutant,
         test_orphan_lease_self_heal_matrix_requires_dead_owner_evidence,
         test_live_unreadable_lease_is_preserved_and_deadline_mutant_dies,
+        test_lease_owner_lock_state_table_is_complete_and_mutation_proven,
         test_archived_task_work_resolution_kills_hot_only_mutant,
         test_glob_claim_scope_fails_closed_and_kills_guard_mutant,
         test_dirty_tree_veto_still_precedes_scope_admission,

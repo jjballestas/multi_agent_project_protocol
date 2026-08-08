@@ -204,18 +204,29 @@ function Update-ExecLeaseHeartbeat {
     }
 }
 
-function Test-LeaseProcessMatches {
+function Get-LeaseProcessState {
     param($Lease)
     if (-not $Lease -or -not $Lease.pid -or -not $Lease.process_start_time_utc) {
-        return $false
+        return "unknown"
     }
     try {
-        $process = Get-Process -Id ([int]$Lease.pid) -ErrorAction Stop
-        $started = $process.StartTime.ToUniversalTime().ToString("o")
-        return ($started -eq [string]$Lease.process_start_time_utc)
+        $process = Get-Process -Id ([int]$Lease.pid) -ErrorAction SilentlyContinue
+        if ($null -eq $process) { return "dead" }
     } catch {
-        return $false
+        return "unknown"
     }
+    try {
+        $started = $process.StartTime.ToUniversalTime().ToString("o")
+        if ($started -eq [string]$Lease.process_start_time_utc) { return "live" }
+        return "dead"
+    } catch {
+        return "unknown"
+    }
+}
+
+function Test-LeaseProcessMatches {
+    param($Lease)
+    return ((Get-LeaseProcessState -Lease $Lease) -ceq "live")
 }
 
 function Stop-LeaseProcessTree {
@@ -291,33 +302,78 @@ function Clear-StaleCronLockIfSafe {
         }
         return
     }
-    $lease = $null; $leaseMatches = $false
-    try {
-        foreach ($readAttempt in 1..3) {
-            try { $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop; if ($null -eq $lease) { throw "lease is empty or invalid" }; break }
-            catch { if ($readAttempt -eq 3) { throw }; Start-Sleep -Milliseconds 25 }
+    $lease = $null
+    $leaseReadable = $false
+    foreach ($readAttempt in 1..3) {
+        try {
+            $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop
+            if ($null -eq $lease) { throw "lease is empty or invalid" }
+            $leaseReadable = $true
+            break
+        } catch {
+            if ($readAttempt -lt 3) { Start-Sleep -Milliseconds 25 }
         }
-        $leaseMatches = Test-LeaseProcessMatches -Lease $lease
-        $deadlineState = "pre_deadline"
-        if ($leaseMatches) {
-            $deadlineValue = if ([string]$lease.state -ceq "reserved") { [string]$lease.reservation_deadline } else { [string]$lease.deadline }
-            $deadline = [DateTime]::Parse($deadlineValue).ToUniversalTime()
+    }
+
+    $liveness = if ($leaseReadable) { Get-LeaseProcessState -Lease $lease } else { "unknown" }
+    if ($liveness -ceq "unknown" -and (Test-Path -LiteralPath $LockPath)) {
+        try {
+            $lockEvidence = Get-Content -LiteralPath $LockPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop
+            if ($null -ne $lockEvidence) {
+                $lockLiveness = Get-LeaseProcessState -Lease $lockEvidence
+                if ($lockLiveness -ne "unknown") { $liveness = $lockLiveness }
+            }
+        } catch { }
+    }
+
+    if ($liveness -ceq "live") {
+        if ($leaseReadable -and [string]$lease.state -ceq "running") {
+            try { $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime() }
+            catch {
+                Write-Log "SELF_HEAL_MANUAL_RECOVERY_REQUIRED owner=$PeerId liveness=live action=preserve reason=running_deadline_unusable"
+                return
+            }
             if ([DateTime]::UtcNow -le $deadline) { return }
             if (-not (Stop-LeaseProcessTree -Lease $lease -Reason "orphan_expired")) { return }
-            $deadlineState = "expired"
+            if ((Get-LeaseProcessState -Lease $lease) -ne "dead") { return }
+        } elseif ($leaseReadable -and [string]$lease.state -ceq "reserved") {
+            try { $reservationDeadline = [DateTime]::Parse([string]$lease.reservation_deadline).ToUniversalTime() }
+            catch {
+                Write-Log "SELF_HEAL_MANUAL_RECOVERY_REQUIRED owner=$PeerId liveness=live action=preserve reason=reservation_deadline_unusable"
+                return
+            }
+            if ([DateTime]::UtcNow -le $reservationDeadline) { return }
+            Write-Log "SELF_HEAL_MANUAL_RECOVERY_REQUIRED owner=$PeerId liveness=live action=preserve reason=live_reservation_expired"
+            return
+        } else {
+            Write-Log "SELF_HEAL_MANUAL_RECOVERY_REQUIRED owner=$PeerId liveness=live action=preserve reason=lease_unusable"
+            return
         }
-        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
-        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
-        Write-Log "SELF_HEAL_STALE_LOCK owner=$PeerId pid=$($lease.pid) message=$($lease.task_or_msg_id) state=$deadlineState"
-    } catch {
-        $ownerEvidence = $null
-        if ($leaseMatches) { $ownerEvidence = $lease }
-        elseif (Test-Path -LiteralPath $LockPath) { try { $ownerEvidence = Get-Content -LiteralPath $LockPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop } catch { $ownerEvidence = $null } }
-        if ($null -ne $ownerEvidence -and (Test-LeaseProcessMatches -Lease $ownerEvidence)) { Write-Log "SELF_HEAL_UNREADABLE_LEASE owner=$PeerId liveness=live action=preserve"; return }
-        if ($null -eq $ownerEvidence) { Write-Log "SELF_HEAL_UNREADABLE_LEASE owner=$PeerId liveness=unknown action=preserve"; return }
-        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue; Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
-        Write-Log "SELF_HEAL_ORPHAN_LEASE owner=$PeerId liveness=dead action=remove"
+    } elseif ($liveness -ceq "unknown") {
+        if (-not (Test-Path -LiteralPath $LockPath)) {
+            $marker = [ordered]@{
+                schema_version = 1
+                owner = $PeerId
+                task_or_msg_id = if ($leaseReadable) { [string]$lease.task_or_msg_id } else { "unknown" }
+                recovery_required = $true
+                created_at = [DateTime]::UtcNow.ToString("o")
+            }
+            try {
+                $stream = New-Object System.IO.FileStream($LockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::Read)
+                try {
+                    $bytes = [Text.Encoding]::UTF8.GetBytes((($marker | ConvertTo-Json -Compress) + "`n"))
+                    $stream.Write($bytes, 0, $bytes.Length)
+                    $stream.Flush($true)
+                } finally { $stream.Dispose() }
+            } catch [System.IO.IOException] { }
+        }
+        Write-Log "SELF_HEAL_MANUAL_RECOVERY_REQUIRED owner=$PeerId liveness=unknown action=preserve reason=owner_unprovable"
+        return
     }
+
+    Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+    Write-Log "SELF_HEAL_ORPHAN_LEASE owner=$PeerId liveness=dead action=remove"
 }
 
 function Get-ExecProgressState {
@@ -850,7 +906,9 @@ function Read-JsonWithDeadline {
     do {
         try {
             $raw = [IO.File]::ReadAllText($Path, [Text.Encoding]::UTF8)
-            return [pscustomobject]@{ ok = $true; value = ($raw | ConvertFrom-Json) }
+            $value = $raw | ConvertFrom-Json -ErrorAction Stop
+            if ($null -eq $value) { throw "JSON document is empty or null" }
+            return [pscustomobject]@{ ok = $true; value = $value }
         } catch {
             Start-Sleep -Milliseconds 25
         }
@@ -992,7 +1050,9 @@ function Get-AdditionalWorkSignal {
             try { $reservationLive = ([DateTime]::Parse([string]$lease.reservation_deadline).ToUniversalTime() -gt $now) }
             catch { return "peer_lease_unreadable" }
         }
-        if ($reservationLive -or (Test-LeaseProcessMatches -Lease $lease)) {
+        $leaseLiveness = if (Test-LeaseProcessMatches -Lease $lease) { "live" } else { Get-LeaseProcessState -Lease $lease }
+        if ($leaseLiveness -ceq "unknown") { return "peer_lease_unreadable" }
+        if ($reservationLive -or $leaseLiveness -ceq "live") {
             $leaseOwner = [string]$leaseResult.value.owner
             if ([string]::IsNullOrWhiteSpace($leaseOwner)) { $leaseOwner = "unknown" }
             $leaseOwner = $leaseOwner -replace '[^A-Za-z0-9_.-]', '_'

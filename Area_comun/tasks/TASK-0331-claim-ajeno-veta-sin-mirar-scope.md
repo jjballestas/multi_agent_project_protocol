@@ -172,10 +172,11 @@ Regla de oro: ante duda real, ni borrar ni dejar pasar. El autocurado preserva l
 El guard del peer trata la lease como ocupada. `dead` significa muerte demostrada por una identidad
 PID + start-time; ausencia de identidad o fallo al leer start-time es `unknown`, nunca `dead`.
 
-La columna `dueno` es el resultado trivaluado de la mejor evidencia util entre lease y lock, no una
-verdad oculta que el runtime no puede observar. Con lease ilegible/0 bytes/sin identidad y lock
-ausente, el resultado necesariamente es `unknown`, aunque el proceso real ya haya muerto. Ese caso
-no se borra por conjetura: queda bloqueado con senal explicita para intervencion.
+La columna `dueno` enumera el estado fisico pedido para completar el producto cartesiano. La accion
+se gobierna por el resultado trivaluado de la mejor evidencia util entre lease y lock. Con lease
+ilegible/0 bytes/sin identidad y lock ausente, ese resultado necesariamente es `unknown`, aunque el
+estado fisico sea live o dead. Esas filas convergen deliberadamente en la misma accion segura: no
+se borra por conjetura y queda bloqueado con senal explicita para intervencion.
 
 Convenciones de respuesta del guard: `scope` significa `active_peer_lease` solo si el scope legible
 interseca (trabajo legible y disjunto puede solaparse); `busy` significa veto fail-closed
@@ -217,5 +218,6 @@ convierte `live` en `dead`.
 
 Contrato permanente: `NEG-HARNESS-LEASE-OWNER-LOCK-STATE-TABLE` recorre las 24 celdas y comprueba
 preservacion/retirada, marcador, senal y respuesta del guard antes/despues. Sus mutantes cambian
-por separado `unknown -> dead`, `unknown -> live`, el vacio fail-closed y la creacion del marcador;
+por separado `unknown -> dead`, omiten evidencia del lock, convierten `unknown` en permiso y
+suprimen la creacion del marcador;
 cualquier movimiento desde una accion declarada rompe al menos una frontera de la tabla.
