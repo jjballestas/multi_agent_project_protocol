@@ -44087,6 +44087,116 @@
             "status": "released",
             "task_id": "TASK-0334",
             "updated_at": "2026-08-08T00:30:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-005228-prune-arquitecto",
+            "expires_at": "2026-08-08",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-08-08T00:52:28Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-08T00:52:28Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-1",
+            "expires_at": "2026-08-08T06:22:43Z",
+            "notes": "Implement TASK-0336 remediation iteration 1; contract declaration remains embedded in the test runner.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0336",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
+                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "Area_comun/artifacts/Codex-TASK-0336-remediation-1-handoff.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-1.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T02:22:43Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-08T02:22:43Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-ratifica-0334",
+            "expires_at": "2026-08-08T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0334",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0334",
+                "Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-ratifica-0334"
+            ],
+            "started_at": "2026-08-08T01:53:14Z",
+            "status": "released",
+            "task_id": "TASK-0334",
+            "updated_at": "2026-08-08T01:53:14Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-ratifica-0335",
+            "expires_at": "2026-08-08T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-ratifica-0335"
+            ],
+            "started_at": "2026-08-08T02:23:20Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-08T02:23:20Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote36",
+            "expires_at": "2026-08-08T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0325-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0325-r3.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0334.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0334.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0334-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0334-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0334-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0334-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0335-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0335-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote36"
+            ],
+            "started_at": "2026-08-08T00:54:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T00:54:17Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote37",
+            "expires_at": "2026-08-08T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0335-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0335-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0334-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0334-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote37"
+            ],
+            "started_at": "2026-08-08T02:40:59Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T02:40:59Z"
         }
     ]
 }
