@@ -2,7 +2,7 @@
 task_id: TASK-0336
 file: Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md
 title: "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -43,7 +43,6 @@ intake:
   scope_routes:
     - scripts/check_falsification_contracts.py
     - scripts/test_falsification_contracts.py
-    - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
   out_of_scope: >
     No se toca `.github/workflows/validate.yml`: su cableado actual es correcto y esta probado en el
     CI real. No se reabre TASK-0330, que cierra con su nucleo. No entra el inventario de rojos de la
@@ -77,6 +76,21 @@ propiedad es de la CONTRIBUCION DEL PASO AL VEREDICTO DEL JOB.
 
 Ninguna cantidad de razonamiento sobre el shell arregla (a): **`if: false` no es una cuestion de
 shell.**
+
+## Remediacion 1 - contrato de shell efectivo y certificacion acotada
+
+La excepcion multilinea acepta solo un shell bash efectivo (declarado en el paso, en
+`defaults.run.shell` del job o del workflow, o implicito en un runner Unix) y un bloque cuya unica
+linea no inerte es la invocacion directa. Las demas lineas admitidas son `echo` simples: no pueden
+desactivar `errexit`, instalar un `trap ERR`, evaluar codigo ni ocultar el estado de salida. Esta
+regla conserva el bloque bueno `echo / runner / echo` y rechaza por construccion `set +e`,
+`set +o errexit`, `trap`, `source`, `eval`, funciones y operadores de control.
+
+La salida ya no afirma ejecucion garantizada. `FALSIFICATION_STATIC_WIRING` certifica solo las
+claves de trigger requeridas, condiciones de job/paso, invocacion directa, propagacion al paso y
+propagacion al job. Declara tres residuales fuera de esa afirmacion: filtros internos de triggers,
+`working-directory` y la resolucion de escalares YAML 1.1. El `needs` defensivo a nivel de paso se
+mantiene como guarda inerte conocida.
 
 ## La condicion dura heredada
 

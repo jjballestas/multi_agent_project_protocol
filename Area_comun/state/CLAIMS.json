@@ -40,6 +40,29 @@
             "updated_at": "2026-08-08T00:52:28Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-1",
+            "expires_at": "2026-08-08T06:22:43Z",
+            "notes": "Implement TASK-0336 remediation iteration 1; contract declaration remains embedded in the test runner.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0336",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
+                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "Area_comun/artifacts/Codex-TASK-0336-remediation-1-handoff.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-1.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T02:22:43Z",
+            "status": "active",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-08T02:22:43Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260808-ratifica-0334",
             "expires_at": "2026-08-08T23:00:00Z",
             "owner": "Arquitecto",
@@ -53,6 +76,21 @@
             "status": "released",
             "task_id": "TASK-0334",
             "updated_at": "2026-08-08T01:53:14Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-ratifica-0335",
+            "expires_at": "2026-08-08T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0335",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
+                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-ratifica-0335"
+            ],
+            "started_at": "2026-08-08T02:23:20Z",
+            "status": "released",
+            "task_id": "TASK-0335",
+            "updated_at": "2026-08-08T02:23:20Z"
         },
         {
             "claim_id": "CLAIM-arq-hygiene-20260808-lote36",
