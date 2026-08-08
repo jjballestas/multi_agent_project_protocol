@@ -56,9 +56,47 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-08T19:55:48Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0328",
             "updated_at": "2026-08-08T19:55:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0328-remediation-1-delivery",
+            "expires_at": "2026-08-08T22:25:48Z",
+            "notes": "Publish exact-commit remediation evidence, move TASK-0328 to in_review, release maker claims, and request independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1.md",
+                "personal/Codex/HANDOFF-TASK-0328-REMEDIATION-1-20260808.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T20:25:48Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-08T20:25:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0328-remediation-1-msgfix",
+            "expires_at": "2026-08-08T20:59:05Z",
+            "notes": "Add the validator-required question to the TASK-0328 review handoff, gate it, and release immediately.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1-msgfix",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T20:29:05Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-08T20:29:05Z"
         },
         {
             "claim_id": "CLAIM-20260808-Codex-TASK-0345",
