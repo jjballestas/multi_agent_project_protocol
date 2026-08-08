@@ -392,7 +392,7 @@
             "id": "TASK-0344",
             "owner": "Codex",
             "phase": "P2",
-            "status": "ready",
+            "status": "in_progress",
             "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra",
             "type": "implementation"
         },
