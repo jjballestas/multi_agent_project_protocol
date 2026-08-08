@@ -151,6 +151,32 @@
             "updated_at": "2026-08-08T18:35:41Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote54",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0343.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0343.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0344.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0344.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0345.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0345.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0345-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0345-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0343.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0343.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0344.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0344.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0345.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0345.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote54"
+            ],
+            "started_at": "2026-08-08T18:50:09Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T18:50:09Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

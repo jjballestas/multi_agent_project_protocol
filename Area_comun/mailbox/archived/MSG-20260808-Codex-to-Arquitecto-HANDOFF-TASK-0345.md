@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0345
-status: open
+status: archived
 created: 2026-08-08T18:32:00Z
 requires_response: false
 requested_action: Route independent review of TASK-0345 and separately assign the unrelated runtime-property invariant regression from run 31271924074.
