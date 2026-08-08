@@ -2,7 +2,7 @@
 task_id: TASK-0336
 file: Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md
 title: "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
