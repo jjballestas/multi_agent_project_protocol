@@ -2,7 +2,7 @@
 task_id: TASK-0329
 file: Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md
 title: "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista

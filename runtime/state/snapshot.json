@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "f11baf87dc5a92d12514d0be839da8494db3bcf735c1a8b0f5d4f910209687ed",
+  "canonical_hash": "298167c2d7092e2b9e0d4e836e699081e0e1363a4961566851b37fb546c8cd43",
   "integrity": {
-    "canonical_hash": "f11baf87dc5a92d12514d0be839da8494db3bcf735c1a8b0f5d4f910209687ed",
+    "canonical_hash": "298167c2d7092e2b9e0d4e836e699081e0e1363a4961566851b37fb546c8cd43",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "42e8c87a9b151da46feb685bac4f03faae29bab4ee9e7efbd232ff799d4ef4e1",
-    "signature": "1dc6d20b4b1501a4025f47048d16103ba6216d7f440510f348d564901a849862",
-    "up_to_seq": 7879
+    "prev_hash": "6d5b56cf9e62b8d258c05b7029466516d611df9902c40c189824553d39180904",
+    "signature": "86c9ba7a1f932484f00d8c5d09a6f2e625523b5809c2eb93c22fd84342fc6318",
+    "up_to_seq": 7883
   },
   "state": {
     "aggregate_versions": {
@@ -3190,7 +3190,7 @@
       "TASK-0326": 13,
       "TASK-0327": 13,
       "TASK-0328": 2,
-      "TASK-0329": 10,
+      "TASK-0329": 14,
       "TASK-0330": 44,
       "TASK-0331": 33,
       "TASK-0332": 2,
@@ -3220,7 +3220,7 @@
       "protocol-prune": 52,
       "protocol-state": 1
     },
-    "events_applied": 7208,
+    "events_applied": 7212,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6897,6 +6897,9 @@
       "codex:task0327:ready-to-in-progress:20260807T132704Z": 7536,
       "codex:task0327:release-delivery:20260807T143223Z": 7557,
       "codex:task0327:release-work:20260807T143223Z": 7556,
+      "codex:task0329:remediation1:delivery-claim-release:20260808T064800Z": 7883,
+      "codex:task0329:remediation1:in-progress-to-in-review:20260808T064800Z": 7881,
+      "codex:task0329:remediation1:work-claim-release:20260808T064800Z": 7882,
       "codex:task0330:acquire-delivery:20260807T141300Z": 7545,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
@@ -9844,6 +9847,7 @@
       "intent:Codex:claim:e460a957770424e99549f112232a3b24b80c8f8636dd10c9d02ea2b792c6dd56": 1435,
       "intent:Codex:claim:e46c0a20d83666cffbec54c3ee325a99c9593f2604449c5b3b757f4506720e45": 4090,
       "intent:Codex:claim:e4e211ef7fc6809d7465d67df1928c596c1c5b3de8eb4abfc0fd19cd5f6cc136": 1706,
+      "intent:Codex:claim:e519e81de1da702866d23ef427159112d6d25978af77502d08236458033f68ba": 7880,
       "intent:Codex:claim:e61af76995e15afd39880fd9d7f8511d26a34093c60060c587cea87ecfc32b15": 2163,
       "intent:Codex:claim:e64b31b793499f7b0646d857ac30fc8439442ce2307986996640bc166f91a136": 3128,
       "intent:Codex:claim:e67ad554ada1b5ec3ed439eab5de608604613ab63ca6187effc812951879a2f5": 2009,
@@ -10432,5 +10436,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7879
+  "up_to_seq": 7883
 }

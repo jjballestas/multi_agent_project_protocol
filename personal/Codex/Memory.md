@@ -1,6 +1,24 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0331 remediation iteration 2 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0329 remediation iteration 1 implementation committed.
+
+## 2026-08-08 - TASK-0329 remediation iteration 1 implementation
+
+- Commit `bde1eddd` removes the remaining whole-file identity allowlist from the exported
+  PowerShell neutrality gate and mirrors the Python scanner's ten-file, term-digest, exact-line
+  inventory with the same written reasons.
+- Permanent negative `NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY` proves both scanners report the
+  same controlled leak and kills a PowerShell mutant that restores whole-file membership. A
+  separate inventory assertion proves both declarations are identical and all 91 declared
+  exemptions resolve to live configured-identity occurrences.
+- The repository gates passed before commit: both scanners, the six-test scanner suite, 56/56
+  falsification inventory across 8/8 runners, collaboration validation, encoding, compile, drift,
+  and diff checks. Exact implementation commit `bde1eddd` passed the same gates in a detached clean
+  clone with empty status.
+- Governed delivery moves TASK-0329 back to `in_review`, releases both Codex claims at runtime
+  sequence 7883 with drift false, and publishes the updated self-contained handoff plus Arquitecto
+  routing request for independent Analista re-review.
+- Codex is the maker and has not reviewed or ratified this remediation.
 
 ## 2026-08-08 - TASK-0331 remediation iteration 2 implementation
 

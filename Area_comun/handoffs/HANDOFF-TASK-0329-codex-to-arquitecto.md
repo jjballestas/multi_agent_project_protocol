@@ -3,18 +3,18 @@ task_id: TASK-0329
 from: Codex
 to: Arquitecto
 status: in_review
-implementation_commit: bd664a864cbf71b489a92047b45ae4f641d4b7e7
+implementation_commit: bde1eddd5d577cef1e4a52fa3d5bd745bc79f3c4
 created_at: 2026-08-08T03:59:00Z
 ---
 
-# HANDOFF TASK-0329 - scoped identity-literal exemptions
+# HANDOFF TASK-0329 remediation 1 - parity-scoped identity exemptions
 
 ## Result
 
-Commit `bd664a86` removes `LEGACY_IDENTITY_LITERAL_FILES`, the whole-file bypass that
-made every configured identity invisible in ten source files. Its replacement binds each
-accepted occurrence to both a case-folded identity digest and an exact line number. A new
-identity on any other line in a formerly exempt file is now a finding.
+Commit `bde1eddd` closes the remaining whole-file bypass in the exported PowerShell scanner.
+Both neutrality implementations now bind every accepted occurrence to the same exact source
+path, line number, and case-normalized identity digest. A new identity on any other line in a
+formerly exempt file is a finding in both scanners.
 
 The inventory contained ten files at implementation time, not nine. All ten are declared
 with a reason:
@@ -33,44 +33,47 @@ with a reason:
 No identity, agent roster, runtime fallback, harness provider, or generated-memory exemption
 was changed. The exception declaration uses SHA-256 digests because spelling the configured
 identities inside the scanner would make the scanner flag its own declaration. Line movement
-fails closed and requires an explicit declaration update.
+fails closed and requires an explicit declaration update. The PowerShell inventory is
+independently declared but permanently compared with the Python inventory: ten files, 82 line
+entries, and 91 term-digest exemptions. Every declaration resolves to a live configured-identity
+occurrence in the current source.
 
 ## Permanent mutation contract
 
-`NEG-NEUTRALITY-IDENTITY-EXEMPTION-SCOPE` builds the same controlled pair described by
-the task:
+`NEG-NEUTRALITY-IDENTITY-EXEMPTION-SCOPE` retains the Python whole-file mutation control.
+The new `NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY` runs both scanners over the same controlled
+pair described by the task:
 
 - the existing third-party provider token at its declared line remains clean;
 - a coordinator identity injected on the next line in that formerly exempt file is found;
 - the same injection in a non-exempt script is found;
-- a mutant replacing the narrow predicate with whole-file membership hides only the first
-  injection and is killed by the declared assertions.
+- both scanners return the same finding set and the same nonzero verdict;
+- a PowerShell mutant replacing the narrow predicate with whole-file membership hides only the
+  formerly exempt-file injection and is killed by the declared assertions.
 
-The contract is declared beside its permanent-negative marker. The existing CI step directly
-executes `scripts/test_scan_domain_neutrality.py`; the falsification checker reports 54/54
+Both contracts are declared beside their permanent-negative markers. The existing CI step directly
+executes `scripts/test_scan_domain_neutrality.py`; the falsification checker reports 56/56
 contracts across 8/8 runners.
 
 ## Exact-commit verification
 
-Detached clean clone of exact commit `bd664a864cbf71b489a92047b45ae4f641d4b7e7` under the
+Detached clean clone of exact commit `bde1eddd5d577cef1e4a52fa3d5bd745bc79f3c4` under the
 designated scratch root:
 
 - `python scripts/validate_collaboration_state.py --root .` -> exit 0;
 - `python scripts/scan_encoding.py --root .` -> exit 0;
 - `python scripts/scan_domain_neutrality.py --root .` -> exit 0;
-- `python scripts/test_scan_domain_neutrality.py` -> exit 0, 4/4;
-- `python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory` -> exit 0, 54/54 and 8/8;
+- `python scripts/test_scan_domain_neutrality.py` -> exit 0, 6/6;
+- `python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory` -> exit 0, 56/56 and 8/8;
 - `powershell -NoProfile -File scripts/scan_domain_neutrality.ps1 -Root .` -> exit 0;
 - Python compile and `git diff --check` -> exit 0;
 - clone status -> empty.
 
 ## Independent review focus
 
-1. Reproduce the provider-file/non-exempt control pair and confirm only the declared provider
-   occurrence is exempt.
-2. Apply the whole-file predicate mutant and confirm the new permanent negative kills it.
-3. Verify all ten reasons and line scopes against the current source occurrences.
-4. Confirm the Python scanner still returns clean on the repository and the existing PowerShell
-   gate remains green.
+1. Reproduce the provider-file/non-exempt control pair and compare both scanners' exact findings.
+2. Apply the PowerShell whole-file predicate mutant and confirm the parity negative kills it.
+3. Verify the two ten-file inventories are identical and all 91 declarations remain live.
+4. Confirm both production scanners return clean and remain copied by `scripts/new_instance.py`.
 
 Codex is maker only and did not review or ratify this implementation.
