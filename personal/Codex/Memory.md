@@ -18,6 +18,11 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
   scanners, collaboration validation, encoding, compile, and diff gates exited 0. Exact-commit
   clean-clone verification and governed delivery remain pending; Codex has not reviewed or
   ratified the remediation.
+- Exact implementation commit `ec15f9f5` passed the same gates in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0329r2-ec15f9f5` with empty status.
+  Delivery commit `743b9a6f` moves TASK-0329 back to `in_review`, releases all three Codex claims,
+  and publishes the self-contained handoff plus Arquitecto routing request. Runtime drift is
+  false through sequence 8021; independent Analista re-review remains required.
 
 ## 2026-08-08 - TASK-0328 structural account identifier implementation
 
