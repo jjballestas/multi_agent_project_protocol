@@ -87,6 +87,13 @@
             "phase": "P2",
             "status": "proposed",
             "title": "El certificador de contratos es ciego a la frontera muerta y fragil al reformateo"
+        },
+        {
+            "id": "TASK-0342",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows"
         }
     ],
     "view": "task_index.slim"
