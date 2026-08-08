@@ -269,14 +269,6 @@
             "type": "build"
         },
         {
-            "file": "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
-            "id": "TASK-0322",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Estrechar DATE_RE con validacion de rangos de componente: el conjunto de confianza se reduce ~3,7e3 veces (la densidad de portadoras NO baja; 2,9/0,05 pct son relativos al muestreador del AC1)",
-            "type": "infra"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0325-endurecimiento-exencion-fecha.md",
             "id": "TASK-0325",
             "owner": "Codex",
@@ -322,14 +314,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST",
-            "type": "infra"
-        },
-        {
-            "file": "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
-            "id": "TASK-0333",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Hay un TERCER lector de git status sin --untracked-files=all, y alimenta el gate que rechaza turnos con cambios no declarados: declarar un directorio esconde el subarbol entero",
             "type": "infra"
         },
         {

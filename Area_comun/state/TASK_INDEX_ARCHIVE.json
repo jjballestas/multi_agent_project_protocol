@@ -8270,6 +8270,22 @@
             "status": "done",
             "title": "23 de 37 contratos de falsacion tienen un runner que CI nunca ejecuta, y uno de esos runners lleva roto desde TASK-0316: la cobertura declarada no es cobertura verificada",
             "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0322-date-re-rangos-portadores.md",
+            "id": "TASK-0322",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Estrechar DATE_RE con validacion de rangos de componente: el conjunto de confianza se reduce ~3,7e3 veces (la densidad de portadoras NO baja; 2,9/0,05 pct son relativos al muestreador del AC1)",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+            "id": "TASK-0333",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Hay un TERCER lector de git status sin --untracked-files=all, y alimenta el gate que rechaza turnos con cambios no declarados: declarar un directorio esconde el subarbol entero",
+            "type": "infra"
         }
     ]
 }
