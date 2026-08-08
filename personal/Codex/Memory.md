@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0343 diagnostic committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0343 implementation committed.
+
+## 2026-08-08 - TASK-0343 implementation
+
+- Commit `26b33967` replaces the platform-bound rollback log assertion and the
+  two adjacent literal sequence checks with a relational comparison of the full
+  signed event list and claims state captured immediately before rollback.
+- Permanent `retry-ledger-preservation-property` kills both an accept-loss mutant
+  and the old literal-log-path mutant; inventory is now 64/64 contracts.
+- Local Windows measured `0 -> 3 / disk`. Actions run 31269392388 emitted no
+  preserved record; rerun 31269815427 attempt 2 showed `rollback_probe_failed`
+  and `ledger_unreadable_after_exec`, with the governed state still preserved.
+- The complete runner, contract inventory, collaboration, encoding, neutrality,
+  drift, compile, and diff gates exited 0. TASK-0343 remains `in_progress`
+  pending exact-commit clean-clone gates and a real green Actions step.
 
 ## 2026-08-08 - TASK-0343 pre-fix CI diagnosis
 
