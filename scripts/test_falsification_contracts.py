@@ -47,6 +47,11 @@ FALSIFICATION_CONTRACTS = (
             "assert job_continue_on_error.returncode != 0",
             "assert job_defaults_bash.returncode == 0",
             "assert workflow_defaults_bash.returncode == 0",
+            "assert multiline_continuation_step_bash.returncode != 0",
+            "assert multiline_continuation_ubuntu.returncode != 0",
+            "assert multiline_continuation_job_bash.returncode != 0",
+            "assert multiline_continuation_workflow_bash.returncode != 0",
+            "assert multiline_comment_backslash.returncode == 0",
             "assert \"FALSIFICATION_EXECUTION_GUARANTEED\" not in wired.stdout",
             "assert \"residuals=trigger_filters,working_directory,yaml_1_1_scalars\" in wired.stdout",
         ),
@@ -201,6 +206,61 @@ def main() -> int:
             ),
         )
         assert workflow_defaults_bash.returncode == 0, workflow_defaults_bash.stdout + workflow_defaults_bash.stderr
+
+        continuation_block = multiline.replace(
+            "          echo before\n", "          echo before \\\n", 1
+        )
+        multiline_continuation_step_bash = mutated(
+            "multiline-continuation-step-bash",
+            continuation_block.replace(
+                "      - run: |\n", "      - shell: bash\n        run: |\n", 1
+            ),
+        )
+        assert multiline_continuation_step_bash.returncode != 0, (
+            multiline_continuation_step_bash.stdout + multiline_continuation_step_bash.stderr
+        )
+
+        multiline_continuation_ubuntu = mutated(
+            "multiline-continuation-ubuntu",
+            continuation_block.replace("runs-on: windows-latest", "runs-on: ubuntu-latest"),
+        )
+        assert multiline_continuation_ubuntu.returncode != 0, (
+            multiline_continuation_ubuntu.stdout + multiline_continuation_ubuntu.stderr
+        )
+
+        multiline_continuation_job_bash = mutated(
+            "multiline-continuation-job-bash",
+            continuation_block.replace(
+                "    runs-on: windows-latest\n",
+                "    runs-on: windows-latest\n    defaults:\n      run:\n        shell: bash\n",
+            ),
+        )
+        assert multiline_continuation_job_bash.returncode != 0, (
+            multiline_continuation_job_bash.stdout + multiline_continuation_job_bash.stderr
+        )
+
+        multiline_continuation_workflow_bash = mutated(
+            "multiline-continuation-workflow-bash",
+            continuation_block.replace(
+                "jobs:\n", "defaults:\n  run:\n    shell: bash\njobs:\n"
+            ),
+        )
+        assert multiline_continuation_workflow_bash.returncode != 0, (
+            multiline_continuation_workflow_bash.stdout
+            + multiline_continuation_workflow_bash.stderr
+        )
+
+        multiline_comment_backslash = mutated(
+            "multiline-bash-comment-backslash",
+            multiline.replace(
+                "      - run: |\n",
+                "      - shell: bash\n        run: |\n          # comment \\\n",
+                1,
+            ).replace("          echo before\n", "", 1),
+        )
+        assert multiline_comment_backslash.returncode == 0, (
+            multiline_comment_backslash.stdout + multiline_comment_backslash.stderr
+        )
 
         step_if_false = mutated(
             "m3-step-if-false",

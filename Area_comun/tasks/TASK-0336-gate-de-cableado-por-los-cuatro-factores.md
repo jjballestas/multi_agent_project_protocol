@@ -2,7 +2,7 @@
 task_id: TASK-0336
 file: Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md
 title: "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -98,3 +98,17 @@ mantiene como guarda inerte conocida.
 Mientras los nueve escapes sigan vivos, **`FALSIFICATION_EXECUTION runners=8/8 contracts=48/48` no
 se cita como prueba de ejecucion** en ningun handoff ni reporte. Es la misma disciplina que se
 aplico al "47" y que el maker respeto en el AC5 de 0330.
+
+## Remediacion 2 - continuacion de linea de bash
+
+El gate conserva los indices de las lineas fisicas antes de normalizar separadores de ruta. En un
+bloque multilinea, una invocacion directa deja de contar si la linea ejecutable inmediatamente
+anterior termina en un numero impar de barras invertidas: bash elimina esa barra y el salto, por lo
+que la supuesta invocacion pasa a ser parte del comando anterior. Las lineas de comentario no
+activan esta regla, igual que en bash, y una barra seguida de espacio tampoco se trata como
+continuacion.
+
+El contrato permanente agrega las dos caras de la frontera: rechaza `echo before \\` seguido del
+runner por las cuatro puertas de bash efectivo (paso, runner Unix, defaults del job y defaults del
+workflow), y sigue aceptando un comentario terminado en `\\` seguido del runner. La certificacion
+permanece acotada a cableado estatico; no se amplia ni se presenta como prueba de ejecucion.

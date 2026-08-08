@@ -117,6 +117,14 @@ def bash_block_preserves_abort(
     )
 
 
+def bash_line_continues(raw_line: str) -> bool:
+    """Detect an executable Bash line whose final backslash consumes the next newline."""
+    if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+        return False
+    trailing_backslashes = len(raw_line) - len(raw_line.rstrip("\\"))
+    return trailing_backslashes % 2 == 1
+
+
 def command_gates_runner(
     command: str,
     relative_path: Path,
@@ -135,11 +143,23 @@ def command_gates_runner(
         rf"{python}\s+[A-Za-z0-9_./:=,-]+(?:\s+[A-Za-z0-9_./:=,-]+)*",
         re.IGNORECASE,
     )
-    lines = [
-        line.strip().replace("\\", "/")
-        for line in command.splitlines()
+    physical_lines = command.splitlines()
+    continued_line_indexes = {
+        index + 1
+        for index, line in enumerate(physical_lines[:-1])
+        if bash_line_continues(line)
+    }
+    indexed_lines = [
+        (index, line.strip().replace("\\", "/"))
+        for index, line in enumerate(physical_lines)
         if line.strip() and not line.lstrip().startswith("#")
     ]
+    lines = [line for _, line in indexed_lines]
+    if any(
+        index in continued_line_indexes and invocation.fullmatch(line)
+        for index, line in indexed_lines
+    ):
+        return False
     direct_invocations = [line for line in lines if invocation.fullmatch(line)]
     if len(lines) == 1:
         return len(direct_invocations) == 1
