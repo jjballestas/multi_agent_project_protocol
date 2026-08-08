@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: GO
 task_id: TASK-0332
-status: open
+status: archived
 created: 2026-08-08T08:46:52Z
 requires_response: false
 ---

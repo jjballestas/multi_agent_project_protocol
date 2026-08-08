@@ -67,12 +67,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0325",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
-        },
-        {
             "id": "TASK-0327",
             "owner": "Codex",
             "status": "in_progress",
@@ -101,18 +95,6 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
-        },
-        {
-            "id": "TASK-0334",
-            "owner": "Codex",
-            "status": "done",
-            "title": "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub"
-        },
-        {
-            "id": "TASK-0335",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
         },
         {
             "id": "TASK-0336",
