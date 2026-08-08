@@ -96,3 +96,23 @@ descubrirlo como ruido en produccion.
 - AC5 queda en `NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION`. El mutante conserva el
   nuevo patron en una rama inalcanzable y restaura como rama viva el patron contiguo:
   la forma contigua sigue dando True y la agrupada cae a False.
+
+## Remediacion 1: limite de avidez y delta bidireccional (2026-08-08)
+
+- El candidato amplio ya no decide por su coincidencia completa. La guarda examina
+  prefijos de longitud valida y solo acepta un prefijo con checksum correcto que
+  termine ante un separador permitido o el final real de la cadena. Asi, el texto
+  posterior puede estar dentro del candidato avido sin contaminar el identificador.
+- La expresion conserva el maximo estructural de 34 caracteres compactados. Si el
+  candidato termina porque alcanzo ese maximo, la guarda tambien mira el caracter
+  siguiente del texto original y rechaza una continuacion alfanumerica sin separar.
+- Comparacion bidireccional sobre el mismo corpus gobernado de metadata de HEAD,
+  seleccionado con `iter_source_paths` y las claves de `ALLOWLIST_KEYS`: 22,342
+  cadenas evaluadas por ambos motores; ganadas: 0; perdidas: 0.
+- Corpus permanente de seis fronteras: ganadas frente al motor anterior: 2 (forma
+  agrupada aislada y agrupada embebida); perdidas: 1. La unica perdida es una forma
+  contigua extendida con `A` cuyo checksum es invalido; se conserva como rechazo
+  deliberado. Todos los positivos validos del motor anterior permanecen detectados.
+- El mutante permanente sustituye la validacion por prefijo por el checksum de la
+  coincidencia completa: las formas aisladas siguen pasando, pero la forma contigua
+  embebida vuelve a escapar. El contrato liga directamente la regresion observada.
