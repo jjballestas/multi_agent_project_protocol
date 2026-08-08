@@ -1,7 +1,7 @@
 ---
 id: TASK-0344
 title: La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0344-la-poda-de-mailbox-y-su-caso-de-prueba-discrepan.md

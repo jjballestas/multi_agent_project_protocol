@@ -147,7 +147,7 @@
         {
             "id": "TASK-0344",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra"
         },
         {
