@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0340 delivery committed.
+
+## 2026-08-08 - TASK-0340 governed delivery
+
+- Delivery commit `bf7239a3` moves TASK-0340 to `in_review`, releases both active TASK-0340
+  maker claims, and publishes the self-contained handoff plus Arquitecto routing request.
+- Real GitHub Actions run `31266732042` proves the TASK-0340 dependency installation,
+  complete-history checkout, canonical validator, PowerShell validator, encoding, and
+  falsification-contract steps succeed. Under Arquitecto's AC6 decision, the remaining run
+  failures are separately contracted as TASK-0344 (`validate`) and TASK-0343
+  (`falsification-runners`).
+- Actor-auth cases, 63/63 falsification inventory, collaboration validation, encoding,
+  neutrality, and diff gates exited 0 immediately before delivery. Codex remains maker only
+  and has not reviewed or ratified TASK-0340.
 
 ## 2026-08-08 - TASK-0342 platform-independent encoding exclusions
 
