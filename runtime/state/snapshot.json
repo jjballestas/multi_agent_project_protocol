@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "920410e53ad72833981aaac4bd0c7ae4fa98aa7aac839f092512466f8a21bfa8",
+  "canonical_hash": "9d4950d8b45f11a2363418e103062f02bb70eed100d711c8c735d4419eb97a26",
   "integrity": {
-    "canonical_hash": "920410e53ad72833981aaac4bd0c7ae4fa98aa7aac839f092512466f8a21bfa8",
+    "canonical_hash": "9d4950d8b45f11a2363418e103062f02bb70eed100d711c8c735d4419eb97a26",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2a24e9bd791d8fc463cd93f016beb7b2a18c469b70dbdd0da2b3a35b8d7ff0f1",
-    "signature": "a9b06056545f3eb2803ae43736c5b06a35692aafe6899915cac6d8cb7a07c7fa",
-    "up_to_seq": 8185
+    "prev_hash": "0aaa4903059a444bdcf60951f2905d55bf50b929216e5422785bdee56bbc1a60",
+    "signature": "2257dd4b246e5f7c25e4de0dd491d7fcd8b97330648c290f7056df16d3696769",
+    "up_to_seq": 8186
   },
   "state": {
     "aggregate_versions": {
@@ -3293,7 +3293,7 @@
       "TASK-0326": 13,
       "TASK-0327": 22,
       "TASK-0328": 17,
-      "TASK-0329": 25,
+      "TASK-0329": 26,
       "TASK-0330": 44,
       "TASK-0331": 54,
       "TASK-0332": 19,
@@ -3333,7 +3333,7 @@
       "protocol-prune": 57,
       "protocol-state": 1
     },
-    "events_applied": 7514,
+    "events_applied": 7515,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7189,6 +7189,7 @@
       "codex:task0329:remediation2:in-review:20260808T135826Z": 8018,
       "codex:task0329:remediation2:memory-claim:20260808T135019Z": 8016,
       "codex:task0329:remediation2:memory-release:20260808T135826Z": 8020,
+      "codex:task0329:remediation3:claim-acquire:20260808T221220Z": 8186,
       "codex:task0330:acquire-delivery:20260807T141300Z": 7545,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
@@ -10851,5 +10852,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8185
+  "up_to_seq": 8186
 }

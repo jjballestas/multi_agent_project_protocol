@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import re
@@ -45,15 +46,28 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY",
         "negative": "Real-tree identity probes must produce identical findings through both gates, including an unseen route.",
-        "mutation": "indented_source = source.replace(",
+        "mutation": "narrowed_python_source = python_source.replace(",
         "boundaries": (
+            "self.assertEqual(contract_paths, copied_paths)",
             "self.assertEqual(expected_findings, python_findings)",
             "self.assertEqual(expected_findings, powershell_findings)",
+            "self.assertNotEqual(expected_findings, narrowed_python_findings)",
             "self.assertNotEqual(python_findings, indented_findings)",
             "self.assertNotEqual(python_findings, outside_findings)",
             "self.assertNotEqual(expected_findings, symmetric_python_findings)",
         ),
         "exercised_by": "test_real_tree_identity_parity_rejects_single_scanner_exemptions",
+    },
+    {
+        "id": "NEG-NEUTRALITY-IDENTITY-INVENTORY-PARITY",
+        "negative": "A dead identity exemption added to only one scanner must be rejected immediately.",
+        "mutation": "mutated_powershell_source = powershell_source.replace(",
+        "boundaries": (
+            "self.assertEqual(python_inventory, powershell_inventory)",
+            "self.assertNotEqual(python_inventory, mutated_powershell_inventory)",
+            "self.assertEqual(declared_exemption_count, 91)",
+        ),
+        "exercised_by": "test_identity_exemption_inventories_are_one_to_one_and_in_parity",
     },
 )
 
@@ -65,6 +79,26 @@ def load_scanner():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def identity_contract_paths(root: Path) -> set[str]:
+    """Return the versioned identity-scan universe without importing either scanner."""
+    paths: set[str] = set()
+    for path in root.rglob("*"):
+        if not path.is_file():
+            continue
+        relative_path = path.relative_to(root).as_posix()
+        runtime_python = (
+            relative_path.startswith("runtime/")
+            and relative_path.endswith(".py")
+            and not relative_path.startswith("runtime/memory/")
+        )
+        script_source = relative_path.startswith("scripts/") and relative_path.endswith(
+            (".py", ".ps1")
+        )
+        if runtime_python or script_source:
+            paths.add(relative_path)
+    return paths
 
 
 class DomainNeutralityCoverageTests(unittest.TestCase):
@@ -150,6 +184,41 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
             capture_output=True,
             check=False,
         )
+
+    def powershell_identity_inventory(
+        self, source: str | None = None
+    ) -> dict[str, dict[int, tuple[str, ...]]]:
+        if source is None:
+            source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
+        marker = "$GenericIdentityTokens = " + "@("
+        self.assertIn(marker, source)
+        probe = r'''
+$InventoryOutput = @{}
+foreach ($InventoryPath in $IdentityLiteralExemptions.Keys) {
+    $InventoryLines = @{}
+    foreach ($InventoryLine in $IdentityLiteralExemptions[$InventoryPath].Lines.Keys) {
+        $InventoryLines[[string]$InventoryLine] = @(
+            $IdentityLiteralExemptions[$InventoryPath].Lines[$InventoryLine]
+        )
+    }
+    $InventoryOutput[$InventoryPath] = $InventoryLines
+}
+$InventoryOutput | ConvertTo-Json -Depth 8 -Compress
+exit 0
+'''
+        instrumented = source.replace(marker, probe + "\n" + marker, 1)
+        probe_path = self.scratch_root / "scan_domain_neutrality_inventory_probe.ps1"
+        probe_path.write_text(instrumented, encoding="utf-8")
+        result = self.run_powershell_scanner(probe_path)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        decoded = json.loads(result.stdout)
+        return {
+            path: {
+                int(line): tuple(digests if isinstance(digests, list) else [digests])
+                for line, digests in lines.items()
+            }
+            for path, lines in decoded.items()
+        }
 
     def test_nested_scripts_and_policy_are_scanned_but_generated_pack_is_exempt(self) -> None:
         result = self.run_python_scanner()
@@ -259,26 +328,20 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         probe_root = self.scratch_root / "real-tree-probe"
         probe_root.mkdir()
         shutil.copy2(REPO_ROOT / "protocol.config.json", probe_root / "protocol.config.json")
-        config = scanner.load_config(REPO_ROOT)["domain_neutrality"]
-        scan_globs = scanner.append_required_patterns(
-            config["scan_globs"], scanner.REQUIRED_SCAN_GLOBS
-        )
-        exempt_globs = scanner.append_required_patterns(
-            config["exempt_globs"], scanner.REQUIRED_EXEMPT_GLOBS
-        )
         configured_identities = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
         probe_identity = "Code" + "x"
         expected_findings: set[str] = set()
-        for source_path in scanner.iter_scanned_files(REPO_ROOT, scan_globs, exempt_globs):
-            relative_path = source_path.relative_to(REPO_ROOT).as_posix()
-            if not scanner.identity_scan_path(relative_path):
-                continue
+        contract_paths = identity_contract_paths(REPO_ROOT)
+        copied_paths: set[str] = set()
+        for relative_path in sorted(contract_paths):
+            source_path = REPO_ROOT / relative_path
             target_path = probe_root / relative_path
             target_path.parent.mkdir(parents=True, exist_ok=True)
             lines = source_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
             first_probe_line = len(lines) + 1
             lines.extend(f'# real-tree parity probe: {term}' for term in configured_identities)
             target_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+            copied_paths.add(relative_path)
             for offset, probe_term in enumerate(configured_identities):
                 for matched_term in configured_identities:
                     if re.search(
@@ -287,6 +350,8 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
                         expected_findings.add(
                             f"{relative_path}:{first_probe_line + offset}: {matched_term}"
                         )
+
+        self.assertEqual(contract_paths, copied_paths)
 
         unseen_relative_path = "scripts/remediation_slip1_probe.py"
         unseen_path = probe_root / unseen_relative_path
@@ -315,6 +380,26 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         powershell_findings = set(powershell.stdout.splitlines())
         self.assertEqual(expected_findings, python_findings)
         self.assertEqual(expected_findings, powershell_findings)
+
+        python_source = SCANNER_PATH.read_text(encoding="utf-8")
+        required_exempt_rule = 'REQUIRED_EXEMPT_GLOBS = ("runtime/memory/**",)'
+        narrowed_python_source = python_source.replace(
+            required_exempt_rule,
+            'REQUIRED_EXEMPT_GLOBS = ("runtime/memory/**", "runtime/adapters/**")',
+            1,
+        )
+        self.assertNotEqual(python_source, narrowed_python_source)
+        narrowed_python_path = self.scratch_root / "scan_domain_neutrality_narrowed_mutant.py"
+        narrowed_python_path.write_text(narrowed_python_source, encoding="utf-8")
+        narrowed_python = self.run_python_scanner(narrowed_python_path, probe_root)
+        narrowed_python_findings = set(narrowed_python.stdout.splitlines())
+        self.assertNotEqual(expected_findings, narrowed_python_findings)
+        self.assertTrue(
+            any(
+                finding.startswith("runtime/adapters/")
+                for finding in expected_findings - narrowed_python_findings
+            )
+        )
 
         source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
         digest = "57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93"
@@ -354,7 +439,6 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         self.assertNotEqual(python_findings, outside_findings)
         self.assertNotIn(f"{unseen_relative_path}:1: {probe_identity}", outside_findings)
 
-        python_source = SCANNER_PATH.read_text(encoding="utf-8")
         scan_loop_rule = "    for line_number, line in enumerate(text.splitlines(), start=1):\n"
         symmetric_python_source = python_source.replace(
             scan_loop_rule,
@@ -386,6 +470,58 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         self.assertNotIn(
             f"{unseen_relative_path}:1: {probe_identity}", symmetric_python_findings
         )
+
+    def test_identity_exemption_inventories_are_one_to_one_and_in_parity(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-NEUTRALITY-IDENTITY-INVENTORY-PARITY"""
+        scanner = load_scanner()
+        powershell_inventory = self.powershell_identity_inventory()
+        python_inventory = {
+            path: {int(line): tuple(hashes) for line, hashes in declaration["lines"].items()}
+            for path, declaration in scanner.IDENTITY_LITERAL_EXEMPTIONS.items()
+        }
+        self.assertEqual(python_inventory, powershell_inventory)
+
+        powershell_source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
+        dead_digest = hashlib.sha256(("Code" + "x").casefold().encode("utf-8")).hexdigest()
+        dead_declaration = (
+            '    "runtime/gate.py" = @{\n'
+            '        Reason = "Dead-coordinate inventory drift mutant."\n'
+            f'        Lines = @{{ 1 = @("{dead_digest}") }}\n'
+            '    }\n'
+        )
+        mutated_powershell_source = powershell_source.replace(
+            "$IdentityLiteralExemptions = @{\n",
+            "$IdentityLiteralExemptions = @{\n" + dead_declaration,
+            1,
+        )
+        self.assertNotEqual(powershell_source, mutated_powershell_source)
+        mutated_powershell_inventory = self.powershell_identity_inventory(
+            mutated_powershell_source
+        )
+        self.assertNotEqual(python_inventory, mutated_powershell_inventory)
+
+        configured_terms = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
+        terms_by_digest = {
+            hashlib.sha256(term.casefold().encode("utf-8")).hexdigest(): term
+            for term in configured_terms
+        }
+        declared_exemption_count = 0
+        for relative_path, lines in python_inventory.items():
+            source_lines = (REPO_ROOT / relative_path).read_text(
+                encoding="utf-8-sig"
+            ).splitlines()
+            for line_number, hashes in lines.items():
+                self.assertLessEqual(line_number, len(source_lines), relative_path)
+                source_line = source_lines[line_number - 1]
+                for digest in hashes:
+                    self.assertIn(digest, terms_by_digest, digest)
+                    term = terms_by_digest[digest]
+                    matches = re.findall(rf"(?i)(?<!\w){re.escape(term)}(?!\w)", source_line)
+                    self.assertGreaterEqual(
+                        len(matches), 1, f"{relative_path}:{line_number}:{term}"
+                    )
+                    declared_exemption_count += 1
+        self.assertEqual(declared_exemption_count, 91)
 
     def test_powershell_scanner_matches_required_coverage_when_available(self) -> None:
         result = self.run_powershell_scanner()
