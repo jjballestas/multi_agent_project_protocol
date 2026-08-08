@@ -16,8 +16,9 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
   backup and cleans both backup and temporary paths; the complete runner passes.
 - The 28-test exec-lease harness, 59/59 falsification inventory, all requested task and
   repository gates, compile, drift, and diff checks exited 0 before commit. Exact-commit
-  detached-clone verification and governed delivery remain pending. Codex has not reviewed
-  or ratified the remediation.
+  detached clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0331r5-a29e2cea-20260808T1426`
+  passed the same gates at `a29e2cea` with empty status. Governed delivery remains pending;
+  Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-08 - TASK-0329 remediation iteration 2 implementation
 

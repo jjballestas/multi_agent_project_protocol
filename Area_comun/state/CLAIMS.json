@@ -62,6 +62,28 @@
             "updated_at": "2026-08-08T14:07:25Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-5-delivery",
+            "expires_at": "2026-08-08T17:34:44Z",
+            "notes": "Publish TASK-0331 remediation 5 exact-commit evidence and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-5-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-5-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediacion-5.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T14:34:44Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-08T14:34:44Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-5-memory",
             "expires_at": "2026-08-08T17:24:24Z",
             "notes": "Persist TASK-0331 remediation 5 implementation commit context.",
@@ -120,7 +142,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-08T14:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0331",
             "updated_at": "2026-08-08T14:20:00Z"
         },

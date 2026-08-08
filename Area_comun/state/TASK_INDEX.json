@@ -296,7 +296,7 @@
             "file": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
             "id": "TASK-0331",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez",
             "type": "infra"
         },
