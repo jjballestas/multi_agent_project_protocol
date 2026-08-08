@@ -16,6 +16,11 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
   falsification inventory across 10/10 wired runners, compile, drift, and diff gates exited
   0. TASK-0342 remains `in_progress`; TASK-0340 remains separately claimed and waits on the
   same real `validate` job outcome.
+- Real run `31266732042` made both `Scan encoding with PowerShell` and `Run encoding gate
+  cases` succeed on ubuntu-latest. Governed delivery commit `cc56e8a3` moves TASK-0342 to
+  `in_review`, releases its claims, and publishes the self-contained handoff. The later
+  mailbox-status failure was signaled separately for partitioning; Codex has not reviewed or
+  ratified TASK-0342.
 
 ## 2026-08-08 - TASK-0340 actor-auth CI verification implementation
 
