@@ -6064,3 +6064,15 @@ ratified its own work.
   negative `NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK`. Local PowerShell cases, the 67/67
   falsification inventory, collaboration, encoding, neutrality, and diff gates pass.
 - A new real Actions run on the remediation commit is still required before TASK-0345 delivery.
+
+## 2026-08-08 - TASK-0345 delivery
+
+- Actions run `31271924074` proves the dedicated `powershell-linux-parity` job fully green on
+  ubuntu: encoding scanner, neutrality scanner, parity cases, and host-assumption contracts all
+  succeed. The parallel falsification job is also green.
+- Delivery commit `10a9aaa2` moves TASK-0345 to `in_review`, releases all Codex claims, publishes
+  `MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0345.md`, and records the self-contained handoff.
+- The overall run is red only at unrelated runtime-property samples 015, 016, and 018, which omit
+  obstacle declarations required by the current validator. The handoff asks Arquitecto to route
+  that anomaly separately. Independent review of TASK-0345 is required; Codex did not review or
+  ratify its work.
