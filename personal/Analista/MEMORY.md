@@ -8638,3 +8638,82 @@ como un no global y provoca que la remediacion toque lo que estaba bien.
   (`line.split(":")[0] + ": return True"`), sin tocar el resto del modulo.
 - `shutil.copytree(..., ignore=ignore_patterns(".git"))` para el banco de mutacion: copiar el
   `.git` de 7 GB cuelga.
+
+---
+
+## TASK-0342 r1 (2026-08-08) -- CHANGE-REQUIRED: la paridad de gemelos vive en la ENUMERACION, no solo en la comparacion
+
+Commit revisado `7bbc0253`. Veredicto en
+`Area_comun/artifacts/Analista-TASK-0342-paridad-conjunto-excluido-verdict.md`,
+commit `97ec33d5`.
+
+### La medicion que resuelve "coinciden o solo no hay nada que encontrar"
+
+Para comparar el CONJUNTO que dos gemelos excluyen, no basta comparar veredictos ni hallazgos.
+Metodo que funciono: **plantar la firma que ambos detectan en TODOS los ficheros del arbol real**
+y diferenciar los conjuntos reportados. Cada escaner reporta como mucho un hallazgo por fichero
+que lee, asi que reportado == leido, y el complemento es el excluido. Sobre 3819 ficheros:
+Python 3818, PowerShell 3808. Diez rutas de diferencia que ningun test sintetico de dos ficheros
+iba a ensenar. Reutilizable para cualquier par de gates gemelos.
+
+### La divergencia estaba en el RECORRIDO, no en el predicado
+
+Todo el mundo (tarea, maker, foco del Arquitecto) miraba la comparacion de prefijos. El arreglo
+de la comparacion era correcto. La divergencia real: `Get-ChildItem -Recurse -File` trata las
+entradas que empiezan por punto como ocultas en POSIX y **las omite salvo `-Force`**, y tampoco
+desciende a directorios ocultos; el gemelo Python usa `rglob("*")` e incluye todo. Nueve
+`.gitkeep` versionados invisibles para un gate y visibles para el otro, tres de ellos en el canal
+ASCII del mailbox. **Regla: al auditar paridad de gemelos, medir las dos fases por separado --
+que ficheros ENUMERA cada uno, y que decide sobre cada fichero.** El bug estaba en la fase que
+nadie declaraba.
+
+Segunda divergencia del mismo par: `StartsWith(..., OrdinalIgnoreCase)` en PS contra
+`str.startswith` exacto en Python. En ext4 (CI) `runtime/Memory/x` lo excluye uno y lo escanea el
+otro. Probable en cualquier pareja PowerShell/Python: PS es case-insensitive por defecto en casi
+todo.
+
+### El contrato verde con el contraejemplo delante
+
+`NEG-ENCODING-SKIP-PATH-SEPARATOR` declara morir "si los dos escaneres dejan de coincidir en el
+conjunto excluido" y compara `python_findings == powershell_findings` sobre un arbol de dos
+ficheros. Mutante que lo prueba: **anadir una exclusion SOLO a un gemelo** (`Area_comun/tasks` en
+PS) -> conjuntos genuinamente distintos, contrato exit 0. Y no hacia falta el mutante: estaba
+verde mientras el arbol real divergia en diez rutas. Detalle demoledor para el veredicto: su
+propio fixture YA crea dos `.gitkeep`, o sea contiene la clase divergente y no la ve porque son
+ASCII puro. **Buscar siempre si el fixture ya contiene el caso que el contrato no distingue: es
+la prueba mas corta de que mide otra cosa.**
+
+### Mutante que muere por texto no es mutante que muere por comportamiento
+
+Revertir la barra invertida literal mata el contrato en `assert powershell_skipped.returncode == 0`
+(comportamiento, bien). Poner una barra normal literal tambien lo mata, pero en
+`assert mutant_text != ps_text`: la guarda es que el `.replace()` encuentre su bloque de cuatro
+lineas. Ruidoso y honesto, pero es guarda de FORMA. Declararlo asi en el veredicto en vez de
+apuntarlo como PASS limpio.
+
+### CI: el run puede no llevar el sha del commit revisado
+
+No existia run con `head_sha 7bbc0253` porque se empujo junto a `670e3879` y **solo la punta del
+push dispara run**. Antes de declarar "sin evidencia de CI", buscar el run del descendiente que
+CONTIENE el commit. Y AC5 pedia el PASO, no el job: `gh api repos/:owner/:repo/actions/runs/<id>/jobs
+--jq '.jobs[] | .steps[]'` da el estado paso a paso; el job fallaba dos pasos despues por causa ajena.
+
+### Entorno POSIX para revisar gates de PowerShell desde Windows
+
+WSL2 Ubuntu esta instalado y no trae pwsh, pero el tarball vale sin apt ni root:
+`curl -sSL .../powershell-7.4.6-linux-x64.tar.gz | tar -xz` en `~/pwsh/pwsh-7/`. Trampas:
+`wsl.exe -- bash /mnt/d/...` lo destroza Git Bash -> usar `MSYS_NO_PATHCONV=1` y doble barra
+inicial `//mnt/d/...`; `$(...)` dentro de `bash -c` lo expande el shell de fuera -> meter todo en
+un `.sh`; Ubuntu no tiene `python`, solo `python3`, y los runners invocan `python` -> symlink en
+`~/bin`. `/mnt/d` es case-insensitive: los vectores de grafia hay que disenarlos con un solo
+directorio, no con los dos coexistiendo.
+
+### Dos verdes falsos encontrados de paso (fuera de alcance, para tarea propia)
+
+- Windows PowerShell 5.1 no tiene `[System.IO.Path]::GetRelativePath`: `scan_encoding.ps1` lanza
+  `MethodNotFound` dentro del pipeline **e igualmente imprime "OK: encoding scan is clean." y sale
+  0**. Cualquier revision local en Windows sin pwsh 7 es un verde falso. Correr los `.ps1` del
+  repo SIEMPRE con pwsh 7, nunca con `powershell.exe`.
+- `scan_encoding.py` revienta con `UnicodeEncodeError` en consola cp1252 si el detalle del hallazgo
+  es `U+FFFD`: muere con traceback en vez de con veredicto. En mis sondas, exportar
+  `PYTHONIOENCODING=utf-8` o plantar `U+00C3` en vez de `U+FFFD`.
