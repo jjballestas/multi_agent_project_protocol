@@ -150,15 +150,46 @@ RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
 LEDGER_HEAD = ROOT / "scripts" / "ledger_head.py"
 
 
+def extract_powershell_function_closure(
+    source: str, roots: tuple[str, ...], *, provided: tuple[str, ...] = ()
+) -> str:
+    """Extract probe roots together with every harness-function dependency."""
+    definitions = {
+        match.group(1): match.group(0)
+        for match in re.finditer(r"(?ms)^function ([A-Za-z0-9_-]+) \{.*?^\}", source)
+    }
+    missing = [name for name in roots if name not in definitions]
+    if missing:
+        raise AssertionError(f"PowerShell probe functions not found: {missing}")
+    supplied = set(provided)
+    ordered: list[str] = []
+    visiting: set[str] = set()
+    emitted: set[str] = set()
+
+    def visit(name: str) -> None:
+        if name in supplied or name in emitted:
+            return
+        if name in visiting:
+            raise AssertionError(f"PowerShell probe dependency cycle at {name}")
+        visiting.add(name)
+        body = definitions[name]
+        for candidate in definitions:
+            if candidate == name or candidate in supplied:
+                continue
+            if re.search(r"(?<![-\w])" + re.escape(candidate) + r"(?![-\w])", body):
+                visit(candidate)
+        visiting.remove(name)
+        emitted.add(name)
+        ordered.append(body)
+
+    for root in roots:
+        visit(root)
+    return "\n\n".join(ordered)
+
+
 def run_outcome_parser_cases(sandbox: Path) -> None:
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    match = re.search(
-        r"(?ms)^function Get-ExecOutcomeClass \{.*?^\}\r?\n\r?\nfunction Get-MessageSignature",
-        runner_text,
-    )
-    if not match:
-        raise AssertionError("Get-ExecOutcomeClass function not found")
-    function_text = match.group(0).rsplit("\nfunction Get-MessageSignature", 1)[0]
+    function_text = extract_powershell_function_closure(runner_text, ("Get-ExecOutcomeClass",))
     probe = sandbox / "outcome-parser-probe.ps1"
     # The first two response/diagnostic pairs are reduced verbatim from the real
     # 2026-07-20 Codex field transcripts. The diagnostics contain the CLI epilogue
@@ -217,17 +248,16 @@ def run_outcome_parser_cases(sandbox: Path) -> None:
 
 def run_torn_tail_case(sandbox: Path) -> None:
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    head_fn = re.search(r"(?ms)^function Get-LedgerHead \{.*?^\}", runner_text)
-    restore_fn = re.search(r"(?ms)^function Restore-TransientExecResidue \{.*?^\}", runner_text)
-    if not head_fn or not restore_fn:
-        raise AssertionError("rollback helper functions not found")
+    rollback_helpers = extract_powershell_function_closure(
+        runner_text, ("Restore-TransientExecResidue",), provided=("Write-Log",)
+    )
     events = sandbox / "runtime/state/events.jsonl"
     events.write_bytes(b'{"seq":1}\n{"seq":')
     probe = sandbox / "torn-tail-probe.ps1"
     probe.write_text(
         "$Root=(Get-Location).Path\n$RunsDir=$Root\n$log=@()\n"
         "function Write-Log { param([string]$Message) $script:log += $Message }\n"
-        + head_fn.group(0) + "\n" + restore_fn.group(0) + "\n"
+        + rollback_helpers + "\n"
         "$before=[pscustomobject]@{readable=$true;seq=1;hash='before';torn_tail=$false}\n"
         "$head=git rev-parse HEAD\n"
         "Restore-TransientExecResidue -HeadBefore $head -IndexPatch '' -UntrackedBefore @() -LedgerHeadBefore $before\n"
@@ -360,6 +390,9 @@ def run_deleted_residue_real_loop_case() -> None:
                 '{"tasks":[{"id":"TASK-0001","file":"Area_comun/tasks/TASK-0001-deleted-residue.md"}]}\n',
                 encoding="ascii",
             )
+            (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text(
+                '{"tasks":[]}\n', encoding="ascii"
+            )
             prompt = fixture / "scripts/harness/prompts/test.prompt.md"
             prompt.write_text("Process @@MESSAGE_PATH@@ under @@ROOT@@.\n", encoding="ascii")
             fake = fixture / "fake-agent.cmd"
@@ -400,9 +433,7 @@ def run_large_stderr_drain_case(sandbox: Path) -> None:
     PERMANENT_NEGATIVE: retry-large-stderr-drain
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
-    if not git_helper:
-        raise AssertionError("git status helper not found")
+    git_helper = extract_powershell_function_closure(runner_text, ("Get-GitStatusPorcelainUtf8",))
     fixture = Path(tempfile.mkdtemp(prefix="task0284-stderr-"))
     try:
         fake_git = fixture / "git.exe"
@@ -430,10 +461,10 @@ def run_large_stderr_drain_case(sandbox: Path) -> None:
             )
             return probe
 
-        good = make_probe("concurrent.ps1", git_helper.group(0))
+        good = make_probe("concurrent.ps1", git_helper)
         run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(good), cwd=fixture, timeout=15)
         assert not (fixture / "drain-test.lock").exists(), "concurrent drain left an orphan lock"
-        sequential_text = git_helper.group(0).replace(
+        sequential_text = git_helper.replace(
             "$stdoutTask = $process.StandardOutput.ReadToEndAsync()\n        $stderrTask = $process.StandardError.ReadToEndAsync()",
             "$stdout = $process.StandardOutput.ReadToEnd()\n        $stderr = $process.StandardError.ReadToEnd()",
             1,
@@ -455,10 +486,9 @@ def run_expired_claim_behavior_case(sandbox: Path) -> None:
     PERMANENT_NEGATIVE: retry-expired-claim
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    read_json = re.search(r"(?ms)^function Read-JsonWithDeadline \{.*?^\}", runner_text)
-    signal = re.search(r"(?ms)^function Get-AdditionalWorkSignal \{.*?^\}", runner_text)
-    if not read_json or not signal:
-        raise AssertionError("claim signal helpers not found")
+    signal = extract_powershell_function_closure(
+        runner_text, ("Get-AdditionalWorkSignal",), provided=("Test-LeaseProcessMatches",)
+    )
     claims = sandbox / "Area_comun/state/CLAIMS.json"
     original_claims = claims.read_bytes()
     expired = "2000-01-01T00:00:00Z"
@@ -475,12 +505,12 @@ def run_expired_claim_behavior_case(sandbox: Path) -> None:
         path.write_text(
             "$Root=(Get-Location).Path\n$PeerId='TestPeer'\n$LeasePath=''\n"
             "function Test-LeaseProcessMatches { param($Lease) return $false }\n"
-            + read_json.group(0) + "\n" + helper + "\nGet-AdditionalWorkSignal\n",
+            + helper + "\nGet-AdditionalWorkSignal\n",
             encoding="ascii",
         )
         return run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(path), cwd=sandbox).stdout.strip()
 
-    current = signal.group(0)
+    current = signal
     current_predicate = "if ($expires -le $now) { continue }"
     old_predicate = "if (-not ($expires -gt $now)) { continue }"
     assert current_predicate in current, "current expiry predicate not found"
@@ -505,12 +535,9 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
     PERMANENT_NEGATIVE: retry-pure-append-evidence
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    helpers = re.search(
-        r"(?ms)^function Get-FilePrefixSha256 \{.*?^\}\r?\n\r?\nfunction Get-OwnEvidence \{.*?^\}",
-        runner_text,
+    helpers = extract_powershell_function_closure(
+        runner_text, ("Get-OwnEvidence",), provided=("Write-Log",)
     )
-    if not helpers:
-        raise AssertionError("pure-append evidence helpers not found")
     events = sandbox / "runtime/state/events.jsonl"
     old = b'{"seq":1,"actor":"Other"}\n'
     own = b'{"seq":2,"actor":"TestPeer","applied":true,"actor_auth":{"method":"ed25519","keyid":"testpeer:v1","sig":"new"},"payload":{"intent_type":"task_status"}}\n'
@@ -518,7 +545,7 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
     probe = sandbox / "pure-append-probe.ps1"
     probe.write_text(
         "$Root=(Get-Location).Path\n$PeerId='TestPeer'\nfunction Write-Log { param([string]$Message) }\n"
-        + helpers.group(0)
+        + helpers
         + "\n$path=Join-Path $Root 'runtime/state/events.jsonl'\n"
         + "$before=(Get-Item -LiteralPath $path).Length\n$hash=Get-FilePrefixSha256 -Path $path -Length $before\n"
         + f"[IO.File]::AppendAllText($path, '{own.decode('ascii').strip()}'+[Environment]::NewLine, [Text.Encoding]::ASCII)\n"
@@ -542,13 +569,10 @@ def run_useful_own_evidence_cases(sandbox: Path) -> None:
     PERMANENT_NEGATIVE: retry-useful-own-evidence
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    helpers = re.search(
-        r"(?ms)^function Get-FilePrefixSha256 \{.*?^\}\r?\n\r?\nfunction Get-OwnEvidence \{.*?^\}",
-        runner_text,
+    helpers = extract_powershell_function_closure(
+        runner_text, ("Get-OwnEvidence",), provided=("Write-Log",)
     )
-    if not helpers:
-        raise AssertionError("own-evidence helpers not found")
-    body = helpers.group(0)
+    body = helpers
 
     def contract(candidate: str) -> bool:
         return all(
@@ -672,13 +696,11 @@ def run_nul_residue_path_cases(sandbox: Path) -> None:
     PERMANENT_NEGATIVE: retry-utf8-residue-path
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
-    residue_helper = re.search(r"(?ms)^function Get-StagedResidueState \{.*?^\}", runner_text)
-    if not git_helper or not residue_helper:
-        raise AssertionError("residue helper not found")
+    helper_text = extract_powershell_function_closure(
+        runner_text, ("Get-StagedResidueState",), provided=("Write-Utf8NoBom",)
+    )
     paths = [sandbox / "fresh residue.txt", sandbox / "residuo-anadido-\u00f1.txt"]
     probe = Path(tempfile.mkdtemp(prefix="task0281-residue-probe-")) / "nul-residue-probe.ps1"
-    helper_text = git_helper.group(0) + "\n" + residue_helper.group(0)
     probe.write_text(
         "$Root=(Get-Location).Path\n$AbortedResidueMinutes=60\n"
         "$ResiduePath=Join-Path $Root '.protocol-tmp/residue-first-seen.json'\n"
@@ -964,6 +986,9 @@ def run_post_delivery_timeout_case() -> None:
             '"file":"Area_comun/tasks/TASK-0300-post-delivery.md"}]}\n',
             encoding="ascii",
         )
+        (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text(
+            '{"tasks":[]}\n', encoding="ascii"
+        )
         task_file = fixture / "Area_comun/tasks/TASK-0300-post-delivery.md"
         task_file.parent.mkdir(parents=True)
         task_file.write_text(
@@ -1058,6 +1083,9 @@ def run_exec_running_heartbeat_case() -> None:
                 '"file":"Area_comun/tasks/TASK-0302-heartbeat.md"}]}\n',
                 encoding="ascii",
             )
+            (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text(
+                '{"tasks":[]}\n', encoding="ascii"
+            )
             task_file = fixture / "Area_comun/tasks/TASK-0302-heartbeat.md"
             task_file.parent.mkdir(parents=True)
             task_file.write_text(
@@ -1133,6 +1161,9 @@ def run_pre_delivery_and_liveness_cases() -> None:
             '{"tasks":[{"id":"TASK-0303","owner":"TestPeer","status":"in_progress",'
             '"file":"Area_comun/tasks/TASK-0303-liveness.md"}]}\n', encoding="ascii"
         )
+        (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text(
+            '{"tasks":[]}\n', encoding="ascii"
+        )
         task_file = fixture / "Area_comun/tasks/TASK-0303-liveness.md"
         task_file.parent.mkdir(parents=True)
         task_file.write_text(
@@ -1189,10 +1220,8 @@ def run_pre_delivery_and_liveness_cases() -> None:
 def run_frozen_exec_with_production_freshness_case() -> None:
     """A self-bumped lease heartbeat cannot keep a frozen exec alive."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    progress_match = re.search(r"(?ms)^function Get-ExecProgressState \{.*?^\}", runner_text)
-    if not progress_match:
-        raise AssertionError("Get-ExecProgressState function not found")
-    assert "heartbeat_fresh" not in progress_match.group(0)
+    progress_helper = extract_powershell_function_closure(runner_text, ("Get-ExecProgressState",))
+    assert "heartbeat_fresh" not in progress_helper
 
     fixture = Path(tempfile.mkdtemp(prefix="task0304-frozen-production-freshness-"))
     try:
@@ -1212,6 +1241,9 @@ def run_frozen_exec_with_production_freshness_case() -> None:
         (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
             '{"tasks":[{"id":"TASK-0304","owner":"TestPeer","status":"in_progress",'
             '"file":"Area_comun/tasks/TASK-0304-frozen.md"}]}\n', encoding="ascii"
+        )
+        (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text(
+            '{"tasks":[]}\n', encoding="ascii"
         )
         task_file = fixture / "Area_comun/tasks/TASK-0304-frozen.md"
         task_file.parent.mkdir(parents=True)
@@ -1260,15 +1292,15 @@ def run_frozen_exec_with_production_freshness_case() -> None:
 def run_complete_tree_kill_case() -> None:
     """The real kill helper removes intact and mid-kill re-parented process trees."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    match = re.search(r"(?ms)^function Stop-LeaseProcessTree \{.*?^\}", runner_text)
-    if not match:
-        raise AssertionError("Stop-LeaseProcessTree function not found")
+    tree_kill_helper = extract_powershell_function_closure(
+        runner_text, ("Stop-LeaseProcessTree",), provided=("Write-Log", "Test-LeaseProcessMatches")
+    )
 
     sweep = """        foreach ($childPid in $killOrder) {
             Stop-Process -Id $childPid -Force -ErrorAction SilentlyContinue
         }"""
-    assert sweep in match.group(0)
-    no_compensating_sweep = match.group(0).replace(sweep, "", 1)
+    assert sweep in tree_kill_helper
+    no_compensating_sweep = tree_kill_helper.replace(sweep, "", 1)
 
     def exercise(candidate: str, reparent_during_snapshot: bool) -> list[int]:
         fixture = Path(tempfile.mkdtemp(prefix="task0301-reparent-tree-kill-"))
@@ -1341,8 +1373,8 @@ def run_complete_tree_kill_case() -> None:
                     process.kill()
             shutil.rmtree(fixture, ignore_errors=True)
 
-    assert exercise(match.group(0), reparent_during_snapshot=False) == []
-    reparent_survivors = exercise(match.group(0), reparent_during_snapshot=True)
+    assert exercise(tree_kill_helper, reparent_during_snapshot=False) == []
+    reparent_survivors = exercise(tree_kill_helper, reparent_during_snapshot=True)
     assert reparent_survivors == [], reparent_survivors
     mutant_survivors = exercise(no_compensating_sweep, reparent_during_snapshot=True)
     assert len(mutant_survivors) == 1, mutant_survivors
@@ -1381,6 +1413,9 @@ def main() -> int:
         (sandbox / "Area_comun/state/TASK_INDEX.json").write_text(
             '{"tasks":[{"id":"TASK-0001","file":"Area_comun/tasks/TASK-fixture.md"}]}\n',
             encoding="ascii",
+        )
+        (sandbox / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text(
+            '{"tasks":[]}\n', encoding="ascii"
         )
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
         message.write_text(
@@ -1555,8 +1590,8 @@ def main() -> int:
         assert (sandbox / "Area_comun/decisions/DECISION-test.md").exists(), "signed decision document was destroyed"
         assert (sandbox / "ambiguous-residue.txt").exists(), "mid-log ambiguity was rolled back"
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "exec-content\n", "worktree content was rewritten"
-        assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii").endswith(
-            "peer-task-edit\n"
+        assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii") == (
+            governed_predirty["Area_comun/tasks/TASK-fixture.md"]
         )
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
         assert predirty_status.startswith(" M "), f"pre-exec index state was not restored: {predirty_status!r}"

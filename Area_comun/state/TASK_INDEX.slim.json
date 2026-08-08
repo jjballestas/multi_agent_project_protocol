@@ -56,7 +56,7 @@
         {
             "id": "TASK-0335",
             "owner": "Codex",
-            "status": "blocked",
+            "status": "in_progress",
             "title": "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
         },
         {

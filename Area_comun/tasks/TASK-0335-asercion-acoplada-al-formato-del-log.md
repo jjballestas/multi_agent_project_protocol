@@ -2,7 +2,7 @@
 task_id: TASK-0335
 file: Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md
 title: "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
-status: blocked
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -34,7 +34,7 @@ intake:
     - "AC4 (sin relajar): no se marca el caso como skip, no se debilita ninguna otra asercion del fixture y no se toca produccion."
     - "AC5 (CI verde): tras el arreglo, run_mailbox_retry_cases.py exit 0 y el paso de CI que TASK-0330 cableo pasa a verde. Se declara el recuento final de contratos ejecutados."
     - "AC6 (sin regresion): suites del harness, inventario de contratos y gates del repo exit 0 en clon limpio."
-    - "AC7 (AMPLIADO 2026-08-07, punto 4 del veredicto de 0330): el inventario de rojos del runner de retry estaba INCOMPLETO. Se exploran y declaran TODOS los rojos restantes -- el 7o, 8o y 9o quedaron sin declarar y la cola posterior a la linea 1390 sin explorar. Esta tarea NO cierra sobre la premisa de que el sexto era el ultimo."
+    - "AC7 (AMPLIADO 2026-08-07, punto 4 del veredicto de 0330; medido en la entrega): el inventario de rojos del runner de retry estaba INCOMPLETO. Se verificaron ocho rojos adicionales despues del sexto y un endurecimiento preventivo separado en run_disordered_ledger_case que no era rojo. Se explora y declara toda la cola; esta tarea no cierra sobre la premisa de que el sexto era el ultimo."
     - "AC8 (AMPLIADO 2026-08-07, punto 5 del veredicto de 0330): `retry-ledger-head-defer-order` NO se ejecuta hoy -- la linea 785 revienta antes de llegar a la 802 -- y su mitad mutante es VACUA porque `terminal_line` es una subcadena que ningun log de produccion satisface, de modo que `expect_terminal=False` pasaria hiciera lo que hiciera produccion. Al reparar la asercion del sexto rojo, ese negativo debe quedar ALCANZABLE y verificado por mutacion en las dos direcciones, dentro de este alcance y no despues."
   verification_cmd:
     - "python examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
@@ -112,6 +112,16 @@ Commit de implementacion: `dbe9a50829c7aae5ef32273113823635b8901e47`.
   principal por `CLAIMS.json` no parseable o por destruir el scope del task fixture. Todos quedaron
   reparados dentro del runner, sin tocar produccion ni omitir casos. El cambio de
   `run_disordered_ledger_case` fue un endurecimiento preventivo adicional, no un rojo medido.
+- La remediacion restauro la igualdad exacta del fichero gobernado pre-sucio. El barrido cruzado
+  posterior encontro que las nueve familias que lanzan el harness necesitaban indices hot y archive
+  resolubles bajo el contrato endurecido de TASK-0331. Se anadio el indice archive vacio a las seis
+  raices de fixture; las catorce ejecuciones resultantes tienen scope resoluble salvo el unico caso
+  negativo que exige deliberadamente `message_scope_ambiguous`.
+- Un segundo barrido cruzado encontro nueve sitios de sonda que extraian funciones PowerShell por
+  nombre. Tres sondas ejecutables asumian dependencias ausentes: `run_large_stderr_drain_case`,
+  `run_expired_claim_behavior_case` y `run_nul_residue_path_cases`. Todas las sondas ejecutables
+  usan ahora un extractor de cierre transitivo; las dos extracciones restantes son inspecciones
+  estaticas que no ejecutan el cuerpo. La produccion de TASK-0334 permanece intacta.
 - `run_mailbox_retry_cases.py` recorre ahora la cola completa y sale 0. El gate de CI declara 8/8
-  runners y 48/48 contratos ejecutados; el inventario declara 48/48 sin faltantes.
+  runners y 52/52 contratos ejecutados; el inventario declara 52/52 sin faltantes.
 - Codex entrega como maker y no revisa ni ratifica su propio trabajo.
