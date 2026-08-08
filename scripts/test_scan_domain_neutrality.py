@@ -28,6 +28,19 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_nested_identity_depth_restriction_is_killed",
     },
+    {
+        "id": "NEG-NEUTRALITY-IDENTITY-EXEMPTION-SCOPE",
+        "negative": "A whole-file identity exemption must not hide a new identity outside its declared lines.",
+        "mutation": ".replace(narrow_rule, whole_file_rule)",
+        "boundaries": (
+            'self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:9: {provider_identity}", baseline.stdout)',
+            'self.assertIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", baseline.stdout)',
+            'self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", baseline.stdout)',
+            'self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)',
+            'self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)',
+        ),
+        "exercised_by": "test_whole_file_identity_exemption_mutation_is_killed",
+    },
 )
 
 
@@ -52,8 +65,16 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         (self.root / "runtime" / "memory").mkdir(parents=True)
 
         self.term = "trad" + "ing"
+        provider_identity = "Code" + "x"
+        coordinator_identity = "Arqui" + "tecto"
         config = {
-            "agent_registry": {"agents": [{"id": "SampleAgent"}]},
+            "agent_registry": {
+                "agents": [
+                    {"id": "SampleAgent"},
+                    {"id": provider_identity},
+                    {"id": coordinator_identity},
+                ]
+            },
             "domain_neutrality": {
                 "enabled": True,
                 "denylist": [self.term],
@@ -162,6 +183,45 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         )
         self.assertIn("scripts/root_identity_probe.py:1", mutant.stdout)
         self.assertNotIn("scripts/memory/identity_probe.py:1", mutant.stdout)
+
+    def test_whole_file_identity_exemption_mutation_is_killed(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-NEUTRALITY-IDENTITY-EXEMPTION-SCOPE"""
+        provider_identity = "Code" + "x"
+        coordinator_identity = "Arqui" + "tecto"
+        harness = self.root / "scripts" / "harness" / "peer_mailbox_cron.ps1"
+        harness.parent.mkdir(parents=True)
+        harness.write_text(
+            "\n" * 8
+            + f'[ValidateSet("Auto", "Anthropic", "{provider_identity}")][string]$AgentProvider = "Auto",\n'
+            + f'$DefaultCoordinator = "{coordinator_identity}"\n',
+            encoding="utf-8",
+        )
+        (self.root / "scripts" / "unlisted_probe.py").write_text(
+            f'DEFAULT_COORDINATOR = "{coordinator_identity}"\n', encoding="utf-8"
+        )
+
+        baseline = self.run_python_scanner()
+        self.assertEqual(baseline.returncode, 1, baseline.stdout + baseline.stderr)
+        self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:9: {provider_identity}", baseline.stdout)
+        self.assertIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", baseline.stdout)
+        self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", baseline.stdout)
+
+        source = SCANNER_PATH.read_text(encoding="utf-8")
+        narrow_rule = "if is_identity_literal_exempt(relative_path, line_number, term):"
+        whole_file_rule = "if relative_path in IDENTITY_LITERAL_EXEMPTIONS:"
+        mutated_source = source.replace(narrow_rule, whole_file_rule)
+        self.assertNotEqual(source, mutated_source)
+        mutant_path = self.scratch_root / "scan_domain_neutrality_whole_file_mutant.py"
+        mutant_path.write_text(mutated_source, encoding="utf-8")
+        mutant = subprocess.run(
+            [sys.executable, str(mutant_path), "--root", str(self.root)],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)
+        self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)
 
     def test_powershell_scanner_matches_required_coverage_when_available(self) -> None:
         executable = shutil.which("pwsh") or shutil.which("powershell")
