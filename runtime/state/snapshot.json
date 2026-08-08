@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "de5f58d996fdaf66e09b28ab83dc369db73ffe5fd3f36ee125cdcb09c8b9fcec",
+  "canonical_hash": "1d9861aa0d9ac5d7e9bf9b0169d881a37f17bdaffa8247532e381c0276f2ac9c",
   "integrity": {
-    "canonical_hash": "de5f58d996fdaf66e09b28ab83dc369db73ffe5fd3f36ee125cdcb09c8b9fcec",
+    "canonical_hash": "1d9861aa0d9ac5d7e9bf9b0169d881a37f17bdaffa8247532e381c0276f2ac9c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "4928209f90554fa91f46f3c7bf1f400fb6ae556174028b4bbea73676e0422d81",
-    "signature": "de43015471fe1d60ec5b413da43972e224bebd8ae1a690820f3722696b7fbefe",
-    "up_to_seq": 7847
+    "prev_hash": "260416448e8ae2d6bfa6ca02cb3897b54f6b80163e577fd90c187c4b50d8d548",
+    "signature": "63ade8ba4687ccc396ef372f6374b8bfeecb64b7f42f4f2ea1c798621ef20e74",
+    "up_to_seq": 7853
   },
   "state": {
     "aggregate_versions": {
@@ -3182,7 +3182,7 @@
       "TASK-0328": 2,
       "TASK-0329": 8,
       "TASK-0330": 44,
-      "TASK-0331": 27,
+      "TASK-0331": 33,
       "TASK-0332": 2,
       "TASK-0333": 13,
       "TASK-0334": 20,
@@ -3210,7 +3210,7 @@
       "protocol-prune": 51,
       "protocol-state": 1
     },
-    "events_applied": 7176,
+    "events_applied": 7182,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9671,6 +9671,7 @@
       "intent:Codex:claim:ba17de8aac96505438c0bf4f0216441412c314baf0aff56669c7dbc59458d47d": 3273,
       "intent:Codex:claim:ba5a1ae788795d496576b043f36fcbea74da0a31352dd8b101e9f1daef836f56": 4214,
       "intent:Codex:claim:bac5dc18a47b4c091f567ebb5ce809983dcf75bf6d6f6142345e243e8c5a4bcf": 827,
+      "intent:Codex:claim:bad8272ddf0e7da9d2480140d0cb85ff7200d7c2d0019fe7a6f6ff3d48367143": 7849,
       "intent:Codex:claim:bb822cee0efda272e3a6bd7dbdf6b7e4bd0aaf885ef614eb4a36774d74a6c833": 4099,
       "intent:Codex:claim:bb890938c3ef34fe83ecf32a6348ee3f2695eb57e3f0fa18e35dfee4c9217590": 2712,
       "intent:Codex:claim:bba0931c897df3fd09c4704b52e921b0aecac9f20643b34b6c47fc0112e7aa27": 3131,
@@ -9698,6 +9699,7 @@
       "intent:Codex:claim:c2b0323f4d3d471554f78a447cef523fc218b5ba85aaf4d38c60ccd78d8d61e5": 2753,
       "intent:Codex:claim:c2c0fc36d08c0014771cc66fe9ff7cc181e37fd566f148fb2f3375a33b34d723": 2521,
       "intent:Codex:claim:c2c6151b94dfb5223c9020283c9a2ae744e43b22409a07197625594af830e63f": 4480,
+      "intent:Codex:claim:c319f52e114b96145066c4b0749cceced095459cc0865f27f20ca7373a5495a2": 7853,
       "intent:Codex:claim:c3b06b11fb73849c8410c9fe70fd298f05b14726d2eba0411a74678dde67ca00": 2171,
       "intent:Codex:claim:c3ccda3278c8f84c58e42c329f4a85d0aa5bd3d04461c0d32db88201dd8a0245": 1669,
       "intent:Codex:claim:c3dfbe61254c6aa0566a77a11fb22cae2a7da82c9c345056b7799eed5e3ad3b6": 2173,
@@ -9738,6 +9740,7 @@
       "intent:Codex:claim:cd9b2e58b61832bb1f118228fd450ebe04a2fc997444265aebeb861b9324aa60": 2169,
       "intent:Codex:claim:ce2fb5f07e3e6d5cfb97f6e01707247b5ce6a2dded7b5986ed76c33a762db0c4": 4159,
       "intent:Codex:claim:cf38cf2107d9f76d947aa7d2a509283c125e0d0408a73c9a14a9307616ec106c": 2350,
+      "intent:Codex:claim:d058d0e86a3df08f9c14fe4ea4208ce618e31492dc6f5c07827b3d8155242ded": 7848,
       "intent:Codex:claim:d0980d76432d3eb0793dfa7cf0cb8d891e0de843be83c3f5f7bfb1d2e10709d1": 2322,
       "intent:Codex:claim:d0e85cc8a5902fe99080d2e1017c3a354e32a0efe581ec3ed6ed8f8aa1caf624": 2036,
       "intent:Codex:claim:d0f3ed532393a2a7beb5ccd3e0eb9dfbc4af9619f1262342d22fad7d3e643732": 6023,
@@ -9771,6 +9774,7 @@
       "intent:Codex:claim:da055894672773fdbf18766fcd083fb26f8f5d42ec6c010f7dbd873179b08e0a": 3613,
       "intent:Codex:claim:dad1d0785bdcc65d10c1879af917068f56a34200e3f4c88f79f04ed09b6dac21": 2164,
       "intent:Codex:claim:db63889ddf393e13d6d09638b874b3c68d11ce48c0298650e6d2df27b4d36525": 2011,
+      "intent:Codex:claim:dba5adfad2a7ff4952ead5ad86c89765f07ca8c3f795d1de8efcd428fadaecd2": 7852,
       "intent:Codex:claim:dc07f1b2f34a09caa39e42eb8df5d1c579440983f69c807cc359bdae66e17a90": 3077,
       "intent:Codex:claim:dc10085b163778673cdd88f8bb5edc0887c5fc74774352628be815d6561bfd01": 1485,
       "intent:Codex:claim:dc2514808ac0323e5d966ba6f223857f4eedde649a03318d1af4a0fdfbd01e7a": 2135,
@@ -9842,6 +9846,7 @@
       "intent:Codex:claim:f10d01c12760b53ad273336fe764f8d0d8afb0ada1731c17f8a9009d092c6a1f": 7654,
       "intent:Codex:claim:f1a205cc986d473fd3e2fd088ef1f7f3398f8d197b9194938d729bae6b9ce6b3": 2174,
       "intent:Codex:claim:f2c181eb99a14baeb0bd380005a7408c7c80b2e963c6765e56712709a048af7a": 1668,
+      "intent:Codex:claim:f33fcf22e58a5512ad6d9179c15591b49e43afc445f67a0b7b84c6de0198b516": 7851,
       "intent:Codex:claim:f3421592050102100f0e86079128f16c1bc80ba55481bac3a8f9c2d6da81c98b": 3087,
       "intent:Codex:claim:f39a2214913f7cb6776f076e3b92001cd070961cde0ed5b7eafe740e325031e9": 3977,
       "intent:Codex:claim:f3dd7aa808b39e0386ba3a3b69fbd251f01bae184fb185aebfac7f22b4648663": 1194,
@@ -10061,6 +10066,7 @@
       "intent:Codex:task_status:da458599487275ec023fe13444d4bafce8ba98f286233de3e92018bbb046ef37": 2925,
       "intent:Codex:task_status:dab32e8e4c325dd9636ae5d03e01245234901b759ad2e94de30c9cfbcc08bed5": 3022,
       "intent:Codex:task_status:dad7413f77226e92726ecf37c13fb69267ba8693ccfc9c340b587d54ccb0dbce": 3082,
+      "intent:Codex:task_status:dadf89100aea2c1f1843bc3b1793c1b1de00993daef589b065fc163ef3ee73d9": 7850,
       "intent:Codex:task_status:dbe49d6618736532d59e7a09023981fc82fb0ad258b84c952d8d78ed9b55609a": 1577,
       "intent:Codex:task_status:de636f63bb04cb84814cc89c9882b94e8856faf86c0bce0f2c3df2eb70619643": 2596,
       "intent:Codex:task_status:de83723f9e2da6787dea59fb69a8f04849ed808283a19de6c5f32a096c0db5fe": 2480,
@@ -10390,5 +10396,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7847
+  "up_to_seq": 7853
 }

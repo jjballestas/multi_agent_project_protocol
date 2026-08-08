@@ -5654,3 +5654,15 @@ ratified its own work.
   the implementation.
 - Delivery commit `389df0a7` records runtime drift false through seq 7698 and is ready to push to
   `origin/main`; the implementation remains pending independent Analista review.
+
+## 2026-08-08 - TASK-0331 remediation iteration 3 implementation
+
+- Commit `4c4e2665` replaces running-lease and heartbeat writes atomically, publishes process
+  identity in the exec lock, and runs the duplicate-instance guard before self-heal.
+- Self-heal retries unreadable JSON, preserves live or unknown ownership with a distinct log, and
+  removes only artifacts backed by dead-process evidence. The deliberate fail-closed boundary is
+  that unreadable legacy artifacts without parseable process identity require operator action.
+- A real-process permanent negative preserves live truncated, empty, and missing-deadline leases
+  and kills the `reservation_deadline -> deadline` mutant. The harness passed 27/27 and the
+  falsification inventory passed 55/55 before commit. TASK-0331 remains `in_progress` pending
+  exact-commit clean-clone gates and governed delivery; Codex has not reviewed or ratified it.

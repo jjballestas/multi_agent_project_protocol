@@ -3,11 +3,47 @@ task_id: TASK-0331
 from: Codex
 to: Arquitecto
 status: in_review
-implementation_commit: 9def32142513ebe81d1a7f81684838dc4456ac5a
+implementation_commit: 4c4e26655df215e88d1befd4a3e325e452466849
 created_at: 2026-08-07T22:52:00Z
 ---
 
 # HANDOFF TASK-0331 - scope-aware and atomic peer admission
+
+## Remediation iteration 3
+
+Implementation commit: `4c4e26655df215e88d1befd4a3e325e452466849`.
+
+- Running-lease publication and every heartbeat now write a complete sibling temporary file and
+  replace the prior JSON. A reader sees the old or new complete document rather than the 0-byte
+  `WriteAllText` window measured by the checker.
+- Startup retries an unreadable lease three times. After that it removes artifacts only when a
+  parseable lease or lock identity proves its process is dead. A live identity preserves both
+  files with `SELF_HEAL_UNREADABLE_LEASE liveness=live action=preserve`; missing identity also
+  preserves them with `liveness=unknown`. Proven-dead evidence removes them with the distinct
+  `SELF_HEAL_ORPHAN_LEASE liveness=dead action=remove` event.
+- The lock carries PID plus process-start identity: the supervisor while the reservation is being
+  published and the child after launch. The existing-cron guard now runs before self-heal, so a
+  redundant live supervisor cannot mutate the active instance's artifacts.
+- `NEG-HARNESS-LIVE-UNREADABLE-LEASE-PRESERVED` starts real child processes and verifies that
+  truncated, empty, and missing-reservation-deadline live leases are never removed. Its deadline
+  selector mutant preserves safety but emits the live-unreadable event for the valid reserved
+  control, making the regression observable and the gate red.
+- `NEG-HARNESS-RESERVED-LEASE-SELF-HEAL` still proves three-restart convergence for the four orphan
+  states, now with explicit dead-process evidence for unreadable artifacts. A mutant that discards
+  that evidence leaves the truncated and empty cases present through all three restarts.
+
+New boundary: an unreadable lease without parseable process identity is not declared orphaned. It
+is preserved with `liveness=unknown` and requires operator intervention. This is deliberate
+fail-closed behavior: unreadability alone cannot authorize deletion of a potentially live exec.
+
+Exact implementation commit `4c4e26655df215e88d1befd4a3e325e452466849` passed in detached
+clean clone `D:/Aegis_Scratch/multi_agent_project_protocol/task0331-r3-4c4e2665-codex`:
+
+- exec-lease harness: 27/27 tests, exit 0;
+- falsification inventory: 55 declared / 55 permanent / 0 missing, exit 0;
+- falsification guardian, collaboration validator, encoding scan, neutrality scan, and diff check:
+  exit 0;
+- final clean-clone status: empty.
 
 ## Remediation iteration 2
 
@@ -119,12 +155,12 @@ dirty-tree veto remains independent and stricter.
 
 ## Exact-commit gates
 
-Detached clean clone of `9def32142513ebe81d1a7f81684838dc4456ac5a` under
-`D:/Aegis_Scratch/multi_agent_project_protocol/r331-r2-9def3214-codex`:
+Detached clean clone of `4c4e26655df215e88d1befd4a3e325e452466849` under
+`D:/Aegis_Scratch/multi_agent_project_protocol/task0331-r3-4c4e2665-codex`:
 
-- `python scripts/test_exec_lease_harness.py` -> exit 0, 26/26 tests.
+- `python scripts/test_exec_lease_harness.py` -> exit 0, 27/27 tests.
 - `python scripts/check_falsification_contracts.py --root .` -> exit 0,
-  53 permanent negatives / 53 declared / 0 missing at the exact commit.
+  55 permanent negatives / 55 declared / 0 missing at the exact commit.
 - `python scripts/test_falsification_contracts.py` -> exit 0.
 - `python scripts/validate_collaboration_state.py --root .` -> exit 0.
 - `python scripts/scan_encoding.py` -> exit 0.
@@ -137,7 +173,7 @@ task_id: TASK-0331
 status: in_review
 executive_summary: Peer admission now compares declared material scope, fails closed on ambiguity, and atomically publishes a reservation before launch.
 artifacts:
-  - path_or_commit: 9def32142513ebe81d1a7f81684838dc4456ac5a
+  - path_or_commit: 4c4e26655df215e88d1befd4a3e325e452466849
   - path_or_commit: Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md
 gates:
   - command: python scripts/test_exec_lease_harness.py
@@ -152,5 +188,5 @@ gates:
     result: PASS
   - command: git diff --check
     result: PASS
-next_recommended: Arquitecto routes commit 9def3214 to Analista for independent remediation-2 review.
-risks: Structurally unresolvable messages terminate deferred until manual rearm; disjoint execs share the Git working tree and may reach ledger operations concurrently, while submit_intent remains the ledger serializer.
+next_recommended: Arquitecto routes commit 4c4e2665 to Analista for independent remediation-3 review.
+risks: Unreadable leases without parseable owner identity are preserved for operator action; structurally unresolvable messages terminate deferred until manual rearm; disjoint execs share the Git working tree and may reach ledger operations concurrently, while submit_intent remains the ledger serializer.
