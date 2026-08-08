@@ -27,87 +27,17 @@
             "updated_at": "2026-07-03T09:01:07Z"
         },
         {
-            "claim_id": "CLAIM-20260808-054445-prune-arquitecto",
+            "claim_id": "CLAIM-20260808-071817-prune-arquitecto",
             "expires_at": "2026-08-08",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-08-08T05:44:45Z",
+            "started_at": "2026-08-08T07:18:17Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-08-08T05:44:45Z"
-        },
-        {
-            "claim_id": "CLAIM-20260808-Codex-TASK-0329-remediation1",
-            "expires_at": "2026-08-08T10:31:50Z",
-            "notes": "Remediation 1: narrow the PowerShell identity exemptions and enforce behavioral parity with the Python scanner.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0329-remediation1",
-                "Area_comun/state/TASK_INDEX.json#TASK-0329",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0329",
-                "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0329-codex-to-arquitecto.md",
-                "scripts/scan_domain_neutrality.ps1",
-                "scripts/test_scan_domain_neutrality.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-08-08T06:31:50Z",
-            "status": "released",
-            "task_id": "TASK-0329",
-            "updated_at": "2026-08-08T06:31:50Z"
-        },
-        {
-            "claim_id": "CLAIM-20260808-Codex-TASK-0329-remediation1-delivery",
-            "expires_at": "2026-08-08T08:45:33Z",
-            "notes": "Publish the TASK-0329 remediation 1 review-routing handoff.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0329-remediation1-delivery",
-                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediacion-1.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-08-08T06:45:33Z",
-            "status": "released",
-            "task_id": "TASK-0329",
-            "updated_at": "2026-08-08T06:45:33Z"
-        },
-        {
-            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-2-final-memory",
-            "expires_at": "2026-08-08T07:44:42Z",
-            "notes": "Record TASK-0336 remediation iteration 2 governed delivery after commit.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-2-final-memory",
-                "personal/Codex/Memory.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-08-08T05:44:42Z",
-            "status": "released",
-            "task_id": "TASK-0336",
-            "updated_at": "2026-08-08T05:44:42Z"
-        },
-        {
-            "claim_id": "CLAIM-20260808-Codex-cleanclone-event-archive",
-            "expires_at": "2026-08-08T07:54:26Z",
-            "notes": "Record and signal the distinct untracked event-archive clean-clone anomaly without absorbing it into TASK-0336.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-cleanclone-event-archive",
-                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-QUESTION-clean-clone-event-archive.md",
-                "personal/Codex/Memory.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-08-08T05:54:26Z",
-            "status": "released",
-            "task_id": "OPS-CLEAN-CLONE-20260808",
-            "updated_at": "2026-08-08T05:54:26Z"
+            "updated_at": "2026-08-08T07:18:17Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
