@@ -258,6 +258,27 @@
             "updated_at": "2026-08-08T15:28:25Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0340",
+            "expires_at": "2026-08-09T03:50:11Z",
+            "notes": "Fix actor-auth missing-dependency failure, install CI dependency, and add permanent behavioral mutation contract.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0340",
+                "Area_comun/state/TASK_INDEX.json#TASK-0340",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0340",
+                "Area_comun/tasks/TASK-0340-el-validador-canonico-lleva-seis-dias-crashing-en-CI.md",
+                "runtime/eventlog.py",
+                ".github/workflows/validate.yml",
+                "examples/actor_auth_ed25519_cases/run_actor_auth_ed25519_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T15:50:11Z",
+            "status": "active",
+            "task_id": "TASK-0340",
+            "updated_at": "2026-08-08T15:50:11Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hygiene-20260808-lote50",
             "expires_at": "2026-08-08T23:59:00Z",
             "owner": "Arquitecto",
@@ -274,6 +295,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260808",
             "updated_at": "2026-08-08T15:10:34Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote51",
+            "expires_at": "2026-08-08T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-4.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-4.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-4.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-4.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote51"
+            ],
+            "started_at": "2026-08-08T15:58:01Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T15:58:01Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9526ee890fef41cc61e1c44c58dd3769bcf41098cb1e4d58562f160d99b091bd",
+  "canonical_hash": "fb28278328480484436d3628a725009d5b142beef1d8429c81ee43a84fb2b737",
   "integrity": {
-    "canonical_hash": "9526ee890fef41cc61e1c44c58dd3769bcf41098cb1e4d58562f160d99b091bd",
+    "canonical_hash": "fb28278328480484436d3628a725009d5b142beef1d8429c81ee43a84fb2b737",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "fe366539d530b60da0cc00312d0cf42f4ee1cb2229203e2479143430edd382a1",
-    "signature": "0eadbe7961e1183394be8e92b5425e4522865f6a25c50b249e166eba8254ddd7",
-    "up_to_seq": 8058
+    "prev_hash": "606b1fa92152ca84ae47012e02c98f6c88be6ff53df2b4522d1a10d297becd84",
+    "signature": "6c2064b84ce48a1009cbe7718247c6cd8e03af8e8282d6343800f434671c28d9",
+    "up_to_seq": 8064
   },
   "state": {
     "aggregate_versions": {
@@ -1134,6 +1134,7 @@
       "CLAIM-arq-hygiene-20260808-lote48": 1,
       "CLAIM-arq-hygiene-20260808-lote49": 1,
       "CLAIM-arq-hygiene-20260808-lote50": 1,
+      "CLAIM-arq-hygiene-20260808-lote51": 1,
       "CLAIM-arq-hygiene-doneflip-hold-20260728": 1,
       "CLAIM-arq-hygiene-milestone1-20260728": 1,
       "CLAIM-arq-hygiene-milestone2-20260728": 1,
@@ -2862,6 +2863,7 @@
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0334-remediacion-1": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-2": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-3": 1,
+      "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0336-remediacion-4": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-cierres-0325-0334-0335": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-doneflip-0325": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-doneflip-0334": 1,
@@ -2889,6 +2891,7 @@
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-1": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-2": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-3": 1,
+      "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-4": 1,
       "MSG-20260808-Codex-to-Arquitecto-QUESTION-TASK-0335-cross-task-0334": 1,
       "MSG-20260808-Codex-to-Arquitecto-QUESTION-TASK-0335-gate-scope": 1,
       "MSG-20260808-Codex-to-Arquitecto-QUESTION-clean-clone-event-archive": 1,
@@ -2978,7 +2981,7 @@
       "OPS-MAILBOX-HYGIENE-20260729F3": 1,
       "OPS-MAILBOX-HYGIENE-20260806": 11,
       "OPS-MAILBOX-HYGIENE-20260807": 22,
-      "OPS-MAILBOX-HYGIENE-20260808": 18,
+      "OPS-MAILBOX-HYGIENE-20260808": 19,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3264,7 +3267,7 @@
       "TASK-0337": 2,
       "TASK-0338": 2,
       "TASK-0339": 1,
-      "TASK-0340": 4,
+      "TASK-0340": 6,
       "TASK-0341": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -3288,7 +3291,7 @@
       "protocol-prune": 55,
       "protocol-state": 1
     },
-    "events_applied": 7387,
+    "events_applied": 7393,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3753,6 +3756,10 @@
       "arq-l50-002": 8047,
       "arq-l50-003": 8048,
       "arq-l50-099": 8049,
+      "arq-l51-000": 8061,
+      "arq-l51-001": 8062,
+      "arq-l51-002": 8063,
+      "arq-l51-099": 8064,
       "arq-r2-0": 7399,
       "arq-r2-1": 7400,
       "arq-r2-2": 7401,
@@ -9673,6 +9680,7 @@
       "intent:Codex:claim:591c2a14556905212b5c4c8717e5ff2a30107bdf889019b0ff797864f5c305ed": 7801,
       "intent:Codex:claim:59ab7d4b8d9220fcacb8dc3773da780c8310d8f4cfb4a638ae616daf7377f4c3": 4477,
       "intent:Codex:claim:5aa6e3c3f5c80830b47823dc27f703c4e1479b475e55c75d10d004bbd0c04ba4": 2326,
+      "intent:Codex:claim:5ac343329b0d289a3da1605ef6e0a790a165af110c4dd80ff3b18ac1ebf7e168": 8059,
       "intent:Codex:claim:5acd76d18f9a6576010edf6ee7063d003bbc6aa863349179ebb3a8107d6d415a": 4523,
       "intent:Codex:claim:5c101bb35a6f546a259d0802b69359029f53c5fb5446933d169f030e786cea0c": 4575,
       "intent:Codex:claim:5c15160a6b6ed49c872c62dbf4fd8ce1fb662fca91e597b246e6c461e23118b6": 2756,
@@ -10175,6 +10183,7 @@
       "intent:Codex:task_status:187c84803df3f124df433a65a7dea159d12ebf52d1caeff07bf3a46c6a2beb10": 3790,
       "intent:Codex:task_status:1ad317075c7b165a114388f2af34d7c7d62c3c2cf43ce3973a8294095438749a": 7622,
       "intent:Codex:task_status:1b7d274614bd8c4d82a783d1d2bc436c9e43b653af7f243edc51c1b7197c666d": 1525,
+      "intent:Codex:task_status:1bf109dd4ddb27864fbeaa287dd214abd21094d97366c30bb31e3b6bbbeef62c": 8060,
       "intent:Codex:task_status:1d485bb92642710359fab5e237c33311dca4f7cc22d116aac5ce7034369b1b04": 4996,
       "intent:Codex:task_status:1fc7973652f4f8b81350e4ba162188b7605a6deb6024c79e0038005c52f2ea15": 2479,
       "intent:Codex:task_status:202db5049bcda39c55410b8dc47b51ca824b4aafd453408473206823cf11f84f": 2392,
@@ -10679,5 +10688,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8058
+  "up_to_seq": 8064
 }
