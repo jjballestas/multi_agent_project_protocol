@@ -16,7 +16,12 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 - Before commit: all 72 memory tests, 59/59 falsification inventory, collaboration,
   encoding, neutrality, compile, drift, and diff gates exited 0. TASK-0328 remains
   `in_progress` under `CLAIM-20260808-Codex-TASK-0328` pending clean-clone verification
-  and governed delivery. Codex has not reviewed or ratified the work.
+  and governed delivery.
+- Exact implementation commit `041e788a` passed the same gates in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0328-041e788a` with empty status.
+  Governed delivery commit `d2989713` moves TASK-0328 to `in_review`, releases both Codex
+  claims at runtime sequence 8010 with drift false, and publishes the self-contained
+  handoff plus Arquitecto routing request. Codex has not reviewed or ratified the work.
 
 ## 2026-08-08 - TASK-0327 remediation iteration 1 implementation
 
