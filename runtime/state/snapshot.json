@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "334610b21e4a3cc28f771defcc34310026146c1ed309fc8efa27dd427f2e38ff",
+  "canonical_hash": "55b95043f5cefbada24d4ca93ad262e402538587e450a6effb6d15431216d3ad",
   "integrity": {
-    "canonical_hash": "334610b21e4a3cc28f771defcc34310026146c1ed309fc8efa27dd427f2e38ff",
+    "canonical_hash": "55b95043f5cefbada24d4ca93ad262e402538587e450a6effb6d15431216d3ad",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "da1cd007cef2a227c347ab8f04ff3eb05e46423d05bc3bf5df58f98b574a8ba7",
-    "signature": "9b0cf28d04589fc6ef62200a0347930359374c5e333856fb7625e7c65b4a7007",
-    "up_to_seq": 7805
+    "prev_hash": "670d6ad639f6b097dc4792c4c4cbe1fd3a0f5a298a862e57effad523789f77c9",
+    "signature": "e9d700e89da2e4c045009453b975cc7e9aa02c7f2777a6c1f42539054dd5eaa3",
+    "up_to_seq": 7807
   },
   "state": {
     "aggregate_versions": {
@@ -3168,7 +3168,7 @@
       "TASK-0333": 13,
       "TASK-0334": 20,
       "TASK-0335": 32,
-      "TASK-0336": 16,
+      "TASK-0336": 18,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3191,7 +3191,7 @@
       "protocol-prune": 50,
       "protocol-state": 1
     },
-    "events_applied": 7134,
+    "events_applied": 7136,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6927,6 +6927,8 @@
       "codex:task0336:delivery-claim:20260807T191822Z": 7651,
       "codex:task0336:finalfix-claim:20260807T192327Z": 7655,
       "codex:task0336:finalfix-release:20260807T192400Z": 7656,
+      "codex:task0336:remediation1:claim-release:20260808T0240Z": 7807,
+      "codex:task0336:remediation1:in-progress-to-in-review:20260808T0240Z": 7806,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "d0104:TASK-0295:claim-acquire": 6394,
@@ -10329,5 +10331,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7805
+  "up_to_seq": 7807
 }
