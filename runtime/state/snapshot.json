@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "499ddd2292a5b23f27b24ecb6e3a35d7edd014f0932aa433ba8f85f31c2c9c41",
+  "canonical_hash": "eec8d7e6de6519b43aa2444cf0c9a951b5d9a28b47f719da6964fa57dbe8d7eb",
   "integrity": {
-    "canonical_hash": "499ddd2292a5b23f27b24ecb6e3a35d7edd014f0932aa433ba8f85f31c2c9c41",
+    "canonical_hash": "eec8d7e6de6519b43aa2444cf0c9a951b5d9a28b47f719da6964fa57dbe8d7eb",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "0fe03c76ec21e8f396525acd33c1ef13eab786d210b3e3ea1f34597dab601ec9",
-    "signature": "438f33df0e4b46db9b2c9460677208d8866c40b7cfc8477493fdc6803f829775",
-    "up_to_seq": 7902
+    "prev_hash": "b9854999943cffd1de37a97ffd06f1ae0195cbb8d73d3c571e8e2faf50008419",
+    "signature": "75e111f66d4e2399d7ca162a1e7dfc1a8bc3a6166dc431236c483d58b12878f0",
+    "up_to_seq": 7905
   },
   "state": {
     "aggregate_versions": {
@@ -1007,6 +1007,7 @@
       "CLAIM-arq-20260807-registro-0336": 1,
       "CLAIM-arq-20260807-titulo-0322": 1,
       "CLAIM-arq-20260808-0336-devolver-a-progreso": 1,
+      "CLAIM-arq-20260808-0337-registro": 1,
       "CLAIM-arq-20260808-ratifica-0325": 1,
       "CLAIM-arq-20260808-ratifica-0334": 1,
       "CLAIM-arq-20260808-ratifica-0335": 1,
@@ -3210,6 +3211,7 @@
       "TASK-0334": 20,
       "TASK-0335": 32,
       "TASK-0336": 30,
+      "TASK-0337": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3232,7 +3234,7 @@
       "protocol-prune": 53,
       "protocol-state": 1
     },
-    "events_applied": 7231,
+    "events_applied": 7234,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3385,6 +3387,9 @@
       "arq-0336-bp-000": 7900,
       "arq-0336-bp-001": 7901,
       "arq-0336-bp-002": 7902,
+      "arq-0337-000": 7903,
+      "arq-0337-001": 7904,
+      "arq-0337-002": 7905,
       "arq-cierre-20260807T0310Z-c0": 7327,
       "arq-cierre-20260807T0310Z-r5": 7332,
       "arq-cierre-20260807T0310Z-s1": 7328,
@@ -10467,5 +10472,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7902
+  "up_to_seq": 7905
 }

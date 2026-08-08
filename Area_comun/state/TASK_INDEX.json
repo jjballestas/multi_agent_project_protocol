@@ -341,6 +341,16 @@
             "type": "infra"
         },
         {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+            "id": "TASK-0337",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "proposed",
+            "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

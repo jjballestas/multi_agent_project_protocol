@@ -47,6 +47,12 @@
             "owner": "Codex",
             "status": "in_progress",
             "title": "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
+        },
+        {
+            "id": "TASK-0337",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331"
         }
     ],
     "next_actions": [

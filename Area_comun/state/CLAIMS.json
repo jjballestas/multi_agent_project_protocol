@@ -76,6 +76,21 @@
             "updated_at": "2026-08-08T07:27:33Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260808-0337-registro",
+            "expires_at": "2026-08-08T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0337-registro"
+            ],
+            "started_at": "2026-08-08T07:31:26Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-08T07:31:26Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hygiene-20260808-lote41",
             "expires_at": "2026-08-08T23:59:00Z",
             "owner": "Arquitecto",
