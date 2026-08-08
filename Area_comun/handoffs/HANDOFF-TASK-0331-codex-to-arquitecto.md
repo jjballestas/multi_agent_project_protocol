@@ -3,11 +3,30 @@ task_id: TASK-0331
 from: Codex
 to: Arquitecto
 status: in_review
-implementation_commit: 4e536ffcd3c6a3527d49c7475a43195fc957ab91
+implementation_commit: 9def32142513ebe81d1a7f81684838dc4456ac5a
 created_at: 2026-08-07T22:52:00Z
 ---
 
 # HANDOFF TASK-0331 - scope-aware and atomic peer admission
+
+## Remediation iteration 2
+
+Commit `9def32142513ebe81d1a7f81684838dc4456ac5a` closes G1-G4 from the independent
+remediation-1 verdict:
+
+- `Clear-StaleCronLockIfSafe` no longer requires a lock before inspecting an own lease. It parses
+  a deadline only when `Test-LeaseProcessMatches` proves a live owner; unreadable leases converge
+  through the same stale cleanup path.
+- Exec publication creates the lock before the exclusive reservation lease. Normal cleanup and
+  self-heal remove the lease before the lock, eliminating the reachable own-lease-without-lock
+  window introduced by exclusive creation.
+- `NEG-HARNESS-RESERVED-LEASE-SELF-HEAL` now executes three recovery rounds over all four required
+  states: reserved without lock, truncated with lock, empty with lock, and reserved without
+  `reservation_deadline`. Shipped code removes both artifacts in round 1 and stays clean in rounds
+  2 and 3; the old lock-required/deadline-first/fail-only mutant leaves every lease present in all
+  three rounds.
+- The archive-resolution statement is corrected below with the checker's measured population. No
+  claim is made that archive membership alone makes a message resolvable.
 
 ## Remediation iteration 1
 
@@ -100,12 +119,12 @@ dirty-tree veto remains independent and stricter.
 
 ## Exact-commit gates
 
-Detached clean clone of `4e536ffcd3c6a3527d49c7475a43195fc957ab91` under
-`D:/Aegis_Scratch/multi_agent_project_protocol/r331-4e536ffc`:
+Detached clean clone of `9def32142513ebe81d1a7f81684838dc4456ac5a` under
+`D:/Aegis_Scratch/multi_agent_project_protocol/r331-r2-9def3214-codex`:
 
-- `python scripts/test_exec_lease_harness.py` -> exit 0, 25/25 tests.
+- `python scripts/test_exec_lease_harness.py` -> exit 0, 26/26 tests.
 - `python scripts/check_falsification_contracts.py --root .` -> exit 0,
-  52 permanent negatives / 52 declared / 0 missing at the exact commit.
+  53 permanent negatives / 53 declared / 0 missing at the exact commit.
 - `python scripts/test_falsification_contracts.py` -> exit 0.
 - `python scripts/validate_collaboration_state.py --root .` -> exit 0.
 - `python scripts/scan_encoding.py` -> exit 0.
@@ -118,7 +137,7 @@ task_id: TASK-0331
 status: in_review
 executive_summary: Peer admission now compares declared material scope, fails closed on ambiguity, and atomically publishes a reservation before launch.
 artifacts:
-  - path_or_commit: 4e536ffcd3c6a3527d49c7475a43195fc957ab91
+  - path_or_commit: 9def32142513ebe81d1a7f81684838dc4456ac5a
   - path_or_commit: Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md
 gates:
   - command: python scripts/test_exec_lease_harness.py
@@ -133,5 +152,5 @@ gates:
     result: PASS
   - command: git diff --check
     result: PASS
-next_recommended: Arquitecto routes commit 4e536ffc to Analista for independent remediation review.
+next_recommended: Arquitecto routes commit 9def3214 to Analista for independent remediation-2 review.
 risks: Structurally unresolvable messages terminate deferred until manual rearm; disjoint execs share the Git working tree and may reach ledger operations concurrently, while submit_intent remains the ledger serializer.
