@@ -126,3 +126,31 @@ sobre una leccion que ya tengo escrita (ventana compartida / silencio de escritu
 commitee en el acto cada vez y con 7200 s de presupuesto no murio ningun mensaje. Pero el patron es
 el mismo, y la conclusion operativa tambien: **agrupar las escrituras de mailbox en un solo commit
 por ventana en vez de gotearlas.**
+
+---
+
+**RES-13. La profundidad de cola esta limitada por el presupuesto de defer, y el peer se la mata solo.**
+Fuente: yo, en vivo el 2026-08-08 16:40, con un mensaje MUERTO como evidencia.
+
+    MSG-...-ACTION-TASK-0332-remediacion-1.md   defer_terminal
+    reason=worktree_residue_live  defers=3  elapsed=8436s > 7200s
+
+Ruteado a las 12:05, Codex lo habria alcanzado a las 16:40: **4,5 h en cola**. El reloj de defer
+corre para TODA la cola en cada sondeo, no solo para el mensaje en ejecucion; y la causa se mantiene
+ESTABLE porque el propio peer la produce -- mientras trabaja escribe `personal/<id>/Memory.md` y sus
+handoffs, que es lo que DECISION-0026 le OBLIGA a hacer tras cada commit.
+
+**Consecuencia: la cola no puede ser mas profunda que ~2 h de trabajo**, o sea 3-4 mensajes con
+execs de 20-40 min. Contradice de frente la directiva operativa de mantener la cola del maker llena.
+
+Direccion: **falla ABIERTO en el peor sentido posible** -- no bloquea, DESCARTA trabajo, y en
+silencio. El mensaje desaparece de la cola efectiva sin que nada lo anuncie salvo el watchdog.
+Encontre ademas **9 entradas huerfanas** en el mismo `retry.json`, para mensajes ya archivados
+(es la ocurrencia 9 del borrador 0105, la que salio de la evidencia por no sostenerla ninguna regla).
+
+Emparejada con **TASK-0337**: el guard de residuo no distingue el trabajo del peer de su propio
+ruido, ni las rutas del mensaje diferido de las del que se ejecuta. Anadir esta medicion al
+inventario de vetos pre-exec que 0337 ya pide.
+
+Paliativo que aplique: borrar del `retry.json` las entradas de los mensajes vivos (les devuelve las
+2 h) y las huerfanas. No es arreglo: hay que volver a hacerlo cada pocas horas.
