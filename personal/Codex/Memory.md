@@ -2,6 +2,21 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
 
+## 2026-08-08 - TASK-0332 behavioral offset contract implementation
+
+- Commit `4205d04ddb92b43f0993224e7870900e924bd107` adds permanent negative
+  `NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR` without changing production.
+- The contract drives all 1,684 offsets accepted by `DATE_RE` through `contains_pii`, including
+  both signs, every minute for hours 00-13, `+14:00`, `-14:00`, `Z`, and no offset.
+- Its `+06:15` falsification target was outside both prior offset samples. Before implementation,
+  a falsy-return production mutant passed the complete 70-test suite; the new behavioral test
+  measures restructuring, external iterable filtering, and falsy early return directly.
+- The new test was appended after existing line-bound identity fixtures and its embedded inventory
+  row was line-neutral, preserving the brittle neutrality coordinates while TASK-0329 remains open.
+- TASK-0332 remains `in_progress` under active claim
+  `CLAIM-20260808-Codex-TASK-0332-v2`; clean-clone mutation and repository gates remain before
+  delivery.
+
 ## 2026-08-08 - TASK-0336 remediation iteration 3 implementation
 
 - Commit `73822f50` replaces shell-escape enumeration with a fail-closed whitelist of exactly two

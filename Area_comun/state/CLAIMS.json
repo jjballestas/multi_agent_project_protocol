@@ -149,6 +149,34 @@
             "updated_at": "2026-08-08T09:44:23Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0332-delivery",
+            "expires_at": "2026-08-08T22:15:00Z",
+            "notes": "Publish the TASK-0332 delivery routing message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332-delivery",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0332.md"
+            ],
+            "started_at": "2026-08-08T10:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0332",
+            "updated_at": "2026-08-08T10:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0332-handoff",
+            "expires_at": "2026-08-08T22:14:23Z",
+            "notes": "Publish the self-contained TASK-0332 maker handoff after exact-commit verification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332-handoff",
+                "Area_comun/handoffs/HANDOFF-TASK-0332-codex-to-arquitecto.md"
+            ],
+            "started_at": "2026-08-08T10:14:23Z",
+            "status": "released",
+            "task_id": "TASK-0332",
+            "updated_at": "2026-08-08T10:14:23Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0332-v2",
             "expires_at": "2026-08-08T21:46:00Z",
             "notes": "Implement TASK-0332 in the existing memory test runner and its embedded falsification inventory.",
@@ -164,7 +192,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-08T09:46:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0332",
             "updated_at": "2026-08-08T09:46:00Z"
         },
