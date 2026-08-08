@@ -10,8 +10,10 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
   modules.
 - The full 71-test memory suite and all five requested repository gates pass at exact commit
   `f732292a`. A new weakening default injected into the drift module makes the AST property test
-  exit 1 with the discovered carrier. TASK-0327 stays `in_progress` under claim
-  `CLAIM-20260808-Codex-TASK-0327-remediation-1` pending governed delivery.
+  exit 1 with the discovered carrier.
+- Governed delivery commit `57a5527a` returns TASK-0327 to `in_review`, releases both Codex claims,
+  and publishes the self-contained remediation handoff requesting independent Analista re-review.
+  Runtime drift is false through sequence 8000. Codex did not review or ratify the remediation.
 
 ## 2026-08-08 - TASK-0332 behavioral offset contract implementation
 
