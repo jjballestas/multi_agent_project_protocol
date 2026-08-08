@@ -17,6 +17,10 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
   neutrality, actor-auth, compile, drift, falsification, and diff gates exited 0.
 - TASK-0340 remains `in_progress` under `CLAIM-20260808-Codex-TASK-0340`; AC6 still requires
   a real GitHub Actions run whose `validate` job is green before governed delivery.
+- Real run `31265922145` proved dependency installation and then exposed the next CI-only
+  precondition: the default depth-1 checkout cannot reach the configured commit-trailer base
+  `57f6250f`. Commit `ed0a7ba8` gives the `validate` checkout full history; a new real run is
+  required before delivery. The separate `falsification-runners` job remains out of scope.
 
 ## 2026-08-08 - TASK-0336 remediation iteration 4 implementation
 
