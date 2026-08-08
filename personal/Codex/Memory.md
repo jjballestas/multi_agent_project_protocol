@@ -5669,3 +5669,15 @@ ratified its own work.
 - Governed delivery commit `91333334` moves TASK-0331 back to `in_review`, releases every Codex
   claim, and publishes the self-contained remediation-3 handoff. Arquitecto independently routed
   review in commit `da14cbe9`; Codex has not reviewed or ratified the implementation.
+## 2026-08-08 - TASK-0336 remediation iteration 2 implementation
+
+- Commit `e21e617a` makes Bash physical line continuation visible before path-separator
+  normalization: a direct runner invocation consumed by the preceding executable line no longer
+  satisfies the static wiring gate.
+- The permanent contract exercises all four effective-Bash entry paths (step shell, implicit Unix
+  shell, job defaults, workflow defaults) and preserves the accepted comment-ending-backslash
+  boundary. `NEG-FALSIFICATION-RUNNER-WIRING` now has 25 declared boundaries.
+- The targeted tests, canonical 8/8 and 55/55 inventory, collaboration validator, encoding,
+  neutrality, drift, compile, and diff gates exited 0 before commit. TASK-0336 remains
+  `in_progress` pending exact-commit clean-clone verification and governed delivery.
+- Codex is the maker and has not reviewed or ratified this remediation.
