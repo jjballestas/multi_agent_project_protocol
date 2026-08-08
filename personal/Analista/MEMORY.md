@@ -7482,3 +7482,86 @@ va en el aislado, y la suite completa solo para el numero que decide. Verificar 
 runner (`.github/workflows/validate.yml:49`), no que lo declara. Gates por exit code: validate,
 scan_encoding, scan_domain_neutrality, `protocol_replay --check-drift`. Trailers `Task-Id:` +
 `Ops-Reason:`; commit con pathspec explicito a mis dos ficheros.
+
+## TASK-0331 remediacion 1 (46f5be47, 2026-08-08) -- CHANGE-REQUIRED
+
+Re-juicio del arreglo de admision de peers (`4e536ffc`+`1c5aa703`) sobre clon limpio de `714221b6`.
+F1 tal como lo reporte quedo cerrado; bloquee por tres cosas distintas.
+
+### La precondicion oculta de un autocurado
+
+`Clear-StaleCronLockIfSafe` recupera la lease huerfana solo si **(a) el fichero de lock existe** y
+**(b) el campo de deadline parsea**. La remediacion arreglo (b) para `state=reserved` y nada mas.
+Medi los siete estados de lease x tres rearranques y cuatro siguen encallados para siempre: lease
+sin lock, lease truncada, lease de 0 bytes, y `reserved` sin `reservation_deadline`. **La leccion:
+cuando un arreglo toca un camino de recuperacion, no basta con probar el estado que se reporto --
+hay que enumerar TODAS las precondiciones de ese camino y probar cada una violada.** La sonda de
+rearranques (mismo estado, N ciclos) es la que separa "se recupera" de "se recupera una vez".
+
+### Un orden de escritura puede volver benigno lo permanente, y al reves
+
+`Acquire-ExecReservation` escribe la lease ANTES del lock, y el `finally` borra el lock ANTES de la
+lease. Con el autocurado condicionado al lock, esas dos ventanas producen un ladrillo permanente.
+Y es **regresion de la propia tarea**: antes de 0331 la lease propia se escribia con
+`Write-Utf8NoBom` (sobreescritura, huerfana inocua); 0331 la volvio exclusiva con `CreateNew`.
+**Comparar siempre contra `<commit>^` para saber si un estado nuevo es defecto heredado o creado.**
+
+### Medir la alcanzabilidad en vez de argumentarla
+
+Para no vender "es teorico" ni "pasa siempre": sonda de atomicidad con un escritor haciendo 20000
+`[IO.File]::WriteAllText` y un job lector muestreando `Length`. Observe `-1`, `0` y el tamano
+completo -> `WriteAllText` **no es atomico** y el fichero es visible a 0 bytes. Como
+`Update-ExecLeaseHeartbeat` corre **una vez por segundo** todo el exec (`WaitForExit(1000)`), la
+ventana es ~1800 por exec de 30 min. Eso convierte un "podria" en un numero.
+
+Y el agravante que casi se me escapa: `LOCKED skip` **no registra defer**, asi que no consume
+presupuesto, no llega a `defer_terminal`, no emite `RETRY_EXHAUSTED` y ningun watchdog despierta.
+**Un fallo que no consume presupuesto de reintento es peor que uno que lo agota**, aunque parezca lo
+contrario.
+
+### Un arreglo puede cerrar el 22 por ciento y declararse como si cerrara la clase
+
+F2 (consultar tambien `TASK_INDEX_ARCHIVE`) lo verifique sobre **poblacion real**: los 2272
+`MSG-*.md` del clon, con el codigo nuevo y con `379a9124`. Resultado 0 -> **228 de 1033**, no los 737
+que yo mismo habia proyectado en r1 leyendo solo los indices. Causa: **272 de las 365 tareas
+archivadas no tienen bloque `scope_routes:` en su contrato**. El fallo se mudo del indice al
+contrato. **Mi propia proyeccion de r1 era optimista porque conte a mitad de la cadena** (indice) en
+vez de ejecutar la funcion entera. Ejecutar la funcion real sobre el corpus real, siempre.
+
+El handoff decia "This remediation removes archived tasks from that class". Falso al 78 por ciento.
+Un defecto de DECLARACION bloquea igual cuando la declaracion es justo la pregunta que hizo el
+Arquitecto: le hace seguir archivando con falsa seguridad.
+
+### El nulo que se descarta y el nulo que debe propagarse
+
+F3: `ConvertTo-ComparableRoute` devuelve `$null` para rutas con glob (bien), pero
+`ConvertTo-ComparableScope` **descarta los nulos** en vez de propagarlos, porque el nulo por
+contenedor-de-ledger es deliberado. Resultado: `["*"]` veta, pero `["src/**","otra/ruta.md"]` da
+`none` -- falla ABIERTO con el glob silenciosamente borrado. **Dos causas distintas de nulo con
+semanticas opuestas compartiendo un unico sumidero.** El negativo entregado solo ejercita la familia
+de UNA ruta, que es la mitad que funciona: la misma trampa de 0330 (probar el ejemplo, no la
+familia). No bloquee: corpus real 2333 claims con scope de lista, 1 glob puro, **0 mixtos**.
+
+### Lo que si funciono, y como lo verifique
+
+Corri **mis propios cuatro mutantes** sobre una copia del clon con el gate completo: deadline de
+reserva revertido, indice solo-caliente, guard de globs borrado, y el de CODIGO MUERTO del veto de
+arbol sucio. Los cuatro ponen el gate en RED. El cuarto es el que sobrevivia en r1: el contrato paso
+de comparar indices de texto a ejecutar `Invoke-PeerForMessage` y contar llamadas a admision. **Un
+contrato tiene teeth cuando invoca la funcion de entrada real, no cuando asevera sobre la fuente.**
+
+### Operativa y trampas de sonda
+
+- Clon `git clone` local a `D:/Aegis_Scratch/mapp/r331b/cc` + `checkout --detach`; los mutantes en
+  una copia aparte (`r331b/mut`), jamas sobre el clon de referencia. Un run de mutantes que muere
+  por timeout **deja el fichero mutado**: restaurar desde el clon limpio antes de seguir, y lanzar
+  las matrices largas en background.
+- Extraer funciones del `.ps1` por AST (`FunctionDefinitionAst` + `Invoke-Expression`) en vez de
+  dot-sourcing. **Cargar las funciones REALES de las que depende la sonda** (me falto
+  `Test-LeaseProcessMatches` y la primera corrida entera dio `SELF_HEAL_FAIL` falso por comando no
+  encontrado -- casi lo reporto como hallazgo).
+- Escapes de backslash entre bash heredoc -> Python -> JSON -> PowerShell: `"src\target"` llego
+  como `src<TAB>arget` y dio un falso `none`. **Ante un vector raro, aislarlo construyendo la cadena
+  en el propio PowerShell (`"src" + [char]92 + "target"`) antes de escribirlo como defecto.**
+- `check_falsification_contracts` y `validate_collaboration_state` aceptan `--root`, **no `-r`**:
+  `-r .` sale EXIT=2 por argparse. No leer ese 2 como gate rojo.
