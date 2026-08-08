@@ -149,7 +149,7 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_domain_pii_retrieval_reason_is_attested_and_falsifiable",
     },
-    {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True), source_results)", "self.assertEqual((False, True), mutant_results[\"restructured\"])", "self.assertEqual((False, True), mutant_results[\"filtered\"])", "self.assertEqual((False, False), mutant_results[\"early_return\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
+    {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True, True), source_results)", "self.assertEqual((False, True, False), mutant_results[\"restructured\"])", "self.assertEqual((False, True, False), mutant_results[\"filtered\"])", "self.assertEqual((False, False, False), mutant_results[\"early_return\"])", "self.assertEqual(False, mutant_results[\"changed_coordinate\"])", "self.assertEqual(False, mutant_results[\"changed_format\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
     {"id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION", "negative": "Making the separator-aware detector unreachable restores the contiguous-only gap while leaving its guard text present.", "mutation": "mutant_source = source.replace(pattern_line, unreachable_pattern_line, 1)", "boundaries": ("self.assertEqual((True, True), source_results)", "self.assertEqual((True, False), mutant_results)", "self.assertEqual((False, False), phone_only_results)"), "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable"},)
 
 def write(path: Path, text: str) -> None:
@@ -2222,19 +2222,51 @@ Body is not indexed.
         )
         valid_offsets = ("", "Z", *numeric_offsets)
         self.assertEqual(1_684, len(valid_offsets))
-        domain_term = "2026"
+        # R0332-3: this offset sweep is exhaustive only for ASCII digits. DATE_RE
+        # uses Unicode-aware \d; that wider alphabet remains TASK-0322 residual R3.
         email = "contact@example.invalid"
-        for offset in valid_offsets:
-            timestamp = f"2026-06-19T09:28:23{offset}"
-            with self.subTest(implementation="source", offset=offset):
+        exhaustive_prefix = "2026-06-19T09:28:23"
+        representative_offsets = (
+            "",
+            "Z",
+            "+00:01",
+            "-05:45",
+            "+13:59",
+            "+14:00",
+            "-14:00",
+        )
+        representative_prefixes = (
+            "2027-06-19T09:28:23",
+            "2028-06-19T092823",
+            "2029-06-19T09:28:23.1",
+            "2030-06-19T09:28:23.123456",
+        )
+        timestamp_cases = [
+            (f"{exhaustive_prefix}{offset}", offset)
+            for offset in valid_offsets
+        ]
+        timestamp_cases.extend(
+            (f"{prefix}{offset}", offset)
+            for prefix in representative_prefixes
+            for offset in representative_offsets
+        )
+        timestamp_cases.append(("2031-06-19", "date-only"))
+
+        for timestamp, coordinate in timestamp_cases:
+            domain_term = timestamp[:4]
+            with self.subTest(
+                implementation="source", timestamp=timestamp, coordinate=coordinate
+            ):
                 self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))
                 source_results = (
                     memory_db.contains_pii(timestamp, [domain_term]),
                     memory_db.contains_pii([timestamp, email], []),
+                    memory_db.contains_pii([timestamp], [domain_term]),
                 )
-                self.assertEqual((True, True), source_results)
+                self.assertEqual((True, True, True), source_results)
 
         target_timestamp = "2026-06-19T09:28:23+06:15"
+        domain_term = "2026"
         old_behavior_offsets = ("", "Z", "+02:00", "-05:00", "-12:30")
         old_grammar_offsets = ("+05:45", "-09:45", "+13:00", "+14:00")
         self.assertNotIn("+06:15", old_behavior_offsets)
@@ -2285,15 +2317,39 @@ Body is not indexed.
         early_return_source = source.replace(
             normalized_line, early_return + normalized_line, 1
         )
+        changed_coordinate = (
+            "        if DATE_RE.fullmatch(item) and item.startswith(\"2027-\"):\n"
+            "            return False\n"
+        )
+        changed_coordinate_source = source.replace(
+            normalized_line, changed_coordinate + normalized_line, 1
+        )
+        value_list_body = (
+            "    if isinstance(value, list):\n"
+            "        return [str(item).strip() for item in value if str(item).strip()]\n"
+        )
+        changed_format_body = (
+            "    if isinstance(value, list):\n"
+            "        items = [str(item).strip() for item in value if str(item).strip()]\n"
+            "        if any(re.fullmatch(r\"\\d{4}-\\d{2}-\\d{2}T\\d{6}(?:Z|[+-]\\d{2}:\\d{2})?\", item) for item in items):\n"
+            "            return []\n"
+            "        return items\n"
+        )
+        self.assertEqual(1, source.count(value_list_body))
+        changed_format_source = source.replace(
+            value_list_body, changed_format_body, 1
+        )
         mutant_sources = {
             "restructured": restructured_source,
             "filtered": filtered_source,
             "early_return": early_return_source,
+            "changed_coordinate": changed_coordinate_source,
+            "changed_format": changed_format_source,
         }
         for mutant_source in mutant_sources.values():
             self.assertNotEqual(source, mutant_source)
 
-        mutant_results: dict[str, tuple[bool, bool]] = {}
+        mutant_results: dict[str, tuple[bool, bool, bool] | bool] = {}
         with tempfile.TemporaryDirectory(prefix="memory-date-offset-pii-mutants-") as temp:
             for name, mutant_source in mutant_sources.items():
                 mutant_path = Path(temp) / f"build_memory_db_{name}_mutant.py"
@@ -2306,16 +2362,28 @@ Body is not indexed.
                 sys.modules[spec.name] = mutant
                 try:
                     spec.loader.exec_module(mutant)
-                    mutant_results[name] = (
-                        mutant.contains_pii(target_timestamp, [domain_term]),
-                        mutant.contains_pii([target_timestamp, email], []),
-                    )
+                    if name == "changed_coordinate":
+                        mutant_results[name] = mutant.contains_pii(
+                            ["2027-06-19T09:28:23+06:15", email], []
+                        )
+                    elif name == "changed_format":
+                        mutant_results[name] = mutant.contains_pii(
+                            ["2028-06-19T092823+06:15", email], []
+                        )
+                    else:
+                        mutant_results[name] = (
+                            mutant.contains_pii(target_timestamp, [domain_term]),
+                            mutant.contains_pii([target_timestamp, email], []),
+                            mutant.contains_pii([target_timestamp], [domain_term]),
+                        )
                 finally:
                     sys.modules.pop(spec.name, None)
 
-        self.assertEqual((False, True), mutant_results["restructured"])
-        self.assertEqual((False, True), mutant_results["filtered"])
-        self.assertEqual((False, False), mutant_results["early_return"])
+        self.assertEqual((False, True, False), mutant_results["restructured"])
+        self.assertEqual((False, True, False), mutant_results["filtered"])
+        self.assertEqual((False, False, False), mutant_results["early_return"])
+        self.assertEqual(False, mutant_results["changed_coordinate"])
+        self.assertEqual(False, mutant_results["changed_format"])
 
     def test_account_identifier_presentations_are_structural_and_falsifiable(self) -> None:
         """PERMANENT_NEGATIVE: NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION"""

@@ -95,3 +95,19 @@ lo bruto; acotar el muestreo a los representantes de cada clase (extremos, minut
 signo) y declarar el criterio. Riesgo mayor: creer que este contrato cubre TODA forma de bypass.
 No lo hara -- cubre las que cambian el COMPORTAMIENTO observable de contains_pii, que es
 justamente la familia que importa; lo que quede fuera se declara.
+
+## Remediation 1 contract
+
+The behavioral sweep keeps all 1,684 ASCII offsets for the extended-time baseline and adds a
+prefix-by-offset matrix over a different year, basic time, one- and six-digit fractional seconds,
+plus a date-only case. Representative offsets cover no offset, `Z`, both signs, non-zero minutes,
+hour 13, and both `14:00` endpoints. Every case checks a scalar timestamp, a timestamp followed by
+email PII, and a one-item list whose only PII is the exempt timestamp through an instance term.
+
+The permanent negative reconstructs the three original bypass forms plus the two independent
+checker slips: a falsy return on a changed year and external iterable filtering on basic time.
+Production remains unchanged; adding a special-case production key is outside this remediation.
+
+**R0332-3 (declared, non-blocking):** the 1,684-member offset sweep is exhaustive only over ASCII
+digits. `DATE_RE` uses Unicode-aware `\d`, so non-ASCII decimal digits remain TASK-0322 residual R3
+and are outside this task's code scope.
