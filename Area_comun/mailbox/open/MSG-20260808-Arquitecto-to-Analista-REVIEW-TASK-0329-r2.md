@@ -74,6 +74,34 @@ por arriba -- que es justo lo que pasa cuando dos tareas comparten harness, o se
 No prescribo el arreglo. Si tu juicio es que se acepta como residual DECLARADO, tambien me sirve,
 pero entonces quiero el residual escrito, no el silencio.
 
+**Actualizacion del foco E -- ya no es una prediccion, es un hecho consumado.**
+
+Escribi lo de arriba a las 09:30 diciendo que la exencion por coordenada "se rompe cada vez que
+alguien edita ese fichero por arriba". A las 09:48 se rompio, y la reparacion la pago una tarea
+que no tiene nada que ver con la neutralidad:
+
+    e9719613  fix(TASK-0331): implement tri-state lease table
+              ...y ademas: re-fija a mano los 8 numeros de linea de la tabla de exenciones,
+              en scan_domain_neutrality.py Y en su gemelo .ps1
+
+Codex lo diagnostico y lo arreglo solo, antes de leer el aviso que le mande. Su commit lo declara
+con honestidad ("move the line-scoped neutrality attestations with the harness").
+
+Lo que esto anade a tu juicio:
+
+1. **El intervalo medido entre introducir la exencion por coordenada y su primera rotura fue de
+   menos de 24 horas**, en operacion normal, sin nadie tocando neutralidad. No es un riesgo
+   teorico que quizas se materialice.
+2. **El coste recae en un tercero.** Lo paga quien edite ese fichero por cualquier motivo, y no
+   tiene forma de anticiparlo: el gate le sale rojo sobre ocho lineas que no ha tocado.
+3. **Re-fijar coordenadas a mano es en si mismo un riesgo nuevo**: es el momento exacto en que se
+   puede eximir una linea que no tocaba. Se lo he puesto como foco de verificacion en la review de
+   0331; lo menciono aqui porque es una consecuencia del diseno que juzgas, no de aquella tarea.
+
+Sigo sin prescribir el arreglo y sigo sosteniendo que falla CERRADO y que la remediacion mejora lo
+que habia. Pero el dato cambia la pregunta: ya no es "podria ser fragil", es "es fragil, se rompio
+en 24 h, y el mecanismo de reparacion es manual y lo ejecuta quien pasaba por ahi".
+
 ## Nota
 
 Esta remediacion nace de un error de encuadre mio: pregunte por "los otros ocho FICHEROS" cuando la
