@@ -7851,3 +7851,65 @@ para cazar lo mio de la sesion anterior.
 - Reemplazo de texto exacto en un fichero de 1615 lineas: fallo por indentacion y perdi un run
   entero (el `replace` no casaba, count=0, y la suite corrio SIN mutar dando un verde enganoso).
   **Afirmar el count del replace ANTES de correr**, o borrar por indices de linea localizados.
+
+---
+
+## 2026-08-08 -- TASK-0329 (exencion de identidad acotada): CHANGE-REQUIRED por el GEMELO
+
+Ancla `bd664a86`, clon limpio `D:/Aegis_Scratch/hub/rev0329/cc` (+ copia sin `.git` en `probe/`
+para inyectar y restaurar). Veredicto:
+`Area_comun/artifacts/Analista-TASK-0329-exencion-identidad-acotada-verdict.md`, commit `29e3316c`.
+
+### La leccion principal: un gate con DOS implementaciones se arregla en las DOS
+
+El fix era bueno en `scripts/scan_domain_neutrality.py` -- y por eso casi se me pasa. El defecto
+seguia entero en `scripts/scan_domain_neutrality.ps1` (`:6` la lista literal, `:172` el
+`-contains $file.RelativePath`), con el comentario justificativo copiado palabra por palabra. La
+misma fuga: **PY exit 1 / PS1 exit 0 en los diez ficheros**.
+
+Lo que lo convierte en bloqueante y no en cosmetico -- los tres hilos hay que tirarlos SIEMPRE:
+
+1. **Quien mas ejecuta este gate?** `grep -rn <script> .github/workflows/` -> `validate.yml:267`.
+2. **Quien mas lo RECIBE?** `grep -rn <script> scripts/new_instance.py` -> linea 90 lo copia a toda
+   instancia nueva, linea 175 lo cablea en el CI generado. El defecto se EXPORTA.
+3. **Hay una DECISION que declare paridad?** `grep -rn <script> Area_comun/decisions/` ->
+   DECISION-0006 dice "(paridad)" y que CI lleva ambos runtimes "para que la paridad se ejercite de
+   verdad". Paridad declarada + rota = no es opinion mia, es contrato incumplido.
+
+Y el test de paridad existente (`test_powershell_scanner_matches_required_coverage_when_available`)
+NO lo cazaba: solo mira cuatro rutas sonda, ninguna de ellas exenta. **Un test de paridad que no
+cubre el eje que estas cambiando no es cobertura de ese eje.**
+
+### Vector nuevo que anado a mi repertorio: EXENCIONES MUERTAS
+
+Ante cualquier allowlist declarativa `(fichero, linea, termino)`, comprobar que **cada** triple
+declarado corresponde a una ocurrencia REAL en el arbol anclado. Una exencion declarada sobre una
+linea que hoy no la necesita es un **agujero pre-autorizado esperando inquilino**. Aqui salieron
+91/91 limpias -- y esa comprobacion es lo que hace honesto el "acotado" del AC3; sin ella, "acotado"
+es solo la forma. Receta: resolver los digests contra los terminos que el propio escaner deriva de
+`protocol.config.json`, y aplicar su MISMO patron de frontera de palabra a la linea real.
+
+Corolario del "nada limpiado en silencio": `git show --stat` no toca ningun fichero fuente + los
+91 triples casan => todo lo destapado quedo declarado, no arreglado por detras. Las dos cosas
+juntas, no una.
+
+### El mutante de codigo muerto (mi pendiente desde 0324) SI murio aqui, y por que
+
+Tres formas de guarda-presente-pero-inalcanzable, mas el control: las cuatro `KILLED`.
+(D1: skip por fichero ANTES de la guarda; D2: la funcion corta a `return True`; D3:
+`identity_scan_path` devuelve False para los exentos.) Mueren por la asercion de **BASELINE** del
+negativo -- exige que la fuga aparezca en la salida del escaner REAL antes de mutar nada -- no por
+su mutacion. **Un negativo cuya baseline ata el EFECTO mata las formas de codigo muerto; uno que
+solo compara pre/post mutacion, no.** Ese es el patron que le faltaba a 0324.
+
+### Operativa
+
+- `git clone --local` del hub: **0,5 s** (hardlinks, `.git` 440 MB). Dejar de tratar el clon como
+  caro; lo caro era `--no-hardlinks`.
+- PowerShell aqui es `/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe`; `pwsh` NO existe,
+  asi que el test de paridad se **skipea** en local y su verde no dice nada del `.ps1`. Correr el
+  `.ps1` a mano SIEMPRE que el eje revisado lo toque.
+- Contrato ejecutado, no solo declarado: `check_falsification_contracts.py --root . --workflow
+  .github/workflows/validate.yml` -> `54/54 missing=0`. Ese flag es el que responde a TASK-0330.
+- Coste de fallar-cerrado medido: +1 linea al principio de `test_memory_db.py` -> **58 hallazgos**.
+  Declararlo como residual: un gate que se pone rojo por un cambio inocuo invita a que lo relajen.
