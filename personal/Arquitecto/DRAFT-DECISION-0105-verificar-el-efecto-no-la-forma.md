@@ -6,8 +6,8 @@
 
 ## Que cambia respecto a la iteracion 1, y por que
 
-El checker falsó la regla que cargaba el peso **usando el propio mecanismo que la certificaria**, y
-desinfló el titular. Lo acepto entero. Los cambios grandes:
+El checker falso la regla que cargaba el peso **usando el propio mecanismo que la certificaria**, y
+desinflo el titular. Lo acepto entero. Los cambios grandes:
 
 - **R2 gana su cuarta palabra.** Declarado, ejecutado y exigido **no implica ASERTADO**.
 - **El recuento baja de "catorce ocurrencias" a OCHO TAREAS.** Cuatro filas eran la misma TASK-0330
