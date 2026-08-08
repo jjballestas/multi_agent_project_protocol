@@ -2,6 +2,24 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
 
+## 2026-08-08 - TASK-0336 remediation iteration 3 implementation
+
+- Commit `73822f50` replaces shell-escape enumeration with a fail-closed whitelist of exactly two
+  command forms: a single undecorated runner invocation or a Bash aborting block containing one
+  runner invocation plus only inert echo, undecorated Python, comments, and blank lines.
+- Any executable Bash line continuation is outside the whitelist. Four permanent boundaries prove
+  the comment-splice escape dies through step shell, Unix implicit shell, job defaults, and workflow
+  defaults; an unknown multiline command also dies.
+- Legitimate multiline Bash, both `defaults.run.shell` sources, and the current `if: always()` form
+  remain accepted. The complete runner reports 31 boundaries and canonical wiring 8/8 runners,
+  57/57 contracts with `recognized_step_form` as the exact certified region.
+- Collaboration, encoding, neutrality, drift, compile, task-specific, and diff gates exited 0
+  before commit and against exact commit `73822f50` in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0336r3-73822f50` with empty status.
+- Delivery commit `a587488e` moves TASK-0336 to `in_review`, releases all three Codex remediation
+  claims, and publishes the self-contained handoff plus Arquitecto routing request. Independent
+  Analista review is required; Codex has not reviewed or ratified the work.
+
 ## 2026-08-08 - TASK-0325, TASK-0334, and TASK-0335 closure
 
 - Commit `26cd5ec6` atomically moves TASK-0325, TASK-0334, and TASK-0335 from
