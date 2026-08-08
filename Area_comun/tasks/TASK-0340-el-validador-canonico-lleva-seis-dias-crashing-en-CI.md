@@ -1,7 +1,7 @@
 ---
 id: TASK-0340
 title: El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0340-el-validador-canonico-lleva-seis-dias-crashing-en-CI.md
