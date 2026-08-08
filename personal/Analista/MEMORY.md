@@ -7,7 +7,85 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
-## Ultima actualizacion 2026-08-08 (56) - TASK-0327 r2: CHANGE-REQUIRED (el chequeo de propiedad enumera tres modulos y el motor tiene cinco)
+## Ultima actualizacion 2026-08-09 (57) - TASK-0336 r5: CHANGE-REQUIRED (el escape cierra por PROPIEDAD; bloquea la certificacion que se desmiente a si misma)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r5`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `90477ff7`, HEAD hub al revisar `28c9d707` (los dos ficheros de alcance IDENTICOS entre ambos;
+  `validate.yml` si cambio despues -- corri el gate de la entrega contra el workflow de la punta:
+  exit 0, 12/12 68/68). Clon limpio `D:/Aegis_Scratch/protocol/analista-0336r5/cc`, banco de mutacion
+  en clon SEPARADO `.../mut`. Veredicto **CHANGE-REQUIRED** en `fa767fac` (artifact
+  `Area_comun/artifacts/Analista-TASK-0336-separador-derivado-r5-verdict.md`). Iteracion 2 de 2.
+
+### LECCION PRINCIPAL: cuando el maker DERIVA la clase en vez de listarla, el bloqueante se acaba
+
+Cerre cuatro veces esta cadena pidiendo lo mismo: ata la PROPIEDAD, no la forma. En r5 el maker paso
+`command.splitlines()` -> `command.split(chr(10))` (la nocion de bash: un comando acaba en LF y en
+nada mas) y **el contrato deriva la clase entera de separadores en tiempo de ejecucion**:
+
+    [chr(c) for c in range(sys.maxunicode + 1)
+     if chr(c) != LF and len(("a"+chr(c)+"b").splitlines()) == 2]   # LF = chr(10)
+
+Eso es lo que hace que el arreglo cubra los caracteres que YO NO NOMBRE. Barri 900 celdas (clase
+derivada + 16 caracteres ausentes de mi r4: NUL, SOH, BS, SO, US, DEL, C1 0x88, NBSP, OGHAM, EN QUAD,
+FIGURE SPACE, ZWSP, WORD JOINER, IDEOGRAPHIC SPACE, BOM, CRLF) x 6 coordenadas x 6 fuentes de shell:
+**0 escapes**. **Regla: ante una remediacion, comprobar si el CONTRATO deriva su universo o lo
+enumera. Si lo deriva, mi lista deja de ser el techo.**
+
+### EL BANCO QUE DECIDE: tres preguntas por celda, con el shell REAL
+
+No basta "el gate lo rechaza". La sonda que zanjo fue `probe_behavior.py`: por cada forma pregunta
+(1) que dice el gate, (2) si el runner CORRIO (fichero testigo), (3) que exit devuelve el shell.
+Runner que FALLA siempre, y bash/PowerShell/cmd invocados como los invoca GitHub
+(`bash --noprofile --norc -eo pipefail`, `. script.ps1` + `exit $LASTEXITCODE`,
+`cmd /D /E:ON /V:OFF /S /C CALL`). La celda peligrosa es **aceptada + no corrio + exit 0**: 0 de 37.
+
+Ese diseno ademas SEPARA dos cosas que yo mezclaba: `aceptada + no corrio + exit != 0` es fail-loud
+(CI rojo, auto-revelador) y NO es la clase de escape. Con eso pude declarar honestamente que la
+divergencia de PALABRA sigue viva (`\s` casa VT/FF/CR, bash no) sin convertirla en bloqueante: toda
+palabra divergente es un comando inexistente y bajo `-e` eso es rojo, nunca verde.
+
+### MEDIR "cuantas fronteras discriminan" SIN correr la suite 37 veces: instrumentar por AST
+
+`assert` aborta a la primera, asi que no se puede saber que fronteras caen bajo un debilitamiento.
+Solucion (`matrix_discrim.py`): `ast.NodeTransformer` que sustituye cada `ast.Assert` por
+try/except que REGISTRA el resultado y sigue. 58 asserts, todos ciertos en la linea base; despues
+22 debilitamientos de un punto sobre produccion, escritos y restaurados en BYTES (`read_bytes`/
+`write_bytes`: con `read_text`/`write_text` Python convierte LF->CRLF al escribir y git marca el
+fichero como modificado; los resultados siguen valiendo pero el arbol miente).
+
+Resultado: 17 de 37 discriminan; de las 8 fronteras NUEVAS, 4 discriminan y 4 son inertes. Y quitar
+entero el guardia de la remediacion 2 (W06/W07) sigue volteando CERO -- igual que en r4, pero ahora
+DECLARADO en `residuals=line_continuation_mechanism_redundancy`.
+
+### EL BLOQUEANTE: el programa se contradice en UNA sola ejecucion
+
+    FALSIFICATION_STATIC_WIRING ... residuals=...,contract_discrimination_23_of_31,twin_TASK_0338
+    DECLARED NEG-FALSIFICATION-RUNNER-WIRING boundaries=37 ...
+
+El maker cogio MI numero de r4 (23 de 31) y lo fijo con un assert **en el mismo commit en que quita 2
+fronteras y anade 8**. El residual describe un contrato que ya no existe. **Regla: cuando el maker
+cita una medida MIA, recontar el denominador sobre lo entregado -- el numero heredado envejece en el
+mismo commit que lo hereda.** Y no reclame mi 17/37 como el numero correcto: espacio de sonda
+distinto da numero distinto, asi que el bloqueante es el DENOMINADOR, no el numerador.
+
+### La frontera del AC5: existe, muere, y sigue atando forma -- medir las dos cosas
+
+Banco de 7 mutantes sobre el texto certificador: **M0 (etiqueta afirmativa + scope ensanchado, la
+mutacion que yo pedi) MUERE** -- la frontera tiene dientes. Pero 4 sobreviven diciendo lo mismo con
+otras palabras: scope + `full_runtime_proof`, `all_runners_really_run=yes`, `proven_to_run=8/8`, y
+una SEGUNDA linea afirmativa (el predicado solo mira la linea que empieza por la etiqueta). Lo
+declare como deuda y NO como bloqueante: "la salida no afirma ejecucion garantizada" no es
+mecanicamente decidible y exigirlo seria pedir lo indecidible que el Arquitecto ya retiro en 0283.
+
+### Higiene del banco que ya es rutina
+
+Clon limpio para MEDIR, clon separado para MUTAR, restauracion en bytes, `git status --porcelain`
+vacio verificado DESPUES de cada banco. Y en Windows: `subprocess.run(["bash", ...])` resuelve el
+bash de **WSL**, no Git Bash -- hay que dar la ruta completa `C:/Program Files/Git/bin/bash.exe`, o
+la sonda mide otro shell sin avisar. Para `cmd` hay que pasar la linea de comandos como CADENA
+(la forma de lista rompe el entrecomillado de `CALL "..."`).
+
+## Antes 2026-08-08 (56) - TASK-0327 r2: CHANGE-REQUIRED (el chequeo de propiedad enumera tres modulos y el motor tiene cinco)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327-r2`. **SIN PRODUCTO EN ALCANCE.**
 - Ancla `f732292a`, HEAD hub al revisar `7000b8ba` (luego `08f1f648`). Clon limpio
