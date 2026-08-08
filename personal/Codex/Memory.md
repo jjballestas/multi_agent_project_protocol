@@ -5664,5 +5664,8 @@ ratified its own work.
   that unreadable legacy artifacts without parseable process identity require operator action.
 - A real-process permanent negative preserves live truncated, empty, and missing-deadline leases
   and kills the `reservation_deadline -> deadline` mutant. The harness passed 27/27 and the
-  falsification inventory passed 55/55 before commit. TASK-0331 remains `in_progress` pending
-  exact-commit clean-clone gates and governed delivery; Codex has not reviewed or ratified it.
+  falsification inventory passed 55/55 before commit. Exact implementation commit `4c4e2665`
+  passed all declared gates in detached clean clone with empty status.
+- Governed delivery commit `91333334` moves TASK-0331 back to `in_review`, releases every Codex
+  claim, and publishes the self-contained remediation-3 handoff. Arquitecto independently routed
+  review in commit `da14cbe9`; Codex has not reviewed or ratified the implementation.
