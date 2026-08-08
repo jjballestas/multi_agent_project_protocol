@@ -6054,3 +6054,13 @@ ratified its own work.
   and a real Actions run id remain required before delivery.
 - TASK-0345 remains `in_progress` under claim `CLAIM-20260808-Codex-TASK-0345-v3`. Codex is the
   maker and has not reviewed or ratified the work.
+
+## 2026-08-08 - TASK-0345 CI remediation iteration 1
+
+- Real Actions run `31271750436` proved both direct scanner steps and the new host-contract step
+  green on ubuntu, then exposed a fifth host/runtime assumption: the PowerShell parity runner
+  printed success but returned the final expected-negative child's stale `LASTEXITCODE=1`.
+- Commit `770d15a7` adds explicit `exit 0` after the runner's aggregate success and permanent
+  negative `NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK`. Local PowerShell cases, the 67/67
+  falsification inventory, collaboration, encoding, neutrality, and diff gates pass.
+- A new real Actions run on the remediation commit is still required before TASK-0345 delivery.
