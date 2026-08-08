@@ -1,6 +1,22 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0343 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0328 remediation 1 committed.
+
+## 2026-08-08 - TASK-0328 remediation iteration 1
+
+- Commit `41a38082` makes the grouped account-identifier detector validate every
+  structurally bounded prefix of a greedy candidate, including the next source
+  character at the 34-character ceiling. Adjacent prose no longer contaminates
+  the checksum, while an unseparated alphanumeric continuation stays rejected.
+- The permanent mutant restores whole-match checksum validation and reproduces
+  the embedded-identifier escape. Its six-value comparison corpus records two
+  gains and one declared checksum-invalid loss versus the previous engine.
+- On the same 22,342 governed metadata strings from HEAD, old and new engines
+  measured zero gains and zero losses. All 72 memory tests, 67/67 falsification
+  inventory, collaboration, encoding, neutrality, compile, and diff gates passed.
+- TASK-0328 remains `in_progress` under the remediation claim. Exact-commit
+  clean-clone verification and governed delivery remain pending; Codex has not
+  reviewed or ratified its own work.
 
 ## 2026-08-08 - TASK-0343 implementation
 
