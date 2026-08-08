@@ -7,6 +7,74 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (53) - TASK-0327: CHANGE-REQUIRED (el inventario correcto no era el de invocaciones sino el de PORTADORES del default)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `be549858` (implementacion `fef3f6b7`), contrastado contra `origin/main` `330fb1c5`. Clon
+  limpio `D:/Aegis_Scratch/mapp/an0327/cc`. Veredicto **CHANGE-REQUIRED** en `13b3651e` (artifact
+  `Area_comun/artifacts/Analista-TASK-0327-default-contains-pii-verdict.md`). Cinco gates exit 0:
+  suite 70 tests (239.8s), contratos, validate, encoding, neutralidad.
+
+### LECCION PRINCIPAL: cuando el defecto es la FORMA de una firma, el inventario que hay que re-derivar es el de DECLARACIONES, no el de LLAMADAS
+
+El Arquitecto me pidio re-derivar el inventario de **invocaciones** de `contains_pii`/`title_is_safe`
+y estaba COMPLETO (seis, AST, sin `getattr`/`eval`/`__dict__`, sin copia del motor en el arbol). El
+hueco estaba en el otro eje: barri las **firmas** que declaran `domain_pii_terms` con default y
+aparecio un cuarto portador, `validate_metadata` (`build_memory_db.py:571`), que ademas es el **unico
+llamador de produccion de las dos funciones arregladas**. Lo llevaba antes (`fef3f6b7^:574`) y lo
+sigue llevando. **Repro: `validate_metadata({"title": "nomina de Acme SL"}, {"Codex"})` ACEPTA; con
+`["Acme SL"]` RECHAZA** -- el mismo par que el contrato usa para probar el defecto, un marco arriba.
+Diez de once call sites ya lo omiten (uno de produccion lo pasa, diez de test no).
+
+Regla que extraigo: **si el AC nombra funciones ("las DOS funciones que lo llevan"), el maker cierra
+esas dos y el gate nace como lista de nombres.** `test_p01_domain_pii_parameters_are_required` son
+dos `assertRaises(TypeError)`, uno por nombre. Es un test de FORMA: el cuarto portador -- y el quinto
+de manana -- pasan verde. Remediacion que propuse y **verifique yo mismo antes de pedirla**: chequeo
+de PROPIEDAD sobre el AST (ninguna funcion de los tres modulos declara `domain_pii_terms` con
+default) -> `VIOLATIONS: 1`, exactamente `:571`, verde al cerrarla. Sobrevive a cambio de coordenada,
+orden y formato.
+
+### Contraste que declare porque juega en contra de mi tesis
+
+En produccion el agujero esta CERRADO hoy (`:712` pasa `policy["domain_pii_terms"]` por blob). Es
+reapertura de la CLASE, no fuga viva medida. Por eso el bloqueante va acotado a una linea + el gate,
+no como rechazo de la entrega. Y lo que lo hace indefendible igualmente: la entrega **si** arreglo
+`title_is_safe` siendo latente ("latent shape defect only"), asi que aplicar el criterio a la hoja
+latente y no al tronco latente es incoherente consigo misma.
+
+### Tecnica que funciono y repito: barrer el eje de las DECLARACIONES con AST
+
+Enumerar `FunctionDef` y emparejar `args.defaults` / `args.kw_defaults` con sus `arg`, imprimiendo la
+firma reconstruida con `ast.unparse`. Salta a la vista lo que el grep de llamadas nunca ensena. Lo
+mismo sirvio para ver que `require_safe_text` si quedo bien (`*, domain_pii_terms` keyword requerido)
+y `_publicable_pii_errors` tambien (sin default).
+
+### Mutantes: el de CODIGO MUERTO estricto tambien mata
+
+Cuatro propios, los cuatro enrojecen su negativo: M1/M2 fontaneria muerta (`domain_pii_terms = []`
+tras leer la politica, en `_sweep_database` y `load_cold_packs`), M3 `contains_pii(reason, [])` con la
+guarda intacta, y **M4 el estricto que pidio el Arquitecto: guarda INALCANZABLE**
+(`if _unreachable and ... contains_pii(...)`, llamada textualmente presente) -> exit 1. Los tres
+negativos atan que los terminos LLEGUEN, no que la linea exista.
+
+### Foco B (ruta de produccion) y AC3, cerrados por comportamiento
+
+El fixture de publicacion llama `check_memory_db_drift._sweep_database`, la MISMA funcion que invoca
+`full_check` (:184), rama `--full` del CLI. Ingesta = `load_cold_packs`, recuperacion =
+`query_memory_db.retrieve`. Ninguna ruta paralela. AC3 lo verifique en la puerta que decide y no solo
+en la de ingesta: politica declarada **sin commitear** -> `_sweep_database` no reporta nada; el mismo
+arbol tras commitear -> `publicable artifact contains PII: TASK-DOMAIN-PUBLIC`.
+
+### Dos footguns operativos que me mordieron en este turno
+
+1. **`EXIT=$?` tras una tuberia devuelve el codigo de `tail`, no el del gate.** Gatee dos veces: la
+   primera lectura era del pipe. Correr `python gate --root . >/dev/null 2>&1; echo $?`.
+2. **El hook de trailers exige UN solo bloque final sin lineas en blanco.** Puse `Task-Id`/
+   `Ops-Reason`, linea en blanco, `Co-Authored-By` -> commit RECHAZADO. Y en el mismo comando el
+   `git push` encadenado publico un commit del PEER (`57d1a5d8`) que habia aterrizado en el arbol
+   compartido. **No encadenar `commit && push` en arbol compartido: verificar `COMMIT_EXIT=0` antes
+   de pushear.**
+
 ## Ultima actualizacion 2026-08-08 (52) - TASK-0329 r2: CHANGE-REQUIRED (la paridad ata una VENTANA DE TEXTO, no la propiedad)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0329-r2`. **SIN PRODUCTO EN ALCANCE.**
