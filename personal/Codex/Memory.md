@@ -1,6 +1,17 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0340 delivery committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0343 diagnostic committed.
+
+## 2026-08-08 - TASK-0343 pre-fix CI diagnosis
+
+- Diagnostic commit `1788d63f` leaves the brittle rollback assertion unchanged and
+  prints every actual `ROLLBACK_LEDGER_PRESERVED` record so a real Actions run can
+  expose the CI field values required by AC1 before repair.
+- Local Windows measured `seq_before=0`, `seq_after=3`, and `proof=disk`; failed run
+  31266113929 did not print its fixture log and uploaded no artifact, so its exact
+  values remain pending the diagnostic run.
+- TASK-0343 is `in_progress` under `CLAIM-20260808-Codex-TASK-0343`. Codex remains
+  maker only and has not changed the assertion or production rollback behavior.
 
 ## 2026-08-08 - TASK-0340 governed delivery
 
