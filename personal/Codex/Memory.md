@@ -5723,3 +5723,20 @@ ratified its own work.
 - `MSG-20260808-Codex-to-Arquitecto-QUESTION-clean-clone-event-archive.md` records the DECISION-0018
   anomaly and asks Arquitecto to partition and route it separately. TASK-0336 remains in independent
   review for the delivered Bash property.
+
+## 2026-08-08 - TASK-0331 remediation iteration 4 implementation
+
+- Commit `e9719613` implements the declared 24-cell lease/owner/lock table with a true
+  `live|dead|unknown` process state. Only proven-dead evidence removes a lease; unknown evidence
+  preserves it, creates an atomic recovery marker when the lock is absent, and emits an explicit
+  `SELF_HEAL_MANUAL_RECOVERY_REQUIRED` signal.
+- The peer guard now fails closed for unreadable, empty, whitespace-only, and readable-but-
+  identityless leases. The same lease state is therefore preserved by self-heal and treated as
+  occupied by peer admission.
+- Permanent `NEG-HARNESS-LEASE-OWNER-LOCK-STATE-TABLE` exercises all 24 cells before/after self-heal,
+  real live/dead processes, nullish peer reads, and four independent source mutants. The harness is
+  28/28 and the repository inventory is 57/57.
+- Python/PowerShell neutrality attestations moved with the claimed harness lines; both scanners and
+  their six parity tests pass. Collaboration, encoding, neutrality, drift, compile, parser, and diff
+  gates exited 0 before commit. TASK-0331 remains `in_progress` pending exact-commit clean-clone
+  verification and governed delivery; Codex has not reviewed or ratified the implementation.

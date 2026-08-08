@@ -56,9 +56,53 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-08T07:20:42Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0331",
             "updated_at": "2026-08-08T07:20:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-4-delivery",
+            "expires_at": "2026-08-08T10:55:34Z",
+            "notes": "Deliver remediation 4 exact commit e9719613 and release every maker claim for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-4-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-4-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediacion-4.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T07:55:34Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-08T07:55:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-4-v2",
+            "expires_at": "2026-08-08T12:41:27Z",
+            "notes": "Remediation 4 expanded only to move the line-scoped neutrality attestations that TASK-0331 necessarily shifts in the claimed harness.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-4-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T07:41:27Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-08T07:41:27Z"
         },
         {
             "claim_id": "CLAIM-arq-20260808-0336-devolver-a-progreso",
