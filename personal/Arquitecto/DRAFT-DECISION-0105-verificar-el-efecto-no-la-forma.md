@@ -55,11 +55,14 @@ Y se manifiesta en dos formas complementarias:
 
 | 12 | TASK-0329 (su REMEDIACION) | la exencion de neutralidad paso de eximir un FICHERO ENTERO a fijar pares **(numero_de_linea, termino)**. El 08-ago otra tarea anadio ~56 lineas por encima en el mismo fichero y las ocho ocurrencias exentas se desplazaron: `scan_domain_neutrality` exit 1 sobre **ocho lineas legitimas e INTACTAS**. La exencion no describe QUE exime ("esta ocurrencia nombra la CLI de un tercero"); describe **DONDE estaba el dia que se escribio** |
 | 13 | guard de residuo (-> TASK-0337) | veta el mensaje de una tarea por suciedad del arbol perteneciente a OTRA. Decision **por-par** (este mensaje contra estas rutas) tomada sobre una propiedad **global** (el arbol esta sucio). Es el gemelo exacto de la ocurrencia 7 en el guard de al lado del mismo fichero: cerrar la admision de claims no cerro la familia |
+| 14 | TASK-0329 (su CONTRATO DE PARIDAD) | el negativo anadido **para impedir la cuarta divergencia** entre los dos escaneres ata (a) un regex de indentacion fija sobre una ventana de texto y (b) un fixture de siete ficheros. Un **desliz de dos espacios** en la clave de ruta -- o declarar la ampliacion fuera de la ventana parseada -- produce veredictos divergentes (Python exit 1, gemelo exit 0) **con la suite entera en verde**. El discriminante no es la gravedad del cambio: es su indentacion |
 
-**La ocurrencia 12 es RECURSIVA como la 10, y esa reincidencia ya no es anecdota.** TASK-0329
-existia para arreglar "la exencion de fichero entero ciega el gate". Su remediacion cambio un gate
-CIEGO por uno FRAGIL: sigue sin ligar la propiedad, solo cambio de coordenada. Dos de las trece
-ocurrencias son remediaciones **de este mismo patron** que reintrodujeron el patron.
+**Las ocurrencias 10, 12 y 14 son RECURSIVAS: son remediaciones de este mismo patron que
+reintrodujeron el patron.** Tres de catorce ya no es anecdota. El caso mas claro es TASK-0329, que
+lo hizo DOS VECES en la misma entrega: existia para arreglar "la exencion de fichero entero ciega el
+gate" y cambio un gate CIEGO por uno FRAGIL; y el contrato que anadio **para impedir la cuarta
+divergencia entre los dos escaneres** ata como se escribe la tabla -- con un regex de indentacion
+fija -- en vez de atar que los dos escaneres coincidan.
 
 Lectura para calibrar la regla: cuando pedimos "ata la propiedad, no la forma", la respuesta natural
 del implementador es **ofrecer otra forma mas estrecha** -- una linea en vez de un fichero, una
