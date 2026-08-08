@@ -7985,3 +7985,69 @@ veredicto en vez de vender las 22 celdas como bugs vivos, y descarte explicitame
   `--local` (hardlinks) sigue siendo la opcion barata cuando no se muta el clon.
 - `pwsh` SI existe en esta sesion (a diferencia de la nota anterior); `shutil.which("pwsh") or
   shutil.which("powershell")` resolvio sin skip.
+
+## TASK-0336 r3 (2026-08-08) -- el gate clasifica por linea FISICA, bash por linea LOGICA
+
+Veredicto: **CHANGE-REQUIRED + ESCALADA** (`35480b9c`), artefacto
+`Area_comun/artifacts/Analista-TASK-0336-continuacion-comentario-r3-verdict.md`. Anclado en
+`1522f08d`; entrega `e21e617a` con rutas de alcance byte-identicas a la punta.
+
+### La leccion central: cerrar las formas declaradas no cierra la familia
+
+En r2 declare cuatro formas de continuacion de bash. El maker las cerro las cuatro, por las cuatro
+puertas de shell efectivo, con frontera de aceptacion incluida. Y la familia seguia viva, porque la
+**premisa** con la que se cerro era falsa -- y la premisa la escribi yo:
+
+    "una linea de comentario no continua, igual que en bash"
+
+En bash el `#` abre comentario **solo si abre palabra**. Si la linea anterior termina en un numero
+impar de barras PEGADAS a un caracter de palabra (`echo x\`), bash empalma y el `#` queda soldado:
+deja de ser comentario, la linea sigue siendo codigo y su `\` final tambien continua. El gate, que
+decide "esto es un comentario" por linea FISICA (`lstrip().startswith("#")`), corta ahi la cadena.
+
+    echo x\ / #foo \ / python runner   ->  bash ejecuta: echo x#foo python .../run_cases.py
+    runner NO corre, paso exit 0, gate exit 0 por las CUATRO puertas, dentro de direct_invocation
+
+Discriminador exacto: **el espacio antes del `#`**. Con espacio o tabulador delante, bash si abre
+comentario y el gate acierta. Tambien escapa con CRLF, con `python -c exit\`, con `echo 1\`, y con
+cadenas de comentarios pegados.
+
+**Regla para el proximo re-juicio:** cuando un fix cierra una familia enumerando formas, no repetir
+las formas -- atacar la PREMISA que las agrupa. Aqui la premisa era una diferencia de nivel de
+analisis (fisico vs logico); mientras la clasificacion preceda al empalme, cada parche cierra lo
+enumerado y deja abierto lo que nadie enumero. Es el mismo patron que "el contrato ata el helper, no
+el efecto" visto desde el otro lado.
+
+Segunda vez consecutiva que en esta tarea **el que fallo primero fue mi muestreo**, no el del maker.
+Decirlo en el veredicto con todas las letras; es lo que hace que el maker acepte el tercer hallazgo.
+
+### La matriz aguanto y eso tambien es dato
+
+25/25 fronteras PORTANTES con 25 relajaciones dirigidas evaluadas fixture a fixture. Anadir 5
+fronteras NO escondio ninguna de las 20 anteriores (era el foco B del Arquitecto). Y AC3 sigue
+correcto por los dos lados: 22/22 formas, cero desajustes. **Un contrato impecable no prueba que la
+propiedad este cerrada** -- prueba que lo declarado esta atado.
+
+### Centinelas no declarados: como cazar "prosa sin frontera"
+
+Meti en la matriz fixtures **no declarados** (`even_backslashes_extra`, `backslash_space_extra`) y
+relajaciones que solo los voltean (L24: paridad -> `>= 1`; L25: mirar la linea ya `rstrip`-eada).
+Ninguna frontera DECLARADA se rompe -> la paridad y la regla de barra-mas-espacio son comportamiento
+vivo **sin contrato**. Tecnica reutilizable: por cada propiedad que la prosa presume, un centinela y
+una relajacion que solo a el le duela.
+
+### Operativa
+
+- Clon: `git clone` local (hardlinks) del hub, `.git` ya en 460 MB. Detached en la punta canonica.
+- **`validate` en clon limpio sobre el commit EXACTO de la entrega puede fallar por historia, no por
+  la entrega**: `e21e617a` no tiene `runtime/state/archives/events-006826-007853.jsonl` (exit 1),
+  pero `06e83983` ya lo commiteo y la punta da exit 0. Antes de cargar un rojo de clon limpio como
+  slip, comprobar si un commit POSTERIOR ya lo cerro y si las rutas de alcance son identicas.
+- Bash real fijado siempre: `C:/Program Files/Git/usr/bin/bash.exe --noprofile --norc -eo pipefail`.
+  El `bash` del PATH es el de WSL y mide ruido.
+- `bash -x` (xtrace) es la prueba que no se discute: imprime la orden EFECTIVA que se ejecuto.
+- Commit: `git add` explicito ANTES del `git commit -- <pathspec>` (el pathspec solo no alcanza a
+  ficheros no rastreados). Trailers `Task-Id` + `Ops-Reason: review-adversarial`.
+- Tope de iteraciones: en r2 declare 2 como maximo. Al agotarlo NO pido un tercer parche por mi
+  cuenta: entrego el hallazgo medido + las dos vias (parchear vs acotar la certificacion, que el
+  propio AC5 autoriza) y escalo. La eleccion de alcance no es del checker.
