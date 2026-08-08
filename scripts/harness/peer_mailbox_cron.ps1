@@ -284,37 +284,39 @@ function Stop-LeaseProcessTree {
 }
 
 function Clear-StaleCronLockIfSafe {
-    if (-not (Test-Path -LiteralPath $LockPath)) {
-        return
-    }
     if (-not (Test-Path -LiteralPath $LeasePath)) {
-        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
-        Write-Log "SELF_HEAL_ORPHAN_LOCK owner=$PeerId reason=missing_lease"
+        if (Test-Path -LiteralPath $LockPath) {
+            Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+            Write-Log "SELF_HEAL_ORPHAN_LOCK owner=$PeerId reason=missing_lease"
+        }
         return
     }
     try {
-        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction SilentlyContinue
         $leaseMatches = Test-LeaseProcessMatches -Lease $lease
-        $deadlineValue = if ([string]$lease.state -ceq "reserved") {
-            [string]$lease.reservation_deadline
-        } else {
-            [string]$lease.deadline
-        }
-        $deadline = [DateTime]::Parse($deadlineValue).ToUniversalTime()
+        $deadlineState = "pre_deadline"
         if ($leaseMatches) {
+            $deadlineValue = if ([string]$lease.state -ceq "reserved") {
+                [string]$lease.reservation_deadline
+            } else {
+                [string]$lease.deadline
+            }
+            $deadline = [DateTime]::Parse($deadlineValue).ToUniversalTime()
             if ([DateTime]::UtcNow -le $deadline) {
                 return
             }
             if (-not (Stop-LeaseProcessTree -Lease $lease -Reason "orphan_expired")) {
                 return
             }
+            $deadlineState = "expired"
         }
-        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
         Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
-        $deadlineState = if ([DateTime]::UtcNow -le $deadline) { "pre_deadline" } else { "expired" }
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
         Write-Log "SELF_HEAL_STALE_LOCK owner=$PeerId pid=$($lease.pid) message=$($lease.task_or_msg_id) state=$deadlineState"
     } catch {
-        Write-Log "SELF_HEAL_FAIL error=$($_.Exception.Message)"
+        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        Write-Log "SELF_HEAL_STALE_LOCK owner=$PeerId state=unreadable_lease"
     }
 }
 
@@ -1308,13 +1310,14 @@ function Invoke-PeerForMessage {
     $ledgerHeadBefore = $null
     $headBefore = ""
     $untrackedBefore = @()
+    Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
     $reservation = Acquire-ExecReservation -Message $Message
     if (-not $reservation.ok) {
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
         Register-PreExecDefer -Message $Message -Reason $reservation.reason -Detail $reservation.detail
         return
     }
     try {
-        Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
         $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
         $ledgerHeadBefore = Get-LedgerHead
         if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason "ledger_unreadable_before_exec"; return }
@@ -1450,11 +1453,11 @@ function Invoke-PeerForMessage {
         Write-RetryState -State $retry
         if ($exhausted) { Write-Log "RETRY_EXHAUSTED attempts=$attempt signal=watchdog outcome=transient message=$($Message.Name)" }
     } finally {
-        if (Test-Path -LiteralPath $LockPath) {
-            Remove-Item -LiteralPath $LockPath -Force
-        }
         if (Test-Path -LiteralPath $LeasePath) {
             Remove-Item -LiteralPath $LeasePath -Force
+        }
+        if (Test-Path -LiteralPath $LockPath) {
+            Remove-Item -LiteralPath $LockPath -Force
         }
     }
 }

@@ -2,7 +2,7 @@
 task_id: TASK-0331
 file: Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md
 title: "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -141,3 +141,12 @@ solo el subconjunto con scopes declarados y disjuntos puede solaparse. El arbol 
 siguen siendo recursos compartidos no declarados en `scope_routes`; el veto de arbol sucio es una
 sonda previa y no una exclusion de vida completa. Las escrituras del ledger siguen serializadas por
 el lock real de `submit_intent` en esta instancia authoritative.
+
+Remediacion 2: el autocurado ya no depende de que exista el lock ni intenta parsear un deadline
+cuando ningun proceso posee la lease. La publicacion crea el lock antes que la lease y la limpieza
+borra la lease antes que el lock. El negativo permanente ejecuta tres rearranques sobre los cuatro
+estados exigidos: `reserved` sin lock, lease truncada con lock, lease vacia con lock y `reserved`
+sin `reservation_deadline`; todos convergen en el primer rearranque y permanecen limpios. La
+garantia de resolucion de tareas archivadas queda limitada a contratos con `scope_routes`: la
+medicion del checker recupero 228 de 1.033 mensajes y encontro 272 de 365 contratos archivados sin
+esa declaracion.

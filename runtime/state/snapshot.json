@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "726eb00e3854bd5639d4ef293344a9c4922e6f083acf5253f488546cdc1799f3",
+  "canonical_hash": "57b28e5b918b75040c848abca222dc1eefe21f8628cb4039febecbb974fb9676",
   "integrity": {
-    "canonical_hash": "726eb00e3854bd5639d4ef293344a9c4922e6f083acf5253f488546cdc1799f3",
+    "canonical_hash": "57b28e5b918b75040c848abca222dc1eefe21f8628cb4039febecbb974fb9676",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "400861629af27c11ce8c81bc6a480a43d4e1379dc8bdb8ade796bf0b07471d07",
-    "signature": "5cf55e544e25435606022083612f913fac15f969fdd265069ef78f16e606aaa7",
-    "up_to_seq": 7821
+    "prev_hash": "6271a9d017ac5a0f7e43bf6eb174a86fcfd23f367cdcdbe26d9e678987118508",
+    "signature": "ba4e1ee1483bd49954930171c628444d659cfbf955c06fc0c6b6144bc5a0f473",
+    "up_to_seq": 7825
   },
   "state": {
     "aggregate_versions": {
@@ -3173,7 +3173,7 @@
       "TASK-0328": 2,
       "TASK-0329": 2,
       "TASK-0330": 44,
-      "TASK-0331": 17,
+      "TASK-0331": 21,
       "TASK-0332": 2,
       "TASK-0333": 13,
       "TASK-0334": 20,
@@ -3201,7 +3201,7 @@
       "protocol-prune": 51,
       "protocol-state": 1
     },
-    "events_applied": 7150,
+    "events_applied": 7154,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6898,6 +6898,10 @@
       "codex:task0331:remediation-1:in-progress-to-in-review:20260808": 7730,
       "codex:task0331:remediation-1:in-review-to-in-progress:20260808": 7726,
       "codex:task0331:remediation-1:work-claim-release:20260808": 7731,
+      "codex:task0331:remediation-2:claim-acquire:20260808": 7822,
+      "codex:task0331:remediation-2:claim-v1-release:20260808": 7824,
+      "codex:task0331:remediation-2:claim-v2-acquire:20260808": 7823,
+      "codex:task0331:remediation-2:in-review-to-in-progress:20260808": 7825,
       "codex:task0331:status-in-progress:20260807T112129Z": 7488,
       "codex:task0331:work-v2-release:20260807T114330Z": 7499,
       "codex:task0333:claim-acquire:20260807T163730Z": 7594,
@@ -10355,5 +10359,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7821
+  "up_to_seq": 7825
 }

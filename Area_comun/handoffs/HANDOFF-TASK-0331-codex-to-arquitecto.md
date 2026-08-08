@@ -30,8 +30,10 @@ and atomic admission core and closes checker findings F1-F4:
 Message-loss boundary: `message_scope_ambiguous` remains a stable terminal defer cause. A message
 without a valid task id, without a unique row across hot plus archive, without its task file, or
 without resolvable `scope_routes` reaches `defer_terminal` and is not executed until manual rearm.
-This remediation removes archived tasks from that class; it does not claim every message is
-resolvable.
+The archive lookup resolves only archived tasks whose contracts declare `scope_routes`: the
+checker measured 228 of 1,033 archived-task messages recovered, while 272 of 365 archived task
+contracts lacked `scope_routes`. A message whose hot or archived task lacks that declaration
+remains terminally deferred until manual rearm.
 
 Measured overlap boundary: the checker measured 255.2 minutes (4 h 15 min), 60 percent of 422.2
 deferred minutes, as the ceiling attacked by TASK-0331. Actual recovered overlap is only the

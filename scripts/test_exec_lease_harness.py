@@ -167,16 +167,15 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-HARNESS-RESERVED-LEASE-SELF-HEAL",
-        "negative": "Startup self-heal must remove a dead reserved lease that has reservation_deadline but no running deadline.",
-        "mutation": "source.replace(target, mutant_target, 1)",
+        "negative": "Startup self-heal must remove orphan own leases across the no-lock, truncated, empty, and missing-reservation-deadline states and remain converged across restarts.",
+        "mutation": "source.replace(dead_owner_branch, live_owner_mutant, 1)",
         "boundaries": (
-            'assert healthy["lock_exists"] is False',
-            'assert healthy["lease_exists"] is False',
-            'assert mutant["lock_exists"] is True',
-            'assert mutant["lease_exists"] is True',
-            'assert any(line.startswith("SELF_HEAL_FAIL ") for line in mutant["logs"])',
+            'assert set(healthy) == expected_states',
+            'assert all(not row["lock_exists"] and not row["lease_exists"] for row in healthy_rounds)',
+            'assert all(row["lease_exists"] for row in mutant_rounds)',
+            'assert all(len(result["rounds"]) == 3 for result in healthy.values())',
         ),
-        "exercised_by": "test_reserved_lease_self_heal_kills_running_deadline_mutant",
+        "exercised_by": "test_orphan_lease_self_heal_matrix_kills_live_owner_mutant",
     },
     {
         "id": "NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION",
@@ -462,35 +461,62 @@ intake:
     return message
 
 
-def reserved_lease_self_heal_probe(source: Path) -> dict:
-    with make_tempdir("reserved-self-heal-") as tmp:
-        root = Path(tmp)
-        lock_path = root / "peer.lock"
-        lease_path = root / "peer.exec-lease.json"
-        lock_path.write_text("lock\n", encoding="ascii")
-        write_json(
-            lease_path,
-            {
-                "owner": IMPLEMENTER,
-                "task_or_msg_id": "MSG-probe-TASK-1001.md",
-                "task_id": "TASK-1001",
-                "state": "reserved",
-                "reserved_at": "2026-08-07T22:00:00Z",
-                "reservation_deadline": "2099-01-01T00:00:00Z",
-            },
-        )
-        script = function_loader(source, ("Clear-StaleCronLockIfSafe",)) + f"""
+def orphan_lease_self_heal_matrix_probe(source: Path) -> dict:
+    cases = {
+        "reserved_without_lock": {
+            "lock": False,
+            "content": json.dumps(
+                {
+                    "owner": IMPLEMENTER,
+                    "task_or_msg_id": "MSG-probe-TASK-1001.md",
+                    "task_id": "TASK-1001",
+                    "state": "reserved",
+                    "reserved_at": "2026-08-07T22:00:00Z",
+                    "reservation_deadline": "2099-01-01T00:00:00Z",
+                }
+            ),
+        },
+        "truncated_with_lock": {"lock": True, "content": "{"},
+        "empty_with_lock": {"lock": True, "content": ""},
+        "reserved_missing_deadline_with_lock": {
+            "lock": True,
+            "content": json.dumps(
+                {
+                    "owner": IMPLEMENTER,
+                    "task_or_msg_id": "MSG-probe-TASK-1001.md",
+                    "task_id": "TASK-1001",
+                    "state": "reserved",
+                    "reserved_at": "2026-08-07T22:00:00Z",
+                }
+            ),
+        },
+    }
+    results = {}
+    for name, case in cases.items():
+        with make_tempdir(f"orphan-self-heal-{name}-") as tmp:
+            root = Path(tmp)
+            lock_path = root / "peer.lock"
+            lease_path = root / "peer.exec-lease.json"
+            if case["lock"]:
+                lock_path.write_text("lock\n", encoding="ascii")
+            lease_path.write_text(case["content"], encoding="ascii")
+            script = function_loader(source, ("Clear-StaleCronLockIfSafe",)) + f"""
 $LockPath = {ps_literal(lock_path)}
 $LeasePath = {ps_literal(lease_path)}
 $PeerId = "{IMPLEMENTER}"
 $script:logs = @()
+$script:rounds = @()
 function Test-LeaseProcessMatches {{ param($Lease) return $false }}
 function Stop-LeaseProcessTree {{ param($Lease, $Reason) return $false }}
 function Write-Log {{ param([string]$Line) $script:logs += $Line }}
-Clear-StaleCronLockIfSafe
-[ordered]@{{ lock_exists=(Test-Path -LiteralPath $LockPath); lease_exists=(Test-Path -LiteralPath $LeasePath); logs=@($script:logs) }} | ConvertTo-Json -Depth 4 -Compress
+1..3 | ForEach-Object {{
+    Clear-StaleCronLockIfSafe
+    $script:rounds += [ordered]@{{ lock_exists=(Test-Path -LiteralPath $LockPath); lease_exists=(Test-Path -LiteralPath $LeasePath) }}
+}}
+[ordered]@{{ rounds=@($script:rounds); logs=@($script:logs) }} | ConvertTo-Json -Depth 6 -Compress
 """
-        return run_powershell(script, root)
+            results[name] = run_powershell(script, root)
+    return results
 
 
 def archived_task_descriptor_probe(source: Path) -> dict | None:
@@ -1513,26 +1539,51 @@ def test_atomic_exec_admission_kills_peer_specific_lock_mutant() -> None:
     assert mutant["lease_count"] == 2
 
 
-def test_reserved_lease_self_heal_kills_running_deadline_mutant() -> None:
+def test_orphan_lease_self_heal_matrix_kills_live_owner_mutant() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-RESERVED-LEASE-SELF-HEAL"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
-    reservation_deadline_read = "[string]$lease.reservation_deadline"
-    running_deadline_read = "[string]$lease.deadline"
-    assert source.count(reservation_deadline_read) >= 2
-    target = "$deadlineValue = if ([string]$lease.state -ceq \"reserved\") {\n            [string]$lease.reservation_deadline"
-    mutant_target = "$deadlineValue = if ([string]$lease.state -ceq \"reserved\") {\n            [string]$lease.deadline"
-    assert source.count(target) == 1
-    mutant_source = source.replace(target, mutant_target, 1)
-    with make_tempdir("reserved-self-heal-mutant-") as tmp:
+    dead_owner_branch = '$deadlineState = "pre_deadline"\n        if ($leaseMatches) {'
+    live_owner_mutant = '$deadlineState = "pre_deadline"\n        if ($true) {'
+    cleanup_catch = '''    } catch {
+        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        Write-Log "SELF_HEAL_STALE_LOCK owner=$PeerId state=unreadable_lease"
+    }'''
+    fail_only_catch = '''    } catch {
+        Write-Log "SELF_HEAL_FAIL error=$($_.Exception.Message)"
+    }'''
+    function_start = "function Clear-StaleCronLockIfSafe {\n"
+    lock_required_start = '''function Clear-StaleCronLockIfSafe {
+    if (-not (Test-Path -LiteralPath $LockPath)) {
+        return
+    }
+'''
+    assert source.count(dead_owner_branch) == 1
+    assert source.count(cleanup_catch) == 1
+    assert source.count(function_start) == 1
+    mutant_source = (
+        source.replace(dead_owner_branch, live_owner_mutant, 1)
+        .replace(cleanup_catch, fail_only_catch, 1)
+        .replace(function_start, lock_required_start, 1)
+    )
+    with make_tempdir("orphan-self-heal-mutant-") as tmp:
         mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
-        mutant = reserved_lease_self_heal_probe(mutant_path)
-    healthy = reserved_lease_self_heal_probe(HARNESS_PATH)
-    assert healthy["lock_exists"] is False
-    assert healthy["lease_exists"] is False
-    assert mutant["lock_exists"] is True
-    assert mutant["lease_exists"] is True
-    assert any(line.startswith("SELF_HEAL_FAIL ") for line in mutant["logs"])
+        mutant = orphan_lease_self_heal_matrix_probe(mutant_path)
+    healthy = orphan_lease_self_heal_matrix_probe(HARNESS_PATH)
+    expected_states = {
+        "reserved_without_lock",
+        "truncated_with_lock",
+        "empty_with_lock",
+        "reserved_missing_deadline_with_lock",
+    }
+    assert set(healthy) == expected_states
+    assert all(len(result["rounds"]) == 3 for result in healthy.values())
+    for state in expected_states:
+        healthy_rounds = healthy[state]["rounds"]
+        mutant_rounds = mutant[state]["rounds"]
+        assert all(not row["lock_exists"] and not row["lease_exists"] for row in healthy_rounds)
+        assert all(row["lease_exists"] for row in mutant_rounds)
 
 
 def test_archived_task_work_resolution_kills_hot_only_mutant() -> None:
@@ -1622,7 +1673,7 @@ def main() -> int:
         test_scope_aware_claim_veto_kills_both_direction_mutants,
         test_scope_aware_lease_veto_kills_both_direction_mutants,
         test_atomic_exec_admission_kills_peer_specific_lock_mutant,
-        test_reserved_lease_self_heal_kills_running_deadline_mutant,
+        test_orphan_lease_self_heal_matrix_kills_live_owner_mutant,
         test_archived_task_work_resolution_kills_hot_only_mutant,
         test_glob_claim_scope_fails_closed_and_kills_guard_mutant,
         test_dirty_tree_veto_still_precedes_scope_admission,
