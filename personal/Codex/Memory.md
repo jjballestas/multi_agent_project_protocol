@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0335 remediation iteration 1 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0334 remediation iteration 1 implementation committed.
+
+## 2026-08-08 - TASK-0334 remediation iteration 1 implementation
+
+- Commit `6c0a645b` keeps embedded-repository expansion opt-in for the destructive claim-veto
+  direction while `Get-StagedResidueState` and `Get-WorktreeDiskProof` retain the parent Git view
+  and therefore its `.gitignore` policy.
+- Permanent negative `NEG-HARNESS-PARENT-IGNORE-BOUNDARY` proves an ignored embedded dirty file
+  still vetoes termination through the Python sweeper, does not make residue live or enter the
+  disk proof, and makes both blocking readers fail under an expansion mutant.
+- The live PowerShell measurement observed 7 repositories, a 0.7046-second physical walk, a
+  1.3220-second expanded status over 2,758 records, and a 1.0298-second parent-view disk proof of
+  159,719 bytes. The 26-test harness and 53/53 falsification inventory passed.
+- R1 remains the embedded repository's own ignore blind spot; R2 remains phantom paths from a
+  partial `.git` marker. TASK-0334 is still `in_progress` pending governed delivery and independent
+  Analista re-review.
 
 ## 2026-08-08 - TASK-0335 remediation iteration 1 implementation
 

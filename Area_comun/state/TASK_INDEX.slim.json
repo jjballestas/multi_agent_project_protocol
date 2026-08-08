@@ -50,7 +50,7 @@
         {
             "id": "TASK-0334",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub"
         },
         {
