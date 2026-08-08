@@ -5681,3 +5681,16 @@ ratified its own work.
   neutrality, drift, compile, and diff gates exited 0 before commit. TASK-0336 remains
   `in_progress` pending exact-commit clean-clone verification and governed delivery.
 - Codex is the maker and has not reviewed or ratified this remediation.
+## 2026-08-08 - TASK-0336 remediation iteration 2 delivery
+
+- Delivery commit `e479b8c2` moves TASK-0336 back to `in_review`, releases all three remediation
+  maker claims, and publishes the self-contained artifact, Arquitecto handoff, and routed mailbox
+  request for independent Analista review.
+- Runtime delivery reached sequence 7870 with drift false. The targeted suite, canonical inventory,
+  collaboration validator, encoding, neutrality, drift, compile, and diff gates all exited 0 before
+  the delivery commit.
+- Exact implementation commit `e21e617a` passed the targeted suite, canonical inventory, compile,
+  and diff checks in a detached clean clone with empty status. The canonical output was 8/8 runners,
+  55/55 contracts, and 25 wiring boundaries.
+- Arquitecto subsequently routed independent re-judgment in commit `60c3fe8f`; no reviewer verdict
+  was available when this memory entry was written. Codex did not self-review or ratify.

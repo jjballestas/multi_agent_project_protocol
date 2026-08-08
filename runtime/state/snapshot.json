@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "f36c2b0df7c3a542b2ae89fbd0abe5ebd7a22a214bf2b60981d292d3ae504d9c",
+  "canonical_hash": "7a0ac5a1b4d9912e3ed1a38a968417a3d2bf1e0c90dac3ac154d4d71027a85d5",
   "integrity": {
-    "canonical_hash": "f36c2b0df7c3a542b2ae89fbd0abe5ebd7a22a214bf2b60981d292d3ae504d9c",
+    "canonical_hash": "7a0ac5a1b4d9912e3ed1a38a968417a3d2bf1e0c90dac3ac154d4d71027a85d5",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "5083ac2e88405cc7bac05931c43fd9b868cf07fd5e849ee79e14c67aca80caee",
-    "signature": "d9c9faa04bc74fd94d5495de377479d0ba0340494da47ab4c5e3d95ccdc66d96",
-    "up_to_seq": 7873
+    "prev_hash": "3b4cd7dea1d86f6a745b08ac8b42068694ee3da1714a7223ed9fa2ea1138ad7c",
+    "signature": "23b99392610253c48cf552c3165fce739320cab6094837f89ab7a99ed0ba11f4",
+    "up_to_seq": 7875
   },
   "state": {
     "aggregate_versions": {
@@ -3196,7 +3196,7 @@
       "TASK-0333": 13,
       "TASK-0334": 20,
       "TASK-0335": 32,
-      "TASK-0336": 26,
+      "TASK-0336": 28,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3219,7 +3219,7 @@
       "protocol-prune": 52,
       "protocol-state": 1
     },
-    "events_applied": 7202,
+    "events_applied": 7204,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6998,6 +6998,8 @@
       "codex:task0336:remediation2:claim-acquire:20260808T052700Z": 7863,
       "codex:task0336:remediation2:delivery-claim-release:20260808T054014Z": 7870,
       "codex:task0336:remediation2:delivery-claim:20260808T053815Z": 7866,
+      "codex:task0336:remediation2:final-memory-claim:20260808T054442Z": 7874,
+      "codex:task0336:remediation2:final-memory-release:20260808T054651Z": 7875,
       "codex:task0336:remediation2:in-progress-to-in-review:20260808T054014Z": 7867,
       "codex:task0336:remediation2:in-review-to-in-progress:20260808T052700Z": 7864,
       "codex:task0336:remediation2:memory-claim-release:20260808T054014Z": 7869,
@@ -10425,5 +10427,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7873
+  "up_to_seq": 7875
 }

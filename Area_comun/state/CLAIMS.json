@@ -40,6 +40,22 @@
             "updated_at": "2026-08-08T05:44:45Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-2-final-memory",
+            "expires_at": "2026-08-08T07:44:42Z",
+            "notes": "Record TASK-0336 remediation iteration 2 governed delivery after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-2-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T05:44:42Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-08T05:44:42Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
