@@ -80,6 +80,13 @@
             "phase": "P2",
             "status": "ready",
             "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala"
+        },
+        {
+            "id": "TASK-0341",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "proposed",
+            "title": "El certificador de contratos es ciego a la frontera muerta y fragil al reformateo"
         }
     ],
     "view": "task_index.slim"

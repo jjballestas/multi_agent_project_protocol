@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "2e1c5ddbef507ca632734aea8927981d50bcd91f8cc45b07fc4eb1ac186813da",
+  "canonical_hash": "04a3064412e44eb0c3eb604ec5e897df8a561826609d303321ab44567efe3d2a",
   "integrity": {
-    "canonical_hash": "2e1c5ddbef507ca632734aea8927981d50bcd91f8cc45b07fc4eb1ac186813da",
+    "canonical_hash": "04a3064412e44eb0c3eb604ec5e897df8a561826609d303321ab44567efe3d2a",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c5c7e44f50f2b53b6f9eab0bda00d3437e2ecb491cbb109de286dc174ed31f86",
-    "signature": "8595a632bee7801f1499ea41570fb070d9038862842e1723a36663a0ba708f70",
-    "up_to_seq": 7973
+    "prev_hash": "a911e584db447167578189f040db940d1d5691d0c1f534ac5a6d63089a9a03ed",
+    "signature": "637b71671ec8ca637263954262014921b463bdb46e88485358e4e7c5bb6d4972",
+    "up_to_seq": 7976
   },
   "state": {
     "aggregate_versions": {
@@ -1014,6 +1014,7 @@
       "CLAIM-arq-20260808-0338-0339-registro": 1,
       "CLAIM-arq-20260808-0340-promover": 1,
       "CLAIM-arq-20260808-0340-registro": 1,
+      "CLAIM-arq-20260808-0341-registro": 1,
       "CLAIM-arq-20260808-ratifica-0325": 1,
       "CLAIM-arq-20260808-ratifica-0334": 1,
       "CLAIM-arq-20260808-ratifica-0335": 1,
@@ -3238,6 +3239,7 @@
       "TASK-0338": 2,
       "TASK-0339": 1,
       "TASK-0340": 4,
+      "TASK-0341": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3260,7 +3262,7 @@
       "protocol-prune": 54,
       "protocol-state": 1
     },
-    "events_applied": 7302,
+    "events_applied": 7305,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3431,6 +3433,9 @@
       "arq-340p-000": 7958,
       "arq-340p-001": 7959,
       "arq-340p-099": 7960,
+      "arq-341-000": 7974,
+      "arq-341-001": 7975,
+      "arq-341-099": 7976,
       "arq-cierre-20260807T0310Z-c0": 7327,
       "arq-cierre-20260807T0310Z-r5": 7332,
       "arq-cierre-20260807T0310Z-s1": 7328,
@@ -10566,5 +10571,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7973
+  "up_to_seq": 7976
 }

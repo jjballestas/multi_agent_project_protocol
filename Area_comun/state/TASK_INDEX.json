@@ -357,6 +357,16 @@
             "type": "implementation"
         },
         {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0341-el-certificador-de-contratos-es-ciego-a-la-frontera-muerta.md",
+            "id": "TASK-0341",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "proposed",
+            "title": "El certificador de contratos es ciego a la frontera muerta y fragil al reformateo",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

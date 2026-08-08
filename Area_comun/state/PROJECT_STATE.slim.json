@@ -71,6 +71,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala"
+        },
+        {
+            "id": "TASK-0341",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El certificador de contratos es ciego a la frontera muerta y fragil al reformateo"
         }
     ],
     "next_actions": [
