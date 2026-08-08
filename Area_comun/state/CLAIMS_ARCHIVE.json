@@ -45953,6 +45953,303 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260808",
             "updated_at": "2026-08-08T17:16:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-181000-prune-arquitecto",
+            "expires_at": "2026-08-08",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-08-08T18:10:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-08T18:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0328-remediation-1",
+            "expires_at": "2026-08-09T01:55:48Z",
+            "notes": "Remediate greedy account identifier matching, measure gains and losses against the previous engine on one corpus, and preserve prior detections.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T19:55:48Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-08T19:55:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0328-remediation-1-delivery",
+            "expires_at": "2026-08-08T22:25:48Z",
+            "notes": "Publish exact-commit remediation evidence, move TASK-0328 to in_review, release maker claims, and request independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1.md",
+                "personal/Codex/HANDOFF-TASK-0328-REMEDIATION-1-20260808.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T20:25:48Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-08T20:25:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0328-remediation-1-msgfix",
+            "expires_at": "2026-08-08T20:59:05Z",
+            "notes": "Add the validator-required question to the TASK-0328 review handoff, gate it, and release immediately.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0328-remediation-1-msgfix",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T20:29:05Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-08T20:29:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0345",
+            "expires_at": "2026-08-08T22:11:45Z",
+            "notes": "Inventory CI-executed PowerShell host assumptions, repair neutral forms, add Linux execution and mutation contracts, and verify real CI.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345",
+                "Area_comun/state/TASK_INDEX.json#TASK-0345",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0345",
+                "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/scan_encoding.ps1",
+                "examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1",
+                "examples/neutrality_scan_cases/README.md",
+                ".github/workflows/validate.yml",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T18:11:45Z",
+            "status": "released",
+            "task_id": "TASK-0345",
+            "updated_at": "2026-08-08T18:11:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0345-delivery",
+            "expires_at": "2026-08-08T20:33:05Z",
+            "notes": "Publish real-CI evidence, move TASK-0345 to in_review, release maker scope, and notify the coordinator of the separate property-invariant regression.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0345",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0345",
+                "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0345.md",
+                "personal/Codex/HANDOFF-TASK-0345-20260808.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T18:33:05Z",
+            "status": "released",
+            "task_id": "TASK-0345",
+            "updated_at": "2026-08-08T18:33:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0345-v2",
+            "expires_at": "2026-08-08T22:13:14Z",
+            "notes": "Corrected scope: the task-listed FALSIFICATION_CONTRACTS.json route does not exist; established contracts are embedded in runners. Covers the existing neutrality cases directory for the new permanent negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345",
+                "Area_comun/state/TASK_INDEX.json#TASK-0345",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0345",
+                "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/scan_encoding.ps1",
+                "examples/neutrality_scan_cases",
+                ".github/workflows/validate.yml",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T18:13:14Z",
+            "status": "released",
+            "task_id": "TASK-0345",
+            "updated_at": "2026-08-08T18:13:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0345-v3",
+            "expires_at": "2026-08-08T22:18:55Z",
+            "notes": "Expand to the existing encoding mutation runner whose exact production replacement must follow the host-native case-comparison repair.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345-v3",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0345-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0345",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0345",
+                "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/scan_encoding.ps1",
+                "examples/neutrality_scan_cases",
+                "examples/encoding_gate_cases/run_encoding_gate_cases.py",
+                ".github/workflows/validate.yml",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T18:18:55Z",
+            "status": "released",
+            "task_id": "TASK-0345",
+            "updated_at": "2026-08-08T18:18:55Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-0327-adj2",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0327-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0327-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327-r2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0327-adj2"
+            ],
+            "started_at": "2026-08-08T19:05:47Z",
+            "status": "released",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-08T19:05:47Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-0328-adj",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0328.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0328.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0328.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0328.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0328-adj"
+            ],
+            "started_at": "2026-08-08T19:35:51Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-08T19:35:51Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-0329-adj3",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0329",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0329",
+                "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0329-adj3"
+            ],
+            "started_at": "2026-08-08T21:21:48Z",
+            "status": "released",
+            "task_id": "TASK-0329",
+            "updated_at": "2026-08-08T21:21:48Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-0342-adj",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0342",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0342",
+                "Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0342-adj"
+            ],
+            "started_at": "2026-08-08T20:05:43Z",
+            "status": "released",
+            "task_id": "TASK-0342",
+            "updated_at": "2026-08-08T20:05:43Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-20260808-0346",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0346",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0346",
+                "Area_comun/tasks/TASK-0346-treinta-y-cinco-runners-de-CI-fuera-de-toda-puerta-de-aceptacion.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0346"
+            ],
+            "started_at": "2026-08-08T18:35:41Z",
+            "status": "released",
+            "task_id": "TASK-0346",
+            "updated_at": "2026-08-08T18:35:41Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote54",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0343.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0343.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0344.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0344.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0345.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-GO-TASK-0345.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0345-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0345-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0343.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0343.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0344.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0344.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0345.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0345.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote54"
+            ],
+            "started_at": "2026-08-08T18:50:09Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T18:50:09Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote55",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0342.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0342.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0342-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0342-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0328-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0328-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote55"
+            ],
+            "started_at": "2026-08-08T20:37:38Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T20:37:38Z"
         }
     ]
 }
