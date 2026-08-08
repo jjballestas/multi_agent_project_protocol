@@ -1,6 +1,22 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
+
+## 2026-08-08 - TASK-0328 structural account identifier implementation
+
+- Commit `041e788a` replaces contiguous-only detection with a separator-agnostic
+  structural candidate plus checksum guard, preserving the 14-34 character compact
+  range and covering mixed whitespace, hyphen, dot, and slash presentations.
+- Permanent negative `NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION` keeps the new guard
+  text present but unreachable while restoring the old live pattern; compact remains
+  detected and grouped form escapes, proving mutation teeth.
+- The governed metadata corpus contained 22,176 eligible strings: 10 new raw candidates,
+  all 10 rejected by the checksum guard, 0 newly marked strings, and 0 observed new false
+  positives. Both compact and grouped forms remain outside the 9-15 digit phone band.
+- Before commit: all 72 memory tests, 59/59 falsification inventory, collaboration,
+  encoding, neutrality, compile, drift, and diff gates exited 0. TASK-0328 remains
+  `in_progress` under `CLAIM-20260808-Codex-TASK-0328` pending clean-clone verification
+  and governed delivery. Codex has not reviewed or ratified the work.
 
 ## 2026-08-08 - TASK-0327 remediation iteration 1 implementation
 
