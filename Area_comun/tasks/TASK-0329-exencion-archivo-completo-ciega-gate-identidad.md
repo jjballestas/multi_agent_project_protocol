@@ -2,7 +2,7 @@
 task_id: TASK-0329
 file: Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md
 title: "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -36,8 +36,8 @@ intake:
     - "python scripts/validate_collaboration_state.py --root ."
   scope_routes:
     - scripts/scan_domain_neutrality.py
+    - scripts/scan_domain_neutrality.ps1
     - scripts/test_scan_domain_neutrality.py
-    - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
   out_of_scope: >
     No se toca `REQUIRED_EXEMPT_GLOBS` (`runtime/memory/**`), que exime artefactos generados y
     tiene otra naturaleza. No se renombra ningun agente ni se cambia identidad alguna en el

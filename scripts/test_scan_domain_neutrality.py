@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -40,6 +42,18 @@ FALSIFICATION_CONTRACTS = (
             'self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)',
         ),
         "exercised_by": "test_whole_file_identity_exemption_mutation_is_killed",
+    },
+    {
+        "id": "NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY",
+        "negative": "The PowerShell gate must reject the same leak and must not restore a whole-file exemption.",
+        "mutation": ".replace(powershell_narrow_rule, powershell_whole_file_rule)",
+        "boundaries": (
+            "self.assertEqual(python_findings, powershell_findings)",
+            'self.assertIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", powershell.stdout)',
+            'self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)',
+            'self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)',
+        ),
+        "exercised_by": "test_powershell_whole_file_exemption_mutation_is_killed",
     },
 )
 
@@ -115,6 +129,20 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
     def run_python_scanner(self) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [sys.executable, str(SCANNER_PATH), "--root", str(self.root)],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+    def run_powershell_scanner(
+        self, scanner_path: Path = POWERSHELL_SCANNER_PATH
+    ) -> subprocess.CompletedProcess[str]:
+        executable = shutil.which("pwsh") or shutil.which("powershell")
+        if not executable:
+            self.skipTest("PowerShell is not installed")
+        return subprocess.run(
+            [executable, "-NoProfile", "-File", str(scanner_path), "-Root", str(self.root)],
             cwd=REPO_ROOT,
             text=True,
             capture_output=True,
@@ -223,24 +251,92 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)
         self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)
 
-    def test_powershell_scanner_matches_required_coverage_when_available(self) -> None:
-        executable = shutil.which("pwsh") or shutil.which("powershell")
-        if not executable:
-            self.skipTest("PowerShell is not installed")
-        result = subprocess.run(
-            [
-                executable,
-                "-NoProfile",
-                "-File",
-                str(POWERSHELL_SCANNER_PATH),
-                "-Root",
-                str(self.root),
-            ],
-            cwd=REPO_ROOT,
-            text=True,
-            capture_output=True,
-            check=False,
+    def test_powershell_whole_file_exemption_mutation_is_killed(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY"""
+        provider_identity = "Code" + "x"
+        coordinator_identity = "Arqui" + "tecto"
+        harness = self.root / "scripts" / "harness" / "peer_mailbox_cron.ps1"
+        harness.parent.mkdir(parents=True)
+        harness.write_text(
+            "\n" * 8
+            + f'[ValidateSet("Auto", "Anthropic", "{provider_identity}")][string]$AgentProvider = "Auto",\n'
+            + f'$DefaultCoordinator = "{coordinator_identity}"\n',
+            encoding="utf-8",
         )
+        (self.root / "scripts" / "unlisted_probe.py").write_text(
+            f'DEFAULT_COORDINATOR = "{coordinator_identity}"\n', encoding="utf-8"
+        )
+
+        python = self.run_python_scanner()
+        powershell = self.run_powershell_scanner()
+        self.assertEqual(python.returncode, 1, python.stdout + python.stderr)
+        self.assertEqual(powershell.returncode, 1, powershell.stdout + powershell.stderr)
+        python_findings = set(python.stdout.splitlines())
+        powershell_findings = set(powershell.stdout.splitlines())
+        self.assertEqual(python_findings, powershell_findings)
+        self.assertIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", powershell.stdout)
+
+        source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
+        powershell_narrow_rule = (
+            "if (Test-IdentityLiteralExempt -RelativePath $file.RelativePath "
+            "-LineNumber ($lineIndex + 1) -Term $scanTerm.Term) {"
+        )
+        powershell_whole_file_rule = (
+            "if ($IdentityLiteralExemptions.ContainsKey($file.RelativePath)) {"
+        )
+        mutated_source = source.replace(powershell_narrow_rule, powershell_whole_file_rule)
+        self.assertNotEqual(source, mutated_source)
+        mutant_path = self.scratch_root / "scan_domain_neutrality_whole_file_mutant.ps1"
+        mutant_path.write_text(mutated_source, encoding="utf-8")
+        mutant = self.run_powershell_scanner(mutant_path)
+        self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)
+        self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)
+
+    def test_identity_exemption_inventories_are_one_to_one_and_in_parity(self) -> None:
+        scanner = load_scanner()
+        powershell_source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
+        inventory_block = powershell_source.split("$IdentityLiteralExemptions = @{", 1)[1].split(
+            "$GenericIdentityTokens", 1
+        )[0]
+        powershell_inventory: dict[str, dict[int, tuple[str, ...]]] = {}
+        current_path: str | None = None
+        for line in inventory_block.splitlines():
+            path_match = re.match(r'^    "([^"]+)" = @\{$', line)
+            if path_match:
+                current_path = path_match.group(1)
+                powershell_inventory[current_path] = {}
+                continue
+            line_match = re.match(r'^            (\d+) = @\((.*)\)$', line)
+            if line_match and current_path:
+                hashes = tuple(re.findall(r'"([0-9a-f]{64})"', line_match.group(2)))
+                powershell_inventory[current_path][int(line_match.group(1))] = hashes
+
+        python_inventory = {
+            path: {int(line): tuple(hashes) for line, hashes in declaration["lines"].items()}
+            for path, declaration in scanner.IDENTITY_LITERAL_EXEMPTIONS.items()
+        }
+        self.assertEqual(powershell_inventory, python_inventory)
+
+        configured_terms = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
+        terms_by_digest = {
+            hashlib.sha256(term.casefold().encode("utf-8")).hexdigest(): term
+            for term in configured_terms
+        }
+        declared_exemption_count = 0
+        for relative_path, lines in python_inventory.items():
+            source_lines = (REPO_ROOT / relative_path).read_text(encoding="utf-8-sig").splitlines()
+            for line_number, hashes in lines.items():
+                self.assertLessEqual(line_number, len(source_lines), relative_path)
+                source_line = source_lines[line_number - 1]
+                for digest in hashes:
+                    term = terms_by_digest[digest]
+                    matches = re.findall(rf"(?i)(?<!\w){re.escape(term)}(?!\w)", source_line)
+                    self.assertGreaterEqual(len(matches), 1, f"{relative_path}:{line_number}:{term}")
+                    declared_exemption_count += 1
+        self.assertEqual(declared_exemption_count, 91)
+
+    def test_powershell_scanner_matches_required_coverage_when_available(self) -> None:
+        result = self.run_powershell_scanner()
         self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
         self.assertIn("scripts/memory/nested_probe.py:1", result.stdout)
         self.assertIn("scripts/root_identity_probe.py:1", result.stdout)
