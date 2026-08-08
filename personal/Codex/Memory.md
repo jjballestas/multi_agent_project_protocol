@@ -2,6 +2,17 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
 
+## 2026-08-08 - TASK-0327 remediation iteration 1 implementation
+
+- Commit `f732292a` removes the weakening default from `validate_metadata`, makes all ten test
+  callers pass an explicit empty instance policy with their isolation reason in code, and replaces
+  the two-name signature check with an AST property over every function in the three memory-engine
+  modules.
+- The full 71-test memory suite and all five requested repository gates pass at exact commit
+  `f732292a`. A new weakening default injected into the drift module makes the AST property test
+  exit 1 with the discovered carrier. TASK-0327 stays `in_progress` under claim
+  `CLAIM-20260808-Codex-TASK-0327-remediation-1` pending governed delivery.
+
 ## 2026-08-08 - TASK-0332 behavioral offset contract implementation
 
 - Commit `4205d04ddb92b43f0993224e7870900e924bd107` adds permanent negative

@@ -2,7 +2,7 @@
 task_id: TASK-0327
 file: Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md
 title: "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista
@@ -99,3 +99,14 @@ Quitar el default rompe cualquier call site externo no inventariado; el AC1 obli
 inventariarlos antes. Ensanchar la deteccion en la puerta de publicacion puede empezar a
 marcar artefactos que hoy pasan: eso es el fix funcionando, pero conviene medir cuantos y
 declararlo para que nadie lo lea como regresion.
+
+## Remediacion 1 (2026-08-08)
+
+- F1 cerrado en `f732292a`: `validate_metadata` ya no declara un default para
+  `domain_pii_terms`; sus diez callers de test pasan `[]` explicitamente y documentan en codigo
+  por que la politica de instancia esta vacia en cada familia aislada.
+- F2 cerrado por propiedad: el test AST recorre todas las funciones de los tres modulos del motor
+  y rechaza cualquier default posicional o keyword-only de `domain_pii_terms`, sin nombres de
+  funcion ni coordenadas codificadas.
+- Falsacion: un default nuevo inyectado en el modulo de drift hace fallar el test con una violacion
+  descubierta dinamicamente. Los cinco gates pedidos pasan en clon limpio del commit exacto.
