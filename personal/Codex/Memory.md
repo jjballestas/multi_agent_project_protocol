@@ -5619,6 +5619,20 @@ ratified its own work.
   certification. TASK-0336 is `in_review`, every Codex claim is released, and the self-contained
   handoff requests independent review. Codex has not reviewed or ratified the work.
 
+## 2026-08-08 - TASK-0329 implementation
+
+- Commit `bd664a86` replaces the ten whole-file identity exemptions with explicit
+  case-folded-term digests bound to exact source line numbers and a written reason per file.
+- A new identity on any other line in a formerly exempt file is now reported; the third-party
+  provider collision remains exempt only at its nine existing occurrences.
+- Permanent negative `NEG-NEUTRALITY-IDENTITY-EXEMPTION-SCOPE` kills the former whole-file guard
+  while retaining a non-exempt control. The Python and PowerShell neutrality gates, scanner tests,
+  falsification inventory, collaboration validator, encoding scan, compile, and diff gates exited 0.
+- Exact implementation commit `bd664a86` passed the declared gates in a detached clean clone.
+  Delivery commit `cbda7606` moves TASK-0329 to `in_review`, releases every Codex claim, and
+  publishes the self-contained handoff plus review-routing request. Codex did not review or
+  ratify the implementation.
+
 ## 2026-08-07 - TASK-0334 implementation
 
 - Commit `7692a561` makes both destructive-work readers discover physical embedded Git repositories
