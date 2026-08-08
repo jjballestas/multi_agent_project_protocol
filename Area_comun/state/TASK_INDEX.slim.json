@@ -115,6 +115,13 @@
             "phase": "P2",
             "status": "in_review",
             "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla"
+        },
+        {
+            "id": "TASK-0346",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea"
         }
     ],
     "view": "task_index.slim"

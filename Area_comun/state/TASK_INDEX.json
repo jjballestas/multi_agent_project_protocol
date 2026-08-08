@@ -407,6 +407,16 @@
             "type": "implementation"
         },
         {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0346-treinta-y-cinco-runners-de-CI-fuera-de-toda-puerta-de-aceptacion.md",
+            "id": "TASK-0346",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
