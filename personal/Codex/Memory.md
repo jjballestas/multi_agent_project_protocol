@@ -2,6 +2,21 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 
+## 2026-08-08 - TASK-0332 remediation iteration 1 implementation
+
+- Commit `3a5cc335` expands the behavioral date-exemption contract from one fixed prefix to all
+  1,684 ASCII offsets plus representative changed-year, basic-time, fractional-second, and
+  date-only coordinates.
+- Every timestamp case now includes a list whose only PII is the exempt timestamp through an
+  instance term, so external iterable filtering dies by source behavior. The permanent negative
+  also reconstructs the checker slips for a changed year and basic-time filtering.
+- R0332-3 explicitly bounds exhaustiveness to ASCII digits and leaves Unicode-aware `\d` under
+  TASK-0322 residual R3. Production remains byte-identical.
+- The full 72-test memory suite, 59/59 inventory and static wiring, guardian, collaboration,
+  encoding, both neutrality scanners, neutrality tests, compile, drift, and diff gates exited 0.
+  TASK-0332 remains `in_progress` under the remediation claim pending exact-commit clean-clone
+  verification and governed delivery.
+
 ## 2026-08-08 - TASK-0331 remediation iteration 5 implementation
 
 - Commit `a29e2cea` replaces the three-literal verdict count with behavioral coverage of the
