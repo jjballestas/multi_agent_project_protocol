@@ -242,10 +242,10 @@ class MemoryDbTests(unittest.TestCase):
             self.assertTrue(memory_db.contains_pii(term, [term]))
 
     def test_p01_domain_pii_parameters_are_required(self) -> None:
-        with self.assertRaises(TypeError):
-            memory_db.contains_pii("safe")
-        with self.assertRaises(TypeError):
-            memory_db.title_is_safe("safe")
+        module_paths = (MODULE_PATH, DRIFT_MODULE_PATH, QUERY_MODULE_PATH)
+        violations = domain_pii_default_violations(module_paths)
+        self.assertEqual([], violations)
+        # The property covers every function in all three memory-engine modules.
 
     def test_p02_project_is_derived_from_instance_config(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-project-") as temp:
@@ -302,20 +302,20 @@ class MemoryDbTests(unittest.TestCase):
             commit = commit_fixture(root)
             agents = memory_db.configured_agents(root, commit)
             self.assertTrue({"Codex", "Human", "Historical"} <= agents)
-            accepted, warnings = memory_db.validate_metadata(
-                {"owner": "Historical", "from": "Human", "to": "Unknown"}, agents
+            accepted, warnings = memory_db.validate_metadata(  # Identity policy only: no instance terms.
+                {"owner": "Historical", "from": "Human", "to": "Unknown"}, agents, []
             )
             self.assertEqual({"from": "Human", "owner": "Historical"}, accepted)
             self.assertEqual(["rejected frontmatter key to"], warnings)
 
     def test_p09_protocol_status_and_type_vocabularies_remain_finite(self) -> None:
-        accepted, warnings = memory_db.validate_metadata(
-            {"status": "ready_for_review", "type": "HANDOFF"}, {"Codex"}
+        accepted, warnings = memory_db.validate_metadata(  # Core vocabularies only: no instance terms.
+            {"status": "ready_for_review", "type": "HANDOFF"}, {"Codex"}, []
         )
         self.assertEqual({"status": "ready_for_review", "type": "HANDOFF"}, accepted)
         self.assertEqual([], warnings)
         accepted, warnings = memory_db.validate_metadata(
-            {"status": "arbitrary status", "type": "arbitrary type"}, {"Codex"}
+            {"status": "arbitrary status", "type": "arbitrary type"}, {"Codex"}, []
         )
         self.assertEqual({}, accepted)
         self.assertEqual(
@@ -491,8 +491,8 @@ class MemoryDbTests(unittest.TestCase):
         )
         for timestamp in suffix_vectors:
             with self.subTest(timestamp=timestamp):
-                accepted, warnings = memory_db.validate_metadata(
-                    {"created_at": timestamp}, {"Codex"}
+                accepted, warnings = memory_db.validate_metadata(  # Timestamp syntax only: no instance terms.
+                    {"created_at": timestamp}, {"Codex"}, []
                 )
                 self.assertEqual({}, accepted)
                 self.assertEqual(["rejected frontmatter key created_at"], warnings)
@@ -516,13 +516,13 @@ class MemoryDbTests(unittest.TestCase):
         self.assertEqual(333, len(timestamps))
         for timestamp in timestamps:
             with self.subTest(timestamp=timestamp):
-                accepted, warnings = memory_db.validate_metadata(
-                    {"created_at": timestamp}, {"Codex"}
+                accepted, warnings = memory_db.validate_metadata(  # Timestamp syntax only: no instance terms.
+                    {"created_at": timestamp}, {"Codex"}, []
                 )
                 self.assertEqual({"created_at": timestamp}, accepted)
                 self.assertEqual([], warnings)
-        accepted, warnings = memory_db.validate_metadata(
-            {"priority": "medium"}, {"Codex"}
+        accepted, warnings = memory_db.validate_metadata(  # Core priority only: no instance terms.
+            {"priority": "medium"}, {"Codex"}, []
         )
         self.assertEqual({"priority": "medium"}, accepted)
         self.assertEqual([], warnings)
@@ -559,8 +559,8 @@ class MemoryDbTests(unittest.TestCase):
         for timestamp in invalid_ranges:
             with self.subTest(invalid=timestamp):
                 self.assertIsNone(memory_db.DATE_RE.fullmatch(timestamp))
-                accepted, warnings = memory_db.validate_metadata(
-                    {"created_at": timestamp}, {"Codex"}
+                accepted, warnings = memory_db.validate_metadata(  # Timestamp syntax only: no instance terms.
+                    {"created_at": timestamp}, {"Codex"}, []
                 )
                 self.assertEqual({}, accepted)
                 self.assertEqual(["rejected frontmatter key created_at"], warnings)
@@ -875,8 +875,8 @@ class MemoryDbTests(unittest.TestCase):
                     self.assertIsNone(mutant.DATE_RE.fullmatch(timestamp))
 
     def test_p12_empty_supersedes_is_valid_and_produces_no_edge(self) -> None:
-        accepted, warnings = memory_db.validate_metadata(
-            {"supersedes": []}, {"Codex"}
+        accepted, warnings = memory_db.validate_metadata(  # Graph metadata only: no instance terms.
+            {"supersedes": []}, {"Codex"}, []
         )
         self.assertEqual({"supersedes": []}, accepted)
         self.assertEqual([], warnings)
@@ -1178,12 +1178,12 @@ owner: Codex
             "file": f"Area_comun/artifacts/{planted}.md",
         }
         self.assertEqual(memory_db.ALLOWLIST_KEYS, set(values))
-        for key, value in values.items():
-            accepted, warnings = memory_db.validate_metadata({key: value}, {"Codex"})
+        for key, value in values.items():  # Structural PII only: no instance terms.
+            accepted, warnings = memory_db.validate_metadata({key: value}, {"Codex"}, [])
             self.assertNotIn(key, accepted, key)
             self.assertEqual([f"rejected frontmatter key {key}"], warnings, key)
         accepted, warnings = memory_db.validate_metadata(
-            {"type": "feature", "status": "for_review"}, {"Codex"}
+            {"type": "feature", "status": "for_review"}, {"Codex"}, []
         )
         self.assertEqual({"status": "for_review", "type": "feature"}, accepted)
         self.assertEqual([], warnings)
@@ -2316,6 +2316,26 @@ Body is not indexed.
         self.assertEqual((False, True), mutant_results["restructured"])
         self.assertEqual((False, True), mutant_results["filtered"])
         self.assertEqual((False, False), mutant_results["early_return"])
+
+
+def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:
+    violations: list[str] = []
+    for module_path in module_paths:
+        tree = ast.parse(module_path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            positional = [*node.args.posonlyargs, *node.args.args]
+            positional_defaults = (
+                positional[-len(node.args.defaults) :] if node.args.defaults else []
+            )
+            for argument in positional_defaults:
+                if argument.arg == "domain_pii_terms":
+                    violations.append(f"{module_path.name}:{argument.lineno}")
+            for argument, default in zip(node.args.kwonlyargs, node.args.kw_defaults):
+                if argument.arg == "domain_pii_terms" and default is not None:
+                    violations.append(f"{module_path.name}:{argument.lineno}")
+    return violations
 
 
 if __name__ == "__main__":

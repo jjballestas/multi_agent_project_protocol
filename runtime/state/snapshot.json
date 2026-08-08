@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9e9a1dbf2ee0c0f132fbe5ce45e780b0b236c4c7d437046d071c5fd85e779f70",
+  "canonical_hash": "f9acf18bf73c4cce00d2a21e700203ca30291b80363eed4f35332711ae5c49ab",
   "integrity": {
-    "canonical_hash": "9e9a1dbf2ee0c0f132fbe5ce45e780b0b236c4c7d437046d071c5fd85e779f70",
+    "canonical_hash": "f9acf18bf73c4cce00d2a21e700203ca30291b80363eed4f35332711ae5c49ab",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "494070d43eaf26e4cb17f47988ca277d5f4b5ca73b27354aae7944e8030cc129",
-    "signature": "d91877b1b8e4440d0e9833e8829bd68346d712ec98d1afea7b34ae2ad43baa07",
-    "up_to_seq": 7990
+    "prev_hash": "415cc8ff416c30bbd2fbafbdc00a10e5b7c133b6f552961a6a6e321b8cbe186d",
+    "signature": "808603acff429612145910708fe08e70352b515d775f6945130c9b0a6adbc8ce",
+    "up_to_seq": 7991
   },
   "state": {
     "aggregate_versions": {
@@ -3234,7 +3234,7 @@
       "TASK-0324": 20,
       "TASK-0325": 25,
       "TASK-0326": 13,
-      "TASK-0327": 15,
+      "TASK-0327": 16,
       "TASK-0328": 2,
       "TASK-0329": 16,
       "TASK-0330": 44,
@@ -3271,7 +3271,7 @@
       "protocol-prune": 54,
       "protocol-state": 1
     },
-    "events_applied": 7319,
+    "events_applied": 7320,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7020,6 +7020,7 @@
       "codex:task0327:ready-to-in-progress:20260807T132704Z": 7536,
       "codex:task0327:release-delivery:20260807T143223Z": 7557,
       "codex:task0327:release-work:20260807T143223Z": 7556,
+      "codex:task0327:remediation-1:claim-acquire:20260808T124000Z": 7991,
       "codex:task0329:remediation1:delivery-claim-release:20260808T064800Z": 7883,
       "codex:task0329:remediation1:in-progress-to-in-review:20260808T064800Z": 7881,
       "codex:task0329:remediation1:work-claim-release:20260808T064800Z": 7882,
@@ -10594,5 +10595,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7990
+  "up_to_seq": 7991
 }

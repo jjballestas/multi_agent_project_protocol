@@ -42,6 +42,28 @@
             "updated_at": "2026-08-08T10:24:51Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0327-remediation-1",
+            "expires_at": "2026-08-08T20:40:00Z",
+            "notes": "TASK-0327 remediation iteration 1: remove validate_metadata default and enforce the no-default property across the memory engine AST.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0327-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0327-codex-to-arquitecto.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T12:40:00Z",
+            "status": "active",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-08T12:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260808-0331-adjudica-r5",
             "expires_at": "2026-08-08T23:59:00Z",
             "owner": "Arquitecto",

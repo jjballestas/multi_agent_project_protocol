@@ -571,7 +571,7 @@ def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:
 def validate_metadata(
     frontmatter: dict[str, Any],
     agents: set[str],
-    domain_pii_terms: Iterable[str] = (),
+    domain_pii_terms: Iterable[str],
     status_values: Iterable[str] = CORE_STATUS_VALUES,
     type_values: Iterable[str] = TYPE_VALUES,
 ) -> tuple[dict[str, Any], list[str]]:
