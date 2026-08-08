@@ -1,195 +1,160 @@
----
-decision_id: DECISION-0105
-title: "Un mecanismo de verificacion debe atar el EFECTO y debe EJECUTARSE: declarado no es verificado, y mergeado no es desplegado"
-status: draft
-proposed_by: Arquitecto
-requires: aprobacion del operador humano
-created_at: 2026-08-07
-supersedes: none
-relates_to:
-  - DECISION-0020
-  - TASK-0324
-  - TASK-0325
-  - TASK-0330
-  - TASK-0331
-  - TASK-0335
----
+# DRAFT-DECISION-0105 -- verificar el efecto, no la forma
 
-# DECISION-0105 (borrador) -- verificar el efecto, y verificar que se verifica
+> **Iteracion 2 del borrador.** Reescrito tras el veredicto CHANGE-REQUIRED del Analista
+> (`Area_comun/artifacts/Analista-DECISION-0105-generalizacion-verdict.md`, 2026-08-08).
+> Estado: **NO propuesto**. Pendiente de re-juicio del checker antes de ir al operador.
 
-## Por que existe este borrador
+## Que cambia respecto a la iteracion 1, y por que
 
-Entre el 2026-08-07 y el 2026-08-08 el mismo defecto de fondo aparecio **catorce veces**, en cinco capas
-distintas del sistema, encontrado por tres agentes distintos y en tareas sin relacion entre si.
-Cuando un patron se repite asi, seguir contratandolo caso por caso es tratar el sintoma.
+El checker falsó la regla que cargaba el peso **usando el propio mecanismo que la certificaria**, y
+desinfló el titular. Lo acepto entero. Los cambios grandes:
 
-Ninguna de las catorce es una hipotesis: todas tienen reproduccion medida.
+- **R2 gana su cuarta palabra.** Declarado, ejecutado y exigido **no implica ASERTADO**.
+- **El recuento baja de "catorce ocurrencias" a OCHO TAREAS.** Cuatro filas eran la misma TASK-0330
+  y dos la misma TASK-0329. Cae la coletilla "en tareas sin relacion entre si", que era falsa.
+- **La ocurrencia 11 sale** y la 9 pasa a la seccion de huecos.
+- **El artefacto se PARTE**: DECISION para lo que tiene predicado binario; guia y plantilla de
+  review para lo que no.
+- Entra la regla que faltaba: **la aceptacion cita un efecto medido**. Es la unica que habria cazado
+  mi propio fallo, y la que me ha vuelto a morder hoy con CI.
 
 ## El patron, en una frase
 
-**Confundimos que algo EXISTA con que algo ACTUE.**
+**Confundir que un mecanismo EXISTA con que ACTUE.** El mecanismo esta presente, declarado, listado
+o mergeado; y no ejerce ningun efecto sobre el veredicto.
 
-Y se manifiesta en dos formas complementarias:
+## Las tres manifestaciones
 
-1. **El verificador ata la FORMA, no el efecto.** Comprueba como esta escrito hoy el codigo, no lo
-   que el codigo hace. Sobrevive a la siguiente refactorizacion legitima sin protegerla.
-2. **El verificador existe pero no CORRE.** Esta declarado, contado e incluso citado como evidencia
-   de rigor, y ningun gate lo ejecuta.
+La iteracion 1 declaraba dos y tres ocurrencias no cabian. Son tres:
 
-## Las ocurrencias medidas
+**M1 -- verificadores que no verifican.** Contratos, gates y CI que emiten verde sin haber
+comprobado lo que dicen comprobar.
 
-| # | Donde | Que ataba, y que deberia atar |
-|---|-------|-------------------------------|
-| 1 | TASK-0324 | ataba el HELPER puro + `assert linea in source`; un mutante de CODIGO MUERTO -- cableado presente pero inalcanzable -- sobrevivia y reproducia el defecto original |
-| 2 | TASK-0325 | el detector buscaba `ast.Continue`; un bypass con `break` colaba **un email por el gate de PII** con la suite de 64 tests en verde |
-| 3 | TASK-0330 r3 | el checker exigia el literal `$expires -gt $now`; la forma equivalente fail-closed de 0331 lo rompio |
-| 4 | TASK-0330 r4 | el fixture asumia un mundo sin `work_scope` obligatorio |
-| 5 | TASK-0335 | la asercion exige una POSICION de subcadena en el log; 0321 metio campos en medio |
-| 6 | TASK-0330 | **23 de 37 contratos declarados** con runner que CI no ejecutaba nunca; uno llevaba **dos semanas rojo** |
-| 7 | TASK-0331 | el guard aparentaba exclusion mutua **sin darla**: check-then-act sin atomicidad; dos peers arrancaron el MISMO segundo |
-| 8 | despliegue | 0321, 0324 y 0331 en `done`/`in_review` y **NO corriendo**: los crons cargan el `.ps1` al arrancar |
-| 9 | estado de reintento | 13 entradas huerfanas apuntando a mensajes archivados o inexistentes, generando falsas alarmas |
-| 10 | TASK-0330 **el cableado mismo** | los tres runners entraron en un paso `run:` de un job `windows-latest` **sin `shell:` declarado**: en `pwsh` el codigo no-cero de un ejecutable INTERMEDIO no aborta el bloque, y GitHub anade `exit $LASTEXITCODE`, asi que el paso hereda el del ULTIMO comando. **El job sale `success` con DOS de los tres runners en ROJO dentro** (medido en el CI real, run 31195169744). Y al job le faltaba `jsonschema`, asi que uno de los "verdes" no ejecutaba ni un caso |
+**M2 -- controles de produccion que no controlan.** Guards que aparentan dar una garantia y no la
+dan. No son verificadores: son codigo que corre en produccion.
 
-| 11 | TASK-0334 | descubrir repos embebidos **protege** al veto por claim (sobre-detectar evita matar trabajo vivo) y **bloquea** a los lectores que comparan, que deben honrar el `.gitignore` del padre. **El mismo cambio, direcciones de seguridad opuestas segun el consumidor** |
+**M3 -- lo que existe en el repositorio no es lo que corre.** Despliegue y estado: el arreglo esta
+en `done` y el proceso vivo no lo tiene.
 
-| 12 | TASK-0329 (su REMEDIACION) | la exencion de neutralidad paso de eximir un FICHERO ENTERO a fijar pares **(numero_de_linea, termino)**. El 08-ago otra tarea anadio ~56 lineas por encima en el mismo fichero y las ocho ocurrencias exentas se desplazaron: `scan_domain_neutrality` exit 1 sobre **ocho lineas legitimas e INTACTAS**. La exencion no describe QUE exime ("esta ocurrencia nombra la CLI de un tercero"); describe **DONDE estaba el dia que se escribio** |
-| 13 | guard de residuo (-> TASK-0337) | veta el mensaje de una tarea por suciedad del arbol perteneciente a OTRA. Decision **por-par** (este mensaje contra estas rutas) tomada sobre una propiedad **global** (el arbol esta sucio). Es el gemelo exacto de la ocurrencia 7 en el guard de al lado del mismo fichero: cerrar la admision de claims no cerro la familia |
-| 14 | TASK-0329 (su CONTRATO DE PARIDAD) | el negativo anadido **para impedir la cuarta divergencia** entre los dos escaneres ata (a) un regex de indentacion fija sobre una ventana de texto y (b) un fixture de siete ficheros. Un **desliz de dos espacios** en la clave de ruta -- o declarar la ampliacion fuera de la ventana parseada -- produce veredictos divergentes (Python exit 1, gemelo exit 0) **con la suite entera en verde**. El discriminante no es la gravedad del cambio: es su indentacion |
+## La evidencia, recontada
 
-**Las ocurrencias 10, 12 y 14 son RECURSIVAS: son remediaciones de este mismo patron que
-reintrodujeron el patron.** Tres de catorce ya no es anecdota. El caso mas claro es TASK-0329, que
-lo hizo DOS VECES en la misma entrega: existia para arreglar "la exencion de fichero entero ciega el
-gate" y cambio un gate CIEGO por uno FRAGIL; y el contrato que anadio **para impedir la cuarta
-divergencia entre los dos escaneres** ata como se escribe la tabla -- con un regex de indentacion
-fija -- en vez de atar que los dos escaneres coincidan.
+**Ocho tareas, tres manifestaciones.** El recuento por FILAS inflaba: cuatro filas eran TASK-0330 y
+dos eran TASK-0329.
 
-Lectura para calibrar la regla: cuando pedimos "ata la propiedad, no la forma", la respuesta natural
-del implementador es **ofrecer otra forma mas estrecha** -- una linea en vez de un fichero, una
-etiqueta `shell: bash` en vez de nada. Estrechar la forma reduce el dano y por eso parece un
-arreglo; pero no cambia la clase del defecto. Por eso R1 debe pedir explicitamente que el criterio
-**sobreviva a un cambio de coordenada, de orden y de formato**, y no solo que sea mas estrecho que
-el anterior.
+| Tarea | Manif. | Que ataba, y que deberia atar |
+|-------|--------|-------------------------------|
+| TASK-0330 | M1 | (a) **23 de 37 contratos declarados** con runner que CI no ejecutaba nunca, uno **dos semanas en rojo**; (b) el checker exigia el literal `$expires -gt $now` y la forma equivalente fail-closed lo rompio; (c) el fixture asumia un mundo sin `work_scope` obligatorio; (d) **el cableado mismo**: los runners entraron en un paso `run:` sin `shell:` declarado, y el job salio `success` **con dos de tres runners en ROJO dentro** (medido en CI real, run 31195169744) |
+| TASK-0329 | M1 | (a) la exencion paso de fichero entero a pares **(linea, termino)**: otra tarea anadio ~56 lineas encima y ocho ocurrencias legitimas e **intactas** pusieron el gate en rojo; (b) el contrato anadido **para impedir la cuarta divergencia** entre los dos escaneres ata un regex de indentacion fija: un desliz de **dos espacios** produce veredictos divergentes con la suite verde |
+| TASK-0324 | M1 | ataba el HELPER puro mas `assert linea in source`; un mutante de CODIGO MUERTO -- cableado presente pero inalcanzable -- sobrevivia |
+| TASK-0325 | M1 | el detector buscaba `ast.Continue`; un bypass con `break` colaba **un email por el gate de PII** con 64 tests en verde |
+| TASK-0335 | M1 | (a) la asercion exige una POSICION de subcadena en el log y otra tarea metio campos en medio; (b) la mitad mutante de `retry-ledger-head-defer-order` era **VACUA**: comparaba contra una subcadena que ningun log real satisface, asi que pasaba hiciera lo que hiciera produccion |
+| TASK-0333 | M1 | el gate leia el arbol vivo y no el **mirror del runtime** que `new_instance.py` copia a cada instancia nueva: se cerro el agujero en la mitad que no se exporta |
+| TASK-0331 | M2 | el guard aparentaba exclusion mutua **sin darla**: check-then-act sin atomicidad; dos peers arrancaron el MISMO segundo |
+| (guard de residuo) | M2 | decision **por-par** -- este mensaje contra estas rutas -- tomada sobre una propiedad **global**: el arbol esta sucio. Medido: un mensaje de una tarea diferido por ficheros de otra, y por correo dirigido a otro agente |
+| (despliegue) | M3 | 0321, 0324 y 0331 en `done`/`in_review` y **NO corriendo**: los crons cargan el `.ps1` al arrancar |
+| (CI, 2026-08-08) | M1+M3 | **300 runs consecutivos sin un solo verde durante seis dias**, y nadie lo miro: el gate canonico crasheaba por una dependencia que CI no instala, mientras los tres agentes declarabamos verde desde clon limpio local |
 
 **Tres de los seis rojos de la suite revivida los causamos NOSOTROS** con cambios correctos: 0316
-hizo obligatorio un parametro, 0319 reordeno un reseteo, 0321 anadio campos a una linea de log. Cada
-uno bien por separado. Ninguno detectado.
+hizo obligatorio un parametro, 0319 reordeno un reseteo, 0321 anadio campos a una linea de log.
 
-**Y la ocurrencia 10 es la que mejor justifica esta decision, porque es RECURSIVA.** La tarea cuyo
-proposito era cerrar "declarado no es verificado" entrego un arreglo que era "listado no es
-exigido": el gate nuevo distinguia declarado de listado, pero no listado de EJECUTADO. Y el
-Arquitecto -- yo -- lo dio por bueno tras comprobar que los runners APARECIAN en el workflow, que es
-exactamente la comprobacion floja que la propia tarea denunciaba, un nivel mas arriba.
+**Y hay recursion, tres veces.** TASK-0330 cerraba "declarado no es verificado" y entrego "listado
+no es exigido". TASK-0329 lo hizo dos veces en la misma entrega. Yo enuncie el principio en la
+iteracion 1 de este documento y **acto seguido lo incumpli** al aceptar 0330 comprobando que los
+runners APARECIAN en el workflow. Lo cazo un checker independiente midiendo el CI real, no la regla.
 
-Ese detalle importa para calibrar la regla: **no basta con enunciar el principio.** Yo lo tenia
-escrito en este mismo borrador y aun asi verifique la existencia en vez del efecto. Lo que lo cazo
-no fue la regla: fue un checker independiente midiendo el CI real.
+## Lo que se propone -- PARTIDO, y esta es la decision de forma
 
-## Lo que se propone
+El checker lo dijo sin rodeos y tiene razon: **publicar nueve reglas de las que siete no tienen
+predicado mecanico crearia siete reglas declaradas-y-no-ejecutadas, que es exactamente el defecto.
+Seria la ocurrencia siguiente, firmada por el protocolo.**
 
-**R1 -- Un negativo permanente ata el EFECTO observable, no la forma sintactica.**
-Prohibido, como unica atadura: `assert <literal> in source`, exigir una posicion de subcadena, o
-comprobar un keyword concreto cuando la propiedad admite otras formas. La prueba de que un contrato
-cumple R1: **al menos dos formas distintas y correctas del codigo deben pasarlo, y una rota debe
-caer.** Si solo pasa la forma actual, ata sintaxis.
+### Van a DECISION: las tres con predicado binario
 
-**R2 -- Todo contrato declarado debe ser EJECUTADO Y EXIGIDO por un gate, y el mecanismo debe
-fallar solo.**
-Un contrato cuyo runner no este cableado es un ERROR del gate, no una linea de inventario. Y
-"cableado" no basta: el fallo del runner tiene que **romper el job**. Ningun recuento de contratos
-puede citarse como cobertura sin declarar cuantos se EXIGEN.
-La ocurrencia 10 obliga a esta redaccion: una version previa de esta regla decia que TASK-0330 ya lo
-implementaba. No lo implementaba -- cableaba sin exigir -- y yo lo di por bueno. La regla se escribe
-con las tres palabras separadas a proposito: **declarado, ejecutado, exigido.**
+**D1 -- Un contrato declarado debe ser EJECUTADO, EXIGIDO y EJERCIDO.**
+Las tres primeras palabras no bastan y esta MEDIDO: dejar una frontera declarada presente byte a
+byte pero inalcanzable (`if False:`) deja el paso de CI en **exit 0**, el inventario en
+`58/58 missing=0` y el guardian imprimiendo OK.
+**Predicado:** rodear una frontera declarada de `if False:` debe poner el gate **ROJO**; y el runner
+debe reportar los casos EJERCIDOS contra cada frontera declarada, no solo su presencia.
 
-**R3 -- El mutante obligatorio incluye la INALCANZABILIDAD.**
-No basta con borrar la linea: hay que dejarla presente y muerta. Es la forma que se escapo en 0324 y
-la que 0326 si mato. Todo negativo sobre codigo de produccion debe morir ante ella.
+**D2 -- Mergeado no es desplegado; el orden es ratificacion -> despliegue -> comprobacion.**
+**Predicado:** el estado de despliegue se comprueba por COMPORTAMIENTO -- un campo de log, un lock,
+un id de corrida -- nunca por el log de git. Todo pendiente de despliegue lleva **dueno y
+caducidad**, y al vencer escala.
 
-**R4 -- Verdad vacia prohibida.**
-Un verificador que no encuentra su objetivo debe FALLAR, nunca devolver "no hay problema". Selectores
-por AST, busquedas de bloque y recorridos deben afirmar que encontraron exactamente lo que buscaban
-antes de juzgarlo.
+**D3 -- Una aceptacion cita un efecto MEDIDO.**
+La regla que faltaba, y la unica que habria cazado mi propio fallo. Quien acepta, ratifica o cierra
+cita un **exit code de una corrida concreta o un id de corrida de CI**, nunca una lectura del diff
+ni la afirmacion del maker. Las otras reglas atan al maker o al mecanismo; ninguna ataba al que
+acepta, que es donde fallo yo dos veces en dos dias.
+**Predicado:** un artefacto de ratificacion sin efecto medido citado no cierra.
 
-**R5 -- Un guard debe declarar QUE garantiza, y demostrarlo.**
-Prohibido dejar que un mecanismo aparente una garantia que no da. Si un guard no excluye, se dice.
-La exclusion real exige un primitivo atomico, no una relectura.
+### Van a GUIA y a la PLANTILLA DE VEREDICTO del checker: las demas
 
-**R6 -- Mergeado no es desplegado. Se verifica por COMPORTAMIENTO.**
-Una tarea que modifica un runtime activo no esta operativa hasta que el runtime se relanza. Al
-cerrarla se declara explicitamente que queda pendiente de despliegue, y el despliegue se comprueba
-buscando un artefacto que solo el codigo nuevo produciria -- un fichero de lock, un campo nuevo en el
-log. "Esta en `done`" no es evidencia de nada operativo.
+No tienen predicado mecanico hoy. Su sitio es donde se **ejercen en cada review** -- y ese ejercicio
+ES su ejecucion -- no un documento que nadie ejecuta:
 
-**R7 -- La direccion del fallo es del par CAMBIO-CONSUMIDOR, no del cambio.**
-Antes de ensanchar o estrechar lo que un lector compartido observa, se enumeran **todos** sus
-consumidores y se declara la direccion para cada uno. El mismo dato de mas puede PROTEGER a quien
-decide a quien no matar y ENCALLAR a quien decide cuando empezar. Cuando las direcciones difieren,
-se separan los conjuntos y **la separacion se clava con un negativo permanente**: si alguien unifica
-los lectores "por coherencia" -- que es la tentacion natural tras cerrar una familia -- el contrato
-tiene que caer.
-
-**R8 -- El gate no es el fichero que editaste. Enumera sus GEMELOS antes de darlo por cerrado.**
-Un mecanismo con implementaciones paralelas -- escaner Python y escaner PowerShell en paridad
-declarada, runtime vivo y mirror enviado a instancias, dos lectores del mismo `git status` -- no
-queda arreglado al arreglar una. Antes de cerrar: **enumera las implementaciones, no los casos**, y
-fija la PARIDAD con un negativo permanente, de modo que si manana una se acota y la otra no, el
-contrato caiga.
-Medido tres veces el mismo dia: el mirror de `examples/full_runtime_instance/` (0333), los dos
-lectores con consumidores opuestos (0334) y los dos escaneres de neutralidad (0329). En este ultimo
-el gemelo sin acotar era **el que CI ejecuta y el que `new_instance.py` copia a toda instancia
-nueva**: se cerro el agujero en la mitad que no se exporta.
-Corolario para quien encarga el trabajo: **si preguntas por "los otros ocho FICHEROS", te contestan
-por ficheros.** La familia hay que nombrarla en el eje correcto -- y a veces hay dos ejes.
-
-**R9 -- Estrechar la forma no es atar la propiedad.**
-Una remediacion de esta familia no cierra por hacer el criterio MAS ESTRECHO que el anterior: cierra
-cuando el criterio **sobrevive a un cambio de coordenada, de orden y de formato**. Al encargarla se
-nombra la propiedad en NEGATIVO y en terminos del efecto -- p.ej. *"no debe existir ninguna edicion
-de un solo escaner que produzca veredictos distintos sobre el mismo arbol con la suite en verde"* --
-y la forma se deja explicitamente al maker.
-Medido: **tres de las catorce ocurrencias (10, 12, 14) son remediaciones de este patron que
-reintrodujeron el patron.** Al pedir "ata la propiedad", la respuesta natural del implementador es
-ofrecer otra forma mas estrecha -- una linea en vez de un fichero entero, `shell: bash` en vez de
-nada, un regex mas especifico. Estrechar reduce el dano y por eso PARECE un arreglo, y en magnitud
-lo es: 0329 paso de 8289 lineas ciegas a 91 pares, un -98,9 %. Pero no cambia la CLASE del defecto y
-el siguiente cambio legitimo vuelve a romperlo.
-Corolario para el revisor: la pregunta no es "cierra el caso que lo destapo", es **"que edicion
-legitima futura vuelve a romperlo"**. Y corolario para quien encarga: reconocer la mejora por
-separado, para que la particion del residual no se lea como un reproche.
-
-**Contrapeso honesto a R6, medido el 2026-08-08.** La brecha "mergeado no es desplegado" que R6
-persigue cerrar **nos protegio por accidente**: la remediacion 2 de TASK-0331 introdujo un
-autocurado que borra la lease de un exec VIVO -- fallo abierto y destructivo -- y no causo dano
-porque ese codigo no estaba corriendo. R6 sigue siendo correcta: una brecha que a veces salva y a
-veces perjudica es una brecha, no una salvaguarda, y confiar en ella es confiar en el azar. Pero al
-aplicarla conviene recordar por que existe el retraso: **desplegar rapido lo revisado es bueno;
-desplegar rapido lo NO ratificado es como se pierde trabajo vivo.** R6 pide declarar el estado de
-despliegue, no acelerarlo por defecto.
+- **G1 -- el negativo ata el EFECTO observable, no la forma sintactica.** Las dos formas correctas
+  deben **diferir en el eje atado**, y no las elige el maker.
+- **G2 -- el mutante obligatorio incluye la INALCANZABILIDAD**, no solo el borrado. Presupone un
+  **llamador vivo**: primero el chequeo barato de que produccion recorre ese camino.
+- **G3 -- verdad vacia prohibida.** Respaldada por la mitad mutante vacua de 0335.
+- **G4 -- un guard declara QUE garantiza y lo demuestra**, reconciliado con lo que asumen sus
+  llamadores; rebajar la garantia declarada no es cumplir.
+- **G5 -- la direccion del fallo es del par CAMBIO-CONSUMIDOR.** Enumerar consumidores **no cierra
+  la clase**: para miembros futuros hace falta un invariante estructural.
+- **G6 -- el gate no es el fichero que editaste: enumera sus GEMELOS.** Mismo limite que G5, y su
+  coste **escala con la adopcion**, que es la meta de la fase.
+- **G7 -- estrechar la forma no es atar la propiedad.** El criterio debe sobrevivir a un cambio de
+  coordenada, de orden y de formato. *(La iteracion 1 enumeraba tres ejes, que es una forma:
+  reproducia el defecto que nombra. Aqui el ejemplo va como ejemplo, no como definicion.)*
 
 ## Coste y contrapartida
 
-R1 y R3 encarecen escribir un contrato: obligan a construir dos formas correctas y un mutante de
-alcanzabilidad. R2 puede poner CI en rojo al encender verificadores dormidos -- de hecho **hoy lo
-esta**, deliberadamente, por el sexto rojo de 0330.
+**Un rojo que se queda rojo deja de leerse.** Con un solo `main` y varios agentes gateados por la
+misma senal, un rojo persistente convierte el gate de **toda** tarea no relacionada en "rojo
+conocido, sigo". Ese es el mecanismo por el que el arreglo se pospone para siempre. **Hoy lo hemos
+vivido**: seis dias de CI rojo que nadie miraba. Por eso D1 y D2 exigen **presupuesto de rojo**:
+dueno, caducidad y escalado al vencer.
 
-Se acepta a proposito. Un rojo visible con tarea abierta y dueno es un estado sano; un verde que
-oculta un fallo conocido no lo es. Toda la evidencia de esta jornada apunta a que el coste de la
-segunda opcion se paga entero y mas tarde.
+**G1 y G2 son coste puro sobre codigo muerto.** Medido: media de un contrato ataba un camino de
+PowerShell que ningun llamador de produccion recorre.
 
-## Lo que NO propone
+**El coste de G6 escala con el exito.** Los gemelos se GENERAN: cada instancia nueva copia el
+mirror.
 
-No cambia DECISION-0020 ni el modelo de claims. No impone contratos por comportamiento donde hoy no
-hay ninguno -- solo regula los que existan. No obliga a reescribir los contratos vigentes de golpe:
-R1 y R3 aplican a los NUEVOS y a los que se toquen.
+**G5 obliga a elegir y a pagar:** invariante estructural (caro) o checklist (barata y no cierra la
+clase). No vale dejarlo ambiguo.
+
+## Lo que esto NO cubre
+
+Declarado, para que "tres manifestaciones" no se lea como cobertura:
+
+1. **El denominador.** Todas las ocurrencias son sobre mecanismos que EXISTEN. Ninguna sobre el que
+   **deberia existir y nunca se declaro**.
+2. **La capa de ledger, mailbox y atestacion: CERO ocurrencias examinadas** -- la capa para la que
+   existe este protocolo. El patron es al menos igual de probable ahi: un `submit_intent` que sale 0
+   sin que el evento aterrice es exactamente "el mecanismo reporta exito sin el efecto".
+3. **El texto del propio protocolo.** `AGENTS.md` y las DECISIONes contienen reglas que ningun gate
+   ejecuta -- la memoria dorada, la narracion minima. Por esta misma tesis son
+   declaradas-no-exigidas. **Queda FUERA de alcance en esta decision**, y se declara como tal.
+4. **Mecanismos que pasan porque nunca disparan.** Guards con ventana, caducidades, techos de
+   reintento: uno que jamas se activa es indistinguible de uno que funciona.
+5. **El estado de reintento no reconciliado** (13 entradas huerfanas apuntando a mensajes archivados
+   o inexistentes). Era la ocurrencia 9 de la iteracion 1; **no la sostiene ninguna regla de las
+   propuestas**, asi que sale de la evidencia y queda aqui como instancia sin regla.
+
+## Lo que se retiro, y por que
+
+**La ocurrencia 11 (TASK-0334) no pertenece al patron.** El cambio ACTUO, y bien, en los dos
+consumidores; el defecto era que querian cosas opuestas. Eso es acoplamiento y requisitos, no
+confundir existir con actuar. Se conserva como leccion bajo G5, no como instancia. Y su contrato
+fija consumidores CONOCIDOS sin cuantificar sobre la clase: **esa parte sigue abierta**.
 
 ## Pendiente antes de proponer formalmente
 
-Que el Analista revise este borrador como cualquier otro artefacto. Catorce ocurrencias medidas son
-una base solida, pero la generalizacion a regla es mia y merece la misma capa de verificacion
-adversarial que exijo al resto.
-
-Y hay un motivo concreto, no ceremonial: la ocurrencia 10 demuestra que **yo enuncie el principio en
-este mismo documento y a continuacion lo incumpli** al validar 0330 comprobando existencia en vez de
-efecto. Un borrador escrito por quien acaba de tropezar con su propia regla necesita que lo lea
-alguien que no la escribio.
+1. Re-juicio del checker sobre esta iteracion 2.
+2. **TASK-0341** debe cerrar antes de que D1 se pueda proponer con su predicado: hoy el certificador
+   del que D1 depende es ciego a la frontera muerta y fragil al reformateo.
+3. Decidir con el operador si la guia G1-G7 se publica como tal o entra en la plantilla de veredicto
+   del checker.
