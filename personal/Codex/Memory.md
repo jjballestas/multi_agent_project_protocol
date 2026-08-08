@@ -1,6 +1,17 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0329 remediation iteration 1 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
+
+## 2026-08-08 - TASK-0325, TASK-0334, and TASK-0335 closure
+
+- Commit `26cd5ec6` atomically moves TASK-0325, TASK-0334, and TASK-0335 from
+  `review_approved` to `done` after independent checker approval and Arquitecto ratification.
+- Runtime transaction sequence 7924-7928 acquired one scoped Codex claim, applied three status
+  flips with distinct idempotency keys, and released the claim in the same transaction. Runtime
+  drift is false at sequence 7928.
+- Before the commit, collaboration validation, encoding, domain-neutrality, and diff checks all
+  exited 0. Codex performed the capability-gated implementer flips and did not review or ratify
+  its own work.
 
 ## 2026-08-08 - TASK-0329 remediation iteration 1 implementation
 
