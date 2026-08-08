@@ -13,8 +13,11 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0336 remediation iteration 1 implem
   checks and declares trigger-filter, working-directory, and YAML 1.1 scalar residuals.
 - The permanent negative now has 20 boundaries; the live checker reports 8/8 runners and 53/53
   contracts under the bounded static claim. Collaboration, encoding, neutrality, compile, drift,
-  and task-specific gates passed before commit. TASK-0336 remains `in_progress` pending exact-commit
-  verification and governed delivery; Codex has not reviewed or ratified the remediation.
+  and task-specific gates passed before commit and in a detached clean clone of `a69207a4`.
+- Delivery commit `916e7338` moves TASK-0336 to `in_review`, releases the remediation claim, and
+  publishes the self-contained handoff plus Arquitecto routing request. The handoff records the
+  concurrent scoped task-file staging collision in Arquitecto commit `a6dc0c6e`. Codex has not
+  reviewed or ratified the remediation.
 
 ## 2026-08-08 - TASK-0334 remediation iteration 1 implementation
 
