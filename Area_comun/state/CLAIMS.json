@@ -136,6 +136,25 @@
             "updated_at": "2026-08-08T18:18:55Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260808-0327-adj2",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0327-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0327-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327-r2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0327-adj2"
+            ],
+            "started_at": "2026-08-08T19:05:47Z",
+            "status": "released",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-08T19:05:47Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260808-0346",
             "expires_at": "2026-08-09T23:59:00Z",
             "owner": "Arquitecto",
