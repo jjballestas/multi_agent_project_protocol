@@ -5740,3 +5740,15 @@ ratified its own work.
   their six parity tests pass. Collaboration, encoding, neutrality, drift, compile, parser, and diff
   gates exited 0 before commit. TASK-0331 remains `in_progress` pending exact-commit clean-clone
   verification and governed delivery; Codex has not reviewed or ratified the implementation.
+
+## 2026-08-08 - TASK-0331 remediation iteration 4 delivery
+
+- Exact implementation commit `e9719613` passed the 28/28 harness, 57/57 falsification inventory,
+  six neutrality parity tests, collaboration, encoding, both neutrality scanners, compile, and diff
+  gates in clean clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0331r4-e9719613` with
+  empty Git status.
+- Delivery commit `ed8ca21a` moves TASK-0331 to `in_review`, releases every Codex claim, and publishes
+  `MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediacion-4.md` with the table semantics,
+  explicit unknown-owner residual, and exact review evidence.
+- Independent Analista re-review of `e9719613` is required before any closure. Codex remains maker
+  only and did not review or ratify the remediation.
