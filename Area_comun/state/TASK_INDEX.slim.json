@@ -48,12 +48,6 @@
             "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
         },
         {
-            "id": "TASK-0334",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub"
-        },
-        {
             "id": "TASK-0335",
             "owner": "Codex",
             "status": "in_review",
