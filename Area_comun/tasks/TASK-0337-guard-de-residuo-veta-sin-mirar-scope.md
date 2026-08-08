@@ -7,7 +7,7 @@ type: implementation
 file: Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md
 created: 2026-08-08
 intake:
-  type: implementation
+  type: fix
   goal: >
     El guard pre-exec de residuo decide sobre la suciedad del arbol COMPLETO, no sobre si las rutas
     sucias intersectan lo que el mensaje diferido necesita. Es el mismo defecto de ceguera de scope

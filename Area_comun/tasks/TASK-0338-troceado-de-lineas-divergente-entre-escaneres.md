@@ -7,7 +7,7 @@ type: implementation
 file: Area_comun/tasks/TASK-0338-troceado-de-lineas-divergente-entre-escaneres.md
 created: 2026-08-08
 intake:
-  type: implementation
+  type: fix
   goal: >
     SLIP-2 del veredicto r2 de TASK-0329. El escaner Python trocea con `str.splitlines()`, que
     rompe tambien en form feed, tabulador vertical, NEL y U+2028; el gemelo PowerShell trocea con

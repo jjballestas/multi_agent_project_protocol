@@ -299,6 +299,21 @@
             "updated_at": "2026-08-08T08:36:09Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260808-0340-promover",
+            "expires_at": "2026-08-08T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0340",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0340",
+                "Area_comun/tasks/TASK-0340-el-validador-canonico-lleva-seis-dias-crashing-en-CI.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260808-0340-promover"
+            ],
+            "started_at": "2026-08-08T10:01:09Z",
+            "status": "released",
+            "task_id": "TASK-0340",
+            "updated_at": "2026-08-08T10:01:09Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260808-0340-registro",
             "expires_at": "2026-08-08T23:59:00Z",
             "owner": "Arquitecto",

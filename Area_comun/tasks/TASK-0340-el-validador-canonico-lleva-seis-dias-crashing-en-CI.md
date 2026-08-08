@@ -1,13 +1,13 @@
 ---
 id: TASK-0340
 title: El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0340-el-validador-canonico-lleva-seis-dias-crashing-en-CI.md
 created: 2026-08-08
 intake:
-  type: implementation
+  type: fix
   goal: >
     El job `validate` de CI lleva rojo desde el 2026-08-02 como minimo -- 300 runs consecutivos sin
     un solo verde. Causa medida: `runtime/eventlog.py:401` importa `InvalidSignature` DENTRO de un

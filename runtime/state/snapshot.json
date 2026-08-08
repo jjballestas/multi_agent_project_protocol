@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "7072f90879307ea9e3f15bc03890ca0fce00beee3b5769295e7b24fb5b7e2724",
+  "canonical_hash": "c81a53a2a7d76423e5d03c2a60f29bc71900029e73daaa62a73c53ee34223bf8",
   "integrity": {
-    "canonical_hash": "7072f90879307ea9e3f15bc03890ca0fce00beee3b5769295e7b24fb5b7e2724",
+    "canonical_hash": "c81a53a2a7d76423e5d03c2a60f29bc71900029e73daaa62a73c53ee34223bf8",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "4a167ae5db8232cfda4df93a27e6885c5da4494dc4ece003666b9bbba346e151",
-    "signature": "1cc837da371a8bb66f70447d7f3f7bb8cd3a1af497566e37273e0e2855a1f381",
-    "up_to_seq": 7957
+    "prev_hash": "fdd632282c0d8e18574b26cbb7c68f8b4c6b5b236bdfdf1aa1a41caa7573c0b1",
+    "signature": "8e301f5cd3ed5b864256c826542a005d37ce886e11f3a8b349a37da6546a5202",
+    "up_to_seq": 7960
   },
   "state": {
     "aggregate_versions": {
@@ -1011,6 +1011,7 @@
       "CLAIM-arq-20260808-0336-devolver-a-progreso": 1,
       "CLAIM-arq-20260808-0337-registro": 1,
       "CLAIM-arq-20260808-0338-0339-registro": 1,
+      "CLAIM-arq-20260808-0340-promover": 1,
       "CLAIM-arq-20260808-0340-registro": 1,
       "CLAIM-arq-20260808-ratifica-0325": 1,
       "CLAIM-arq-20260808-ratifica-0334": 1,
@@ -3232,7 +3233,7 @@
       "TASK-0337": 2,
       "TASK-0338": 2,
       "TASK-0339": 1,
-      "TASK-0340": 2,
+      "TASK-0340": 4,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3255,7 +3256,7 @@
       "protocol-prune": 53,
       "protocol-state": 1
     },
-    "events_applied": 7286,
+    "events_applied": 7289,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3423,6 +3424,9 @@
       "arq-340-000": 7955,
       "arq-340-001": 7956,
       "arq-340-099": 7957,
+      "arq-340p-000": 7958,
+      "arq-340p-001": 7959,
+      "arq-340p-099": 7960,
       "arq-cierre-20260807T0310Z-c0": 7327,
       "arq-cierre-20260807T0310Z-r5": 7332,
       "arq-cierre-20260807T0310Z-s1": 7328,
@@ -10545,5 +10549,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7957
+  "up_to_seq": 7960
 }

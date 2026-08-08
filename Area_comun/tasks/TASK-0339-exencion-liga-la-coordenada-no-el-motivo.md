@@ -7,7 +7,7 @@ type: implementation
 file: Area_comun/tasks/TASK-0339-exencion-liga-la-coordenada-no-el-motivo.md
 created: 2026-08-08
 intake:
-  type: implementation
+  type: fix
   goal: >
     SLIP-4 del veredicto r2 de TASK-0329. La exencion declara ruta, linea y termino mas un campo
     de motivo en prosa, pero el contrato solo comprueba que en esa coordenada OCURRA el termino;
