@@ -16,6 +16,14 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0325/TASK-0334/TASK-0335 closed.
 - TASK-0332 remains `in_progress` under active claim
   `CLAIM-20260808-Codex-TASK-0332-v2`; clean-clone mutation and repository gates remain before
   delivery.
+- Delivery commit `54a7b867b941359d7fa2cc69781a5d6aee94468d` moves TASK-0332 to
+  `in_review`, releases all Codex claims, and publishes the handoff plus mailbox routing request.
+- Exact implementation commit gates: 71 memory tests; 58/58 falsification inventory; five directed
+  legacy contracts; collaboration, encoding, neutrality, drift, compile, and production diff all
+  exit 0 in detached clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0332-4205d04d`.
+- Direct production-mutant clones make the new targeted negative exit 1 for restructuring, external
+  iterable filtering, and falsy early return. Independent Analista review is required; Codex did
+  not review or ratify the result.
 
 ## 2026-08-08 - TASK-0336 remediation iteration 3 implementation
 
