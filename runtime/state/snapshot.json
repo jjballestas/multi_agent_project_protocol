@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9b8f9796f70840fcc5f3e47dd5275745c07d46e29246430d01302e9585142467",
+  "canonical_hash": "a2989730ec77012e72741311dbe0755c6161f1bd76cfdd7adda0edaead22d728",
   "integrity": {
-    "canonical_hash": "9b8f9796f70840fcc5f3e47dd5275745c07d46e29246430d01302e9585142467",
+    "canonical_hash": "a2989730ec77012e72741311dbe0755c6161f1bd76cfdd7adda0edaead22d728",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "53a6f8c997751bb7dbd398b3528aa3ca5255b3fbcac60969c20ecf48b19a0492",
-    "signature": "cbb69324f83b9c982496a0f687a901839085ed5bd47380d8135f15ec985e07ec",
-    "up_to_seq": 8015
+    "prev_hash": "171dd2bdd5331d47197737bc052ead78c9bc85a49510a4082a36435ec4b114fe",
+    "signature": "ebd86687f8d721d7d28de0e60b7b1eb87defd59d5594c0ee3907820abba62473",
+    "up_to_seq": 8016
   },
   "state": {
     "aggregate_versions": {
@@ -3245,7 +3245,7 @@
       "TASK-0326": 13,
       "TASK-0327": 20,
       "TASK-0328": 8,
-      "TASK-0329": 17,
+      "TASK-0329": 18,
       "TASK-0330": 44,
       "TASK-0331": 43,
       "TASK-0332": 14,
@@ -3280,7 +3280,7 @@
       "protocol-prune": 54,
       "protocol-state": 1
     },
-    "events_applied": 7344,
+    "events_applied": 7345,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7051,6 +7051,7 @@
       "codex:task0329:remediation1:in-progress-to-in-review:20260808T064800Z": 7881,
       "codex:task0329:remediation1:work-claim-release:20260808T064800Z": 7882,
       "codex:task0329:remediation2:claim-acquire:20260808T134145Z": 8015,
+      "codex:task0329:remediation2:memory-claim:20260808T135019Z": 8016,
       "codex:task0330:acquire-delivery:20260807T141300Z": 7545,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
@@ -10628,5 +10629,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8015
+  "up_to_seq": 8016
 }

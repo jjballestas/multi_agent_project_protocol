@@ -2,6 +2,23 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 
+## 2026-08-08 - TASK-0329 remediation iteration 2 implementation
+
+- Commit `ec15f9f5` replaces the fixed-indentation PowerShell inventory parser and seven-file
+  fixture with an effective-behavior parity matrix built from every identity-eligible file in
+  the real scanned tree plus an unseen route.
+- Every configured identity is injected at every eligible route; both production scanners must
+  return the complete expected finding set, not merely equal each other. PowerShell-only SLIP-1
+  mutants with a two-space key and an assignment outside the declaration block both diverge and
+  are killed.
+- A symmetric Python-plus-PowerShell dead-code mutant for the unseen route still returns equal
+  scanner verdicts but fails the complete expected-set assertion, so the new contract also kills
+  measured SLIP-3 on all current eligible routes plus the unseen-route sentinel.
+- Before commit, the five-test scanner suite, 59/59 falsification inventory, both neutrality
+  scanners, collaboration validation, encoding, compile, and diff gates exited 0. Exact-commit
+  clean-clone verification and governed delivery remain pending; Codex has not reviewed or
+  ratified the remediation.
+
 ## 2026-08-08 - TASK-0328 structural account identifier implementation
 
 - Commit `041e788a` replaces contiguous-only detection with a separator-agnostic
