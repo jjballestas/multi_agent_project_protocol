@@ -14,8 +14,12 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
   TASK-0322 residual R3. Production remains byte-identical.
 - The full 72-test memory suite, 59/59 inventory and static wiring, guardian, collaboration,
   encoding, both neutrality scanners, neutrality tests, compile, drift, and diff gates exited 0.
-  TASK-0332 remains `in_progress` under the remediation claim pending exact-commit clean-clone
-  verification and governed delivery.
+  Exact implementation commit `3a5cc335` passed the same gates in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0332r1-3a5cc335` with empty status.
+- Governed delivery commit `9e5abeca` moves TASK-0332 to `in_review`, releases both Codex claims,
+  and publishes the self-contained remediation handoff plus Arquitecto routing request. Runtime
+  drift is false through sequence 8044. Independent Analista re-review remains required; Codex has
+  not reviewed or ratified the remediation.
 
 ## 2026-08-08 - TASK-0331 remediation iteration 5 implementation
 
