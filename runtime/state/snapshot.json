@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "1bde06a0849b2f823a53468bd7c741145d2a8ee8b43cb3b4c72a9e4be97566b2",
+  "canonical_hash": "a2e719796e44036b5efcada490f7e8e3c79a27d97784900ff2a255850355206d",
   "integrity": {
-    "canonical_hash": "1bde06a0849b2f823a53468bd7c741145d2a8ee8b43cb3b4c72a9e4be97566b2",
+    "canonical_hash": "a2e719796e44036b5efcada490f7e8e3c79a27d97784900ff2a255850355206d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "06a5e73ab6070c90e4e184416d7f45914b0a1c9be47a85dbde37d2e7adacded3",
-    "signature": "e5ebda2d52bc1733baf6e80090a1687576fe9d6c7957728811ff29f55f937888",
-    "up_to_seq": 8173
+    "prev_hash": "0178d71aa54be2417ad42d6cec2874eaee5a4c64f113c0ca7720182c14040699",
+    "signature": "95eaf29893e540ec6c44a6f634331f13ae2090d1da09977cc4504043c2d3b297",
+    "up_to_seq": 8179
   },
   "state": {
     "aggregate_versions": {
@@ -1147,6 +1147,7 @@
       "CLAIM-arq-hygiene-20260808-lote52": 1,
       "CLAIM-arq-hygiene-20260808-lote53b": 1,
       "CLAIM-arq-hygiene-20260808-lote54": 1,
+      "CLAIM-arq-hygiene-20260808-lote55": 1,
       "CLAIM-arq-hygiene-doneflip-hold-20260728": 1,
       "CLAIM-arq-hygiene-milestone1-20260728": 1,
       "CLAIM-arq-hygiene-milestone2-20260728": 1,
@@ -2838,6 +2839,7 @@
       "MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0325-r3": 1,
       "MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0331-r4-verdict": 1,
       "MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0334": 1,
+      "MSG-20260808-Analista-to-Arquitecto-REVIEW-TASK-0342-verdict": 1,
       "MSG-20260808-Analista-to-Arquitecto-VERDICT-DECISION-0105": 1,
       "MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0327-r2": 1,
       "MSG-20260808-Analista-to-Arquitecto-VERDICT-TASK-0328": 1,
@@ -2869,7 +2871,9 @@
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r2": 1,
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r3": 1,
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r4": 1,
+      "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0342": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0327-remediacion-1": 1,
+      "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0328-remediacion-1": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0329-remediacion-1": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0329-remediacion-2": 1,
       "MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0331-remediacion-2": 1,
@@ -2901,6 +2905,7 @@
       "MSG-20260808-Codex-to-Arquitecto-ACTION-TASK-0340-mailbox-status-blocker": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0327-remediacion-1": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328": 1,
+      "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-1": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediacion-1": 1,
       "MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediacion-2": 1,
@@ -3011,7 +3016,7 @@
       "OPS-MAILBOX-HYGIENE-20260729F3": 1,
       "OPS-MAILBOX-HYGIENE-20260806": 11,
       "OPS-MAILBOX-HYGIENE-20260807": 22,
-      "OPS-MAILBOX-HYGIENE-20260808": 22,
+      "OPS-MAILBOX-HYGIENE-20260808": 23,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3326,7 +3331,7 @@
       "protocol-prune": 56,
       "protocol-state": 1
     },
-    "events_applied": 7502,
+    "events_applied": 7508,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3848,6 +3853,12 @@
       "arq-l54-006": 8151,
       "arq-l54-007": 8152,
       "arq-l54-099": 8153,
+      "arq-l55-000": 8174,
+      "arq-l55-001": 8175,
+      "arq-l55-002": 8176,
+      "arq-l55-003": 8177,
+      "arq-l55-004": 8178,
+      "arq-l55-099": 8179,
       "arq-r2-0": 7399,
       "arq-r2-1": 7400,
       "arq-r2-2": 7401,
@@ -10832,5 +10843,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8173
+  "up_to_seq": 8179
 }
