@@ -83,6 +83,12 @@
             "owner": "Codex",
             "status": "in_progress",
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows"
+        },
+        {
+            "id": "TASK-0343",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma"
         }
     ],
     "next_actions": [

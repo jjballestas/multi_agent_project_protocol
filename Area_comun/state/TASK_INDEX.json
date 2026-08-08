@@ -377,6 +377,16 @@
             "type": "implementation"
         },
         {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+            "id": "TASK-0343",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
