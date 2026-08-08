@@ -10,8 +10,9 @@ El checker falso la regla que cargaba el peso **usando el propio mecanismo que l
 desinflo el titular. Lo acepto entero. Los cambios grandes:
 
 - **R2 gana su cuarta palabra.** Declarado, ejecutado y exigido **no implica ASERTADO**.
-- **El recuento baja de "catorce ocurrencias" a OCHO TAREAS.** Cuatro filas eran la misma TASK-0330
-  y dos la misma TASK-0329. Cae la coletilla "en tareas sin relacion entre si", que era falsa.
+- **El recuento baja de "catorce ocurrencias" a SIETE TAREAS mas tres instancias transversales.**
+  Cuatro filas eran la misma TASK-0330 y dos la misma TASK-0329. Cae la coletilla "en tareas sin
+  relacion entre si", que era falsa.
 - **La ocurrencia 11 sale** y la 9 pasa a la seccion de huecos.
 - **El artefacto se PARTE**: DECISION para lo que tiene predicado binario; guia y plantilla de
   review para lo que no.
@@ -38,8 +39,9 @@ en `done` y el proceso vivo no lo tiene.
 
 ## La evidencia, recontada
 
-**Ocho tareas, tres manifestaciones.** El recuento por FILAS inflaba: cuatro filas eran TASK-0330 y
-dos eran TASK-0329.
+**Siete tareas nombradas mas tres instancias transversales -- despliegue, guard de residuo y CI --
+repartidas en tres manifestaciones.** El recuento por FILAS de la iteracion 1 inflaba: cuatro filas
+eran TASK-0330 y dos eran TASK-0329.
 
 | Tarea | Manif. | Que ataba, y que deberia atar |
 |-------|--------|-------------------------------|
