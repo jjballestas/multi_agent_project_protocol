@@ -1,6 +1,23 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0336 remediation iteration 1 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0331 remediation iteration 2 implementation committed.
+
+## 2026-08-08 - TASK-0331 remediation iteration 2 implementation
+
+- Commit `9def3214` makes orphan own leases converge on the first restart for the four required
+  states: reserved without a lock, truncated with a lock, empty with a lock, and reserved without
+  `reservation_deadline`; three consecutive recovery rounds remain clean.
+- Publication now creates the lock before the exclusive reservation lease, and cleanup deletes the
+  lease before the lock. Deadline parsing occurs only when a live process owns the lease.
+- The permanent negative applies the old lock/deadline/fail-only behavior and keeps all four leases
+  stuck, while the shipped behavior removes them. The full 26-test harness and repository gates
+  passed before commit.
+- The handoff now states the measured archive boundary: 228 of 1,033 messages recovered, while a
+  hot or archived task without `scope_routes` remains terminally deferred until manual rearm.
+- Commit `84fb6ac4` records the exact-commit clean-clone evidence and updated remediation-2 handoff.
+- Delivery commit `60022264` moves TASK-0331 to `in_review`, releases every Codex claim, and
+  publishes the self-contained remediation-2 handoff requesting independent final review.
+  Runtime drift is false through sequence 7829. Codex did not review or ratify the remediation.
 
 ## 2026-08-08 - TASK-0336 remediation iteration 1 implementation
 
