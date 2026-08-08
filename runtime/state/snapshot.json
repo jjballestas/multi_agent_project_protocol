@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "251a4c8f08c6bd6f41040f3ed0033fa6a6ede4cff1d88e0a4afaa218f02e3504",
+  "canonical_hash": "bcdefe59888ae994711f940cdda01cca40710fc84633f283b8af28d0aa54e067",
   "integrity": {
-    "canonical_hash": "251a4c8f08c6bd6f41040f3ed0033fa6a6ede4cff1d88e0a4afaa218f02e3504",
+    "canonical_hash": "bcdefe59888ae994711f940cdda01cca40710fc84633f283b8af28d0aa54e067",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "7d643fef16d61dfd2c7c8355b139dcf30e8eea90a32dbd27f6e147527f37cbba",
-    "signature": "e1aeed4d150962ddf2d22604177b6d66dad9e1c59f0042f197815793fa68245d",
-    "up_to_seq": 8033
+    "prev_hash": "689302d64c69345467f8a0ae37be01a61deba1c96caf0879369aaa64d7e1affb",
+    "signature": "f34fd9660cf6cc002e4c47641612c9db615ba01ee6a6486f18a1ed8ae41d4dc4",
+    "up_to_seq": 8035
   },
   "state": {
     "aggregate_versions": {
@@ -3251,7 +3251,7 @@
       "TASK-0328": 8,
       "TASK-0329": 23,
       "TASK-0330": 44,
-      "TASK-0331": 48,
+      "TASK-0331": 50,
       "TASK-0332": 14,
       "TASK-0333": 13,
       "TASK-0334": 21,
@@ -3284,7 +3284,7 @@
       "protocol-prune": 55,
       "protocol-state": 1
     },
-    "events_applied": 7362,
+    "events_applied": 7364,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7127,6 +7127,8 @@
       "codex:task0331:remediation5:claim-v2:20260808T141200Z": 8030,
       "codex:task0331:remediation5:claim-v3:20260808T142000Z": 8032,
       "codex:task0331:remediation5:claim:20260808T140725Z": 8029,
+      "codex:task0331:remediation5:memory-claim:20260808T142424Z": 8034,
+      "codex:task0331:remediation5:memory-release:20260808T142510Z": 8035,
       "codex:task0331:status-in-progress:20260807T112129Z": 7488,
       "codex:task0331:work-v2-release:20260807T114330Z": 7499,
       "codex:task0332:claim-v1-release:20260808T094600Z": 7954,
@@ -10650,5 +10652,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8033
+  "up_to_seq": 8035
 }

@@ -2,6 +2,23 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 
+## 2026-08-08 - TASK-0331 remediation iteration 5 implementation
+
+- Commit `a29e2cea` replaces the three-literal verdict count with behavioral coverage of the
+  real `Get-LeaseProcessState` branches: forced `Get-Process` failure, forced `StartTime`
+  failure, and a live PID with a mismatched start time. The checker M1/M2/M3 dead-code
+  mutants now diverge at their respective branch assertions.
+- The TASK-0284 pre-gate contract resolves the exec-lock evidence writer by its data effect
+  (`$LockPath`, `$MessageName`, and `process_start_time_utc`) and kills a mutant that moves
+  the intact writer call above the residue probe; helper renames no longer break the property.
+- Reaching the complete mailbox retry runner exposed Windows PowerShell rejecting
+  `File.Replace(..., $null)` on the overwrite path. Atomic replacement now uses a unique
+  backup and cleans both backup and temporary paths; the complete runner passes.
+- The 28-test exec-lease harness, 59/59 falsification inventory, all requested task and
+  repository gates, compile, drift, and diff checks exited 0 before commit. Exact-commit
+  detached-clone verification and governed delivery remain pending. Codex has not reviewed
+  or ratified the remediation.
+
 ## 2026-08-08 - TASK-0329 remediation iteration 2 implementation
 
 - Commit `ec15f9f5` replaces the fixed-indentation PowerShell inventory parser and seven-file

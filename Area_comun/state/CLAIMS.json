@@ -62,6 +62,22 @@
             "updated_at": "2026-08-08T14:07:25Z"
         },
         {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-5-memory",
+            "expires_at": "2026-08-08T17:24:24Z",
+            "notes": "Persist TASK-0331 remediation 5 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0331-remediation-5-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T14:24:24Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-08T14:24:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260808-Codex-TASK-0331-remediation-5-v2",
             "expires_at": "2026-08-08T20:12:00Z",
             "notes": "Remediation 5 corrected scope: behavioral liveness branch contracts, TASK-0284 resolved lock-write ordering contract, and task verification declaration.",
