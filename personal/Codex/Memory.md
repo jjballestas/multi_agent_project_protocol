@@ -17,8 +17,10 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 - The 28-test exec-lease harness, 59/59 falsification inventory, all requested task and
   repository gates, compile, drift, and diff checks exited 0 before commit. Exact-commit
   detached clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0331r5-a29e2cea-20260808T1426`
-  passed the same gates at `a29e2cea` with empty status. Governed delivery remains pending;
-  Codex has not reviewed or ratified the remediation.
+  passed the same gates at `a29e2cea` with empty status. Delivery commit `0ab07a0d` moves
+  TASK-0331 to `in_review`, releases every Codex claim, and publishes the updated handoff plus
+  Arquitecto routing request. Runtime drift is false through sequence 8039. Codex has not
+  reviewed or ratified the remediation.
 
 ## 2026-08-08 - TASK-0329 remediation iteration 2 implementation
 
