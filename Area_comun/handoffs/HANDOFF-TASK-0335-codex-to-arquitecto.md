@@ -5,6 +5,7 @@ status: in_review
 executive_summary: Commit dbe9a508 replaces positional retry-log matching with semantic field assertions and proves both no-terminal and wrong-cause mutations. Remediation restores the unrelated exact assertion, records eight additional measured reds plus one preventive hardening, and repairs the cross-task fixture regression exposed by TASK-0331; production remains untouched.
 artifacts:
   - path_or_commit: dbe9a50829c7aae5ef32273113823635b8901e47
+  - path_or_commit: e7eb39713ff119db4be866b7ec2d7dfb966a1d39
   - path_or_commit: examples/mailbox_retry_cases/run_mailbox_retry_cases.py
   - path_or_commit: Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md
 gates:
@@ -26,6 +27,10 @@ gates:
     result: PASS
 next_recommended: Route independent review to Analista; Codex must not review or ratify this maker delivery.
 risks: No known residual in the explored runner. Scope-aware admission remains protected by its existing permanent negatives; production code was not changed.
+
+Exact detached commit `e7eb39713ff119db4be866b7ec2d7dfb966a1d39` passed every gate listed
+above plus `python scripts/test_falsification_contracts.py`, `git diff --check`, and clean
+`git status --short` in the designated scratch clone.
 
 ## Remediation iteration 1
 

@@ -1,21 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260808-Codex-TASK-0335-cross0334-blocked-wip",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0335-cross0334-blocked-wip",
-                "Area_comun/state/TASK_INDEX.json#TASK-0335",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0335",
-                "Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0335-codex-to-arquitecto.md",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0335"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
