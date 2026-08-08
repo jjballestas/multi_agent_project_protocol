@@ -8580,3 +8580,61 @@ autor se los come sin saber si su forma es insegura o solo no esta en la plantil
 - `cp -r clone m2` SI funciona aqui (el clon con `--no-hardlinks` local es manejable); lo que se
   colgaba en 0332 era copiar el arbol con el `.git` de 7 GB.
 - Al commitear volvio a salir `PRUNE DUE: cold_start_tokens 20466 >= 20000`. Es del Arquitecto.
+
+## 2026-08-08 -- TASK-0328 r1: el identificador agrupado (CHANGE-REQUIRED)
+
+Ancla `041e788a`, clon limpio `D:/Aegis_Scratch/protocol/analista-0328/clone`, motor "antes"
+desde clon SEPARADO del padre `06bc025c` (comparar dos motores exige dos arboles, no un
+`git stash`). Cuatro gates AC6 exit 0 (suite 72 tests, 272.5s, OK).
+
+### La leccion transferible: ensanchar un patron lo puede ESTRECHAR
+
+El arreglo cambio `\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b` por un patron con separadores admitidos
+mas checksum mod-97. El checksum discrimina bien (1,055% de deslizamiento sobre 20.000 cadenas
+con la forma, contra 1/97 = 1,031% teorico; y `checksum -> True` y `checksum -> False` tumban
+los dos el runner, o sea que esta atado). El defecto no estaba en el checksum sino en **lo que
+se le entrega**: como el espacio es separador y `[A-Z0-9]` es cuerpo, las palabras corrientes
+son indistinguibles de bloques del identificador. `finditer` devuelve UN candidato avido que se
+traga la frase, y el checksum -- correctamente -- lo rechaza.
+
+    'transferir a ES9121000418450200051332 hoy'
+        candidato = 'ES9121000418450200051332 hoy'   viejo TRUE -> nuevo FALSE
+
+Es decir: un ensanchamiento produjo un ESCAPE NUEVO que el motor anterior no tenia. **Al revisar
+cualquier ensanchamiento de patron, medir SIEMPRE las dos direcciones**: no solo que casos
+nuevos entren, sino que ningun caso viejo salga. Aqui el maker midio una sola (0 marcadas
+nuevas) y el AC lo dejo pasar porque tambien estaba escrito en una sola direccion.
+
+### Probar el caso EMBEBIDO, no solo el aislado
+
+Las cinco presentaciones del test entregado eran cadenas **aisladas**; todas pasaban. La tercera
+linea del bloque de evidencia de la propia tarea era el caso embebido en prosa y seguia dando
+False despues del arreglo. Regla: **para todo detector que corre sobre texto escrito a mano,
+exigir en el negativo permanente al menos un caso con palabras a izquierda Y derecha**. Un test
+de tokens sueltos no falsa un detector de corpus.
+
+### Comprobar si otra guarda esta tapando el hueco (el rescate incidental)
+
+El AC4 declaraba "ni la contigua ni la agrupada entra en la banda telefonica de 9-15 digitos".
+Cierto para el fixture ES91 y falso para GB33 (14 digitos), NL91 (10), BE68 (14), NO93 (13):
+con el detector estructural desactivado esos cuatro siguen dando True **por el heuristico de
+telefono**. La frontera del contrato `(False, False) phone_only_results` certifica como general
+algo medido sobre el unico fixture donde la banda no dispara. **Cuando una declaracion sobre un
+rango numerico se apoya en UN ejemplo, muestrear el rango**: aqui bastaba probar diez IBAN de
+paises distintos, porque la longitud del identificador varia por pais y la banda es fija.
+
+### AC3 recontado: las cifras del maker se sostenian
+
+22.164 cadenas elegibles que recuento (declaraba 22.176, delta 12 de enumeracion), **10**
+candidatos brutos, **0** aceptados por el checksum, **0** marcadas. Reproducido al numero con
+`iter_source_paths` + `parse_frontmatter` + `value_list` sobre `ALLOWLIST_KEYS`. Decirlo
+explicito en el veredicto: un CHANGE-REQUIRED que no reconoce lo que si se sostiene se relee
+como un no global y provoca que la remediacion toque lo que estaba bien.
+
+### Operativa
+
+- El corpus completo tarda >2 min: lanzarlo en background y trabajar los otros focos mientras.
+- Los mutantes de un one-liner se construyen partiendo por el primer `:` de la firma
+  (`line.split(":")[0] + ": return True"`), sin tocar el resto del modulo.
+- `shutil.copytree(..., ignore=ignore_patterns(".git"))` para el banco de mutacion: copiar el
+  `.git` de 7 GB cuelga.
