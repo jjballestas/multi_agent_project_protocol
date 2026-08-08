@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import importlib.util
-import hashlib
 import json
 import re
 import shutil
@@ -45,15 +44,16 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY",
-        "negative": "The PowerShell gate must reject the same leak and must not restore a whole-file exemption.",
-        "mutation": ".replace(powershell_narrow_rule, powershell_whole_file_rule)",
+        "negative": "Real-tree identity probes must produce identical findings through both gates, including an unseen route.",
+        "mutation": "indented_source = source.replace(",
         "boundaries": (
-            "self.assertEqual(python_findings, powershell_findings)",
-            'self.assertIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", powershell.stdout)',
-            'self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)',
-            'self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)',
+            "self.assertEqual(expected_findings, python_findings)",
+            "self.assertEqual(expected_findings, powershell_findings)",
+            "self.assertNotEqual(python_findings, indented_findings)",
+            "self.assertNotEqual(python_findings, outside_findings)",
+            "self.assertNotEqual(expected_findings, symmetric_python_findings)",
         ),
-        "exercised_by": "test_powershell_whole_file_exemption_mutation_is_killed",
+        "exercised_by": "test_real_tree_identity_parity_rejects_single_scanner_exemptions",
     },
 )
 
@@ -126,9 +126,11 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
             raise RuntimeError("refusing to clean outside the designated scratch root")
         self._tempdir.cleanup()
 
-    def run_python_scanner(self) -> subprocess.CompletedProcess[str]:
+    def run_python_scanner(
+        self, scanner_path: Path = SCANNER_PATH, root: Path | None = None
+    ) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
-            [sys.executable, str(SCANNER_PATH), "--root", str(self.root)],
+            [sys.executable, str(scanner_path), "--root", str(root or self.root)],
             cwd=REPO_ROOT,
             text=True,
             capture_output=True,
@@ -136,13 +138,13 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         )
 
     def run_powershell_scanner(
-        self, scanner_path: Path = POWERSHELL_SCANNER_PATH
+        self, scanner_path: Path = POWERSHELL_SCANNER_PATH, root: Path | None = None
     ) -> subprocess.CompletedProcess[str]:
         executable = shutil.which("pwsh") or shutil.which("powershell")
         if not executable:
             self.skipTest("PowerShell is not installed")
         return subprocess.run(
-            [executable, "-NoProfile", "-File", str(scanner_path), "-Root", str(self.root)],
+            [executable, "-NoProfile", "-File", str(scanner_path), "-Root", str(root or self.root)],
             cwd=REPO_ROOT,
             text=True,
             capture_output=True,
@@ -251,89 +253,139 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)
         self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)
 
-    def test_powershell_whole_file_exemption_mutation_is_killed(self) -> None:
+    def test_real_tree_identity_parity_rejects_single_scanner_exemptions(self) -> None:
         """PERMANENT_NEGATIVE: NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY"""
-        provider_identity = "Code" + "x"
-        coordinator_identity = "Arqui" + "tecto"
-        harness = self.root / "scripts" / "harness" / "peer_mailbox_cron.ps1"
-        harness.parent.mkdir(parents=True)
-        harness.write_text(
-            "\n" * 8
-            + f'[ValidateSet("Auto", "Anthropic", "{provider_identity}")][string]$AgentProvider = "Auto",\n'
-            + f'$DefaultCoordinator = "{coordinator_identity}"\n',
-            encoding="utf-8",
+        scanner = load_scanner()
+        probe_root = self.scratch_root / "real-tree-probe"
+        probe_root.mkdir()
+        shutil.copy2(REPO_ROOT / "protocol.config.json", probe_root / "protocol.config.json")
+        config = scanner.load_config(REPO_ROOT)["domain_neutrality"]
+        scan_globs = scanner.append_required_patterns(
+            config["scan_globs"], scanner.REQUIRED_SCAN_GLOBS
         )
-        (self.root / "scripts" / "unlisted_probe.py").write_text(
-            f'DEFAULT_COORDINATOR = "{coordinator_identity}"\n', encoding="utf-8"
+        exempt_globs = scanner.append_required_patterns(
+            config["exempt_globs"], scanner.REQUIRED_EXEMPT_GLOBS
         )
+        configured_identities = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
+        probe_identity = "Code" + "x"
+        expected_findings: set[str] = set()
+        for source_path in scanner.iter_scanned_files(REPO_ROOT, scan_globs, exempt_globs):
+            relative_path = source_path.relative_to(REPO_ROOT).as_posix()
+            if not scanner.identity_scan_path(relative_path):
+                continue
+            target_path = probe_root / relative_path
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            lines = source_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
+            first_probe_line = len(lines) + 1
+            lines.extend(f'# real-tree parity probe: {term}' for term in configured_identities)
+            target_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+            for offset, probe_term in enumerate(configured_identities):
+                for matched_term in configured_identities:
+                    if re.search(
+                        rf"(?i)(?<!\w){re.escape(matched_term)}(?!\w)", probe_term
+                    ):
+                        expected_findings.add(
+                            f"{relative_path}:{first_probe_line + offset}: {matched_term}"
+                        )
 
-        python = self.run_python_scanner()
-        powershell = self.run_powershell_scanner()
+        unseen_relative_path = "scripts/remediation_slip1_probe.py"
+        unseen_path = probe_root / unseen_relative_path
+        unseen_lines = [probe_identity, *[term for term in configured_identities if term != probe_identity]]
+        unseen_path.write_text(
+            "".join(f'OWNER = "{term}"\n' for term in unseen_lines), encoding="utf-8"
+        )
+        for line_number, probe_term in enumerate(unseen_lines, start=1):
+            for matched_term in configured_identities:
+                if re.search(rf"(?i)(?<!\w){re.escape(matched_term)}(?!\w)", probe_term):
+                    expected_findings.add(
+                        f"{unseen_relative_path}:{line_number}: {matched_term}"
+                    )
+
+        python = subprocess.run(
+            [sys.executable, str(SCANNER_PATH), "--root", str(probe_root)],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        powershell = self.run_powershell_scanner(root=probe_root)
         self.assertEqual(python.returncode, 1, python.stdout + python.stderr)
         self.assertEqual(powershell.returncode, 1, powershell.stdout + powershell.stderr)
         python_findings = set(python.stdout.splitlines())
         powershell_findings = set(powershell.stdout.splitlines())
-        self.assertEqual(python_findings, powershell_findings)
-        self.assertIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", powershell.stdout)
+        self.assertEqual(expected_findings, python_findings)
+        self.assertEqual(expected_findings, powershell_findings)
 
         source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
-        powershell_narrow_rule = (
-            "if (Test-IdentityLiteralExempt -RelativePath $file.RelativePath "
-            "-LineNumber ($lineIndex + 1) -Term $scanTerm.Term) {"
+        digest = "57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93"
+        exemption = (
+            f'  "{unseen_relative_path}" = @{{\n'
+            '        Reason = "SLIP-1 indentation mutant."\n'
+            f'        Lines = @{{ 1 = @("{digest}") }}\n'
+            '    }\n'
         )
-        powershell_whole_file_rule = (
-            "if ($IdentityLiteralExemptions.ContainsKey($file.RelativePath)) {"
+        indented_source = source.replace(
+            "$IdentityLiteralExemptions = @{\n",
+            "$IdentityLiteralExemptions = @{\n" + exemption,
+            1,
         )
-        mutated_source = source.replace(powershell_narrow_rule, powershell_whole_file_rule)
-        self.assertNotEqual(source, mutated_source)
-        mutant_path = self.scratch_root / "scan_domain_neutrality_whole_file_mutant.ps1"
-        mutant_path.write_text(mutated_source, encoding="utf-8")
-        mutant = self.run_powershell_scanner(mutant_path)
-        self.assertNotIn(f"scripts/harness/peer_mailbox_cron.ps1:10: {coordinator_identity}", mutant.stdout)
-        self.assertIn(f"scripts/unlisted_probe.py:1: {coordinator_identity}", mutant.stdout)
+        self.assertNotEqual(source, indented_source)
+        indented_path = self.scratch_root / "scan_domain_neutrality_indented_mutant.ps1"
+        indented_path.write_text(indented_source, encoding="utf-8")
+        indented = self.run_powershell_scanner(indented_path, probe_root)
+        indented_findings = set(indented.stdout.splitlines())
+        self.assertNotEqual(python_findings, indented_findings)
+        self.assertNotIn(f"{unseen_relative_path}:1: {probe_identity}", indented_findings)
 
-    def test_identity_exemption_inventories_are_one_to_one_and_in_parity(self) -> None:
-        scanner = load_scanner()
-        powershell_source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
-        inventory_block = powershell_source.split("$IdentityLiteralExemptions = @{", 1)[1].split(
-            "$GenericIdentityTokens", 1
-        )[0]
-        powershell_inventory: dict[str, dict[int, tuple[str, ...]]] = {}
-        current_path: str | None = None
-        for line in inventory_block.splitlines():
-            path_match = re.match(r'^    "([^"]+)" = @\{$', line)
-            if path_match:
-                current_path = path_match.group(1)
-                powershell_inventory[current_path] = {}
-                continue
-            line_match = re.match(r'^            (\d+) = @\((.*)\)$', line)
-            if line_match and current_path:
-                hashes = tuple(re.findall(r'"([0-9a-f]{64})"', line_match.group(2)))
-                powershell_inventory[current_path][int(line_match.group(1))] = hashes
+        outside_assignment = (
+            f'$IdentityLiteralExemptions["{unseen_relative_path}"] = @{{\n'
+            '    Reason = "SLIP-1 outside-block mutant."\n'
+            f'    Lines = @{{ 1 = @("{digest}") }}\n'
+            '}\n'
+        )
+        outside_source = source.replace(
+            "$GenericIdentityTokens = @(", outside_assignment + "$GenericIdentityTokens = @(", 1
+        )
+        self.assertNotEqual(source, outside_source)
+        outside_path = self.scratch_root / "scan_domain_neutrality_outside_mutant.ps1"
+        outside_path.write_text(outside_source, encoding="utf-8")
+        outside = self.run_powershell_scanner(outside_path, probe_root)
+        outside_findings = set(outside.stdout.splitlines())
+        self.assertNotEqual(python_findings, outside_findings)
+        self.assertNotIn(f"{unseen_relative_path}:1: {probe_identity}", outside_findings)
 
-        python_inventory = {
-            path: {int(line): tuple(hashes) for line, hashes in declaration["lines"].items()}
-            for path, declaration in scanner.IDENTITY_LITERAL_EXEMPTIONS.items()
-        }
-        self.assertEqual(powershell_inventory, python_inventory)
-
-        configured_terms = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
-        terms_by_digest = {
-            hashlib.sha256(term.casefold().encode("utf-8")).hexdigest(): term
-            for term in configured_terms
-        }
-        declared_exemption_count = 0
-        for relative_path, lines in python_inventory.items():
-            source_lines = (REPO_ROOT / relative_path).read_text(encoding="utf-8-sig").splitlines()
-            for line_number, hashes in lines.items():
-                self.assertLessEqual(line_number, len(source_lines), relative_path)
-                source_line = source_lines[line_number - 1]
-                for digest in hashes:
-                    term = terms_by_digest[digest]
-                    matches = re.findall(rf"(?i)(?<!\w){re.escape(term)}(?!\w)", source_line)
-                    self.assertGreaterEqual(len(matches), 1, f"{relative_path}:{line_number}:{term}")
-                    declared_exemption_count += 1
-        self.assertEqual(declared_exemption_count, 91)
+        python_source = SCANNER_PATH.read_text(encoding="utf-8")
+        scan_loop_rule = "    for line_number, line in enumerate(text.splitlines(), start=1):\n"
+        symmetric_python_source = python_source.replace(
+            scan_loop_rule,
+            f'    if relative_path == "{unseen_relative_path}":\n'
+            + "        return []\n"
+            + scan_loop_rule,
+            1,
+        )
+        self.assertNotEqual(python_source, symmetric_python_source)
+        symmetric_python_path = self.scratch_root / "scan_domain_neutrality_symmetric_mutant.py"
+        symmetric_python_path.write_text(symmetric_python_source, encoding="utf-8")
+        symmetric_powershell_source = source.replace(
+            "foreach ($file in $files) {\n",
+            "foreach ($file in $files) {\n"
+            + f'    if ($file.RelativePath -eq "{unseen_relative_path}") {{ continue }}\n',
+            1,
+        )
+        self.assertNotEqual(source, symmetric_powershell_source)
+        symmetric_powershell_path = (
+            self.scratch_root / "scan_domain_neutrality_symmetric_mutant.ps1"
+        )
+        symmetric_powershell_path.write_text(symmetric_powershell_source, encoding="utf-8")
+        symmetric_python = self.run_python_scanner(symmetric_python_path, probe_root)
+        symmetric_powershell = self.run_powershell_scanner(symmetric_powershell_path, probe_root)
+        symmetric_python_findings = set(symmetric_python.stdout.splitlines())
+        symmetric_powershell_findings = set(symmetric_powershell.stdout.splitlines())
+        self.assertEqual(symmetric_python_findings, symmetric_powershell_findings)
+        self.assertNotEqual(expected_findings, symmetric_python_findings)
+        self.assertNotIn(
+            f"{unseen_relative_path}:1: {probe_identity}", symmetric_python_findings
+        )
 
     def test_powershell_scanner_matches_required_coverage_when_available(self) -> None:
         result = self.run_powershell_scanner()
