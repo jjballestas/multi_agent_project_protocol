@@ -7619,3 +7619,108 @@ contrato tiene teeth cuando invoca la funcion de entrada real, no cuando asevera
   en el propio PowerShell (`"src" + [char]92 + "target"`) antes de escribirlo como defecto.**
 - `check_falsification_contracts` y `validate_collaboration_state` aceptan `--root`, **no `-r`**:
   `-r .` sale EXIT=2 por argparse. No leer ese 2 como gate rojo.
+
+## TASK-0335 re-juicio remediacion 1 (2026-08-08, commit 95dea841): OK-CLOSABLE
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0335-inventarios-cruzados-verdict.md`. Ancla
+`e7eb3971` en clon limpio; runner identico byte a byte hasta HEAD. Todos los gates EXIT 0, drift
+CLEAN. Primera vez que cierro una remediacion en la iteracion 1 de 2.
+
+### La leccion central: para juzgar un INVENTARIO, recomponlo; para juzgar una FAMILIA, rompela
+
+El Arquitecto me pidio completitud, no reparacion. Dos tecnicas distintas, y la segunda es la que
+de verdad contesta:
+
+- **Recomponer el inventario.** No lei la tabla del handoff: instrumente `run()` para interceptar
+  toda invocacion del harness y leer su log de admision. Salieron **14 ejecuciones, 6 raices, 9
+  familias, exactamente 1 `message_scope_ambiguous`** -- las cuatro cifras declaradas, medidas por
+  separado. Cuando las cifras coinciden una a una, la tabla deja de ser una afirmacion y pasa a ser
+  un hecho.
+- **Romper la familia.** Que los casos rotos esten arreglados no cierra nada. Inyecte al harness
+  una funcion NUEVA (`Get-AnalistaInjectedDep`) llamada desde las ocho raices extraidas -- la forma
+  exacta del refactor de TASK-0334 que abrio la grieta -- y el runner siguio EXIT 0. **Control de
+  no-vacuidad obligatorio**: con un extractor al que le quito esa definicion, EXIT 1 en la primera
+  sonda. Sin ese segundo run, el primero no prueba nada.
+- **Corroboracion gratis que casi me pierdo:** el runner es byte a byte el mismo, asi que correrlo
+  contra el harness de HEAD (que ya lleva la remediacion de produccion de 0334, `6c0a645b`) es un
+  refactor REAL posterior a la entrega. Verde. Cuando el arbol vivo ya contiene un cambio ajeno
+  posterior, ese cambio es un experimento natural: usarlo antes de fabricar mutantes.
+
+### Trampa: la funcion de PowerShell definida al FINAL del script no existe cuando corre el bucle
+
+Mi primera inyeccion puso `function Get-AnalistaInjectedDep {...}` al final del `.ps1` y el runner
+murio con "no se reconoce el nombre" -- pero rompiendo **produccion**, no las sondas. PowerShell
+define las funciones cuando la ejecucion llega a la linea; el bucle principal corre antes del final
+del fichero. **Inyectar SIEMPRE antes de la primera `^function` existente.** Un mutante que rompe
+por su propia construccion se lee como hallazgo y no lo es.
+
+### Cruce correcto para medir el radio de una regresion cruzada: sondas VIEJAS x harness NUEVO
+
+Medi primero las sondas de `dbe9a508` contra el harness de `dbe9a508` y me salieron 2 sitios con
+dependencias ausentes. Numero inutil: el cambio de 0334 al harness entro DESPUES del padre. El
+cruce correcto (sondas viejas x harness de `e7eb3971`) da **4**. Al medir el radio de una regresion
+cruzada, la variable vieja es el consumidor y la nueva es el proveedor; mezclar epocas da un radio
+falso en las dos direcciones.
+
+### Rojo medido vs endurecimiento preventivo: la distincion vale para SONDAS, no solo para casos
+
+Cuatro sondas ejecutables arrastraban dependencias ausentes, no tres. La cuarta,
+`run_torn_tail_case`, le faltaban **7 de sus 8** y solo se salvaba porque el ledger desgarrado
+retorna antes de tocarlas. Lo falsee **revirtiendo esa sola extraccion** a la tecnica per-name
+(monkeypatch del extractor filtrando por `roots`+`provided` del sitio concreto) y corriendo la suite
+entera: verde. Asi que no era rojo medido y la etiqueta correcta es preventivo -- el mismo
+vocabulario que fije en la vuelta anterior con `run_disordered_ledger_case`. **Un fix completo con
+una etiqueta corta es SUGGESTION, no CHANGE-REQUIRED**; el bloqueo de la vuelta anterior era un
+numero presentado como medido y una relajacion real, dos cosas distintas.
+
+### Falsar mi propio arreglo, no solo comprobar que esta puesto
+
+Mi punto de la igualdad exacta lo habia justificado con aritmetica de escape. Esta vez lo probe por
+comportamiento: parchee `run()` para que, tras el exec end-to-end, reescribiera el fichero gobernado
+destruyendo el frontmatter y dejando la ultima linea. `endswith` -> True (escapaba), `==` -> False y
+`AssertionError` en la 1593. **Un arreglo que pedi yo se verifica como cualquier otro: con el
+mutante que motivo el hallazgo.**
+
+### El extractor nuevo: ruidoso para la raiz, MUDO para la dependencia
+
+`extract_powershell_function_closure` revienta con `AssertionError` si falta una RAIZ, pero omite en
+silencio una dependencia que no sabe ver. Dos puntos ciegos que demostre y hoy no existen en el
+harness (53/53 funciones capturadas, 0 cuerpos truncados, 0 despacho dinamico):
+
+- funcion declarada con la llave en la LINEA SIGUIENTE -> no entra en el mapa de definiciones; el
+  cierre devuelve la llamada pero no la definicion;
+- dependencia despachada por variable (`& $script:Handler`) -> invisible al barrido textual.
+
+Las dos son latentes con la forma del torn-tail: solo se ven cuando el camino las alcanza. Patron
+general que ya he visto tres veces: **un mecanismo que falla ruidosamente en su entrada y
+silenciosamente en su interior deja la mitad silenciosa sin guardian.**
+
+### Necesidad de un fixture: probarla en las DOS escalas
+
+Que las seis raices necesitaran el indice archive lo probe (a) con una micro-sonda sobre
+`Get-TaskRowById` extraida del harness -- archive ausente o roto -> `NULL_UNRESOLVABLE`, vacio ->
+`RESOLVED`, porque `Read-JsonWithDeadline` devuelve `ok=true; value=$null` para un fichero que **no
+existe** y el consumidor corta ahi -- y (b) retirando una sola de las seis escrituras y corriendo el
+gate: EXIT 1 con `reason=message_scope_ambiguous`. La micro-sonda da el MECANISMO (generaliza a
+cualquier raiz), el gate da la CONSECUENCIA. Con solo una de las dos, el hallazgo es a medias.
+
+### Higiene: yo tambien dejo residuo en la raiz del arbol gobernado
+
+Encontre `probe.ps1` sin trackear en la RAIZ del repo, residuo de mi PROPIA re-review de TASK-0334
+(referenciaba `D:/Aegis_Scratch/hub/an334r2`). Viola DECISION-0104 y puede diferir el exec de un
+peer via el guard de residuo. Lo **movi** a scratch en vez de destruirlo y lo declare como mio en el
+veredicto. Comprobar el `git status` completo al arrancar no es solo para no pisar al peer: tambien
+para cazar lo mio de la sesion anterior.
+
+### Operativa
+
+- Clones a `D:/Aegis_Scratch/hub/t0335r2/{cc,par,head,mut,nec}`; `git clone --no-checkout` +
+  `checkout --detach`. `.git` esta hoy en 415 MB, asi que un clon local es barato otra vez.
+- Para reventar un solo sitio de un modulo sin editarlo: importar por `importlib.util`,
+  monkeypatchear la funcion y llamar a `m.main()` desde un driver en scratch. Deja el clon de
+  referencia intacto y permite filtrar por argumentos (`roots`/`provided`) el sitio exacto.
+- `runtime/protocol_replay.py` exige `--check-drift`; sin el sale EXIT 2 por argparse. No leerlo
+  como drift rojo.
+- Reemplazo de texto exacto en un fichero de 1615 lineas: fallo por indentacion y perdi un run
+  entero (el `replace` no casaba, count=0, y la suite corrio SIN mutar dando un verde enganoso).
+  **Afirmar el count del replace ANTES de correr**, o borrar por indices de linea localizados.
