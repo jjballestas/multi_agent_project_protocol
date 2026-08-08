@@ -7,7 +7,71 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
-## Ultima actualizacion 2026-08-08 (55) - TASK-0331 r5: CHANGE-REQUIRED (la frontera era correcta; el VEREDICTO que la alimenta no estaba atado)
+## Ultima actualizacion 2026-08-08 (56) - TASK-0327 r2: CHANGE-REQUIRED (el chequeo de propiedad enumera tres modulos y el motor tiene cinco)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327-r2`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `f732292a`, HEAD hub al revisar `7000b8ba` (luego `08f1f648`). Clon limpio
+  `D:/Aegis_Scratch/mapp/rev0327r2/cc`, banco de mutacion en clon SEPARADO `.../mut`. Veredicto
+  **CHANGE-REQUIRED** en `54a75bfd` (artifact
+  `Area_comun/artifacts/Analista-TASK-0327-quinto-portador-verdict.md`). Iteracion 2 de 2.
+
+### LECCION PRINCIPAL: sustituir nombres codificados por una PROPIEDAD deja dos enumeraciones nuevas -- contarlas
+
+En la iteracion 1 bloquee porque el test ataba DOS NOMBRES de funcion. El maker lo convirtio en un
+chequeo AST de propiedad (`domain_pii_default_violations`) -- avance real: sobrevive a metodo de
+clase, funcion anidada, `async def`, posicional-only y keyword-only. **Pero el chequeo nuevo se apoya
+en dos listas escritas a mano y por las dos entra el portador de manana:**
+
+    module_paths = (MODULE_PATH, DRIFT_MODULE_PATH, QUERY_MODULE_PATH)   # tres de CINCO
+    isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))            # falta ast.Lambda
+
+**Regla: al recibir una remediacion "por propiedad", buscar las enumeraciones que quedan DENTRO del
+chequeo (tipos de nodo, rutas, globs) y contar el universo real de cada una.** Aqui: `ls
+scripts/memory/*.py` = 5 modulos de produccion; el barrido cubre 3. `revive_pack.py` y
+`dump_memory_db.py` aceptan un `def ... domain_pii_terms=()` y `test_p01` sale exit 0.
+
+### El banco: barrer el ESPACIO DE COLOCACIONES, no un ejemplo
+
+13 mutantes de "quinto portador", cada uno gateado por el exit code de `test_p01`. 7 mueren
+(`def` top-level x3 modulos, metodo, anidada, posicional-only, `async def`); **4 sobreviven**:
+lambda en modulo cubierto, `def` en `revive_pack.py`, `def` en `dump_memory_db.py`, modulo nuevo.
+Mas 1 fuera de la letra (`**kwargs`+`setdefault`, default computado: reintroduce la propiedad danina
+sin declarar ningun default en el AST) y 1 que no es defecto (parametro renombrado).
+Sin el barrido habria firmado verde con el ejemplo `def` que el encargo sugeria.
+
+### Declarar la ATENUANTE cuando el hueco lo abrio MI PROPIA letra
+
+Los tres modulos son los que yo escribi en F2 de la iteracion 1. **La entrega cumple mi letra.**
+Bloquee por el proposito (la pregunta del encargo era si la CLASE queda cerrada) y lo escribi asi
+en el veredicto, mas el dato de que el arreglo cabe entero en `test_memory_db.py`, que si es ruta de
+alcance. Un bloqueante que pide mas de lo que pedi hay que justificarlo con eso a la vista.
+
+### Medir el LIMITE DEL DANO aunque juegue contra mi tesis
+
+Un portador por lambda que ciega una guarda YA EXISTENTE sigue muriendo por consecuencia:
+`test_p01` exit 0 pero `NEG-MEMORY-DOMAIN-PII-PUBLICATION` exit 1. Lo descubierto es solo la guarda
+NUEVA que ningun negativo ejercita. Ese experimento (N14) convierte "el gate esta roto" en "el gate
+esta roto exactamente aqui" y hace el bloqueante acotado y de cuatro lineas.
+
+### Verificar que el runner del chequeo SI corre en CI antes de darle credito
+
+`grep -rn test_memory_db .github/workflows/` -> `validate.yml:49`. Sin eso el chequeo de propiedad
+seria otro contrato declarado que CI no ejecuta (la clase de TASK-0330). Un solo grep, siempre.
+
+### Higiene del banco (repite la leccion 55)
+
+Clon limpio para MEDIR, clon separado para MUTAR; cada mutante hace `git checkout -- .`, borra
+`__pycache__` y afirma `git status --porcelain` vacio antes de correr. `git status --porcelain`
+verificado vacio tambien DESPUES de los cinco gates.
+
+### Detalle de git en arbol compartido
+
+Commitee con pathspec explicito y al ir a integrar `origin/main` (`08f1f648`, higiene del peer) el
+merge dijo "Already up to date": **el peer ya habia movido el HEAD del arbol compartido antes de mi
+commit**, asi que mi commit ya colgaba de el. Comprobar el PADRE real (`git log --format='%h %p'`)
+antes de asumir que hace falta rebase. `git rebase` esta ademas fuera del allowlist de permisos.
+
+## Antes 2026-08-08 (55) - TASK-0331 r5: CHANGE-REQUIRED (la frontera era correcta; el VEREDICTO que la alimenta no estaba atado)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r5`. **SIN PRODUCTO EN ALCANCE.**
 - Ancla `e9719613` (padre `a4a400e8`), HEAD hub al revisar `36931ef4`. Clon limpio
