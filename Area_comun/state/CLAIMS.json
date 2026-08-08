@@ -299,6 +299,22 @@
             "updated_at": "2026-08-08T13:35:17Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote49",
+            "expires_at": "2026-08-08T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0329-remediacion-2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0329-remediacion-2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediacion-2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediacion-2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote49"
+            ],
+            "started_at": "2026-08-08T14:05:43Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T14:05:43Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
