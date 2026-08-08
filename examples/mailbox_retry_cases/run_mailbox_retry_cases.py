@@ -1635,6 +1635,10 @@ def main() -> int:
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
         assert "RETRY_SCHEDULED attempt=3" in log
+        preserved_records = [
+            line for line in log.splitlines() if "ROLLBACK_LEDGER_PRESERVED" in line
+        ]
+        print(f"TASK0343_DIAG preserved_records={preserved_records!r}")
         assert "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=3 proof=disk" in log
         assert ("ROLLBACK_DEFER reason=ledger_unreadable_after_exec" in log or
                 "ROLLBACK_DEFER reason=rollback_probe_failed" in log)

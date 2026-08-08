@@ -99,7 +99,7 @@
             "id": "TASK-0343",
             "owner": "Codex",
             "phase": "P2",
-            "status": "ready",
+            "status": "in_progress",
             "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma"
         },
         {
