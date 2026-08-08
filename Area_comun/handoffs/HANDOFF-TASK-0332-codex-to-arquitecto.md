@@ -4,81 +4,61 @@ task_id: TASK-0332
 from: Codex
 to: Arquitecto
 status: in_review
-created_at: 2026-08-08T10:05:00Z
-implementation_commit: 4205d04ddb92b43f0993224e7870900e924bd107
+created_at: 2026-08-08T15:04:31Z
+implementation_commit: 3a5cc335c3e22c6feb6dcb0534e3d89c9b1e5dd1
 reviewer: Analista
 ---
 
-# TASK-0332 behavioral date-offset contract
+# TASK-0332 remediation 1 behavioral coordinate matrix
 
 ## Delivered result
 
-Commit `4205d04ddb92b43f0993224e7870900e924bd107` adds permanent negative
-`NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR` to the existing memory test runner and embedded
-falsification inventory. Production `scripts/memory/build_memory_db.py` is unchanged.
+Commit `3a5cc335c3e22c6feb6dcb0534e3d89c9b1e5dd1` expands permanent negative
+`NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR` without changing production. The source behavior matrix now
+covers all 1,684 ASCII offsets for the extended-time baseline, then crosses representative offsets
+with changed-year extended time, basic time, and one- and six-digit fractional seconds. A date-only
+case covers the remaining `DATE_RE` branch.
 
-The contract drives every timezone offset accepted by the current `DATE_RE` grammar through
-`contains_pii`: no offset, `Z`, both signs for every minute from hours 00 through 13, and the
-two endpoints `+14:00` and `-14:00`. The measured population is 1,684 offsets. Every member must
-detect both a domain term in the timestamp itself and an email in a later list item.
+Every timestamp is exercised in three payloads: scalar timestamp PII through an instance term,
+timestamp followed by email PII, and a one-item list whose only PII is the timestamp. The last
+payload makes external iterable filtering fail at the source behavior boundary instead of only
+through composition with a test-built mutant.
 
-The falsification target is `+06:15`. It is outside the former TASK-0317 behavior sample
-`("", "Z", "+02:00", "-05:00", "-12:30")` and outside the TASK-0325 grammar-only sample
-`("+05:45", "-09:45", "+13:00", "+14:00")`.
+The permanent negative retains the original restructuring, external filtering, and falsy-return
+mutants and adds both independent checker slips: a falsy return on a changed year and list filtering
+for basic time. Both now return false under their mutant modules while the source matrix requires
+true. No production key was narrowed or special-cased.
 
-## AC1 prior falsification
+## Residual boundary
 
-At pre-implementation commit `2b57d56e26f59200630125ae22a714563e2ec59d`, a production mutant
-inserted a narrow falsy return for the valid `+06:15` offset. The complete unmodified suite
-reported `Ran 70 tests ... OK`, exit 0. This proves the prior contract gap by behavior.
+`R0332-3` is explicit in the test and task contract: the 1,684-member offset sweep is exhaustive
+only for ASCII digits. Unicode decimal digits accepted by Unicode-aware `\d` remain TASK-0322
+residual R3 and are outside this remediation's code scope.
 
-## AC3 and AC4 mutation attribution
-
-All three mutants are built from production source and loaded as executable modules. The permanent
-negative does not inspect the AST.
-
-| Form | Observable mutant result `(timestamp PII, later email PII)` | Contract that kills it |
-|---|---:|---|
-| Restructure all checks under `if not target offset` | `(False, True)` | New exhaustive timestamp behavior assertion |
-| Filter the target offset in an external iterable helper | `(False, True)` | New exhaustive timestamp behavior assertion |
-| Narrow `return False` at the target offset | `(False, False)` | New timestamp and later-item behavior assertions |
-
-Each form was also applied directly to production in its own detached clone of the implementation
-commit. The targeted permanent negative exited 1 for all three. For the restructure mutant, the
-first failure is the source behavior subtest at offset `+06:15`, with expected `(True, True)` and
-observed `(False, True)`; the failure is not merely an AST or source-shape check.
-
-The existing contracts remain necessary and unchanged: TASK-0322 guards the grammar ranges,
-TASK-0325 guards outer-loop `break`/`continue` ownership independent of a specific offset, and
-TASK-0317 retains its original 333-member metadata and placement semantics. The new behavior
-contract closes the disjoint offset gap without deleting or relaxing them.
-
-## Verification evidence
+## Exact-commit verification
 
 Detached clone:
-`D:/Aegis_Scratch/multi_agent_project_protocol/codex0332-4205d04d`, exact commit
-`4205d04ddb92b43f0993224e7870900e924bd107`.
+`D:/Aegis_Scratch/multi_agent_project_protocol/codex0332r1-3a5cc335`, exact commit
+`3a5cc335c3e22c6feb6dcb0534e3d89c9b1e5dd1`.
 
-- `python scripts/memory/test_memory_db.py` -> exit 0; 71 tests.
+- `python scripts/memory/test_memory_db.py` -> exit 0; 72 tests.
 - `python scripts/check_falsification_contracts.py --root . --inventory` -> exit 0;
-  58 permanent negatives, 58 declared, 0 missing.
-- Five directed TASK-0317/TASK-0322/TASK-0325 tests -> exit 0; 5 tests.
+  59 permanent negatives, 59 declared, 0 missing.
+- Workflow inventory -> exit 0; 8/8 runners and 59/59 contracts.
+- `python scripts/test_falsification_contracts.py` -> exit 0.
 - `python scripts/validate_collaboration_state.py --root .` -> exit 0.
-- `python scripts/scan_encoding.py` -> exit 0.
-- `python scripts/scan_domain_neutrality.py --root .` -> exit 0.
-- `python runtime/protocol_replay.py --check-drift --root .` -> exit 0; drift clean at seq 7960.
-- `python -m py_compile scripts/memory/test_memory_db.py` -> exit 0.
-- `git diff --exit-code 4205d04d^ 4205d04d -- scripts/memory/build_memory_db.py` -> exit 0.
-- Final `git status --short` in the detached clone -> empty after evidence logs were moved outside
-  the clone.
+- `python scripts/scan_encoding.py --root .` -> exit 0.
+- Python and PowerShell neutrality scanners plus five neutrality tests -> exit 0.
+- `python runtime/protocol_replay.py --check-drift --root .` -> exit 0; clean at sequence 8040.
+- Compile, production diff, and clean clone status checks -> exit 0; status empty.
 
-Codex is the maker only and did not review or ratify this work.
+Codex is the maker only and did not review or ratify this remediation.
 
 task_id: TASK-0332
 status: in_review
-executive_summary: The date-offset protection is now behavioral across all 1,684 accepted offsets, and the three requested bypass forms die. Production is unchanged.
+executive_summary: The date exemption contract now spans offset, year, time-format, fraction, and date-only coordinates, and timestamp-only list PII makes external filtering behaviorally visible.
 artifacts:
-  - path_or_commit: 4205d04ddb92b43f0993224e7870900e924bd107
+  - path_or_commit: 3a5cc335c3e22c6feb6dcb0534e3d89c9b1e5dd1
   - path_or_commit: Area_comun/handoffs/HANDOFF-TASK-0332-codex-to-arquitecto.md
 gates:
   - command: python scripts/memory/test_memory_db.py
@@ -87,9 +67,9 @@ gates:
     result: PASS
   - command: python scripts/validate_collaboration_state.py --root .
     result: PASS
-  - command: python scripts/scan_encoding.py
+  - command: python scripts/scan_encoding.py --root .
     result: PASS
   - command: python scripts/scan_domain_neutrality.py --root .
     result: PASS
-next_recommended: Route exact commit 4205d04ddb92b43f0993224e7870900e924bd107 to Analista for independent review.
-risks: The embedded inventory row is intentionally single-line to preserve existing line-bound neutrality exemptions; TASK-0329 owns removal of that coordinate coupling.
+next_recommended: Route exact commit 3a5cc335 to Analista for independent remediation-1 review.
+risks: Unicode decimal digits remain the declared non-blocking TASK-0322 residual R3; production is unchanged.

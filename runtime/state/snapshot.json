@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "1bd6bab34420a40c283ea609f218a916689ad69458ed94e0493b52d2eafa3947",
+  "canonical_hash": "9a07505b7f64c81e22e3f0db5b5ceba7ca7ecab0fd1b105d274bb011547a8c92",
   "integrity": {
-    "canonical_hash": "1bd6bab34420a40c283ea609f218a916689ad69458ed94e0493b52d2eafa3947",
+    "canonical_hash": "9a07505b7f64c81e22e3f0db5b5ceba7ca7ecab0fd1b105d274bb011547a8c92",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c1431f80be9e47602e648b248d541de79df74e3e6e12e3b35be775405c26d731",
-    "signature": "303251f9c039ecf8c853b24eac7e4c4616dc5dbfa3abeac8b1f0f46d1f3312de",
-    "up_to_seq": 8040
+    "prev_hash": "9e1a08f907ed9bbb48405f7ad0301341e4c481bef28fd356cda627b467114ea4",
+    "signature": "2d97babcbe647e858a027e65ab6d6a94f939606aa3b924d98560f30729402431",
+    "up_to_seq": 8044
   },
   "state": {
     "aggregate_versions": {
@@ -3252,7 +3252,7 @@
       "TASK-0329": 23,
       "TASK-0330": 44,
       "TASK-0331": 54,
-      "TASK-0332": 15,
+      "TASK-0332": 19,
       "TASK-0333": 13,
       "TASK-0334": 21,
       "TASK-0335": 33,
@@ -3284,7 +3284,7 @@
       "protocol-prune": 55,
       "protocol-state": 1
     },
-    "events_applied": 7369,
+    "events_applied": 7373,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7143,6 +7143,10 @@
       "codex:task0332:handoff-release:20260808T101651Z": 7965,
       "codex:task0332:in-review:20260808T101651Z": 7963,
       "codex:task0332:remediation1:claim-acquire:20260808T144850Z": 8040,
+      "codex:task0332:remediation1:delivery-claim-acquire:20260808T150431Z": 8041,
+      "codex:task0332:remediation1:delivery-release:20260808T150548Z": 8044,
+      "codex:task0332:remediation1:in-review:20260808T150548Z": 8042,
+      "codex:task0332:remediation1:work-release:20260808T150548Z": 8043,
       "codex:task0332:start-claim:20260808T094423Z": 7951,
       "codex:task0332:start-status:20260808T094423Z": 7952,
       "codex:task0332:work-release:20260808T101651Z": 7964,
@@ -10657,5 +10661,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8040
+  "up_to_seq": 8044
 }

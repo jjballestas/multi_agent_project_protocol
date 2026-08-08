@@ -163,9 +163,31 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-08T14:48:50Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0332",
             "updated_at": "2026-08-08T14:48:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0332-remediation-1-delivery",
+            "expires_at": "2026-08-08T18:04:31Z",
+            "notes": "Publish TASK-0332 remediation 1 exact-commit evidence and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332-remediation-1-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0332-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0332",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0332",
+                "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0332-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0332-remediacion-1.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-08T15:04:31Z",
+            "status": "released",
+            "task_id": "TASK-0332",
+            "updated_at": "2026-08-08T15:04:31Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
