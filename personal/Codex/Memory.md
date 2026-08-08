@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0334 remediation iteration 1 implementation committed.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0336 remediation iteration 1 implementation committed.
+
+## 2026-08-08 - TASK-0336 remediation iteration 1 implementation
+
+- Commit `a69207a4` replaces nominal-shell trust with a conservative effective-block contract:
+  multiline bash is accepted only when the shell resolves from step/job/workflow defaults or a
+  Unix runner and every other executable line is an inert echo or undecorated Python process.
+- New load-bearing boundaries reject `set +e`, `trap ERR`, and job-level
+  `continue-on-error`, while accepting both job- and workflow-level `defaults.run.shell: bash`.
+- The affirmative execution claim is removed. `FALSIFICATION_STATIC_WIRING` names its five static
+  checks and declares trigger-filter, working-directory, and YAML 1.1 scalar residuals.
+- The permanent negative now has 20 boundaries; the live checker reports 8/8 runners and 53/53
+  contracts under the bounded static claim. Collaboration, encoding, neutrality, compile, drift,
+  and task-specific gates passed before commit. TASK-0336 remains `in_progress` pending exact-commit
+  verification and governed delivery; Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-08 - TASK-0334 remediation iteration 1 implementation
 
@@ -14,8 +28,9 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0334 remediation iteration 1 implem
   1.3220-second expanded status over 2,758 records, and a 1.0298-second parent-view disk proof of
   159,719 bytes. The 26-test harness and 53/53 falsification inventory passed.
 - R1 remains the embedded repository's own ignore blind spot; R2 remains phantom paths from a
-  partial `.git` marker. TASK-0334 is still `in_progress` pending governed delivery and independent
-  Analista re-review.
+  partial `.git` marker. Governed delivery commit `1b07b0fd` moves TASK-0334 to `in_review`, releases
+  every Codex claim, and publishes the self-contained handoff requesting independent Analista
+  re-review. Codex did not review or ratify the remediation.
 
 ## 2026-08-08 - TASK-0335 remediation iteration 1 implementation
 
