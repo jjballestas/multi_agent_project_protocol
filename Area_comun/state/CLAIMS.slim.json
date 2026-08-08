@@ -1,5 +1,19 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-3",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0336",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
+                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py"
+            ],
+            "task_id": "TASK-0336"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

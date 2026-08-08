@@ -112,3 +112,19 @@ El contrato permanente agrega las dos caras de la frontera: rechaza `echo before
 runner por las cuatro puertas de bash efectivo (paso, runner Unix, defaults del job y defaults del
 workflow), y sigue aceptando un comentario terminado en `\\` seguido del runner. La certificacion
 permanece acotada a cableado estatico; no se amplia ni se presenta como prueba de ejecucion.
+
+## Remediacion 3 - lista blanca de formas demostradas
+
+El gate deja de intentar enumerar adornos peligrosos y reconoce solo dos formas de comando: una
+invocacion unica y sin adornos del runner, o un bloque Bash con aborto garantizado compuesto por
+exactamente una invocacion del runner, `echo` inerte, procesos Python sin operadores, comentarios
+independientes y lineas en blanco. Todo lo demas se rechaza. En particular, ninguna linea
+ejecutable con continuacion Bash pertenece a la gramatica, por lo que un `#` fisico nunca puede
+empalmar el runner con el comando anterior. Un comentario independiente terminado en barra sigue
+siendo valido.
+
+El contrato conserva las 25 fronteras portantes y agrega rechazo por las cuatro fuentes de shell
+efectivo del empalme medido, rechazo de un comando multilinea no reconocido y aceptacion explicita
+de `if: always()`. Las formas legitimas requeridas siguen cubiertas: bloque Bash multilinea, shell
+en `defaults.run.shell` de job o workflow y el cableado actual. La certificacion afirma
+`recognized_step_form`, exactamente la region finita que controla la lista blanca.

@@ -103,26 +103,62 @@ def shell_guarantees_abort(
     return shell is None and isinstance(runs_on, str) and runs_on.startswith(("ubuntu-", "macos-"))
 
 
-def bash_block_preserves_abort(
-    lines: list[str], invocation: re.Pattern[str], safe_python: re.Pattern[str]
-) -> bool:
-    """Accept only block lines that cannot change or intercept bash failure handling."""
-    direct_invocations = [line for line in lines if invocation.fullmatch(line)]
-    if len(direct_invocations) != 1:
-        return False
-    safe_echo = re.compile(r"echo(?:\s+[A-Za-z0-9_./: -]+)?", re.IGNORECASE)
-    return all(
-        invocation.fullmatch(line) or safe_echo.fullmatch(line) or safe_python.fullmatch(line)
-        for line in lines
-    )
-
-
 def bash_line_continues(raw_line: str) -> bool:
     """Detect an executable Bash line whose final backslash consumes the next newline."""
     if not raw_line.strip() or raw_line.lstrip().startswith("#"):
         return False
     trailing_backslashes = len(raw_line) - len(raw_line.rstrip("\\"))
     return trailing_backslashes % 2 == 1
+
+
+def recognized_command_form(
+    command: str,
+    relative_path: Path,
+    workflow_defaults: dict[str, object],
+    job: dict[str, object],
+    step: dict[str, object],
+) -> str | None:
+    """Return the short, fail-closed command form proved by the static gate.
+
+    The whitelist has two members: one undecorated runner invocation, or one
+    aborting Bash block made only of a single runner invocation, inert ``echo``
+    commands, undecorated Python processes, blank lines, and standalone comments.
+    Any executable Bash line continuation is outside the grammar. This makes a
+    following physical comment incapable of splicing the runner into an earlier
+    command while preserving ordinary standalone comments (including ``# ... \\``).
+    """
+    path_parts = [re.escape(part) for part in relative_path.parts]
+    candidate = r"[\\/]".join(path_parts)
+    python = r"(?:python(?:3(?:\.\d+)*)?(?:\.exe)?|py(?:\.exe)?(?:\s+-3)?)"
+    invocation = re.compile(
+        rf"{python}\s+(?:{candidate}|\"{candidate}\"|'{candidate}')",
+        re.IGNORECASE,
+    )
+    safe_echo = re.compile(r"echo(?:\s+[A-Za-z0-9_./: -]+)?", re.IGNORECASE)
+    safe_python = re.compile(
+        rf"{python}\s+[A-Za-z0-9_./:=,-]+(?:\s+[A-Za-z0-9_./:=,-]+)*",
+        re.IGNORECASE,
+    )
+    physical_lines = command.splitlines()
+    executable_lines = [
+        line.strip()
+        for line in physical_lines
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    if len(executable_lines) == 1 and invocation.fullmatch(executable_lines[0]):
+        return "single_runner"
+    if not shell_guarantees_abort(workflow_defaults, job, step):
+        return None
+    if any(bash_line_continues(line) for line in physical_lines):
+        return None
+    if sum(bool(invocation.fullmatch(line)) for line in executable_lines) != 1:
+        return None
+    if all(
+        invocation.fullmatch(line) or safe_echo.fullmatch(line) or safe_python.fullmatch(line)
+        for line in executable_lines
+    ):
+        return "bash_abort_block"
+    return None
 
 
 def command_gates_runner(
@@ -132,44 +168,10 @@ def command_gates_runner(
     job: dict[str, object],
     step: dict[str, object],
 ) -> bool:
-    """Require one undecorated invocation, with a narrow safe multiline exception."""
-    candidate = re.escape(relative_path.as_posix())
-    python = r"(?:python(?:3(?:\.\d+)*)?(?:\.exe)?|py(?:\.exe)?(?:\s+-3)?)"
-    invocation = re.compile(
-        rf"{python}\s+(?:{candidate}|\"{candidate}\"|'{candidate}')",
-        re.IGNORECASE,
-    )
-    safe_python = re.compile(
-        rf"{python}\s+[A-Za-z0-9_./:=,-]+(?:\s+[A-Za-z0-9_./:=,-]+)*",
-        re.IGNORECASE,
-    )
-    physical_lines = command.splitlines()
-    continued_line_indexes = {
-        index + 1
-        for index, line in enumerate(physical_lines[:-1])
-        if bash_line_continues(line)
-    }
-    indexed_lines = [
-        (index, line.strip().replace("\\", "/"))
-        for index, line in enumerate(physical_lines)
-        if line.strip() and not line.lstrip().startswith("#")
-    ]
-    lines = [line for _, line in indexed_lines]
-    if any(
-        index in continued_line_indexes and invocation.fullmatch(line)
-        for index, line in indexed_lines
-    ):
-        return False
-    direct_invocations = [line for line in lines if invocation.fullmatch(line)]
-    if len(lines) == 1:
-        return len(direct_invocations) == 1
-    # GitHub's bash shell starts with ``-eo pipefail``.  The multiline exception is
-    # deliberately narrower than nominal shell selection: every other executable line
-    # must be an inert echo or an undecorated Python process, so the block cannot change
-    # parent-shell options, disable errexit, or intercept ERR.
-    return shell_guarantees_abort(workflow_defaults, job, step) and bash_block_preserves_abort(
-        lines, invocation, safe_python
-    )
+    """Accept only one of the two explicitly proved command forms."""
+    return recognized_command_form(
+        command, relative_path, workflow_defaults, job, step
+    ) is not None
 
 
 def condition_allows_execution(value: object) -> bool:
@@ -348,7 +350,7 @@ def main() -> int:
         print(
             "FALSIFICATION_STATIC_WIRING "
             f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)} "
-            "scope=trigger_keys+conditions+direct_invocation+shell_failure+job_failure "
+            "scope=trigger_keys+conditions+recognized_step_form+job_failure "
             "residuals=trigger_filters,working_directory,yaml_1_1_scalars"
         )
     print(

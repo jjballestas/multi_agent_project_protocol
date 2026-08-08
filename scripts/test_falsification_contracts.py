@@ -52,6 +52,12 @@ FALSIFICATION_CONTRACTS = (
             "assert multiline_continuation_job_bash.returncode != 0",
             "assert multiline_continuation_workflow_bash.returncode != 0",
             "assert multiline_comment_backslash.returncode == 0",
+            "assert multiline_splice_step_bash.returncode != 0",
+            "assert multiline_splice_ubuntu.returncode != 0",
+            "assert multiline_splice_job_bash.returncode != 0",
+            "assert multiline_splice_workflow_bash.returncode != 0",
+            "assert multiline_unknown_command.returncode != 0",
+            "assert current_step_always.returncode == 0",
             "assert \"FALSIFICATION_EXECUTION_GUARANTEED\" not in wired.stdout",
             "assert \"residuals=trigger_filters,working_directory,yaml_1_1_scalars\" in wired.stdout",
         ),
@@ -260,6 +266,74 @@ def main() -> int:
         )
         assert multiline_comment_backslash.returncode == 0, (
             multiline_comment_backslash.stdout + multiline_comment_backslash.stderr
+        )
+
+        splice_block = multiline.replace(
+            "          echo before\n",
+            "          echo before\\\n          #joined \\\n",
+            1,
+        ).replace("          echo after\n", "", 1)
+        multiline_splice_step_bash = mutated(
+            "multiline-splice-step-bash",
+            splice_block.replace(
+                "      - run: |\n", "      - shell: bash\n        run: |\n", 1
+            ),
+        )
+        assert multiline_splice_step_bash.returncode != 0, (
+            multiline_splice_step_bash.stdout + multiline_splice_step_bash.stderr
+        )
+
+        multiline_splice_ubuntu = mutated(
+            "multiline-splice-ubuntu",
+            splice_block.replace("runs-on: windows-latest", "runs-on: ubuntu-latest"),
+        )
+        assert multiline_splice_ubuntu.returncode != 0, (
+            multiline_splice_ubuntu.stdout + multiline_splice_ubuntu.stderr
+        )
+
+        multiline_splice_job_bash = mutated(
+            "multiline-splice-job-bash",
+            splice_block.replace(
+                "    runs-on: windows-latest\n",
+                "    runs-on: windows-latest\n    defaults:\n      run:\n        shell: bash\n",
+            ),
+        )
+        assert multiline_splice_job_bash.returncode != 0, (
+            multiline_splice_job_bash.stdout + multiline_splice_job_bash.stderr
+        )
+
+        multiline_splice_workflow_bash = mutated(
+            "multiline-splice-workflow-bash",
+            splice_block.replace(
+                "jobs:\n", "defaults:\n  run:\n    shell: bash\njobs:\n"
+            ),
+        )
+        assert multiline_splice_workflow_bash.returncode != 0, (
+            multiline_splice_workflow_bash.stdout
+            + multiline_splice_workflow_bash.stderr
+        )
+
+        multiline_unknown_command = mutated(
+            "multiline-unknown-command",
+            multiline.replace(
+                "      - run: |\n",
+                "      - shell: bash\n        run: |\n          printf before\n",
+                1,
+            ),
+        )
+        assert multiline_unknown_command.returncode != 0, (
+            multiline_unknown_command.stdout + multiline_unknown_command.stderr
+        )
+
+        current_step_always = mutated(
+            "current-step-always",
+            baseline.replace(
+                "      - run: python examples/orphan/run_orphan.py\n",
+                "      - if: always()\n        run: python examples/orphan/run_orphan.py\n",
+            ),
+        )
+        assert current_step_always.returncode == 0, (
+            current_step_always.stdout + current_step_always.stderr
         )
 
         step_if_false = mutated(
