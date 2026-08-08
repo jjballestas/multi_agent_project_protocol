@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "a2989730ec77012e72741311dbe0755c6161f1bd76cfdd7adda0edaead22d728",
+  "canonical_hash": "b4dcb8f7ba970b5c9653b9d5ad5c599af541bd1361ea8e652df70de5cdd8f318",
   "integrity": {
-    "canonical_hash": "a2989730ec77012e72741311dbe0755c6161f1bd76cfdd7adda0edaead22d728",
+    "canonical_hash": "b4dcb8f7ba970b5c9653b9d5ad5c599af541bd1361ea8e652df70de5cdd8f318",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "171dd2bdd5331d47197737bc052ead78c9bc85a49510a4082a36435ec4b114fe",
-    "signature": "ebd86687f8d721d7d28de0e60b7b1eb87defd59d5594c0ee3907820abba62473",
-    "up_to_seq": 8016
+    "prev_hash": "2d67f60851b32854da455e9f2d57d2c5f391612ccb093f187b54b28433a75e27",
+    "signature": "03863b1c3240c39d1a334991b7c2e3439a33939f83c88cd15f4229bae4f1f27e",
+    "up_to_seq": 8021
   },
   "state": {
     "aggregate_versions": {
@@ -3245,7 +3245,7 @@
       "TASK-0326": 13,
       "TASK-0327": 20,
       "TASK-0328": 8,
-      "TASK-0329": 18,
+      "TASK-0329": 23,
       "TASK-0330": 44,
       "TASK-0331": 43,
       "TASK-0332": 14,
@@ -3280,7 +3280,7 @@
       "protocol-prune": 54,
       "protocol-state": 1
     },
-    "events_applied": 7345,
+    "events_applied": 7350,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7051,7 +7051,12 @@
       "codex:task0329:remediation1:in-progress-to-in-review:20260808T064800Z": 7881,
       "codex:task0329:remediation1:work-claim-release:20260808T064800Z": 7882,
       "codex:task0329:remediation2:claim-acquire:20260808T134145Z": 8015,
+      "codex:task0329:remediation2:claim-release:20260808T135826Z": 8019,
+      "codex:task0329:remediation2:delivery-claim-release:20260808T135826Z": 8021,
+      "codex:task0329:remediation2:delivery-claim:20260808T135623Z": 8017,
+      "codex:task0329:remediation2:in-review:20260808T135826Z": 8018,
       "codex:task0329:remediation2:memory-claim:20260808T135019Z": 8016,
+      "codex:task0329:remediation2:memory-release:20260808T135826Z": 8020,
       "codex:task0330:acquire-delivery:20260807T141300Z": 7545,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
@@ -10629,5 +10634,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8016
+  "up_to_seq": 8021
 }

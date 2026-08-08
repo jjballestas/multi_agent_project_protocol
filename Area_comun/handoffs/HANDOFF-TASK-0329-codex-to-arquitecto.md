@@ -3,77 +3,74 @@ task_id: TASK-0329
 from: Codex
 to: Arquitecto
 status: in_review
-implementation_commit: bde1eddd5d577cef1e4a52fa3d5bd745bc79f3c4
-created_at: 2026-08-08T03:59:00Z
+implementation_commit: ec15f9f5613ded44f32c751c528252c5f56c51f5
+created_at: 2026-08-08T13:58:00Z
 ---
 
-# HANDOFF TASK-0329 remediation 1 - parity-scoped identity exemptions
+# HANDOFF TASK-0329 remediation 2 - effective scanner parity
 
 ## Result
 
-Commit `bde1eddd` closes the remaining whole-file bypass in the exported PowerShell scanner.
-Both neutrality implementations now bind every accepted occurrence to the same exact source
-path, line number, and case-normalized identity digest. A new identity on any other line in a
-formerly exempt file is a finding in both scanners.
+Commit `ec15f9f5` removes the fixed-indentation PowerShell inventory parser and the synthetic
+seven-file parity fixture. The replacement proves effective behavior over a copy of every
+identity-eligible file in the real scanned tree plus a new route absent from the tree.
 
-The inventory contained ten files at implementation time, not nine. All ten are declared
-with a reason:
+The matrix injects every configured identity at every eligible route. The expected finding set
+is computed independently from the configured terms and injected coordinates. Each production
+scanner must equal that complete set; equality between the scanners alone is insufficient.
+Consequently, a one-scanner exemption at any current eligible route or the unseen route fails
+the suite without depending on declaration indentation, declaration placement, or inventory
+text parsing.
 
-- `runtime/apply.py`: historical compatibility owner in fixture output;
-- `runtime/budget.py`: two historical independent-review annotations;
-- `runtime/context.py`: two pre-registry fallback-role lines;
-- `runtime/eventlog.py`: one legacy key fallback and two review annotations;
-- `runtime/ledger_ops.py`: one legacy command description;
-- `runtime/metrics.py`: one review annotation;
-- `runtime/router.py`: two pre-registry human-owner fallback lines;
-- `scripts/prune_state.py`: five historical writer-marker fixture lines;
-- `scripts/memory/test_memory_db.py`: exact multi-agent and memory-isolation fixture lines;
-- `scripts/harness/peer_mailbox_cron.ps1`: nine third-party provider CLI/path occurrences.
+Production scanner code and the 91 accepted path-line-term exemptions are unchanged. The closed
+review focusses B, C, and AC5 are therefore not reopened. SLIP-2 and SLIP-4 remain outside this
+remediation exactly as partitioned by Arquitecto.
 
-No identity, agent roster, runtime fallback, harness provider, or generated-memory exemption
-was changed. The exception declaration uses SHA-256 digests because spelling the configured
-identities inside the scanner would make the scanner flag its own declaration. Line movement
-fails closed and requires an explicit declaration update. The PowerShell inventory is
-independently declared but permanently compared with the Python inventory: ten files, 82 line
-entries, and 91 term-digest exemptions. Every declaration resolves to a live configured-identity
-occurrence in the current source.
+## Permanent mutation evidence
 
-## Permanent mutation contract
+`NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY` now exercises three mutation families against
+`scripts/remediation_slip1_probe.py`, a route not present in the old fixture:
 
-`NEG-NEUTRALITY-IDENTITY-EXEMPTION-SCOPE` retains the Python whole-file mutation control.
-The new `NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY` runs both scanners over the same controlled
-pair described by the task:
+- SLIP-1 indentation: a PowerShell-only exemption whose route key has two leading spaces is
+  accepted by PowerShell, makes its findings differ from Python, and is killed;
+- SLIP-1 placement: the same PowerShell-only exemption assigned after the declaration block
+  makes the findings differ and is killed;
+- SLIP-3 measured: matching early skips are injected into both scanners. Their findings remain
+  equal, but both omit the unseen probe and fail the complete expected-set assertion.
 
-- the existing third-party provider token at its declared line remains clean;
-- a coordinator identity injected on the next line in that formerly exempt file is found;
-- the same injection in a non-exempt script is found;
-- both scanners return the same finding set and the same nonzero verdict;
-- a PowerShell mutant replacing the narrow predicate with whole-file membership hides only the
-  formerly exempt-file injection and is killed by the declared assertions.
+The last result means the repaired contract kills the measured symmetric dead-code form on every
+current identity-eligible route plus the unseen sentinel. It does not claim to decide arbitrary
+program equivalence outside those observed scan surfaces.
 
-Both contracts are declared beside their permanent-negative markers. The existing CI step directly
-executes `scripts/test_scan_domain_neutrality.py`; the falsification checker reports 56/56
-contracts across 8/8 runners.
+The falsification registry reports 59/59 permanent negatives, including five load-bearing
+boundaries for this contract.
 
 ## Exact-commit verification
 
-Detached clean clone of exact commit `bde1eddd5d577cef1e4a52fa3d5bd745bc79f3c4` under the
-designated scratch root:
+Detached clean clone
+`D:/Aegis_Scratch/multi_agent_project_protocol/codex0329r2-ec15f9f5` at exact commit
+`ec15f9f5613ded44f32c751c528252c5f56c51f5`:
 
+- `python scripts/test_scan_domain_neutrality.py` -> exit 0, 5/5;
+- `python scripts/check_falsification_contracts.py --root .` -> exit 0, 59/59;
+- `python scripts/scan_domain_neutrality.py --root .` -> exit 0;
+- `powershell -NoProfile -File scripts/scan_domain_neutrality.ps1 -Root .` -> exit 0;
 - `python scripts/validate_collaboration_state.py --root .` -> exit 0;
 - `python scripts/scan_encoding.py --root .` -> exit 0;
-- `python scripts/scan_domain_neutrality.py --root .` -> exit 0;
-- `python scripts/test_scan_domain_neutrality.py` -> exit 0, 6/6;
-- `python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory` -> exit 0, 56/56 and 8/8;
-- `powershell -NoProfile -File scripts/scan_domain_neutrality.ps1 -Root .` -> exit 0;
 - Python compile and `git diff --check` -> exit 0;
 - clone status -> empty.
 
+Windows PowerShell 5.1 was measured locally. `pwsh` 7 was unavailable on this host; CI remains the
+declared `pwsh` 7 coverage surface on Ubuntu.
+
 ## Independent review focus
 
-1. Reproduce the provider-file/non-exempt control pair and compare both scanners' exact findings.
-2. Apply the PowerShell whole-file predicate mutant and confirm the parity negative kills it.
-3. Verify the two ten-file inventories are identical and all 91 declarations remain live.
-4. Confirm both production scanners return clean and remain copied by `scripts/new_instance.py`.
+1. Apply both requested SLIP-1 variants to the PowerShell scanner at the unseen probe route and
+   confirm the suite fails.
+2. Apply the symmetric early-skip mutant to both scanners and confirm expected-set completeness,
+   rather than scanner equality, fails.
+3. Confirm the production inventory and both scanner implementations are byte-identical to the
+   prior remediation except for the test contract.
+4. Re-run the exact-commit gates, including `pwsh` 7 when available.
 
-Codex is maker only and did not review or ratify this implementation.
+Codex is maker only and did not review or ratify this remediation.
