@@ -145,9 +145,61 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "run_unreadable_head_case",
     },
+    {
+        "id": "retry-ledger-preservation-property",
+        "negative": "rollback verification rejects ledger loss without requiring one log path",
+        "mutation": '"literal_log_path": lambda before, after, before_claims, after_claims, log:',
+        "boundaries": (
+            "assert all(actual == expected for _, actual, expected in property_results)",
+            "assert not survivors",
+        ),
+        "exercised_by": "run_rollback_ledger_preservation_property",
+    },
 )
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
 LEDGER_HEAD = ROOT / "scripts" / "ledger_head.py"
+
+
+def ledger_preservation_holds(
+    before_events: list[dict[str, object]],
+    after_events: list[dict[str, object]],
+    before_claims: dict[str, object],
+    after_claims: dict[str, object],
+) -> bool:
+    """Compare the governed ledger state itself, independent of rollback logging."""
+    return bool(before_events) and after_events == before_events and after_claims == before_claims
+
+
+def run_rollback_ledger_preservation_property() -> None:
+    """Ledger loss fails; preservation through a conservative defer still passes.
+    PERMANENT_NEGATIVE: retry-ledger-preservation-property
+    """
+    before = [{"seq": 41, "payload": {"intent_type": "claim"}}]
+    claims = {"seq": 41, "claims": []}
+    alternative_log = "ROLLBACK_DEFER reason=ledger_unreadable_after_exec"
+    cases = (
+        ("lost", before, [], claims, claims, alternative_log, False),
+        ("alternative_path", before, list(before), claims, dict(claims), alternative_log, True),
+    )
+    property_results = [
+        (label, ledger_preservation_holds(before_events, after_events, before_claims, after_claims), expected)
+        for label, before_events, after_events, before_claims, after_claims, _, expected in cases
+    ]
+    assert all(actual == expected for _, actual, expected in property_results), property_results
+    mutants = {
+        "accept_loss": lambda before, after, before_claims, after_claims, log: True,
+        "literal_log_path": lambda before, after, before_claims, after_claims, log:
+            "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=3 proof=disk" in log,
+    }
+    survivors = [
+        name
+        for name, mutant in mutants.items()
+        if all(
+            mutant(before_events, after_events, before_claims, after_claims, log) == expected
+            for _, before_events, after_events, before_claims, after_claims, log, expected in cases
+        )
+    ]
+    assert not survivors, f"rollback preservation mutants survived: {survivors}"
 
 
 def extract_powershell_function_closure(
@@ -1507,6 +1559,8 @@ def main() -> int:
             "  )\n"
             "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $events -Encoding ASCII\n"
             "  Set-Content -Path (Join-Path $root 'Area_comun/state/CLAIMS.json') -Value '{\"seq\":3,\"claims\":[]}' -Encoding ASCII\n"
+            "  Copy-Item -LiteralPath (Join-Path $root 'runtime/state/events.jsonl') -Destination (Join-Path $root '.protocol-tmp/signed-events-before-rollback.jsonl') -Force\n"
+            "  Copy-Item -LiteralPath (Join-Path $root 'Area_comun/state/CLAIMS.json') -Destination (Join-Path $root '.protocol-tmp/claims-before-rollback.json') -Force\n"
             "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
@@ -1543,6 +1597,7 @@ def main() -> int:
         run_outcome_parser_cases(sandbox)
         run_torn_tail_case(sandbox)
         run_nondestructive_rollback_contract()
+        run_rollback_ledger_preservation_property()
         run_pregate_contract_mutants()
         run_deleted_residue_real_loop_case()
         run_large_stderr_drain_case(sandbox)
@@ -1612,6 +1667,15 @@ def main() -> int:
             "mailbox message deposited during the exec window was quarantined"
         )
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
+        events_before_rollback = (
+            sandbox / ".protocol-tmp/signed-events-before-rollback.jsonl"
+        ).read_text(encoding="ascii").splitlines()
+        claims_before_rollback = json.loads(
+            (sandbox / ".protocol-tmp/claims-before-rollback.json").read_text(encoding="ascii")
+        )
+        claims_after_rollback = json.loads(
+            (sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii")
+        )
         ambiguous_fixture = (sandbox / ".protocol-tmp/ambiguous-events-fixture.txt").read_text(encoding="ascii").splitlines()
         assert ambiguous_fixture[1] == "{not-json", f"ambiguous ledger fixture was not produced: {ambiguous_fixture!r}"
         ambiguous_after_rollback = (sandbox / ".protocol-tmp/ambiguous-events-after-rollback.txt").read_text(encoding="ascii").splitlines()
@@ -1619,8 +1683,18 @@ def main() -> int:
             "ambiguous ledger changed before the repair barrier: "
             f"fixture={ambiguous_fixture!r}; after_rollback={ambiguous_after_rollback!r}; log={log}"
         )
-        assert json.loads(events[-1])["seq"] == 3, f"signed ledger events did not survive: {events!r}; log={log}"
-        assert json.loads((sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii"))["seq"] == 3
+        parsed_before_rollback = [json.loads(line) for line in events_before_rollback]
+        parsed_after_rollback = [json.loads(line) for line in events]
+        assert ledger_preservation_holds(
+            parsed_before_rollback,
+            parsed_after_rollback,
+            claims_before_rollback,
+            claims_after_rollback,
+        ), (
+            "signed ledger state changed across rollback: "
+            f"before_events={parsed_before_rollback!r}; after_events={parsed_after_rollback!r}; "
+            f"before_claims={claims_before_rollback!r}; after_claims={claims_after_rollback!r}; log={log}"
+        )
         assert not governed_message.exists(), "signed mailbox archive deletion was rolled back"
         assert (sandbox / "Area_comun/mailbox/archived/MSG-gov.md").exists(), "signed mailbox archive addition was rolled back"
         assert (sandbox / "Area_comun/state/TASK_INDEX_ARCHIVE.json").exists(), "signed prune archive was destroyed"
@@ -1635,11 +1709,6 @@ def main() -> int:
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
         assert "RETRY_SCHEDULED attempt=3" in log
-        rollback_records = [
-            line for line in log.splitlines() if "ROLLBACK_" in line
-        ]
-        print(f"TASK0343_DIAG rollback_records={rollback_records!r}")
-        assert "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=3 proof=disk" in log
         assert ("ROLLBACK_DEFER reason=ledger_unreadable_after_exec" in log or
                 "ROLLBACK_DEFER reason=rollback_probe_failed" in log)
         assert "LOOP_ERROR" not in log

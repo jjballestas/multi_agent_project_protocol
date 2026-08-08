@@ -15,8 +15,14 @@ Recorded before changing the assertion at
 - Diagnostic Actions run 31269392388 confirms
   `preserved_records=[]`: CI emits no `ROLLBACK_LEDGER_PRESERVED` record at all,
   so there are no CI `seq_before`, `seq_after`, or `proof` values on that branch.
-  A second diagnostic observation now exposes every rollback record to identify
-  the path that preserved the ledger in CI.
+- Diagnostic rerun 31269815427 attempt 2 exposes the complete CI path:
+  `head_changed`, successful residue quarantine, `rollback_probe_failed`, then
+  `ledger_unreadable_after_exec`. The signed ledger nevertheless survives byte
+  for byte. `Restore-TransientExecResidue` produces `rollback_probe_failed` from
+  its trap before the preserved-record writer, and its unreadable-head guard
+  produces the later defer. Therefore CI has no values for any of the three
+  logged fields: `seq_before=<not emitted>`, `seq_after=<not emitted>`, and
+  `proof=<not emitted>`.
 - Producer: `scripts/harness/peer_mailbox_cron.ps1` reads both heads through
   `scripts/ledger_head.py`; its preserved branch logs the pre-exec head, the
   post-exec head, and the proof implementation label after two identical disk
@@ -25,14 +31,33 @@ Recorded before changing the assertion at
 
 ## Diagnostic requirement before repair
 
-The assertion remains unchanged. A diagnostic-only observation must expose every
-rollback record in a real Actions run so the CI preservation path can be recorded
-before replacing the literal assertion.
+The assertion remained unchanged through both diagnostic runs. The difference is
+the conservative rollback path, not the final governed state: local proves the
+stable disk branch and logs `0 -> 3 / disk`; CI preserves the same signed events
+through defer and emits none of those fields. The repair may therefore bind the
+pre/post ledger state itself without changing production rollback behavior.
 
 ## Whole-file literal inventory (pre-fix)
 
-Candidate assertions tied to counters or paths remain at lines 503, 516, 754,
-765, 776, 862, 868, 956, 1078, 1086, 1170, 1173, 1252, 1324, 1364, 1417,
-1601, 1603, 1607, 1610, 1611, 1622-1630, 1635-1638, and 1644. These include
-behavioral bounds and fixture-relative paths as well as brittle literal log
-records; TASK-0343 will classify them rather than silently expanding scope.
+The full AST-assisted assertion sweep found no host-absolute path literal. All
+path assertions are fixture-relative and name the artifact whose behavior they
+exercise. The remaining counter literals classify as follows (pre-fix lines):
+
+- Protocol properties: retry attempts `1/2/3` (1635-1637), cleared retry count
+  `0` (956), and total fake executions `5` (1648). These are deliberate state
+  machine expectations, not environment-derived observations.
+- Timing tolerances: elapsed `<18` (1078), measured heartbeat range `1..4`
+  (1086), elapsed `>=4` (1252), and elapsed `<12` (1324). These are explicit
+  behavioral windows and remain unchanged.
+- Liveness/mutation cardinalities: heartbeat count `>=3` (1170), mutant count
+  `0` (1173), one expected process-tree survivor (1417), and one quarantined
+  residue (1603). These are contract cardinalities and remain unchanged.
+- Brittle ledger observations: event head `seq == 3`, claims `seq == 3`
+  (1622-1623), and the combined log literal `seq_before=0 seq_after=3
+  proof=disk` (1642). These three are replaced together by a relational
+  before/after comparison of the complete signed event list and claims state.
+
+Other fixture paths at 503, 516, 754, 765, 776, 862, 868, 1364, and
+1601-1630 assert existence, content, or quarantine location of a named fixture
+artifact. They do not embed a host root or platform separator and remain in
+scope as behavioral checks.
