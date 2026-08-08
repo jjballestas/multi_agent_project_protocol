@@ -2,6 +2,25 @@
 
 Last updated: 2026-08-08 Europe/Madrid, TASK-0328 implementation committed.
 
+## 2026-08-08 - TASK-0336 remediation iteration 4 implementation
+
+- Commit `90477ff7` makes the recognized-command grammar use the effective shell's command
+  boundary: Bash blocks split only on LF and trim only horizontal layout whitespace, so Python-only
+  line separators remain inside one rejected command instead of manufacturing whitelist members.
+- A single runner is accepted only after resolving its effective shell family. Explicit Bash and
+  PowerShell plus literal hosted-runner defaults remain accepted; unknown shells and dynamic runner
+  labels fail closed.
+- The permanent contract derives every Unicode scalar that Python treats as a line separator but
+  Bash does not, exercises both coordinates through all four Bash-resolution sources, and reports
+  zero mismatches. It also mutates the certification text to an affirmative execution guarantee and
+  proves the bounded-static certification property rejects it.
+- The output now declares the measured debts: safe forms outside the whitelist, redundant line-
+  continuation mechanisms, prior discrimination of 23/31 boundaries, and the shared root with
+  TASK-0338. The task-specific suite reports 59/59 contracts and 37 wiring boundaries.
+- Collaboration, encoding, neutrality, drift, compile, task-specific, inventory, and diff gates
+  exited 0 before commit. TASK-0336 remains `in_progress` under the remediation claim pending exact-
+  commit clean-clone verification and governed delivery; Codex has not reviewed or ratified it.
+
 ## 2026-08-08 - TASK-0332 remediation iteration 1 implementation
 
 - Commit `3a5cc335` expands the behavioral date-exemption contract from one fixed prefix to all
