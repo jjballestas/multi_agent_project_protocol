@@ -8717,3 +8717,59 @@ directorio, no con los dos coexistiendo.
 - `scan_encoding.py` revienta con `UnicodeEncodeError` en consola cp1252 si el detalle del hallazgo
   es `U+FFFD`: muere con traceback en vez de con veredicto. En mis sondas, exportar
   `PYTHONIOENCODING=utf-8` o plantar `U+00C3` en vez de `U+FFFD`.
+
+## 2026-08-08 -- TASK-0329 r3 (ec15f9f5): CHANGE-REQUIRED por ORACULO DERIVADO
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0329-paridad-oraculo-derivado-r3-verdict.md`,
+commit `51f05d17`. Clon limpio en `D:/Aegis_Scratch/mapp/an329r3`, reset entre experimentos con
+`git checkout -- . && git clean -fd` (verificar `git status --porcelain` a 0 lineas).
+
+### La leccion nueva: un contrato cuyo ORACULO lo calcula el artefacto bajo juicio no ata nada
+
+La remediacion cambio "fixture sintetico de 7 ficheros" por "arbol real con sondas inyectadas".
+Suena a atar la propiedad, pero el corpus de rutas lo produce el propio escaner Python
+(`iter_scanned_files`, `identity_scan_path`, `REQUIRED_EXEMPT_GLOBS`, `configured_identity_terms`).
+Toda edicion de ese escaner que ESTRECHE el corpus estrecha el oraculo con ella. Repro de un token:
+
+    -REQUIRED_EXEMPT_GLOBS = ("runtime/memory/**",)
+    +REQUIRED_EXEMPT_GLOBS = ("runtime/memory/**", "runtime/adapters/**")
+    + OWNER = "Codex" en runtime/adapters/leak_probe.py
+    => PY_SCANNER=0  PS_SCANNER=1  SUITE=0  CONTRACTS=0
+
+**Regla operativa:** ante cualquier contrato de paridad/cobertura, preguntar SIEMPRE "quien calcula
+el conjunto contra el que se compara". Si sale del lado juzgado, el contrato es ciego de ese lado.
+Probar SIEMPRE las dos direcciones (edicion en A / edicion en B): aqui el espejo en PowerShell SI
+se detectaba y el de Python no. La asimetria es el sintoma.
+
+### Correr SIEMPRE el CONTROL sin mutacion
+
+Las dos variantes de SLIP-1 se pusieron rojas, pero el control (la fuga sola, sin tocar ningun
+escaner) tambien. El rojo no lo producia la comparacion de paridad sino la asercion nueva de
+"arbol limpio". Sin el control habria atribuido poder discriminante a un mecanismo que no lo tiene.
+
+### Contar los tests: una remediacion puede BORRAR un guardian
+
+6 tests -> 5. `test_identity_exemption_inventories_are_one_to_one_and_in_parity` desaparecio, y
+con el: inventarios uno-a-uno, cero exenciones muertas, coordenadas dentro de rango y el canario
+de 91 pares. Medido con el MISMO mutante en los dos commits (exencion muerta solo en PowerShell):
+`ec15f9f5^` SUITE=1 / `ec15f9f5` SUITE=0. El handoff no lo menciona -> anomalia DECISION-0018.
+**Comparar siempre el recuento de tests antes/despues y correr el mutante en el commit PADRE para
+demostrar la regresion en vez de afirmarla.**
+
+### Paridad no es correccion
+
+El cegado SIMETRICO en el selector de rutas (los dos escaneres) deja los cuatro gates verdes con
+una fuga viva. Un contrato que solo compara los dos lados no puede ver lo que ambos dejan de mirar.
+Declararlo siempre como limite estructural, no como fallo de la entrega.
+
+### Auditar el inventario con parser independiente (repetido, sigue valiendo)
+
+AST de PowerShell (`[System.Management.Automation.Language.Parser]::ParseInput` + ejecutar el
+`Right.Extent.Text` del AssignmentStatementAst) -> 10 rutas, 91 pares, 0 muertas, 0 fuera de rango
+en `ec15f9f5`. Los hechos siguen limpios; lo que se fue es el guardian.
+
+### Premisa del encargo que habia que corregir
+
+`exercised_by` NO lo anadio la entrega: es campo obligatorio en `scripts/falsification_contracts.py:14`.
+Lo que si se degrado, y nadie lo habia visto, es `mutation` (de nombrar la mutacion a un fragmento
+de asignacion). Verificar las premisas del encargo contra el diff antes de juzgarlas.
