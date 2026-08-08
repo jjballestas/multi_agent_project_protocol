@@ -1,6 +1,23 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0328 remediation 1 committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0329 remediation 3 implementation committed.
+
+## 2026-08-09 - TASK-0329 remediation iteration 3 implementation
+
+- Commit `1177f67b` replaces the parity corpus derived from the Python scanner with an
+  independent versioned filesystem selector for every runtime Python and scripts Python/
+  PowerShell identity surface, excluding only the declared generated-memory boundary.
+- The permanent Python-only `runtime/adapters/**` exemption mutant now loses expected probes,
+  so the exact SLIP-5 reported in review cannot narrow the oracle with the scanner under test.
+- Restored inventory parity as its own permanent negative. It executes the effective PowerShell
+  declarations, detects a dead coordinate added to only that scanner immediately, preserves the
+  91-pair canary, and verifies every coordinate is live and in range.
+- The previously removed inventory test and four invariants are explicitly restored; the
+  degraded `mutation` fragment is replaced by named, executable single-scanner mutations.
+- Six neutrality tests, 68/68 falsification inventory across 12/12 wired runners,
+  collaboration, encoding, both neutrality scanners, compile, and diff gates exited 0.
+  TASK-0329 remains `in_progress` pending exact-commit clean-clone verification and governed
+  delivery; Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-08 - TASK-0328 remediation iteration 1
 
