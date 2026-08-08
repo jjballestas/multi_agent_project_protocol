@@ -2,7 +2,7 @@
 task_id: TASK-0335
 file: Area_comun/tasks/TASK-0335-asercion-acoplada-al-formato-del-log.md
 title: "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
-status: review_approved
+status: done
 type: infra
 owner: Codex
 reviewer: Analista

@@ -69,7 +69,7 @@
         {
             "id": "TASK-0325",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "Endurecimiento de la exencion de fecha: chequeo AST contra bypass por continue + los dos residuales R5-1 y R5-2"
         },
         {
@@ -105,13 +105,13 @@
         {
             "id": "TASK-0334",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "git status no desciende a un repo git EMBEBIDO con ninguna opcion: el barredor ve limpio un directorio con trabajo vivo y lo mata -- y esa forma existe HOY en el hub"
         },
         {
             "id": "TASK-0335",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no"
         },
         {
