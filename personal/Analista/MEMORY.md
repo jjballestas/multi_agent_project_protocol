@@ -7,6 +7,83 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (54) - DRAFT-DECISION-0105: CHANGE-REQUIRED (revisar un ARTEFACTO DE RAZONAMIENTO, no una entrega)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-DRAFT-DECISION-0105`. **SIN PRODUCTO EN
+  ALCANCE**, y el propio encargo decia "no te pido gates: aqui no hay nada que recomputar".
+- Ancla hub `ec11faf5`. El borrador esta **UNTRACKED** en `personal/Arquitecto/`: no esta en estado
+  canonico, asi que lo ancle por **sha256 del contenido** (`0bd90cd6...c972ef77`) y lo declare como
+  residual (si cambia, mis citas de linea caducan). Clon limpio `D:/Aegis_Scratch/hub/an0105`.
+  Veredicto **CHANGE-REQUIRED** en `3b9b636f` (artifact
+  `Area_comun/artifacts/Analista-DECISION-0105-generalizacion-verdict.md`).
+
+### LECCION PRINCIPAL: "no hay gates que recomputar" no es "no hay nada que MEDIR"
+
+El encargo me eximia de gates. Acepte la exencion de gates y **no** la de medicion: en vez de
+argumentar sobre las nueve reglas, **elegi la que carga el peso (R2) y trate de falsarla en el
+codigo vivo**. Salio. Ese es el hallazgo bloqueante y ninguna cantidad de prosa lo habria producido.
+
+**Ante un artefacto de razonamiento, buscar la regla que ya tiene mecanismo y probar el mecanismo.**
+Una regla sin mecanismo solo se puede criticar; una regla con mecanismo se puede FALSAR.
+
+### El hallazgo: el certificador de contratos es ciego y fragil a la vez (D1/D2)
+
+`scripts/check_falsification_contracts.py:316-319` hace `if boundary not in source` y
+`if contract.mutation not in source`. Es `assert <literal> in source` -- el anti-patron que R1
+prohibe -- **dentro del mecanismo que certifica a TODOS los negativos del repo**.
+
+- **D2 (ciego)**: dejar las dos fronteras de `NEG-NEUTRALITY-NESTED-IDENTITY` presentes byte a byte
+  y hacerlas inalcanzables (`if False:`) -> paso de CI verbatim de `validate.yml:45-49`, los tres
+  comandos, **exit 0**; `permanent_negatives=58 declared=58 missing=0`; el guardian imprime "OK:
+  guardian rejects relaxed boundaries". Un negativo que **no asierta nada** sale certificado.
+- **D1 (fragil)**: un salto de linea PEP8 sobre esa misma asercion -- semantica identica, test
+  exit 0 -- pone el certificador **exit 1**.
+- `step_gates_runner` decide "ejecutado" **parseando el YAML del workflow**; el propio gate confiesa
+  `residuals=trigger_filters,working_directory,yaml_1_1_scalars`. "Ejecutado" = "aparece en el
+  fichero con una forma reconocida" = declaracion sobre declaracion.
+
+**`if False:` alrededor de una frontera declarada es el mutante mas barato y mas letal contra
+cualquier gate de contratos. Usarlo siempre.**
+
+### Como se ataca una generalizacion (guion reutilizable)
+
+1. **Mapear regla -> ocurrencia en las DOS direcciones.** Encontre una ocurrencia sin regla (la 9) y
+   una regla sin ocurrencia (R4), mas evidencia citada FUERA de la tabla (R8 cita TASK-0333, que no
+   es ninguna de las catorce filas).
+2. **Contar el denominador real.** "Catorce ocurrencias en tareas sin relacion" cubria **ocho
+   tareas**: 3/4/6/10 son la misma TASK-0330 y 12/14 la misma TASK-0329.
+3. **Contrastar cada fila contra la TAXONOMIA declarada, no contra la tesis.** El documento declaraba
+   dos manifestaciones (el verificador ata la forma / no corre) y 7, 11 y 13 son **controles de
+   produccion**, no verificadores. La 11 (TASK-0334) la quite entera: el cambio ACTUO, y bien; el
+   defecto era que los dos consumidores querian cosas opuestas -- acoplamiento, no existir-vs-actuar.
+4. **Para cada regla, preguntar "cual es el acto de cumplimiento?"** Si el acto es *declarar*,
+   *enumerar* o *documentar*, la regla se cumple en falso: R5 (rebajar la garantia declarada), R6
+   (su primera obligacion ES una declaracion), R7/R8 (enumerar no puede fallar cuando el conjunto
+   crece -- ya lo medi en 0334 con una tercera funcion bloqueante), R9 (enumera tres ejes, que es una
+   forma: reproduce el defecto que nombra).
+5. **Preguntar por el coste que NO esta escrito.** El mio: "un rojo que se queda rojo deja de
+   leerse"; R1/R3 son coste puro sobre codigo muerto (medido en 0334); el coste de R8 escala con la
+   adopcion porque los gemelos se GENERAN (`new_instance.py`).
+6. **Juicio de forma, no solo de contenido.** Recomende PARTIRLO: DECISION para las dos reglas con
+   predicado binario (R2, R6) y guia/plantilla-de-veredicto para las siete sin predicado mecanico.
+   **Una DECISION cuyo cumplimiento se autodeclara es la ocurrencia que la propia DECISION condena.**
+
+### El hueco que mas valor tuvo senalar
+
+La ocurrencia que el Arquitecto usaba como mejor justificacion (el aceptar un arreglo comprobando
+que los runners APARECIAN) es un fallo de **ACEPTACION**, y **ninguna de sus nueve reglas ata a quien
+acepta**: las nueve atan al maker o al mecanismo. **Cuando alguien confiesa un fallo propio en un
+documento de reglas, comprobar si alguna regla lo habria cazado.** Aqui, ninguna.
+
+### Operativa
+
+- Encargo sin gates -> igual corri `validate` (exit 0) en el arbol vivo y la linea base de contratos
+  en el clon, porque mi commit los necesita. **El barrido completo en el clon (validate+encoding+
+  neutralidad) corto a los 120 s; lo declare como residual en vez de omitirlo en silencio.**
+- Driver D1/D2: `cp` del fichero a `/tmp`, parcheo con heredoc de Python, corrida, **restauracion
+  desde la copia**, y `git status --porcelain` del clon al final para probar que quedo limpio.
+- `PRUNE DUE cold_start_tokens 22131 >= 20000` al commitear: senalado, no corrido (es del Arquitecto).
+
 ## Ultima actualizacion 2026-08-08 (53) - TASK-0327: CHANGE-REQUIRED (el inventario correcto no era el de invocaciones sino el de PORTADORES del default)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0327`. **SIN PRODUCTO EN ALCANCE.**
