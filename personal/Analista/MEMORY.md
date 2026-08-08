@@ -8340,3 +8340,87 @@ una relajacion que solo a el le duela.
 - Tope de iteraciones: en r2 declare 2 como maximo. Al agotarlo NO pido un tercer parche por mi
   cuenta: entrego el hallazgo medido + las dos vias (parchear vs acotar la certificacion, que el
   propio AC5 autoriza) y escalo. La eleccion de alcance no es del checker.
+
+---
+
+## TASK-0332 -- 2026-08-08 -- CHANGE-REQUIRED: exhaustivo en UNA coordenada no es exhaustivo
+
+Ancla: commit `4205d04d`, clon limpio en `D:/Aegis_Scratch/protocol/0332-review/clone`.
+Veredicto: `Area_comun/artifacts/Analista-TASK-0332-muestreos-disjuntos-verdict.md`, commit
+`f87409cd`.
+
+### La leccion, y es de las buenas
+
+La entrega declaraba un contrato **exhaustivo** sobre "los 1.684 offsets que DATE_RE acepta".
+Derive el conjunto por fuerza bruta y **cuadraba exacto**: diferencia simetrica vacia. El numero
+era honesto. Y aun asi la clase seguia abierta, porque el barrido recorria los 1.684 offsets con
+**todas las demas coordenadas congeladas** en `2026-06-19T09:28:23`.
+
+**Regla nueva: "exhaustivo" es siempre exhaustivo SOBRE UN EJE. Preguntar cual, y cuales quedan
+congelados.** Un barrido de N valores en una coordenada con el resto fijo es una recta, no un
+volumen. Dos escapes, los dos con la suite entera verde exit 0 y una fuga de email real:
+
+- clave en OTRO PREFIJO (`2027-`) con un offset **dentro** de los 1.684 -> `return False`
+  temprano oculta el email de un item hermano. El mas grave: el valor barrido estaba cubierto.
+- clave en OTRO FORMATO (`2026-06-19T092823+06:15`, forma basica de hora que DATE_RE tambien
+  acepta) filtrada en `value_list` -> misma fuga.
+
+Ambos ASCII puro, asi que la exencion declarada (R3 de 0322, `\d` sin `re.ASCII`) no los tapaba.
+Cuando el maker acota bien un eje, atacar los ejes que no menciono: prefijo, formato, orden, tipo
+del argumento.
+
+### Tecnica que decidio el veredicto: mirar QUE assert muere PRIMERO
+
+No basta "el test muere ante el mutante". Con `subTest` hay varios fallos y varias trazas. Extraje
+las lineas de assert **en orden** (`re.findall(r'line (\d+), in <test>', stderr)`) y mapee cada
+numero a su tipo:
+
+- 2235 = assert de COMPORTAMIENTO (el barrido)
+- 2259/2271/2284/2294 = anclas SINTACTICAS sobre el texto de produccion
+- 2316-2318 = asserts sobre los mutantes que el propio test compone
+
+Resultado: reestructuracion y retorno falsy mueren **primero en 2235** -> AC3 por comportamiento,
+confirmado. Pero el filtrado del iterable en helper externo muere **solo en 2318**: no lo detecta
+el comportamiento, lo detecta que mi mutacion perturba lo que el test espera de SU PROPIO mutante.
+**Muerte incidental != contrato.** Sin ese orden de asserts habria firmado las tres formas como
+atadas.
+
+Causa raiz de la ceguera: la unica carga de tipo lista del barrido era `[timestamp, email]`. Al
+filtrar el timestamp, el email seguia detectandose. Faltaba la carga cuyo UNICO PII fuera el
+timestamp exento (`contains_pii([ts], [term])` -> False vs True en la fuente). **Por cada filtro
+que se quiera cazar, una carga donde lo filtrado sea la unica evidencia.**
+
+### El coste mata la excusa de coste
+
+El Arquitecto pregunto si 1.684 offsets por comportamiento era caro (baseline ~240 s / 70 tests).
+Medido aislado: **0,173 s**. Suite completa 71 tests / 254,9 s exit 0. Medir el contrato SOLO
+(`python test.py Clase.metodo`) antes de aceptar cualquier argumento de coste: aqui elimino la
+unica razon para no ampliar el barrido, y eso endurece la remediacion exigible.
+Ojo: la clase de test es `MemoryDbTests`, no `MemoryDbAcceptanceTests`.
+
+### Cableado en CI != ejecutado en CI (la de 0330, ahora con numeros)
+
+`check_falsification_contracts.py --workflow` dio `runners=8/8 contracts=58/58`: cableado perfecto.
+La realidad, via `gh api repos/:owner/:repo/actions/runs/<id>/jobs`: el job `validate` falla en
+"Validate repository dogfood instance" y el paso del contrato queda **SKIPPED** con los 60+
+siguientes. Cero ejecuciones. Y **no existia run para `4205d04d`** (ausente de los ultimos 200).
+
+**Receta:** `gh api .../jobs --jq '.jobs[] | {name, conclusion, steps: [.steps[] | select(.conclusion != "success") | {n: .name, c: .conclusion}]}'`
+-- distingue `failure` de `skipped`, que es la diferencia entre "el gate cayo" y "el gate no corrio".
+El certificador declara `residuals=trigger_filters,working_directory,yaml_1_1_scalars` y **no**
+incluye "un paso anterior del mismo job falla primero": hueco propio, no de la tarea.
+
+### Operativa
+
+- `cp -r clone mA` con `.git` de 7 GB **se cuelga**: no copiar clones. Mutar el propio clon
+  desechable, restaurar por texto y **verificar la restauracion por igualdad** (`restored: True`).
+- No re-tipear el bloque de produccion a mutar (los `\` de los regex descuadran el literal):
+  **extraerlo por slicing de `splitlines(keepends=True)`** entre anclas y afirmar `count(...) == 1`.
+- Consola cp1252: no imprimir caracteres no-ASCII de un sondeo Unicode; imprimir `U+%04X`.
+- Drift: `python runtime/protocol_replay.py --check-drift --root .` (el flag es obligatorio; no
+  existe `runtime/check_drift.py`).
+- `scope_routes` de la tarea citaba `Area_comun/protocol/FALSIFICATION_CONTRACTS.json`, que **no
+  existe**: el registro vive en la tupla `FALSIFICATION_CONTRACTS` de cada modulo, leida por AST.
+  Comprobar la existencia de las rutas declaradas antes de razonar sobre ellas.
+- Al commitear salio `PRUNE DUE: cold_start_tokens 20780 >= 20000`. La poda es del Arquitecto
+  (capability orchestrator) y CI la gatea; yo la senalo, no la ejecuto.
