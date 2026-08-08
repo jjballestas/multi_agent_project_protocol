@@ -7,6 +7,72 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (51) - TASK-0331 remediacion 2: CHANGE-REQUIRED (G6 fallo ABIERTO nuevo + G7 dientes perdidos)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r3`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `9def3214` (padre `ddcdc497`), clon limpio `D:/Aegis_Scratch/mapp/r331c/cc`. Veredicto
+  **CHANGE-REQUIRED** en `9c8859cd` (artifact
+  `Area_comun/artifacts/Analista-TASK-0331-remediacion-2-verdict.md`). Gates exit 0: harness 26/26,
+  contratos 53/53/0, validate, encoding, neutralidad.
+- Cerrado de verdad: matriz de SIETE estados de lease huerfana (dueno muerto, funciones reales) ->
+  todas RECUPERADAS en r1 y convergentes en r2/r3. G1+G2+G3 cerrados. G4 cerrado (el handoff cita
+  mis 228/1033 y 272/365). Cero regresion: ocho funciones de scope/archivo/reserva byte identicas
+  a mi ancla de r1 `714221b6`; el diff son tres hunks.
+
+### LECCION PRINCIPAL: un arreglo que convierte un ESTANCAMIENTO en un fallo ABIERTO
+
+El autocurado paso de "no se si puedo leer la lease -> no toco nada" (encallado, seguro) a
+"no puedo leer la lease -> es huerfana, la borro". Pero **la ventana en que una lease es ilegible
+es exactamente la ventana del latido de un exec VIVO** (`WriteAllText` no atomico, una vez por
+segundo). Medido con proceso hijo real: lease truncada / 0 bytes / `reserved` sin
+`reservation_deadline` de dueno VIVO -> lease y lock BORRADOS; el padre los conservaba.
+`Update-ExecLeaseHeartbeat` sale temprano si el fichero no existe, asi que **nadie los repone y no
+hay log**. El peer pasa de `active_peer_lease` a `none` con el exec en curso.
+
+**Patron generalizable:** cuando un arreglo de recuperacion amplia lo que considera "huerfano",
+preguntar siempre QUE ESTADO VIVO cae dentro de la definicion nueva. Y medir la DURACION, no solo
+la direccion: aqui el fallo-abierto ya existia (corregi mi propio residual 2 de r1: una lease de
+0 bytes da `ok=true,value=null`, no `peer_lease_unreadable`), lo que cambia es que pasa de
+microsegundos a todo el exec. **La honestidad de decir "esto ya fallaba" no anula el hallazgo si
+lo que cambio es la escala.**
+
+### LECCION DE DIENTES: un stub en el negativo apaga la rama donde vive el peligro
+
+Los cuatro casos del negativo nuevo declaran `function Test-LeaseProcessMatches { return $false }`.
+Con el dueno siempre muerto, la rama `if ($leaseMatches)` no se ejecuta NUNCA en la corrida sana.
+Dos consecuencias medidas con mis cinco mutantes sobre el gate completo: (1) revertir la lectura de
+`reservation_deadline` --el arreglo de la remediacion 1-- deja el gate VERDE; (2) la direccion de
+G6 es invisible. **Cuando un negativo stubea un helper, comprobar que rama del codigo bajo prueba
+queda inalcanzable por ese stub.** Es la version "por stub" del mutante de codigo muerto.
+
+Corolario que casi me como: volver a meter la fila base que el maker quito (`reserved` + lock,
+proceso muerto) NO devuelve los dientes -- con el dueno muerto el deadline tampoco se lee. El
+arreglo exige un caso de dueno VIVO. **Antes de pedir "reanade el estado que quitaste", simular si
+ese estado ejercita de verdad la linea que se quedo sin proteger.**
+
+### ALCANZABILIDAD: leer el ORDEN de arranque, no solo las funciones
+
+`Clear-StaleCronLockIfSafe` se llama en la linea 1470 y `Test-ExistingCronInstance` en la 1471:
+el autocurado corre UNA LINEA ANTES del guard de instancia unica. Una segunda instancia lanzada
+por un relanzamiento rutinario ejecuta el borrado y solo despues descubre que sobra. **Para un
+defecto de concurrencia, el numero de linea del CALL SITE es evidencia de alcanzabilidad tan
+fuerte como el cuerpo de la funcion.**
+
+### OPERATIVA de sondas (r331c)
+
+- Sondas en `D:/Aegis_Scratch/mapp/r331c/probes/*.py`: `p1_matrix` (7 estados x 3 rearranques),
+  `p2_live_owner` (proceso hijo REAL + `StartTime.ToUniversalTime().ToString("o")`),
+  `p4_mutants` (5 mutantes x gate completo, copia por mutante, `shutil.copytree` ignorando `.git`),
+  `p5_window` (atomicidad del latido con job lector + orden de arranque), `p6_cadena`
+  (`active_peer_lease` -> autocurado -> `none`, fixture propio de scope).
+- Comparar SIEMPRE contra el padre del commit en la MISMA sonda: es lo que separa "defecto
+  heredado" de "direccion creada". Extraje el `.ps1` del padre con `git show HEAD^:<ruta>`.
+- Identidad de funcion por md5 del cuerpo (`awk "/^function X /,/^}/" | md5sum`) contra el ancla del
+  juicio anterior: convierte "no hay regresion" en un hecho verificado, no en una suposicion, y
+  ahorra repetir matrices enteras.
+- Un job lector de PowerShell devuelve objetos con `PSComputerName`/`RunspaceId` al serializar:
+  los tamanos salen como `{"value":0}`, no como enteros pelados. No leerlo como fallo de sonda.
+
 ## Ultima actualizacion 2026-08-08 (50) - TASK-0336 remediacion 1: CHANGE-REQUIRED estrecho
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r2`. **SIN PRODUCTO EN ALCANCE.**
