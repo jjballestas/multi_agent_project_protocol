@@ -156,6 +156,34 @@
             "updated_at": "2026-08-08T03:08:31Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote39",
+            "expires_at": "2026-08-08T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260807-Arquitecto-to-Codex-GO-TASK-0329.md",
+                "Area_comun/mailbox/archived/MSG-20260807-Arquitecto-to-Codex-GO-TASK-0329.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0334-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0334-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0335-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0335-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0336-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0336-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0331-remediacion-2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-TASK-0331-remediacion-2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0329.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediacion-2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediacion-2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote39"
+            ],
+            "started_at": "2026-08-08T04:08:16Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T04:08:16Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
