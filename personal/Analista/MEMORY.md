@@ -7,6 +7,65 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-08 (52) - TASK-0329 r2: CHANGE-REQUIRED (la paridad ata una VENTANA DE TEXTO, no la propiedad)
+
+- Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0329-r2`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `bde1eddd` ("enforce scanner parity"), contrastado contra HEAD `9a6e4eaf`. Clon limpio
+  `D:/Aegis_Scratch/mapp/an0329r2/cc`. Veredicto **CHANGE-REQUIRED** en `8a808ab3` (artifact
+  `Area_comun/artifacts/Analista-TASK-0329-paridad-escaneres-r2-verdict.md`). Seis gates exit 0 en
+  las dos anclas: neutralidad py, suite 6 tests 0 skipped, contratos, validate, encoding, gemelo .ps1.
+
+### LECCION PRINCIPAL: un contrato de paridad que PARSEA al gemelo con regex ata su FORMATO, no la propiedad
+
+`test_identity_exemption_inventories_are_one_to_one_and_in_parity` compara los inventarios
+parseando el `.ps1` con `^    "([^"]+)" = @\{$` y `^            (\d+) = @\((.*)\)$` sobre el texto
+entre `$IdentityLiteralExemptions = @{` y `$GenericIdentityTokens`. Todo lo que caiga fuera de esa
+ventana es invisible y esta VIVO en ejecucion. **Repro: indentar la clave de ruta con 2 espacios en
+vez de 4** en una entrada anadida solo al `.ps1`, sobre una ruta que el fixture de 7 ficheros no
+cubre -> Python exit 1, PowerShell exit 0 sobre el mismo arbol, suite exit 0, contratos exit 0.
+Variante: declararla despues de `$GenericIdentityTokens`. El discriminante entre detectado y no
+detectado no es la severidad del cambio: **es su indentacion.**
+
+Contraste que declare porque juega en contra de mi tesis: si la LINEA DE RUTA si casa con la regex,
+la deriva SI se detecta (el inventario parseado deja de coincidir). Fallo cerrado en ese caso.
+
+### LECCION 2: dos implementaciones gemelas pueden no compartir la definicion de "linea"
+
+Python trocea con `str.splitlines()` (rompe en form feed 0x0c, vertical tab 0x0b, NEL 0x85 y U+2028); PowerShell con
+`Get-Content` (no rompe en ninguno; en `
+` suelto SI coinciden). **Un unico form feed dentro de la
+linea 10 de `scripts/prune_state.py`, sin tocar ningun escaner, da Python exit 1 con dos hallazgos
+y PowerShell exit 0.** Unico camino encontrado en que el gemelo falla ABIERTO. Cuando las exenciones
+se atan a NUMEROS DE LINEA, hay que probar el primitivo de troceado antes que la tabla.
+
+### LECCION 3: exencion (linea, termino) no es exencion (linea, termino, MOTIVO)
+
+El uno-a-uno verifica que el termino OCURRA en la coordenada, nunca que la ocurrencia sea la que el
+campo `Reason` describe. Reescribi la linea 1397 -- ya exenta -- de `peer_mailbox_cron.ps1` como
+`$DefaultCoordinator = "Codex"` (la clase exacta de fuga que TASK-0316 corrigio, en el fichero del
+que trata 0329) y los CUATRO gates salen verdes. El canario `declared_exemption_count == 91` no lo
+ve porque el numero no cambia. No incumple AC2 (admite "o la linea concreta"): residual declarado.
+
+### Tecnica que funciono y repito: parsear al gemelo con un parser INDEPENDIENTE
+
+Para el foco B no use el regex del test: extraje el inventario del `.ps1` con el AST de PowerShell
+(`[System.Management.Automation.Language.Parser]::ParseInput`, recorriendo `KeyValuePairs`) y lo
+compare contra el diccionario Python importado. Resultado limpio: 10 rutas, 91 pares, 0 muertas, 0
+fuera de rango. Ojo: los arrays de UN elemento `@("x")` no exponen `Elements`; saque los digests con
+regex sobre `Extent.Text` del valor.
+
+### Lo que PASA y no vuelve a juicio
+
+Foco A por las dos direcciones (relajar la guarda Python mata 2 tests, la PowerShell mata 1), foco B,
+foco C (las 9 lineas exentas son todas la CLI del proveedor), AC5. **Foco E aceptado como residual
+DECLARADO con magnitud medida: de 8289 lineas ciegas (10 ficheros enteros) a 91 pares (linea,
+termino) ciegos a UN termino, -98,9%.** Correccion al Arquitecto: "falla CERRADO" describe el
+mecanismo observado, no una propiedad del diseno (leccion 2 lo desmiente).
+
+Cableado en CI verificado: `validate.yml:260/263/266-267`, los tres en el job ubuntu; el
+`skipTest("PowerShell is not installed")` NO se dispara ahi. Limite propio declarado: medi el gemelo
+con Windows PowerShell 5.1, CI usa pwsh 7.
+
 ## Ultima actualizacion 2026-08-08 (51) - TASK-0331 remediacion 2: CHANGE-REQUIRED (G6 fallo ABIERTO nuevo + G7 dientes perdidos)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r3`. **SIN PRODUCTO EN ALCANCE.**
