@@ -372,7 +372,7 @@
             "id": "TASK-0342",
             "owner": "Codex",
             "phase": "P2",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows",
             "type": "implementation"
         },
