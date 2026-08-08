@@ -194,9 +194,20 @@ function Get-RelativePath {
         [string]$FullPath
     )
 
-    $rootUri = [System.Uri]((Resolve-Path $RootPath).Path.TrimEnd("\", "/") + [System.IO.Path]::DirectorySeparatorChar)
-    $fileUri = [System.Uri](Resolve-Path $FullPath).Path
-    return $rootUri.MakeRelativeUri($fileUri).ToString()
+    $resolvedRootPath = (Resolve-Path -LiteralPath $RootPath).Path
+    $resolvedFullPath = (Resolve-Path -LiteralPath $FullPath).Path
+    $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+    $rootPrefix = $resolvedRootPath.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar
+    $comparison = if ([System.IO.Path]::DirectorySeparatorChar -eq [char]'\') {
+        [System.StringComparison]::OrdinalIgnoreCase
+    } else {
+        [System.StringComparison]::Ordinal
+    }
+    if (-not $resolvedFullPath.StartsWith($rootPrefix, $comparison)) {
+        throw "Path is outside the scan root: $resolvedFullPath"
+    }
+    $relativePath = $resolvedFullPath.Substring($rootPrefix.Length)
+    return ($relativePath -replace "\\", "/")
 }
 
 function Get-ConfiguredIdentityTerms {

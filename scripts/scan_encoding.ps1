@@ -5,6 +5,11 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ResolvedRoot = (Resolve-Path $Root).Path
+$PathComparison = if ([System.IO.Path]::DirectorySeparatorChar -eq [char]'\') {
+    [System.StringComparison]::OrdinalIgnoreCase
+} else {
+    [System.StringComparison]::Ordinal
+}
 $SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")
 $SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))
 $SkipSuffixes = @(".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip")
@@ -36,7 +41,7 @@ function Should-Scan {
         # Compare one host-native directory boundary, never a literal slash shape.
         $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
         $directoryPrefix = $directory.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar
-        if ($File.FullName -eq $directory -or $File.FullName.StartsWith($directoryPrefix, [System.StringComparison]::OrdinalIgnoreCase)) { return $false }
+        if ($File.FullName.Equals($directory, $PathComparison) -or $File.FullName.StartsWith($directoryPrefix, $PathComparison)) { return $false }
     }
     foreach ($part in $File.FullName.Split([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)) {
         if ($SkipDirs -contains $part) { return $false }

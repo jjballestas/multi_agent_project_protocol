@@ -2,6 +2,13 @@
 
 Golden cases for `scripts/scan_domain_neutrality.py` and `.ps1`.
 
+`run_powershell_host_cases.py` inventories every PowerShell entry point executed by
+`.github/workflows/validate.yml`, checks the five host-sensitive dimensions required by
+TASK-0345, and mutates all four known failure forms. The dedicated
+`powershell-linux-parity` job runs the affected twins independently on `ubuntu-latest`; every
+step uses normal job-failure semantics, while `if: always()` prevents one defect from masking
+the next entry point.
+
 - `clean`: expected exit `0`.
 - `domain_term_in_core`: expected exit `1` because a denylisted term appears in `AGENTS.template.md`.
 - `runtime_state_exempt`: expected exit `0` because generated `runtime/state/**` is exempt.

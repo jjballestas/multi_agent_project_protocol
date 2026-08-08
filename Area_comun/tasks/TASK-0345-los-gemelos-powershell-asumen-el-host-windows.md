@@ -1,7 +1,7 @@
 ---
 id: TASK-0345
 title: Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md
@@ -79,3 +79,20 @@ proxima suposicion de host se descubre al introducirla, no seis dias despues.
 Si al inventariar resulta que la forma correcta es un helper compartido -- resolucion de rutas,
 troceado de lineas -- **dilo y lo particiono**. No absorbas 0338 ni 0336: estan contratadas y en
 curso.
+
+## Inventario de suposiciones de host
+
+| Ruta ejecutada por CI | Separadores y rutas | Troceado y finales de linea | Mayusculas/minusculas | Forma y proteccion |
+|---|---|---|---|---|
+| `scripts/validate_collaboration_state.ps1` | `Join-Path`, `Resolve-Path`, separadores normalizados y comparacion dependiente del host | `Get-Content` interpreta lineas PowerShell; sus casos SDD y compactos comparan contra Python | rutas `OrdinalIgnoreCase` solo en Windows, `Ordinal` fuera | especifica por semantica del validador; casos gemelos SDD/compactos |
+| `scripts/scan_encoding.ps1` | `Path.GetRelativePath`, separador nativo y frontera nativa | bytes para offsets LF; `ReadAllLines` para mojibake | frontera de ruta insensible solo en Windows | neutral; `NEG-ENCODING-SKIP-PATH-SEPARATOR` y contrato TASK-0345 |
+| `scripts/scan_domain_neutrality.ps1` | raiz absoluta, frontera con separador nativo y salida POSIX | el `Get-Content` conocido queda acotado a una ocurrencia bajo TASK-0338 | frontera de ruta segun host; regex y terminos deliberadamente insensibles, igual que Python | ruta neutral; troceado no absorbido, protegido contra expansion y referido a TASK-0338 |
+| `examples/sdd_validation_cases/run_sdd_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad Python/PowerShell en CI Linux |
+| `examples/compact_comms_validation_cases/run_compact_comms_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad Python/PowerShell en CI Linux |
+| `examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1` | `Join-Path` | normaliza CRLF a LF al comparar procesos del mismo host | nombres de caso exactos | neutral; paridad de veredicto y salida en CI Linux |
+| `examples/llm_turn_wrapper_cases/run_llm_turn_wrapper_cases.ps1` | `Join-Path` | delega el contrato al runner Python | no compara rutas | neutral; smoke wrapper en CI Linux |
+
+La cuarta averia no necesita helper compartido: una raiz resuelta y una frontera con el separador
+nativo resuelven la ruta tambien en Windows PowerShell 5.1. La segunda forma conocida pertenece al lector de workflow Python,
+no a un `.ps1`; sigue protegida por `NEG-FALSIFICATION-RUNNER-WIRING` de TASK-0336. El contrato
+TASK-0345 comprueba que no reaparezca `splitlines()` en esa frontera.

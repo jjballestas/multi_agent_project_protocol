@@ -127,7 +127,7 @@ def assert_cross_platform_skip_parity() -> None:
             "        # Compare one host-native directory boundary, never a literal slash shape.\n"
             "        $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)\n"
             "        $directoryPrefix = $directory.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar\n"
-            "        if ($File.FullName -eq $directory -or $File.FullName.StartsWith($directoryPrefix, [System.StringComparison]::OrdinalIgnoreCase)) { return $false }",
+            "        if ($File.FullName.Equals($directory, $PathComparison) -or $File.FullName.StartsWith($directoryPrefix, $PathComparison)) { return $false }",
             '        if ($File.FullName -eq $directory -or $File.FullName.StartsWith("$directory\\", [System.StringComparison]::OrdinalIgnoreCase)) { return $false }',
             1,
         )

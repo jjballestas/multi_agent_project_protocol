@@ -5,6 +5,39 @@ on:
   pull_request:
 
 jobs:
+  powershell-linux-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install parity dependencies
+        run: python -m pip install pyyaml
+
+      - name: Scan encoding with PowerShell on Linux
+        if: always()
+        shell: pwsh
+        run: ./scripts/scan_encoding.ps1 -Root .
+
+      - name: Scan domain neutrality with PowerShell on Linux
+        if: always()
+        shell: pwsh
+        run: ./scripts/scan_domain_neutrality.ps1 -Root .
+
+      - name: Run neutrality parity cases on Linux
+        if: always()
+        shell: pwsh
+        run: ./examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1
+
+      - name: Run PowerShell host-assumption contracts
+        if: always()
+        run: python examples/neutrality_scan_cases/run_powershell_host_cases.py
+
   validate:
     runs-on: ubuntu-latest
     steps:
