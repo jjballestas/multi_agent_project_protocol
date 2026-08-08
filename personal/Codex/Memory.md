@@ -17,6 +17,14 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0328 remediation 1 committed.
 - TASK-0328 remains `in_progress` under the remediation claim. Exact-commit
   clean-clone verification and governed delivery remain pending; Codex has not
   reviewed or ratified its own work.
+- Exact implementation commit `41a38082` passed 72/72 memory tests, 67/67
+  falsification inventory, collaboration, encoding, neutrality, and diff gates
+  in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0328r1-41a38082` with
+  empty status before and after validation.
+- Delivery commit `b0d21dd3` moves TASK-0328 to `in_review`, releases every
+  remediation claim, and publishes the self-contained handoff to Arquitecto.
+  Independent Analista review remains required; Codex did not self-review.
 
 ## 2026-08-08 - TASK-0343 implementation
 
