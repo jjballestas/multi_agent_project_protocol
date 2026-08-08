@@ -1,6 +1,37 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-08 Europe/Madrid, TASK-0331 remediation iteration 1 implementation.
+Last updated: 2026-08-08 Europe/Madrid, TASK-0335 remediation iteration 1 implementation committed.
+
+## 2026-08-08 - TASK-0335 remediation iteration 1 implementation
+
+- Commit `e7eb3971` restores the exact governed-file assertion, records the measured AC7 count,
+  completes the full-harness scope inventory, and repairs the authorized TASK-0334 fixture-only
+  dependency regression without touching production.
+- Eleven PowerShell extraction sites were inventoried. Nine executable/body-fed probes now use a
+  transitive dependency-closure extractor with explicit mocks; two remaining single-body extracts
+  are static inspections. The three stale executable probes were large stderr, expired-claim, and
+  UTF-8 residue; no third failure family appeared.
+- The complete retry runner, 25-test exec-lease harness, 52/52 falsification inventory, 8/8 CI
+  wiring, falsification guardian, collaboration validator, encoding, neutrality, and diff gates
+  exited 0 before commit and against exact detached commit `e7eb3971` in the designated scratch
+  clone.
+- Governed delivery commit `c0ac45d8` moves TASK-0335 to `in_review`, releases both Codex claims,
+  and publishes the self-contained handoff requesting independent Analista re-review. Codex did
+  not review or ratify the remediation.
+
+## 2026-08-08 - TASK-0335 remediation blocked on TASK-0334 fixture dependency
+
+- Commit `bf9e4a68` records TASK-0335 blocked and publishes one question to Arquitecto after the
+  authorized scope inventory advanced the runner beyond deleted-residue admission.
+- The inventory repair adds empty archive indexes to six independent fixture roots; nine full-harness
+  fixture families contain fourteen executions, thirteen resolvable and one deliberately ambiguous
+  negative. These edits remain uncommitted under the active blocked-WIP claim.
+- The next deterministic failure is not production and not missing scope: TASK-0334 made
+  `Get-GitStatusPorcelainUtf8` depend on two helpers, while `run_large_stderr_drain_case` still
+  extracts only the outer function. Arquitecto must choose whether TASK-0335 may absorb the narrow
+  fixture-only dependency repair or partition it.
+- Collaboration validation, encoding, neutrality, and diff gates exited 0 before the coordination
+  commit. The full retry runner remains red at the declared blocker; Codex did not widen scope.
 
 ## 2026-08-08 - TASK-0331 remediation iteration 1 implementation
 
@@ -11,11 +42,13 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0331 remediation iteration 1 implem
   and glob fail-closed behavior. The existing dirty-tree contract is now behavioral and kills a
   dead-wiring mutant that leaves the guard text present while reaching admission.
 - The 25-test exec-lease harness, 52/52 falsification inventory, guardian, collaboration validator,
-  encoding, neutrality, and diff gates exited 0 before commit. TASK-0331 remains `in_progress`
-  under the remediation claim pending exact-commit clean-clone verification and governed delivery.
+  encoding, neutrality, and diff gates exited 0 before commit and against the exact detached commit.
 - The declared boundary is explicit: structurally unresolvable messages reach terminal defer and
   require manual rearm; archived tasks no longer fall into that class. The measured 255.2-minute
   figure is only the recoverable ceiling, not claimed actual overlap.
+- Delivery commit `1c5aa703` moves TASK-0331 to `in_review`, releases every Codex remediation claim,
+  publishes the self-contained handoff and requests independent Analista re-review. Codex did not
+  review or ratify the remediation.
 
 ## 2026-08-08 - TASK-0322 and TASK-0333 closure
 
