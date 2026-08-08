@@ -4,9 +4,9 @@ Last updated: 2026-08-08 Europe/Madrid, TASK-0343 diagnostic committed.
 
 ## 2026-08-08 - TASK-0343 pre-fix CI diagnosis
 
-- Diagnostic commit `1788d63f` leaves the brittle rollback assertion unchanged and
-  prints every actual `ROLLBACK_LEDGER_PRESERVED` record so a real Actions run can
-  expose the CI field values required by AC1 before repair.
+- Diagnostic commits `1788d63f` and `071b5a1a` leave the brittle rollback assertion
+  unchanged. Run 31269392388 proved CI emits no preserved-ledger record; the second
+  observation prints every rollback decision to identify the actual CI path.
 - Local Windows measured `seq_before=0`, `seq_after=3`, and `proof=disk`; failed run
   31266113929 did not print its fixture log and uploaded no artifact, so its exact
   values remain pending the diagnostic run.
