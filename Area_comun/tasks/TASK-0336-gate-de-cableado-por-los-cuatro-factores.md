@@ -81,8 +81,9 @@ shell.**
 
 La excepcion multilinea acepta solo un shell bash efectivo (declarado en el paso, en
 `defaults.run.shell` del job o del workflow, o implicito en un runner Unix) y un bloque cuya unica
-linea no inerte es la invocacion directa. Las demas lineas admitidas son `echo` simples: no pueden
-desactivar `errexit`, instalar un `trap ERR`, evaluar codigo ni ocultar el estado de salida. Esta
+linea relevante es la invocacion directa. Las demas lineas admitidas son `echo` simples o
+invocaciones Python sin operadores de shell: no pueden desactivar `errexit`, instalar un `trap ERR`,
+evaluar codigo en el shell padre ni ocultar el estado de salida. Esta
 regla conserva el bloque bueno `echo / runner / echo` y rechaza por construccion `set +e`,
 `set +o errexit`, `trap`, `source`, `eval`, funciones y operadores de control.
 

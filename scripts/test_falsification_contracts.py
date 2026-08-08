@@ -42,6 +42,13 @@ FALSIFICATION_CONTRACTS = (
             "assert job_needs.returncode != 0",
             "assert job_if_false.returncode != 0",
             "assert dispatch_only.returncode != 0",
+            "assert multiline_set_plus_e.returncode != 0",
+            "assert multiline_trap_err.returncode != 0",
+            "assert job_continue_on_error.returncode != 0",
+            "assert job_defaults_bash.returncode == 0",
+            "assert workflow_defaults_bash.returncode == 0",
+            "assert \"FALSIFICATION_EXECUTION_GUARANTEED\" not in wired.stdout",
+            "assert \"residuals=trigger_filters,working_directory,yaml_1_1_scalars\" in wired.stdout",
         ),
         "exercised_by": "main",
     },
@@ -138,6 +145,8 @@ def main() -> int:
         workflow.write_text(baseline, encoding="ascii")
         wired = run(fixture, workflow)
         assert wired.returncode == 0, wired.stdout + wired.stderr
+        assert "FALSIFICATION_EXECUTION_GUARANTEED" not in wired.stdout, wired.stdout
+        assert "residuals=trigger_filters,working_directory,yaml_1_1_scalars" in wired.stdout, wired.stdout
 
         multiline = baseline.replace(
             "      - run: python examples/orphan/run_orphan.py\n",
@@ -154,6 +163,44 @@ def main() -> int:
             multiline.replace("      - run: |\n", "      - shell: bash\n        run: |\n", 1),
         )
         assert multiline_bash.returncode == 0, multiline_bash.stdout + multiline_bash.stderr
+
+        multiline_set_plus_e = mutated(
+            "m14-multiline-set-plus-e",
+            multiline.replace(
+                "      - run: |\n",
+                "      - shell: bash\n        run: |\n          set +e\n",
+                1,
+            ),
+        )
+        assert multiline_set_plus_e.returncode != 0, multiline_set_plus_e.stdout + multiline_set_plus_e.stderr
+
+        multiline_trap_err = mutated(
+            "m15-multiline-trap-err",
+            multiline.replace(
+                "      - run: |\n",
+                "      - shell: bash\n        run: |\n          trap 'exit 0' ERR\n",
+                1,
+            ),
+        )
+        assert multiline_trap_err.returncode != 0, multiline_trap_err.stdout + multiline_trap_err.stderr
+
+        job_defaults_bash = mutated(
+            "job-defaults-bash",
+            multiline.replace(
+                "    runs-on: windows-latest\n",
+                "    runs-on: windows-latest\n    defaults:\n      run:\n        shell: bash\n",
+            ),
+        )
+        assert job_defaults_bash.returncode == 0, job_defaults_bash.stdout + job_defaults_bash.stderr
+
+        workflow_defaults_bash = mutated(
+            "workflow-defaults-bash",
+            multiline.replace(
+                "jobs:\n",
+                "defaults:\n  run:\n    shell: bash\njobs:\n",
+            ),
+        )
+        assert workflow_defaults_bash.returncode == 0, workflow_defaults_bash.stdout + workflow_defaults_bash.stderr
 
         step_if_false = mutated(
             "m3-step-if-false",
@@ -222,6 +269,15 @@ def main() -> int:
             ),
         )
         assert continued_literal.returncode != 0, continued_literal.stdout + continued_literal.stderr
+
+        job_continue_on_error = mutated(
+            "m16-job-continue-on-error",
+            baseline.replace(
+                "    runs-on: windows-latest\n",
+                "    continue-on-error: true\n    runs-on: windows-latest\n",
+            ),
+        )
+        assert job_continue_on_error.returncode != 0, job_continue_on_error.stdout + job_continue_on_error.stderr
 
         echoed = mutated(
             "m10-echoed",

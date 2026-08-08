@@ -36,7 +36,9 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def workflow_steps(path: Path) -> tuple[bool, list[tuple[str, dict[str, object], dict[str, object]]]]:
+def workflow_steps(
+    path: Path,
+) -> tuple[bool, list[tuple[str, dict[str, object], dict[str, object], dict[str, object]]]]:
     """Return trigger coverage and real steps nested under real workflow jobs."""
     document = yaml.safe_load(path.read_text(encoding="utf-8-sig"))
     if not isinstance(document, dict):
@@ -55,7 +57,10 @@ def workflow_steps(path: Path) -> tuple[bool, list[tuple[str, dict[str, object],
     jobs = document.get("jobs")
     if not isinstance(jobs, dict):
         raise ValueError(f"{path}: workflow must define a jobs mapping")
-    found: list[tuple[str, dict[str, object], dict[str, object]]] = []
+    workflow_defaults = document.get("defaults")
+    if not isinstance(workflow_defaults, dict):
+        workflow_defaults = {}
+    found: list[tuple[str, dict[str, object], dict[str, object], dict[str, object]]] = []
     for job_id, raw_job in jobs.items():
         if not isinstance(raw_job, dict):
             continue
@@ -64,22 +69,58 @@ def workflow_steps(path: Path) -> tuple[bool, list[tuple[str, dict[str, object],
             continue
         for raw_step in steps:
             if isinstance(raw_step, dict):
-                found.append((str(job_id), raw_job, raw_step))
+                found.append((str(job_id), workflow_defaults, raw_job, raw_step))
     return required_triggers <= triggers, found
 
 
-def shell_guarantees_abort(job: dict[str, object], step: dict[str, object]) -> bool:
+def configured_shell(
+    workflow_defaults: dict[str, object],
+    job: dict[str, object],
+    step: dict[str, object],
+) -> object:
+    """Resolve the step, job-default, then workflow-default shell declaration."""
+    if "shell" in step:
+        return step["shell"]
+    for defaults in (job.get("defaults"), workflow_defaults):
+        if not isinstance(defaults, dict):
+            continue
+        run_defaults = defaults.get("run")
+        if isinstance(run_defaults, dict) and "shell" in run_defaults:
+            return run_defaults["shell"]
+    return None
+
+
+def shell_guarantees_abort(
+    workflow_defaults: dict[str, object],
+    job: dict[str, object],
+    step: dict[str, object],
+) -> bool:
     """Recognize GitHub shell modes that abort a multiline script on first failure."""
-    shell = step.get("shell")
+    shell = configured_shell(workflow_defaults, job, step)
     if shell == "bash":
         return True
     runs_on = job.get("runs-on")
     return shell is None and isinstance(runs_on, str) and runs_on.startswith(("ubuntu-", "macos-"))
 
 
+def bash_block_preserves_abort(
+    lines: list[str], invocation: re.Pattern[str], safe_python: re.Pattern[str]
+) -> bool:
+    """Accept only block lines that cannot change or intercept bash failure handling."""
+    direct_invocations = [line for line in lines if invocation.fullmatch(line)]
+    if len(direct_invocations) != 1:
+        return False
+    safe_echo = re.compile(r"echo(?:\s+[A-Za-z0-9_./: -]+)?", re.IGNORECASE)
+    return all(
+        invocation.fullmatch(line) or safe_echo.fullmatch(line) or safe_python.fullmatch(line)
+        for line in lines
+    )
+
+
 def command_gates_runner(
     command: str,
     relative_path: Path,
+    workflow_defaults: dict[str, object],
     job: dict[str, object],
     step: dict[str, object],
 ) -> bool:
@@ -90,6 +131,10 @@ def command_gates_runner(
         rf"{python}\s+(?:{candidate}|\"{candidate}\"|'{candidate}')",
         re.IGNORECASE,
     )
+    safe_python = re.compile(
+        rf"{python}\s+[A-Za-z0-9_./:=,-]+(?:\s+[A-Za-z0-9_./:=,-]+)*",
+        re.IGNORECASE,
+    )
     lines = [
         line.strip().replace("\\", "/")
         for line in command.splitlines()
@@ -98,9 +143,13 @@ def command_gates_runner(
     direct_invocations = [line for line in lines if invocation.fullmatch(line)]
     if len(lines) == 1:
         return len(direct_invocations) == 1
-    # GitHub's named bash shell runs with ``bash --noprofile --norc -eo pipefail``.
-    # A plain runner line therefore propagates failure even inside a multiline block.
-    return shell_guarantees_abort(job, step) and len(direct_invocations) == 1
+    # GitHub's bash shell starts with ``-eo pipefail``.  The multiline exception is
+    # deliberately narrower than nominal shell selection: every other executable line
+    # must be an inert echo or an undecorated Python process, so the block cannot change
+    # parent-shell options, disable errexit, or intercept ERR.
+    return shell_guarantees_abort(workflow_defaults, job, step) and bash_block_preserves_abort(
+        lines, invocation, safe_python
+    )
 
 
 def condition_allows_execution(value: object) -> bool:
@@ -122,6 +171,7 @@ def failure_reaches_job(mapping: dict[str, object]) -> bool:
 
 def step_gates_runner(
     workflow_triggers: bool,
+    workflow_defaults: dict[str, object],
     job: dict[str, object],
     step: dict[str, object],
     relative_path: Path,
@@ -135,7 +185,9 @@ def step_gates_runner(
         return False
     if not failure_reaches_job(job) or not failure_reaches_job(step):
         return False
-    return isinstance(command, str) and command_gates_runner(command, relative_path, job, step)
+    return isinstance(command, str) and command_gates_runner(
+        command, relative_path, workflow_defaults, job, step
+    )
 
 
 def declarations(path: Path) -> list[dict[str, object]]:
@@ -218,7 +270,7 @@ def main() -> int:
     stale = sorted(declared_ids - existing_ids)
     workflow_path = (root / args.workflow).resolve() if args.workflow else None
     required_triggers_present = False
-    steps: list[tuple[str, dict[str, object], dict[str, object]]] = []
+    steps: list[tuple[str, dict[str, object], dict[str, object], dict[str, object]]] = []
     if workflow_path is not None:
         if workflow_path.is_file():
             try:
@@ -246,8 +298,8 @@ def main() -> int:
         if workflow_path is not None and steps:
             runner = owners[contract.id].relative_to(root)
             if not any(
-                step_gates_runner(required_triggers_present, job, step, runner)
-                for _, job, step in steps
+                step_gates_runner(required_triggers_present, defaults, job, step, runner)
+                for _, defaults, job, step in steps
             ):
                 errors.append(f"{contract.id}: runner is not executed by workflow: {runner}")
     if workflow_path is not None and steps:
@@ -256,25 +308,28 @@ def main() -> int:
             runner
             for runner in runners
             if any(
-                step_gates_runner(required_triggers_present, job, step, runner)
-                for _, job, step in steps
+                step_gates_runner(required_triggers_present, defaults, job, step, runner)
+                for _, defaults, job, step in steps
             )
         }
         executed_contracts = sum(
             any(
                 step_gates_runner(
                     required_triggers_present,
+                    defaults,
                     job,
                     step,
                     owners[item.id].relative_to(root),
                 )
-                for _, job, step in steps
+                for _, defaults, job, step in steps
             )
             for item in contracts
         )
         print(
-            "FALSIFICATION_EXECUTION_GUARANTEED "
-            f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)}"
+            "FALSIFICATION_STATIC_WIRING "
+            f"runners={len(executed_runners)}/{len(runners)} contracts={executed_contracts}/{len(contracts)} "
+            "scope=trigger_keys+conditions+direct_invocation+shell_failure+job_failure "
+            "residuals=trigger_filters,working_directory,yaml_1_1_scalars"
         )
     print(
         "FALSIFICATION_INVENTORY "
