@@ -4,11 +4,15 @@
 from __future__ import annotations
 
 import base64
+import builtins
 import json
 import shutil
 import sys
+from types import ModuleType
 from pathlib import Path
 from typing import Any
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -17,7 +21,7 @@ if str(ROOT) not in sys.path:
 from cryptography.hazmat.primitives import serialization  # type: ignore
 from cryptography.hazmat.primitives.asymmetric import ed25519  # type: ignore
 
-from runtime.eventlog import EventWriter, actor_auth_signable_event, canonical_hash, verify_actor_auth
+from runtime.eventlog import EventLogError, EventWriter, actor_auth_signable_event, canonical_hash, verify_actor_auth
 from runtime.protocol_replay import protocol_state_drift
 from runtime.submit_intent import IntentError, submit_intent
 from runtime.temp_paths import make_root_temp_dir, remove_root_temp_dir
@@ -25,6 +29,29 @@ from runtime.temp_paths import make_root_temp_dir, remove_root_temp_dir
 
 PRIVATE_KEY = ed25519.Ed25519PrivateKey.from_private_bytes(bytes(range(1, 33)))
 OTHER_KEY = ed25519.Ed25519PrivateKey.from_private_bytes(bytes(range(2, 34)))
+
+FALSIFICATION_CONTRACTS = (
+    {
+        "id": "NEG-ACTOR-AUTH-CRYPTO-DEPENDENCY",
+        "negative": "Actor-auth verification must fail explicitly, never crash through an unbound exception type, when cryptography is absent.",
+        "mutation": "mutant_source = source.replace(",
+        "boundaries": (
+            "assert shipped_reason == missing_dependency_reason",
+            "assert isinstance(mutant_error, UnboundLocalError)",
+        ),
+        "exercised_by": "case_cryptography_dependency_contract",
+    },
+    {
+        "id": "NEG-ACTOR-AUTH-CI-DEPENDENCY",
+        "negative": "Every workflow job that runs the canonical validator must install cryptography.",
+        "mutation": 'workflow_text.replace("cryptography jsonschema pyyaml", "jsonschema pyyaml", 1)',
+        "boundaries": (
+            "assert validator_jobs_install_cryptography(workflow_text)",
+            "assert not validator_jobs_install_cryptography(mutant_workflow)",
+        ),
+        "exercised_by": "case_cryptography_dependency_contract",
+    },
+)
 
 
 def public_b64(key: ed25519.Ed25519PrivateKey) -> str:
@@ -114,6 +141,92 @@ def intent() -> dict[str, Any]:
             "notes": "actor auth golden",
         },
     }
+
+
+def block_cryptography_imports(name: str, *args: object, **kwargs: object) -> object:
+    if name == "cryptography" or name.startswith("cryptography."):
+        raise ModuleNotFoundError("blocked cryptography import for dependency contract")
+    return ORIGINAL_IMPORT(name, *args, **kwargs)
+
+
+ORIGINAL_IMPORT = builtins.__import__
+
+
+def missing_dependency_result(verify: object) -> tuple[str | None, BaseException | None]:
+    event = {
+        "actor": "Codex",
+        "actor_auth": {
+            "method": "ed25519",
+            "keyid": "codex:v1",
+            "sig": base64.b64encode(b"not-a-real-signature").decode("ascii"),
+        },
+    }
+    try:
+        builtins.__import__ = block_cryptography_imports
+        verify(event, config(enforce=False, keyid="codex:v1"))  # type: ignore[operator]
+    except EventLogError as exc:
+        return str(exc), None
+    except BaseException as exc:  # The negative must classify the former UnboundLocalError.
+        return None, exc
+    finally:
+        builtins.__import__ = ORIGINAL_IMPORT
+    return None, None
+
+
+def validator_jobs_install_cryptography(workflow_text: str) -> bool:
+    document = yaml.safe_load(workflow_text)
+    jobs = document.get("jobs") if isinstance(document, dict) else None
+    if not isinstance(jobs, dict):
+        return False
+    validator_jobs = []
+    for raw_job in jobs.values():
+        if not isinstance(raw_job, dict) or not isinstance(raw_job.get("steps"), list):
+            continue
+        commands = [
+            str(step.get("run") or "")
+            for step in raw_job["steps"]
+            if isinstance(step, dict)
+        ]
+        if any("validate_collaboration_state.py" in command for command in commands):
+            validator_jobs.append(commands)
+    return bool(validator_jobs) and all(
+        any("pip install" in command and "cryptography" in command.split() for command in commands)
+        for commands in validator_jobs
+    )
+
+
+def case_cryptography_dependency_contract() -> tuple[str, bool, str]:
+    """PERMANENT_NEGATIVE: NEG-ACTOR-AUTH-CRYPTO-DEPENDENCY, NEG-ACTOR-AUTH-CI-DEPENDENCY"""
+    missing_dependency_reason = "actor_auth verification unavailable: cryptography package is required"
+    shipped_reason, shipped_error = missing_dependency_result(verify_actor_auth)
+    assert shipped_error is None
+    assert shipped_reason == missing_dependency_reason
+
+    source = (ROOT / "runtime/eventlog.py").read_text(encoding="utf-8-sig")
+    mutant_source = source.replace(
+        "    except ImportError as exc:\n"
+        "        raise EventLogError(\"actor_auth verification unavailable: cryptography package is required\") from exc\n"
+        "    try:\n"
+        "        raw_signature",
+        "        raw_signature",
+        1,
+    )
+    if mutant_source == source:
+        return "AC6-cryptography-dependency-contract", False, "eventlog mutation did not apply"
+    mutant = ModuleType("mutant_eventlog")
+    exec(compile(mutant_source, "mutant_eventlog.py", "exec"), mutant.__dict__)
+    _mutant_reason, mutant_error = missing_dependency_result(mutant.verify_actor_auth)
+    assert isinstance(mutant_error, UnboundLocalError)
+
+    workflow_text = (ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8-sig")
+    assert validator_jobs_install_cryptography(workflow_text)
+    mutant_workflow = workflow_text.replace("cryptography jsonschema pyyaml", "jsonschema pyyaml", 1)
+    assert not validator_jobs_install_cryptography(mutant_workflow)
+    return (
+        "AC6-cryptography-dependency-contract",
+        True,
+        "missing dependency is explicit; former crash and missing CI install mutants diverge",
+    )
 
 
 def case_submit_intent_signs() -> tuple[str, bool, str]:
@@ -211,6 +324,7 @@ def main() -> int:
         case_secret_independent_verify,
         case_sign_without_secret_fails,
         case_runtime_override_flip_clean,
+        case_cryptography_dependency_contract,
     ]
     results = [case() for case in cases]
     print(json.dumps({"actor_auth_ed25519_cases.v1": [{"name": name, "ok": ok, "detail": detail} for name, ok, detail in results]}, indent=2, sort_keys=True))

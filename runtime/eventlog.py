@@ -401,6 +401,9 @@ def verify_actor_auth(event: dict[str, Any], config: dict[str, Any] | None, root
         from cryptography.exceptions import InvalidSignature  # type: ignore
         from cryptography.hazmat.primitives import serialization  # type: ignore
         from cryptography.hazmat.primitives.asymmetric import ed25519  # type: ignore
+    except ImportError as exc:
+        raise EventLogError("actor_auth verification unavailable: cryptography package is required") from exc
+    try:
         raw_signature = base64.b64decode(signature, validate=True)
         key_text = public_key_text.strip()
         if "BEGIN PUBLIC KEY" in key_text:
@@ -416,10 +419,8 @@ def verify_actor_auth(event: dict[str, Any], config: dict[str, Any] | None, root
     except Exception:
         return {"valid": False, "reason": "invalid_signature"}
 
-
 def event_head_digest(event: dict[str, Any]) -> str:
     return "sha256:" + canonical_hash(event)
-
 
 def anchor_to_git_remote(head_digest: str, config: dict[str, Any], *, now: str) -> dict[str, Any]:
     remote_url = str(config.get("remote_url") or "").strip()
@@ -438,7 +439,6 @@ def anchor_to_git_remote(head_digest: str, config: dict[str, Any], *, now: str) 
         handle.write(line)
     proof = canonical_hash({"head": head_digest, "identity": identity, "line": line, "backend": "git-remote"})
     return {"backend": "git-remote", "git_timestamp": now, "proof": proof, "remote_ref": str(remote_path)}
-
 
 def anchor_due(last_anchor_ts: str | None, now: str, interval_seconds: int) -> bool:
     if interval_seconds <= 0 or not last_anchor_ts:
