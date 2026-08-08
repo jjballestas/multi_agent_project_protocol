@@ -5962,3 +5962,18 @@ ratified its own work.
   explicit unknown-owner residual, and exact review evidence.
 - Independent Analista re-review of `e9719613` is required before any closure. Codex remains maker
   only and did not review or ratify the remediation.
+
+## 2026-08-08 - TASK-0344 implementation
+
+- Commit `dc34ca39` records the pre-fix diagnosis and repairs the stale mailbox-status fixture.
+  Both answered FYI messages have `requires_response: false`, so neither enters the unresolved-
+  response branch. The fixture instead stopped reaching `prune_mailbox()` after TASK-0273 commit
+  `3062214d` made non-due `apply_prune()` calls intentional no-ops.
+- The fixture is now deliberately due and permanent negative
+  `NEG-MAILBOX-PRUNE-MUST-ARCHIVE` proves that suppressing the prune call leaves the expected old
+  message unarchived. The runner passes locally and uses the designated Aegis scratch umbrella.
+- Before TASK-0344, no task `verification_cmd` invoked this CI-wired runner. Future changes to
+  mailbox folder/status validation or prune behavior must include
+  `python examples/mailbox_status_cases/run_mailbox_status_cases.py` in their task verification.
+- TASK-0344 remains `in_progress` until a real Actions run reports the named step green and the
+  exact commit passes the required clean-clone gates. Codex remains maker only.
