@@ -16,8 +16,11 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0329 remediation 3 implementation c
   degraded `mutation` fragment is replaced by named, executable single-scanner mutations.
 - Six neutrality tests, 68/68 falsification inventory across 12/12 wired runners,
   collaboration, encoding, both neutrality scanners, compile, and diff gates exited 0.
-  TASK-0329 remains `in_progress` pending exact-commit clean-clone verification and governed
-  delivery; Codex has not reviewed or ratified the remediation.
+  Exact commit `1177f67b` passed those gates in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0329r3-1177f67b-20260809` with empty status.
+- Delivery commit `f276b897` moves TASK-0329 to `in_review`, releases every Codex claim, and
+  publishes the self-contained remediation-3 handoff plus Arquitecto routing request. Codex
+  remains maker only and did not review or ratify the remediation.
 
 ## 2026-08-08 - TASK-0328 remediation iteration 1
 
