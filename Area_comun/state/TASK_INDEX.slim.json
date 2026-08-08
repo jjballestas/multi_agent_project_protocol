@@ -50,7 +50,7 @@
         {
             "id": "TASK-0336",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
         },
         {

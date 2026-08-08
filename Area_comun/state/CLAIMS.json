@@ -142,9 +142,37 @@
                 "scripts/test_falsification_contracts.py"
             ],
             "started_at": "2026-08-08T09:45:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0336",
             "updated_at": "2026-08-08T09:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-3-delivery",
+            "expires_at": "2026-08-08T22:18:00Z",
+            "notes": "Publish the remediation-3 delivery routing message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-3-delivery",
+                "Area_comun/mailbox/open/MSG-20260808-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-3.md"
+            ],
+            "started_at": "2026-08-08T10:18:00Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-08T10:18:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260808-Codex-TASK-0336-remediation-3-handoff",
+            "expires_at": "2026-08-08T22:10:00Z",
+            "notes": "Publish the self-contained remediation-3 maker handoff after exact-commit verification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260808-Codex-TASK-0336-remediation-3-handoff",
+                "Area_comun/handoffs/HANDOFF-TASK-0336-codex-to-arquitecto.md"
+            ],
+            "started_at": "2026-08-08T10:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-08T10:10:00Z"
         },
         {
             "claim_id": "CLAIM-arq-20260808-0327-adjudica",
