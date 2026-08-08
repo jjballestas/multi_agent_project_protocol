@@ -2,7 +2,7 @@
 task_id: TASK-0331
 file: Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md
 title: "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
-status: in_review
+status: in_progress
 type: infra
 owner: Codex
 reviewer: Analista
@@ -164,3 +164,58 @@ preserva leases truncada, vacia y sin deadline de un dueno vivo, y mata el mutan
 `deadline` en vez de `reservation_deadline`. Frontera: una lease ilegible sin evidencia parseable de
 dueno se conserva deliberadamente; falla cerrado y requiere intervencion en vez de arriesgar borrar
 un exec vivo.
+
+## Remediacion 4 - tabla normativa de estados
+
+Regla de oro: ante duda real, ni borrar ni dejar pasar. El autocurado preserva la lease y publica
+`SELF_HEAL_MANUAL_RECOVERY_REQUIRED`; si no habia lock, crea un marcador de recuperacion atomico.
+El guard del peer trata la lease como ocupada. `dead` significa muerte demostrada por una identidad
+PID + start-time; ausencia de identidad o fallo al leer start-time es `unknown`, nunca `dead`.
+
+La columna `dueno` es el resultado trivaluado de la mejor evidencia util entre lease y lock, no una
+verdad oculta que el runtime no puede observar. Con lease ilegible/0 bytes/sin identidad y lock
+ausente, el resultado necesariamente es `unknown`, aunque el proceso real ya haya muerto. Ese caso
+no se borra por conjetura: queda bloqueado con senal explicita para intervencion.
+
+Convenciones de respuesta del guard: `scope` significa `active_peer_lease` solo si el scope legible
+interseca (trabajo legible y disjunto puede solaparse); `busy` significa veto fail-closed
+`peer_lease_unreadable`; `none` significa que no veta. Para `dead`, la respuesta anterior al
+autocurado solo puede ser `none` si la lease legible trae identidad util; las otras formas quedan
+`busy` hasta que el autocurado respaldado por el lock las retire. Despues de retirar, siempre `none`.
+
+| lease | dueno | lock | autocurado | guard antes -> despues | porque |
+|---|---|---|---|---|---|
+| legible | live | presente | preservar | scope -> scope | La identidad util prueba vida; solo el scope decide solape. |
+| legible | live | ausente | preservar | scope -> scope | La lease basta para probar vida. |
+| legible | dead | presente | retirar lease+lock | none -> none | La identidad util prueba muerte. |
+| legible | dead | ausente | retirar lease | none -> none | La lease basta para probar muerte. |
+| legible | unknown | presente | preservar | busy -> busy | No hay certificado de muerte. |
+| legible | unknown | ausente | preservar+marcador | busy -> busy | El marcador evita arranque propio y el guard veta. |
+| ilegible | live | presente | preservar | busy -> busy | El lock prueba vida; la lease no permite scope seguro. |
+| ilegible | live | ausente | preservar+marcador | busy -> busy | Sin evidencia observable se clasifica unknown y no se arriesga. |
+| ilegible | dead | presente | retirar lease+lock | busy -> none | Solo el lock puede probar muerte. |
+| ilegible | dead | ausente | preservar+marcador | busy -> busy | Muerte real sin evidencia observable no autoriza borrar. |
+| ilegible | unknown | presente | preservar | busy -> busy | Lock no util y lease no legible: duda real. |
+| ilegible | unknown | ausente | preservar+marcador | busy -> busy | Duda real sin lock: se hace visible y bloqueante. |
+| 0 bytes | live | presente | preservar | busy -> busy | Vacio es ilegible, no ausencia de lease. |
+| 0 bytes | live | ausente | preservar+marcador | busy -> busy | Vacio sin evidencia sigue siendo ocupacion dudosa. |
+| 0 bytes | dead | presente | retirar lease+lock | busy -> none | El lock prueba muerte aunque la lease este vacia. |
+| 0 bytes | dead | ausente | preservar+marcador | busy -> busy | No existe prueba observable de muerte. |
+| 0 bytes | unknown | presente | preservar | busy -> busy | El lock no resuelve la duda. |
+| 0 bytes | unknown | ausente | preservar+marcador | busy -> busy | Cierra el fallo abierto de vacio/espacios. |
+| sin identidad | live | presente | preservar | busy -> busy | El lock prueba vida; la lease no puede probar scope+owner completo. |
+| sin identidad | live | ausente | preservar+marcador | busy -> busy | Sin identidad observable no se asume vida ni muerte. |
+| sin identidad | dead | presente | retirar lease+lock | busy -> none | El lock prueba muerte. |
+| sin identidad | dead | ausente | preservar+marcador | busy -> busy | Sin prueba observable no se borra. |
+| sin identidad | unknown | presente | preservar | busy -> busy | Ninguna evidencia util resuelve el owner. |
+| sin identidad | unknown | ausente | preservar+marcador | busy -> busy | El marcador evita el estado absorbente mudo. |
+
+Refinamiento temporal: una lease `running` viva y pre-deadline se preserva. Si expira, se intenta
+detener el arbol y solo se retira tras observar `dead`. Una reserva viva pre-deadline se preserva;
+si vence con supervisor aun vivo se preserva y exige recuperacion manual. Un deadline ilegible no
+convierte `live` en `dead`.
+
+Contrato permanente: `NEG-HARNESS-LEASE-OWNER-LOCK-STATE-TABLE` recorre las 24 celdas y comprueba
+preservacion/retirada, marcador, senal y respuesta del guard antes/despues. Sus mutantes cambian
+por separado `unknown -> dead`, `unknown -> live`, el vacio fail-closed y la creacion del marcador;
+cualquier movimiento desde una accion declarada rompe al menos una frontera de la tabla.

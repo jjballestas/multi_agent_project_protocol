@@ -304,7 +304,7 @@
             "file": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
             "id": "TASK-0331",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez",
             "type": "infra"
         },
@@ -336,7 +336,7 @@
             "file": "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
             "id": "TASK-0336",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job",
             "type": "infra"
         },
