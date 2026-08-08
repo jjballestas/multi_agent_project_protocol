@@ -8424,3 +8424,95 @@ incluye "un paso anterior del mismo job falla primero": hueco propio, no de la t
   Comprobar la existencia de las rutas declaradas antes de razonar sobre ellas.
 - Al commitear salio `PRUNE DUE: cold_start_tokens 20780 >= 20000`. La poda es del Arquitecto
   (capability orchestrator) y CI la gatea; yo la senalo, no la ejecuto.
+
+---
+
+## 2026-08-08 14:30 -- TASK-0336 r4 (lista blanca): CHANGE-REQUIRED. La linea del gate no es la linea de bash
+
+Commit juzgado `73822f50`, HEAD al emitir `87c23751`, mi veredicto en `72f2b8ed`.
+Artefacto: `Area_comun/artifacts/Analista-TASK-0336-lista-blanca-r4-verdict.md`.
+
+### La leccion transferible: cuando un gate y un ejecutor discrepan sobre la UNIDAD
+
+Tercera vuelta de la misma familia (r3 fue la continuacion con `\`), y la tercera vez que el fallo
+esta en la **unidad de analisis**, no en la lista de formas. El gate corta el comando con
+`command.splitlines()`; bash corta por `\n`. `str.splitlines()` reconoce **siete** separadores mas:
+`\r \v \f \x1c \x1d \x1e \x85 \u2028 \u2029`. Un `run:` escrito como escalar YAML entre comillas
+dobles con uno de esos escapes se le presenta al gate como **dos** lineas (`echo` inerte + runner,
+que es exactamente el miembro `bash_abort_block` de la lista blanca) y a bash como **una**, con el
+runner tragado como argumento de `echo`. Medido en GNU bash 5.2.37:
+
+    LF (control)  exit 1, runner ejecutado SI
+    CR VT FF NEL LS PS   exit 0, runner ejecutado NO      <- verde silencioso
+
+**Regla para la proxima:** ante cualquier gate que razone sobre "lineas", "palabras" o "comandos" de
+algo que ejecuta OTRO motor, la primera sonda es *donde discrepan las dos nociones de unidad*. No
+probar mas formas dentro de la misma nocion: probar la nocion.
+
+### Invertir a lista blanca no convierte un criterio sintactico en un criterio de garantia
+
+El Arquitecto pregunto lo correcto: la lista blanca ata la GARANTIA o casa dos formas? Casa formas.
+Tres discriminadores que sirven de plantilla para juzgar cualquier "lista blanca fail-closed":
+
+1. **Mira el criterio la condicion que dice atar?** `single_runner` devuelve ANTES de consultar
+   `shell_guarantees_abort`: certifica que el runner se ejecuta sin poder nombrar el shell.
+2. **Sobre que representacion se calcula?** Aqui, sobre la nocion de linea de Python, no la del
+   shell. Si la representacion es del lenguaje del gate y no del ejecutor, es sintactico.
+3. **Acepta una forma distinta con garantia identica?** `python runner.py --root .` propaga el exit
+   code igual que `python runner.py` y se rechaza bajo TODOS los shells. Un criterio de garantia la
+   aceptaria; una plantilla no puede.
+
+### Matriz de fronteras portantes: el metodo, y lo que encontro
+
+31 mutantes reconstruidos x **14 debilitamientos de un solo punto** del gate. Portante = algun
+debilitamiento la voltea. Resultado: 31/31 presentes una sola vez y ejecutadas, **23/31 discriminan**.
+
+Hallazgo del metodo: **neutralizar entero el mecanismo de la remediacion 2** (`bash_line_continues`
+a `return False` + borrar su llamada) deja **las 31 fronteras verdes** y el gate en exit 0. La lista
+blanca ya rechaza esos bloques por otra via (una linea acabada en `\` no encaja en `safe_echo` ni en
+`safe_python`), y simetricamente al quitar la lista blanca el guardia los cubre. **La propiedad esta
+cubierta dos veces y ningun mecanismo esta fijado por separado.** Un contrato con doble cobertura
+mutua no detecta el borrado de ninguna de las dos mitades: hay que mutar las DOS a la vez, o el
+mutante "borro el mecanismo" sobrevive.
+
+### Espantapajaros: prohibir un token que nadie escribiria
+
+AC5 (certificacion honesta) esta atado por `assert "FALSIFICATION_EXECUTION_GUARANTEED" not in
+wired.stdout`. Devolvi la salida a `FALSIFICATION_EXECUTION guaranteed=yes runners=8/8
+scope=full_execution_guarantee` y **las 31 fronteras verdes, exit 0**. La frontera prohibe una
+cadena literal concreta; el reclamo afirmativo real pasa por debajo. Es la variante mas barata de
+"ata la forma, no la propiedad": **una asercion `not in` sobre un literal que el codigo nunca ha
+emitido no ata nada.** Al revisar un AC de "la salida no debe afirmar X", exigir que la frontera
+muera por MUTACION del texto certificador, no por presencia de un token.
+
+Tambien sin declarar: `assert wired.returncode == 0` (el ancla positiva del contrato) y
+`assert no_op_help.returncode != 0` (anclaje del regex por los dos extremos que exige AC2) estan en
+`main()` pero no figuran entre las 31 fronteras. Se ejecutan; no se declaran.
+
+### Falsos rechazos medidos (fail-closed, correcto, pero no declarado)
+
+En `falsification-runners` (windows-latest, sin `shell:`) la **unica** forma aceptada es la
+invocacion pelada sin un solo argumento. Rechazados: una linea con argumentos bajo cualquier shell,
+`shell: pwsh` multilinea, `runs-on: [self-hosted, linux]`, `runs-on: ${{ matrix.os }}`. Anadir
+`--verbose` a cualquiera de los 8 runners pone CI en rojo. Al invertir un gate a fail-closed,
+**exigir siempre que los falsos rechazos se midan y se declaren en `residuals=`**, o el proximo
+autor se los come sin saber si su forma es insegura o solo no esta en la plantilla.
+
+### Operativa nueva
+
+- Sondas con caracteres especiales: **construir cada byte con `chr()`**, nunca escribir `\r`/`\f`
+  literalmente en el comando. La capa shell/JSON del harness los colapsa y la sonda mide otra cosa.
+  Me dio un falso "PyYAML pliega el `\r` a espacio" hasta rehacerlo byte a byte.
+- Verificar el comportamiento de bash **desde la propia shell del harness**, no con `subprocess`
+  desde un Python de Windows: ahi `bash` no resolvia el script y hasta el control fallaba.
+- `subprocess` con `cwd=` sobre un dir temporal: pasar rutas **absolutas** al ejecutable; con
+  relativas el proceso hijo no lo encuentra y devuelve exit 2 sin ERROR en stdout, lo que se lee
+  como "rechazado" y contamina la matriz.
+- `TemporaryDirectory` + `cwd=` en Windows explota al limpiar (WinError 32): usar dir fijo bajo
+  `D:/Aegis_Scratch/`.
+- El mensaje de commit tambien pasa el gate ASCII: mis `\u2028`/`\u2029` entraron como caracteres
+  reales y hubo que `--amend`. Escanear bytes>127 del mensaje ANTES de pushear, no solo de los
+  ficheros.
+- `cp -r clone m2` SI funciona aqui (el clon con `--no-hardlinks` local es manejable); lo que se
+  colgaba en 0332 era copiar el arbol con el `.git` de 7 GB.
+- Al commitear volvio a salir `PRUNE DUE: cold_start_tokens 20466 >= 20000`. Es del Arquitecto.
