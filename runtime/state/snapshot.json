@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "b071cbc85ac2687c984534a22fda310fb91f80284b4c925d6b6dea92de6595e4",
+  "canonical_hash": "79360297a6d505173c0055b5c21ccbb43527f1b0fa1dc252fa91e00aa89da610",
   "integrity": {
-    "canonical_hash": "b071cbc85ac2687c984534a22fda310fb91f80284b4c925d6b6dea92de6595e4",
+    "canonical_hash": "79360297a6d505173c0055b5c21ccbb43527f1b0fa1dc252fa91e00aa89da610",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "745f319df7d55128dd31b179560a1e75bba0025937761c19c5b94b94f67247bc",
-    "signature": "d34e82a626d83f7abcad0e0718d48db2c6b5f54c3d610f2f194a364772bf6109",
-    "up_to_seq": 8121
+    "prev_hash": "45129f5f242a59c74742bfb6d86ff142b13b998b1d3f2295e0ae44793f30d0b5",
+    "signature": "13707966b9320d662811c63562840771430fb538e7f8a334882edfa21855a5b8",
+    "up_to_seq": 8125
   },
   "state": {
     "aggregate_versions": {
@@ -3283,7 +3283,7 @@
       "TASK-0340": 22,
       "TASK-0341": 2,
       "TASK-0342": 11,
-      "TASK-0343": 5,
+      "TASK-0343": 9,
       "TASK-0344": 7,
       "TASK-0345": 3,
       "TASK-1102": 14,
@@ -3308,7 +3308,7 @@
       "protocol-prune": 55,
       "protocol-state": 1
     },
-    "events_applied": 7450,
+    "events_applied": 7454,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7286,6 +7286,7 @@
       "codex:task0336:remediation4:work-release:20260808T153700Z": 8055,
       "codex:task0340:delivery-claim:2026-08-08T16:58:43Z": 8111,
       "codex:task0340:in-review:2026-08-08T17:01:22Z": 8112,
+      "codex:task0343:in-review:2026-08-08T17:51:20Z": 8123,
       "codex:task0343:status-in-progress:20260808T172036Z": 8121,
       "codex:task0344:claim:2026-08-08T16:36:00Z": 8103,
       "codex:task0344:delivery-claim:2026-08-08T16:47:19Z": 8109,
@@ -9577,6 +9578,7 @@
       "intent:Codex:claim:28a3e66adc9517fbeca08f5f80b8aafd3c5df1f31a605e54c3d798c5ba1ef88e": 3212,
       "intent:Codex:claim:28df9a04c553790c35899c58c1c566e3313e542f525d65f0e8e0d678b4bdb7dd": 4199,
       "intent:Codex:claim:28e7f8d9972d1480ff930ffbb3e4643e1b051be0ffcc82c61342efce295bd5ab": 6030,
+      "intent:Codex:claim:290ac87aa591fd47d5457d73128d561a9222694bbb3fbd89b3c0593919821d03": 8125,
       "intent:Codex:claim:290eda757d525b238137c63ef490d604191886678f36a9249fabbea15abe5bdf": 2085,
       "intent:Codex:claim:2984c9c039bae7b908ad538e144a576d147acfa1fcf5e5c31cbf50fa9b80c86f": 4516,
       "intent:Codex:claim:299b5ebbc2db89620ea425f171d10a0bbdfbb146a40d5d0f788d0ff059724874": 1229,
@@ -9715,6 +9717,7 @@
       "intent:Codex:claim:538b41f792f317a27918a44078478cdc000502d6b7664210234f71b375f90373": 7485,
       "intent:Codex:claim:538c6ef37989d4ff88937803afe01d8e92252473afb7e5a27d58ce37a4137d1d": 5732,
       "intent:Codex:claim:53b1818dd1e69a2f85b69d4a620918897bae6ec3579042ff4645c6ff710332c5": 3150,
+      "intent:Codex:claim:53fffaa57bdbcddd43bc2ae4079ee4b14f56ab27cc82c316aa327ec68c4127ce": 8124,
       "intent:Codex:claim:541a9df064931b588f6e18f76271d7550eab5c278db272e560502064f7715e85": 4035,
       "intent:Codex:claim:5467327c5612100d80731e30d72e230aff533cd42ae44200b4541b3e48d74191": 8005,
       "intent:Codex:claim:54a81dbf9f6d1d1dd19f53f66663f678e6d9c588c5d708849b4435c00c3c54fa": 830,
@@ -9761,6 +9764,7 @@
       "intent:Codex:claim:62e9d05f9a142b99f71c42190b66fe5eba38b2922b930e3e22dfcb3f930b7e6a": 6055,
       "intent:Codex:claim:643e57ea480e4adf7315625d37dea04b0d752475cbae2a2f70f49301d2749260": 2425,
       "intent:Codex:claim:646da087338934e13e23cbbebd2cb0b022788b441d5ff2840e2c99281b2430f3": 1982,
+      "intent:Codex:claim:646f0e1027a946b8671d5e30c0b3aa96da70fe8fe3292fdb8b08142debc38517": 8122,
       "intent:Codex:claim:64736d7123dcbdf85116976e512ba2be8188ec3d80821bb63eef7565a3e489c2": 2189,
       "intent:Codex:claim:6512d872cd59a182e0b6d4211bdcf8cc1f378995ee6d9c0b4a3009e4effb25b0": 3023,
       "intent:Codex:claim:6517f181fb05c7fcc480e47525c0aed3d092c808d4caaa410e7f061fbfd1a57b": 2168,
@@ -10762,5 +10766,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8121
+  "up_to_seq": 8125
 }
