@@ -87,7 +87,7 @@
         {
             "id": "TASK-0329",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
         },
         {
@@ -125,6 +125,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331"
+        },
+        {
+            "id": "TASK-0338",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Los dos escaneres no comparten la definicion de LINEA a la que atan las coordenadas"
+        },
+        {
+            "id": "TASK-0339",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La exencion de identidad liga (linea, termino) y no el motivo que la justifica"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

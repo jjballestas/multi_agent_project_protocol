@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "862f80194aa5088f9e5a02502bf561f135a24eaf2e03c840e73619a5ee575f5f",
+  "canonical_hash": "ba8271a0be43815a113012a23d576d00308cbd3c27477c3d24b282ca8394bf0a",
   "integrity": {
-    "canonical_hash": "862f80194aa5088f9e5a02502bf561f135a24eaf2e03c840e73619a5ee575f5f",
+    "canonical_hash": "ba8271a0be43815a113012a23d576d00308cbd3c27477c3d24b282ca8394bf0a",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "a7fccdc2e4f986b7aa71c87329153bb73bbb0c7d9ec963744b3eb06d902ea8ac",
-    "signature": "14c991b82abbe71aa6177916a1ec94e2b4f010d74dbf9b62c868e9e387e7b7ca",
-    "up_to_seq": 7915
+    "prev_hash": "7e47fd6af19cb3be0a8d41831b52920d31ffc4caf671fc0eb1b12ebf49a182b3",
+    "signature": "f791a35a5a564ac53afdf5db1603b60860738a7d6cb6d3b9ab2195088fac8bb3",
+    "up_to_seq": 7923
   },
   "state": {
     "aggregate_versions": {
@@ -1006,8 +1006,10 @@
       "CLAIM-arq-20260807-registro-0335": 1,
       "CLAIM-arq-20260807-registro-0336": 1,
       "CLAIM-arq-20260807-titulo-0322": 1,
+      "CLAIM-arq-20260808-0329-devolver": 1,
       "CLAIM-arq-20260808-0336-devolver-a-progreso": 1,
       "CLAIM-arq-20260808-0337-registro": 1,
+      "CLAIM-arq-20260808-0338-0339-registro": 1,
       "CLAIM-arq-20260808-ratifica-0325": 1,
       "CLAIM-arq-20260808-ratifica-0334": 1,
       "CLAIM-arq-20260808-ratifica-0335": 1,
@@ -2814,6 +2816,7 @@
       "MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0336-r2": 1,
       "MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0336-r3": 1,
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0329": 1,
+      "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0329-r2": 1,
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r2": 1,
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r3": 1,
       "MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0331-r4": 1,
@@ -3206,7 +3209,7 @@
       "TASK-0326": 13,
       "TASK-0327": 13,
       "TASK-0328": 2,
-      "TASK-0329": 14,
+      "TASK-0329": 16,
       "TASK-0330": 44,
       "TASK-0331": 41,
       "TASK-0332": 2,
@@ -3215,6 +3218,8 @@
       "TASK-0335": 32,
       "TASK-0336": 30,
       "TASK-0337": 2,
+      "TASK-0338": 2,
+      "TASK-0339": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3237,7 +3242,7 @@
       "protocol-prune": 53,
       "protocol-state": 1
     },
-    "events_applied": 7244,
+    "events_applied": 7252,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3387,6 +3392,10 @@
       "arq-0324-20260807T0115Z-c0": 7306,
       "arq-0324-20260807T0115Z-r2": 7308,
       "arq-0324-20260807T0115Z-u1": 7307,
+      "arq-0329a-000": 7916,
+      "arq-0329a-001": 7917,
+      "arq-0329a-002": 7918,
+      "arq-0329a-099": 7919,
       "arq-0336-bp-000": 7900,
       "arq-0336-bp-001": 7901,
       "arq-0336-bp-002": 7902,
@@ -3704,6 +3713,10 @@
       "arq-t322-0": 7585,
       "arq-t322-1": 7586,
       "arq-t322-2": 7587,
+      "arq-td-000": 7920,
+      "arq-td-001": 7921,
+      "arq-td-002": 7922,
+      "arq-td-099": 7923,
       "arq:0202-0203:acq": 2307,
       "arq:0202-0203:rel": 2310,
       "arq:0204-0205:acq": 2327,
@@ -10485,5 +10498,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 7915
+  "up_to_seq": 7923
 }
