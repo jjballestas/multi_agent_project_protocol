@@ -240,6 +240,26 @@
             "updated_at": "2026-08-08T08:06:15Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-20260808-lote43",
+            "expires_at": "2026-08-08T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0329-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Analista-to-Arquitecto-VEREDICTO-TASK-0329-r2.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-ACTION-cierres-0325-0334-0335.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-ACTION-cierres-0325-0334-0335.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-FYI-neutralidad-lineas-desplazadas.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-FYI-neutralidad-lineas-desplazadas.md",
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Codex-RESPUESTA-clean-clone-event-archive.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Codex-RESPUESTA-clean-clone-event-archive.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260808-lote43"
+            ],
+            "started_at": "2026-08-08T08:45:02Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260808",
+            "updated_at": "2026-08-08T08:45:02Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
