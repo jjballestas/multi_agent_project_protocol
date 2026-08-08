@@ -101,6 +101,13 @@
             "phase": "P2",
             "status": "ready",
             "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma"
+        },
+        {
+            "id": "TASK-0344",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra"
         }
     ],
     "view": "task_index.slim"

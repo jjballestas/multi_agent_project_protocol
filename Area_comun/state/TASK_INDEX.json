@@ -387,6 +387,16 @@
             "type": "implementation"
         },
         {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0344-la-poda-de-mailbox-y-su-caso-de-prueba-discrepan.md",
+            "id": "TASK-0344",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
