@@ -322,9 +322,31 @@ def run_pregate_contract_mutants() -> None:
     """
     text = RUNNER.read_text(encoding="utf-8-sig")
 
+    def function_bodies(candidate: str) -> dict[str, str]:
+        starts = list(re.finditer(r"(?m)^function\s+([A-Za-z0-9_-]+)\s*\{", candidate))
+        return {
+            match.group(1): candidate[match.start() : (starts[index + 1].start() if index + 1 < len(starts) else len(candidate))]
+            for index, match in enumerate(starts)
+        }
+
+    def resolved_exec_lock_write(candidate: str) -> tuple[int, int]:
+        bodies = function_bodies(candidate)
+        invoke = bodies.get("Invoke-PeerForMessage", "")
+        prelock = invoke.find("$residueState = Get-StagedResidueState")
+        evidence_writers = {
+            name
+            for name, body in bodies.items()
+            if "$LockPath" in body and "$MessageName" in body and "process_start_time_utc" in body
+        }
+        call_offsets = [
+            match.start()
+            for name in evidence_writers
+            for match in re.finditer(rf"(?m)^\s*{re.escape(name)}\b", invoke)
+        ]
+        return prelock, min(call_offsets, default=-1)
+
     def contract(candidate: str) -> bool:
-        prelock = candidate.find("$residueState = Get-StagedResidueState")
-        lock_write = candidate.find("Write-Utf8NoBom -Path $LockPath")
+        prelock, lock_write = resolved_exec_lock_write(candidate)
         return all(
             (
                 candidate.count("ReadToEndAsync()") >= 2,
@@ -340,9 +362,24 @@ def run_pregate_contract_mutants() -> None:
         )
 
     assert contract(text), "TASK-0284 pre-gate contract is incomplete"
+    bodies = function_bodies(text)
+    invoke = bodies["Invoke-PeerForMessage"]
+    evidence_writer = next(
+        name
+        for name, body in bodies.items()
+        if "$LockPath" in body and "$MessageName" in body and "process_start_time_utc" in body
+    )
+    writer_call = re.search(rf"(?m)^(\s*{re.escape(evidence_writer)}\b[^\r\n]*\r?\n)", invoke)
+    residue_line = re.search(r"(?m)^\s*\$residueState = Get-StagedResidueState\s*$", invoke)
+    assert writer_call is not None and residue_line is not None
+    moved_invoke = invoke[: writer_call.start()] + invoke[writer_call.end() :]
+    moved_residue = moved_invoke.find(residue_line.group(0))
+    assert moved_residue >= 0
+    moved_invoke = moved_invoke[:moved_residue] + writer_call.group(1) + moved_invoke[moved_residue:]
     mutants = {
         "terminal_defer_removed": text.replace("exhausted = $terminal", "exhausted = $false", 1),
         "dirty_forensics_removed": text.replace("$residueState = Get-StagedResidueState", "# dirty-tree veto removed", 1),
+        "exec_lock_write_moved_before_residue_probe": text.replace(invoke, moved_invoke, 1),
     }
     survivors = [name for name, mutant in mutants.items() if contract(mutant)]
     assert not survivors, f"pre-gate contract failed to kill declared mutants: {survivors}"

@@ -60,6 +60,9 @@ intake:
     - "python scripts/check_falsification_contracts.py --root ."
     - "python scripts/validate_collaboration_state.py --root ."
     - "python scripts/scan_domain_neutrality.py --root ."
+    - "python examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
+    - "python scripts/test_scan_domain_neutrality.py"
+    - "powershell scripts/scan_domain_neutrality.ps1 -Root ."
   scope_routes:
     - scripts/harness/peer_mailbox_cron.ps1
     - scripts/test_exec_lease_harness.py
@@ -221,3 +224,22 @@ preservacion/retirada, marcador, senal y respuesta del guard antes/despues. Sus 
 por separado `unknown -> dead`, omiten evidencia del lock, convierten `unknown` en permiso y
 suprimen la creacion del marcador;
 cualquier movimiento desde una accion declarada rompe al menos una frontera de la tabla.
+
+## Remediacion 5 - veredicto por rama y orden por efecto
+
+El contrato trivaluado ya no depende del numero de literales `return "unknown"`. La sonda ejecuta
+la `Get-LeaseProcessState` real y fuerza por separado el `catch` de `Get-Process`, el `catch` de
+`StartTime` y un PID vivo con una hora de arranque desplazada. Los tres mutantes del checker
+preservan los literales originales como codigo muerto, pero M1 y M2 devuelven `dead` donde la
+produccion devuelve `unknown`, y M3 devuelve `live` donde la produccion devuelve `dead`; cada rama
+queda sujeta por comportamiento.
+
+El contrato TASK-0284 resuelve el escritor de evidencia por su efecto observable: usa `$LockPath`,
+`$MessageName` y `process_start_time_utc`, encuentra su llamada desde `Invoke-PeerForMessage` y exige
+que ocurra despues de `Get-StagedResidueState`. El mutante mueve esa llamada por encima de la sonda,
+sin borrarla ni depender del nombre del helper, y el contrato lo mata.
+
+Al alcanzar por primera vez el cuerpo completo del runner, la prueba expuso que Windows PowerShell
+rechaza `File.Replace(..., $null)` cuando el lock ya existe. La sustitucion atomica ahora usa una
+ruta de backup unica y limpia backup y temporal en `finally`; el runner completo ejerce la
+sustitucion y pasa. Los tres lectores de CI que faltaban quedan incluidos en `verification_cmd`.

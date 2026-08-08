@@ -197,7 +197,7 @@ FALSIFICATION_CONTRACTS = (
         "mutation": "source.replace(unknown_default, dead_default, 1)",
         "boundaries": (
             "assert len(healthy) == 24",
-            "assert process_states == {\"live\": \"live\", \"dead\": \"dead\", \"unknown\": \"unknown\"}",
+            "assert process_states == expected_process_states",
             "assert nullish == {\"empty\": \"peer_lease_unreadable\", \"whitespace\": \"peer_lease_unreadable\"}",
             "assert row[\"lease_exists\"] is should_preserve",
             "assert row[\"before\"] == expected_before",
@@ -207,7 +207,9 @@ FALSIFICATION_CONTRACTS = (
             "assert ignored_lock[dead_with_lock][\"lease_exists\"] is True",
             "assert open_guard[identityless_unknown][\"before\"] == \"none\"",
             "assert no_marker[unknown_absent][\"lock_exists\"] is False",
-            "assert process_mutant[\"unknown\"] == \"dead\"",
+            "assert start_time_mutant[\"start_time_error\"] == \"dead\"",
+            "assert get_process_mutant[\"get_process_error\"] == \"dead\"",
+            "assert pid_reuse_mutant[\"pid_reused\"] == \"live\"",
         ),
         "exercised_by": "test_lease_owner_lock_state_table_is_complete_and_mutation_proven",
     },
@@ -608,19 +610,36 @@ def lease_process_state_probe(source: Path) -> dict[str, str]:
 $engine = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
 $child = Start-Process -FilePath $engine -ArgumentList @("-NoProfile", "-Command", "Start-Sleep -Seconds 30") -PassThru -WindowStyle Hidden
 $deadChild = Start-Process -FilePath $engine -ArgumentList @("-NoProfile", "-Command", "Start-Sleep -Seconds 30") -PassThru -WindowStyle Hidden
+$script:ProcessProbeMode = "real"
+function Get-Process {
+    param([int]$Id, $ErrorAction)
+    if ($script:ProcessProbeMode -eq "get_process_error") { throw "forced Get-Process failure" }
+    if ($script:ProcessProbeMode -eq "start_time_error") {
+        $broken = [pscustomobject]@{}
+        return ($broken | Add-Member -MemberType ScriptProperty -Name StartTime -Value { throw "forced StartTime failure" } -PassThru)
+    }
+    return Microsoft.PowerShell.Management\\Get-Process -Id $Id -ErrorAction SilentlyContinue
+}
 try {
     $null = $child.Handle
     $null = $deadChild.Handle
     $live = [pscustomobject]@{ pid=$child.Id; process_start_time_utc=$child.StartTime.ToUniversalTime().ToString("o") }
+    $pidReused = [pscustomobject]@{ pid=$child.Id; process_start_time_utc=$child.StartTime.ToUniversalTime().AddSeconds(-7).ToString("o") }
     $dead = [pscustomobject]@{ pid=$deadChild.Id; process_start_time_utc=$deadChild.StartTime.ToUniversalTime().ToString("o") }
     Stop-Process -Id $deadChild.Id -Force -ErrorAction Stop
     $deadChild.WaitForExit()
     $unknown = [pscustomobject]@{ pid=$child.Id; process_start_time_utc="" }
-    [ordered]@{
+    $result = [ordered]@{
         live=(Get-LeaseProcessState -Lease $live)
         dead=(Get-LeaseProcessState -Lease $dead)
         unknown=(Get-LeaseProcessState -Lease $unknown)
-    } | ConvertTo-Json -Compress
+        pid_reused=(Get-LeaseProcessState -Lease $pidReused)
+    }
+    $script:ProcessProbeMode = "get_process_error"
+    $result.get_process_error = Get-LeaseProcessState -Lease $live
+    $script:ProcessProbeMode = "start_time_error"
+    $result.start_time_error = Get-LeaseProcessState -Lease $live
+    $result | ConvertTo-Json -Compress
 } finally {
     if (-not $child.HasExited) { Stop-Process -Id $child.Id -Force -ErrorAction SilentlyContinue }
     if (-not $deadChild.HasExited) { Stop-Process -Id $deadChild.Id -Force -ErrorAction SilentlyContinue }
@@ -1838,7 +1857,15 @@ def test_lease_owner_lock_state_table_is_complete_and_mutation_proven() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-LEASE-OWNER-LOCK-STATE-TABLE"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
     process_states = lease_process_state_probe(HARNESS_PATH)
-    assert process_states == {"live": "live", "dead": "dead", "unknown": "unknown"}
+    expected_process_states = {
+        "live": "live",
+        "dead": "dead",
+        "unknown": "unknown",
+        "pid_reused": "dead",
+        "get_process_error": "unknown",
+        "start_time_error": "unknown",
+    }
+    assert process_states == expected_process_states
     nullish = nullish_peer_lease_guard_probe(HARNESS_PATH)
     assert nullish == {"empty": "peer_lease_unreadable", "whitespace": "peer_lease_unreadable"}
 
@@ -1871,8 +1898,6 @@ def test_lease_owner_lock_state_table_is_complete_and_mutation_proven() -> None:
     open_unknown_guard = '        if ($false) { return "peer_lease_unreadable" }'
     marker_guard = '        if (-not (Test-Path -LiteralPath $LockPath)) {'
     no_marker_guard = '        if ($false) {'
-    missing_identity = '        return "unknown"'
-    missing_identity_dead = '        return "dead"'
     for original in (unknown_default, lock_liveness_promotion, unknown_guard, marker_guard):
         assert source.count(original) == 1
 
@@ -1895,21 +1920,59 @@ def test_lease_owner_lock_state_table_is_complete_and_mutation_proven() -> None:
         path = Path(tmp) / "peer_mailbox_cron.ps1"
         path.write_text(source.replace(marker_guard, no_marker_guard, 1), encoding="utf-8", newline="\n")
         no_marker = lease_owner_lock_state_table_probe(path, {unknown_absent})
-    with make_tempdir("lease-state-process-collapse-") as tmp:
-        path = Path(tmp) / "peer_mailbox_cron.ps1"
-        start = source.index("function Get-LeaseProcessState")
-        end = source.index("function Test-LeaseProcessMatches", start)
-        process_body = source[start:end]
-        assert process_body.count(missing_identity) == 3
-        mutant_body = process_body.replace(missing_identity, missing_identity_dead, 1)
-        path.write_text(source[:start] + mutant_body + source[end:], encoding="utf-8", newline="\n")
-        process_mutant = lease_process_state_probe(path)
+    start = source.index("function Get-LeaseProcessState")
+    end = source.index("function Test-LeaseProcessMatches", start)
+    process_body = source[start:end]
+    get_process_catch = '''    } catch {
+        return "unknown"
+    }
+    try {
+        $started = $process.StartTime'''
+    get_process_dead = '''    } catch {
+        return "dead"
+        return "unknown"
+    }
+    try {
+        $started = $process.StartTime'''
+    start_time_catch = '''    } catch {
+        return "unknown"
+    }
+}'''
+    start_time_dead = '''    } catch {
+        return "dead"
+        return "unknown"
+    }
+}'''
+    start_compare = '''    try {
+        $started = $process.StartTime.ToUniversalTime().ToString("o")'''
+    pid_reuse_blind = '''    try {
+        if ($true) { return "live" }
+        $started = $process.StartTime.ToUniversalTime().ToString("o")'''
+    for branch in (get_process_catch, start_time_catch, start_compare):
+        assert process_body.count(branch) == 1
+
+    process_mutants = {
+        "get_process": process_body.replace(get_process_catch, get_process_dead, 1),
+        "start_time": process_body.replace(start_time_catch, start_time_dead, 1),
+        "pid_reuse": process_body.replace(start_compare, pid_reuse_blind, 1),
+    }
+    process_results = {}
+    for name, mutant_body in process_mutants.items():
+        with make_tempdir(f"lease-state-process-{name}-") as tmp:
+            path = Path(tmp) / "peer_mailbox_cron.ps1"
+            path.write_text(source[:start] + mutant_body + source[end:], encoding="utf-8", newline="\n")
+            process_results[name] = lease_process_state_probe(path)
 
     assert collapsed_unknown[unknown_absent]["lease_exists"] is False
     assert ignored_lock[dead_with_lock]["lease_exists"] is True
     assert open_guard[identityless_unknown]["before"] == "none"
     assert no_marker[unknown_absent]["lock_exists"] is False
-    assert process_mutant["unknown"] == "dead"
+    get_process_mutant = process_results["get_process"]
+    start_time_mutant = process_results["start_time"]
+    pid_reuse_mutant = process_results["pid_reuse"]
+    assert get_process_mutant["get_process_error"] == "dead"
+    assert start_time_mutant["start_time_error"] == "dead"
+    assert pid_reuse_mutant["pid_reused"] == "live"
 
 
 def test_archived_task_work_resolution_kills_hot_only_mutant() -> None:

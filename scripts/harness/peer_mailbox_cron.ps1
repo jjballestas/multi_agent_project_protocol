@@ -1526,16 +1526,21 @@ function Invoke-PeerForMessage {
 function Write-AtomicUtf8NoBom {
     param([string]$Path, [string]$Content)
     $temporaryPath = "$Path.tmp.$PID.$([Guid]::NewGuid().ToString('N'))"
+    $backupPath = "$Path.bak.$PID.$([Guid]::NewGuid().ToString('N'))"
     try {
         Write-Utf8NoBom -Path $temporaryPath -Content $Content
         if (Test-Path -LiteralPath $Path) {
-            [System.IO.File]::Replace($temporaryPath, $Path, $null)
+            [System.IO.File]::Replace($temporaryPath, $Path, $backupPath)
+            Remove-Item -LiteralPath $backupPath -Force -ErrorAction SilentlyContinue
         } else {
             [System.IO.File]::Move($temporaryPath, $Path)
         }
     } finally {
         if (Test-Path -LiteralPath $temporaryPath) {
             Remove-Item -LiteralPath $temporaryPath -Force -ErrorAction SilentlyContinue
+        }
+        if (Test-Path -LiteralPath $backupPath) {
+            Remove-Item -LiteralPath $backupPath -Force -ErrorAction SilentlyContinue
         }
     }
 }
