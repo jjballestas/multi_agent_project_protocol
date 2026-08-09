@@ -8851,3 +8851,96 @@ en `ec15f9f5`. Los hechos siguen limpios; lo que se fue es el guardian.
 `exercised_by` NO lo anadio la entrega: es campo obligatorio en `scripts/falsification_contracts.py:14`.
 Lo que si se degrado, y nadie lo habia visto, es `mutation` (de nombrar la mutacion a un fragmento
 de asignacion). Verificar las premisas del encargo contra el diff antes de juzgarlas.
+
+---
+
+## 2026-08-09 -- TASK-0327 r3 (OK-CLOSABLE) -- commit del veredicto `6db9c73a`, ancla `784dd470`
+
+Tercera iteracion de la tarea del default vacio de `contains_pii`. En r2 bloquee por tres escapes
+(lambda, `revive_pack.py`, `dump_memory_db.py`) y declare F3 (descubrir modulos) + F4 (cubrir
+`ast.Lambda`) como obligatorios, iteracion 2 de 2. La remediacion `784dd470` toca UN fichero,
+`test_memory_db.py`, +7/-6. Los dos obligatorios estan cerrados y medidos. Veredicto OK-CLOSABLE.
+
+### La distincion que hay que saber ver: derivar vs enumerar mejor
+
+La trampa que esperaba era que anadieran `ast.Lambda` a una TERCERA lista escrita a mano y
+ensancharan la enumeracion de tres a cinco nombres de modulo. No lo hicieron:
+
+    module_paths = tuple(sorted(p for p in Path(__file__).parent.glob("*.py")
+                                 if not p.name.startswith("test_")))
+    arguments = getattr(node, "args", None)
+    if not isinstance(arguments, ast.arguments): continue
+
+La segunda mitad es una derivacion DEMOSTRABLE, y asi hay que verificarla: recorrer `ast` entero
+y enumerar que nodos llevan el campo. En CPython 3.12 son cuatro -- `FunctionDef`,
+`AsyncFunctionDef`, `Lambda` y `Call` -- y `Call.args` es una `list`, asi que el `isinstance` lo
+descarta solo. **Comprobar la completitud de un criterio estructural recorriendo el modulo que lo
+define, no confiando en el enunciado.** El comando:
+
+    python -c "import ast; [print(n,getattr(ast,n)._fields) for n in dir(ast)
+               if isinstance(getattr(ast,n),type) and issubclass(getattr(ast,n),ast.AST)
+               and 'args' in getattr(getattr(ast,n),'_fields',())]"
+
+### Medir la anchura del glob en las DOS direcciones
+
+El encargo pedia "que el glob no se pase de ancho". Eso son dos preguntas, no una:
+
+- **Demasiado ancho** (falso positivo): soltar un `.py` ajeno SIN portador en el directorio.
+  Resultado: exit 0. No hay falso positivo.
+- **Demasiado estrecho** (falso negativo): tres formas medidas que se escapan --
+  prefijo `test_` (C1), SUBDIRECTORIO `adapters/` porque `glob` no es recursivo (C2), y
+  extension `.pyw` (C3).
+
+Y una cuarta que no estaba en el encargo y es la mejor del lote: **el conjunto derivado no tiene
+suelo**. Forzando el glob a vacio Y anadiendo a la vez un portador real, `test_p01` sale **exit 0**.
+La propiedad pasa en verde cubriendo cero. Se dispara por refactor ordinario, no por adversario.
+**Ante cualquier chequeo que DERIVE su conjunto: probar siempre el conjunto vacio con la violacion
+presente.** Es el equivalente, para una derivacion, del mutante "dejar la guarda INALCANZABLE".
+
+### Dato que decide si una fuga es cara o barata de cerrar
+
+Antes de pedir que quiten la exclusion `test_`, medi si es PORTANTE: corri el propio chequeo sobre
+`test_memory_db.py` y da **cero violaciones**. Es decir, la exclusion se puede estrechar a
+`p != Path(__file__)` sin poner nada en rojo. **Un residual con coste de cierre medido pesa
+distinto que uno sin medir**, y el encargo puede decidir con eso.
+
+### Por que NO bloquee, y como se justifica sin mover la porteria
+
+Aplique el MISMO baremo que use para bloquear en r2: alli el escape era *la forma exacta del
+defecto original, en un modulo del motor que YA EXISTE*. Ninguno de los residuales nuevos lo cumple
+(exigen que el motor adopte una forma de fichero que hoy no tiene, o el conjunto vacio). Endurecer
+el baremo en la iteracion siguiente es mover la porteria, y ademas es pedir otra FORMA mas estrecha
+en vez de una propiedad -- el patron exacto contra el que existe la tarea. **Si en la iteracion N
+declaras un baremo, en N+1 juzgas con ese baremo o declaras por que cambia.**
+
+### "SOBREVIVE" no siempre significa agujero
+
+M2 (rama PII de `validate_metadata` INALCANZABLE) y M4 (`title_is_safe` neutralizado) dejan
+`NEG-...-PUBLICATION` en exit 0. No es un punto ciego: el artefacto con PII **lo sigue rechazando
+la guarda hermana**. Solo cortando el `contains_pii` comun (M1) mueren los tres negativos. Eso es
+profundidad de defensa MEDIDA y juega a favor de la entrega. **Antes de reportar un mutante
+superviviente como defecto, preguntarse si el sistema sigue seguro por otra via.**
+
+### Control al commit PADRE para separar regresion de preexistente
+
+M2 sale exit 0 tambien en `f732292a` (el padre). Comportamiento identico antes y despues => no es
+regresion de esta entrega. Barato y decisivo; repetirlo siempre que un mutante sobreviva y no
+sepas si la entrega lo causo.
+
+### Reproduccion (26 mutantes, dos drivers)
+
+Clon limpio `D:/Aegis_Scratch/mapp/rev0327r3/cc` para medir; clon SEPARADO `.../mut` para mutar;
+drivers en `D:/Aegis_Scratch/mapp/rev0327r3/driver.py` y `driver2.py`. Cada mutante:
+`git checkout -- .` + `git clean -fdq scripts/memory` + borrar todo `__pycache__` + abortar si
+`git status --porcelain` no esta vacio. Gate por metodo suelto
+(`python -m unittest test_memory_db.MemoryDbTests.test_p01_...` con cwd=`scripts/memory`, ~0.02s)
+en vez de la suite entera (272s). Los cinco gates en el ancla: todos exit 0, suite 72/72.
+
+### Residuales que deje escritos para el Arquitecto
+
+R9 (suelo no vacio del conjunto derivado, el que mas importa), R6 (`test_` por identidad en vez de
+prefijo), R7 (`rglob`), R8 (`.pyw`), R1 ampliado (omision SEMANTICA sin default sintactico:
+`**kwargs`+`setdefault`, `functools.partial`, `__defaults__` inyectado -- tres testigos, los tres
+verdes), R4 medido (`test_p01` sin marcador `PERMANENT_NEGATIVE:`, cortocircuitado a `return []`
+sale verde y `check_falsification_contracts.py` no lo delata). Recomende tarea de endurecimiento
+APARTE, no tercera iteracion.
