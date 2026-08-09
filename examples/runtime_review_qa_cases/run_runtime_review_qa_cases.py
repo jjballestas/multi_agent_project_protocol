@@ -116,6 +116,7 @@ def check(check_id="unit", error_class="AssertionError", artifact_path="reports/
 
 
 def report(actor: str, from_status: str, to_status: str, review_qa: dict) -> dict:
+    friction = to_status == "changes_requested" or review_qa.get("event") in {"reject_review", "checks_failed"}
     return {
         "turn_id": f"RUN-{actor}-{from_status}-{to_status}",
         "task_id": TASK_ID,
@@ -123,6 +124,18 @@ def report(actor: str, from_status: str, to_status: str, review_qa: dict) -> dic
         "outcome": "done" if to_status == "done" else "ok",
         "summary": "Exercise Review/QA transition.",
         "changed_paths": [],
+        "obstacles": (
+            [
+                {
+                    "what": "The fixture review or QA check failed.",
+                    "root_cause": "The case deliberately exercises an objective review failure.",
+                    "resolution": "Record the finding and return the task for remediation.",
+                    "recurrence_risk": "low",
+                }
+            ]
+            if friction
+            else []
+        ),
         "transitions": {
             "task_status": {"from": from_status, "to": to_status},
             "review_qa": review_qa,

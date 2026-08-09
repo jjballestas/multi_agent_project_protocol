@@ -200,6 +200,7 @@ def turn_report(task_id: str) -> dict[str, Any]:
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
             "Area_comun/state/CLAIMS.json",
         ],
+        "obstacles": [],
         "transitions": {
             "task_status": {"from": "ready", "to": "done"},
             "claims": [{"op": "release", "claim_id": claim_id_for(task_id, "Codex")}],
@@ -232,6 +233,14 @@ def review_rejection_report(task_id: str) -> dict[str, Any]:
             f"Area_comun/state/TASK_INDEX.json#{task_id}",
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
             "Area_comun/state/CLAIMS.json",
+        ],
+        "obstacles": [
+            {
+                "what": "The fixture review was rejected.",
+                "root_cause": "The deliberate review-cycle check failed.",
+                "resolution": "Return the fixture task for remediation.",
+                "recurrence_risk": "low",
+            }
         ],
         "transitions": {
             "task_status": {"from": "in_review", "to": "changes_requested"},

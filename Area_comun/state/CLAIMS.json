@@ -83,6 +83,27 @@
             "updated_at": "2026-08-09T17:01:15Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0347",
+            "expires_at": "2026-08-10T01:26:56Z",
+            "notes": "Derive the validate-job runner population from the workflow, repair only stale delivery fixtures, add non-empty diagnostics and a property-bound mutation contract, and report stepwise before/after balances.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0347",
+                "Area_comun/state/TASK_INDEX.json#TASK-0347",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0347",
+                "Area_comun/tasks/TASK-0347-ocho-runners-sin-el-bloque-obstacles.md",
+                "scripts/replay_validate_job.py",
+                "examples/",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T21:26:56Z",
+            "status": "active",
+            "task_id": "TASK-0347",
+            "updated_at": "2026-08-09T21:26:56Z"
+        },
+        {
             "claim_id": "CLAIM-arq-0347-reencuadre-20260809",
             "expires_at": "2026-08-10T23:59:00Z",
             "owner": "Arquitecto",

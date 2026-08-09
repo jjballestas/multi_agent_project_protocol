@@ -7,8 +7,11 @@ import ast
 import sys
 import tempfile
 import json
+import re
 import subprocess
 from pathlib import Path
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -24,6 +27,7 @@ FALSIFICATION_CONTRACTS = (
         "negative": "A delivery transition cannot be hidden by a divergent outcome label.",
         "mutation": "turn_validate.is_delivery_turn = lambda report: False",
         "boundaries": (
+            "assert workflow_delivery_constructor_violations(ROOT) == []",
             "assert turn_validate.validate_delivery_obstacles(delivery_missing) == [DELIVERY_ERROR]",
             "assert turn_validate.validate_delivery_obstacles(delivery_clean) == []",
             "assert turn_validate.validate_delivery_obstacles(delivery_missing) == []",
@@ -103,6 +107,59 @@ REVIEW_ERROR = "semantic: objective friction (review_qa:assign_fix) requires non
 CHECKS_ERROR = "semantic: objective friction (review_qa:checks_failed) requires non-empty obstacles"
 REVERT_ERROR = "semantic: objective friction (revert:action-summary-proxy) requires non-empty obstacles"
 ATTEMPT_ERROR = "semantic: objective friction (attempt>1) requires non-empty obstacles"
+
+
+def workflow_python_runners(root: Path) -> list[Path]:
+    """Derive Python runner sources from the validate job, never from a maintained list."""
+    workflow = yaml.safe_load((root / ".github/workflows/validate.yml").read_text(encoding="utf-8-sig"))
+    steps = workflow["jobs"]["validate"]["steps"]
+    paths: set[Path] = set()
+    pattern = re.compile(r"(?:^|\s)(?:python(?:3(?:\.\d+)*)?|py(?:\.exe)?(?:\s+-3)?)\s+([^\s]+\.py)(?:\s|$)")
+    for step in steps:
+        command = step.get("run") if isinstance(step, dict) else None
+        if not isinstance(command, str):
+            continue
+        for match in pattern.finditer(command):
+            token = match.group(1).strip("\"'")
+            path = (root / token).resolve()
+            if path.is_file() and root in path.parents:
+                paths.add(path)
+    return sorted(paths)
+
+
+def string_keyed_dict(node: ast.AST | None) -> dict[str, ast.AST]:
+    if not isinstance(node, ast.Dict):
+        return {}
+    return {
+        key.value: value
+        for key, value in zip(node.keys, node.values)
+        if isinstance(key, ast.Constant) and isinstance(key.value, str)
+    }
+
+
+def delivery_constructor(node: ast.Dict) -> bool:
+    """Recognize a literal capable of reporting an in_review/done transition."""
+    report = string_keyed_dict(node)
+    task_status = string_keyed_dict(string_keyed_dict(report.get("transitions")).get("task_status"))
+    target = task_status.get("to")
+    if target is None:
+        return False
+    if isinstance(target, ast.Constant):
+        return target.value in {"in_review", "done"}
+    return True
+
+
+def workflow_delivery_constructor_violations(root: Path) -> list[str]:
+    """Return workflow-derived delivery literals that omit explicit obstacle consideration."""
+    violations: list[str] = []
+    for path in workflow_python_runners(root):
+        tree = ast.parse(path.read_text(encoding="utf-8-sig"), filename=str(path))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Dict) or not delivery_constructor(node):
+                continue
+            if "obstacles" not in string_keyed_dict(node):
+                violations.append(f"{path.relative_to(root).as_posix()}:{node.lineno}")
+    return violations
 
 
 def load_dirty_path_functions(source: str) -> dict[str, object]:
@@ -194,6 +251,7 @@ def exercise_untracked_subtree_gate() -> None:
 def main() -> int:
     """PERMANENT_NEGATIVE: NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-STATUS-FRICTION-OBSTACLES, NEG-TURN-REVIEW-FRICTION-OBSTACLES, NEG-TURN-CHECKS-FRICTION-OBSTACLES, NEG-TURN-REVERT-PROXY-OBSTACLES, NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER"""
     exercise_untracked_subtree_gate()
+    assert workflow_delivery_constructor_violations(ROOT) == []
     delivery_missing = {
         "outcome": "ok",
         "transitions": {"task_status": {"from": "in_progress", "to": "in_review"}},

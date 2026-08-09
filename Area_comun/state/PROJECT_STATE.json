@@ -165,7 +165,7 @@
         {
             "id": "TASK-0347",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El job validate no esta verde desde el 5 de junio -- una regla endurecida dejo obsoletas las fixtures de quince runners a la vez"
         },
         {

@@ -1,7 +1,7 @@
 ---
 id: TASK-0347
-title: El job validate no esta verde desde el 5 de junio -- una regla endurecida dejo obsoletas las fixtures de quince runners a la vez
-status: ready
+title: El job validate no esta verde desde el 5 de junio -- una regla endurecida dejo obsoletas las fixtures de doce runners a la vez
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0347-ocho-runners-sin-el-bloque-obstacles.md
@@ -12,8 +12,8 @@ intake:
     El job `validate` de GitHub Actions no sale verde desde el 2026-06-05 (run 27017313818, sha
     fb0d0f07), cuando ejecutaba DOS gates reales. Hoy declara 77 pasos `run:`. Como un paso rojo
     aborta el job, ningun runner cableado en estos dos meses ha sido observado nunca pasar en CI.
-    Replicado el job entero a HEAD en un checkout limpio: 55 verdes, 17 rojos. QUINCE de esos
-    diecisiete comparten una causa unica -- `c725e9bd fix(TASK-0259)` empezo a exigir el bloque
+    Replicado el job entero a HEAD en un checkout limpio: 55 verdes, 17 rojos. DOCE de esos
+    diecisiete comparten una causa unica, medido por MUTACION sobre produccion (no por correlacion) -- `c725e9bd fix(TASK-0259)` empezo a exigir el bloque
     `obstacles` en los turnos de entrega y las fixtures no lo producen. Siete lo dicen; ocho lo
     ocultan tras un `assert` sin mensaje, que reporta `"error": ""`. El encargo anterior de esta
     tarea enumeraba ocho y declaraba los otros de causas independientes: esa afirmacion queda
@@ -22,8 +22,8 @@ intake:
   acceptance:
     - "AC1 (la poblacion se deriva, no se enumera): existe un replicador local que LEE `.github/workflows/validate.yml` y ejecuta cada paso `run:` del job `validate` en orden, reportando exit code por paso. Nadie escribe la lista a mano: si manana se anade un paso al workflow, el replicador lo corre sin tocarlo. Declara que pasos no puede ejecutar en el host y por que."
     - "AC2 (el criterio de pertenencia, medido): se declara por medicion cuantos runners del job construyen turnos de entrega, cuantos de ellos satisfacen el contrato de `obstacles` y cuantos no, y se acredita la correlacion con el rojo. La particion se justifica por la condicion evaluada, no por el sintoma observado."
-    - "AC3 (el fallo silencioso deja de serlo): ningun caso puede reportarse fallido con diagnostico vacio. Se acredita ejecutando un fallo real y mostrando que el mensaje identifica la causa. Un `assert` sin mensaje que reporta `error: \"\"` no es una puerta: oculto siete de estas quince causas al censo anterior."
-    - "AC4 (los quince pasan, y se dice el saldo): el replicador de AC1 baja de 17 rojos a como mucho 2 (los dos de causa ajena, ver alcance). Se reporta el saldo PASS/FAIL antes y despues, paso a paso."
+    - "AC3 (el fallo silencioso deja de serlo): ningun caso puede reportarse fallido con diagnostico vacio. Se acredita ejecutando un fallo real y mostrando que el mensaje identifica la causa. Un `assert` sin mensaje que reporta `error: \"\"` no es una puerta: oculto varias de estas causas al censo anterior."
+    - "AC4 (los doce pasan, y se dice el saldo): el replicador de AC1 baja de 17 rojos a como mucho 5 (los cinco de causa ajena, ver alcance). Se reporta el saldo PASS/FAIL antes y despues, paso a paso. NO se persigue ningun runner fuera de la clase medida: si uno de los cinco cae de paso, se declara y se saca del alcance."
     - "AC5 (se arregla el lado correcto): si en alguno el defecto resulta ser de PRODUCCION y no del fixture, se declara, se para en ese, y se particiona. No se ajusta un fixture para tapar un fallo real."
     - "AC6 (contrato por la clase, verificado por mutacion): negativo permanente que muera si un fixture de entrega vuelve a omitir el bloque obligatorio, atado por PROPIEDAD -- no enumerando ficheros -- y verificado matando un mutante de PRODUCCION. Debe sobrevivir a cambio de coordenada, de orden y de formato."
     - "AC7 (cerrado en CI REAL): los pasos correspondientes salen success en un run real de GitHub Actions, citando la terna run_id + job + head_sha. Este AC esta hoy BLOQUEADO por la facturacion de Actions: la tarea puede entregarse y revisarse sin el, pero no cierra sin el."
@@ -36,15 +36,14 @@ intake:
     - scripts/replay_validate_job.py
     - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
   out_of_scope:
-    - "El paso 43 (`event auth runtime override cases`), que falla por `unsupported keys: method` -- causa distinta, tarea aparte."
-    - "El paso 50 (`runtime instantiation cases`), que falla por marcadores sin resolver en el port del motor de memoria -- causa distinta, tarea aparte."
+    - "Los CINCO pasos cuya causa NO es la regla de obstacles, medido por mutacion: 36 (`intent flow`), 43 (`event auth runtime override`), 50 (`runtime instantiation`), 58 (`runtime loop`) y 59 (`supervised autonomy`). Siguen rojos con la regla neutralizada. 43 y 50 ya tienen tarea (TASK-0349, TASK-0350); 36, 58 y 59 quedan por contratar."
     - "El mecanismo de cobertura del AC4 de TASK-0346, pendiente de decision del operador."
     - "Codigo de produccion, salvo que el AC5 revele un defecto real, y entonces se para y se declara."
   risk: medium
   estimate: L
 ---
 
-# TASK-0347 -- quince verificadores, una sola raiz, y dos meses sin verde
+# TASK-0347 -- doce verificadores, una sola raiz, y dos meses sin verde
 
 ## Lo que se midio
 
@@ -71,10 +70,24 @@ De los runners del job que construyen turnos de entrega:
 
     26 construyen turnos
        4 mencionan obstacles  ->   0 en rojo
-      22 no lo mencionan      ->  15 en rojo
+      22 no lo mencionan      ->  15 en rojo (de esos, 12 por esta causa)
 
-Los 15 rojos caen dentro de los 22. Ninguno de los 4 falla. La correlacion no es una hipotesis:
-es el recuento.
+Los 15 rojos caen dentro de los 22 y ninguno de los 4 falla. **Pero la correlacion no es la causa,
+y aqui me corrijo a mi mismo.** Neutralice la regla en produccion (`validate_delivery_obstacles` en
+`runtime/turn_validate.py` devolviendo `[]`) en un worktree aparte y volvi a correr los diecisiete:
+
+    VERDES con el mutante (la regla era su UNICA causa), DOCE:
+        29 concurrency    30 guardrail     34 materialize    39 enforce
+        40 genesis-ref    52 eventlog gate 53 review/QA      54 agent registry
+        61 observability  62 budget        71 llm adapter    74 real adapter
+
+    SIGUEN ROJOS (al menos una causa ajena), CINCO:
+        36 intent flow    43 event auth override   50 instantiation
+        58 runtime loop   59 supervised autonomy
+
+**Son doce, no quince.** Atribui 58 y 59 por correlacion -- construyen turnos, no mencionan
+`obstacles`, estan rojos -- y la medicion me desmiente. Es el defecto que esta tarea persigue,
+cometido al escribir su encargo.
 
 ## Por que el censo anterior dijo "ocho, y el resto independientes"
 

@@ -133,6 +133,7 @@ def implementer_report(handoff_path: str | None) -> dict:
             f"Area_comun/state/TASK_INDEX.json#{TASK_ID}",
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{TASK_ID}",
         ],
+        "obstacles": [],
         "transitions": {
             "task_status": {"from": "in_progress", "to": "in_review"},
             "claims": [],
@@ -153,6 +154,14 @@ def reviewer_report(handoff_path: str) -> dict:
         "outcome": "ok",
         "summary": "Reject fixture for review.",
         "changed_paths": [],
+        "obstacles": [
+            {
+                "what": "The fixture review was rejected.",
+                "root_cause": "The guardrail check found the deliberate fixture defect.",
+                "resolution": "Return the fixture to its maker for correction.",
+                "recurrence_risk": "low",
+            }
+        ],
         "transitions": {
             "task_status": {"from": "in_review", "to": "changes_requested"},
             "review_qa": {

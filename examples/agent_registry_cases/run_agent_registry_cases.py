@@ -100,6 +100,7 @@ def turn_report(agent: str) -> dict:
         "outcome": "in_review",
         "summary": f"Move {TASK_ID} to review.",
         "changed_paths": ["runtime/context.py", f"Area_comun/tasks/{TASK_ID}.md"],
+        "obstacles": [],
         "transitions": {
             "task_status": {"from": "in_progress", "to": "in_review"},
             "claims": [{"op": "release", "claim_id": f"CLAIM-{TASK_ID}-{agent}"}],

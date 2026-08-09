@@ -130,6 +130,7 @@ def turn_report(task_id: str, *, cost: int = 3, outside_scope: bool = False) -> 
         "outcome": "done",
         "summary": f"Move {task_id}.",
         "changed_paths": changed_paths,
+        "obstacles": [],
         "transitions": {
             "task_status": {"from": "ready", "to": "done"},
             "claims": [{"op": "release", "claim_id": f"CLAIM-{task_id}-codex"}],

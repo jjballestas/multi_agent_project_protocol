@@ -114,6 +114,7 @@ def turn_report(task_id: str, *, cost: int = 1) -> dict[str, Any]:
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
             "Area_comun/state/CLAIMS.json",
         ],
+        "obstacles": [],
         "transitions": {
             "task_status": {"from": "ready", "to": "done"},
             "claims": [{"op": "release", "claim_id": f"CLAIM-{task_id}-codex"}],

@@ -192,6 +192,7 @@ def validate_execute_turn(task_id: str, actor: str, sample_index: int) -> None:
         "outcome": "in_review",
         "summary": "Concurrency simulation execute transition.",
         "changed_paths": [],
+        "obstacles": [],
         "transitions": {
             "task_status": {"from": "ready", "to": "in_review"},
             "review_qa": None,
