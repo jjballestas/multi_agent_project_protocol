@@ -182,7 +182,7 @@ def assert_cross_platform_skip_parity() -> None:
         assert extra_excluded != expected_excluded
         assert "Area_comun/tasks/.gitkeep" in extra_excluded
 
-        hidden_text = ps_text.replace(" -File -Force", " -File", 1)
+        hidden_text = ps_text.replace(" -File -Force", " -File")
         assert hidden_text != ps_text
         hidden_path = fixture / "scan_encoding_hidden_omission_mutant.ps1"
         hidden_path.write_text(hidden_text, encoding="utf-8", newline="\n")
