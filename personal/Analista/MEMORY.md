@@ -9819,3 +9819,75 @@ baseline; la suite vuelve de 5 a 6 tests. Veredicto:
 - Iteracion 2 de 2 declarada en r2: **escale al operador humano** en vez de pedir una tercera, y
   lo dije citando mi propia regla de r3. Cuando la clase reaparece por tercera vez, la decision de
   cuantos ciclos mas gastar es del operador, no mia.
+
+## 2026-08-09 -- TASK-0332 r2 (commit del veredicto `5eab1684`, ancla `3a5cc335`): CHANGE-REQUIRED + ESCALADO
+
+Re-juicio de la remediacion 1. Instruccion:
+`MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0332-r2.md`. Veredicto:
+`Area_comun/artifacts/Analista-TASK-0332-remediacion-1-verdict.md`. Alcance: solo hub.
+
+**Lo que SI se cerro (y lo firme).** Mis dos escapes de r1 reinyectados en produccion mueren los
+dos, y mueren PRIMERO en `test_memory_db.py:2266`
+(`assertEqual((True, True, True), source_results)`), no en un ancla sintactica: el retorno falsy
+sobre `2027-` y el filtrado de la forma basica en `value_list`. La tercera componente que pedi en
+r1 -- `contains_pii([timestamp], [domain_term])` -- es la que hace visible el segundo
+(`(True,True,True) != (True,False,False)`). Produccion intacta (el commit no la toca; los cambios
+de `build_memory_db.py` entre r1 y r2 son de 0327/0328). R0332-3 declarado en `:2225-2226`.
+
+**Lo que bloqueo: la "matriz" es una ESTRELLA.** Entregado: `{2026} x {1.684 offsets}` union
+`{2027..2030} x {7 offsets}` union `{2031-06-19}`. Tres mutantes en produccion sobreviven con
+`Ran 72 tests ... OK`, exit 0, y fuga real (fuente `(True,True,True)`, mutante
+`(False,False,False)`: el `return False` aborta el barrido y oculta el email de un item hermano):
+
+| clave | sonda | suite |
+|---|---|---|
+| `2027-` **Y** `+06:15` a la vez | `2027-06-19T09:28:23+06:15` | **0 ESCAPA** |
+| mes `03` | `2026-03-19T09:28:23+06:15` | **0 ESCAPA** |
+| hora `05` | `2026-06-19T05:28:23+06:15` | **0 ESCAPA** |
+| mes `12` | `2026-12-19T09:28:23+06:15` | 1, en `:692` (**0317**, no 0332) |
+| fraccion de 3 digitos | `...T09:28:23.123+06:15` | 1, en `:692` (**0317**, no 0332) |
+
+### Tecnicas que quiero repetir
+
+1. **Censo de "afirmado", no de "alimentado".** Primero instrumente `contains_pii` con un spy y
+   corri la suite entera: 5.668 cadenas distintas, 2.223 miembros de `DATE_RE`, y marginales
+   ENGANOSAMENTE altas (dia 31/31, hora 24/24). El mutante de hora `05` sobrevivio igual. La
+   metrica correcta no es "se lo pasan a la funcion" sino **"algun test exige True para el"**:
+   reconstrui estaticamente los 1.713 del barrido de 0332 + los 333 de 0317 = **2.041 afirmados**,
+   y ahi salen los huecos reales: 6 anos de 10.000, **3 meses de 12**, 3 dias de 31, **3 horas de
+   24**, 3 minutos de 60, 3 segundos de 60. Alimentar != afirmar.
+2. **La conjuncion como sonda.** El escape mas elegante no varia una coordenada nueva: usa DOS
+   valores que el muestreo YA cubre por separado (`2027-` con 7 offsets, `+06:15` con el prefijo
+   2026) y clava el bypass en el PAR. Distingue producto de estrella sin discutir de gusto.
+3. **Controles que deben morir.** Mes `12` y fraccion de 3 digitos mueren -- y mueren en `:692`,
+   la familia de 0317, no en el barrido de esta tarea. Sin esos dos controles mi censo seria una
+   afirmacion; con ellos es una medicion.
+4. **Medir el coste de la alternativa, no solo el de lo entregado.** Producto COMPLETO
+   `5 x 1.684` = 8.420 casos / 25.260 llamadas = **0,163 s** de computo puro (aislado 0,271 s;
+   suite 72 tests / 284,5 s). Deja sin argumento cualquier "no cabe".
+5. **Reconocer mi propio encargo.** La estrella la prescribi YO en r1: *"mantener los 1.684 offsets
+   para un prefijo y un subconjunto representativo para los demas"*. El maker entrego lo que pedi.
+   Es `el-encargo-que-enumera-recibe-la-enumeracion` otra vez. Por eso NO di lista de coordenadas
+   en la remediacion: el criterio que pedi es **adversarial y a posteriori** (en el re-juicio yo
+   elijo tres claves que el maker no ha visto, sobre coordenadas que NO nombre en el veredicto).
+6. **Declarar cuando la clase no se cierra por muestreo.** El lenguaje exento es ~10^4 anos x 12 x
+   31 x 10^11 variantes de hora x 1.684 offsets: ningun barrido finito lo cierra. Cerrarlo exige
+   **derivar la carga de la gramatica de `DATE_RE`** -- tarea nueva (R0332-8), no remediacion. Es
+   la diferencia entre ampliar el muestreo y cambiar de tecnica.
+
+### Operativo
+
+- **Seis clones con `--shared` = 49 MB cada uno** (`git clone --shared <repo> w1..w6`), frente a
+  ~7 GB de un clon normal por los objetos sueltos. Con 6 suites en paralelo cada corrida pasa de
+  285 s a ~565 s; con 2 en paralelo, ~320 s. **Anotar la contencion** o los tiempos se malinterpretan.
+- Driver de mutacion reutilizable en `D:/Aegis_Scratch/protocol/0332-r2/mutate.py`: aplica el
+  bypass a PRODUCCION, mide fuente vs mutante en las 3 formas, corre la suite, restaura y verifica
+  `restored: True`. Los siete restauraron.
+- El gate ASCII del repo (`scan_encoding.py`) dio exit 0 con un `U+00B7` dentro de mi artefacto:
+  **mi propio escaneo de bytes >127 es el que manda**, no el del repo.
+- CI del hub sin cambio: 60 de 60 runs en `failure`, los tres jobs anotan *"The job was not started
+  because recent account payments have failed or your spending limit needs to be increased"*,
+  terminan en 3 s sin ejecutar un paso, y **`3a5cc335` no tiene run**. Ya escalado en 0329 r4.
+- Iteracion 2 de 2 declarada en r1: escale al operador con dos salidas legitimas (remediacion 2 con
+  aceptacion adversarial a posteriori, o cierre con R0332-6/7/8 declarados por escrito + tarea
+  nueva para la carga derivada de la gramatica).
