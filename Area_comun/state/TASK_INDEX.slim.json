@@ -123,6 +123,24 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada"
+        },
+        {
+            "id": "TASK-0351",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El lazo del runtime reporta ok true y no deja el commit -- exito declarado sin el efecto"
+        },
+        {
+            "id": "TASK-0352",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Los casos de intent flow terminan con drift de estado tras submit_intent"
+        },
+        {
+            "id": "TASK-0353",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn"
         }
     ],
     "view": "task_index.slim"

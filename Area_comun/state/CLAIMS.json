@@ -227,6 +227,28 @@
             "updated_at": "2026-08-09T21:04:14Z"
         },
         {
+            "claim_id": "CLAIM-arq-particion-0347-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-DECISION-TASK-0347-particion.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-particion-0347-20260810",
+                "Area_comun/state/TASK_INDEX.json#TASK-0351",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0351",
+                "Area_comun/tasks/TASK-0351-el-lazo-reporta-ok-y-no-commitea.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0352",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0352",
+                "Area_comun/tasks/TASK-0352-drift-tras-submit-intent-en-los-casos-de-intent-flow.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md"
+            ],
+            "started_at": "2026-08-09T22:12:20Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-09T22:12:20Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",

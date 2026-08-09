@@ -16,11 +16,19 @@ intake:
     verde, con el paso de CI en exit 0 y el inventario en 58/58 missing=0; (b) un simple salto de
     linea PEP8 sobre esa misma asercion, de semantica identica y con el test en exit 0, pone el
     certificador en exit 1. El gate es a la vez ciego a la frontera muerta y fragil al reformateo.
+    Re-medido en el re-juicio del 2026-08-09: la inalcanzabilidad NO es una forma, es una FAMILIA de
+    al menos seis (`if False:`, `return` antes del cuerpo, `@unittest.skip`, `raise SkipTest`, guarda
+    por variable de entorno, `while False:`), y las SEIS dejan certificador, guardian y runner en
+    exit 0 con las fronteras presentes byte a byte. Dos de ellas son peores: el runner ya reporta
+    `skipped=1` y nadie lo consume. Por eso el criterio de esta tarea no es detectar formas.
   acceptance:
     - "AC1 (falsacion previa, las dos direcciones): se reproduce que envolver una frontera declarada en `if False:` deja el certificador y el paso de CI en exit 0 con missing=0, y que un salto de linea PEP8 sobre la misma asercion lo pone en exit 1 con el test en verde. Evidencia por comportamiento."
-    - "AC2 (el certificador enrojece ante la frontera MUERTA): tras el cambio, una frontera declarada presente pero inalcanzable hace fallar al certificador. Este AC se verifica ejecutando el mutante `if False:`, NO comprobando que se anadio una comprobacion."
+    - "AC2 (el criterio es POR PROPIEDAD, no por forma): el certificador enrojece cuando una frontera declarada NO SE EJECUTO durante la corrida del runner que su contrato declara como `exercised_by`. El predicado es la ejecucion, no la sintaxis: no se detectan formas, se observa si la linea corrio. Se verifica ejecutando mutantes, NO comprobando que se anadio una comprobacion."
+    - "AC2b (los seis vectores, declarados NO exhaustivos): U1 `if False:`, U2 `return` antes del cuerpo, U3 `@unittest.skip`, U4 `raise SkipTest`, U5 guarda por variable de entorno, U6 `while False:` deben poner el certificador en ROJO -- las seis. Se declaran vectores obligatorios y NO exhaustivos: si el criterio necesita crecer para cubrir un U7, es que se implemento una enumeracion y el AC2 no esta cumplido."
     - "AC3 (deja de ser fragil al formato): un cambio de formato que preserve la semantica de la asercion -- saltos de linea, espaciado, parentesis -- no puede poner rojo al certificador. Se falsa con al menos tres reformateos distintos."
-    - "AC4 (el criterio no vuelve a ser una subcadena): la decision de si una frontera esta viva no puede apoyarse en `<literal> in source`. Se declara el criterio elegido y por que sobrevive a cambios de coordenada, de orden y de formato."
+    - "AC4 (el criterio no vuelve a ser una subcadena): la decision de si una frontera esta viva no puede apoyarse en `<literal> in source` ni en ninguna otra inspeccion del TEXTO. Se declara el criterio elegido y se acredita que sobrevive a cambios de coordenada, de orden y de formato."
+    - "AC4b (sin falso rojo en el baseline): U0 -- el arbol real, sin mutar -- debe seguir en VERDE, y ninguna frontera legitima viva puede marcarse. Un criterio que enrojece con todo no distingue nada."
+    - "AC4c (el fallo dice cual): cuando el certificador enrojece, su salida identifica QUE frontera no se ejercio y de que contrato. Un gate que falla con diagnostico vacio no es un gate: esta misma jornada un `assert` sin mensaje hizo que siete fallos de la misma causa se clasificaran como independientes."
     - "AC5 (contrato): negativo permanente que muera si el certificador vuelve a aceptar una frontera inalcanzable, verificado por MUTACION. Redactado como negativo por COMPORTAMIENTO, nunca como afirmacion de que la comprobacion existe."
     - "AC6 (sin regresion y sin falsos rojos): el inventario completo sigue verde sobre el arbol real, y ninguna de las fronteras legitimas vivas pasa a marcarse. Se declara el recuento antes y despues."
   verification_cmd:
@@ -64,6 +72,28 @@ ejecutado, exigido" no implica ASERTADO**. Falta la cuarta palabra -- *ejercido*
 Y el criterio que usa, `boundary not in source`, es exactamente el `assert <literal> in source` que
 el propio borrador cataloga como anti-patron. Es la tercera aparicion del mismo defecto **dentro del
 artefacto que existe para impedirlo**.
+
+## El predicado, medido (tabla del re-juicio del 2026-08-09)
+
+En las siete variantes las dos fronteras declaradas siguen presentes byte a byte dentro de la
+funcion que el contrato declara como `exercised_by`.
+
+| Variante | Forma | Presentes | Ejecutadas | Criterio por forma (`if False:`) | Criterio por propiedad |
+|---|---|---|---|---|---|
+| U0 | baseline | SI | SI | -- | EJERCIDA (verde) |
+| U1 | `if False:` | SI | NO | detecta | NO EJERCIDA (rojo) |
+| U2 | `return` antes del cuerpo | SI | NO | no detecta | NO EJERCIDA (rojo) |
+| U3 | `@unittest.skip` | SI | NO | no detecta | NO EJERCIDA (rojo) |
+| U4 | `raise SkipTest` | SI | NO | no detecta | NO EJERCIDA (rojo) |
+| U5 | guarda por variable de entorno | SI | NO | no detecta | NO EJERCIDA (rojo) |
+| U6 | `while False:` | SI | NO | no detecta | NO EJERCIDA (rojo) |
+
+Uno de seis frente a siete de siete. El criterio cabe en un trazador de lineas o en `coverage` con
+el runner ya cableado: no es caro, es distinto.
+
+**U3 y U4 son las peores**, y niegan la version anterior de este contrato: el runner **ya** reporta
+`skipped=1`. La informacion existe y nadie la consume. El predicado tiene que nombrar al
+**consumidor**, no al emisor.
 
 ## Nota de redaccion, que viene del checker y la hago mia
 

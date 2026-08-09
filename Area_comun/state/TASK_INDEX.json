@@ -453,6 +453,30 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0351-el-lazo-reporta-ok-y-no-commitea.md",
+            "id": "TASK-0351",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El lazo del runtime reporta ok true y no deja el commit -- exito declarado sin el efecto",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0352-drift-tras-submit-intent-en-los-casos-de-intent-flow.md",
+            "id": "TASK-0352",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Los casos de intent flow terminan con drift de estado tras submit_intent",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+            "id": "TASK-0353",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

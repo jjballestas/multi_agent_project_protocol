@@ -36,7 +36,7 @@ intake:
     - scripts/replay_validate_job.py
     - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
   out_of_scope:
-    - "Los CINCO pasos cuya causa NO es la regla de obstacles, medido por mutacion: 36 (`intent flow`), 43 (`event auth runtime override`), 50 (`runtime instantiation`), 58 (`runtime loop`) y 59 (`supervised autonomy`). Siguen rojos con la regla neutralizada. 43 y 50 ya tienen tarea (TASK-0349, TASK-0350); 36, 58 y 59 quedan por contratar."
+    - "Los CINCO pasos cuya causa NO es la regla de obstacles, medido por mutacion: 36 (`intent flow`), 43 (`event auth runtime override`), 50 (`runtime instantiation`), 58 (`runtime loop`) y 59 (`supervised autonomy`). Siguen rojos con la regla neutralizada. Los cinco tienen tarea propia: 43 -> TASK-0349, 50 -> TASK-0350, 58 y 59 -> TASK-0351, 36 -> TASK-0352."
     - "El mecanismo de cobertura del AC4 de TASK-0346, pendiente de decision del operador."
     - "Codigo de produccion, salvo que el AC5 revele un defecto real, y entonces se para y se declara."
   risk: medium
