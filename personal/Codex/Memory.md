@@ -6257,3 +6257,19 @@ ratified its own work.
   obstacle declarations required by the current validator. The handoff asks Arquitecto to route
   that anomaly separately. Independent review of TASK-0345 is required; Codex did not review or
   ratify its work.
+
+## 2026-08-09 - TASK-0331 remediation iteration 6 implementation
+
+- Commit `bc2efc8a` adds permanent negative
+  `NEG-HARNESS-ADMISSION-LIVENESS-PRODUCTION-PATH` over the real, unstubbed
+  `Get-LeaseProcessState`, `Test-LeaseProcessMatches`, and `Get-AdditionalWorkSignal` positions.
+- The production-path probe fixes dead, live, and PID-reused observations. Early constant returns
+  preserving the original bodies as dead code all die: state=`live` and matches=`true` turn a dead
+  peer lease into `active_peer_lease`; admission=`none` lets an intersecting live lease pass.
+- The 24-cell decision table intentionally retains its injected verdicts; no claim is made that
+  those cells now exercise production. The separately routed TASK-0341 lock-write contract was not
+  absorbed.
+- The harness passed 29/29 and falsification inventory passed 69/69. All seven task gates plus
+  encoding, drift, compile, and diff checks exited 0. TASK-0331 remains `in_progress` under the
+  remediation-6 claim pending exact-commit clean-clone verification and governed delivery.
+- Codex is maker only and has not reviewed or ratified the implementation.
