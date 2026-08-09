@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0343 remediation iteration 1 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0340 remediation iteration 1 implementation committed.
+
+## 2026-08-09 - TASK-0340 remediation iteration 1 implementation
+
+- Commit `91c6a542` makes the actor-auth permanent negative run under `if: always()` in the
+  `validate` job, so an earlier unrelated red step no longer skips AC5.
+- The CI dependency property now scans every `.github/workflows/*.yml` and `*.yaml`, recognizes
+  direct path and module invocations, and follows local shell wrappers. Permanent mutants add a
+  second workflow, use `python -m`, route through a Bash wrapper, remove the install, and remove
+  runner reachability; all diverge. Legitimate pinned and separate-step installs remain green.
+- The focused actor-auth suite, 70/70 falsification inventory, falsification guardian, collaboration,
+  encoding, Python/PowerShell neutrality, compile, and diff gates exited 0 before commit.
+- TASK-0347 is the contracted owner of the remaining runtime-concurrency failure. TASK-0340 remains
+  `in_progress` under `CLAIM-20260809-Codex-TASK-0340-remediation-1` pending exact-commit CI evidence
+  and governed delivery. Codex is maker only and has not reviewed or ratified the remediation.
 
 ## 2026-08-09 - TASK-0343 remediation iteration 1 implementation
 
