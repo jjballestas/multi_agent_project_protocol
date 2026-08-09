@@ -39,8 +39,12 @@ pre/post ledger state itself without changing production rollback behavior.
 
 ## Whole-file literal inventory (pre-fix)
 
-The full AST-assisted assertion sweep found no host-absolute path literal. All
-path assertions are fixture-relative and name the artifact whose behavior they
+The full AST-assisted assertion sweep found no host-absolute path literal inside
+an assertion. That narrower result did not cover executable literals elsewhere
+in the runner: `run_large_stderr_drain_case` invokes the host-absolute
+`C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe`. This remains an
+explicit platform residual (R5) and is not changed by TASK-0343. All path
+assertions are fixture-relative and name the artifact whose behavior they
 exercise. The remaining counter literals classify as follows (pre-fix lines):
 
 - Protocol properties: retry attempts `1/2/3` (1635-1637), cleared retry count

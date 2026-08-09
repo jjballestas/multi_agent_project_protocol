@@ -82,6 +82,28 @@
             "updated_at": "2026-08-09T09:10:35Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+            "expires_at": "2026-08-10T11:08:58Z",
+            "notes": "Remediation 1: bind rollback preservation to behavior, close claim and non-vacuity directions, and remove defer-reason literal coupling without absorbing TASK-0341.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0343",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+                "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/DIAG-TASK-0343-before-fix-20260808.md",
+                "personal/Codex/HANDOFF-TASK-0343-20260808.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T11:08:58Z",
+            "status": "active",
+            "task_id": "TASK-0343",
+            "updated_at": "2026-08-09T11:08:58Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260809-0328-adj4",
             "expires_at": "2026-08-10T23:59:00Z",
             "owner": "Arquitecto",

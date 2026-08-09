@@ -1,0 +1,124 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "02273915a0fbc375618e803caa07a06dedf7ff7040646c75a3342bf417c070a6",
+        "replay_hash": "02273915a0fbc375618e803caa07a06dedf7ff7040646c75a3342bf417c070a6",
+        "up_to_seq": 8366
+    },
+    "event": {
+        "actor": "Codex",
+        "actor_auth": {
+            "keyid": "codex:v1",
+            "method": "ed25519",
+            "sig": "ISegc7KZQFY6sQmBAlrIVUXXNF7UxT2oZ9aXCHsPUh0TCOMJuBKNg7xnXm8bIoNAzby2M5l3XNo9oeGCHIk0AA=="
+        },
+        "aggregate_id": "TASK-0343",
+        "aggregate_version": 12,
+        "applied": true,
+        "event_auth": {
+            "audience": "runtime-event-log",
+            "issuer": "local-runtime",
+            "key_id": "codex-hmac:v1",
+            "method": "hmac-sha256",
+            "signature": "0151b6fa99f9476dd494469a088e331a0eba281947e1e473e92fece0a70ee489"
+        },
+        "event_schema_version": "1.0",
+        "fencing_token": null,
+        "idempotency_key": "intent:Codex:claim:57a37f7e679832a639626de006e6680240d523fb8981d51196f2a21607154123",
+        "payload": {
+            "commit": "c60a0a9d6dfafd2c60ea7ca603a09002c4161e8a",
+            "intent_type": "claim",
+            "task_id": "TASK-0343",
+            "timestamp": "2026-08-09T11:08:58Z",
+            "transitions": {
+                "claims": [
+                    {
+                        "claim": {
+                            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+                            "expires_at": "2026-08-10T11:08:58Z",
+                            "notes": "Remediation 1: bind rollback preservation to behavior, close claim and non-vacuity directions, and remove defer-reason literal coupling without absorbing TASK-0341.",
+                            "owner": "Codex",
+                            "scope": [
+                                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1",
+                                "Area_comun/state/TASK_INDEX.json#TASK-0343",
+                                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+                                "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+                                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                                "personal/Codex/DIAG-TASK-0343-before-fix-20260808.md",
+                                "personal/Codex/HANDOFF-TASK-0343-20260808.md",
+                                "personal/Codex/Memory.md",
+                                "runtime/state/events.jsonl",
+                                "runtime/state/snapshot.json"
+                            ],
+                            "started_at": "2026-08-09T11:08:58Z",
+                            "status": "active",
+                            "task_id": "TASK-0343",
+                            "updated_at": "2026-08-09T11:08:58Z"
+                        },
+                        "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+                        "op": "acquire",
+                        "owner": "Codex",
+                        "task_id": "TASK-0343"
+                    }
+                ]
+            }
+        },
+        "prev_hash": "08763391b363447909f34da1b5e43cc21e36d9da446d9b07e6a05a1d4a4e1f7f",
+        "seq": 8366,
+        "ts": "2026-08-09T11:08:58Z",
+        "type": "intent.applied"
+    },
+    "genesis_event": null,
+    "intent": {
+        "claim": {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+            "expires_at": "2026-08-10T11:08:58Z",
+            "notes": "Remediation 1: bind rollback preservation to behavior, close claim and non-vacuity directions, and remove defer-reason literal coupling without absorbing TASK-0341.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0343",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+                "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/DIAG-TASK-0343-before-fix-20260808.md",
+                "personal/Codex/HANDOFF-TASK-0343-20260808.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T11:08:58Z",
+            "status": "active",
+            "task_id": "TASK-0343",
+            "updated_at": "2026-08-09T11:08:58Z"
+        },
+        "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+        "kind": "claim",
+        "op": "acquire",
+        "owner": "Codex",
+        "task_id": "TASK-0343"
+    },
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "264d267cc01ec7721a7e28f0f971f19b97897b37ce82efacf41314a8330f36af",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 8366
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 8366
+    },
+    "task_files_updated": []
+}

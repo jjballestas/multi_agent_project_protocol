@@ -147,10 +147,11 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "retry-ledger-preservation-property",
-        "negative": "rollback verification rejects ledger loss without requiring one log path",
-        "mutation": '"literal_log_path": lambda before, after, before_claims, after_claims, log:',
+        "negative": "rollback verification rejects event or claim loss and accepts any conservative defer reason",
+        "mutation": '"claims_ignored": lambda before, after, before_claims, after_claims:',
         "boundaries": (
             "assert all(actual == expected for _, actual, expected in property_results)",
+            "assert all(actual == expected for _, actual, expected in defer_results)",
             "assert not survivors",
         ),
         "exercised_by": "run_rollback_ledger_preservation_property",
@@ -170,35 +171,65 @@ def ledger_preservation_holds(
     return bool(before_events) and after_events == before_events and after_claims == before_claims
 
 
+def conservative_rollback_defer_observed(log: str) -> bool:
+    """Recognize the defer effect without coupling the contract to a reason name."""
+    return any(
+        re.search(r"(?:^|\s)ROLLBACK_DEFER reason=[A-Za-z0-9_]+(?:\s|$)", line)
+        for line in log.splitlines()
+    )
+
+
 def run_rollback_ledger_preservation_property() -> None:
-    """Ledger loss fails; preservation through a conservative defer still passes.
+    """Event or claim loss fails; any conservative defer reason still passes.
     PERMANENT_NEGATIVE: retry-ledger-preservation-property
     """
     before = [{"seq": 41, "payload": {"intent_type": "claim"}}]
     claims = {"seq": 41, "claims": []}
-    alternative_log = "ROLLBACK_DEFER reason=ledger_unreadable_after_exec"
+    changed_claims = {"seq": 41, "claims": [{"claim_id": "lost-by-rollback"}]}
     cases = (
-        ("lost", before, [], claims, claims, alternative_log, False),
-        ("alternative_path", before, list(before), claims, dict(claims), alternative_log, True),
+        ("events_lost", before, [], claims, claims, False),
+        ("claims_changed", before, list(before), claims, changed_claims, False),
+        ("empty_prestate", [], [], claims, claims, False),
+        ("preserved", before, list(before), claims, dict(claims), True),
     )
     property_results = [
         (label, ledger_preservation_holds(before_events, after_events, before_claims, after_claims), expected)
-        for label, before_events, after_events, before_claims, after_claims, _, expected in cases
+        for label, before_events, after_events, before_claims, after_claims, expected in cases
     ]
     assert all(actual == expected for _, actual, expected in property_results), property_results
+    defer_cases = (
+        ("current_reason", "ROLLBACK_DEFER reason=ledger_unreadable_after_exec", True),
+        ("renamed_reason", "ROLLBACK_DEFER reason=ledger_head_unreadable_after_exec", True),
+        ("reason_with_context", "ts ROLLBACK_DEFER reason=quarantine_move_failed path=residue.txt", True),
+        ("preserved_record", "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=3 proof=disk", False),
+        ("missing_defer", "ROLLBACK_QUARANTINED path=residue.txt", False),
+    )
+    defer_results = [
+        (label, conservative_rollback_defer_observed(log), expected)
+        for label, log, expected in defer_cases
+    ]
+    assert all(actual == expected for _, actual, expected in defer_results), defer_results
     mutants = {
-        "accept_loss": lambda before, after, before_claims, after_claims, log: True,
-        "literal_log_path": lambda before, after, before_claims, after_claims, log:
-            "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=3 proof=disk" in log,
+        "accept_loss": lambda before, after, before_claims, after_claims: True,
+        "claims_ignored": lambda before, after, before_claims, after_claims:
+            bool(before) and after == before,
+        "empty_accepted": lambda before, after, before_claims, after_claims:
+            after == before and after_claims == before_claims,
     }
     survivors = [
         name
         for name, mutant in mutants.items()
         if all(
-            mutant(before_events, after_events, before_claims, after_claims, log) == expected
-            for _, before_events, after_events, before_claims, after_claims, log, expected in cases
+            mutant(before_events, after_events, before_claims, after_claims) == expected
+            for _, before_events, after_events, before_claims, after_claims, expected in cases
         )
     ]
+    literal_reason_survives = all(
+        ("ROLLBACK_DEFER reason=ledger_unreadable_after_exec" in log) == expected
+        for _, log, expected in defer_cases
+    )
+    if literal_reason_survives:
+        survivors.append("literal_reason")
     assert not survivors, f"rollback preservation mutants survived: {survivors}"
 
 
@@ -1575,7 +1606,7 @@ def main() -> int:
             "  $repair=Join-Path $root '.protocol-tmp/repair-events.ps1'\n"
             "  $logPath=Join-Path $root '.protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log'\n"
             "  $proofPath=Join-Path $root '.protocol-tmp/ambiguous-events-after-rollback.txt'\n"
-            "  Set-Content -LiteralPath $repair -Value \"`$deadline=(Get-Date).AddSeconds(10)`nwhile((Get-Date) -lt `$deadline){if((Test-Path -LiteralPath '$logPath') -and (Select-String -LiteralPath '$logPath' -SimpleMatch 'ROLLBACK_DEFER reason=ledger_unreadable_after_exec' -Quiet)){Copy-Item -LiteralPath '$eventPath' -Destination '$proofPath' -Force; Set-Content -LiteralPath '$eventPath' -Value @('$($lines[0])','$($lines[1])','$($lines[2])') -Encoding ASCII; exit 0}; Start-Sleep -Milliseconds 25}`nexit 23\" -Encoding ASCII\n"
+            "  Set-Content -LiteralPath $repair -Value \"`$deadline=(Get-Date).AddSeconds(10)`nwhile((Get-Date) -lt `$deadline){if((Test-Path -LiteralPath '$logPath') -and (Select-String -LiteralPath '$logPath' -Pattern 'ROLLBACK_DEFER reason=[A-Za-z0-9_]+' -Quiet)){Copy-Item -LiteralPath '$eventPath' -Destination '$proofPath' -Force; Set-Content -LiteralPath '$eventPath' -Value @('$($lines[0])','$($lines[1])','$($lines[2])') -Encoding ASCII; exit 0}; Start-Sleep -Milliseconds 25}`nexit 23\" -Encoding ASCII\n"
             "  Start-Process powershell.exe -WindowStyle Hidden -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-File',$repair) | Out-Null\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
@@ -1709,8 +1740,9 @@ def main() -> int:
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
         assert "RETRY_SCHEDULED attempt=3" in log
-        assert ("ROLLBACK_DEFER reason=ledger_unreadable_after_exec" in log or
-                "ROLLBACK_DEFER reason=rollback_probe_failed" in log)
+        assert conservative_rollback_defer_observed(log), (
+            f"no conservative rollback defer was observed; log={log}"
+        )
         assert "LOOP_ERROR" not in log
         assert "ROLLBACK_LEDGER_DRIFT" not in log
         assert "outcome=confirmed" in log
