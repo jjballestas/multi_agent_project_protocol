@@ -103,7 +103,7 @@
             "owner": "Codex",
             "phase": "P2",
             "status": "ready",
-            "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles"
+            "title": "El job validate no esta verde desde el 5 de junio -- una regla endurecida dejo obsoletas las fixtures de quince runners a la vez"
         },
         {
             "id": "TASK-0348",
@@ -111,6 +111,18 @@
             "phase": "P2",
             "status": "proposed",
             "title": "Todo consumo del veredicto de vitalidad observado en su posicion, con unknown atado"
+        },
+        {
+            "id": "TASK-0349",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El caso de override de event-auth escribe una clave que el guard rechaza, y el gate muere sin haber probado nada"
+        },
+        {
+            "id": "TASK-0350",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada"
         }
     ],
     "view": "task_index.slim"

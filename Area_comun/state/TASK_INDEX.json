@@ -423,7 +423,7 @@
             "owner": "Codex",
             "phase": "P2",
             "status": "ready",
-            "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles",
+            "title": "El job validate no esta verde desde el 5 de junio -- una regla endurecida dejo obsoletas las fixtures de quince runners a la vez",
             "type": "implementation"
         },
         {
@@ -434,6 +434,22 @@
             "phase": "P2",
             "status": "proposed",
             "title": "Todo consumo del veredicto de vitalidad observado en su posicion, con unknown atado",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0349-el-override-rechaza-una-clave-que-su-propio-caso-escribe.md",
+            "id": "TASK-0349",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El caso de override de event-auth escribe una clave que el guard rechaza, y el gate muere sin haber probado nada",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
+            "id": "TASK-0350",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada",
             "type": "implementation"
         },
         {
