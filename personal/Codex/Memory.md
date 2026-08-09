@@ -16,7 +16,10 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 4 implem
   Python/PowerShell neutrality, compile, and diff gates exited 0 before commit and again on exact
   commit `8ab9d575` in detached clean worktree
   `D:/Aegis_Scratch/multi_agent_project_protocol/codex0328r4-8ab9d575-20260809` with empty status.
-  TASK-0328 remains `in_progress` under the remediation-4 claim pending governed delivery.
+  Delivery commit `dfb16c5a` moves TASK-0328 to `in_review`, releases both remediation-4 claims,
+  and publishes the self-contained handoff plus Arquitecto routing request. The commit hook reports
+  state pruning due at 90.48% released claims; pruning belongs to the next coordinated Architect
+  checkpoint and was not absorbed into this maker delivery.
 - Codex is maker only and has not reviewed or ratified this remediation.
 
 ## 2026-08-09 - TASK-0340 remediation iteration 1 implementation
