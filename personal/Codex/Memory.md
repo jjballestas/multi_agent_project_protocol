@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0329 remediation 3 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0327 remediation 2 implementation committed.
+
+## 2026-08-09 - TASK-0327 remediation iteration 2 implementation
+
+- Commit `784dd470` replaces both finite enumerations in the no-default property. Production
+  modules are derived from every non-test Python sibling under `scripts/memory/`, currently all
+  five modules, and parameter-bearing constructs are derived structurally through `ast.arguments`.
+- A scratch mutation adding a lambda default to `build_memory_db.py` and a function default to
+  `revive_pack.py` made the focused property report both carriers and exit 1. The unmodified
+  focused property and complete 72-test memory suite exit 0.
+- Falsification inventory remains 68/68. Collaboration, encoding, neutrality, and diff gates
+  exited 0 before commit. TASK-0327 remains `in_progress` under the remediation-2 claim pending
+  exact-commit clean-clone verification and governed delivery. Codex has not reviewed or ratified
+  the remediation.
 
 ## 2026-08-09 - TASK-0329 remediation iteration 3 implementation
 

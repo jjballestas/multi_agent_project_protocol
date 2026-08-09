@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c51008d9fcb37d49afa251000babc45ff5ebcbff651cded49c1092c84ddaa0a5",
+  "canonical_hash": "45919ce069b538ede526ab288b34ebb7a19b19ac17bad265bf1ae12ba3252aa0",
   "integrity": {
-    "canonical_hash": "c51008d9fcb37d49afa251000babc45ff5ebcbff651cded49c1092c84ddaa0a5",
+    "canonical_hash": "45919ce069b538ede526ab288b34ebb7a19b19ac17bad265bf1ae12ba3252aa0",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "7412abb99375b700fac7d0781a6f7f7835088ca5c5eb9ea5e6a860d3258437b7",
-    "signature": "87cac6ec19ec32ecfa364cd95db7b073693dfa7e34e4feb55af68d8e3edbb14e",
-    "up_to_seq": 8209
+    "prev_hash": "1ccfb67f0b6f798b0b74266f327dd53a7e78a9a80d5d94e3c927ffd8fbc13026",
+    "signature": "2d62da57a7e958198f6aca9baf87a42b7d556b5958f193c196432c2050e89132",
+    "up_to_seq": 8213
   },
   "state": {
     "aggregate_versions": {
@@ -3302,7 +3302,7 @@
       "TASK-0324": 20,
       "TASK-0325": 25,
       "TASK-0326": 13,
-      "TASK-0327": 23,
+      "TASK-0327": 27,
       "TASK-0328": 17,
       "TASK-0329": 32,
       "TASK-0330": 44,
@@ -3344,7 +3344,7 @@
       "protocol-prune": 57,
       "protocol-state": 1
     },
-    "events_applied": 7538,
+    "events_applied": 7542,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7203,6 +7203,10 @@
       "codex:task0327:remediation-1:implementation-claim-release:20260808T130800Z": 7999,
       "codex:task0327:remediation-1:in-progress-to-in-review:20260808T130800Z": 7998,
       "codex:task0327:remediation-2:claim-acquire:20260808T233519Z": 8206,
+      "codex:task0327:remediation-2:delivery-claim:20260809T000650Z": 8210,
+      "codex:task0327:remediation-2:delivery-release:20260809T000723Z": 8213,
+      "codex:task0327:remediation-2:implementation-release:20260809T000723Z": 8212,
+      "codex:task0327:remediation-2:in-review:20260809T000723Z": 8211,
       "codex:task0328:remediation1:delivery-release:20260808T202700Z": 8171,
       "codex:task0328:remediation1:msgfix-release:20260808T203100Z": 8173,
       "codex:task0328:remediation1:status-in-review:20260808T202700Z": 8169,
@@ -10886,5 +10890,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8209
+  "up_to_seq": 8213
 }

@@ -4,12 +4,28 @@ from: Codex
 to: Arquitecto
 status: in_review
 created: 2026-08-08T13:00:00Z
-implementation_commit: f732292ad6588aebdbd00e9ff2e46938fd2b0439
-verified_head: f732292ad6588aebdbd00e9ff2e46938fd2b0439
+implementation_commit: 784dd470985e41472de4ef117cdec55c6af1ab21
+verified_head: 784dd470985e41472de4ef117cdec55c6af1ab21
 reviewer: Analista
 ---
 
 # HANDOFF TASK-0327 - instance PII terms are fail-closed at every call site
+
+## Remediation iteration 2
+
+- The protected production-module set is derived from every non-test Python sibling under
+  `scripts/memory/`; it currently contains all five modules, including `dump_memory_db.py` and
+  `revive_pack.py`.
+- Parameter-bearing constructs are derived structurally: any AST node whose `args` field is an
+  `ast.arguments` instance is checked. There is no finite node-type list, and lambdas are covered.
+- A scratch mutation added `lambda value, domain_pii_terms=(): ...` to `build_memory_db.py` and a
+  `def` with the same default to `revive_pack.py`. The focused property reported both file/line
+  carriers and exited 1; the unmodified property exits 0.
+- Exact commit `784dd470` passed 72/72 memory tests, 68/68 falsification inventory, collaboration,
+  encoding, neutrality, and diff gates in clean detached clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0327r2-784dd470-20260809`, with empty status
+  before and after the gates.
+- Codex is the maker only and did not review or ratify this remediation.
 
 ## Remediation iteration 1
 

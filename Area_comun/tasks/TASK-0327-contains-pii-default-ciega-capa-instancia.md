@@ -2,7 +2,7 @@
 task_id: TASK-0327
 file: Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md
 title: "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion"
-status: in_progress
+status: in_review
 type: infra
 owner: Codex
 reviewer: Analista
@@ -110,3 +110,13 @@ declararlo para que nadie lo lea como regresion.
   funcion ni coordenadas codificadas.
 - Falsacion: un default nuevo inyectado en el modulo de drift hace fallar el test con una violacion
   descubierta dinamicamente. Los cinco gates pedidos pasan en clon limpio del commit exacto.
+
+## Remediacion 2 (2026-08-09)
+
+- El conjunto de modulos ya no enumera nombres: descubre todos los Python de produccion bajo
+  `scripts/memory/` mediante la convencion `*.py` excepto `test_*.py`. Hoy cubre los cinco modulos.
+- El conjunto de construcciones tampoco enumera tipos de nodo: deriva cualquier nodo cuyo atributo
+  `args` sea `ast.arguments`, cubriendo `def`, `async def`, metodos, funciones anidadas y lambdas.
+- Falsacion doble: una lambda con default en `build_memory_db.py` y un `def` con default en
+  `revive_pack.py` producen simultaneamente las dos violaciones y hacen rojo el test focal.
+- El commit exacto `784dd470` pasa 72/72 tests y los cinco gates pedidos en clon limpio.
