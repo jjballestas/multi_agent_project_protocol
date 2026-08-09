@@ -42,12 +42,6 @@
             "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
         },
         {
-            "id": "TASK-0336",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job"
-        },
-        {
             "id": "TASK-0337",
             "owner": "Codex",
             "phase": "P2",
