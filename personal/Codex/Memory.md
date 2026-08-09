@@ -11,9 +11,11 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0327 remediation 2 implementation c
   `revive_pack.py` made the focused property report both carriers and exit 1. The unmodified
   focused property and complete 72-test memory suite exit 0.
 - Falsification inventory remains 68/68. Collaboration, encoding, neutrality, and diff gates
-  exited 0 before commit. TASK-0327 remains `in_progress` under the remediation-2 claim pending
-  exact-commit clean-clone verification and governed delivery. Codex has not reviewed or ratified
-  the remediation.
+  exited 0 before commit. Exact commit `784dd470` passed the same gates plus 72/72 memory tests in
+  detached clean clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0327r2-784dd470-20260809`.
+- Delivery commit `84faf2be` moves TASK-0327 to `in_review`, releases both remediation-2 claims,
+  and publishes the self-contained handoff plus Arquitecto routing request. Codex has not reviewed
+  or ratified the remediation.
 
 ## 2026-08-09 - TASK-0329 remediation iteration 3 implementation
 
