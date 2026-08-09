@@ -1,6 +1,23 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0342 remediation iteration 2 delivered for review.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 3 implemented.
+
+## 2026-08-09 - TASK-0328 remediation iteration 3 implementation
+
+- Commit `9639535f` restores the grouped-prefix termination condition, rejects a contiguous
+  silhouette when its maximal alphanumeric run exceeds 34 characters, and recognizes complete
+  40/64-character hexadecimal object ids in the `git_ref` ingestion path.
+- Protocol identities and governed paths are excluded only from the account-identifier and phone
+  heuristics; email, domain-term, and shape validation remain active. Across 22,576 governed
+  allowlisted metadata strings, the real pre-TASK-0328 engine and the repaired engine measured
+  0 gains and 0 losses. All 4,385 `message_id`/`spec_id`/`task_id` values were unmarked.
+- The permanent negative derives governed metadata and real repository object ids. Removing the
+  terminator creates new governed-corpus marks, enabling PII checks for object ids creates hard
+  rejects, and the three previous coverage mutants still die.
+- Full memory tests passed 72/72. Falsification inventory 69/69, collaboration, encoding, Python
+  and PowerShell neutrality, neutrality parity tests, drift, compile, and diff gates exited 0.
+  TASK-0328 remains `in_progress` under the remediation-3 maker claim until exact-commit
+  verification and governed delivery. Codex has not reviewed or ratified the work.
 
 ## 2026-08-09 - TASK-0342 remediation iteration 2 implementation
 
