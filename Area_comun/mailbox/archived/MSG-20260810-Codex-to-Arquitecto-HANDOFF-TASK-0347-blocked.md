@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0347
-status: open
+status: archived
 created: 2026-08-09T22:18:00Z
 requires_response: false
 context_refs:

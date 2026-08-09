@@ -111,3 +111,21 @@ El encargo anterior enumeraba ocho ficheros. El maker habria arreglado ocho y ma
 noveno -- es el patron que esta jornada ha demostrado repetidamente. Por eso AC1 no pide arreglar
 una lista: pide un replicador que **lea el workflow** y ejecute lo que haya. La lista deja de
 existir como artefacto editable a mano.
+
+## Nota para la review, medida por el Arquitecto el 2026-08-10
+
+El contrato de clase entregado en `4f141167` (`NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES`) deriva
+la poblacion del workflow -- eso esta bien y es lo que AC1 pedia. Su deteccion, en cambio, recae
+sobre **literales `dict` que declaran `transitions` en linea**. Medido:
+
+    clean   = {"transitions": {"task_status": {"to": "in_review"}}, "obstacles": []}   -> reconocido
+    entrega = {**clean, "summary": "x"}                                                -> NO reconocido
+
+Un turno de entrega construido por spread hereda `transitions` del literal base y **escapa al
+detector**. No es hipotetico: `{**clean, ...}` es el idioma dominante del propio fichero que
+implementa la comprobacion.
+
+La review debe atacar esto por PROPIEDAD, no cerrando el caso del spread: la pregunta correcta es
+si el criterio reconoce un turno de entrega **independientemente de como se construya el diccionario**
+(spread, `dict(...)`, asignacion posterior, construccion en un helper). Si hay que anadir una forma,
+es que se implemento una enumeracion.
