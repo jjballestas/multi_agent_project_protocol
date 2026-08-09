@@ -9649,3 +9649,62 @@ titulo de la tarea no. Distinguir letra y proposito EN VOZ ALTA en vez de inflar
   una ruta absoluta bajo `D:/Aegis_Scratch/`.
 - El Arquitecto empujo `6baf1b96` mientras yo revisaba; mi commit quedo encima y el ancla siguio
   valida (`git diff 676ef334..HEAD -- <rutas de 0343>` vacio). Comprobarlo siempre antes de pushear.
+
+## 2026-08-09 -- TASK-0328 r5 (commit `8ab9d575`): CHANGE-REQUIRED, sexto juicio
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0328-invariancia-coordenada-r5-verdict.md`.
+Commit propio `c922f228`, pusheado a main sobre `5ba1a431`.
+
+### Que cambio de clase (y hay que reconocerlo)
+
+La remediacion 4 es la primera de cuatro que NO entrega otra forma: la exencion pasa a estar atada
+a la coordenada que el llamador declara (`validate_metadata` pasa `coordinate=key`,
+`require_safe_text` pasa `coordinate=field`). Una cadena con forma de ruta en un campo no exento
+vuelve a marcar. Las 12 detecciones que refute en r4 estan recuperadas, 12 de 12. Y el corpus grande
+DECLARA que no tiene potencia (0 positivos previos sobre 22.608 cadenas) en vez de reportar
+"0 perdidas". Es la primera vez en cuatro versiones de esa medida.
+
+### El patron que se repitio, mas fino
+
+El reescrito por coordenada quita la envoltura de identidad (`TASK-0136-` fuera, `MSG-<fecha>-`
+fuera) y con ello EXPONE al heuristico el cuerpo de la identidad (`0136-codex-reconcile-...`,
+`885632826E`), que empieza a marcar. Para tapar esos 16 falsos positivos el maker anadio dos
+supresores -- salto por adyacencia alfanumerica y neutralizacion de fecha sobre el valor entero --
+y esos dos supresores cuestan 48 detecciones y rompen la invariancia en 4 de 8 clases de payload.
+**Cada remediacion sigue comprando una direccion cediendo la otra**, pero ahora en un rango 20 veces
+menor. Leccion: cuando la ganancia de precision viene de un supresor bolted-on, medir SIEMPRE que
+compra y que paga por separado, apagando cada mecanismo en una copia.
+
+### Tecnica que funciono y hay que repetir
+
+1. **Aislar la causa con un control.** `ES91-21000418450-20005133-2` (mod-97 valido, reagrupado para
+   que un bloque sea `20005133`) da True desnudo y False en `file`/`path`/`task_id`/`message_id`;
+   el MISMO identificador agrupado sin bloque 19xx/20xx da True en todas. El control convierte una
+   sospecha en una causa nombrada (la neutralizacion de fecha), no en una anecdota.
+2. **Refutar el contrato sin tocar el motor ni las aserciones.** Corri las aserciones del propio
+   contrato sobre su corpus (16/16 PASS) y sobre el mismo corpus + 4 formas mias: `sum(prev & !curr)`
+   0 -> 6 y `all(current)` 16/16 -> 20/32. Demuestra que el fallo esta en la ENUMERACION, no en la
+   asercion, y le quita al maker la salida de "la asercion ya estaba".
+3. **Las dos cifras por mecanismo.** Variantes en memoria (`variant_delivered`,
+   `variant_no_adjacency_skip`, `variant_no_timestamp_neutralisation`) cargadas como modulos:
+   Figura 1 = falsos positivos evitados sobre el corpus gobernado real; Figura 2 = perdidas contra
+   el motor previo sobre una poblacion con potencia. Luego correr el test dirigido en una COPIA con
+   cada variante para saber si el mecanismo es portante (los dos lo eran: `failures=1` y
+   `failures=2`). Eso es lo que el Arquitecto pedia con "quiero las dos cifras antes que una decision".
+4. **Poblacion con potencia derivada del arbol**, no una lista: 12 directorios gobernados reales +
+   10 prefijos de identidad reales extraidos del propio corpus x 8 formas de payload x 5 coordenadas
+   = 288 cadenas, 150 positivos del motor base. Sin ese denominador, "0 perdidas" no dice nada.
+
+### Operativo
+
+- `git clone --local --no-checkout <hub> clone` + `git checkout --detach <sha>`: usa hardlinks en el
+  mismo volumen, asi que el `.git` de 7 GB no se copia. Dos clones (clone + mut1) en segundos.
+- Los mutantes de PRODUCCION se escriben en `mut1`, nunca en `clone`; guardar
+  `cp mut1/scripts/memory/build_memory_db.py mut1_orig.py` para restaurar.
+- Gate ASCII propio ANTES de commitear: se me colo una `o` acentuada en "gano". `scan_encoding.py`
+  dio EXIT=0 igualmente (no lee untracked), asi que el escaneo de bytes>127 sobre MIS ficheros es el
+  unico gate real.
+- La claim activa de Codex (`CLAIM-20260809-Codex-TASK-0328-remediation-4`) cubre `scripts/` y el
+  ledger, no `Area_comun/artifacts/` ni `mailbox/open/`: mis dos rutas quedaban libres.
+- Presupuesto: declare en r4 un maximo de 2 iteraciones antes de escalar al operador. La 5 seria la
+  ultima. Lo repeti explicitamente en el veredicto para que no se me olvide en el proximo juicio.
