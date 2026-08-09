@@ -9755,3 +9755,67 @@ Veredicto sobre `4cded4c4`. Artefacto:
   simulation cases", ajeno.
 - Presupuesto agotado (iteracion 2 de 2 declarada en la r1): el veredicto recomienda **escalar al
   operador humano** con dos opciones, y pide explicitamente no promover ni cerrar mientras tanto.
+
+---
+
+## 2026-08-09 -- TASK-0329 r4 (commit `53c35cad`): CHANGE-REQUIRED, escalado al operador
+
+Juzgado en clon limpio `D:/Aegis_Scratch/mapp/an329r4` sobre `1177f67b`. Siete gates verdes en
+baseline; la suite vuelve de 5 a 6 tests. Veredicto:
+`Area_comun/artifacts/Analista-TASK-0329-oraculo-independiente-r4-verdict.md`.
+
+### Lecciones de metodo
+
+1. **El corpus de un contrato tiene mas de un eje. Medir TODOS.** El corpus de paridad es
+   rutas x terminos. La remediacion 3 independizo el eje de RUTAS (`identity_contract_paths()`,
+   selector de fs propio del test) y las tres instancias de SLIP-5 murieron. Pero el eje de
+   TERMINOS sigue saliendo del escaner juzgado (`configured_identity_terms` en `:331` y `:503`):
+   una edicion de un token deja al escaner ciego a una identidad con `SUITE=0`. **Cuando una
+   remediacion cierra "la via que mediste", preguntar de que mas se compone el objeto.**
+2. **El experimento decisivo es la MISMA mutacion en VARIAS colocaciones.** Coordenada muerta
+   anadida solo a PowerShell: indentada dentro del bloque -> detectado; fuera del bloque antes
+   del marcador -> detectado; fuera del bloque DESPUES del marcador `$GenericIdentityTokens = @(`
+   -> **escapa** con los siete gates verdes. Una sola colocacion habria dado un falso PASS. Tabla
+   de colocaciones = la forma barata de falsar "el oraculo ve la propiedad".
+3. **Instrumentar por marcador de texto es la ventana de texto otra vez.**
+   `powershell_identity_inventory()` inyecta una sonda con `exit 0` antes del marcador: todo lo
+   que el `.ps1` ejecuta despues es activo e invisible. **Tercera reaparicion de la clase**
+   (SLIP-1 ventana de texto -> SLIP-5 selector del artefacto juzgado -> SLIP-6 ventana de
+   instrumentacion). Cada remediacion la desplazo, ninguna la cerro.
+4. **Comparar los dos lados del gemelo revela si la fragilidad es del oraculo.** La misma deriva
+   por el lado Python SI se detecta, porque ese inventario se lee por importacion (estado
+   efectivo). Un lado juzgado por su estado real y el otro por donde cae una cadena: la asimetria
+   senala exactamente donde esta el defecto.
+5. **Un backstop accidental no es un invariante.** SLIP-7 hoy cae porque los cinco terminos
+   configurados tienen casualmente coordenadas entre los 91 pares (`assertIn(digest,
+   terms_by_digest)`). Con un agente registrado sin exenciones -- el estado normal de cualquier
+   alta -- desaparece. Distinguir siempre "lo mata el contrato" de "lo mata la coincidencia".
+6. **Comprobar que el mutante no se auto-delata.** Mi primer intento de estrechar el eje de
+   terminos anadia el literal `"analista"` a `GENERIC_IDENTITY_TOKENS`: el propio escaner gemelo
+   flagged el literal en el codigo fuente (`PS=1` sin fuga) y el experimento quedo invalido. En un
+   escaner de identidades, **el mutante no puede escribir el termino**; usar un cambio numerico
+   (minimo de longitud `3` -> `6`) o digests.
+7. **Verificar la declaracion contra el diff, no contra la prosa.** El handoff dice que reemplaza
+   el campo `mutation` por "the executable Python route-exemption mutation"; el diff da
+   `indented_source = source.replace(` -> `narrowed_python_source = python_source.replace(`, el
+   mismo fragmento con otro nombre. Declarar != corregir.
+
+### Operativo
+
+- Auditoria AST independiente del inventario PS: `Parser::ParseInput` + `FindAll` sobre
+  `AssignmentStatementAst`, script en fichero (`/d/Aegis_Scratch/mapp/ast_audit.ps1`) -- **no
+  inline via `powershell -Command` desde bash**, el escapado de backticks/`$` rompe. Resultado:
+  PS == Python, 10 rutas, 91 pares, 0 muertas, 0 fuera de rango, 0 digests huerfanos, y **una
+  sola** asignacion que toca la tabla (linea 6).
+- La suite tarda ~31 s en verde y ~10 s cuando falla pronto: **una bateria de mutantes en bucle
+  `for MODE in ...` con `git checkout -- . && git clean -qfd` al principio de cada vuelta** cabe
+  en un solo tool call y evita el goteo.
+- Rutas de scratch en heredocs de Python: usar `D:/...` absoluto, no `/d/...` (pathlib en Windows
+  no resuelve el estilo MSYS).
+- **CI del hub: 200 de 200 runs en `failure` desde 2026-08-08T04:29 por BLOQUEO DE FACTURACION**
+  ("The job was not started because recent account payments have failed..."). Ningun job arranca:
+  ni `validate`, ni `falsification-runners`, ni `powershell-linux-parity`. Toda declaracion de
+  "CI cubre pwsh 7" esta vacia mientras dure. Reportado como anomalia DECISION-0018.
+- Iteracion 2 de 2 declarada en r2: **escale al operador humano** en vez de pedir una tercera, y
+  lo dije citando mi propia regla de r3. Cuando la clase reaparece por tercera vez, la decision de
+  cuantos ciclos mas gastar es del operador, no mia.
