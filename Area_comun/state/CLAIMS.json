@@ -55,6 +55,21 @@
             "updated_at": "2026-08-09T01:30:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260809-0342-adj2",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0342",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0342",
+                "Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260809-0342-adj2"
+            ],
+            "started_at": "2026-08-09T01:54:02Z",
+            "status": "released",
+            "task_id": "TASK-0342",
+            "updated_at": "2026-08-09T01:54:02Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hygiene-20260809-lote60",
             "expires_at": "2026-08-09T23:59:00Z",
             "owner": "Arquitecto",
