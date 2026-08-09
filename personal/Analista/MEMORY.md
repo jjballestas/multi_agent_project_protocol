@@ -9708,3 +9708,50 @@ compra y que paga por separado, apagando cada mecanismo en una copia.
   ledger, no `Area_comun/artifacts/` ni `mailbox/open/`: mis dos rutas quedaban libres.
 - Presupuesto: declare en r4 un maximo de 2 iteraciones antes de escalar al operador. La 5 seria la
   ultima. Lo repeti explicitamente en el veredicto para que no se me olvide en el proximo juicio.
+
+## 2026-08-09 -- TASK-0343 r2 (commit b8c93e5e): CHANGE-REQUIRED, el ensanchado dejo el gate ciego
+
+Veredicto sobre `4cded4c4`. Artefacto:
+`Area_comun/artifacts/Analista-TASK-0343-defer-por-comportamiento-r2-verdict.md`.
+
+### Lo tecnico que no quiero volver a descubrir
+
+1. **Un predicado que barre el LOG ENTERO no puede fallar por lo que pase en un intento concreto.**
+   El escenario de `run_mailbox_retry_cases.py` emite dos `ROLLBACK_DEFER`: `reason=head_changed` en
+   el intento 1 y `reason=ledger_unreadable_after_exec` en el intento 4, que es el unico bajo prueba.
+   La remediacion sustituyo dos literales por `re.search(...)` sobre todo el log: la linea del
+   intento 1 lo satisface para siempre. **La ventana de observacion es parte del criterio**; ensanchar
+   el vocabulario sin acotar la ventana convierte la asercion en tautologia.
+2. **Como se prueba, en dos direcciones.** (a) borrar SOLO el `Write-Log` guardado conservando el
+   `return` (efecto intacto, linea observada fuera): 3 de 4 corridas exit 0 en r2, 2 de 2 exit 1
+   determinista en el commit anterior `26b33967` -- el control cruzado contra el commit PREVIO es lo
+   que convierte "es debil" en "es una PERDIDA medida"; (b) renombrar la razon con guiones, que el
+   regex `[A-Za-z0-9_]+` no puede casar: 2 de 3 corridas exit 0. Si el gate aprueba una razon que su
+   propio regex no reconoce, lo que aprueba es otra cosa.
+3. **Ensanchar una BARRERA es peor que ensanchar una asercion.** El `Select-String` del fixture no
+   asierta: sincroniza. Al aceptar cualquier razon casa con una linea de cinco segundos antes, dispara
+   en el primer sondeo y el fixture pasa a correr una carrera.
+4. **Sintoma de fixture racy: la misma mutacion da resultados distintos.** mp6 dio 1, 0, 0, 1 en cuatro
+   corridas identicas. **Un solo verde no cierra nada**: a partir de ahora, todo criterio que escriba en
+   un bucle de arreglo lleva "3 de 3 corridas", no "exit 0". Y hay que medir el BASELINE repetido
+   (4 de 4 verde) para poder decir que lo no determinista es la respuesta a la mutacion, no el entorno.
+5. **Un `catch` sin `return` no es un defer conservador.** El negativo consagro
+   `reason=quarantine_move_failed` como caso True; en produccion esa rama esta dentro del bucle y sin
+   `return`: el rollback continua. Leer el CONTROL DE FLUJO de cada razon antes de aceptar que la
+   pertenencia a la familia signifique lo que el nombre sugiere.
+
+### Operativo
+
+- Tres clones en paralelo (`an0343r2`, `an0343r2b`, `an0343r2c`) con `git clone --local --no-checkout`
+  + `checkout --detach`. Cada corrida del runner tarda ~1m53s; con 3 clones la bateria de 9 mutantes
+  baja de ~20 a ~7 minutos.
+- **Nunca tocar un clon mientras su driver corre.** Hice un `git checkout <otro-sha> -- <fichero>` para
+  el barrido AST sobre el MISMO clon donde corria la bateria y contamine la primera tanda; hubo que
+  matarla y repetirla entera. Barridos estaticos: en un clon aparte o antes de lanzar.
+- Instrumentar el volcado del log completo (escribir `log` a un fichero justo antes de la asercion) es
+  lo que revelo la causa. Sin el log entero solo se ven exit codes.
+- Leer CI **por PASO**: run 31310469089 sobre `4cded4c4` tiene `validate` en failure y aun asi el paso
+  "Execute mailbox retry falsification runner" en success; el rojo es "Run runtime concurrency
+  simulation cases", ajeno.
+- Presupuesto agotado (iteracion 2 de 2 declarada en la r1): el veredicto recomienda **escalar al
+  operador humano** con dos opciones, y pide explicitamente no promover ni cerrar mientras tanto.
