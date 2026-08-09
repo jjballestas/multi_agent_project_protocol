@@ -6270,6 +6270,11 @@ ratified its own work.
   those cells now exercise production. The separately routed TASK-0341 lock-write contract was not
   absorbed.
 - The harness passed 29/29 and falsification inventory passed 69/69. All seven task gates plus
-  encoding, drift, compile, and diff checks exited 0. TASK-0331 remains `in_progress` under the
-  remediation-6 claim pending exact-commit clean-clone verification and governed delivery.
+  encoding, drift, compile, and diff checks exited 0. Exact implementation commit `bc2efc8a`
+  passed the seven task gates plus encoding and clean drift in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0331r6-bc2efc8a` with empty status.
+- Delivery commit `3d3daf5f` moves TASK-0331 to `in_review`, releases both Codex claims, and
+  publishes the self-contained Arquitecto handoff for independent Analista re-review of B-new.
+  Runtime delivery reached seq 8328 with drift false. The TASK-0341 lock-write partition remains
+  outside this remediation.
 - Codex is maker only and has not reviewed or ratified the implementation.
