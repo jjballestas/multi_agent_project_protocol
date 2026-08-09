@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0340 remediation iteration 1 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0340 remediation iteration 1 blocked on Actions billing.
 
 ## 2026-08-09 - TASK-0340 remediation iteration 1 implementation
 
@@ -12,9 +12,13 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0340 remediation iteration 1 implem
   runner reachability; all diverge. Legitimate pinned and separate-step installs remain green.
 - The focused actor-auth suite, 70/70 falsification inventory, falsification guardian, collaboration,
   encoding, Python/PowerShell neutrality, compile, and diff gates exited 0 before commit.
-- TASK-0347 is the contracted owner of the remaining runtime-concurrency failure. TASK-0340 remains
-  `in_progress` under `CLAIM-20260809-Codex-TASK-0340-remediation-1` pending exact-commit CI evidence
-  and governed delivery. Codex is maker only and has not reviewed or ratified the remediation.
+- TASK-0347 is the contracted owner of the remaining runtime-concurrency failure. Push commit
+  `3204de5e` triggered Actions run `31317196577`, but GitHub rejected all three jobs before checkout
+  because account payments failed or the spending limit must be increased. No actor-auth CI step ran.
+- Governed commit `a5aa5428` moves TASK-0340 to `blocked`, releases both remediation claims, and
+  publishes `MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0340-actions-billing.md`. Resume only
+  after the account gate is restored and rerun exact commit `3204de5e`; then require the actor-auth
+  step result before delivery. Codex is maker only and has not reviewed or ratified the remediation.
 
 ## 2026-08-09 - TASK-0343 remediation iteration 1 implementation
 
