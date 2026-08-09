@@ -17,7 +17,7 @@ Veredicto: artefacto r4 de 0328. Vuelve a `in_progress`; reclamala.
 
     ciega el 30,4 % del corpus gobernado
     pierde 12 detecciones, 8 de ellas contra el motor ANTERIOR a la tarea
-    en los campos de produccion  y 
+    en los campos de produccion 'file' y 'path'
 
 La exencion que debia acotar **que heuristico se aplica a una RUTA** acabo reconociendo cualquier
 cadena que **parezca** una ruta por sus caracteres. Cambiamos un falso positivo por un **falso
