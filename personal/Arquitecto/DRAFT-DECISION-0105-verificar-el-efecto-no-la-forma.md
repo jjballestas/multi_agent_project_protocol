@@ -111,6 +111,47 @@ ES su ejecucion -- no un documento que nadie ejecuta:
   coordenada, de orden y de formato. *(La iteracion 1 enumeraba tres ejes, que es una forma:
   reproducia el defecto que nombra. Aqui el ejemplo va como ejemplo, no como definicion.)*
 
+## Evidencia de la jornada del 2026-08-09 (posterior a la iteracion 2)
+
+Un dia entero de ciclo de dos capas anadio evidencia que cambia el enfasis del documento.
+
+**Cuatro cadenas escalaron al operador el mismo dia, y por la MISMA causa.** TASK-0329, TASK-0332,
+TASK-0342 y TASK-0343 agotaron sus dos iteraciones. En las cuatro, cada remediacion cerro **lo
+medido** y dejo la clase abierta **por un eje mas**:
+
+    0329   el oraculo lee al gemelo por un PREFIJO DE TEXTO
+    0332   la matriz prometida es una ESTRELLA, no un producto
+    0342   la paridad deriva de UNA LINEA de formato fijo
+    0343   el gate observa una VENTANA que no le pertenece
+
+Catorce vueltas entre las cuatro. **No es fallo del maker**: perseguiamos "cerrar la clase"
+**iterando sobre instancias**, y cada vuelta el checker encontraba el siguiente eje.
+
+**El caso mas nitido -- estrella frente a producto.** El contrato de 0332 prometia una matriz
+`prefijo x offset`. Lo entregado variaba un eje cada vez desde un centro. La **conjuncion** de dos
+valores ya muestreados por separado nunca se probo, y ocultaba un email real con **72 pruebas en
+verde**. Muestrear cada eje no es muestrear el producto, y el bypass vive en la conjuncion.
+
+**El instrumento de medida tambien mide su ausencia.** En TASK-0328 la medicion bidireccional se
+corrio DOS veces sobre corpus con **cero positivos previos**: su "0 perdidas" no significaba nada. El
+criterio que lo cierra quedo escrito como una condicion de alcance: el corpus debe **acreditar que
+entra por la rama que dice cubrir**.
+
+**Y una correccion de encuadre que hice yo mismo:** ofrecer "cerrar con residual declarado" como
+salida legitima resulto ser, en un caso, ofrecer enviar un gate de PII ciego a identificadores
+validos. **Un residual se declara; un agujero se arregla.** Distinguirlos exige la misma medicion que
+todo lo demas.
+
+### Lo que esto anade a las reglas
+
+Refuerza **D1** y **G7** y sugiere una formulacion mas util que "ata la propiedad":
+
+    La poblacion de prueba se DERIVA de la condicion que el motor evalua; no se enumera.
+    Y acredita haber ejercitado la rama bajo prueba al menos una vez.
+
+Si el corpus sale de la gramatica real, los ejes que nadie penso entran solos. Si lo escribe quien
+implementa, mide lo que ese alguien ya habia pensado.
+
 ## Coste y contrapartida
 
 **Un rojo que se queda rojo deja de leerse.** Con un solo `main` y varios agentes gateados por la
