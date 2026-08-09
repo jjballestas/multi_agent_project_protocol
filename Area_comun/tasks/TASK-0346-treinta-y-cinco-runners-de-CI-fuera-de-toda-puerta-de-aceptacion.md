@@ -202,3 +202,13 @@ anterior, el negativo adecuado agrega por mutacion un runner sintetico a `valida
 el registro y exige que el validador falle; una segunda mutacion elimina o vuelve inalcanzable una
 fila existente y tambien debe fallar. Implementarlo ahora fijaria unilateralmente el mecanismo que
 AC4 reserva al Arquitecto.
+
+## AC6 - bloqueo externo medido
+
+El commit de implementacion `27581eeb` disparo el run real de Actions `31290696952`. Los jobs
+`powershell-linux-parity` y `falsification-runners` pasaron. El job `validate` se detuvo antes del
+runner de propiedades en `Check systematic state pruning`: `cold_start_tokens 20142 >= 20000`.
+El propio gate exige un checkpoint coordinado del Arquitecto. Por tanto el paso
+`Run runtime property invariant cases` quedo skipped y AC6 aun no esta medido. TASK-0346 no aplica
+la poda porque es una operacion gobernada fuera de su scope y porque los otros 17 fallos del censo
+siguen fuera de alcance.

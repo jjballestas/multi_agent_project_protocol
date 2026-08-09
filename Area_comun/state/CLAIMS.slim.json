@@ -13,6 +13,17 @@
                 "runtime/state/snapshot.json"
             ],
             "task_id": "TASK-0346"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0346-PRUNE-QUESTION",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0346-PRUNE-QUESTION",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0346-prune-gate.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0346"
         }
     ],
     "schema_version": "1.0",
