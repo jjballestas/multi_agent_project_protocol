@@ -1,7 +1,7 @@
 ---
 id: TASK-0346
 title: Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea
-status: blocked
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0346-treinta-y-cinco-runners-de-CI-fuera-de-toda-puerta-de-aceptacion.md
@@ -203,12 +203,11 @@ el registro y exige que el validador falle; una segunda mutacion elimina o vuelv
 fila existente y tambien debe fallar. Implementarlo ahora fijaria unilateralmente el mecanismo que
 AC4 reserva al Arquitecto.
 
-## AC6 - bloqueo externo medido
+## AC6 - cerrado en CI real
 
-El commit de implementacion `27581eeb` disparo el run real de Actions `31290696952`. Los jobs
-`powershell-linux-parity` y `falsification-runners` pasaron. El job `validate` se detuvo antes del
-runner de propiedades en `Check systematic state pruning`: `cold_start_tokens 20142 >= 20000`.
-El propio gate exige un checkpoint coordinado del Arquitecto. Por tanto el paso
-`Run runtime property invariant cases` quedo skipped y AC6 aun no esta medido. TASK-0346 no aplica
-la poda porque es una operacion gobernada fuera de su scope y porque los otros 17 fallos del censo
-siguen fuera de alcance.
+Tras el punto de control coordinado del Arquitecto en `a669f82d`, el run real de Actions
+`31291178449` completo `Check systematic state pruning` con success y ejecuto
+`Run runtime property invariant cases` con success sobre ese mismo HEAD. El job `validate` fallo
+despues, en `Run runtime concurrency simulation cases`, uno de los 17 fallos ya declarados por AC2
+y expresamente fuera del alcance de AC3. Por tanto AC6 queda medido y satisfecho sin ampliar el
+arreglo autorizado.

@@ -159,7 +159,7 @@
         {
             "id": "TASK-0346",
             "owner": "Codex",
-            "status": "blocked",
+            "status": "in_review",
             "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea"
         },
         {
