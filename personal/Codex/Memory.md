@@ -2,6 +2,23 @@
 
 Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 4 implementation.
 
+## 2026-08-09 - TASK-0328 remediation iteration 5 implementation
+
+- Commit `df5de987` replaces prefix-wide and date-wide coordinate exemptions with bounded
+  parsers that consume only integral protocol envelopes. Unexplained identity slugs and path
+  segments are scanned without coordinate-dependent adjacency suppression.
+- The permanent powered corpus derives 10 separators, 23 block lengths, alphanumeric adjacency
+  in both phone directions, grouped-account adjacency, and date-shaped account blocks from the
+  production predicates. It contains 260 payloads and 940 coordinate renderings: 244 prior
+  positives, 940 current positives, 696 gains, and 0 losses.
+- `validate_metadata(file=...)` and `require_safe_text(field='path')` directly reject all 85
+  path-valid powered payloads. Three independent coordinate mutants lose detections; the contract
+  now declares 18 boundaries and the repository inventory remains 70/70.
+- Full memory tests passed 72/72. Collaboration, encoding, Python/PowerShell neutrality, drift,
+  compile, falsification inventory, and diff gates exited 0 before commit. TASK-0328 remains
+  `in_progress` under the remediation-5 maker claim until exact-commit verification and governed
+  delivery. Codex is maker only and has not reviewed or ratified this remediation.
+
 ## 2026-08-09 - TASK-0328 remediation iteration 4 implementation
 
 - Commit `8ab9d575` replaces value-shape exemptions with validated-coordinate handling. Protocol
