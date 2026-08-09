@@ -6378,3 +6378,18 @@ ratified its own work.
   Runtime delivery reached seq 8328 with drift false. The TASK-0341 lock-write partition remains
   outside this remediation.
 - Codex is maker only and has not reviewed or ratified the implementation.
+## 2026-08-09 - TASK-0347 production-path blocker
+
+- Commit `4f141167` adds the workflow-derived validate-job replicator, restores explicit
+  `obstacles` fields in the shared delivery fixture builders, and extends
+  `NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES` with an AST property over Python runners derived
+  from `.github/workflows/validate.yml`. The direct concurrency and guardrail runners pass;
+  falsification inventory is 70/70 and collaboration, encoding, neutrality, compile, and diff
+  gates exit 0.
+- The scoped fixture repair exposed a production defect required by TASK-0347 AC5: both live and
+  shipped `orchestrator.py` omit `obstacles` from `TURN_SCHEMA_KEYS`. `schema_report()` therefore
+  strips a producer-supplied `obstacles: []` immediately before `validate_turn()`, and
+  orchestrator-routed runners still fail with the missing-obstacles diagnostic while their runlog
+  entry proves the original report contained `obstacles: []`.
+- Codex stopped without editing production. TASK-0347 must be blocked and partitioned by Arquitecto
+  before resumption; the unrelated Actions billing gate also keeps AC7 unavailable.
