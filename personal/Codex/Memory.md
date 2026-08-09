@@ -1,6 +1,19 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0327 remediation 2 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0342 remediation 1 implementation committed.
+
+## 2026-08-09 - TASK-0342 remediation iteration 1 implementation
+
+- Commit `dc0bdf56` makes the PowerShell scanner enumerate hidden entries and apply the same
+  exact-case path semantics as the Python scanner. The ten real-tree paths identified by the
+  checker are now scanned by both; `runtime/Memory` is scanned and only exact-case
+  `runtime/memory` is excluded.
+- The permanent negative now derives scanned and excluded complements across 21 sentinels and
+  kills PowerShell-only extra exclusion, hidden omission, case-insensitive skip, and literal
+  Windows-separator mutants. Both scanners may remain exit 1 while a set-divergence mutant dies.
+- Local collaboration, encoding, neutrality, compile, diff, focused runner, and 68/68
+  falsification inventory gates exited 0. PowerShell 7 parity was explicitly unmeasured locally;
+  TASK-0342 remains `in_progress` until a real ubuntu Actions run establishes the POSIX property.
 
 ## 2026-08-09 - TASK-0327 remediation iteration 2 implementation
 
