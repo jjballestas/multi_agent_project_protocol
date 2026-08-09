@@ -1,6 +1,66 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0342 remediation 1 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 2 implementation committed.
+
+## 2026-08-09 - TASK-0328 remediation iteration 2 implementation
+
+- Commit `f5581ca7` restores unconditional contiguous account-identifier silhouette coverage;
+  checksum validation now only broadens detection to separated presentations and cannot narrow
+  the prior fail-closed surface.
+- Grouped detection enumerates every structural start and every admissible prefix, so moving a
+  valid identifier within left or right prose no longer changes the result. Three source mutants
+  kill single-cut, first-start-only, and checksum-gated-contiguous regressions.
+- The powered 10,800-case population contains 5,400 prior-engine positives: current results are
+  8,660 positives, 3,260 gains, and 0 losses. Removing unconditional contiguous coverage loses
+  2,140 prior positives.
+- AC4 is corrected: 4/10 sampled country forms incidentally enter the phone band in both compact
+  and grouped presentations, but structural coverage is independent. Full memory tests passed
+  72/72; falsification inventory 68/68, collaboration, encoding, Python/PowerShell neutrality,
+  parity, compile, and diff gates exited 0. TASK-0328 remains `in_progress` pending governed
+  delivery and independent Analista re-review; Codex has not reviewed or ratified the work.
+
+## 2026-08-09 - TASK-0346 governed delivery
+
+- Architect checkpoint commit `a669f82d` lowered the systematic-pruning gate and triggered Actions
+  run `31291178449`. `Check systematic state pruning` and the required
+  `Run runtime property invariant cases` step both passed; the later concurrency-runner failure is
+  already item 19 in the 17 declared out-of-scope failures.
+- Delivery commit `527a8b0b` records AC6, moves TASK-0346 to `in_review`, releases both maker
+  claims, and publishes the self-contained handoff plus Arquitecto routing request. Codex did not
+  review or ratify the implementation.
+- Local collaboration, encoding, neutrality, focused runtime-property (26 samples), falsification
+  inventory (68/68), and diff gates exited 0 immediately before the delivery commit.
+
+## 2026-08-09 - TASK-0346 AC6 pruning prerequisite
+
+- Actions run `31290696952` for implementation commit `27581eeb` passed the Linux PowerShell and
+  falsification jobs. Its `validate` job stopped at `Check systematic state pruning` because
+  `cold_start_tokens 20142 >= 20000`; the runtime-property step was skipped rather than measured.
+- Commit `33f1902d` records the run and publishes
+  `MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0346-prune-gate.md`, asking Arquitecto for the
+  explicitly required coordinated pruning checkpoint. Codex did not expand TASK-0346 into state
+  maintenance or the 17 declared out-of-scope runner repairs.
+- Commit `f43190e9` moves TASK-0346 to `blocked` and releases both Codex claims. After the Architect
+  checkpoint, reacquire/resume and obtain a real Actions success for
+  `Run runtime property invariant cases`.
+
+## 2026-08-09 - TASK-0346 implementation before CI
+
+- Commit `27581eeb` records the complete census of 66 unique `examples/` runners wired in
+  `validate.yml`: 48 passed and 18 failed before the scoped repair; 49 pass and 17 remain declared
+  failures after it. No runner outside AC1 was repaired.
+- Pre-change diagnosis attributes the known runtime-property failure to the obsolete generator:
+  TASK-0259 commit `c725e9bd` required delivery obstacle presence and non-empty structured
+  obstacles for objective review friction. Production remains unchanged.
+- The runtime-property fixture now emits `obstacles: []` for frictionless valid transitions and a
+  structured obstacle for rejection friction; its 26 deterministic samples pass.
+- AC4 proposes a versioned bidirectional registry that classifies every CI runner as a reusable
+  acceptance gate or an explicitly owned protocol-CI runner. It is not implemented because the
+  process mechanism is reserved to Arquitecto; AC5 is deferred to that choice.
+- Collaboration, encoding, neutrality, falsification inventory 68/68, and the focused runner all
+  exited 0. TASK-0346 remains `in_progress` under claim
+  `CLAIM-20260809-Codex-TASK-0346`; AC6 still requires a real Actions run whose
+  `Run runtime property invariant cases` step is success.
 
 ## 2026-08-09 - TASK-0342 remediation iteration 1 implementation
 

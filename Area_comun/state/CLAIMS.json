@@ -40,6 +40,22 @@
             "updated_at": "2026-08-09T01:21:43Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0328-memory",
+            "expires_at": "2026-08-09T09:37:36Z",
+            "notes": "Persist post-commit TASK-0328 remediation iteration 2 context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0328-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T03:37:36Z",
+            "status": "active",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-09T03:37:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260809-Codex-TASK-0328-neutrality",
             "expires_at": "2026-08-09T09:21:47Z",
             "notes": "Move exact-line neutrality attestations with the claimed TASK-0328 test fixture.",
