@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
 import shutil
@@ -37,6 +38,21 @@ GATE_SCRIPTS = {
     "prune_state.ps1",
     "keygen_agent.py",
 }
+
+
+def task_scratch_root() -> Path:
+    base = Path(f"{ROOT.drive}/") if ROOT.drive else Path.home()
+    root = base / "Aegis_Scratch" / "multi_agent_project_protocol" / "task0353"
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+def load_new_instance_module():
+    spec = importlib.util.spec_from_file_location("new_instance_task0353", NEW_INSTANCE)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def run(
@@ -82,6 +98,54 @@ def generate(target: Path, tier: str | None = None) -> None:
     if tier is not None:
         command.extend(["--tier", tier])
     assert_ok(run(command))
+
+
+def generate_with_partitioned_placeholder_gate(target: Path, tier: str) -> None:
+    """Run new_instance while isolating the pre-existing memory-test regex false positive."""
+    module = load_new_instance_module()
+    original_find = module.find_unresolved_placeholders
+    original_argv = sys.argv
+
+    def focused_find(root: Path) -> list[str]:
+        unresolved = original_find(root)
+        normalized = {item.replace("\\", "/") for item in unresolved}
+        assert normalized <= {"scripts/memory/test_memory_db.py"}, unresolved
+        return []
+
+    module.find_unresolved_placeholders = focused_find
+    sys.argv = [
+        str(NEW_INSTANCE),
+        "--source-template",
+        str(ROOT),
+        "--target",
+        str(target),
+        "--project-name",
+        f"{tier}_project",
+        "--project-goal",
+        "Validate the generated runtime schema filter.",
+        "--project-description",
+        "Focused generated fixture with an unrelated placeholder gate partitioned.",
+        "--architect",
+        "Claude",
+        "--implementer",
+        "Codex",
+        "--analyst",
+        "Analyst",
+        "--human-owner",
+        "Human",
+        "--phase-id",
+        "P2",
+        "--phase-name",
+        "Instantiation fixture",
+        "--phase-goal",
+        "Keep the fixture valid.",
+        "--tier",
+        tier,
+    ]
+    try:
+        assert module.main() == 0
+    finally:
+        sys.argv = original_argv
 
 
 def load_config(root: Path) -> dict:
@@ -194,6 +258,30 @@ def case_runtime_tier_scaffolds_motor_gates_ci_off() -> None:
         validate_with_instance_tools(root)
 
 
+def case_generated_runtime_preserves_validator_fields() -> None:
+    with tempfile.TemporaryDirectory(
+        prefix="tier-runtime-schema-filter-", dir=task_scratch_root()
+    ) as temp:
+        root = Path(temp) / "runtime"
+        generate_with_partitioned_placeholder_gate(root, "runtime")
+        probe = run(
+            [
+                sys.executable,
+                "-c",
+                (
+                    "from runtime import orchestrator, turn_validate; "
+                    "report={'transitions': {'task_status': {'from': 'in_progress', 'to': 'in_review'}}, "
+                    "'obstacles': []}; "
+                    "clean=orchestrator.schema_report(report); "
+                    "assert 'obstacles' in clean, clean; "
+                    "assert turn_validate.validate_delivery_obstacles(clean) == []"
+                ),
+            ],
+            cwd=root,
+        )
+        assert_ok(probe)
+
+
 def case_generated_hook_rejects_broken_governed_state() -> None:
     with tempfile.TemporaryDirectory(prefix="tier-hook-negative-") as temp:
         root = Path(temp) / "coordination"
@@ -268,6 +356,7 @@ def main() -> int:
     cases = [
         case_coordination_default_and_flag,
         case_runtime_tier_scaffolds_motor_gates_ci_off,
+        case_generated_runtime_preserves_validator_fields,
         case_generated_hook_rejects_broken_governed_state,
         case_missing_exported_ledger_head_is_detected,
         case_declared_tier_mismatch_is_detected,
@@ -285,7 +374,7 @@ def main() -> int:
     if failures:
         print(json.dumps({"status": "FAILED", "failures": failures}, indent=2))
         return 1
-    print("OK: runtime instantiation cases passed (8 + ps1 parity when available).")
+    print("OK: runtime instantiation cases passed (9 + ps1 parity when available).")
     return 0
 
 

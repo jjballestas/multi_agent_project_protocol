@@ -69,25 +69,6 @@ except ImportError:  # pragma: no cover - direct script execution
 
 
 HUMAN_OUTCOMES = {"decision_required", "human_required"}
-TURN_SCHEMA_KEYS = {
-    "turn_id",
-    "task_id",
-    "agent",
-    "outcome",
-    "summary",
-    "changed_paths",
-    "attempt_id",
-    "idempotency_key",
-    "aggregate_version",
-    "fencing_token",
-    "tools",
-    "actions",
-    "decision_refs",
-    "transitions",
-    "commit_message",
-    "gate",
-    "next_hint",
-}
 
 DEFAULT_CONTEXT_POLICY = {
     "compaction_enabled": False,
@@ -120,6 +101,19 @@ SLIM_CONTEXT_PATHS = (
 
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def turn_schema_keys() -> frozenset[str]:
+    """Return the only keys that the turn validator can accept.
+
+    The schema is the validator's first gate and rejects additional properties.
+    Deriving the filter from it prevents an independently maintained allowlist from
+    deleting a field immediately before validation.
+    """
+    properties = read_json(Path(__file__).with_name("turn_schema.json")).get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError("runtime/turn_schema.json must define a properties mapping")
+    return frozenset(str(key) for key in properties)
 
 
 def token_count(text: str, divisor: int = 4) -> int:
@@ -479,7 +473,8 @@ def real_invoker_run_id_error(root: Path, *, llm_invoker: str, run_id: str | Non
 
 
 def schema_report(report: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in report.items() if key in TURN_SCHEMA_KEYS}
+    allowed_keys = turn_schema_keys()
+    return {key: value for key, value in report.items() if key in allowed_keys}
 
 
 def normalize_scope_path(path: Any) -> str:

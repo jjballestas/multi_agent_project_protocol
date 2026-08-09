@@ -19,9 +19,27 @@ sys.path.insert(0, str(ROOT))
 import runtime.turn_validate as turn_validate  # noqa: E402
 import runtime.orchestrator as orchestrator  # noqa: E402
 from examples.runtime_turn_cases.run_runtime_turn_semantic_cases import build_fixture_root  # noqa: E402
+from examples.runtime_loop_cases.run_runtime_loop_cases import (  # noqa: E402
+    build_fixture as build_loop_fixture,
+    run_orchestrator,
+    turn_report,
+    write_reports,
+)
 
 
 FALSIFICATION_CONTRACTS = (
+    {
+        "id": "NEG-TURN-SCHEMA-FILTER-COVERS-VALIDATION",
+        "negative": "A field required by turn validation cannot be removed by the orchestrator schema filter.",
+        "mutation": "orchestrator.turn_schema_keys = lambda: original_schema_keys() - {removed_key}",
+        "boundaries": (
+            "required_keys = behaviorally_required_turn_keys(clean, fixture_root)",
+            "assert required_keys <= orchestrator.turn_schema_keys()",
+            "assert required_keys <= orchestrator.schema_report(clean).keys()",
+            "assert not required_keys <= orchestrator.schema_report(clean).keys()",
+        ),
+        "exercised_by": "main",
+    },
     {
         "id": "NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES",
         "negative": "A delivery transition cannot be hidden by a divergent outcome label.",
@@ -107,6 +125,43 @@ REVIEW_ERROR = "semantic: objective friction (review_qa:assign_fix) requires non
 CHECKS_ERROR = "semantic: objective friction (review_qa:checks_failed) requires non-empty obstacles"
 REVERT_ERROR = "semantic: objective friction (revert:action-summary-proxy) requires non-empty obstacles"
 ATTEMPT_ERROR = "semantic: objective friction (attempt>1) requires non-empty obstacles"
+
+
+def task_scratch_root() -> Path:
+    base = Path(f"{ROOT.drive}/") if ROOT.drive else Path.home()
+    root = base / "Aegis_Scratch" / "multi_agent_project_protocol" / "task0353"
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+def behaviorally_required_turn_keys(report: dict, fixture_root: Path) -> set[str]:
+    """Derive required top-level keys by removing each key from a valid report."""
+    assert turn_validate.validate_turn(report, fixture_root) == []
+    required: set[str] = set()
+    for key in report:
+        candidate = dict(report)
+        candidate.pop(key)
+        if turn_validate.validate_turn(candidate, fixture_root):
+            required.add(key)
+    return required
+
+
+def exercise_routed_delivery() -> None:
+    """Prove the orchestrator route preserves and accepts a frictionless delivery."""
+    with tempfile.TemporaryDirectory(
+        prefix="runtime-turn-routed-obstacles-", dir=task_scratch_root()
+    ) as temp:
+        fixture = Path(temp)
+        build_loop_fixture(fixture)
+        report_dir = write_reports(fixture, [turn_report("TASK-9000")])
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-routed-obstacles", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert result["turns"][0]["outcome"] != "rejected", result
+        assert result["turns"][0]["trace"][:5] == ["gate_pre", "route", "claim", "adapter", "validate"], result
 
 
 def workflow_python_runners(root: Path) -> list[Path]:
@@ -249,8 +304,9 @@ def exercise_untracked_subtree_gate() -> None:
 
 
 def main() -> int:
-    """PERMANENT_NEGATIVE: NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-STATUS-FRICTION-OBSTACLES, NEG-TURN-REVIEW-FRICTION-OBSTACLES, NEG-TURN-CHECKS-FRICTION-OBSTACLES, NEG-TURN-REVERT-PROXY-OBSTACLES, NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER"""
+    """PERMANENT_NEGATIVE: NEG-TURN-SCHEMA-FILTER-COVERS-VALIDATION, NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-STATUS-FRICTION-OBSTACLES, NEG-TURN-REVIEW-FRICTION-OBSTACLES, NEG-TURN-CHECKS-FRICTION-OBSTACLES, NEG-TURN-REVERT-PROXY-OBSTACLES, NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER"""
     exercise_untracked_subtree_gate()
+    exercise_routed_delivery()
     assert workflow_delivery_constructor_violations(ROOT) == []
     delivery_missing = {
         "outcome": "ok",
@@ -276,6 +332,17 @@ def main() -> int:
         clean = json.loads((ROOT / "examples/runtime_turn_cases/semantic_valid.json").read_text(encoding="utf-8"))
         clean["obstacles"] = []
         assert turn_validate.validate_turn(clean, fixture_root) == []
+
+        required_keys = behaviorally_required_turn_keys(clean, fixture_root)
+        assert required_keys <= orchestrator.turn_schema_keys()
+        assert required_keys <= orchestrator.schema_report(clean).keys()
+        original_schema_keys = orchestrator.turn_schema_keys
+        removed_key = min(required_keys)
+        try:
+            orchestrator.turn_schema_keys = lambda: original_schema_keys() - {removed_key}
+            assert not required_keys <= orchestrator.schema_report(clean).keys()
+        finally:
+            orchestrator.turn_schema_keys = original_schema_keys
 
         blocked_empty = {**clean, "outcome": "blocked", "transitions": {**clean["transitions"], "task_status": {"from": "in_progress", "to": "blocked"}}}
         blocked_with_obstacle = {**blocked_empty, "obstacles": obstacle}
