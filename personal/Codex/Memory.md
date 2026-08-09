@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0340 remediation iteration 1 blocked on Actions billing.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 4 implementation.
+
+## 2026-08-09 - TASK-0328 remediation iteration 4 implementation
+
+- Commit `8ab9d575` replaces value-shape exemptions with validated-coordinate handling. Protocol
+  identity fields and `file`/`path` coordinates remove only their protocol envelope; the same
+  sensitive payload remains detected bare, in a path segment, and in an identity suffix.
+- The permanent account-identifier negative now covers both loss and gain directions at the
+  exemption coordinate. Its powered 16-value cross-coordinate population has 11 prior-engine
+  positives, 16 current positives, 5 gains, and 0 losses; the coordinate-blind mutant loses 12.
+- The governed real-tree comparison has 22,608 values but 0 prior positives, so it is explicitly
+  declared unpowered for loss instead of treating its 0-loss result as evidence.
+- Full memory tests passed 72/72; falsification inventory passed 70/70. Collaboration, encoding,
+  Python/PowerShell neutrality, compile, and diff gates exited 0 before commit. TASK-0328 remains
+  `in_progress` under the remediation-4 claim pending exact-commit verification and delivery.
+- Codex is maker only and has not reviewed or ratified this remediation.
 
 ## 2026-08-09 - TASK-0340 remediation iteration 1 implementation
 
