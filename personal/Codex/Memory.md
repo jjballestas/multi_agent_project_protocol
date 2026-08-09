@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 4 implementation.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 5 delivery.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 5 implementation
 
@@ -17,7 +17,12 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 4 implem
 - Full memory tests passed 72/72. Collaboration, encoding, Python/PowerShell neutrality, drift,
   compile, falsification inventory, and diff gates exited 0 before commit. TASK-0328 remains
   `in_progress` under the remediation-5 maker claim until exact-commit verification and governed
-  delivery. Codex is maker only and has not reviewed or ratified this remediation.
+  delivery.
+- Exact implementation commit `df5de987` passed the same declared gates in detached clean worktree
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0328r5-df5de987-20260809` with empty status.
+  Delivery commit `57979983` moves TASK-0328 to `in_review`, releases both maker claims, updates
+  the governed handoff route, and publishes the Arquitecto routing request. Runtime drift is false
+  through sequence 8407. Codex is maker only and has not reviewed or ratified this remediation.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 4 implementation
 
