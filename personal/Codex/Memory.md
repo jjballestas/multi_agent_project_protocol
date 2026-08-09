@@ -18,7 +18,14 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0342 remediation 1 implementation c
   exposed a contract-mutant error: removing `-Force` from only the ASCII enumeration left the same
   hidden sentinels observable through the mojibake enumeration. Commit `7691a87e` removes `-Force`
   from every enumeration in that mutant so the intended hidden-omission regression is exercised;
-  a replacement real run is pending.
+  replacement run `31286367935` passed the encoding scans, full encoding gate case, and dedicated
+  PowerShell Linux parity job. Its later mailbox-retry and runtime-property failures are unrelated.
+- Exact implementation commit `7691a87e` passed the focused runner, 68/68 falsification inventory,
+  collaboration, encoding, neutrality, and diff gates in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0342r1-7691a87e-20260809T0038` with empty status.
+- Delivery commit `eb47942a` moves TASK-0342 to `in_review`, releases both maker claims, and
+  publishes the self-contained handoff and review-routing request. Codex did not review or ratify
+  the remediation.
 
 ## 2026-08-09 - TASK-0327 remediation iteration 2 implementation
 
