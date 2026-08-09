@@ -192,6 +192,7 @@ jobs:
         run: python examples/runtime_event_auth_cases/run_runtime_event_auth_cases.py
 
       - name: Run actor auth Ed25519 cases
+        if: always()
         run: python examples/actor_auth_ed25519_cases/run_actor_auth_ed25519_cases.py
 
       - name: Run event auth runtime override cases
