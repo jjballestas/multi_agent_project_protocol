@@ -9205,3 +9205,118 @@ enmiendas pedidas en la seccion 7 del artefacto.
 - Artefacto: `Area_comun/artifacts/Analista-TASK-0346-censo-66-runners-verdict.md`.
 - Sondas en `D:/Aegis_Scratch/protocol/t0346-review/`: `derive.py`, `runall.py`, `runsample.py`,
   `compare2.py`, `mutate.py`, `probe.py`, con `logs/` y `logs2/` completos.
+
+---
+
+## 2026-08-09 08:15 (UTC+2) -- TASK-0328 r3: CHANGE-REQUIRED
+
+Ancla: `f5581ca7` (`fix(TASK-0328): restore context-invariant identifier coverage`). Clon limpio
+detached en `D:/Aegis_Scratch/protocol/a0328r3`. Mi commit: `cf3b0592`.
+
+### Veredicto
+
+Los cinco focos del encargo PASAN. Bloquea el AC3, que la r3 dejo a medias.
+
+### Lo que hice distinto y valio la pena
+
+**Cargue el motor viejo REAL como modulo, no la simulacion del test.** El test compara contra
+`re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b")` escrita en linea. Yo saque
+`f732292a:scripts/memory/build_memory_db.py` a un archivo y lo importe. Los cuatro numeros
+salieron exactos (5400 / 8660 / +3260 / 0 perdidas), asi que la simulacion era fiel -- pero eso
+solo se sabe DESPUES de comprobarlo. Regla: cuando el maker simula el motor de control, el
+checker importa el motor de control.
+
+**Medi la direccion que nadie pidio.** El encargo enumeraba cinco focos, todos de COBERTURA.
+Ninguno pedia precision. La r2 si habia medido las dos direcciones sobre el corpus gobernado
+(22.342 cadenas, 0 y 0); la r3 cambio la superficie de decision y **solo declaro coste**
+(+3,9 %). Rehacer la medicion de poblacion fue lo que encontro el defecto:
+
+```
+22469 cadenas de metadata gobernada   444 marcas NUEVAS (1,98 %)   0 perdidas
+rechazos de frontmatter: 652 actual vs 226 previo -> 426 valores nuevos descartados
+   message_id 374 (antes 0) | file 36 (antes 0) | title 6 (antes 0) | spec_id 133 (antes 123)
+```
+
+Es la leccion "ensanchar un patron puede estrecharlo" al reves: **estrechar el requisito
+ensancha la marca**. Y la de "el encargo que enumera recibe la enumeracion": cinco focos, cinco
+de cobertura, cero de precision.
+
+**Segui el predicado hasta donde LANZA, no hasta donde avisa.** `contains_pii` tiene dos
+consumidores muy distintos: `validate_metadata` (tira el valor con warning) y
+`require_safe_text` (levanta `ValueError`). `build_memory_db.py:860` pasa `git_ref` por el
+segundo con `pii_check=True` por defecto (el `created_at` de al lado si lo pone en False).
+Medido sobre los SHA reales del repo: 1750/2000 (87,5 %) marcados, antes 313 (15,7 %); sha256
+aleatorios 98,2 % vs 27,6 %. Latente hoy porque `Area_comun/archive/` tiene 0 cold packs.
+**Regla: al juzgar un predicado, enumerar sus call sites y separar los que avisan de los que
+abortan.**
+
+### Causa raiz que atribui
+
+La r3 borro la guarda que la r2 habia anadido a proposito:
+
+```
+-  next_char = value[end] if end < len(value) else following
+-  if next_char and not ACCOUNT_IDENTIFIER_SEPARATORS_RE.fullmatch(next_char):
+-      continue
+```
+
+Sin ella, un prefijo con checksum correcto puede cortar a mitad de token. ~21 prefijos por
+candidato x 1/97 de acierto por azar = ~20 % de colision por candidato -> el 1,98 %. El relato
+de la tarea dice "evalua todos los prefijos" y NO dice que dejo de exigir donde termina el
+corte. **Una remediacion que RETIRA una guarda de una remediacion anterior es un cambio de
+superficie de decision y debe declararse y medirse como tal.**
+
+### El contrato no puede ver este defecto
+
+Sus tres mutantes cuentan `mutant_lost` -- solo regresiones de COBERTURA. Ninguna frontera de
+PRECISION. Y el unico caso protocolar protegido es **uno elegido a mano**
+(`MSG-20260707-Maker-to-Checker-GO-1105-infra-fixture`, `assertFalse`) que no colisiona; la
+clase falla en el 1,98 % del corpus real. Pedi atar la propiedad: ningun
+`message_id`/`spec_id`/`task_id` del arbol gobernado marca.
+
+### Detalle util sobre los mutantes
+
+Los corri yo contra PRODUCCION: `single_cut` 8131, `first_start` 7066, `checksum_contiguous`
+6520 con 2140 perdidas (exacto a lo declarado), y uno mio que quita la rama agrupada, 5400.
+Los cuatro mueren. **Pero `single_cut` y `first_start` dan `mutant_lost = 0`**: no mueren por
+el contador, mueren por el barrido de contextos. Si alguien simplifica el negativo dejando solo
+`mutant_lost > 0`, dos de los tres mutantes sobreviven. Lo deje escrito en el artefacto.
+
+### Falsos amigos que descarte (no eran defectos)
+
+- `ACCOUNT_IDENTIFIER_SEPARATORS_RE` parecia codigo muerto tras el diff: **no lo es**, sigue
+  usada en la compactacion (linea 114). Contarla antes de acusar.
+- `scripts/scan_domain_neutrality.py`/`.ps1`, 108 lineas cada uno fuera de `scope_routes`:
+  renumeracion mecanica de exenciones por linea, paridad gemela verde. R8, no bloqueante.
+- `"ES00210004184"` (13 compactos) da True en los DOS motores: es la banda de telefono, no la
+  rama de cuenta. Atribuir la rama antes de contar el caso.
+
+### Residuales nuevos que declare
+
+- **R6:** agrupada con separadores mezclados y checksum invalido se detecta **solo** por
+  `PHONE` (atribucion de rama verificada). Dependencia del 100 % de la banda que TASK-0322
+  estrecha; el AC4 corregido registra 4/10 paises, no este caso.
+- **R7:** coste 20 kB texto limpio 1,73 -> 2,46 ms (+42 %). El +3,9 % de la tarea mide otra cosa.
+- **R8:** rutas fuera de `scope_routes` (clase TASK-0333).
+
+### Anomalia senalada (DECISION-0018)
+
+CI rojo en los **12 runs mas recientes**, HEAD incluido. Ajeno a 0328: cae
+`Run runtime concurrency simulation cases`, `"semantic: delivery turn is missing the obstacles
+block"` (`Impl10`, `TASK-6001`, `RUN-concurrency-v1-000`) -- misma clase que TASK-0346 cerro
+para otras filas, reaparecida en la simulacion de concurrencia. **No existe run de Actions para
+`f5581ca7`**: el AC6 esta demostrado en clon limpio, no en CI real. Correr `gh run list` SIEMPRE
+antes de firmar un AC que hable de CI.
+
+### Operativo
+
+- Anti-colision: 0 claims sobre mis rutas (comprobado por comparacion de `scope` contra los dos
+  paths destino), 0 modificaciones trackeadas, `origin/main` == `a99a09c6` antes de commitear.
+- Gate ASCII propio: barrido de bytes>127 archivo a archivo, 0 en ambos. `scan_encoding` EXIT 0.
+- Puertas en el clon limpio: test_memory_db (72 tests, 311 s), contratos, validate, neutralidad,
+  encoding, y `protocol_replay --check-drift` -> CLEAN up_to_seq=8265. Todas EXIT 0.
+- Artefacto: `Area_comun/artifacts/Analista-TASK-0328-remediacion-3-verdict.md`.
+- Sondas en el scratchpad de sesion: `probe_0328_r3.py` (focos A-E), `probe2_0328_r3.py`
+  (corpus gobernado + SHA + escapes), `probe3_0328_r3.py` (atribucion de rama + efecto
+  aguas abajo + mutantes).
+- Bucle declarado: maximo 2 iteraciones mas (r4, r5) antes de escalar al operador humano.
