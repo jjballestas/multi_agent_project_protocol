@@ -201,3 +201,23 @@ descubrirlo como ruido en produccion.
 - El contrato permanente deriva todas las identidades gobernadas y cubre las dos direcciones:
   ninguna identidad limpia marca, todos los payloads sensibles conservan su deteccion al cambiar
   de coordenada y el mutante de cegado debe perder positivos. Los mutantes anteriores permanecen.
+
+## Remediacion 5: envoltura integral y corpus derivado (2026-08-09)
+
+- La exencion ya no elimina un prefijo generico ni neutraliza fechas sobre el valor completo. Un
+  parser acotado consume solo envolturas integrales de identidades, mensajes y rutas; el slug o
+  segmento no explicado vuelve al detector sin atenuacion. Las fechas solo quedan fuera cuando
+  forman parte completa de una identidad operacional reconocida.
+- El salto por adyacencia deja de depender de la coordenada. Telefonos con letra a izquierda o
+  derecha, cuentas agrupadas pegadas por la izquierda y cuentas con un bloque de ocho digitos que
+  empieza por 19/20 conservan el mismo veredicto desnudas, en `file`, en `path` y como sufijo de
+  identidad. Los caminos productivos `validate_metadata(file=...)` y
+  `require_safe_text(field='path')` se ejercitan directamente sobre 85 payloads validos de ruta.
+- El corpus permanente ya no enumera cuatro payloads. Deriva diez separadores desde la expresion
+  productiva, 23 longitudes de bloque desde los limites productivos y ambas direcciones de
+  adyacencia desde `isalnum`. La poblacion resultante contiene 260 payloads y 940 valores por
+  coordenada: 244 positivos del motor anterior, 940 actuales, 696 ganancias y 0 perdidas.
+- Tres mutantes independientes deben perder detecciones: cegado total de coordenada, restauracion
+  del salto por adyacencia y restauracion conjunta de neutralizacion de fecha mas salto. El
+  inventario declara ahora 18 fronteras para
+  `NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION`; los 70 contratos permanecen registrados.

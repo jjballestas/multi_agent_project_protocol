@@ -105,6 +105,8 @@ ACCOUNT_IDENTIFIER_START_RE = re.compile(
 ACCOUNT_IDENTIFIER_CONTIGUOUS_RE = re.compile(
     r"[A-Z]{2}\d{2}[A-Z0-9]{10,30}", re.I | re.ASCII
 )
+ACCOUNT_IDENTIFIER_MIN_LENGTH = 14
+ACCOUNT_IDENTIFIER_MAX_LENGTH = 34
 SECRET_SUFFIXES = {".key", ".pem"}
 TEXT_SUFFIXES = {".md", ".json", ".jsonl", ".txt", ".yaml", ".yml"}
 EVENTS_PATH = Path("runtime/state/events.jsonl")
@@ -134,7 +136,7 @@ def account_identifier_candidate_has_valid_prefix(value: str, following: str) ->
     for index, char in enumerate(value):
         if char.isascii() and char.isalnum():
             compact_length += 1
-        if not 14 <= compact_length <= 34:
+        if not ACCOUNT_IDENTIFIER_MIN_LENGTH <= compact_length <= ACCOUNT_IDENTIFIER_MAX_LENGTH:
             continue
         end = index + 1
         next_char = value[end:end + 1] or following
@@ -160,7 +162,7 @@ def account_identifier_contiguous_is_bounded(value: str) -> bool:
             start -= 1
         while end < len(value) and value[end].isascii() and value[end].isalnum():
             end += 1
-        if end - start <= 34:
+        if end - start <= ACCOUNT_IDENTIFIER_MAX_LENGTH:
             return True
     return False
 
@@ -608,32 +610,74 @@ def title_is_safe(value: str, domain_pii_terms: Iterable[str]) -> bool:
     )
 
 
-def pii_values_for_coordinate(item: str, coordinate: str | None) -> tuple[str, ...]:
-    def without_coordinate_timestamp(value: str) -> str:
-        return re.sub(
-            r"(?<!\d)(?:19|20)\d{6}(?:-(?:[01]\d|2[0-3])[0-5]\d[0-5]\d)?(?!\d)",
-            ":",
-            value,
-        )
+COORDINATE_ID_ENVELOPE_RE = re.compile(
+    r"^(?:(?:TASK|DECISION|SPEC)-\d{4}|REQ-[0-9A-F]{8,})(?:-|$)",
+    re.I | re.ASCII,
+)
+COORDINATE_ACTOR_ARTIFACT_RE = re.compile(
+    r"^[A-Z][A-Z0-9]*-(?=(?:TASK|DECISION|SPEC)-\d{4}(?:-|$))",
+    re.I | re.ASCII,
+)
+COORDINATE_MESSAGE_ENVELOPE_RE = re.compile(
+    r"^MSG-(?:19|20)\d{6}(?:T(?:[01]\d|2[0-3])[0-5]\d[0-5]\dZ"
+    r"|-(?:[01]\d|2[0-3])[0-5]\d[0-5]\d)?-[A-Z][A-Z0-9]*"
+    r"(?:-to-[A-Z][A-Z0-9]*)?(?:-[A-Z]+)?(?:-|$)",
+    re.I | re.ASCII,
+)
+COORDINATE_COMPLETE_OPERATIONAL_ID_RE = re.compile(
+    r"^[A-Z][A-Z0-9]*(?:-[A-Z][A-Z0-9]*(?:\.\d+)*)+-(?:19|20)\d{6}$",
+    re.I | re.ASCII,
+)
 
+
+def unexplained_identity_parts(value: str, *, message: bool = False) -> tuple[str, ...]:
+    if COORDINATE_COMPLETE_OPERATIONAL_ID_RE.fullmatch(value):
+        return ()
+    remainder = value
+    if message:
+        envelope = COORDINATE_MESSAGE_ENVELOPE_RE.match(remainder)
+        if envelope is None:
+            return (value,)
+        remainder = remainder[envelope.end():]
+    else:
+        actor_envelope = COORDINATE_ACTOR_ARTIFACT_RE.match(remainder)
+        if actor_envelope is not None:
+            remainder = remainder[actor_envelope.end():]
+        envelope = COORDINATE_ID_ENVELOPE_RE.match(remainder)
+        if envelope is None:
+            return (value,)
+        remainder = remainder[envelope.end():]
+
+    parts: list[str] = []
+    for part in re.split(r"[-._]+", remainder):
+        if not part:
+            continue
+        if re.fullmatch(r"(?:TASK|DECISION|SPEC)\d{4}", part, re.I | re.ASCII):
+            continue
+        parts.append(part)
+    return tuple(parts)
+
+
+def pii_values_for_coordinate(item: str, coordinate: str | None) -> tuple[str, ...]:
     if coordinate in {
-        "task_id", "decision_id", "spec_id", "message_id",
-        "relates_to", "linked_decisions", "supersedes", "superseded_by",
+        "task_id", "decision_id", "spec_id", "relates_to", "linked_decisions",
+        "supersedes", "superseded_by",
     }:
-        if not ID_RE.fullmatch(item):
-            return (item,)
-        return (without_coordinate_timestamp(item.split("-", 1)[1]),)
+        return unexplained_identity_parts(item)
+    if coordinate == "message_id":
+        return unexplained_identity_parts(item, message=True)
     if coordinate in {"file", "path"}:
         if not PATH_RE.fullmatch(item) or ".." in Path(item).parts:
             return (item,)
         values: list[str] = []
         for segment in re.split(r"[/\\]+", item):
-            stem, suffix = os.path.splitext(segment)
-            if ID_RE.fullmatch(stem):
-                segment = stem.split("-", 1)[1] + suffix
-            if segment:
-                values.append(segment)
-        return (without_coordinate_timestamp("/".join(values)),)
+            candidate_stem, suffix = os.path.splitext(segment)
+            stem = candidate_stem if suffix.lower() in TEXT_SUFFIXES else segment
+            if not stem:
+                continue
+            explained = unexplained_identity_parts(stem)
+            values.extend(explained if explained != (stem,) else (stem,))
+        return tuple(values)
     return (item,)
 
 
@@ -673,11 +717,7 @@ def contains_pii(
     for item in value_list(value):
         normalized = re.sub(r"[_/\\.-]+", " ", item)
         pii_values = pii_values_for_coordinate(item, coordinate)
-        coordinate_bound = coordinate in {
-            "task_id", "decision_id", "spec_id", "message_id",
-            "relates_to", "linked_decisions", "supersedes", "superseded_by",
-            "file", "path",
-        }
+        coordinate_bound = False
         if STRUCTURAL_PII_PATTERNS[0].search(item):
             return True
         if (
