@@ -155,3 +155,29 @@ descubrirlo como ruido en produccion.
   contigua; R4, la medicion deja de ser una lista manual y genera contextos desde la
   condicion del patron; R5, la presentacion agrupada conserva la mayor tasa de
   sobre-deteccion ya cuantificada.
+
+## Remediacion 3: terminacion, tirada acotada y frontera de precision (2026-08-09)
+
+- La validacion de prefijos agrupados vuelve a exigir que el corte termine ante un
+  separador admitido o al final real del candidato. El caracter siguiente al limite de
+  34 caracteres compactados tambien participa, por lo que alcanzar el maximo no oculta
+  una continuacion alfanumerica.
+- La silueta contigua se evalua contra la tirada alfanumerica maximal que la contiene.
+  Solo se acepta cuando esa tirada completa mide como maximo 34 caracteres. La cobertura
+  contigua previa se conserva para valores completos de 14 a 34 caracteres, incluido un
+  caracter adicional que aun queda dentro del maximo; una silueta interna en un objeto de
+  40 o 64 caracteres no abre esta rama.
+- Los tokens de identidad protocolar (`ID_RE`) y las rutas gobernadas validas se excluyen
+  solo de las heuristicas de identificador de cuenta y telefono; email, terminos de
+  instancia y sus validadores de forma siguen activos. Ademas, `git_ref` reconoce por
+  propiedad los identificadores hexadecimales completos de 40 o 64 caracteres y no los
+  somete al clasificador de PII; el resto de referencias conserva el gate.
+- AC3 bidireccional contra el motor real anterior `f732292a`, con el selector productivo
+  `iter_source_paths` y todas las claves de `ALLOWLIST_KEYS`: 22.576 cadenas gobernadas,
+  marcas nuevas: 0, marcas perdidas: 0. El motor anterior y el actual marcaron 0 valores
+  en esta medicion estructural sin terminos de instancia. Ninguno de los 4.385 valores
+  `message_id`, `spec_id` o `task_id` del mismo arbol marco.
+- El contrato permanente ata las dos direcciones. Quitar la guarda de terminacion produce
+  nuevas marcas sobre el corpus gobernado; las identidades se derivan del arbol, no de un
+  ejemplo; y los objetos git se derivan de `git rev-list --all`. Tambien conserva los tres
+  mutantes de cobertura de la remediacion anterior.

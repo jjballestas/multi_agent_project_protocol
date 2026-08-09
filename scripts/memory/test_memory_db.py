@@ -152,7 +152,7 @@ FALSIFICATION_CONTRACTS = (
     {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True, True), source_results)", "self.assertEqual((False, True, False), mutant_results[\"restructured\"])", "self.assertEqual((False, True, False), mutant_results[\"filtered\"])", "self.assertEqual((False, False, False), mutant_results[\"early_return\"])", "self.assertEqual(False, mutant_results[\"changed_coordinate\"])", "self.assertEqual(False, mutant_results[\"changed_format\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
     {
         "id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION",
-        "negative": "A single candidate cut, first-start-only scan, or checksum gate on the contiguous silhouette makes account-identifier detection depend on adjacent prose or narrows prior coverage.",
+        "negative": "A single candidate cut, first-start-only scan, checksum gate on the contiguous silhouette, missing prefix terminator, or unbounded alphanumeric run either narrows prior coverage or marks governed protocol identities.",
         "mutation": "mutant_sources = {",
         "boundaries": (
             "self.assertEqual(5400, previous_positive_count)",
@@ -162,6 +162,10 @@ FALSIFICATION_CONTRACTS = (
             "self.assertFalse(all(mutant_context_results[\"single_cut\"]))",
             "self.assertFalse(all(mutant_context_results[\"first_start\"]))",
             "self.assertGreater(mutant_lost[\"checksum_contiguous\"], 0)",
+            "self.assertEqual([], governed_identity_hits)",
+            "self.assertGreater(len(mutant_governed_gains[\"missing_terminator\"]), 0)",
+            "self.assertEqual([], source_object_id_errors)",
+            "self.assertGreater(len(mutant_object_id_hits), 0)",
             "self.assertEqual(4, sum(phone_only_compact))",
             "self.assertEqual(phone_only_compact, phone_only_grouped)",
         ),
@@ -708,13 +712,13 @@ class MemoryDbTests(unittest.TestCase):
                 self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))
 
         source = MODULE_PATH.read_text(encoding="utf-8")
-        phone_guard = "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
+        phone_guard = "        if not protocol_identity and not DATE_RE.fullmatch(item):\n"
         early_date_exemption = (
             "        if DATE_RE.fullmatch(item):\n"
             "            continue\n"
             "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         )
-        id_guard = "        if not ID_RE.fullmatch(item):\n"
+        id_guard = "        if not protocol_identity:\n"
         normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         self.assertEqual(1, source.count(phone_guard))
         self.assertEqual(1, source.count(normalized_line))
@@ -2292,18 +2296,24 @@ Body is not indexed.
         normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         loop_body = (
             normalized_line
+            + "        protocol_identity = bool(\n"
+            + "            ID_RE.fullmatch(item)\n"
+            + "            or ((\"/\" in item or \"\\\\\" in item) and PATH_RE.fullmatch(item))\n"
+            + "        )\n"
             + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
             + "            return True\n"
             + "        if (\n"
-            + "            ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)\n"
-            + "            or any(\n"
-            + "                account_identifier_candidate_has_valid_prefix(candidate)\n"
-            + "                for candidate in account_identifier_candidates(item)\n"
+            + "            not protocol_identity\n"
+            + "            and (\n"
+            + "                account_identifier_contiguous_is_bounded(item)\n"
+            + "                or any(\n"
+            + "                    account_identifier_candidate_has_valid_prefix(candidate, following)\n"
+            + "                    for candidate, following in account_identifier_candidates(item)\n"
+            + "                )\n"
             + "            )\n"
-            + "            or STRUCTURAL_PII_PATTERNS[2].search(normalized)\n"
-            + "        ):\n"
+            + "        ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):\n"
             + "            return True\n"
-            + "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
+            + "        if not protocol_identity and not DATE_RE.fullmatch(item):\n"
             + "            for candidate in PHONE_CANDIDATE_RE.finditer(item):\n"
             + "                digits = re.sub(r\"\\D\", \"\", candidate.group(0))\n"
             + "                if 9 <= len(digits) <= 15:\n"
@@ -2446,6 +2456,49 @@ Body is not indexed.
         self.assertIsNotNone(memory_db.STRUCTURAL_PII_PATTERNS[1].search(protocol_like))
         self.assertFalse(memory_db.contains_pii(protocol_like, []))
 
+        governed_metadata_values = tuple(
+            (key, item, relative)
+            for path, relative in memory_db.iter_source_paths(ROOT, "HEAD")
+            for key, value in memory_db.parse_frontmatter(
+                path.read_text(encoding="utf-8")
+            ).items()
+            if key in memory_db.ALLOWLIST_KEYS
+            for item in memory_db.value_list(value)
+        )
+        governed_identities = tuple(
+            entry
+            for entry in governed_metadata_values
+            if entry[0] in {"message_id", "spec_id", "task_id"}
+        )
+        governed_identity_hits = [
+            entry
+            for entry in governed_identities
+            if memory_db.contains_pii(entry[1], [])
+        ]
+        self.assertEqual([], governed_identity_hits)
+
+        object_ids = tuple(git(ROOT, "rev-list", "--all").splitlines())
+        self.assertGreater(len(object_ids), 100)
+        self.assertFalse(
+            any(memory_db.account_identifier_contiguous_is_bounded(item) for item in object_ids)
+        )
+        self.assertGreater(
+            sum(bool(memory_db.ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)) for item in object_ids),
+            0,
+        )
+        source_object_id_errors = []
+        for object_id in object_ids:
+            try:
+                memory_db.require_safe_text(
+                    object_id,
+                    "git_ref",
+                    domain_pii_terms=[],
+                    pii_check=memory_db.git_ref_requires_pii_check(object_id),
+                )
+            except ValueError as error:
+                source_object_id_errors.append(str(error))
+        self.assertEqual([], source_object_id_errors)
+
         minimum = "GB82WEST123456"
         maximum = "GB82" + ("A" * 30)
         self.assertEqual(14, len(minimum))
@@ -2534,25 +2587,47 @@ Body is not indexed.
         self.assertGreater(gained, 2700)
 
         source = MODULE_PATH.read_text(encoding="utf-8")
-        prefix_guard_call = "account_identifier_candidate_has_valid_prefix(candidate)"
+        prefix_guard_call = "account_identifier_candidate_has_valid_prefix(candidate, following)"
         whole_match_guard_call = "account_identifier_checksum_is_valid(candidate)"
         all_starts_loop = "for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):"
         first_start_loop = "for start in tuple(ACCOUNT_IDENTIFIER_START_RE.finditer(value))[:1]:"
-        contiguous_guard = "            ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)\n            or "
+        contiguous_guard = "                account_identifier_contiguous_is_bounded(item)\n                or "
+        terminator_guard = (
+            "        next_char = value[end:end + 1] or following\n"
+            "        if next_char and not ACCOUNT_IDENTIFIER_SEPARATORS_RE.fullmatch(next_char):\n"
+            "            continue\n"
+        )
+        object_id_guard = (
+            "def git_ref_requires_pii_check(value: Any) -> bool:\n"
+            "    return not (\n"
+            "        isinstance(value, str)\n"
+            "        and bool(re.fullmatch(r\"[0-9a-f]{40}|[0-9a-f]{64}\", value, re.I))\n"
+            "    )\n"
+        )
         self.assertEqual(1, source.count(prefix_guard_call))
         self.assertEqual(1, source.count(all_starts_loop))
         self.assertEqual(1, source.count(contiguous_guard))
+        self.assertEqual(1, source.count(terminator_guard))
+        self.assertEqual(1, source.count(object_id_guard))
         mutant_sources = {
             "single_cut": source.replace(
                 prefix_guard_call, whole_match_guard_call, 1
             ),
             "first_start": source.replace(all_starts_loop, first_start_loop, 1),
             "checksum_contiguous": source.replace(contiguous_guard, "", 1),
+            "missing_terminator": source.replace(terminator_guard, "", 1),
+            "object_id_pii": source.replace(
+                object_id_guard,
+                "def git_ref_requires_pii_check(value: Any) -> bool:\n    return True\n",
+                1,
+            ),
         }
         self.assertTrue(all(mutant != source for mutant in mutant_sources.values()))
 
         mutant_context_results: dict[str, tuple[bool, ...]] = {}
         mutant_lost: dict[str, int] = {}
+        mutant_governed_gains: dict[str, list[tuple[str, str, str]]] = {}
+        mutant_object_id_hits: list[str] = []
         with tempfile.TemporaryDirectory(prefix="memory-account-id-mutant-") as temp:
             for name, mutant_source in mutant_sources.items():
                 mutant_path = Path(temp) / f"build_memory_db_{name}.py"
@@ -2565,21 +2640,42 @@ Body is not indexed.
                 sys.modules[spec.name] = mutant
                 try:
                     spec.loader.exec_module(mutant)
-                    mutant_context_results[name] = tuple(
-                        mutant.contains_pii(value, []) for value in context_values
-                    )
-                    mutant_results = tuple(
-                        mutant.contains_pii(value, []) for value in comparison_corpus
-                    )
+                    if name in {"single_cut", "first_start", "checksum_contiguous"}:
+                        mutant_context_results[name] = tuple(
+                            mutant.contains_pii(value, []) for value in context_values
+                        )
+                        mutant_results = tuple(
+                            mutant.contains_pii(value, []) for value in comparison_corpus
+                        )
+                        mutant_lost[name] = sum(
+                            old and not current
+                            for old, current in zip(previous_results, mutant_results)
+                        )
+                    if name == "missing_terminator":
+                        mutant_governed_gains[name] = [
+                            entry
+                            for entry in governed_metadata_values
+                            if mutant.contains_pii(entry[1], [])
+                            and not memory_db.contains_pii(entry[1], [])
+                        ]
+                    if name == "object_id_pii":
+                        for object_id in object_ids:
+                            try:
+                                mutant.require_safe_text(
+                                    object_id,
+                                    "git_ref",
+                                    domain_pii_terms=[],
+                                    pii_check=mutant.git_ref_requires_pii_check(object_id),
+                                )
+                            except ValueError:
+                                mutant_object_id_hits.append(object_id)
                 finally:
                     sys.modules.pop(spec.name, None)
-                mutant_lost[name] = sum(
-                    old and not current
-                    for old, current in zip(previous_results, mutant_results)
-                )
         self.assertFalse(all(mutant_context_results["single_cut"]))
         self.assertFalse(all(mutant_context_results["first_start"]))
         self.assertGreater(mutant_lost["checksum_contiguous"], 0)
+        self.assertGreater(len(mutant_governed_gains["missing_terminator"]), 0)
+        self.assertGreater(len(mutant_object_id_hits), 0)
 
 
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:

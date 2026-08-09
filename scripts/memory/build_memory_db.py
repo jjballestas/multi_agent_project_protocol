@@ -121,7 +121,14 @@ def account_identifier_checksum_is_valid(value: str) -> bool:
     return int(numeric) % 97 == 1
 
 
-def account_identifier_candidate_has_valid_prefix(value: str) -> bool:
+def git_ref_requires_pii_check(value: Any) -> bool:
+    return not (
+        isinstance(value, str)
+        and bool(re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", value, re.I))
+    )
+
+
+def account_identifier_candidate_has_valid_prefix(value: str, following: str) -> bool:
     compact_length = 0
     for index, char in enumerate(value):
         if char.isascii() and char.isalnum():
@@ -129,16 +136,32 @@ def account_identifier_candidate_has_valid_prefix(value: str) -> bool:
         if not 14 <= compact_length <= 34:
             continue
         end = index + 1
+        next_char = value[end:end + 1] or following
+        if next_char and not ACCOUNT_IDENTIFIER_SEPARATORS_RE.fullmatch(next_char):
+            continue
         if account_identifier_checksum_is_valid(value[:end]):
             return True
     return False
 
 
-def account_identifier_candidates(value: str) -> Iterator[str]:
+def account_identifier_candidates(value: str) -> Iterator[tuple[str, str]]:
     for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):
         candidate = STRUCTURAL_PII_PATTERNS[1].match(value, start.start())
         if candidate is not None:
-            yield candidate.group(0)
+            yield candidate.group(0), value[candidate.end():candidate.end() + 1]
+
+
+def account_identifier_contiguous_is_bounded(value: str) -> bool:
+    for candidate in ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.finditer(value):
+        start = candidate.start()
+        end = candidate.end()
+        while start and value[start - 1].isascii() and value[start - 1].isalnum():
+            start -= 1
+        while end < len(value) and value[end].isascii() and value[end].isalnum():
+            end += 1
+        if end - start <= 34:
+            return True
+    return False
 
 
 DDL = r"""
@@ -590,18 +613,24 @@ def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:
     )
     for item in value_list(value):
         normalized = re.sub(r"[_/\\.-]+", " ", item)
+        protocol_identity = bool(
+            ID_RE.fullmatch(item)
+            or (("/" in item or "\\" in item) and PATH_RE.fullmatch(item))
+        )
         if STRUCTURAL_PII_PATTERNS[0].search(item):
             return True
         if (
-            ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)
-            or any(
-                account_identifier_candidate_has_valid_prefix(candidate)
-                for candidate in account_identifier_candidates(item)
+            not protocol_identity
+            and (
+                account_identifier_contiguous_is_bounded(item)
+                or any(
+                    account_identifier_candidate_has_valid_prefix(candidate, following)
+                    for candidate, following in account_identifier_candidates(item)
+                )
             )
-            or STRUCTURAL_PII_PATTERNS[2].search(normalized)
-        ):
+        ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):
             return True
-        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):
+        if not protocol_identity and not DATE_RE.fullmatch(item):
             for candidate in PHONE_CANDIDATE_RE.finditer(item):
                 digits = re.sub(r"\D", "", candidate.group(0))
                 if 9 <= len(digits) <= 15:
@@ -857,8 +886,10 @@ def load_cold_packs(root: Path, commit: str) -> list[tuple[Any, ...]]:
         path = require_safe_text(
             header.get("path"), "path", domain_pii_terms=domain_pii_terms
         ).replace("\\", "/")
+        raw_git_ref = header.get("git_ref")
         git_ref = require_safe_text(
-            header.get("git_ref"), "git_ref", domain_pii_terms=domain_pii_terms
+            raw_git_ref, "git_ref", domain_pii_terms=domain_pii_terms,
+            pii_check=git_ref_requires_pii_check(raw_git_ref),
         )
         created_at = require_safe_text(
             header.get("created_at"), "created_at",
