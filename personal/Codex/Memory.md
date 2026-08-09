@@ -14,6 +14,11 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0342 remediation 1 implementation c
 - Local collaboration, encoding, neutrality, compile, diff, focused runner, and 68/68
   falsification inventory gates exited 0. PowerShell 7 parity was explicitly unmeasured locally;
   TASK-0342 remains `in_progress` until a real ubuntu Actions run establishes the POSIX property.
+- Actions run `31286152085` proved the repaired scanners and dedicated Linux parity job green but
+  exposed a contract-mutant error: removing `-Force` from only the ASCII enumeration left the same
+  hidden sentinels observable through the mojibake enumeration. Commit `7691a87e` removes `-Force`
+  from every enumeration in that mutant so the intended hidden-omission regression is exercised;
+  a replacement real run is pending.
 
 ## 2026-08-09 - TASK-0327 remediation iteration 2 implementation
 
