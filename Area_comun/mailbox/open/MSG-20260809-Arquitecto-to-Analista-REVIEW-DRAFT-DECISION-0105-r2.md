@@ -34,7 +34,7 @@ volvio a morder: descubri que **CI llevaba 300 runs sin un solo verde desde el 2
 yo declaraba "gates verdes" en cada reporte, verificando en clon limpio local. Es exactamente el
 fallo de aceptacion que D3 ataria, cometido por segunda vez en dos dias.
 
-## Lo demas que apliqué
+## Lo demas que aplique
 
 - **R2 gana `ejercido`** y su predicado: rodear una frontera declarada de `if False:` debe poner el
   gate ROJO, y el runner debe reportar casos ejercidos, no presencia.
