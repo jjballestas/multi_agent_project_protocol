@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "4caa4bf1114f5249eac755f801315053284065f97261c115bf6285081c5e9c1b",
+  "canonical_hash": "55c9408d49e86110d805d58c3983b3e3c0a0e030a8446d96c4cb8366b6697598",
   "integrity": {
-    "canonical_hash": "4caa4bf1114f5249eac755f801315053284065f97261c115bf6285081c5e9c1b",
+    "canonical_hash": "55c9408d49e86110d805d58c3983b3e3c0a0e030a8446d96c4cb8366b6697598",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "31737d0e21ff56a354d02c387d831f2d4540ae184ff413b65bbcb4265c5d1222",
-    "signature": "dbc5d60287f001dd98f27b3a1f4341d8f347f2a54505af75dcc5b0cda0fc1203",
-    "up_to_seq": 8381
+    "prev_hash": "ea7fa20b7656b8238da0b0ee63682828c72b9836e9ae6a804ce3e4df622a065a",
+    "signature": "202e2251767739ce1b2fa53bf3b303c68f33805138f37f800380c4ed4024ef50",
+    "up_to_seq": 8385
   },
   "state": {
     "aggregate_versions": {
@@ -3368,7 +3368,7 @@
       "TASK-0325": 25,
       "TASK-0326": 13,
       "TASK-0327": 29,
-      "TASK-0328": 40,
+      "TASK-0328": 44,
       "TASK-0329": 32,
       "TASK-0330": 44,
       "TASK-0331": 61,
@@ -3410,7 +3410,7 @@
       "protocol-prune": 60,
       "protocol-state": 1
     },
-    "events_applied": 7710,
+    "events_applied": 7714,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9783,6 +9783,9 @@
       "intent:Arquitecto:task_upsert:fdb013eebc6b6592b8efba048af5ca3d765e4a43a3a9279307bf6785a228a500": 4872,
       "intent:Codex:TASK-0213-review-fix-claim-release-v3": 2528,
       "intent:Codex:TASK-0213-review-fix-status-in-review-v3": 2527,
+      "intent:Codex:TASK-0328:remediation4:in-review": 8383,
+      "intent:Codex:TASK-0328:remediation4:release-delivery": 8385,
+      "intent:Codex:TASK-0328:remediation4:release-maker": 8384,
       "intent:Codex:claim-acquire:TASK-0248:answer-action-1": 3723,
       "intent:Codex:claim-acquire:TASK-0248:answer-status-fix": 3725,
       "intent:Codex:claim-acquire:TASK-0248:handoff-product-hash-fix": 3727,
@@ -10356,6 +10359,7 @@
       "intent:Codex:claim:bb890938c3ef34fe83ecf32a6348ee3f2695eb57e3f0fa18e35dfee4c9217590": 2712,
       "intent:Codex:claim:bba0931c897df3fd09c4704b52e921b0aecac9f20643b34b6c47fc0112e7aa27": 3131,
       "intent:Codex:claim:bbccdfd4b3700f2545be5c3236fd69df82645b5c6f75bd7cff337175b4846ceb": 7698,
+      "intent:Codex:claim:bc4041ffd30b3583e582447219182e7533e2361a64e146fe54cf5dab2e8e1700": 8382,
       "intent:Codex:claim:bd5bf5499133eb8d19c0b9fce3b1eedae3d3e595149a586b6acfc8d8d27a54e1": 3589,
       "intent:Codex:claim:bd9797117935d343935ecdfa2f10af77a0cb58dbbbabad5778827501168e1d7a": 4424,
       "intent:Codex:claim:be3fa13380428529c43aa84ea02ed3394feac7ab539431f3fa13b8a44b3d730a": 3946,
@@ -11124,5 +11128,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8381
+  "up_to_seq": 8385
 }

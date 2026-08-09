@@ -97,9 +97,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T12:48:55Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0328",
             "updated_at": "2026-08-09T12:48:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0328-remediation-4-delivery",
+            "expires_at": "2026-08-09T16:41:24Z",
+            "notes": "Publish TASK-0328 remediation-4 handoff, move to in_review, and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0328-remediation-4-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0328-remediation-4-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-4.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T14:41:24Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-09T14:41:24Z"
         },
         {
             "claim_id": "CLAIM-20260809-Codex-TASK-0340-billing-question",
