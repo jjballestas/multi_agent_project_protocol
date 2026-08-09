@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 5 delivery.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0347 blocked on TASK-0353.
+
+## 2026-08-10 - TASK-0347 blocked on partitioned production defect
+
+- Governed commit `c24124fb` moves TASK-0347 from `in_progress` to `blocked`, releases
+  `CLAIM-20260809-Codex-TASK-0347`, and confirms the partition to Arquitecto. Runtime events
+  8446-8449 are signed by Codex and drift is false.
+- Implementation commit `4f141167` remains preserved. The workflow-derived replicator and fixture
+  repairs must not resume until TASK-0353 closes and Arquitecto sends a fresh executable instruction.
+- TASK-0353 owns the production defect where `schema_report()` removes `obstacles` before the
+  validator requires it. Codex remains maker only and did not review or ratify TASK-0347.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 5 implementation
 

@@ -104,6 +104,22 @@
             "updated_at": "2026-08-09T21:26:56Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0347-blocked-memory",
+            "expires_at": "2026-08-09T23:21:31Z",
+            "notes": "Persist the post-commit TASK-0347 blocked state and resume condition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0347-blocked-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T22:21:31Z",
+            "status": "released",
+            "task_id": "TASK-0347",
+            "updated_at": "2026-08-09T22:21:31Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0347-blocked-response",
             "expires_at": "2026-08-09T23:17:36Z",
             "notes": "Publish governed confirmation that TASK-0347 is blocked and its maker claim is released.",
