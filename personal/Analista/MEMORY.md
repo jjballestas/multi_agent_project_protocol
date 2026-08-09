@@ -7,6 +7,68 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-09 (58) - TASK-0336 r6: OK-CLOSABLE (el denominador ya deriva; CIERRA la cadena de 6 vueltas)
+
+- Encargo `MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0336-r6`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `2ed31e87`, HEAD al emitir `dde65715`. Clon limpio
+  `D:/Aegis_Scratch/protocol/analista-0336r6/cc`, banco en clon SEPARADO `.../mut`.
+  Veredicto **OK-CLOSABLE** en `43d2e228` (artifact
+  `Area_comun/artifacts/Analista-TASK-0336-cifra-derivada-r6-verdict.md`).
+
+### LECCION PRINCIPAL: "deriva o es literal disfrazado" se prueba EMPUJANDO EL NUMERO, no leyendo la f-string
+
+Ver una f-string no prueba derivacion: un literal puede estar envuelto en `f""` y coincidir hoy por
+casualidad. El banco que zanja tiene tres piezas y ninguna sobra:
+
+1. **Mover el numero en las DOS direcciones** (+1 frontera -> `_of_38`, -1 -> `_of_36`, con el
+   `boundaries=N` del inventario siguiendolo en la misma corrida). Una sola direccion no distingue
+   derivacion de coincidencia.
+2. **Probar que el aserto tiene DIENTES**: re-congelar el denominador al literal viejo (31) y hacer
+   que el checker mire un `id` inexistente -> suite `exit 1` en ambos. Un aserto que no se puede
+   romper no vale nada aunque el numero sea correcto.
+3. **Buscar la degeneracion**: `next((...), ())` da `len 0`. Sobre un repo sin ese contrato el token
+   imprime `23_of_0` con exit 0 -- y `bounded_static_certification` lo acepta.
+
+### LO QUE MAS IMPORTA: NO MOVER LA PORTERIA cuando el maker entrega lo que pedi
+
+En r5 escribi con nombre propio "el bloqueante es el DENOMINADOR, no el numerador". El maker derivo
+el denominador. El numerador (`23`) sigue congelado y **medi** que a partir de 15 fronteras retiradas
+el token dice `23_of_22` -- imposible -- con todos los gates verdes. Era tentador bloquear por ahi:
+es la MISMA clase que bloquee en r5. **No lo hice.** Bloquear en r6 por lo que declare no-bloqueante
+en r5 es exactamente el fallo que le reprocho a las remediaciones. Lo correcto: OK-CLOSABLE con el
+residual MEDIDO y su UMBRAL EXACTO, y proponer tarea nueva. **Regla: si en la vuelta N nombre el
+bloqueante, en la vuelta N+1 solo puedo bloquear por eso o por algo NUEVO que la remediacion
+introdujo -- nunca por lo que expresamente descarte.**
+
+### Segunda leccion: cuando la frontera se MUDA de corrida, mirar de que caso se aparto
+
+El maker cambio el aserto de `wired.stdout` (fixture controlado) a `clean.stdout` (repo canonico).
+Motivo real: en el fixture el token vale `23_of_0` y el aserto derivado no casaria. **La frontera se
+aparto del unico caso donde la derivacion degenera.** Conserva dientes, pero vigila menos. Siempre
+preguntar "por que se movio el objetivo del aserto", no solo "sigue verde".
+
+### Higiene del banco: mi propio mutante me mintio
+
+M7 (anadir un tercer contrato para probar la fragilidad de `[-1]` frente a la busqueda por `id`) lo
+escribi como `text[:i] + extra` y **trunque el fichero**: la suite salio `exit 0` con salida VACIA
+porque ya no habia `main()`. Casi lo reporto como verde silencioso. **Regla: todo mutante lleva un
+assert de integridad (`"def main()" in nuevo and "__main__" in nuevo`) antes de correrlo; exit 0 con
+stdout vacio es sintoma de mutante roto, no de hallazgo.** Corregido, M7 es fail-loud (checker exit 1
+y suite exit 1): la divergencia posicional no esconde nada.
+
+### No-regresion medida (B) y alcance (C)
+
+- 440 celdas de separador: clase derivada (9) **mas 13 caracteres que no nombre ni en r4 ni en r5**
+  (BEL, SUB, ESC, SOFT HYPHEN, MONGOLIAN VOWEL SEP, EM QUAD, EM SPACE, FIGURE SPACE, ZWSP, NARROW
+  NBSP, MEDIUM MATH SPACE, U+2061, U+FFF9) x 5 coordenadas x 4 fuentes de bash efectivo -> **0
+  aceptadas**. Controles correctos (directa exit 0, con echo exit 1).
+- `shell: fish` en bloque multilinea -> exit 1 (falla cerrado); el bash equivalente exit 0.
+- Frontera AC5: mutando PRODUCCION (etiqueta afirmativa / scope ensanchado) -> suite exit 1 las dos.
+- Alcance por **AST** (comparar el segmento fuente de cada funcion top-level entre las dos anclas, no
+  el diff de texto): la unica funcion que cambia en ambos ficheros es `main`. Metodo reutilizable.
+- `2ed31e87` no toca `validate.yml`; el workflow cambio entre anclas por 0340/0345/0346, no por esta
+  entrega. Distinguir "cambio entre anclas" de "lo toco este commit" mirando el stat DEL COMMIT.
+
 ## Ultima actualizacion 2026-08-09 (57) - TASK-0336 r5: CHANGE-REQUIRED (el escape cierra por PROPIEDAD; bloquea la certificacion que se desmiente a si misma)
 
 - Encargo `MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r5`. **SIN PRODUCTO EN ALCANCE.**
