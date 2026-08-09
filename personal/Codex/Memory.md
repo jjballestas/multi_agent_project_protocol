@@ -1,6 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0336 remediation iteration 5 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0342 remediation iteration 2 implementation committed.
+
+## 2026-08-09 - TASK-0342 remediation iteration 2 implementation
+
+- Commit `3e6012a6` gives Python and PowerShell the same explicit suffix rule: a leading dot alone
+  does not start a suffix. Dot-only basenames such as `.png`, `.zip`, and `.pyc` are scanned by both;
+  ordinary suffixes are normalized to lowercase and excluded by both.
+- The permanent parity property derives every skip-directory and suffix coordinate from both
+  production declarations. It covers exact/case-changed directories, lowercase/uppercase suffixes,
+  and dot-only basenames, so adding a sixth skip directory needs no fixture edit and reverting
+  `$SkipDirs -ccontains` to `-contains` changes the measured set.
+- R5 is resolved by probing filesystem case sensitivity before building case-distinct coordinates;
+  an insensitive filesystem reports `UNMEASURED` instead of a false red. Local focused, 68/68
+  falsification inventory, collaboration, encoding, both neutrality, compile, and diff gates exited
+  0. PowerShell 7 parity remains unmeasured locally; a real Actions run is still required before
+  delivery. TASK-0342 remains `in_progress` under its remediation-2 claim.
 
 ## 2026-08-09 - TASK-0336 remediation iteration 5 implementation
 
