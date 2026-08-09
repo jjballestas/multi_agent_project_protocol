@@ -19,8 +19,8 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0343 remediation iteration 1 implem
   passed the same declared gates in a detached clean clone with empty status.
 - Actions run `31310469089` reports `falsification-runners` and its mailbox retry step
   successful on exact head `4cded4c4`. The unrelated concurrency-fixture red is TASK-0347.
-  Governed delivery moves TASK-0343 to `in_review`, releases both remediation claims, and
-  publishes the self-contained handoff. Codex did not review or ratify the remediation.
+  Governed delivery commit `c488a5f3` moves TASK-0343 to `in_review`, releases both remediation
+  claims, and publishes the self-contained handoff. Codex did not review or ratify the remediation.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 3 implementation
 
