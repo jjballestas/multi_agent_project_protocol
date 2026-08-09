@@ -55,6 +55,21 @@
             "updated_at": "2026-08-09T08:01:29Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260809-0343-adj",
+            "expires_at": "2026-08-10T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0343",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+                "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260809-0343-adj"
+            ],
+            "started_at": "2026-08-09T08:30:44Z",
+            "status": "released",
+            "task_id": "TASK-0343",
+            "updated_at": "2026-08-09T08:30:44Z"
+        },
+        {
             "claim_id": "CLAIM-arq-20260809-0347",
             "expires_at": "2026-08-10T23:59:00Z",
             "owner": "Arquitecto",

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "471fc5bf7d86402485753e62931032356267fe4f85793c5da97f36dbdaed2807",
+  "canonical_hash": "5bc7bf6a204a36f104ae6dbec25b12f3c65360262ba9a724234803fae4d782ec",
   "integrity": {
-    "canonical_hash": "471fc5bf7d86402485753e62931032356267fe4f85793c5da97f36dbdaed2807",
+    "canonical_hash": "5bc7bf6a204a36f104ae6dbec25b12f3c65360262ba9a724234803fae4d782ec",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "06166a0e09f15259ebe574093f51cb40cc7cfa00263fef1002ee6843a69d7b2c",
-    "signature": "55902ce2f846a85ab65c51ba0653d1aa544555e63a697150b2bd0bb48ab61fc6",
-    "up_to_seq": 8348
+    "prev_hash": "f5569bc6e9d41cb1fdc22e5a467bb2cf66d9fc239ff4c5e0cdf81b258c85a697",
+    "signature": "ad5f4e85759307cccb5d3744cafd5b17286e76556177f61d82470651d759e7cd",
+    "up_to_seq": 8351
   },
   "state": {
     "aggregate_versions": {
@@ -1044,6 +1044,7 @@
       "CLAIM-arq-20260809-0336-ratifica": 1,
       "CLAIM-arq-20260809-0340-adj": 1,
       "CLAIM-arq-20260809-0342-adj2": 1,
+      "CLAIM-arq-20260809-0343-adj": 1,
       "CLAIM-arq-20260809-0346-ratifica": 1,
       "CLAIM-arq-20260809-0347": 1,
       "CLAIM-arq-alta0280-20260720": 1,
@@ -3372,7 +3373,7 @@
       "TASK-0340": 24,
       "TASK-0341": 2,
       "TASK-0342": 27,
-      "TASK-0343": 9,
+      "TASK-0343": 11,
       "TASK-0344": 9,
       "TASK-0345": 13,
       "TASK-0346": 17,
@@ -3399,7 +3400,7 @@
       "protocol-prune": 60,
       "protocol-state": 1
     },
-    "events_applied": 7677,
+    "events_applied": 7680,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3636,6 +3637,9 @@
       "arq-343-001": 8082,
       "arq-343-002": 8083,
       "arq-343-099": 8084,
+      "arq-343a-000": 8349,
+      "arq-343a-001": 8350,
+      "arq-343a-099": 8351,
       "arq-344-000": 8085,
       "arq-344-001": 8086,
       "arq-344-002": 8087,
@@ -11080,5 +11084,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8348
+  "up_to_seq": 8351
 }
