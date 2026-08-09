@@ -116,3 +116,42 @@ descubrirlo como ruido en produccion.
 - El mutante permanente sustituye la validacion por prefijo por el checksum de la
   coincidencia completa: las formas aisladas siguen pasando, pero la forma contigua
   embebida vuelve a escapar. El contrato liga directamente la regresion observada.
+
+## Remediacion 2: invariancia de contexto y cobertura monotona (2026-08-09)
+
+- La silueta contigua vuelve a ser cobertura estructural incondicional. El checksum no
+  puede quitar una deteccion que el motor anterior ya hacia: se usa solo para ensanchar
+  la cobertura hacia presentaciones con separadores. Una silueta contigua se marca aunque
+  su checksum sea invalido, porque puede ser un identificador real mal tecleado, truncado
+  o parcialmente enmascarado y el gate de PII falla hacia marcar de mas.
+- La deteccion agrupada ya no depende del primer candidato avido. El motor enumera cada
+  posicion que satisface el arranque estructural y, desde cada una, evalua todos los
+  prefijos de longitud admitida. Esto hace visible el identificador tanto con contaminacion
+  a la izquierda como a la derecha, incluso si la prosa queda pegada sin separador.
+- Medicion bidireccional con potencia: 10.800 cadenas, construidas con 300 identificadores
+  de checksum valido y 300 siluetas de checksum invalido, cada uno en forma contigua y
+  agrupada, cruzados con nueve contextos. Seis contextos se generan desde la propia
+  condicion de arranque `[A-Z]{2}[sep]*\d{2}`. El motor anterior tiene 5.400 positivos;
+  el reparado tiene 8.660. Ganadas: 3.260. Perdidas: 0. La cifra de perdidas ya no es
+  vacua porque el denominador contiene 5.400 positivos anteriores.
+- El contrato `NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION` mata tres regresiones por
+  comportamiento: volver a un unico corte del candidato rompe la invariancia por la
+  derecha; mirar solo el primer arranque la rompe al mover el identificador dentro de la
+  frase; volver a exigir checksum a la silueta contigua pierde 2.140 positivos anteriores
+  en la poblacion con potencia.
+- AC4 corregido: en una muestra de diez identificadores multipais, GB33, NL91, BE68 y
+  NO93 (4/10) caen incidentalmente dentro de la banda telefonica de 9 a 15 digitos, tanto
+  contiguos como agrupados. Por tanto, la afirmacion anterior de dependencia cero era
+  falsa. La cobertura de esta remediacion no depende de esa heuristica: las dos ramas
+  estructurales se evaluan antes y de manera independiente.
+- Laxitud declarada: al validar varios prefijos, la tasa medida por el checker sube de
+  1,050 % con una forma contigua aislada a 3,140 % con una agrupada aislada y 4,990 % con
+  una agrupada en prosa. Es la direccion fail-closed aceptada por AC3; el coste medido por
+  el checker fue +3,9 % sobre el corpus gobernado y 14,3 ms en su peor carga de 20 kB.
+- Residuales no bloqueantes ratificados como limites de esta tarea: R1, no se admiten los
+  separadores U+2002, U+2003, U+2007, U+200A, U+200B, U+2010, U+2011, U+2013, U+00B7 ni
+  salto de linea; R2, el minimo estructural sigue en 14 caracteres compactados; R3, los
+  identificadores nacionales sin mod-97 solo quedan cubiertos si presentan la silueta
+  contigua; R4, la medicion deja de ser una lista manual y genera contextos desde la
+  condicion del patron; R5, la presentacion agrupada conserva la mayor tasa de
+  sobre-deteccion ya cuantificada.

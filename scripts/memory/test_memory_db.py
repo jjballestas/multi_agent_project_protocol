@@ -150,7 +150,23 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_domain_pii_retrieval_reason_is_attested_and_falsifiable",
     },
     {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True, True), source_results)", "self.assertEqual((False, True, False), mutant_results[\"restructured\"])", "self.assertEqual((False, True, False), mutant_results[\"filtered\"])", "self.assertEqual((False, False, False), mutant_results[\"early_return\"])", "self.assertEqual(False, mutant_results[\"changed_coordinate\"])", "self.assertEqual(False, mutant_results[\"changed_format\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
-    {"id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION", "negative": "Checking only the greedy whole match swallows adjacent prose and rejects an otherwise valid identifier.", "mutation": "mutant_source = source.replace(prefix_guard_call, whole_match_guard_call, 1)", "boundaries": ("self.assertEqual((True, True, True), source_results)", "self.assertEqual((True, True, False), mutant_results)", "self.assertEqual((1, 2), (lost, gained))", "self.assertEqual((compact + \"A\",), lost_values)", "self.assertEqual((False, False), phone_only_results)"), "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable"},)
+    {
+        "id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION",
+        "negative": "A single candidate cut, first-start-only scan, or checksum gate on the contiguous silhouette makes account-identifier detection depend on adjacent prose or narrows prior coverage.",
+        "mutation": "mutant_sources = {",
+        "boundaries": (
+            "self.assertEqual(5400, previous_positive_count)",
+            "self.assertEqual(0, lost)",
+            "self.assertGreater(gained, 2700)",
+            "self.assertTrue(all(source_context_results))",
+            "self.assertFalse(all(mutant_context_results[\"single_cut\"]))",
+            "self.assertFalse(all(mutant_context_results[\"first_start\"]))",
+            "self.assertGreater(mutant_lost[\"checksum_contiguous\"], 0)",
+            "self.assertEqual(4, sum(phone_only_compact))",
+            "self.assertEqual(phone_only_compact, phone_only_grouped)",
+        ),
+        "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
+    },)
 
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -2278,7 +2294,14 @@ Body is not indexed.
             normalized_line
             + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
             + "            return True\n"
-            + "        if any(account_identifier_candidate_has_valid_prefix(candidate.group(0), item[candidate.end():candidate.end() + 1]) for candidate in STRUCTURAL_PII_PATTERNS[1].finditer(item)) or STRUCTURAL_PII_PATTERNS[2].search(normalized):\n"
+            + "        if (\n"
+            + "            ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)\n"
+            + "            or any(\n"
+            + "                account_identifier_candidate_has_valid_prefix(candidate)\n"
+            + "                for candidate in account_identifier_candidates(item)\n"
+            + "            )\n"
+            + "            or STRUCTURAL_PII_PATTERNS[2].search(normalized)\n"
+            + "        ):\n"
             + "            return True\n"
             + "        if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):\n"
             + "            for candidate in PHONE_CANDIDATE_RE.finditer(item):\n"
@@ -2400,11 +2423,24 @@ Body is not indexed.
             with self.subTest(presentation=presentation):
                 self.assertTrue(memory_db.contains_pii(presentation, []))
 
-        embedded_compact = f"account: {compact} from holder"
-        embedded_grouped = f"account: {grouped} from holder"
-        self.assertTrue(memory_db.contains_pii(embedded_compact, []))
-        self.assertTrue(memory_db.contains_pii(embedded_grouped, []))
-        self.assertFalse(memory_db.contains_pii(compact + "A", []))
+        left_contexts = ("", "prefix ", "AB12 ", "xAB 34 payload ", "x")
+        right_contexts = ("", " suffix", " AB12 suffix", "x")
+        context_values = tuple(
+            left + presentation + right
+            for presentation in (compact, grouped)
+            for left in left_contexts
+            for right in right_contexts
+        )
+        source_context_results = tuple(
+            memory_db.contains_pii(value, []) for value in context_values
+        )
+        self.assertTrue(all(source_context_results))
+
+        invalid_contiguous = compact + "A"
+        self.assertFalse(
+            memory_db.account_identifier_checksum_is_valid(invalid_contiguous)
+        )
+        self.assertTrue(memory_db.contains_pii(invalid_contiguous, []))
 
         protocol_like = "MSG-20260707-Maker-to-Checker-GO-1105-infra-fixture"
         self.assertIsNotNone(memory_db.STRUCTURAL_PII_PATTERNS[1].search(protocol_like))
@@ -2425,78 +2461,125 @@ Body is not indexed.
                 for candidate in memory_db.PHONE_CANDIDATE_RE.finditer(value)
             )
 
-        self.assertEqual((False, False), tuple(map(phone_band_detects, (compact, grouped))))
-        original_patterns = memory_db.STRUCTURAL_PII_PATTERNS
-        memory_db.STRUCTURAL_PII_PATTERNS = (
-            original_patterns[0],
-            re.compile(r"(?!x)x"),
-            original_patterns[2],
+        country_samples = (
+            "ES9121000418450200051332",
+            "GB33BUKB20201555555555",
+            "NL91ABNA0417164300",
+            "BE68539007547034",
+            "NO9386011117947",
+            "DE89370400440532013000",
+            "FR1420041010050500013M02606",
+            "IT60X0542811101000000123456",
+            "CH9300762011623852957",
+            "PL61109010140000071219812874",
         )
-        try:
-            phone_only_results = tuple(
-                memory_db.contains_pii(value, []) for value in (compact, grouped)
-            )
-        finally:
-            memory_db.STRUCTURAL_PII_PATTERNS = original_patterns
-        self.assertEqual((False, False), phone_only_results)
+        grouped_country_samples = tuple(
+            " ".join(value[index:index + 4] for index in range(0, len(value), 4))
+            for value in country_samples
+        )
+        phone_only_compact = tuple(map(phone_band_detects, country_samples))
+        phone_only_grouped = tuple(map(phone_band_detects, grouped_country_samples))
+        self.assertEqual(4, sum(phone_only_compact))
+        self.assertEqual(phone_only_compact, phone_only_grouped)
 
-        comparison_corpus = (
-            compact,
-            grouped,
-            embedded_compact,
-            embedded_grouped,
-            compact + "A",
-            protocol_like,
+        def valid_identifier(index: int) -> str:
+            body = f"{index:020d}"
+            provisional = body + "142800"
+            check_digits = 98 - (int(provisional) % 97)
+            return f"ES{check_digits:02d}{body}"
+
+        def invalid_silhouette(index: int) -> str:
+            rng = random.Random(index)
+            return "ES00" + "".join(str(rng.randrange(10)) for _ in range(20))
+
+        neutral_contexts = ("", "prefix ", "record ")
+        generated_start_contexts = tuple(
+            f"{letters}{separator}{number:02d} payload "
+            for letters, separator, number in zip(
+                ("AB", "CD", "EF", "GH", "IJ", "KL"),
+                ("", " ", "-", ".", "/", "_"),
+                (12, 23, 34, 45, 56, 67),
+            )
+        )
+        contexts = neutral_contexts + generated_start_contexts
+        identifiers = tuple(valid_identifier(index) for index in range(300)) + tuple(
+            invalid_silhouette(index) for index in range(300)
+        )
+        comparison_corpus = tuple(
+            context + presentation
+            for identifier in identifiers
+            for context in contexts
+            for presentation in (
+                identifier,
+                " ".join(
+                    identifier[index:index + 4]
+                    for index in range(0, len(identifier), 4)
+                ),
+            )
         )
         previous_pattern = re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b", re.I)
         previous_results = tuple(
             bool(previous_pattern.search(re.sub(r"[_/\\.-]+", " ", value)))
+            or phone_band_detects(value)
             for value in comparison_corpus
         )
         current_results = tuple(
             memory_db.contains_pii(value, []) for value in comparison_corpus
         )
+        previous_positive_count = sum(previous_results)
         lost = sum(old and not current for old, current in zip(previous_results, current_results))
         gained = sum(current and not old for old, current in zip(previous_results, current_results))
-        lost_values = tuple(
-            value
-            for value, old, current in zip(comparison_corpus, previous_results, current_results)
-            if old and not current
-        )
-        self.assertEqual((1, 2), (lost, gained))
-        self.assertEqual((compact + "A",), lost_values)
-        self.assertFalse(memory_db.account_identifier_checksum_is_valid(lost_values[0]))
+        self.assertEqual(5400, previous_positive_count)
+        self.assertEqual(0, lost)
+        self.assertGreater(gained, 2700)
 
-        source_results = tuple(
-            memory_db.contains_pii(value, [])
-            for value in (compact, grouped, embedded_compact)
-        )
-        self.assertEqual((True, True, True), source_results)
         source = MODULE_PATH.read_text(encoding="utf-8")
-        prefix_guard_call = "account_identifier_candidate_has_valid_prefix(candidate.group(0), item[candidate.end():candidate.end() + 1])"
-        whole_match_guard_call = "account_identifier_checksum_is_valid(candidate.group(0))"
+        prefix_guard_call = "account_identifier_candidate_has_valid_prefix(candidate)"
+        whole_match_guard_call = "account_identifier_checksum_is_valid(candidate)"
+        all_starts_loop = "for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):"
+        first_start_loop = "for start in tuple(ACCOUNT_IDENTIFIER_START_RE.finditer(value))[:1]:"
+        contiguous_guard = "            ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)\n            or "
         self.assertEqual(1, source.count(prefix_guard_call))
-        mutant_source = source.replace(prefix_guard_call, whole_match_guard_call, 1)
-        self.assertNotEqual(source, mutant_source)
+        self.assertEqual(1, source.count(all_starts_loop))
+        self.assertEqual(1, source.count(contiguous_guard))
+        mutant_sources = {
+            "single_cut": source.replace(
+                prefix_guard_call, whole_match_guard_call, 1
+            ),
+            "first_start": source.replace(all_starts_loop, first_start_loop, 1),
+            "checksum_contiguous": source.replace(contiguous_guard, "", 1),
+        }
+        self.assertTrue(all(mutant != source for mutant in mutant_sources.values()))
 
+        mutant_context_results: dict[str, tuple[bool, ...]] = {}
+        mutant_lost: dict[str, int] = {}
         with tempfile.TemporaryDirectory(prefix="memory-account-id-mutant-") as temp:
-            mutant_path = Path(temp) / "build_memory_db_mutant.py"
-            write(mutant_path, mutant_source)
-            spec = importlib.util.spec_from_file_location(
-                "build_memory_db_account_id_mutant", mutant_path
-            )
-            assert spec and spec.loader
-            mutant = importlib.util.module_from_spec(spec)
-            sys.modules[spec.name] = mutant
-            try:
-                spec.loader.exec_module(mutant)
-                mutant_results = tuple(
-                    mutant.contains_pii(value, [])
-                    for value in (compact, grouped, embedded_compact)
+            for name, mutant_source in mutant_sources.items():
+                mutant_path = Path(temp) / f"build_memory_db_{name}.py"
+                write(mutant_path, mutant_source)
+                spec = importlib.util.spec_from_file_location(
+                    f"build_memory_db_account_id_{name}", mutant_path
                 )
-            finally:
-                sys.modules.pop(spec.name, None)
-        self.assertEqual((True, True, False), mutant_results)
+                assert spec and spec.loader
+                mutant = importlib.util.module_from_spec(spec)
+                sys.modules[spec.name] = mutant
+                try:
+                    spec.loader.exec_module(mutant)
+                    mutant_context_results[name] = tuple(
+                        mutant.contains_pii(value, []) for value in context_values
+                    )
+                    mutant_results = tuple(
+                        mutant.contains_pii(value, []) for value in comparison_corpus
+                    )
+                finally:
+                    sys.modules.pop(spec.name, None)
+                mutant_lost[name] = sum(
+                    old and not current
+                    for old, current in zip(previous_results, mutant_results)
+                )
+        self.assertFalse(all(mutant_context_results["single_cut"]))
+        self.assertFalse(all(mutant_context_results["first_start"]))
+        self.assertGreater(mutant_lost["checksum_contiguous"], 0)
 
 
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:

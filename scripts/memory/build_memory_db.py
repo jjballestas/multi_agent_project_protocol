@@ -26,7 +26,7 @@ import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator
 
 
 DB_PATH = Path("runtime/memory/index.db")
@@ -93,11 +93,17 @@ PATH_RE = re.compile(r"^[A-Za-z0-9._/\\-]+$")
 TITLE_MAX_LENGTH = 500
 STRUCTURAL_PII_PATTERNS = (
     re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.I),
-    re.compile(r"(?<![A-Z0-9])[A-Z]{2}[ \t\u00a0\u2009\u202f._/\\-]*\d{2}(?:[ \t\u00a0\u2009\u202f._/\\-]*[A-Z0-9]){10,30}", re.I | re.ASCII),
+    re.compile(r"[A-Z]{2}[ \t\u00a0\u2009\u202f._/\\-]*\d{2}(?:[ \t\u00a0\u2009\u202f._/\\-]*[A-Z0-9]){10,30}", re.I | re.ASCII),
     re.compile(r"\b(?:NIF|NIE|NIT|DNI|SSN)\b", re.I),
 )
 PHONE_CANDIDATE_RE = re.compile(r"(?:\+?\d[\d .()-]{7,}\d)")
 ACCOUNT_IDENTIFIER_SEPARATORS_RE = re.compile(r"[ \t\u00a0\u2009\u202f._/\\-]+")
+ACCOUNT_IDENTIFIER_START_RE = re.compile(
+    r"(?=[A-Z]{2}[ \t\u00a0\u2009\u202f._/\\-]*\d{2})", re.I | re.ASCII
+)
+ACCOUNT_IDENTIFIER_CONTIGUOUS_RE = re.compile(
+    r"[A-Z]{2}\d{2}[A-Z0-9]{10,30}", re.I | re.ASCII
+)
 SECRET_SUFFIXES = {".key", ".pem"}
 TEXT_SUFFIXES = {".md", ".json", ".jsonl", ".txt", ".yaml", ".yml"}
 EVENTS_PATH = Path("runtime/state/events.jsonl")
@@ -115,7 +121,7 @@ def account_identifier_checksum_is_valid(value: str) -> bool:
     return int(numeric) % 97 == 1
 
 
-def account_identifier_candidate_has_valid_prefix(value: str, following: str) -> bool:
+def account_identifier_candidate_has_valid_prefix(value: str) -> bool:
     compact_length = 0
     for index, char in enumerate(value):
         if char.isascii() and char.isalnum():
@@ -123,12 +129,17 @@ def account_identifier_candidate_has_valid_prefix(value: str, following: str) ->
         if not 14 <= compact_length <= 34:
             continue
         end = index + 1
-        next_char = value[end] if end < len(value) else following
-        if next_char and not ACCOUNT_IDENTIFIER_SEPARATORS_RE.fullmatch(next_char):
-            continue
         if account_identifier_checksum_is_valid(value[:end]):
             return True
     return False
+
+
+def account_identifier_candidates(value: str) -> Iterator[str]:
+    for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):
+        candidate = STRUCTURAL_PII_PATTERNS[1].match(value, start.start())
+        if candidate is not None:
+            yield candidate.group(0)
+
 
 DDL = r"""
 CREATE TABLE artifacts (
@@ -581,7 +592,14 @@ def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:
         normalized = re.sub(r"[_/\\.-]+", " ", item)
         if STRUCTURAL_PII_PATTERNS[0].search(item):
             return True
-        if any(account_identifier_candidate_has_valid_prefix(candidate.group(0), item[candidate.end():candidate.end() + 1]) for candidate in STRUCTURAL_PII_PATTERNS[1].finditer(item)) or STRUCTURAL_PII_PATTERNS[2].search(normalized):
+        if (
+            ACCOUNT_IDENTIFIER_CONTIGUOUS_RE.search(item)
+            or any(
+                account_identifier_candidate_has_valid_prefix(candidate)
+                for candidate in account_identifier_candidates(item)
+            )
+            or STRUCTURAL_PII_PATTERNS[2].search(normalized)
+        ):
             return True
         if not ID_RE.fullmatch(item) and not DATE_RE.fullmatch(item):
             for candidate in PHONE_CANDIDATE_RE.finditer(item):

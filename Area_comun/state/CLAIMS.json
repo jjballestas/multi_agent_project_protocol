@@ -40,6 +40,43 @@
             "updated_at": "2026-08-09T01:21:43Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0328-neutrality",
+            "expires_at": "2026-08-09T09:21:47Z",
+            "notes": "Move exact-line neutrality attestations with the claimed TASK-0328 test fixture.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0328-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T03:21:47Z",
+            "status": "active",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-09T03:21:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0328-remediation-2",
+            "expires_at": "2026-08-09T09:14:03Z",
+            "notes": "Remediation iteration 2: context-invariant detection, unconditional contiguous silhouette coverage, powered bidirectional measurement, and AC4 correction.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0328-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T03:14:03Z",
+            "status": "active",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-09T03:14:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260809-Codex-TASK-0346",
             "expires_at": "2026-08-09T06:02:00Z",
             "notes": "Diagnose the stale runtime-property fixture before edits, census all 66 CI runners, repair only the diagnosed fixture, propose AC4 without implementing it, and verify the repaired step in real Actions.",
