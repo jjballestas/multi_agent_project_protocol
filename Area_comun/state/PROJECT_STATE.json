@@ -123,7 +123,7 @@
         {
             "id": "TASK-0340",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala"
         },
         {
@@ -161,6 +161,12 @@
             "owner": "Codex",
             "status": "review_approved",
             "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea"
+        },
+        {
+            "id": "TASK-0347",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

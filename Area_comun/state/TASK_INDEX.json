@@ -352,7 +352,7 @@
             "id": "TASK-0340",
             "owner": "Codex",
             "phase": "P2",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala",
             "type": "implementation"
         },
@@ -414,6 +414,16 @@
             "phase": "P2",
             "status": "review_approved",
             "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-09",
+            "file": "Area_comun/tasks/TASK-0347-ocho-runners-sin-el-bloque-obstacles.md",
+            "id": "TASK-0347",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "ready",
+            "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles",
             "type": "implementation"
         },
         {

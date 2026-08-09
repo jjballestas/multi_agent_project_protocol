@@ -57,7 +57,7 @@
         {
             "id": "TASK-0340",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala"
         },
         {
@@ -89,6 +89,12 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla"
+        },
+        {
+            "id": "TASK-0347",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles"
         }
     ],
     "next_actions": [
