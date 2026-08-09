@@ -8944,3 +8944,84 @@ prefijo), R7 (`rglob`), R8 (`.pyw`), R1 ampliado (omision SEMANTICA sin default 
 verdes), R4 medido (`test_p01` sin marcador `PERMANENT_NEGATIVE:`, cortocircuitado a `return []`
 sale verde y `check_falsification_contracts.py` no lo delata). Recomende tarea de endurecimiento
 APARTE, no tercera iteracion.
+
+---
+
+## 2026-08-09 -- TASK-0328 r2 (CHANGE-REQUIRED) -- veredicto `591910a7`, ancla `41a38082`
+
+Segunda vuelta del identificador de cuenta. En r1 bloquee porque el patron avido se tragaba la
+palabra SIGUIENTE y el checksum rechazaba el conjunto. La remediacion valida ahora **prefijos**
+del candidato (`account_identifier_candidate_has_valid_prefix`, valida `value[:end]`).
+CHANGE-REQUIRED. Iteracion 1 de 2 consumida. **SIN PRODUCTO EN ALCANCE.**
+
+### LECCION PRINCIPAL: la remediacion por PREFIJOS solo puede limpiar UNA direccion
+
+Validar `value[:end]` empieza siempre en el caracter 0 del candidato. Por construccion limpia la
+contaminacion por la DERECHA y **no puede** limpiar la de la IZQUIERDA: ahi el identificador es
+sufijo o infijo, nunca prefijo. Con `re.I`, el arranque `(?<![A-Z0-9])[A-Z]{2}[sep]*\d{2}` lo abre
+**cualquier** par de letras seguido de dos digitos -- `el 12`, `de 34`, `US 12`, `NO 04`, `ref AB12` --
+o sea prosa corriente. Es la MISMA clase de r1, reflejada.
+
+    'el 12 ES9121000418450200051332'            OLD True -> NEW False
+    'pago de 50 EUR a ES9121000418450200051332' OLD True -> NEW False
+
+Cuando bloquees por "el candidato absorbe texto", **el arreglo aceptable no es una coordenada
+(derecha) sino una INVARIANCIA**: `contains_pii(L + I + R) == contains_pii(I)`. Lo escribi asi en
+la remediacion 2 para no volver una tercera vez con la coordenada que falte. Corolario de
+[remediaciones-reintroducen-el-patron] y de [ensanchar-un-patron-puede-estrecharlo].
+
+### LECCION NUEVA: una medida bidireccional sobre un corpus SIN POSITIVOS tiene potencia CERO
+
+El maker declaro "22.342 cadenas evaluadas por ambos motores; ganadas 0; perdidas 0" y **se
+reproduce al numero** (yo conte 22.340). Pero el corpus gobernado tiene **cero positivos** en los
+dos motores y **cero cadenas** que case el patron de cuenta del motor viejo. Un corpus sin un solo
+positivo no puede perder ninguno: "perdidas: 0" es **vacuamente cierto**.
+
+**Antes de aceptar una cifra de perdidas, contar los POSITIVOS DEL MOTOR ANTERIOR en el corpus.
+Si son 0, la medida no prueba nada y hay que decirlo con esas palabras.** Reproducir la cifra del
+maker y validar la cifra del maker son dos cosas distintas.
+
+Lo mismo con el corpus permanente del contrato: 6 fronteras escritas a mano, `(lost, gained) =
+(1, 2)` reproducido -- y **ninguna de las 6 tiene texto a la izquierda del identificador**. El
+corpus con positivos estaba construido justo para no ver la clase que falla.
+
+Construi la poblacion con potencia: 300 IBAN con mod-97 valido (semilla fija) x 9 contextos de
+prosa x 2 presentaciones = 5.400 cadenas. **Perdidas: 1.791.** Restringido a contexto con token
+`LLdd` a la izquierda + forma contigua: **1.791 de 1.800, el 99,5 %**. Y la capacidad que la tarea
+venia a construir (la forma agrupada) cae de 300/300 a **97 de 1.800** en esos contextos.
+
+### LECCION NUEVA: escanear prefijos MULTIPLICA los intentos de checksum = laxitud medible
+
+El foco C preguntaba si la validacion por prefijos introdujo laxitud. **Si.** El mod-97 no cambio
+(1,050 % contra el 1/97 teorico = 1,031 %), pero la guarda hace **un intento por cada frontera de
+separador**: 1 en la contigua, 3 en la agrupada, 5 en la agrupada en prosa. Deslizamiento medido
+**1,050 % -> 3,140 % -> 4,990 %**, clavado en `1-(96/97)^k`.
+
+**Cuando un arreglo pasa de "evaluar una vez" a "evaluar N cortes", la tasa de falso positivo se
+multiplica por N. Contar los intentos, no solo medir la tasa.** No bloquee: es sobre-deteccion,
+o sea fallo cerrado, y sobre el corpus gobernado el efecto observado sigue siendo 0. Pero se
+declara.
+
+### El coste (foco D) se cierra con dos cifras y ya
+
++3,9 % sobre el corpus real (4,32 -> 4,49 us/cadena). Peor patologico x7,4 relativo pero 14,3 ms
+absolutos sobre 20 kB. **Un ratio sin el absoluto asusta de mas; dar siempre los dos.**
+
+### Hallazgos de r1 que arrastro y hay que re-levantar
+
+- H2: la silueta contigua sin mod-97 valido deja de marcarse. La tarea lo declara en prosa
+  ("rechazo deliberado") pero **sin el numero**. Lo aporte: **98,95 %** (19.790 de 20.000).
+  Con la cifra delante es una decision del Arquitecto, no del implementador.
+- H4: la tarea sigue afirmando que la banda telefonica de 9-15 digitos no alcanza al identificador.
+  Remedido sobre `41a38082`: **4 de 10 IBAN** (GB33, NL91, BE68, NO93) SI dependen del heuristico
+  estrechado por TASK-0322. **La ACTION de remediacion 1 del Arquitecto no incluyo este punto de mi
+  r1. Un bloqueante mio que el encargo siguiente no relaya no queda renunciado: se re-levanta.**
+
+### Reproduccion
+
+Clon limpio `D:/Aegis_Scratch/map/rev0328r2/cc` (checkout `41a38082`). Tres motores cargados por
+`importlib` desde copias del fichero: `eng_old` (`06bc025c`), `eng_r1` (`041e788a`), `eng_new`
+(`41a38082`) -- `git show <commit>:<path> > dir/build_memory_db.py`, mas barato que tres clones y
+suficiente porque el modulo no importa nada local. Sondas `p1_focoA` .. `p8_power` en
+`D:/Aegis_Scratch/map/rev0328r2/`. Los cinco gates exit 0 en el ancla, suite 72/72 en 280,686 s.
+Comprobe ademas que el contrato esta EJECUTADO por CI (`validate.yml:84`), no solo declarado.
