@@ -33,7 +33,7 @@ intake:
     - examples/
   out_of_scope:
     - "El crash del validador por dependencia ausente (TASK-0340)."
-    - "El contrato de subcadenas de run_mailbox_retry_cases.py, que va por la via de TASK-0331."
+    - "El contrato de subcadenas de run_mailbox_retry_cases.py y la resolucion de la primera escritura alcanzable sobre $LockPath (frente C3): su dueno es TASK-0348. Esta linea corrige una remision mutua con TASK-0331 que dejo C3 huerfano."
     - "Codigo de producto."
   risk: high
   estimate: M

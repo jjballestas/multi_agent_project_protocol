@@ -263,6 +263,24 @@
             "updated_at": "2026-08-09T08:00:36Z"
         },
         {
+            "claim_id": "CLAIM-arq-20260809-particion-0331-0348",
+            "expires_at": "2026-08-10T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0348",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0348",
+                "Area_comun/tasks/TASK-0348-todo-consumo-del-veredicto-de-vitalidad-observado.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-20260809-particion-0331-0348"
+            ],
+            "started_at": "2026-08-09T14:52:34Z",
+            "status": "released",
+            "task_id": "TASK-0348",
+            "updated_at": "2026-08-09T14:52:34Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hygiene-20260809-lote68",
             "expires_at": "2026-08-09T23:59:00Z",
             "owner": "Arquitecto",
@@ -319,6 +337,28 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260809",
             "updated_at": "2026-08-09T11:39:21Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-20260809-lote71",
+            "expires_at": "2026-08-10T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260809-Analista-to-Arquitecto-REVIEW-TASK-0331-r7-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Analista-to-Arquitecto-REVIEW-TASK-0331-r7-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0331-r7.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0331-r7.md",
+                "Area_comun/mailbox/open/MSG-20260809-Arquitecto-to-Codex-ACTION-TASK-0328-remediacion-4.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Arquitecto-to-Codex-ACTION-TASK-0328-remediacion-4.md",
+                "Area_comun/mailbox/open/MSG-20260809-Arquitecto-to-Codex-ACTION-TASK-0340-remediacion-1.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Arquitecto-to-Codex-ACTION-TASK-0340-remediacion-1.md",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-4.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-4.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260809-lote71"
+            ],
+            "started_at": "2026-08-09T14:53:16Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260809",
+            "updated_at": "2026-08-09T14:53:16Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0284-20260722",

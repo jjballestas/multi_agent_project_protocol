@@ -2,7 +2,7 @@
 task_id: TASK-0331
 file: Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md
 title: "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
-status: in_review
+status: review_approved
 type: infra
 owner: Codex
 reviewer: Analista
@@ -262,3 +262,9 @@ La tabla normativa de 24 celdas conserva sus stubs deliberados: sigue contratand
 partir de un veredicto inyectado. La nueva sonda contrata por separado el camino de produccion real;
 no se afirma que las 24 celdas hayan dejado de usar stubs. El frente de escritura alcanzable sobre
 `$LockPath` queda fuera de esta remediacion y se particiono hacia TASK-0341 por orden del Arquitecto.
+
+## Nota de cierre de alcance (2026-08-09)
+
+El frente C3 -- resolucion de la primera escritura alcanzable sobre `$LockPath` -- **no pertenece a
+esta tarea ni a TASK-0341**. Durante la r5 y la r6 las notas de ambas se remitian mutuamente y lo
+dejaron sin dueno. Su dueno es **TASK-0348**, junto con los consumidores del veredicto de vitalidad.

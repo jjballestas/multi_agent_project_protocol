@@ -296,7 +296,7 @@
             "file": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
             "id": "TASK-0331",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez",
             "type": "infra"
         },
@@ -424,6 +424,16 @@
             "phase": "P2",
             "status": "ready",
             "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-09",
+            "file": "Area_comun/tasks/TASK-0348-todo-consumo-del-veredicto-de-vitalidad-observado.md",
+            "id": "TASK-0348",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "proposed",
+            "title": "Todo consumo del veredicto de vitalidad observado en su posicion, con unknown atado",
             "type": "implementation"
         },
         {

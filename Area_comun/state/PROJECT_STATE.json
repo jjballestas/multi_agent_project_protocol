@@ -87,7 +87,7 @@
         {
             "id": "TASK-0331",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
         },
         {
@@ -167,6 +167,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles"
+        },
+        {
+            "id": "TASK-0348",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Todo consumo del veredicto de vitalidad observado en su posicion, con unknown atado"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

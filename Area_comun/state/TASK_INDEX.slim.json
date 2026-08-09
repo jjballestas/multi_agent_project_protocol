@@ -30,12 +30,6 @@
             "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
         },
         {
-            "id": "TASK-0331",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
-        },
-        {
             "id": "TASK-0332",
             "owner": "Codex",
             "status": "in_review",
@@ -110,6 +104,13 @@
             "phase": "P2",
             "status": "ready",
             "title": "Ocho runners de CI fallan por la misma raiz -- sus fixtures de entrega no traen el bloque obstacles"
+        },
+        {
+            "id": "TASK-0348",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "proposed",
+            "title": "Todo consumo del veredicto de vitalidad observado en su posicion, con unknown atado"
         }
     ],
     "view": "task_index.slim"
