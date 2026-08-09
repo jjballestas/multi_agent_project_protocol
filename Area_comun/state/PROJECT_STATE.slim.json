@@ -57,7 +57,7 @@
         {
             "id": "TASK-0340",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "blocked",
             "title": "El validador canonico lleva seis dias crashing en CI por una dependencia que CI no instala"
         },
         {

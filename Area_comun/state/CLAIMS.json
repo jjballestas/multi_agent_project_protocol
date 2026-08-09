@@ -82,6 +82,62 @@
             "updated_at": "2026-08-09T09:10:35Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0328-remediation-4",
+            "expires_at": "2026-08-09T17:48:55Z",
+            "notes": "TASK-0328 remediation 4: bind account and phone exemptions to validated field coordinates, prove loss-direction invariance, and use powered bidirectional measurement.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0328-remediation-4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T12:48:55Z",
+            "status": "active",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-09T12:48:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0340-billing-question",
+            "expires_at": "2026-08-09T14:30:00Z",
+            "notes": "Record TASK-0340 external Actions billing blocker and one concrete question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0340-billing-question",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0340-actions-billing.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T14:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0340",
+            "updated_at": "2026-08-09T14:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0340-remediation-1",
+            "expires_at": "2026-08-09T18:48:00Z",
+            "notes": "TASK-0340 remediation 1: make the actor-auth negative reachable and bind CI dependency coverage to all workflows and invocation forms.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0340-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0340",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0340",
+                "Area_comun/tasks/TASK-0340-el-validador-canonico-lleva-seis-dias-crashing-en-CI.md",
+                ".github/workflows/validate.yml",
+                "examples/actor_auth_ed25519_cases/run_actor_auth_ed25519_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T13:48:00Z",
+            "status": "released",
+            "task_id": "TASK-0340",
+            "updated_at": "2026-08-09T13:48:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
             "expires_at": "2026-08-10T11:08:58Z",
             "notes": "Remediation 1: bind rollback preservation to behavior, close claim and non-vacuity directions, and remove defer-reason literal coupling without absorbing TASK-0341.",
