@@ -159,6 +159,22 @@
             "updated_at": "2026-08-09T22:59:00Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-memory",
+            "expires_at": "2026-08-10T01:00:00Z",
+            "notes": "Persist TASK-0353 implementation checkpoint after commit f4c6c3b9.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T23:57:00Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-09T23:57:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0353-v2",
             "expires_at": "2026-08-10T07:00:00Z",
             "notes": "Continue TASK-0353 with only existing, exact implementation and evidence routes.",

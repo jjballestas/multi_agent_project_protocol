@@ -1,6 +1,24 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0347 blocked on TASK-0353.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0353 implemented pending governed delivery.
+
+## 2026-08-10 - TASK-0353 implementation
+
+- Commit `f4c6c3b9` removes the independent `TURN_SCHEMA_KEYS` allowlist. The orchestrator now
+  derives its filter from `runtime/turn_schema.json`, the same schema that is the validator's
+  first gate, so a schema-valid field cannot be deleted immediately before validation.
+- Permanent negative `NEG-TURN-SCHEMA-FILTER-COVERS-VALIDATION` behaviorally derives required
+  top-level fields from a valid report and kills a production-function mutant that removes one
+  of them. The focused runner also executes the real orchestrator route with `obstacles: []`.
+- A fresh runtime instance created through `new_instance.py` executes its copied orchestrator and
+  preserves `obstacles`; the unrelated known placeholder false positive in
+  `scripts/memory/test_memory_db.py` is explicitly partitioned in that focused probe.
+- Canonical validate-job replay improved from the routed baseline `54 PASS / 15 FAIL / 8
+  UNSUPPORTED` to `60 PASS / 9 FAIL / 8 UNSUPPORTED`. The same eight unavailable `pwsh` steps
+  remain declared; real-adapter step 74 is now green. TASK-0347 remains blocked and unchanged.
+- Targeted obstacle route, generated-instance behavior, falsification inventory 71/71,
+  collaboration, encoding, neutrality, compile, and diff gates passed before the implementation
+  commit. Codex is maker only and has not reviewed or ratified the change.
 
 ## 2026-08-10 - TASK-0347 blocked on partitioned production defect
 
