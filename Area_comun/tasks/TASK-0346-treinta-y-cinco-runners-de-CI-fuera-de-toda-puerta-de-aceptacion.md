@@ -1,7 +1,7 @@
 ---
 id: TASK-0346
 title: Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea
-status: in_progress
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0346-treinta-y-cinco-runners-de-CI-fuera-de-toda-puerta-de-aceptacion.md
