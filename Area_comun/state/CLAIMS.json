@@ -125,6 +125,28 @@
             "updated_at": "2026-08-09T01:36:51Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-20260809-lote61",
+            "expires_at": "2026-08-09T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260808-Arquitecto-to-Analista-REVIEW-TASK-0336-r5.md",
+                "Area_comun/mailbox/open/MSG-20260809-Analista-to-Arquitecto-VERDICT-TASK-0342-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Analista-to-Arquitecto-VERDICT-TASK-0342-r2.md",
+                "Area_comun/mailbox/open/MSG-20260809-Analista-to-Arquitecto-VEREDICTO-TASK-0336-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Analista-to-Arquitecto-VEREDICTO-TASK-0336-r5.md",
+                "Area_comun/mailbox/open/MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0342-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0342-r2.md",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0346-prune-gate.md",
+                "Area_comun/mailbox/archived/MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0346-prune-gate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-20260809-lote61"
+            ],
+            "started_at": "2026-08-09T02:48:53Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260809",
+            "updated_at": "2026-08-09T02:48:53Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0284-20260722",
             "expires_at": "2026-07-22T00:20:48Z",
             "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
