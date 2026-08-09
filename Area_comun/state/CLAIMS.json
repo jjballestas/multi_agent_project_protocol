@@ -56,9 +56,31 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T07:03:42Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0331",
             "updated_at": "2026-08-09T07:03:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0331-remediation-6-delivery",
+            "expires_at": "2026-08-09T10:24:15Z",
+            "notes": "Publish TASK-0331 remediation 6 exact-commit evidence and route independent B-new re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0331-remediation-6-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0331-remediation-6",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0331-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0331-remediacion-6.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T07:24:15Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-09T07:24:15Z"
         },
         {
             "claim_id": "CLAIM-20260809-Codex-TASK-0336-r5",
