@@ -52,7 +52,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T07:25:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0336",
             "updated_at": "2026-08-09T07:25:00Z"
         },
@@ -71,7 +71,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T04:52:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0336",
             "updated_at": "2026-08-09T04:52:00Z"
         },
@@ -87,7 +87,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T04:54:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0336",
             "updated_at": "2026-08-09T04:54:00Z"
         },

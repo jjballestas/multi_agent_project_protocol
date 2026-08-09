@@ -1,43 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260809-Codex-TASK-0336-r5",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0336-r5",
-                "scripts/check_falsification_contracts.py",
-                "scripts/test_falsification_contracts.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0336"
-        },
-        {
-            "claim_id": "CLAIM-20260809-Codex-TASK-0336-r5-delivery",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0336-r5-delivery",
-                "Area_comun/state/TASK_INDEX.json#TASK-0336",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
-                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0336-codex-to-arquitecto.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0336"
-        },
-        {
-            "claim_id": "CLAIM-20260809-Codex-TASK-0336-r5-mailbox",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0336-r5-mailbox",
-                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0336-remediacion-5.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0336"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
