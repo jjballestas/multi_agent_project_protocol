@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 3 implemented.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 3 delivered for review.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 3 implementation
 
@@ -16,8 +16,11 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 3 implem
   rejects, and the three previous coverage mutants still die.
 - Full memory tests passed 72/72. Falsification inventory 69/69, collaboration, encoding, Python
   and PowerShell neutrality, neutrality parity tests, drift, compile, and diff gates exited 0.
-  TASK-0328 remains `in_progress` under the remediation-3 maker claim until exact-commit
-  verification and governed delivery. Codex has not reviewed or ratified the work.
+  Exact commit `9639535f` passed the same gates in detached clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/codex0328r3-9639535f-20260809` with empty status.
+- Delivery commit `4ba856ae` moves TASK-0328 to `in_review`, releases both remediation-3 maker
+  claims, and publishes the self-contained handoff plus Arquitecto routing request. Codex has not
+  reviewed or ratified the remediation.
 
 ## 2026-08-09 - TASK-0342 remediation iteration 2 implementation
 
