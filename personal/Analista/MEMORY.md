@@ -9496,3 +9496,75 @@ negativo se EJECUTO, no solo que existe.
   Commit con pathspec explicito de mis dos ficheros.
 - Trailers contiguos sin lineas en blanco: `Task-Id` + `Ops-Reason` + `Co-Authored-By`.
 - Bucle declarado: remediacion 1, rejuicio mio antes del commit de cierre, maximo 2 iteraciones.
+
+## 2026-08-09 -- REVIEW TASK-0343 (asercion de rollback atada a contadores): CHANGE-REQUIRED
+
+Commit del veredicto: `497e1ff5`. Ancla: implementacion `26b33967`, entrega `844a1f5f`,
+HEAD canonico `676ef334`. Clon limpio + 8 copias mutantes en
+`D:/Aegis_Scratch/multi_agent_project_protocol/an0343/`.
+
+### Lo que si se sostenia (no repetir la sospecha)
+
+Paso de Actions verde de VERDAD: run `31270228630` sobre `b2da30ce`, paso
+`Execute mailbox retry falsification runner` SUCCESS; `b2da30ce` solo difiere de `26b33967` en
+`personal/Codex/Memory.md`, asi que el runner que corrio es el entregado. Sigue verde en HEAD
+(`31302240646`); el rojo global de HEAD es `Run runtime concurrency simulation cases`, ajeno.
+Inventario 64/64 exacto en el commit exacto. La asercion nueva **si** mata destruccion real de
+CLAIMS.json en la rama de produccion que declara preservacion (mp8, linea 1688).
+
+### Bateria mp1-mp8 (todas sobre PRODUCCION), reutilizable
+
+Sobreviven (exit 0): mp1 borrar la LLAMADA al negativo permanente (el checker de contratos tambien
+sale 0, inventario intacto); mp2 borrar la asercion real de `main()`; mp4 quitar
+`and after_claims == before_claims`; mp5 quitar `bool(before_events)`.
+Mueren: mp3 helper `return True`; mp7 destruir eventos (pero por CASCADA en linea 1647, no por la
+asercion nueva); mp8 destruir CLAIMS.json (por la asercion, linea 1688).
+Escape nuevo: mp6, renombrar UNA razon de defer conservador en el `.ps1` conservando rama,
+condicion, `return` y efecto -> runner exit 1 con `AssertionError: seen state missing`.
+
+### Leccion transferible: "20 -> 19" como medida de clase
+
+Contar los miembros de la clase con un barrido AST propio en TRES commits (pre-arreglo, arreglo,
+HEAD) convierte "ata la propiedad o la ocurrencia" en un numero. Aqui: aserciones atadas a
+subcadenas literales del log = 20 en `071b5a1a`, 19 en `26b33967` y en `676ef334`. Retirar 1 de 20
+es ocurrencia. Snippet: `ast.walk` -> `ast.Assert` -> `ast.get_source_segment(node.test)` ->
+regex `"..." in log`.
+
+### Leccion transferible: el negativo que solo prueba no-constancia
+
+Si el negativo permanente construye fixtures sinteticos y define sus mutantes como **lambdas en el
+propio test**, lo unico que demuestra es que la funcion bajo prueba no es constante: cualquier
+mutante constante muere y ningun aflojamiento parcial muere. Comprobarlo siempre con dos mutantes
+de aflojamiento PARCIAL (quitar un conjunto de la conjuncion, quitar una guarda). Aqui ademas el
+mutante `literal_log_path` era inmatable por construccion porque `ledger_preservation_holds` **no
+recibe el log**. Contraste util dentro del MISMO fichero: `run_nondestructive_rollback_contract`
+hace `RUNNER.read_text()` y muta el texto real del `.ps1`; ese es el estandar de la casa.
+
+### Leccion transferible: codigo muerto = borrar la LLAMADA
+
+`check_falsification_contracts.py` solo comprueba `if contract.mutation not in source` y lo mismo
+con `boundaries`: presencia de SUBCADENA dentro de la funcion `exercised_by`. No aplica la mutacion
+ni ejecuta nada. Por eso mp1 (huerfanar el negativo) pasa los dos gates. Vale para los 18 contratos
+del fichero, no solo el de 0343 -> lo deje como pregunta al Arquitecto (gemela de TASK-0330).
+Ninguno de los 18 declara `boundaries` dentro de `main()`: el mecanismo protege el negativo, nunca
+la asercion del fixture (residual R1).
+
+### Residuales que deje declarados
+
+R1 mp2 (clase, tarea propia). R2 mp7 muere por cascada. R3 se perdio el ancla absoluta `seq == 3`,
+que NO fallaba en CI (el AssertionError de `31266113929` era la linea 1638, la del log). R4 el
+snapshot "antes" vive en `.protocol-tmp/`, el mismo directorio de cuarentena del rollback. R5 la
+linea 535 tiene `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe`, ruta absoluta de host
+dentro de un negativo permanente: por la LETRA del AC4 (habla de aserciones) queda fuera, por el
+titulo de la tarea no. Distinguir letra y proposito EN VOZ ALTA en vez de inflar el incumplimiento.
+
+### Operativo
+
+- 8 copias mutantes con `cp -r hub mpN && rm -rf mpN/.git` (49 MB sin `.git`, contra 668 MB con el).
+  El runner no necesita que la raiz sea un repo git: crea su propio sandbox en el temp del sistema.
+- Cada corrida del runner tarda ~1m51s; en lotes de 3-4 en paralelo con `&` + `wait` y un
+  `exits.txt` por lote.
+- `git show <c>:<ruta> > /tmp/x.py` NO es legible por Python en este shell (mapeo MSYS): volcar a
+  una ruta absoluta bajo `D:/Aegis_Scratch/`.
+- El Arquitecto empujo `6baf1b96` mientras yo revisaba; mi commit quedo encima y el ancla siguio
+  valida (`git diff 676ef334..HEAD -- <rutas de 0343>` vacio). Comprobarlo siempre antes de pushear.
