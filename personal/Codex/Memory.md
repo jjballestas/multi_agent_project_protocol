@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 2 implementation committed.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0336 remediation iteration 5 implementation committed.
+
+## 2026-08-09 - TASK-0336 remediation iteration 5 implementation
+
+- Commit `2ed31e87` replaces the stale `contract_discrimination_23_of_31` denominator with the
+  boundary count derived from the delivered `NEG-FALSIFICATION-RUNNER-WIRING` contract in the same
+  checker run. Canonical output now says `contract_discrimination_23_of_37` and separately prints
+  `boundaries=37`.
+- The permanent assertion derives its expected denominator from its own declared boundary tuple and
+  checks the canonical workflow-backed run. No recognized-command grammar, shell-family resolution,
+  bounded-static certification predicate, or workflow file changed.
+- Focused inventory reports 12/12 runners, 68/68 contracts, and 37 wiring boundaries. The focused
+  suite, collaboration validator, encoding, neutrality, compile, and diff gates exited 0.
+- TASK-0336 remains `in_progress` under claim `CLAIM-20260809-Codex-TASK-0336-r5` pending governed
+  delivery to `in_review`; Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 2 implementation
 
