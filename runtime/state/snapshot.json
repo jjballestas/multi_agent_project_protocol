@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9f6690cbe551e05e4debb564e4e8e09ab923b35a1ab4bd3512034ea54a3167b8",
+  "canonical_hash": "eccda80279a2ace64979f6d73feb098793b659485c36c7de2a05bdbba71b9194",
   "integrity": {
-    "canonical_hash": "9f6690cbe551e05e4debb564e4e8e09ab923b35a1ab4bd3512034ea54a3167b8",
+    "canonical_hash": "eccda80279a2ace64979f6d73feb098793b659485c36c7de2a05bdbba71b9194",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "f17531adccebbf7ddb7155e742cda906882bebaadbc4c59384a40942d2dcefa1",
-    "signature": "ff9df13c3e52e4b6675fbf37150574b9609265e88e18449dbaf611aaf6766518",
-    "up_to_seq": 8352
+    "prev_hash": "49206634a0ef7c1ffdbe70dea4a4c139607eca9114de04fde2710e0442f6346d",
+    "signature": "7082c95955ec3a8995d75842f34705a602a36e4b1ea1d5bf821f46b2a2a14fb5",
+    "up_to_seq": 8356
   },
   "state": {
     "aggregate_versions": {
@@ -3358,7 +3358,7 @@
       "TASK-0325": 25,
       "TASK-0326": 13,
       "TASK-0327": 29,
-      "TASK-0328": 33,
+      "TASK-0328": 37,
       "TASK-0329": 32,
       "TASK-0330": 44,
       "TASK-0331": 61,
@@ -3400,7 +3400,7 @@
       "protocol-prune": 60,
       "protocol-state": 1
     },
-    "events_applied": 7681,
+    "events_applied": 7685,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7356,6 +7356,10 @@
       "codex:task0328:remediation2:status-in-review:20260809T035054Z": 8268,
       "codex:task0328:remediation2:work-release:20260809T035054Z": 8269,
       "codex:task0328:remediation3:claim-acquire:20260809T083306Z": 8352,
+      "codex:task0328:remediation3:delivery-claim-acquire:20260809T091035Z": 8353,
+      "codex:task0328:remediation3:delivery-claim-release:20260809T091242Z": 8356,
+      "codex:task0328:remediation3:implementation-claim-release:20260809T091242Z": 8355,
+      "codex:task0328:remediation3:in-progress-to-in-review:20260809T091242Z": 8354,
       "codex:task0329:remediation1:delivery-claim-release:20260808T064800Z": 7883,
       "codex:task0329:remediation1:in-progress-to-in-review:20260808T064800Z": 7881,
       "codex:task0329:remediation1:work-claim-release:20260808T064800Z": 7882,
@@ -11085,5 +11089,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8352
+  "up_to_seq": 8356
 }

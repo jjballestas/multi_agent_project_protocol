@@ -280,7 +280,7 @@
             "file": "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
             "id": "TASK-0328",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono",
             "type": "infra"
         },
