@@ -412,7 +412,7 @@
             "id": "TASK-0346",
             "owner": "Codex",
             "phase": "P2",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea",
             "type": "implementation"
         },

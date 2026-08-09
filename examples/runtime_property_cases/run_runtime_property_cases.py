@@ -280,6 +280,11 @@ def check_payload() -> dict[str, str]:
 
 
 def turn_report(actor: str, from_status: str, to_status: str, review_qa: dict[str, Any] | None) -> dict[str, Any]:
+    friction = bool(
+        to_status in {"changes_requested", "qa_failed", "architect_review"}
+        or (review_qa or {}).get("event") in {"reject_review", "fail_qa"}
+        or (review_qa or {}).get("checks_failed")
+    )
     return {
         "turn_id": f"RUN-{actor}-{from_status}-{to_status}",
         "task_id": TASK_ID,
@@ -287,6 +292,18 @@ def turn_report(actor: str, from_status: str, to_status: str, review_qa: dict[st
         "outcome": "done" if to_status == "done" else "in_review" if to_status == "in_review" else "ok",
         "summary": "Exercise property transition.",
         "changed_paths": [],
+        "obstacles": (
+            [
+                {
+                    "what": "The independent check rejected the candidate transition.",
+                    "root_cause": "The supplied evidence did not satisfy the check.",
+                    "resolution": "Return the task for remediation with the failed checks recorded.",
+                    "recurrence_risk": "low",
+                }
+            ]
+            if friction
+            else []
+        ),
         "transitions": {
             "task_status": {"from": from_status, "to": to_status},
             "review_qa": review_qa,
