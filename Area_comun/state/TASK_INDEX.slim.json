@@ -18,12 +18,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0327",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion"
-        },
-        {
             "id": "TASK-0328",
             "owner": "Codex",
             "status": "in_review",
