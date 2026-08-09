@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "cc3c51427ad694f0ded9a40312dd0d77ac7519cbca8f727cb40571620366162e",
+  "canonical_hash": "cdfa04536c0f30dec1070ad8db59bae8ca1bee584e8a52bf6e8cfb80386092de",
   "integrity": {
-    "canonical_hash": "cc3c51427ad694f0ded9a40312dd0d77ac7519cbca8f727cb40571620366162e",
+    "canonical_hash": "cdfa04536c0f30dec1070ad8db59bae8ca1bee584e8a52bf6e8cfb80386092de",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "68b7e0263904b7dbf48955ece45594a9501809c6643405177030b1fd1c6b5e20",
-    "signature": "b3056655de257b92709880fe071889e057bf7d38d677acbdfac027ddeb6d0f0d",
-    "up_to_seq": 8323
+    "prev_hash": "52dfcabc007457d75682afddec8edcb6f7c7f87ffc407499cda39b5fbf9d17e3",
+    "signature": "f1a91ee2d4792ca28cecb0798eed75fdb75ca427e8ba6266b65ccc174f72a884",
+    "up_to_seq": 8324
   },
   "state": {
     "aggregate_versions": {
@@ -3349,7 +3349,7 @@
       "TASK-0328": 32,
       "TASK-0329": 32,
       "TASK-0330": 44,
-      "TASK-0331": 56,
+      "TASK-0331": 57,
       "TASK-0332": 19,
       "TASK-0333": 13,
       "TASK-0334": 21,
@@ -3387,7 +3387,7 @@
       "protocol-prune": 59,
       "protocol-state": 1
     },
-    "events_applied": 7652,
+    "events_applied": 7653,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7407,6 +7407,7 @@
       "codex:task0331:remediation5:in-review:20260808T143615Z": 8037,
       "codex:task0331:remediation5:memory-claim:20260808T142424Z": 8034,
       "codex:task0331:remediation5:memory-release:20260808T142510Z": 8035,
+      "codex:task0331:remediation6:claim:20260809T070342Z": 8324,
       "codex:task0331:status-in-progress:20260807T112129Z": 7488,
       "codex:task0331:work-v2-release:20260807T114330Z": 7499,
       "codex:task0332:claim-v1-release:20260808T094600Z": 7954,
@@ -11043,5 +11044,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8323
+  "up_to_seq": 8324
 }

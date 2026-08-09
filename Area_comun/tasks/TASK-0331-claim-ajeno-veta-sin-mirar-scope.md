@@ -243,3 +243,22 @@ Al alcanzar por primera vez el cuerpo completo del runner, la prueba expuso que 
 rechaza `File.Replace(..., $null)` cuando el lock ya existe. La sustitucion atomica ahora usa una
 ruta de backup unica y limpia backup y temporal en `finally`; el runner completo ejerce la
 sustitucion y pasa. Los tres lectores de CI que faltaban quedan incluidos en `verification_cmd`.
+
+## Remediacion 6 - camino de vitalidad real sin stubs
+
+`NEG-HARNESS-ADMISSION-LIVENESS-PRODUCTION-PATH` carga juntas y sin redefinir en su propia posicion
+las tres funciones del camino actual de admision que producen o consumen el veredicto de vitalidad:
+`Get-LeaseProcessState`, `Test-LeaseProcessMatches` y `Get-AdditionalWorkSignal`. La sonda usa el
+proceso PowerShell real para los casos live y PID reutilizado, y un PID inexistente para dead; fija
+estado, coincidencia de identidad y resultado final de admision para las tres situaciones.
+
+El contrato inyecta un retorno constante al principio de cada funcion sin borrar el cuerpo original.
+`Get-LeaseProcessState -> "live"` y `Test-LeaseProcessMatches -> $true` convierten la lease muerta en
+`active_peer_lease`; `Get-AdditionalWorkSignal -> "none"` deja pasar la lease viva intersectante.
+Los tres mutantes cambian una observacion obligatoria y mueren. El M5 exacto del checker queda por
+tanto cubierto por comportamiento aunque conserve intacta como codigo muerto la llamada original.
+
+La tabla normativa de 24 celdas conserva sus stubs deliberados: sigue contratando decisiones a
+partir de un veredicto inyectado. La nueva sonda contrata por separado el camino de produccion real;
+no se afirma que las 24 celdas hayan dejado de usar stubs. El frente de escritura alcanzable sobre
+`$LockPath` queda fuera de esta remediacion y se particiono hacia TASK-0341 por orden del Arquitecto.

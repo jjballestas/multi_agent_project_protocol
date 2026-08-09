@@ -214,6 +214,18 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "test_lease_owner_lock_state_table_is_complete_and_mutation_proven",
     },
     {
+        "id": "NEG-HARNESS-ADMISSION-LIVENESS-PRODUCTION-PATH",
+        "negative": "Every producer or consumer on the exec-admission liveness path must be observed in its production position; collapsing any one to a constant must change a required behavior.",
+        "mutation": "inject_function_return(source, function_name, constant_return)",
+        "boundaries": (
+            "assert healthy == expected",
+            "assert mutant != expected",
+            'assert mutant["dead_signal"] == "active_peer_lease"',
+            'assert mutant["live_signal"] == "none"',
+        ),
+        "exercised_by": "test_admission_liveness_path_uses_production_functions_and_kills_constant_mutants",
+    },
+    {
         "id": "NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION",
         "negative": "Message work resolution must consult the cold task archive when the task is absent from the pruned hot index.",
         "mutation": "source.replace(archive_index, hot_index, 1)",
@@ -647,6 +659,71 @@ try {
 '''
     with make_tempdir("lease-process-state-") as tmp:
         return run_powershell(script, Path(tmp))
+
+
+def admission_liveness_path_probe(source: Path) -> dict[str, object]:
+    with make_tempdir("admission-liveness-") as tmp:
+        root = Path(tmp)
+        message = write_scope_fixture(root)
+        write_json(root / "Area_comun/state/CLAIMS.json", {"claims": []})
+        lease = root / ".protocol-tmp/reviewer/reviewer.exec-lease.json"
+        own_lease = root / ".protocol-tmp/implementer/implementer.exec-lease.json"
+        functions = SCOPE_FUNCTIONS + ("Get-LeaseProcessState", "Test-LeaseProcessMatches")
+        script = function_loader(source, functions) + f'''
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$LeasePath = {ps_literal(own_lease)}
+$Message = Get-Item -LiteralPath {ps_literal(message)}
+$PeerLeasePath = {ps_literal(lease)}
+$script:LastAdditionalSignalDetail = ""
+$current = Get-Process -Id $PID -ErrorAction Stop
+$started = $current.StartTime.ToUniversalTime()
+function Set-ProbeLease {{
+    param([int]$PidValue, [string]$StartedValue)
+    $value = [ordered]@{{
+        owner = "{REVIEWER}"
+        state = "running"
+        pid = $PidValue
+        process_start_time_utc = $StartedValue
+        work_scope = @("src/target")
+    }}
+    [IO.Directory]::CreateDirectory((Split-Path -Parent $PeerLeasePath)) | Out-Null
+    [IO.File]::WriteAllText($PeerLeasePath, (($value | ConvertTo-Json -Depth 5) + "`n"))
+    return [pscustomobject]$value
+}}
+$deadLease = Set-ProbeLease -PidValue 2147483647 -StartedValue "2000-01-01T00:00:00Z"
+$deadState = Get-LeaseProcessState -Lease $deadLease
+$deadMatches = Test-LeaseProcessMatches -Lease $deadLease
+$deadSignal = Get-AdditionalWorkSignal -Message $Message
+$liveLease = Set-ProbeLease -PidValue $PID -StartedValue $started.ToString("o")
+$liveState = Get-LeaseProcessState -Lease $liveLease
+$liveMatches = Test-LeaseProcessMatches -Lease $liveLease
+$liveSignal = Get-AdditionalWorkSignal -Message $Message
+$reusedLease = Set-ProbeLease -PidValue $PID -StartedValue $started.AddSeconds(-7).ToString("o")
+$reusedState = Get-LeaseProcessState -Lease $reusedLease
+$reusedMatches = Test-LeaseProcessMatches -Lease $reusedLease
+$reusedSignal = Get-AdditionalWorkSignal -Message $Message
+[ordered]@{{
+    dead_state=$deadState
+    dead_matches=$deadMatches
+    dead_signal=$deadSignal
+    live_state=$liveState
+    live_matches=$liveMatches
+    live_signal=$liveSignal
+    reused_state=$reusedState
+    reused_matches=$reusedMatches
+    reused_signal=$reusedSignal
+}} | ConvertTo-Json -Compress
+'''
+        return run_powershell(script, root)
+
+
+def inject_function_return(source: str, function_name: str, constant_return: str) -> str:
+    marker = f"function {function_name} {{\n    param("
+    assert source.count(marker) == 1
+    start = source.index(marker)
+    param_end = source.index("\n", start + len(marker))
+    return source[: param_end + 1] + f"    return {constant_return}\n" + source[param_end + 1 :]
 
 
 def lease_owner_lock_state_table_probe(source: Path, selected: set[str] | None = None) -> dict:
@@ -1975,6 +2052,45 @@ def test_lease_owner_lock_state_table_is_complete_and_mutation_proven() -> None:
     assert pid_reuse_mutant["pid_reused"] == "live"
 
 
+def test_admission_liveness_path_uses_production_functions_and_kills_constant_mutants() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-ADMISSION-LIVENESS-PRODUCTION-PATH"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    expected = {
+        "dead_state": "dead",
+        "dead_matches": False,
+        "dead_signal": "none",
+        "live_state": "live",
+        "live_matches": True,
+        "live_signal": "active_peer_lease",
+        "reused_state": "dead",
+        "reused_matches": False,
+        "reused_signal": "none",
+    }
+    healthy = admission_liveness_path_probe(HARNESS_PATH)
+    assert healthy == expected
+
+    constant_mutants = {
+        "Get-LeaseProcessState": '"live"',
+        "Test-LeaseProcessMatches": "$true",
+        "Get-AdditionalWorkSignal": '"none"',
+    }
+    results = {}
+    for function_name, constant_return in constant_mutants.items():
+        mutant_source = inject_function_return(source, function_name, constant_return)
+        with make_tempdir(f"liveness-constant-{function_name.lower()}-") as tmp:
+            mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+            mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+            results[function_name] = admission_liveness_path_probe(mutant_path)
+
+    for mutant in results.values():
+        assert mutant != expected
+    for function_name in ("Get-LeaseProcessState", "Test-LeaseProcessMatches"):
+        mutant = results[function_name]
+        assert mutant["dead_signal"] == "active_peer_lease"
+    mutant = results["Get-AdditionalWorkSignal"]
+    assert mutant["live_signal"] == "none"
+
+
 def test_archived_task_work_resolution_kills_hot_only_mutant() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-ARCHIVED-TASK-WORK-RESOLUTION"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
@@ -2065,6 +2181,7 @@ def main() -> int:
         test_orphan_lease_self_heal_matrix_requires_dead_owner_evidence,
         test_live_unreadable_lease_is_preserved_and_deadline_mutant_dies,
         test_lease_owner_lock_state_table_is_complete_and_mutation_proven,
+        test_admission_liveness_path_uses_production_functions_and_kills_constant_mutants,
         test_archived_task_work_resolution_kills_hot_only_mutant,
         test_glob_claim_scope_fails_closed_and_kills_guard_mutant,
         test_dirty_tree_veto_still_precedes_scope_admission,
