@@ -7,6 +7,87 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-09 (59) - TASK-0328 r4: CHANGE-REQUIRED (la exencion valida un CHARSET, no una ruta)
+
+- Encargo `MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0328-r4`. **SIN PRODUCTO EN ALCANCE.**
+- Ancla `9639535f`, HEAD al emitir `d3a0e9e9`. Clon limpio
+  `D:/Aegis_Scratch/multi_agent_project_protocol/analista-0328-r4/clone`, mutante de PRODUCCION en
+  copia separada `.../mut1`. Veredicto **CHANGE-REQUIRED** en `45659630` (artifact
+  `Area_comun/artifacts/Analista-TASK-0328-remediacion-4-verdict.md`).
+- Los CINCO gates declarados salen EXIT=0 en el clon limpio y ninguno ve el defecto.
+
+### LECCION PRINCIPAL: cargar los TRES motores como modulos y mover el payload de COORDENADA
+
+El arreglo introduce `protocol_identity = ID_RE.fullmatch(item) or (("/" in item or "\\" in item)
+and PATH_RE.fullmatch(item))`, con `PATH_RE = ^[A-Za-z0-9._/\-]+$`. La tarea lo llama "rutas
+gobernadas VALIDAS"; es un JUEGO DE CARACTERES. Lo que lo demuestra no es leer la regex sino mover
+el MISMO payload entre tres coordenadas:
+
+    ES9121000418450200051332                          base True  r2 True  r3 True
+    Area_comun/notes/ES9121000418450200051332.md      base True  r2 True  r3 FALSE
+    REF-ES9121000418450200051332                      base True  r2 True  r3 FALSE
+
+Mismo identificador, tres posiciones, tres veredictos. 12 perdidas confirmadas, 8 contra el motor
+PREVIO A LA TAREA (`f732292a`), no contra la remediacion anterior. Cargue `f732292a`, `f5581ca7` y
+`9639535f` como tres modulos independientes via `importlib` (no regex copiadas a mano) y compare
+los tres a la vez: la columna del medio distingue "regresion de esta ronda" de "regresion de toda
+la tarea", y eso cambia la severidad del veredicto.
+
+### EJERCITAR EL CAMINO DE PRODUCCION, no `contains_pii` a secas
+
+`contains_pii` aislado convence a medias. Lo decisivo fue encontrar los DOS puntos de entrada
+reales que llevan valores con forma de ruta y ejercitarlos:
+
+    validate_metadata(), clave `file` (esta en ALLOWLIST_KEYS)  -> file_accepted pasa False -> True
+    require_safe_text(field='path') en load_cold_packs          -> REJECTED(PII) -> ACCEPTED
+
+Un falso negativo en una funcion auxiliar es una discusion; en `require_safe_text` es un gate que
+acepta lo que rechazaba.
+
+### EL "0 y 0" VACUO, TERCERA VEZ: medir la POTENCIA antes de creerse la cifra
+
+Recontado con parser propio: 22.564 cadenas (declaraban 22.576), 4.381 ids (declaraban 4.385).
+Cuadra. Pero **positivos del motor base = 0** sobre ese corpus. Denominador cero -> "0 perdidas"
+es cierto por construccion. Regla que me llevo: **antes de aceptar una cifra de perdidas, imprimir
+el numero de POSITIVOS PREVIOS del corpus**; si es 0, la medida no tiene poder y hay que decirlo
+con esa palabra. Construir el corpus con potencia inyectando la carga en las formas que la guarda
+NUEVA toca (12 directorios reales del arbol + prefijos de identidad reales x IBAN valido / silueta
+invalida / telefono / forma agrupada): 116 cadenas, base 84 positivos, r2 111, r3 **0**.
+
+### SEPARAR LA PRECISION LEGITIMA DEL CEGADO
+
+No basta con decir "perdiste cobertura". Hay que particionar la ganancia: de los 444 positivos de
+r2 retirados, **437 (98,4 %) mueren por la exencion** y solo **7** por las guardas de terminacion
+y tirada acotada. Con esa particion el veredicto deja de ser opinion: la precision recuperada es
+cegado, no afinado. Blast radius: **6.850 de 22.564 cadenas gobernadas (30,4 %)** ciegas a los
+heuristicos de cuenta y telefono, incluidos 213 valores de la clave `file`.
+
+### POR QUE EL CONTRATO NO LO ATRAPA (y como probarlo)
+
+`NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION` genera sus contextos desde la condicion de arranque
+del patron y todos llevan espacios o letras sueltas. `PATH_RE` exige que TODO el token este en su
+charset y `ID_RE` exige `MAYUSCULAS-` inicial: **por construccion ningun contexto generado puede
+activar la exencion**. El contrato tiene aserto en la direccion de la PRECISION
+(`governed_identity_hits == []`) y ninguno en la direccion de la PERDIDA sobre la coordenada nueva.
+Lo verifique con un mutante de PRODUCCION (quitar `PATH_RE`, exencion estrictamente mas amplia):
+mata 2 tests -> el borde SUPERIOR tiene dientes, el INFERIOR no existe.
+
+### LA PROPIEDAD QUE PEDI (no una forma mas)
+
+"Una exencion solo puede suprimir un heuristico sobre un token cuyo contenido quede INTEGRAMENTE
+explicado por la gramatica de identidad o de ruta que invoca." Prueba operacional: mismo payload en
+valor desnudo / segmento de ruta / sufijo de `PREFIJO-` -> MISMO veredicto. Y senale DECISION-0018:
+quinto juicio, cuarta remediacion, mismo patron (cada ronda compra una direccion cediendo la otra y
+elige una medicion sin poder para ver la cedida). Si la r4 vuelve a entregar otra FORMA, recomiendo
+escalar al operador sin gastar la segunda iteracion.
+
+### Detalle operativo
+
+- `subprocess` en Windows no acepta cwd estilo `/d/...`: pasar `D:\...` o `iter_source_paths`
+  revienta con `NotADirectoryError` y el `except Exception: continue` lo convierte en "0 cadenas".
+  Un corpus de 0 que no explota es la forma mas facil de auto-enganarse.
+- `git_blob()` devuelve BYTES; `parse_frontmatter()` quiere str. Decodificar antes.
+
 ## Ultima actualizacion 2026-08-09 (58) - TASK-0336 r6: OK-CLOSABLE (el denominador ya deriva; CIERRA la cadena de 6 vueltas)
 
 - Encargo `MSG-20260809-Arquitecto-to-Analista-REVIEW-TASK-0336-r6`. **SIN PRODUCTO EN ALCANCE.**
