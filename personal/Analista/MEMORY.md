@@ -9044,7 +9044,7 @@ mutantes tiene exactamente la cobertura que su autor imagino.**
 - **F1 enumeracion oculta:** `ONLY_PY=0`, `ONLY_PS=0` sobre el arbol real de 3.865 ficheros.
 - **Foco C, las dos direcciones:** `py GAINED=0 LOST=0`; `ps GAINED=9 LOST=0`. Medir solo lo ganado
   habria dejado sin mirar la mitad del riesgo (leccion de 0328 aplicada).
-- **F3 el negativo medía hallazgos:** ahora planta un centinela y deriva conjuntos. Reproducido el
+- **F3 el negativo media hallazgos:** ahora planta un centinela y deriva conjuntos. Reproducido el
   caso ciego de r1: produccion mutada, arbol ASCII limpio, **los dos escaneres exit 0 diciendo lo
   mismo, y el contrato MUERE igual**. Esa era la pregunta del Arquitecto y la respuesta es si.
 - **Foco D mayusculas:** cerrado **por derivacion**. `Memory`, `MEMORY`, `MeMoRy` escaneadas por los
@@ -9095,3 +9095,113 @@ bajo revision, o sea el codigo atestado por CI es el revisado.
 "Failed to translate <path>". Siempre `wsl -d Ubuntu`.
 
 Iteracion 1 de 2 consumida.
+
+---
+
+## 2026-08-09 -- TASK-0346 (censo de los 66 runners): OK-CLOSABLE. Commit `f3746d05`.
+
+Anchor `27581eeb`. Clon limpio `D:/Aegis_Scratch/protocol/t0346-review/hub` + dos worktrees
+(`hub2` orden distinto, `hub3` mutaciones). Gates en el anchor: validate / scan_encoding /
+scan_domain_neutrality / check_falsification_contracts / protocol_replay --check-drift, los
+cinco EXIT=0, drift CLEAN up_to_seq=8246.
+
+### La decision que hizo el veredicto: no muestrear cuando el universo es barato
+
+El encargo pedia MUESTRA ("varios PASS y varios FAIL"). Corri **los 66**. Coste real: ~14 min
+secuencial (solo dos outliers, #3 en 405.2 s y #64 en 113.5 s; los otros 64 suman poco). Una
+muestra responde "miente en algun sitio"; el conjunto entero responde "la medida es correcta",
+que es lo que la tarea entrega. **Regla: antes de aceptar el muestreo que pide el encargo,
+cronometrar el universo completo -- si cabe en el turno, la muestra es la respuesta debil.**
+
+Y lo corri **dos veces**: `hub` secuencial 1..66 (el orden de CI) y `hub2` con otro orden. 64
+runners medidos por duplicado, misma respuesta. Eso descarta de golpe la dependencia de orden,
+que era la hipotesis mas probable de discrepancia en un arbol que acumula `.protocol-tmp/`.
+
+Resultado: **PASS 49 / FAIL 17**, ids `[19,20,24,26,29,30,33,40,42,43,44,48,49,51,52,60,63]`.
+Identico a lo declarado. **66 de 66 veredictos reproducidos, 0 mismatches.**
+
+### El hallazgo real estaba en la columna que nadie gatea
+
+El encargo preguntaba por los VEREDICTOS (PASS/FAIL) y ahi no habia nada. El defecto estaba en
+la columna de **sintomas**, que es la mitad accionable -- la que usara quien particione.
+
+**R3, el bueno:** la fila 24 declara "ademas fallan dos controles de limpieza por residuos bajo
+`.protocol-tmp/`". Medido en los DOS arboles y en el orden secuencial de CI: 2 casos, ambos
+`missing the obstacles block`, y **cero apariciones de la cadena `.protocol-tmp` en la salida
+del runner**. Ese sintoma es del ARBOL en que corrio su censo (residuo de runners anteriores),
+no del runner. **Un censo tomado en un arbol con residuo registra la contaminacion como defecto
+del runner.** Quien tome la 24 perseguiria un fantasma la mitad del tiempo.
+
+**R2:** recuentos subestimados. Fila 43 dice "cuatro casos" -> son 8. Fila 48 dice "tres
+aserciones vacias" -> son 7 (de 9 fallos). Filas 63 y 20, un caso menos cada una. **Contar los
+casos del payload de fallo, no leer la frase del sintoma.** Un `grep -o '"case"'` sobre el log.
+
+### Verificar el arreglo por mutacion de PRODUCCION (leccion 0342 aplicada)
+
+Los cuatro mutantes sobre el UNICO archivo de codigo del diff:
+
+    M1 borrar el bloque obstacles entero    -> rc=1  (reproduce el estado pre-fix)
+    M2 emitir siempre []                     -> rc=1  (la rama de friccion es portante)
+    M3 emitir siempre un obstaculo no vacio  -> rc=0
+    M4 como entregado                        -> rc=0  "26 deterministic property samples passed"
+
+M1 y M2 mueren -> el arreglo no es "poner [] en todas partes". **M3 sobreviviendo NO es un
+hueco y casi lo reporto como tal:** TASK-0259 dice que una entrega sin friccion *puede* usar
+`[]`, no que deba, y la direccion anti-teatro esta mutation-cubierta aparte en el runner 65
+(`run_runtime_turn_obstacle_cases.py`, que fija `blocked`, `assign_fix`, `checks_failed` y el
+proxy de revert). **Antes de declarar hueco por un mutante superviviente, buscar si la
+propiedad esta atada en OTRO runner.**
+
+### R1 -- corrigio las tres instancias, no la clase (el patron de siempre)
+
+El predicado `friction` del fixture cubre `{changes_requested, qa_failed, architect_review}`,
+`{reject_review, fail_qa}` y `checks_failed`. `friction_sensors` de produccion cubre ademas
+**`task_status:blocked`, `review_qa:assign_fix`** y el proxy de revert. Sonda directa contra
+produccion: `turn_report(...,'blocked',None)` emite `obstacles: []` y produccion devuelve
+`requires non-empty obstacles`. Hoy verde porque la muestra no los alcanza. **El fixture es un
+subconjunto del predicado de produccion: es paridad de gemelos sin gate de paridad.**
+
+### Re-derivar el universo con parser, no con grep
+
+Parser por indentacion restringido a bloques `run:` de `validate.yml`: **66 rutas unicas, 67
+invocaciones** (neutralidad x2), y `examples/minimal_instance` aparece 2 veces como argumento
+`--root`, no como runner. Las dos exclusiones declaradas, exactas. **R4: hay 16 runners
+`examples/*/run_*.{py,ps1}` que NO estan cableados en CI en absoluto** -- fuera del universo del
+AC2 con razon, pero decisivo para el AC4 porque su registro se indexa por "cableado en CI" y
+esos 16 son invisibles: desconectar un `run:` seria una salida silenciosa del regimen.
+
+### AC6: comprobar que el arreglo esta DENTRO del run
+
+`gh run view 31291178449` -> sha `a669f82d`, paso 31 success, job cae en el 32 (= runner 19 del
+censo). **Lo que habia que comprobar y casi se pasa: `git merge-base --is-ancestor 27581eeb
+a669f82d` -> YES.** Si el fix NO estuviera en el run, el "success" seria un verde previo y el
+AC6 estaria vacio. Precision aparte: el parrafo del AC6 no esta en el commit citado como
+anchor, se escribio en `527a8b0b` -- **el anchor de un encargo puede no contener todo lo que el
+encargo discute; verificar el diff anchor..HEAD del archivo de la tarea.**
+
+### R5 -- la evidencia del "diagnostico antes del arreglo" no estaba en estado canonico
+
+`personal/Codex/DIAG-TASK-0346-before-fix-20260809.md` esta **untracked**: un clon limpio no lo
+ve. mtime 04:03:05 < commit 04:36:29 y el contenido es correcto, asi que lo acepte, pero el
+orden que exige el AC1 no es demostrable desde el ledger porque diagnostico y arreglo entraron
+en el MISMO commit. **Un AC de la forma "X antes que Y" necesita dos commits, no dos mtimes.**
+
+### Opinion sobre el AC4 (me la pidieron explicitamente)
+
+Mitad y mitad. La derivacion bidireccional `validate.yml` <-> registro **si** ata un invariante
+mecanico. Pero: `acceptance_gate` declara cobertura y nada la mide (TASK-0330 un nivel arriba);
+el SLA de `protocol_ci` es decoracion si no se computa de runs reales; reclasificar a
+`protocol_ci` no cuesta nada, asi que converge a todo-`protocol_ci`; la clave del universo esta
+del lado equivocado (R4); y el AC5 propuesto solo mata la mitad que ya funciona. Cuatro
+enmiendas pedidas en la seccion 7 del artefacto.
+
+### Operativo
+
+- Anti-colision: 0 claims activas, 0 modificaciones trackeadas. El peer pusheo `dc904efc`
+  mientras yo media; `git fetch` + gates antes de commitear, pathspec explicito en el commit.
+- Gate ASCII propio: "muestree" con tilde colo 0xc3 0xa9 en los DOS archivos. **El scan solo
+  senalo el del mailbox** (se para en el primer canal); el barrido de bytes>127 archivo a
+  archivo encontro los dos. **No fiarse de que `scan_encoding` liste TODAS las ocurrencias.**
+- Artefacto: `Area_comun/artifacts/Analista-TASK-0346-censo-66-runners-verdict.md`.
+- Sondas en `D:/Aegis_Scratch/protocol/t0346-review/`: `derive.py`, `runall.py`, `runsample.py`,
+  `compare2.py`, `mutate.py`, `probe.py`, con `logs/` y `logs2/` completos.
