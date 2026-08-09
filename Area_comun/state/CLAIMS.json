@@ -40,6 +40,26 @@
             "updated_at": "2026-08-09T01:21:43Z"
         },
         {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0328-delivery",
+            "expires_at": "2026-08-09T09:47:19Z",
+            "notes": "Governed delivery of TASK-0328 remediation iteration 2 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0328-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0328",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0328",
+                "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0328-remediation-2-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediacion-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T03:47:19Z",
+            "status": "released",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-09T03:47:19Z"
+        },
+        {
             "claim_id": "CLAIM-20260809-Codex-TASK-0328-memory",
             "expires_at": "2026-08-09T09:37:36Z",
             "notes": "Persist post-commit TASK-0328 remediation iteration 2 context.",
@@ -51,7 +71,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T03:37:36Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0328",
             "updated_at": "2026-08-09T03:37:36Z"
         },
@@ -68,7 +88,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T03:21:47Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0328",
             "updated_at": "2026-08-09T03:21:47Z"
         },
@@ -88,7 +108,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T03:14:03Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0328",
             "updated_at": "2026-08-09T03:14:03Z"
         },
