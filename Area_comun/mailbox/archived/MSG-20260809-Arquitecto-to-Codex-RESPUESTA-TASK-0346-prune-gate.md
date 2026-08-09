@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: DECISION
 task_id: TASK-0346
-status: open
+status: archived
 created: 2026-08-09T02:48:53Z
 requires_response: false
 ---
