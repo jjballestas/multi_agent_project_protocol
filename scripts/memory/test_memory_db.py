@@ -78,7 +78,7 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-MEMORY-DATE-EXEMPTION-PHONE-ONLY",
         "negative": "Moving the date exemption above the phone heuristic bypasses later PII checks.",
-        "mutation": "mutant_source = source.replace(normalized_line, early_date_exemption).replace(phone_guard, id_guard)",
+        "mutation": "mutant_source = source.replace(normalized_line, early_date_exemption)",
         "boundaries": (
             "self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))",
             "self.assertFalse(mutant.contains_pii(timestamp, [domain_term]))",
@@ -122,7 +122,7 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-MEMORY-DOMAIN-PII-PUBLICATION",
         "negative": "Ignoring instance terms authorizes a publicable database row with domain PII.",
-        "mutation": "memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])",
+        "mutation": "memory_db.contains_pii = lambda value, terms, **kwargs: original_contains_pii(value, [], **kwargs)",
         "boundaries": (
             "self.assertIn(expected_error, guarded_errors)",
             "self.assertNotIn(expected_error, mutant_errors)",
@@ -132,7 +132,7 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-MEMORY-DOMAIN-PII-INGESTION",
         "negative": "Ignoring instance terms admits a cold-pack field containing domain PII.",
-        "mutation": "memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])",
+        "mutation": "memory_db.contains_pii = lambda value, terms, **kwargs: original_contains_pii(value, [], **kwargs)",
         "boundaries": (
             "with self.assertRaisesRegex(ValueError, \"contains prohibited PII\")",
             "self.assertEqual(1, len(mutant_rows))",
@@ -142,7 +142,7 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-MEMORY-DOMAIN-PII-RETRIEVAL-REASON",
         "negative": "Ignoring instance terms writes a retrieval reason containing domain PII.",
-        "mutation": "memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])",
+        "mutation": "memory_db.contains_pii = lambda value, terms, **kwargs: original_contains_pii(value, [], **kwargs)",
         "boundaries": (
             "with self.assertRaisesRegex(ValueError, \"without PII\")",
             "self.assertEqual(1, retrieval_log_count)",
@@ -152,7 +152,7 @@ FALSIFICATION_CONTRACTS = (
     {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True, True), source_results)", "self.assertEqual((False, True, False), mutant_results[\"restructured\"])", "self.assertEqual((False, True, False), mutant_results[\"filtered\"])", "self.assertEqual((False, False, False), mutant_results[\"early_return\"])", "self.assertEqual(False, mutant_results[\"changed_coordinate\"])", "self.assertEqual(False, mutant_results[\"changed_format\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
     {
         "id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION",
-        "negative": "A single candidate cut, first-start-only scan, checksum gate on the contiguous silhouette, missing prefix terminator, or unbounded alphanumeric run either narrows prior coverage or marks governed protocol identities.",
+        "negative": "A single candidate cut, first-start-only scan, checksum gate on the contiguous silhouette, missing prefix terminator, unbounded alphanumeric run, or coordinate-wide exemption either narrows prior coverage, loses coordinate-invariant detections, or marks governed protocol identities.",
         "mutation": "mutant_sources = {",
         "boundaries": (
             "self.assertEqual(5400, previous_positive_count)",
@@ -167,7 +167,7 @@ FALSIFICATION_CONTRACTS = (
             "self.assertEqual([], source_object_id_errors)",
             "self.assertGreater(len(mutant_object_id_hits), 0)",
             "self.assertEqual(4, sum(phone_only_compact))",
-            "self.assertEqual(phone_only_compact, phone_only_grouped)",
+            "self.assertEqual(phone_only_compact, phone_only_grouped)", "self.assertGreater(sum(coordinate_previous_results), 0)", "self.assertTrue(all(coordinate_current_results))", "self.assertGreater(mutant_coordinate_lost, 0)",
         ),
         "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
     },)
@@ -290,7 +290,7 @@ class MemoryDbTests(unittest.TestCase):
     def test_p05_protocol_timestamp_id_is_not_a_phone(self) -> None:
         self.assertFalse(
             memory_db.contains_pii(
-                "MSG-20260619-092823-Codex-to-Arquitecto", []
+                "MSG-20260619-092823-Codex-to-Arquitecto", [], coordinate="message_id",
             )
         )
         self.assertTrue(memory_db.contains_pii("+34 612 345 678", []))
@@ -712,17 +712,17 @@ class MemoryDbTests(unittest.TestCase):
                 self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))
 
         source = MODULE_PATH.read_text(encoding="utf-8")
-        phone_guard = "        if not protocol_identity and not DATE_RE.fullmatch(item):\n"
+        phone_guard = "        if not DATE_RE.fullmatch(item):\n"
+        self.assertNotIn("protocol_identity", phone_guard)
         early_date_exemption = (
             "        if DATE_RE.fullmatch(item):\n"
             "            continue\n"
             "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         )
-        id_guard = "        if not protocol_identity:\n"
         normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         self.assertEqual(1, source.count(phone_guard))
         self.assertEqual(1, source.count(normalized_line))
-        mutant_source = source.replace(normalized_line, early_date_exemption).replace(phone_guard, id_guard)
+        mutant_source = source.replace(normalized_line, early_date_exemption)
         self.assertNotEqual(source, mutant_source)
 
         with tempfile.TemporaryDirectory(prefix="memory-date-exemption-mutant-") as temp:
@@ -1821,7 +1821,7 @@ Body is not indexed.
             self.assertIn(expected_error, guarded_errors)
 
             original_contains_pii = memory_db.contains_pii
-            memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])
+            memory_db.contains_pii = lambda value, terms, **kwargs: original_contains_pii(value, [], **kwargs)
             try:
                 mutant_errors = check_memory_db_drift._sweep_database(
                     root, connection, artifacts, commit
@@ -1867,7 +1867,7 @@ Body is not indexed.
                 memory_db.load_cold_packs(root, attested_commit)
 
             original_contains_pii = memory_db.contains_pii
-            memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])
+            memory_db.contains_pii = lambda value, terms, **kwargs: original_contains_pii(value, [], **kwargs)
             try:
                 mutant_rows = memory_db.load_cold_packs(root, attested_commit)
             finally:
@@ -2020,7 +2020,7 @@ Body is not indexed.
             connection.close()
 
             original_contains_pii = memory_db.contains_pii
-            memory_db.contains_pii = lambda value, terms: original_contains_pii(value, [])
+            memory_db.contains_pii = lambda value, terms, **kwargs: original_contains_pii(value, [], **kwargs)
             try:
                 query_memory_db.retrieve(
                     root,
@@ -2296,28 +2296,32 @@ Body is not indexed.
         normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         loop_body = (
             normalized_line
-            + "        protocol_identity = bool(\n"
-            + "            ID_RE.fullmatch(item)\n"
-            + "            or ((\"/\" in item or \"\\\\\" in item) and PATH_RE.fullmatch(item))\n"
-            + "        )\n"
+            + "        pii_values = pii_values_for_coordinate(item, coordinate)\n"
+            + "        coordinate_bound = coordinate in {\n"
+            + "            \"task_id\", \"decision_id\", \"spec_id\", \"message_id\",\n"
+            + "            \"relates_to\", \"linked_decisions\", \"supersedes\", \"superseded_by\",\n"
+            + "            \"file\", \"path\",\n"
+            + "        }\n"
             + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
             + "            return True\n"
             + "        if (\n"
-            + "            not protocol_identity\n"
-            + "            and (\n"
-            + "                account_identifier_contiguous_is_bounded(item)\n"
-            + "                or any(\n"
-            + "                    account_identifier_candidate_has_valid_prefix(candidate, following)\n"
-            + "                    for candidate, following in account_identifier_candidates(item)\n"
+            + "            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)\n"
+            + "            or any(\n"
+            + "                account_identifier_grouped_is_detected(\n"
+            + "                    pii_value, coordinate_bound=coordinate_bound\n"
             + "                )\n"
+            + "                for pii_value in pii_values\n"
             + "            )\n"
             + "        ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):\n"
             + "            return True\n"
-            + "        if not protocol_identity and not DATE_RE.fullmatch(item):\n"
-            + "            for candidate in PHONE_CANDIDATE_RE.finditer(item):\n"
-            + "                digits = re.sub(r\"\\D\", \"\", candidate.group(0))\n"
-            + "                if 9 <= len(digits) <= 15:\n"
-            + "                    return True\n"
+            + "        if not DATE_RE.fullmatch(item):\n"
+            + "            if any(\n"
+            + "                phone_number_is_detected(\n"
+            + "                    pii_value, coordinate_bound=coordinate_bound\n"
+            + "                )\n"
+            + "                for pii_value in pii_values\n"
+            + "            ):\n"
+            + "                return True\n"
             + "        if any(pattern.search(normalized) for pattern in domain_patterns):\n"
             + "            return True\n"
         )
@@ -2328,7 +2332,7 @@ Body is not indexed.
         )
         restructured_source = source.replace(loop_body, restructured_body)
 
-        function_anchor = "def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:\n"
+        function_anchor = "def contains_pii(\n"
         filter_helper = (
             "def without_target_offset(items: Iterable[str]) -> list[str]:\n"
             "    return [item for item in items if not item.endswith(\"+06:15\")]\n\n\n"
@@ -2468,12 +2472,15 @@ Body is not indexed.
         governed_identities = tuple(
             entry
             for entry in governed_metadata_values
-            if entry[0] in {"message_id", "spec_id", "task_id"}
+            if entry[0] in {
+                "task_id", "decision_id", "spec_id", "message_id",
+                "relates_to", "linked_decisions", "supersedes", "superseded_by",
+            }
         )
         governed_identity_hits = [
             entry
             for entry in governed_identities
-            if memory_db.contains_pii(entry[1], [])
+            if memory_db.contains_pii(entry[1], [], coordinate=entry[0])
         ]
         self.assertEqual([], governed_identity_hits)
 
@@ -2586,12 +2593,73 @@ Body is not indexed.
         self.assertEqual(0, lost)
         self.assertGreater(gained, 2700)
 
+        coordinate_payloads = (
+            compact,
+            invalid_contiguous,
+            "ES91-2100-0418-4502-0005-1332",
+            "346-001-234-56",
+        )
+        coordinate_corpus = tuple(
+            (coordinate, rendered)
+            for payload in coordinate_payloads
+            for coordinate, rendered in (
+                (None, payload),
+                ("file", f"Area_comun/tasks/{payload}.md"),
+                ("path", f"Area_comun/archive/{payload}/pack.manifest.json"),
+                ("message_id", f"MSG-{payload}"),
+            )
+        )
+        coordinate_previous_results = tuple(
+            bool(previous_pattern.search(re.sub(r"[_/\\.-]+", " ", value)))
+            or phone_band_detects(value)
+            for _, value in coordinate_corpus
+        )
+        coordinate_current_results = tuple(
+            memory_db.contains_pii(value, [], coordinate=coordinate)
+            for coordinate, value in coordinate_corpus
+        )
+        self.assertGreater(sum(coordinate_previous_results), 0)
+        self.assertEqual(
+            0,
+            sum(
+                previous and not current
+                for previous, current in zip(
+                    coordinate_previous_results, coordinate_current_results
+                )
+            ),
+        )
+        self.assertTrue(all(coordinate_current_results))
+        clean_coordinates = (
+            ("message_id", "MSG-20260809-Zeta-to-Omega-REVIEW-TASK-9999"),
+            ("file", "Area_comun/tasks/TASK-9999-cosa.md"),
+            ("path", "Area_comun/archive/2026-08/pack.manifest.json"),
+        )
+        self.assertFalse(
+            any(
+                memory_db.contains_pii(value, [], coordinate=coordinate)
+                for coordinate, value in clean_coordinates
+            )
+        )
+
         source = MODULE_PATH.read_text(encoding="utf-8")
-        prefix_guard_call = "account_identifier_candidate_has_valid_prefix(candidate, following)"
-        whole_match_guard_call = "account_identifier_checksum_is_valid(candidate)"
-        all_starts_loop = "for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):"
-        first_start_loop = "for start in tuple(ACCOUNT_IDENTIFIER_START_RE.finditer(value))[:1]:"
-        contiguous_guard = "                account_identifier_contiguous_is_bounded(item)\n                or "
+        prefix_guard_call = (
+            "account_identifier_candidate_has_valid_prefix(\n"
+            "            candidate.group(0), value[candidate.end():candidate.end() + 1]\n"
+            "        )"
+        )
+        whole_match_guard_call = "account_identifier_checksum_is_valid(candidate.group(0))"
+        all_starts_loop = (
+            "def account_identifier_grouped_is_detected(value: str, *, coordinate_bound: bool) -> bool:\n"
+            "    for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):"
+        )
+        first_start_loop = (
+            "def account_identifier_grouped_is_detected(value: str, *, coordinate_bound: bool) -> bool:\n"
+            "    for start in tuple(ACCOUNT_IDENTIFIER_START_RE.finditer(value))[:1]:"
+        )
+        contiguous_guard = (
+            "            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)\n"
+            "            or "
+        )
         terminator_guard = (
             "        next_char = value[end:end + 1] or following\n"
             "        if next_char and not ACCOUNT_IDENTIFIER_SEPARATORS_RE.fullmatch(next_char):\n"
@@ -2609,6 +2677,14 @@ Body is not indexed.
         self.assertEqual(1, source.count(contiguous_guard))
         self.assertEqual(1, source.count(terminator_guard))
         self.assertEqual(1, source.count(object_id_guard))
+        identity_coordinate_return = (
+            "        return (without_coordinate_timestamp(item.split(\"-\", 1)[1]),)\n"
+        )
+        path_coordinate_return = (
+            "        return (without_coordinate_timestamp(\"/\".join(values)),)\n"
+        )
+        self.assertEqual(1, source.count(identity_coordinate_return))
+        self.assertEqual(1, source.count(path_coordinate_return))
         mutant_sources = {
             "single_cut": source.replace(
                 prefix_guard_call, whole_match_guard_call, 1
@@ -2621,6 +2697,9 @@ Body is not indexed.
                 "def git_ref_requires_pii_check(value: Any) -> bool:\n    return True\n",
                 1,
             ),
+            "coordinate_blind": source.replace(
+                identity_coordinate_return, "        return (\":\",)\n", 1
+            ).replace(path_coordinate_return, "        return (\":\",)\n", 1),
         }
         self.assertTrue(all(mutant != source for mutant in mutant_sources.values()))
 
@@ -2628,6 +2707,7 @@ Body is not indexed.
         mutant_lost: dict[str, int] = {}
         mutant_governed_gains: dict[str, list[tuple[str, str, str]]] = {}
         mutant_object_id_hits: list[str] = []
+        mutant_coordinate_lost = 0
         with tempfile.TemporaryDirectory(prefix="memory-account-id-mutant-") as temp:
             for name, mutant_source in mutant_sources.items():
                 mutant_path = Path(temp) / f"build_memory_db_{name}.py"
@@ -2669,6 +2749,17 @@ Body is not indexed.
                                 )
                             except ValueError:
                                 mutant_object_id_hits.append(object_id)
+                    if name == "coordinate_blind":
+                        mutant_coordinate_results = tuple(
+                            mutant.contains_pii(value, [], coordinate=coordinate)
+                            for coordinate, value in coordinate_corpus
+                        )
+                        mutant_coordinate_lost = sum(
+                            current and not mutant_result
+                            for current, mutant_result in zip(
+                                coordinate_current_results, mutant_coordinate_results
+                            )
+                        )
                 finally:
                     sys.modules.pop(spec.name, None)
         self.assertFalse(all(mutant_context_results["single_cut"]))
@@ -2676,6 +2767,7 @@ Body is not indexed.
         self.assertGreater(mutant_lost["checksum_contiguous"], 0)
         self.assertGreater(len(mutant_governed_gains["missing_terminator"]), 0)
         self.assertGreater(len(mutant_object_id_hits), 0)
+        self.assertGreater(mutant_coordinate_lost, 0)
 
 
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:

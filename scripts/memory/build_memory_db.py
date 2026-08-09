@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sqlite3
 import subprocess
@@ -607,34 +608,96 @@ def title_is_safe(value: str, domain_pii_terms: Iterable[str]) -> bool:
     )
 
 
-def contains_pii(value: Any, domain_pii_terms: Iterable[str]) -> bool:
+def pii_values_for_coordinate(item: str, coordinate: str | None) -> tuple[str, ...]:
+    def without_coordinate_timestamp(value: str) -> str:
+        return re.sub(
+            r"(?<!\d)(?:19|20)\d{6}(?:-(?:[01]\d|2[0-3])[0-5]\d[0-5]\d)?(?!\d)",
+            ":",
+            value,
+        )
+
+    if coordinate in {
+        "task_id", "decision_id", "spec_id", "message_id",
+        "relates_to", "linked_decisions", "supersedes", "superseded_by",
+    }:
+        if not ID_RE.fullmatch(item):
+            return (item,)
+        return (without_coordinate_timestamp(item.split("-", 1)[1]),)
+    if coordinate in {"file", "path"}:
+        if not PATH_RE.fullmatch(item) or ".." in Path(item).parts:
+            return (item,)
+        values: list[str] = []
+        for segment in re.split(r"[/\\]+", item):
+            stem, suffix = os.path.splitext(segment)
+            if ID_RE.fullmatch(stem):
+                segment = stem.split("-", 1)[1] + suffix
+            if segment:
+                values.append(segment)
+        return (without_coordinate_timestamp("/".join(values)),)
+    return (item,)
+
+
+def account_identifier_grouped_is_detected(value: str, *, coordinate_bound: bool) -> bool:
+    for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):
+        if coordinate_bound and start.start() and value[start.start() - 1].isalnum():
+            continue
+        candidate = STRUCTURAL_PII_PATTERNS[1].match(value, start.start())
+        if candidate is not None and account_identifier_candidate_has_valid_prefix(
+            candidate.group(0), value[candidate.end():candidate.end() + 1]
+        ):
+            return True
+    return False
+
+
+def phone_number_is_detected(value: str, *, coordinate_bound: bool) -> bool:
+    for candidate in PHONE_CANDIDATE_RE.finditer(value):
+        if coordinate_bound:
+            previous = value[candidate.start() - 1:candidate.start()]
+            following = value[candidate.end():candidate.end() + 1]
+            if (previous and previous.isalnum()) or (following and following.isalnum()):
+                continue
+        if 9 <= len(re.sub(r"\D", "", candidate.group(0))) <= 15:
+            return True
+    return False
+
+
+def contains_pii(
+    value: Any,
+    domain_pii_terms: Iterable[str],
+    *,
+    coordinate: str | None = None,
+) -> bool:
     domain_patterns = tuple(
         re.compile(rf"\b{re.escape(term)}\b", re.I) for term in domain_pii_terms
     )
     for item in value_list(value):
         normalized = re.sub(r"[_/\\.-]+", " ", item)
-        protocol_identity = bool(
-            ID_RE.fullmatch(item)
-            or (("/" in item or "\\" in item) and PATH_RE.fullmatch(item))
-        )
+        pii_values = pii_values_for_coordinate(item, coordinate)
+        coordinate_bound = coordinate in {
+            "task_id", "decision_id", "spec_id", "message_id",
+            "relates_to", "linked_decisions", "supersedes", "superseded_by",
+            "file", "path",
+        }
         if STRUCTURAL_PII_PATTERNS[0].search(item):
             return True
         if (
-            not protocol_identity
-            and (
-                account_identifier_contiguous_is_bounded(item)
-                or any(
-                    account_identifier_candidate_has_valid_prefix(candidate, following)
-                    for candidate, following in account_identifier_candidates(item)
+            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)
+            or any(
+                account_identifier_grouped_is_detected(
+                    pii_value, coordinate_bound=coordinate_bound
                 )
+                for pii_value in pii_values
             )
         ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):
             return True
-        if not protocol_identity and not DATE_RE.fullmatch(item):
-            for candidate in PHONE_CANDIDATE_RE.finditer(item):
-                digits = re.sub(r"\D", "", candidate.group(0))
-                if 9 <= len(digits) <= 15:
-                    return True
+        if not DATE_RE.fullmatch(item):
+            if any(
+                phone_number_is_detected(
+                    pii_value, coordinate_bound=coordinate_bound
+                )
+                for pii_value in pii_values
+            ):
+                return True
         if any(pattern.search(normalized) for pattern in domain_patterns):
             return True
     return False
@@ -686,7 +749,7 @@ def validate_metadata(
             valid = isinstance(value, str) and bool(PATH_RE.fullmatch(value)) and ".." not in Path(value).parts
             if valid:
                 value = value.replace("\\", "/")
-        if valid and contains_pii(value, domain_pii_terms):
+        if valid and contains_pii(value, domain_pii_terms, coordinate=key):
             valid = False
         if valid:
             accepted[key] = value
@@ -845,7 +908,7 @@ def require_safe_text(
 ) -> str:
     if not isinstance(value, str) or not value or any(ord(char) > 127 for char in value):
         raise ValueError(f"{field} must be non-empty ASCII text")
-    if pii_check and contains_pii(value, domain_pii_terms):
+    if pii_check and contains_pii(value, domain_pii_terms, coordinate=field):
         raise ValueError(f"{field} contains prohibited PII")
     return value
 

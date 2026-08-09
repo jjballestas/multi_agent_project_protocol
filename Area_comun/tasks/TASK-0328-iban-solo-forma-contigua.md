@@ -181,3 +181,23 @@ descubrirlo como ruido en produccion.
   nuevas marcas sobre el corpus gobernado; las identidades se derivan del arbol, no de un
   ejemplo; y los objetos git se derivan de `git rev-list --all`. Tambien conserva los tres
   mutantes de cobertura de la remediacion anterior.
+
+## Remediacion 4: invariancia por coordenada y potencia de perdida (2026-08-09)
+
+- La gramatica exenta ya no se infiere del juego de caracteres del valor. El llamador entrega
+  la coordenada validada (`task_id`, relaciones, `file` o `path`) y el detector elimina solo la
+  envoltura protocolar explicada por esa coordenada. El mismo payload conserva el veredicto al
+  estar desnudo, en un segmento de ruta o como sufijo de una identidad.
+- Las fechas y horas propias de identidades se neutralizan solo dentro de esas coordenadas; las
+  detecciones estructurales incrustadas conservan fronteras alfanumericas. Los caminos reales
+  `validate_metadata(file=...)` y `require_safe_text(field=path)` vuelven a rechazar identificadores
+  de cuenta y telefonos incrustados, mientras rutas e identidades limpias siguen admitidas.
+- Medicion bidireccional del corpus gobernado real contra el motor previo `f732292a`: 22.608
+  cadenas, 0 positivos previos, 0 actuales, 0 ganancias y 0 perdidas. Se declara SIN PODER para
+  la direccion de perdida porque el denominador previo es cero.
+- Medicion separada con potencia sobre 16 valores que cruzan cuatro payloads con las coordenadas
+  desnuda, `file`, `path` y `message_id`: 11 positivos previos, 16 actuales, 5 ganancias y 0
+  perdidas. Un mutante que ciega por completo las coordenadas exentas pierde 12 detecciones.
+- El contrato permanente deriva todas las identidades gobernadas y cubre las dos direcciones:
+  ninguna identidad limpia marca, todos los payloads sensibles conservan su deteccion al cambiar
+  de coordenada y el mutante de cegado debe perder positivos. Los mutantes anteriores permanecen.
