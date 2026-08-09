@@ -16,8 +16,10 @@ Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 2 implem
 - AC4 is corrected: 4/10 sampled country forms incidentally enter the phone band in both compact
   and grouped presentations, but structural coverage is independent. Full memory tests passed
   72/72; falsification inventory 68/68, collaboration, encoding, Python/PowerShell neutrality,
-  parity, compile, and diff gates exited 0. TASK-0328 remains `in_progress` pending governed
-  delivery and independent Analista re-review; Codex has not reviewed or ratified the work.
+  parity, compile, and diff gates exited 0 in the live tree and exact-commit detached clone.
+- Delivery commit `907c6a03` moves TASK-0328 to `in_review`, releases every maker claim, and
+  publishes the self-contained handoff plus Arquitecto routing request for independent Analista
+  re-review. Codex has not reviewed or ratified the work.
 
 ## 2026-08-09 - TASK-0346 governed delivery
 
