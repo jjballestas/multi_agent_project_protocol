@@ -107,3 +107,22 @@ and requires the same declared 16 scanned paths and five excluded paths. Mutants
 remove hidden enumeration, restore case-insensitive matching, restore the literal Windows
 separator, and add a PowerShell-only `Area_comun/tasks` exclusion; every mutation changes the
 measured set even when both scanner exit codes remain 1.
+
+## Remediation 2 - construction-derived parity
+
+Both scanners now define the same suffix rule: the final dot starts a suffix only when at least one
+basename character precedes it, and matching normalizes that suffix to lowercase. Therefore a name
+whose complete basename is `.png`, `.zip`, or `.pyc` has no suffix and is scanned by both twins;
+`real.PNG` has suffix `.png` and is excluded by both.
+
+The permanent negative derives its directory and suffix coordinates from the production
+declarations of both twins. For every declared skip directory it creates an exact spelling and a
+case-changed spelling; for every suffix it creates lowercase, uppercase, and dot-only basenames.
+Adding another declared directory or suffix expands the property without editing its fixture. A
+production mutation from `$SkipDirs -ccontains $part` to `$SkipDirs -contains $part` therefore
+changes the measured set and kills the contract.
+
+R5 is resolved as a measurement precondition. The cross-platform parity property probes the
+fixture filesystem before creating case-distinct coordinates. On a case-insensitive filesystem it
+reports `UNMEASURED` and exits without a false failure; the case-sensitive POSIX boundary remains a
+required real Actions measurement.

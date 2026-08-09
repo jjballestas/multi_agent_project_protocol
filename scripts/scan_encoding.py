@@ -38,6 +38,12 @@ class Finding:
     detail: str
 
 
+def shared_suffix(name: str) -> str:
+    """Return the normalized final suffix; a leading dot alone is not a suffix."""
+    dot = name.rfind(".")
+    return name[dot:].lower() if dot > 0 else ""
+
+
 def iter_files(root: Path, patterns: tuple[str, ...]) -> set[Path]:
     files: set[Path] = set()
     for pattern in patterns:
@@ -50,7 +56,7 @@ def iter_files(root: Path, patterns: tuple[str, ...]) -> set[Path]:
 def should_scan(path: Path, root: Path | None = None) -> bool:
     if not path.is_file():
         return False
-    if path.suffix.lower() in SKIP_SUFFIXES:
+    if shared_suffix(path.name) in SKIP_SUFFIXES:
         return False
     if root is not None:
         try:

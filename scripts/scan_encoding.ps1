@@ -31,9 +31,17 @@ function Get-RelativePath {
     return ($relative -replace "\\", "/")
 }
 
+function Get-SharedSuffix {
+    param([string]$Name)
+    # Shared rule: only a final dot after at least one basename character starts a suffix.
+    $dot = $Name.LastIndexOf([char]'.')
+    if ($dot -le 0) { return "" }
+    return $Name.Substring($dot).ToLowerInvariant()
+}
+
 function Should-Scan {
     param([System.IO.FileInfo]$File)
-    if ($SkipSuffixes -ccontains $File.Extension.ToLowerInvariant()) { return $false }
+    if ($SkipSuffixes -ccontains (Get-SharedSuffix $File.Name)) { return $false }
     foreach ($directory in $SkipAbsoluteDirs) {
         # Compare one host-native directory boundary, never a literal slash shape.
         $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
