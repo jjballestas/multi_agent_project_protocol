@@ -5,11 +5,8 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ResolvedRoot = (Resolve-Path $Root).Path
-$PathComparison = if ([System.IO.Path]::DirectorySeparatorChar -eq [char]'\') {
-    [System.StringComparison]::OrdinalIgnoreCase
-} else {
-    [System.StringComparison]::Ordinal
-}
+# Match the Python scanner's exact relative-path semantics on every host.
+$PathComparison = [System.StringComparison]::Ordinal
 $SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")
 $SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))
 $SkipSuffixes = @(".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip")
@@ -36,7 +33,7 @@ function Get-RelativePath {
 
 function Should-Scan {
     param([System.IO.FileInfo]$File)
-    if ($SkipSuffixes -contains $File.Extension.ToLowerInvariant()) { return $false }
+    if ($SkipSuffixes -ccontains $File.Extension.ToLowerInvariant()) { return $false }
     foreach ($directory in $SkipAbsoluteDirs) {
         # Compare one host-native directory boundary, never a literal slash shape.
         $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
@@ -44,7 +41,7 @@ function Should-Scan {
         if ($File.FullName.Equals($directory, $PathComparison) -or $File.FullName.StartsWith($directoryPrefix, $PathComparison)) { return $false }
     }
     foreach ($part in $File.FullName.Split([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)) {
-        if ($SkipDirs -contains $part) { return $false }
+        if ($SkipDirs -ccontains $part) { return $false }
     }
     return $true
 }
@@ -61,7 +58,7 @@ function Get-LineForOffset {
 function Scan-AsciiPath {
     param([string]$Path)
     if (-not (Test-Path -LiteralPath $Path)) { return }
-    Get-ChildItem -LiteralPath $Path -Recurse -File | ForEach-Object {
+    Get-ChildItem -LiteralPath $Path -Recurse -File -Force | ForEach-Object {
         if (-not (Should-Scan $_)) { return }
         $bytes = [System.IO.File]::ReadAllBytes($_.FullName)
         for ($i = 0; $i -lt $bytes.Length; $i++) {
@@ -78,7 +75,7 @@ function Scan-AsciiPath {
 function Scan-AsciiStateJson {
     $statePath = Join-Path $ResolvedRoot "Area_comun/state"
     if (-not (Test-Path -LiteralPath $statePath)) { return }
-    Get-ChildItem -LiteralPath $statePath -Filter "*.json" -File | ForEach-Object {
+    Get-ChildItem -LiteralPath $statePath -Filter "*.json" -File -Force | ForEach-Object {
         if (-not (Should-Scan $_)) { return }
         $bytes = [System.IO.File]::ReadAllBytes($_.FullName)
         for ($i = 0; $i -lt $bytes.Length; $i++) {
@@ -95,7 +92,7 @@ function Scan-AsciiStateJson {
 function Scan-MojibakeRoot {
     param([string]$Path)
     if (-not (Test-Path -LiteralPath $Path)) { return }
-    Get-ChildItem -LiteralPath $Path -Recurse -File | ForEach-Object {
+    Get-ChildItem -LiteralPath $Path -Recurse -File -Force | ForEach-Object {
         if (-not (Should-Scan $_)) { return }
         $lines = [System.IO.File]::ReadAllLines($_.FullName, [System.Text.Encoding]::UTF8)
         for ($lineIndex = 0; $lineIndex -lt $lines.Count; $lineIndex++) {

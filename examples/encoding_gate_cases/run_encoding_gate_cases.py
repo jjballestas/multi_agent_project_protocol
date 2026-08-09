@@ -19,14 +19,15 @@ POWERSHELL = shutil.which("pwsh")
 FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-ENCODING-SKIP-PATH-SEPARATOR",
-        "negative": "Python and PowerShell must exclude runtime/memory independently of the host path separator.",
+        "negative": "Python and PowerShell must scan and exclude the same sentinel paths, including hidden entries and exact-case skip boundaries, independently of the host path separator.",
         "mutation": "mutant_text = ps_text.replace(",
         "boundaries": (
-            "assert python_skipped.returncode == 0",
-            "assert powershell_skipped.returncode == 0",
-            "assert python_findings == powershell_findings == {\"runtime/visible.txt\"}",
-            "assert mutant.returncode != 0",
-            "assert \"runtime/memory/index.db\" in mutant.stdout.replace(\"\\\\\", \"/\")",
+            "assert python_scanned == powershell_scanned == expected_scanned",
+            "assert python_excluded == powershell_excluded == expected_excluded",
+            "assert \"Area_comun/tasks/.gitkeep\" in extra_excluded",
+            "assert hidden_scanned != expected_scanned",
+            "assert \"runtime/Memory/case.txt\" not in case_scanned",
+            "assert \"runtime/memory/index.db\" in separator_scanned",
         ),
         "exercised_by": "assert_cross_platform_skip_parity",
     },
@@ -105,25 +106,54 @@ def assert_cross_platform_skip_parity() -> None:
     with task_temp("encoding-skip-parity-") as temp:
         fixture = Path(temp)
         build_fixture(fixture)
-        skipped = fixture / "runtime/memory/index.db"
-        skipped.parent.mkdir(parents=True, exist_ok=True)
-        skipped.write_bytes(b"SQLite format 3\x00\xff\xfe\xfd")
+        scanned_paths = {
+            "Area_comun/artifacts/.gitkeep",
+            "Area_comun/contracts/.gitkeep",
+            "Area_comun/decisions/.gitkeep",
+            "Area_comun/handoffs/.gitkeep",
+            "Area_comun/mailbox/answered/.gitkeep",
+            "Area_comun/mailbox/archived/.gitkeep",
+            "Area_comun/mailbox/open/.gitkeep",
+            "Area_comun/reports/.gitkeep",
+            "Area_comun/tasks/.gitkeep",
+            "runtime/.cache/note.txt",
+            "runtime/Memory/case.txt",
+            "runtime/memoryX/file.txt",
+            "runtime/memory-extra/file.txt",
+            "runtime/memoryfile.txt",
+            "runtime/sub/memory/file.txt",
+            "Area_comun/runtime/memory/file.txt",
+        }
+        excluded_paths = {
+            "runtime/memory/index.db",
+            "runtime/node_modules/hidden.txt",
+            "runtime/__pycache__/hidden.txt",
+            "runtime/.git/hidden.txt",
+            "runtime/skip.png",
+        }
+        universe = scanned_paths | excluded_paths
+        for relative in universe:
+            path = fixture / relative
+            if relative == "runtime/memory/index.db":
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"SQLite format 3\x00\xff\xfe\xfd")
+            else:
+                write(path, "# Espa\u00c3\u00b1a\n")
 
-        python_skipped = run_scan(fixture)
-        powershell_skipped = run_ps_scan(fixture)
-        assert python_skipped.returncode == 0
-        assert powershell_skipped.returncode == 0
-
-        write(fixture / "runtime/visible.txt", "# Espa\u00c3\u00b1a\n")
-        python_visible = run_scan(fixture)
-        powershell_visible = run_ps_scan(fixture)
-        python_findings = finding_paths(python_visible.stdout)
-        powershell_findings = finding_paths(powershell_visible.stdout)
-        assert python_visible.returncode == powershell_visible.returncode == 1
-        assert python_findings == powershell_findings == {"runtime/visible.txt"}
+        python_result = run_scan(fixture)
+        powershell_result = run_ps_scan(fixture)
+        python_scanned = finding_paths(python_result.stdout) & universe
+        powershell_scanned = finding_paths(powershell_result.stdout) & universe
+        python_excluded = universe - python_scanned
+        powershell_excluded = universe - powershell_scanned
+        expected_scanned = scanned_paths
+        expected_excluded = excluded_paths
+        assert python_result.returncode == powershell_result.returncode == 1
+        assert python_scanned == powershell_scanned == expected_scanned
+        assert python_excluded == powershell_excluded == expected_excluded
 
         ps_text = PS_SCAN.read_text(encoding="utf-8-sig")
-        mutant_text = ps_text.replace(
+        separator_text = ps_text.replace(
             "        # Compare one host-native directory boundary, never a literal slash shape.\n"
             "        $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)\n"
             "        $directoryPrefix = $directory.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar\n"
@@ -131,14 +161,46 @@ def assert_cross_platform_skip_parity() -> None:
             '        if ($File.FullName -eq $directory -or $File.FullName.StartsWith("$directory\\", [System.StringComparison]::OrdinalIgnoreCase)) { return $false }',
             1,
         )
-        assert mutant_text != ps_text
-        mutant_path = fixture / "scan_encoding_separator_mutant.ps1"
-        mutant_path.write_text(mutant_text, encoding="utf-8", newline="\n")
-        (fixture / "runtime/visible.txt").unlink()
-        mutant = run_ps_scan(fixture, mutant_path)
+        assert separator_text != ps_text
+        separator_path = fixture / "scan_encoding_separator_mutant.ps1"
+        separator_path.write_text(separator_text, encoding="utf-8", newline="\n")
+        separator_result = run_ps_scan(fixture, separator_path)
         if os.name != "nt":
-            assert mutant.returncode != 0
-            assert "runtime/memory/index.db" in mutant.stdout.replace("\\", "/")
+            separator_scanned = finding_paths(separator_result.stdout) & universe
+            assert "runtime/memory/index.db" in separator_scanned
+
+        mutant_text = ps_text.replace(
+            '$SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))',
+            '$SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"), (Join-Path $ResolvedRoot "Area_comun/tasks"))',
+            1,
+        )
+        assert mutant_text != ps_text
+        extra_path = fixture / "scan_encoding_extra_exclusion_mutant.ps1"
+        extra_path.write_text(mutant_text, encoding="utf-8", newline="\n")
+        extra_scanned = finding_paths(run_ps_scan(fixture, extra_path).stdout) & universe
+        extra_excluded = universe - extra_scanned
+        assert extra_excluded != expected_excluded
+        assert "Area_comun/tasks/.gitkeep" in extra_excluded
+
+        hidden_text = ps_text.replace(" -File -Force", " -File", 1)
+        assert hidden_text != ps_text
+        hidden_path = fixture / "scan_encoding_hidden_omission_mutant.ps1"
+        hidden_path.write_text(hidden_text, encoding="utf-8", newline="\n")
+        if os.name != "nt":
+            hidden_scanned = finding_paths(run_ps_scan(fixture, hidden_path).stdout) & universe
+            assert hidden_scanned != expected_scanned
+            assert "Area_comun/mailbox/open/.gitkeep" not in hidden_scanned
+
+        case_text = ps_text.replace(
+            "$PathComparison = [System.StringComparison]::Ordinal",
+            "$PathComparison = [System.StringComparison]::OrdinalIgnoreCase",
+            1,
+        )
+        assert case_text != ps_text
+        case_path = fixture / "scan_encoding_case_mutant.ps1"
+        case_path.write_text(case_text, encoding="utf-8", newline="\n")
+        case_scanned = finding_paths(run_ps_scan(fixture, case_path).stdout) & universe
+        assert "runtime/Memory/case.txt" not in case_scanned
 
 
 def main() -> int:

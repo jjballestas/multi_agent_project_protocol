@@ -78,3 +78,32 @@ particiono**; no lo absorbas aqui.
 Esta tarea **no se puede cerrar con evidencia local**, y no es una formalidad: el defecto es
 invisible en Windows, que es donde trabajamos. Cerrarla desde aqui seria certificar verde
 exactamente en el unico entorno donde el fallo no ocurre.
+
+## Remediation 1 - declared scanned and excluded sets
+
+The shared contract is exact-case path semantics. Both scanners scan hidden files and hidden
+directories. Both exclude only files under an exact-case `runtime/memory` boundary, files with a
+lowercased suffix in the shared suffix list, or files whose path has an exact-case segment in the
+shared skip-directory list.
+
+Before remediation, PowerShell effectively excluded these ten real-tree sentinels that Python
+scanned because recursive enumeration omitted hidden entries:
+
+- `Area_comun/artifacts/.gitkeep`
+- `Area_comun/contracts/.gitkeep`
+- `Area_comun/decisions/.gitkeep`
+- `Area_comun/handoffs/.gitkeep`
+- `Area_comun/mailbox/answered/.gitkeep`
+- `Area_comun/mailbox/archived/.gitkeep`
+- `Area_comun/mailbox/open/.gitkeep`
+- `Area_comun/reports/.gitkeep`
+- `Area_comun/tasks/.gitkeep`
+- `runtime/.cache/note.txt`
+
+After remediation, both scanners scan all ten. On a case-sensitive tree, both also scan
+`runtime/Memory/case.txt`; only exact-case `runtime/memory/**` is excluded. The permanent property
+plants a detectable sentinel in 21 paths, derives each scanner's scanned and excluded complements,
+and requires the same declared 16 scanned paths and five excluded paths. Mutants independently
+remove hidden enumeration, restore case-insensitive matching, restore the literal Windows
+separator, and add a PowerShell-only `Area_comun/tasks` exclusion; every mutation changes the
+measured set even when both scanner exit codes remain 1.
