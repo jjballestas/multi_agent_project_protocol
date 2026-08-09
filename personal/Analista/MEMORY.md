@@ -9382,3 +9382,67 @@ antes de firmar un AC que hable de CI.
   (corpus gobernado + SHA + escapes), `probe3_0328_r3.py` (atribucion de rama + efecto
   aguas abajo + mutantes).
 - Bucle declarado: maximo 2 iteraciones mas (r4, r5) antes de escalar al operador humano.
+
+## 2026-08-09 -- TASK-0342 r3 (commit 3e6012a6): CHANGE-REQUIRED + ESCALADO (iteracion 2 de 2)
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0342-paridad-derivada-r3-verdict.md`.
+Mensaje: `MSG-20260809-Analista-to-Arquitecto-REVIEW-TASK-0342-r3-veredicto.md`. Commit `9a3368c1`.
+
+### Lo que CIERRA (los dos SLIPS de r2)
+
+- **Foco B**: `$SkipDirs -ccontains` -> `-contains` ahora MUERE (exit 1) en
+  `assert python_scanned == powershell_scanned == expected_scanned`. Muere por conjunto medido,
+  no por ancla de texto. G2 de r2 cerrado.
+- **Foco A**: el universo del negativo se DERIVA de verdad. Anadi `dist` como sexto directorio a
+  los dos gemelos **sin tocar el fixture** (A1 exit 0), y A3 -- ambos DECLARAN `dist` pero PS solo
+  aplica los cinco primeros -- MUERE. La coordenada nueva queda atada por construccion.
+- **Foco C**: `.png`/`.zip`/`.pyc` como nombre completo los escanean los DOS; `..png` y `real.PNG`
+  excluidos por los dos; `x.` escaneado por los dos. Regla declarada y atada (C1/C3/C4 mueren).
+- **Foco D**: arbol real 5.404 ficheros, `GAINED=0` y `LOST=0` en los dos motores, excluidos
+  identicos (1519).
+- **Foco E**: R5 resuelto, verificado por comportamiento (NTFS y DrvFs -> UNMEASURED; ext4 -> mide).
+  AC5: run `31296929292`, pasos 14/15/16 success + job `powershell-linux-parity` entero verde.
+
+### Lo que NO cierra (AC4)
+
+- **G3 -- la derivacion sale de una VENTANA DE TEXTO.** El contrato lee la politica de Python por
+  `import` (valor efectivo) y la de PowerShell con `re.search` de UNA linea de formato fijo
+  (`ps_array`). Rompe en las dos direcciones y las dos importan:
+  - `$SkipDirs += "dist"` en su propia linea -> divergencia VIVA (`runtime/dist/a.txt` py=True
+    ps=False), negativo **exit 0**.
+  - segunda asignacion de `$SkipDirs` mas abajo (PS honra la ultima, la regex lee la primera) ->
+    misma divergencia viva, negativo **exit 0**.
+  - array multilinea, comentario al final de la linea, coordenada sin caja (`.123`) -> **rojo
+    falso** con cero cambio de comportamiento.
+- **G4 -- una de las TRES enumeraciones ocultas no esta atada.** Quitar `-Force` solo de
+  `Scan-AsciiPath` SOBREVIVE; quitarlo solo de `Scan-MojibakeRoot` muere. El mutante del runner
+  quita las tres a la vez y el centinela del fixture dispara los dos canales, asi que el canal de
+  mojibake enmascara la perdida del canal ASCII.
+
+### Leccion que me llevo (refuerza `paridad-gemelos-ata-ventana-de-texto`)
+
+Cuando un contrato de paridad lee un gemelo por `import` y el otro por regex, la asimetria ES el
+agujero: el lado leido por texto solo esta atado en la forma que la regex reconoce. **Probar
+siempre las formas normales de escribir lo mismo** (`+=`, segunda asignacion, multilinea,
+comentario al final) y no solo el contenido. Y **un centinela que dispara dos canales enmascara
+la perdida de uno**: para atar N sitios de enumeracion hacen falta N centinelas discriminantes,
+no uno que los dispare todos.
+
+### Operativo
+
+- Clon limpio POSIX en WSL2 Ubuntu (ext4, sensible a mayusculas), pwsh **7.4.6**, checkout de
+  `3e6012a6`. El default de `wsl` es `docker-desktop` y falla: usar `wsl -d Ubuntu`.
+- 22 mutantes de PRODUCCION, arbol nuevo por mutante, gateados por exit code. Sondas:
+  `~/Aegis_Scratch/multi_agent_project_protocol/an0342r3/{drive.py,probe.py}`.
+- Declare 2 mutantes EQUIVALENTES verificados por comportamiento (B2 sufijo `-ccontains`, C2
+  `path.suffix.lower()`), y 2 muertes por el motivo equivocado (X4 por ancla de texto, X7 por
+  casualidad del fixture).
+- Residuales nuevos: **R5b** (el negativo se auto-desactiva en verde con `UNMEASURED` y nada
+  asegura que midiera; hoy CI si mide -- verificado en el log del run), **R7** (`case_variant`
+  revienta ante coordenada sin caracter con caja).
+- **Gate de trailers**: el hook exige UN solo bloque final de trailers SIN lineas en blanco.
+  `Task-Id` + `Ops-Reason` + `Co-Authored-By` contiguos, o el push se rechaza.
+- Anti-colision: 0 claims activas (las 19 en `released`). HEAD avanzo a `26ea2e79` a mitad de la
+  revision; re-verifique que el codigo revisado seguia identico antes de commitear.
+- Bucle: **iteraciones agotadas (2 de 2)**. Escalado al operador humano: o tarea nueva para G3/G4
+  y cierre de 0342 con residuales declarados, o tercera vuelta autorizada por el.
