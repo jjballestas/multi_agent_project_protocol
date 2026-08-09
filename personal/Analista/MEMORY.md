@@ -9025,3 +9025,73 @@ Clon limpio `D:/Aegis_Scratch/map/rev0328r2/cc` (checkout `41a38082`). Tres moto
 suficiente porque el modulo no importa nada local. Sondas `p1_focoA` .. `p8_power` en
 `D:/Aegis_Scratch/map/rev0328r2/`. Los cinco gates exit 0 en el ancla, suite 72/72 en 280,686 s.
 Comprobe ademas que el contrato esta EJECUTADO por CI (`validate.yml:84`), no solo declarado.
+
+---
+
+## 2026-08-09 -- TASK-0342 r2 (`eb47942a`): CHANGE-REQUIRED. Coinciden por medida, no por construccion
+
+### La leccion metodologica que me llevo: mutar PRODUCCION, no los mutantes del runner
+
+El negativo de 0342 se fabrica sus propios mutantes con `.replace()` sobre el texto del `.ps1` y
+se los mata. Eso solo prueba que sabe hacer `.replace()`. **Lo que decide si el contrato vale es
+aplicar la mutacion al fichero que se DESPLIEGA y gatear por exit code del runner.** Once mutantes
+de produccion, cada uno en su arbol: 10 mueren, 1 sobrevive. El que sobrevive (`-ccontains` ->
+`-contains`) es el que ningun mutante interno tocaba. **Un contrato que solo mata a sus propios
+mutantes tiene exactamente la cobertura que su autor imagino.**
+
+### Lo que si cerro (y hay que decirlo con la misma fuerza que lo que no)
+
+- **F1 enumeracion oculta:** `ONLY_PY=0`, `ONLY_PS=0` sobre el arbol real de 3.865 ficheros.
+- **Foco C, las dos direcciones:** `py GAINED=0 LOST=0`; `ps GAINED=9 LOST=0`. Medir solo lo ganado
+  habria dejado sin mirar la mitad del riesgo (leccion de 0328 aplicada).
+- **F3 el negativo medía hallazgos:** ahora planta un centinela y deriva conjuntos. Reproducido el
+  caso ciego de r1: produccion mutada, arbol ASCII limpio, **los dos escaneres exit 0 diciendo lo
+  mismo, y el contrato MUERE igual**. Esa era la pregunta del Arquitecto y la respuesta es si.
+- **Foco D mayusculas:** cerrado **por derivacion**. `Memory`, `MEMORY`, `MeMoRy` escaneadas por los
+  dos; solo `memory` exacto excluido. La cuarta grafia sale bien sin estar en el fixture. Cuando el
+  arreglo deriva en vez de enumerar, la variante que nadie escribio ya esta cubierta.
+
+### G1 -- la remediacion cerro la INSTANCIA, no la CLASE (y la puerta la abrio ella misma)
+
+No es un mutante, es el codigo entregado:
+
+    Python  Path(".png").suffix         -> ""        (rfind('.')==0 -> sin sufijo)
+    .NET    FileInfo(".png").Extension  -> ".png"
+
+`Area_comun/mailbox/open/.png`, `.zip`, `.pyc`: Python los escanea, PowerShell los excluye. Misma
+direccion y mismo canal que la F1 que bloquee en r1, sobrevivida por otro mecanismo. **Y `-Force`
+se anadio precisamente para que PowerShell VEA los ficheros que empiezan por punto: se abrio la
+puerta y el desacuerdo estaba justo detras.** Patron a buscar siempre: cuando un arreglo amplia lo
+que un gemelo mira, mirar que hace con lo recien admitido, no solo que ya lo admite.
+
+### G2 -- el arreglo no ata la linea que el propio arreglo escribio
+
+`dc0bdf56` cambio `-contains` por `-ccontains` en `$SkipDirs` para igualar la semantica exacta.
+Revertirlo -- **un caracter** -- diverge `runtime/Node_Modules/b.txt` y `runtime/NODE_MODULES/c.txt`
+y el negativo sale **exit 0**. La case-sensitivity queda atada solo en la frontera `runtime/memory`
+(via `runtime/Memory/case.txt`), no en las otras dos listas, aunque el handoff declara "exact-case
+path semantics" para las tres. **Comprobar siempre que cada linea que la remediacion escribe tiene
+un mutante que la mata; si no, esa linea no esta contratada.**
+
+### R5 -- el contrato ligo la plataforma contraria y no lo declara
+
+El fixture **no es satisfacible en un FS insensible a mayusculas**: en NTFS `runtime/Memory` y
+`runtime/memory` colapsan (medido: queda `Memory`, `index.db` cae dentro), y encima
+`scan_encoding.py` revienta con `UnicodeEncodeError` en cp1252 al imprimir el U+FFFD de ese SQLite
+y trunca su propia salida a 12 rutas. Hoy latente porque `shutil.which("pwsh")` da `None` en el host
+Windows. **El dia que alguien instale pwsh 7 en Windows, el contrato no dira `UNMEASURED`: se pondra
+ROJO en falso.** Misma clase de la tarea con el signo cambiado.
+
+### Reproduccion
+
+Clon limpio POSIX `~/Aegis_Scratch/multi_agent_project_protocol/an0342r2` en **WSL2 Ubuntu (ext4,
+sensible a mayusculas)** con **pwsh 7.4.6**; segundo clon `an0342r1` en `7bbc0253` para el
+antes/despues sobre el MISMO arbol. Sondas `measure_sets.py`, `mutate.py`, `probe.py`, `p7.py`,
+`focusB.py` en el scratch. Siete gates exit 0. AC5: run `31286367935`, pasos 14/15/16 `success` +
+job nuevo `powershell-linux-parity` entero verde; `git diff 677246a9 eb47942a` vacio en las rutas
+bajo revision, o sea el codigo atestado por CI es el revisado.
+
+**Ojo operativo:** `wsl` sin `-d Ubuntu` cae en `docker-desktop` (distro por defecto) y falla con
+"Failed to translate <path>". Siempre `wsl -d Ubuntu`.
+
+Iteracion 1 de 2 consumida.
