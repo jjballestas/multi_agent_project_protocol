@@ -1,0 +1,126 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "00b25495528b0db4d8aa03adfb4b0afa3cec9904599b43f92d7ca307546cd469",
+        "replay_hash": "00b25495528b0db4d8aa03adfb4b0afa3cec9904599b43f92d7ca307546cd469",
+        "up_to_seq": 8367
+    },
+    "event": {
+        "actor": "Codex",
+        "actor_auth": {
+            "keyid": "codex:v1",
+            "method": "ed25519",
+            "sig": "fsOgPdZ/3FJlHSnje/FTMNh7QJh7xpoBxJAP+Ez8wCGLoyGf3Mo8HPLn5U0KHwJw3ZpL2Uc2GrDK1tXZJ7wOBw=="
+        },
+        "aggregate_id": "TASK-0343",
+        "aggregate_version": 13,
+        "applied": true,
+        "event_auth": {
+            "audience": "runtime-event-log",
+            "issuer": "local-runtime",
+            "key_id": "codex-hmac:v1",
+            "method": "hmac-sha256",
+            "signature": "5f0a6a95ea7a0abb247b646052cf260e8857b5a1bf04d308f47e253a0b209528"
+        },
+        "event_schema_version": "1.0",
+        "fencing_token": null,
+        "idempotency_key": "intent:Codex:claim:6384751c9430eebe37acacf2f3fbb5f8ecc178dba4a1c1c8007253e445ff950e",
+        "payload": {
+            "commit": "4cded4c4e8c733a2ddc7e8c212ee14ea96df4364",
+            "intent_type": "claim",
+            "task_id": "TASK-0343",
+            "timestamp": "2026-08-09T11:32:16Z",
+            "transitions": {
+                "claims": [
+                    {
+                        "claim": {
+                            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+                            "expires_at": "2026-08-10T11:32:16Z",
+                            "notes": "Publish verified TASK-0343 remediation-1 evidence, move to in_review, and release all maker claims.",
+                            "owner": "Codex",
+                            "scope": [
+                                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+                                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1",
+                                "Area_comun/state/TASK_INDEX.json#TASK-0343",
+                                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+                                "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+                                "Area_comun/handoffs/HANDOFF-TASK-0343-remediation-1-codex-to-arquitecto.md",
+                                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0343-remediacion-1.md",
+                                "personal/Codex/HANDOFF-TASK-0343-20260808.md",
+                                "personal/Codex/Memory.md",
+                                "runtime/state/events.jsonl",
+                                "runtime/state/snapshot.json"
+                            ],
+                            "started_at": "2026-08-09T11:32:16Z",
+                            "status": "active",
+                            "task_id": "TASK-0343",
+                            "updated_at": "2026-08-09T11:32:16Z"
+                        },
+                        "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+                        "op": "acquire",
+                        "owner": "Codex",
+                        "task_id": "TASK-0343"
+                    }
+                ]
+            }
+        },
+        "prev_hash": "9391376486cf10907f0696f38a52a108edb5ecfaca12c714e536b71619db82c4",
+        "seq": 8367,
+        "ts": "2026-08-09T11:32:16Z",
+        "type": "intent.applied"
+    },
+    "genesis_event": null,
+    "intent": {
+        "claim": {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+            "expires_at": "2026-08-10T11:32:16Z",
+            "notes": "Publish verified TASK-0343 remediation-1 evidence, move to in_review, and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0343",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+                "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0343-remediation-1-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0343-remediacion-1.md",
+                "personal/Codex/HANDOFF-TASK-0343-20260808.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T11:32:16Z",
+            "status": "active",
+            "task_id": "TASK-0343",
+            "updated_at": "2026-08-09T11:32:16Z"
+        },
+        "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+        "kind": "claim",
+        "op": "acquire",
+        "owner": "Codex",
+        "task_id": "TASK-0343"
+    },
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "2f4df742f73bc353250f66a03dea63dda98acefbff59d765fa91af77db3fcb51",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 8367
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 8367
+    },
+    "task_files_updated": []
+}

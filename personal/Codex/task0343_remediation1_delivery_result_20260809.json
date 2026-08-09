@@ -1,0 +1,204 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "55cd622ef7a54d7cd0bf218b99d53719c835c951ef0442c082517098d7c2dab4",
+        "replay_hash": "55cd622ef7a54d7cd0bf218b99d53719c835c951ef0442c082517098d7c2dab4",
+        "up_to_seq": 8370
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "hrsF9PyDlH/Wu0aXk9RMaBy4euhAExoGkUc2qHNeCCjTbydn4GTGgjeSTMW4U81ThD2G5tuCvbdHIkhluZ4ZBw=="
+            },
+            "aggregate_id": "TASK-0343",
+            "aggregate_version": 14,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "f561dd44edf7ea9d0f9f4e374ef1f34505e55f7b7d8180a3f9d03ce53a790667"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0343:remediation1:in-review:20260809T113252Z",
+            "payload": {
+                "commit": "4cded4c4e8c733a2ddc7e8c212ee14ea96df4364",
+                "intent_type": "task_status",
+                "task_id": "TASK-0343",
+                "timestamp": "2026-08-09T11:32:52Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0343:remediation1:delivery:20260809T113252Z",
+                    "index": 1
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_progress",
+                        "to": "in_review"
+                    }
+                }
+            },
+            "prev_hash": "47d91417bbf9202b096631cc39b76ed561df1c23bed8c4e700d8a42aa6626a3a",
+            "seq": 8368,
+            "ts": "2026-08-09T11:32:52Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "4iMb+6yhKtgnm4m7xeLdnM/PSLZCY08tobNFA8h8qRgS9yY1a2q1hvveuZAO0fjUeAYaB88LlNG1pulBkceBDQ=="
+            },
+            "aggregate_id": "TASK-0343",
+            "aggregate_version": 15,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "fbf10a5706f27e0c4134c9cd811115a8e154d40e4bba6edf53bf1e53a6f5e121"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0343:remediation1:implementation-release:20260809T113252Z",
+            "payload": {
+                "commit": "4cded4c4e8c733a2ddc7e8c212ee14ea96df4364",
+                "intent_type": "claim",
+                "task_id": "TASK-0343",
+                "timestamp": "2026-08-09T11:32:52Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0343:remediation1:delivery:20260809T113252Z",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0343"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "9ab7487f2d5ac8688807ff51463d22cfdc40975d93a28d5c721e40a4559117fc",
+            "seq": 8369,
+            "ts": "2026-08-09T11:32:52Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "CFSsiP+gIrRzMZOiqzvqfiuuvzau0qb2PPz3V+E563iMHV2IH0brW5OXxKImVFygaXnpDaurfSi9tHCp0EdPCQ=="
+            },
+            "aggregate_id": "TASK-0343",
+            "aggregate_version": 16,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "842a3c366e3cd924e910940e15195e3a3ec727c4a3b655f69804c815e8c82740"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0343:remediation1:delivery-release:20260809T113252Z",
+            "payload": {
+                "commit": "4cded4c4e8c733a2ddc7e8c212ee14ea96df4364",
+                "intent_type": "claim",
+                "task_id": "TASK-0343",
+                "timestamp": "2026-08-09T11:32:52Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0343:remediation1:delivery:20260809T113252Z",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0343"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "cfcf90c0f1b9e6f3c8e6cfda19172a6fcd560c577e35d5e0f9a874e69612e018",
+            "seq": 8370,
+            "ts": "2026-08-09T11:32:52Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "from": "in_progress",
+            "idempotency_key": "codex:task0343:remediation1:in-review:20260809T113252Z",
+            "kind": "task_status",
+            "task_id": "TASK-0343",
+            "to": "in_review"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1",
+            "idempotency_key": "codex:task0343:remediation1:implementation-release:20260809T113252Z",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0343"
+        },
+        {
+            "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+            "idempotency_key": "codex:task0343:remediation1:delivery-release:20260809T113252Z",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0343"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "c0e76d03fbf8e7f62770e20af4b45faab5c189c2291eef4177078402ae725d68",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 8370
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 8370
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0343:remediation1:in-review:20260809T113252Z",
+            "codex:task0343:remediation1:implementation-release:20260809T113252Z",
+            "codex:task0343:remediation1:delivery-release:20260809T113252Z"
+        ],
+        "idempotency_key": "codex:task0343:remediation1:delivery:20260809T113252Z",
+        "intent_count": 3
+    }
+}

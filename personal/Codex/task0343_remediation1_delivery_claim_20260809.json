@@ -1,0 +1,27 @@
+{
+  "type": "claim",
+  "op": "acquire",
+  "claim": {
+    "claim_id": "CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+    "owner": "Codex",
+    "task_id": "TASK-0343",
+    "status": "active",
+    "scope": [
+      "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1-delivery",
+      "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0343-r1",
+      "Area_comun/state/TASK_INDEX.json#TASK-0343",
+      "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0343",
+      "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
+      "Area_comun/handoffs/HANDOFF-TASK-0343-remediation-1-codex-to-arquitecto.md",
+      "Area_comun/mailbox/open/MSG-20260809-Codex-to-Arquitecto-HANDOFF-TASK-0343-remediacion-1.md",
+      "personal/Codex/HANDOFF-TASK-0343-20260808.md",
+      "personal/Codex/Memory.md",
+      "runtime/state/events.jsonl",
+      "runtime/state/snapshot.json"
+    ],
+    "notes": "Publish verified TASK-0343 remediation-1 evidence, move to in_review, and release all maker claims.",
+    "started_at": "2026-08-09T11:32:16Z",
+    "updated_at": "2026-08-09T11:32:16Z",
+    "expires_at": "2026-08-10T11:32:16Z"
+  }
+}

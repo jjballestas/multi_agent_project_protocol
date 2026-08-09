@@ -1,6 +1,26 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-09 Europe/Madrid, TASK-0328 remediation iteration 3 delivered for review.
+Last updated: 2026-08-09 Europe/Madrid, TASK-0343 remediation iteration 1 implementation committed.
+
+## 2026-08-09 - TASK-0343 remediation iteration 1 implementation
+
+- Commit `4cded4c4` replaces the two remaining defer-reason literals in the exercised rollback
+  path with one behavioral event-class predicate. A production rename from
+  `ledger_unreadable_after_exec` to `ledger_head_unreadable_after_exec` now leaves the complete
+  mailbox retry runner green.
+- The permanent property now includes changed-claims and empty-prestate coordinates. Removing
+  the claims half (mp4) and removing the non-vacuity guard (mp5) both change the focused probe
+  from exit 0 to exit 1; the renamed-reason production mutant (mp6) keeps the full runner at
+  exit 0.
+- The unchanged host-absolute `csc.exe` invocation is now declared explicitly as residual R5.
+  Dead negative invocation remains partitioned to TASK-0341 and was not absorbed.
+- Base and mp6 full runners pass. The falsification inventory is 69/69; collaboration,
+  encoding, neutrality, drift, compile, and diff gates exited 0. Exact commit `4cded4c4`
+  passed the same declared gates in a detached clean clone with empty status.
+- Actions run `31310469089` reports `falsification-runners` and its mailbox retry step
+  successful on exact head `4cded4c4`. The unrelated concurrency-fixture red is TASK-0347.
+  Governed delivery moves TASK-0343 to `in_review`, releases both remediation claims, and
+  publishes the self-contained handoff. Codex did not review or ratify the remediation.
 
 ## 2026-08-09 - TASK-0328 remediation iteration 3 implementation
 
