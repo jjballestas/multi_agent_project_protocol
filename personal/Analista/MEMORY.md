@@ -9891,3 +9891,79 @@ de `build_memory_db.py` entre r1 y r2 son de 0327/0328). R0332-3 declarado en `:
 - Iteracion 2 de 2 declarada en r1: escale al operador con dos salidas legitimas (remediacion 2 con
   aceptacion adversarial a posteriori, o cierre con R0332-6/7/8 declarados por escrito + tarea
   nueva para la carga derivada de la gramatica).
+
+## TASK-0328 r6 (2026-08-09, commit `423e7c7d`) -- CHANGE-REQUIRED, presupuesto agotado, escalado
+
+Anclaje `df5de987` en clon limpio `--shared` (`D:/Aegis_Scratch/multi_agent_project_protocol/an0328r6`).
+Cinco gates exit 0 (suite 72 tests / 358,2 s). Veredicto:
+`Area_comun/artifacts/Analista-TASK-0328-envoltura-integra-r6-verdict.md`.
+
+### Lo que cerro
+
+`coordinate_bound = False` incondicional + `without_coordinate_timestamp` eliminado matan los DOS
+mecanismos que refute en r5. `tel34600123456` / `34600123456tel` vuelven a marcar en `file` y `path`
+(base True, r5 False, r6 True). Las dos PERDIDAS contra el motor previo estan cerradas. Merito real
+y lo dije sin matiz.
+
+### Lo que abrio -- y la leccion
+
+1. **La remediacion que quita dos supresores puede introducir uno peor.** `unexplained_identity_parts`
+   quita la envoltura y despues **parte el remanente con `re.split(r"[-._]+")` y evalua cada trozo
+   por separado**. `-`, `.` y `_` son separadores que el PROPIO motor admite dentro de un
+   identificador: trocear por ellos ciega la presentacion agrupada, que es el objeto entero de la
+   tarea. 126 perdidas de 144 en mi poblacion de 153 renderizaciones.
+   **Regla nueva: quitar la envoltura no autoriza a fragmentar lo que queda.**
+2. **`return ()` es exencion TOTAL y no se ve.** `COORDINATE_COMPLETE_OPERATIONAL_ID_RE` devuelve
+   tupla vacia; con `pii_values` vacio los tres `any(...)` son False **por vacuidad** y no corre
+   ningun heuristico. Su bloque `[A-Z][A-Z0-9]*` con `re.I` se traga un IBAN contiguo entero:
+   `REQ-ES9121000418450200051332-20260809` lo ACEPTA `validate_metadata` y no lo lanza
+   `require_safe_text`. **Buscar siempre el retorno vacio: `any()` sobre vacio miente en verde.**
+3. **EL HALLAZGO METODOLOGICO: el corpus derivo el PAYLOAD pero no la RENDERIZACION.** Pedi (y el
+   Arquitecto ruteo) "que las formas salgan de la condicion del motor". El maker lo hizo -- en el eje
+   del payload: separadores recorridos por punto de codigo, longitudes desde las constantes. Pero
+   la renderizacion en coordenada siguio siendo tupla literal: `TASK-{payload}`, `MSG-{payload}`,
+   `Area_comun/tasks/{payload}.md`. **Ninguna casa las regex de envoltura** (`TASK-` exige `\d{4}`,
+   `MSG-` exige `(?:19|20)\d{6}`), asi que `unexplained_identity_parts` cae al ramal de escape
+   `return (value,)` y devuelve el valor INTACTO. Medido: **202 payloads, 0 renderizaciones alcanzan
+   el ramal de exencion**. El corpus no ejerce ni una vez el codigo que la remediacion escribio, y
+   los tres mutantes nuevos mueren en el ramal de escape.
+   **Un corpus tiene DOS ejes; derivar uno de la condicion y dejar el otro literal deja el gate
+   igual de ciego. La sonda barata: `pii_values_for_coordinate(item, coord) != (item,)` al menos
+   una vez.**
+4. **La prueba mas fuerte: sus propias aserciones sobre su propio corpus + UNA renderizacion.**
+   Sin tocar motor ni aserciones, anadiendo la envoltura gobernada real:
+   `all(current)` 940/940 PASS -> 1676/1880 FAIL; `assertEqual({}, accepted_file)` 51 de 85
+   ACEPTADOS; `assertRaisesRegex` 51 de 85 NO LANZAN. Replicar las aserciones entregadas y anadir
+   una sola dimension es mas convincente que escribir un corpus propio.
+
+### Cifras que di al operador
+
+- Trituracion: compra **10** falsos positivos evitados sobre 6.446 cadenas de identidad gobernadas;
+  paga **126** detecciones de 144.
+- Exencion total: exime 7 valores gobernados distintos, solo **2** serian falsos positivos; paga la
+  cobertura contigua.
+- Corpus gobernado real del commit: 4.603 ficheros, 22.663 cadenas, 6.660 llegan al ramal de
+  exencion, 1.970 con remanente triturado, 4.371 con `parts = ()` (la mayoria legitimos, `TASK-0229`).
+
+### Encuadre corregido -- lo mas importante del turno
+
+El Arquitecto anuncio que, si no cerraba, subiria al operador "cerrar con las dos perdidas declaradas
+y sus cifras". **Ese encuadre habia caducado**: las dos perdidas estaban cerradas y lo abierto era
+mayor (contiguo valido pasando produccion). Escribi explicitamente que la opcion sobre la mesa ya no
+era esa. **Cuando el coordinador declara de antemano la salida que va a escalar, verificar que la
+salida sigue describiendo el estado despues de la entrega; si no, corregir el encuadre es parte del
+veredicto.**
+
+### Operativo
+
+- Clon `git clone -s -n <repo> <dest>` + `checkout <sha>`: instantaneo, sin copiar los ~7 GB de
+  objetos sueltos. Working tree limpio verificado.
+- Tres motores como modulos independientes por `git show <sha>:scripts/memory/build_memory_db.py`.
+  El motor base (`f732292a`) **no acepta el kwarg `coordinate`**: envolver la llamada en
+  `try/except TypeError`.
+- `iter_source_paths(root, commit)` exige el commit; el censo gobernado se hace con
+  `parse_frontmatter` + `ALLOWLIST_KEYS` + `value_list`.
+- Sin claims activas en el ledger y solo mis dos ficheros sin trackear: ventana segura, commit
+  directo con pathspec explicito. El commit avisa `PRUNE DUE` (cold_start_tokens 20.393 >= 20.000):
+  es del Arquitecto, no mio.
+- Iteracion 3 sobre un presupuesto de 2 declarado en r5: **escale al operador humano**.
