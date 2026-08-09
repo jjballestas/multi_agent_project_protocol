@@ -99,9 +99,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-09T21:26:56Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0347",
             "updated_at": "2026-08-09T21:26:56Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0347-blocked-response",
+            "expires_at": "2026-08-09T23:17:36Z",
+            "notes": "Publish governed confirmation that TASK-0347 is blocked and its maker claim is released.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0347-blocked-response",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0347-blocked.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-09T22:17:36Z",
+            "status": "released",
+            "task_id": "TASK-0347",
+            "updated_at": "2026-08-09T22:17:36Z"
         },
         {
             "claim_id": "CLAIM-arq-0347-reencuadre-20260809",

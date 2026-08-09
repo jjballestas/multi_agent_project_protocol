@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260809-Codex-TASK-0347",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260809-Codex-TASK-0347",
-                "Area_comun/state/TASK_INDEX.json#TASK-0347",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0347",
-                "Area_comun/tasks/TASK-0347-ocho-runners-sin-el-bloque-obstacles.md",
-                "scripts/replay_validate_job.py",
-                "examples/",
-                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0347"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

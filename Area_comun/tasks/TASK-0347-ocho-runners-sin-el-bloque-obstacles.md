@@ -1,7 +1,7 @@
 ---
 id: TASK-0347
 title: El job validate no esta verde desde el 5 de junio -- una regla endurecida dejo obsoletas las fixtures de doce runners a la vez
-status: in_progress
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0347-ocho-runners-sin-el-bloque-obstacles.md
