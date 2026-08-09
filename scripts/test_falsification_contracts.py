@@ -66,7 +66,7 @@ FALSIFICATION_CONTRACTS = (
             "assert shell_separator_mismatches == []",
             "assert bounded_static_certification(wired.stdout)",
             "assert not bounded_static_certification(affirmative_certification.stdout)",
-            "assert \"contract_discrimination_23_of_31,twin_TASK_0338\" in wired.stdout",
+            "assert f\"contract_discrimination_23_of_{len(FALSIFICATION_CONTRACTS[-1]['boundaries'])},twin_TASK_0338\" in clean.stdout",
         ),
         "exercised_by": "main",
     },
@@ -110,7 +110,7 @@ def bounded_static_certification(output: str) -> bool:
 
 def main() -> int:
     """PERMANENT_NEGATIVE: NEG-FALSIFICATION-GUARDIAN, NEG-FALSIFICATION-RUNNER-WIRING"""
-    clean = run(ROOT)
+    clean = run(ROOT, ROOT / ".github/workflows/validate.yml")
     assert clean.returncode == 0, clean.stdout + clean.stderr
     with tempfile.TemporaryDirectory(prefix="falsification-contract-") as temp:
         fixture = Path(temp)
@@ -178,7 +178,7 @@ def main() -> int:
         wired = run(fixture, workflow)
         assert wired.returncode == 0, wired.stdout + wired.stderr
         assert bounded_static_certification(wired.stdout), wired.stdout
-        assert "contract_discrimination_23_of_31,twin_TASK_0338" in wired.stdout, wired.stdout
+        assert f"contract_discrimination_23_of_{len(FALSIFICATION_CONTRACTS[-1]['boundaries'])},twin_TASK_0338" in clean.stdout, clean.stdout
 
         checker_source = (ROOT / "scripts/check_falsification_contracts.py").read_text(encoding="ascii")
         affirmative_checker = fixture / "affirmative_check_falsification_contracts.py"

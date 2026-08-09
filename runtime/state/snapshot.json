@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "f13ea16f839ff245c7b801b9420b6d5348f9e3414ee97340a003e6d71ac69846",
+  "canonical_hash": "5193bd88a1e6f8feea337cfde4bf659b19001dcd19a92dd87b911921da27e808",
   "integrity": {
-    "canonical_hash": "f13ea16f839ff245c7b801b9420b6d5348f9e3414ee97340a003e6d71ac69846",
+    "canonical_hash": "5193bd88a1e6f8feea337cfde4bf659b19001dcd19a92dd87b911921da27e808",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "d5ad07606ee7ffb8564e77ce6aecbb3cf62dade160a254e54027c6d9bd831188",
-    "signature": "f28c97fdc73b3839e75510c8092aec664bc76f33a3ae42cfd72e42725f8a130b",
-    "up_to_seq": 8285
+    "prev_hash": "72c9ed5823ddf945a4ce4713a1725717f27b213732215e3bd30c388fb142b5be",
+    "signature": "882926cffea9033bba061b9dbe2beddcb060e8ed403312cb23cbb8f2191f1360",
+    "up_to_seq": 8286
   },
   "state": {
     "aggregate_versions": {
@@ -3338,7 +3338,7 @@
       "TASK-0333": 13,
       "TASK-0334": 21,
       "TASK-0335": 33,
-      "TASK-0336": 50,
+      "TASK-0336": 51,
       "TASK-0337": 2,
       "TASK-0338": 2,
       "TASK-0339": 1,
@@ -3371,7 +3371,7 @@
       "protocol-prune": 59,
       "protocol-state": 1
     },
-    "events_applied": 7614,
+    "events_applied": 7615,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -10303,6 +10303,7 @@
       "intent:Codex:claim:d18416eba36e911860db42264eea26e5b736a14aa49a2572617462eef11c1e1b": 4481,
       "intent:Codex:claim:d19c2a7ed3e89f535bca4890cf7fea3bd24cd08dcae44d746f9ac1afa10c8eef": 4119,
       "intent:Codex:claim:d1d85d5022a433f3949aa940ff4185c6507fb1e792bd6746dfc797e10f0edf06": 7484,
+      "intent:Codex:claim:d28424ae50952cf2719a1af8674039df3f3b9415a3c201f71978500dffbda703": 8286,
       "intent:Codex:claim:d2b898bc356b161222645e39abadbfb8b0d35910feb0d457d79d388119ceaf8e": 4440,
       "intent:Codex:claim:d2c0cf768408fe29da0cb7dbc356941f40185ba783831a1f5c3c9d72376e79ed": 3323,
       "intent:Codex:claim:d2c88c06808d0633150da23f6b2f22d5d8a4fab278dede3939302c92d408c078": 4221,
@@ -10989,5 +10990,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8285
+  "up_to_seq": 8286
 }

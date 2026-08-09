@@ -380,7 +380,7 @@ def main() -> int:
             "scope=trigger_keys+conditions+recognized_step_form+job_failure "
             "residuals=trigger_filters,working_directory,yaml_1_1_scalars,"
             "safe_forms_outside_whitelist,line_continuation_mechanism_redundancy,"
-            "contract_discrimination_23_of_31,twin_TASK_0338"
+            f"contract_discrimination_23_of_{len(next((contract.boundaries for contract in contracts if contract.id == 'NEG-FALSIFICATION-RUNNER-WIRING'), ()))},twin_TASK_0338"
         )
     print(
         "FALSIFICATION_INVENTORY "
