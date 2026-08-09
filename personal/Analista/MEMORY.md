@@ -9446,3 +9446,53 @@ no uno que los dispare todos.
   revision; re-verifique que el codigo revisado seguia identico antes de commitear.
 - Bucle: **iteraciones agotadas (2 de 2)**. Escalado al operador humano: o tarea nueva para G3/G4
   y cierre de 0342 con residuales declarados, o tercera vuelta autorizada por el.
+
+## 2026-08-09 -- TASK-0340 (dependencia ausente en CI): CHANGE-REQUIRED, iteracion 1 de 2
+
+Commit del veredicto: `c9d8bd46`. Artefacto:
+`Area_comun/artifacts/Analista-TASK-0340-dependencia-ausente-verdict.md`.
+Ancla: `81ca947b` + `ed0a7ba8`, entrega `bf7239a3`, gates en clon limpio sobre `f1eeb1ce`.
+
+### Leccion: la evidencia de CI hay que RECOMPUTARLA, no heredarla
+
+La instruccion de review afirmaba "el job `validate` recupero el verde, el run 31291178449 lo
+respalda". `gh run view 31291178449 --json jobs` da **validate: FAILURE**. Barrido de los ultimos
+40 runs buscando `validate == success`: **cero**. La premisa del encargo era falsa y nadie la habia
+comprobado. **Correr siempre `gh run view <id> --json conclusion,jobs` sobre el id CITADO** antes de
+aceptar cualquier afirmacion de CI verde, venga de quien venga -- tambien del Arquitecto.
+
+### Leccion nueva: cableado en CI no es ejecutado por CI
+
+El negativo de la tarea estaba registrado, cableado en el workflow (paso 44/45) y verde en local...
+y **SKIPPED en 6 de 6 runs**, incluido el que cita el handoff. Causa: el job `validate` tiene **0 de
+79 pasos con `if: always()`** (las 6 apariciones del fichero estan en los otros dos jobs), asi que un
+paso rojo ciega a los 47 siguientes. Variante nueva de la clase de TASK-0330: alli el runner no
+estaba cableado; aqui lo esta pero queda **detras de una barrera**. Comprobar siempre con
+`gh run view <id> --json jobs --jq '...|select(.name|test("<runner>"))|.conclusion'` que el paso del
+negativo se EJECUTO, no solo que existe.
+
+### Focos A/B: como quedo el amarre
+
+- Mitad de codigo = **clase atada**. M1 (revertir), M2 (degradar a `invalid_signature`) y M3
+  (omitir con `valid: True`) mueren, y mueren por las aserciones del lado ENVIADO, que leen el
+  modulo de produccion -- no por el `.replace()` en memoria del propio runner. Amarre correcto.
+- Mitad de CI = **ocurrencia atada**. La guarda lee `ROOT/".github/workflows/validate.yml"`
+  cableado y reconoce al validador por la subcadena `validate_collaboration_state.py`. Sobreviven
+  **M6** (fichero de workflow NUEVO), **M9** (`python -m scripts.validate_collaboration_state`) y
+  **M10** (envoltorio `bash scripts/ci_validate.sh`). **M5** (job nuevo, mismo fichero, forma
+  directa) si muere: 1 de las 3 coordenadas de la clase.
+- Falsos rojos por mutante literal: **M7** (pin `'cryptography==43.0.0'`) y **M11** (instalar
+  cryptography en un paso aparte) ponen el contrato en rojo por el motivo equivocado. Falla en
+  ruidoso, nunca en falso verde.
+
+### Operativo
+
+- Clon limpio con `git clone --no-checkout <ruta local>` (hardlinks, barato pese a los 7 GB de
+  objetos sueltos) bajo `D:/Aegis_Scratch/multi_agent_project_protocol/analista-0340/{cc,mut}`:
+  `cc` para gates, `mut` para las 11 mutaciones sobre PRODUCCION con `git checkout --` entre cada
+  una y borrado de `__pycache__`.
+- Los 5 gates locales tardan >120s juntos: lanzarlos en background y leer el fichero de salida.
+- Anti-colision: 0 claims activas, arbol limpio en `Area_comun/` tras la higiene del Arquitecto.
+  Commit con pathspec explicito de mis dos ficheros.
+- Trailers contiguos sin lineas en blanco: `Task-Id` + `Ops-Reason` + `Co-Authored-By`.
+- Bucle declarado: remediacion 1, rejuicio mio antes del commit de cierre, maximo 2 iteraciones.
