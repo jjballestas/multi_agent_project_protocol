@@ -7,6 +7,80 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-10 (67) - TASK-0328 r8: OK-CLOSABLE (primer GO tras ocho vueltas)
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0328-r8`. **SOLO HUB, SIN PRODUCTO.**
+  Ancla `034e4f48`, implementacion `b1e2eb1c` (modulo del ancla byte-identico). Veredicto en
+  `Area_comun/artifacts/Analista-TASK-0328-corpus-no-circular-r8-verdict.md`.
+- Gates en clon limpio detached sobre el ancla (`an0328r8_gate`, status 0 lineas): validate 0,
+  encoding 0, neutralidad 0, check_falsification_contracts 0, drift CLEAN up_to_seq=8634.
+- Encargo CORTO por instrumento: el Arquitecto diagnostico que `Get-ExecProgressState` solo extiende
+  el plazo si crecen mis logs o el ledger, y yo no produzco ninguno mientras mido -> mis dos reviews
+  anteriores murieron a 3600 s. Dos preguntas, dos respuestas, sin re-medir R1-R5.
+
+### LECCION 1 (metodo, la que me llevo): instrumentar al generador ENTREGADO, no reconstruirlo
+
+En r7 refute el corpus reconstruyendo el generador a mano (12 semillas propias). Funciono, pero
+cuesta caro y siempre queda la duda de si mi copia es fiel. Esta vez **parche minimamente el propio
+test del commit** en un clon HERMANO (`an0328r8_probe`): recolector de los casos que el filtro
+EXCLUYE + volcado a JSON + `SystemExit(0)` justo antes del bloque de mutantes. **1,45 s** en vez de
+400 s de suite, y el corpus es el REAL, no mi replica. Insercion por `str.replace` con
+`assert count == 1` en cada anclaje, para que el parche falle si el codigo cambio.
+
+### LECCION 2 (contenido): la pregunta correcta sobre un filtro no es "es circular?" sino "que esconde?"
+
+En r7 mi hallazgo fue "el filtro de admision ES la guarda bajo prueba". La remediacion lo sustituyo
+por uno de SUPERVIVENCIA DEL PARSER (descarta el caso si la presentacion compacta sobrevive entera
+en algun `pii_values_for_coordinate`). Leerlo no basta: podia seguir escondiendo ciegos. **La
+medicion que decide es evaluar los EXCLUIDOS**:
+
+    poblacion generada 6.978   admitidos 1.001 (0 ciegos)   EXCLUIDOS 5.977 (0 CIEGOS)
+
+Con 0 ciegos entre los excluidos, el filtro es irrelevante al veredicto. Esa comprobacion -- correr
+el motor sobre lo que el corpus TIRA -- es barata y la voy a pedir siempre que vea un `continue` en
+un generador de corpus.
+
+### LECCION 3: un corpus honesto se acredita matando al motor anterior
+
+`assertTrue(all(...))` verde no dice nada por si solo. Lo que lo convierte en evidencia: el MISMO
+corpus contra otros motores. r7 (el que refute) es ciego en **745 de 1.001**; el mutante que borra
+la clausula nueva pierde 745; el que borra la guarda entera pierde 1.001. Un espejo no discrimina.
+Anadi ademas la prueba de que no depende de la constante del payload (`ES00` fijo): reutilice las
+768 renderizaciones invalid-contiguous cambiando SOLO la identidad por seis familias (mal tecleado,
+truncado, enmascarado, otro pais, minusculas, longitud 30) -> 0 ciegas en las seis.
+
+### LECCION 4: aislar el motivo del rechazo (`fmt`) o el PASS es falso
+
+Mi primera pasada de Q2 dio r7=True en filas donde mi propio veredicto r7 decia False. La causa: en
+`validate_metadata` el valor tambien puede caer por `ID_RE.fullmatch`, no por PII. Anadi columna
+`fmt` (pasa el chequeo de forma?) y separe `contains_pii` del veredicto del gate. **Sin esa columna
+habria firmado un PASS que no era de la guarda.** Resultado real: 5 familias x 11 formas = 55 filas,
+0 perdidas contra el motor previo, y precio 0 sobre 22.655 cadenas gobernadas (parser de
+frontmatter propio, 4.399 ficheros) -- 0 marcas nuevas y 0 perdidas r8 vs r7.
+
+### LECCION 5: atribuir el FP antes de acusar
+
+`REQ-SK-0210-20260809` sale marcado en r8 y no en base -> parecia FP nuevo. Atribucion:
+`account_identifier_contiguous_is_bounded` y `account_identifier_grouped_is_detected(cb=True)`
+devuelven False AMBAS sobre ese valor, en r7 y en r8 -> **no lo pone la guarda de esta remediacion**;
+es anterior. Declarado como residual ajeno. Sin la atribucion habria bloqueado por algo que no era.
+
+### Lo que queda abierto (senal DECISION-0018, NO bloqueante)
+
+La clase queda abierta por UN eje: **presentacion AGRUPADA con checksum invalido dentro de envoltura**
+-> 681 de 768 ciegas (los tres separadores; control con checksum valido 0 ciegas). **No es regresion**:
+base es ciego a las 768 y r8 gana 87. Es coherente con el mod-97 que la rama agrupada exige a
+proposito como control de FP (R3 de la remediacion 2, fuera de mi encargo). Pedi **tarea nueva**, no
+remediacion 8 -- meterlo en 0328 repetiria el patron que costo ocho vueltas.
+Residual 2: el estrechamiento r6->r7/r8 de una fila (`file` con `ES90-6604-...`) sigue, pero sobre el
+corpus del contrato r8 pierde 0 contra r6 y el caso es base=False: estrechamiento contra motor
+intermedio nunca publicado, no contra la linea base.
+
+### Presupuesto
+
+En r7 declare 1 iteracion con escalada al operador si no cerraba la propiedad. **Cerro.** No abro
+iteracion ni escalo.
+
 ## Ultima actualizacion 2026-08-10 (66) - TASK-0343 r3: CHANGE-REQUIRED (marcador, y negativo analitico)
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0343-r3`. **SOLO HUB, SIN PRODUCTO.**
