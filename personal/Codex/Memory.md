@@ -15,8 +15,10 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0328 remediation iteration 6 implem
 - Removing the production pre-exemption guard loses all 231 derived cases. The two production
   call paths reject every applicable file/path case. Full memory tests passed 72/72; the 71/71
   falsification inventory, collaboration, encoding, Python neutrality, and PowerShell neutrality
-  gates exited 0. TASK-0328 remains `in_progress` pending exact-commit verification and governed
-  delivery; Codex is maker only and has not reviewed or ratified the remediation.
+  gates exited 0 on exact commit `6caeabca` in a detached clean Aegis worktree. Runtime events
+  8585-8588 move TASK-0328 to `in_review` and release every Codex claim. Arquitecto coordination
+  commit `36f1065e` archives the consumed delivery message and routes r7 to Analista. Codex is maker
+  only and has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0345 remediation iteration 2 implementation
 
