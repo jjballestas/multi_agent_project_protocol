@@ -82,3 +82,28 @@ en Windows. Los otros dos pagan el x2 sin ninguna razon de host.
   invoca, y se declara uno a uno (AC3).
 - Convertir la dependencia dura de `powershell.exe` en un `skip` para que el runner "pase" en Linux.
   Eso seria un gate que aprueba por no ejecutar (AC5).
+
+## Remediacion de dependencias y residuales de cierre
+
+La dependencia de paquetes se verifica desde el propio workflow. El job `validate` deriva los
+runners Python de los comandos `run`, analiza sus imports de nivel superior, excluye stdlib y
+modulos locales del repositorio, resuelve modulo -> distribucion con los metadatos instalados y
+compara el resultado con los `python -m pip install` declarados por cada job. Un modulo externo sin
+proveedor conocido o sin distribucion declarada deja el workflow en rojo. En particular, `yaml`
+se resuelve a `pyyaml`; quitar `pyyaml` del job `falsification-runners-python` debe matar esta puerta.
+
+La granularidad elegida sigue siendo `github.workflow` + `github.ref`. Por eso una corrida `push`
+y una corrida `pull_request` del mismo commit usan referencias distintas y no se cancelan entre si.
+Se acepta esa duplicacion para conservar ambos triggers; la guarda elimina solo corridas superadas
+del mismo workflow y la misma referencia.
+
+La puerta estatica de contratos acredita cableado, no ejecucion de cada corrida: una corrida
+cancelada puede no ejecutar sus runners. La corrida superviviente sobre el HEAD es la que conserva
+la cobertura. AC1 sigue pendiente hasta que Actions permita dos pushes rapidos y la primera corrida
+se observe en estado `cancelled`; la presencia del YAML no lo acredita. La cancelacion tambien
+reduce la granularidad de validacion y de una futura biseccion para commits intermedios de una rafaga.
+
+Para AC6, el replicador sin `--job` solo cubre `validate` y es ciego a los jobs movidos. La
+remediacion mide por separado `falsification-runners` y `falsification-runners-python`, y deriva sus
+fallos de cada salida. La comparacion de saldo historico se hace en clones limpios de las anclas
+`a583e189^` y `a583e189`, nunca desde el arbol vivo.

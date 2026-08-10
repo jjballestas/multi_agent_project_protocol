@@ -64,6 +64,90 @@ jobs:
       - name: Install Python test dependencies
         run: python -m pip install cryptography jsonschema pyyaml
 
+      - name: Verify workflow runner dependency declarations
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import ast
+          import importlib.metadata
+          import re
+          import shlex
+          import sys
+          from pathlib import Path
+
+          import yaml
+
+          root = Path(".").resolve()
+          workflow = root / ".github/workflows/validate.yml"
+          document = yaml.safe_load(workflow.read_text(encoding="utf-8"))
+          stdlib = set(sys.stdlib_module_names)
+          local_names = {path.stem for path in root.rglob("*.py")}
+          local_names.update(path.name for path in root.rglob("*") if path.is_dir())
+
+          def normalize_distribution(value: str) -> str:
+              return re.sub(r"[-_.]+", "-", value).lower()
+
+          package_map = {
+              module: {normalize_distribution(distribution) for distribution in distributions}
+              for module, distributions in importlib.metadata.packages_distributions().items()
+          }
+
+          def declared_distributions(job: dict) -> set[str]:
+              declared = set()
+              for step in job.get("steps", []):
+                  for line in str(step.get("run", "")).splitlines():
+                      try:
+                          parts = shlex.split(line, posix=True)
+                      except ValueError:
+                          continue
+                      if len(parts) >= 4 and parts[:4] == ["python", "-m", "pip", "install"]:
+                          declared.update(
+                              normalize_distribution(re.split(r"[<>=!~\[]", part, 1)[0])
+                              for part in parts[4:]
+                              if not part.startswith("-")
+                          )
+              return declared
+
+          errors = []
+          checked = 0
+          for job_name, job in document.get("jobs", {}).items():
+              declared = declared_distributions(job)
+              for step in job.get("steps", []):
+                  command = str(step.get("run", ""))
+                  for match in re.finditer(r"(?m)^\s*python(?:3)?\s+([^\s]+\.py)(?:\s|$)", command):
+                      runner = (root / match.group(1)).resolve()
+                      if not runner.is_file():
+                          continue
+                      checked += 1
+                      tree = ast.parse(runner.read_text(encoding="utf-8"), filename=str(runner))
+                      modules = {
+                          alias.name.split(".")[0]
+                          for node in ast.walk(tree)
+                          if isinstance(node, ast.Import)
+                          for alias in node.names
+                      }
+                      modules.update(
+                          node.module.split(".")[0]
+                          for node in ast.walk(tree)
+                          if isinstance(node, ast.ImportFrom) and node.module
+                      )
+                      for module in sorted(modules - stdlib - local_names - {"__future__"}):
+                          providers = package_map.get(module, set())
+                          if not providers:
+                              errors.append(
+                                  f"{job_name}: {runner.relative_to(root)} imports unmapped external module {module}"
+                              )
+                          elif not providers & declared:
+                              errors.append(
+                                  f"{job_name}: {runner.relative_to(root)} imports {module}; "
+                                  f"requires one of {sorted(providers)}, declared {sorted(declared)}"
+                              )
+          if errors:
+              raise SystemExit("WORKFLOW_RUNNER_DEPENDENCIES FAIL\n" + "\n".join(errors))
+          print(f"WORKFLOW_RUNNER_DEPENDENCIES PASS runners={checked}")
+          PY
+
       - name: Validate repository dogfood instance
         run: python scripts/validate_collaboration_state.py --root .
 
@@ -317,9 +401,6 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install falsification runner dependencies
-        run: python -m pip install jsonschema
-
       - name: Execute mailbox retry falsification runner
         run: python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
 
@@ -335,7 +416,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install falsification runner dependencies
-        run: python -m pip install jsonschema
+        run: python -m pip install jsonschema pyyaml
 
       - name: Execute runtime turn falsification runner
         if: always()
