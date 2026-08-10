@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Inventory and mutation contracts for PowerShell entry points run by CI."""
+"""Derived CI PowerShell inventory and host-assumption mutation contracts."""
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
@@ -12,36 +13,24 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = ROOT / ".github" / "workflows" / "validate.yml"
 
-CI_POWERSHELL_ENTRY_POINTS = {
-    "examples/compact_comms_validation_cases/run_compact_comms_cases.ps1",
-    "examples/llm_turn_wrapper_cases/run_llm_turn_wrapper_cases.ps1",
-    "examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1",
-    "examples/sdd_validation_cases/run_sdd_cases.ps1",
-    "scripts/scan_domain_neutrality.ps1",
-    "scripts/scan_encoding.ps1",
-    "scripts/validate_collaboration_state.ps1",
-}
-
-HOST_DIMENSIONS = {
-    "separators": CI_POWERSHELL_ENTRY_POINTS,
-    "absolute_vs_relative": CI_POWERSHELL_ENTRY_POINTS,
-    "line_splitting": CI_POWERSHELL_ENTRY_POINTS,
-    "filesystem_case": CI_POWERSHELL_ENTRY_POINTS,
-    "line_endings": CI_POWERSHELL_ENTRY_POINTS,
+# TASK-0338 owns this real, host-sensitive line-reader coordinate. The exception
+# is structural (not a frozen source line) and bounded to one occurrence.
+BOUNDED_LINE_READERS = {
+    "scripts/scan_domain_neutrality.ps1": 1,
 }
 
 FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-POWERSHELL-HOST-ASSUMPTION-CLASS",
-        "negative": "All CI PowerShell entry points stay inventoried and the four known host-dependent forms stay absent or explicitly bounded.",
-        "mutation": "mutants = {",
+        "negative": "Every PowerShell surface derived from CI rejects known host-dependent path forms at every entry point and bounds the real line-reader residual.",
+        "mutation": "for route, source in sources.items():",
         "boundaries": (
-            'assert classify_known_forms(mutants["line_reader"]) == {"line_reader"}',
-            'assert classify_known_forms(mutants["bash_boundary"]) == {"bash_boundary"}',
-            'assert classify_known_forms(mutants["literal_separator"]) == {"literal_separator"}',
-            'assert classify_known_forms(mutants["relative_uri"]) == {"relative_uri"}',
+            "assert scan_powershell_surface(surface) == {}",
+            "assert set(mutation_failures) == set(sources)",
+            'assert classify_bash_boundary(bash_mutant) == {"bash_line_model"}',
+            'assert scan_inline_powershell(mutant_surface.inline_commands[0]) == {"relative_uri"}',
         ),
-        "exercised_by": "case_known_form_mutations",
+        "exercised_by": "case_host_surface_mutations",
     },
     {
         "id": "NEG-POWERSHELL-LINUX-JOB-WIRING",
@@ -55,35 +44,175 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK",
-        "negative": "A PowerShell parity runner must not leak LASTEXITCODE from its final expected-negative child process.",
-        "mutation": 'mutant_runner = runner_text.replace("\\nexit 0\\n", "\\n", 1)',
+        "negative": "The PowerShell parity runner reaches an unconditional success exit before any top-level exit can leak a child LASTEXITCODE.",
+        "mutation": 'mutant_runner = insert_before_final_exit(runner_text, "exit $LASTEXITCODE")',
         "boundaries": (
-            "assert runner_has_explicit_success_exit(runner_text)",
-            "assert not runner_has_explicit_success_exit(mutant_runner)",
+            "assert runner_reaches_success_exit(runner_text)",
+            "assert not runner_reaches_success_exit(mutant_runner)",
         ),
         "exercised_by": "case_expected_negative_exit",
     },
 )
 
 
-def workflow_powershell_paths(workflow_text: str) -> set[str]:
-    return {
-        match.replace("\\", "/")
-        for match in re.findall(r"(?:\./)?([A-Za-z0-9_./-]+\.ps1)\b", workflow_text)
+@dataclass(frozen=True)
+class PowerShellSurface:
+    paths: frozenset[str]
+    inline_commands: tuple[str, ...]
+
+
+def _effective_shell(workflow: dict, job: dict, step: dict) -> str | None:
+    shell = step.get("shell")
+    if shell is None:
+        for owner in (job, workflow):
+            defaults = owner.get("defaults", {})
+            if isinstance(defaults, dict):
+                run_defaults = defaults.get("run", {})
+                if isinstance(run_defaults, dict) and "shell" in run_defaults:
+                    shell = run_defaults["shell"]
+                    break
+    if isinstance(shell, str):
+        return shell.split()[0].lower()
+    runner = job.get("runs-on")
+    if isinstance(runner, str) and runner.startswith("windows-"):
+        return "powershell"
+    return None
+
+
+def workflow_powershell_surface(workflow_text: str) -> PowerShellSurface:
+    """Derive files and inline commands from steps actually evaluated as PowerShell."""
+    document = yaml.safe_load(workflow_text)
+    if not isinstance(document, dict) or not isinstance(document.get("jobs"), dict):
+        raise AssertionError("workflow must contain jobs")
+    paths: set[str] = set()
+    inline: list[str] = []
+    path_pattern = re.compile(r"(?:^|\s)(?:\./)?([A-Za-z0-9_./-]+\.ps1)(?=\s|$)", re.I)
+    for job in document["jobs"].values():
+        if not isinstance(job, dict):
+            continue
+        for step in job.get("steps", []):
+            if not isinstance(step, dict) or _effective_shell(document, job, step) not in {
+                "pwsh",
+                "powershell",
+            }:
+                continue
+            command = step.get("run")
+            if not isinstance(command, str):
+                continue
+            matches = {match.replace("\\", "/") for match in path_pattern.findall(command)}
+            paths.update(matches)
+            executable = [
+                line.strip()
+                for line in command.splitlines()
+                if line.strip() and not line.lstrip().startswith("#")
+            ]
+            if not matches or len(executable) != 1:
+                inline.append(command)
+    return PowerShellSurface(frozenset(paths), tuple(inline))
+
+
+def powershell_sources(surface: PowerShellSurface) -> dict[str, str]:
+    sources: dict[str, str] = {}
+    for route in sorted(surface.paths):
+        path = ROOT / route
+        assert path.is_file(), f"workflow PowerShell route does not exist: {route}"
+        sources[route] = path.read_text(encoding="utf-8-sig")
+    return sources
+
+
+def _code_lines(source: str) -> str:
+    """Drop full-line comments while preserving quoted path operands."""
+    return "\n".join(
+        line for line in source.splitlines() if not line.lstrip().startswith("#")
+    )
+
+
+def _line_reader_count(source: str) -> int:
+    code = _code_lines(source)
+    return len(
+        re.findall(
+            r"\$lines\s*=\s*@\(\s*Get-Content\b(?=[^\r\n)]*-Path\s+\$file\.Path\b)(?![^\r\n)]*\s-Raw\b)[^\r\n)]*\)",
+            code,
+            re.I,
+        )
+    )
+
+
+def scan_powershell_source(route: str, source: str) -> set[str]:
+    """Recognize semantic host forms, independent of source order and spacing."""
+    code = _code_lines(source)
+    violations: set[str] = set()
+    if re.search(r"\.\s*MakeRelativeUri\s*\(", code, re.I):
+        violations.add("relative_uri")
+    # A literal host separator used as the boundary operand of StartsWith is
+    # unsafe. This models the call shape rather than one frozen source string.
+    literal_prefix = re.search(
+        r"\.\s*StartsWith\s*\(\s*\"\s*\$[A-Za-z_][A-Za-z0-9_.]*\\\"\s*(?:,|\))",
+        code,
+        re.I,
+    )
+    literal_root_suffix = re.search(
+        r"\.\s*TrimEnd\s*\([^\r\n)]*\)\s*\+\s*[\"']\\[\"']",
+        code,
+        re.I,
+    )
+    if literal_prefix or literal_root_suffix:
+        violations.add("literal_path_boundary")
+    if re.search(
+        r"(?im)^\s*\$(?:Path)?Comparison\s*=\s*\[System\.StringComparison\]::OrdinalIgnoreCase\s*$",
+        code,
+    ):
+        violations.add("fixed_case_path_comparison")
+    readers = _line_reader_count(source)
+    if readers > BOUNDED_LINE_READERS.get(route, 0):
+        violations.add("unbounded_line_reader")
+    return violations
+
+
+def scan_inline_powershell(command: str) -> set[str]:
+    return scan_powershell_source("<workflow-inline>", command)
+
+
+def scan_powershell_surface(surface: PowerShellSurface) -> dict[str, set[str]]:
+    violations = {
+        route: found
+        for route, source in powershell_sources(surface).items()
+        if (found := scan_powershell_source(route, source))
     }
+    for number, command in enumerate(surface.inline_commands, 1):
+        found = scan_inline_powershell(command)
+        if found:
+            violations[f"<workflow-inline:{number}>"] = found
+    return violations
 
 
-def classify_known_forms(text: str) -> set[str]:
-    forms: set[str] = set()
-    if "TASK0345_UNBOUNDED_GET_CONTENT_LINE_READER" in text:
-        forms.add("line_reader")
-    if "command.splitlines()" in text:
-        forms.add("bash_boundary")
-    if 'StartsWith("$directory\\")' in text:
-        forms.add("literal_separator")
-    if ".MakeRelativeUri(" in text:
-        forms.add("relative_uri")
-    return forms
+def classify_bash_boundary(source: str) -> set[str]:
+    return {"bash_line_model"} if re.search(r"command\s*\.\s*splitlines\s*\(\s*\)", source) else set()
+
+
+def insert_before_final_exit(source: str, statement: str) -> str:
+    matches = list(re.finditer(r"(?im)^(\s*)exit\s+0\s*(?:#.*)?$", source))
+    assert matches, "runner has no success exit"
+    match = matches[-1]
+    return source[: match.start()] + statement + "\n" + source[match.start() :]
+
+
+def runner_reaches_success_exit(source: str) -> bool:
+    """Reject a top-level exit before the runner's unconditional ``exit 0``."""
+    depth = 0
+    for raw_line in source.splitlines():
+        line = raw_line.split("#", 1)[0].strip()
+        if not line:
+            continue
+        leading_closes = len(line) - len(line.lstrip("}"))
+        depth = max(0, depth - leading_closes)
+        body = line[leading_closes:].strip()
+        match = re.fullmatch(r"exit(?:\s+(.+?))?", body, re.I)
+        if match and depth == 0:
+            return (match.group(1) or "").strip() == "0"
+        depth += body.count("{") - body.count("}")
+        depth = max(0, depth)
+    return False
 
 
 def linux_job_is_failure_gating(workflow_text: str) -> bool:
@@ -107,63 +236,61 @@ def linux_job_is_failure_gating(workflow_text: str) -> bool:
     )
 
 
-def runner_has_explicit_success_exit(source: str) -> bool:
-    return source.rstrip().endswith("exit 0")
-
-
 def case_inventory() -> None:
-    workflow_text = WORKFLOW.read_text(encoding="utf-8")
-    assert workflow_powershell_paths(workflow_text) == CI_POWERSHELL_ENTRY_POINTS
-    assert set(HOST_DIMENSIONS) == {
-        "separators",
-        "absolute_vs_relative",
-        "line_splitting",
-        "filesystem_case",
-        "line_endings",
-    }
-    assert all(paths == CI_POWERSHELL_ENTRY_POINTS for paths in HOST_DIMENSIONS.values())
-
-    neutrality = (ROOT / "scripts" / "scan_domain_neutrality.ps1").read_text(encoding="utf-8-sig")
-    encoding = (ROOT / "scripts" / "scan_encoding.ps1").read_text(encoding="utf-8-sig")
-    bash_reader = (ROOT / "scripts" / "check_falsification_contracts.py").read_text(encoding="utf-8-sig")
-    assert ".MakeRelativeUri(" not in neutrality
-    assert 'StartsWith("$directory\\")' not in encoding
-    assert bash_reader.count('command.split("\\n")') == 1
-    # TASK-0338 owns the one remaining scanner line-reader mismatch. This
-    # contract freezes its footprint so TASK-0345 does not absorb that work.
-    assert neutrality.count("$lines = @(Get-Content -Path $file.Path -Encoding UTF8)") == 1
+    surface = workflow_powershell_surface(WORKFLOW.read_text(encoding="utf-8"))
+    assert len(surface.paths) == 7
+    assert len(surface.inline_commands) == 1
+    assert set(BOUNDED_LINE_READERS) <= set(surface.paths)
+    assert scan_powershell_surface(surface) == {}
 
 
-def case_known_form_mutations() -> None:
+def case_host_surface_mutations() -> None:
     """PERMANENT_NEGATIVE: NEG-POWERSHELL-HOST-ASSUMPTION-CLASS"""
-    neutrality = (ROOT / "scripts" / "scan_domain_neutrality.ps1").read_text(encoding="utf-8-sig")
-    encoding = (ROOT / "scripts" / "scan_encoding.ps1").read_text(encoding="utf-8-sig")
-    bash_reader = (ROOT / "scripts" / "check_falsification_contracts.py").read_text(encoding="utf-8-sig")
-    mutants = {
-        "line_reader": neutrality.replace(
-            "$lines = @(Get-Content -Path $file.Path -Encoding UTF8)",
-            "$lines = @(Get-Content -Path $file.Path -Encoding UTF8) # TASK0345_UNBOUNDED_GET_CONTENT_LINE_READER",
-            1,
-        ),
-        "bash_boundary": bash_reader.replace('command.split("\\n")', "command.splitlines()", 1),
-        "literal_separator": encoding.replace(
-            "StartsWith($directoryPrefix, $PathComparison)",
-            'StartsWith("$directory\\")',
-            1,
-        ),
-        "relative_uri": neutrality.replace(
-            "$relativePath = $resolvedFullPath.Substring($rootPrefix.Length)",
-            "$relativePath = $rootUri.MakeRelativeUri($fileUri).ToString()",
-            1,
-        ),
-    }
-    assert classify_known_forms(mutants["line_reader"]) == {"line_reader"}
-    assert classify_known_forms(mutants["bash_boundary"]) == {"bash_boundary"}
-    assert classify_known_forms(mutants["literal_separator"]) == {"literal_separator"}
-    assert classify_known_forms(mutants["relative_uri"]) == {"relative_uri"}
-    assert classify_known_forms(neutrality) == set()
-    assert classify_known_forms(encoding) == set()
-    assert classify_known_forms(bash_reader) == set()
+    workflow_text = WORKFLOW.read_text(encoding="utf-8")
+    surface = workflow_powershell_surface(workflow_text)
+    sources = powershell_sources(surface)
+    assert scan_powershell_surface(surface) == {}
+
+    mutation_failures: dict[str, set[str]] = {}
+    forms = (
+        '$probe = $rootUri . MakeRelativeUri ( $fileUri )',
+        '$probe = $candidate.StartsWith( "$directory\\" )',
+        '$lines = @( Get-Content -Encoding UTF8 -Path $file.Path )',
+        "$PathComparison = [System.StringComparison]::OrdinalIgnoreCase",
+    )
+    for route, source in sources.items():
+        killed: set[str] = set()
+        for index, form in enumerate(forms):
+            injected = source + ("\n\n" if index % 2 else "\n") + form + "\n"
+            found = scan_powershell_source(route, injected)
+            assert found, f"host mutant {index} escaped at {route}"
+            killed.add(str(index))
+        mutation_failures[route] = killed
+    assert set(mutation_failures) == set(sources)
+    assert all(len(killed) == len(forms) for killed in mutation_failures.values())
+
+    # The TASK-0336 Bash boundary remains owned there, but its real production
+    # reader and production mutant stay accredited without a synthetic marker.
+    bash_path = ROOT / "scripts" / "check_falsification_contracts.py"
+    bash_source = bash_path.read_text(encoding="utf-8-sig")
+    bash_mutant = bash_source.replace('command.split("\\n")', "command.splitlines()", 1)
+    assert bash_mutant != bash_source
+    assert classify_bash_boundary(bash_source) == set()
+    assert classify_bash_boundary(bash_mutant) == {"bash_line_model"}
+
+    # Inline PowerShell is in scope mechanically even though the current
+    # workflow has none: a new inline host form must not evade file discovery.
+    inline_mutant = workflow_text.replace(
+        "      - name: Scan encoding with PowerShell on Linux",
+        "      - name: Inline PowerShell host mutant\n"
+        "        shell: pwsh\n"
+        "        run: $rootUri.MakeRelativeUri($fileUri)\n"
+        "      - name: Scan encoding with PowerShell on Linux",
+        1,
+    )
+    mutant_surface = workflow_powershell_surface(inline_mutant)
+    assert len(mutant_surface.inline_commands) == len(surface.inline_commands) + 1
+    assert scan_inline_powershell(mutant_surface.inline_commands[0]) == {"relative_uri"}
 
 
 def case_linux_job_wiring() -> None:
@@ -179,18 +306,22 @@ def case_expected_negative_exit() -> None:
     """PERMANENT_NEGATIVE: NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK"""
     runner_path = ROOT / "examples" / "neutrality_scan_cases" / "run_neutrality_scan_cases.ps1"
     runner_text = runner_path.read_text(encoding="utf-8-sig")
-    assert runner_has_explicit_success_exit(runner_text)
-    mutant_runner = runner_text.replace("\nexit 0\n", "\n", 1)
+    assert runner_reaches_success_exit(runner_text)
+    mutant_runner = insert_before_final_exit(runner_text, "exit $LASTEXITCODE")
     assert mutant_runner != runner_text
-    assert not runner_has_explicit_success_exit(mutant_runner)
+    assert not runner_reaches_success_exit(mutant_runner)
 
 
 def main() -> int:
     case_inventory()
-    case_known_form_mutations()
+    case_host_surface_mutations()
     case_linux_job_wiring()
     case_expected_negative_exit()
-    print("OK: 7 CI PowerShell entry points x 5 host dimensions; 5 host mutations; Linux job wiring.")
+    surface = workflow_powershell_surface(WORKFLOW.read_text(encoding="utf-8"))
+    print(
+        f"OK: {len(surface.paths)} workflow-derived CI PowerShell entry points; "
+        "28 all-coordinate production mutants; inline PowerShell and exit reachability covered."
+    )
     return 0
 
 

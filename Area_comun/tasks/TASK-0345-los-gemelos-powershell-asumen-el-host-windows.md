@@ -96,3 +96,33 @@ La cuarta averia no necesita helper compartido: una raiz resuelta y una frontera
 nativo resuelven la ruta tambien en Windows PowerShell 5.1. La segunda forma conocida pertenece al lector de workflow Python,
 no a un `.ps1`; sigue protegida por `NEG-FALSIFICATION-RUNNER-WIRING` de TASK-0336. El contrato
 TASK-0345 comprueba que no reaparezca `splitlines()` en esa frontera.
+
+## Remediacion AC4 -- iteracion 2
+
+El inventario ejecutable ya no es una constante paralela. `workflow_powershell_surface()` parsea
+el workflow, resuelve el shell efectivo de cada step y deriva los siete `.ps1` que CI evalua como
+PowerShell. Tambien deriva los comandos PowerShell en linea: hoy existe uno que solo invoca Python,
+pero un step nuevo con codigo en linea entra en el mismo escaneo. El mutante en linea que introduce
+`MakeRelativeUri` muere, por lo que ese eje queda cubierto y no declarado fuera de alcance.
+
+`HOST_DIMENSIONS` se retiro. El mensaje de exito ya no anuncia cinco dimensiones decorativas: informa
+la poblacion derivada, 28 mutantes de produccion y las dos propiedades adicionales que realmente
+mide. Los 28 mutantes son las cuatro formas PowerShell host-dependientes aplicadas a cada uno de los
+siete puntos derivados, con variacion de espaciado y orden. Incluyen `MakeRelativeUri`, un separador
+literal usado como frontera, una comparacion de path fijada a `OrdinalIgnoreCase` y el lector real
+`Get-Content` sin `-Raw`; no usan marcadores sinteticos. La unica ocurrencia admitida del lector real
+queda limitada estructuralmente a una en `scan_domain_neutrality.ps1`, bajo el owner TASK-0338. Una
+segunda ocurrencia en esa ruta o la primera en cualquier otra ruta derivada hace fallar el contrato.
+
+La forma Bash sigue fuera del alcance de implementacion de TASK-0345 y bajo TASK-0336, pero su
+mutante se construye sobre el lector real de produccion y se acredita sin marcador tautologico. No
+se modifica ni se redefine el contrato de TASK-0336.
+
+`NEG-POWERSHELL-EXPECTED-NEGATIVE-EXIT-LEAK` ahora inspecciona control de flujo superior: exige que
+el primer `exit` top-level alcanzable sea `exit 0`. Su mutante inserta `exit $LASTEXITCODE` justo
+antes del success final, deja ese `exit 0` inalcanzable y muere. Ya no se acredita por los ultimos
+siete caracteres del fichero.
+
+AC6 permanece acreditado por el run historico `31271924074`, job `powershell-linux-parity` success,
+head `50ce23010d83af5ca3c8c5f0433b2f18288eb0a8`. La facturacion impide lanzar runs nuevos, no leer
+esa evidencia ya existente; no se declara AC6 pendiente.
