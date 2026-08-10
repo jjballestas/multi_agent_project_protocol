@@ -145,7 +145,7 @@
         {
             "id": "TASK-0354",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan"
         }
     ],

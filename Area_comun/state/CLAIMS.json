@@ -208,9 +208,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-10T07:52:08Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0354",
             "updated_at": "2026-08-10T07:52:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-delivery",
+            "expires_at": "2026-08-10T10:25:00Z",
+            "notes": "Deliver TASK-0354 remediation iteration 1 for independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-remediation-1-delivery",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T08:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T08:25:00Z"
         },
         {
             "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-memory",
