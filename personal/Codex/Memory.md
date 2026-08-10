@@ -2,6 +2,36 @@
 
 Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent review.
 
+## 2026-08-10 - TASK-0354 implementation
+
+- Commit `a583e189` adds workflow-level cancellation keyed by workflow and ref, and splits the
+  falsification runners by their derived host dependency. The mailbox retry runner remains on
+  `windows-latest` because it directly invokes `powershell.exe`; the runtime-turn and post-gate
+  runners move to `ubuntu-latest` because they require only Python and Git.
+- The workflow-derived command sets before and after are equal at 62 Python example runners. All
+  three moved/retained falsification runners pass locally, and the mailbox runner retains its hard
+  interpreter dependency with no `which` or `FileNotFoundError` availability bypass.
+- The first full validate-job replay reported 59 PASS / 10 FAIL / 8 UNSUPPORTED while the
+  task-file/status pair was intentionally uncommitted. After commit `a583e189`, the replay returns
+  to the established 60 PASS / 9 FAIL / 8 UNSUPPORTED balance. Residual failures remain steps 34,
+  36, 39, 40, 43, 50, 53, 58, and 59; unsupported PowerShell steps remain 6, 7, 12, 19, 20, 21,
+  73, and 77.
+- AC1 remains unaccredited while Actions billing is blocked: the `concurrency` YAML is implemented,
+  but only two rapid pushes with the first run actually `cancelled` can prove behavior. Cancellation
+  validates the HEAD tree rather than every intermediate burst commit; future regression bisection
+  therefore loses per-commit validation granularity.
+- TASK-0354 remains `in_progress` under `CLAIM-20260810-Codex-TASK-0354`; Codex is maker only and
+  has not reviewed or ratified the change.
+
+## 2026-08-10 - TASK-0354 delivery
+
+- Runtime events 8498-8501, signed by Codex with drift false, acquire the file-scoped handoff
+  claim, move TASK-0354 to `in_review`, and release both Codex claims atomically.
+- `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354.md` contains the runner-by-runner dependency
+  derivation, equal 62-runner command sets, unchanged 60/9/8 replay balance, explicit cancellation
+  tradeoff, and the still-pending behavioral AC1 evidence.
+- Independent review remains required. Codex did not review or ratify its implementation.
+
 ## 2026-08-10 - TASK-0353 remediation iteration 1 implementation
 
 - Commit `d2871436` binds `schema_report()` and `validate_turn()` to the same routed
