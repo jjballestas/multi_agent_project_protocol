@@ -46,7 +46,7 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-NEUTRALITY-IDENTITY-EXEMPTION-PARITY",
         "negative": "Real-tree identity probes must produce identical findings through both gates, including an unseen route.",
-        "mutation": "narrowed_python_source = python_source.replace(",
+        "mutation": "narrowed_term_source = python_source.replace(",
         "boundaries": (
             "self.assertEqual(contract_paths, copied_paths)",
             "self.assertEqual(expected_findings, python_findings)",
@@ -55,16 +55,17 @@ FALSIFICATION_CONTRACTS = (
             "self.assertNotEqual(python_findings, indented_findings)",
             "self.assertNotEqual(python_findings, outside_findings)",
             "self.assertNotEqual(expected_findings, symmetric_python_findings)",
+            "self.assertNotEqual(expected_findings, narrowed_term_findings)",
         ),
         "exercised_by": "test_real_tree_identity_parity_rejects_single_scanner_exemptions",
     },
     {
         "id": "NEG-NEUTRALITY-IDENTITY-INVENTORY-PARITY",
         "negative": "A dead identity exemption added to only one scanner must be rejected immediately.",
-        "mutation": "mutated_powershell_source = powershell_source.replace(",
+        "mutation": "production_mutants = {",
         "boundaries": (
             "self.assertEqual(python_inventory, powershell_inventory)",
-            "self.assertNotEqual(python_inventory, mutated_powershell_inventory)",
+            "self.assertTrue(all(mutation_results.values()), mutation_results)",
             "self.assertEqual(declared_exemption_count, 91)",
         ),
         "exercised_by": "test_identity_exemption_inventories_are_one_to_one_and_in_parity",
@@ -99,6 +100,32 @@ def identity_contract_paths(root: Path) -> set[str]:
         if runtime_python or script_source:
             paths.add(relative_path)
     return paths
+
+
+def identity_contract_terms(root: Path) -> list[str]:
+    """Derive the identity universe from the protocol contract, not either scanner."""
+    config = json.loads((root / "protocol.config.json").read_text(encoding="utf-8-sig"))
+    generic = {"agent", "human", "humano", "owner"}
+    terms: set[str] = set()
+    registry = config.get("agent_registry")
+    if isinstance(registry, dict):
+        for agent in registry.get("agents") or []:
+            if not isinstance(agent, dict):
+                continue
+            value = str(agent.get("id") or "").strip()
+            if len(value) >= 3 and value.casefold() not in generic:
+                terms.add(value)
+    roles = config.get("agent_roles")
+    if isinstance(roles, dict):
+        for value in roles.values():
+            text = str(value or "").strip()
+            if len(text) >= 3 and text.casefold() not in generic:
+                terms.add(text)
+            for token in re.split(r"\s+", text):
+                clean = token.strip()
+                if len(clean) >= 4 and clean.casefold() not in generic:
+                    terms.add(clean)
+    return sorted(terms, key=str.casefold)
 
 
 class DomainNeutralityCoverageTests(unittest.TestCase):
@@ -188,28 +215,28 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
     def powershell_identity_inventory(
         self, source: str | None = None
     ) -> dict[str, dict[int, tuple[str, ...]]]:
-        if source is None:
-            source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
-        marker = "$GenericIdentityTokens = " + "@("
-        self.assertIn(marker, source)
-        probe = r'''
-$InventoryOutput = @{}
-foreach ($InventoryPath in $IdentityLiteralExemptions.Keys) {
-    $InventoryLines = @{}
-    foreach ($InventoryLine in $IdentityLiteralExemptions[$InventoryPath].Lines.Keys) {
-        $InventoryLines[[string]$InventoryLine] = @(
-            $IdentityLiteralExemptions[$InventoryPath].Lines[$InventoryLine]
+        scanner_path = POWERSHELL_SCANNER_PATH
+        if source is not None:
+            scanner_path = self.scratch_root / "scan_domain_neutrality_inventory_mutant.ps1"
+            scanner_path.write_text(source, encoding="utf-8")
+        executable = shutil.which("pwsh") or shutil.which("powershell")
+        if not executable:
+            self.skipTest("PowerShell is not installed")
+        result = subprocess.run(
+            [
+                executable,
+                "-NoProfile",
+                "-File",
+                str(scanner_path),
+                "-Root",
+                str(self.root),
+                "-DumpIdentityInventory",
+            ],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
         )
-    }
-    $InventoryOutput[$InventoryPath] = $InventoryLines
-}
-$InventoryOutput | ConvertTo-Json -Depth 8 -Compress
-exit 0
-'''
-        instrumented = source.replace(marker, probe + "\n" + marker, 1)
-        probe_path = self.scratch_root / "scan_domain_neutrality_inventory_probe.ps1"
-        probe_path.write_text(instrumented, encoding="utf-8")
-        result = self.run_powershell_scanner(probe_path)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         decoded = json.loads(result.stdout)
         return {
@@ -328,7 +355,14 @@ exit 0
         probe_root = self.scratch_root / "real-tree-probe"
         probe_root.mkdir()
         shutil.copy2(REPO_ROOT / "protocol.config.json", probe_root / "protocol.config.json")
-        configured_identities = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
+        probe_config_path = probe_root / "protocol.config.json"
+        probe_config = json.loads(probe_config_path.read_text(encoding="utf-8-sig"))
+        new_identity = "Vi" + "gia"
+        probe_config["agent_registry"]["agents"].append(
+            {"id": new_identity, "enabled": True}
+        )
+        probe_config_path.write_text(json.dumps(probe_config, indent=2) + "\n", encoding="utf-8")
+        configured_identities = identity_contract_terms(probe_root)
         probe_identity = "Code" + "x"
         expected_findings: set[str] = set()
         contract_paths = identity_contract_paths(REPO_ROOT)
@@ -471,6 +505,26 @@ exit 0
             f"{unseen_relative_path}:1: {probe_identity}", symmetric_python_findings
         )
 
+        term_rule = "if len(value) >= 3 and value.casefold() not in GENERIC_IDENTITY_TOKENS:"
+        narrowed_term_source = python_source.replace(
+            term_rule,
+            "if len(value) >= 6 and value.casefold() not in GENERIC_IDENTITY_TOKENS:",
+            1,
+        )
+        self.assertNotEqual(python_source, narrowed_term_source)
+        narrowed_term_path = self.scratch_root / "scan_domain_neutrality_term_mutant.py"
+        narrowed_term_path.write_text(narrowed_term_source, encoding="utf-8")
+        narrowed_term = self.run_python_scanner(narrowed_term_path, probe_root)
+        narrowed_term_findings = set(narrowed_term.stdout.splitlines())
+        self.assertNotEqual(expected_findings, narrowed_term_findings)
+        term_losses = expected_findings - narrowed_term_findings
+        self.assertTrue(any(finding.endswith(f": {new_identity}") for finding in term_losses))
+        print(
+            "TERM_MUTATION_BALANCE "
+            f"expected={len(expected_findings)} current={len(python_findings)} "
+            f"mutant={len(narrowed_term_findings)} losses={len(term_losses)}"
+        )
+
     def test_identity_exemption_inventories_are_one_to_one_and_in_parity(self) -> None:
         """PERMANENT_NEGATIVE: NEG-NEUTRALITY-IDENTITY-INVENTORY-PARITY"""
         scanner = load_scanner()
@@ -483,22 +537,59 @@ exit 0
 
         powershell_source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
         dead_digest = hashlib.sha256(("Code" + "x").casefold().encode("utf-8")).hexdigest()
-        dead_declaration = (
+        dead_literal_declaration = (
             '    "runtime/gate.py" = @{\n'
             '        Reason = "Dead-coordinate inventory drift mutant."\n'
             f'        Lines = @{{ 1 = @("{dead_digest}") }}\n'
             '    }\n'
         )
-        mutated_powershell_source = powershell_source.replace(
-            "$IdentityLiteralExemptions = @{\n",
-            "$IdentityLiteralExemptions = @{\n" + dead_declaration,
-            1,
+        dead_assignment = (
+            '$IdentityLiteralExemptions["runtime/gate.py"] = @{\n'
+            '    Reason = "Dead-coordinate inventory drift mutant."\n'
+            f'    Lines = @{{ 1 = @("{dead_digest}") }}\n'
+            '}\n'
         )
-        self.assertNotEqual(powershell_source, mutated_powershell_source)
-        mutated_powershell_inventory = self.powershell_identity_inventory(
-            mutated_powershell_source
+        dead_add = (
+            '$IdentityLiteralExemptions.Add("runtime/gate.py", @{\n'
+            '    Lines = @{\n'
+            f'        1 = @("{dead_digest}")\n'
+            '    }\n'
+            '    Reason = "Dead-coordinate inventory drift mutant."\n'
+            '})\n'
         )
-        self.assertNotEqual(python_inventory, mutated_powershell_inventory)
+        production_mutants = {
+            "literal_block": powershell_source.replace(
+                "$IdentityLiteralExemptions = @{\n",
+                "$IdentityLiteralExemptions = @{\n" + dead_literal_declaration,
+                1,
+            ),
+            "before_terms": powershell_source.replace(
+                "$GenericIdentityTokens = @(", dead_assignment + "$GenericIdentityTokens = @(", 1
+            ),
+            "after_terms": powershell_source.replace(
+                '$RequiredScanGlobs = @(\n', dead_assignment + '$RequiredScanGlobs = @(\n', 1
+            ),
+            "reordered_add": powershell_source.replace(
+                "function Convert-GlobToRegex {", dead_add + "function Convert-GlobToRegex {", 1
+            ),
+            "before_consumption": powershell_source.replace(
+                "$findings = New-Object System.Collections.Generic.List[string]",
+                dead_assignment + "$findings = New-Object System.Collections.Generic.List[string]",
+                1,
+            ),
+        }
+        mutation_results: dict[str, bool] = {}
+        for name, mutant_source in production_mutants.items():
+            self.assertNotEqual(powershell_source, mutant_source, name)
+            mutant_inventory = self.powershell_identity_inventory(mutant_source)
+            mutation_results[name] = mutant_inventory != python_inventory
+        self.assertTrue(all(mutation_results.values()), mutation_results)
+        print(
+            "INVENTORY_MUTATION_BALANCE "
+            f"total={len(mutation_results)} caught={sum(mutation_results.values())} "
+            f"escaped={len(mutation_results) - sum(mutation_results.values())} "
+            "axes=coordinate,order,format"
+        )
 
         configured_terms = scanner.configured_identity_terms(scanner.load_config(REPO_ROOT))
         terms_by_digest = {

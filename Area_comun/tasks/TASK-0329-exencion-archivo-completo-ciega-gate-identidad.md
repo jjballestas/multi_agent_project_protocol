@@ -69,6 +69,32 @@ alguien decidio desproteger.
 Merece la pena mirarlo junto: si aparece por tercera vez, deja de ser un bug y pasa a ser una
 propiedad del estilo del repo que hay que gatear.
 
+## Remediation 4 -- effective inventory and independent term corpus (2026-08-10)
+
+The PowerShell scanner now exposes `-DumpIdentityInventory` after the real scan has consumed the
+inventory. The test executes the production scanner (or an unchanged production-source mutant)
+through that mode and compares the emitted effective hashtable with Python. It no longer inserts a
+probe at a textual marker or parses a declaration form.
+
+The permanent negative derives five mutants from the production PowerShell source. They place the
+same dead exemption inside the initial literal, before and after the generic-term declaration,
+through a reordered `.Add(...)` form, and immediately before scan consumption. The run-derived
+balance is:
+
+    INVENTORY_MUTATION_BALANCE total=5 caught=5 escaped=0 axes=coordinate,order,format
+
+The route-probe corpus now also derives configured identities directly from the protocol config,
+without importing either scanner. A new registered identity with no exemption remains in that
+independent corpus; narrowing the production Python minimum length from 3 to 6 loses it. The same
+run reports:
+
+    TERM_MUTATION_BALANCE expected=609 current=609 mutant=522 losses=87
+
+This closes the previously declared SLIP-6 placement window and SLIP-7 term-source coupling without
+changing the scoped identity exemptions, their 91 declared pairs, or either scanner's normal
+finding semantics. Independent review remains required; Codex is the maker and does not ratify the
+result.
+
 ## Riesgo declarado (medium)
 
 Acotar la exencion puede destapar literales de identidad preexistentes en esos nueve ficheros

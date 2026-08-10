@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9c7c015d3037f4f35d8887d9f48bf04731a8c12451f94902f93ac508aed64512",
+  "canonical_hash": "ccfcb0976b2d8216854e9ff5097d0fdc9db7ab9381b2ec8669dd57e578dd4565",
   "integrity": {
-    "canonical_hash": "9c7c015d3037f4f35d8887d9f48bf04731a8c12451f94902f93ac508aed64512",
+    "canonical_hash": "ccfcb0976b2d8216854e9ff5097d0fdc9db7ab9381b2ec8669dd57e578dd4565",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "bcd0a0d5e18c8066b121e87e2c5cd0dde85f6dfa683f5b23c095d4ad1d11f55b",
-    "signature": "0c8c49ce0ab24c8f6c44b6eec1d7aafba53c651ecc5294d4492aebeb02edd914",
-    "up_to_seq": 8649
+    "prev_hash": "6319440cdfa8ee2639d5fe00510ef49fa48af946c8deb051090cb1da8a66369d",
+    "signature": "e5fb1fd4d6399a61162f213876258e877156f640ae3daf0a236d8fcb2468e977",
+    "up_to_seq": 8650
   },
   "state": {
     "aggregate_versions": {
@@ -3488,7 +3488,7 @@
       "TASK-0326": 13,
       "TASK-0327": 29,
       "TASK-0328": 73,
-      "TASK-0329": 34,
+      "TASK-0329": 35,
       "TASK-0330": 44,
       "TASK-0331": 62,
       "TASK-0332": 19,
@@ -3537,7 +3537,7 @@
       "protocol-prune": 64,
       "protocol-state": 1
     },
-    "events_applied": 7978,
+    "events_applied": 7979,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7696,6 +7696,7 @@
       "codex:task0329:remediation3:in-review:20260808T223046Z": 8197,
       "codex:task0329:remediation3:msgfix-claim:20260808T223238Z": 8200,
       "codex:task0329:remediation3:msgfix-release:20260808T223313Z": 8201,
+      "codex:task0329:remediation4:claim-acquire:20260810T192327Z": 8650,
       "codex:task0330:acquire-delivery:20260807T141300Z": 7545,
       "codex:task0330:acquire-expanded-scope:20260807T115758Z": 7508,
       "codex:task0330:blocked-to-in-progress:20260807T115758Z": 7509,
@@ -11519,5 +11520,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8649
+  "up_to_seq": 8650
 }

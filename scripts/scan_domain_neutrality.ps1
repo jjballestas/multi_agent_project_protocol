@@ -1,5 +1,6 @@
 param(
-    [string]$Root = "."
+    [string]$Root = ".",
+    [switch]$DumpIdentityInventory
 )
 
 $ErrorActionPreference = "Stop"
@@ -342,6 +343,23 @@ foreach ($file in $files) {
             }
         }
     }
+}
+
+if ($DumpIdentityInventory) {
+    # Emit the effective inventory after the real scan has consumed it. Any top-level
+    # declaration that can affect scanning has already run, irrespective of its source form.
+    $InventoryOutput = [ordered]@{}
+    foreach ($InventoryPath in @($IdentityLiteralExemptions.Keys) | Sort-Object) {
+        $InventoryLines = [ordered]@{}
+        foreach ($InventoryLine in @($IdentityLiteralExemptions[$InventoryPath].Lines.Keys) | Sort-Object) {
+            $InventoryLines[[string]$InventoryLine] = @(
+                $IdentityLiteralExemptions[$InventoryPath].Lines[$InventoryLine]
+            )
+        }
+        $InventoryOutput[$InventoryPath] = $InventoryLines
+    }
+    $InventoryOutput | ConvertTo-Json -Depth 8 -Compress
+    exit 0
 }
 
 foreach ($finding in $findings) {
