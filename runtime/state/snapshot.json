@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "bda1fe75c29a66a40901c2ac43374245ed4b272de19522080203f2ffb0bf69b6",
+  "canonical_hash": "76acdc116e3c7c50005fdb2d8da43d6b0c72d4ceeb1966e72b73c7222722487c",
   "integrity": {
-    "canonical_hash": "bda1fe75c29a66a40901c2ac43374245ed4b272de19522080203f2ffb0bf69b6",
+    "canonical_hash": "76acdc116e3c7c50005fdb2d8da43d6b0c72d4ceeb1966e72b73c7222722487c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "6a94d815526f38d2fae09530586bb5106aa5dd6794ed8b1479bde91d2af1bd8f",
-    "signature": "9c92a3ae110b79eae384c53776b1a83e156336d5a8a09eb586052f49e4790462",
-    "up_to_seq": 8561
+    "prev_hash": "b539998e56da5e8a622542c62962ec71b06447cd437715dff9ada48a1fe2acdb",
+    "signature": "30c93ae8f248eb48c79a0c586dedf8836a78ca8d817ae72d85bb808d05a7dd89",
+    "up_to_seq": 8564
   },
   "state": {
     "aggregate_versions": {
@@ -1334,6 +1334,7 @@
       "CLAIM-arq-rutear0282-20260722": 1,
       "CLAIM-arq-rutear0284-20260722": 1,
       "CLAIM-arq-rv0344-45-20260810": 1,
+      "CLAIM-arq-rv0345r2-20260810": 1,
       "CLAIM-arq-rv0353r3-20260810": 1,
       "CLAIM-arq-rv0354r2-20260810": 1,
       "CLAIM-arq-tres-encargos-20260720": 1,
@@ -3073,6 +3074,7 @@
       "MSG-20260810-Arquitecto-to-Codex-DECISION-TASK-0347-particion": 1,
       "MSG-20260810-Arquitecto-to-Codex-GO-TASK-0353": 1,
       "MSG-20260810-Arquitecto-to-Codex-GO-TASK-0354": 1,
+      "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0345": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353-r2": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0354": 1,
@@ -3176,6 +3178,7 @@
       "OPS-MAILBOX-HYGIENE-20260810B": 1,
       "OPS-MAILBOX-HYGIENE-20260810C": 1,
       "OPS-MAILBOX-HYGIENE-20260810D": 1,
+      "OPS-MAILBOX-HYGIENE-20260810E": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3498,7 +3501,7 @@
       "protocol-prune": 63,
       "protocol-state": 1
     },
-    "events_applied": 7890,
+    "events_applied": 7893,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4295,6 +4298,9 @@
       "arq-rt2-1": 7460,
       "arq-rt2-2": 7461,
       "arq-rt2-3": 7462,
+      "arq-rv345b-000": 8562,
+      "arq-rv345b-001": 8563,
+      "arq-rv345b-099": 8564,
       "arq-rv353-000": 8471,
       "arq-rv353-001": 8472,
       "arq-rv353-002": 8473,
@@ -11392,5 +11398,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8561
+  "up_to_seq": 8564
 }

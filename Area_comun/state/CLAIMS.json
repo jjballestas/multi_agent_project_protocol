@@ -115,6 +115,21 @@
             "updated_at": "2026-08-10T09:10:32Z"
         },
         {
+            "claim_id": "CLAIM-arq-rv0345r2-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0345-r2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rv0345r2-20260810",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0345.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0345.md"
+            ],
+            "started_at": "2026-08-10T10:18:24Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260810E",
+            "updated_at": "2026-08-10T10:18:24Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rv0353r3-20260810",
             "expires_at": "2026-08-11T23:59:00Z",
             "owner": "Arquitecto",
