@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "dcecd1bde2c08d8a7973de3858129fb506a9a07457b160cff3838112534e67fe",
+  "canonical_hash": "33f0ea13e0a5f851f001e8fd70353c4a104a3dc9598faaee6eb83d124d9d354e",
   "integrity": {
-    "canonical_hash": "dcecd1bde2c08d8a7973de3858129fb506a9a07457b160cff3838112534e67fe",
+    "canonical_hash": "33f0ea13e0a5f851f001e8fd70353c4a104a3dc9598faaee6eb83d124d9d354e",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c4dc38cd7a8ceb5eb9c5a78dba659707879417cf0d1f922a09af672bf3ed577e",
-    "signature": "04a9df1b8aefe89dfad7a70642d495e8fcf4a0ce741f29871ed74f89135370bc",
-    "up_to_seq": 8658
+    "prev_hash": "79f83928444e13710b20b36e291dbcc201889b60eff693b9882fbc6bbc0969da",
+    "signature": "f05453cc54c9d939d597460a38c5834dcb9670fa3b9d4ba4bc5ef41b53cc08b8",
+    "up_to_seq": 8666
   },
   "state": {
     "aggregate_versions": {
@@ -1212,6 +1212,7 @@
       "CLAIM-arq-iter3-0283-20260722": 1,
       "CLAIM-arq-lote2-20260810": 1,
       "CLAIM-arq-lote3-20260810": 1,
+      "CLAIM-arq-lote4-20260810": 1,
       "CLAIM-arq-mailbox-go0257-20260719": 1,
       "CLAIM-arq-mailbox-rejfinal-20260719": 1,
       "CLAIM-arq-mailbox-rejuicio-20260719": 1,
@@ -3098,6 +3099,7 @@
       "MSG-20260810-Arquitecto-to-Codex-GO-TASK-0354": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0328": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0328-r7": 1,
+      "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0329": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0342": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0343": 1,
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0345": 1,
@@ -3106,6 +3108,7 @@
       "MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0354": 1,
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediation-6": 1,
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0328-remediation-7": 1,
+      "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediation-4": 1,
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0343-remediation-2": 1,
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0345-remediation-2": 1,
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0347-blocked": 1,
@@ -3491,7 +3494,7 @@
       "TASK-0329": 43,
       "TASK-0330": 44,
       "TASK-0331": 62,
-      "TASK-0332": 19,
+      "TASK-0332": 21,
       "TASK-0333": 13,
       "TASK-0334": 21,
       "TASK-0335": 33,
@@ -3502,7 +3505,7 @@
       "TASK-0340": 29,
       "TASK-0341": 2,
       "TASK-0342": 34,
-      "TASK-0343": 28,
+      "TASK-0343": 31,
       "TASK-0344": 11,
       "TASK-0345": 22,
       "TASK-0346": 17,
@@ -3537,7 +3540,7 @@
       "protocol-prune": 64,
       "protocol-state": 1
     },
-    "events_applied": 7987,
+    "events_applied": 7995,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4058,6 +4061,11 @@
       "arq-l39-7": 7843,
       "arq-l39-8": 7844,
       "arq-l39-9": 7845,
+      "arq-l4-000": 8662,
+      "arq-l4-001": 8663,
+      "arq-l4-010": 8664,
+      "arq-l4-011": 8665,
+      "arq-l4-099": 8666,
       "arq-l40-0": 7854,
       "arq-l40-1": 7855,
       "arq-l40-2": 7856,
@@ -7896,6 +7904,9 @@
       "codex:task0343:remediation1:delivery-release:20260809T113252Z": 8370,
       "codex:task0343:remediation1:implementation-release:20260809T113252Z": 8369,
       "codex:task0343:remediation1:in-review:20260809T113252Z": 8368,
+      "codex:task0343:remediation3:claim-scopefix-acquire:20260810T195719Z": 8661,
+      "codex:task0343:remediation3:claim-scopefix-release:20260810T195719Z": 8660,
+      "codex:task0343:remediation3:claim:20260810T184000Z": 8659,
       "codex:task0343:status-in-progress:20260808T172036Z": 8121,
       "codex:task0344:claim:2026-08-08T16:36:00Z": 8103,
       "codex:task0344:delivery-claim-release:20260808T1805Z": 8127,
@@ -11528,5 +11539,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8658
+  "up_to_seq": 8666
 }
