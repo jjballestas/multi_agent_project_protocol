@@ -1,7 +1,7 @@
 ---
 id: TASK-0353
 title: Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md
@@ -86,3 +86,33 @@ Implementation commit: `f4c6c3b9`.
   `Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353.md`.
 
 Independent review is required. Codex is maker only.
+
+## Remediation 2 maker delivery
+
+Implementation commit: `897b9767`.
+
+- Closure A is implemented. Before filtering, the routed schema must declare every top-level key
+  conditionally required by the live semantic validator or the orchestrator exits loudly with the
+  routed-schema/semantic-gap diagnostic.
+- The permanent contract derives the semantic-only requirement set by behavior from a valid turn
+  and requires exact agreement with the production declaration. The historical 1.2.0 schema proves
+  both direct filtering and the real orchestrator CLI reject before the false missing-field symptom.
+- The historical 0.10.0 runtime snapshot is preserved for compatibility, migration, and
+  instantiation verification. It is not an integral parity mirror; two contracts intentionally
+  compare only `parse_porcelain_v1_z` and `dirty_worktree_paths` with the live runtime.
+- Exact-commit clean-worktree replay output:
+
+```text
+STEP 36/77 FAIL name=Run intent flow cases
+STEP 43/77 FAIL name=Run event auth runtime override cases
+STEP 50/77 FAIL name=Run runtime instantiation cases
+STEP 53/77 FAIL name=Run runtime Review/QA cases
+STEP 58/77 FAIL name=Run runtime loop cases
+STEP 59/77 FAIL name=Run supervised autonomy cases
+SUMMARY declared=77 pass=63 fail=6 unsupported=8
+```
+
+The balance and failure set are produced by the remediation run itself, not copied from a prior
+delivery. Focused routed-turn behavior, 71/71 falsification inventory, canonical validation,
+encoding, neutrality, compile, and diff gates pass on exact commit `897b9767` in a detached clean
+worktree. Independent review is required; Codex is maker only.

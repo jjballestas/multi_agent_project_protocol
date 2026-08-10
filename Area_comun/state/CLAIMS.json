@@ -138,9 +138,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-10T05:15:25Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0353",
             "updated_at": "2026-08-10T05:15:25Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-2-delivery",
+            "expires_at": "2026-08-10T09:10:10Z",
+            "notes": "Deliver TASK-0353 remediation iteration 2 for independent final re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-2-delivery",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T06:10:10Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T06:10:10Z"
         },
         {
             "claim_id": "CLAIM-20260810-Codex-TASK-0354",
@@ -271,6 +287,23 @@
             "status": "released",
             "task_id": "TASK-0284",
             "updated_at": "2026-07-21T23:55:48Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rv0353r3-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r3.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rv0353r3-20260810",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353-r2.md",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-2.md"
+            ],
+            "started_at": "2026-08-10T06:12:59Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260810B",
+            "updated_at": "2026-08-10T06:12:59Z"
         },
         {
             "claim_id": "CLAIM-arq-tres-encargos-20260720",
