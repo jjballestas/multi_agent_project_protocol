@@ -1,7 +1,7 @@
 ---
 id: TASK-0343
 title: La asercion de rollback ata contadores literales y solo se cumple en una plataforma
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md

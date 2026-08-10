@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "3c389f7fc6feb6849f566ac3fe6078c2ff93c15f5defe0f6a0dc4252d8ae3080",
+  "canonical_hash": "dd9724666004aa85c335dfab26e65507965204c10653beed2aadb024e334df0d",
   "integrity": {
-    "canonical_hash": "3c389f7fc6feb6849f566ac3fe6078c2ff93c15f5defe0f6a0dc4252d8ae3080",
+    "canonical_hash": "dd9724666004aa85c335dfab26e65507965204c10653beed2aadb024e334df0d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c2b34a2b701bc5efabdc1a46564f1504949bf5e1227c2485c49a3547d945c447",
-    "signature": "8a78c02bbddb460cc4a9d921603eca785b75c0312ef1d7b2c47b943abc9c6397",
-    "up_to_seq": 8577
+    "prev_hash": "85a3232d106f99c73860f7b230c1800b97c18fa33093d194e98f0bf000610580",
+    "signature": "a50ba05e3df27a7c8e23b42e4016334b4506519330847a0f91d7fd2f09a71234",
+    "up_to_seq": 8581
   },
   "state": {
     "aggregate_versions": {
@@ -1293,6 +1293,7 @@
       "CLAIM-arq-remed-0353-20260810": 1,
       "CLAIM-arq-remed-0354-20260810": 1,
       "CLAIM-arq-remed2-0353-20260810": 1,
+      "CLAIM-arq-remed5-lote1-20260810": 1,
       "CLAIM-arq-reporte0103-20260720": 1,
       "CLAIM-arq-resp0279-20260722": 1,
       "CLAIM-arq-rev0256r1-20260724": 1,
@@ -3460,7 +3461,7 @@
       "TASK-0325": 25,
       "TASK-0326": 13,
       "TASK-0327": 29,
-      "TASK-0328": 51,
+      "TASK-0328": 53,
       "TASK-0329": 32,
       "TASK-0330": 44,
       "TASK-0331": 62,
@@ -3475,7 +3476,7 @@
       "TASK-0340": 29,
       "TASK-0341": 2,
       "TASK-0342": 27,
-      "TASK-0343": 16,
+      "TASK-0343": 17,
       "TASK-0344": 11,
       "TASK-0345": 22,
       "TASK-0346": 17,
@@ -3510,7 +3511,7 @@
       "protocol-prune": 63,
       "protocol-state": 1
     },
-    "events_applied": 7906,
+    "events_applied": 7910,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4262,6 +4263,10 @@
       "arq-r4go23-20260807T2320Z-r3": 7288,
       "arq-r4go23-20260807T2320Z-s1": 7286,
       "arq-r4go23-20260807T2320Z-s2": 7287,
+      "arq-r5a-000": 8578,
+      "arq-r5a-001": 8579,
+      "arq-r5a-002": 8580,
+      "arq-r5a-099": 8581,
       "arq-reg3-0": 7441,
       "arq-reg3-1": 7442,
       "arq-reg3-10": 7451,
@@ -11420,5 +11425,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8577
+  "up_to_seq": 8581
 }
