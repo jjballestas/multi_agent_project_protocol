@@ -245,3 +245,20 @@ descubrirlo como ruido en produccion.
 - El mutante de produccion elimina la guarda previa a la exencion y pierde las 231 detecciones del
   corpus derivado. Los mutantes historicos de cegado de coordenada, adyacencia y fecha siguen
   muriendo sobre el corpus previo con positivos anteriores no nulos.
+
+## Remediacion 7: silueta contigua integral y corpus no circular (2026-08-10)
+
+- La guarda previa a la exencion evalua sobre el mismo valor integral tanto la silueta contigua
+  incondicional como la presentacion agrupada con checksum. Una coordenada ya no puede consumir
+  una silueta contigua con checksum invalido antes de que el detector estructural la vea.
+- El corpus derivado deja de admitir casos mediante `account_identifier_grouped_is_detected`, que
+  era la guarda bajo prueba. La admision ahora depende solo de que la presentacion construida no
+  sobreviva en los remanentes del parser de coordenada; cruza 12 siluetas contiguas invalidas con
+  las presentaciones validas, las nueve coordenadas descubiertas y los tres ordenes.
+- Saldo emitido por el contrato: `population=1001 previous_positive=832 current_positive=1001
+  gained=169 lost=0 coordinates=9 orders=3 formats=3`. Los formatos son contiguo valido,
+  agrupado valido y contiguo con checksum invalido.
+- El precio medido sobre las 22.990 cadenas gobernadas actuales es cero marcas nuevas. El mutante
+  que retira solo la rama contigua de la guarda integral pierde detecciones del corpus derivado y
+  conserva cero divergencias sobre el corpus gobernado real; el mutante historico que vuelve a
+  exigir checksum a la rama contigua tambien muere.
