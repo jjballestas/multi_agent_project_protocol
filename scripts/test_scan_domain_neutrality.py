@@ -61,7 +61,7 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-NEUTRALITY-IDENTITY-INVENTORY-PARITY",
-        "negative": "A dead identity exemption added to only one scanner must be rejected immediately.",
+        "negative": "An UNCONDITIONAL dead identity exemption added to only one scanner must be rejected immediately. Scope declared 2026-08-10 after SLIP-8: an exemption behind a guard conditioned on the scanned tree is NOT covered; see TASK-0356.",
         "mutation": "production_mutants = {",
         "boundaries": (
             "self.assertEqual(python_inventory, powershell_inventory)",

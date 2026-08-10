@@ -81,7 +81,7 @@
         {
             "id": "TASK-0329",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
         },
         {
@@ -203,6 +203,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El eje de la forma no se cierra enumerando -- reconocer PowerShell por estructura y no por texto"
+        },
+        {
+            "id": "TASK-0356",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El oraculo de paridad vuelca bajo la raiz del fixture y el gate corre con -Root . -- ninguna invocacion es la de produccion"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
