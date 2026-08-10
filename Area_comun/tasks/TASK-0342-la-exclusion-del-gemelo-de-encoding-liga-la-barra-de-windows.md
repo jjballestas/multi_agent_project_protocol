@@ -126,3 +126,22 @@ R5 is resolved as a measurement precondition. The cross-platform parity property
 fixture filesystem before creating case-distinct coordinates. On a case-insensitive filesystem it
 reports `UNMEASURED` and exits without a false failure; the case-sensitive POSIX boundary remains a
 required real Actions measurement.
+
+## Remediation 3 - effective policy and channel-isolated hidden enumeration
+
+The PowerShell scanner exposes `-DumpPolicy` at the exact top-level point where scanning starts.
+It serializes the effective `SkipDirs`, root-relative `SkipAbsoluteDirs`, and `SkipSuffixes` values
+after all assignments have executed. The parity contract consumes that runtime JSON instead of
+parsing a source-code line. Therefore an added coordinate, `+=`, a later assignment, a multiline
+array, and a trailing comment are judged by their executed effect rather than their text shape.
+
+The permanent negative now runs four production-script variants. `+=` and a later assignment that
+introduce `dist` are caught as live policy and behavior divergences. A multiline array and a
+trailing comment with no policy effect remain green. Coordinates without case-bearing characters
+remain in the exact-coordinate universe but do not manufacture a meaningless case variant.
+
+Hidden enumeration is isolated per PowerShell channel. A mailbox hidden file and a state hidden
+JSON file contain valid UTF-8 non-ASCII text that only the ASCII channels report; a hidden task file
+contains only a mojibake signature. Removing `-Force` independently from `Scan-AsciiPath`,
+`Scan-AsciiStateJson`, or `Scan-MojibakeRoot` now changes the measured scanned set and kills the
+contract without another channel masking the loss.
