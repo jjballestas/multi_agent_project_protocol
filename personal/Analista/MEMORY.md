@@ -10239,3 +10239,87 @@ DECISION-0018 en el mensaje.
   replica.
 - `Area_comun/protocol/FALSIFICATION_CONTRACTS.json` (en `scope_routes` del intake de 0353) **no
   existe**: el registro se deriva del AST de los runners.
+
+---
+
+## 2026-08-10 -- TASK-0353 r3 (remediacion 2, salida A): CHANGE-REQUIRED, commit `32a23e4d`
+
+Ancla `897b9767` (verde esta vez: validate/encoding/neutrality/contracts/drift todos EXIT=0, y el
+paso 03 del replicador vuelve a PASS; la anomalia DECISION-0018 de r2 queda cerrada).
+
+### La leccion de la ronda: EL PREDICADO ERA CORRECTO, LA POBLACION ERA UN PUNTO
+
+Codex ato la declaracion (`SEMANTIC_REQUIRED_TURN_KEYS`) a una derivacion por comportamiento con
+**igualdad exacta**. El predicado es el bueno. Pero el derivador
+(`behaviorally_required_turn_keys`) hace `for key in report` sobre **un solo informe** (`clean`):
+
+1. solo prueba las claves que ese informe **ya trae**;
+2. solo prueba **una forma de turno**, asi que ninguna regla condicional que no dispare para esa
+   forma existe para el contrato.
+
+**Refutacion con SU PROPIA herramienta, cero cambios de codigo**: copie el derivador verbatim y lo
+aplique a otro turno valido cambiando solo `outcome` -> `{gate, obstacles}` vs declaracion
+`{obstacles}`. Es la leccion `estrella-no-producto-y-poblacion-derivada` en su forma mas pura:
+**derivar de una muestra no es derivar de la condicion evaluada.**
+
+### El mutante que decide: MP4, la regla de MANANA
+
+MP1 guard borrado / MP2 declaracion vaciada / MP3 sobre-declaracion -> **KILLED** (credito real).
+MP4 = anadir a `validate_turn()` una exigencia condicional NUEVA sin declararla ->
+**SOBREVIVE (exit 0)**, refutando la promesa literal del handoff.
+
+**Y acredite que el mutante esta VIVO** (`mutar-produccion-no-los-mutantes-del-runner`):
+- la regla muerde: `blocked` sin `next_hint` -> error; con `next_hint` -> [];
+- derivado desde la forma BLOCKED = `{next_hint, obstacles}` != declaracion;
+- derivado desde la forma MUESTREADA = `{obstacles}` == declaracion.
+Sin ese paso, MP4 seria indistinguible de un edit nulo y el hallazgo no valdria nada.
+
+### Medir la DIRECCION del cambio (pre vs post) encontro lo mas grave
+
+Clon C en `3b089ab3` (= `f4c6c3b9^`, pre-remediacion). Misma configuracion, dos arboles:
+
+| config (raiz enrutada) | 3b089ab3 pre | 897b9767 ancla |
+|---|---|---|
+| sin `decision_refs` | error honesto de esquema, rejected | **diagnostico que MIENTE**, rejected |
+| sin `actions` | rejected | **ok + COMMITEADO** (`1e1abbd`) |
+
+La remediacion 1 cambio el filtro de una **lista fija del modulo** a **las claves de la raiz
+enrutada**: cerro `obstacles` y abrio la simetrica sobre TODAS las demas claves. La remediacion 2
+tapa una (`obstacles`) por enumeracion. El CASO B es un **falso negativo con commit**, no solo un
+mensaje feo. Control obligatorio: el mismo turno con el esquema vivo intacto **se rechaza**.
+
+`leccion-ensanchar-un-patron-puede-estrecharlo` generalizada: **medir siempre el arbol de ANTES;
+un arreglo puede convertir un error honesto en uno que miente, y un rechazo en un commit.**
+
+### La hipotesis del Arquitecto que NO era (refutar tambien es entregar)
+
+Preguntaba por exigencias sobre el contenido de una clave **anidada**. Medido: `schema_report` poda
+**solo el nivel superior**, asi que lo anidado sobrevive al filtro y la puerta de esquema lo caza
+con un error honesto (`review_qa` fuera del `transitions` de la raiz -> "Additional properties are
+not allowed"). Descartar su hipotesis 1 con medicion y senalar que el eje real era su hipotesis 2
+vale tanto como el hallazgo.
+
+### AC6 por fin PASS -- y la paridad por PASO puede esconder regresion por CASO
+
+Mi replicador en el ancla: **63/6/8, fallos {36,43,50,53,58,59}**, identico a lo declarado. Ya no
+transcribe. **Pero el conteo por paso no basta**: compare los CASOS que fallan dentro de los dos
+pasos que la entrega podia tocar.
+
+- paso 53 Review/QA: 6 casos pre -> los mismos 6.
+- paso 58 runtime loop: **9 casos pre -> 5, subconjunto estricto** (mejora real escondida dentro de
+  un paso que sigue rojo).
+
+**Regla nueva: cuando un paso ya esta rojo por causa ajena, comparar el CONJUNTO DE CASOS, no el
+conteo de pasos.** Un fallo nuevo cabe entero dentro de un rojo preexistente.
+
+### Operativo
+
+- 3 clones (`clone` replay @ancla, `clone2` sondas/mutantes @ancla, `clone3` control @pre). El
+  replay completo tardo ~22 min esta vez; lanzarlo en background en el minuto 1 sigue siendo lo
+  correcto.
+- Diagnosticar "cuelgue" del replay por `Get-CimInstance Win32_Process` + `CommandLine`, no por
+  ausencia de lineas: estaba en `scripts/memory/test_memory_db.py`, sano.
+- El guard nuevo aborta con **traceback y sin runlog** (levanta dentro de `run_loop`). Ruidoso,
+  que era lo pedido; anotado como R11 de operabilidad, no como slip.
+- `new_instance.py` usa `copy_runtime_dir`: `orchestrator.py` y `turn_schema.json` viajan de la
+  misma fuente, asi que el guard no puede romper una instancia recien generada (AC3 intacto).
