@@ -6602,3 +6602,17 @@ ratified its own work.
   Actions run before delivery. Codex is maker only and has not reviewed or ratified this work.
 - A concurrent TASK-0328 coordination commit `0c216cd6` absorbed the already-written TASK-0342
   task-note and Codex-signed claim event while Codex respected its staged anti-collision window.
+
+## 2026-08-10 - TASK-0342 remediation 3 blocked on Actions admission
+
+- Real Actions run `31402650690` targeted exact pushed head `bb90a6ad`, but all four jobs had empty
+  step lists and runner id 0. GitHub reported failed recent account payments or a spending-limit
+  gate; no requested POSIX scanner or mutation step executed.
+- Commit `e92d1f69` moves TASK-0342 from `in_progress` to `blocked`, releases both Codex claims, and
+  records a self-contained handoff. The open question asks Arquitecto/operator to restore Actions
+  admission and rerun the exact implementation before AC5 or independent review can close.
+- Arquitecto concurrently routed an explicitly unverified r4 review in commit `e52044aa` and
+  absorbed the already-created Codex question into that coordination snapshot. TASK-0342 remains
+  canonically blocked; Codex remains maker only.
+- The commit hook reports released-claim pruning due at 93.1 percent. That maintenance is
+  Architect-owned and was not absorbed into this implementation/block transaction.
