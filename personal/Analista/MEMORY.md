@@ -10571,3 +10571,83 @@ paso 03 EXIT=0 y paso 04 EXIT=0. **La conclusion "no empeora" sobrevivio; el num
    compartido es peor que el slip, asi que va en commit de continuacion y queda anotado. La proxima
    vez: escribir la memoria ANTES de commitear el veredicto y meter las tres rutas en el mismo
    pathspec.
+
+## 2026-08-10 -- TASK-0345 r1: CHANGE-REQUIRED (`8d0f811e`)
+
+Ancla `6fb4ea95` (== HEAD `3dfa6b5a` en las rutas de alcance, diff vacio). Entrega `fe7c1dea` +
+remediacion `770d15a7`. Sin `pwsh` en este host: los `.ps1` no se pueden ejercitar aqui, pero el
+contrato AC4 es Python puro y se ejercita entero.
+
+### El hallazgo que decide
+
+El guardian `run_powershell_host_cases.py` **inventaria 7 puntos de entrada PowerShell de CI y
+escanea formas de host en 2**. Reintroducir `.MakeRelativeUri(` -- la averia original que abrio la
+tarea -- en `scripts/validate_collaboration_state.ps1` (un `.ps1` que CI corre con `shell: pwsh` en
+ubuntu, `validate.yml:161`) deja el gate en **exit 0**. El AC4 dice literalmente "debe caer con el
+mutante que reintroduzca cualquiera de las cuatro formas ya conocidas": **no cae**. No es solo que
+no cierre la clase; incumple su propia letra en cuanto cambias de coordenada.
+
+**8 escapes de 11 mutantes sobre produccion.** Los 3 muertos, ninguno murio por reconocer una forma:
+dos por `assert texto.count("<linea exacta>") == 1` (candado de texto, no de propiedad -- anadir un
+lector NUEVO dejando la linea congelada intacta pasa) y el tercero porque al comentar la linea el
+`.replace()` del propio mutante se quedo sin ancla y se volvio no-op.
+
+### Los tres patrones que se repiten y ya tengo escritos
+
+1. **La poblacion no se deriva** (`estrella-no-producto-y-poblacion-derivada`): la lista de ficheros
+   escaneados esta escrita a mano (3), mientras la lista inventariada SI se deriva del workflow (7).
+   La derivacion existia en el mismo fichero -- `workflow_powershell_paths` -- y no se uso donde
+   importa. **Cuando un guardian tiene una parte derivada y otra a mano, el agujero esta en la parte
+   a mano.**
+2. **Mutante tautologico** (`mutar-produccion-no-los-mutantes-del-runner`): el mutante `line_reader`
+   planta el comentario `TASK0345_UNBOUNDED_GET_CONTENT_LINE_READER` y el clasificador detecta ese
+   comentario. `grep -rn` del marcador da **dos** lineas en todo el repo: el detector (l.78) y el
+   mutante que lo planta (l.145). Sobre un lector real devuelve `set()`. **Test rapido para cazarlo:
+   grepear el token del detector en el repo; si solo vive dentro del guardian, no mide nada.**
+3. **Ata el texto, no el efecto** (`contrato-ata-el-helper-no-el-efecto`): `NEG-POWERSHELL-EXPECTED-
+   NEGATIVE-EXIT-LEAK` = `source.rstrip().endswith("exit 0")`. Comprobado en directo que devuelve
+   `True` con el `exit 0` **comentado** y con el `exit 0` **inalcanzable** (`exit $LASTEXITCODE`
+   encima). El mutante correcto no es borrar la linea: es dejarla inalcanzable. Ya lo tenia escrito
+   y volvio a aparecer, esta vez en la remediacion misma (`770d15a7`).
+
+Cuarto eje nuevo: **el inventario esta indexado por FICHERO cuando la condicion es "PowerShell que
+CI ejecuta"**. Un paso `shell: pwsh` con `run: |` en linea no es un `.ps1`, no entra en el inventario
+y no lo escanea nadie. Verificado: exit 0.
+
+### AC6: "bloqueado por facturacion" era falso
+
+El Arquitecto me pidio declararlo bloqueado por el instrumento. **La facturacion impide LANZAR runs
+nuevos, no LEER el que ya existe.** `gh run view 31271924074` -> job `powershell-linux-parity`
+success, head_sha `50ce2301` (posterior a la remediacion), sus 4 pasos de gate success. El rojo
+global viene de `Run runtime property invariant cases`, ajeno. **Segunda vez seguida (0344 y 0345)
+que un AC dado por bloqueado SI era acreditable abriendo el run.** Regla: antes de aceptar "bloqueado
+por el instrumento", comprobar si el bloqueo afecta a la escritura o tambien a la lectura.
+
+Matiz que si es real: ese run dejo **saltados** los pasos 75-80 de `validate` (el paso 31 aborta la
+cadena), entre ellos `Run LLM turn wrapper cases with PowerShell`. Ese `.ps1` esta inventariado como
+"smoke wrapper en CI Linux" y no tiene evidencia de haber corrido nunca alli -> residual R1.
+
+### AC5 (paridad de veredicto) SI se sostiene
+
+No basta con que los dos gemelos salgan verdes sobre un arbol limpio -- eso es acuerdo en un punto.
+Aqui hay corpus real: `run_neutrality_scan_cases.ps1`, `run_sdd_cases.ps1` y
+`run_compact_comms_cases.ps1` comparan **exit Y salida normalizada** de ambos gemelos sobre casos que
+deben salir 0 y casos que deben salir 1; `run_encoding_gate_cases.py` compara los conjuntos
+`scanned`/`excluded` y **declara `UNMEASURED`** cuando falta `pwsh` o el FS es insensible. Esa
+declaracion es exactamente la valvula que el AC5 admite. Pasos 16/22/23/24 success en ubuntu.
+
+### Lo que exijo en la r2 (y lo que NO acepto)
+
+Dicho en el veredicto: **no acepto "anado `"\"` y `OrdinalIgnoreCase` a la lista negra"**. Es la
+remediacion que reintroduce el patron (`remediaciones-reintroducen-el-patron`): estrecha el dano sin
+cambiar la clase. El criterio: poblacion derivada del workflow, mutantes sobre produccion **en cada**
+punto de entrada, y supervivencia a cambio de **coordenada, orden y formato**. Mis E2a/E2b/E6 son el
+negativo minimo que debe morir. Max 2 iteraciones, luego operador humano.
+
+### Slip propio, segunda vez
+
+**DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): me la volvi a saltar.** Veredicto en
+`8d0f811e`, memoria en commit de continuacion. Ya lo anote en 0354 y he repetido. La causa es de
+orden: escribo el veredicto, corro gates, commiteo, y la memoria llega despues. **Fix mecanico para
+la proxima: escribir la memoria ANTES de correr los gates, y meter las TRES rutas (artefacto,
+mensaje, memoria) en el mismo pathspec del commit.**
