@@ -1,7 +1,7 @@
 ---
 id: TASK-0343
 title: La asercion de rollback ata contadores literales y solo se cumple en una plataforma
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md
@@ -96,3 +96,9 @@ El baseline completo conserva exit 0 y emite el saldo anterior seguido de:
     mailbox retry cases: PASS (proof-only rollback -> conservative signed/ambiguous preservation)
 
 El inventario permanece derivado y completo: `permanent_negatives=71 declared=71 missing=0`.
+
+El commit exacto `4cfd1b03` repite runner, inventario, colaboracion, encoding, neutralidad,
+compilacion, drift y diff en worktree limpio con status vacio. El run real `31397288472` sobre el
+head publicado `1d219ccd` no inicio ningun paso: la anotacion de `falsification-runners` declara
+fallo de pagos recientes o limite de gasto. La evidencia actual de AC5 queda externamente pendiente;
+no se presenta ese rojo de plataforma como fallo del codigo.
