@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0328 remediation iteration 6 implemented.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0343 remediation iteration 2 implemented.
+
+## 2026-08-10 - TASK-0343 remediation iteration 2 implementation
+
+- Commit `4cfd1b03` binds the rollback ledger assertion in production `main()` to the existing
+  permanent negative through semantic AST inspection. The criterion finds the call to
+  `ledger_preservation_holds` inside an assertion and does not enumerate reason names or source
+  forms.
+- The run-derived balance is `baseline=1 coordinate=1 order=1 format=1 deleted=0`; changing line
+  coordinates, definition order, or formatting preserves the criterion. Removing the complete
+  production assertion makes the full runner exit 1 with every structural balance at false.
+- The ordinary full runner exits 0, and the falsification inventory remains 71/71. Collaboration,
+  encoding, neutrality, compile, and diff gates exited 0 before commit. TASK-0343 remains
+  `in_progress` pending exact-commit clean verification, required real Actions evidence, and
+  independent review. Codex is maker only and has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0328 remediation iteration 6 implementation
 
