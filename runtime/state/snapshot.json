@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "d7875f28282a1f9e03cf176c0130056044b808e85c26ea445631f1f7cc4a4a63",
+  "canonical_hash": "91a2ccb2c2094a996179c791afef992ac897854b5fecc4b540b1577c45aa0c56",
   "integrity": {
-    "canonical_hash": "d7875f28282a1f9e03cf176c0130056044b808e85c26ea445631f1f7cc4a4a63",
+    "canonical_hash": "91a2ccb2c2094a996179c791afef992ac897854b5fecc4b540b1577c45aa0c56",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "73ede9805cd8ac79f9144c3e7bdcaf1cbfa9a3ea1c6bb994d7a4254f3107fa3d",
-    "signature": "cbf61c54bcd1432c1ff5177eb907dcf4dfd290a7b9980546c6de5db5878cbfc6",
-    "up_to_seq": 8672
+    "prev_hash": "cfb48ec45e6af30ec24899650c3c2cea47f0797d0ac62aac32adc3dbf1ade960",
+    "signature": "a4b8ac3289fbbc1b25680908aff36d5d995157a1981d8b479f00a6a2ea152c3a",
+    "up_to_seq": 8679
   },
   "state": {
     "aggregate_versions": {
@@ -1070,6 +1070,7 @@
       "CLAIM-arq-cancel0231-20260724": 1,
       "CLAIM-arq-checkpoint-hyg-20260720": 1,
       "CLAIM-arq-ciclo1200-20260720": 1,
+      "CLAIM-arq-cierre-0328-20260810": 1,
       "CLAIM-arq-cierre-0344-20260810": 1,
       "CLAIM-arq-cierre-0345-20260810": 1,
       "CLAIM-arq-cierre-orden-20260721": 1,
@@ -3073,6 +3074,7 @@
       "MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-r2-veredicto": 1,
       "MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-veredicto": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0328-r7": 1,
+      "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0328-r8": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0342-r4": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0343-r3": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0344": 1,
@@ -3082,6 +3084,7 @@
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0354": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0354-r2": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0328-r7": 1,
+      "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0328-r8": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0342-r4": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0343-r3": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0344": 1,
@@ -3490,7 +3493,7 @@
       "TASK-0325": 25,
       "TASK-0326": 13,
       "TASK-0327": 29,
-      "TASK-0328": 73,
+      "TASK-0328": 75,
       "TASK-0329": 43,
       "TASK-0330": 44,
       "TASK-0331": 62,
@@ -3505,7 +3508,7 @@
       "TASK-0340": 29,
       "TASK-0341": 2,
       "TASK-0342": 34,
-      "TASK-0343": 37,
+      "TASK-0343": 39,
       "TASK-0344": 11,
       "TASK-0345": 22,
       "TASK-0346": 17,
@@ -3540,7 +3543,7 @@
       "protocol-prune": 64,
       "protocol-state": 1
     },
-    "events_applied": 8001,
+    "events_applied": 8008,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3814,6 +3817,11 @@
       "arq-cierre-20260807T0310Z-s2": 7329,
       "arq-cierre-20260807T0310Z-u3": 7330,
       "arq-cierre-20260807T0310Z-u4": 7331,
+      "arq-cl328-000": 8675,
+      "arq-cl328-001": 8676,
+      "arq-cl328-010": 8677,
+      "arq-cl328-011": 8678,
+      "arq-cl328-099": 8679,
       "arq-cl344-000": 8565,
       "arq-cl344-001": 8566,
       "arq-cl344-010": 8567,
@@ -7911,6 +7919,8 @@
       "codex:task0343:remediation3:delivery-release-delivery:20260810T203436Z": 8672,
       "codex:task0343:remediation3:delivery-release-main:20260810T203436Z": 8671,
       "codex:task0343:remediation3:delivery-status:20260810T203436Z": 8670,
+      "codex:task0343:remediation3:final-memory-claim:20260810T204414Z": 8673,
+      "codex:task0343:remediation3:final-memory-release:20260810T204802Z": 8674,
       "codex:task0343:remediation3:memory-claim:20260810T201403Z": 8667,
       "codex:task0343:remediation3:memory-release:20260810T201614Z": 8668,
       "codex:task0343:status-in-progress:20260808T172036Z": 8121,
@@ -11545,5 +11555,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8672
+  "up_to_seq": 8679
 }

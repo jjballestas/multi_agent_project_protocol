@@ -2,7 +2,7 @@
 task_id: TASK-0328
 file: Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md
 title: "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono"
-status: in_review
+status: done
 type: infra
 owner: Codex
 reviewer: Analista
@@ -262,3 +262,27 @@ descubrirlo como ruido en produccion.
   que retira solo la rama contigua de la guarda integral pierde detecciones del corpus derivado y
   conserva cero divergencias sobre el corpus gobernado real; el mutante historico que vuelve a
   exigir checksum a la rama contigua tambien muere.
+
+## Frontera declarada al cerrar (2026-08-10)
+
+Cerrada con veredicto OK-CLOSABLE (`Analista-TASK-0328-corpus-no-circular-r8-verdict.md`) y
+verificada por el Arquitecto por separado. Al verificar aparecio una **asimetria que no es un
+hueco sino una frontera de diseno**, y se declara aqui para que sea visible y refutable:
+
+    agrupado VALIDO          ES91 2100 0418 4502 0005 1332   -> detectado
+    agrupado MAL TECLEADO    ES91 2100 0418 4502 0005 1333   -> NO detectado
+    contiguo MAL TECLEADO    ES9121000418450200051333        -> detectado (incondicional)
+
+    control de falsos positivos, presentaciones agrupadas inocuas:
+        "factura 2100 0418 4502 0005"                        -> no marcado
+        "tel 600 123 456 789 012 345"                        -> no marcado
+        "fecha 2026 0810 1200 0000 0000 0001"                -> no marcado
+
+**Por que la asimetria es coherente:** una tirada de digitos agrupada es comun en texto inocuo --
+facturas, telefonos, fechas -- asi que exigir checksum valido en la forma agrupada es lo que impide
+el falso positivo. La silueta CONTIGUA, en cambio, es rara en texto inocuo, y por eso puede ser
+incondicional con un precio medido de **0 marcas nuevas sobre 22.918 cadenas gobernadas reales**.
+
+Hacer incondicional tambien la agrupada tendria un precio que **no** esta medido y que los tres
+controles de arriba sugieren que no seria cero. Si alguien concluye que esa cobertura hace falta,
+**es tarea nueva con su propia medicion de falsos positivos**, no un residuo de esta.
