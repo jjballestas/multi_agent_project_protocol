@@ -6586,3 +6586,19 @@ ratified its own work.
   entry proves the original report contained `obstacles: []`.
 - Codex stopped without editing production. TASK-0347 must be blocked and partitioned by Arquitecto
   before resumption; the unrelated Actions billing gate also keeps AC7 unavailable.
+
+## 2026-08-10 - TASK-0342 remediation 3 implementation
+
+- Commit `05ec641f` replaces the PowerShell declaration-line regex with a runtime `-DumpPolicy`
+  contract emitted at the exact point where the scanner consumes its effective policy.
+- The permanent negative runs production-script variants for `+=`, a later assignment, a multiline
+  array, and a trailing comment. The first two create a live `dist` divergence and must be caught;
+  the latter two preserve policy and must remain accepted. Case-free coordinates stay measurable
+  without a manufactured case variant.
+- Hidden enumeration now has independent ASCII-mailbox, ASCII-state, and mojibake sentinels. A
+  one-site `-Force` removal from any of the three production functions changes the measured set.
+- Local collaboration, encoding, neutrality, falsification, compile, drift, and diff gates exited
+  0. PowerShell 7 POSIX execution remains deliberately unmeasured locally and requires the real
+  Actions run before delivery. Codex is maker only and has not reviewed or ratified this work.
+- A concurrent TASK-0328 coordination commit `0c216cd6` absorbed the already-written TASK-0342
+  task-note and Codex-signed claim event while Codex respected its staged anti-collision window.
