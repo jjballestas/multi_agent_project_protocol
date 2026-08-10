@@ -1,7 +1,7 @@
 ---
 id: TASK-0353
 title: Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md
@@ -69,3 +69,20 @@ regla se endurecio; la lista no se entero. Ningun gate lo vio porque el sintoma 
 
 Por eso el AC4 no pide anadir `obstacles` a la lista: pide el criterio que impide la **proxima**
 divergencia. Anadir el campo cierra hoy y deja la clase abierta.
+
+## Maker delivery
+
+Implementation commit: `f4c6c3b9`.
+
+- `schema_report()` now derives its accepted keys from `runtime/turn_schema.json`; the independent
+  allowlist was removed.
+- The permanent property derives validator-required top-level fields by behavior and proves that
+  every one survives the filter; a production-function mutant that removes one derived field dies.
+- The real orchestrator route accepts a delivery with `obstacles: []`.
+- A freshly generated runtime instance executes the copied orchestrator and preserves the field.
+- Validate-job replay changed from `54 PASS / 15 FAIL / 8 UNSUPPORTED` to
+  `60 PASS / 9 FAIL / 8 UNSUPPORTED`. The same eight `pwsh` steps remain explicitly unsupported.
+- Self-contained handoff:
+  `Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353.md`.
+
+Independent review is required. Codex is maker only.
