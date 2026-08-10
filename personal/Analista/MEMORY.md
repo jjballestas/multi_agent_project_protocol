@@ -11123,3 +11123,67 @@ negativo minimo que debe morir. Max 2 iteraciones, luego operador humano.
 orden: escribo el veredicto, corro gates, commiteo, y la memoria llega despues. **Fix mecanico para
 la proxima: escribir la memoria ANTES de correr los gates, y meter las TRES rutas (artefacto,
 mensaje, memoria) en el mismo pathspec del commit.**
+
+---
+
+## 2026-08-10 23:58 -- TASK-0329 r5: OK-CLOSABLE. SLIP-6 y SLIP-7 muertos, SLIP-8 declarado
+
+Veredicto `13c80c09`. Ancla citada `30913b59`, medido en clon limpio sobre `04a5cc88` y `3ec27a03`
+(`D:/Aegis_Scratch/mapp/an329r5`). Implementacion `21181902`.
+
+### Lo que cerro la clase, y por que esta vez si
+
+Tres rondas persiguiendo *el oraculo se ata a una forma textual del artefacto que juzga*. Lo que la
+cerro no fue otra forma de leer el fuente: fue **que produccion emita su propio estado**. El `.ps1`
+gano `-DumpIdentityInventory` y volca `$IdentityLiteralExemptions` **despues** de que el bucle de
+escaneo real lo haya consumido. Eso hace la propiedad estructural: toda sentencia de nivel superior
+capaz de afectar al escaneo ya corrio antes del punto del volcado, este donde este y con la forma
+que sea.
+
+**Patron reutilizable:** cuando un oraculo tenga que leer el estado de un artefacto ajeno, la
+pregunta no es "con que parser lo leo" sino **"puede el propio artefacto emitirlo despues de
+usarlo?"**. Un parser independiente (el AST que use en r4) sigue leyendo la DECLARACION; el volcado
+post-consumo lee el EFECTO. Es la version instrumental de
+`verificar-el-efecto-no-la-forma`.
+
+### La bateria que lo acredito (8 mutantes mios, no los 5 del handoff)
+
+Misma coordenada muerta solo en PowerShell, cambiando donde y como se escribe: la fuga exacta de r4
+(tras el antiguo marcador), funcion invocada mas abajo, variable en minusculas, **construida en
+cadena y ejecutada con `Invoke-Expression`** (no existe como literal en el fuente), fusion `+=`,
+linea injertada en una ruta YA declarada, y el control post-consumo. **Siete caen.**
+
+**Trampa de instrumentacion que me comi:** mi primer `Reason = "Analista r5 ..."` contenia una
+identidad y el escaner se escanea a si mismo -> `PS_GATE=1` en casi toda la bateria y casi lo leo
+como comportamiento de produccion. **Al mutar un escaner de identidades, el texto del mutante no
+puede contener identidades.**
+
+### SLIP-8: el eje nuevo, y por que NO bloquee
+
+El oraculo volca con `-Root <fixture>` y la paridad de arbol real con `-Root probe_root`; el gate
+corre con `-Root .`. **Ninguna invocacion del oraculo es la de produccion.** Con
+`if (Test-Path (Join-Path $Root "AGENTS.md")) { ...exencion... }` los siete gates quedan verdes y
+PowerShell queda realmente ciego a `runtime/gate.py:1: Codex` (Python sale 1 y lo ve).
+
+**Regla que me impuse y cumpli: no mover la porteria.** En r4 publique el criterio de aceptacion
+(coordenada, orden, formato) ANTES de ver la entrega. Se cumple sobre mutantes que elegi en el
+momento. Bloquear por un eje que no declare seria el mismo vicio que reprocho a las remediaciones.
+Lo que si hice: senalar que **la redaccion del negativo sobreafirma** ("must be rejected
+immediately", sin calificar) y pedir que se acote a *declaracion incondicional*. Acotar la promesa
+no es estrechar el mecanismo -- es dejar de mentirle al siguiente lector.
+
+### Ancla roja que no era mia
+
+`30913b59` da validate EXIT=1 por el cruce `TASK-0328 index=in_review / file=in_progress`. Antes de
+abortar la review: `git diff --stat <ancla> origin/main -- <los ficheros que juzgo>` salio **vacio**,
+asi que medi en la punta verde con equivalencia byte a byte acreditada. **Ancla roja por causa ajena
+no es motivo de aborto si se demuestra que el objeto juzgado es identico.**
+
+### Slip propio, TERCERA vez
+
+DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): otra vez no. Veredicto `13c80c09`,
+memoria en commit de continuacion, y ya lo habia anotado en 0354 y en 0345. El fix que escribi la
+vez pasada -- *escribir la memoria ANTES de correr los gates y meter las tres rutas en el mismo
+pathspec* -- **no lo aplique porque no lo lei al empezar**. Corolario: el fix tiene que estar en el
+arranque, no en el final. **Al leer `personal/Analista/` en el cold start, buscar "Slip propio" y
+ejecutar lo que diga antes de escribir nada.**
