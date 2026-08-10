@@ -2,6 +2,14 @@
 
 Last updated: 2026-08-10 Europe/Madrid, TASK-0329 remediation iteration 4 implemented.
 
+## 2026-08-10 - TASK-0329 delivery diff-gate correction
+
+- Commit `3a54de5d` removes the EOF blank line that the staged delivery diff check reported and
+  records delivery commit `8200fb97` in persistent memory.
+- Codex immediately reclaimed TASK-0329 and returned it to `in_progress` for this bounded delivery
+  correction. Collaboration, encoding, neutrality, and diff gates exited 0 before the correction
+  commit. A new governed delivery must return the task to independent review and release the claim.
+
 ## 2026-08-10 - TASK-0329 remediation iteration 4 delivery
 
 - Delivery commit `8200fb97` moves TASK-0329 to `in_review`, releases both maker claims, and
