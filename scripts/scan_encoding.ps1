@@ -1,5 +1,6 @@
 param(
-    [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
+    [switch]$DumpPolicy
 )
 
 $ErrorActionPreference = "Stop"
@@ -112,6 +113,17 @@ function Scan-MojibakeRoot {
             }
         }
     }
+}
+
+if ($DumpPolicy) {
+    # Emit the policy after every top-level assignment has run, at the same point where
+    # the scanner consumes it. Tests therefore observe values, not source formatting.
+    [ordered]@{
+        skip_dirs = @($SkipDirs)
+        skip_relative_dirs = @($SkipAbsoluteDirs | ForEach-Object { Get-RelativePath $_ })
+        skip_suffixes = @($SkipSuffixes)
+    } | ConvertTo-Json -Compress
+    exit 0
 }
 
 Scan-AsciiPath (Join-Path $ResolvedRoot "Area_comun/mailbox")

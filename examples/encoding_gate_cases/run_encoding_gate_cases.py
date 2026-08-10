@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -22,19 +23,23 @@ import scan_encoding as python_scan  # noqa: E402
 FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-ENCODING-SKIP-PATH-SEPARATOR",
-        "negative": "Python and PowerShell must derive identical scanned and excluded sets from every declared skip coordinate, including hidden entries, dot-only basenames, case semantics, and host path separators.",
+        "negative": "Python and PowerShell must derive identical scanned and excluded sets from effective runtime policy, independent of coordinate, order, formatting, hidden-enumeration channel, dot-only basenames, case semantics, and host path separators.",
         "mutation": "mutant_text = ps_text.replace(",
         "boundaries": (
             "assert python_scanned == powershell_scanned == expected_scanned",
             "assert python_excluded == powershell_excluded == expected_excluded",
             "assert \"Area_comun/tasks/.gitkeep\" in extra_excluded",
-            "assert hidden_scanned != expected_scanned",
             "assert \"runtime/Memory/case.txt\" not in case_scanned",
             "assert \"runtime/memory/index.db\" in separator_scanned",
             "assert dot_suffix_paths <= expected_scanned",
             "assert directory_case_paths <= expected_scanned",
             "assert suffix_case_paths <= expected_excluded",
             "assert skip_dir_case_scanned != expected_scanned",
+            "assert ascii_hidden_scanned != expected_scanned",
+            "assert state_hidden_scanned != expected_scanned",
+            "assert mojibake_hidden_scanned != expected_scanned",
+            "assert (dist_path in policy_scanned) is expected_dist_scanned",
+            "assert (policy_mutant[\"skip_dirs\"] == ps_skip_dirs) is expected_policy_equal",
         ),
         "exercised_by": "assert_cross_platform_skip_parity",
     },
@@ -94,18 +99,41 @@ def finding_paths(output: str) -> set[str]:
     }
 
 
-def ps_array(text: str, variable: str) -> set[str]:
-    match = re.search(rf"^\${re.escape(variable)}\s*=\s*@\(([^\r\n]*)\)$", text, re.MULTILINE)
-    if not match:
-        raise AssertionError(f"PowerShell declaration not found: ${variable}")
-    return set(re.findall(r'"([^"]+)"', match.group(1)))
+def powershell_policy(root: Path, script: Path = PS_SCAN) -> dict[str, set[str]]:
+    if not POWERSHELL:
+        raise RuntimeError("PowerShell is required for encoding scanner policy parity")
+    result = subprocess.run(
+        [POWERSHELL, "-NoProfile", "-File", str(script), "-Root", str(root), "-DumpPolicy"],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise AssertionError(f"PowerShell policy dump failed: {result.stderr}")
+    payload = json.loads(result.stdout)
+    return {
+        "skip_dirs": set(payload["skip_dirs"]),
+        "skip_relative_dirs": {value.replace("\\", "/") for value in payload["skip_relative_dirs"]},
+        "skip_suffixes": set(payload["skip_suffixes"]),
+    }
 
 
-def case_variant(value: str) -> str:
+def case_variant(value: str) -> str | None:
     variant = value.swapcase()
     if variant == value:
-        raise AssertionError(f"coordinate has no case-bearing character: {value}")
+        return None
     return variant
+
+
+def mutate_function(text: str, function_name: str, old: str, new: str) -> str:
+    start = text.index(f"function {function_name} {{")
+    next_function = text.find("\nfunction ", start + 1)
+    end = len(text) if next_function < 0 else next_function
+    body = text[start:end]
+    mutated_body = body.replace(old, new, 1)
+    if mutated_body == body:
+        raise AssertionError(f"mutation anchor missing in {function_name}: {old}")
+    return text[:start] + mutated_body + text[end:]
 
 
 def has_case_sensitive_filesystem(root: Path) -> bool:
@@ -138,11 +166,13 @@ def assert_cross_platform_skip_parity() -> None:
             return
         build_fixture(fixture)
         ps_text = PS_SCAN.read_text(encoding="utf-8-sig")
-        ps_skip_dirs = ps_array(ps_text, "SkipDirs")
-        ps_skip_suffixes = ps_array(ps_text, "SkipSuffixes")
+        ps_policy = powershell_policy(fixture)
+        ps_skip_dirs = ps_policy["skip_dirs"]
+        ps_skip_suffixes = ps_policy["skip_suffixes"]
         declared_skip_dirs = set(python_scan.SKIP_DIRS) | ps_skip_dirs
         declared_skip_suffixes = set(python_scan.SKIP_SUFFIXES) | ps_skip_suffixes
         assert set(python_scan.SKIP_DIRS) == ps_skip_dirs
+        assert set(python_scan.SKIP_RELATIVE_DIRS) == ps_policy["skip_relative_dirs"]
         assert set(python_scan.SKIP_SUFFIXES) == ps_skip_suffixes
 
         scanned_paths = {
@@ -153,6 +183,9 @@ def assert_cross_platform_skip_parity() -> None:
             "Area_comun/mailbox/answered/.gitkeep",
             "Area_comun/mailbox/archived/.gitkeep",
             "Area_comun/mailbox/open/.gitkeep",
+            "Area_comun/mailbox/open/.hidden.md",
+            "Area_comun/state/.hidden.json",
+            "Area_comun/tasks/.hidden.md",
             "Area_comun/reports/.gitkeep",
             "Area_comun/tasks/.gitkeep",
             "runtime/.cache/note.txt",
@@ -168,15 +201,18 @@ def assert_cross_platform_skip_parity() -> None:
         }
         directory_exact_paths = {f"runtime/{item}/exact.txt" for item in declared_skip_dirs}
         directory_case_paths = {
-            f"runtime/{case_variant(item)}/case.txt" for item in declared_skip_dirs
+            f"runtime/{variant}/case.txt"
+            for item in declared_skip_dirs
+            if (variant := case_variant(item)) is not None
         }
         suffix_exact_paths = {
             f"runtime/suffixes/exact-{index}{suffix}"
             for index, suffix in enumerate(sorted(declared_skip_suffixes))
         }
         suffix_case_paths = {
-            f"runtime/suffixes/case-{index}{case_variant(suffix)}"
+            f"runtime/suffixes/case-{index}{variant}"
             for index, suffix in enumerate(sorted(declared_skip_suffixes))
+            if (variant := case_variant(suffix)) is not None
         }
         dot_suffix_paths = {
             f"Area_comun/mailbox/open/{suffix}" for suffix in declared_skip_suffixes
@@ -189,6 +225,8 @@ def assert_cross_platform_skip_parity() -> None:
             if relative == "runtime/memory/index.db":
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(b"SQLite format 3\x00\xff\xfe\xfd")
+            elif relative.startswith("Area_comun/mailbox/") or relative.startswith("Area_comun/state/"):
+                write(path, "# se\u00f1al\n")
             else:
                 write(path, "# Espa\u00c3\u00b1a\n")
 
@@ -206,6 +244,45 @@ def assert_cross_platform_skip_parity() -> None:
         assert python_result.returncode == powershell_result.returncode == 1
         assert python_scanned == powershell_scanned == expected_scanned
         assert python_excluded == powershell_excluded == expected_excluded
+
+        skip_dirs_line = '$SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")'
+        multiline_skip_dirs = (
+            "$SkipDirs = @(\n"
+            '    ".git",\n'
+            '    ".venv",\n'
+            '    "venv",\n'
+            '    "__pycache__",\n'
+            '    "node_modules"\n'
+            ")"
+        )
+        policy_mutants = (
+            ("A4_plus_equals", ps_text.replace(skip_dirs_line, skip_dirs_line + '\n$SkipDirs += "dist"', 1), False, False),
+            (
+                "A7_later_assignment",
+                ps_text.replace(
+                    "$SkipSuffixes = @",
+                    '$SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules", "dist")\n$SkipSuffixes = @',
+                    1,
+                ),
+                False,
+                False,
+            ),
+            ("A5_multiline", ps_text.replace(skip_dirs_line, multiline_skip_dirs, 1), True, True),
+            ("A8_trailing_comment", ps_text.replace(skip_dirs_line, skip_dirs_line + " # same policy", 1), True, True),
+        )
+        dist_path = "runtime/dist/a.txt"
+        write(fixture / dist_path, "# Espa\u00c3\u00b1a\n")
+        assert dist_path in finding_paths(run_scan(fixture).stdout)
+        for name, mutant, expected_dist_scanned, expected_policy_equal in policy_mutants:
+            assert mutant != ps_text
+            mutant_path = fixture / f"scan_encoding_{name}_mutant.ps1"
+            mutant_path.write_text(mutant, encoding="utf-8", newline="\n")
+            policy_mutant = powershell_policy(fixture, mutant_path)
+            policy_scanned = finding_paths(run_ps_scan(fixture, mutant_path).stdout)
+            assert (dist_path in policy_scanned) is expected_dist_scanned
+            assert (policy_mutant["skip_dirs"] == ps_skip_dirs) is expected_policy_equal
+            verdict = "ACCEPTED_EQUIVALENT" if expected_policy_equal else "CAUGHT_DIVERGENCE"
+            print(f"POLICY_MUTATION {name} {verdict}")
 
         separator_text = ps_text.replace(
             "        # Compare one host-native directory boundary, never a literal slash shape.\n"
@@ -236,14 +313,29 @@ def assert_cross_platform_skip_parity() -> None:
         assert extra_excluded != expected_excluded
         assert "Area_comun/tasks/.gitkeep" in extra_excluded
 
-        hidden_text = ps_text.replace(" -File -Force", " -File")
-        assert hidden_text != ps_text
-        hidden_path = fixture / "scan_encoding_hidden_omission_mutant.ps1"
-        hidden_path.write_text(hidden_text, encoding="utf-8", newline="\n")
+        ascii_hidden_text = mutate_function(ps_text, "Scan-AsciiPath", " -File -Force", " -File")
+        ascii_hidden_path = fixture / "scan_encoding_ascii_hidden_omission_mutant.ps1"
+        ascii_hidden_path.write_text(ascii_hidden_text, encoding="utf-8", newline="\n")
         if os.name != "nt":
-            hidden_scanned = finding_paths(run_ps_scan(fixture, hidden_path).stdout) & universe
-            assert hidden_scanned != expected_scanned
-            assert "Area_comun/mailbox/open/.gitkeep" not in hidden_scanned
+            ascii_hidden_scanned = finding_paths(run_ps_scan(fixture, ascii_hidden_path).stdout) & universe
+            assert ascii_hidden_scanned != expected_scanned
+            assert "Area_comun/mailbox/open/.hidden.md" not in ascii_hidden_scanned
+
+        state_hidden_text = mutate_function(ps_text, "Scan-AsciiStateJson", " -File -Force", " -File")
+        state_hidden_path = fixture / "scan_encoding_state_hidden_omission_mutant.ps1"
+        state_hidden_path.write_text(state_hidden_text, encoding="utf-8", newline="\n")
+        if os.name != "nt":
+            state_hidden_scanned = finding_paths(run_ps_scan(fixture, state_hidden_path).stdout) & universe
+            assert state_hidden_scanned != expected_scanned
+            assert "Area_comun/state/.hidden.json" not in state_hidden_scanned
+
+        mojibake_hidden_text = mutate_function(ps_text, "Scan-MojibakeRoot", " -File -Force", " -File")
+        mojibake_hidden_path = fixture / "scan_encoding_mojibake_hidden_omission_mutant.ps1"
+        mojibake_hidden_path.write_text(mojibake_hidden_text, encoding="utf-8", newline="\n")
+        if os.name != "nt":
+            mojibake_hidden_scanned = finding_paths(run_ps_scan(fixture, mojibake_hidden_path).stdout) & universe
+            assert mojibake_hidden_scanned != expected_scanned
+            assert "Area_comun/tasks/.hidden.md" not in mojibake_hidden_scanned
 
         case_text = ps_text.replace(
             "$PathComparison = [System.StringComparison]::Ordinal",
