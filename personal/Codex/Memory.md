@@ -19,6 +19,9 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent revie
   before the implementation commit. TASK-0353 remains `in_progress` under claim
   `CLAIM-20260810-Codex-TASK-0353-remediation-1c` pending governed delivery; Codex has not reviewed
   or ratified the remediation.
+- Delivery commit `cac99b0c` moves TASK-0353 to `in_review`, releases both remediation claims, and
+  publishes `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-1.md` for independent
+  re-review. Runtime transitions are signed by Codex and canonical gates remained green.
 
 ## 2026-08-10 - TASK-0353 implementation
 
