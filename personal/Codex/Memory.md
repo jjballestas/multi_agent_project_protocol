@@ -1,6 +1,22 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0343 remediation iteration 3 implemented.
+Last updated: 2026-08-11 Europe/Madrid, TASK-0332 remediation iteration 2 implemented.
+
+## 2026-08-11 - TASK-0332 remediation iteration 2 implementation
+
+- Commit `29175f01` moves the date exemption behind a production two-phase invariant:
+  `contains_pii` evaluates non-phone PII across the complete input before the exemption can affect
+  the phone heuristic. An exempt timestamp can no longer suppress a sibling email.
+- The behavioral product derives 12 months x 24 hours x 1,684 ASCII offsets x three accepted
+  formats: 1,454,976/1,454,976 source cases passed. Three production-source mutants keyed by
+  coordinate, input order, and format were caught 3/3 by subprocess execution, without AST as the
+  oracle or checker-provided literal probes.
+- Full memory tests passed 72/72 in 304.310 seconds. Collaboration, encoding, Python and PowerShell
+  neutrality, neutrality contract tests, 71/71 falsification inventory, compile, and diff gates
+  exited 0. The neutrality inventories were moved in parity because the governed test rewrite
+  shifted their reviewed line coordinates without adding identity literals.
+- TASK-0332 remains `in_progress` under the remediation-2-v2 maker claim pending exact-commit
+  verification and governed delivery. Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0343 remediation iteration 3 implementation
 
@@ -15,6 +31,11 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0343 remediation iteration 3 implem
   neutrality, compile, and diff gates exited 0. AC5 remains externally pending because Actions
   billing still prevents jobs from starting. TASK-0343 remains `in_progress` pending exact-commit
   verification and governed delivery; Codex has not reviewed or ratified the remediation.
+- Exact commit `bec5dda7` passed the full runner, 71/71 inventory, collaboration, encoding,
+  neutrality, compile, clean drift through seq 8668, and diff gates in a detached clean Aegis
+  worktree with empty status. Delivery commit `9f38ebd5` moves TASK-0343 to `in_review`, releases
+  every maker claim, and publishes the self-contained Arquitecto handoff. AC5 remains externally
+  pending and independent Analista re-review is required.
 
 ## 2026-08-10 - TASK-0329 corrected delivery complete
 
