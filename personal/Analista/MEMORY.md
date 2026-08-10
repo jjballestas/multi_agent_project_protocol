@@ -11187,3 +11187,43 @@ vez pasada -- *escribir la memoria ANTES de correr los gates y meter las tres ru
 pathspec* -- **no lo aplique porque no lo lei al empezar**. Corolario: el fix tiene que estar en el
 arranque, no en el final. **Al leer `personal/Analista/` en el cold start, buscar "Slip propio" y
 ejecutar lo que diga antes de escribir nada.**
+
+## 2026-08-11 -- TASK-0343 r4: OK-CLOSABLE, y el liston propio se respeta
+
+Veredicto `c382d769`. Ancla `1fa77aa2`, implementacion `7917d5b7`.
+Artefacto: `Area_comun/artifacts/Analista-TASK-0343-exigencia-por-ejecucion-r4-verdict.md`.
+
+### La leccion principal: no mover el liston que escribi yo
+
+Deje el criterio por adelantado en la r3 (RJ1 1 en 3/3, RJ2/RJA/RJB 1 en 3/3). Salio: 245/237/238 s
+en serie para RJ1, y 3-4 corridas por escape con `baseline caught_runs=0`. **Cumplido el criterio,
+se cierra.** Encontre ademas una cuarta forma viva de R1, y aun asi NO lo converti en
+CHANGE-REQUIRED: va como residual declarado con ficha propia. Mover la meta despues de que el maker
+la alcanza exactamente es el mismo vicio que reprocho a las remediaciones.
+
+### La cuarta forma: mirar QUE RUTA ejecuta el oraculo
+
+El contrato nuevo ata el efecto por ejecucion, pero **solo dentro de `--task0343-rollback-only`**.
+La ruta que corre CI (runner sin flags) no la mide nadie. Vector `RJD_modeguard`:
+`assert (not TASK0343_ROLLBACK_ONLY) or ledger_preservation_holds(...)` -> **exit 0** con el contrato
+publicando 4/4 y el ledger destruido. **Regla: cuando una remediacion parte el sistema en modos,
+preguntar cual de los modos mide el oraculo y cual queda ciego.** La prueba fuerte es la comparacion
+controlada: RJ1 y RJD con el mismo mp8 y el mismo ancla, unica diferencia la efectividad real.
+
+### Gestion del reloj (el harness mata a los 3600 s)
+
+Presupuesto real gastado: ~50 min. Lo que funciono:
+- Un clon por vector con `git clone --local` desde un clon ya existente: **2 s**, no los ~7 GB.
+- **Separar vectores por exposicion al flaky**: RJ2/RJA/RJB mueren en el caso 4 (linea 281), ANTES de
+  las aserciones sensibles al tiempo (1806/1023) y su causa (`baseline caught_runs=0`) no la puede
+  fabricar la contencion -> se pueden correr **en paralelo** sin comprometer la lectura. RJ1 recorre
+  el runner entero -> **en serie, siempre**. Eso convirtio 3 rondas de ~10 min en ~4 min.
+- `| tail -N` sobre un job de fondo **BUFEA**: el Monitor sobre ese fichero no ve nada hasta el final.
+  Vigilar por **ficheros .meta** (una linea `EXIT=` por vector), no por el stdout del lote.
+
+### Slip propio, CUARTA vez -- y el fix va al arranque
+
+Otra vez veredicto y memoria en commits distintos (DECISION-0110 D1/D3). Causa medida: **no lei esta
+seccion al empezar**. Accion para el proximo cold start, literal y primero: al leer
+`personal/Analista/`, buscar "Slip propio", y **crear el fichero de memoria vacio con el titulo de la
+review ANTES de medir nada**, para que entre en el mismo pathspec del commit del veredicto.
