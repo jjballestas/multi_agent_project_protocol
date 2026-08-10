@@ -1,6 +1,17 @@
 {
     "claims": [
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0328-remediation-7-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0328-remediation-7-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0328"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0328-remediation-7-v2",
             "owner": "Codex",
             "scope": [

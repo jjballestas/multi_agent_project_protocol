@@ -1,6 +1,23 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0343 remediation iteration 2 implemented.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0328 remediation iteration 7 implemented.
+
+## 2026-08-10 - TASK-0328 remediation iteration 7 implementation
+
+- Commit `b1e2eb1c` routes unconditional contiguous account silhouettes over the integral value
+  before coordinate exemptions, alongside the checksum-valid grouped branch. Invalid-checksum
+  contiguous values can no longer disappear when a governed coordinate consumes its envelope.
+- The permanent corpus no longer admits cases through the detector under test. It uses parser
+  survival as the independent criterion and crosses 12 invalid contiguous silhouettes with valid
+  contiguous/grouped presentations, nine derived coordinates, and three insertion orders.
+- The measured balance is 1001 population, 832 previous positives, 1001 current positives, 169
+  gains, zero losses, nine coordinates, three orders, and three format classes. Removing only the
+  integral contiguous branch loses derived cases; new marks over 22,995 governed strings are zero.
+- Full memory tests passed 72/72 after one transient anti-collision run overlapped Arquitecto
+  mailbox archival. Collaboration, encoding, neutrality, compile, 71/71 falsification inventory,
+  and diff gates exited 0 before commit. TASK-0328 remains `in_progress` under the remediation-7
+  maker claim pending exact-commit verification and governed delivery. Codex has not reviewed or
+  ratified the remediation.
 
 ## 2026-08-10 - TASK-0343 remediation iteration 2 implementation
 
