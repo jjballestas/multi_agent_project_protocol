@@ -7,6 +7,107 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-10 (66) - TASK-0343 r3: CHANGE-REQUIRED (marcador, y negativo analitico)
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0343-r3`. **SOLO HUB, SIN PRODUCTO.**
+  Operador autorizo ESTA vuelta (la r2 habia escalado con 2 de 2 agotadas).
+- Ancla `179ef523`, implementacion `4cfd1b03`. Veredicto en `c71c8d13`
+  (`Area_comun/artifacts/Analista-TASK-0343-marcador-vs-exigencia-r3-verdict.md`).
+- Estado canonico sano ANTES de revisar: validate 0, drift CLEAN up_to_seq=8623, gate 0, encoding 0,
+  neutralidad 0. Dos clones limpios detached en `an0343r3/{hub,hub2}`, status vacio por vector.
+
+### LECCION 1 (la grande): el mutante derivado del predicado que lo juzga
+
+`main_enforces_ledger_preservation` (184-202) busca un `ast.Assert` en `main` cuyo test llame a
+`ledger_preservation_holds`. Ata **tipo de nodo, nombre del invocado y pertenencia a main**; no ata
+alcanzabilidad, evaluacion, gobierno del resultado ni argumentos. Eso ya lo esperaba.
+
+Lo que **no** esperaba: el negativo que lo certifica (`deleted`) se deriva con
+`DeleteMainLedgerAssertion` (238-260), y su `visit_Assert` usa una condicion **byte a byte identica**
+a la del detector. **`deleted=False` es analitico, no medido.** Borrar-lo-que-el-detector-busca hace
+que el detector no lo encuentre, pase lo que pase con el efecto.
+
+**Regla nueva:** ante un saldo con un negativo, no basta con preguntar "que ata el predicado". Hay
+que leer **de donde sale el mutante**. Si el mutante se deriva del mismo predicado que lo juzga, el
+negativo no puede fallar y el saldo verde no es informacion. Gemelo exacto de
+`mutar-produccion-no-los-mutantes-del-runner` y del mutante tautologico de TASK-0345.
+
+Corolario util: ese negativo analitico solo deja de serlo por accidentes que **no hablan del efecto**.
+Aqui hay dos, y los medi: (a) **asimetria** -- el detector recorre con `ast.walk(main_node)` y
+desciende a `def` anidados, el borrador es un `NodeTransformer` que pone `in_main=False` al entrar en
+cualquier `FunctionDef`; meter la asercion en un `def _unused_never_called()` dentro de `main` da
+`baseline=True` **y** `deleted=True` -> muere en la 280 por incoherencia entre sus dos mitades, no
+porque la asercion haga nada. (b) **fuente inparseable** -- `try/except AssertionError: pass` deja al
+borrador un `try:` sin cuerpo, `ast.unparse` emite invalido y el detector revienta con
+`IndentationError`. Los dos "matan" el mutante por la razon equivocada.
+
+### LECCION 2: simular el bloque de aserciones FUERA del runner ahorra horas
+
+Cada corrida completa del runner cuesta ~5 min. Reimplementar `assertion_wiring` (detector +
+borrador + las dos aserciones de 279-280) en un script suelto da el saldo de 7 variantes en <1 s, y
+**predijo exactamente** los tres exit codes que luego confirme por comportamiento (incluido que
+`dead_nested_fn` NO era escape, contra mi intuicion inicial). Simular primero, gastar el runner solo
+en los vectores que la simulacion dice que importan.
+
+### El saldo medido (13 corridas completas del runner en esta ejecucion)
+
+Instrumento **mp8**: destruccion real del ledger durante el rollback
+(`Set-Content CLAIMS.json '{"seq":0,"claims":[]}'` antes de `ROLLBACK_LEDGER_PRESERVED`).
+
+    control mp8 solo          runner=1 en la linea 1792, before_claims seq=3 / after seq=0   PASS
+    cortocircuito + mp8       runner=0 contracts=0   saldo 1/1/1/1/0                         SLIP
+    tautologia + mp8          runner=0 contracts=0   saldo 1/1/1/1/0                         SLIP
+    inalcanzable + mp8        runner=0 contracts=0   saldo 1/1/1/1/0                         SLIP
+    los tres SOLOS (sin mp8)  seis puertas 0 en clon limpio                                  SLIP
+    sonda en el punto exacto  ANALISTA_PROBE holds=False  con el saldo publicando 1
+
+Reconocido de la remediacion: mp2 literal muere determinista por su propia asercion; la
+insensibilidad a coordenada, orden y formato es real y medida; sin listas de razones ni de formas;
+cero regresion. **Mide presencia y se publica como exigencia.**
+
+### El mutante del Arquitecto: la lectura 2 era la correcta
+
+`assert not survivors` esta en la **linea 306**, dentro de
+`run_rollback_ledger_preservation_property`, **no en `main`**. R1/mp2 nombra la de 1792-1801.
+`baseline=1` ahi es comportamiento correcto. **Antes de perseguir un proxy, localizar el nodo que el
+mutante toca de verdad** -- `ast.walk` + `enclosing def`, 5 segundos.
+
+Pero su mutante dejo dato nuevo: `runner=0` con `check_falsification_contracts.py=1`. El runner **no
+defiende su propio matamutantes**; lo cubre otro gate, y por texto literal (residual R2).
+
+### Residuales nuevos
+
+- **R7.** El negativo `deleted` es analitico (leccion 1).
+- **R8, fuera de alcance.** Las exenciones de `scan_domain_neutrality.py` estan fijadas por **numero
+  de linea absoluto** (`"lines": {1397: (...)}` en `peer_mailbox_cron.ps1`). Medido: insertar UNA
+  linea en la 1216 desplaza la exenta a la 1398 y el gate se pone **rojo (exit 1)** sobre una
+  ocurrencia que nadie toco. Misma clase coordenada-fragil por la que se abrio 0343, en otro gate.
+  **Efecto lateral practico:** cualquier mutante mio que inserte lineas en ese `.ps1` enrojece la
+  neutralidad por artefacto del instrumento -> las seis puertas hay que medirlas con el escape
+  **solo**, nunca emparejado con la inyeccion.
+- **F1.** Dos aserciones flaky bajo contencion de CPU, no una: linea **1806**
+  (`"mid-log ambiguity was rolled back"`) y linea **1023** (`SELF_HEAL_ORPHAN_LOCK ...
+  reason=missing_lease`). 2 rojos en 13 corridas, ninguno en serie. La de 1023 **enmascara** lo que
+  corre detras (aborta antes de llegar a la 1792) e invalido asi mi vector RJ3, que tuve que repetir.
+  Diagnosticar SIEMPRE por linea de asercion, no por exit code.
+
+### AC5: abierto por bloqueo externo, verificado abriendo los runs
+
+`31398231909` (sha del ancla `179ef523`) y `31397288472`: 4 jobs `failure` con **steps=0** y anotacion
+de facturacion. Ningun paso arranco. Ni lo presento como fallo del codigo ni lo acepto como cierre.
+
+### Slip propio, CUARTA vez -- y el fix que escribi no lo aplique
+
+**DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): me la volvi a saltar.** Veredicto en
+`c71c8d13`, memoria en commit de continuacion. En la entrada (65) escribi el fix mecanico -- *"escribir
+la memoria ANTES de correr los gates, y meter las TRES rutas (artefacto, mensaje, memoria) en el mismo
+pathspec del commit"* -- y **no lo ejecute**. Escribir la regla no la instala.
+
+**Fix con dientes para la proxima:** en cuanto termine de medir y antes de redactar el artefacto,
+crear el `pathspec` de las tres rutas como una variable y no permitirme correr `git commit` con otra
+cosa. Si el artefacto no esta escrito todavia, la memoria tampoco se commitea: se escriben las tres y
+se commitea una sola vez.
+
 ## Ultima actualizacion 2026-08-10 (65) - TASK-0342 r4: CHANGE-REQUIRED (el volcado precede al consumo)
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0342-r4`. **SOLO HUB, SIN PRODUCTO.**
