@@ -62,6 +62,22 @@
             "updated_at": "2026-08-10T01:21:36Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1-delivery-msg",
+            "expires_at": "2026-08-10T08:42:12Z",
+            "notes": "Deliver TASK-0353 remediation iteration 1 for independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1-delivery-msg",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T02:42:12Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T02:42:12Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1b",
             "expires_at": "2026-08-10T07:23:09Z",
             "notes": "Remediation iteration 1: bind schema filtering and validation to the routed root, assert the closed-schema premise, and add mutation-proved divergent-anchor coverage.",
@@ -100,7 +116,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-10T01:25:02Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0353",
             "updated_at": "2026-08-10T01:25:02Z"
         },
