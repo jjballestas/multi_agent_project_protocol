@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "a4a94fee15768b3f767566d02a1994936785f4eddab4190e74f8086c14e0992d",
+  "canonical_hash": "6b84513ae97736298ecdbc3c168d644563c6c6c7635d97da35dea927590b3b59",
   "integrity": {
-    "canonical_hash": "a4a94fee15768b3f767566d02a1994936785f4eddab4190e74f8086c14e0992d",
+    "canonical_hash": "6b84513ae97736298ecdbc3c168d644563c6c6c7635d97da35dea927590b3b59",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "75e47d0944b5e0df7ce2b70fb44f549e09435f7c713591700455b85bf6640deb",
-    "signature": "b15bc0c2d054a77af5e958d8c3d3677071bd2f357d05a9173d6d1cb9164e15dc",
-    "up_to_seq": 8654
+    "prev_hash": "065575a42745f94029e40ae7b25d6c1fd3350bcec72dad2d2572381d261b0e36",
+    "signature": "35459fac727e32c7a2aba271086df5e9ea6c50d963c0c1bf8af5fa6d941dc1b8",
+    "up_to_seq": 8656
   },
   "state": {
     "aggregate_versions": {
@@ -3488,7 +3488,7 @@
       "TASK-0326": 13,
       "TASK-0327": 29,
       "TASK-0328": 73,
-      "TASK-0329": 39,
+      "TASK-0329": 41,
       "TASK-0330": 44,
       "TASK-0331": 62,
       "TASK-0332": 19,
@@ -3537,7 +3537,7 @@
       "protocol-prune": 64,
       "protocol-state": 1
     },
-    "events_applied": 7983,
+    "events_applied": 7985,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7679,6 +7679,8 @@
       "codex:task0328:remediation7:claim-v1-release:20260810T182000Z": 8626,
       "codex:task0328:remediation7:claim-v2-acquire:20260810T182000Z": 8625,
       "codex:task0328:remediation7:msgfix-release:20260810T191100Z": 8641,
+      "codex:task0329:delivery-gate-fix:claim-acquire:20260810T194243Z": 8655,
+      "codex:task0329:delivery-gate-fix:status-in-progress:20260810T194243Z": 8656,
       "codex:task0329:remediation1:delivery-claim-release:20260808T064800Z": 7883,
       "codex:task0329:remediation1:in-progress-to-in-review:20260808T064800Z": 7881,
       "codex:task0329:remediation1:work-claim-release:20260808T064800Z": 7882,
@@ -11524,5 +11526,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8654
+  "up_to_seq": 8656
 }

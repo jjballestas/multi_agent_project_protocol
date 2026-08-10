@@ -67,4 +67,3 @@ update that makes the canonical validator exit 0; this delivery did not stage, e
   remediation does not claim to close them.
 - PowerShell 7 POSIX evidence remains unavailable while Actions admission is blocked; Windows
   PowerShell 5.1 behavior is measured here.
-

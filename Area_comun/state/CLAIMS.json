@@ -42,6 +42,26 @@
             "updated_at": "2026-08-10T19:14:34Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0329-delivery-gate-fix",
+            "expires_at": "2026-08-10T20:42:43Z",
+            "notes": "Correct the delivery handoff EOF diff gate and persist the delivery memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0329-delivery-gate-fix",
+                "Area_comun/state/TASK_INDEX.json#TASK-0329",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0329",
+                "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0329-remediation-4-codex-to-arquitecto.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T19:42:43Z",
+            "status": "active",
+            "task_id": "TASK-0329",
+            "updated_at": "2026-08-10T19:42:43Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0329-remediation-4",
             "expires_at": "2026-08-10T23:23:27Z",
             "notes": "Implement authorized TASK-0329 remediation 4 using the PowerShell scanner's effective runtime inventory and production-derived mutation coverage.",

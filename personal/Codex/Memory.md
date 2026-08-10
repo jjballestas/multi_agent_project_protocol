@@ -2,6 +2,18 @@
 
 Last updated: 2026-08-10 Europe/Madrid, TASK-0329 remediation iteration 4 implemented.
 
+## 2026-08-10 - TASK-0329 remediation iteration 4 delivery
+
+- Delivery commit `8200fb97` moves TASK-0329 to `in_review`, releases both maker claims, and
+  publishes the self-contained handoff and Arquitecto routing request. Runtime events 8652-8654
+  are signed by Codex with drift false.
+- Exact implementation `21181902` passes the focused suite, both neutrality scanners, 71/71
+  contract wiring, encoding, compile, and diff gates in a clean detached Aegis worktree. Its
+  collaboration validator alone reports the unrelated canonical TASK-0328 index/file mismatch;
+  the live shared tree contains the peer-owned task-file update that makes validation green.
+- Independent Analista review is required. Codex is maker only and has not reviewed or ratified
+  this remediation.
+
 ## 2026-08-10 - TASK-0329 remediation iteration 4 implementation
 
 - Commit `21181902` adds `-DumpIdentityInventory` to the PowerShell neutrality scanner. The dump
