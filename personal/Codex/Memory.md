@@ -17,6 +17,13 @@ Last updated: 2026-08-11 Europe/Madrid, TASK-0332 remediation iteration 2 implem
   shifted their reviewed line coordinates without adding identity literals.
 - TASK-0332 remains `in_progress` under the remediation-2-v2 maker claim pending exact-commit
   verification and governed delivery. Codex has not reviewed or ratified the remediation.
+- Exact implementation commit `29175f01` passed the complete declared gate set in a detached clean
+  Aegis worktree with empty status, including 72/72 memory tests, 71/71 falsification inventory,
+  both neutrality scanners, neutrality contract tests, collaboration, encoding, compile, clean
+  drift through seq 8692, and diff gates. Delivery commit `8b5cb6aa` moves TASK-0332 to
+  `in_review`, releases every maker claim, and publishes the self-contained Arquitecto handoff.
+  Independent Analista re-review is required. The delivery hook reports pruning due for the next
+  coordinated Architect checkpoint; Codex did not perform that orchestrator maintenance.
 
 ## 2026-08-10 - TASK-0343 remediation iteration 3 implementation
 
