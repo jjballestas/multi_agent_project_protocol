@@ -10042,3 +10042,107 @@ veredicto.**
   directo con pathspec explicito. El commit avisa `PRUNE DUE` (cold_start_tokens 20.393 >= 20.000):
   es del Arquitecto, no mio.
 - Iteracion 3 sobre un presupuesto de 2 declarado en r5: **escale al operador humano**.
+
+---
+
+## TASK-0353 -- veredicto CHANGE-REQUIRED (2026-08-10 ~03:0x local). El arreglo movio la divergencia un nivel
+
+Anclaje `e853cb73` (impl `f4c6c3b9`), clon limpio `D:/Aegis_Scratch/map/rev0353/clone`.
+Commit del veredicto: `34a2f5bc`. Artefacto:
+`Area_comun/artifacts/Analista-TASK-0353-filtro-derivado-dos-anclas-verdict.md`.
+
+### La leccion central: derivar de un fichero NO cierra la clase si hay dos anclas
+
+Codex quito la lista `TURN_SCHEMA_KEYS` y derivo el filtro de `runtime/turn_schema.json`.
+Parece cerrar la clase. No la cierra, porque las dos puntas se resuelven por caminos distintos:
+
+```
+filtro : Path(orchestrator.__file__).with_name("turn_schema.json")   orchestrator.py:113
+puerta : (root / "runtime" / "turn_schema.json")                     turn_validate.py:315
+```
+
+**Reproduje el defecto VERBATIM en su propio commit, con CERO cambios de codigo**, usando como
+esquema del modulo el fichero 1.2.0 que el repo YA embarca
+(`examples/full_runtime_instance/runtime/turn_schema.json`):
+
+```
+producer delivers obstacles       : True
+survives schema_report (post-fix) : False
+validate_turn -> ['semantic: delivery turn is missing the obstacles block; ...']
+```
+
+Cadena identica byte a byte a la del pre-fix. **Cuando una remediacion sustituye "dos listas
+mantenidas por separado" por "dos FICHEROS mantenidos por separado", no cerro la clase: la
+renombro.** El tell: seis runners embarcados invocan `<hub>/runtime/orchestrator.py --root
+<otra raiz>` y siguen verdes SOLO porque cada fixture copia el esquema a mano
+(`run_runtime_loop_cases.py:148-150`, `run_runtime_turn_semantic_cases.py:34`,
+`run_agent_registry_cases.py:29`). **Sincronizacion por copia no es derivacion. Buscar las
+sentencias de copia es como se encuentra la clase que sobrevive.**
+
+### La premisa oculta de toda derivacion
+
+`turn_schema_keys()` deriva de `properties`. Eso equivale al conjunto ACEPTADO solo mientras
+`additionalProperties` sea `false` -- premisa que nadie afirma. A `true`: la puerta acepta un
+campo que el filtro borra. **Toda derivacion tiene una premisa; preguntar cual es y si algo
+la afirma.**
+
+### Mutantes: como se prueba "no es verde por construccion" (4 mutantes de PRODUCCION)
+
+Baseline runner EXIT=0 en 3.6 s. Mute produccion, no el runner:
+
+```
+M1 schema_report vuelve a cablear una lista literal        -> KILLED
+M2 turn_schema_keys deriva del esquema del espejo          -> KILLED
+M5 turn_schema_keys deriva de `required` no `properties`   -> KILLED
+M4 turn_schema.json additionalProperties false -> true     -> SOBREVIVE   <-- el hueco
+```
+
+**Refute mi propia sospecha inicial**: el monkey-patch de `orchestrator.turn_schema_keys` SI es
+mutante de produccion (atributo de modulo, no `.replace()` sobre el runner) y NO esta verde por
+construccion. **Un contrato puede ser honesto y aun asi no cubrir la clase que su texto
+declara.** La barra correcta: el mutante que reabre la clase debe matarlo; M4 no.
+
+### FOCO 1: el Arquitecto midio media condicion
+
+Dijo "hay una segunda copia y sigue rota". El defecto exige DOS cosas: (a) el filtro borra el
+campo Y (b) una regla lo exige. El midio solo (a). Medido (b): el espejo tiene **0 ocurrencias
+de "obstacles"** en su `turn_validate.py`, su `TURN_SCHEMA_KEYS` coincide EXACTAMENTE con su
+propio esquema 1.2.0. **Esta viejo, no roto.** Y los dos contratos que lo leen como gemelo atan
+solo `parse_porcelain_v1_z`, no el filtro. **Cuando el coordinador afirma "sigue roto",
+comprobar que midio la CONJUNCION, no un conjunto.**
+
+### FOCO 4: el saldo declarado no reproduce (62/7/8, no 60/9/8)
+
+```
+SUMMARY declared=77 pass=62 fail=7 unsupported=8   EXIT=1
+declarados (9): 34,36,39,40,43,50,53,58,59
+medidos    (7): 17,36,43,50,53,58,59
+NUEVO: 17 "Check systematic state pruning"; PASAN: 34,39,40 (tambien sueltos en f4c6c3b9)
+aritmetica exacta: 60+3-1=62, 9-3+1=7
+```
+
+El paso 17 es la PODA, no el codigo de Codex. Exit codes reales:
+`f4c6c3b9` 0 (`prune not due`), `e853cb73` 1 (91.3), **HEAD `37dd36bf` 1 (92.0)**. El propio
+pre-commit hook me lo confirmo al commitear. **Un saldo medido en el commit de implementacion
+puede no describir el anclaje que te routean: los commits de ledger intermedios mueven los
+pasos ESTADO-DEPENDIENTES. Re-medir siempre en el anclaje que te dan, y derivar la lista de
+fallos del propio run, nunca transcribirla.**
+
+### Barrido de la misma FORMA, no del mismo nombre
+
+`grep "_KEYS =\|_FIELDS =\|ALLOWED\w* ="` sobre `runtime/`: queda
+`runtime/llm_turn_wrapper.py:32 REQUIRED_REPORT_KEYS` = 7 claves literales que duplican
+`required` del esquema, en un modulo que **ya carga ese esquema** (`load_schema`). Iguales hoy.
+Fuera de los `scope_routes` de 0353 -> lo declare como finding de criterio, NO como
+incumplimiento del maker. **Ser justo con el alcance declarado hace el hallazgo mas fuerte, no
+mas debil.**
+
+### Operativo
+
+- `git clone` local + `git checkout <sha>`; para un segundo punto de medida,
+  `git -C clone worktree add --detach ../wt_impl <sha>` (barato, no molesta al replay en curso).
+- El replicador tardo ~2h para 77 pasos (pasos 4, 8 y 68 son los caros). Lanzarlo en background
+  AL PRINCIPIO y trabajar en paralelo; no bloquear el veredicto sobre el.
+- Restaurar el arbol tras CADA sonda de mutacion y verificar `git status --short` vacio.
+- Sin claims activas del peer; commit directo con pathspec explicito, trailers en bloque final
+  UNICO sin blank line (Task-Id + Co-Authored-By).
