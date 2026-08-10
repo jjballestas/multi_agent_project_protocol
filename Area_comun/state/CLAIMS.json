@@ -61,6 +61,22 @@
             "updated_at": "2026-08-10T13:11:58Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0328-remediation-6-memory",
+            "expires_at": "2026-08-10T15:34:04Z",
+            "notes": "Persist TASK-0328 remediation iteration 6 implementation commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0328-remediation-6-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T13:34:04Z",
+            "status": "active",
+            "task_id": "TASK-0328",
+            "updated_at": "2026-08-10T13:34:04Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0345-remediation-2",
             "expires_at": "2026-08-11T23:59:00Z",
             "notes": "Remediation iteration 2: derive the scanned PowerShell population, use production-coordinate mutants, bind expected-negative exit effect, and state inline PowerShell scope honestly.",

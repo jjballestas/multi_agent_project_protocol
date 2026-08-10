@@ -1,6 +1,22 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0345 remediation iteration 2 implemented.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0328 remediation iteration 6 implemented.
+
+## 2026-08-10 - TASK-0328 remediation iteration 6 implementation
+
+- Commit `17629f4f` evaluates checksum-valid account candidates on the integral value before
+  coordinate exemptions and preserves unexplained envelope remainders as a unit. Contiguous and
+  grouped payloads can no longer disappear through complete exemption or punctuation splitting.
+- The coordinate guard retains zero hits on clean governed identities while preserving dense
+  adjacent account and phone coverage. The permanent corpus discovers real envelope-consuming
+  coordinates from the governed tree, derives insertion order and presentations from production
+  predicates, and reports 231 cases, 64 prior positives, 231 current positives, 167 gains, zero
+  losses, nine coordinate types, three orders, and two format classes.
+- Removing the production pre-exemption guard loses all 231 derived cases. The two production
+  call paths reject every applicable file/path case. Full memory tests passed 72/72; the 71/71
+  falsification inventory, collaboration, encoding, Python neutrality, and PowerShell neutrality
+  gates exited 0. TASK-0328 remains `in_progress` pending exact-commit verification and governed
+  delivery; Codex is maker only and has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0345 remediation iteration 2 implementation
 
