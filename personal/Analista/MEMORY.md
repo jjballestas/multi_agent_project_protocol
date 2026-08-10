@@ -7,7 +7,110 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
-## Ultima actualizacion 2026-08-10 (64) - TASK-0328 r7: CHANGE-REQUIRED (la guarda previa solo cubre la rama del checksum)
+## Ultima actualizacion 2026-08-10 (65) - TASK-0342 r4: CHANGE-REQUIRED (el volcado precede al consumo)
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0342-r4`. **SOLO HUB, SIN PRODUCTO.**
+  Operador autorizo ESTA vuelta (r3 habia escalado con 2 de 2 agotadas).
+- Ancla `bb90a6ad`, implementacion `05ec641f`. `git diff bb90a6ad f703a473 -- scripts/ examples/
+  Area_comun/protocol/ .github/` VACIO. Veredicto en `8e61c6be`
+  (`Area_comun/artifacts/Analista-TASK-0342-r4-valor-efectivo-al-punto-del-volcado-verdict.md`).
+- Siete gates EXIT=0 en clon limpio POSIX. Saldo propio: 18 mutantes de PRODUCCION,
+  CAUGHT 10 / ESCAPE 4 / ROJO FALSO 3 / VERDE CORRECTO 1. Por propiedad: 7 limpias, 7 no.
+
+### LECCION 1 (la grande de esta vuelta): "no hay instrumento en esta maquina" tiene CAPA, no solo fecha
+
+El Arquitecto y Codex declararon 0342 **inverificable aqui** porque `shutil.which("pwsh")` da `None`.
+Eso es cierto **para el PATH de Windows**. En el **WSL2 Ubuntu del mismo equipo** hay `pwsh 7.4.6`
+sobre **ext4** -- que es exactamente la plataforma del job `powershell-linux-parity`. Es el entorno
+donde yo ya habia medido r2 y r3. Resultado: **AC4 se medi entera aqui** y devolvio cuatro escapes
+vivos, mientras el ledger decia "no verificable".
+
+Es el gemelo de `citar-un-run-sin-abrirlo` y `descartar-un-run-sin-abrirlo`, un eje mas arriba:
+- una afirmacion sobre un run tiene **fecha**;
+- una afirmacion sobre un **instrumento** tiene **capa** (que shell, que PATH, que FS, que host).
+
+**Regla:** antes de aceptar "aqui no se puede medir", enumerar las capas del propio equipo
+(Windows PATH / WSL / contenedor) y el requisito real de la medicion (aqui: `pwsh` + FS sensible a
+mayusculas). El coste de comprobarlo fue un `wsl.exe -e bash -lc 'which pwsh'`.
+
+Receta que funciono y hay que reusar (clon limpio POSIX barato pese al `.git` de 7 GB):
+
+    wsl.exe -d Ubuntu -e bash -lc 'git clone --depth 6 --no-single-branch \
+      "file:///mnt/d/Agentes/multi_agent_project_protocol" cc'     # ~20 s, .git 31 MB
+    # si el gate de trailers necesita historia: git fetch --depth 1300  (~4 min, 73 MB)
+    # luego rsync -a --exclude .git cc/ base/  y copiar `base` por mutante
+
+### LECCION 2: exponer el valor efectivo no basta si el volcado NO esta donde se consume
+
+La remediacion 3 sustituyo la regex de `ps_array()` por `scan_encoding.ps1 -DumpPolicy` (JSON del
+`$SkipDirs`/`$SkipSuffixes`/`$SkipAbsoluteDirs` resueltos). **Cierra las dos SLIPS de r3** (`+=` y
+segunda asignacion mueren en `assert set(python_scan.SKIP_DIRS) == ps_skip_dirs`), los tres rojos
+falsos de formato y el R7. Real y grande.
+
+Pero el bloque `if ($DumpPolicy) { ... exit 0 }` esta en la **linea 127** y los `Scan-*` consumen en
+la **129-132**. Su propio comentario dice "at the same point where the scanner consumes it": **no lo
+es**. Todo lo asignado entre medias es invisible al volcado y vivo para el escaner:
+
+    G9a  $SkipDirs += "zzq"                 tras el volcado -> ONLY_PY runtime/zzq/a.txt        neg exit=0
+    G9b  $SkipSuffixes += ".log"            tras el volcado -> ONLY_PY runtime/note.log         neg exit=0
+    G9c  $SkipAbsoluteDirs += runtime/state tras el volcado -> ONLY_PY runtime/state/events.jsonl neg exit=0
+    G9d  las tres a la vez                                                                      neg exit=0
+
+**Generalizacion:** un "dump de estado efectivo" es una foto **en un instante del fichero**. Si el
+instante del dump != el instante del consumo, sigue siendo una foto de la FORMA (ahora del orden de
+ejecucion) y no de la propiedad. Al juzgar cualquier `--dump-config` / `--print-policy` / `--explain`,
+la pregunta es siempre: **quien lee este valor despues de que se imprima, y puede cambiarlo?**
+
+### LECCION 3: el literal cableado se disfraza de coordenada de control
+
+Al quitar la regex metieron tres literales en el runner: `skip_dirs_line`, la cadena de
+`A7_later_assignment`, y `dist_path`. Devuelven el rojo falso por **orden, formato y coordenada**:
+
+    G6six  sexto dir "dist" en LOS DOS gemelos   exit=1  (assert dist_path in finding_paths(...), l.275)
+    G6ord  reordenar los cinco                   exit=1  (assert mutant != ps_text, l.277)
+    G6ws   dos espacios dentro de @( )           exit=1  (assert mutant != ps_text, l.277)
+
+`G6six` es **regresion contra r3** (alli A1 salia verde y era la prueba de la derivacion). Y el
+contraste que lo delata: un **sufijo** nuevo en los dos gemelos pasa (A6p `.123` -> exit 0), un
+**directorio** nuevo no -- porque los literales solo cubren la linea de directorios.
+
+Corolario del metodo, que ya me ha servido dos veces: **G5a/G5b/G5c parecian muertos y no lo estaban.**
+Morian por colisionar con `dist`, la unica coordenada cableada. Repetir la mutacion con una coordenada
+**fuera del universo del fixture** (`zzq`, `.log`, `runtime/state`) los resucito. Es el patron X7 de r3.
+**Regla:** cuando un mutante muere, comprobar POR QUE LINEA muere; si muere por un literal del propio
+runner, repetirlo con una coordenada que ese literal no nombre.
+
+### LECCION 4: la linea de exito que afirma lo que no hizo
+
+`UNMEASURED` + `exit 0` es defendible. Lo que no lo es: imprimir despues
+`OK: encoding gate cases passed (3 py cases + PowerShell parity and separator mutation)`. Medido, no
+opinado: con divergencia VIVA en produccion (`$SkipDirs += "dist"`) y sin `pwsh`, el negativo sale 0 y
+firma que la paridad paso. R5b de r3 agravado. **Al juzgar cualquier gate con valvula de
+`UNMEASURED`, leer tambien la linea final: la valvula sin ajustar el mensaje es un verde falso.**
+
+### AC5: bloqueo REAL, y esta vez lo confirme yo
+
+`gh run view 31402650690` -> headSha `bb90a6ad`, los cuatro jobs `failure` con **steps=0** y
+`runner_id=0`; anotacion = "recent account payments have failed or your spending limit needs to be
+increased". Ningun paso ejecuto. Contraste util con 0344/0345: alli el bloqueo era **falso** porque
+la facturacion impide ESCRIBIR runs, no LEERLOS, y el historial ya cubria el commit. Aqui el arreglo
+es de HOY, asi que el historial no lo cubre: bloqueo genuino. **La pregunta correcta sigue siendo la
+misma: el historial cubre este commit, si o no.**
+
+### Slip propio, TERCERA vez -- y ahora con el fix aplicado
+
+DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): me la volvi a saltar. Veredicto en
+`8e61c6be`, memoria en commit de continuacion. No enmiendo el pusheado: en arbol compartido eso es la
+carrera `reset/amend` documentada. **Fix mecanico, escrito aqui para que la proxima corrida lo lea
+antes de commitear: escribir esta seccion ANTES de correr los gates y meter las TRES rutas
+(artefacto, mensaje, `personal/Analista/MEMORY.md`) en el MISMO pathspec del commit.**
+
+### Higiene senalada, no corrida
+
+`PRUNE DUE: released_ratio 93.33 >= 90` al commitear. Es del Arquitecto (capability orchestrator).
+Senalado, no tocado.
+
+## 2026-08-10 (64) - TASK-0328 r7: CHANGE-REQUIRED (la guarda previa solo cubre la rama del checksum)
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0328-r7`. **SOLO HUB, SIN PRODUCTO.**
   El operador autorizo EXPRESAMENTE esta vuelta tras mi escalado de r6.
