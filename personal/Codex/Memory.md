@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0328 remediation iteration 7 implemented.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0329 remediation iteration 4 implemented.
+
+## 2026-08-10 - TASK-0329 remediation iteration 4 implementation
+
+- Commit `21181902` adds `-DumpIdentityInventory` to the PowerShell neutrality scanner. The dump
+  occurs after the real scan consumes the effective hashtable, so the oracle executes production
+  state instead of instrumenting or parsing a textual declaration window.
+- Five production-source mutants vary coordinate, order, and format. The run-derived balance is
+  `total=5 caught=5 escaped=0`. The identity probe corpus now derives terms directly from protocol
+  configuration; a production minimum-length mutant loses 87 of 609 expected findings while the
+  current scanners retain all 609.
+- The focused suite, both neutrality scanners, 71/71 falsification inventory and workflow wiring,
+  collaboration, encoding, compile, and diff gates exited 0 before commit. TASK-0329 remains
+  `in_progress` under its remediation-4 maker claim pending exact-commit verification and governed
+  delivery. Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0328 remediation iteration 7 implementation
 

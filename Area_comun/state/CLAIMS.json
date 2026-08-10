@@ -57,9 +57,30 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-10T19:23:27Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0329",
             "updated_at": "2026-08-10T19:23:27Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0329-remediation-4-delivery",
+            "expires_at": "2026-08-10T21:38:10Z",
+            "notes": "Publish TASK-0329 remediation 4 handoff, move the task to independent review, and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0329-remediation-4-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0329",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0329",
+                "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0329-remediation-4-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0329-remediation-4.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T19:38:10Z",
+            "status": "released",
+            "task_id": "TASK-0329",
+            "updated_at": "2026-08-10T19:38:10Z"
         },
         {
             "claim_id": "CLAIM-arq-rv0328r8-20260810",
