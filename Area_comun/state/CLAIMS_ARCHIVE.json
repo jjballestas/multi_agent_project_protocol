@@ -47792,6 +47792,355 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260810",
             "updated_at": "2026-08-10T00:16:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-010845-prune-arquitecto",
+            "expires_at": "2026-08-10",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-08-10T01:08:45Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-10T01:08:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1",
+            "expires_at": "2026-08-10T07:21:36Z",
+            "notes": "Remediation iteration 1: bind schema filtering and validation to the routed root, assert the closed-schema premise, and add mutation-proved divergent-anchor coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T01:21:36Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:21:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1-delivery-msg",
+            "expires_at": "2026-08-10T08:42:12Z",
+            "notes": "Deliver TASK-0353 remediation iteration 1 for independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1-delivery-msg",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T02:42:12Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T02:42:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1b",
+            "expires_at": "2026-08-10T07:23:09Z",
+            "notes": "Remediation iteration 1: bind schema filtering and validation to the routed root, assert the closed-schema premise, and add mutation-proved divergent-anchor coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T01:23:09Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:23:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1c",
+            "expires_at": "2026-08-10T07:25:02Z",
+            "notes": "Remediation iteration 1 plus explicit declaration that the full-runtime example is a historical snapshot, not a live schema parity mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1c",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "examples/full_runtime_instance/runtime/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T01:25:02Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:25:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-2",
+            "expires_at": "2026-08-10T11:15:25Z",
+            "notes": "Remediation iteration 2: enforce schema coverage for semantic-required top-level fields, prove the routed CLI path, derive replay balance, and complete the historical-snapshot declaration.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "examples/full_runtime_instance/runtime/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T05:15:25Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T05:15:25Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-2-delivery",
+            "expires_at": "2026-08-10T09:10:10Z",
+            "notes": "Deliver TASK-0353 remediation iteration 2 for independent final re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-2-delivery",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T06:10:10Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T06:10:10Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354",
+            "expires_at": "2026-08-10T08:51:58Z",
+            "notes": "Implement workflow concurrency cancellation and dependency-derived falsification runner placement.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T02:51:58Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T02:51:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-delivery-msg",
+            "expires_at": "2026-08-10T06:02:59Z",
+            "notes": "Deliver TASK-0354 implementation for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-delivery-msg",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T04:02:59Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T04:02:59Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1",
+            "expires_at": "2026-08-10T11:52:08Z",
+            "notes": "Remediate dependency-derived job coverage and record TASK-0354 residuals.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T07:52:08Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T07:52:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-delivery",
+            "expires_at": "2026-08-10T10:25:00Z",
+            "notes": "Deliver TASK-0354 remediation iteration 1 for independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-remediation-1-delivery",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T08:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T08:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-final-memory",
+            "expires_at": "2026-08-10T10:30:38Z",
+            "notes": "Persist final TASK-0354 remediation delivery checkpoint after commit a9664e01.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-remediation-1-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T08:30:38Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T08:30:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-memory",
+            "expires_at": "2026-08-10T10:19:10Z",
+            "notes": "Persist TASK-0354 remediation implementation checkpoint after commit a47bed11.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-remediation-1-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T08:19:10Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T08:19:10Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-decision-0110-20260810c",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0110-memoria-en-el-commit-del-trabajo-y-arbol-limpio.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-decision-0110-20260810c"
+            ],
+            "started_at": "2026-08-10T04:03:43Z",
+            "status": "released",
+            "task_id": "OPS-DECISION-0110",
+            "updated_at": "2026-08-10T04:03:43Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-go-0354-20260810b",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go-0354-20260810b"
+            ],
+            "started_at": "2026-08-10T02:09:21Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T02:09:21Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-remed-0353-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-remed-0353-20260810",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353.md",
+                "Area_comun/mailbox/open/MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-veredicto.md"
+            ],
+            "started_at": "2026-08-10T01:11:50Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:11:50Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-remed-0354-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0354.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-remed-0354-20260810",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0354.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0354.md",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r3.md"
+            ],
+            "started_at": "2026-08-10T07:42:52Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T07:42:52Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-remed2-0353-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353-r2.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-remed2-0353-20260810",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r2.md",
+                "Area_comun/mailbox/open/MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-r2-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-r2-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354.md",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0353.md",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-GO-TASK-0354.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Codex-GO-TASK-0354.md"
+            ],
+            "started_at": "2026-08-10T05:11:01Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T05:11:01Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0284-20260722",
+            "expires_at": "2026-07-22T00:20:48Z",
+            "notes": "Ruteo del juicio de 0284 (ultimo eslabon) al checker + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0284-20260722"
+            ],
+            "started_at": "2026-07-21T23:55:48Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-21T23:55:48Z"
         }
     ]
 }
