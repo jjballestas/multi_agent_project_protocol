@@ -1,6 +1,29 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent review.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0354 remediation implementation committed.
+
+## 2026-08-10 - TASK-0354 remediation iteration 1 implementation
+
+- Commit `a47bed11` adds a workflow-native dependency gate. It derives Python runner paths from
+  workflow `run` commands, parses their top-level imports, excludes stdlib and repository-local
+  modules, maps import modules to installed distributions, and rejects external dependencies not
+  declared by that job's `python -m pip install` command.
+- `falsification-runners-python` now declares `pyyaml` for its direct `yaml` import; the obsolete
+  `jsonschema` install was removed from the Windows-only mailbox job. The exact gate passes across
+  72 derived runner invocations, while an in-memory workflow mutant that removes `pyyaml` fails
+  with the expected `imports yaml` diagnostic.
+- Both moved runners pass in a clean venv containing only the job's declared `jsonschema pyyaml`.
+  Exact historical replays report parent `falsification-runners` 0/0/4, implementation Windows
+  0/0/2, and implementation Python 3/0/0 (PASS/FAIL/UNSUPPORTED). The current split reports
+  Windows 0/0/1 and Python 3/0/0.
+- The task file now records `github.ref` granularity, accepted push/PR duplication, cancellation as
+  a static-wiring residual, the pending behavioral AC1 obligation, and reduced per-commit bisection
+  granularity. Canonical collaboration, encoding, neutrality, drift, inventory, and diff gates
+  passed. The unrestricted default validate-job replay exceeded the 10-minute harness limit; a
+  30-second-per-step diagnostic replay reached 56 PASS / 14 FAIL / 8 UNSUPPORTED and is not used as
+  acceptance evidence because four legitimate long steps timed out.
+- TASK-0354 remains `in_progress` under the remediation maker claim pending governed delivery.
+  Codex is maker only and has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0353 remediation iteration 2 implementation
 
