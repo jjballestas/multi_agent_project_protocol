@@ -111,3 +111,29 @@ Production remains unchanged; adding a special-case production key is outside th
 **R0332-3 (declared, non-blocking):** the 1,684-member offset sweep is exhaustive only over ASCII
 digits. `DATE_RE` uses Unicode-aware `\d`, so non-ASCII decimal digits remain TASK-0322 residual R3
 and are outside this task's code scope.
+
+## Remediation 2 contract
+
+The operator-authorized remediation in
+`MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0332` supersedes the earlier statement that
+production would remain untouched. The defect is closed in production: `contains_pii` first evaluates
+all non-phone PII across the complete input and only then applies the date exemption to the phone
+heuristic. A date-shaped item can therefore no longer stop evaluation before a sibling email or an
+instance term is checked.
+
+The behavioral corpus is a product, not a star. It derives all 12 months, all 24 hours, all 1,684
+ASCII offsets, and three accepted timestamp formats, for 1,454,976 source cases. Year, day, minute,
+second, and fractional length are generated across their complete accepted marginal ranges while the
+product advances. Each source case places a real email after the exempt timestamp and must remain
+positive through the production entry point.
+
+Three ephemeral mutants are derived from the production two-phase body and are judged only by
+execution. They reintroduce a coordinate-keyed false return, an input-order early return, and a
+basic-format early return. The permanent negative requires all three to diverge while the source
+product remains fully positive; it does not inspect an AST or enumerate the checker probes.
+
+**R0332-9 (declared, non-blocking):** the finite corpus proves the complete
+month-by-hour-by-ASCII-offset-by-format product and complete marginals for the other accepted ASCII
+coordinates. It does not claim the impossible full Cartesian product over every coordinate
+simultaneously. The production two-phase invariant, rather than that finite sample alone, prevents a
+date exemption from suppressing non-phone PII in another item.

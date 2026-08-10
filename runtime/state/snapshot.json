@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "b02ff5b67fef4fb6dff65bfeba8a1afa3aa7051727ccaa88618864fe759e1f30",
+  "canonical_hash": "d58c3ed36958026a463691b2b2cdd002dc84eee9198d848bbc766159b4a4ddac",
   "integrity": {
-    "canonical_hash": "b02ff5b67fef4fb6dff65bfeba8a1afa3aa7051727ccaa88618864fe759e1f30",
+    "canonical_hash": "d58c3ed36958026a463691b2b2cdd002dc84eee9198d848bbc766159b4a4ddac",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "9e0d4aec5ca4fc3089c55b52bff06841bf6bb453dc7a68c633d98aaf44c0212b",
-    "signature": "7ab815e99bd9a19038bba9a28b9d5fb94269643df184113ff9fec45af14480ee",
-    "up_to_seq": 8690
+    "prev_hash": "92af3d235dde1e3c7da27650dd5520eceff265a7d0f9226844b2c115bccde0db",
+    "signature": "be98c0910aa5bcda7aa6fa0b1b0425ddcf202a05b1b8683d936efe3fc0ad5674",
+    "up_to_seq": 8692
   },
   "state": {
     "aggregate_versions": {
@@ -3504,7 +3504,7 @@
       "TASK-0329": 45,
       "TASK-0330": 44,
       "TASK-0331": 62,
-      "TASK-0332": 22,
+      "TASK-0332": 24,
       "TASK-0333": 13,
       "TASK-0334": 21,
       "TASK-0335": 33,
@@ -3551,7 +3551,7 @@
       "protocol-prune": 64,
       "protocol-state": 1
     },
-    "events_applied": 8019,
+    "events_applied": 8021,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7826,6 +7826,8 @@
       "codex:task0332:remediation1:delivery-release:20260808T150548Z": 8044,
       "codex:task0332:remediation1:in-review:20260808T150548Z": 8042,
       "codex:task0332:remediation1:work-release:20260808T150548Z": 8043,
+      "codex:task0332:remediation2:claim-v1-release:20260810T223847Z": 8692,
+      "codex:task0332:remediation2:claim-v2:20260810T223847Z": 8691,
       "codex:task0332:remediation2:claim:20260810T220802Z": 8686,
       "codex:task0332:start-claim:20260808T094423Z": 7951,
       "codex:task0332:start-status:20260808T094423Z": 7952,
@@ -11574,5 +11576,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8690
+  "up_to_seq": 8692
 }

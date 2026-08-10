@@ -713,6 +713,36 @@ def phone_number_is_detected(value: str, *, coordinate_bound: bool) -> bool:
     return False
 
 
+def non_phone_pii_is_detected(
+    item: str,
+    domain_patterns: tuple[re.Pattern[str], ...],
+    coordinate: str | None,
+) -> bool:
+    normalized = re.sub(r"[_/\\.-]+", " ", item)
+    account_coordinate_bound = coordinate is not None
+    if (
+        account_identifier_contiguous_is_bounded(item)
+        or account_identifier_grouped_is_detected(
+            item, coordinate_bound=account_coordinate_bound
+        )
+    ):
+        return True
+    pii_values = pii_values_for_coordinate(item, coordinate)
+    if STRUCTURAL_PII_PATTERNS[0].search(item):
+        return True
+    if (
+        any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)
+        or any(
+            account_identifier_grouped_is_detected(
+                pii_value, coordinate_bound=account_coordinate_bound
+            )
+            for pii_value in pii_values
+        )
+    ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):
+        return True
+    return any(pattern.search(normalized) for pattern in domain_patterns)
+
+
 def contains_pii(
     value: Any,
     domain_pii_terms: Iterable[str],
@@ -722,39 +752,15 @@ def contains_pii(
     domain_patterns = tuple(
         re.compile(rf"\b{re.escape(term)}\b", re.I) for term in domain_pii_terms
     )
-    for item in value_list(value):
-        normalized = re.sub(r"[_/\\.-]+", " ", item)
-        account_coordinate_bound = coordinate is not None
-        if (
-            account_identifier_contiguous_is_bounded(item)
-            or account_identifier_grouped_is_detected(
-                item, coordinate_bound=account_coordinate_bound
-            )
+    items = value_list(value)
+    if any(non_phone_pii_is_detected(item, domain_patterns, coordinate) for item in items):
+        return True
+    coordinate_bound = False
+    for item in items:
+        if not DATE_RE.fullmatch(item) and any(
+            phone_number_is_detected(pii_value, coordinate_bound=coordinate_bound)
+            for pii_value in pii_values_for_coordinate(item, coordinate)
         ):
-            return True
-        pii_values = pii_values_for_coordinate(item, coordinate)
-        coordinate_bound = False
-        if STRUCTURAL_PII_PATTERNS[0].search(item):
-            return True
-        if (
-            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)
-            or any(
-                account_identifier_grouped_is_detected(
-                    pii_value, coordinate_bound=account_coordinate_bound
-                )
-                for pii_value in pii_values
-            )
-        ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):
-            return True
-        if not DATE_RE.fullmatch(item):
-            if any(
-                phone_number_is_detected(
-                    pii_value, coordinate_bound=coordinate_bound
-                )
-                for pii_value in pii_values
-            ):
-                return True
-        if any(pattern.search(normalized) for pattern in domain_patterns):
             return True
     return False
 

@@ -98,7 +98,7 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-MEMORY-DATE-EXEMPTION-NO-EARLY-EXIT",
         "negative": "An early exit from the contains_pii item loop bypasses later PII checks.",
-        "mutation": "mutant_break_source = source.replace(normalized_line, early_break + normalized_line)",
+        "mutation": "mutant_break_source = source.replace(phone_loop, phone_loop + early_break)",
         "boundaries": (
             "self.assertEqual([], source_early_exits)",
             "self.assertNotEqual([], mutant_break_early_exits)",
@@ -149,7 +149,19 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_domain_pii_retrieval_reason_is_attested_and_falsifiable",
     },
-    {"id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR", "negative": "Offset-specific restructuring, iterable filtering, or a falsy return bypasses observable PII checks.", "mutation": "mutant_sources = {", "boundaries": ("self.assertEqual((True, True, True), source_results)", "self.assertEqual((False, True, False), mutant_results[\"restructured\"])", "self.assertEqual((False, True, False), mutant_results[\"filtered\"])", "self.assertEqual((False, False, False), mutant_results[\"early_return\"])", "self.assertEqual(False, mutant_results[\"changed_coordinate\"])", "self.assertEqual(False, mutant_results[\"changed_format\"])",), "exercised_by": "test_date_offset_pii_behavior_is_falsifiable"},
+    {
+        "id": "NEG-MEMORY-DATE-OFFSET-PII-BEHAVIOR",
+        "negative": "A date exemption keyed by coordinate, input order, or timestamp format suppresses observable PII checks.",
+        "mutation": "mutant_sources = {",
+        "boundaries": (
+            "self.assertEqual(expected_product_size, source_product_passed)",
+            "self.assertEqual((False, True, False), mutant_results[\"coordinate\"])",
+            "self.assertEqual((False, True), mutant_results[\"order\"])",
+            "self.assertEqual((False, True, False), mutant_results[\"format\"])",
+            "self.assertEqual(3, mutant_caught)",
+        ),
+        "exercised_by": "test_date_offset_pii_behavior_is_falsifiable",
+    },
     {
         "id": "NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION",
         "negative": "A single candidate cut, first-start-only scan, checksum gate on the contiguous silhouette, missing integral pre-exemption branch, circular corpus admission, missing prefix terminator, unbounded alphanumeric run, or exemption beyond an integrally explained coordinate envelope either narrows prior coverage, loses coordinate-invariant detections, or marks governed protocol identities.",
@@ -712,14 +724,14 @@ class MemoryDbTests(unittest.TestCase):
                 self.assertTrue(memory_db.contains_pii(timestamp, [domain_term]))
 
         source = MODULE_PATH.read_text(encoding="utf-8")
-        phone_guard = "        if not DATE_RE.fullmatch(item):\n"
+        phone_guard = "        if not DATE_RE.fullmatch(item) and any(\n"
         self.assertNotIn("protocol_identity", phone_guard)
         early_date_exemption = (
-            "        if DATE_RE.fullmatch(item):\n"
-            "            continue\n"
-            "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+            "    if DATE_RE.fullmatch(item):\n"
+            "        return False\n"
+            "    normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         )
-        normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+        normalized_line = "    normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         self.assertEqual(1, source.count(phone_guard))
         self.assertEqual(1, source.count(normalized_line))
         mutant_source = source.replace(normalized_line, early_date_exemption)
@@ -800,7 +812,7 @@ class MemoryDbTests(unittest.TestCase):
         source_early_exits = item_loop_early_exits(source)
         self.assertEqual([], source_early_exits)
 
-        normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
+        phone_loop = "    for item in items:\n"
         early_continue = (
             "        if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
             "            continue\n"
@@ -825,22 +837,22 @@ class MemoryDbTests(unittest.TestCase):
             "            if DATE_RE.fullmatch(item) and item.endswith(\"+05:45\"):\n"
             "                continue\n"
         )
-        self.assertEqual(1, source.count(normalized_line))
+        self.assertEqual(1, source.count(phone_loop))
         mutant_continue_source = source.replace(
-            normalized_line, early_continue + normalized_line
+            phone_loop, phone_loop + early_continue
         )
-        mutant_break_source = source.replace(normalized_line, early_break + normalized_line)
+        mutant_break_source = source.replace(phone_loop, phone_loop + early_break)
         nested_break_source = source.replace(
-            normalized_line, nested_break + normalized_line
+            phone_loop, phone_loop + nested_break
         )
         nested_continue_source = source.replace(
-            normalized_line, nested_continue + normalized_line
+            phone_loop, phone_loop + nested_continue
         )
         nested_else_break_source = source.replace(
-            normalized_line, nested_else_break + normalized_line
+            phone_loop, phone_loop + nested_else_break
         )
         nested_else_continue_source = source.replace(
-            normalized_line, nested_else_continue + normalized_line
+            phone_loop, phone_loop + nested_else_continue
         )
         self.assertNotEqual(source, mutant_continue_source)
         self.assertNotEqual(source, mutant_break_source)
@@ -2241,190 +2253,149 @@ Body is not indexed.
             if hour < 14 or minute == 0
         )
         valid_offsets = ("", "Z", *numeric_offsets)
-        self.assertEqual(1_684, len(valid_offsets))
-        # R0332-3: this offset sweep is exhaustive only for ASCII digits. DATE_RE
-        # uses Unicode-aware \d; that wider alphabet remains TASK-0322 residual R3.
+        months = tuple(range(1, 13))
+        hours = tuple(range(24))
+        formats = ("extended", "basic", "fractional")
         email = "contact@example.invalid"
-        exhaustive_prefix = "2026-06-19T09:28:23"
-        representative_offsets = (
-            "",
-            "Z",
-            "+00:01",
-            "-05:45",
-            "+13:59",
-            "+14:00",
-            "-14:00",
-        )
-        representative_prefixes = (
-            "2027-06-19T09:28:23",
-            "2028-06-19T092823",
-            "2029-06-19T09:28:23.1",
-            "2030-06-19T09:28:23.123456",
-        )
-        timestamp_cases = [
-            (f"{exhaustive_prefix}{offset}", offset)
-            for offset in valid_offsets
-        ]
-        timestamp_cases.extend(
-            (f"{prefix}{offset}", offset)
-            for prefix in representative_prefixes
-            for offset in representative_offsets
-        )
-        timestamp_cases.append(("2031-06-19", "date-only"))
+        self.assertEqual(1_684, len(valid_offsets))
 
-        for timestamp, coordinate in timestamp_cases:
-            domain_term = timestamp[:4]
-            with self.subTest(
-                implementation="source", timestamp=timestamp, coordinate=coordinate
-            ):
-                self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))
-                source_results = (
-                    memory_db.contains_pii(timestamp, [domain_term]),
-                    memory_db.contains_pii([timestamp, email], []),
-                    memory_db.contains_pii([timestamp], [domain_term]),
-                )
-                self.assertEqual((True, True, True), source_results)
+        def timestamp_for(
+            month: int, hour: int, offset: str, format_name: str, ordinal: int
+        ) -> str:
+            year = ordinal % 10_000
+            day = ordinal % 31 + 1
+            minute = ordinal % 60
+            second = (ordinal * 7) % 60
+            date = f"{year:04d}-{month:02d}-{day:02d}"
+            if format_name == "basic":
+                return f"{date}T{hour:02d}{minute:02d}{second:02d}{offset}"
+            fraction = "" if format_name == "extended" else "." + "1" * (ordinal % 6 + 1)
+            return f"{date}T{hour:02d}:{minute:02d}:{second:02d}{fraction}{offset}"
 
-        target_timestamp = "2026-06-19T09:28:23+06:15"
-        domain_term = "2026"
-        old_behavior_offsets = ("", "Z", "+02:00", "-05:00", "-12:30")
-        old_grammar_offsets = ("+05:45", "-09:45", "+13:00", "+14:00")
-        self.assertNotIn("+06:15", old_behavior_offsets)
-        self.assertNotIn("+06:15", old_grammar_offsets)
+        expected_product_size = len(months) * len(hours) * len(valid_offsets) * len(formats)
+        source_product_passed = 0
+        ordinal = 0
+        for month in months:
+            for hour in hours:
+                for offset in valid_offsets:
+                    for format_name in formats:
+                        timestamp = timestamp_for(month, hour, offset, format_name, ordinal)
+                        ordinal += 1
+                        self.assertIsNotNone(memory_db.DATE_RE.fullmatch(timestamp))
+                        if memory_db.contains_pii([timestamp, email], []):
+                            source_product_passed += 1
+        self.assertEqual(expected_product_size, source_product_passed)
 
         source = MODULE_PATH.read_text(encoding="utf-8")
-        normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
-        loop_body = (
-            normalized_line
-            + "        account_coordinate_bound = coordinate is not None\n"
-            + "        if (\n"
-            + "            account_identifier_contiguous_is_bounded(item)\n"
-            + "            or account_identifier_grouped_is_detected(\n"
-            + "                item, coordinate_bound=account_coordinate_bound\n"
-            + "            )\n"
-            + "        ):\n"
-            + "            return True\n"
-            + "        pii_values = pii_values_for_coordinate(item, coordinate)\n"
-            + "        coordinate_bound = False\n"
-            + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
-            + "            return True\n"
-            + "        if (\n"
-            + "            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)\n"
-            + "            or any(\n"
-            + "                account_identifier_grouped_is_detected(\n"
-            + "                    pii_value, coordinate_bound=account_coordinate_bound\n"
-            + "                )\n"
-            + "                for pii_value in pii_values\n"
-            + "            )\n"
-            + "        ) or STRUCTURAL_PII_PATTERNS[2].search(normalized):\n"
-            + "            return True\n"
-            + "        if not DATE_RE.fullmatch(item):\n"
-            + "            if any(\n"
-            + "                phone_number_is_detected(\n"
-            + "                    pii_value, coordinate_bound=coordinate_bound\n"
-            + "                )\n"
-            + "                for pii_value in pii_values\n"
-            + "            ):\n"
-            + "                return True\n"
-            + "        if any(pattern.search(normalized) for pattern in domain_patterns):\n"
-            + "            return True\n"
+        two_phase_body = (
+            "    items = value_list(value)\n"
+            "    if any(non_phone_pii_is_detected(item, domain_patterns, coordinate) for item in items):\n"
+            "        return True\n"
+            "    coordinate_bound = False\n"
+            "    for item in items:\n"
+            "        if not DATE_RE.fullmatch(item) and any(\n"
+            "            phone_number_is_detected(pii_value, coordinate_bound=coordinate_bound)\n"
+            "            for pii_value in pii_values_for_coordinate(item, coordinate)\n"
+            "        ):\n"
+            "            return True\n"
         )
-        self.assertEqual(1, source.count(loop_body))
-        restructured_body = (
-            "        if not (DATE_RE.fullmatch(item) and item.endswith(\"+06:15\")):\n"
-            + "".join(f"    {line}" for line in loop_body.splitlines(keepends=True))
-        )
-        restructured_source = source.replace(loop_body, restructured_body)
+        self.assertEqual(1, source.count(two_phase_body))
 
-        function_anchor = "def contains_pii(\n"
-        filter_helper = (
-            "def without_target_offset(items: Iterable[str]) -> list[str]:\n"
-            "    return [item for item in items if not item.endswith(\"+06:15\")]\n\n\n"
+        target_offset = valid_offsets[len(valid_offsets) // 3]
+        target_month = months[len(months) // 2]
+        target_hour = hours[len(hours) // 2]
+        target_extended = timestamp_for(target_month, target_hour, target_offset, "extended", 37)
+        target_basic = timestamp_for(target_month, target_hour, target_offset, "basic", 41)
+        target_domain = f"{37 % 10_000:04d}"
+        coordinate_guard = (
+            f"DATE_RE.fullmatch(item) and item[5:7] == {f'{target_month:02d}'!r} "
+            f"and item[11:13] == {f'{target_hour:02d}'!r} and item.endswith({target_offset!r})"
         )
-        self.assertEqual(1, source.count(function_anchor))
-        filtered_source = source.replace(
-            function_anchor, filter_helper + function_anchor, 1
-        ).replace(
-            "    for item in value_list(value):\n",
-            "    for item in without_target_offset(value_list(value)):\n",
-            1,
-        )
-
-        early_return = (
-            "        if DATE_RE.fullmatch(item) and item.endswith(\"+06:15\"):\n"
+        single_pass_body = (
+            "    for item in value_list(value):\n"
+            f"        if {coordinate_guard}:\n"
             "            return False\n"
+            "        if non_phone_pii_is_detected(item, domain_patterns, coordinate):\n"
+            "            return True\n"
+            "        if not DATE_RE.fullmatch(item) and any(\n"
+            "            phone_number_is_detected(pii_value, coordinate_bound=False)\n"
+            "            for pii_value in pii_values_for_coordinate(item, coordinate)\n"
+            "        ):\n"
+            "            return True\n"
         )
-        self.assertEqual(1, source.count(normalized_line))
-        early_return_source = source.replace(
-            normalized_line, early_return + normalized_line, 1
+        order_body = (
+            "    items = value_list(value)\n"
+            "    if items and DATE_RE.fullmatch(items[0]):\n"
+            "        return False\n"
+            + two_phase_body
         )
-        changed_coordinate = (
-            "        if DATE_RE.fullmatch(item) and item.startswith(\"2027-\"):\n"
+        format_guard = (
+            "DATE_RE.fullmatch(item) and len(item) > 16 and item[13] != ':'"
+        )
+        format_body = (
+            "    for item in value_list(value):\n"
+            f"        if {format_guard}:\n"
             "            return False\n"
-        )
-        changed_coordinate_source = source.replace(
-            normalized_line, changed_coordinate + normalized_line, 1
-        )
-        value_list_body = (
-            "    if isinstance(value, list):\n"
-            "        return [str(item).strip() for item in value if str(item).strip()]\n"
-        )
-        changed_format_body = (
-            "    if isinstance(value, list):\n"
-            "        items = [str(item).strip() for item in value if str(item).strip()]\n"
-            "        if any(re.fullmatch(r\"\\d{4}-\\d{2}-\\d{2}T\\d{6}(?:Z|[+-]\\d{2}:\\d{2})?\", item) for item in items):\n"
-            "            return []\n"
-            "        return items\n"
-        )
-        self.assertEqual(1, source.count(value_list_body))
-        changed_format_source = source.replace(
-            value_list_body, changed_format_body, 1
+            "        if non_phone_pii_is_detected(item, domain_patterns, coordinate):\n"
+            "            return True\n"
+            "        if not DATE_RE.fullmatch(item) and any(\n"
+            "            phone_number_is_detected(pii_value, coordinate_bound=False)\n"
+            "            for pii_value in pii_values_for_coordinate(item, coordinate)\n"
+            "        ):\n"
+            "            return True\n"
         )
         mutant_sources = {
-            "restructured": restructured_source,
-            "filtered": filtered_source,
-            "early_return": early_return_source,
-            "changed_coordinate": changed_coordinate_source,
-            "changed_format": changed_format_source,
+            "coordinate": source.replace(two_phase_body, single_pass_body),
+            "order": source.replace(two_phase_body, order_body),
+            "format": source.replace(two_phase_body, format_body),
         }
-        for mutant_source in mutant_sources.values():
-            self.assertNotEqual(source, mutant_source)
+        self.assertTrue(all(mutant_source != source for mutant_source in mutant_sources.values()))
 
-        mutant_results: dict[str, tuple[bool, bool, bool] | bool] = {}
-        with tempfile.TemporaryDirectory(prefix="memory-date-offset-pii-mutants-") as temp:
+        mutant_results: dict[str, tuple[bool, ...]] = {}
+        with tempfile.TemporaryDirectory(prefix="memory-date-product-mutants-") as temp:
             for name, mutant_source in mutant_sources.items():
                 mutant_path = Path(temp) / f"build_memory_db_{name}_mutant.py"
                 write(mutant_path, mutant_source)
                 spec = importlib.util.spec_from_file_location(
-                    f"build_memory_db_date_offset_{name}_mutant", mutant_path
+                    f"build_memory_db_date_product_{name}_mutant", mutant_path
                 )
                 assert spec and spec.loader
                 mutant = importlib.util.module_from_spec(spec)
                 sys.modules[spec.name] = mutant
                 try:
                     spec.loader.exec_module(mutant)
-                    if name == "changed_coordinate":
-                        mutant_results[name] = mutant.contains_pii(
-                            ["2027-06-19T09:28:23+06:15", email], []
+                    if name == "coordinate":
+                        mutant_results[name] = (
+                            mutant.contains_pii([target_extended, email], []),
+                            mutant.contains_pii([email, target_extended], []),
+                            mutant.contains_pii(target_extended, [target_domain]),
                         )
-                    elif name == "changed_format":
-                        mutant_results[name] = mutant.contains_pii(
-                            ["2028-06-19T092823+06:15", email], []
+                    elif name == "order":
+                        mutant_results[name] = (
+                            mutant.contains_pii([target_extended, email], []),
+                            mutant.contains_pii([email, target_extended], []),
                         )
                     else:
                         mutant_results[name] = (
-                            mutant.contains_pii(target_timestamp, [domain_term]),
-                            mutant.contains_pii([target_timestamp, email], []),
-                            mutant.contains_pii([target_timestamp], [domain_term]),
+                            mutant.contains_pii([target_basic, email], []),
+                            mutant.contains_pii([email, target_basic], []),
+                            mutant.contains_pii(target_basic, [f"{41 % 10_000:04d}"]),
                         )
                 finally:
                     sys.modules.pop(spec.name, None)
 
-        self.assertEqual((False, True, False), mutant_results["restructured"])
-        self.assertEqual((False, True, False), mutant_results["filtered"])
-        self.assertEqual((False, False, False), mutant_results["early_return"])
-        self.assertEqual(False, mutant_results["changed_coordinate"])
-        self.assertEqual(False, mutant_results["changed_format"])
+        self.assertEqual((False, True, False), mutant_results["coordinate"])
+        self.assertEqual((False, True), mutant_results["order"])
+        self.assertEqual((False, True, False), mutant_results["format"])
+        mutant_caught = sum(any(not result for result in results) for results in mutant_results.values())
+        self.assertEqual(3, mutant_caught)
+        print(
+            "TASK0332_BEHAVIOR "
+            f"product={expected_product_size} source={source_product_passed} "
+            f"mutants={mutant_caught}/{len(mutant_results)} "
+            f"coordinate={mutant_results['coordinate']} "
+            f"order={mutant_results['order']} format={mutant_results['format']}"
+        )
 
     def test_account_identifier_presentations_are_structural_and_falsifiable(self) -> None:
         """PERMANENT_NEGATIVE: NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION"""
@@ -2852,8 +2823,8 @@ Body is not indexed.
             "    for start in tuple(ACCOUNT_IDENTIFIER_START_RE.finditer(value))[:1]:"
         )
         contiguous_guard = (
-            "            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)\n"
-            "            or "
+            "        any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)\n"
+            "        or "
         )
         terminator_guard = (
             "        next_char = value[end:end + 1] or following\n"
@@ -2872,7 +2843,7 @@ Body is not indexed.
         self.assertEqual(1, source.count(contiguous_guard))
         self.assertEqual(1, source.count(terminator_guard))
         self.assertEqual(1, source.count(object_id_guard))
-        coordinate_bound_line = "        coordinate_bound = False\n"
+        coordinate_bound_line = "    coordinate_bound = False\n"
         self.assertEqual(1, source.count(coordinate_bound_line))
         coordinate_blind_identity_return = "        return unexplained_identity_parts(item)\n"
         coordinate_blind_message_return = (
@@ -2882,21 +2853,21 @@ Body is not indexed.
         self.assertEqual(1, source.count(coordinate_blind_identity_return))
         self.assertEqual(1, source.count(coordinate_blind_message_return))
         self.assertEqual(1, source.count(coordinate_blind_path_return))
-        pii_values_call = "        pii_values = pii_values_for_coordinate(item, coordinate)\n"
+        pii_values_call = "    pii_values = pii_values_for_coordinate(item, coordinate)\n"
         self.assertEqual(1, source.count(pii_values_call))
         raw_account_guard = (
-            "        if (\n"
-            "            account_identifier_contiguous_is_bounded(item)\n"
-            "            or account_identifier_grouped_is_detected(\n"
-            "                item, coordinate_bound=account_coordinate_bound\n"
-            "            )\n"
-            "        ):\n"
-            "            return True\n"
+            "    if (\n"
+            "        account_identifier_contiguous_is_bounded(item)\n"
+            "        or account_identifier_grouped_is_detected(\n"
+            "            item, coordinate_bound=account_coordinate_bound\n"
+            "        )\n"
+            "    ):\n"
+            "        return True\n"
         )
         self.assertEqual(1, source.count(raw_account_guard))
         raw_contiguous_clause = (
-            "            account_identifier_contiguous_is_bounded(item)\n"
-            "            or "
+            "        account_identifier_contiguous_is_bounded(item)\n"
+            "        or "
         )
         self.assertEqual(1, source.count(raw_contiguous_clause))
         mutant_sources = {
@@ -2920,19 +2891,19 @@ Body is not indexed.
             ).replace(coordinate_blind_path_return, "        return ()\n", 1),
             "coordinate_adjacency_blind": source.replace(
                 coordinate_bound_line,
-                "        coordinate_bound = coordinate is not None\n",
+                "    coordinate_bound = coordinate is not None\n",
                 1,
             ),
             "coordinate_date_blind": source.replace(
                 pii_values_call,
-                "        pii_values = tuple(\n"
-                "            re.sub(r\"(?<!\\d)(?:19|20)\\d{6}(?!\\d)\", \":\", part)\n"
-                "            for part in pii_values_for_coordinate(item, coordinate)\n"
-                "        )\n",
+                "    pii_values = tuple(\n"
+                "        re.sub(r\"(?<!\\d)(?:19|20)\\d{6}(?!\\d)\", \":\", part)\n"
+                "        for part in pii_values_for_coordinate(item, coordinate)\n"
+                "    )\n",
                 1,
             ).replace(
                 coordinate_bound_line,
-                "        coordinate_bound = coordinate is not None\n",
+                "    coordinate_bound = coordinate is not None\n",
                 1,
             ),
             "coordinate_raw_account_blind": source.replace(raw_account_guard, "", 1),
