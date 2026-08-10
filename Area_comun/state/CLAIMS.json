@@ -135,9 +135,39 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-10T02:51:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0354",
             "updated_at": "2026-08-10T02:51:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-delivery-msg",
+            "expires_at": "2026-08-10T06:02:59Z",
+            "notes": "Deliver TASK-0354 implementation for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-delivery-msg",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T04:02:59Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T04:02:59Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-decision-0110-20260810c",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0110-memoria-en-el-commit-del-trabajo-y-arbol-limpio.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-decision-0110-20260810c"
+            ],
+            "started_at": "2026-08-10T04:03:43Z",
+            "status": "released",
+            "task_id": "OPS-DECISION-0110",
+            "updated_at": "2026-08-10T04:03:43Z"
         },
         {
             "claim_id": "CLAIM-arq-go-0354-20260810b",

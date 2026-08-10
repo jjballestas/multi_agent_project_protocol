@@ -207,7 +207,7 @@
         {
             "id": "TASK-0354",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan"
         },
         {
@@ -334,7 +334,8 @@
         "DECISION-0106",
         "DECISION-0107",
         "DECISION-0108",
-        "DECISION-0109"
+        "DECISION-0109",
+        "DECISION-0110"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
