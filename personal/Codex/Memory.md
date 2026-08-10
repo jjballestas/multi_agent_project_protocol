@@ -22,7 +22,7 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0345 remediation iteration 2 implem
 - The focused runner, 71/71 falsification inventory and wiring, collaboration, encoding,
   neutrality, compile, reviewer-battery, and diff gates exited 0. Exact commit `d2187eb8` passed
   the declared gates in a detached clean Aegis worktree with empty status.
-- Governed delivery moves TASK-0345 to `in_review`, releases both remediation claims, and publishes
+- Governed delivery commit `a3ad18c5` moves TASK-0345 to `in_review`, releases both remediation claims, and publishes
   `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0345-remediation-2.md` for independent Analista
   re-review. Codex is maker only and has not reviewed or ratified the remediation.
 
