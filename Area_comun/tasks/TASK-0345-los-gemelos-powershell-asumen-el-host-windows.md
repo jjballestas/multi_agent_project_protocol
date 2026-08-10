@@ -1,7 +1,7 @@
 ---
 id: TASK-0345
 title: Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md

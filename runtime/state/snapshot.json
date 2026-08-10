@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "94cf81b4fb8d4c31c620f1a7b89ee8c4a5a1db8a27d09afb5f24ed2cd41c0a20",
+  "canonical_hash": "b42aae61ae6b999eb445187c7b2acca7b89802133306f92ad396dbf83af8beed",
   "integrity": {
-    "canonical_hash": "94cf81b4fb8d4c31c620f1a7b89ee8c4a5a1db8a27d09afb5f24ed2cd41c0a20",
+    "canonical_hash": "b42aae61ae6b999eb445187c7b2acca7b89802133306f92ad396dbf83af8beed",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c423f3fa33df54cdc09ce9600e40516453d5956b6399d071aa68157e59b58a14",
-    "signature": "4e95225f379b777d15139fa98eb0e90b8f9197b89387e7753eaf64722a669623",
-    "up_to_seq": 8549
+    "prev_hash": "4fc384b1b148d7eb2a4923ff24d19c03b49d813626ad2391bf8878df53fb700f",
+    "signature": "54df10f26f9d3eef824f5489a8b9ef3a92c322cd6eb3cf703a1372b92ae980ce",
+    "up_to_seq": 8556
   },
   "state": {
     "aggregate_versions": {
@@ -1286,6 +1286,7 @@
       "CLAIM-arq-rem0283-20260722": 1,
       "CLAIM-arq-rem0294-20260724": 1,
       "CLAIM-arq-rembatch-20260723": 1,
+      "CLAIM-arq-remed-0345-20260810": 1,
       "CLAIM-arq-remed-0353-20260810": 1,
       "CLAIM-arq-remed-0354-20260810": 1,
       "CLAIM-arq-remed2-0353-20260810": 1,
@@ -3057,9 +3058,13 @@
       "MSG-20260809-Codex-to-Arquitecto-QUESTION-TASK-0346-prune-gate": 1,
       "MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-r2-veredicto": 1,
       "MSG-20260810-Analista-to-Arquitecto-REVIEW-TASK-0353-veredicto": 1,
+      "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0344": 1,
+      "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0345": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0353-r3": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0354": 1,
       "MSG-20260810-Analista-to-Arquitecto-VERDICT-TASK-0354-r2": 1,
+      "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0344": 1,
+      "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0345": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r2": 1,
       "MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0353-r3": 1,
@@ -3461,7 +3466,7 @@
       "TASK-0342": 27,
       "TASK-0343": 16,
       "TASK-0344": 9,
-      "TASK-0345": 13,
+      "TASK-0345": 15,
       "TASK-0346": 17,
       "TASK-0347": 13,
       "TASK-0348": 2,
@@ -3493,7 +3498,7 @@
       "protocol-prune": 63,
       "protocol-state": 1
     },
-    "events_applied": 7878,
+    "events_applied": 7885,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4253,6 +4258,13 @@
       "arq-rj-0": 7387,
       "arq-rj-1": 7388,
       "arq-rj-2": 7389,
+      "arq-rm345-000": 8550,
+      "arq-rm345-001": 8551,
+      "arq-rm345-010": 8552,
+      "arq-rm345-011": 8553,
+      "arq-rm345-012": 8554,
+      "arq-rm345-013": 8555,
+      "arq-rm345-099": 8556,
       "arq-rm353-000": 8478,
       "arq-rm353-001": 8479,
       "arq-rm353-010": 8480,
@@ -11375,5 +11387,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8549
+  "up_to_seq": 8556
 }
