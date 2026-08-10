@@ -7,6 +7,88 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-10 (63) - TASK-0345 r2: CHANGE-REQUIRED (la poblacion se deriva de la coordenada equivocada)
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0345-r2`. **SOLO HUB, SIN PRODUCTO.**
+- Ancla `a3ad18c5`; implementacion `d2187eb8`; HEAD `69c36020` con diff **vacio** sobre `scripts/`,
+  `examples/`, `.github/`, `Area_comun/tasks/`. Clon limpio `D:/Aegis_Scratch/mapp/rev0345r2/clone`.
+  Veredicto en `089f21d1`
+  (`Area_comun/artifacts/Analista-TASK-0345-r2-poblacion-derivada-formas-enumeradas-verdict.md`).
+  Estado canonico al arrancar: validate exit 0, drift `CLEAN up_to_seq=8564`, encoding/neutralidad exit 0.
+- **17 mutantes sobre produccion: 8 muertos, 9 escapes.** Los 9 escapes verdes contra los CINCO gates
+  declarados, no solo contra el AC4 (lo verifique con una segunda bateria cruzada).
+
+### LECCION 1: "derivar la poblacion" puede derivarla de la COORDENADA EQUIVOCADA
+
+Mi bloqueante de r1 fue "la poblacion es una lista escrita a mano". El maker la derivo de verdad:
+`workflow_powershell_surface()` parsea el workflow y saca 7 puntos de entrada. Y **falla cerrado**
+para todo lo que ve (`assert len(paths)==7`, `assert len(inline)==1`). Pero deriva del campo
+**`shell:` del step**, cuando la condicion evaluada es **"PowerShell que CI ejecuta"**:
+
+    step con shell: bash  y  run: pwsh -File ./scripts/host_probe.ps1     -> INVISIBLE, gate exit 0
+
+Un `.ps1` nuevo entero con `MakeRelativeUri` dentro, cableado a CI, y los cinco gates verdes. Ademas
+`WORKFLOW` esta fijado a `.github/workflows/validate.yml` (un segundo fichero de workflow es
+invisible; latente hoy porque solo hay uno).
+**Regla:** cuando pida "derivar la poblacion", el re-juicio tiene que atacar el PREDICADO DE
+DERIVACION, no solo el tamano de la poblacion. La pregunta es "?que instancia de la condicion no
+entra por este campo?", no "?estan los 7?".
+
+### LECCION 2: el mutante tautologico se retira y reaparece atado al NOMBRE DE LA VARIABLE
+
+El marcador `TASK0345_UNBOUNDED_GET_CONTENT_LINE_READER` desaparecio (grep: 0). La deteccion ya es
+sobre la forma real. Pero la regex exige `$lines = @(Get-Content ... -Path $file.Path ...)`:
+
+    scan_powershell_source('x.ps1', '$rows = @(Get-Content -Path $file.Path -Encoding UTF8)') -> set()
+
+Mismo lector, misma ruta, una renombrada de distancia. Igual `fixed_case_path_comparison`, atado a
+`$(Path)?Comparison`: renombrar la variable de produccion basta. **Un reconocedor atado a un
+identificador de produccion es un literal disfrazado de propiedad.**
+
+### LECCION 3: mide las FRASES del entregable, no solo el codigo
+
+Dos afirmaciones escritas en el fichero de tarea las falsa un mutante:
+- "una segunda ocurrencia en esa ruta hace fallar el contrato" -> falso (C2, `$rows`).
+- "exige que el primer `exit` top-level alcanzable sea `exit 0`" -> falso (C3 y C5).
+En C5, `if ($true) { exit $LASTEXITCODE }` deja el `exit 0` **literalmente inalcanzable** y
+`runner_reaches_success_exit()` devuelve `True`. El modelo de profundidad solo ve un `exit` cuando es
+la sentencia COMPLETA de la linea; **una llave en la misma linea lo ciega**.
+Esto es lo que convirtio un "buen avance" en bloqueante: un contrato que DOCUMENTA una propiedad mas
+fuerte que la que ATA es el falso seguro que la tarea existe para evitar. **Leer la prosa del
+entregable como si fuera codigo y buscarle el contraejemplo.**
+
+### LECCION 4: reconocer el avance real y ACOTAR el pedido
+
+4 de mis 6 puntos de r1 estan cumplidos: los 28 SI son el producto 7x4 (bucle anidado con assert por
+celda, formas reales con variacion de espaciado/orden), el marcador se fue, el eje en linea quedo
+cubierto (A5 muere) y `HOST_DIMENSIONS` se retiro. Mis tres negativos minimos de r1 (E2a/E2b/E6)
+**ahora mueren**, insertados a media altura del fichero.
+Por eso NO repeti "cierra la clase". Pedi explicitamente **DECLARAR** el residual de grafia
+(B2/B4/B5/B6: la quinta grafia de las mismas 4 dimensiones) en vez de ampliar el reconocedor, y
+nombre donde vive el cierre real: **ejecutar** los gemelos en Linux (hoy 3 de 7, residual R1). Si la
+respuesta es "anado cuatro literales mas", vuelvo a fallar -- y lo escribi en el veredicto.
+
+### LECCION 5: mutar el CHECKER, declarandolo, para cazar numeros que mienten
+
+Borre una de las 4 `forms` del propio guardian: **exit 0 y el mensaje sigue diciendo
+`28 all-coordinate production mutants`** cuando corrieron 21. Es un literal, no
+`len(sources)*len(forms)`. Misma familia que el `HOST_DIMENSIONS` que acababan de retirar.
+Y C6 (renombrar el lector de produccion) muere con `AssertionError: host mutant 2 escaped` cuando la
+causa real es que `BOUNDED_LINE_READERS` caduco: **falla cerrado pero nombra mal su causa**.
+
+### Metodo que repetir
+
+- Precondicion en cada mutante: `git status --porcelain` no vacio ANTES de correr el gate. La ronda
+  pasada casi reporto "sobrevive" un mutante que no se habia aplicado.
+- Segunda bateria CRUZADA: repetir cada escape contra **todos** los gates de `verification_cmd`. Sin
+  eso, "escapa al AC4" no es "escapa a la entrega".
+- Restaurar con `git checkout -- . && git clean -fdq` y re-medir el baseline al final.
+- Residual duro sin cambios: **no hay `pwsh` en este host**; no ejecuto ningun `.ps1`. Declare como
+  NO MEDIDO (no como defensa del contrato) que el job de paridad quiza matara B3/B4/B5 por
+  comportamiento en Linux.
+- **Iteracion 2 de 2**: si tras ella C1/C2/C3/C5 siguen vivos y las frases falsas siguen, escalo al
+  operador humano en lugar de abrir una r3.
+
 ## Ultima actualizacion 2026-08-10 (62) - TASK-0344: OK-CLOSABLE (el primer GO tras una racha larga)
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0344`. **SOLO HUB, SIN PRODUCTO.**
