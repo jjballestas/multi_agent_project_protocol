@@ -7,6 +7,78 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-10 (61) - TASK-0354 r2: CHANGE-REQUIRED + ESCALADO al operador
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0354-r2`. **SOLO HUB, SIN PRODUCTO.**
+- Ancla `269e5d13`; implementacion `a47bed11`; padre de la 1a entrega `2767b2c7`. El workflow es
+  byte-identico de `a47bed11` a `origin/main`. Clones `--shared` bajo
+  `D:/Aegis_Scratch/protocol/rv0354r2/` (c1 medicion, c2 mutantes, c3 antes). Veredicto en
+  `24231afa` (`Area_comun/artifacts/Analista-TASK-0354-r2-gate-dependencias-verdict.md`).
+  Gates en clon limpio: validate / scan_encoding / scan_domain_neutrality / drift /
+  check_falsification_contracts --inventory = **exit 0** (12/12, 71/71). Iteracion 2 de 2 -> escale.
+
+### LECCION 1: un gate que lee el ENTORNO exige un interprete por cada declaracion
+
+El gate de TASK-0354 mapea modulo->distribucion con `importlib.metadata.packages_distributions()`
+del interprete en el que corre. Juzgarlo desde mi host (253 paquetes) miente en las DOS
+direcciones. Monte **tres venvs, uno por job**: bare (== falsification-runners), jsonschema+pyyaml
+(== falsification-runners-python), cryptography+jsonschema+pyyaml (== validate). Solo asi:
+- el `PASS runners=72` es el que CI veria (mapa de 15 modulos, no 253);
+- los runners del job nuevo se prueban con **solo lo que su job instala** -> exit 0 los dos;
+- el `pip install jsonschema` que la remediacion BORRO del job de Windows se falsa de verdad:
+  corri su runner con **cero paquetes** -> exit 0, borrado justificado.
+Regla: **borrar una linea de instalacion es una mutacion; se prueba en el entorno que deja, no
+leyendo el diff.**
+
+### LECCION 2: cuando el gate descubre por FORMA, el escape ya vive en el fichero
+
+El descubrimiento anclaba a principio de linea (`^\s*python ... .py`). No busque un contraejemplo
+inventado: **compare el descubrimiento del gate contra un matcher amplio sobre el mismo documento**
+-> 72 vs 73, y el que falta es `if ! python scripts/prune_state.py ...`, dos pasos por ENCIMA del
+propio gate. A/B decisivo: mismo `import attrs` no declarado, mismo job, cambiando solo el fichero
+que lo recibe -> en el no descubierto gate PASS exit 0 y runner exit 1; en el descubierto gate
+FAIL exit 1. **El discriminador es la forma, no la dependencia.** Patron reutilizable: ante
+cualquier gate con regex de descubrimiento, escribir el matcher amplio y restar los conjuntos; el
+escape suele estar ya commiteado.
+
+### LECCION 3: un contador que nadie ata es una perdida de cobertura silenciosa
+
+`runners=72` es el unico testigo y no se compara con nada. Reescribir el runner como
+`cd . && python ...` o `python -m ...` lo baja a 71 **sin senal** y el defecto vuelve a pasar.
+Es el gemelo de la leccion "estrella no producto": medir no es gatear. Todo gate que imprima N
+debe comparar N con un esperado, o N es decorativo.
+
+### LECCION 4: la indireccion por un modulo del repo resucita el defecto entero
+
+El gate parsea SOLO el fichero del runner y excluye todo nombre local sin seguirlo. Lo demostre
+**sin fabricar dependencia sintetica**: el runner del job de Windows importa `runtime.turn_validate`
+(que tiene `import jsonschema` de nivel superior) con el mismo idiom de `sys.path` que los runners
+ya usan -> gate PASS runners=72 exit 0, runner exit 1 ModuleNotFoundError. Un salto y vuelve F1.
+Corolario metodologico: escribi un analizador de **cierre transitivo** propio y medi TODOS los
+runners -> hoy no rompe ninguno, pero lo que protege el arbol son los `try/except` de los imports
+perezosos, no el gate. **"La clase abierta, la instancia cerrada" es un veredicto legitimo y hay
+que decirlo con las dos mitades.**
+
+### LECCION 5: mutar tambien la direccion del FALSO ROJO
+
+No solo busque bypass. Probe que un job que declara CORRECTAMENTE algo que `validate` no instala
+(`requests`) sale FAIL "unmapped external module": el mapa esta acoplado al entorno de otro job.
+Es fail-closed, pero acopla cualquier job futuro (el repo ya documenta `pip install pymssql`).
+Un checker completo mide las dos direcciones: lo que se cuela y lo que se bloquea de mas.
+
+### Operativo
+
+- **Lock huerfano en el arbol compartido:** `.git/next-index-6720.lock` del **2026-07-30**, sin
+  proceso git vivo. Rompio mi primer `git commit` ("Another git process seems to be running").
+  **El reintento con proceso nuevo funciona** (git nombra el lock por pid); no borre nada. Si vuelve
+  a chocar: reintentar antes de tocar `.git`.
+- El replicador del job `validate` completo (78 pasos ahora, 77 antes) **no cabe en la ventana**:
+  se queda en el paso 05 (hook inventory full-mode). Verifique el paso nuevo (`STEP 03/78 PASS`) y
+  los cuatro primeros; lo demas se declara residual, igual que le paso al maker.
+- AC6 se re-deriva bien con `--job`: `replay_validate_job.py --job falsification-runners` /
+  `--job falsification-runners-python` en clones de las anclas. Sin `--job` el default es
+  `validate`, que es CIEGO a los jobs que esta tarea toca.
+
 ## Ultima actualizacion 2026-08-09 (60) - DECISION-0105 iter2: CHANGE-REQUIRED + ESCALADO al operador
 
 - Encargo `MSG-20260809-Arquitecto-to-Analista-REVIEW-DRAFT-DECISION-0105-r2`. **SIN PRODUCTO.**
