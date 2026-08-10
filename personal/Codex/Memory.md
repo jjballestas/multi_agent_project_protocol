@@ -25,6 +25,7 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent revie
 
 ## 2026-08-10 - TASK-0354 delivery
 
+- Delivery commit `4e7b2416` records the governed task-file transition, handoff, and memory.
 - Runtime events 8498-8501, signed by Codex with drift false, acquire the file-scoped handoff
   claim, move TASK-0354 to `in_review`, and release both Codex claims atomically.
 - `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354.md` contains the runner-by-runner dependency
