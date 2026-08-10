@@ -5,15 +5,19 @@ from __future__ import annotations
 
 import ast
 import json
+import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(os.environ.get("TASK0343_ROOT", Path(__file__).resolve().parents[2])).resolve()
+TASK0343_ROLLBACK_ONLY = "--task0343-rollback-only" in sys.argv
+TASK0343_CONTRACT_CANDIDATE = "--task0343-contract-candidate" in sys.argv
 
 FALSIFICATION_CONTRACTS = (
     {
@@ -148,15 +152,10 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "retry-ledger-preservation-property",
-        "negative": "rollback verification rejects ledger loss and deletion of the production assertion",
-        "mutation": "class DeleteMainLedgerAssertion(ast.NodeTransformer):",
-        "boundaries": (
-            "assert all(actual == expected for _, actual, expected in property_results)",
-            "assert all(actual == expected for _, actual, expected in defer_results)",
-            "assert not main_enforces_ledger_preservation(deleted_source)",
-            "assert not survivors",
-        ),
-        "exercised_by": "run_rollback_ledger_preservation_property",
+        "negative": "rollback verification rejects ledger loss and ineffective production assertions by execution",
+        "mutation": "make_main_ledger_assertion_mutants(production_source)",
+        "boundaries": ("assert all(outcome[\"caught\"] for outcome in execution_results)",),
+        "exercised_by": "run_main_ledger_assertion_behavior_cases",
     },
 )
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
@@ -181,24 +180,132 @@ def conservative_rollback_defer_observed(log: str) -> bool:
     )
 
 
-def main_enforces_ledger_preservation(source: str) -> bool:
-    """Find the behavioral assertion semantically, independent of layout."""
-    tree = ast.parse(source)
-    main_node = next(
-        (node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "main"),
-        None,
-    )
-    if main_node is None:
-        return False
-    return any(
-        isinstance(node, ast.Assert)
-        and any(
-            isinstance(child, ast.Call)
-            and isinstance(child.func, ast.Name)
-            and child.func.id == "ledger_preservation_holds"
-            for child in ast.walk(node.test)
+def make_main_ledger_assertion_mutants(source: str) -> dict[str, str]:
+    """Derive ineffective assertion variants from production; execution is the oracle."""
+
+    class MutateMainLedgerAssertion(ast.NodeTransformer):
+        def __init__(self, variant: str) -> None:
+            self.variant = variant
+            self.in_main = False
+            self.mutations = 0
+
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
+            previous = self.in_main
+            self.in_main = node.name == "main"
+            result = self.generic_visit(node)
+            self.in_main = previous
+            return result
+
+        def visit_Assert(self, node: ast.Assert) -> ast.AST:
+            if not self.in_main:
+                return node
+            call = next(
+                (
+                    child
+                    for child in ast.walk(node.test)
+                    if isinstance(child, ast.Call)
+                    and isinstance(child.func, ast.Name)
+                    and child.func.id == "ledger_preservation_holds"
+                ),
+                None,
+            )
+            if call is None:
+                return node
+            self.mutations += 1
+            if self.variant == "short_circuit":
+                node.test = ast.BoolOp(op=ast.Or(), values=[ast.Constant(value=True), node.test])
+                return node
+            if self.variant == "tautology":
+                assert len(call.args) == 4
+                call.args = [call.args[0], call.args[0], call.args[2], call.args[2]]
+                return node
+            if self.variant == "unreachable":
+                return ast.If(test=ast.Constant(value=False), body=[node], orelse=[])
+            raise AssertionError(f"unknown TASK-0343 assertion mutant: {self.variant}")
+
+    mutants: dict[str, str] = {}
+    for variant in ("short_circuit", "tautology", "unreachable"):
+        transformer = MutateMainLedgerAssertion(variant)
+        tree = transformer.visit(ast.parse(source))
+        assert transformer.mutations == 1, (
+            f"TASK-0343 production assertion selection changed for {variant}: "
+            f"mutations={transformer.mutations}"
         )
-        for node in ast.walk(main_node)
+        mutants[variant] = ast.unparse(ast.fix_missing_locations(tree))
+    return mutants
+
+
+def run_main_ledger_assertion_behavior_cases() -> None:
+    """A production-derived ledger-loss mutant must kill every assertion variant."""
+    production_source = Path(__file__).read_text(encoding="utf-8")
+    candidates = {"baseline": production_source, **make_main_ledger_assertion_mutants(production_source)}
+    scratch_root = Path("D:/Aegis_Scratch/multi_agent_project_protocol/task0343-behavior")
+    scratch_root.mkdir(parents=True, exist_ok=True)
+    fixture = Path(tempfile.mkdtemp(prefix="execution-", dir=scratch_root))
+    execution_results: list[dict[str, object]] = []
+    try:
+        for label, candidate_source in candidates.items():
+            candidate = fixture / f"run_mailbox_retry_cases_{label}.py"
+            candidate.write_text(candidate_source, encoding="utf-8")
+            caught_runs = 0
+            diagnostics: list[str] = []
+            for _ in range(3):
+                environment = os.environ.copy()
+                environment["TASK0343_ROOT"] = str(ROOT)
+                environment["TASK0343_DESTROY_ROLLBACK_LEDGER"] = "1"
+                mode = "--task0343-rollback-only" if label == "baseline" else "--task0343-contract-candidate"
+                result = subprocess.run(
+                    [sys.executable, str(candidate), mode],
+                    cwd=ROOT,
+                    env=environment,
+                    text=True,
+                    capture_output=True,
+                    timeout=240,
+                )
+                evidence = result.stdout + result.stderr
+                caught = result.returncode == 1 and (
+                    "signed ledger state changed across rollback" in evidence
+                    if label == "baseline"
+                    else "TASK-0343 assertion effect escaped" in evidence
+                )
+                caught_runs += int(caught)
+                diagnostics.append(evidence[-600:])
+            execution_results.append(
+                {
+                    "variant": label,
+                    "caught_runs": caught_runs,
+                    "caught": caught_runs == 3,
+                    "diagnostic": diagnostics,
+                }
+            )
+        assert all(outcome["caught"] for outcome in execution_results), execution_results
+        print(
+            "TASK0343_MAIN_ASSERTION_EXECUTION "
+            + " ".join(
+                f"{outcome['variant']}={outcome['caught_runs']}/3" for outcome in execution_results
+            )
+        )
+    finally:
+        shutil.rmtree(fixture, ignore_errors=True)
+
+
+def run_current_main_assertion_effect_case() -> None:
+    """Execute this exact source with production rollback ledger destruction."""
+    environment = os.environ.copy()
+    environment["TASK0343_ROOT"] = str(ROOT)
+    environment["TASK0343_DESTROY_ROLLBACK_LEDGER"] = "1"
+    result = subprocess.run(
+        [sys.executable, str(Path(__file__).resolve()), "--task0343-rollback-only"],
+        cwd=ROOT,
+        env=environment,
+        text=True,
+        capture_output=True,
+        timeout=240,
+    )
+    evidence = result.stdout + result.stderr
+    assert result.returncode == 1 and "signed ledger state changed across rollback" in evidence, (
+        "TASK-0343 assertion effect escaped: "
+        f"exit={result.returncode}; evidence={evidence[-1200:]}"
     )
 
 
@@ -233,55 +340,7 @@ def run_rollback_ledger_preservation_property() -> None:
     ]
     assert all(actual == expected for _, actual, expected in defer_results), defer_results
 
-    production_source = Path(__file__).read_text(encoding="utf-8")
-
-    class DeleteMainLedgerAssertion(ast.NodeTransformer):
-        def __init__(self) -> None:
-            self.in_main = False
-
-        def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
-            previous = self.in_main
-            self.in_main = node.name == "main"
-            result = self.generic_visit(node)
-            self.in_main = previous
-            return result
-
-        def visit_Assert(self, node: ast.Assert) -> ast.AST | None:
-            if self.in_main and any(
-                isinstance(child, ast.Call)
-                and isinstance(child.func, ast.Name)
-                and child.func.id == "ledger_preservation_holds"
-                for child in ast.walk(node.test)
-            ):
-                return None
-            return node
-
-    deleted_tree = DeleteMainLedgerAssertion().visit(ast.parse(production_source))
-    deleted_source = ast.unparse(ast.fix_missing_locations(deleted_tree))
-    reordered_tree = ast.parse(production_source)
-    main_index = next(
-        index
-        for index, node in enumerate(reordered_tree.body)
-        if isinstance(node, ast.FunctionDef) and node.name == "main"
-    )
-    main_definition = reordered_tree.body.pop(main_index)
-    first_definition = next(
-        index for index, node in enumerate(reordered_tree.body) if isinstance(node, ast.FunctionDef)
-    )
-    reordered_tree.body.insert(first_definition, main_definition)
-    assertion_wiring = {
-        "baseline": main_enforces_ledger_preservation(production_source),
-        "coordinate": main_enforces_ledger_preservation("\n" * 17 + production_source),
-        "order": main_enforces_ledger_preservation(ast.unparse(reordered_tree)),
-        "format": main_enforces_ledger_preservation(ast.unparse(ast.parse(production_source))),
-        "deleted": main_enforces_ledger_preservation(deleted_source),
-    }
-    assert all(assertion_wiring[key] for key in ("baseline", "coordinate", "order", "format")), assertion_wiring
-    assert not main_enforces_ledger_preservation(deleted_source), assertion_wiring
-    print(
-        "TASK0343_MAIN_ASSERTION "
-        + " ".join(f"{key}={int(value)}" for key, value in assertion_wiring.items())
-    )
+    run_main_ledger_assertion_behavior_cases()
     mutants = {
         "accept_loss": lambda before, after, before_claims, after_claims: True,
         "claims_ignored": lambda before, after, before_claims, after_claims:
@@ -1574,6 +1633,9 @@ def run_complete_tree_kill_case() -> None:
 
 
 def main() -> int:
+    if TASK0343_CONTRACT_CANDIDATE:
+        run_current_main_assertion_effect_case()
+        return 0
     sandbox = Path(tempfile.mkdtemp(prefix="mailbox-retry-"))
     try:
         (sandbox / "Area_comun/mailbox/open").mkdir(parents=True)
@@ -1589,6 +1651,21 @@ def main() -> int:
         )
         (sandbox / "scripts/harness/prompts").mkdir(parents=True)
         shutil.copy2(RUNNER, sandbox / "scripts/harness/peer_mailbox_cron.ps1")
+        if TASK0343_ROLLBACK_ONLY and os.environ.get("TASK0343_DESTROY_ROLLBACK_LEDGER") == "1":
+            sandbox_runner = sandbox / "scripts/harness/peer_mailbox_cron.ps1"
+            runner_source = sandbox_runner.read_text(encoding="utf-8-sig")
+            preserved_log = (
+                '        Write-Log "ROLLBACK_LEDGER_PRESERVED '
+                'seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq) proof=disk"'
+            )
+            destruction = (
+                "        Set-Content -LiteralPath (Join-Path $Root "
+                "'Area_comun/state/CLAIMS.json') -Value '{\"seq\":0,\"claims\":[]}'\n"
+            )
+            assert runner_source.count(preserved_log) == 1, "TASK-0343 production rollback anchor changed"
+            sandbox_runner.write_text(
+                runner_source.replace(preserved_log, destruction + preserved_log), encoding="utf-8"
+            )
         shutil.copy2(LEDGER_HEAD, sandbox / "scripts/ledger_head.py")
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
@@ -1698,26 +1775,27 @@ def main() -> int:
         run("git", "config", "user.name", "TestPeer", cwd=sandbox)
         run("git", "add", ".", cwd=sandbox)
         run("git", "commit", "-m", "fixture", cwd=sandbox)
-        run_outcome_parser_cases(sandbox)
-        run_torn_tail_case(sandbox)
-        run_nondestructive_rollback_contract()
-        run_rollback_ledger_preservation_property()
-        run_pregate_contract_mutants()
-        run_deleted_residue_real_loop_case()
-        run_large_stderr_drain_case(sandbox)
-        run_expired_claim_behavior_case(sandbox)
-        run_pure_append_evidence_cases(sandbox)
-        run_useful_own_evidence_cases(sandbox)
-        run_git_gate_contract_mutants()
-        run_nul_residue_path_cases(sandbox)
-        run_unreadable_head_case(sandbox, prompt, fake)
-        run_unstaged_residue_case(sandbox, prompt, fake)
-        run_disordered_ledger_case(sandbox, prompt)
-        run_exec_running_heartbeat_case()
-        run_post_delivery_timeout_case()
-        run_pre_delivery_and_liveness_cases()
-        run_frozen_exec_with_production_freshness_case()
-        run_complete_tree_kill_case()
+        if not TASK0343_ROLLBACK_ONLY:
+            run_outcome_parser_cases(sandbox)
+            run_torn_tail_case(sandbox)
+            run_nondestructive_rollback_contract()
+            run_rollback_ledger_preservation_property()
+            run_pregate_contract_mutants()
+            run_deleted_residue_real_loop_case()
+            run_large_stderr_drain_case(sandbox)
+            run_expired_claim_behavior_case(sandbox)
+            run_pure_append_evidence_cases(sandbox)
+            run_useful_own_evidence_cases(sandbox)
+            run_git_gate_contract_mutants()
+            run_nul_residue_path_cases(sandbox)
+            run_unreadable_head_case(sandbox, prompt, fake)
+            run_unstaged_residue_case(sandbox, prompt, fake)
+            run_disordered_ledger_case(sandbox, prompt)
+            run_exec_running_heartbeat_case()
+            run_post_delivery_timeout_case()
+            run_pre_delivery_and_liveness_cases()
+            run_frozen_exec_with_production_freshness_case()
+            run_complete_tree_kill_case()
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         governed_predirty = {
@@ -1733,7 +1811,8 @@ def main() -> int:
             (sandbox / relative).write_text(content, encoding="ascii")
         try:
             result = run(
-                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                str(sandbox / "scripts/harness/peer_mailbox_cron.ps1") if TASK0343_ROLLBACK_ONLY else str(RUNNER),
                 "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(sandbox), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "6", "-ExecTimeoutSeconds", "20",

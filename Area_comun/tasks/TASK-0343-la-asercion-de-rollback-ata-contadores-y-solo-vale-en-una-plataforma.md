@@ -102,3 +102,28 @@ compilacion, drift y diff en worktree limpio con status vacio. El run real `3139
 head publicado `1d219ccd` no inicio ningun paso: la anotacion de `falsification-runners` declara
 fallo de pagos recientes o limite de gasto. La evidencia actual de AC5 queda externamente pendiente;
 no se presenta ese rojo de plataforma como fallo del codigo.
+
+## Remediacion 3 -- exigencia atada por ejecucion (2026-08-10)
+
+El saldo AST fue retirado como oraculo. El contrato ahora deriva de la produccion cuatro candidatos:
+baseline, cortocircuito, tautologia de argumentos e inalcanzabilidad. En cada candidato inyecta en
+una copia del harness de produccion la destruccion real de `CLAIMS.json` inmediatamente despues de
+la verificacion de rollback. El criterio de aceptacion es el exit observado del runner y el
+diagnostico de preservacion; no es la presencia de un nodo ni el resultado de otro predicado AST.
+
+El AST solo construye los tres mutantes desde el fuente de produccion. Nunca juzga si el efecto esta
+atado. Cada candidato ejecuta su fuente exacto y el contrato conductual vuelve a ejecutar ese fuente
+contra el ledger destruido. Si la asercion queda vaciada, el hijo sale 0 y el contrato del candidato
+sale 1 con `TASK-0343 assertion effect escaped`.
+
+La serie requerida, ejecutada en orden y sin reintentos, produjo:
+
+    TASK0343_MAIN_ASSERTION_EXECUTION baseline=3/3 short_circuit=3/3 tautology=3/3 unreachable=3/3
+
+Fueron doce ejecuciones consecutivas. Ninguna cayo en la asercion sensible al tiempo posterior. El
+runner completo salio 0 y publico el saldo anterior seguido de su PASS ordinario. El inventario de
+falsificacion permanece derivado y completo: `permanent_negatives=71 declared=71 missing=0`.
+
+AC5 sigue externamente pendiente por el bloqueo de facturacion ya documentado. Esta remediacion no
+lo presenta como evidencia de cierre y no cambia el harness de produccion: la destruccion vive solo
+en la copia efimera bajo el scratch gobernado para el negativo.
