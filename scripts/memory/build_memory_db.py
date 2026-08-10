@@ -725,8 +725,11 @@ def contains_pii(
     for item in value_list(value):
         normalized = re.sub(r"[_/\\.-]+", " ", item)
         account_coordinate_bound = coordinate is not None
-        if account_identifier_grouped_is_detected(
-            item, coordinate_bound=account_coordinate_bound
+        if (
+            account_identifier_contiguous_is_bounded(item)
+            or account_identifier_grouped_is_detected(
+                item, coordinate_bound=account_coordinate_bound
+            )
         ):
             return True
         pii_values = pii_values_for_coordinate(item, coordinate)
