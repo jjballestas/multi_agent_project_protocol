@@ -288,6 +288,12 @@ TASK-0353, y que `a583e189` **repara de paso** al llevar el fichero de tarea de 
 `in_progress`. Verificado directamente sobre la implementacion:
 
     clon limpio @ a583e189:  python scripts/validate_collaboration_state.py --root .   EXIT=0
+    clon limpio @ a583e189:  python examples/hook_fullmode_inventory_cases/run_hook_fullmode_inventory_cases.py
+                                                                                      EXIT=0
+
+Los dos pasos rojos del padre pasan a verde en la propia implementacion, asi que el delta
+61/8/8 -> 63/6/8 es entero de la reparacion de status que `a583e189` lleva dentro, y nada del
+cambio del workflow puede mover el saldo de `validate`: sus 77 pasos son byte-identicos.
 
 O sea: la conclusion del AC6 ("no empeora") **sobrevive** -- de hecho mejora en dos pasos --, pero el
 numero fue **transcrito desde un arbol de trabajo, no derivado de las anclas**. Los tres rojos

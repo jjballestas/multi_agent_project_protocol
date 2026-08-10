@@ -10323,3 +10323,83 @@ conteo de pasos.** Un fallo nuevo cabe entero dentro de un rojo preexistente.
   que era lo pedido; anotado como R11 de operabilidad, no como slip.
 - `new_instance.py` usa `copy_runtime_dir`: `orchestrator.py` y `turn_schema.json` viajan de la
   misma fuente, asi que el guard no puede romper una instancia recien generada (AC3 intacto).
+
+---
+
+## 2026-08-10 -- TASK-0354 (concurrencia + colocacion por host): CHANGE-REQUIRED, commit `f785e933`
+
+Ancla `1d78dc08` (== origin/main), implementacion `a583e189`, padre `2767b2c7`. El workflow es
+identico en `7467857e` (ancla citada), `a583e189` y HEAD -> juzgue en HEAD: equivalente para el
+fichero y mas estricto para las puertas. Puertas todas EXIT=0 en clon limpio: validate, encoding,
+neutrality, drift (CLEAN up_to_seq=8522), contracts inventory (runners=12/12 contracts=71/71).
+
+### La leccion de la ronda: DERIVAR EL HOST NO ES DERIVAR LA DEPENDENCIA
+
+El AC3 pedia que la colocacion se derivara "de lo que invoca -- que interprete, que binario". La
+entrega derivo el **host** bien (lo verifique yo por comportamiento y salio correcto) y no derivo la
+**dependencia de paquetes** del mismo runner. El job nuevo `falsification-runners-python` instala
+solo `jsonschema` y su runner tiene `import yaml` en la linea 14:
+
+    pip show jsonschema -> Requires: attrs, jsonschema-specifications, referencing, rpds-py  (sin PyYAML)
+    con jsonschema 4.26.0 presente y yaml ausente: ModuleNotFoundError, EXIT=1, antes de la 1a asercion
+
+**Cuando un encargo dice "derivar de lo que invoca", la palabra "invoca" se lee como binario externo
+y se pierde el import.** Los dos ejes son la misma pregunta: que necesita el runner para arrancar.
+
+### Tecnica nueva y reutilizable
+
+- **Probar el host de destino cuando el cambio mueve un job de host.** WSL2 Ubuntu esta disponible
+  (`wsl -d Ubuntu -e bash -lc '...'`, python 3.12.3, git 2.43.0). Corri los dos runners movidos en
+  Linux: EXIT=0. Y otra vez sobre `git clone --depth 1 --branch main --no-local file:///mnt/d/...`
+  para imitar `actions/checkout@v4` por defecto: EXIT=0. Nadie los habia corrido nunca en Linux.
+- **OJO: `/tmp` de WSL se borra entre invocaciones `wsl -e`** (la instancia se apaga). Todo lo que
+  necesite persistir -- venv, clon -- va en UNA sola invocacion, o se pierde y el `cd` falla en
+  silencio y ejecutas contra el arbol vivo sin darte cuenta. Me paso.
+- **Falsar una dependencia dura sin salir del host:** WSL trae el PATH de Windows por
+  interoperabilidad, asi que `powershell.exe` RESUELVE via `/mnt/c` y el negativo no se ve. Control
+  correcto: `env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`. Con el PATH
+  desnudo: `FileNotFoundError: 'powershell.exe'`, que es lo que el AC5 exige.
+- **Bloquear un modulo para reproducir un interprete de CI sin red:** meta_path finder que levanta
+  `ModuleNotFoundError` para `yaml`, importando `jsonschema` antes como control. Vale cuando el
+  `pip install` del venv no tiene red. Script en el scratch, `block_yaml.py`.
+- **El replicador NO puede cazar la clase "dependencia del job insuficiente":** usa el interprete del
+  HOST y nunca honra el `pip install` declarado. `--job falsification-runners-python` da
+  `SUMMARY declared=3 pass=3` mientras el job real muere en el import. Falso verde estructural.
+- **Derivacion de cobertura con parser propio, por linea de comando y por (job, runs-on):** 89 -> 89
+  lineas, perdidas 0, ganadas 0, y exactamente 3 comandos cambian de host. Los **pasos** `run` suben
+  86 -> 87 (el `pip install` se duplica): la igualdad de comandos oculta el paso nuevo.
+
+### Lo que confirmo del punto ciego que ya tenia escrito
+
+`replay_validate_job.py` tiene `--job` con default `validate`, y esta tarea no toca ese job (77 pasos
+byte-identicos). **El AC6 uso como puerta de no-regresion un instrumento ciego al cambio.** Ya lo
+tenia anotado en el veredicto r2 de 0353 y volvio a pasar; ahora tambien se usa como argumento.
+
+Y el saldo, tercera vez seguida transcrito en vez de derivado:
+
+    mio, clones limpios en las anclas:  a583e189^ 61/8/8 (FAIL 03,04,36,43,50,53,58,59)
+                                       1d78dc08  63/6/8 (FAIL 36,43,50,53,58,59)
+    declarado por la entrega:           60/9/8 antes y despues (FAIL 34,36,39,40,43,50,53,58,59)
+
+Cinco de nueve entradas no cuadran. 34/39/40 son materialize/enforce/genesis-ref -- los mas sensibles
+al **arbol sucio**: la firma de que la medicion se tomo en el arbol vivo. Y faltaban los dos rojos
+reales del padre (03/04, `Task TASK-0354 status mismatch: index='in_progress' file='ready'`), que la
+propia implementacion repara al flipar el fichero de tarea: verificado en clon limpio @`a583e189`,
+paso 03 EXIT=0 y paso 04 EXIT=0. **La conclusion "no empeora" sobrevivio; el numero no.**
+
+### Regla que me llevo
+
+1. **Cuando un AC pide "derivar lo que el runner necesita", derivar los DOS ejes:** binario externo
+   (host) e imports (dependencias declaradas del job). Y falsarlo en un interprete que tenga
+   **solo lo que el job instala**, nunca el del host.
+2. **Cuando un cambio mueve trabajo entre jobs, replicar el job MOVIDO, no el default.** Y decir en
+   el veredicto si el instrumento del AC puede ver el cambio.
+3. **Atribuir por bisect antes de cargar el defecto al maker:** `git log -S "import yaml" -- <ruta>`
+   dio `4f141167` (TASK-0347). Lo conte DENTRO de 0354 solo porque el arreglo cae en su unica
+   `scope_route` y es literalmente la derivacion que el AC3 pide. Decirlo asi evita el reproche
+   injusto y no deja el defecto huerfano.
+4. **DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): me la salte.** Commitee el
+   veredicto en `f785e933` y la memoria despues. Con el commit ya pusheado, `amend` en arbol
+   compartido es peor que el slip, asi que va en commit de continuacion y queda anotado. La proxima
+   vez: escribir la memoria ANTES de commitear el veredicto y meter las tres rutas en el mismo
+   pathspec.
