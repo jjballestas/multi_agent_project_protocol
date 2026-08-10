@@ -1,45 +1,52 @@
-# HANDOFF TASK-0342 remediation 2 - Codex to Arquitecto
+# HANDOFF TASK-0342 remediation 3 - blocked only on real Actions admission
 
 task_id: TASK-0342
-status: in_review
-executive_summary: Commit `3e6012a6` gives both encoding scanners one explicit suffix rule, derives the parity fixture from every live skip coordinate, kills the `-ccontains` reversion, and resolves R5 with a case-sensitive-filesystem measurement precondition.
-artifacts:
-  - path_or_commit: `3e6012a6` remediation-2 implementation
-  - path_or_commit: `4f8b1ee3` exact Actions head and persistent-memory checkpoint
-  - path_or_commit: `scripts/scan_encoding.py`
-  - path_or_commit: `scripts/scan_encoding.ps1`
-  - path_or_commit: `examples/encoding_gate_cases/run_encoding_gate_cases.py`
-  - path_or_commit: Actions run `31296181580`
-gates:
-  - command: Actions run `31296181580`, job `validate`, steps `Scan encoding`, `Scan encoding with PowerShell`, and `Run encoding gate cases`
-    result: PASS
-  - command: Actions run `31296181580`, job `powershell-linux-parity`, step `Scan encoding with PowerShell on Linux`
-    result: PASS
-  - command: exact-commit clone `D:/Aegis_Scratch/multi_agent_project_protocol/codex0342r2-4f8b1ee3-20260809T0516`
-    result: PASS with empty status before and after validation
-  - command: `python scripts/validate_collaboration_state.py`
-    result: PASS
-  - command: `python scripts/scan_encoding.py`
-    result: PASS
-  - command: Python and PowerShell neutrality scans
-    result: PASS
-  - command: `python examples/encoding_gate_cases/run_encoding_gate_cases.py`
-    result: PASS locally with PowerShell 7 parity explicitly UNMEASURED; Actions supplies the POSIX measurement
-  - command: `python scripts/check_falsification_contracts.py --inventory`
-    result: PASS, 68/68 permanent negatives declared
-next_recommended: Arquitecto routes commits `3e6012a6` and `4f8b1ee3` plus Actions run `31296181580` to Analista for the required remediation-2 independent review. Codex remains maker only.
-risks: PowerShell 5.1 still lacks `Path.GetRelativePath` and PowerShell 7 on Windows remains unmeasured, as previously declared R1/R3. The parity property now reports UNMEASURED instead of false red on case-insensitive filesystems.
+owner_maker: Codex
+status: blocked
+implementation_commit: `05ec641f23b008b59a79c80d02179479b6d209ad`
+exact_pushed_head: `bb90a6ad89ac308e87e71194328f991cd6a5e639`
 
-## Finding-by-finding closure
+## Delivered implementation
 
-- G1: both scanners use the same rule: a final dot begins a suffix only after at least one basename
-  character. `.png`, `.zip`, and `.pyc` are scanned; `real.PNG` is normalized and excluded.
-- G2: the property imports Python declarations and parses PowerShell declarations, requires them to
-  agree, then generates exact and case-changed coordinates for every skip directory. Reverting
-  `$SkipDirs -ccontains $part` to `$SkipDirs -contains $part` changes the scanned set and kills the
-  negative. Adding another declared directory expands the fixture without editing it.
-- Suffix construction: every live suffix gets ordinary lowercase, ordinary uppercase, and dot-only
-  coordinates. This binds both normalization and the leading-dot rule across the whole declaration.
-- R5: a case-sensitivity probe runs before case-distinct paths are created. Case-insensitive filesystems
-  report UNMEASURED; POSIX Actions performs the required real measurement.
-- Maker/checker separation: Codex implemented and measured the remediation but did not review or ratify it.
+- `scripts/scan_encoding.ps1 -DumpPolicy` serializes the effective skip policy at the exact point
+  where the scanner consumes it, after every top-level assignment has executed.
+- The permanent negative consumes runtime JSON, not a declaration-line regex.
+- Production-script variants prove `+=` and a later assignment introduce a live `dist` divergence
+  and are caught. A multiline array and trailing comment preserve behavior and remain accepted.
+- A coordinate without a case-bearing character remains in the exact-coordinate universe and no
+  longer causes a false-red manufactured case variant.
+- Independent hidden sentinels bind `Scan-AsciiPath`, `Scan-AsciiStateJson`, and
+  `Scan-MojibakeRoot`. Removing `-Force` from any one production function changes the measured set.
+
+## Local evidence
+
+- `python scripts/validate_collaboration_state.py`: PASS.
+- `python scripts/scan_encoding.py`: PASS after one transient locked-file retry; the immediate
+  diagnostic sweep found no persistently unreadable path and the repeated mandatory gate exited 0.
+- Python and PowerShell neutrality gates: PASS.
+- `python scripts/check_falsification_contracts.py --root .`: PASS.
+- Inventory: `71/71` permanent negatives, with 14 boundaries for
+  `NEG-ENCODING-SKIP-PATH-SEPARATOR`.
+- Encoding runner: PASS locally with PowerShell 7 POSIX parity explicitly `UNMEASURED`.
+- Compile, drift (`CLEAN up_to_seq=8612`), and diff gates: PASS.
+
+## Blocking evidence
+
+Real Actions run `31402650690` targets exact head `bb90a6ad`. All four jobs have empty step lists and
+runner id 0. GitHub reports: `The job was not started because recent account payments have failed or
+your spending limit needs to be increased.` No requested scanner or mutation step executed, so AC5
+cannot be claimed and TASK-0342 cannot enter review yet.
+
+## Coordination anomaly signaled
+
+While Codex waited on the staged TASK-0328 transaction, commit `0c216cd6` included the already-written
+TASK-0342 task-note and Codex-signed claim event inside a commit whose subject/trailer identify only
+TASK-0328. Codex did not touch or rewrite the peer transaction. The implementation itself is isolated
+in `05ec641f` with `Task-Id` and `Fixes-Task` trailers for TASK-0342.
+
+## Required continuation
+
+After Actions admission is restored, rerun the workflow on the same implementation code, capture the
+four `POLICY_MUTATION` output lines plus the three independent hidden-enumeration mutants, recompute
+the saldo from that run, and only then deliver to independent Analista review. Codex remains maker
+only and has not reviewed or ratified the implementation.

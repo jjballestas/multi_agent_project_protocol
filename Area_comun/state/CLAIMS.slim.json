@@ -1,39 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260810-Codex-TASK-0342-remediation-3",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0342-remediation-3",
-                "Area_comun/state/TASK_INDEX.json#TASK-0342",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0342",
-                "Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0342-codex-to-arquitecto.md",
-                "scripts/scan_encoding.ps1",
-                "scripts/scan_encoding.py",
-                "examples/encoding_gate_cases/run_encoding_gate_cases.py",
-                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0342"
-        },
-        {
-            "claim_id": "CLAIM-20260810-Codex-TASK-0342-remediation-3-block",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0342-remediation-3-block",
-                "Area_comun/state/TASK_INDEX.json#TASK-0342",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0342",
-                "Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0342-codex-to-arquitecto.md",
-                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-QUESTION-TASK-0342-actions-admission.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0342"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
