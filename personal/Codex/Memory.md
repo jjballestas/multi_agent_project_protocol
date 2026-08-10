@@ -2,6 +2,14 @@
 
 Last updated: 2026-08-10 Europe/Madrid, TASK-0329 remediation iteration 4 implemented.
 
+## 2026-08-10 - TASK-0329 corrected delivery complete
+
+- Commit `5878fc1a` returns TASK-0329 to `in_review` after the bounded EOF diff-gate correction
+  and releases `CLAIM-20260810-Codex-TASK-0329-delivery-gate-fix`.
+- Final live-tree collaboration, encoding, Python neutrality, PowerShell neutrality, and diff
+  gates all exited 0. No active TASK-0329 maker claim remains; the handoff message stays open for
+  Arquitecto routing and independent Analista review.
+
 ## 2026-08-10 - TASK-0329 delivery diff-gate correction
 
 - Commit `3a54de5d` removes the EOF blank line that the staged delivery diff check reported and
