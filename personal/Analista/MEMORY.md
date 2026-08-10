@@ -10146,3 +10146,96 @@ mas debil.**
 - Restaurar el arbol tras CADA sonda de mutacion y verificar `git status --short` vacio.
 - Sin claims activas del peer; commit directo con pathspec explicito, trailers en bloque final
   UNICO sin blank line (Task-Id + Co-Authored-By).
+
+---
+
+## TASK-0353 r2 -- veredicto CHANGE-REQUIRED (2026-08-10, commit `c4b53557`)
+
+Ancla `6b7b24e9`, implementacion `d2871436`. Artefacto:
+`Area_comun/artifacts/Analista-TASK-0353-r2-tercera-ancla-verdict.md`.
+
+### La leccion grande: cuenta las anclas, no las alinees de dos en dos
+
+La remediacion hizo converger filtro y puerta de ESQUEMA (`root/runtime/turn_schema.json` en
+ambos). Yo habia dicho "una sola ancla por turno enrutado" y lo cumplieron **al pie de la letra**.
+Pero `validate_turn()` = esquema (de la RAIZ) + semantica (del MODULO del hub,
+`validate_delivery_obstacles`). **La tercera ancla nunca la nombre**, y por ahi el defecto vuelve
+verbatim: raiz con esquema 1.2.0 -> el filtro borra `obstacles` -> la regla semantica del modulo
+lo exige -> insatisfacible, con el diagnostico que MIENTE.
+
+**Cuando exija "una sola ancla", enumerar TODAS las fuentes de verdad que la puerta consulta, o
+mejor: pedir la propiedad ("el filtro cubre lo que exige la validacion COMPLETA") en vez de la
+coordenada.** Es mi propia leccion `el-encargo-que-enumera-recibe-la-enumeracion` aplicada a un
+lazo de correccion: enumere dos anclas y recibi dos anclas alineadas.
+
+### Un arreglo puede empeorar el sintoma que la tarea nombra
+
+Medido con la MISMA sonda cambiando solo el arbol:
+
+```
+339149e8 (pre)  survives filter: True  -> "schema: Additional properties are not allowed ('obstacles'...)"  <- HONESTO
+6b7b24e9 (post) survives filter: False -> "semantic: delivery turn is missing the obstacles block"          <- MIENTE
+```
+
+Ninguna de las dos aceptaba el turno: **no hay regresion funcional, si regresion de
+DIAGNOSTICO**. Buscar siempre el par (antes, despues) en la MISMA configuracion; sin el control
+no se puede afirmar "empeora".
+
+### El experimento controlado vale mas que la sonda suelta
+
+Sonda C (raiz 1.2.0) y sonda D (raiz = hub) son identicas salvo el esquema de la raiz:
+rejected/lying vs done/committed. **Una variable, dos resultados**: eso convierte una anecdota en
+causa. Preparar SIEMPRE el control con la unica variable cambiada.
+
+### Mutantes: la barra que fije se supero, y hay que decirlo
+
+`MA` (ancla al modulo), `MB` (guarda de premisa fuera), `MC` (`additionalProperties: true` en el
+esquema de produccion, el ex-M4 superviviente), `MD` (defecto original) -> **los cuatro KILLED**.
+Superviviente nuevo: `ME` = `patternProperties` (ensancha lo que la puerta ACEPTA sin tocar
+`additionalProperties`). **Dar credito explicito por lo cumplido hace que el CHANGE-REQUIRED se
+lea como medicion y no como castigo.**
+
+### El contrato ata el TEXTO de la frontera, no su ejecucion
+
+```
+frontera BORRADA de main()        -> check_falsification_contracts EXIT=1 (la caza)
+frontera INALCANZABLE (if False:) -> check_falsification_contracts EXIT=0 (ciega)   runner EXIT=0
+```
+
+Mi leccion `contrato-ata-el-helper-no-el-efecto` confirmada en este gate. Fuera de `scope_routes`
+-> residual R8, no incumplimiento.
+
+### AC6: la transcripcion se prueba en el commit del MAKER
+
+```
+d2871436 (commit de la entrega)  pass=63 fail=6 unsupported=8
+6b7b24e9 (ancla de la review)    pass=61 fail=8 unsupported=8
+declarado                             60 / 9 / 8   fallos {34,36,39,40,43,50,53,58,59}
+```
+
+34/39/40 PASAN en la secuencia completa en AMBOS commits -> **R6 (sensibilidad al orden)
+REFUTADO y cerrado**. Fallo estable = {36,43,50,53,58,59}, todos ajenos. **Para acusar de
+"transcrita" hay que medir donde midio el maker; medir solo en el ancla deja la coartada del
+orden y de los commits de ledger.** Dos replays completos = ~1h cada uno; lanzar el primero en
+background al minuto 1.
+
+### El ancla que te dan puede ser el commit que rompe el gate
+
+Bisect de `validate_collaboration_state.py` sobre los 6 commits: toda la cadena de Codex verde,
+y el rojo (`TASK-0354 status mismatch`) entra **en el propio commit-ancla** `6b7b24e9`
+(`state(DECISION-0110)`, coordinacion). Mata los pasos 03 y 04 del replicador. HEAD vivo verde.
+**Bisect barato = atribucion exacta; sin el, el rojo del ancla parece del maker.** Senalado por
+DECISION-0018 en el mensaje.
+
+### Operativo nuevo
+
+- Dos clones `--shared --no-hardlinks` (`clone` @ancla, `clone2` @implementacion) permiten
+  correr sondas en uno mientras el replay ocupa el otro. Colision real solo en
+  `D:/Aegis_Scratch/multi_agent_project_protocol/task0353`, y ahi cada runner crea su tempdir.
+- **Gatear por `$?` del comando, nunca detras de un pipe a `tail`**: mi primer barrido de puertas
+  dio "EXIT=0" para un validate que estaba en 1.
+- El numero de paso del replicador cuenta SOLO los steps con `run:` del job `validate` (77). El
+  runner del negativo permanente vive en el job `falsification-runners`, que el replicador NO
+  replica.
+- `Area_comun/protocol/FALSIFICATION_CONTRACTS.json` (en `scope_routes` del intake de 0353) **no
+  existe**: el registro se deriva del AST de los runners.
