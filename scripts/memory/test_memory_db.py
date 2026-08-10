@@ -167,7 +167,7 @@ FALSIFICATION_CONTRACTS = (
             "self.assertEqual([], source_object_id_errors)",
             "self.assertGreater(len(mutant_object_id_hits), 0)",
             "self.assertEqual(4, sum(phone_only_compact))",
-            "self.assertEqual(phone_only_compact, phone_only_grouped)", "self.assertGreater(sum(coordinate_previous_results), 0)", "self.assertTrue(all(coordinate_current_results))", "self.assertEqual({}, accepted_file)", "with self.assertRaisesRegex(ValueError, \"path contains prohibited PII\")", "mutant_coordinate_lost[name] > 0",
+            "self.assertEqual(phone_only_compact, phone_only_grouped)", "self.assertGreater(sum(coordinate_previous_results), 0)", "self.assertTrue(all(coordinate_current_results))", "self.assertGreater(len(coordinate_types), 2)", "self.assertEqual({\"before\", \"inside\", \"after\"}, coordinate_orders)", "self.assertGreater(len(coordinate_formats), 1)", "self.assertEqual({}, accepted_file)", "with self.assertRaisesRegex(ValueError, \"path contains prohibited PII\")", "mutant_coordinate_lost[name] > 0", "self.assertGreater(mutant_raw_guard_lost, 0)",
         ),
         "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
     },)
@@ -2296,6 +2296,11 @@ Body is not indexed.
         normalized_line = "        normalized = re.sub(r\"[_/\\\\.-]+\", \" \", item)\n"
         loop_body = (
             normalized_line
+            + "        account_coordinate_bound = coordinate is not None\n"
+            + "        if account_identifier_grouped_is_detected(\n"
+            + "            item, coordinate_bound=account_coordinate_bound\n"
+            + "        ):\n"
+            + "            return True\n"
             + "        pii_values = pii_values_for_coordinate(item, coordinate)\n"
             + "        coordinate_bound = False\n"
             + "        if STRUCTURAL_PII_PATTERNS[0].search(item):\n"
@@ -2304,7 +2309,7 @@ Body is not indexed.
             + "            any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)\n"
             + "            or any(\n"
             + "                account_identifier_grouped_is_detected(\n"
-            + "                    pii_value, coordinate_bound=coordinate_bound\n"
+            + "                    pii_value, coordinate_bound=account_coordinate_bound\n"
             + "                )\n"
             + "                for pii_value in pii_values\n"
             + "            )\n"
@@ -2654,7 +2659,7 @@ Body is not indexed.
             *adjacent_phone_from_condition,
             *adjacent_account_from_condition,
         )))
-        coordinate_corpus = tuple(
+        legacy_coordinate_corpus = tuple(
             (coordinate, rendered)
             for payload in coordinate_payloads
             for coordinate, rendered in (
@@ -2666,6 +2671,96 @@ Body is not indexed.
             if coordinate not in {"file", "path"}
             or not any(separator in payload for separator in ("/", "\\"))
         )
+        legacy_coordinate_current_results = tuple(
+            memory_db.contains_pii(value, [], coordinate=coordinate)
+            for coordinate, value in legacy_coordinate_corpus
+        )
+        legacy_coordinate_previous_results = tuple(
+            bool(previous_pattern.search(re.sub(r"[_/\\.-]+", " ", value)))
+            or phone_band_detects(value)
+            for _, value in legacy_coordinate_corpus
+        )
+        self.assertEqual(
+            0,
+            sum(
+                previous and not current
+                for previous, current in zip(
+                    legacy_coordinate_previous_results,
+                    legacy_coordinate_current_results,
+                )
+            ),
+        )
+        coordinate_envelopes_by_type: dict[str, list[str]] = {}
+        for coordinate, value, _ in governed_metadata_values:
+            if memory_db.contains_pii(value, [], coordinate=coordinate):
+                continue
+            if memory_db.pii_values_for_coordinate(value, coordinate) == (value,):
+                continue
+            coordinate_envelopes_by_type.setdefault(coordinate, []).append(value)
+        coordinate_envelopes = tuple(
+            (coordinate, value)
+            for coordinate, values in sorted(coordinate_envelopes_by_type.items())
+            for value in sorted(set(values), key=lambda item: (len(item), item))[:8]
+        )
+        self.assertGreater(len(coordinate_envelopes), 8)
+
+        coordinate_formats_from_condition = tuple(dict.fromkeys((
+            compact,
+            *grouped_by_separator,
+            compact[:4] + separator_chars[0] + compact[4:8]
+            + separator_chars[-1] + compact[8:],
+        )))
+        coordinate_cases: dict[tuple[str, str], tuple[str, str]] = {}
+        for coordinate, envelope in coordinate_envelopes:
+            boundaries = tuple(dict.fromkeys((
+                0,
+                *(match.end() for match in re.finditer(r"[-._/\\]+", envelope)),
+                len(envelope),
+            )))
+            for boundary in boundaries:
+                order = (
+                    "before" if boundary == 0
+                    else "after" if boundary == len(envelope)
+                    else "inside"
+                )
+                left = envelope[:boundary]
+                right = envelope[boundary:]
+                for presentation in coordinate_formats_from_condition:
+                    rendered = (
+                        left
+                        + ("-" if left and left[-1].isalnum() else "")
+                        + presentation
+                        + ("-" if right and right[0].isalnum() else "")
+                        + right
+                    )
+                    if coordinate in {"file", "path"} and (
+                        not memory_db.PATH_RE.fullmatch(rendered)
+                        or ".." in Path(rendered).parts
+                    ):
+                        continue
+                    if not memory_db.account_identifier_grouped_is_detected(
+                        rendered, coordinate_bound=False
+                    ):
+                        continue
+                    parsed_values = memory_db.pii_values_for_coordinate(rendered, coordinate)
+                    if any(
+                        memory_db.account_identifier_grouped_is_detected(
+                            parsed, coordinate_bound=False
+                        )
+                        for parsed in parsed_values
+                    ):
+                        continue
+                    coordinate_cases[(coordinate, rendered)] = (
+                        order,
+                        "contiguous" if presentation == compact else "grouped",
+                    )
+        coordinate_corpus = tuple(coordinate_cases)
+        coordinate_types = {coordinate for coordinate, _ in coordinate_corpus}
+        coordinate_orders = {order for order, _ in coordinate_cases.values()}
+        coordinate_formats = {format_name for _, format_name in coordinate_cases.values()}
+        self.assertGreater(len(coordinate_types), 2)
+        self.assertEqual({"before", "inside", "after"}, coordinate_orders)
+        self.assertGreater(len(coordinate_formats), 1)
         coordinate_previous_results = tuple(
             bool(previous_pattern.search(re.sub(r"[_/\\.-]+", " ", value)))
             or phone_band_detects(value)
@@ -2687,24 +2782,36 @@ Body is not indexed.
         )
         self.assertTrue(all(coordinate_current_results))
         production_payloads = tuple(
-            payload
-            for payload in coordinate_payloads
-            if memory_db.PATH_RE.fullmatch(f"Area_comun/tasks/{payload}.md")
-            and not any(separator in payload for separator in ("/", "\\"))
+            (coordinate, rendered)
+            for coordinate, rendered in coordinate_corpus
+            if coordinate in {"file", "path"}
         )
         self.assertGreater(len(production_payloads), 20)
-        for payload in production_payloads:
-            accepted_file, warnings = memory_db.validate_metadata(
-                {"file": f"Area_comun/tasks/{payload}.md"}, set(), []
-            )
-            self.assertEqual({}, accepted_file)
-            self.assertEqual(["rejected frontmatter key file"], warnings)
-            with self.assertRaisesRegex(ValueError, "path contains prohibited PII"):
-                memory_db.require_safe_text(
-                    f"Area_comun/archive/{payload}/pack.manifest.json",
-                    "path",
-                    domain_pii_terms=[],
+        for coordinate, rendered in production_payloads:
+            if coordinate == "file":
+                accepted_file, warnings = memory_db.validate_metadata(
+                    {"file": rendered}, set(), []
                 )
+                self.assertEqual({}, accepted_file)
+                self.assertEqual(["rejected frontmatter key file"], warnings)
+            else:
+                with self.assertRaisesRegex(ValueError, "path contains prohibited PII"):
+                    memory_db.require_safe_text(
+                        rendered,
+                        "path",
+                        domain_pii_terms=[],
+                    )
+        print(
+            "TASK-0328 derived-envelope balance: "
+            f"population={len(coordinate_corpus)} "
+            f"previous_positive={sum(coordinate_previous_results)} "
+            f"current_positive={sum(coordinate_current_results)} "
+            f"gained={sum(current and not previous for previous, current in zip(coordinate_previous_results, coordinate_current_results))} "
+            f"lost={sum(previous and not current for previous, current in zip(coordinate_previous_results, coordinate_current_results))} "
+            f"coordinates={len(coordinate_types)} "
+            f"orders={len(coordinate_orders)} "
+            f"formats={len(coordinate_formats)}"
+        )
         clean_coordinates = (
             ("message_id", "MSG-20260809-Zeta-to-Omega-REVIEW-TASK-9999"),
             ("file", "Area_comun/tasks/TASK-9999-cosa.md"),
@@ -2765,6 +2872,13 @@ Body is not indexed.
         self.assertEqual(1, source.count(coordinate_blind_path_return))
         pii_values_call = "        pii_values = pii_values_for_coordinate(item, coordinate)\n"
         self.assertEqual(1, source.count(pii_values_call))
+        raw_account_guard = (
+            "        if account_identifier_grouped_is_detected(\n"
+            "            item, coordinate_bound=account_coordinate_bound\n"
+            "        ):\n"
+            "            return True\n"
+        )
+        self.assertEqual(1, source.count(raw_account_guard))
         mutant_sources = {
             "single_cut": source.replace(
                 prefix_guard_call, whole_match_guard_call, 1
@@ -2799,6 +2913,7 @@ Body is not indexed.
                 "        coordinate_bound = coordinate is not None\n",
                 1,
             ),
+            "coordinate_raw_account_blind": source.replace(raw_account_guard, "", 1),
         }
         self.assertTrue(all(mutant != source for mutant in mutant_sources.values()))
 
@@ -2807,6 +2922,7 @@ Body is not indexed.
         mutant_governed_gains: dict[str, list[tuple[str, str, str]]] = {}
         mutant_object_id_hits: list[str] = []
         mutant_coordinate_lost: dict[str, int] = {}
+        mutant_raw_guard_lost = 0
         with tempfile.TemporaryDirectory(prefix="memory-account-id-mutant-") as temp:
             for name, mutant_source in mutant_sources.items():
                 mutant_path = Path(temp) / f"build_memory_db_{name}.py"
@@ -2854,9 +2970,21 @@ Body is not indexed.
                     }:
                         mutant_coordinate_results = tuple(
                             mutant.contains_pii(value, [], coordinate=coordinate)
-                            for coordinate, value in coordinate_corpus
+                            for coordinate, value in legacy_coordinate_corpus
                         )
                         mutant_coordinate_lost[name] = sum(
+                            current and not mutant_result
+                            for current, mutant_result in zip(
+                                legacy_coordinate_current_results,
+                                mutant_coordinate_results,
+                            )
+                        )
+                    if name == "coordinate_raw_account_blind":
+                        mutant_coordinate_results = tuple(
+                            mutant.contains_pii(value, [], coordinate=coordinate)
+                            for coordinate, value in coordinate_corpus
+                        )
+                        mutant_raw_guard_lost = sum(
                             current and not mutant_result
                             for current, mutant_result in zip(
                                 coordinate_current_results, mutant_coordinate_results
@@ -2879,6 +3007,7 @@ Body is not indexed.
             ),
             mutant_coordinate_lost,
         )
+        self.assertGreater(mutant_raw_guard_lost, 0)
 
 
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:

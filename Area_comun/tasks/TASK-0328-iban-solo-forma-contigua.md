@@ -221,3 +221,27 @@ descubrirlo como ruido en produccion.
   del salto por adyacencia y restauracion conjunta de neutralizacion de fecha mas salto. El
   inventario declara ahora 18 fronteras para
   `NEG-MEMORY-ACCOUNT-IDENTIFIER-PRESENTATION`; los 70 contratos permanecen registrados.
+
+## Remediacion 6: criterio previo a la exencion y envolturas derivadas (2026-08-10)
+
+- La deteccion de candidatos con checksum valido ocurre sobre el valor integral antes de que la
+  coordenada retire su envoltura. La exencion ya no puede borrar una cuenta contigua completa ni
+  triturar una presentacion agrupada antes de que el detector la vea. El remanente no explicado
+  se conserva como una unidad; solo un remanente vacio o una referencia protocolar integral queda
+  exento.
+- La guarda de contexto conserva cero hallazgos sobre las identidades gobernadas limpias. En una
+  coordenada, una coincidencia que empieza dentro de otro token solo se admite si conserva el
+  arranque estructural contiguo y al menos ocho digitos; esto mantiene las ganancias con
+  adyacencia de datos densos sin restaurar los falsos positivos `SG-2026...` y `SK-02...` que
+  motivaron la exencion.
+- El corpus nuevo no enumera envolturas. Descubre las coordenadas reales del arbol gobernado para
+  las que `pii_values_for_coordinate` consume una envoltura, selecciona ejemplos por tipo, deriva
+  los puntos de insercion de sus separadores y cruza el payload antes, dentro y despues con las
+  presentaciones contigua, agrupada y mixta derivadas de las expresiones productivas.
+- Saldo emitido por el propio test: `population=231 previous_positive=64 current_positive=231
+  gained=167 lost=0 coordinates=9 orders=3 formats=2`. Los dos caminos productivos siguen
+  ejercitados: `validate_metadata(file=...)` rechaza los ficheros validos del corpus y
+  `require_safe_text(field='path')` lanza el rechazo esperado.
+- El mutante de produccion elimina la guarda previa a la exencion y pierde las 231 detecciones del
+  corpus derivado. Los mutantes historicos de cegado de coordenada, adyacencia y fecha siguen
+  muriendo sobre el corpus previo con positivos anteriores no nulos.

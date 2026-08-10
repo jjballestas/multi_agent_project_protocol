@@ -648,14 +648,9 @@ def unexplained_identity_parts(value: str, *, message: bool = False) -> tuple[st
             return (value,)
         remainder = remainder[envelope.end():]
 
-    parts: list[str] = []
-    for part in re.split(r"[-._]+", remainder):
-        if not part:
-            continue
-        if re.fullmatch(r"(?:TASK|DECISION|SPEC)\d{4}", part, re.I | re.ASCII):
-            continue
-        parts.append(part)
-    return tuple(parts)
+    if re.fullmatch(r"(?:TASK|DECISION|SPEC)\d{4}", remainder, re.I | re.ASCII):
+        return ()
+    return (remainder,) if remainder else ()
 
 
 def pii_values_for_coordinate(item: str, coordinate: str | None) -> tuple[str, ...]:
@@ -683,9 +678,22 @@ def pii_values_for_coordinate(item: str, coordinate: str | None) -> tuple[str, .
 
 def account_identifier_grouped_is_detected(value: str, *, coordinate_bound: bool) -> bool:
     for start in ACCOUNT_IDENTIFIER_START_RE.finditer(value):
-        if coordinate_bound and start.start() and value[start.start() - 1].isalnum():
-            continue
         candidate = STRUCTURAL_PII_PATTERNS[1].match(value, start.start())
+        if (
+            candidate is not None
+            and coordinate_bound
+            and start.start()
+            and value[start.start() - 1].isalnum()
+        ):
+            compact = ACCOUNT_IDENTIFIER_SEPARATORS_RE.sub("", candidate.group(0))
+            if (
+                value[start.start() - 1].isascii()
+                and value[start.start() - 1].isupper()
+            ) or (
+                not re.match(r"^[A-Z]{2}\d{2}", compact, re.I | re.ASCII)
+                or sum(char.isdigit() for char in compact) < 8
+            ):
+                continue
         if candidate is not None and account_identifier_candidate_has_valid_prefix(
             candidate.group(0), value[candidate.end():candidate.end() + 1]
         ):
@@ -716,6 +724,11 @@ def contains_pii(
     )
     for item in value_list(value):
         normalized = re.sub(r"[_/\\.-]+", " ", item)
+        account_coordinate_bound = coordinate is not None
+        if account_identifier_grouped_is_detected(
+            item, coordinate_bound=account_coordinate_bound
+        ):
+            return True
         pii_values = pii_values_for_coordinate(item, coordinate)
         coordinate_bound = False
         if STRUCTURAL_PII_PATTERNS[0].search(item):
@@ -724,7 +737,7 @@ def contains_pii(
             any(account_identifier_contiguous_is_bounded(candidate) for candidate in pii_values)
             or any(
                 account_identifier_grouped_is_detected(
-                    pii_value, coordinate_bound=coordinate_bound
+                    pii_value, coordinate_bound=account_coordinate_bound
                 )
                 for pii_value in pii_values
             )
