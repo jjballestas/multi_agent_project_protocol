@@ -8310,6 +8310,26 @@
             "status": "done",
             "title": "Sexto rojo de la suite revivida: la asercion busca una subcadena exacta del log y TASK-0321 metio campos nuevos en medio -- el estado terminal esta, el emparejamiento textual no",
             "type": "infra"
+        },
+        {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0344-la-poda-de-mailbox-y-su-caso-de-prueba-discrepan.md",
+            "id": "TASK-0344",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "done",
+            "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
+            "id": "TASK-0345",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "done",
+            "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla",
+            "type": "implementation"
         }
     ]
 }

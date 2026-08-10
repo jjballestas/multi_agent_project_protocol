@@ -280,7 +280,7 @@
             "file": "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
             "id": "TASK-0328",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono",
             "type": "infra"
         },
@@ -384,26 +384,6 @@
             "phase": "P2",
             "status": "in_progress",
             "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma",
-            "type": "implementation"
-        },
-        {
-            "created": "2026-08-08",
-            "file": "Area_comun/tasks/TASK-0344-la-poda-de-mailbox-y-su-caso-de-prueba-discrepan.md",
-            "id": "TASK-0344",
-            "owner": "Codex",
-            "phase": "P2",
-            "status": "done",
-            "title": "La poda de mailbox y su caso de prueba discrepan, y el runner lleva roto sin que nadie lo corra",
-            "type": "implementation"
-        },
-        {
-            "created": "2026-08-08",
-            "file": "Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md",
-            "id": "TASK-0345",
-            "owner": "Codex",
-            "phase": "P2",
-            "status": "done",
-            "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla",
             "type": "implementation"
         },
         {
