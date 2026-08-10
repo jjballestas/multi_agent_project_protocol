@@ -1,6 +1,30 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0354 remediation delivered to independent re-review.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0345 remediation iteration 2 implemented.
+
+## 2026-08-10 - TASK-0345 remediation iteration 2 implementation
+
+- Commit `d2187eb8` replaces the parallel seven-route constant with a workflow-derived PowerShell
+  surface. It resolves each step's effective shell, derives all seven `.ps1` entry points, and
+  also scans inline PowerShell; the current workflow has one inert inline Python invocation.
+- The permanent host contract applies four real source forms to every derived production entry
+  point (28 mutants): relative-URI path arithmetic, literal path boundaries, fixed filesystem-case
+  comparisons, and the real non-Raw line reader. The TASK-0338 reader residual is structurally
+  bounded to one occurrence; there is no synthetic marker.
+- The historical reviewer battery E1a/E1b/E2a/E2b/E3b/E4b/E5/E6 now all diverges. The Bash
+  `splitlines()` mutant remains partitioned to TASK-0336 but is built against its real production
+  reader. Inline PowerShell is mechanically covered.
+- Expected-negative exit protection now checks top-level reachability: inserting
+  `exit $LASTEXITCODE` before the final `exit 0` fails even though the success text remains.
+  Decorative `HOST_DIMENSIONS` output was removed. AC6 remains accredited by run `31271924074`,
+  job `powershell-linux-parity` success, head `50ce2301`; billing does not invalidate readable
+  historical evidence.
+- The focused runner, 71/71 falsification inventory and wiring, collaboration, encoding,
+  neutrality, compile, reviewer-battery, and diff gates exited 0. Exact commit `d2187eb8` passed
+  the declared gates in a detached clean Aegis worktree with empty status.
+- Governed delivery moves TASK-0345 to `in_review`, releases both remediation claims, and publishes
+  `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0345-remediation-2.md` for independent Analista
+  re-review. Codex is maker only and has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0354 remediation iteration 1 implementation
 
