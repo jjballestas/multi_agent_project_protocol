@@ -145,3 +145,8 @@ JSON file contain valid UTF-8 non-ASCII text that only the ASCII channels report
 contains only a mojibake signature. Removing `-Force` independently from `Scan-AsciiPath`,
 `Scan-AsciiStateJson`, or `Scan-MojibakeRoot` now changes the measured scanned set and kills the
 contract without another channel masking the loss.
+
+Implementation commit `05ec641f` is pushed at exact head `bb90a6ad`. Real Actions run
+`31402650690` did not start any step: every job has an empty step list and GitHub reports a failed
+account payment or spending-limit gate. Therefore AC5 is unmeasured and the task is blocked pending
+restored Actions admission; no in-review or closure claim is valid from this run.

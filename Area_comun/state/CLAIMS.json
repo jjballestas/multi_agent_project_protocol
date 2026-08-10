@@ -120,6 +120,26 @@
             "updated_at": "2026-08-10T15:04:49Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0342-remediation-3-block",
+            "expires_at": "2026-08-11T03:17:15Z",
+            "notes": "Block TASK-0342 on the real Actions admission gate and publish one concrete operator question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0342-remediation-3-block",
+                "Area_comun/state/TASK_INDEX.json#TASK-0342",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0342",
+                "Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0342-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260810-Codex-to-Arquitecto-QUESTION-TASK-0342-actions-admission.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T15:17:15Z",
+            "status": "active",
+            "task_id": "TASK-0342",
+            "updated_at": "2026-08-10T15:17:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0343-remediation-2",
             "expires_at": "2026-08-10T20:01:00Z",
             "notes": "Remediation iteration 2: make deletion of the main rollback assertion fail through a production-source contract invariant across coordinate, order, and formatting.",
@@ -296,6 +316,25 @@
             "status": "released",
             "task_id": "TASK-0342",
             "updated_at": "2026-08-10T13:49:26Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-lote3-20260810",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0342-r4.md",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0329.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0329",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0329",
+                "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-lote3-20260810",
+                "Area_comun/mailbox/open/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0342.md",
+                "Area_comun/mailbox/archived/MSG-20260810-Arquitecto-to-Codex-REMEDIACION-TASK-0342.md"
+            ],
+            "started_at": "2026-08-10T15:18:38Z",
+            "status": "released",
+            "task_id": "TASK-0329",
+            "updated_at": "2026-08-10T15:18:38Z"
         },
         {
             "claim_id": "CLAIM-arq-remed-0345-20260810",
