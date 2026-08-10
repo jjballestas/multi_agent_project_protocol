@@ -477,6 +477,14 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+            "id": "TASK-0354",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

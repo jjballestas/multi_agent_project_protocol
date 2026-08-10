@@ -141,6 +141,12 @@
             "owner": "Codex",
             "status": "in_progress",
             "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn"
+        },
+        {
+            "id": "TASK-0354",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan"
         }
     ],
     "view": "task_index.slim"

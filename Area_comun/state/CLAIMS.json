@@ -40,6 +40,86 @@
             "updated_at": "2026-08-10T01:08:45Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1",
+            "expires_at": "2026-08-10T07:21:36Z",
+            "notes": "Remediation iteration 1: bind schema filtering and validation to the routed root, assert the closed-schema premise, and add mutation-proved divergent-anchor coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T01:21:36Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:21:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1b",
+            "expires_at": "2026-08-10T07:23:09Z",
+            "notes": "Remediation iteration 1: bind schema filtering and validation to the routed root, assert the closed-schema premise, and add mutation-proved divergent-anchor coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T01:23:09Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:23:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1c",
+            "expires_at": "2026-08-10T07:25:02Z",
+            "notes": "Remediation iteration 1 plus explicit declaration that the full-runtime example is a historical snapshot, not a live schema parity mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1c",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "examples/full_runtime_instance/runtime/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T01:25:02Z",
+            "status": "active",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-10T01:25:02Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-go-0354-20260810b",
+            "expires_at": "2026-08-11T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go-0354-20260810b"
+            ],
+            "started_at": "2026-08-10T02:09:21Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T02:09:21Z"
+        },
+        {
             "claim_id": "CLAIM-arq-remed-0353-20260810",
             "expires_at": "2026-08-11T23:59:00Z",
             "owner": "Arquitecto",

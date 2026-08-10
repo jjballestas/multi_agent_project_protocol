@@ -1,5 +1,23 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0353-remediation-1c",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0353-remediation-1c",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "examples/full_runtime_instance/runtime/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0353"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
