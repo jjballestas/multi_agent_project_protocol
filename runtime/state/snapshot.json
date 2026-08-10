@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "33f0ea13e0a5f851f001e8fd70353c4a104a3dc9598faaee6eb83d124d9d354e",
+  "canonical_hash": "c273f5e6fdc40f87d1b4c229091049ef4c1c2e4001944a1c15cf565c62339326",
   "integrity": {
-    "canonical_hash": "33f0ea13e0a5f851f001e8fd70353c4a104a3dc9598faaee6eb83d124d9d354e",
+    "canonical_hash": "c273f5e6fdc40f87d1b4c229091049ef4c1c2e4001944a1c15cf565c62339326",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "79f83928444e13710b20b36e291dbcc201889b60eff693b9882fbc6bbc0969da",
-    "signature": "f05453cc54c9d939d597460a38c5834dcb9670fa3b9d4ba4bc5ef41b53cc08b8",
-    "up_to_seq": 8666
+    "prev_hash": "a746165f35408b18ab1195dc01c7a6ab264e8be01183036ad4b56e6599238bd6",
+    "signature": "8c247623e7b716b48c36b1d469db8a621fc65a992757f0c3974bcc00f352ad90",
+    "up_to_seq": 8668
   },
   "state": {
     "aggregate_versions": {
@@ -3505,7 +3505,7 @@
       "TASK-0340": 29,
       "TASK-0341": 2,
       "TASK-0342": 34,
-      "TASK-0343": 31,
+      "TASK-0343": 33,
       "TASK-0344": 11,
       "TASK-0345": 22,
       "TASK-0346": 17,
@@ -3540,7 +3540,7 @@
       "protocol-prune": 64,
       "protocol-state": 1
     },
-    "events_applied": 7995,
+    "events_applied": 7997,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7907,6 +7907,8 @@
       "codex:task0343:remediation3:claim-scopefix-acquire:20260810T195719Z": 8661,
       "codex:task0343:remediation3:claim-scopefix-release:20260810T195719Z": 8660,
       "codex:task0343:remediation3:claim:20260810T184000Z": 8659,
+      "codex:task0343:remediation3:memory-claim:20260810T201403Z": 8667,
+      "codex:task0343:remediation3:memory-release:20260810T201614Z": 8668,
       "codex:task0343:status-in-progress:20260808T172036Z": 8121,
       "codex:task0344:claim:2026-08-08T16:36:00Z": 8103,
       "codex:task0344:delivery-claim-release:20260808T1805Z": 8127,
@@ -11539,5 +11541,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8666
+  "up_to_seq": 8668
 }

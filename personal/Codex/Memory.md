@@ -1,6 +1,20 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0329 remediation iteration 4 implemented.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0343 remediation iteration 3 implemented.
+
+## 2026-08-10 - TASK-0343 remediation iteration 3 implementation
+
+- Commit `7917d5b7` removes the AST presence oracle and binds rollback preservation by execution.
+  A production-derived harness mutant destroys `CLAIMS.json` after rollback verification; the
+  exact runner source is then executed against that false property.
+- The AST is now only a mutant generator. It derives short-circuit, argument-tautology, and
+  unreachable variants from production, while subprocess exit and the real preservation
+  diagnostic are the oracle. The serialized balance is baseline 3/3, short-circuit 3/3,
+  tautology 3/3, and unreachable 3/3, with no retries and no timing-flaky failures.
+- The full mailbox retry runner, 71/71 falsification inventory, collaboration, encoding,
+  neutrality, compile, and diff gates exited 0. AC5 remains externally pending because Actions
+  billing still prevents jobs from starting. TASK-0343 remains `in_progress` pending exact-commit
+  verification and governed delivery; Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0329 corrected delivery complete
 
