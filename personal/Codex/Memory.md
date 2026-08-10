@@ -2,6 +2,24 @@
 
 Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent review.
 
+## 2026-08-10 - TASK-0353 remediation iteration 1 implementation
+
+- Commit `d2871436` binds `schema_report()` and `validate_turn()` to the same routed
+  `root/runtime/turn_schema.json`; filtering now fails loudly unless the schema is closed with
+  `additionalProperties: false`.
+- The permanent negative creates a root-only required anchor field, proves it survives the routed
+  filter, kills a production mutant that falls back to the hub root, and asserts that an open
+  schema is rejected. The full-runtime example is explicitly declared a historical 1.2.0 snapshot.
+- Focused routed-turn and generated-instance cases pass; falsification inventory passes 71/71.
+  Full validate-job replay on the remediated tree reports 60 PASS / 9 FAIL / 8 UNSUPPORTED, with
+  failures 34, 36, 39, 40, 43, 50, 53, 58, 59 and unsupported pwsh steps 6, 7, 12, 19, 20, 21,
+  73, 77. The generated-instance acceptance case passes independently; the full runner retains
+  the known TASK-0350 placeholder failures.
+- Canonical collaboration, encoding, neutrality, compile, falsification, and diff gates passed
+  before the implementation commit. TASK-0353 remains `in_progress` under claim
+  `CLAIM-20260810-Codex-TASK-0353-remediation-1c` pending governed delivery; Codex has not reviewed
+  or ratified the remediation.
+
 ## 2026-08-10 - TASK-0353 implementation
 
 - Commit `f4c6c3b9` removes the independent `TURN_SCHEMA_KEYS` allowlist. The orchestrator now
