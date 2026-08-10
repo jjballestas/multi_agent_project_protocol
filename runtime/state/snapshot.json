@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "f99330b611fa8aab554bd51992d58ef62b0f3543cf6585a1e36c4c78972c21bb",
+  "canonical_hash": "3c389f7fc6feb6849f566ac3fe6078c2ff93c15f5defe0f6a0dc4252d8ae3080",
   "integrity": {
-    "canonical_hash": "f99330b611fa8aab554bd51992d58ef62b0f3543cf6585a1e36c4c78972c21bb",
+    "canonical_hash": "3c389f7fc6feb6849f566ac3fe6078c2ff93c15f5defe0f6a0dc4252d8ae3080",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "ced2289d47c209ed1123bb01ce83bdf446e2490d5225a7551bad88d7f5f8c659",
-    "signature": "2d4577a12824825eebde4b86aa4e95fe7e71df2640c8c040e86d32efe51cf0e7",
-    "up_to_seq": 8573
+    "prev_hash": "c2b34a2b701bc5efabdc1a46564f1504949bf5e1227c2485c49a3547d945c447",
+    "signature": "8a78c02bbddb460cc4a9d921603eca785b75c0312ef1d7b2c47b943abc9c6397",
+    "up_to_seq": 8577
   },
   "state": {
     "aggregate_versions": {
@@ -1069,6 +1069,7 @@
       "CLAIM-arq-checkpoint-hyg-20260720": 1,
       "CLAIM-arq-ciclo1200-20260720": 1,
       "CLAIM-arq-cierre-0344-20260810": 1,
+      "CLAIM-arq-cierre-0345-20260810": 1,
       "CLAIM-arq-cierre-orden-20260721": 1,
       "CLAIM-arq-cierre0274-20260722": 1,
       "CLAIM-arq-cierre0275-20260722": 1,
@@ -3476,7 +3477,7 @@
       "TASK-0342": 27,
       "TASK-0343": 16,
       "TASK-0344": 11,
-      "TASK-0345": 20,
+      "TASK-0345": 22,
       "TASK-0346": 17,
       "TASK-0347": 13,
       "TASK-0348": 2,
@@ -3486,6 +3487,7 @@
       "TASK-0352": 1,
       "TASK-0353": 34,
       "TASK-0354": 20,
+      "TASK-0355": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3508,7 +3510,7 @@
       "protocol-prune": 63,
       "protocol-state": 1
     },
-    "events_applied": 7902,
+    "events_applied": 7906,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3783,6 +3785,10 @@
       "arq-cl344-001": 8566,
       "arq-cl344-010": 8567,
       "arq-cl344-099": 8568,
+      "arq-cl345-000": 8574,
+      "arq-cl345-001": 8575,
+      "arq-cl345-002": 8576,
+      "arq-cl345-099": 8577,
       "arq-d110c-000": 8502,
       "arq-d110c-001": 8503,
       "arq-d110c-099": 8504,
@@ -11414,5 +11420,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8573
+  "up_to_seq": 8577
 }

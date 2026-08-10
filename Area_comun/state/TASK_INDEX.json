@@ -402,7 +402,7 @@
             "id": "TASK-0345",
             "owner": "Codex",
             "phase": "P2",
-            "status": "in_review",
+            "status": "done",
             "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla",
             "type": "implementation"
         },
@@ -482,6 +482,14 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0355-reconocer-powershell-por-estructura-no-por-texto.md",
+            "id": "TASK-0355",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El eje de la forma no se cierra enumerando -- reconocer PowerShell por estructura y no por texto",
             "type": "implementation"
         },
         {

@@ -1,7 +1,7 @@
 ---
 id: TASK-0345
 title: Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla
-status: in_review
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0345-los-gemelos-powershell-asumen-el-host-windows.md
@@ -111,8 +111,18 @@ mide. Los 28 mutantes son las cuatro formas PowerShell host-dependientes aplicad
 siete puntos derivados, con variacion de espaciado y orden. Incluyen `MakeRelativeUri`, un separador
 literal usado como frontera, una comparacion de path fijada a `OrdinalIgnoreCase` y el lector real
 `Get-Content` sin `-Raw`; no usan marcadores sinteticos. La unica ocurrencia admitida del lector real
-queda limitada estructuralmente a una en `scan_domain_neutrality.ps1`, bajo el owner TASK-0338. Una
-segunda ocurrencia en esa ruta o la primera en cualquier otra ruta derivada hace fallar el contrato.
+queda limitada estructuralmente a una en `scan_domain_neutrality.ps1`, bajo el owner TASK-0338.
+
+**CORREGIDO 2026-08-10 tras el re-juicio r2.** La frase que ocupaba este lugar -- *"una segunda
+ocurrencia en esa ruta o la primera en cualquier otra ruta derivada hace fallar el contrato"* -- era
+**FALSA**, y el checker la falso ejecutando: la deteccion esta atada al NOMBRE de la variable
+receptora, no a la forma. Medido:
+
+    $lines = @(Get-Content -Path $file.Path -Encoding UTF8)   ->  {'unbounded_line_reader'}
+    $rows  = @(Get-Content -Path $file.Path -Encoding UTF8)   ->  set()
+
+Mismo lector real, misma dimension, una renombrada de distancia. La afirmacion se retira en vez de
+matizarse: una tarea cerrada no puede conservar una promesa que su propio gate no cumple.
 
 La forma Bash sigue fuera del alcance de implementacion de TASK-0345 y bajo TASK-0336, pero su
 mutante se construye sobre el lector real de produccion y se acredita sin marcador tautologico. No
@@ -126,3 +136,31 @@ siete caracteres del fichero.
 AC6 permanece acreditado por el run historico `31271924074`, job `powershell-linux-parity` success,
 head `50ce23010d83af5ca3c8c5f0433b2f18288eb0a8`. La facturacion impide lanzar runs nuevos, no leer
 esa evidencia ya existente; no se declara AC6 pendiente.
+
+## Residual declarado al cerrar (2026-08-10, decision del operador)
+
+TASK-0345 se cierra **con residual declarado**, no como clase cerrada. Lo que SI logro, medido y
+firmado por el checker:
+
+- **Poblacion derivada**: 7 puntos de entrada PowerShell obtenidos del workflow, no de una lista.
+- **Producto real sobre ese eje**: 28 celdas = 7 puntos x 4 formas, cada una con su assert, con la
+  forma real y variando formato y orden. Los tres negativos minimos del checker mueren.
+- **Mutante tautologico retirado**: `line_reader` se detecta sobre la forma real, no sobre un
+  marcador plantado por el test.
+- **`exit 0` inalcanzable** ya se caza; PowerShell en linea cubierto.
+- **AC1, AC3, AC5 y AC6 acreditados**, el AC6 con el run real `31271924074`
+  (`powershell-linux-parity` success), confirmado por el Arquitecto por separado.
+
+**Lo que queda ABIERTO y por que no se persigue aqui:**
+
+1. **El eje de la FORMA sigue siendo una enumeracion.** Las cuatro formas son reconocedores
+   enumerados -- regex de forma de llamada, mejor que literales, pero lista al fin --. **La quinta
+   grafia de esas mismas cuatro dimensiones entra sin tocar el gate.**
+2. **Los detectores se atan a coordenadas incidentales**: el nombre de la variable receptora y la
+   disposicion de la sentencia (`if (...) { exit $LASTEXITCODE }` en una sola linea escapa al modelo
+   de profundidad de llaves).
+
+**Razon del cierre:** este eje **no se cierra enumerando**. Cada vuelta produce la grafia siguiente
+-- van dos y el checker predijo la tercera --. Cerrarlo de verdad exige reconocer PowerShell por
+**estructura** y no por texto, que es un mecanismo distinto y una tarea propia: **TASK-0355**.
+Seguir aqui seria exactamente el patron que esta instancia lleva ocho cadenas documentando.

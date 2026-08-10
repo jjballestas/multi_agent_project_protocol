@@ -85,13 +85,6 @@
             "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma"
         },
         {
-            "id": "TASK-0345",
-            "owner": "Codex",
-            "phase": "P2",
-            "status": "in_review",
-            "title": "Los gemelos PowerShell asumen el host Windows y nadie los ejecuta en Linux hasta que CI falla"
-        },
-        {
             "id": "TASK-0347",
             "owner": "Codex",
             "phase": "P2",
@@ -140,6 +133,12 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan"
+        },
+        {
+            "id": "TASK-0355",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El eje de la forma no se cierra enumerando -- reconocer PowerShell por estructura y no por texto"
         }
     ],
     "view": "task_index.slim"
