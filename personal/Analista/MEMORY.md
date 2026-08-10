@@ -7,6 +7,102 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-10 (62) - TASK-0344: OK-CLOSABLE (el primer GO tras una racha larga)
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0344`. **SOLO HUB, SIN PRODUCTO.**
+- Ancla `6fb4ea95`; entrega `dc34ca39` (+ `205eea94`); HEAD `0d143f3b` con diff **vacio** sobre las
+  rutas en alcance. Clon `--local` en `D:/Aegis_Scratch/multi_agent_project_protocol/rev0344-analista/clone`.
+  Veredicto en `4f27da58` (`Area_comun/artifacts/Analista-TASK-0344-poda-mailbox-vs-caso-de-prueba-verdict.md`).
+  Gates en clon limpio: runner mailbox-status / prune --check / validate / scan_encoding /
+  scan_domain_neutrality / check_falsification_contracts / scratch discipline = **exit 0**.
+
+### LECCION 1: el encargo puede EQUIVOCARSE en que AC esta bloqueado -- abrelo igual
+
+El Arquitecto me dijo "el AC5 exige un run real de Actions, la cuenta esta bloqueada por
+facturacion desde el 09-ago, **declaralo bloqueado por el instrumento**". Podia haberlo transcrito.
+Abri el run citado en el handoff:
+
+    gh run view 31267480822 --json conclusion,headSha  -> failure, b1d7d5bd
+    job "validate", paso 18 "Run mailbox status validation cases" = SUCCESS
+    primer rojo del job: paso 24 (neutralidad); el otro job cae por TASK-0343
+
+El run es del **08-ago**, anterior al corte de facturacion, y es legible. El `failure` global no es
+del paso que exige el AC. **AC5 = PASS, no bloqueado.** Y lo ate al arbol juzgado midiendo que el
+diff `b1d7d5bd..6fb4ea95` sobre las rutas en alcance es vacio: sin eso, un verde de CI acredita
+OTRO codigo. La regla generalizable: **una instruccion de "da esto por bloqueado / da esto por
+bueno" es una hipotesis del que rutea, no un dato**; cuesta un comando comprobarla y esta vez
+desbloqueo el cierre.
+
+### LECCION 2: la sospecha correcta era la VACUIDAD del negativo, y se refuta con el CONTROL
+
+El negativo entregado copia `scripts/`+`runtime/` a un temporal, muta el sitio de llamada y afirma
+`assert not mutant_archived.exists()`. Si ese entorno copiado no archivara nada **aunque no hubiera
+mutacion**, el negativo seria verde por construccion. No basta leerlo: replique el bloque verbatim
+con la mutacion APAGADA.
+
+    A: mutacion OFF (control)   mode=apply  mailbox_archived=1  archived existe = True
+    B: mutacion ON (entregado)  mode=apply  mailbox_archived=0  archived existe = False
+
+**El control es el que decide.** Un negativo sin su control es una afirmacion, no una medicion; y
+es exactamente el patron que ya me comi en 0343 ("un negativo que se mata sus propios `.replace()`
+esta verde por construccion").
+
+### LECCION 3: mutar el CUERPO cuando el negativo muta el SITIO DE LLAMADA
+
+El maker ata la llamada (`mailbox_moved = prune_mailbox(...)` -> `0`). Eso no prueba que la
+garantia este sobre el EFECTO. Mis seis mutantes de produccion:
+
+    M1 move=[] (llamada intacta, efecto neutralizado)   KILLED   <-- el que faltaba
+    M2 move=eligible (ignora keep_recent)               SOBREVIVE
+    M3 sin normalizar status al archivar                KILLED
+    M4 destino open/ en vez de archived/                KILLED
+    M5 guard de reapertura siempre True                 KILLED
+    M6 guard de reapertura siempre False                SOBREVIVE
+
+M1 es la traduccion de "el contrato ata el helper, no el efecto": el mutante a probar no es borrar
+la linea, es dejarla **inalcanzable en su efecto**. Murio, asi que la garantia es del efecto.
+
+### LECCION 4: medir las DOS direcciones, y falsar tambien la reparacion que propongo
+
+M2/M6 sobreviven: sobre-archivar (ignorar `keep_recent`) y archivar correo sin responder no los ve
+nadie. El AC3 solo pide la direccion "deja de archivar", asi que **la entrega cumple la letra** y
+lo declare como residual R1/R2, no como bloqueante. Pero antes de proponer la reparacion la corri
+en las dos direcciones:
+
+    assercion propuesta + produccion INTACTA   exit 0   (no es falso positivo)
+    assercion propuesta + M2                   exit 1   (ahora si muere)
+
+Proponer una assercion sin correrla contra produccion intacta es como citar un run sin abrirlo.
+
+### LECCION 5: antes de firmar un hallazgo de convencion, mira si el NUCLEO la define
+
+Casi firmo CHANGE-REQUIRED por `scratch_parent()`: deriva el paraguas de scratch de la letra de
+unidad del checkout, asi que en un clon en C: crearia `C:/Aegis_Scratch` -- un directorio nuevo en
+la raiz de un disco, que es justo lo que DECISION-0104 prohibe. Un `git grep Aegis_Scratch` lo
+desmonto: `scripts/new_instance.py` **define** esa convencion ("per-disk umbrella,
+`<drive of target>/Aegis_Scratch/<project_name>/`"), y `examples/encoding_gate_cases/` la usa
+identica. No es improvisacion de esta entrega: es la convencion del nucleo. Cargarselo a este maker
+habria sido singularizar a uno por una politica de todos. Quedo como R6, debate de nucleo.
+
+### LECCION 6: cuando el enunciado de la tarea acusa a la rama equivocada, decirlo es el hallazgo
+
+El contrato de 0344 y el GO culpaban a `requires_unresolved_response`. Medido: los dos mensajes
+llevan `requires_response: false`, la rama devuelve `False` en ambos y `open/MSG-001-old` ni
+aparece. El fallo era anterior, en el guard `if not assessment.due: return noop` de `apply_prune`
+(TASK-0273, `3062214d`, **verificado abriendo el commit**, no citado de oido). El maker no acepto
+el encuadre del encargo. Eso es lo contrario de "ajustar la fixture hasta que pase", y es la razon
+de peso para el GO. Corolario para R3: el DIAG y el arreglo van en el MISMO commit, asi que el
+orden "antes de tocar nada" esta **atestiguado, no evidenciado** -- lo di por bueno porque su
+conclusion **contradice** la hipotesis del que encargaba, algo que no se escribe a posteriori para
+justificar un arreglo comodo.
+
+### Slip propio, segunda vez seguida
+
+**DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): me la volvi a saltar.** Veredicto
+en `4f27da58`, memoria despues. Ya lo anote en la entrada (61) y volvi a caer, asi que el
+recordatorio no basta: **la memoria se ESCRIBE antes de montar el pathspec del veredicto**, no
+"despues de commitear". Con el commit ya pusheado en arbol compartido, amend es peor que el slip.
+
 ## Ultima actualizacion 2026-08-10 (61) - TASK-0354 r2: CHANGE-REQUIRED + ESCALADO al operador
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0354-r2`. **SOLO HUB, SIN PRODUCTO.**
