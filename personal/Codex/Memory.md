@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0353 implemented pending governed delivery.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent review.
 
 ## 2026-08-10 - TASK-0353 implementation
 
@@ -19,6 +19,11 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0353 implemented pending governed d
 - Targeted obstacle route, generated-instance behavior, falsification inventory 71/71,
   collaboration, encoding, neutrality, compile, and diff gates passed before the implementation
   commit. Codex is maker only and has not reviewed or ratified the change.
+- Delivery commit `e853cb73` moves TASK-0353 to `in_review`, releases every maker claim, and
+  publishes `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0353.md` with the complete baseline,
+  after balance, unsupported steps, residual failures, and independent-review request. The commit
+  hook reports routine Architect-owned pruning due at a 91.3-percent released-claim ratio; Codex
+  did not absorb that maintenance into the implementation delivery.
 
 ## 2026-08-10 - TASK-0347 blocked on partitioned production defect
 
