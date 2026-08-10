@@ -34,11 +34,14 @@ FALSIFICATION_CONTRACTS = (
         "mutation": "orchestrator.turn_schema_keys = lambda root: original_schema_keys(ROOT)",
         "boundaries": (
             "required_keys = behaviorally_required_turn_keys(clean, fixture_root)",
+            "semantic_required_keys = required_keys - set(base_schema[\"required\"])",
+            "assert semantic_required_keys == set(orchestrator.SEMANTIC_REQUIRED_TURN_KEYS)",
             "assert required_keys <= orchestrator.turn_schema_keys(fixture_root)",
             "assert required_keys <= orchestrator.schema_report(clean, fixture_root).keys()",
             "assert anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()",
             "assert not anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()",
             "assert_open_schema_is_rejected(fixture_root)",
+            "assert_older_schema_semantic_gap_is_rejected()",
         ),
         "exercised_by": "main",
     },
@@ -163,6 +166,47 @@ def assert_open_schema_is_rejected(fixture_root: Path) -> None:
     finally:
         schema["additionalProperties"] = False
         schema_path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
+
+
+def assert_older_schema_semantic_gap_is_rejected() -> None:
+    """Prove both the direct filter and real CLI reject a semantic/schema gap loudly."""
+    historical_schema = ROOT / "examples/full_runtime_instance/runtime/turn_schema.json"
+    with tempfile.TemporaryDirectory(
+        prefix="runtime-turn-older-schema-", dir=task_scratch_root()
+    ) as temp:
+        fixture = Path(temp)
+        build_loop_fixture(fixture)
+        schema_path = fixture / "runtime" / "turn_schema.json"
+        schema_path.write_bytes(historical_schema.read_bytes())
+        report = turn_report("TASK-9000")
+
+        try:
+            orchestrator.schema_report(report, fixture)
+        except ValueError as exc:
+            diagnostic = str(exc)
+            assert "routed schema omits top-level keys" in diagnostic
+            assert "semantic validation: obstacles" in diagnostic
+        else:
+            raise AssertionError("historical schema must fail before filtering semantic-required keys")
+
+        report_dir = write_reports(fixture, [report])
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--once",
+                "--run-id",
+                "RUN-routed-older-schema",
+                "--replay-report",
+                str(report_dir),
+            ],
+            check=False,
+        )
+        assert completed.returncode != 0
+        combined = completed.stdout + completed.stderr
+        assert "routed schema omits top-level keys" in combined
+        assert "semantic validation: obstacles" in combined
+        assert DELIVERY_ERROR not in combined
 
 
 def exercise_routed_delivery() -> None:
@@ -326,6 +370,7 @@ def main() -> int:
     """PERMANENT_NEGATIVE: NEG-TURN-SCHEMA-FILTER-COVERS-VALIDATION, NEG-TURN-AUTHORITATIVE-DELIVERY-OBSTACLES, NEG-TURN-STATUS-FRICTION-OBSTACLES, NEG-TURN-REVIEW-FRICTION-OBSTACLES, NEG-TURN-CHECKS-FRICTION-OBSTACLES, NEG-TURN-REVERT-PROXY-OBSTACLES, NEG-TURN-ATTEMPT-ID-NOT-A-COUNTER"""
     exercise_untracked_subtree_gate()
     exercise_routed_delivery()
+    assert_older_schema_semantic_gap_is_rejected()
     assert workflow_delivery_constructor_violations(ROOT) == []
     delivery_missing = {
         "outcome": "ok",
@@ -353,10 +398,13 @@ def main() -> int:
         assert turn_validate.validate_turn(clean, fixture_root) == []
 
         required_keys = behaviorally_required_turn_keys(clean, fixture_root)
+        schema_path = fixture_root / "runtime" / "turn_schema.json"
+        base_schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
+        semantic_required_keys = required_keys - set(base_schema["required"])
+        assert semantic_required_keys == set(orchestrator.SEMANTIC_REQUIRED_TURN_KEYS)
         assert required_keys <= orchestrator.turn_schema_keys(fixture_root)
         assert required_keys <= orchestrator.schema_report(clean, fixture_root).keys()
 
-        schema_path = fixture_root / "runtime" / "turn_schema.json"
         divergent_schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
         base_schema = json.loads(json.dumps(divergent_schema))
         anchor_field = "fixture_anchor_required"

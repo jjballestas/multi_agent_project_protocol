@@ -13,11 +13,15 @@ observabilidad, y el hito M2 de adapter LLM real gateado. El adapter por defecto
 `replay`; `llm` debe seleccionarse de forma explicita y la corrida real por subproceso exige un
 flag adicional.
 
-Esta carpeta es una instantanea historica autocontenida del tier runtime en protocol version
-`0.10.0`; no es un espejo de paridad del `runtime/` vivo del repositorio. Por eso su
-`turn_schema.json` puede divergir del esquema vivo. Un orquestador nunca debe filtrar un turno con
-el esquema de esta instantanea y validarlo contra otra raiz: filtro y puerta resuelven siempre el
-`runtime/turn_schema.json` de la raiz enrutada.
+Esta carpeta se conserva como una instantanea historica autocontenida del tier runtime en protocol
+version `0.10.0`: permite verificar compatibilidad, migracion e instanciacion desde ese contrato
+publicado. No es un espejo integral de paridad del `runtime/` vivo, por lo que su
+`turn_schema.json` puede divergir del esquema vivo. Dos contratos si comparan funciones concretas
+de deteccion de worktree (`parse_porcelain_v1_z` y `dirty_worktree_paths`) con el vivo; esa paridad
+acotada no convierte el resto de la instantanea en un gemelo. El orquestador vivo filtra y valida
+contra el esquema de la raiz enrutada, pero su semantica procede del modulo vivo: antes de filtrar,
+rechaza ruidosamente una raiz cuyo esquema no declare todas las claves que esa semantica puede
+exigir.
 
 - `turn_schema.json` - esquema estricto del turn report que un agente devuelve por turno
   (contrato SPEC-0026).

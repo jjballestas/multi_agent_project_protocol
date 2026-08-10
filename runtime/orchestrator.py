@@ -70,6 +70,12 @@ except ImportError:  # pragma: no cover - direct script execution
 
 HUMAN_OUTCOMES = {"decision_required", "human_required"}
 
+# The semantic validator requires these top-level keys conditionally even though
+# JSON Schema does not mark them unconditionally required.  The permanent
+# behavioral contract derives this set from validate_turn(), so a new semantic
+# requirement cannot silently diverge from this declaration.
+SEMANTIC_REQUIRED_TURN_KEYS = frozenset({"obstacles"})
+
 DEFAULT_CONTEXT_POLICY = {
     "compaction_enabled": False,
     "recent_turn_summaries": 3,
@@ -119,7 +125,15 @@ def turn_schema_keys(root: Path) -> frozenset[str]:
     properties = schema.get("properties")
     if not isinstance(properties, dict):
         raise ValueError(f"{schema_path}: schema must define a properties mapping")
-    return frozenset(str(key) for key in properties)
+    keys = frozenset(str(key) for key in properties)
+    missing_semantic = SEMANTIC_REQUIRED_TURN_KEYS - keys
+    if missing_semantic:
+        missing = ", ".join(sorted(missing_semantic))
+        raise ValueError(
+            f"{schema_path}: routed schema omits top-level keys required by "
+            f"orchestrator semantic validation: {missing}"
+        )
+    return keys
 
 
 def token_count(text: str, divisor: int = 4) -> int:
