@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-10 Europe/Madrid, TASK-0354 remediation implementation committed.
+Last updated: 2026-08-10 Europe/Madrid, TASK-0354 remediation delivered to independent re-review.
 
 ## 2026-08-10 - TASK-0354 remediation iteration 1 implementation
 
@@ -22,8 +22,11 @@ Last updated: 2026-08-10 Europe/Madrid, TASK-0354 remediation implementation com
   passed. The unrestricted default validate-job replay exceeded the 10-minute harness limit; a
   30-second-per-step diagnostic replay reached 56 PASS / 14 FAIL / 8 UNSUPPORTED and is not used as
   acceptance evidence because four legitimate long steps timed out.
-- TASK-0354 remains `in_progress` under the remediation maker claim pending governed delivery.
-  Codex is maker only and has not reviewed or ratified the remediation.
+- Delivery commit `a9664e01` moves TASK-0354 to `in_review`, releases both maker claims atomically,
+  and publishes `MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354-remediation-1.md`. Runtime events
+  8532-8534 are signed by Codex with drift false. The handoff records all derived balances,
+  behavioral mutant evidence, remaining AC1 obligation, and the bounded full-replay limitation.
+  Independent re-review is required; Codex has not reviewed or ratified the remediation.
 
 ## 2026-08-10 - TASK-0353 remediation iteration 2 implementation
 

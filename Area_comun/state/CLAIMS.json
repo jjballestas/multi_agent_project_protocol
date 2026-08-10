@@ -229,6 +229,22 @@
             "updated_at": "2026-08-10T08:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-final-memory",
+            "expires_at": "2026-08-10T10:30:38Z",
+            "notes": "Persist final TASK-0354 remediation delivery checkpoint after commit a9664e01.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260810-Codex-TASK-0354-remediation-1-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-10T08:30:38Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-10T08:30:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260810-Codex-TASK-0354-remediation-1-memory",
             "expires_at": "2026-08-10T10:19:10Z",
             "notes": "Persist TASK-0354 remediation implementation checkpoint after commit a47bed11.",
