@@ -2,6 +2,27 @@
 
 Last updated: 2026-08-10 Europe/Madrid, TASK-0353 delivered to independent review.
 
+## 2026-08-10 - TASK-0353 remediation iteration 2 implementation
+
+- Commit `897b9767` chooses closure A and makes the routed schema fail loudly before filtering
+  when it omits a top-level key required by the live semantic validator. The current conditional
+  semantic requirement is declared as `obstacles`; the permanent contract behaviorally derives
+  the semantic-only set as schema-valid required keys minus JSON Schema `required`, and requires
+  exact agreement with the production declaration.
+- The historical 1.2.0 schema now proves both direct `schema_report()` and the real orchestrator
+  CLI exit non-zero with the honest routed-schema/semantic-gap diagnostic; the false
+  "delivery turn is missing" diagnostic is absent. The ordinary routed delivery remains green.
+- The historical runtime README now states why the 0.10.0 snapshot is preserved and distinguishes
+  its two bounded worktree-function parity checks from integral runtime parity.
+- A workflow-derived replay on exact commit `897b9767` in a detached clean worktree produced
+  63 PASS / 6 FAIL / 8 UNSUPPORTED with failures 36, 43, 50, 53, 58, and 59. Steps 34, 39, and
+  40 pass in sequence. This balance comes from the remediation run itself; it was not transcribed.
+- Focused routed-turn, generated-instance focused case, 71/71 falsification inventory, canonical
+  collaboration, encoding, neutrality, compile, and diff gates passed. The full generated-instance
+  runner retains its known placeholder failures. Runtime events 8515-8518 move TASK-0353 to
+  `in_review` and release both Codex claims; Arquitecto archived the consumed messages and routed
+  re-review in coordination commit `42df9207`. Codex has not reviewed or ratified the change.
+
 ## 2026-08-10 - TASK-0354 implementation
 
 - Commit `a583e189` adds workflow-level cancellation keyed by workflow and ref, and splits the
