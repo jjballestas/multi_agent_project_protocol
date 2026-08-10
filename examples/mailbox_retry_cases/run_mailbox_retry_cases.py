@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import ast
 import json
 import re
 import shutil
@@ -147,11 +148,12 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "retry-ledger-preservation-property",
-        "negative": "rollback verification rejects event or claim loss and accepts any conservative defer reason",
-        "mutation": '"claims_ignored": lambda before, after, before_claims, after_claims:',
+        "negative": "rollback verification rejects ledger loss and deletion of the production assertion",
+        "mutation": "class DeleteMainLedgerAssertion(ast.NodeTransformer):",
         "boundaries": (
             "assert all(actual == expected for _, actual, expected in property_results)",
             "assert all(actual == expected for _, actual, expected in defer_results)",
+            "assert not main_enforces_ledger_preservation(deleted_source)",
             "assert not survivors",
         ),
         "exercised_by": "run_rollback_ledger_preservation_property",
@@ -176,6 +178,27 @@ def conservative_rollback_defer_observed(log: str) -> bool:
     return any(
         re.search(r"(?:^|\s)ROLLBACK_DEFER reason=[A-Za-z0-9_]+(?:\s|$)", line)
         for line in log.splitlines()
+    )
+
+
+def main_enforces_ledger_preservation(source: str) -> bool:
+    """Find the behavioral assertion semantically, independent of layout."""
+    tree = ast.parse(source)
+    main_node = next(
+        (node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "main"),
+        None,
+    )
+    if main_node is None:
+        return False
+    return any(
+        isinstance(node, ast.Assert)
+        and any(
+            isinstance(child, ast.Call)
+            and isinstance(child.func, ast.Name)
+            and child.func.id == "ledger_preservation_holds"
+            for child in ast.walk(node.test)
+        )
+        for node in ast.walk(main_node)
     )
 
 
@@ -209,6 +232,56 @@ def run_rollback_ledger_preservation_property() -> None:
         for label, log, expected in defer_cases
     ]
     assert all(actual == expected for _, actual, expected in defer_results), defer_results
+
+    production_source = Path(__file__).read_text(encoding="utf-8")
+
+    class DeleteMainLedgerAssertion(ast.NodeTransformer):
+        def __init__(self) -> None:
+            self.in_main = False
+
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.AST:
+            previous = self.in_main
+            self.in_main = node.name == "main"
+            result = self.generic_visit(node)
+            self.in_main = previous
+            return result
+
+        def visit_Assert(self, node: ast.Assert) -> ast.AST | None:
+            if self.in_main and any(
+                isinstance(child, ast.Call)
+                and isinstance(child.func, ast.Name)
+                and child.func.id == "ledger_preservation_holds"
+                for child in ast.walk(node.test)
+            ):
+                return None
+            return node
+
+    deleted_tree = DeleteMainLedgerAssertion().visit(ast.parse(production_source))
+    deleted_source = ast.unparse(ast.fix_missing_locations(deleted_tree))
+    reordered_tree = ast.parse(production_source)
+    main_index = next(
+        index
+        for index, node in enumerate(reordered_tree.body)
+        if isinstance(node, ast.FunctionDef) and node.name == "main"
+    )
+    main_definition = reordered_tree.body.pop(main_index)
+    first_definition = next(
+        index for index, node in enumerate(reordered_tree.body) if isinstance(node, ast.FunctionDef)
+    )
+    reordered_tree.body.insert(first_definition, main_definition)
+    assertion_wiring = {
+        "baseline": main_enforces_ledger_preservation(production_source),
+        "coordinate": main_enforces_ledger_preservation("\n" * 17 + production_source),
+        "order": main_enforces_ledger_preservation(ast.unparse(reordered_tree)),
+        "format": main_enforces_ledger_preservation(ast.unparse(ast.parse(production_source))),
+        "deleted": main_enforces_ledger_preservation(deleted_source),
+    }
+    assert all(assertion_wiring[key] for key in ("baseline", "coordinate", "order", "format")), assertion_wiring
+    assert not main_enforces_ledger_preservation(deleted_source), assertion_wiring
+    print(
+        "TASK0343_MAIN_ASSERTION "
+        + " ".join(f"{key}={int(value)}" for key, value in assertion_wiring.items())
+    )
     mutants = {
         "accept_loss": lambda before, after, before_claims, after_claims: True,
         "claims_ignored": lambda before, after, before_claims, after_claims:

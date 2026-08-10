@@ -72,3 +72,27 @@ de las que quedan, declarado aunque no se toquen.
 Esta tarea toca la **asercion**, no lo aserido. Si la medicion del AC1 revela que la diferencia
 viene de un comportamiento real distinto del rollback entre plataformas, **eso es un defecto de
 produccion**: se declara, se para, y lo particiono. No se arregla dentro de aqui.
+
+## Remediacion autorizada -- R1 / mp2 (2026-08-10)
+
+La asercion de preservacion de `main()` queda exigida por el negativo permanente existente. El
+criterio parsea la produccion con AST y busca la llamada a `ledger_preservation_holds` dentro del
+test de una asercion de `main`; no depende de numero de linea, orden de las definiciones ni formato
+del fuente, y no agrega razones o formas a una lista.
+
+El propio run deriva y publica el saldo estructural:
+
+    TASK0343_MAIN_ASSERTION baseline=1 coordinate=1 order=1 format=1 deleted=0
+
+El mutante mp2 se deriva del fuente de produccion y elimina el nodo `Assert` completo. Sobre ese
+fichero mutado, el runner sale 1 en el negativo permanente con este saldo real:
+
+    AssertionError: {'baseline': False, 'coordinate': False, 'order': False,
+                     'format': False, 'deleted': False}
+    MP2_RUNNER_EXIT=1
+
+El baseline completo conserva exit 0 y emite el saldo anterior seguido de:
+
+    mailbox retry cases: PASS (proof-only rollback -> conservative signed/ambiguous preservation)
+
+El inventario permanece derivado y completo: `permanent_negatives=71 declared=71 missing=0`.
