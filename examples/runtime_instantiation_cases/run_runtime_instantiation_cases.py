@@ -272,7 +272,7 @@ def case_generated_runtime_preserves_validator_fields() -> None:
                     "from runtime import orchestrator, turn_validate; "
                     "report={'transitions': {'task_status': {'from': 'in_progress', 'to': 'in_review'}}, "
                     "'obstacles': []}; "
-                    "clean=orchestrator.schema_report(report); "
+                    "clean=orchestrator.schema_report(report, __import__('pathlib').Path('.')); "
                     "assert 'obstacles' in clean, clean; "
                     "assert turn_validate.validate_delivery_obstacles(clean) == []"
                 ),

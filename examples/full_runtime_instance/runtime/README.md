@@ -13,6 +13,12 @@ observabilidad, y el hito M2 de adapter LLM real gateado. El adapter por defecto
 `replay`; `llm` debe seleccionarse de forma explicita y la corrida real por subproceso exige un
 flag adicional.
 
+Esta carpeta es una instantanea historica autocontenida del tier runtime en protocol version
+`0.10.0`; no es un espejo de paridad del `runtime/` vivo del repositorio. Por eso su
+`turn_schema.json` puede divergir del esquema vivo. Un orquestador nunca debe filtrar un turno con
+el esquema de esta instantanea y validarlo contra otra raiz: filtro y puerta resuelven siempre el
+`runtime/turn_schema.json` de la raiz enrutada.
+
 - `turn_schema.json` - esquema estricto del turn report que un agente devuelve por turno
   (contrato SPEC-0026).
 - `context.py` - carga de estado compartida para runtime.

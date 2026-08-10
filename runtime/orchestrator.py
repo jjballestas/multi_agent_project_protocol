@@ -103,16 +103,22 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def turn_schema_keys() -> frozenset[str]:
+def turn_schema_keys(root: Path) -> frozenset[str]:
     """Return the only keys that the turn validator can accept.
 
     The schema is the validator's first gate and rejects additional properties.
-    Deriving the filter from it prevents an independently maintained allowlist from
-    deleting a field immediately before validation.
+    Resolve it from the routed root, exactly as validate_turn does, so filtering and
+    validation cannot silently use different schema artifacts.
     """
-    properties = read_json(Path(__file__).with_name("turn_schema.json")).get("properties")
+    schema_path = root / "runtime" / "turn_schema.json"
+    schema = read_json(schema_path)
+    if schema.get("additionalProperties") is not False:
+        raise ValueError(
+            f"{schema_path}: orchestrator filtering requires additionalProperties=false"
+        )
+    properties = schema.get("properties")
     if not isinstance(properties, dict):
-        raise ValueError("runtime/turn_schema.json must define a properties mapping")
+        raise ValueError(f"{schema_path}: schema must define a properties mapping")
     return frozenset(str(key) for key in properties)
 
 
@@ -472,8 +478,8 @@ def real_invoker_run_id_error(root: Path, *, llm_invoker: str, run_id: str | Non
     return None
 
 
-def schema_report(report: dict[str, Any]) -> dict[str, Any]:
-    allowed_keys = turn_schema_keys()
+def schema_report(report: dict[str, Any], root: Path) -> dict[str, Any]:
+    allowed_keys = turn_schema_keys(root)
     return {key: value for key, value in report.items() if key in allowed_keys}
 
 
@@ -1043,7 +1049,7 @@ def run_loop(
             runlog.append(entry)
             turns.append(entry)
             break
-        clean_report = schema_report(report)
+        clean_report = schema_report(report, root)
         trace.append("validate")
         errors = validate_turn(clean_report, root)
         errors.extend(validate_task_close_summary(clean_report, config))

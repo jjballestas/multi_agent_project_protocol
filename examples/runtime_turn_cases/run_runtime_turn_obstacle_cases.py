@@ -31,12 +31,14 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-TURN-SCHEMA-FILTER-COVERS-VALIDATION",
         "negative": "A field required by turn validation cannot be removed by the orchestrator schema filter.",
-        "mutation": "orchestrator.turn_schema_keys = lambda: original_schema_keys() - {removed_key}",
+        "mutation": "orchestrator.turn_schema_keys = lambda root: original_schema_keys(ROOT)",
         "boundaries": (
             "required_keys = behaviorally_required_turn_keys(clean, fixture_root)",
-            "assert required_keys <= orchestrator.turn_schema_keys()",
-            "assert required_keys <= orchestrator.schema_report(clean).keys()",
-            "assert not required_keys <= orchestrator.schema_report(clean).keys()",
+            "assert required_keys <= orchestrator.turn_schema_keys(fixture_root)",
+            "assert required_keys <= orchestrator.schema_report(clean, fixture_root).keys()",
+            "assert anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()",
+            "assert not anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()",
+            "assert_open_schema_is_rejected(fixture_root)",
         ),
         "exercised_by": "main",
     },
@@ -144,6 +146,23 @@ def behaviorally_required_turn_keys(report: dict, fixture_root: Path) -> set[str
         if turn_validate.validate_turn(candidate, fixture_root):
             required.add(key)
     return required
+
+
+def assert_open_schema_is_rejected(fixture_root: Path) -> None:
+    """Prove the finite filter fails loudly if the schema accepts arbitrary keys."""
+    schema_path = fixture_root / "runtime" / "turn_schema.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
+    schema["additionalProperties"] = True
+    schema_path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
+    try:
+        orchestrator.turn_schema_keys(fixture_root)
+    except ValueError as exc:
+        assert "additionalProperties=false" in str(exc)
+    else:
+        raise AssertionError("open turn schema must disable the finite orchestrator filter")
+    finally:
+        schema["additionalProperties"] = False
+        schema_path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
 
 
 def exercise_routed_delivery() -> None:
@@ -334,15 +353,32 @@ def main() -> int:
         assert turn_validate.validate_turn(clean, fixture_root) == []
 
         required_keys = behaviorally_required_turn_keys(clean, fixture_root)
-        assert required_keys <= orchestrator.turn_schema_keys()
-        assert required_keys <= orchestrator.schema_report(clean).keys()
+        assert required_keys <= orchestrator.turn_schema_keys(fixture_root)
+        assert required_keys <= orchestrator.schema_report(clean, fixture_root).keys()
+
+        schema_path = fixture_root / "runtime" / "turn_schema.json"
+        divergent_schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
+        base_schema = json.loads(json.dumps(divergent_schema))
+        anchor_field = "fixture_anchor_required"
+        assert anchor_field not in divergent_schema["properties"]
+        divergent_schema["properties"][anchor_field] = {"type": "string"}
+        divergent_schema["required"].append(anchor_field)
+        schema_path.write_text(json.dumps(divergent_schema, indent=2) + "\n", encoding="utf-8")
+        divergent = {**clean, anchor_field: "root-schema"}
+        assert turn_validate.validate_turn(divergent, fixture_root) == []
+        divergent_required = behaviorally_required_turn_keys(divergent, fixture_root)
+        anchor_only_keys = divergent_required - required_keys
+        assert anchor_only_keys == {anchor_field}
+        assert anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()
+
         original_schema_keys = orchestrator.turn_schema_keys
-        removed_key = min(required_keys)
         try:
-            orchestrator.turn_schema_keys = lambda: original_schema_keys() - {removed_key}
-            assert not required_keys <= orchestrator.schema_report(clean).keys()
+            orchestrator.turn_schema_keys = lambda root: original_schema_keys(ROOT)
+            assert not anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()
         finally:
             orchestrator.turn_schema_keys = original_schema_keys
+        assert_open_schema_is_rejected(fixture_root)
+        schema_path.write_text(json.dumps(base_schema, indent=2) + "\n", encoding="utf-8")
 
         blocked_empty = {**clean, "outcome": "blocked", "transitions": {**clean["transitions"], "task_status": {"from": "in_progress", "to": "blocked"}}}
         blocked_with_obstacle = {**blocked_empty, "obstacles": obstacle}
