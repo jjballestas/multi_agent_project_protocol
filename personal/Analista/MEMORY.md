@@ -7,6 +7,118 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-10 (64) - TASK-0328 r7: CHANGE-REQUIRED (la guarda previa solo cubre la rama del checksum)
+
+- Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0328-r7`. **SOLO HUB, SIN PRODUCTO.**
+  El operador autorizo EXPRESAMENTE esta vuelta tras mi escalado de r6.
+- Ancla `6caeabca`; implementacion `17629f4f`; `git diff 6caeabca origin/main -- scripts/` VACIO.
+  Clon de gates PRISTINO `D:/Aegis_Scratch/multi_agent_project_protocol/an0328r7_gate`
+  (`git status` 0 lineas antes y despues); sondas en un clon HERMANO `an0328r7` para no ensuciarlo.
+  Tres motores cargados como MODULOS via `git show`: `f732292a` (base), `df5de987` (r6), `17629f4f` (r7).
+  Veredicto en `eb6b706a`
+  (`Area_comun/artifacts/Analista-TASK-0328-checksum-parcial-r7-verdict.md`).
+  Cinco gates EXIT=0; saldo del test `population=231 previous_positive=64 current_positive=231
+  gained=167 lost=0 coordinates=9` reproducido con generador propio (231 y 9 exactos).
+
+### LECCION 1: una guarda "previa a la exencion" que solo cubre UNA de las dos ramas de deteccion
+
+El arreglo es real y grande: mecanismo 3 (trituracion) muerto de raiz, mecanismo 4 cerrado para la
+familia de **checksum valido** en las 9 coordenadas y por `validate_metadata` + `require_safe_text`
+(3.258 renderizaciones, +2.894 ganadas, **0 perdidas** contra `f732292a`).
+
+Pero la guarda previa es `account_identifier_grouped_is_detected`, que **exige mod-97 valido**. La
+otra rama -- `account_identifier_contiguous_is_bounded`, que la propia remediacion 2 declaro
+INCONDICIONAL respecto al checksum, por escrito, para cubrir el identificador mal tecleado /
+truncado / enmascarado -- **se quedo detras de la exencion**. Cambiando SOLO los dos digitos de
+control: 11 formas, 9 coordenadas, los dos sitios de produccion, todas **PERDIDA contra el motor
+previo a la tarea**.
+
+Mecanismo trazado: `COORDINATE_ACTOR_ARTIFACT_RE` acepta un identificador de cuenta en la ranura de
+ACTOR, consume el valor entero, `pii_values_for_coordinate` devuelve `()`, y los `any(...)` de
+`contains_pii` son False por vacuidad.
+
+**Generalizable:** cuando un arreglo introduce una guarda "antes de X", enumerar TODAS las ramas de
+deteccion que X podia ver y comprobar que la guarda cubre cada una. Aqui el maker cubrio la rama que
+tenia un predicado a mano y dejo la otra. Es el patron `estrella-no-producto`: se cierra lo medido y
+la clase queda abierta por un eje mas -- aqui el eje es **la validez del checksum**.
+
+### LECCION 2: el corpus no puede ADMITIR sus casos con el predicado que despues AFIRMA
+
+El generador nuevo si deriva las envolturas del arbol real (mi bloqueante de r6 esta cerrado). Pero
+su filtro de admision es, verbatim:
+
+    if not memory_db.account_identifier_grouped_is_detected(rendered, coordinate_bound=False):
+        continue
+
+que **es** la guarda recien escrita. De las 231 renderizaciones, **0** divergen entre el filtro y
+produccion -> `assertTrue(all(coordinate_current_results))` queda satisfecha por la SELECCION.
+Y las presentaciones salen todas de un unico `compact = "ES9121000418450200051332"`, valido.
+
+**Falsacion barata que hay que hacer siempre: reconstruir el generador entregado y mover UNA sola
+coordenada.** Aqui movi la identidad del payload (valido -> silueta invalida) dejando todo lo demas
+identico: **12 de 12 semillas hacen FALLAR la asercion del propio contrato**; poblacion 1.626,
+ciegas 1.454. Es el mismo test, el mismo generador, el mismo commit.
+
+Es la version "de admision" de `el-encargo-que-enumera-recibe-la-enumeracion`: no basta con que el
+corpus DERIVE; hay que mirar por que condicion **descarta**.
+
+### LECCION 3: al ensanchar por delante se estrecho por detras, en el MISMO commit
+
+El commit cambio la llamada post-exencion de `coordinate_bound=coordinate_bound` (siempre False en
+r6) a `coordinate_bound=account_coordinate_bound` (True con coordenada). Medido: **49
+renderizaciones que r6 detectaba y r7 ya no**, con los `pii_values` IDENTICOS en ambos motores; la
+unica diferencia es el flag. Corolario operativo: **medir las dos direcciones contra la vuelta
+ANTERIOR tambien**, no solo contra el motor previo a la tarea.
+
+### LECCION 4: "el orden" no siempre es un orden -- a veces es el OPERANDO
+
+El FOCO 3 del Arquitecto pedia atacar el criterio "detectar antes de eximir" como orden. Construi
+dos mutantes y corri el contrato permanente sobre cada uno:
+
+    M1 reordenar (guarda DESPUES de calcular la exencion)  contrato EXIT=0  SOBREVIVE
+    M2 reapuntar (guarda mira los valores YA eximidos)     contrato EXIT=1  MUERE (0 != 64)
+
+M1 sobrevive **porque no cambia nada**: la guarda lee `item` este donde este. Asi que el criterio no
+es de orden sino de OPERANDO, y ese SI esta custodiado. Lo dije asi en el veredicto en vez de vender
+M1 como hallazgo. **No convertir un no-op semantico en un hallazgo:** antes de reportar un mutante
+superviviente, comprobar que el mutante CAMBIA el comportamiento. Si no lo cambia, el superviviente
+no prueba falta de custodia.
+
+La asercion `assertEqual(1, source.count(raw_account_guard))` fija la FORMA y sobrevive a M1; no la
+conte como defecto porque el mutante de comportamiento (`coordinate_raw_account_blind`) si existe y
+si muere. Distinguir las dos cosas.
+
+### LECCION 5: dar el PRECIO convierte un veredicto en una decision
+
+Medido sobre el corpus gobernado real del commit: 3.542 ficheros, **22.918 cadenas** en clave
+permitida; correr tambien la rama contigua sobre el valor integral -> **0 marcas nuevas, 0 falsos
+positivos**. Con el precio en cero, "cerrar con residual declarado" deja de ser una opcion
+defendible y la decision del operador queda informada. Un veredicto que solo dice "no cierra" es
+mas debil que uno que dice "no cierra y arreglarlo cuesta cero".
+
+### Slip propio, TERCERA vez -- y por que fallo el fix que ya me habia escrito
+
+**DECISION-0110 D1/D3 (veredicto + memoria en el MISMO commit): me la volvi a saltar.** Veredicto en
+`eb6b706a`, memoria en commit de continuacion. En la entrada (63) escribi el fix mecanico
+-- "escribir la memoria ANTES de correr los gates y meter las TRES rutas en el mismo pathspec" -- y
+**no lo ejecute**, porque el fix vive en la memoria y la memoria se lee al arrancar, no al commitear.
+
+Fix nuevo, atado al momento en que falla: **el pathspec del commit del veredicto se escribe con TRES
+rutas desde el principio** (artefacto, mensaje, `personal/Analista/MEMORY.md`), y si la tercera aun
+no existe, ese es el recordatorio de que falta escribirla -- no al reves. Redactar la memoria en
+cuanto el ultimo gate arranca en segundo plano, que es tiempo muerto de todos modos.
+
+### Higiene senalada, no corrida
+
+`PRUNE DUE: released_ratio 92.0 >= 90` en el gate de commit. Es del Arquitecto (capability
+orchestrator); lo senalo, no lo toco.
+
+### Presupuesto
+
+En r6 declare el presupuesto agotado y escale; el operador autorizo ESTA vuelta, no una serie nueva.
+Declarado en el veredicto: **1 iteracion, no 2**. Si la remediacion 7 no cierra la propiedad, vuelve
+al operador sin que yo abra otra iteracion.
+
 ## Ultima actualizacion 2026-08-10 (63) - TASK-0345 r2: CHANGE-REQUIRED (la poblacion se deriva de la coordenada equivocada)
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0345-r2`. **SOLO HUB, SIN PRODUCTO.**
