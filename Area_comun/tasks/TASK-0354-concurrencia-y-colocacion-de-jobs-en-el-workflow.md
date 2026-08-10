@@ -1,7 +1,7 @@
 ---
 id: TASK-0354
 title: El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md

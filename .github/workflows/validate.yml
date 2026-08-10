@@ -4,6 +4,10 @@ on:
   push:
   pull_request:
 
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   powershell-linux-parity:
     runs-on: ubuntu-latest
@@ -318,6 +322,20 @@ jobs:
 
       - name: Execute mailbox retry falsification runner
         run: python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
+
+  falsification-runners-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install falsification runner dependencies
+        run: python -m pip install jsonschema
 
       - name: Execute runtime turn falsification runner
         if: always()
