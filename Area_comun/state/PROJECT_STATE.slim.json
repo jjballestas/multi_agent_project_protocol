@@ -123,7 +123,7 @@
         {
             "id": "TASK-0359",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora"
         }
     ],

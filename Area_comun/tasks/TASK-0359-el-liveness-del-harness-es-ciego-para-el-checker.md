@@ -1,7 +1,7 @@
 ---
 id: TASK-0359
 title: El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md
@@ -87,3 +87,21 @@ Estaba vivo y trabajando cuando lo cortaron.
 Es el unico defecto del tablero que **degrada el mecanismo de verificacion en si mismo**. Con el
 vivo, el checker no puede completar sus reviews mas dificiles -- y en esta instancia el checker ha
 corregido al Arquitecto mas veces que al maker.
+
+## Implementacion Codex 2026-08-11
+
+- Direccion elegida: CPU acumulada del arbol real del exec. El muestreo se hace una vez dentro de
+  `ProgressFreshSeconds` antes de cada deadline y se compara con el arbol en el deadline. No es un
+  latido declarativo. Si CIM o la lectura de CPU no estan disponibles, la senal nueva no autoriza
+  una extension; las senales de logs y ledger siguen operativas.
+- La misma propiedad alimenta el deadline principal y el de post-entrega. Cada extension vuelve a
+  programar un par de muestras y conserva los hard caps existentes.
+- Falsacion comprimida del caso de 70 minutos: antes (mutante de produccion sin CPU), 0/2 trabajos
+  silenciosos completan y ambos reciben `TREE_KILL` por deadline. Despues, 2/2 trabajos silenciosos
+  con CPU completan sin `TREE_KILL`; el dormido 0/1 sigue recibiendo `TREE_KILL reason=deadline`.
+  En post-entrega, el sano completa sin `POST_DELIVERY_TIMEOUT` y el mismo mutante reproduce
+  `POST_DELIVERY_TIMEOUT` seguido de `TREE_KILL reason=post_delivery`.
+- Saldo de los dos crons vivos durante la implementacion: Analista 379 `EXEC_START` / 372
+  `EXEC_EXIT`; Codex 547 / 543. Ambos procesos supervisores siguieron vivos (PID 77884 y 1480) y
+  emitieron heartbeat. No se relanzaron en esta tarea; una nueva ejecucion carga el artefacto
+  generico reparado.

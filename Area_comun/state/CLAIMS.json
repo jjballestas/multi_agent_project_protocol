@@ -42,6 +42,70 @@
             "updated_at": "2026-08-11T01:34:41Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359",
+            "expires_at": "2026-08-11T15:49:11Z",
+            "notes": "Implement work-derived process-tree CPU liveness for exec and post-delivery deadlines with sleeping-process falsification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T09:49:11Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T09:49:11Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-v2",
+            "expires_at": "2026-08-11T15:55:00Z",
+            "notes": "Add end-to-end busy versus sleeping process-tree supervision coverage in the existing retry runner.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T09:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T09:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-v3",
+            "expires_at": "2026-08-11T14:14:00Z",
+            "notes": "Move exact-line neutrality attestations by the 48-line production insertion without changing exempt terms or digests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T10:14:00Z",
+            "status": "active",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T10:14:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260811T093828Z-Codex-TASK-0327-done-flip",
             "expires_at": "2026-08-11T11:38:28Z",
             "notes": "Operator-authorized final close after independent review approval.",

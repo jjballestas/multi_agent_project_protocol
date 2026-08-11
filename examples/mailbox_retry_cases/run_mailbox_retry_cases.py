@@ -157,6 +157,19 @@ FALSIFICATION_CONTRACTS = (
         "boundaries": ("assert all(outcome[\"caught\"] for outcome in execution_results)",),
         "exercised_by": "run_main_ledger_assertion_behavior_cases",
     },
+    {
+        "id": "retry-work-derived-process-liveness",
+        "negative": "silent CPU work extends both exec phases, while a silent sleeper remains deadline-terminable",
+        "mutation": 'mutant_text = runner_text.replace(cpu_progress_guard, "if ($false) {", 1)',
+        "boundaries": (
+            'assert "reason=process_tree_cpu_growing" in busy_exec',
+            'assert "TREE_KILL" not in busy_exec',
+            'assert "reason=deadline" in sleeping_exec',
+            'assert "phase=post_delivery reason=process_tree_cpu_growing" in busy_post',
+            'assert "POST_DELIVERY_TIMEOUT" in mutant_post',
+        ),
+        "exercised_by": "run_silent_process_tree_liveness_cases",
+    },
 )
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
 LEDGER_HEAD = ROOT / "scripts" / "ledger_head.py"
@@ -1469,6 +1482,122 @@ def run_pre_delivery_and_liveness_cases() -> None:
         shutil.rmtree(fixture, ignore_errors=True)
 
 
+def run_silent_process_tree_liveness_cases() -> None:
+    """PERMANENT_NEGATIVE: retry-work-derived-process-liveness
+
+    A compressed deadline preserves the production ratio: sustained silent work crosses the
+    initial deadline and finishes inside the hard cap; a silent sleeper remains terminable.
+    """
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    cpu_progress_guard = (
+        "if ($null -ne $processCpuTicks -and $null -ne $PreviousProcessCpuTicks "
+        "-and $processCpuTicks -gt $PreviousProcessCpuTicks) {"
+    )
+    assert runner_text.count(cpu_progress_guard) == 1
+    mutant_text = runner_text.replace(cpu_progress_guard, "if ($false) {", 1)
+
+    def exercise(candidate: str, mode: str, post_delivery: bool) -> str:
+        assert mode in {"busy", "sleep"}
+        scratch_root = Path("D:/Aegis_Scratch/multi_agent_project_protocol/task0359-liveness")
+        scratch_root.mkdir(parents=True, exist_ok=True)
+        fixture = Path(tempfile.mkdtemp(prefix=f"{mode}-{'post' if post_delivery else 'exec'}-", dir=scratch_root))
+        try:
+            (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
+            (fixture / "Area_comun/state").mkdir(parents=True)
+            (fixture / "runtime/state").mkdir(parents=True)
+            (fixture / "runtime").mkdir(exist_ok=True)
+            (fixture / "scripts/harness/prompts").mkdir(parents=True)
+            (fixture / "scripts").mkdir(exist_ok=True)
+            (fixture / "scripts/harness/peer_mailbox_cron.ps1").write_text(candidate, encoding="utf-8")
+            shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+            (fixture / "runtime/protocol_replay.py").write_text(
+                "def protocol_state_drift(root): return {'has_drift': False}\n", encoding="ascii"
+            )
+            (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+            (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+            (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+                '{"tasks":[{"id":"TASK-0359","owner":"TestPeer","status":"in_progress",'
+                '"file":"Area_comun/tasks/TASK-0359-liveness.md"}]}\n',
+                encoding="ascii",
+            )
+            (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text('{"tasks":[]}\n', encoding="ascii")
+            task_file = fixture / "Area_comun/tasks/TASK-0359-liveness.md"
+            task_file.parent.mkdir(parents=True)
+            task_file.write_text(
+                "---\ntask_id: TASK-0359\nfile: Area_comun/tasks/TASK-0359-liveness.md\n"
+                "intake:\n  scope_routes:\n    - silent-output.txt\n---\n",
+                encoding="ascii",
+            )
+            (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+            (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+            (fixture / "Area_comun/mailbox/open/MSG-liveness.md").write_text(
+                "---\nfrom: Coordinator\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0359\nstatus: open\n"
+                "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+                encoding="ascii",
+            )
+            prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+            prompt.write_text("Process @@MESSAGE_PATH@@.\n", encoding="ascii")
+            delivery = ""
+            if post_delivery:
+                delivery = (
+                    "$event='{\"seq\":1,\"actor\":\"TestPeer\",\"applied\":true,\"actor_auth\":{\"method\":\"ed25519\","
+                    "\"keyid\":\"testpeer:v1\",\"sig\":\"fixture\"},\"payload\":{\"intent_type\":\"task_status\","
+                    "\"task_id\":\"TASK-0359\",\"transitions\":{\"task_status\":{\"from\":\"in_progress\","
+                    "\"to\":\"in_review\"}}}}'\n"
+                    "Add-Content -LiteralPath 'runtime/state/events.jsonl' -Value $event -Encoding ASCII\n"
+                )
+            workload = (
+                "$until=[DateTime]::UtcNow.AddSeconds(12)\n"
+                "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
+                if mode == "busy"
+                else "Start-Sleep -Seconds 15\n"
+            )
+            core = fixture / "silent-work.ps1"
+            core.write_text(delivery + workload + "Write-Output 'OUTCOME: transient'\n", encoding="ascii")
+            fake = fixture / "silent-work.cmd"
+            fake.write_text('@powershell.exe -NoProfile -File "%~dp0silent-work.ps1"\r\n', encoding="ascii")
+            run("git", "init", cwd=fixture)
+            run("git", "config", "user.email", "retry@example.invalid", cwd=fixture)
+            run("git", "config", "user.name", "TestPeer", cwd=fixture)
+            run("git", "add", ".", cwd=fixture)
+            run("git", "commit", "-m", "fixture", cwd=fixture)
+            run(
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                str(fixture / "scripts/harness/peer_mailbox_cron.ps1"),
+                "-PeerId", "TestPeer", "-CoordinatorId", "Coordinator", "-Root", str(fixture),
+                "-PromptFile", str(prompt), "-AgentExe", str(fake), "-AgentProvider", "Codex",
+                "-IntervalSeconds", "1", "-MaxNoCoordinatorRounds", "2",
+                "-ExecTimeoutSeconds", "20" if post_delivery else "5",
+                "-PostDeliveryTimeoutSeconds", "2" if post_delivery else "0",
+                "-ProgressFreshSeconds", "1", "-ProgressExtensionSeconds", "10",
+                "-ProgressHardCapSeconds", "20", "-HeartbeatSeconds", "0",
+                "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0",
+                cwd=fixture, timeout=30,
+            )
+            return (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(
+                encoding="utf-8"
+            )
+        finally:
+            shutil.rmtree(fixture, ignore_errors=True)
+
+    busy_exec = exercise(runner_text, "busy", False)
+    sleeping_exec = exercise(runner_text, "sleep", False)
+    mutant_exec = exercise(mutant_text, "busy", False)
+    busy_post = exercise(runner_text, "busy", True)
+    mutant_post = exercise(mutant_text, "busy", True)
+
+    assert "reason=process_tree_cpu_growing" in busy_exec, busy_exec
+    assert "TREE_KILL" not in busy_exec, busy_exec
+    assert "TREE_KILL" in sleeping_exec, sleeping_exec
+    assert "reason=deadline" in sleeping_exec, sleeping_exec
+    assert "reason=process_tree_cpu_growing" not in sleeping_exec, sleeping_exec
+    assert "TREE_KILL" in mutant_exec and "reason=deadline" in mutant_exec, mutant_exec
+    assert "phase=post_delivery reason=process_tree_cpu_growing" in busy_post, busy_post
+    assert "POST_DELIVERY_TIMEOUT" not in busy_post, busy_post
+    assert "POST_DELIVERY_TIMEOUT" in mutant_post, mutant_post
+    assert "reason=post_delivery" in mutant_post, mutant_post
+
+
 def run_frozen_exec_with_production_freshness_case() -> None:
     """A self-bumped lease heartbeat cannot keep a frozen exec alive."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
@@ -1794,6 +1923,7 @@ def main() -> int:
             run_exec_running_heartbeat_case()
             run_post_delivery_timeout_case()
             run_pre_delivery_and_liveness_cases()
+            run_silent_process_tree_liveness_cases()
             run_frozen_exec_with_production_freshness_case()
             run_complete_tree_kill_case()
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")

@@ -376,6 +376,48 @@ function Clear-StaleCronLockIfSafe {
     Write-Log "SELF_HEAL_ORPHAN_LEASE owner=$PeerId liveness=dead action=remove"
 }
 
+function Get-ExecTreeCpuTicks {
+    param($Lease)
+    if (-not (Test-LeaseProcessMatches -Lease $Lease)) {
+        return $null
+    }
+    try {
+        $childrenByParent = @{}
+        foreach ($candidate in @(Get-CimInstance Win32_Process -ErrorAction Stop)) {
+            if ($null -eq $candidate.ParentProcessId -or $null -eq $candidate.ProcessId) { continue }
+            $candidateParent = [int]$candidate.ParentProcessId
+            if (-not $childrenByParent.ContainsKey($candidateParent)) {
+                $childrenByParent[$candidateParent] = @()
+            }
+            $childrenByParent[$candidateParent] += [int]$candidate.ProcessId
+        }
+        $pending = [System.Collections.Generic.Queue[int]]::new()
+        $pending.Enqueue([int]$Lease.pid)
+        $seenPids = @{}
+        $cpuTicks = 0L
+        while ($pending.Count -gt 0) {
+            $processId = $pending.Dequeue()
+            if ($seenPids.ContainsKey($processId)) { continue }
+            $seenPids[$processId] = $true
+            try {
+                $treeProcess = Get-Process -Id $processId -ErrorAction Stop
+                $cpuTicks += [long]$treeProcess.TotalProcessorTime.Ticks
+            } catch {
+                # A descendant may exit between the process-tree and CPU snapshots.
+            }
+            if ($childrenByParent.ContainsKey($processId)) {
+                foreach ($childPid in @($childrenByParent[$processId])) {
+                    $pending.Enqueue([int]$childPid)
+                }
+            }
+        }
+        return $cpuTicks
+    } catch {
+        # CPU telemetry is additive. Existing file evidence still works when it is unavailable.
+        return $null
+    }
+}
+
 function Get-ExecProgressState {
     param(
         $Lease,
@@ -384,6 +426,7 @@ function Get-ExecProgressState {
         [string]$EventsPath,
         [long]$PreviousOutputBytes,
         [long]$PreviousLedgerBytes,
+        $PreviousProcessCpuTicks,
         [int]$FreshSeconds
     )
     $outputBytes = 0L
@@ -398,11 +441,16 @@ function Get-ExecProgressState {
     $reasons = @()
     if ($outputBytes -gt $PreviousOutputBytes) { $reasons += "run_log_growing" }
     if ($ledgerBytes -gt $PreviousLedgerBytes) { $reasons += "ledger_growing" }
+    $processCpuTicks = Get-ExecTreeCpuTicks -Lease $Lease
+    if ($null -ne $processCpuTicks -and $null -ne $PreviousProcessCpuTicks -and $processCpuTicks -gt $PreviousProcessCpuTicks) {
+        $reasons += "process_tree_cpu_growing"
+    }
     return [pscustomobject]@{
         progressing = ($reasons.Count -gt 0)
         reasons = ($reasons -join ",")
         output_bytes = $outputBytes
         ledger_bytes = $ledgerBytes
+        process_cpu_ticks = $processCpuTicks
     }
 }
 
@@ -1412,6 +1460,9 @@ function Invoke-PeerForMessage {
             if (Test-Path -LiteralPath $progressPath -PathType Leaf) { $progressOutputBytes += [long](Get-Item -LiteralPath $progressPath).Length }
         }
         $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
+        $progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)
+        $progressProcessCpuTicks = $null
+        $nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)
         while (-not $process.WaitForExit(1000)) {
             Update-ExecLeaseHeartbeat
             if ($HeartbeatSeconds -gt 0 -and $execStopwatch.Elapsed.TotalSeconds -ge $nextHeartbeatSeconds) {
@@ -1424,15 +1475,17 @@ function Invoke-PeerForMessage {
             }
             if ([DateTime]::UtcNow -gt $deadlineUtc) {
                 $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -FreshSeconds $ProgressFreshSeconds
+                $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuTicks $progressProcessCpuTicks -FreshSeconds $ProgressFreshSeconds
                 if ($progress.progressing -and [DateTime]::UtcNow -lt $execHardDeadlineUtc) {
                     $progressOutputBytes = $progress.output_bytes
                     $progressLedgerBytes = $progress.ledger_bytes
+                    $progressProcessCpuTicks = $progress.process_cpu_ticks
                     $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
                     if ($deadlineUtc -gt $execHardDeadlineUtc) { $deadlineUtc = $execHardDeadlineUtc }
                     if ($null -ne $postDeliveryDeadlineUtc) {
                         $postDeliveryDeadlineUtc = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $postDeliveryDeadlineUtc -HardDeadlineUtc $postDeliveryHardDeadlineUtc -ExecDeadlineUtc $deadlineUtc
                     }
+                    $nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)
                     $effectivePostDeliveryDeadline = if ($null -ne $postDeliveryDeadlineUtc) { $postDeliveryDeadlineUtc.ToString('o') } else { "none" }
                     Write-Log "EXEC_PROGRESSING pid=$($process.Id) reason=$($progress.reasons) next_deadline=$($deadlineUtc.ToString('o')) hard_deadline=$($execHardDeadlineUtc.ToString('o')) post_delivery_deadline=$effectivePostDeliveryDeadline message=$($Message.Name)"
                 } else {
@@ -1453,15 +1506,19 @@ function Invoke-PeerForMessage {
                         if (Test-Path -LiteralPath $progressPath -PathType Leaf) { $progressOutputBytes += [long](Get-Item -LiteralPath $progressPath).Length }
                     }
                     $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
+                    $progressProcessCpuTicks = $null
+                    $nextProgressCpuSampleUtc = $postDeliveryDeadlineUtc.AddSeconds(-$progressSampleSeconds)
                     Write-Log "POST_DELIVERY_WINDOW_START pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds message=$($Message.Name)"
                 } elseif ($null -ne $postDeliveryDeadlineUtc -and [DateTime]::UtcNow -gt $postDeliveryDeadlineUtc) {
                     $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                    $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -FreshSeconds $ProgressFreshSeconds
+                    $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuTicks $progressProcessCpuTicks -FreshSeconds $ProgressFreshSeconds
                     if ($progress.progressing -and [DateTime]::UtcNow -lt $postDeliveryHardDeadlineUtc) {
                         $progressOutputBytes = $progress.output_bytes
                         $progressLedgerBytes = $progress.ledger_bytes
+                        $progressProcessCpuTicks = $progress.process_cpu_ticks
                         $postDeliveryDeadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
                         if ($postDeliveryDeadlineUtc -gt $postDeliveryHardDeadlineUtc) { $postDeliveryDeadlineUtc = $postDeliveryHardDeadlineUtc }
+                        $nextProgressCpuSampleUtc = $postDeliveryDeadlineUtc.AddSeconds(-$progressSampleSeconds)
                         Write-Log "EXEC_PROGRESSING pid=$($process.Id) phase=post_delivery reason=$($progress.reasons) next_deadline=$($postDeliveryDeadlineUtc.ToString('o')) hard_deadline=$($postDeliveryHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
                     } else {
                         $hungReason = if ([DateTime]::UtcNow -ge $postDeliveryHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
@@ -1472,6 +1529,12 @@ function Invoke-PeerForMessage {
                         break
                     }
                 }
+            }
+            if ([DateTime]::UtcNow -ge $nextProgressCpuSampleUtc) {
+                $sampleLease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+                $sampleCpuTicks = Get-ExecTreeCpuTicks -Lease $sampleLease
+                if ($null -ne $sampleCpuTicks) { $progressProcessCpuTicks = $sampleCpuTicks }
+                $nextProgressCpuSampleUtc = [DateTime]::MaxValue
             }
         }
         $agentResponse = ""
