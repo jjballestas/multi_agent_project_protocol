@@ -119,8 +119,39 @@ repararse bajando un cardinal literal.
 El tokenizador conserva la semantica de host del job: usa reglas POSIX salvo cuando `runs-on`
 declara Windows. Esta diferencia evita interpretar `\` como escape en comandos del job Windows.
 Una forma script descubierta cuyo token no resuelva a un fichero del repositorio queda en postura
-fail-closed. La cobertura no alcanza tokens compuestos que no presentan una ruta `.py` al analizador:
-`$BASE` compuesto, `find -exec` y `bash -c` sobreviven y quedan declarados como residual.
+fail-closed.
+
+**Cobertura real, corregida 2026-08-12 tras el veredicto r6.** La redaccion anterior nombraba tres
+ejemplos -- `$BASE` compuesto, `find -exec` y `bash -c` -- y se leia como lista completa. **La
+medicion la refuta.** La propiedad, enunciada y no enumerada:
+
+> La puerta solo descubre la invocacion si el **token inmediatamente posterior a `python` es el
+> propio objetivo** (una ruta `.py`, o `-m <modulo>`). Una bandera, un `-c`, un envoltorio o un token
+> compuesto la dejan **invisible**; y solo enrojece si la ruta relativa a la raiz aparece **literal**
+> en el mismo `run`.
+
+Basta una bandera para pasar de atrapada a invisible, sobre la misma forma:
+
+    N2   cd <dir> && python <base>       EXIT=1   atrapada
+    F1   cd <dir> && python -u <base>    EXIT=0   SILENCIOSA
+
+**Censo, no anecdota:** tomando los **69** pasos `run: python <ruta>.py` del workflow y aplicando a
+cada uno la reescritura mecanica a `cd <dir> && python -u <base>`, el resultado es **69 silenciosas y
+0 atrapadas**. Sobre un runner real con dependencia real, quitandole su `pyyaml` al job:
+
+    B4 working-directory + bandera   gate PASS invocations=72 EXIT=0 | runner ModuleNotFoundError EXIT=1
+    B5 cd + `python -m <mod>`        gate PASS invocations=72 EXIT=0 | runner ModuleNotFoundError EXIT=1
+    B6 cd + bandera                  gate PASS invocations=72 EXIT=0 | runner ModuleNotFoundError EXIT=1
+    B0 control sin ocultar           gate FAIL               EXIT=1  (la puerta funciona cuando ve)
+
+El arbol de HOY **no esta roto**: cero `working-directory`, cero `cd` en bloques `run` y cero
+banderas intermedias en el ancla. El riesgo es futuro, y la clase -- *derivar la invocacion del
+comando EJECUTADO y no de su texto* -- exige otro mecanismo y va a tarea propia (TASK-0363).
+
+**Residual adicional, coste de la propia remediacion:** la rama de error enrojece tambien objetivos
+legitimos **fuera** del repositorio -- `python "$RUNNER_TEMP/generated.py"` y `python /tmp/generated.py`
+pasan de `EXIT=0` a `EXIT=1`. No hay ninguno en el arbol de hoy y falla del lado seguro, pero su
+reparacion natural empujaria esas invocaciones a la clase silenciosa.
 
 G2 queda explicitamente fuera de esta vuelta: la superficie de la puerta termina en el fichero
 del runner descubierto. No calcula clausura transitiva de imports locales ni certifica procesos

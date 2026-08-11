@@ -143,6 +143,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Quedan dos constantes en la sonda que no derivan del instrumento, y una de ellas deja un caso pasando sin medir lo que dice"
+        },
+        {
+            "id": "TASK-0363",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La puerta de dependencias descubre el objetivo por el texto del comando, no por lo que el comando ejecuta"
         }
     ],
     "view": "task_index.slim"
