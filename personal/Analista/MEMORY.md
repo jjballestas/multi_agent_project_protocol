@@ -11313,3 +11313,69 @@ Veredicto y memoria vuelven a ir en commits distintos. El fichero de memoria no 
 medir, otra vez. El paso literal para el proximo cold start sigue siendo: **abrir esta seccion,
 crear el fichero de memoria con el titulo de la review ANTES de tocar un clon**, y meterlo en el
 mismo pathspec del commit del veredicto.
+
+---
+
+## 2026-08-11 -- TASK-0353 r4: CHANGE-REQUIRED. La RESTA en el contrato reabre la clase
+
+Ancla `02c58629` (impl `1e178f3c`), HEAD `6cd15d9c`, veredicto commiteado en `f70d55a3`.
+Artefacto: `Area_comun/artifacts/Analista-TASK-0353-r4-la-resta-del-required-verdict.md`.
+
+### La leccion transferible: mirar la RESTA, no solo la derivacion
+
+El maker arreglo lo que pedi -- el conjunto ya **se deriva** ejecutando ramas (enums del esquema +
+`REVIEW_QA_EVENTS` + sonda de lectura sobre produccion + `assert_branch_coverage`). Todo correcto.
+Y aun asi la clase seguia abierta, porque el contrato **le resta** al conjunto derivado una lista
+importada de otro sitio:
+
+```python
+optional_consumed = consumed_keys - set(base_schema["required"])
+```
+
+`required` es del esquema del HUB; la puerta protege raices ENRUTADAS, que no tienen por que
+compartirlo. Siete claves consumidas (`changed_paths`, `task_id`, `agent`, `outcome`, `summary`,
+`turn_id`, `commit_message`) caian por la resta.
+
+**Regla para la proxima review: cuando una asercion tenga la forma `derivado - constante == declarado`,
+atacar la CONSTANTE.** La derivacion puede ser impecable y la resta meter la suposicion tacita
+entera. Preguntar siempre: de donde sale lo que resta, y quien garantiza que vale en el dominio que
+la puerta protege.
+
+### El escape (CASO C), y por que valio mas que cualquier mutante
+
+Raiz enrutada sin `changed_paths` -> el filtro lo borra -> la puerta de alcance de claim
+(`turn_validate.py:340`) no ve nada -> `validate_turn() == []` -> **turn done, commit `fa2b670`,
+tarea a `done`, con escritura FUERA del scope de su claim**. Control con esquema vivo: `rejected`
+por `write outside active claim scope`, sin commit. Unica variable: las propiedades de la raiz.
+
+Como lo encontre, en 10 minutos y sin correr nada: grep de `report.get("` / `report[` sobre
+`turn_validate.py`, lista de claves de primer nivel leidas, y **diff contra la declaracion**. Las
+que faltaban eran exactamente las de `required`. La lectura estatica apunto el disparo; la sonda por
+proceso real solo lo confirmo.
+
+### Punto ciego de la sonda del maker (R12)
+
+`TurnReadProbe` graba `get`/`__getitem__`/`__contains__`. **`dict(probe)`, `.items()` y la iteracion
+NO se graban** (aislado: `read_keys == []` en los tres). Asi que la MISMA regla que el contrato dice
+cazar, escrita como `payload = dict(report)`, esta viva en produccion con el contrato en exit 0.
+Patron ya visto tres veces: se ata la FORMA de leer, no la propiedad "la clave se consume".
+
+Ojo al medir liveness de una mutacion en `validate_turn`: si el informe de prueba falla el esquema,
+la funcion **retorna antes** (linea 319-321) y la mutacion insertada al final nunca corre. Mi primer
+check de liveness dio un falso "no dispara" por eso. Construir el turno con la MISMA forma que usa el
+corpus del contrato.
+
+### Negativos honestos que tambien se reportan
+
+CASO D (quitar `outcome` de la raiz para saltar la puerta humana): **no es escape**, variante y
+control se rechazan igual. Va escrito en el artefacto: un negativo medido vale tanto como un
+positivo, y evita que el maker lo tenga que descubrir.
+
+### Instrumento
+
+- Encargo corto ("si no cabe en una hora, entrega lo medido"): no re-corri el replicador de 77
+  pasos. Lo declare como residual R3 en vez de silenciarlo.
+- `git merge-base --is-ancestor <impl> <ancla>` para acreditar que la implementacion esta DENTRO de
+  la ancla, y `git diff --stat <ancla> HEAD -- <rutas de codigo>` para acreditar que el delta a HEAD
+  no toca lo revisado. Dos comandos, cierran la anclaje sin discusion.
+- Slip propio, SEXTA vez: veredicto y memoria otra vez en commits distintos.
