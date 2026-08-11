@@ -1,7 +1,7 @@
 ---
 id: TASK-0343
 title: La asercion de rollback ata contadores literales y solo se cumple en una plataforma
-status: in_review
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md
@@ -127,3 +127,31 @@ falsificacion permanece derivado y completo: `permanent_negatives=71 declared=71
 AC5 sigue externamente pendiente por el bloqueo de facturacion ya documentado. Esta remediacion no
 lo presenta como evidencia de cierre y no cambia el harness de produccion: la destruccion vive solo
 en la copia efimera bajo el scratch gobernado para el negativo.
+
+## Residuales declarados al cerrar (2026-08-11)
+
+Cerrada con OK-CLOSABLE (`Analista-TASK-0343-exigencia-por-ejecucion-r4-verdict.md`). El liston que
+el propio checker publico ANTES de ver la entrega se cumple con margen:
+
+    RJ1  exit 1 en 3 de 3     (sigue muriendo por su propia asercion)
+    RJ2  exit 1 en 5 de 5     (antes salia 0)   cortocircuito  assert True or ...
+    RJA  exit 1 en 5 de 5     (antes salia 0)   tautologia     (before, before, ...)
+    RJB  exit 1 en 5 de 5     (antes salia 0)   inalcanzable   envuelta en if False:
+
+**R7 queda CERRADO**: el negativo ya no se deriva del predicado que lo juzga.
+
+**Lo que queda abierto, con dueno:**
+
+- **R1 (cuarta forma, `RJD_modeguard`)** y **R2 (el contrato comprueba un texto literal)**: el
+  contrato solo ejecuta `--task0343-rollback-only`, y **la ruta real que corre CI no la mide nadie**.
+  Son de la clase de **TASK-0341** -- el certificador ata la forma y no el efecto -- y alli se
+  atienden.
+- **N1**: la fixture de comportamiento fija una **ruta absoluta de una maquina concreta**
+  (`D:/Aegis_Scratch/...`), la unica del fichero, en un runner que **CI ejecuta**. Ficha propia:
+  **TASK-0357**.
+- **F1**: las aserciones sensibles al tiempo de las lineas 1806 y 1023 siguen ahi. Cero incidencias
+  en las 14 corridas de esta vuelta, pero ya me dieron a mi un falso rojo por contencion.
+
+Merece constar el metodo: el checker **descarto una corrida contaminada y volvio a medir**, y
+verifico que el blob del runner es el mismo en el ancla y en la implementacion antes de fiarse del
+ancla. Es la disciplina que esta instancia lleva dos dias intentando instalar.

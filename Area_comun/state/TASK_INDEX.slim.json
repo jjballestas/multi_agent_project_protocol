@@ -66,13 +66,6 @@
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows"
         },
         {
-            "id": "TASK-0343",
-            "owner": "Codex",
-            "phase": "P2",
-            "status": "in_review",
-            "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma"
-        },
-        {
             "id": "TASK-0347",
             "owner": "Codex",
             "phase": "P2",
@@ -133,6 +126,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El oraculo de paridad vuelca bajo la raiz del fixture y el gate corre con -Root . -- ninguna invocacion es la de produccion"
+        },
+        {
+            "id": "TASK-0357",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Un runner que CI ejecuta fija una ruta absoluta de UNA maquina y revienta antes de medir si esa unidad no existe"
         }
     ],
     "view": "task_index.slim"
