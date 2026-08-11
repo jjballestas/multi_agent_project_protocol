@@ -116,3 +116,25 @@ The balance and failure set are produced by the remediation run itself, not copi
 delivery. Focused routed-turn behavior, 71/71 falsification inventory, canonical validation,
 encoding, neutrality, compile, and diff gates pass on exact commit `897b9767` in a detached clean
 worktree. Independent review is required; Codex is maker only.
+
+## Remediation 3 maker implementation
+
+- The production predicate now covers optional top-level keys read by any routed validation gate,
+  not only keys conditionally required by one sampled turn. The declared set is `actions`,
+  `aggregate_version`, `decision_refs`, `fencing_token`, `gate`, `obstacles`, `tools`, and
+  `transitions`.
+- The permanent property derives 23 reports from all seven schema outcomes, all six action types,
+  all eight production Review/QA transitions, plus concurrency and tool-policy probes. Executing
+  the live gates observes 12 top-level reads: four schema-required keys and the exact eight-key
+  optional declaration.
+- Branch evidence proves blocked friction, human outcomes, every Review/QA transition, stale
+  aggregate version, diff-required, decision-required, and human-required action paths are
+  entered. A new blocked-turn `next_hint` production rule without a declaration changes the
+  behaviorally observed set and is killed by the exact-set contract.
+- The regression reported by the checker is now a permanent process-level negative: a routed
+  schema without `actions` fails loudly before filtering, the real orchestrator CLI exits nonzero,
+  and TASK-9000 remains `ready` instead of committing the unjustified contract change.
+- Focused routed-turn behavior, the 73/73 falsification inventory, canonical validation, encoding,
+  Python and PowerShell neutrality, compile, and diff gates exit 0. The unrestricted validate-job
+  replay exceeded the 15-minute local harness timeout without producing a final balance; it is not
+  used as acceptance evidence. Independent review is required; Codex is maker only.

@@ -19,9 +19,10 @@ publicado. No es un espejo integral de paridad del `runtime/` vivo, por lo que s
 `turn_schema.json` puede divergir del esquema vivo. Dos contratos si comparan funciones concretas
 de deteccion de worktree (`parse_porcelain_v1_z` y `dirty_worktree_paths`) con el vivo; esa paridad
 acotada no convierte el resto de la instantanea en un gemelo. El orquestador vivo filtra y valida
-contra el esquema de la raiz enrutada, pero su semantica procede del modulo vivo: antes de filtrar,
-rechaza ruidosamente una raiz cuyo esquema no declare todas las claves que esa semantica puede
-exigir.
+contra el esquema de la raiz enrutada, pero sus puertas proceden del modulo vivo: antes de filtrar,
+rechaza ruidosamente una raiz cuyo esquema omita una clave opcional que cualquiera de esas puertas
+lee. El conjunto se deriva por ejecucion sobre un corpus que recorre las ramas condicionales, no
+desde un solo turno ni desde una lista de campos obligatorios.
 
 - `turn_schema.json` - esquema estricto del turn report que un agente devuelve por turno
   (contrato SPEC-0026).

@@ -42,6 +42,41 @@
             "updated_at": "2026-08-11T01:34:41Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0353-remediation-3",
+            "expires_at": "2026-08-11T15:43:54Z",
+            "notes": "Remediation r3: derive every top-level key read by routed validation gates from a branch-covering turn corpus and prevent routed filtering from erasing it.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0353-remediation-3 Area_comun/state/TASK_INDEX.json#TASK-0353 Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353 Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md runtime/orchestrator.py examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py examples/full_runtime_instance/runtime/README.md runtime/state/events.jsonl runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T10:43:54Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-11T10:43:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0353-remediation-3-v2",
+            "expires_at": "2026-08-11T15:44:31Z",
+            "notes": "Correct file-scoped TASK-0353 remediation r3 claim; supersedes malformed scope from the prior acquisition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0353-remediation-3-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0353-remediation-3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "examples/full_runtime_instance/runtime/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T10:44:31Z",
+            "status": "active",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-11T10:44:31Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Codex-TASK-0359",
             "expires_at": "2026-08-11T15:49:11Z",
             "notes": "Implement work-derived process-tree CPU liveness for exec and post-delivery deadlines with sleeping-process falsification.",

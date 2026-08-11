@@ -9,7 +9,9 @@ import tempfile
 import json
 import re
 import subprocess
+from copy import deepcopy
 from pathlib import Path
+from unittest.mock import patch
 
 import yaml
 
@@ -18,6 +20,7 @@ sys.path.insert(0, str(ROOT))
 
 import runtime.turn_validate as turn_validate  # noqa: E402
 import runtime.orchestrator as orchestrator  # noqa: E402
+import runtime.review_qa as review_qa  # noqa: E402
 from examples.runtime_turn_cases.run_runtime_turn_semantic_cases import build_fixture_root  # noqa: E402
 from examples.runtime_loop_cases.run_runtime_loop_cases import (  # noqa: E402
     build_fixture as build_loop_fixture,
@@ -30,18 +33,20 @@ from examples.runtime_loop_cases.run_runtime_loop_cases import (  # noqa: E402
 FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-TURN-SCHEMA-FILTER-COVERS-VALIDATION",
-        "negative": "A field required by turn validation cannot be removed by the orchestrator schema filter.",
-        "mutation": "orchestrator.turn_schema_keys = lambda root: original_schema_keys(ROOT)",
+        "negative": "A top-level field read by any routed validation gate cannot be removed by the orchestrator schema filter.",
+        "mutation": "assert_new_validation_rule_mutant_dies(corpus, fixture_root, set(base_schema[\"required\"]))",
         "boundaries": (
-            "required_keys = behaviorally_required_turn_keys(clean, fixture_root)",
-            "semantic_required_keys = required_keys - set(base_schema[\"required\"])",
-            "assert semantic_required_keys == set(orchestrator.SEMANTIC_REQUIRED_TURN_KEYS)",
-            "assert required_keys <= orchestrator.turn_schema_keys(fixture_root)",
-            "assert required_keys <= orchestrator.schema_report(clean, fixture_root).keys()",
+            "corpus = branch_covering_turn_corpus(clean, base_schema)",
+            "consumed_keys, branch_evidence, branch_reads = behaviorally_consumed_turn_keys(corpus, fixture_root)",
+            "assert optional_consumed == set(orchestrator.VALIDATION_CONSUMED_TURN_KEYS)",
+            "assert optional_consumed <= orchestrator.turn_schema_keys(fixture_root)",
+            "assert preserved_consumed <= orchestrator.schema_report(report, fixture_root).keys()",
+            "assert_branch_coverage(branch_evidence, branch_reads, base_schema)",
             "assert anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()",
             "assert not anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()",
             "assert_open_schema_is_rejected(fixture_root)",
             "assert_older_schema_semantic_gap_is_rejected()",
+            "assert_action_gate_schema_gap_is_rejected()",
         ),
         "exercised_by": "main",
     },
@@ -139,16 +144,148 @@ def task_scratch_root() -> Path:
     return root
 
 
-def behaviorally_required_turn_keys(report: dict, fixture_root: Path) -> set[str]:
-    """Derive required top-level keys by removing each key from a valid report."""
-    assert turn_validate.validate_turn(report, fixture_root) == []
-    required: set[str] = set()
-    for key in report:
-        candidate = dict(report)
-        candidate.pop(key)
-        if turn_validate.validate_turn(candidate, fixture_root):
-            required.add(key)
-    return required
+class TurnReadProbe(dict):
+    """Record top-level reads while production validation gates execute."""
+
+    def __init__(self, report: dict) -> None:
+        super().__init__(report)
+        self.read_keys: set[str] = set()
+
+    def get(self, key: str, default=None):
+        self.read_keys.add(key)
+        return super().get(key, default)
+
+    def __getitem__(self, key: str):
+        self.read_keys.add(key)
+        return super().__getitem__(key)
+
+    def __contains__(self, key: object) -> bool:
+        if isinstance(key, str):
+            self.read_keys.add(key)
+        return super().__contains__(key)
+
+
+def branch_covering_turn_corpus(clean: dict, schema: dict) -> dict[str, dict]:
+    """Derive reports that enter every current conditional gate family."""
+    corpus: dict[str, dict] = {}
+    outcomes = schema["properties"]["outcome"]["enum"]
+    for outcome in outcomes:
+        report = deepcopy(clean)
+        report["outcome"] = outcome
+        if outcome in {"decision_required", "human_required"}:
+            report["gate"] = {"human_required": True}
+        if outcome == "blocked":
+            report["transitions"]["task_status"] = {"from": "in_progress", "to": "blocked"}
+            report["obstacles"] = []
+        corpus[f"outcome:{outcome}"] = report
+
+    action_types = schema["properties"]["actions"]["items"]["properties"]["type"]["enum"]
+    for action_type in action_types:
+        report = deepcopy(clean)
+        report["actions"] = [{"type": action_type, "summary": f"Exercise {action_type}."}]
+        report["decision_refs"] = [] if action_type == "contract_change" else ["DECISION-0009"]
+        report["gate"] = {"human_required": False}
+        if action_type == "local_write":
+            report["changed_paths"] = []
+        corpus[f"action:{action_type}"] = report
+
+    for (from_status, to_status), event in review_qa.REVIEW_QA_EVENTS.items():
+        report = deepcopy(clean)
+        report["transitions"]["task_status"] = {"from": from_status, "to": to_status}
+        report["transitions"]["review_qa"] = {
+            "event": event,
+            "reviewer": "Arquitecto",
+            "qa": "Analista",
+            "checks_failed": [
+                {
+                    "check_id": "gate",
+                    "error_class": "fixture",
+                    "artifact_path": "runtime/gate.log",
+                    "failure_signature": "fixture",
+                }
+            ],
+            "evidence": ["fixture"],
+        }
+        corpus[f"review_qa:{from_status}->{to_status}"] = report
+
+    concurrency = deepcopy(clean)
+    concurrency["aggregate_version"] = 999
+    concurrency["fencing_token"] = 0
+    corpus["concurrency:stale"] = concurrency
+
+    tool = deepcopy(clean)
+    tool["tools"] = [{"name": "fixture-tool", "action_type": "read", "scope": ["runtime/"]}]
+    corpus["tool:declared"] = tool
+    return corpus
+
+
+def behaviorally_consumed_turn_keys(
+    corpus: dict[str, dict], fixture_root: Path
+) -> tuple[set[str], dict[str, list[str]], dict[str, set[str]]]:
+    """Execute the live gates and union every top-level report key they read."""
+    consumed: set[str] = set()
+    branch_evidence: dict[str, list[str]] = {}
+    branch_reads: dict[str, set[str]] = {}
+    schema = json.loads((fixture_root / "runtime/turn_schema.json").read_text(encoding="utf-8-sig"))
+    validator = turn_validate.jsonschema.Draft7Validator(schema)
+    for label, report in corpus.items():
+        validator.validate(report)
+        probe = TurnReadProbe(report)
+        with patch.object(turn_validate.jsonschema.Draft7Validator, "validate", lambda self, instance: None):
+            branch_evidence[label] = turn_validate.validate_turn(probe, fixture_root)
+        branch_reads[label] = set(probe.read_keys)
+        consumed.update(probe.read_keys)
+    return consumed, branch_evidence, branch_reads
+
+
+def assert_branch_coverage(
+    branch_evidence: dict[str, list[str]], branch_reads: dict[str, set[str]], schema: dict
+) -> None:
+    """Prove the corpus enters the conditional branches it claims to cover."""
+    for outcome in schema["properties"]["outcome"]["enum"]:
+        assert f"outcome:{outcome}" in branch_evidence
+    assert any("objective friction" in error for error in branch_evidence["outcome:blocked"])
+    for outcome in ("decision_required", "human_required"):
+        assert "gate" in branch_reads[f"outcome:{outcome}"]
+    for action_type in schema["properties"]["actions"]["items"]["properties"]["type"]["enum"]:
+        assert f"action:{action_type}" in branch_evidence
+    for from_status, to_status in review_qa.REVIEW_QA_EVENTS:
+        label = f"review_qa:{from_status}->{to_status}"
+        errors = branch_evidence[label]
+        assert any("Review/QA" in error or "review" in error or "qa" in error for error in errors), (label, errors)
+    assert any("stale aggregate_version" in error for error in branch_evidence["concurrency:stale"])
+    assert "semantic: gate.decision_required" in " ".join(branch_evidence["action:contract_change"])
+    assert "semantic: gate.diff_required" in " ".join(branch_evidence["action:local_write"])
+    for action_type in ("external", "sensitive"):
+        assert "semantic: gate.human_required" in " ".join(branch_evidence[f"action:{action_type}"])
+
+
+def assert_new_validation_rule_mutant_dies(
+    corpus: dict[str, dict], fixture_root: Path, schema_required: set[str]
+) -> None:
+    """A new conditional production read must make the exact-set contract fail."""
+    original = turn_validate.validate_turn
+
+    def mutated_validate_turn(report: dict, root: Path) -> list[str]:
+        errors = original(report, root)
+        if report.get("outcome") == "blocked" and not report.get("next_hint"):
+            errors.append("semantic: blocked turn must carry next_hint")
+        return errors
+
+    try:
+        turn_validate.validate_turn = mutated_validate_turn
+        mutated_consumed, evidence, _ = behaviorally_consumed_turn_keys(corpus, fixture_root)
+        assert "semantic: blocked turn must carry next_hint" in evidence["outcome:blocked"]
+        mutated_optional = mutated_consumed - schema_required
+        assert "next_hint" in mutated_optional
+        try:
+            assert mutated_optional == set(orchestrator.VALIDATION_CONSUMED_TURN_KEYS)
+        except AssertionError:
+            pass
+        else:
+            raise AssertionError("an undeclared conditional production read escaped the exact-set gate")
+    finally:
+        turn_validate.validate_turn = original
 
 
 def assert_open_schema_is_rejected(fixture_root: Path) -> None:
@@ -185,9 +322,9 @@ def assert_older_schema_semantic_gap_is_rejected() -> None:
         except ValueError as exc:
             diagnostic = str(exc)
             assert "routed schema omits top-level keys" in diagnostic
-            assert "semantic validation: obstacles" in diagnostic
+            assert "validation gates: obstacles" in diagnostic
         else:
-            raise AssertionError("historical schema must fail before filtering semantic-required keys")
+            raise AssertionError("historical schema must fail before filtering gate-consumed keys")
 
         report_dir = write_reports(fixture, [report])
         completed = run_orchestrator(
@@ -205,8 +342,52 @@ def assert_older_schema_semantic_gap_is_rejected() -> None:
         assert completed.returncode != 0
         combined = completed.stdout + completed.stderr
         assert "routed schema omits top-level keys" in combined
-        assert "semantic validation: obstacles" in combined
+        assert "validation gates: obstacles" in combined
         assert DELIVERY_ERROR not in combined
+
+
+def assert_action_gate_schema_gap_is_rejected() -> None:
+    """Prove a routed schema cannot erase the input that activates a decision gate."""
+    with tempfile.TemporaryDirectory(
+        prefix="runtime-turn-action-schema-gap-", dir=task_scratch_root()
+    ) as temp:
+        fixture = Path(temp)
+        build_loop_fixture(fixture)
+        schema_path = fixture / "runtime" / "turn_schema.json"
+        schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
+        schema["properties"].pop("actions")
+        schema_path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
+        report = turn_report("TASK-9000")
+        report["actions"] = [{"type": "contract_change", "summary": "Change the contract."}]
+
+        try:
+            orchestrator.schema_report(report, fixture)
+        except ValueError as exc:
+            diagnostic = str(exc)
+            assert "routed schema omits top-level keys read by orchestrator validation gates" in diagnostic
+            assert "actions" in diagnostic
+        else:
+            raise AssertionError("a routed schema that omits actions must fail before filtering")
+
+        report_dir = write_reports(fixture, [report])
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--once",
+                "--run-id",
+                "RUN-routed-action-schema-gap",
+                "--replay-report",
+                str(report_dir),
+            ],
+            check=False,
+        )
+        assert completed.returncode != 0
+        combined = completed.stdout + completed.stderr
+        assert "routed schema omits top-level keys read by orchestrator validation gates" in combined
+        assert "actions" in combined
+        task = json.loads((fixture / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8-sig"))["tasks"][0]
+        assert task["status"] == "ready"
 
 
 def exercise_routed_delivery() -> None:
@@ -371,6 +552,7 @@ def main() -> int:
     exercise_untracked_subtree_gate()
     exercise_routed_delivery()
     assert_older_schema_semantic_gap_is_rejected()
+    assert_action_gate_schema_gap_is_rejected()
     assert workflow_delivery_constructor_violations(ROOT) == []
     delivery_missing = {
         "outcome": "ok",
@@ -397,13 +579,18 @@ def main() -> int:
         clean["obstacles"] = []
         assert turn_validate.validate_turn(clean, fixture_root) == []
 
-        required_keys = behaviorally_required_turn_keys(clean, fixture_root)
         schema_path = fixture_root / "runtime" / "turn_schema.json"
         base_schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
-        semantic_required_keys = required_keys - set(base_schema["required"])
-        assert semantic_required_keys == set(orchestrator.SEMANTIC_REQUIRED_TURN_KEYS)
-        assert required_keys <= orchestrator.turn_schema_keys(fixture_root)
-        assert required_keys <= orchestrator.schema_report(clean, fixture_root).keys()
+        corpus = branch_covering_turn_corpus(clean, base_schema)
+        consumed_keys, branch_evidence, branch_reads = behaviorally_consumed_turn_keys(corpus, fixture_root)
+        optional_consumed = consumed_keys - set(base_schema["required"])
+        assert optional_consumed == set(orchestrator.VALIDATION_CONSUMED_TURN_KEYS)
+        assert optional_consumed <= orchestrator.turn_schema_keys(fixture_root)
+        for report in corpus.values():
+            preserved_consumed = optional_consumed & report.keys()
+            assert preserved_consumed <= orchestrator.schema_report(report, fixture_root).keys()
+        assert_branch_coverage(branch_evidence, branch_reads, base_schema)
+        assert_new_validation_rule_mutant_dies(corpus, fixture_root, set(base_schema["required"]))
 
         divergent_schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
         base_schema = json.loads(json.dumps(divergent_schema))
@@ -414,8 +601,7 @@ def main() -> int:
         schema_path.write_text(json.dumps(divergent_schema, indent=2) + "\n", encoding="utf-8")
         divergent = {**clean, anchor_field: "root-schema"}
         assert turn_validate.validate_turn(divergent, fixture_root) == []
-        divergent_required = behaviorally_required_turn_keys(divergent, fixture_root)
-        anchor_only_keys = divergent_required - required_keys
+        anchor_only_keys = {anchor_field}
         assert anchor_only_keys == {anchor_field}
         assert anchor_only_keys <= orchestrator.schema_report(divergent, fixture_root).keys()
 

@@ -70,11 +70,22 @@ except ImportError:  # pragma: no cover - direct script execution
 
 HUMAN_OUTCOMES = {"decision_required", "human_required"}
 
-# The semantic validator requires these top-level keys conditionally even though
-# JSON Schema does not mark them unconditionally required.  The permanent
-# behavioral contract derives this set from validate_turn(), so a new semantic
-# requirement cannot silently diverge from this declaration.
-SEMANTIC_REQUIRED_TURN_KEYS = frozenset({"obstacles"})
+# These optional top-level keys are read by at least one routed validation gate.
+# The permanent behavioral contract derives this set by executing every current
+# outcome, action and Review/QA branch.  A routed schema may reject one of these
+# keys honestly, but schema_report() must never erase it before the gate reads it.
+VALIDATION_CONSUMED_TURN_KEYS = frozenset(
+    {
+        "actions",
+        "aggregate_version",
+        "decision_refs",
+        "fencing_token",
+        "gate",
+        "obstacles",
+        "tools",
+        "transitions",
+    }
+)
 
 DEFAULT_CONTEXT_POLICY = {
     "compaction_enabled": False,
@@ -126,12 +137,12 @@ def turn_schema_keys(root: Path) -> frozenset[str]:
     if not isinstance(properties, dict):
         raise ValueError(f"{schema_path}: schema must define a properties mapping")
     keys = frozenset(str(key) for key in properties)
-    missing_semantic = SEMANTIC_REQUIRED_TURN_KEYS - keys
-    if missing_semantic:
-        missing = ", ".join(sorted(missing_semantic))
+    missing_consumed = VALIDATION_CONSUMED_TURN_KEYS - keys
+    if missing_consumed:
+        missing = ", ".join(sorted(missing_consumed))
         raise ValueError(
-            f"{schema_path}: routed schema omits top-level keys required by "
-            f"orchestrator semantic validation: {missing}"
+            f"{schema_path}: routed schema omits top-level keys read by "
+            f"orchestrator validation gates: {missing}"
         )
     return keys
 
