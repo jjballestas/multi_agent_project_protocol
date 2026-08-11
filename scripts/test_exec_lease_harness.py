@@ -1100,7 +1100,7 @@ $process | Add-Member ScriptMethod WaitForExit {{
     param([int]$Milliseconds)
     $script:ticks += 1
     Start-Sleep -Milliseconds 100
-    return ($script:ticks -ge 15)
+    return ($script:ticks -ge 80)
 }}
 $Message = [pscustomobject]@{{ Name = "MSG-probe.md" }}
 $Root = {ps_literal(root)}
@@ -1116,9 +1116,9 @@ $StopPath = Join-Path $Root "STOP"
 $HeartbeatSeconds = 0
 $nextHeartbeatSeconds = 0
 $execStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
-$PostDeliveryTimeoutSeconds = 1
-$ProgressHardCapSeconds = 3
-$ProgressExtensionSeconds = 2
+$PostDeliveryTimeoutSeconds = 5
+$ProgressHardCapSeconds = 30
+$ProgressExtensionSeconds = 10
 $ProgressFreshSeconds = 1
 $ledgerBytesBefore = 0L
 $ledgerPrefixSha256Before = "probe"
@@ -1129,7 +1129,7 @@ $progressSampleSeconds = 1
 $nextProgressCpuSampleUtc = [DateTime]::UtcNow.AddSeconds(10)
 $postDeliveryDeadlineUtc = $null
 $postDeliveryHardDeadlineUtc = $null
-$deadlineUtc = [DateTime]::UtcNow.AddMilliseconds(150)
+$deadlineUtc = [DateTime]::UtcNow.AddSeconds(1)
 $execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
 Invoke-Expression $whileNode.Extent.Text
 [ordered]@{{

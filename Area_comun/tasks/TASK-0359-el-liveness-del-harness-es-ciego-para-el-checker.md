@@ -129,3 +129,5 @@ corregido al Arquitecto mas veces que al maker.
   sin depender de `Start-Sleep` ni de deltas de CPU accidentales durante el arranque. El control
   historico de post-entrega tolera los dos polls de un segundo y la resolucion de un segundo del
   log; conserva un limite superior de seis segundos para una ventana comprimida de tres segundos.
+  La sonda sintetica de herencia usa una geometria 1/5/10/30 y ocho segundos de vida, suficiente
+  para conservar el orden causal bajo carga sin depender de una carrera de 150 milisegundos.
