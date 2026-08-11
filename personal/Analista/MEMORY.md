@@ -11379,3 +11379,107 @@ positivo, y evita que el maker lo tenga que descubrir.
   la ancla, y `git diff --stat <ancla> HEAD -- <rutas de codigo>` para acreditar que el delta a HEAD
   no toca lo revisado. Dos comandos, cierran la anclaje sin discusion.
 - Slip propio, SEXTA vez: veredicto y memoria otra vez en commits distintos.
+
+## 2026-08-11 -- TASK-0354 r4: CHANGE-REQUIRED. 14 formas escapan al reconocedor, y el testigo se desata solo
+
+Commit del veredicto `9b8827c8`. Ancla `02c58629`, implementacion `736b03f2`.
+Artefacto: `Area_comun/artifacts/Analista-TASK-0354-r4-formas-invocacion-verdict.md`.
+Pregunta unica: el descubrimiento por token cierra la clase de FORMAS de invocacion? **No.**
+
+### El ataque que dio 14 huecos: dos direcciones, no una
+
+La forma correcta de atacar un reconocedor NO es solo "reescribo lo que ya hay" (direccion B), es
+tambien **"anado algo nuevo con la forma X"** (direccion A). Y son asimetricas:
+
+    direccion B (reescritura)  el contador baja 73 -> 72 y enrojece   -> 14 de 14 ROJO
+    direccion A (alta)         checked sigue en 73                    -> 14 de 14 MUDO, EXIT=0
+
+Un contador de cardinalidad **solo vigila que no se caiga lo que ya estaba**. Es ciego a las altas
+por construccion. Si un veredicto solo mide la direccion B, firma "atado" un testigo que no ata la
+mitad de la clase. **Probar SIEMPRE las dos direcciones sobre un inventario/contador.**
+
+### Las cuatro familias, con su mecanismo (no con su nombre)
+
+    a) flag del interprete antes del script    python -u / -X utf8 / -W ignore
+       mecanismo: solo se mira parts[index+1]; si ahi hay un flag, no sigue buscando
+    b) el modelo de linea                      continuacion `\`, PY=python, sh -c, for, xargs
+       mecanismo: command.splitlines() ANTES de tokenizar
+    c) el lanzador de Windows                  py -3 <ruta>
+    d) ruta con backslash sin comillas         python examples\cases\run_x.py
+       mecanismo: shlex.split(posix=True) SE COME los backslash:
+       'python a\b\c.py' -> ['python', 'abc.py']
+
+(d) es la joya: el job corre en **windows-latest**, y el gate **imprime sus propios errores con
+backslash**. Un reconocedor que no sabe leer el formato que el mismo emite. Leccion de instrumento:
+cuando veas `posix=True` aplicado a un YAML con un job de Windows, es error de CATEGORIA, no hueco
+de lista -- y se demuestra en una linea con `shlex.split`.
+
+**Trampa que casi me arruina la medicion:** escribi los mutantes con backslash dentro de un heredoc
+Python sin raw string. `"examples\probe\run_x.py"` -> `\r` es un CR REAL. Los primeros resultados de
+la tanda de Windows eran basura. Fix: construir el backslash con `chr(92)` y **imprimir el `repr()`
+del body y el `shlex.split()` antes de creer la tabla**. Si mides formas, verifica los BYTES de la
+forma que crees estar midiendo.
+
+### El testigo que se desata con la edicion que su propio mensaje nombra
+
+`expected_runner_invocations = 73` literal a mano. Cadena medida:
+
+    paso 1  reescribo `python -u ...` + inyecto `import attrs` en el runner
+            gate FAIL "expected 73 invocations, discovered 72"  EXIT=1
+            real ModuleNotFoundError: No module named 'attrs'   EXIT=1
+    paso 2  "arreglo" el rojo como dice el mensaje: 73 -> 72
+            gate PASS runners=72                                EXIT=0
+            real ModuleNotFoundError                            EXIT=1
+
+**Patron nuevo para el catalogo: el rojo indistinguible.** El mismo mensaje senala "quite un runner a
+proposito" y "escondi un runner sin darme cuenta", y en los dos casos la reparacion natural es bajar
+el literal. Un testigo cuya unica reparacion documentada lo desactiva no ata la propiedad: ata la
+constancia de un numero que el maker edita. **Preguntar siempre: cual es la reparacion NATURAL de
+este rojo, y deja el defecto vivo?**
+
+### La respuesta constructiva se MIDE, no se propone
+
+Al Arquitecto le pregunte-respondi con dos fuentes independientes, las dos medidas:
+
+1. **Ya en el repo:** `scripts/check_falsification_contracts.py` deriva su poblacion de los duenos de
+   contrato y su reconocedor es una **lista blanca fail-closed** (`recognized_command_form`) que
+   acepta `[\/]`, trata `py -3`, rechaza continuaciones y honra `if:`/`needs`/`continue-on-error`.
+   Sobre el arbol del paso 1: `runners=11/12` + `runner is not executed by workflow` EXIT=1, nombrando
+   el RUNNER, sin literal que bajar. **Dos gates del mismo repo, la misma pregunta, posturas
+   opuestas (fail-open vs fail-closed): eso es paridad de gemelos y es hallazgo por si solo.**
+   Al revisar un reconocedor nuevo, buscar SIEMPRE si el repo ya tiene otro para la misma pregunta.
+2. **Derivar de la CONDICION:** poblacion = "fichero .py del repo nombrado en un bloque `run`"
+   (normalizando `\`->`/`, resolviendo por SUFIJO para que `$VAR/` y `.\` aterricen). Medido:
+   **73 == 73 sobre el ancla (cero falsos rojos) y CATCHES 14 de 14**. Una recomendacion medida
+   --que no rompe el arbol de hoy y mata los 14-- pesa infinitamente mas que "cierra la clase".
+
+### Autocritica que va en el veredicto, no en la memoria
+
+Mi minimo de r2 **enumero** dos falsadores (M3 `cd . && python`, M5 `python -m`) y la remediacion me
+devolvio exactamente esos dos, verdes. Corri los dos: son HONESTOS y matan por la dependencia, no por
+el cardinal. El maker cumplio la letra. La letra era mia y era estrecha: nombre un espacio de FORMAS,
+no la propiedad. Es `el-encargo-que-enumera-recibe-la-enumeracion` aplicado a mi propio minimo de
+cierre. **Al escribir "lo minimo que cierra", escribir el CRITERIO DE PERTENENCIA y usar los ejemplos
+solo como falsadores, diciendo explicitamente "no es una lista".**
+
+### Lo que di por bueno, y por que importa decirlo
+
+G1 instanciado (`if ! python`) cerrado; tambien `cd . &&`, `python -m`, `python3.12`, `python.exe`,
+`./`, comillas, y los envoltorios `env`/`exec`/`timeout`/`uv run`/`&` de pwsh: 14 de 28 cerradas.
+G2 cerrado **por declaracion escrita**, que era la rama alternativa que yo mismo ofreci en r2 --
+cuando ofreces una alternativa declarativa y la toman, se acepta y no se vuelve a gatear.
+Y sobre todo: **no hay instancia viva hoy** (descubierto 73 == derivado 73, cero divergencia). Decirlo
+explicitamente evita que un CHANGE-REQUIRED se lea como "CI esta roto ahora".
+
+### Instrumento
+
+- El probe sintetico (`examples/probe_cases/run_probe_cases.py`, `import attrs`) vive SOLO en el clon
+  de mutantes. `attrs` esta en el venv de `validate` pero el job de Windows **no declara nada**, asi
+  que sirve de positivo limpio en ese job.
+- Al inyectar un import en un runner: **despues** del `from __future__`, no antes (`sed '5a ...'`).
+  Prependerlo da `SyntaxError` y arruina la prueba de comportamiento.
+- Restaurar el clon de mutantes con `git checkout -q -- .`, **no** con un OY/OR leido por el script:
+  si el script se relanza, lee el fichero YA mutado y guarda la mutacion como "original".
+- Runners lentos (`run_mailbox_retry_cases.py`) revientan el limite de 2 min del Bash: `timeout` por
+  llamada y una etapa por invocacion, no la cadena entera en un solo script.
+- Slip propio, SEPTIMA vez: veredicto y memoria en commits distintos.
