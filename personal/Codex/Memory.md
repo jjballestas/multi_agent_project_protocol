@@ -19,6 +19,15 @@ Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures c
   15-minute local harness timeout without a final balance and is not acceptance evidence.
 - TASK-0353 remains `in_progress` under the remediation-3-v2 maker claim pending exact-commit clean
   verification and governed delivery. Codex has not reviewed or ratified the remediation.
+- Exact implementation `1e178f3c` passed the focused property, 73/73 inventory, collaboration,
+  encoding, Python/PowerShell neutrality, compile, clean drift through seq 8748, diff gates, and
+  clean tracked status in detached worktree
+  `D:/Aegis_Scratch/multi_agent_project_protocol/task0353-clean-1e178f3c`.
+- Delivery commit `937ed2a9` moves TASK-0353 to `in_review`, releases both maker claims, and
+  publishes `MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-3.md`. Live drift is
+  clean through seq 8752. Independent Analista re-review is required; Codex did not self-review.
+- The delivery hook reports released-claim pruning due at 90 percent. That checkpoint is
+  Architect-owned and was not absorbed into this remediation.
 
 ## 2026-08-11 - Four approved task closures
 
