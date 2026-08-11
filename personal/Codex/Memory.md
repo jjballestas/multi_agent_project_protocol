@@ -6834,3 +6834,22 @@ ratified its own work.
 - Delivery commit `a6dee0c5` moves TASK-0359 to `in_review`, releases every Codex claim, and
   publishes the self-contained Arquitecto handoff for independent Analista review. Codex is maker
   only and has not reviewed or ratified the implementation.
+
+## 2026-08-11 - TASK-0359 remediation iteration 2 implementation
+
+- Commit `580f0892` replaces the non-monotone live-tree CPU sum with per-PID high-water state.
+  CPU already observed from a descendant remains in the sample after that descendant exits, while
+  continued parent work grows the monotone total. A meaningful delta floor rejects idle-runtime
+  jitter from a blocked process.
+- The finite ceiling is explicit: `ExecTimeoutSeconds + ProgressHardCapSeconds`, defaulting to
+  4500 seconds (75 minutes), and each exec logs `EXEC_SUPERVISION_LIMIT` with both components and
+  the hard deadline. Work extends supervision only inside that declared cap.
+- Permanent negatives bind outcomes, not reason strings. The real production loop preserves silent
+  CPU work in both phases, preserves a parent after its heavy child exits, kills a blocked no-work
+  control, and kills busy work when the production sampling block is made unreachable.
+- The exec-lease suite, full mailbox-retry suite, 73/73 falsification inventory, collaboration,
+  encoding, Python and PowerShell neutrality, six neutrality parity tests, clean drift through seq
+  8819, compile, parser, and diff gates exited 0. The existing compressed post-delivery timing
+  control now accounts for its two one-second polls and second-resolution timestamps.
+- TASK-0359 remains `in_progress` under the remediation-2-v2 maker claim pending exact-commit clean
+  verification and governed delivery. Codex has not reviewed or ratified the remediation.
