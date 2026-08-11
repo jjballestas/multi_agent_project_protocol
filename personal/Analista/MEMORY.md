@@ -11246,3 +11246,70 @@ Reglas que me llevo:
    esta contaminada y se descarta -- las dos lineas, tambien la que me conviene.
 4. Descubrirlo despues de commitear no es excusa para callarlo: correccion commiteada aparte
    (`7b55df84`), con la traza completa en el artefacto y en el mensaje.
+
+## TASK-0332 r3 (2026-08-11) -- el mutante tiene que ser invisible a TODAS las guardias a la vez
+
+Ancla `647ba7e3`, implementacion `29175f01`. Veredicto CHANGE-REQUIRED
+(`Area_comun/artifacts/Analista-TASK-0332-remediacion-2-verdict.md`, commit `38851b29`).
+
+### La leccion tecnica de esta ronda
+
+Mi primera bateria de seis mutantes de produccion **murio entera**, y casi la firmo como "los
+escapes mueren". Miren donde murio: en `contains_pii_loop`, que exige
+`assertEqual(1, len(loops))` -- **conte de bucles**, no comportamiento. Mi guard usaba un `for` de
+primer nivel, asi que introducia un segundo `ast.For` y el test caia por estructura.
+
+Regla: **antes de correr la suite, perfilar el mutante contra cada guardia que exista sobre esa
+funcion** y comprobar que las deja todas satisfechas. Aqui eran tres a la vez:
+1. conteo de `ast.For` de primer nivel en `contains_pii` (`:769`),
+2. visitante de `break`/`continue` (`:772`),
+3. ancla de **texto exacto de diez lineas** sobre produccion (`:2302`).
+
+La forma que las evade las tres es una **expresion generadora**, no una sentencia de bucle:
+
+    if any(DATE_RE.fullmatch(_x) and (<clave>) for _x in value_list(value)):
+        return False
+
+Con esa forma, 4 de 6 mutantes escaparon la suite entera (exit 0) ocultando un email real.
+Un mutante que muere por la guardia equivocada es un **falso verde de mi metodo**, no del codigo.
+
+### El ancla de texto comprueba PRESENCIA, no EXCLUSIVIDAD
+
+`assertEqual(1, source.count(bloque_de_10_lineas))` verifica que el bloque esta. No verifica que
+nada se ejecute antes. Todo bypass insertado **encima** del bloque lo respeta byte a byte. Cuando
+una entrega diga "la invariante X previene Y", buscar que puerta ata X: si es un `source.count`,
+la invariante no esta atada, esta *fotografiada*.
+
+### Producto en un eje, estrella en el resto -- y coordenadas disfrazadas
+
+El corpus era producto exacto en 4 coordenadas (`12 x 24 x 1684 x 3 = 1.454.976`, verificado) con
+marginales completas en las otras 5. Pero esas 5 se derivan del **mismo contador `ordinal`**:
+`second == (7*minute) % 60` y `fraccion == (minute % 6) + 1`. Tres "coordenadas" eran **una sola**.
+Metodo que lo caza en 30 segundos: reimplementar el generador de la entrega y contar las
+**conjuntas** por pares, no las marginales. (minuto,segundo) 1,67 %; (ano,offset) 8,64 %.
+
+### Lo que si acredite a favor de la entrega
+
+- Diferencial viejo-contra-nuevo del refactor de produccion: 60.000 entradas aleatorias con
+  semilla fija, alfabeto de 12 valores, 1-3 items, con y sin `coordinate` -> **0 divergencias**.
+  Es la forma barata de sostener un AC5 ("sin cambio de semantica") por medicion.
+- 2 de mis 3 escapes de r2 murieron por comportamiento, y la perdida era exacta
+  (`1454976/12` para el mes, `1454976/24` para la hora): eso confirma que el eje es producto real.
+
+### Instrumento
+
+- La suite tarda **488 s sola** y **~700 s con 6 en paralelo** (20 cores). Seis mutantes en
+  worktrees + `wait` NO cabe en el timeout de 600 s de un comando en primer plano: lanzarlo en
+  **background** y sondear por `SUITE_EXIT` en el log.
+- `git worktree add --detach` desde el clon es barato y aisla la mutacion. Un worktree de control
+  **sin mutar** vale su coste: descarto la falsa alarma de esta sesion.
+- Leer el resultado de unittest verbose con `tail -c`: la linea `... FAIL` pertenece al test
+  ANTERIOR al nombre que la sigue. Casi imputo un fallo al test equivocado. La lista real esta en
+  las lineas `^FAIL: ` del final, no en el progreso.
+
+### Slip propio: QUINTA vez, y esta vez el fix funciono a medias
+
+Veredicto y memoria vuelven a ir en commits distintos. El fichero de memoria no se creo antes de
+medir, otra vez. El paso literal para el proximo cold start sigue siendo: **abrir esta seccion,
+crear el fichero de memoria con el titulo de la review ANTES de tocar un clon**, y meterlo en el
+mismo pathspec del commit del veredicto.
