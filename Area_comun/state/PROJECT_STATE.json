@@ -189,7 +189,7 @@
         {
             "id": "TASK-0361",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca"
         },
         {

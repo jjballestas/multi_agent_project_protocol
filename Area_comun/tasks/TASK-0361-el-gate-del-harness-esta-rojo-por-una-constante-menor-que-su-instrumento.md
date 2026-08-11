@@ -1,7 +1,7 @@
 ---
 id: TASK-0361
 title: El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca
-status: ready
+status: in_progress
 owner: Codex
 file: Area_comun/tasks/TASK-0361-el-gate-del-harness-esta-rojo-por-una-constante-menor-que-su-instrumento.md
 type: fix

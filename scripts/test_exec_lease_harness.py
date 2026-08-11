@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import traceback
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -1202,18 +1203,21 @@ def process_tree_cpu_probe(source: Path, mode: str) -> dict:
         )
         workloads = {
             "busy": (
-                "$until=[DateTime]::UtcNow.AddSeconds(8); "
+                "param([int]$LifetimeMilliseconds); "
+                "$until=[DateTime]::UtcNow.AddMilliseconds($LifetimeMilliseconds); "
                 "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
             ),
             "blocked": (
+                "param([int]$LifetimeMilliseconds); "
                 "$gate=New-Object System.Threading.ManualResetEvent($false); "
-                "[void]$gate.WaitOne(8000)\n"
+                "[void]$gate.WaitOne($LifetimeMilliseconds)\n"
             ),
             "retiring_child": (
+                "param([int]$LifetimeMilliseconds); "
+                "$until=[DateTime]::UtcNow.AddMilliseconds($LifetimeMilliseconds); "
                 f"$worker=Start-Process -FilePath {ps_literal(powershell_executable())} "
                 f"-ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(heavy_path)}) "
                 "-WindowStyle Hidden -PassThru; $worker.WaitForExit(); "
-                "$until=[DateTime]::UtcNow.AddSeconds(3); "
                 "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
             ),
         }
@@ -1222,7 +1226,23 @@ def process_tree_cpu_probe(source: Path, mode: str) -> dict:
             source,
             ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Get-ExecTreeCpuSample", "Get-ExecProgressState"),
         ) + f"""
-$child = Start-Process -FilePath {ps_literal(powershell_executable())} -ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(workload_path)}) -WindowStyle Hidden -PassThru
+$selfProcess = Get-Process -Id $PID
+$measurementLease = [pscustomobject]@{{ pid = $PID; process_start_time_utc = $selfProcess.StartTime.ToUniversalTime().ToString('o') }}
+$null = Get-ExecTreeCpuSample -Lease $measurementLease
+$instrumentSamplesMs = @()
+foreach ($measurement in 1..2) {{
+    $timer = [System.Diagnostics.Stopwatch]::StartNew()
+    $sample = Get-ExecTreeCpuSample -Lease $measurementLease
+    $timer.Stop()
+    if ($null -eq $sample) {{ throw "process-tree CPU instrument measurement returned null" }}
+    $instrumentSamplesMs += [double]$timer.Elapsed.TotalMilliseconds
+}}
+$instrumentCostMs = [Math]::Max($instrumentSamplesMs[0], $instrumentSamplesMs[1])
+$fixedProbeDelayMs = 4500
+$instrumentTraversals = 2
+$safetyMarginMs = [Math]::Max(5000, [Math]::Ceiling($instrumentCostMs * 2))
+$workloadLifetimeMs = [int][Math]::Ceiling($fixedProbeDelayMs + ($instrumentTraversals * $instrumentCostMs) + $safetyMarginMs)
+$child = Start-Process -FilePath {ps_literal(powershell_executable())} -ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(workload_path)},$workloadLifetimeMs) -WindowStyle Hidden -PassThru
 $null = $child.Handle
 try {{
     Start-Sleep -Milliseconds 1500
@@ -1230,7 +1250,16 @@ try {{
     $before = Get-ExecTreeCpuSample -Lease $lease
     Start-Sleep -Milliseconds 3000
     $result = Get-ExecProgressState -Lease $lease -StdoutPath {ps_literal(stdout_path)} -StderrPath {ps_literal(stderr_path)} -EventsPath {ps_literal(events_path)} -PreviousOutputBytes 0L -PreviousLedgerBytes 0L -PreviousProcessCpuSample $before -FreshSeconds 1
-    [ordered]@{{ progressing = [bool]$result.progressing; before = $before.total_ticks; after = $result.process_cpu_ticks }} | ConvertTo-Json -Compress
+    $childAliveAtSecondSample = -not $child.HasExited
+    [ordered]@{{
+        progressing = [bool]$result.progressing
+        before = $before.total_ticks
+        after = $result.process_cpu_ticks
+        child_alive_at_second_sample = $childAliveAtSecondSample
+        instrument_cost_ms = [int][Math]::Ceiling($instrumentCostMs)
+        workload_lifetime_ms = $workloadLifetimeMs
+        safety_margin_ms = [int]$safetyMarginMs
+    }} | ConvertTo-Json -Compress
 }} finally {{
     if (-not $child.HasExited) {{ Stop-Process -Id $child.Id -Force -ErrorAction SilentlyContinue }}
 }}
@@ -1244,6 +1273,15 @@ def test_silent_process_tree_cpu_is_work_derived_and_mutation_proven() -> None:
     healthy_busy = process_tree_cpu_probe(HARNESS_PATH, "busy")
     healthy_blocked = process_tree_cpu_probe(HARNESS_PATH, "blocked")
     retiring_child = process_tree_cpu_probe(HARNESS_PATH, "retiring_child")
+    assert healthy_busy["child_alive_at_second_sample"] is True, (
+        f"busy child was not alive through the second process-tree CPU sample: {healthy_busy}"
+    )
+    assert healthy_blocked["child_alive_at_second_sample"] is True, (
+        f"blocked child was not alive through the second process-tree CPU sample: {healthy_blocked}"
+    )
+    assert retiring_child["child_alive_at_second_sample"] is True, (
+        f"retiring-child parent was not alive through the second process-tree CPU sample: {retiring_child}"
+    )
     assert healthy_busy["progressing"] is True
     assert healthy_busy["after"] > healthy_busy["before"]
     assert healthy_blocked["progressing"] is False
@@ -1258,6 +1296,10 @@ def test_silent_process_tree_cpu_is_work_derived_and_mutation_proven() -> None:
         mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
         mutant_retiring_child = process_tree_cpu_probe(mutant_path, "retiring_child")
+    assert mutant_retiring_child["child_alive_at_second_sample"] is True, (
+        "mutant retiring-child parent was not alive through the second process-tree CPU sample: "
+        f"{mutant_retiring_child}"
+    )
     assert mutant_retiring_child["progressing"] is False
 
 
@@ -2281,10 +2323,19 @@ def main() -> int:
         test_dirty_tree_veto_still_precedes_scope_admission,
         test_new_instance_exports_identical_harness,
     ]
+    failures: list[tuple[str, str]] = []
     for test in tests:
-        test()
-        print(f"PASS {test.__name__}")
-    return 0
+        try:
+            test()
+        except Exception:
+            failures.append((test.__name__, traceback.format_exc()))
+            print(f"FAIL {test.__name__}")
+        else:
+            print(f"PASS {test.__name__}")
+    print(f"SUMMARY total={len(tests)} passed={len(tests) - len(failures)} failed={len(failures)}")
+    for name, failure in failures:
+        print(f"\n--- FAILURE {name} ---\n{failure}", file=sys.stderr)
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":
