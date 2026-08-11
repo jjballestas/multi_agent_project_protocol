@@ -84,6 +84,10 @@ jobs:
           stdlib = set(sys.stdlib_module_names)
           local_names = {path.stem for path in root.rglob("*.py")}
           local_names.update(path.name for path in root.rglob("*") if path.is_dir())
+          repository_python_paths = {
+              path.relative_to(root).as_posix()
+              for path in root.rglob("*.py")
+          }
 
           def normalize_distribution(value: str) -> str:
               return re.sub(r"[-_.]+", "-", value).lower()
@@ -109,10 +113,21 @@ jobs:
                           )
               return declared
 
-          def python_runner_tokens(command: str):
+          def referenced_runner_paths(command: str) -> set[str]:
+              normalized = command.replace("\\", "/")
+              return {
+                  path
+                  for path in repository_python_paths
+                  if re.search(
+                      rf"(?<![A-Za-z0-9_.-])(?:\./)?{re.escape(path)}(?![A-Za-z0-9_.-])",
+                      normalized,
+                  )
+              }
+
+          def python_runner_tokens(command: str, *, posix: bool):
               for line in command.splitlines():
                   try:
-                      parts = shlex.split(line, posix=True)
+                      parts = shlex.split(line, posix=posix)
                   except ValueError:
                       continue
                   for index, token in enumerate(parts):
@@ -120,7 +135,7 @@ jobs:
                       if not re.fullmatch(r"python(?:3(?:\.\d+)?)?(?:\.exe)?", executable, re.IGNORECASE):
                           continue
                       if index + 1 < len(parts):
-                          script = parts[index + 1].strip(";|&()")
+                          script = parts[index + 1].strip(";|&()\"'").replace("\\", "/")
                           if script.endswith(".py"):
                               yield script
                               continue
@@ -130,16 +145,23 @@ jobs:
 
           errors = []
           checked = 0
-          expected_runner_invocations = 73
+          referenced = set()
           for job_name, job in document.get("jobs", {}).items():
               declared = declared_distributions(job)
+              runs_on = str(job.get("runs-on", ""))
+              posix = "windows" not in runs_on.lower()
               for step in job.get("steps", []):
                   command = str(step.get("run", ""))
-                  for runner_token in python_runner_tokens(command):
+                  expected_in_step = referenced_runner_paths(command)
+                  discovered_in_step = set()
+                  for runner_token in python_runner_tokens(command, posix=posix):
                       runner = (root / runner_token).resolve()
                       if not runner.is_file():
                           continue
                       checked += 1
+                      relative_runner = runner.relative_to(root).as_posix()
+                      discovered_in_step.add(relative_runner)
+                      referenced.add(relative_runner)
                       tree = ast.parse(runner.read_text(encoding="utf-8"), filename=str(runner))
                       modules = {
                           alias.name.split(".")[0]
@@ -163,14 +185,16 @@ jobs:
                                   f"{job_name}: {runner.relative_to(root)} imports {module}; "
                                   f"requires one of {sorted(providers)}, declared {sorted(declared)}"
                               )
-          if checked != expected_runner_invocations:
-              errors.append(
-                  "workflow runner inventory changed: "
-                  f"expected {expected_runner_invocations} invocations, discovered {checked}"
-              )
+                  for missing in sorted(expected_in_step - discovered_in_step):
+                      errors.append(
+                          f"{job_name}: Python file named in run block was not discovered: {missing}"
+                      )
           if errors:
               raise SystemExit("WORKFLOW_RUNNER_DEPENDENCIES FAIL\n" + "\n".join(errors))
-          print(f"WORKFLOW_RUNNER_DEPENDENCIES PASS runners={checked}")
+          print(
+              "WORKFLOW_RUNNER_DEPENDENCIES PASS "
+              f"invocations={checked} referenced={len(referenced)}"
+          )
           PY
 
       - name: Validate repository dogfood instance

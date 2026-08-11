@@ -110,14 +110,16 @@ fallos de cada salida. La comparacion de saldo historico se hace en clones limpi
 
 ## Remediacion G1 autorizada el 2026-08-11
 
-El descubrimiento ya no depende del principio de linea. Tokeniza cada linea de `run` y reconoce
-una invocacion de Python en cualquier posicion, tanto por ruta `archivo.py` como por modulo `-m`.
-El inventario esperado queda atado a 73 invocaciones: una baja produce `FAIL` y EXIT=1 en vez de
-dejar un contador informativo sin asercion.
+El criterio de pertenencia no enumera formas de invocacion. La poblacion se deriva de todos los
+ficheros `.py` del repositorio que aparecen nombrados en cada bloque `run`, con separadores de ruta
+normalizados. Para cada bloque, el conjunto descubierto por el analizador de invocaciones debe
+contener esa poblacion. Una omision produce `FAIL`, nombra la ruta concreta que falta y no puede
+repararse bajando un cardinal literal.
 
-La falsacion cubre los dos escapes del veredicto: el runner reescrito como
-`cd . && python ...` y como `python -m ...`, con `pyyaml` quitado, deja la puerta roja en ambos
-casos. Un mutante que elimina una invocacion baja 73 -> 72 y tambien deja la puerta roja.
+El tokenizador conserva la semantica de host del job: usa reglas POSIX salvo cuando `runs-on`
+declara Windows. Esta diferencia evita interpretar `\` como escape en comandos del job Windows.
+Las formas que el tokenizador no entienda quedan en postura fail-closed porque el fichero nombrado
+permanece en la poblacion derivada y falta en el conjunto descubierto.
 
 G2 queda explicitamente fuera de esta vuelta: la superficie de la puerta termina en el fichero
 del runner descubierto. No calcula clausura transitiva de imports locales ni certifica procesos
