@@ -12020,3 +12020,52 @@ La rama de error que yo recomende enrojece objetivos legitimos fuera del repo
 instancias en el arbol, pero su reparacion natural empuja la invocacion a la clase silenciosa. En r5
 solo medi "arbol intacto, cero falsos rojos" y no medi el caso hipotetico legitimo. **Medir el coste
 de mi propia recomendacion es parte del encargo, no un extra.**
+
+## 2026-08-12 -- TASK-0354 r7: mi propia propiedad, corregida por mi propia medicion
+
+Ancla `cf918584` (YAML intacto), texto en `0b130fa9`, veredicto en `b0c1d770`. Segunda vuelta
+declarativa (2 de 2). Veredicto: **CHANGE-REQUIRED**, otra vez solo texto, cero mecanismo.
+
+### La leccion, y es dura: solo mire una direccion
+
+En r6 escribi la propiedad de la puerta y el censo 69/69. El Arquitecto la transcribio **bien**. Los
+cuatro bloqueos de r7 corrigen **mi** formulacion, no la suya. Mire "que se escapa" y no mire
+**"por que enrojece lo que si enrojece"**. Un criterio se falsa en LAS DOS direcciones: la de los
+falsos verdes Y la de los rojos. Si solo mides una, publicas media propiedad y suena a propiedad
+entera.
+
+### Lo que faltaba (medido, 12 vectores en clon limpio)
+
+1. **Segunda condicion ausente: la resolucion contra la RAIZ.** `-m` pegado al interprete en
+   `cd <dir> && python -m <base>` (verde), `python -m <ruta.punteada>` (ROJO) y
+   `python -m <inexistente>` (verde). El token es el mismo en los tres. Lo que decide es
+   `(root / token).resolve()`: **la puerta no modela el cwd**. W1 vs W2, mismo runner y misma
+   dependencia quitada: verde vs rojo.
+2. **Al no resolver, script y modulo fallan en direcciones OPUESTAS**: script -> fail-closed ROJO;
+   modulo -> **descartado en silencio, VERDE**. `python "$RUNNER_TEMP/gen.py"` enrojece y
+   `python -m generated` calla: **la reparacion "natural" que la tarea teme ya existe medida dentro
+   del mismo gate**. Ese es el mejor insumo del AC4 de TASK-0363 y no estaba escrito.
+3. **"Solo enrojece si la ruta aparece literal" es FALSO**: hay DOS ramas de rojo -- ruta literal
+   ("named in run block was not discovered") y fail-closed ("script target is not a repository
+   file"). N2, el ejemplo que el texto llama "atrapada", enrojece por la segunda, y en su `run` la
+   ruta a la raiz **no aparece**: el `cd` la parte en dos. La puerta nunca vio ahi un runner.
+4. **El censo 69 NO re-deriva.** En cf918584: 66 lineas exactas, 64 pasos de una linea, 65 pasos, 72
+   con argumentos, 76 lineas `python`. **Ninguna da 69.** Censo rehecho sobre poblacion derivada:
+   **72 de 72 SILENT, 0 CAUGHT**, y 72 == el `referenced=72` que el gate imprime en verde.
+
+### Regla que me llevo
+
+**Un cardinal que publico se re-deriva o no se publica.** El 69 salio de mi r6, viajo a TASK-0354 y
+de ahi al AC1 de TASK-0363 -- un AC de falsacion clavado a un numero irreproducible es infalsable,
+justo lo que el AC existe para prohibir. Antes de escribir un numero en un veredicto: enunciar el
+criterio de pertenencia, contarlo con un parser, y comprobar que el criterio escrito devuelve ese
+numero. Si no lo devuelve, es que el criterio que tengo en la cabeza no es el que escribi.
+
+**Corolario:** cuando un peer transcribe mi texto fielmente y el texto falla, el fallo es mio y lo
+digo en el veredicto. Lo escribi en la seccion 3.3 y en el mensaje. Un checker que deja que su error
+se lea como error del que lo copio, envenena el canal.
+
+### Ciclo declarado
+
+2 de 2. Si hiciera falta una tercera vuelta, **va al operador humano**: seria senal de que el defecto
+no esta en la redaccion.
