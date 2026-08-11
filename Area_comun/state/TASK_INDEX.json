@@ -324,7 +324,7 @@
             "id": "TASK-0342",
             "owner": "Codex",
             "phase": "P2",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows",
             "type": "implementation"
         },
@@ -435,6 +435,42 @@
             "status": "in_progress",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora",
             "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0360-el-guarda-puede-excluir-sin-pasar-por-la-politica.md",
+            "id": "TASK-0360",
+            "intake": {
+                "acceptance": [
+                    "AC1 (falsacion previa): se reproduce que una exclusion cableada dentro del guarda deja el negativo en exit 0 con divergencia VIVA, y se acredita con el conjunto ONLY_PY resultante. Medido, no argumentado.",
+                    "AC2 (se observa la DECISION, no el conjunto): tras el cambio, lo que el contrato compara es la decision por fichero de los dos escaneres, no el conjunto excluido sobre un universo elegido de antemano. Cualquier ruta sobre la que los dos difieran mata al negativo, venga la diferencia de la politica o del guarda.",
+                    "AC3 (la poblacion se DERIVA de la condicion): los vectores de prueba no son una lista de rutas escrita a mano. Se derivan del dominio que el guarda lee, e incluyen al menos una coordenada FUERA del universo que hoy se muestrea -- el escape de E1 vivia precisamente ahi. Se declara la regla de derivacion.",
+                    "AC4 (el contrato no depende de texto incidental): reescribir un comentario, reordenar dos flags equivalentes (`-File -Force` <-> `-Force -File`) o renombrar una variable local NO puede poner el gate rojo. Se acredita con esos tres cambios exactos, divergencia CERO medida, gate en exit 0.",
+                    "AC5 (el negativo sigue matando lo que ya mataba): los siete vectores que TASK-0342 dejo verdes (G9a-d rojos, G6six/ord/ws verdes) siguen dando el mismo resultado. Sin regresion de cobertura.",
+                    "AC6 (sin regresion): los gates del repo exit 0 en clon limpio y ninguna ruta legitima pasa a excluirse."
+                ],
+                "estimate": "M",
+                "goal": "Que ninguna ruta pueda quedar fuera del escaneo sin que la decision sea visible para el contrato, y que el negativo deje de morir por texto incidental de produccion. Hoy una linea cableada dentro de `Should-Scan` excluye ficheros sin tocar `$ScanPolicy`: el volcado sale intacto, el contrato no ve nada, y `runtime/state` -- el ledger atestado -- puede caer del canal de PowerShell en silencio.",
+                "out_of_scope": [
+                    "AC5 de TASK-0342 (el paso de PowerShell verde en un run REAL de Actions): depende de la facturacion, que es del operador.",
+                    "El troceado de lineas divergente entre los escaneres de neutralidad (TASK-0338).",
+                    "Cerrar el espacio de nombres infinito con una fixture finita: no se puede, y por eso AC2 cambia QUE se observa en vez de ampliar la lista."
+                ],
+                "risk": "high",
+                "scope_routes": [
+                    "scripts/scan_encoding.ps1",
+                    "scripts/scan_encoding.py"
+                ],
+                "type": "fix",
+                "verification_cmd": [
+                    "python scripts/check_falsification_contracts.py --root .",
+                    "python scripts/scan_encoding.py --root .",
+                    "python scripts/validate_collaboration_state.py --root ."
+                ]
+            },
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El guarda puede excluir sin pasar por la politica, y el contrato observa el conjunto en vez de la decision",
+            "type": "fix"
         },
         {
             "author": "Operador",

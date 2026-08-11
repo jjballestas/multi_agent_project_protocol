@@ -1,7 +1,7 @@
 ---
 id: TASK-0342
 title: La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows
-status: in_review
+status: review_approved
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md

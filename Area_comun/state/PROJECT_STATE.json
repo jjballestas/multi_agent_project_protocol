@@ -99,7 +99,7 @@
         {
             "id": "TASK-0342",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows"
         },
         {
@@ -179,6 +179,12 @@
             "owner": "Codex",
             "status": "in_progress",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora"
+        },
+        {
+            "id": "TASK-0360",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El guarda puede excluir sin pasar por la politica, y el contrato observa el conjunto en vez de la decision"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
