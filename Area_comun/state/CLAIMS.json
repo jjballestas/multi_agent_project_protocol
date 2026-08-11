@@ -133,9 +133,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-11T22:00:26Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0354",
             "updated_at": "2026-08-11T22:00:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0354-remediation-6-delivery",
+            "expires_at": "2026-08-12T00:13:53Z",
+            "notes": "Publish exact-commit evidence and route TASK-0354 remediation 6 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0354-remediation-6-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0354-remediation-6.md",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T22:13:53Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-11T22:13:53Z"
         },
         {
             "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation3",
