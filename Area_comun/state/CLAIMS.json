@@ -42,6 +42,42 @@
             "updated_at": "2026-08-11T12:46:39Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Arquitecto-OPS-mailbox-hygiene-b",
+            "expires_at": "2026-08-12T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0359.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0359.md",
+                "Area_comun/mailbox/open/MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0359.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0359.md",
+                "Area_comun/mailbox/open/MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0354-r4.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0354-r4.md",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0342-ac4.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0342-ac4.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Arquitecto-OPS-mailbox-hygiene-b"
+            ],
+            "started_at": "2026-08-11T15:04:58Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260811",
+            "updated_at": "2026-08-11T15:04:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Arquitecto-TASK-0359-reroute",
+            "expires_at": "2026-08-12T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0359-r2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Arquitecto-TASK-0359-reroute"
+            ],
+            "started_at": "2026-08-11T15:03:54Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T15:03:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Codex-TASK-0342-remediation-4",
             "expires_at": "2026-08-12T00:52:08Z",
             "notes": "Operator-authorized TASK-0342 remediation 4: close AC4 G9 and G6 slips; AC5 remains deferred.",
@@ -126,9 +162,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-11T14:51:22Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0354",
             "updated_at": "2026-08-11T14:51:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0354-remediation-4-delivery",
+            "expires_at": "2026-08-11T18:03:43Z",
+            "notes": "Publish TASK-0354 remediation-4 maker handoff and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0354-remediation-4-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0354-remediation-4.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T15:03:43Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-11T15:03:43Z"
         },
         {
             "claim_id": "CLAIM-arq-r354r4b-20260811",

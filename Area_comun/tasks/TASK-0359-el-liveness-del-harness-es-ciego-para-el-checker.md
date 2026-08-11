@@ -1,7 +1,7 @@
 ---
 id: TASK-0359
 title: El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md
@@ -21,7 +21,7 @@ intake:
     sabe leer, y le pasa justo en las reviews mas dificiles, que son las que mas valen.
   acceptance:
     - "AC1 (falsacion previa por comportamiento): se reproduce que un proceso que consume CPU y NO escribe logs ni ledger es matado por deadline. Evidencia por ejecucion, con la linea TREE_KILL reason=deadline, no por lectura del codigo."
-    - "AC2 (el criterio reconoce TRABAJO, no una forma de dejar rastro): tras el cambio, un exec que consume CPU sin escribir logs ni ledger durante 70 minutos NO puede ser matado por deadline. Se falsa con un proceso de prueba que consuma CPU sin escribir nada."
+    - "AC2 (el criterio reconoce TRABAJO, no una forma de dejar rastro): tras el cambio, un exec que consume CPU sin escribir logs ni ledger NO puede ser matado por deadline MIENTRAS SIGA TRABAJANDO. CORREGIDO 2026-08-11 tras el veredicto r1: la redaccion anterior decia -durante 70 minutos-, y el checker la falso -- el 70 es un NUMERO, no una clase, y un exec que quema CPU si muere a ExecTimeout + ProgressHardCap (hoy 75 min). El defecto de encuadre es del Arquitecto, no del maker. La propiedad correcta no lleva cifra: o el techo duro pasa a ser funcion del trabajo observado, o este AC declara por escrito el techo real y deja de prometer lo que no da. Se falsa con un proceso que consuma CPU sin escribir nada, y la asercion va sobre el DESENLACE (muere / no muere), nunca sobre la cadena reasons."
     - "AC3 (no se abre la puerta al colgado): un exec que NO consume CPU y NO escribe nada SIGUE muriendo por deadline. Sin este AC el arreglo cambia un falso negativo por un falso positivo. Se falsa con un proceso dormido."
     - "AC4 (cubre las dos fases): la senal nueva aplica tanto a la fase de exec como a la ventana de POST-ENTREGA, que hoy corta a 300 s fijos ignorando la extension. Medido el 2026-08-10: POST_DELIVERY_TIMEOUT action=terminate justo despues de un EXEC_PROGRESSING phase=post_delivery."
     - "AC5 (contrato por la clase, verificado por mutacion): negativo permanente que muera si el detector vuelve a depender EXCLUSIVAMENTE de que crezca un fichero. Atado por PROPIEDAD -- que reconozca trabajo en curso -- no enumerando senales, y verificado matando un mutante de PRODUCCION."
