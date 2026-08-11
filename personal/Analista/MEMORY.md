@@ -11703,3 +11703,80 @@ efecto y su observacion se separan. Si ya no existe tal punto, la clase se cerro
   `validate` sale rojo por historia truncada, no por estado. `git fetch --depth 2000` primero.
 - **WSL: el distro por defecto puede ser `docker-desktop`.** `wsl -e bash` fallo con "mounted
   read-only" y "Failed to translate D:\...". Usar `wsl -d Ubuntu -e bash -lc` siempre.
+
+## 2026-08-11 -- TASK-0359 r2: CHANGE-REQUIRED. El negativo muere por el coste de su propio instrumento
+
+Ancla `29db31c7` (HEAD avanzo a `89edea63` durante la review), implementacion `81f058e6`. Clon
+limpio `D:/Aegis_Scratch/mapp/0359r2/clone`. Veredicto `451359ed`.
+
+### El hallazgo que no habria visto sin gatear por exit code
+
+`python scripts/test_exec_lease_harness.py` -- **verification_cmd DECLARADO de la tarea** -- sale
+**EXIT=1** en el ancla. Dos corridas completas, dos rojos, en aserciones DISTINTAS del mismo test
+(`healthy_busy` :1247 y `retiring_child` :1250). El runner aborta al primer fallo: los ~50 tests
+posteriores no llegan a correr, asi que **toda tarea que declare ese gate esta roja por esto**.
+
+**Causa raiz medida, no inferida.** `Get-CimInstance Win32_Process` cuesta **~2,2 s por muestra** en
+esta maquina y la sonda del negativo la paga DOS veces. Con el workload de 8 s, el `Get-Process` del
+segundo recorrido aterriza **despues de que el hijo ha muerto**; `Get-ExecTreeCpuSample` devuelve el
+mapa acarreado intacto y el delta es **cero exacto**, 5/5. Cambiando la UNICA variable -- vida del
+workload 8 s -> 30 s -- pasa 2/2.
+
+### Metodo que repetir: cuando el sintoma es "identico a la unidad", el proceso ya murio
+
+`before == after` **a la garrapata** no es ruido de medicion ni carga: es que **la lectura no
+ocurrio**. Ese patron exacto (delta 0 en los tres modos, incluido el que si debia dar 0) fue lo que
+me hizo instrumentar el reloj DENTRO de la sonda (`diag6.py`: `cim_warm_ms`, `child_start`,
+`muestra1 inicio->fin`, `muestra2 inicio->fin`, `child_exited_now`) en vez de repetir la corrida
+esperando flakiness. Regla: **cuando un instrumento tarda, el instante en que lo LLAMAS no es el
+instante en que MIDE**; acreditar que el sujeto seguia vivo en el instante del recorrido, no en el de
+la llamada.
+
+Corolario para juzgar una sonda ajena: **una geometria de test que no deja margen para el coste del
+instrumento que ella misma invoca es un rojo que depende del entorno**, no un test. La correccion no
+es subir la constante hasta que cuadre (eso es el moldeo de siempre): es derivar la vida del workload
+del coste OBSERVADO del muestreo.
+
+### AC5: el mismo hallazgo de r1, con la coordenada exacta
+
+El mutante de PRODUCCION de una linea en `:1565`
+(`if ([DateTime]::UtcNow -ge $nextProgressCpuSampleUtc) {` -> `if ($false) {`) restaura el defecto
+ENTERO en el bucle real (`EXEC_HUNG reason=no_progress`, 0 `EXEC_PROGRESSING`, sobre un exec que
+quema CPU). El negativo NO lo distingue: sigue cargando por AST solo cuatro funciones y pasandole a
+mano el `$before`. Medido con geometria viable (30 s) sobre los dos arboles: `progressing=True`
+identico, 2/2. **La remediacion cambio de mutante (del guard al `$cpuByPid[...] = 0L`) pero siguio
+mutando DENTRO del helper**: es el patron "las remediaciones reintroducen la clase estrechando la
+forma". Lo mismo que el cuerpo de la tarea, que afirma "el negativo ejecuta el bucle real" cuando el
+unico test que ejecuta el bucle stubbea `Get-ExecProgressState` entero. **Verificar siempre la
+afirmacion del cuerpo de la tarea contra el codigo, no contra su commit message.**
+
+### Lo que si quedo bien (y hay que acreditar, no solo criticar)
+
+- **Monotonia resuelta de fondo**: maximo por PID acarreado entre muestras. La falsacion de r1 (hijo
+  pesado termina, padre sigue) ya NO reproduce: 4 extensiones y supervivencia hasta el techo.
+- **Delta minimo `max(50 ms, Fresh*10 ms)`** (no lo pedi yo, y acierta): cierra el **poller ligero**,
+  falso positivo que r1 no llego a medir. AC3 pasa 6/6 en tres clases (espera bloqueante,
+  `Start-Sleep`, poll ligero).
+- **`$progressObservedAtUtc` capturado ANTES del muestreo**: impide que los 2,2 s de CIM conviertan
+  trabajo ya observado en `hard_cap`. **`HasExited` tras el muestreo**: evita `EXEC_HUNG` falso.
+- **Techo declarado** en AC2 y en `EXEC_SUPERVISION_LIMIT` por exec. Cerrar un S2 no es quitar el
+  tope: es decir cual es.
+
+### Residual NUEVO que introduce el arreglo (R6)
+
+El mapa `pid -> maximo` se acarrea toda la vida del exec, **nunca caduca entradas** y la clave es
+**solo el numero de PID**. Sembrando una entrada inflada para el pid vivo, dos ventanas seguidas
+declaran "no progresa" sobre un proceso que quema CPU al 100% (`real_live_ticks` 39M -> 87,6M).
+Mecanismo probado de forma determinista; disparo en campo (reciclado de PID) NO medido -- declarado
+asi, sin inflar. Cierre barato: clave = `pid + process_start_time_utc`, que ya es como
+`Test-LeaseProcessMatches` distingue un PID reciclado en el resto del harness.
+
+### Trazabilidad
+
+- Gates en clon limpio: validate 0, scan_encoding 0, neutralidad 0, contracts 0,
+  `run_mailbox_retry_cases.py` **0** (R4 de r1 no reproduce), `test_exec_lease_harness.py` **1**.
+- **Sin CI verde para el ancla**: run `31521780635`, `headSha=29db31c7`, `conclusion=failure`, los
+  cuatro jobs en `failure`. Verificacion enteramente local.
+- Sondas: `D:/Aegis_Scratch/mapp/0359r2/live_probe2.py` (bucle real), `live_probe_pd.py`
+  (post-entrega, AC4 verificado por mi con arbol real -- el negativo entregado no lo cubre),
+  `diag2..diag7`, `mut_wiring/` + `mut_tree/` (arbol copiado con `tar --exclude=.git`).
