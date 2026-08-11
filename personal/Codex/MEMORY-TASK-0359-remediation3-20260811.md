@@ -14,3 +14,8 @@
   mailbox changes that remained uncommitted in the shared tree. TASK-0359 remains `in_progress`
   under `CLAIM-20260811-Codex-TASK-0359-remediation3-v3`; delivery still needs exact-commit clean
   verification, `in_review`, claim release, and an independent Analista re-review.
+- Exact implementation `ec0b93ce` subsequently passed the complete declared gates in a detached
+  clean worktree with full history and empty tracked status. Delivery commit `78abeaeb` moves
+  TASK-0359 to `in_review`, releases every Codex claim, records the r3 evidence in the task, and
+  publishes `MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359-remediation-3.md`. Independent
+  Analista re-review is required; Codex did not self-review or ratify the remediation.
