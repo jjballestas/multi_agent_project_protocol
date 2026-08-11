@@ -2,6 +2,22 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-11 - TASK-0354 remediation iteration 3 implementation
+
+- Commit `736b03f2` closes the authorized G1 scope. Workflow runner discovery tokenizes every
+  `run` line, recognizes Python invocations at any token position, supports direct `.py` and
+  `python -m` entry points, and binds the observed count to 73 expected invocations.
+- The `cd . && python ...` and `python -m ...` mutants both failed when `pyyaml` was removed.
+  Removing one runner invocation failed with expected 73 versus discovered 72. The intact gate
+  passed with `runners=73`; falsification inventory passed 73/73.
+- Collaboration, encoding, Python and Windows PowerShell neutrality, drift, and diff gates exited
+  0. The full 78-step validate replay reached every step but remained red on 10 unrelated existing
+  runtime/harness failures and reported eight `pwsh`-unavailable steps; steps 1-6 and 9-34,
+  including the changed dependency gate and `prune_state.py`, passed.
+- G2 is explicitly out of scope in the task artifact: the gate covers the discovered runner file,
+  not transitive local imports or child processes. TASK-0354 remains `in_progress` pending exact
+  commit verification and governed delivery; Codex has not reviewed or ratified the remediation.
+
 ## 2026-08-11 - TASK-0353 remediation iteration 3 implementation
 
 - Commit `1e178f3c` changes the production guard from conditionally required keys sampled from one
