@@ -1,7 +1,7 @@
 ---
 id: TASK-0361
 title: El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca
-status: in_review
+status: done
 owner: Codex
 file: Area_comun/tasks/TASK-0361-el-gate-del-harness-esta-rojo-por-una-constante-menor-que-su-instrumento.md
 type: fix
@@ -59,6 +59,11 @@ mira.
 ## Por que es urgente y va aparte
 
 `scripts/test_exec_lease_harness.py` es el comando de verificacion declarado por **doce** tareas de la
-familia del harness -- varias de ellas ya cerradas -- y esta en `.github/workflows/validate.yml`.
-Mientras este rojo, ninguna de ellas puede acreditarse en limpio, y la vuelta 2 de TASK-0359 tampoco:
-no se puede juzgar un negativo dentro de un arnes roto.
+familia del harness y esta en `.github/workflows/validate.yml`.
+
+**Precision de alcance (medida 2026-08-11, corrige la redaccion anterior):** nueve de esas doce estan
+en `done`, pero **la sonda que falla entro HOY** con las remediaciones de la propia TASK-0359
+(`5a378a0d`, `580f0892`). Esas nueve se cerraron contra un arnes que no la contenia, asi que su verde
+era real para el codigo que juzgaban y **no quedan en entredicho**. El rojo es una regresion de hoy,
+no una deuda arrastrada. Lo que bloquea es la acreditacion FUTURA -- empezando por la vuelta 2 de
+TASK-0359, que no puede juzgar un negativo dentro de un arnes roto.

@@ -177,7 +177,7 @@
         {
             "id": "TASK-0359",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora"
         },
         {
@@ -189,8 +189,14 @@
         {
             "id": "TASK-0361",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca"
+        },
+        {
+            "id": "TASK-0362",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Quedan dos constantes en la sonda que no derivan del instrumento, y una de ellas deja un caso pasando sin medir lo que dice"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

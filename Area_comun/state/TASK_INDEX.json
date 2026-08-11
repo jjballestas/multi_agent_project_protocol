@@ -432,7 +432,7 @@
             "file": "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
             "id": "TASK-0359",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora",
             "type": "implementation"
         },
@@ -502,8 +502,42 @@
                 ]
             },
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca",
+            "type": "fix"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0362-constantes-del-arnes-que-no-derivan-del-instrumento.md",
+            "id": "TASK-0362",
+            "intake": {
+                "acceptance": [
+                    "AC1 (falsacion previa de R2): se acredita que hoy el caso `retiring_child` puede pasar SIN que el nieto se haya retirado antes de la segunda muestra, fabricando la condicion (encarecer el instrumento o alargar la vida del nieto) y mostrando que el caso sigue en verde. Medido, no argumentado.",
+                    "AC2 (R2, la vida del worker se DERIVA): la vida del worker de `retiring_child` se calcula del coste observado del instrumento, igual que ya hace el resto de la sonda tras 0361. Ninguna cifra fija elegida para que cuadre.",
+                    "AC3 (R2, se acredita el hecho que el caso presume): el caso afirma explicitamente que el nieto SE RETIRO antes de la segunda muestra, y si no fue asi falla con un diagnostico que lo diga -- no pasa en silencio ni devuelve un resultado indistinguible del caso sano.",
+                    "AC4 (R1, la geometria deja de estar duplicada a mano): el 4500 se deriva de los `Start-Sleep` reales de la sonda en vez de repetirlos. Se falsa cambiando SOLO uno de los sleeps y comprobando que la vida derivada se mueve con el; hoy no se mueve.",
+                    "AC5 (el verde DISCRIMINA): la bateria de 0361 se repite sobre este cambio -- codigo previo y codigo nuevo bajo el MISMO instrumento encarecido -- y el previo falla mientras el nuevo pasa. Un verde que ambas versiones comparten no acredita nada; asi lo demostro el checker en 0361.",
+                    "AC6 (sin regresion): `python scripts/test_exec_lease_harness.py` sale EXIT=0 en clon limpio CON HISTORIA COMPLETA en tres corridas consecutivas, reportando los casos de cada una, y ningun caso queda desactivado ni relajado."
+                ],
+                "estimate": "S",
+                "goal": "Cerrar los dos residuales que TASK-0361 dejo declarados en `scripts/test_exec_lease_harness.py`. R2: la vida del worker de `retiring_child` sigue siendo un 3500 fijo y nadie acredita que el nieto se retirara ANTES de la segunda muestra, asi que en una maquina distinta el caso pasaria sin estar midiendo un hijo retirado -- verde que no discrimina, la misma clase que 0361 acaba de cerrar. R1: el 4500 de la formula es un duplicado a mano de los dos `Start-Sleep` de la sonda; desincronizarlos (segundo sleep 3000 -> 9000) deja la vida derivada quieta en 11844 ms y devuelve el delta cero.",
+                "out_of_scope": [
+                    "R3 de TASK-0361 (el AC4 de aquella tarea quedo a nivel de test y no de asercion individual): declarado sin tarea, no se aborda aqui.",
+                    "AC5, la asercion sobre el desenlace y el residual R6 de TASK-0359: son propiedades del contrato de liveness y van en su vuelta 2.",
+                    "Acreditar nada en un run REAL de Actions: la facturacion sigue bloqueada."
+                ],
+                "risk": "low",
+                "scope_routes": [
+                    "scripts/test_exec_lease_harness.py"
+                ],
+                "type": "fix",
+                "verification_cmd": [
+                    "python scripts/test_exec_lease_harness.py",
+                    "python scripts/validate_collaboration_state.py --root ."
+                ]
+            },
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Quedan dos constantes en la sonda que no derivan del instrumento, y una de ellas deja un caso pasando sin medir lo que dice",
             "type": "fix"
         },
         {

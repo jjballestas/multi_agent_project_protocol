@@ -129,7 +129,7 @@
         {
             "id": "TASK-0359",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora"
         },
         {
@@ -139,10 +139,10 @@
             "title": "El guarda puede excluir sin pasar por la politica, y el contrato observa el conjunto en vez de la decision"
         },
         {
-            "id": "TASK-0361",
+            "id": "TASK-0362",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca"
+            "status": "proposed",
+            "title": "Quedan dos constantes en la sonda que no derivan del instrumento, y una de ellas deja un caso pasando sin medir lo que dice"
         }
     ],
     "view": "task_index.slim"
