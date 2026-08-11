@@ -125,6 +125,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El guarda puede excluir sin pasar por la politica, y el contrato observa el conjunto en vez de la decision"
+        },
+        {
+            "id": "TASK-0361",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca"
         }
     ],
     "next_actions": [
