@@ -15,8 +15,14 @@ Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures c
   runtime/harness failures and reported eight `pwsh`-unavailable steps; steps 1-6 and 9-34,
   including the changed dependency gate and `prune_state.py`, passed.
 - G2 is explicitly out of scope in the task artifact: the gate covers the discovered runner file,
-  not transitive local imports or child processes. TASK-0354 remains `in_progress` pending exact
-  commit verification and governed delivery; Codex has not reviewed or ratified the remediation.
+  not transitive local imports or child processes. Exact implementation `736b03f2` passed the
+  focused dependency gate, 73/73 inventory, collaboration, encoding, both neutrality scanners,
+  clean drift through seq 8763, diff, and empty tracked status in a detached Aegis worktree.
+- Memory commit `f64c75ac` records the implementation. Delivery commit `d7c2d504` moves TASK-0354
+  to `in_review`, releases all three Codex claims, and publishes the self-contained Arquitecto
+  handoff. Independent Analista re-review is required; Codex has not reviewed or ratified the
+  remediation. The delivery hook reports released-claim pruning due at 92 percent; that checkpoint
+  is Architect-owned and was not absorbed into this task.
 
 ## 2026-08-11 - TASK-0353 remediation iteration 3 implementation
 
