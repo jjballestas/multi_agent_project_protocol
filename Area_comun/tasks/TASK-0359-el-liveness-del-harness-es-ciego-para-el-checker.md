@@ -112,7 +112,11 @@ corregido al Arquitecto mas veces que al maker.
   ultima CPU observada de descendientes que ya terminaron, por lo que nunca baja; si el padre sigue
   trabajando despues de un hijo pesado, el total monotono sigue creciendo. La comparacion exige
   ademas un delta minimo de CPU (maximo entre 50 ms y 10 ms por segundo de frescura) para que el
-  ruido de arranque o de una espera bloqueante no cuente como trabajo sostenido.
+  ruido de arranque o de una espera bloqueante no cuente como trabajo sostenido. La elegibilidad
+  frente al hard cap usa el instante en que empieza la observacion del deadline; el coste del
+  muestreo CIM no puede convertir retroactivamente trabajo ya observado a tiempo en `hard_cap`.
+  Si el exec termina durante ese muestreo costoso, el supervisor observa primero ese desenlace y
+  no publica un `EXEC_HUNG` falso ni intenta matar un proceso ya completado.
 - El techo es explicito y deliberadamente finito: `ExecTimeoutSeconds + ProgressHardCapSeconds`.
   Con los valores por defecto son `3600 + 900 = 4500` segundos (75 minutos). El trabajo observado
   extiende deadlines solo dentro de ese techo. `EXEC_SUPERVISION_LIMIT` registra ambos componentes

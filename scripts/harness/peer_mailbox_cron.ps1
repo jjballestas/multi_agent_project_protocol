@@ -1503,13 +1503,15 @@ function Invoke-PeerForMessage {
                 Write-Log "Stop marker detected; waiting for current exec pid=$($process.Id)"
             }
             if ([DateTime]::UtcNow -gt $deadlineUtc) {
+                $progressObservedAtUtc = [DateTime]::UtcNow
                 $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
                 $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuSample $progressProcessCpuSample -FreshSeconds $ProgressFreshSeconds
-                if ($progress.progressing -and [DateTime]::UtcNow -lt $execHardDeadlineUtc) {
+                if ($process.HasExited) { break }
+                if ($progress.progressing -and $progressObservedAtUtc -lt $execHardDeadlineUtc) {
                     $progressOutputBytes = $progress.output_bytes
                     $progressLedgerBytes = $progress.ledger_bytes
                     $progressProcessCpuSample = $progress.process_cpu_sample
-                    $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
+                    $deadlineUtc = $progressObservedAtUtc.AddSeconds($ProgressExtensionSeconds)
                     if ($deadlineUtc -gt $execHardDeadlineUtc) { $deadlineUtc = $execHardDeadlineUtc }
                     if ($null -ne $postDeliveryDeadlineUtc) {
                         $postDeliveryDeadlineUtc = Get-PostDeliveryDeadlineAfterProgress -CurrentDeadlineUtc $postDeliveryDeadlineUtc -HardDeadlineUtc $postDeliveryHardDeadlineUtc -ExecDeadlineUtc $deadlineUtc
@@ -1518,7 +1520,7 @@ function Invoke-PeerForMessage {
                     $effectivePostDeliveryDeadline = if ($null -ne $postDeliveryDeadlineUtc) { $postDeliveryDeadlineUtc.ToString('o') } else { "none" }
                     Write-Log "EXEC_PROGRESSING pid=$($process.Id) reason=$($progress.reasons) next_deadline=$($deadlineUtc.ToString('o')) hard_deadline=$($execHardDeadlineUtc.ToString('o')) post_delivery_deadline=$effectivePostDeliveryDeadline message=$($Message.Name)"
                 } else {
-                    $hungReason = if ([DateTime]::UtcNow -ge $execHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
+                    $hungReason = if ($progressObservedAtUtc -ge $execHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
                     Write-Log "EXEC_HUNG pid=$($process.Id) reason=$hungReason action=terminate message=$($Message.Name)"
                     [void](Stop-LeaseProcessTree -Lease $lease -Reason "deadline")
                     if (-not $process.WaitForExit(2000)) { Write-Log "TREE_KILL_WAIT_TIMEOUT pid=$($process.Id) reason=deadline" }
@@ -1539,18 +1541,20 @@ function Invoke-PeerForMessage {
                     $nextProgressCpuSampleUtc = $postDeliveryDeadlineUtc.AddSeconds(-$progressSampleSeconds)
                     Write-Log "POST_DELIVERY_WINDOW_START pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds message=$($Message.Name)"
                 } elseif ($null -ne $postDeliveryDeadlineUtc -and [DateTime]::UtcNow -gt $postDeliveryDeadlineUtc) {
+                    $postProgressObservedAtUtc = [DateTime]::UtcNow
                     $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
                     $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuSample $progressProcessCpuSample -FreshSeconds $ProgressFreshSeconds
-                    if ($progress.progressing -and [DateTime]::UtcNow -lt $postDeliveryHardDeadlineUtc) {
+                    if ($process.HasExited) { break }
+                    if ($progress.progressing -and $postProgressObservedAtUtc -lt $postDeliveryHardDeadlineUtc) {
                         $progressOutputBytes = $progress.output_bytes
                         $progressLedgerBytes = $progress.ledger_bytes
                         $progressProcessCpuSample = $progress.process_cpu_sample
-                        $postDeliveryDeadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
+                        $postDeliveryDeadlineUtc = $postProgressObservedAtUtc.AddSeconds($ProgressExtensionSeconds)
                         if ($postDeliveryDeadlineUtc -gt $postDeliveryHardDeadlineUtc) { $postDeliveryDeadlineUtc = $postDeliveryHardDeadlineUtc }
                         $nextProgressCpuSampleUtc = $postDeliveryDeadlineUtc.AddSeconds(-$progressSampleSeconds)
                         Write-Log "EXEC_PROGRESSING pid=$($process.Id) phase=post_delivery reason=$($progress.reasons) next_deadline=$($postDeliveryDeadlineUtc.ToString('o')) hard_deadline=$($postDeliveryHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
                     } else {
-                        $hungReason = if ([DateTime]::UtcNow -ge $postDeliveryHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
+                        $hungReason = if ($postProgressObservedAtUtc -ge $postDeliveryHardDeadlineUtc) { "hard_cap" } else { "no_progress" }
                         Write-Log "POST_DELIVERY_TIMEOUT pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds action=terminate message=$($Message.Name)"
                         Write-Log "EXEC_HUNG pid=$($process.Id) phase=post_delivery reason=$hungReason action=terminate message=$($Message.Name)"
                         [void](Stop-LeaseProcessTree -Lease $lease -Reason "post_delivery")

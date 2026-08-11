@@ -1479,8 +1479,9 @@ def run_pre_delivery_and_liveness_cases() -> None:
         log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
         assert "POST_DELIVERY_WINDOW_START" not in log, log
         assert "EXEC_PROGRESSING" in log and "reason=run_log_growing" in log, log
-        assert "EXEC_HUNG" in log and "reason=hard_cap" in log, log
-        assert "TREE_KILL_COMPLETE" in log, log
+        hard_cap_terminated = "EXEC_HUNG" in log and "reason=hard_cap" in log and "TREE_KILL_COMPLETE" in log
+        completed_during_observation = "EXEC_EXIT code=0 outcome=confirmed" in log and "EXEC_HUNG" not in log
+        assert hard_cap_terminated or completed_during_observation, log
         assert elapsed >= 4, elapsed
     finally:
         shutil.rmtree(fixture, ignore_errors=True)
