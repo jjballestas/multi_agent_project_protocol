@@ -112,6 +112,29 @@
             "updated_at": "2026-08-11T12:55:42Z"
         },
         {
+            "claim_id": "CLAIM-arq-r354r4b-20260811",
+            "expires_at": "2026-08-12T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0354-r4.md",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0342-r5.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-r354r4b-20260811",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0353-r4.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0353-r4.md",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0354-r4.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0354-r4.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0342-remediation-4.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0342-remediation-4.md"
+            ],
+            "started_at": "2026-08-11T14:41:21Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-11T14:41:21Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
