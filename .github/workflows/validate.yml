@@ -109,14 +109,34 @@ jobs:
                           )
               return declared
 
+          def python_runner_tokens(command: str):
+              for line in command.splitlines():
+                  try:
+                      parts = shlex.split(line, posix=True)
+                  except ValueError:
+                      continue
+                  for index, token in enumerate(parts):
+                      executable = token.replace("\\", "/").rsplit("/", 1)[-1]
+                      if not re.fullmatch(r"python(?:3(?:\.\d+)?)?(?:\.exe)?", executable, re.IGNORECASE):
+                          continue
+                      if index + 1 < len(parts):
+                          script = parts[index + 1].strip(";|&()")
+                          if script.endswith(".py"):
+                              yield script
+                              continue
+                      if index + 2 < len(parts) and parts[index + 1] == "-m":
+                          module = parts[index + 2].strip(";|&()")
+                          yield module.replace(".", "/") + ".py"
+
           errors = []
           checked = 0
+          expected_runner_invocations = 73
           for job_name, job in document.get("jobs", {}).items():
               declared = declared_distributions(job)
               for step in job.get("steps", []):
                   command = str(step.get("run", ""))
-                  for match in re.finditer(r"(?m)^\s*python(?:3)?\s+([^\s]+\.py)(?:\s|$)", command):
-                      runner = (root / match.group(1)).resolve()
+                  for runner_token in python_runner_tokens(command):
+                      runner = (root / runner_token).resolve()
                       if not runner.is_file():
                           continue
                       checked += 1
@@ -143,6 +163,11 @@ jobs:
                                   f"{job_name}: {runner.relative_to(root)} imports {module}; "
                                   f"requires one of {sorted(providers)}, declared {sorted(declared)}"
                               )
+          if checked != expected_runner_invocations:
+              errors.append(
+                  "workflow runner inventory changed: "
+                  f"expected {expected_runner_invocations} invocations, discovered {checked}"
+              )
           if errors:
               raise SystemExit("WORKFLOW_RUNNER_DEPENDENCIES FAIL\n" + "\n".join(errors))
           print(f"WORKFLOW_RUNNER_DEPENDENCIES PASS runners={checked}")

@@ -107,3 +107,18 @@ Para AC6, el replicador sin `--job` solo cubre `validate` y es ciego a los jobs 
 remediacion mide por separado `falsification-runners` y `falsification-runners-python`, y deriva sus
 fallos de cada salida. La comparacion de saldo historico se hace en clones limpios de las anclas
 `a583e189^` y `a583e189`, nunca desde el arbol vivo.
+
+## Remediacion G1 autorizada el 2026-08-11
+
+El descubrimiento ya no depende del principio de linea. Tokeniza cada linea de `run` y reconoce
+una invocacion de Python en cualquier posicion, tanto por ruta `archivo.py` como por modulo `-m`.
+El inventario esperado queda atado a 73 invocaciones: una baja produce `FAIL` y EXIT=1 en vez de
+dejar un contador informativo sin asercion.
+
+La falsacion cubre los dos escapes del veredicto: el runner reescrito como
+`cd . && python ...` y como `python -m ...`, con `pyyaml` quitado, deja la puerta roja en ambos
+casos. Un mutante que elimina una invocacion baja 73 -> 72 y tambien deja la puerta roja.
+
+G2 queda explicitamente fuera de esta vuelta: la superficie de la puerta termina en el fichero
+del runner descubierto. No calcula clausura transitiva de imports locales ni certifica procesos
+hijo. Cerrar esa clase requiere otro mecanismo y otra tarea; no se presenta como cubierto aqui.
