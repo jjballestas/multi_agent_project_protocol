@@ -1,75 +1,45 @@
 #!/usr/bin/env bash
-# Devuelve 0 si es seguro commitear, 1 si hay que esperar.
+# RETIRADO como bloqueador. Ahora solo AVISA de MI residuo sin commitear.
 #
-#   bash personal/Arquitecto/guard-commit-si-peer-trabaja.sh          # comprueba una vez
-#   bash personal/Arquitecto/guard-commit-si-peer-trabaja.sh --wait   # espera hasta que sea seguro
-#   bash personal/Arquitecto/guard-commit-si-peer-trabaja.sh --deliver # ignora "correo pendiente"
+#   bash personal/Arquitecto/guard-commit-si-peer-trabaja.sh
 #
-# --deliver es para EL commit que entrega el mensaje: si bloqueara por correo pendiente, el commit
-# que crea el mensaje no podria hacerse nunca. Sigue bloqueando por exec vivo y por reintento.
+# ============================================================================
+# POR QUE CAMBIO DE PROPOSITO (2026-08-11)
 #
-# POR QUE MIRA MAS QUE EL EXEC (2026-08-10, carrera real):
-# la version anterior solo miraba si habia un exec CORRIENDO. Comprobe "ningun peer en exec",
-# arranco un reintento en los segundos siguientes, y mi commit lo mato con head_changed.
-# Un exec no empieza porque si: empieza cuando el peer TIENE TRABAJO. Asi que el predicado no es
-# "hay un exec" sino "puede haberlo antes de que yo termine": exec vivo, reintento pendiente, o
-# mensaje suyo sin consumir en open/. Mismo principio que le exijo a los contratos: no mirar el
-# sintoma (una linea de log) sino la condicion que lo causa.
+# Este script nacio de un modelo causal FALSO: "commitear mientras un peer
+# ejecuta le tira el trabajo". Lei el harness y no es asi:
+#
+#   Get-ExecOutcomeClass          decide confirmed/transient/definitive
+#                                 -> menciones a HEAD: CERO
+#
+#   Restore-TransientExecResidue  unico sitio que escribe head_changed, y SOLO
+#                                 se invoca cuando el exec YA fallo: es una
+#                                 limpieza post mortem que se abstiene de
+#                                 revertir para no pisar el commit ajeno.
+#
+# Lo que SI hace fallar a un peer es su propio pre-gate cuando ve el arbol
+# sucio (tree dirty / staged residue / cambios ajenos). Es decir: el peligro
+# no es commitear, es tener cosas SIN commitear.
+#
+# Consecuencia: bloquear el commit hasta que el peer estuviera ocioso alargaba
+# exactamente el estado que le hace dano. Y con dos crons encadenando trabajo,
+# "ocioso" no llega nunca: el 2026-08-11 tuve dos rutinas de ruteo dos horas
+# armadas sin poder disparar, y una se comio el limite de tiempo en primer
+# plano sin hacer nada.
+#
+# LECCION QUE ESTE FICHERO EXISTE PARA RECORDAR: cuando corriges un modelo, ve
+# a RETIRAR las herramientas construidas sobre el anterior. Anotar la
+# correccion no basta; la herramienta vieja te sigue obedeciendo.
+# ============================================================================
 cd "$(dirname "$0")/../.." || exit 2
 
-check() {
-  reasons=""
-  for a in codex analista; do
-    peer=$(printf '%s' "$a" | sed 's/^./\U&/')
-    L=".protocol-tmp/${a}_mailbox_cron/${a}_mailbox_cron.log"
-    R=".protocol-tmp/${a}_mailbox_cron/${a}_mailbox_cron.retry.json"
+mio=$(git status --porcelain -- Area_comun runtime/state scripts .github 2>/dev/null | head -20)
 
-    # 1. exec vivo
-    if [ -f "$L" ]; then
-      last=$(tail -1 "$L")
-      case "$last" in
-        *EXEC_RUNNING*|*EXEC_PROGRESSING*|*EXEC_START*|*POST_DELIVERY_WINDOW_START*)
-          el=$(printf '%s' "$last" | grep -oE 'elapsed=[0-9]+' | cut -d= -f2)
-          reasons="$reasons ${a}:exec(${el:-0}s)" ;;
-      esac
-    fi
-
-    # 2. reintento pendiente (arranca solo en el siguiente ciclo)
-    if [ -f "$R" ]; then
-      n=$(python -c "
-import json,sys
-try: d=json.load(open(sys.argv[1]))
-except Exception: d={}
-# Solo cuenta reintentos de execs que YA CORRIERON y fallaron (attempts>0).
-# Una entrada 'deferred' con attempts==0 es un pre-exec defer: el exec NO arranco, asi que
-# commitear no puede matarlo -- y muchas veces el defer lo causa justo mi arbol sucio, con lo
-# que bloquear ahi es un abrazo mortal. (Medido el 2026-08-10.)
-print(sum(1 for v in d.values() if isinstance(v,dict) and not v.get('exhausted') and int(v.get('attempts') or 0) > 0))
-" "$R" 2>/dev/null)
-      [ "${n:-0}" -gt 0 ] 2>/dev/null && reasons="$reasons ${a}:reintento($n)"
-    fi
-
-    # 3. correo suyo sin consumir: es lo que DISPARA el exec
-    if [ "$DELIVER" != "1" ]; then
-      m=$(grep -lE "^to: ${peer}$" Area_comun/mailbox/open/MSG-*.md 2>/dev/null | wc -l | tr -d ' ')
-      [ "${m:-0}" -gt 0 ] 2>/dev/null && reasons="$reasons ${a}:correo($m)"
-    fi
-  done
-  [ -z "$reasons" ]
-}
-
-DELIVER=0
-[ "$1" = "--deliver" ] && DELIVER=1
-[ "$2" = "--deliver" ] && DELIVER=1
-
-if [ "$1" = "--wait" ]; then
-  for _ in $(seq 1 240); do
-    if check; then echo "seguro: peers sin trabajo pendiente"; exit 0; fi
-    sleep 15
-  done
-  echo "TIMEOUT esperando ventana:$reasons"; exit 1
+if [ -n "$mio" ]; then
+  echo "AVISO -- hay cambios sin commitear en rutas gobernadas:"
+  echo "$mio" | sed "s/^/    /"
+  echo "  Commitea PRONTO: el arbol sucio es lo que hace abortar a los peers, no tu commit."
+else
+  echo "arbol gobernado limpio"
 fi
-
-if check; then echo "seguro: peers sin trabajo pendiente"; exit 0; fi
-echo "NO COMMITEAR --$reasons"
-exit 1
+exit 0
