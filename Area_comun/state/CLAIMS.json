@@ -69,9 +69,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-11T19:18:03Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0361",
             "updated_at": "2026-08-11T19:18:03Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0361-delivery",
+            "expires_at": "2026-08-11T21:55:02Z",
+            "notes": "Publish exact-commit evidence and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0361-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0361",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0361",
+                "Area_comun/tasks/TASK-0361-el-gate-del-harness-esta-rojo-por-una-constante-menor-que-su-instrumento.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0361.md",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T19:55:02Z",
+            "status": "released",
+            "task_id": "TASK-0361",
+            "updated_at": "2026-08-11T19:55:02Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

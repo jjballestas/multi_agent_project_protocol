@@ -502,7 +502,7 @@
                 ]
             },
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El gate declarado del harness esta rojo porque su constante es menor que el coste del instrumento que invoca",
             "type": "fix"
         },
