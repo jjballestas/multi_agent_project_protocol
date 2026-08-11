@@ -130,15 +130,27 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-HARNESS-WORK-DERIVED-EXEC-LIVENESS",
-        "negative": "A silent working tree must produce a growing monotone CPU sample after a heavy descendant exits, while a silent no-progress tree remains non-progressing.",
-        "mutation": "source.replace(cpu_sample_update, dead_cpu_sample_update, 1)",
+        "negative": "The real supervision loop must keep a silent CPU-working exec alive at its first deadline and kill it when the production CPU-sampling block is unreachable.",
+        "mutation": "source.replace(live_sampling_guard, unreachable_sampling_guard, 1)",
         "boundaries": (
-            'assert healthy_busy["progressing"] is True',
-            'assert healthy_blocked["progressing"] is False',
-            'assert retiring_child["progressing"] is True',
-            'assert mutant_retiring_child["progressing"] is False',
+            'assert healthy_outcome["exec_progressing"] is True',
+            'assert healthy_outcome["exec_hung"] is False',
+            'assert mutant_outcome["exec_progressing"] is False',
+            'assert mutant_outcome["exec_hung"] is True',
         ),
         "exercised_by": "test_silent_process_tree_cpu_is_work_derived_and_mutation_proven",
+    },
+    {
+        "id": "NEG-HARNESS-PROCESS-IDENTITY-CPU-SAMPLE",
+        "negative": "A live process reusing a numeric PID must contribute CPU independently from an inflated sample belonging to the old process identity.",
+        "mutation": "source.replace(identity_key, pid_only_key, 1)",
+        "boundaries": (
+            'assert healthy["progressing"] is True',
+            'assert healthy["after"] > healthy["before"]',
+            'assert mutant["progressing"] is False',
+            'assert mutant["live_process_ticks"] > 0',
+        ),
+        "exercised_by": "test_process_tree_cpu_sample_distinguishes_recycled_pid",
     },
     {
         "id": "NEG-HARNESS-SCOPE-AWARE-EXTERNAL-CLAIM",
@@ -1267,40 +1279,189 @@ try {{
         return run_powershell(script, root)
 
 
+def supervision_loop_outcome_probe(source: Path) -> dict:
+    with make_tempdir("supervision-loop-outcome-") as tmp:
+        root = Path(tmp)
+        stdout_path = root / "stdout.log"
+        stderr_path = root / "stderr.log"
+        events_path = root / "events.jsonl"
+        lease_path = root / "lease.json"
+        workload_path = root / "silent-busy.ps1"
+        for path in (stdout_path, stderr_path, events_path):
+            path.write_text("", encoding="ascii")
+        workload_path.write_text(
+            "param([int]$LifetimeMilliseconds); "
+            "$until=[DateTime]::UtcNow.AddMilliseconds($LifetimeMilliseconds); "
+            "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n",
+            encoding="ascii",
+        )
+        script = function_loader(
+            source,
+            ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Get-ExecTreeCpuSample", "Get-ExecProgressState"),
+        ) + f"""
+$whileNode = $ast.FindAll({{ param($item)
+    $item -is [System.Management.Automation.Language.WhileStatementAst] -and
+    $item.Extent.Text.Contains("POST_DELIVERY_WINDOW_START")
+}}, $true) | Select-Object -First 1
+if (-not $whileNode) {{ throw "missing live supervision loop" }}
+$selfProcess = Get-Process -Id $PID
+$measurementLease = [pscustomobject]@{{ pid = $PID; process_start_time_utc = $selfProcess.StartTime.ToUniversalTime().ToString('o') }}
+$null = Get-ExecTreeCpuSample -Lease $measurementLease
+$instrumentTimer = [System.Diagnostics.Stopwatch]::StartNew()
+$instrumentSample = Get-ExecTreeCpuSample -Lease $measurementLease
+$instrumentTimer.Stop()
+if ($null -eq $instrumentSample) {{ throw "process-tree CPU instrument measurement returned null" }}
+$instrumentCostMs = [Math]::Max(1, [int][Math]::Ceiling($instrumentTimer.Elapsed.TotalMilliseconds))
+$ProgressFreshSeconds = [Math]::Max(2, [int][Math]::Ceiling(($instrumentCostMs + 1000) / 1000.0))
+$ExecTimeoutSeconds = $ProgressFreshSeconds + [Math]::Max(3, [int][Math]::Ceiling(($instrumentCostMs + 2000) / 1000.0))
+$workloadLifetimeMs = [int](($ExecTimeoutSeconds * 1000) + (3 * $instrumentCostMs) + 10000)
+$process = Start-Process -FilePath {ps_literal(powershell_executable())} -ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(workload_path)},$workloadLifetimeMs) -WindowStyle Hidden -PassThru
+$null = $process.Handle
+$lease = [ordered]@{{ pid = $process.Id; process_start_time_utc = $process.StartTime.ToUniversalTime().ToString('o') }}
+$lease | ConvertTo-Json -Compress | Set-Content -LiteralPath {ps_literal(lease_path)} -Encoding UTF8
+$script:logs = @()
+$script:stopCalls = 0
+function Write-Log {{
+    param([string]$Line)
+    $script:logs += $Line
+    if ($Line -match '^EXEC_PROGRESSING ' -and -not $process.HasExited) {{
+        Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+    }}
+}}
+function Update-ExecLeaseHeartbeat {{}}
+function Get-OwnDeliveryEvidence {{ return $false }}
+function Stop-LeaseProcessTree {{
+    param($Lease, [string]$Reason)
+    $script:stopCalls += 1
+    Stop-Process -Id ([int]$Lease.pid) -Force -ErrorAction SilentlyContinue
+    return $true
+}}
+$Message = [pscustomobject]@{{ Name = "MSG-real-loop-probe.md" }}
+$Root = {ps_literal(root)}
+$stdoutPath = {ps_literal(stdout_path)}
+$stderrPath = {ps_literal(stderr_path)}
+$eventsPath = {ps_literal(events_path)}
+$LeasePath = {ps_literal(lease_path)}
+$StopPath = Join-Path $Root "STOP"
+$HeartbeatSeconds = 0
+$nextHeartbeatSeconds = 0
+$execStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+$PostDeliveryTimeoutSeconds = 0
+$ProgressHardCapSeconds = $ExecTimeoutSeconds
+$ProgressExtensionSeconds = $ExecTimeoutSeconds
+$ledgerBytesBefore = 0L
+$ledgerPrefixSha256Before = "probe"
+$deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
+$postDeliveryDeadlineUtc = $null
+$postDeliveryHardDeadlineUtc = $null
+$execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
+$progressOutputBytes = 0L
+$progressLedgerBytes = 0L
+$progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)
+$progressProcessCpuSample = $null
+$nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)
+try {{
+    Invoke-Expression $whileNode.Extent.Text
+}} finally {{
+    if (-not $process.HasExited) {{ Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue }}
+    $process.WaitForExit()
+}}
+[ordered]@{{
+    exec_progressing = [bool]($script:logs -match '^EXEC_PROGRESSING ')
+    exec_hung = [bool]($script:logs -match '^EXEC_HUNG ')
+    stop_calls = $script:stopCalls
+    instrument_cost_ms = $instrumentCostMs
+    exec_timeout_seconds = $ExecTimeoutSeconds
+    workload_lifetime_ms = $workloadLifetimeMs
+    logs = @($script:logs)
+}} | ConvertTo-Json -Depth 5 -Compress
+"""
+        return run_powershell(script, root)
+
+
 def test_silent_process_tree_cpu_is_work_derived_and_mutation_proven() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-WORK-DERIVED-EXEC-LIVENESS"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
-    healthy_busy = process_tree_cpu_probe(HARNESS_PATH, "busy")
-    healthy_blocked = process_tree_cpu_probe(HARNESS_PATH, "blocked")
-    retiring_child = process_tree_cpu_probe(HARNESS_PATH, "retiring_child")
-    assert healthy_busy["child_alive_at_second_sample"] is True, (
-        f"busy child was not alive through the second process-tree CPU sample: {healthy_busy}"
-    )
-    assert healthy_blocked["child_alive_at_second_sample"] is True, (
-        f"blocked child was not alive through the second process-tree CPU sample: {healthy_blocked}"
-    )
-    assert retiring_child["child_alive_at_second_sample"] is True, (
-        f"retiring-child parent was not alive through the second process-tree CPU sample: {retiring_child}"
-    )
-    assert healthy_busy["progressing"] is True
-    assert healthy_busy["after"] > healthy_busy["before"]
-    assert healthy_blocked["progressing"] is False
-    assert retiring_child["progressing"] is True
-    assert retiring_child["after"] > retiring_child["before"]
+    healthy_outcome = supervision_loop_outcome_probe(HARNESS_PATH)
+    assert healthy_outcome["exec_progressing"] is True
+    assert healthy_outcome["exec_hung"] is False
+    assert healthy_outcome["stop_calls"] == 0
 
-    cpu_sample_update = "$cpuByPid[$processKey] = $observedTicks"
-    dead_cpu_sample_update = "$cpuByPid[$processKey] = 0L"
-    mutant_source = source.replace(cpu_sample_update, dead_cpu_sample_update, 1)
+    live_sampling_guard = "if ([DateTime]::UtcNow -ge $nextProgressCpuSampleUtc) {"
+    unreachable_sampling_guard = "if ($false) {"
+    assert source.count(live_sampling_guard) == 1
+    mutant_source = source.replace(live_sampling_guard, unreachable_sampling_guard, 1)
     assert mutant_source != source
-    with make_tempdir("process-tree-cpu-mutant-") as tmp:
+    with make_tempdir("supervision-loop-unreachable-sampling-") as tmp:
         mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
-        mutant_retiring_child = process_tree_cpu_probe(mutant_path, "retiring_child")
-    assert mutant_retiring_child["child_alive_at_second_sample"] is True, (
-        "mutant retiring-child parent was not alive through the second process-tree CPU sample: "
-        f"{mutant_retiring_child}"
-    )
-    assert mutant_retiring_child["progressing"] is False
+        mutant_outcome = supervision_loop_outcome_probe(mutant_path)
+    assert mutant_outcome["exec_progressing"] is False
+    assert mutant_outcome["exec_hung"] is True
+    assert mutant_outcome["stop_calls"] == 1
+
+
+def recycled_pid_cpu_probe(source: Path) -> dict:
+    with make_tempdir("recycled-pid-cpu-") as tmp:
+        root = Path(tmp)
+        stdout_path = root / "stdout.log"
+        stderr_path = root / "stderr.log"
+        events_path = root / "events.jsonl"
+        workload_path = root / "busy.ps1"
+        for path in (stdout_path, stderr_path, events_path):
+            path.write_text("", encoding="ascii")
+        workload_path.write_text(
+            "$until=[DateTime]::UtcNow.AddSeconds(20); "
+            "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n",
+            encoding="ascii",
+        )
+        script = function_loader(
+            source,
+            ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Get-ExecTreeCpuSample", "Get-ExecProgressState"),
+        ) + f"""
+$child = Start-Process -FilePath {ps_literal(powershell_executable())} -ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(workload_path)}) -WindowStyle Hidden -PassThru
+$null = $child.Handle
+try {{
+    Start-Sleep -Milliseconds 1500
+    $start = $child.StartTime.ToUniversalTime().ToString('o')
+    $lease = [pscustomobject]@{{ pid = $child.Id; process_start_time_utc = $start }}
+    $inflated = 6000000000L
+    $oldIdentity = "{{0}}|1900-01-01T00:00:00.0000000Z" -f $child.Id
+    $previousMap = @{{ ([string]$child.Id) = $inflated; $oldIdentity = $inflated }}
+    $before = [pscustomobject]@{{ total_ticks = (2L * $inflated); cpu_by_pid = $previousMap }}
+    Start-Sleep -Milliseconds 1500
+    $result = Get-ExecProgressState -Lease $lease -StdoutPath {ps_literal(stdout_path)} -StderrPath {ps_literal(stderr_path)} -EventsPath {ps_literal(events_path)} -PreviousOutputBytes 0L -PreviousLedgerBytes 0L -PreviousProcessCpuSample $before -FreshSeconds 1
+    $liveProcessTicks = [long](Get-Process -Id $child.Id -ErrorAction Stop).TotalProcessorTime.Ticks
+    [ordered]@{{
+        progressing = [bool]$result.progressing
+        before = [long]$before.total_ticks
+        after = [long]$result.process_cpu_ticks
+        live_process_ticks = $liveProcessTicks
+    }} | ConvertTo-Json -Compress
+}} finally {{
+    if (-not $child.HasExited) {{ Stop-Process -Id $child.Id -Force -ErrorAction SilentlyContinue }}
+}}
+"""
+        return run_powershell(script, root)
+
+
+def test_process_tree_cpu_sample_distinguishes_recycled_pid() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-PROCESS-IDENTITY-CPU-SAMPLE"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    healthy = recycled_pid_cpu_probe(HARNESS_PATH)
+    assert healthy["progressing"] is True
+    assert healthy["after"] > healthy["before"]
+
+    identity_key = '$processKey = "{0}|{1}" -f $processId, $processStartTimeUtc'
+    pid_only_key = "$processKey = [string]$processId"
+    assert source.count(identity_key) == 1
+    mutant_source = source.replace(identity_key, pid_only_key, 1)
+    with make_tempdir("recycled-pid-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
+        mutant = recycled_pid_cpu_probe(mutant_path)
+    assert mutant["progressing"] is False
+    assert mutant["live_process_ticks"] > 0
 
 
 def defer_probe(source: Path) -> dict:
@@ -2303,6 +2464,7 @@ def main() -> int:
         test_stop_order_requires_exact_line_not_contains,
         test_post_delivery_window_honors_main_progress_extensions,
         test_silent_process_tree_cpu_is_work_derived_and_mutation_proven,
+        test_process_tree_cpu_sample_distinguishes_recycled_pid,
         test_preexec_defer_budget_kills_shared_counter_mutant,
         test_worktree_disk_proof_pairs_real_git_rename_records,
         test_zombie_sweeper_parses_real_git_quoted_rename_paths,

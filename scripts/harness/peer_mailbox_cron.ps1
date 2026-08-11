@@ -412,7 +412,8 @@ function Get-ExecTreeCpuSample {
             $seenPids[$processId] = $true
             try {
                 $treeProcess = Get-Process -Id $processId -ErrorAction Stop
-                $processKey = [string]$processId
+                $processStartTimeUtc = $treeProcess.StartTime.ToUniversalTime().ToString("o")
+                $processKey = "{0}|{1}" -f $processId, $processStartTimeUtc
                 $observedTicks = [long]$treeProcess.TotalProcessorTime.Ticks
                 if (-not $cpuByPid.ContainsKey($processKey) -or $observedTicks -gt [long]$cpuByPid[$processKey]) {
                     $cpuByPid[$processKey] = $observedTicks
