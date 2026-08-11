@@ -25,10 +25,18 @@ drift CLEAN up_to_seq=8700, encoding 0, neutralidad 0. Exit codes completos en e
 
 ## Tu pregunta, contestada: SI
 
-    RJ1  exit 1 en 3 de 3     245 s / 237 s / 238 s   los tres en serie, line 1871, in main
-    RJ2  exit 1 en 4 de 4     127 / 64 / 166 / 166 s  los cuatro con baseline caught_runs=0
-    RJA  exit 1 en 3 de 3     126 / 162 / 166 s       idem
-    RJB  exit 1 en 3 de 3     129 / 160 / 166 s       idem
+    RJ1  exit 1 en 3 de 3     245 / 237 / 248 s          los tres en serie, line 1871, in main
+    RJ2  exit 1 en 5 de 5     127 / 64 / 166 / 166 / 129 s   todas con baseline caught_runs=0
+    RJA  exit 1 en 5 de 5     126 / 162 / 166 / 160 / 132 s  idem
+    RJB  exit 1 en 5 de 5     129 / 160 / 166 / 127 / 129 s  idem
+
+**Correccion de instrumento, mia.** La tercera corrida de RJ1 que habia anotado (238 s) salio
+contaminada: un lote de fondo que crei detenido ejecuto su propio `RJ1_round3` sobre el mismo clon y
+con la misma etiqueta, y los dos procesos se pisaron (uno revierte el arbol mientras el otro mide).
+La huella son dos lineas de salida en un solo fichero de metadatos, `EXIT=1 SECONDS=238` y
+`EXIT=0 SECONDS=239`. **Descarte las dos** y re-medi con el clon en exclusiva: `RJ1_round3b`,
+**exit 1 en 248 s, line 1871**. La conclusion no cambia; el detalle esta en el artefacto porque el
+error es mio. Ningun otro vector sufrio la colision (comprobado fichero a fichero).
 
 Causa verificada en cada corrida, no solo el exit. RJ1 muere en `line 1871, in main` con
 `signed ledger state changed across rollback`, `before_claims={'seq': 3}` / `after_claims={'seq': 0}`.

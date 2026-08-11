@@ -49,9 +49,9 @@ code**, y ademas por **causa**: no cuento un exit 1 si no muere donde debe.
 ## Tu pregunta, contestada: SI -- 3 de 3 en los cuatro vectores
 
     RJ1  exit 1 en 3 de 3     (antes tambien salia 1; sigue muriendo por su propia asercion)
-    RJ2  exit 1 en 4 de 4     (antes salia 0)
-    RJA  exit 1 en 3 de 3     (antes salia 0)
-    RJB  exit 1 en 3 de 3     (antes salia 0)
+    RJ2  exit 1 en 5 de 5     (antes salia 0)
+    RJA  exit 1 en 5 de 5     (antes salia 0)
+    RJB  exit 1 en 5 de 5     (antes salia 0)
 
 Corrida por corrida, con la causa verificada en cada una:
 
@@ -59,7 +59,13 @@ Corrida por corrida, con la causa verificada en cada una:
 |--------|---------|------|-----|------------------|
 | RJ1 | round1 (serie) | 1 | 245 | `line 1871, in main` -- `AssertionError: signed ledger state changed across rollback` con `before_claims={'seq': 3}` / `after_claims={'seq': 0}` |
 | RJ1 | round2 (serie) | 1 | 237 | idem, `line 1871, in main`, mismo diagnostico |
-| RJ1 | round3 (serie) | 1 | 238 | idem, `line 1871, in main`, mismo diagnostico |
+| RJ1 | round3 -- DESCARTADA | -- | -- | **contaminada por mi instrumento**, ver la correccion de abajo |
+| RJ1 | round3b (serie, exclusiva) | 1 | 248 | idem, `line 1871, in main`, mismo diagnostico |
+| RJ2 | round3 (extra) | 1 | 129 | idem, `baseline caught_runs=0` |
+| RJA | round2 (extra) | 1 | 160 | idem, `baseline caught_runs=0` |
+| RJA | round3 (extra) | 1 | 132 | idem, `baseline caught_runs=0` |
+| RJB | round2 (extra) | 1 | 127 | idem, `baseline caught_runs=0` |
+| RJB | round3 (extra) | 1 | 129 | idem, `baseline caught_runs=0` |
 | RJ2 | round1 | 1 | 127 | `line 281, in run_main_ledger_assertion_behavior_cases` -- `baseline caught_runs=0` |
 | RJ2 | round2 | 1 | 64 | idem, `baseline caught_runs=0` |
 | RJ2 | round2p | 1 | 166 | idem, `baseline caught_runs=0` |
@@ -75,9 +81,31 @@ Corrida por corrida, con la causa verificada en cada una:
 --que es el fuente de produccion **mutado**-- ejecutado contra el ledger realmente destruido salio
 **0** las tres veces, y por eso el contrato lo mata. La exigencia esta atada al efecto.
 
-El aviso de flaky que me diste: **no se materializo**. En las **14 corridas completas** de esta
-ejecucion (todas las de la tabla mas el vector RJD de abajo) hubo **cero** rojos por las aserciones
-sensibles al tiempo de las lineas 1806 y 1023. Ningun 3 de 3 se obtuvo repitiendo.
+El aviso de flaky que me diste: **no se materializo**. En las **22 corridas completas** de esta
+ejecucion (todas las de la tabla, el vector RJD y los dos baseline) hubo **cero** rojos por las
+aserciones sensibles al tiempo de las lineas 1806 y 1023. Ningun 3 de 3 se obtuvo repitiendo.
+
+## Correccion -- una corrida mia salio contaminada y la descarto
+
+Un lote de fondo que crei detenido siguio vivo y ejecuto su propio `RJ1_round3` **sobre el mismo
+clon y con la misma etiqueta** que el mio. Los dos procesos se pisaron: uno revierte el arbol
+(`git checkout -- .`) mientras el otro mide, de modo que la inyeccion mp8 desaparece a mitad de la
+corrida. La huella quedo en el fichero de metadatos, con **dos** lineas de salida para una sola
+corrida declarada:
+
+    RJ1_round3.meta   EXIT=1 SECONDS=238
+                      EXIT=0 SECONDS=239
+
+**Descarto las dos.** Un exit 0 producido por mi propio instrumento no es un dato sobre el codigo
+que reviso, y un exit 1 que no puedo atribuir a un proceso concreto tampoco. Re-medi con el clon en
+exclusiva, verificado sin procesos vivos y con `git status --short` vacio:
+
+    RJ1_round3b   exit 1   248 s   line 1871, in main -- signed ledger state changed across rollback
+
+**La conclusion no cambia: RJ1 sale 1 en 3 de 3** (round1, round2, round3b). Lo digo aqui porque el
+error es mio y porque un veredicto que oculta la contaminacion de su propia serie no vale nada.
+Comprobado ademas que ningun otro vector sufrio la colision: solo `RJ1_round3.meta` tiene dos lineas
+de salida; los demas clones fueron exclusivos, incluido el `vG0` del vector RJD.
 
 ## Lo que si encontre, y no estaba en tu pregunta: R1 sigue vivo por una CUARTA forma
 
@@ -137,7 +165,8 @@ Los tres escapes que en la r3 pasaban las seis puertas hoy no pasan la primera.
 Vector `RJ0_baseline`: produccion **intacta**, sin mp8, clon limpio detached en `1fa77aa2` con
 `git status --short` vacio verificado antes de correr:
 
-    python examples/mailbox_retry_cases/run_mailbox_retry_cases.py   -> 0   (239 s)
+    python examples/mailbox_retry_cases/run_mailbox_retry_cases.py   -> 0   (239 s, RJ0_baseline)
+    python examples/mailbox_retry_cases/run_mailbox_retry_cases.py   -> 0   (248 s, RJ0_baselineb)
       TASK0343_MAIN_ASSERTION_EXECUTION baseline=3/3 short_circuit=3/3 tautology=3/3 unreachable=3/3
       mailbox retry cases: PASS (proof-only rollback -> conservative signed/ambiguous preservation)
     python scripts/check_falsification_contracts.py --root .         -> 0
