@@ -73,18 +73,6 @@
             "title": "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion"
         },
         {
-            "id": "TASK-0328",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono"
-        },
-        {
-            "id": "TASK-0329",
-            "owner": "Codex",
-            "status": "done",
-            "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad"
-        },
-        {
             "id": "TASK-0331",
             "owner": "Codex",
             "status": "review_approved",
@@ -137,12 +125,6 @@
             "owner": "Codex",
             "status": "blocked",
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows"
-        },
-        {
-            "id": "TASK-0343",
-            "owner": "Codex",
-            "status": "done",
-            "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma"
         },
         {
             "id": "TASK-0346",

@@ -277,22 +277,6 @@
             "type": "infra"
         },
         {
-            "file": "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
-            "id": "TASK-0328",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El patron estructural de IBAN solo casa la forma contigua: la agrupacion en bloques de cuatro con que se escribe realmente escapa al patron Y a la banda del heuristico de telefono",
-            "type": "infra"
-        },
-        {
-            "file": "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
-            "id": "TASK-0329",
-            "owner": "Codex",
-            "status": "done",
-            "title": "La exencion de identidad se concede por ARCHIVO COMPLETO: el gate de neutralidad esta ciego en el mismo fichero donde TASK-0316 acaba de corregir una fuga de identidad",
-            "type": "infra"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
             "id": "TASK-0331",
             "owner": "Codex",
@@ -374,16 +358,6 @@
             "phase": "P2",
             "status": "blocked",
             "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows",
-            "type": "implementation"
-        },
-        {
-            "created": "2026-08-08",
-            "file": "Area_comun/tasks/TASK-0343-la-asercion-de-rollback-ata-contadores-y-solo-vale-en-una-plataforma.md",
-            "id": "TASK-0343",
-            "owner": "Codex",
-            "phase": "P2",
-            "status": "done",
-            "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma",
             "type": "implementation"
         },
         {

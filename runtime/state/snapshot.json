@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "0d226e60afbdcbfed54640995e9b3ca2466ae3fdc1eae42ff129be931e5ad92a",
+  "canonical_hash": "2718789303e252615a7244a817ff3b5f415bb87e4969e26d1f272eea4be37046",
   "integrity": {
-    "canonical_hash": "0d226e60afbdcbfed54640995e9b3ca2466ae3fdc1eae42ff129be931e5ad92a",
+    "canonical_hash": "2718789303e252615a7244a817ff3b5f415bb87e4969e26d1f272eea4be37046",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c47047de13a9ce450e95feb5b0bafa644ba6a5d01b3f2ddaa1fbe8d1618e0fe8",
-    "signature": "728285e87a20d9f350a495eb6f7bd228a3db075c3c80788a3bc82d645a9427b9",
-    "up_to_seq": 8706
+    "prev_hash": "934b6a881b4249479ccda68275a712654bc3536b9d30a55fd580a48f59bc43d4",
+    "signature": "15e0d894cd828a6389bf74244a3c327f108fb09b808b78105c1202432b737aa5",
+    "up_to_seq": 8713
   },
   "state": {
     "aggregate_versions": {
@@ -951,6 +951,7 @@
       "CLAIM-20260810-010845-prune-arquitecto": 1,
       "CLAIM-20260810-083456-prune-arquitecto": 1,
       "CLAIM-20260810-191434-prune-arquitecto": 1,
+      "CLAIM-20260811-013441-prune-arquitecto": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1118,6 +1119,7 @@
       "CLAIM-arq-go0294-20260724": 1,
       "CLAIM-arq-gobatchR3R4-20260723": 1,
       "CLAIM-arq-h1h2-0267-20260719": 1,
+      "CLAIM-arq-higiene-cierre-20260811": 1,
       "CLAIM-arq-higiene-final-20260810": 1,
       "CLAIM-arq-hyg-0400-20260720": 1,
       "CLAIM-arq-hyg-0417-20260720": 1,
@@ -1434,7 +1436,7 @@
       "MAILBOX-HYGIENE": 5,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
-      "MAINTENANCE-PRUNE": 62,
+      "MAINTENANCE-PRUNE": 63,
       "MSG-20260621-Arquitecto-to-Operador-CLOSE-TASK-0139": 1,
       "MSG-20260621-Arquitecto-to-Operador-RESP-RECONCILIA-ZEUS": 1,
       "MSG-20260622-Arquitecto-to-Operador-CLOSE-REQ-643B160A": 1,
@@ -3130,7 +3132,9 @@
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354": 1,
       "MSG-20260810-Codex-to-Arquitecto-HANDOFF-TASK-0354-remediation-1": 1,
       "MSG-20260810-Codex-to-Arquitecto-QUESTION-TASK-0342-actions-admission": 1,
+      "MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0332-r3": 1,
       "MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0343-r4": 1,
+      "MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0332-r3": 1,
       "MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0343-r4": 1,
       "MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0332-remediation-2": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
@@ -3234,6 +3238,7 @@
       "OPS-MAILBOX-HYGIENE-20260810I": 1,
       "OPS-MAILBOX-HYGIENE-20260811A": 1,
       "OPS-MAILBOX-HYGIENE-20260811B": 1,
+      "OPS-MAILBOX-HYGIENE-20260811C": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3556,10 +3561,10 @@
       "claim-arq-d0103-registro-20260719": 1,
       "claim-arq-mailbox-hygiene-20260719": 1,
       "none": 35,
-      "protocol-prune": 64,
+      "protocol-prune": 65,
       "protocol-state": 1
     },
-    "events_applied": 8035,
+    "events_applied": 8042,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3880,6 +3885,10 @@
       "arq-go354b-001": 8489,
       "arq-go354b-002": 8490,
       "arq-go354b-099": 8491,
+      "arq-hgc-000": 8710,
+      "arq-hgc-001": 8711,
+      "arq-hgc-002": 8712,
+      "arq-hgc-099": 8713,
       "arq-hgf-000": 8569,
       "arq-hgf-001": 8570,
       "arq-hgf-002": 8571,
@@ -11520,6 +11529,9 @@
       "prune-state:2026-08-10T19:14:34Z:claim-acquire": 8642,
       "prune-state:2026-08-10T19:14:34Z:claim-release": 8644,
       "prune-state:2026-08-10T19:14:34Z:protocol-prune": 8643,
+      "prune-state:2026-08-11T01:34:41Z:claim-acquire": 8707,
+      "prune-state:2026-08-11T01:34:41Z:claim-release": 8709,
+      "prune-state:2026-08-11T01:34:41Z:protocol-prune": 8708,
       "ratifica-0257-cierre-B-20260720T0550": 5172,
       "ratifica-0258-20260720T1146": 5281,
       "ratifica-0267-informal-20260720T0200": 5049,
@@ -11598,5 +11610,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8706
+  "up_to_seq": 8713
 }
