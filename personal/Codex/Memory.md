@@ -2,6 +2,23 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-11 - TASK-0342 remediation iteration 4 implementation
+
+- Commit `14686290` constructs one PowerShell policy object, consumes it in every `Should-Scan`
+  decision, and dumps that same object after consumption. The former early dump-and-exit gap is
+  removed.
+- Every directory, root-relative directory, suffix, case, boundary-neighbor, and non-excluded
+  control coordinate in the parity fixture is derived from the effective Python and PowerShell
+  policies. The handwritten `dist` control and declaration-line parser are gone.
+- WSL2 `pwsh 7.4.6` on case-sensitive ext4 measured G9a/G9b/G9c/G9d as caught divergences;
+  A4/A7 remain caught and A5/A8 remain accepted equivalents. The 16-boundary permanent negative,
+  collaboration, encoding, both neutrality gates, drift through seq 8779, compile, and diff gates
+  exited 0.
+- AC5 remains deferred by operator instruction because Actions billing still prevents job
+  admission. TASK-0342 remains `in_progress` under the remediation-4-v2 maker claim pending exact
+  commit verification and governed handoff for one independent Analista re-judgment. Codex did
+  not review or ratify the implementation.
+
 ## 2026-08-11 - TASK-0354 remediation iteration 3 implementation
 
 - Commit `736b03f2` closes the authorized G1 scope. Workflow runner discovery tokenizes every
