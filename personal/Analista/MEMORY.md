@@ -11483,3 +11483,91 @@ explicitamente evita que un CHANGE-REQUIRED se lea como "CI esta roto ahora".
 - Runners lentos (`run_mailbox_retry_cases.py`) revientan el limite de 2 min del Bash: `timeout` por
   llamada y una etapa por invocacion, no la cadena entera en un solo script.
 - Slip propio, SEPTIMA vez: veredicto y memoria en commits distintos.
+
+---
+
+## 2026-08-11 -- TASK-0359 (liveness del harness): el contrato ata el helper, no el efecto
+
+Veredicto **CHANGE-REQUIRED** (`46a8f98c`), ancla `9de85529`, implementacion `5a378a0d`. La tarea era
+el defecto que me mata a MI: `Get-ExecProgressState` solo extendia el plazo si crecian los logs o el
+ledger, y el checker no produce ninguna de las dos mientras mide. Codex anadio CPU acumulada del
+arbol de procesos. Los seis gates declarados salieron VERDES en clon limpio. El hallazgo no estaba en
+un gate rojo: estaba en lo que los gates no miran.
+
+### El instrumento que hizo posible los tres hallazgos
+
+Ejecutar el **BUCLE de supervision REAL**, no las funciones sueltas. Receta reutilizable
+(`D:/Aegis_Scratch/mapp/0359r1/live_probe.py`):
+
+1. `Parser::ParseFile` del `.ps1` y `FindAll` del nodo `WhileStatementAst` cuyo `Extent.Text` contiene
+   un log unico del bucle (`POST_DELIVERY_WINDOW_START`); `Invoke-Expression $whileNode.Extent.Text`.
+2. Cargar por AST las funciones REALES que el bucle usa; stubear SOLO el borde
+   (`Write-Log` captura, `Update-ExecLeaseHeartbeat` no-op, `Get-OwnDeliveryEvidence` false,
+   `Stop-LeaseProcessTree` registra y mata).
+3. `$process` = un **proceso hijo REAL** de `Start-Process -PassThru`, y la lease con su pid y
+   `process_start_time_utc` verdaderos (si no, `Test-LeaseProcessMatches` devuelve dead y todo miente).
+4. **Escalar las perillas, no el reloj**: 6+6+2+2 en vez de 3600+900+60+15. Misma geometria, 15 s por
+   corrida. Un AC que habla de 70 minutos se falsa en 15 segundos.
+
+### S1 -- LA LECCION: el mutante a probar es el que deja la linea INALCANZABLE
+
+El negativo `NEG-HARNESS-WORK-DERIVED-EXEC-LIVENESS` mutaba el guard de comparacion
+(`-gt` -> `if ($false)`) dentro de `Get-ExecProgressState` y moria. Correcto y suficiente en
+apariencia. Pero la sonda carga por AST **solo cuatro funciones** y le pasa a mano el `$before` que
+en produccion produce **un unico bloque del bucle** (`:1533`). Mutante de produccion de UNA linea en
+ese bloque -- `if ($false) {` -- y:
+
+- efecto medido con el bucle real: `EXEC_HUNG reason=no_progress`, 0 `EXEC_PROGRESSING`, la senal de
+  CPU nunca aparece. **El defecto original entero, restaurado.**
+- negativo permanente sobre ese mismo arbol: **PASS 3/3**.
+
+Regla: ante un negativo que ejercita un helper, buscar SIEMPRE **quien alimenta sus parametros en
+produccion** y mutar ESO. Si el unico productor del insumo esta fuera de la sonda, el contrato no ata
+el efecto. Ver `contrato-ata-el-helper-no-el-efecto`; esta es su instancia mas limpia hasta hoy.
+
+### S2 -- un AC que da un NUMERO recibe el numero
+
+`$execHardDeadlineUtc` se fija UNA vez y no se reasigna: techo `ExecTimeout + ProgressHardCap` =
+3600+900 = **4500 s**. El AC pedia "70 minutos sin morir" = 4200 s: pasa por **300 s de margen** sobre
+un techo que ya existia antes del arreglo. Medido: el hijo que quema CPU recibe dos extensiones y
+despues `EXEC_HUNG reason=hard_cap`. Hermano de `el-encargo-que-enumera-recibe-la-enumeracion`: **si
+el AC fija una cifra, el maker no necesita tocar la propiedad, solo quedar por debajo de la cifra.**
+Al leer un AC, calcular SIEMPRE el techo que ya impone el codigo y comparar con el numero pedido.
+
+### S3 -- comprobar la MONOTONIA de toda magnitud acumulada antes de creerse un `-gt`
+
+`Get-ExecTreeCpuTicks` suma `TotalProcessorTime` de los procesos **VIVOS** del arbol: cuando un
+descendiente termina, su CPU **desaparece de la suma**. El `-gt` compara contra una muestra que si lo
+incluia, asi que el superviviente tiene que reconquistar toda la CPU del muerto. Falsacion 2/2: un
+exec que lanza dos nietos que queman 6 s, los espera, y **despues quema CPU al 100%**, muere con
+`reason=no_progress` sin un solo `EXEC_PROGRESSING`. Es la forma normal del trabajo de un checker
+(clonar, correr una suite, lanzar sondas: todo eso TERMINA). Esta review lanzo un clon de 912 MB y
+dos suites completas: **el arreglo no me habria salvado**.
+
+Sintoma que lo delato antes de disenar el caso: 8 sondas del control dormido con `delta_ticks`
+**negativo** (-1875000 ticks = -0.19 s) en una magnitud supuestamente acumulada. **Un delta negativo
+donde no puede haberlo es la punta de un hallazgo, no ruido.**
+
+### Metodo
+
+- Correr el suite entero contra el mutante puede morir por una **flake ajena** (aqui, el control
+  dormido clasificado como `progressing`, linea 1230). No concluir desde el exit del suite: aislar y
+  correr la funcion del contrato **N veces** (`import test_exec_lease_harness as t; t.test_...()`).
+  La flake, ademas, era hallazgo (S3b): un negativo permanente inestable pone rojo el gate de todos.
+- Medir bajo carga miente: `run_mailbox_retry_cases.py` fallo con `AssertionError: 5.0` (asercion de
+  1..4 s sobre la ventana de post-entrega) mientras mis propias sondas saturaban la maquina, y salio
+  VERDE al repetir en reposo. **Repetir en reposo antes de imputar un rojo**, y declarar el episodio
+  como fragilidad del gate, no como defecto de la entrega.
+- Verificar que la raiz del arbol es el pid del EXEC y no el del SUPERVISOR: el supervisor hace un
+  `Get-CimInstance Win32_Process` completo por muestreo, asi que su CPU crece siempre y el criterio
+  seria trivialmente cierto para cualquier colgado. Aqui estaba bien (`pid = $Process.Id`), pero es la
+  primera pregunta que hay que hacerle a cualquier liveness por CPU.
+- CI: la corrida citada en el encargo (`31478253906`) era `failure` y su `headSha` (`8766d9e6`) era
+  **anterior** a la implementacion. Abrir siempre con `gh run view --json conclusion,headSha`.
+
+### Arbol compartido: mi mensaje se publico dentro del commit del Arquitecto
+
+Escribi `MSG-...-VERDICT-TASK-0359.md` en `mailbox/open/` y el commit del Arquitecto (`5f425031`) lo
+barrio con staging amplio antes de que yo commiteara. Contenido identico, nada perdido, pero el
+veredicto se publico bajo su firma y **antes** que el artefacto que sus `context_refs` citan. Aprendido:
+escribir el artefacto PRIMERO y el mensaje al final, justo antes de commitear ambos.
