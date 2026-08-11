@@ -121,9 +121,16 @@ corregido al Arquitecto mas veces que al maker.
   Con los valores por defecto son `3600 + 900 = 4500` segundos (75 minutos). El trabajo observado
   extiende deadlines solo dentro de ese techo. `EXEC_SUPERVISION_LIMIT` registra ambos componentes
   y el hard deadline al iniciar cada exec; esta implementacion no promete vida ilimitada.
-- El negativo permanente ejecuta el bucle real con un arbol real y muta el bloque de muestreo de
-  produccion para hacerlo inalcanzable. Las aserciones solo observan desenlaces: el trabajo sano no
-  muere, el mutante si muere, y post-entrega solo expira con el mutante. No atan nombres de razones.
+- CORREGIDO 2026-08-11 tras el veredicto r2: **este parrafo afirmaba dos cosas que la entrega
+  `81f058e6` NO hace**, y se retiran en vez de dejarlas en pie. (1) Decia que *"el negativo
+  permanente ejecuta el bucle real"*: el unico test que ejecuta el bucle,
+  `test_post_delivery_window_honors_main_progress_extensions`, **stubbea `Get-ExecProgressState`
+  entero** y por tanto no toca el cableado de CPU. (2) Decia que *"las aserciones solo observan
+  desenlaces"*: siguen mirando el booleano `progressing` **del helper**, no *muere / no muere* del
+  bucle. Lo que si es cierto y se conserva: la igualdad con la cadena `reasons` desaparecio de los
+  `boundaries`. El AC5 queda por tanto **incumplido** y pasa a la vuelta 2, con la coordenada exacta
+  que el checker fijo dos veces: el mutante a matar es el que deja el bloque de muestreo de
+  produccion **INALCANZABLE** (`:1565`, una linea), no uno que viva dentro del propio helper.
 - El caso monotono ejecuta un hijo pesado que termina y un padre que continua consumiendo CPU. El
   control colgado usa una espera bloqueante sin CPU, logs ni ledger; prueba la clase `no progresa`
   sin depender de `Start-Sleep` ni de deltas de CPU accidentales durante el arranque. El control
