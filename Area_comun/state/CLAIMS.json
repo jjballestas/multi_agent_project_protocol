@@ -42,6 +42,24 @@
             "updated_at": "2026-08-11T12:46:39Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Arquitecto-OPS-hygiene-0359r2",
+            "expires_at": "2026-08-12T06:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Arquitecto-OPS-hygiene-0359r2",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0354-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0354-r5.md",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0359-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0359-r2.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359-remediacion-2.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359-remediacion-2.md"
+            ],
+            "started_at": "2026-08-11T17:57:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260811",
+            "updated_at": "2026-08-11T17:57:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Arquitecto-OPS-mailbox-hygiene-b",
             "expires_at": "2026-08-12T00:00:00Z",
             "owner": "Arquitecto",
@@ -260,6 +278,30 @@
             "updated_at": "2026-08-11T15:49:50Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation-2-delivery",
+            "expires_at": "2026-08-11T20:47:42Z",
+            "notes": "Publish remediation 2 evidence and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-remediation-2-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359-remediacion-2.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T17:47:42Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T17:47:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation-2-v2",
             "expires_at": "2026-08-11T22:21:47Z",
             "notes": "Remediation iteration 2 with exact-line neutrality attestations moved alongside the production insertion.",
@@ -278,7 +320,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-11T16:21:47Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0359",
             "updated_at": "2026-08-11T16:21:47Z"
         },
