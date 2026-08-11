@@ -157,3 +157,41 @@ corregido al Arquitecto mas veces que al maker.
   falsacion 74/74, validador de colaboracion, encoding, neutralidad Python/PowerShell, pruebas de
   contrato de neutralidad, compile y diff gates en EXIT=0 dentro de un worktree limpio con historia
   completa. Codex entrega como maker; requiere re-juicio independiente de Analista.
+
+## Estado tras la vuelta 2 (r3, `ec0b93ce`) -- verificado por el checker 2026-08-12
+
+**Los tres puntos que quedaban PASAN, medidos por conducta en clon limpio con historia completa:**
+
+    AC5   muere con el mutante que deja el muestreo inalcanzable   PASS
+          sano          exec_progressing=true  exec_hung=false  stop_calls=0
+          mutante       exec_progressing=false exec_hung=true   stop_calls=1
+    asercion sobre el DESENLACE del bucle real                     PASS  (ata stop_calls, mas de lo pedido)
+    R6    clave pid + process_start_time_utc                       PASS
+          sano delta 40,9 M ticks  /  mutante pid-only 15,6 ms sobre 3,7 s de CPU quemada
+
+Arnes **31/31**, contratos **74 DECLARED** (el nuevo es el que dice ser), retry cases, validate,
+encoding y las dos neutralidades en EXIT=0. El rojo determinista de r2 no reproduce.
+
+**Queda ABIERTO S2, y es la misma clase en otra coordenada.** La sonda ejecuta solo el nodo `while` y
+**escribe ella misma** las tres lineas de produccion que alimentan el camino de CPU (`:1493-:1495`),
+que quedan fuera del extent invocado. En r2 el hand-feed era `$before`; aqui es el calendario del
+muestreo. Un mutante de **un caracter** en `:1495` -- solo el signo -- restaura el defecto entero y el
+negativo entregado se queda verde: sin semilla, `$progressProcessCpuSample` sigue `$null` en el primer
+deadline y el detector vuelve a depender EXCLUSIVAMENTE de que crezca un fichero, que es justo lo que
+AC5 prohibe. El texto del contrato promete matar *"when the production CPU-sampling block is
+unreachable"*, y ese mutante lo deja inalcanzable de hecho sin tocarlo: **promete mas clase de la que
+verifica**.
+
+Arreglo especificado y ya ejecutado por el checker: cuatro lineas, **solo test**, invocando el bloque
+desde la semilla en vez del nodo y borrando las tres asignaciones a mano. Criterio de aceptacion por
+conducta: con `:1495` mutado por el signo, el negativo debe **morir**. Recomendado ademas declarar
+como `mutation` del contrato la de la semilla, estrictamente mas fuerte que `if ($false)`.
+
+**Residuales declarados que NO bloquean:** R9 (el margen del negativo de R6 es 15,6 ms contra un
+umbral fijo de 50 ms, no derivado), R10 (la rama de post-entrega `:1541-:1555` no la ejecuta ningun
+negativo, asi que **AC4 no lo sostiene ningun contrato**), R1 (una sola muestra por ventana; `:1571`
+asigna `MaxValue` incondicionalmente), R8 (`Get-ExecTreeCpuTicks` es codigo muerto) y R5 (seis
+corridas de CI en `failure`: no hay verde de Actions para esta entrega).
+
+Esta era la vuelta 2 de 2. Conceder una tercera o cerrar con S2 abierto **lo decide el operador**.
+
