@@ -11857,3 +11857,101 @@ el clon somero como laboratorio adversarial. Casi firmo un rojo que era mio.
 - Sondas propias: `analista-0361/adversarial_probe.py` (simetrico x2/x6 + asimetrico),
   `discriminate_old_vs_new.py` (la decisiva), `probe_geometry_coupling.py` (R1),
   `probe_measurement_fidelity.py` (self vs arbol de 4 nodos), `run_prefix_case.py` (AC1).
+
+---
+
+## 2026-08-12 -- TASK-0359 r3 (vuelta 2 de 2): CHANGE-REQUIRED. El hand-feed se MUEVE de coordenada, no desaparece
+
+Commit `096e0685`. Ancla `c3246b2d` (el remoto avanzo a `0370f105` durante la review, poda del
+Arquitecto). Implementacion juzgada `ec0b93ce`. Clon limpio con historia completa
+(`git clone -s`) en `D:/Aegis_Scratch/mapp/t0359r3`.
+
+### Los tres puntos que me pidieron: los tres PASAN por conducta
+
+1. **El mutante de la guarda YA muere.** Sonda entregada, dos arboles, mismo instrumento:
+   sano `exec_progressing=true exec_hung=false stop_calls=0` con `reason=process_tree_cpu_growing`;
+   mutante `:1567 if ($false)` -> `exec_progressing=false exec_hung=true stop_calls=1` con
+   `EXEC_HUNG reason=no_progress`. La falsacion que firme en r1 y r2 **no reproduce**.
+   (La guarda migro de `:1565` a `:1567` porque el arreglo de R6 anadio una linea. **Una coordenada
+   de linea caduca entre entregas: re-localizar por TEXTO, no por numero.**)
+2. **La asercion es el desenlace.** Boundaries = `exec_progressing`/`exec_hung` del stream de log del
+   bucle real + `stop_calls` (que ata la llamada real a la ruta de kill). El booleano `progressing`
+   del helper desaparecio.
+3. **R6 cerrado**: clave `pid|process_start_time_utc` en `:415-416`. Sano delta 40,9 M ticks;
+   mutante pid-only delta 15,6 ms sobre un proceso que quemaba 3,7 s de CPU.
+
+Gates en clon limpio: validate 0, encoding 0, las DOS neutralidades 0 (la `.ps1` hay que correrla con
+`powershell.exe -File`; `pwsh` da EXIT=127 en este Git Bash y **127 no es un rojo de la entrega**),
+contracts 0 con 74 DECLARED, arnes **EXIT=0 31/31**, retry cases 0.
+
+### LA LECCION: el hand-feed no se cierra, se MUEVE
+
+En r2 el negativo le pasaba a mano `$before` a `Get-ExecProgressState`. El maker arreglo eso
+ejecutando el bucle real... pero **el extent empieza en `while`**, y las TRES lineas de produccion
+que alimentan el camino de CPU quedan justo encima, fuera:
+
+    :1493   $progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)
+    :1494   $progressProcessCpuSample = $null
+    :1495   $nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)
+
+y la sonda las **reescribe ella misma** antes de invocar el nodo. El hand-feed paso de un ARGUMENTO
+a un CALENDARIO. Mutante de produccion de **UN CARACTER** en `:1495` (quitar el signo menos):
+
+    mi instrumento (ejecuta la semilla)  EXEC_HUNG reason=no_progress  stop_calls=1
+    la sonda entregada                   EXEC_PROGRESSING              stop_calls=0  <- IDENTICO AL SANO
+
+Y con `:1495 -> [DateTime]::MaxValue`, corriendo el test entregado con `HARNESS_PATH` apuntando a ese
+arbol: **RESULT=PASS**. El negativo verde sobre un arbol donde el detector vuelve a depender
+EXCLUSIVAMENTE de que crezca un fichero.
+
+**Regla que me llevo:** cuando exijo "que el negativo ejecute el codigo real", tengo que decir
+**donde EMPIEZA y donde TERMINA el extent**, no solo "el bucle real". Un extent que empieza una
+sentencia tarde deja la semilla en manos del test. Y la prueba de que el extent es correcto no es
+leerlo: es **mutar cada linea de produccion que el camino necesita y exigir que el negativo muera**.
+
+**Corolario de encuadre:** el texto del contrato decia *"...kill it when the production CPU-sampling
+block is unreachable"*. El mutante del signo lo deja inalcanzable **de hecho** sin tocar su texto.
+Cuando el contrato promete una CLASE ("inalcanzable") y el test mata una FORMA (`if ($false)`), el
+contrato es el que miente. Por eso bloquea y no es residual.
+
+### Mi instrumento (reutilizable)
+
+`D:/Aegis_Scratch/mapp/t0359r3_probe/real_loop_probe.py`: ejecuta produccion **desde la semilla hasta
+el final del nodo `while`**, por offsets del AST sobre el texto original:
+
+    $seedIdx = $srcText.IndexOf('$progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)')
+    Invoke-Expression $srcText.Substring($seedIdx, $whileNode.Extent.EndOffset - $seedIdx)
+
+`run_delivered_negative_on_mutant.py`: monkeypatchea `mod.HARNESS_PATH` al arbol mutado y **corre la
+funcion de test ENTREGADA**. Esta es la forma mas limpia de demostrar ceguera: no discuto la sonda,
+ejecuto SU test contra un arbol roto y enseno el PASS. Reutilizar siempre.
+Para importar el modulo de tests hace falta `PYTHONPATH=<clon>/scripts` (importa `sweep_cron_zombies`).
+
+### Lo que declare como bien resuelto (que no se pierda en la siguiente remediacion)
+
+- La **geometria derivada del coste medido del instrumento** (`instrument_cost_ms` 823-1034 ms hoy):
+  cierra el rojo determinista de r2 sin sumar constantes al azar. Es lo que pedi.
+- El **runner acumula fallos y publica `SUMMARY total/passed/failed`** en vez de abortar en el
+  primero. En r2 un negativo roto escondio a los 30 tests siguientes; esto lo arregla para TODO el
+  tablero.
+- **`stop_calls` como asercion**: ata la llamada real a la ruta de kill, mejor de lo que pedi.
+
+### Residuales que declare
+
+- **R9 (nuevo)**: el margen del negativo de R6 es 15,6 ms de ruido contra un umbral **fijo** de 50 ms
+  (factor 3,2), no derivado del instrumento. Misma clase que R7.
+- **R10 (nuevo)**: la rama de post-entrega (`:1541-:1555`), que resetea `$progressProcessCpuSample` y
+  REPROGRAMA el muestreo, **no la ejecuta ningun negativo** porque la sonda fija
+  `$PostDeliveryTimeoutSeconds = 0`. AC4 lo verifique yo a mano en r2; hoy no lo sostiene nada.
+- **Cuerpo de la tarea sin seccion r3**: sigue diciendo "AC5 queda incumplido" describiendo
+  `81f058e6`. Falla del lado seguro (subestima), asi que lo declare sin bloquear por el.
+- **R1** sigue abierto (`:1571` asigna `MaxValue` incondicionalmente, tambien cuando la muestra
+  devolvio `$null`); **R8** codigo muerto; **R5 peor**: seis corridas seguidas de CI en `failure`,
+  ninguna verde para esta entrega. Toda mi verificacion es local.
+
+### Presupuesto y frontera de rol
+
+Era la **vuelta 2 de 2**. No concedo yo la tercera: dije explicitamente que **la decision es del
+operador humano** y di el parche completo (4 lineas, solo test, sin tocar produccion) para que esa
+decision sea barata. Emitir CHANGE-REQUIRED y ADEMAS especificar el arreglo exacto no es implementar:
+es hacer que el veredicto sea accionable en una vuelta.
