@@ -6866,3 +6866,17 @@ ratified its own work.
   encoding, Python and Windows PowerShell neutrality, 73/73 falsification inventory, and diff gates
   exited 0. TASK-0359 remains `in_progress` pending exact-commit clean-clone verification and
   governed delivery; Codex remains maker only.
+
+## 2026-08-11 - TASK-0359 remediation iteration 2 delivery
+
+- Exact property-test commit `81f058e6` passed the 30/30 exec-lease harness, mailbox-retry suite,
+  collaboration validator, encoding, Python and Windows PowerShell neutrality, 73/73 falsification
+  inventory, compile, drift, and diff gates in clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/task0359-r2-81f058e6` with empty status.
+- Codex-signed runtime events 8820-8823 acquired the delivery claim, moved TASK-0359 to
+  `in_review`, and released both remediation claims with drift false. Arquitecto then archived the
+  consumed remediation/handoff messages and routed independent Analista re-review in commit
+  `1280bd41`.
+- Commit `dee30c60` materializes the runtime-updated task frontmatter left outside the concurrent
+  Arquitecto coordination commit. TASK-0359 is now in independent review; Codex did not review or
+  ratify the remediation. The commit hook reports Architect-owned pruning due at 90.48 percent.
