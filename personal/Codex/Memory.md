@@ -6856,3 +6856,13 @@ ratified its own work.
   into a hard-cap failure or publish a false hang for an exec that completed during observation.
 - TASK-0359 remains `in_progress` under the remediation-2-v2 maker claim pending exact-commit clean
   verification and governed delivery. Codex has not reviewed or ratified the remediation.
+
+## 2026-08-11 - TASK-0359 remediation iteration 2 timing stabilization
+
+- Commit `81f058e6` removes the remaining 150 ms race from the post-delivery inheritance probe. The
+  synthetic process now lives for eight seconds and the compressed supervision geometry is
+  1/5/10/30 seconds, preserving the same causal property with enough scheduling margin under load.
+- Before the commit, the full 30-test exec-lease harness, mailbox-retry suite, collaboration,
+  encoding, Python and Windows PowerShell neutrality, 73/73 falsification inventory, and diff gates
+  exited 0. TASK-0359 remains `in_progress` pending exact-commit clean-clone verification and
+  governed delivery; Codex remains maker only.
