@@ -11780,3 +11780,80 @@ asi, sin inflar. Cierre barato: clave = `pid + process_start_time_utc`, que ya e
 - Sondas: `D:/Aegis_Scratch/mapp/0359r2/live_probe2.py` (bucle real), `live_probe_pd.py`
   (post-entrega, AC4 verificado por mi con arbol real -- el negativo entregado no lo cubre),
   `diag2..diag7`, `mut_wiring/` + `mut_tree/` (arbol copiado con `tar --exclude=.git`).
+
+---
+
+## 2026-08-11 22:45 -- TASK-0361: OK-CLOSABLE. El verde de hoy no discriminaba; hubo que encarecer el instrumento
+
+Ancla `2144d433`, implementacion `0205c056`, veredicto commiteado en `e854f8de`.
+Sale del rojo que yo mismo levante en 0359 r2. Sin producto en alcance.
+
+### La leccion que me llevo: un verde reproducible no es un verde discriminante
+
+Iba a firmar sobre tres corridas verdes. Antes se me ocurrio correr el test **PRE-FIX** (el de los
+8 s fijos) contra el mismo harness, en el mismo clon limpio, ahora: **verde 2 de 2**. La maquina
+esta hoy mas tranquila que en 0359 r2 -- el instrumento cuesta ~1,2 s por muestra en vez de ~2,2 s --
+y `4500 + 2*1200` todavia cabe en 8000. Es decir: **las tres corridas verdes del codigo nuevo eran,
+por si solas, compatibles con no haber arreglado nada.**
+
+Regla para la proxima: cuando el defecto es una **ventana de carrera**, el AC de "N corridas verdes"
+NO acredita nada por si mismo, porque el codigo viejo tambien sale verde cuando la maquina esta
+tranquila. Lo que acredita es **poner las dos versiones bajo la misma perturbacion** y ver cual cede.
+Y si no consigo reproducir el rojo previo, eso no refuta el diagnostico: cuando el diagnostico ES
+"depende de la maquina", la no-reproducibilidad es evidencia A FAVOR, y hay que decirlo asi.
+
+### La prueba decisiva (retardo dentro de Get-ExecTreeCpuSample, coste real ~3,75 s)
+
+    [PRE-FIX/busy]            BROKEN  after=null (hijo ya muerto), progressing=false
+    [PRE-FIX/retiring_child]  BROKEN  after=null,                  progressing=false
+    [POST-FIX/busy]           OK      lifetime=19506 ms, child_alive=true
+    [POST-FIX/retiring_child] OK      lifetime=19526 ms, child_alive=true
+
+Escalado simetrico: coste 1363 -> vida 12225; 3578 -> 18810; 7968 -> 36370. La vida SIGUE al coste.
+
+### Como probe AC3 sin creerme el nombre del campo
+
+Fabrique el escenario que el campo debe delatar: medicion **ciega** al coste real (retardo solo
+cuando el lease no es `$PID`). El hijo muere antes de la segunda muestra, sale `after == before`
+EXACTO -- la firma original -- y ahora viene con `child_alive_at_second_sample: false`, que es la
+PRIMERA asercion del test. El delta cero mudo ya no existe. De paso queda medida la **cota** del
+margen: tolera ~2,5 s por muestra de coste no estimado (unas 3x el de hoy) y luego cede DICIENDOLO.
+
+### La objecion que tuve que cerrar yo (y salio a favor de la entrega)
+
+La medicion se toma contra `$PID` (arbol de 1 nodo) y se gasta en muestras contra el hijo. Si el
+coste escalara con el arbol, seria un subestimador sistematico. Lo medi alternando con un arbol hijo
+real de 4 nodos: `self_ms=[778,660,867]` vs `child_ms=[692,929,956]`. Indistinguibles -- el termino
+dominante es `Get-CimInstance Win32_Process`, tabla entera, independiente del lease. Proxy fiel.
+
+### Trampa de instrumento: `git clone --depth 1` da validate ROJO FALSO
+
+Mi primer clon fue somero y el validador salio EXIT=1 con
+`commit_trailers could not scan git history from 57f6250f...: rev-list ... exit 128`.
+No era la entrega: era mi clon. **Para gatear `validate_collaboration_state.py` hace falta historia
+completa**; `git clone -s <ruta>` (alternates) da historia entera sin copiar los ~7 GB de objetos
+sueltos, y con `-n` + `checkout <sha>` deja el arbol pristino. Lo use como clon B de evidencia y deje
+el clon somero como laboratorio adversarial. Casi firmo un rojo que era mio.
+
+### Residuales que declare
+
+- **R1**: el `4500` pretende ser `1500 + 3000` (los dos `Start-Sleep` de la sonda) pero esta
+  **copiado, no derivado**. Lo desincronice: cambiando solo el segundo sleep a 9000, la vida derivada
+  no se mueve (11844 ms) y vuelve el delta cero. No bloquea porque ahora falla ruidosamente por AC3.
+- **R2** (el que recomiendo abrir): la vida del worker de `retiring_child` sigue siendo un **3500
+  fijo** y el caso solo afirma que el PADRE llego vivo -- nadie acredita que el NIETO se retirara
+  antes de la segunda muestra, que es la otra mitad de la propiedad. Hoy se cumple por holgura
+  (nieto muere a ~3,9 s, segunda muestra a ~6,9 s), no por construccion: en una maquina con
+  instrumento barato y arranque de PowerShell caro seria **verde silencioso**.
+- **R3**: AC4 quedo a nivel de test, no de asercion (la sonda del mutante va DESPUES de las
+  aserciones sanas, asi que un fallo sano sigue impidiendo que el mutante corra).
+
+### Trazabilidad
+
+- Clon B (evidencia): `D:/Aegis_Scratch/multi_agent_project_protocol/analista-0361/clone2`,
+  `git clone -s` + `checkout 2144d433`, `untracked_before=0`.
+- Gates: validate 0, scan_encoding 0, neutralidad 0, drift 0 (`CLEAN up_to_seq=8846`),
+  `test_exec_lease_harness.py` **EXIT=0 x3** (157/149/153 s, `total=30 passed=30 failed=0`).
+- Sondas propias: `analista-0361/adversarial_probe.py` (simetrico x2/x6 + asimetrico),
+  `discriminate_old_vs_new.py` (la decisiva), `probe_geometry_coupling.py` (R1),
+  `probe_measurement_fidelity.py` (self vs arbol de 4 nodos), `run_prefix_case.py` (AC1).
