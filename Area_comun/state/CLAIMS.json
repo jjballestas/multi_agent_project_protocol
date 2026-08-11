@@ -62,6 +62,30 @@
             "updated_at": "2026-08-11T09:49:11Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-delivery",
+            "expires_at": "2026-08-11T12:30:01Z",
+            "notes": "Publish the exact-commit evidence and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T10:30:01Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T10:30:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Codex-TASK-0359-v2",
             "expires_at": "2026-08-11T15:55:00Z",
             "notes": "Add end-to-end busy versus sleeping process-tree supervision coverage in the existing retry runner.",
@@ -101,7 +125,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-11T10:14:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0359",
             "updated_at": "2026-08-11T10:14:00Z"
         },
