@@ -1,6 +1,15 @@
 ﻿# Codex Memory
 
-Last updated: 2026-08-11 Europe/Madrid, TASK-0332 remediation iteration 2 implemented.
+Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
+
+## 2026-08-11 - Four approved task closures
+
+- Commit `bbe7d9e2` atomically moves TASK-0327, TASK-0331, TASK-0336, and TASK-0346 from
+  `review_approved` to `done` after operator authorization and independent checker approval.
+- The runtime transaction is signed by Codex, contains exactly one status flip per task, and
+  releases all four bounded close claims; no active claim remains on any closed task.
+- Collaboration, encoding, Python neutrality, and PowerShell neutrality gates exited 0. No
+  product or protocol implementation code was changed.
 
 ## 2026-08-11 - TASK-0332 remediation iteration 2 implementation
 
