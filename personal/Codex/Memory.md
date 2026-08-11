@@ -2,6 +2,22 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-11 - TASK-0354 remediation iteration 4 implementation
+
+- Commit `90fa8ffa` replaces the literal 73-invocation witness with a membership property. Every
+  repository `.py` path named in a workflow `run` block is derived independently and must appear
+  in that block's discovered runner set; failures name the missing path.
+- Tokenization now follows the declared job host, using non-POSIX parsing for Windows jobs so
+  unquoted backslashes remain path separators. Unrecognized invocation forms fail closed through
+  the independent membership set instead of requiring another form-specific recognizer.
+- The intact gate passes with 73 invocations and 72 distinct referenced runners. All 14 previously
+  silent forms exit 1 and name the missing runner; four Windows backslash forms also exit 1 through
+  dependency enforcement under Windows tokenization.
+- Collaboration, encoding, Python and PowerShell neutrality, drift through seq 8790, 73/73
+  falsification inventory, and diff gates exited 0. TASK-0354 remains `in_progress` under its
+  remediation-4 maker claim pending exact-commit verification and governed delivery. Codex has
+  not reviewed or ratified the implementation.
+
 ## 2026-08-11 - TASK-0342 remediation iteration 4 implementation
 
 - Commit `14686290` constructs one PowerShell policy object, consumes it in every `Should-Scan`
