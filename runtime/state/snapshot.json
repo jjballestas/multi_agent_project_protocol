@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "591911d5f33253def597da52d0020c44daadf1182768b966b924bb052e0a790d",
+  "canonical_hash": "74c70b358220749d0ec5cf528169937219023d4151e796a511b2539e32c987db",
   "integrity": {
-    "canonical_hash": "591911d5f33253def597da52d0020c44daadf1182768b966b924bb052e0a790d",
+    "canonical_hash": "74c70b358220749d0ec5cf528169937219023d4151e796a511b2539e32c987db",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "28212f31e6412e8f314441e43a54cf2659f44eeda450cb84b21d4000a8f9f8b6",
-    "signature": "0d295c13844921982a9d9183a9189d54b6043f63401e59be4e85dc480f0daab7",
-    "up_to_seq": 8816
+    "prev_hash": "6cb818b936fafa31bd98a71b5c3204478b9327a6d9bed7f634361fde86908c1d",
+    "signature": "036e5c6463e27b413f23735c627a917babec9388ea236a6b5b658d3b47d946c6",
+    "up_to_seq": 8819
   },
   "state": {
     "aggregate_versions": {
@@ -3576,7 +3576,7 @@
       "TASK-0356": 1,
       "TASK-0357": 1,
       "TASK-0358": 1,
-      "TASK-0359": 15,
+      "TASK-0359": 18,
       "TASK-0360": 4,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -3600,7 +3600,7 @@
       "protocol-prune": 66,
       "protocol-state": 1
     },
-    "events_applied": 8145,
+    "events_applied": 8148,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8151,6 +8151,9 @@
       "codex:task0359:claim-v3-release:20260811T103001Z": 8742,
       "codex:task0359:delivery-claim-acquire:20260811T103001Z": 8743,
       "codex:task0359:delivery-claim-release:20260811T103415Z": 8745,
+      "codex:task0359:remediation2-claim-release:20260811T162147Z": 8818,
+      "codex:task0359:remediation2-claim:20260811T154950Z": 8817,
+      "codex:task0359:remediation2-v2-claim-acquire:20260811T162147Z": 8819,
       "codex:task0359:status-in-progress:20260811T094911Z": 8737,
       "codex:task0359:status-in-review:20260811T103415Z": 8744,
       "codex:tasks0325-0334-0335:done-flip:claim-acquire:20260808T084041Z": 7924,
@@ -11749,5 +11752,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8816
+  "up_to_seq": 8819
 }

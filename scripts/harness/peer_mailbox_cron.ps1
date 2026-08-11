@@ -376,12 +376,24 @@ function Clear-StaleCronLockIfSafe {
     Write-Log "SELF_HEAL_ORPHAN_LEASE owner=$PeerId liveness=dead action=remove"
 }
 
-function Get-ExecTreeCpuTicks {
-    param($Lease)
+function Get-ExecTreeCpuSample {
+    param($Lease, $PreviousSample = $null)
     if (-not (Test-LeaseProcessMatches -Lease $Lease)) {
         return $null
     }
     try {
+        $cpuByPid = @{}
+        if ($null -ne $PreviousSample -and $null -ne $PreviousSample.cpu_by_pid) {
+            if ($PreviousSample.cpu_by_pid -is [System.Collections.IDictionary]) {
+                foreach ($key in $PreviousSample.cpu_by_pid.Keys) {
+                    $cpuByPid[[string]$key] = [long]$PreviousSample.cpu_by_pid[$key]
+                }
+            } else {
+                foreach ($property in $PreviousSample.cpu_by_pid.PSObject.Properties) {
+                    $cpuByPid[[string]$property.Name] = [long]$property.Value
+                }
+            }
+        }
         $childrenByParent = @{}
         foreach ($candidate in @(Get-CimInstance Win32_Process -ErrorAction Stop)) {
             if ($null -eq $candidate.ParentProcessId -or $null -eq $candidate.ProcessId) { continue }
@@ -394,14 +406,17 @@ function Get-ExecTreeCpuTicks {
         $pending = [System.Collections.Generic.Queue[int]]::new()
         $pending.Enqueue([int]$Lease.pid)
         $seenPids = @{}
-        $cpuTicks = 0L
         while ($pending.Count -gt 0) {
             $processId = $pending.Dequeue()
             if ($seenPids.ContainsKey($processId)) { continue }
             $seenPids[$processId] = $true
             try {
                 $treeProcess = Get-Process -Id $processId -ErrorAction Stop
-                $cpuTicks += [long]$treeProcess.TotalProcessorTime.Ticks
+                $processKey = [string]$processId
+                $observedTicks = [long]$treeProcess.TotalProcessorTime.Ticks
+                if (-not $cpuByPid.ContainsKey($processKey) -or $observedTicks -gt [long]$cpuByPid[$processKey]) {
+                    $cpuByPid[$processKey] = $observedTicks
+                }
             } catch {
                 # A descendant may exit between the process-tree and CPU snapshots.
             }
@@ -411,11 +426,20 @@ function Get-ExecTreeCpuTicks {
                 }
             }
         }
-        return $cpuTicks
+        $totalTicks = 0L
+        foreach ($value in $cpuByPid.Values) { $totalTicks += [long]$value }
+        return [pscustomobject]@{ total_ticks = $totalTicks; cpu_by_pid = $cpuByPid }
     } catch {
         # CPU telemetry is additive. Existing file evidence still works when it is unavailable.
         return $null
     }
+}
+
+function Get-ExecTreeCpuTicks {
+    param($Lease)
+    $sample = Get-ExecTreeCpuSample -Lease $Lease
+    if ($null -eq $sample) { return $null }
+    return [long]$sample.total_ticks
 }
 
 function Get-ExecProgressState {
@@ -426,7 +450,7 @@ function Get-ExecProgressState {
         [string]$EventsPath,
         [long]$PreviousOutputBytes,
         [long]$PreviousLedgerBytes,
-        $PreviousProcessCpuTicks,
+        $PreviousProcessCpuSample,
         [int]$FreshSeconds
     )
     $outputBytes = 0L
@@ -441,8 +465,11 @@ function Get-ExecProgressState {
     $reasons = @()
     if ($outputBytes -gt $PreviousOutputBytes) { $reasons += "run_log_growing" }
     if ($ledgerBytes -gt $PreviousLedgerBytes) { $reasons += "ledger_growing" }
-    $processCpuTicks = Get-ExecTreeCpuTicks -Lease $Lease
-    if ($null -ne $processCpuTicks -and $null -ne $PreviousProcessCpuTicks -and $processCpuTicks -gt $PreviousProcessCpuTicks) {
+    $processCpuSample = Get-ExecTreeCpuSample -Lease $Lease -PreviousSample $PreviousProcessCpuSample
+    $previousProcessCpuTicks = if ($null -ne $PreviousProcessCpuSample) { [long]$PreviousProcessCpuSample.total_ticks } else { $null }
+    $processCpuTicks = if ($null -ne $processCpuSample) { [long]$processCpuSample.total_ticks } else { $null }
+    $minimumCpuProgressTicks = [TimeSpan]::FromMilliseconds([Math]::Max(50, $FreshSeconds * 10)).Ticks
+    if ($null -ne $processCpuTicks -and $null -ne $previousProcessCpuTicks -and ($processCpuTicks - $previousProcessCpuTicks) -ge $minimumCpuProgressTicks) {
         $reasons += "process_tree_cpu_growing"
     }
     return [pscustomobject]@{
@@ -451,6 +478,7 @@ function Get-ExecProgressState {
         output_bytes = $outputBytes
         ledger_bytes = $ledgerBytes
         process_cpu_ticks = $processCpuTicks
+        process_cpu_sample = $processCpuSample
     }
 }
 
@@ -1454,6 +1482,7 @@ function Invoke-PeerForMessage {
         $postDeliveryDeadlineUtc = $null
         $postDeliveryHardDeadlineUtc = $null
         $execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
+        Write-Log "EXEC_SUPERVISION_LIMIT pid=$($process.Id) base_timeout_seconds=$ExecTimeoutSeconds progress_hard_cap_seconds=$ProgressHardCapSeconds hard_deadline=$($execHardDeadlineUtc.ToString('o')) message=$($Message.Name)"
         $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
         $progressOutputBytes = 0L
         foreach ($progressPath in @($stdoutPath, $stderrPath)) {
@@ -1461,7 +1490,7 @@ function Invoke-PeerForMessage {
         }
         $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
         $progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)
-        $progressProcessCpuTicks = $null
+        $progressProcessCpuSample = $null
         $nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)
         while (-not $process.WaitForExit(1000)) {
             Update-ExecLeaseHeartbeat
@@ -1475,11 +1504,11 @@ function Invoke-PeerForMessage {
             }
             if ([DateTime]::UtcNow -gt $deadlineUtc) {
                 $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuTicks $progressProcessCpuTicks -FreshSeconds $ProgressFreshSeconds
+                $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuSample $progressProcessCpuSample -FreshSeconds $ProgressFreshSeconds
                 if ($progress.progressing -and [DateTime]::UtcNow -lt $execHardDeadlineUtc) {
                     $progressOutputBytes = $progress.output_bytes
                     $progressLedgerBytes = $progress.ledger_bytes
-                    $progressProcessCpuTicks = $progress.process_cpu_ticks
+                    $progressProcessCpuSample = $progress.process_cpu_sample
                     $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
                     if ($deadlineUtc -gt $execHardDeadlineUtc) { $deadlineUtc = $execHardDeadlineUtc }
                     if ($null -ne $postDeliveryDeadlineUtc) {
@@ -1506,16 +1535,16 @@ function Invoke-PeerForMessage {
                         if (Test-Path -LiteralPath $progressPath -PathType Leaf) { $progressOutputBytes += [long](Get-Item -LiteralPath $progressPath).Length }
                     }
                     $progressLedgerBytes = if (Test-Path -LiteralPath $eventsPath -PathType Leaf) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0L }
-                    $progressProcessCpuTicks = $null
+                    $progressProcessCpuSample = $null
                     $nextProgressCpuSampleUtc = $postDeliveryDeadlineUtc.AddSeconds(-$progressSampleSeconds)
                     Write-Log "POST_DELIVERY_WINDOW_START pid=$($process.Id) timeout_seconds=$PostDeliveryTimeoutSeconds message=$($Message.Name)"
                 } elseif ($null -ne $postDeliveryDeadlineUtc -and [DateTime]::UtcNow -gt $postDeliveryDeadlineUtc) {
                     $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                    $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuTicks $progressProcessCpuTicks -FreshSeconds $ProgressFreshSeconds
+                    $progress = Get-ExecProgressState -Lease $lease -StdoutPath $stdoutPath -StderrPath $stderrPath -EventsPath $eventsPath -PreviousOutputBytes $progressOutputBytes -PreviousLedgerBytes $progressLedgerBytes -PreviousProcessCpuSample $progressProcessCpuSample -FreshSeconds $ProgressFreshSeconds
                     if ($progress.progressing -and [DateTime]::UtcNow -lt $postDeliveryHardDeadlineUtc) {
                         $progressOutputBytes = $progress.output_bytes
                         $progressLedgerBytes = $progress.ledger_bytes
-                        $progressProcessCpuTicks = $progress.process_cpu_ticks
+                        $progressProcessCpuSample = $progress.process_cpu_sample
                         $postDeliveryDeadlineUtc = [DateTime]::UtcNow.AddSeconds($ProgressExtensionSeconds)
                         if ($postDeliveryDeadlineUtc -gt $postDeliveryHardDeadlineUtc) { $postDeliveryDeadlineUtc = $postDeliveryHardDeadlineUtc }
                         $nextProgressCpuSampleUtc = $postDeliveryDeadlineUtc.AddSeconds(-$progressSampleSeconds)
@@ -1532,8 +1561,8 @@ function Invoke-PeerForMessage {
             }
             if ([DateTime]::UtcNow -ge $nextProgressCpuSampleUtc) {
                 $sampleLease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-                $sampleCpuTicks = Get-ExecTreeCpuTicks -Lease $sampleLease
-                if ($null -ne $sampleCpuTicks) { $progressProcessCpuTicks = $sampleCpuTicks }
+                $sampleCpuState = Get-ExecTreeCpuSample -Lease $sampleLease -PreviousSample $progressProcessCpuSample
+                if ($null -ne $sampleCpuState) { $progressProcessCpuSample = $sampleCpuState }
                 $nextProgressCpuSampleUtc = [DateTime]::MaxValue
             }
         }

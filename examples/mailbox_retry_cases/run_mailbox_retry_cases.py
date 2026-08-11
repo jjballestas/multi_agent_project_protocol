@@ -159,13 +159,14 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "retry-work-derived-process-liveness",
-        "negative": "silent CPU work extends both exec phases, while a silent sleeper remains deadline-terminable",
-        "mutation": 'mutant_text = runner_text.replace(cpu_progress_guard, "if ($false) {", 1)',
+        "negative": "real supervision preserves silent work in both phases, including after a heavy child exits, while silent no-progress work remains deadline-terminable",
+        "mutation": 'mutant_text = runner_text.replace(cpu_sampling_guard, "if ($false) {", 1)',
         "boundaries": (
-            'assert "reason=process_tree_cpu_growing" in busy_exec',
             'assert "TREE_KILL" not in busy_exec',
-            'assert "reason=deadline" in sleeping_exec',
-            'assert "phase=post_delivery reason=process_tree_cpu_growing" in busy_post',
+            'assert "TREE_KILL" in blocked_exec',
+            'assert "TREE_KILL" not in retiring_child_exec',
+            'assert "TREE_KILL" in mutant_exec',
+            'assert "POST_DELIVERY_TIMEOUT" not in busy_post',
             'assert "POST_DELIVERY_TIMEOUT" in mutant_post',
         ),
         "exercised_by": "run_silent_process_tree_liveness_cases",
@@ -1311,7 +1312,10 @@ def run_post_delivery_timeout_case() -> None:
         measured = time.mktime(time.strptime(window_expired.group(1), "%Y-%m-%dT%H:%M:%S")) - time.mktime(
             time.strptime(window_started.group(1), "%Y-%m-%dT%H:%M:%S")
         )
-        assert 1 <= measured <= 4, measured
+        # The loop observes both delivery and expiry on one-second WaitForExit polls, while
+        # log timestamps have one-second resolution. Keep the behavioral deadline bounded
+        # without turning scheduler alignment into a flaky red gate.
+        assert 1 <= measured <= 6, measured
         assert "TREE_KILL_COMPLETE" in log and "outcome=transient" in log, log
         assert "RETRY_EXHAUSTED" in log, log
     finally:
@@ -1485,19 +1489,16 @@ def run_pre_delivery_and_liveness_cases() -> None:
 def run_silent_process_tree_liveness_cases() -> None:
     """PERMANENT_NEGATIVE: retry-work-derived-process-liveness
 
-    A compressed deadline preserves the production ratio: sustained silent work crosses the
-    initial deadline and finishes inside the hard cap; a silent sleeper remains terminable.
+    The assertions bind supervision outcomes, not reason labels. A production mutation makes
+    sampling unreachable, and a no-progress process blocks without using a sleep workload.
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    cpu_progress_guard = (
-        "if ($null -ne $processCpuTicks -and $null -ne $PreviousProcessCpuTicks "
-        "-and $processCpuTicks -gt $PreviousProcessCpuTicks) {"
-    )
-    assert runner_text.count(cpu_progress_guard) == 1
-    mutant_text = runner_text.replace(cpu_progress_guard, "if ($false) {", 1)
+    cpu_sampling_guard = "if ([DateTime]::UtcNow -ge $nextProgressCpuSampleUtc) {"
+    assert runner_text.count(cpu_sampling_guard) == 1
+    mutant_text = runner_text.replace(cpu_sampling_guard, "if ($false) {", 1)
 
     def exercise(candidate: str, mode: str, post_delivery: bool) -> str:
-        assert mode in {"busy", "sleep"}
+        assert mode in {"busy", "blocked", "retiring_child"}
         scratch_root = Path("D:/Aegis_Scratch/multi_agent_project_protocol/task0359-liveness")
         scratch_root.mkdir(parents=True, exist_ok=True)
         fixture = Path(tempfile.mkdtemp(prefix=f"{mode}-{'post' if post_delivery else 'exec'}-", dir=scratch_root))
@@ -1546,14 +1547,31 @@ def run_silent_process_tree_liveness_cases() -> None:
                     "\"to\":\"in_review\"}}}}'\n"
                     "Add-Content -LiteralPath 'runtime/state/events.jsonl' -Value $event -Encoding ASCII\n"
                 )
-            workload = (
-                "$until=[DateTime]::UtcNow.AddSeconds(12)\n"
-                "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
-                if mode == "busy"
-                else "Start-Sleep -Seconds 15\n"
+            heavy_child = fixture / "heavy-child.ps1"
+            heavy_child.write_text(
+                "$until=[DateTime]::UtcNow.AddMilliseconds(4500)\n"
+                "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n",
+                encoding="ascii",
             )
+            heavy_child_arg = "'" + str(heavy_child).replace("'", "''") + "'"
+            workloads = {
+                "busy": (
+                    "$until=[DateTime]::UtcNow.AddSeconds(12)\n"
+                    "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
+                ),
+                "blocked": (
+                    "$gate=New-Object System.Threading.ManualResetEvent($false)\n"
+                    "[void]$gate.WaitOne(15000)\n"
+                ),
+                "retiring_child": (
+                    f"$worker=Start-Process -FilePath 'powershell.exe' -ArgumentList @('-NoProfile','-File',{heavy_child_arg}) -WindowStyle Hidden -PassThru\n"
+                    "$worker.WaitForExit()\n"
+                    "$until=[DateTime]::UtcNow.AddSeconds(8)\n"
+                    "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
+                ),
+            }
             core = fixture / "silent-work.ps1"
-            core.write_text(delivery + workload + "Write-Output 'OUTCOME: transient'\n", encoding="ascii")
+            core.write_text(delivery + workloads[mode] + "Write-Output 'OUTCOME: transient'\n", encoding="ascii")
             fake = fixture / "silent-work.cmd"
             fake.write_text('@powershell.exe -NoProfile -File "%~dp0silent-work.ps1"\r\n', encoding="ascii")
             run("git", "init", cwd=fixture)
@@ -1581,21 +1599,18 @@ def run_silent_process_tree_liveness_cases() -> None:
             shutil.rmtree(fixture, ignore_errors=True)
 
     busy_exec = exercise(runner_text, "busy", False)
-    sleeping_exec = exercise(runner_text, "sleep", False)
+    blocked_exec = exercise(runner_text, "blocked", False)
+    retiring_child_exec = exercise(runner_text, "retiring_child", False)
     mutant_exec = exercise(mutant_text, "busy", False)
     busy_post = exercise(runner_text, "busy", True)
     mutant_post = exercise(mutant_text, "busy", True)
 
-    assert "reason=process_tree_cpu_growing" in busy_exec, busy_exec
     assert "TREE_KILL" not in busy_exec, busy_exec
-    assert "TREE_KILL" in sleeping_exec, sleeping_exec
-    assert "reason=deadline" in sleeping_exec, sleeping_exec
-    assert "reason=process_tree_cpu_growing" not in sleeping_exec, sleeping_exec
-    assert "TREE_KILL" in mutant_exec and "reason=deadline" in mutant_exec, mutant_exec
-    assert "phase=post_delivery reason=process_tree_cpu_growing" in busy_post, busy_post
+    assert "TREE_KILL" in blocked_exec, blocked_exec
+    assert "TREE_KILL" not in retiring_child_exec, retiring_child_exec
+    assert "TREE_KILL" in mutant_exec, mutant_exec
     assert "POST_DELIVERY_TIMEOUT" not in busy_post, busy_post
     assert "POST_DELIVERY_TIMEOUT" in mutant_post, mutant_post
-    assert "reason=post_delivery" in mutant_post, mutant_post
 
 
 def run_frozen_exec_with_production_freshness_case() -> None:

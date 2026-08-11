@@ -105,3 +105,23 @@ corregido al Arquitecto mas veces que al maker.
   `EXEC_EXIT`; Codex 547 / 543. Ambos procesos supervisores siguieron vivos (PID 77884 y 1480) y
   emitieron heartbeat. No se relanzaron en esta tarea; una nueva ejecucion carga el artefacto
   generico reparado.
+
+## Remediacion Codex r2 2026-08-11
+
+- El estado de CPU conserva el maximo observado por PID durante cada ventana. La suma incluye la
+  ultima CPU observada de descendientes que ya terminaron, por lo que nunca baja; si el padre sigue
+  trabajando despues de un hijo pesado, el total monotono sigue creciendo. La comparacion exige
+  ademas un delta minimo de CPU (maximo entre 50 ms y 10 ms por segundo de frescura) para que el
+  ruido de arranque o de una espera bloqueante no cuente como trabajo sostenido.
+- El techo es explicito y deliberadamente finito: `ExecTimeoutSeconds + ProgressHardCapSeconds`.
+  Con los valores por defecto son `3600 + 900 = 4500` segundos (75 minutos). El trabajo observado
+  extiende deadlines solo dentro de ese techo. `EXEC_SUPERVISION_LIMIT` registra ambos componentes
+  y el hard deadline al iniciar cada exec; esta implementacion no promete vida ilimitada.
+- El negativo permanente ejecuta el bucle real con un arbol real y muta el bloque de muestreo de
+  produccion para hacerlo inalcanzable. Las aserciones solo observan desenlaces: el trabajo sano no
+  muere, el mutante si muere, y post-entrega solo expira con el mutante. No atan nombres de razones.
+- El caso monotono ejecuta un hijo pesado que termina y un padre que continua consumiendo CPU. El
+  control colgado usa una espera bloqueante sin CPU, logs ni ledger; prueba la clase `no progresa`
+  sin depender de `Start-Sleep` ni de deltas de CPU accidentales durante el arranque. El control
+  historico de post-entrega tolera los dos polls de un segundo y la resolucion de un segundo del
+  log; conserva un limite superior de seis segundos para una ventana comprimida de tres segundos.

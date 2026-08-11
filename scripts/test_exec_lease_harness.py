@@ -129,13 +129,13 @@ FALSIFICATION_CONTRACTS = (
     },
     {
         "id": "NEG-HARNESS-WORK-DERIVED-EXEC-LIVENESS",
-        "negative": "A silent process tree doing CPU work must extend supervision, while a silent sleeping tree must still time out in both supervision phases.",
-        "mutation": "source.replace(cpu_progress_guard, dead_cpu_progress_guard, 1)",
+        "negative": "A silent working tree must produce a growing monotone CPU sample after a heavy descendant exits, while a silent no-progress tree remains non-progressing.",
+        "mutation": "source.replace(cpu_sample_update, dead_cpu_sample_update, 1)",
         "boundaries": (
             'assert healthy_busy["progressing"] is True',
-            'assert healthy_busy["reasons"] == "process_tree_cpu_growing"',
-            'assert healthy_sleep["progressing"] is False',
-            'assert mutant_busy["progressing"] is False',
+            'assert healthy_blocked["progressing"] is False',
+            'assert retiring_child["progressing"] is True',
+            'assert mutant_retiring_child["progressing"] is False',
         ),
         "exercised_by": "test_silent_process_tree_cpu_is_work_derived_and_mutation_proven",
     },
@@ -1087,13 +1087,13 @@ function Write-Log {{ param([string]$Line) $script:logs += $Line }}
 function Update-ExecLeaseHeartbeat {{}}
 function Get-OwnDeliveryEvidence {{ return $true }}
 function Stop-LeaseProcessTree {{ $script:stopped = $true; return $true }}
-function Get-ExecTreeCpuTicks {{ return 0L }}
+function Get-ExecTreeCpuSample {{ return [pscustomobject]@{{ total_ticks = 0L; cpu_by_pid = @{{}} }} }}
 function Get-ExecProgressState {{
     $script:progressCalls += 1
     if ($script:progressCalls -eq 1) {{
-        return [pscustomobject]@{{ progressing = $true; output_bytes = 1L; ledger_bytes = 0L; process_cpu_ticks = 0L; reasons = "probe_progress" }}
+        return [pscustomobject]@{{ progressing = $true; output_bytes = 1L; ledger_bytes = 0L; process_cpu_ticks = 0L; process_cpu_sample = [pscustomobject]@{{ total_ticks = 0L; cpu_by_pid = @{{}} }}; reasons = "probe_progress" }}
     }}
-    return [pscustomobject]@{{ progressing = $false; output_bytes = 1L; ledger_bytes = 0L; process_cpu_ticks = 0L; reasons = "none" }}
+    return [pscustomobject]@{{ progressing = $false; output_bytes = 1L; ledger_bytes = 0L; process_cpu_ticks = 0L; process_cpu_sample = [pscustomobject]@{{ total_ticks = 0L; cpu_by_pid = @{{}} }}; reasons = "none" }}
 }}
 $process = [pscustomobject]@{{ Id = 4242 }}
 $process | Add-Member ScriptMethod WaitForExit {{
@@ -1124,7 +1124,7 @@ $ledgerBytesBefore = 0L
 $ledgerPrefixSha256Before = "probe"
 $progressOutputBytes = 0L
 $progressLedgerBytes = 0L
-$progressProcessCpuTicks = 0L
+$progressProcessCpuSample = [pscustomobject]@{{ total_ticks = 0L; cpu_by_pid = @{{}} }}
 $progressSampleSeconds = 1
 $nextProgressCpuSampleUtc = [DateTime]::UtcNow.AddSeconds(10)
 $postDeliveryDeadlineUtc = $null
@@ -1185,7 +1185,7 @@ def test_post_delivery_window_honors_main_progress_extensions() -> None:
 
 
 def process_tree_cpu_probe(source: Path, mode: str) -> dict:
-    assert mode in {"busy", "sleep"}
+    assert mode in {"busy", "blocked", "retiring_child"}
     with make_tempdir(f"process-tree-cpu-{mode}-") as tmp:
         root = Path(tmp)
         stdout_path = root / "stdout.log"
@@ -1193,25 +1193,44 @@ def process_tree_cpu_probe(source: Path, mode: str) -> dict:
         events_path = root / "events.jsonl"
         for path in (stdout_path, stderr_path, events_path):
             path.write_text("", encoding="ascii")
-        workload = (
-            "$until=[DateTime]::UtcNow.AddSeconds(4); "
-            "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}"
-            if mode == "busy"
-            else "Start-Sleep -Seconds 4"
+        workload_path = root / "workload.ps1"
+        heavy_path = root / "heavy-child.ps1"
+        heavy_path.write_text(
+            "$until=[DateTime]::UtcNow.AddMilliseconds(3500); "
+            "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n",
+            encoding="ascii",
         )
+        workloads = {
+            "busy": (
+                "$until=[DateTime]::UtcNow.AddSeconds(8); "
+                "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
+            ),
+            "blocked": (
+                "$gate=New-Object System.Threading.ManualResetEvent($false); "
+                "[void]$gate.WaitOne(8000)\n"
+            ),
+            "retiring_child": (
+                f"$worker=Start-Process -FilePath {ps_literal(powershell_executable())} "
+                f"-ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(heavy_path)}) "
+                "-WindowStyle Hidden -PassThru; $worker.WaitForExit(); "
+                "$until=[DateTime]::UtcNow.AddSeconds(3); "
+                "while([DateTime]::UtcNow -lt $until){[void][Math]::Sqrt(12345.6789)}\n"
+            ),
+        }
+        workload_path.write_text(workloads[mode], encoding="ascii")
         script = function_loader(
             source,
-            ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Get-ExecTreeCpuTicks", "Get-ExecProgressState"),
+            ("Get-LeaseProcessState", "Test-LeaseProcessMatches", "Get-ExecTreeCpuSample", "Get-ExecProgressState"),
         ) + f"""
-$child = Start-Process -FilePath {ps_literal(powershell_executable())} -ArgumentList @('-NoProfile','-NonInteractive','-Command',{ps_literal(workload)}) -WindowStyle Hidden -PassThru
+$child = Start-Process -FilePath {ps_literal(powershell_executable())} -ArgumentList @('-NoProfile','-NonInteractive','-File',{ps_literal(workload_path)}) -WindowStyle Hidden -PassThru
 $null = $child.Handle
 try {{
-    Start-Sleep -Milliseconds 900
+    Start-Sleep -Milliseconds 1500
     $lease = [pscustomobject]@{{ pid = $child.Id; process_start_time_utc = $child.StartTime.ToUniversalTime().ToString('o') }}
-    $before = Get-ExecTreeCpuTicks -Lease $lease
-    Start-Sleep -Milliseconds 1200
-    $result = Get-ExecProgressState -Lease $lease -StdoutPath {ps_literal(stdout_path)} -StderrPath {ps_literal(stderr_path)} -EventsPath {ps_literal(events_path)} -PreviousOutputBytes 0L -PreviousLedgerBytes 0L -PreviousProcessCpuTicks $before -FreshSeconds 1
-    [ordered]@{{ progressing = [bool]$result.progressing; reasons = [string]$result.reasons; before = $before; after = $result.process_cpu_ticks }} | ConvertTo-Json -Compress
+    $before = Get-ExecTreeCpuSample -Lease $lease
+    Start-Sleep -Milliseconds 3000
+    $result = Get-ExecProgressState -Lease $lease -StdoutPath {ps_literal(stdout_path)} -StderrPath {ps_literal(stderr_path)} -EventsPath {ps_literal(events_path)} -PreviousOutputBytes 0L -PreviousLedgerBytes 0L -PreviousProcessCpuSample $before -FreshSeconds 1
+    [ordered]@{{ progressing = [bool]$result.progressing; before = $before.total_ticks; after = $result.process_cpu_ticks }} | ConvertTo-Json -Compress
 }} finally {{
     if (-not $child.HasExited) {{ Stop-Process -Id $child.Id -Force -ErrorAction SilentlyContinue }}
 }}
@@ -1223,24 +1242,23 @@ def test_silent_process_tree_cpu_is_work_derived_and_mutation_proven() -> None:
     """PERMANENT_NEGATIVE: NEG-HARNESS-WORK-DERIVED-EXEC-LIVENESS"""
     source = HARNESS_PATH.read_text(encoding="utf-8")
     healthy_busy = process_tree_cpu_probe(HARNESS_PATH, "busy")
-    healthy_sleep = process_tree_cpu_probe(HARNESS_PATH, "sleep")
+    healthy_blocked = process_tree_cpu_probe(HARNESS_PATH, "blocked")
+    retiring_child = process_tree_cpu_probe(HARNESS_PATH, "retiring_child")
     assert healthy_busy["progressing"] is True
-    assert healthy_busy["reasons"] == "process_tree_cpu_growing"
     assert healthy_busy["after"] > healthy_busy["before"]
-    assert healthy_sleep["progressing"] is False
+    assert healthy_blocked["progressing"] is False
+    assert retiring_child["progressing"] is True
+    assert retiring_child["after"] > retiring_child["before"]
 
-    cpu_progress_guard = (
-        "if ($null -ne $processCpuTicks -and $null -ne $PreviousProcessCpuTicks "
-        "-and $processCpuTicks -gt $PreviousProcessCpuTicks) {"
-    )
-    dead_cpu_progress_guard = "if ($false) {"
-    mutant_source = source.replace(cpu_progress_guard, dead_cpu_progress_guard, 1)
+    cpu_sample_update = "$cpuByPid[$processKey] = $observedTicks"
+    dead_cpu_sample_update = "$cpuByPid[$processKey] = 0L"
+    mutant_source = source.replace(cpu_sample_update, dead_cpu_sample_update, 1)
     assert mutant_source != source
     with make_tempdir("process-tree-cpu-mutant-") as tmp:
         mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
         mutant_path.write_text(mutant_source, encoding="utf-8", newline="\n")
-        mutant_busy = process_tree_cpu_probe(mutant_path, "busy")
-    assert mutant_busy["progressing"] is False
+        mutant_retiring_child = process_tree_cpu_probe(mutant_path, "retiring_child")
+    assert mutant_retiring_child["progressing"] is False
 
 
 def defer_probe(source: Path) -> dict:
