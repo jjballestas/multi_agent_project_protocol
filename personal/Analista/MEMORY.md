@@ -11955,3 +11955,68 @@ Era la **vuelta 2 de 2**. No concedo yo la tercera: dije explicitamente que **la
 operador humano** y di el parche completo (4 lineas, solo test, sin tocar produccion) para que esa
 decision sea barata. Emitir CHANGE-REQUIRED y ADEMAS especificar el arreglo exacto no es implementar:
 es hacer que el veredicto sea accionable en una vuelta.
+
+---
+
+## 2026-08-12 -- TASK-0354 r6: CHANGE-REQUIRED **solo declarativo**, y la leccion nueva
+
+Commit del veredicto: `b6001d08`. Ancla de la implementacion `cf918584`, control pre-fix
+`90fa8ffa`, `origin/main` `567447dd` al firmar. Artefacto:
+`Area_comun/artifacts/Analista-TASK-0354-r6-token-inmediato-verdict.md`.
+Clones y arnes: `D:/Aegis_Scratch/protocol/an0354r6/` (c1 medicion, c2 mutantes, `harness.py`,
+`battery_repro.py`, `battery_attack.py`, `census.py`, `extract_gate.py`). **No los borro todavia**:
+si el Arquitecto rutea la remediacion declarativa, el re-juicio no necesita re-medir mecanismo, pero
+si alguien reabre mecanismo el arnes ya esta montado. Venvs reutilizados de r5:
+`D:/Aegis_Scratch/protocol/r54r5/venvjob` (cryptography jsonschema pyyaml + attrs transitivo) y
+`venvbare` (vacio).
+
+### La leccion, que es NUEVA y merece skill/memoria global
+
+**Dos coordenadas que por separado se atrapan pueden componerse en un escape.** En r5 medi
+"banderas del interprete" (`-u`, `-X utf8`, `-W ignore`) y salieron CAUGHT. Y medi "cambio de cwd"
+(`working-directory`, `cd`) y salio SILENT. La remediacion cerro el cwd. Nadie midio **cwd + bandera
+a la vez**, y ahi vive la clase entera: `cd <dir> && python <base>` muere, `cd <dir> && python -u
+<base>` no. Las banderas solo salian CAUGHT porque en aquellos vectores la ruta literal estaba
+escrita; quitada la ruta literal, la bandera es un escape limpio.
+
+Corolario para futuras bateras: cuando dos ejes producen veredictos distintos, **el producto de los
+ejes es una poblacion propia**. Es la misma familia que "estrella no producto: la poblacion se
+DERIVA", pero en version temporal: la coordenada que se cierra en la vuelta N deja viva su
+composicion con la que se dio por cerrada en la vuelta N-1.
+
+### Censo en vez de anecdota (esto si funciono y lo repito)
+
+Un escape suelto se discute; 69 de 69 no. Tome **todos** los pasos `run: python <ruta>.py` del
+workflow y aplique la reescritura mecanica uno a uno restaurando entre medias: SILENT 69, CAUGHT 0.
+El censo convirtio "hay una forma exotica que escapa" en "toda invocacion viva es ocultable". Coste:
+69 corridas del gate, unos minutos. Lo vuelvo a hacer siempre que la pregunta sea "cuanto queda
+abierto".
+
+### Lo que confirme del maker (entero, y lo dije ANTES de lo malo)
+
+pre-fix EXIT=0 en 14/14; nuevo EXIT=1 en las 11 declaradas; supervivientes N8/N10/N14; arbol intacto
+EXIT=0 `invocations=73 referenced=72` con **cero falsos rojos**; el reconocedor no se ensancho.
+Cuatro lineas, exactamente mi recomendacion de r5 seccion 8. La remediacion es limpia; lo que falla
+es el ENUNCIADO del residual, no el mecanismo.
+
+### Criterio real de la puerta, por si vuelve
+
+> Descubre la invocacion solo si el token **inmediatamente posterior** a `python` es el propio
+> objetivo (`.py` o `-m <modulo>`). Bandera, `-c`, envoltorio (`bash -c`, `find -exec`) o token
+> compuesto la dejan invisible. Una invisible solo enrojece si la ruta relativa a la RAIZ aparece
+> **literal** en el mismo `run`. Dos condiciones de forma, no una.
+
+### Frontera de rol que respete
+
+En r5 firme "si la clase sigue abierta no pido otra vuelta de mecanismo; se cierra por declaracion".
+La clase sigue abierta y **sostuve la palabra**: CHANGE-REQUIRED de un solo parrafo de texto, cero
+cambios en el YAML, y escalo el fondo al operador sin pedirle nada. Un checker que cambia su propio
+liston entre vueltas no es un liston.
+
+### Residual que es coste MIO
+
+La rama de error que yo recomende enrojece objetivos legitimos fuera del repo
+(`python "$RUNNER_TEMP/generated.py"`, `python /tmp/gen.py`: EXIT=0 -> EXIT=1). Fail-closed y sin
+instancias en el arbol, pero su reparacion natural empuja la invocacion a la clase silenciosa. En r5
+solo medi "arbol intacto, cero falsos rojos" y no medi el caso hipotetico legitimo. **Medir el coste
+de mi propia recomendacion es parte del encargo, no un extra.**
