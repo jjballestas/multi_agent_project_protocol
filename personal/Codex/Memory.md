@@ -2,6 +2,24 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-11 - TASK-0353 remediation iteration 3 implementation
+
+- Commit `1e178f3c` changes the production guard from conditionally required keys sampled from one
+  turn to every optional top-level key read by routed validation gates: `actions`,
+  `aggregate_version`, `decision_refs`, `fencing_token`, `gate`, `obstacles`, `tools`, and
+  `transitions`.
+- A production-executing corpus derives 23 reports from seven outcomes, six action types, eight
+  Review/QA transitions, concurrency, and tool-policy shapes. It observes 12 top-level reads: four
+  schema-required keys plus the exact eight-key production declaration.
+- The permanent negative kills a new blocked-turn `next_hint` validation read that is not declared.
+  A routed schema without `actions` now fails before filtering in both direct and real CLI paths,
+  and TASK-9000 remains `ready`; the checker-reported unjustified contract-change commit is closed.
+- Focused behavior, 73/73 falsification inventory, collaboration, encoding, Python/PowerShell
+  neutrality, compile, and diff gates exited 0. The unrestricted validate-job replay exceeded the
+  15-minute local harness timeout without a final balance and is not acceptance evidence.
+- TASK-0353 remains `in_progress` under the remediation-3-v2 maker claim pending exact-commit clean
+  verification and governed delivery. Codex has not reviewed or ratified the remediation.
+
 ## 2026-08-11 - Four approved task closures
 
 - Commit `bbe7d9e2` atomically moves TASK-0327, TASK-0331, TASK-0336, and TASK-0346 from
