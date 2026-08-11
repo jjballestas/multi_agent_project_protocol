@@ -137,11 +137,11 @@ jobs:
                       if index + 1 < len(parts):
                           script = parts[index + 1].strip(";|&()\"'").replace("\\", "/")
                           if script.endswith(".py"):
-                              yield script
+                              yield "script", script
                               continue
                       if index + 2 < len(parts) and parts[index + 1] == "-m":
                           module = parts[index + 2].strip(";|&()")
-                          yield module.replace(".", "/") + ".py"
+                          yield "module", module.replace(".", "/") + ".py"
 
           errors = []
           checked = 0
@@ -154,9 +154,11 @@ jobs:
                   command = str(step.get("run", ""))
                   expected_in_step = referenced_runner_paths(command)
                   discovered_in_step = set()
-                  for runner_token in python_runner_tokens(command, posix=posix):
+                  for kind, runner_token in python_runner_tokens(command, posix=posix):
                       runner = (root / runner_token).resolve()
                       if not runner.is_file():
+                          if kind == "script":
+                              errors.append(f"{job_name}: python script target is not a repository file: {runner_token}")
                           continue
                       checked += 1
                       relative_runner = runner.relative_to(root).as_posix()

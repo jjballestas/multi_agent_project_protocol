@@ -118,8 +118,9 @@ repararse bajando un cardinal literal.
 
 El tokenizador conserva la semantica de host del job: usa reglas POSIX salvo cuando `runs-on`
 declara Windows. Esta diferencia evita interpretar `\` como escape en comandos del job Windows.
-Las formas que el tokenizador no entienda quedan en postura fail-closed porque el fichero nombrado
-permanece en la poblacion derivada y falta en el conjunto descubierto.
+Una forma script descubierta cuyo token no resuelva a un fichero del repositorio queda en postura
+fail-closed. La cobertura no alcanza tokens compuestos que no presentan una ruta `.py` al analizador:
+`$BASE` compuesto, `find -exec` y `bash -c` sobreviven y quedan declarados como residual.
 
 G2 queda explicitamente fuera de esta vuelta: la superficie de la puerta termina en el fichero
 del runner descubierto. No calcula clausura transitiva de imports locales ni certifica procesos
