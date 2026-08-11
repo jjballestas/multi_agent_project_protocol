@@ -42,6 +42,78 @@
             "updated_at": "2026-08-11T01:34:41Z"
         },
         {
+            "claim_id": "CLAIM-20260811T093828Z-Codex-TASK-0327-done-flip",
+            "expires_at": "2026-08-11T11:38:28Z",
+            "notes": "Operator-authorized final close after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811T093828Z-Codex-TASK-0327-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0327",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0327",
+                "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T09:38:28Z",
+            "status": "released",
+            "task_id": "TASK-0327",
+            "updated_at": "2026-08-11T09:38:28Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811T093828Z-Codex-TASK-0331-done-flip",
+            "expires_at": "2026-08-11T11:38:28Z",
+            "notes": "Operator-authorized final close after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811T093828Z-Codex-TASK-0331-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0331",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0331",
+                "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T09:38:28Z",
+            "status": "released",
+            "task_id": "TASK-0331",
+            "updated_at": "2026-08-11T09:38:28Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811T093828Z-Codex-TASK-0336-done-flip",
+            "expires_at": "2026-08-11T11:38:28Z",
+            "notes": "Operator-authorized final close after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811T093828Z-Codex-TASK-0336-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0336",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0336",
+                "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T09:38:28Z",
+            "status": "released",
+            "task_id": "TASK-0336",
+            "updated_at": "2026-08-11T09:38:28Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811T093828Z-Codex-TASK-0346-done-flip",
+            "expires_at": "2026-08-11T11:38:28Z",
+            "notes": "Operator-authorized final close after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811T093828Z-Codex-TASK-0346-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0346",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0346",
+                "Area_comun/tasks/TASK-0346-treinta-y-cinco-runners-de-CI-fuera-de-toda-puerta-de-aceptacion.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T09:38:28Z",
+            "status": "released",
+            "task_id": "TASK-0346",
+            "updated_at": "2026-08-11T09:38:28Z"
+        },
+        {
             "claim_id": "CLAIM-arq-cierre-0332-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
