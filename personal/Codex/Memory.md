@@ -6851,5 +6851,8 @@ ratified its own work.
   encoding, Python and PowerShell neutrality, six neutrality parity tests, clean drift through seq
   8819, compile, parser, and diff gates exited 0. The existing compressed post-delivery timing
   control now accounts for its two one-second polls and second-resolution timestamps.
+- Follow-up commit `a80a3cc2` anchors cap eligibility at the start of deadline observation and
+  rechecks process completion after telemetry. Slow CIM cannot retroactively turn timely progress
+  into a hard-cap failure or publish a false hang for an exec that completed during observation.
 - TASK-0359 remains `in_progress` under the remediation-2-v2 maker claim pending exact-commit clean
   verification and governed delivery. Codex has not reviewed or ratified the remediation.
