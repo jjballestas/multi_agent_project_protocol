@@ -18,6 +18,13 @@ Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures c
   admission. TASK-0342 remains `in_progress` under the remediation-4-v2 maker claim pending exact
   commit verification and governed handoff for one independent Analista re-judgment. Codex did
   not review or ratify the implementation.
+- Exact implementation `14686290` passed the declared gates in a detached clean worktree with
+  empty tracked status. Independent G6six, G6ord, and G6ws source variants each exited 0; all four
+  scratch worktrees were removed after verification.
+- Delivery commit `774df28d` moves TASK-0342 to `in_review`, releases every Codex claim, updates the
+  self-contained handoff, and publishes the Arquitecto routing message. Live drift is clean through
+  seq 8783. AC5 remains deferred and unclaimed; the task cannot reach `done` without later Actions
+  evidence or an operator decision. Codex remains maker only.
 
 ## 2026-08-11 - TASK-0354 remediation iteration 3 implementation
 
