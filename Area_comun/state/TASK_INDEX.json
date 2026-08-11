@@ -288,7 +288,7 @@
             "file": "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
             "id": "TASK-0332",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST",
             "type": "infra"
         },
@@ -426,7 +426,7 @@
             "file": "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
             "id": "TASK-0353",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn",
             "type": "implementation"
         },
@@ -434,7 +434,7 @@
             "file": "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
             "id": "TASK-0354",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan",
             "type": "implementation"
         },
@@ -460,6 +460,22 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un runner que CI ejecuta fija una ruta absoluta de UNA maquina y revienta antes de medir si esa unidad no existe",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0358-la-invariante-de-dos-fases-no-esta-atada.md",
+            "id": "TASK-0358",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La invariante de dos fases no esta atada por ninguna puerta -- el bloque existe, nadie comprueba que nada corra antes",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+            "id": "TASK-0359",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora",
             "type": "implementation"
         },
         {

@@ -2,7 +2,7 @@
 task_id: TASK-0332
 file: Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md
 title: "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
-status: in_review
+status: done
 type: infra
 owner: Codex
 reviewer: Analista
@@ -137,3 +137,40 @@ month-by-hour-by-ASCII-offset-by-format product and complete marginals for the o
 coordinates. It does not claim the impossible full Cartesian product over every coordinate
 simultaneously. The production two-phase invariant, rather than that finite sample alone, prevents a
 date exemption from suppressing non-phone PII in another item.
+
+## Residuales declarados al cerrar (pendiente de decision del operador)
+
+Cierre propuesto tras el veredicto r3 (`Analista-TASK-0332-remediacion-2-verdict.md`), que escala
+por segunda vez pero declara legitimo el cierre-con-residual siempre que se corrija la frase de
+R0332-9. Lo que la remediacion 2 SI logro, medido por el checker:
+
+- **Toca produccion**: `scripts/memory/build_memory_db.py` (+70/-34), que era su reproche principal
+  a la vuelta anterior.
+- **Dos de los tres escapes mueren por comportamiento**, en el assert correcto: el mes y la hora.
+- El producto de cuatro ejes y las marginales completas de R0332-9 **son ciertos y estan
+  verificados**.
+
+**CORRECCION de R0332-9.** La segunda frase de ese residual afirmaba:
+
+> *"The production two-phase invariant, rather than that finite sample alone, prevents a date
+> exemption from suppressing non-phone PII in another item."*
+
+La invariante **es cierta del codigo entregado**, pero **nada la ata**: `:2302` comprueba que el
+bloque existe una vez; no comprueba que nada corra antes. Cuatro mutantes lo demuestran dejando
+intactos el texto del bloque, el conteo de bucles y la ausencia de `break`/`continue`. La frase se
+retira: una tarea cerrada no afirma una garantia que ninguna puerta sostiene.
+
+**Lo que queda abierto, con dueno:**
+
+- **R0332-10** -- la invariante de dos fases no esta atada por ninguna puerta. **Ficha propia:
+  TASK-0358.** Era la unica razon por la que el checker no firmaba el cierre.
+- **R0332-11** -- el corpus es **producto en cuatro coordenadas y estrella en cinco**, y de esas
+  cinco tres estan funcionalmente clavadas (`second = 7*minute mod 60`,
+  `fraccion = minute mod 6 + 1`). Un bypass con clave en un PAR de esas cinco es invisible.
+  Demostrado con M5, N1, N2 y N3.
+- **R0332-12 (informativo)** -- con la fase 1 delante, los 1.454.976 casos del producto dan positivo
+  **sin atravesar la exencion de fecha**. El tamano del corpus no es, por si mismo, medida de lo que
+  el corpus ata sobre la exencion.
+
+Y la conjuncion `2027-` con `+06:15` sigue viva, con tres companeras nuevas que el maker no habia
+visto: es la estrella otra vez, con los ejes cubiertos por separado y el cruce no.

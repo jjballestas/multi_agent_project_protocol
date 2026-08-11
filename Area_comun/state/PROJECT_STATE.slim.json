@@ -13,12 +13,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0332",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST"
-        },
-        {
             "id": "TASK-0337",
             "owner": "Codex",
             "status": "proposed",
@@ -93,13 +87,13 @@
         {
             "id": "TASK-0353",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn"
         },
         {
             "id": "TASK-0354",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan"
         },
         {
@@ -119,6 +113,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un runner que CI ejecuta fija una ruta absoluta de UNA maquina y revienta antes de medir si esa unidad no existe"
+        },
+        {
+            "id": "TASK-0358",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La invariante de dos fases no esta atada por ninguna puerta -- el bloque existe, nadie comprueba que nada corra antes"
+        },
+        {
+            "id": "TASK-0359",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora"
         }
     ],
     "next_actions": [
