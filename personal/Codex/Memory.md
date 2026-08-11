@@ -14,9 +14,12 @@ Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures c
   silent forms exit 1 and name the missing runner; four Windows backslash forms also exit 1 through
   dependency enforcement under Windows tokenization.
 - Collaboration, encoding, Python and PowerShell neutrality, drift through seq 8790, 73/73
-  falsification inventory, and diff gates exited 0. TASK-0354 remains `in_progress` under its
-  remediation-4 maker claim pending exact-commit verification and governed delivery. Codex has
-  not reviewed or ratified the implementation.
+  falsification inventory, and diff gates exited 0.
+- Exact implementation `90fa8ffa` passed the same gates in a detached clean Aegis worktree with
+  empty tracked status. Codex-signed events 8801-8803 move TASK-0354 to `in_review` and release
+  both maker claims; concurrent Arquitecto coordination commit `0b37ebd5` incorporated those
+  runtime changes. Handoff commit `d53f0095` publishes the self-contained routing request for
+  independent Analista re-review. Codex has not reviewed or ratified the implementation.
 
 ## 2026-08-11 - TASK-0342 remediation iteration 4 implementation
 
