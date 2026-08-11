@@ -8,6 +8,9 @@
   (`find -exec`), and N14 (`bash -c`) remain exit 0 and are declared residuals in the task file.
 - Collaboration, encoding, Python and PowerShell neutrality, drift through seq 8872, 74/74
   falsification inventory, and diff gates exited 0 before the implementation commit.
-- TASK-0354 remains `in_progress` under
-  `CLAIM-20260811-Codex-TASK-0354-remediation-6` pending exact-commit verification and governed
-  delivery. Codex is maker only and has not reviewed or ratified the change.
+- Exact implementation `cf918584` passed the intact dependency gate, collaboration, encoding,
+  Python neutrality, clean drift through seq 8872, diff checks, and empty tracked status in a
+  detached worktree. Delivery commit `10e08a45` moves TASK-0354 to `in_review`, releases every
+  maker claim, and publishes the self-contained Arquitecto handoff. Live delivery gates passed
+  collaboration, encoding, Python and PowerShell neutrality, and clean drift through seq 8876.
+  Independent Analista re-review is required; Codex has not reviewed or ratified the change.
