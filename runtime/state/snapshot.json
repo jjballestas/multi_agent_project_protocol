@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "dbfd692538ecd90845901c9327161c690ca0a2093bf641e3bdfc4c0542df0719",
+  "canonical_hash": "2ab3a7aef43cbf305c39f8d5cf774e3abe95063bd1c1ed82c9d34e38955e722b",
   "integrity": {
-    "canonical_hash": "dbfd692538ecd90845901c9327161c690ca0a2093bf641e3bdfc4c0542df0719",
+    "canonical_hash": "2ab3a7aef43cbf305c39f8d5cf774e3abe95063bd1c1ed82c9d34e38955e722b",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2b47edbb36d2a6d337b405eab79d08e62ac3e75ceae835a281e8a0c3811c8d81",
-    "signature": "db63a3a05481f6d8348834133a970a4a5867db7b92030868e384196d6469a3e7",
-    "up_to_seq": 8752
+    "prev_hash": "59d48171e4a15422f6cd50e69b403f14d7effe5353386625c4d17b89f82e7367",
+    "signature": "ae4b8ede2c6b12a0fdf643787af44f1bcdfd5104a7d0d054cd58b704cf69db6d",
+    "up_to_seq": 8759
   },
   "state": {
     "aggregate_versions": {
@@ -1358,6 +1358,7 @@
       "CLAIM-arq-rv0345r2-20260810": 1,
       "CLAIM-arq-rv0353r3-20260810": 1,
       "CLAIM-arq-rv0354r2-20260810": 1,
+      "CLAIM-arq-rv0359c-20260811": 1,
       "CLAIM-arq-tanda-20260811": 1,
       "CLAIM-arq-tres-encargos-20260720": 1,
       "CLAIM-arq-unblock0300-20260728": 1,
@@ -3138,7 +3139,12 @@
       "MSG-20260811-Analista-to-Arquitecto-VERDICT-TASK-0343-r4": 1,
       "MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0332-r3": 1,
       "MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0343-r4": 1,
+      "MSG-20260811-Arquitecto-to-Codex-ACTION-flips-cierre": 1,
+      "MSG-20260811-Arquitecto-to-Codex-GO-TASK-0359": 1,
+      "MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0353-r2": 1,
       "MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0332-remediation-2": 1,
+      "MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0353-remediation-3": 1,
+      "MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -3241,6 +3247,7 @@
       "OPS-MAILBOX-HYGIENE-20260811A": 1,
       "OPS-MAILBOX-HYGIENE-20260811B": 1,
       "OPS-MAILBOX-HYGIENE-20260811C": 1,
+      "OPS-MAILBOX-HYGIENE-20260811F": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3568,7 +3575,7 @@
       "protocol-prune": 65,
       "protocol-state": 1
     },
-    "events_applied": 8081,
+    "events_applied": 8088,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4470,6 +4477,13 @@
       "arq-rv354b-003": 8543,
       "arq-rv354b-004": 8544,
       "arq-rv354b-099": 8545,
+      "arq-rv359c-000": 8753,
+      "arq-rv359c-001": 8754,
+      "arq-rv359c-002": 8755,
+      "arq-rv359c-003": 8756,
+      "arq-rv359c-004": 8757,
+      "arq-rv359c-005": 8758,
+      "arq-rv359c-099": 8759,
       "arq-rv4445-000": 8546,
       "arq-rv4445-001": 8547,
       "arq-rv4445-002": 8548,
@@ -11653,5 +11667,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8752
+  "up_to_seq": 8759
 }
