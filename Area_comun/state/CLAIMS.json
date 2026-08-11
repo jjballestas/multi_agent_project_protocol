@@ -58,6 +58,24 @@
             "updated_at": "2026-08-11T20:01:17Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Arquitecto-TASK-0354-vuelta3",
+            "expires_at": "2026-08-12T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
+                "Area_comun/mailbox/open/MSG-20260811-Arquitecto-to-Codex-REMEDIACION-TASK-0354-r6.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Arquitecto-TASK-0354-vuelta3",
+                "Area_comun/mailbox/open/MSG-20260811-Analista-to-Arquitecto-REVIEW-TASK-0354-r5-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260811-Analista-to-Arquitecto-REVIEW-TASK-0354-r5-verdict.md"
+            ],
+            "started_at": "2026-08-11T21:29:54Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-11T21:29:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Arquitecto-TASK-0361-registro",
             "expires_at": "2026-08-12T08:00:00Z",
             "owner": "Arquitecto",
@@ -99,6 +117,69 @@
             "status": "released",
             "task_id": "TASK-0361",
             "updated_at": "2026-08-11T20:57:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation3",
+            "expires_at": "2026-08-12T05:09:05Z",
+            "notes": "Close AC5 through the real supervision loop outcome and bind CPU sampling identity to pid plus process start time.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-remediation3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T21:09:05Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T21:09:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation3-v2",
+            "expires_at": "2026-08-12T05:10:15Z",
+            "notes": "Close AC5 through real supervision-loop outcomes and bind CPU sampling identity to pid plus process start time.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-remediation3-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T21:10:15Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T21:10:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation3-v3",
+            "expires_at": "2026-08-12T05:24:58Z",
+            "notes": "Close AC5 through real loop outcomes, bind CPU samples to process identity, and keep reviewed neutrality coordinates aligned.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-remediation3-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T21:24:58Z",
+            "status": "active",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T21:24:58Z"
         },
         {
             "claim_id": "CLAIM-20260811-Codex-TASK-0361",
