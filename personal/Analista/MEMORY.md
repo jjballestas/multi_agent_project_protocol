@@ -11571,3 +11571,58 @@ Escribi `MSG-...-VERDICT-TASK-0359.md` en `mailbox/open/` y el commit del Arquit
 barrio con staging amplio antes de que yo commiteara. Contenido identico, nada perdido, pero el
 veredicto se publico bajo su firma y **antes** que el artefacto que sus `context_refs` citan. Aprendido:
 escribir el artefacto PRIMERO y el mensaje al final, justo antes de commitear ambos.
+
+## 2026-08-11 -- TASK-0342 r5 (AC4): OK-CLOSABLE. Un liston publicado por adelantado se juzga con aritmetica, no con opinion
+
+Ancla `6cd15d9c`, implementacion `14686290`. Clon limpio + `pwsh 7.4.6` sobre ext4 (WSL), 7 vectores
+del liston que yo mismo publique al final de r4, mas 8 vectores de caza libre.
+
+### El resultado, para no volver a discutirlo
+
+    G9a G9b G9c G9d   exit=1  ROJOS   (mueren en la comparacion de valores efectivos)
+    G6six G6ord G6ws  exit=0  VERDES  (dist dejo de ser palabra reservada del runner)
+
+**Cuando publico un liston al cerrar una ronda, la ronda siguiente es aritmetica y hay que decirlo
+asi.** No reabrir el criterio a mitad de partida ni subir el liston porque encuentro cosas nuevas:
+lo nuevo se declara aparte, con su proporcion, y se recomienda tarea propia.
+
+### La leccion tecnica: un "punto del fichero" no se arregla moviendolo, se arregla atandolo
+
+En r4 el volcado precedia al consumo y cualquier asignacion intermedia era invisible. La remediacion
+no movio el volcado al otro extremo y ya: hizo que **lea el mismo objeto vivo** que el escaner
+consumio (`$ScanPolicy`), con lo que "despues del volcado" pasa a ser codigo muerto (`exit 0`) y el
+desfase por ORDEN deja de existir como colocacion. Verificado atacando por el otro lado: mutar tras
+construir y **revertir** antes de volcar tambien muere.
+
+**Como se comprueba que una clase se cerro y no se movio: buscar el punto del programa donde el
+efecto y su observacion se separan. Si ya no existe tal punto, la clase se cerro.**
+
+### Lo que si sigue abierto, y por que no era remediacion 5
+
+- **E1 -- el guarda puede excluir sin pasar por la politica.** `if ($File.FullName -match
+  "runtime/state") { return $false }` como primera linea de `Should-Scan`: el volcado sale intacto,
+  los gemelos divergen VIVO (`ONLY_PY = runtime/state/events.jsonl, keep.txt`) y el negativo sale
+  **exit 0**. Acotado honestamente: la misma linea con una coordenada **dentro** del universo derivado
+  (`Area_comun/tasks`) SI muere. **Ninguna fixture finita cubre un espacio de nombres infinito: eso no
+  se cierra anadiendo coordenadas, se cierra cambiando QUE se observa** (la decision por fichero, no
+  el conjunto sobre un universo pre-elegido).
+- **E2 -- rojos falsos por ancla de texto (= X4 de r3).** Reescribir un COMENTARIO de produccion,
+  cambiar `-File -Force` por `-Force -File` (identico en PowerShell) o renombrar `$PathComparison`
+  ponen el gate rojo con **divergencia CERO medida**. La prosa del codigo es parte del contrato.
+
+### Metodo que repetir
+
+- **Toda mutacion de produccion, en su propio arbol copiado del clon limpio** (`tar --exclude=.git`,
+  54 MB por copia, ~25 s por vector). Driver en Python con un decorador por vector y `assert` de que
+  la mutacion no fue no-op.
+- **Un exit 0 no es escape hasta demostrar la divergencia VIVA por separado**: arbol sonda propio +
+  los dos escaneres + diferencia de conjuntos (`ONLY_PY` / `ONLY_PS`). Y **un exit 1 no es rojo falso
+  hasta demostrar divergencia CERO** con la misma sonda. Los dos lados se miden.
+- **Anadir siempre el vector que ACOTA la clase** (aqui `N2c_in_universe`, que muere). Un hallazgo sin
+  su frontera se lee como catastrofe y se descarta como exagerado.
+- **Gatear por exit code REAL.** Un `for c in ...; do out=$(cmd | tail -2); echo "[$?]"` devuelve el
+  exit de `tail`, no del comando: me marco cinco gates como `[0]` cuando `validate` estaba rojo.
+- **Clon superficial rompe `commit_trailers`.** `--depth 20` no alcanza el genesis `57f6250f` y
+  `validate` sale rojo por historia truncada, no por estado. `git fetch --depth 2000` primero.
+- **WSL: el distro por defecto puede ser `docker-desktop`.** `wsl -e bash` fallo con "mounted
+  read-only" y "Failed to translate D:\...". Usar `wsl -d Ubuntu -e bash -lc` siempre.
