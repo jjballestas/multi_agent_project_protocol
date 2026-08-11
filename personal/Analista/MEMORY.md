@@ -7,6 +7,83 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-11 (68) - TASK-0354 r5: CHANGE-REQUIRED + ESCALADO al operador
+
+- Encargo `MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0354-r5`. **SOLO HUB, SIN PRODUCTO.**
+  Implementacion `90fa8ffa` (ancestro de `origin/main` `f65440d9`). Veredicto en
+  `Area_comun/artifacts/Analista-TASK-0354-r5-criterio-derivado-verdict.md`, commit `8c689983`.
+- Clones limpios `D:/Aegis_Scratch/protocol/r54r5/{c1,c2}` + DOS venvs: uno con exactamente lo que
+  instala el job `validate` (cryptography jsonschema pyyaml) y otro **VACIO** para los jobs que no
+  declaran nada. Puertas en el ancla: validate 0, encoding 0, neutralidad 0, contratos 0,
+  drift CLEAN up_to_seq=8790. Gate baseline `invocations=73 referenced=72` EXIT=0.
+- Verifique las tres cifras del maker y las TRES son correctas: 73/72, 14/14 y 4/4 en Windows.
+
+### LECCION 1 (la que me llevo): al retirar un testigo hay que medir el eje que ese testigo cubria
+
+En r4 yo mismo pedi que muriera el literal `expected_runner_invocations = 73` porque su unica
+reparacion documentada era bajarlo. El maker lo quito. Con el se fue **la direccion B**, que yo
+habia certificado verde en r4 (14/14: reescribir una invocacion existente enrojecia por el `!=`).
+El resultado: ocultar la invocacion viva de `run_powershell_host_cases.py` con `cd <dir> && python
+<basename>` (o `working-directory:`) y quitarle `pyyaml` a su job deja el gate en
+`PASS invocations=72` EXIT=0 mientras el runner muere con `ModuleNotFoundError: No module named
+'yaml'` EXIT=1. **El defecto original de TASK-0354 entero, en dos lineas que no tocan el runner.**
+
+Regla que adopto: cuando una remediacion **retira** un mecanismo, la bateria de re-juicio debe
+incluir los casos que ese mecanismo mataba, no solo los que la nueva pieza promete matar. Un
+veredicto anterior mio que decia "esto ya esta cumplido" es exactamente lo que hay que re-medir.
+
+### LECCION 2: mi recomendacion llevaba el agujero dentro
+
+El escape es **mi seccion 4.2 de r4 al pie de la letra** ("regex sobre el texto crudo del `run`,
+normalizando `\` a `/`, resolviendo por sufijo"). El maker entrego con fidelidad lo que yo medi y
+firme, y mi propuesta presuponia sin decirlo que **el cwd de todo paso es la raiz del repo**.
+Tampoco medi la direccion B contra mi propia propuesta antes de recomendarla. Es la tercera vez
+que mi encargo nombra una implementacion en vez de la propiedad y recibo la implementacion.
+Por eso escale al operador en vez de pedir vuelta 3: no es el maker quien va por la tercera.
+
+Regla: antes de firmar una recomendacion propia, correrle **la misma bateria adversarial** que le
+correria a la entrega del maker, incluidos los ejes que la pieza que sustituye ya cubria.
+
+### LECCION 3 (contenido): "derivado" y "sin lista" no son lo mismo que "invariante"
+
+El conjunto **SI se deriva** -- poblacion de `rglob("*.py")`, 206 ficheros, sin literal, y las 14
+formas de r4 mueren **sin que se anadiera una sola alternativa al reconocedor**, por contencion.
+Eso es un cambio de naturaleza y lo firme como tal. Pero el criterio implementado es
+*"un .py del repo cuya ruta relativa aparece ESCRITA en el texto del `run`"*, no *"un .py del repo
+que el `run` ejecuta"*: sigue siendo condicion de forma, cambio de que forma. Doce coordenadas
+reales lo atraviesan con EXIT=0 sin senal (`working-directory`, `cd`+basename, `pushd`, globs,
+`$DIR/`, `find -exec`, `bash -c`), y comprobe que **ejecutan de verdad**, no que parezcan validas.
+
+Al juzgar un "criterio derivado" hay que preguntar de que se deriva **el predicado de pertenencia**,
+no solo de que se deriva la poblacion.
+
+### LECCION 4 (metodo): dar la remediacion MEDIDA, con sus supervivientes
+
+La rama fail-open estaba en una linea (`if not runner.is_file(): continue`). La converti en error
+solo para la forma script (no para `-m`, que resuelve legitimamente fuera del repo, p.ej. `pip` --
+la version ingenua daba 3 falsos rojos por `pip.py`) y la medi en los dos sentidos: arbol intacto
+`PASS 73/72 EXIT=0` **cero falsos rojos**, y 11 de los 14 casos silenciosos a EXIT=1 incluidos los
+dos de servicio. **Sobreviven 3** (`$BASE` compuesto, `find -exec`, `bash -c`) y los declare yo.
+Dar la medicion completa -- con lo que la recomendacion NO cierra -- es lo que la separa de una
+opinion, y es justo lo que me falto en r4.
+
+### Residual nuevo que dejo abierto: gemelo de sufijo, 23 pares vivos
+
+El lookbehind `(?<![A-Za-z0-9_.-])` no excluye `/`, asi que toda ruta del repo que sea **sufijo** de
+otra entra en `expected` al nombrarse la larga. Medido: un paso que ejecute el fichero REAL
+`examples/full_runtime_instance/runtime/guardrails.py` enrojece nombrando `runtime/guardrails.py`,
+que **no aparece en el comando**. Fail-closed, pero es un rojo falso sin reparacion documentada:
+el molde del auto-desarme de r4 en forma nueva. G3 (`if: false` sobre el paso de instalacion) y la
+asimetria de `declared_distributions` (`python3 -m pip install` deja `declared []`) siguen abiertos.
+
+### Aparejo reutilizable (esta en el scratch, no en el arbol)
+
+`D:/Aegis_Scratch/protocol/r54r5/`: `extract_gate.py` (saca el cuerpo del paso con PyYAML
+independiente, localizando por `name`), `drive.py` (inserta pasos/sustituciones en el YAML, corre
+el gate, **restaura y verifica byte-identico**, imprime CAUGHT/SILENT por caso), `mkspec*.py`.
+Patron que quiero repetir: la tabla de la bateria se genera sola y el driver **asserta la
+restauracion**; asi el clon de mutantes nunca queda sucio.
+
 ## Ultima actualizacion 2026-08-10 (67) - TASK-0328 r8: OK-CLOSABLE (primer GO tras ocho vueltas)
 
 - Encargo `MSG-20260810-Arquitecto-to-Analista-REVIEW-TASK-0328-r8`. **SOLO HUB, SIN PRODUCTO.**
