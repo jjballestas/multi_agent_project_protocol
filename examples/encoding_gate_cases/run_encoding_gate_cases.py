@@ -24,13 +24,13 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-ENCODING-SKIP-PATH-SEPARATOR",
         "negative": "Python and PowerShell must derive identical scanned and excluded sets from effective runtime policy, independent of coordinate, order, formatting, hidden-enumeration channel, dot-only basenames, case semantics, and host path separators.",
-        "mutation": "mutant_text = ps_text.replace(",
+        "mutation": "mutant_text = insert_after_policy_build(",
         "boundaries": (
             "assert python_scanned == powershell_scanned == expected_scanned",
             "assert python_excluded == powershell_excluded == expected_excluded",
             "assert \"Area_comun/tasks/.gitkeep\" in extra_excluded",
-            "assert \"runtime/Memory/case.txt\" not in case_scanned",
-            "assert \"runtime/memory/index.db\" in separator_scanned",
+            "assert relative_case_paths - case_scanned",
+            "assert relative_exact_paths <= separator_scanned",
             "assert dot_suffix_paths <= expected_scanned",
             "assert directory_case_paths <= expected_scanned",
             "assert suffix_case_paths <= expected_excluded",
@@ -38,8 +38,10 @@ FALSIFICATION_CONTRACTS = (
             "assert ascii_hidden_scanned != expected_scanned",
             "assert state_hidden_scanned != expected_scanned",
             "assert mojibake_hidden_scanned != expected_scanned",
-            "assert (dist_path in policy_scanned) is expected_dist_scanned",
+            "assert (control_path in policy_scanned) is expected_control_scanned",
             "assert (policy_mutant[\"skip_dirs\"] == ps_skip_dirs) is expected_policy_equal",
+            "assert policy_declares_excluded",
+            "assert affected_paths <= late_scanned",
         ),
         "exercised_by": "assert_cross_platform_skip_parity",
     },
@@ -125,6 +127,16 @@ def case_variant(value: str) -> str | None:
     return variant
 
 
+def relative_case_variant(value: str) -> str | None:
+    parts = value.rstrip("/").split("/")
+    for index in range(len(parts) - 1, -1, -1):
+        variant = case_variant(parts[index])
+        if variant is not None:
+            parts[index] = variant
+            return "/".join(parts)
+    return None
+
+
 def mutate_function(text: str, function_name: str, old: str, new: str) -> str:
     start = text.index(f"function {function_name} {{")
     next_function = text.find("\nfunction ", start + 1)
@@ -134,6 +146,40 @@ def mutate_function(text: str, function_name: str, old: str, new: str) -> str:
     if mutated_body == body:
         raise AssertionError(f"mutation anchor missing in {function_name}: {old}")
     return text[:start] + mutated_body + text[end:]
+
+
+def insert_after_policy_build(text: str, statement: str) -> str:
+    match = re.search(r"(?m)^\$ScanPolicy[ \t]*=[ \t]*New-ScanPolicy[ \t]*(?:#.*)?$", text)
+    if not match:
+        raise AssertionError("effective policy construction point is missing")
+    return text[: match.end()] + "\n" + statement + text[match.end() :]
+
+
+def insert_before_policy_dump(text: str, statement: str) -> str:
+    match = re.search(r"(?m)^if \(\$DumpPolicy\) \{$", text)
+    if not match:
+        raise AssertionError("post-consumption policy dump point is missing")
+    return text[: match.start()] + statement + "\n\n" + text[match.start() :]
+
+
+def fresh_directory_coordinate(*policies: set[str]) -> str:
+    occupied = set().union(*policies)
+    index = 0
+    while True:
+        candidate = f"contract-control-{index}"
+        if candidate not in occupied:
+            return candidate
+        index += 1
+
+
+def fresh_suffix_coordinate(*policies: set[str]) -> str:
+    occupied = set().union(*policies)
+    index = 0
+    while True:
+        candidate = f".contract{index}"
+        if candidate not in occupied:
+            return candidate
+        index += 1
 
 
 def has_case_sensitive_filesystem(root: Path) -> bool:
@@ -154,22 +200,24 @@ def assert_case(name: str, expected: int, **fixture_kwargs: str) -> None:
             raise AssertionError(f"{name}: expected exit {expected}, got {result.returncode}")
 
 
-def assert_cross_platform_skip_parity() -> None:
+def assert_cross_platform_skip_parity() -> bool:
     """PERMANENT_NEGATIVE: NEG-ENCODING-SKIP-PATH-SEPARATOR"""
     if not POWERSHELL:
         print("UNMEASURED: PowerShell 7 parity requires pwsh; CI measures the POSIX boundary.")
-        return
+        return False
     with task_temp("encoding-skip-parity-") as temp:
         fixture = Path(temp)
         if not has_case_sensitive_filesystem(fixture):
             print("UNMEASURED: skip parity requires a case-sensitive filesystem; CI measures it on POSIX.")
-            return
+            return False
         build_fixture(fixture)
         ps_text = PS_SCAN.read_text(encoding="utf-8-sig")
         ps_policy = powershell_policy(fixture)
         ps_skip_dirs = ps_policy["skip_dirs"]
+        ps_skip_relative_dirs = ps_policy["skip_relative_dirs"]
         ps_skip_suffixes = ps_policy["skip_suffixes"]
         declared_skip_dirs = set(python_scan.SKIP_DIRS) | ps_skip_dirs
+        declared_skip_relative_dirs = set(python_scan.SKIP_RELATIVE_DIRS) | ps_skip_relative_dirs
         declared_skip_suffixes = set(python_scan.SKIP_SUFFIXES) | ps_skip_suffixes
         assert set(python_scan.SKIP_DIRS) == ps_skip_dirs
         assert set(python_scan.SKIP_RELATIVE_DIRS) == ps_policy["skip_relative_dirs"]
@@ -189,15 +237,33 @@ def assert_cross_platform_skip_parity() -> None:
             "Area_comun/reports/.gitkeep",
             "Area_comun/tasks/.gitkeep",
             "runtime/.cache/note.txt",
-            "runtime/Memory/case.txt",
-            "runtime/memoryX/file.txt",
-            "runtime/memory-extra/file.txt",
-            "runtime/memoryfile.txt",
-            "runtime/sub/memory/file.txt",
-            "Area_comun/runtime/memory/file.txt",
         }
-        excluded_paths = {
-            "runtime/memory/index.db",
+        excluded_paths: set[str] = set()
+        relative_exact_paths = {
+            f"{item.rstrip('/')}/contract-{index}.db"
+            for index, item in enumerate(sorted(declared_skip_relative_dirs))
+        }
+        relative_near_paths = {
+            coordinate
+            for item in declared_skip_relative_dirs
+            for coordinate in (
+                f"{item.rstrip('/')}X/file.txt",
+                f"{item.rstrip('/')}-extra/file.txt",
+                f"{item.rstrip('/')}file.txt",
+            )
+        }
+        relative_case_paths = {
+            f"{variant}/case.txt"
+            for item in declared_skip_relative_dirs
+            if (variant := relative_case_variant(item)) is not None
+        }
+        relative_nested_paths = {
+            coordinate
+            for item in declared_skip_relative_dirs
+            for coordinate in (
+                f"Area_comun/{item.rstrip('/')}/file.txt",
+                f"runtime/sub/{item.rstrip('/').split('/')[-1]}/file.txt",
+            )
         }
         directory_exact_paths = {f"runtime/{item}/exact.txt" for item in declared_skip_dirs}
         directory_case_paths = {
@@ -217,12 +283,12 @@ def assert_cross_platform_skip_parity() -> None:
         dot_suffix_paths = {
             f"Area_comun/mailbox/open/{suffix}" for suffix in declared_skip_suffixes
         }
-        excluded_paths |= directory_exact_paths | suffix_exact_paths | suffix_case_paths
-        scanned_paths |= directory_case_paths | dot_suffix_paths
+        excluded_paths |= relative_exact_paths | directory_exact_paths | suffix_exact_paths | suffix_case_paths
+        scanned_paths |= relative_near_paths | relative_case_paths | relative_nested_paths | directory_case_paths | dot_suffix_paths
         universe = scanned_paths | excluded_paths
         for relative in universe:
             path = fixture / relative
-            if relative == "runtime/memory/index.db":
+            if relative in relative_exact_paths:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(b"SQLite format 3\x00\xff\xfe\xfd")
             elif relative.startswith("Area_comun/mailbox/") or relative.startswith("Area_comun/state/"):
@@ -242,47 +308,87 @@ def assert_cross_platform_skip_parity() -> None:
         assert directory_case_paths <= expected_scanned
         assert suffix_case_paths <= expected_excluded
         assert python_result.returncode == powershell_result.returncode == 1
-        assert python_scanned == powershell_scanned == expected_scanned
+        assert python_scanned == powershell_scanned == expected_scanned, {
+            "python_missing": sorted(expected_scanned - python_scanned),
+            "python_extra": sorted(python_scanned - expected_scanned),
+            "powershell_missing": sorted(expected_scanned - powershell_scanned),
+            "powershell_extra": sorted(powershell_scanned - expected_scanned),
+        }
         assert python_excluded == powershell_excluded == expected_excluded
 
-        skip_dirs_line = '$SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")'
-        multiline_skip_dirs = (
-            "$SkipDirs = @(\n"
-            '    ".git",\n'
-            '    ".venv",\n'
-            '    "venv",\n'
-            '    "__pycache__",\n'
-            '    "node_modules"\n'
-            ")"
+        control_dir = fresh_directory_coordinate(
+            declared_skip_dirs,
+            {Path(item).name for item in declared_skip_relative_dirs},
+        )
+        control_path = f"runtime/{control_dir}/a.txt"
+        live_append = f'$ScanPolicy.SkipDirs += "{control_dir}"'
+        live_replace = (
+            f'$ScanPolicy.SkipDirs = @($ScanPolicy.SkipDirs) + @("{control_dir}")'
         )
         policy_mutants = (
-            ("A4_plus_equals", ps_text.replace(skip_dirs_line, skip_dirs_line + '\n$SkipDirs += "dist"', 1), False, False),
-            (
-                "A7_later_assignment",
-                ps_text.replace(
-                    "$SkipSuffixes = @",
-                    '$SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules", "dist")\n$SkipSuffixes = @',
-                    1,
-                ),
-                False,
-                False,
-            ),
-            ("A5_multiline", ps_text.replace(skip_dirs_line, multiline_skip_dirs, 1), True, True),
-            ("A8_trailing_comment", ps_text.replace(skip_dirs_line, skip_dirs_line + " # same policy", 1), True, True),
+            ("A4_plus_equals", insert_after_policy_build(ps_text, live_append), False, False),
+            ("A7_later_assignment", insert_after_policy_build(ps_text, live_replace), False, False),
+            ("A5_multiline", insert_after_policy_build(ps_text, "# equivalent multiline format\n"), True, True),
+            ("A8_trailing_comment", insert_after_policy_build(ps_text, "# same effective policy"), True, True),
         )
-        dist_path = "runtime/dist/a.txt"
-        write(fixture / dist_path, "# Espa\u00c3\u00b1a\n")
-        assert dist_path in finding_paths(run_scan(fixture).stdout)
-        for name, mutant, expected_dist_scanned, expected_policy_equal in policy_mutants:
-            assert mutant != ps_text
+        write(fixture / control_path, "# Espa\u00c3\u00b1a\n")
+        assert control_path in finding_paths(run_scan(fixture).stdout)
+        for name, mutant, expected_control_scanned, expected_policy_equal in policy_mutants:
             mutant_path = fixture / f"scan_encoding_{name}_mutant.ps1"
             mutant_path.write_text(mutant, encoding="utf-8", newline="\n")
             policy_mutant = powershell_policy(fixture, mutant_path)
             policy_scanned = finding_paths(run_ps_scan(fixture, mutant_path).stdout)
-            assert (dist_path in policy_scanned) is expected_dist_scanned
+            assert (control_path in policy_scanned) is expected_control_scanned
             assert (policy_mutant["skip_dirs"] == ps_skip_dirs) is expected_policy_equal
             verdict = "ACCEPTED_EQUIVALENT" if expected_policy_equal else "CAUGHT_DIVERGENCE"
             print(f"POLICY_MUTATION {name} {verdict}")
+
+        late_suffix = fresh_suffix_coordinate(declared_skip_suffixes)
+        late_absolute_dir = fresh_directory_coordinate(
+            declared_skip_dirs,
+            {Path(item).name for item in declared_skip_relative_dirs},
+            {control_dir},
+        )
+        late_dir_path = f"runtime/{control_dir}/late.txt"
+        late_suffix_path = f"runtime/late-suffix/file{late_suffix}"
+        late_absolute_path = f"runtime/{late_absolute_dir}/late.txt"
+        late_probe_paths = {late_dir_path, late_suffix_path, late_absolute_path}
+        for relative in late_probe_paths:
+            write(fixture / relative, "# Espa\u00c3\u00b1a\n")
+        late_mutants = (
+            ("G9a", f'$ScanPolicy.SkipDirs += "{control_dir}"', {late_dir_path}),
+            ("G9b", f'$ScanPolicy.SkipSuffixes += "{late_suffix}"', {late_suffix_path}),
+            (
+                "G9c",
+                f'$ScanPolicy.SkipAbsoluteDirs += (Join-Path $ResolvedRoot "runtime/{late_absolute_dir}")',
+                {late_absolute_path},
+            ),
+            (
+                "G9d",
+                "\n".join(
+                    (
+                        f'$ScanPolicy.SkipDirs += "{control_dir}"',
+                        f'$ScanPolicy.SkipSuffixes += "{late_suffix}"',
+                        f'$ScanPolicy.SkipAbsoluteDirs += (Join-Path $ResolvedRoot "runtime/{late_absolute_dir}")',
+                    )
+                ),
+                late_probe_paths,
+            ),
+        )
+        for name, statement, affected_paths in late_mutants:
+            late_text = insert_before_policy_dump(ps_text, statement)
+            late_path = fixture / f"scan_encoding_{name}_late_policy_mutant.ps1"
+            late_path.write_text(late_text, encoding="utf-8", newline="\n")
+            late_policy = powershell_policy(fixture, late_path)
+            late_scanned = finding_paths(run_ps_scan(fixture, late_path).stdout)
+            policy_declares_excluded = (
+                control_dir in late_policy["skip_dirs"]
+                or late_suffix in late_policy["skip_suffixes"]
+                or f"runtime/{late_absolute_dir}" in late_policy["skip_relative_dirs"]
+            )
+            assert policy_declares_excluded
+            assert affected_paths <= late_scanned
+            print(f"LATE_POLICY_MUTATION {name} CAUGHT_DIVERGENCE")
 
         separator_text = ps_text.replace(
             "        # Compare one host-native directory boundary, never a literal slash shape.\n"
@@ -298,12 +404,11 @@ def assert_cross_platform_skip_parity() -> None:
         separator_result = run_ps_scan(fixture, separator_path)
         if os.name != "nt":
             separator_scanned = finding_paths(separator_result.stdout) & universe
-            assert "runtime/memory/index.db" in separator_scanned
+            assert relative_exact_paths <= separator_scanned
 
-        mutant_text = ps_text.replace(
-            '$SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))',
-            '$SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"), (Join-Path $ResolvedRoot "Area_comun/tasks"))',
-            1,
+        mutant_text = insert_after_policy_build(
+            ps_text,
+            '$ScanPolicy.SkipAbsoluteDirs += (Join-Path $ResolvedRoot "Area_comun/tasks")',
         )
         assert mutant_text != ps_text
         extra_path = fixture / "scan_encoding_extra_exclusion_mutant.ps1"
@@ -346,15 +451,16 @@ def assert_cross_platform_skip_parity() -> None:
         case_path = fixture / "scan_encoding_case_mutant.ps1"
         case_path.write_text(case_text, encoding="utf-8", newline="\n")
         case_scanned = finding_paths(run_ps_scan(fixture, case_path).stdout) & universe
-        assert "runtime/Memory/case.txt" not in case_scanned
+        assert relative_case_paths - case_scanned
 
-        skip_dir_case_text = ps_text.replace("$SkipDirs -ccontains $part", "$SkipDirs -contains $part", 1)
+        skip_dir_case_text = ps_text.replace("$ScanPolicy.SkipDirs -ccontains $part", "$ScanPolicy.SkipDirs -contains $part", 1)
         assert skip_dir_case_text != ps_text
         skip_dir_case_path = fixture / "scan_encoding_skip_dir_case_mutant.ps1"
         skip_dir_case_path.write_text(skip_dir_case_text, encoding="utf-8", newline="\n")
         skip_dir_case_scanned = finding_paths(run_ps_scan(fixture, skip_dir_case_path).stdout) & universe
         assert skip_dir_case_scanned != expected_scanned
         assert directory_case_paths - skip_dir_case_scanned
+        return True
 
 
 def main() -> int:
@@ -372,9 +478,12 @@ def main() -> int:
                 print(result.stderr)
                 raise AssertionError(f"ps1 non_ascii_mailbox: expected exit 1, got {result.returncode}")
 
-    assert_cross_platform_skip_parity()
+    parity_measured = assert_cross_platform_skip_parity()
 
-    print("OK: encoding gate cases passed (3 py cases + PowerShell parity and separator mutation).")
+    if parity_measured:
+        print("OK: encoding gate cases passed (3 py cases + measured PowerShell parity and separator mutation).")
+    else:
+        print("OK: encoding gate cases passed (3 py cases; PowerShell parity UNMEASURED).")
     return 0
 
 

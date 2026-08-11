@@ -150,3 +150,24 @@ Implementation commit `05ec641f` is pushed at exact head `bb90a6ad`. Real Action
 `31402650690` did not start any step: every job has an empty step list and GitHub reports a failed
 account payment or spending-limit gate. Therefore AC5 is unmeasured and the task is blocked pending
 restored Actions admission; no in-review or closure claim is valid from this run.
+
+## Remediation 4 - consumption-bound policy and derived coordinates
+
+The PowerShell scanner constructs one policy object. Every `Should-Scan` decision consumes that
+object, and `-DumpPolicy` serializes the same object only after the scan calls have consumed it.
+There is no earlier dump-and-exit boundary at which a later live policy assignment can be hidden.
+
+The parity fixture derives directory, root-relative directory, suffix, case, boundary-neighbor,
+and non-excluded control coordinates from the effective policies returned by both scanners. It no
+longer reserves a handwritten `dist` coordinate or parses the PowerShell declaration line. Source
+mutants are inserted at the policy construction boundary and judged by dumped values plus observed
+scan sets; an equivalent mutation is accepted even when it does not change the effective policy.
+
+The permanent negative now measures four post-consumption policy mutations independently: skip
+directory, suffix, root-relative directory, and all three together. In each case the policy dump
+changes while the already-consumed scan set exposes the mismatch. Its final success line reports
+PowerShell parity as `UNMEASURED` when `pwsh` or a case-sensitive filesystem is unavailable, and
+reports measured parity only after that branch runs.
+
+AC5 remains explicitly deferred by the operator because Actions admission is blocked by billing.
+This remediation claims only AC4; it does not claim a real Actions run or task closure.

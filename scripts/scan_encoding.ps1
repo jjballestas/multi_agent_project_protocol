@@ -8,9 +8,6 @@ $ErrorActionPreference = "Stop"
 $ResolvedRoot = (Resolve-Path $Root).Path
 # Match the Python scanner's exact relative-path semantics on every host.
 $PathComparison = [System.StringComparison]::Ordinal
-$SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")
-$SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))
-$SkipSuffixes = @(".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip")
 $MojibakeSignatures = @(
     [string][char]0x00c3,
     [string][char]0x00c2,
@@ -40,17 +37,27 @@ function Get-SharedSuffix {
     return $Name.Substring($dot).ToLowerInvariant()
 }
 
+function New-ScanPolicy {
+    return [pscustomobject][ordered]@{
+        SkipDirs = @(".git", ".venv", "venv", "__pycache__", "node_modules")
+        SkipAbsoluteDirs = @((Join-Path $ResolvedRoot "runtime/memory"))
+        SkipSuffixes = @(".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".pdf", ".zip")
+    }
+}
+
+$ScanPolicy = New-ScanPolicy
+
 function Should-Scan {
     param([System.IO.FileInfo]$File)
-    if ($SkipSuffixes -ccontains (Get-SharedSuffix $File.Name)) { return $false }
-    foreach ($directory in $SkipAbsoluteDirs) {
+    if ($ScanPolicy.SkipSuffixes -ccontains (Get-SharedSuffix $File.Name)) { return $false }
+    foreach ($directory in $ScanPolicy.SkipAbsoluteDirs) {
         # Compare one host-native directory boundary, never a literal slash shape.
         $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
         $directoryPrefix = $directory.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar
         if ($File.FullName.Equals($directory, $PathComparison) -or $File.FullName.StartsWith($directoryPrefix, $PathComparison)) { return $false }
     }
     foreach ($part in $File.FullName.Split([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)) {
-        if ($SkipDirs -ccontains $part) { return $false }
+        if ($ScanPolicy.SkipDirs -ccontains $part) { return $false }
     }
     return $true
 }
@@ -115,21 +122,21 @@ function Scan-MojibakeRoot {
     }
 }
 
-if ($DumpPolicy) {
-    # Emit the policy after every top-level assignment has run, at the same point where
-    # the scanner consumes it. Tests therefore observe values, not source formatting.
-    [ordered]@{
-        skip_dirs = @($SkipDirs)
-        skip_relative_dirs = @($SkipAbsoluteDirs | ForEach-Object { Get-RelativePath $_ })
-        skip_suffixes = @($SkipSuffixes)
-    } | ConvertTo-Json -Compress
-    exit 0
-}
-
 Scan-AsciiPath (Join-Path $ResolvedRoot "Area_comun/mailbox")
 Scan-AsciiStateJson
 Scan-MojibakeRoot (Join-Path $ResolvedRoot "Area_comun")
 Scan-MojibakeRoot (Join-Path $ResolvedRoot "runtime")
+
+if ($DumpPolicy) {
+    # Serialize the same policy object after the scan has consumed it. Runtime policy and
+    # the observable contract therefore cannot diverge across an early dump boundary.
+    [ordered]@{
+        skip_dirs = @($ScanPolicy.SkipDirs)
+        skip_relative_dirs = @($ScanPolicy.SkipAbsoluteDirs | ForEach-Object { Get-RelativePath $_ })
+        skip_suffixes = @($ScanPolicy.SkipSuffixes)
+    } | ConvertTo-Json -Compress
+    exit 0
+}
 
 if ($Findings.Count -gt 0) {
     Write-Output "ENCODING ERRORS:"
