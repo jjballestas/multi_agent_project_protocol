@@ -1,7 +1,7 @@
 ---
 id: TASK-0353
 title: Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md
@@ -119,6 +119,8 @@ worktree. Independent review is required; Codex is maker only.
 
 ## Remediation 3 maker implementation
 
+Implementation commit: `1e178f3c`.
+
 - The production predicate now covers optional top-level keys read by any routed validation gate,
   not only keys conditionally required by one sampled turn. The declared set is `actions`,
   `aggregate_version`, `decision_refs`, `fencing_token`, `gate`, `obstacles`, `tools`, and
@@ -134,7 +136,11 @@ worktree. Independent review is required; Codex is maker only.
 - The regression reported by the checker is now a permanent process-level negative: a routed
   schema without `actions` fails loudly before filtering, the real orchestrator CLI exits nonzero,
   and TASK-9000 remains `ready` instead of committing the unjustified contract change.
-- Focused routed-turn behavior, the 73/73 falsification inventory, canonical validation, encoding,
-  Python and PowerShell neutrality, compile, and diff gates exit 0. The unrestricted validate-job
-  replay exceeded the 15-minute local harness timeout without producing a final balance; it is not
-  used as acceptance evidence. Independent review is required; Codex is maker only.
+- Exact commit `1e178f3c` passes focused routed-turn behavior, the 73/73 falsification inventory,
+  canonical validation, encoding, Python and PowerShell neutrality, compile, clean drift through
+  seq 8748, diff gates, and clean tracked status in a detached Aegis worktree. The unrestricted
+  validate-job replay exceeded the 15-minute local harness timeout. A bounded 30-second-per-step
+  diagnostic replay completed at 59 PASS / 11 FAIL / 8 UNSUPPORTED; five failures are deliberate
+  timeouts of legitimate long steps, and the remaining known red steps stay outside TASK-0353.
+  This diagnostic balance is not acceptance evidence. Independent review is required; Codex is
+  maker only.
