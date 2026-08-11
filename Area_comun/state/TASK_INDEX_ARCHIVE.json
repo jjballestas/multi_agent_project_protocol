@@ -8356,6 +8356,48 @@
             "status": "done",
             "title": "La asercion de rollback ata contadores literales y solo se cumple en una plataforma",
             "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+            "id": "TASK-0327",
+            "owner": "Codex",
+            "status": "done",
+            "title": "El default vacio de contains_pii apaga en silencio la capa de dominio de la instancia en tres call sites, uno de ellos la puerta que autoriza publicacion",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+            "id": "TASK-0331",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+            "id": "TASK-0332",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Los muestreos de TASK-0317 y TASK-0325 son disjuntos y por ese hueco entra una fuga de PII demostrada: cerrarla pide un contrato POR COMPORTAMIENTO, no mas AST",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0336-gate-de-cableado-por-los-cuatro-factores.md",
+            "id": "TASK-0336",
+            "owner": "Codex",
+            "status": "done",
+            "title": "El gate de cableado emite una certificacion afirmativa FALSA bajo nueve escapes: ata dos de los cuatro factores que hacen que el fallo de un runner llegue al veredicto del job",
+            "type": "infra"
+        },
+        {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0346-treinta-y-cinco-runners-de-CI-fuera-de-toda-puerta-de-aceptacion.md",
+            "id": "TASK-0346",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "done",
+            "title": "Treinta y cinco runners cableados en CI no estan en la puerta de aceptacion de ninguna tarea",
+            "type": "implementation"
         }
     ]
 }
