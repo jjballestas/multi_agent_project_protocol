@@ -6726,3 +6726,19 @@ ratified its own work.
   canonically blocked; Codex remains maker only.
 - The commit hook reports released-claim pruning due at 93.1 percent. That maintenance is
   Architect-owned and was not absorbed into this implementation/block transaction.
+## 2026-08-11 - TASK-0359 implementation
+
+- Commit `5a378a0d` adds work-derived liveness from accumulated CPU across the real exec process
+  tree. One baseline sample is taken inside `ProgressFreshSeconds` before each deadline; the
+  comparison applies to both main exec and post-delivery supervision without changing hard caps.
+- Full-loop compressed evidence: healthy silent CPU work completes in both phases, the production
+  mutant is killed by main and post-delivery deadlines, and a silent sleeping process remains
+  deadline-terminable. Permanent negatives are mutation-proved and the falsification inventory is
+  73/73.
+- Exact implementation commit `5a378a0d` passed the required exec-lease and mailbox-retry suites,
+  collaboration, encoding, Python/PowerShell neutrality, neutrality parity, drift, falsification
+  inventory 73/73, compile, and diff gates in clean clone
+  `D:/Aegis_Scratch/multi_agent_project_protocol/task0359-clean-5a378a0d`.
+- Delivery commit `a6dee0c5` moves TASK-0359 to `in_review`, releases every Codex claim, and
+  publishes the self-contained Arquitecto handoff for independent Analista review. Codex is maker
+  only and has not reviewed or ratified the implementation.
