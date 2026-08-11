@@ -1,7 +1,7 @@
 ---
 id: TASK-0359
 title: El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md
@@ -138,3 +138,22 @@ corregido al Arquitecto mas veces que al maker.
   log; conserva un limite superior de seis segundos para una ventana comprimida de tres segundos.
   La sonda sintetica de herencia usa una geometria 1/5/10/30 y ocho segundos de vida, suficiente
   para conservar el orden causal bajo carga sin depender de una carrera de 150 milisegundos.
+
+## Remediacion Codex r3 2026-08-11
+
+- AC5 ejecuta el `while` real de supervision con las funciones reales de lease, muestreo de CPU y
+  decision de progreso. El arbol sano observa `EXEC_PROGRESSING` y no mata el exec silencioso que
+  consume CPU. El mutante de produccion de una linea cambia el guard de muestreo a `if ($false)`;
+  el mismo bucle observa `EXEC_HUNG reason=no_progress` y mata el exec. Las aserciones son sobre el
+  desenlace del bucle, no sobre el booleano aislado del helper.
+- La geometria de la sonda deriva frescura, timeout y vida del workload del coste medido del mismo
+  recorrido de CPU. El sano y el mutante corren bajo ese instrumento comun; el verde previo no
+  acredita el resultado.
+- El estado monotono usa la identidad `pid|process_start_time_utc`. El negativo de PID reciclado
+  siembra maximos inflados para el numero de PID y para una identidad anterior; el proceso vivo
+  aporta CPU con la clave nueva. El mutante que vuelve a `pid` solo declara que no hay progreso
+  aunque el proceso vivo tenga ticks de CPU.
+- Implementacion exacta `ec0b93ce`: suite del harness 31/31, mailbox retry PASS, inventario de
+  falsacion 74/74, validador de colaboracion, encoding, neutralidad Python/PowerShell, pruebas de
+  contrato de neutralidad, compile y diff gates en EXIT=0 dentro de un worktree limpio con historia
+  completa. Codex entrega como maker; requiere re-juicio independiente de Analista.

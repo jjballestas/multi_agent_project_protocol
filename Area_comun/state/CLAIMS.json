@@ -140,6 +140,29 @@
             "updated_at": "2026-08-11T21:09:05Z"
         },
         {
+            "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation3-delivery",
+            "expires_at": "2026-08-11T23:48:27Z",
+            "notes": "Publish exact-commit evidence and route independent re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260811-Codex-TASK-0359-remediation3-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "Area_comun/mailbox/open/MSG-20260811-Codex-to-Arquitecto-HANDOFF-TASK-0359-remediation-3.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-11T21:48:27Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-11T21:48:27Z"
+        },
+        {
             "claim_id": "CLAIM-20260811-Codex-TASK-0359-remediation3-v2",
             "expires_at": "2026-08-12T05:10:15Z",
             "notes": "Close AC5 through real supervision-loop outcomes and bind CPU sampling identity to pid plus process start time.",
@@ -177,7 +200,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-11T21:24:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0359",
             "updated_at": "2026-08-11T21:24:58Z"
         },
