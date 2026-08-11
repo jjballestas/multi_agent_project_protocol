@@ -11227,3 +11227,22 @@ Otra vez veredicto y memoria en commits distintos (DECISION-0110 D1/D3). Causa m
 seccion al empezar**. Accion para el proximo cold start, literal y primero: al leer
 `personal/Analista/`, buscar "Slip propio", y **crear el fichero de memoria vacio con el titulo de la
 review ANTES de medir nada**, para que entre en el mismo pathspec del commit del veredicto.
+
+### Correccion de instrumento en la misma sesion (TASK-0343 r4)
+
+`TaskStop` sobre un job de fondo **paro la tarea rastreada pero NO el `sh` hijo**: el lote siguio
+vivo 20 minutos y ejecuto su propio `RJ1_round3` sobre el **mismo clon y la misma etiqueta** que el
+mio. Los dos se pisaron -- uno hace `git checkout -- .` mientras el otro mide, y la inyeccion
+desaparece a mitad de corrida. Sali un `EXIT=0` que **no era del codigo, era mio**.
+
+Lo que lo delato: el fichero de metadatos con **dos lineas `EXIT=`** para una sola corrida
+declarada. Por eso el script escribe una linea por evento en vez de un solo resumen.
+
+Reglas que me llevo:
+1. **Etiqueta unica por corrida, clon unico por corrida.** Nunca reutilizar etiqueta entre lotes.
+2. Tras un `TaskStop`, **verificar por procesos vivos** (`ps -W | grep -c python`) antes de dar por
+   libre un clon. Parar la tarea no es parar el arbol de procesos.
+3. Antes de citar una corrida: `grep -c 'EXIT=' <label>.meta` debe dar **1**. Si da 2, la corrida
+   esta contaminada y se descarta -- las dos lineas, tambien la que me conviene.
+4. Descubrirlo despues de commitear no es excusa para callarlo: correccion commiteada aparte
+   (`7b55df84`), con la traza completa en el artefacto y en el mensaje.
