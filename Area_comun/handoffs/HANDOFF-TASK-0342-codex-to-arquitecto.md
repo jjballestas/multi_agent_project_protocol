@@ -1,52 +1,51 @@
-# HANDOFF TASK-0342 remediation 3 - blocked only on real Actions admission
+# HANDOFF TASK-0342 remediation 4 - AC4 ready for independent re-judgment
 
 task_id: TASK-0342
 owner_maker: Codex
-status: blocked
-implementation_commit: `05ec641f23b008b59a79c80d02179479b6d209ad`
-exact_pushed_head: `bb90a6ad89ac308e87e71194328f991cd6a5e639`
+delivery_status: in_review
+implementation_commit: `14686290`
+memory_commit: `97d784b9`
+deferred_acceptance: AC5
 
 ## Delivered implementation
 
-- `scripts/scan_encoding.ps1 -DumpPolicy` serializes the effective skip policy at the exact point
-  where the scanner consumes it, after every top-level assignment has executed.
-- The permanent negative consumes runtime JSON, not a declaration-line regex.
-- Production-script variants prove `+=` and a later assignment introduce a live `dist` divergence
-  and are caught. A multiline array and trailing comment preserve behavior and remain accepted.
-- A coordinate without a case-bearing character remains in the exact-coordinate universe and no
-  longer causes a false-red manufactured case variant.
-- Independent hidden sentinels bind `Scan-AsciiPath`, `Scan-AsciiStateJson`, and
-  `Scan-MojibakeRoot`. Removing `-Force` from any one production function changes the measured set.
+- `scripts/scan_encoding.ps1` constructs one policy object. Every `Should-Scan` decision consumes
+  that object, and `-DumpPolicy` serializes the same object after the scan calls consume it.
+- The parity fixture derives directory, root-relative directory, suffix, case, boundary-neighbor,
+  and non-excluded control coordinates from the effective Python and PowerShell policies.
+- The runner no longer parses the PowerShell declaration line or reserves `dist` as a control.
+  Mutants are inserted at the policy construction/consumption boundaries and judged from dumped
+  values plus observed scan sets.
+- The final line reports PowerShell parity as `UNMEASURED` when the branch did not run and reports
+  measured parity only when `pwsh` ran on a case-sensitive filesystem.
 
-## Local evidence
+## Checker criteria measured
 
-- `python scripts/validate_collaboration_state.py`: PASS.
-- `python scripts/scan_encoding.py`: PASS after one transient locked-file retry; the immediate
-  diagnostic sweep found no persistently unreadable path and the repeated mandatory gate exited 0.
-- Python and PowerShell neutrality gates: PASS.
-- `python scripts/check_falsification_contracts.py --root .`: PASS.
-- Inventory: `71/71` permanent negatives, with 14 boundaries for
-  `NEG-ENCODING-SKIP-PATH-SEPARATOR`.
-- Encoding runner: PASS locally with PowerShell 7 POSIX parity explicitly `UNMEASURED`.
-- Compile, drift (`CLEAN up_to_seq=8612`), and diff gates: PASS.
+On WSL2 Ubuntu with `pwsh 7.4.6` and a case-sensitive ext4 fixture:
 
-## Blocking evidence
+- G9a, G9b, G9c, and G9d: each emitted `CAUGHT_DIVERGENCE` and the runner exited 0.
+- A4 and A7: each emitted `CAUGHT_DIVERGENCE`.
+- A5 and A8: each emitted `ACCEPTED_EQUIVALENT`.
+- Independent source variants G6six, G6ord, and G6ws: each full runner exited 0 without editing
+  the runner for the coordinate.
+- `NEG-ENCODING-SKIP-PATH-SEPARATOR`: 16 declared boundaries; inventory 73/73.
 
-Real Actions run `31402650690` targets exact head `bb90a6ad`. All four jobs have empty step lists and
-runner id 0. GitHub reports: `The job was not started because recent account payments have failed or
-your spending limit needs to be increased.` No requested scanner or mutation step executed, so AC5
-cannot be claimed and TASK-0342 cannot enter review yet.
+## Exact-commit evidence
 
-## Coordination anomaly signaled
+Exact implementation `14686290` passed in a detached clean worktree with empty tracked status:
 
-While Codex waited on the staged TASK-0328 transaction, commit `0c216cd6` included the already-written
-TASK-0342 task-note and Codex-signed claim event inside a commit whose subject/trailer identify only
-TASK-0328. Codex did not touch or rewrite the peer transaction. The implementation itself is isolated
-in `05ec641f` with `Task-Id` and `Fixes-Task` trailers for TASK-0342.
+- collaboration validator, encoding, Python neutrality, and PowerShell neutrality: exit 0;
+- falsification contract gate and inventory: exit 0, 73/73;
+- WSL2 PowerShell parity runner: exit 0 with measured parity;
+- Python compile, protocol drift (`CLEAN up_to_seq=8779`), and diff gate: exit 0.
 
-## Required continuation
+The four exact-commit and G6 scratch worktrees were removed after verification as required by the
+scratch discipline.
 
-After Actions admission is restored, rerun the workflow on the same implementation code, capture the
-four `POLICY_MUTATION` output lines plus the three independent hidden-enumeration mutants, recompute
-the saldo from that run, and only then deliver to independent Analista review. Codex remains maker
-only and has not reviewed or ratified the implementation.
+## Deferred boundary
+
+AC5 is not claimed. Per the operator instruction, real Actions admission remains deferred while
+billing prevents jobs from starting. This handoff requests the single authorized independent
+Analista re-judgment of AC4 only. TASK-0342 cannot reach `done` until AC5 is later measured or the
+operator records a different closure decision. Codex is maker only and has not reviewed or
+ratified this implementation.
