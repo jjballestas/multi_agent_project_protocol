@@ -12274,3 +12274,86 @@ commit -- la que ocurrio; (b) si el Arquitecto se desviaba una palabra, iteracio
 re-juicio de R1 lo hice POR ADELANTADO en el propio veredicto (sus cuatro cifras medidas en la seccion
 4), de forma que el control del commit de cierre quedara **mecanico**: parrafo == R1, cuatro puertas a
 0, sha256 del workflow intacto. **Bajar el coste del arreglo a cero es lo que evita la vuelta 5.**
+
+## 2026-08-12 -- TASK-0359 r4 (e08d9e54): OK-CLOSABLE. El hand-feed se mueve por TERCERA vez, y esta vez NO bloqueo
+
+Encargo `MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0359-r4`. **SOLO HUB, sin producto.** Ancla
+protocolo `cac45c2f`, implementacion `e08d9e54`. Clon limpio `git clone -s` ->
+`D:/Aegis_Scratch/mapp/t0359r4`. Veredicto
+`Area_comun/artifacts/Analista-TASK-0359-r4-semilla-ejecutada-verdict.md`, commit **`07f56b01`**.
+
+Siete puertas EXIT=0 en el clon: validate, encoding, las dos neutralidades, 74 contratos,
+arnes 31/31, mailbox retry. Produccion (`scripts/harness/peer_mailbox_cron.ps1`) NO aparece en el
+diff del ancla: la vuelta fue solo test + texto.
+
+### LECCION 1 (la que me llevo): registrar EN QUE ASERCION muere el negativo, no solo que muere
+
+El liston de r3 era "con `:1495` mutado por el signo, el negativo debe MORIR". Muere. Pero el test
+lleva ahora `assert source.count(live_sampling_seed) == 2`, un centinela de **texto**: cualquier
+arbol que toque esa cadena mata al negativo **sin ejecutar nada**. Si me hubiera quedado en el
+exit code habria firmado un verde que no discrimina conducta de forma.
+
+Lo instrumente: mi runner (`run_delivered_negative.py`) captura el traceback y **imprime la ultima
+linea `assert ...`**. Resultado: M1/M2/M3 mueren en
+`assert healthy_outcome["exec_progressing"] is True` -- primera asercion del test, de conducta, y
+se evalua ANTES que cualquier asercion de forma. M5 (mutar la 2.a ocurrencia de la semilla, el
+re-arm de `:1520`) muere en el `count == 2`: **cobertura de texto, no de conducta** -> R12.
+Regla que adopto: *un negativo que puede morir por dos causas distintas exige registrar cual.*
+
+### LECCION 2: mover el ancla del instrumento UNA coordenada mas arriba que el maker
+
+En r3 mi sonda arrancaba donde acabe pidiendo que arrancase la suya (`:1493`). Repetirla no habria
+encontrado nada. Esta vez extraje produccion desde **`:1485`** (`$execHardDeadlineUtc = ...`), una
+coordenada mas arriba, con ancla por **PREFIJO** (`$execHardDeadlineUtc = $deadlineUtc.AddSeconds(`)
+para que un arbol con esa linea mutada tambien se localice. Detalle que costo: produccion recalcula
+`$eventsPath = Join-Path $Root "runtime\state\events.jsonl"`, asi que la sonda tiene que crear ese
+fichero vacio o introduce una diferencia que no esta midiendo.
+
+Hallazgo (R11): mutante de **un caracter** en `:1485` (`AddSeconds($x)` -> `AddSeconds(-$x)`) ->
+mi instrumento da `EXEC_HUNG reason=hard_cap stop_calls=1` sobre un exec que **si** quema CPU,
+mientras el negativo entregado da **PASS**. Falsifica literalmente la primera clausula del texto del
+contrato. `:1485` esta copiado a mano en DOS sondas del arnes y ejecutado desde el artefacto en
+NINGUNA. Tercera coordenada del mismo patron: r2 `$before`, r3 el calendario, r4 el techo duro.
+
+### LECCION 3 (la importante): la simetria con la vuelta anterior NO es razon suficiente para bloquear
+
+Bloquear otra vez habria sido lo comodo y lo coherente de forma. No lo hice, y el criterio que use
+lo dejo escrito porque es el que me faltaba en vueltas anteriores:
+
+- Lo que bloquee en r3 **restauraba AC5 entero**: el detector volvia a depender EXCLUSIVAMENTE de
+  que creciera un fichero. Ese es el defecto que la tarea existe para arreglar.
+- R11 **no** reintroduce esa ceguera: introduce el fallo contrario (matar al que trabaja) por
+  aritmetica del techo duro. Otra clausula, otra linea, otro modo de fallo.
+- AC5 y R6 estan cerrados **por conducta y medidos por mi**, con el mutante mas fuerte que sabia
+  pedir.
+- El presupuesto estaba agotado y el Arquitecto me dijo explicitamente que **no concediera la
+  cuarta**. No la concedi: entregue R11 como material de tarea sucesora con el parche ya escrito.
+
+Criterio destilado: **un residual nuevo bloquea si restaura el defecto de la tarea; si abre una
+clase vecina, es tarea sucesora.** Y cuando el presupuesto esta agotado, la escalada es del
+Arquitecto, no un veto mio -- lo dije asi en el mensaje para que la decision quedara donde toca.
+
+### LECCION 4: verificar el run que me pasan como contexto, aunque venga del Arquitecto
+
+Me dieron el run `31581821440` como prueba de que los runners propios funcionan. Lo abri:
+conclusion global **failure**, pero dentro `probe (self-hosted Linux)` y `probe (self-hosted
+Windows)` en **success con 8 pasos cada uno** contra `control (GitHub-hosted)` en failure con
+**0 pasos**. El control esta en el mismo run: la medida discrimina. Ademas comprobe que
+`e08d9e54` **no tiene ninguna corrida de Actions** (barrido de las 40 mas recientes, su SHA no
+aparece). R5 lo declare **PENDIENTE, no imposible**.
+
+### Higiene de la vuelta
+
+Gate ASCII propio antes de commitear: cazo un `0xc2 0xa7` (el signo de seccion, en "r3 sec. 4.4") que
+`scan_encoding.py` dejo pasar con EXIT=0. **Mi barrido de bytes>127 sigue siendo mas estricto que
+la puerta.** Anti-colision verificada: en `cac45c2f` la unica claim activa era la del Arquitecto
+sobre `.github/workflows/selfhosted-probe.yml`, ninguna sobre `Area_comun/artifacts/` ni sobre
+`mailbox/open/`; la de Codex `CLAIM-20260812-Codex-TASK-0359-remediation4` ya estaba liberada.
+Commit con pathspec explicito de mis dos ficheros. Push `cac45c2f..07f56b01`.
+
+### Ciclo declarado
+
+Vuelta 3 (la ultima concedida). Salida: OK-CLOSABLE + R11/R12 declarados. **No pedi vuelta 4**; si
+el Arquitecto juzga que el texto del contrato no puede prometer una clausula que no verifica antes
+del flip a done, la escalada al operador es suya. Instrumentos en
+`D:/Aegis_Scratch/mapp/t0359r4_probe/` (`my_instrument.py`, `run_delivered_negative.py`, `M1..M5`).
