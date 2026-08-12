@@ -1,7 +1,7 @@
 ---
 id: TASK-0353
 title: Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md
@@ -147,6 +147,8 @@ Implementation commit: `1e178f3c`.
 
 ## Remediation 5 maker implementation
 
+Implementation commit: `c92be390`.
+
 - The operator-selected closure removes the `required` subtraction: the behavioral contract now
   requires the complete consumed-key set to be contained in the routed root schema.
 - The production guard is inverted from a maintained consumed-key list to filter coverage.
@@ -157,5 +159,7 @@ Implementation commit: `1e178f3c`.
   iteration, or copying.
 - CASO C is closed by the real orchestrator process: a routed schema without `changed_paths` receives
   an out-of-claim write, rejects the turn, creates no commit, and leaves the task `ready`.
+- Focused runtime-turn behavior, 74/74 falsification inventory, collaboration validation, encoding,
+  domain neutrality, drift, compile, and diff gates exited 0 before the implementation commit.
 
 Independent review and ratification remain required. Codex is maker only.

@@ -8,19 +8,6 @@
                 ".github/workflows/selfhosted-probe.yml"
             ],
             "task_id": "OPS-SELFHOSTED-PROBE-20260812"
-        },
-        {
-            "claim_id": "CLAIM-20260812-Codex-TASK-0353-r5",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Codex-TASK-0353-r5",
-                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
-                "runtime/orchestrator.py",
-                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0353"
         }
     ],
     "schema_version": "1.0",

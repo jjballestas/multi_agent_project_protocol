@@ -141,7 +141,7 @@
         {
             "id": "TASK-0353",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn"
         },
         {
