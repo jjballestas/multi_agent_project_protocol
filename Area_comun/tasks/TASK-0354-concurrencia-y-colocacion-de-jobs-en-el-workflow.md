@@ -145,11 +145,18 @@ Aplicando la reescritura mecanica una a una: **73 silenciosas y 0 atrapadas**. L
 cambio, se cuenta por fichero: la puerta cubre **72** ficheros distintos (`referenced=72`), porque
 `scripts/validate_collaboration_state.py` se invoca dos veces. Los dos cardinales no son el mismo
 conjunto: ocultar una sola de esas dos invocaciones la vuelve silenciosa **sin** que el fichero
-pierda cobertura -- hacen falta las dos. (El 69 de la primera redaccion no re-derivaba -- en el ancla
-hay 66 lineas `python <ruta>.py` exactas, 64 pasos de una linea, 72 con argumentos y 76 lineas
-`python` cualesquiera, y ninguna da 69; el 72 de la segunda tampoco: salia de un criterio anclado a
-la linea que descartaba la invocacion `if ! python scripts/prune_state.py ...`, y su coincidencia con
-`referenced=72` era accidental.)
+pierda cobertura -- hacen falta las dos. (Los dos cardinales retirados **si** se re-derivan; lo que
+fallaba era su unidad y su criterio, anclados a la forma del texto y no a lo que la puerta descubre.
+Todos salen de la misma familia, medida en el ancla:
+
+    unidad \ forma                 exacta `python <ruta>.py`   admitiendo argumentos
+    linea de `run`                            66                        72
+    paso de `run` de una sola linea           64                        69
+
+mas 76 lineas que **empiezan** por `python` (78 si se cuenta el token en cualquier posicion). El **69**
+de la primera redaccion es la celda paso+argumentos; el **72** de la segunda es la celda
+linea+argumentos, y su coincidencia con `referenced=72` -- que cuenta ficheros -- era accidental.
+Ninguna celda de esa tabla es la poblacion: la poblacion es lo que la puerta descubre, 73.)
 
 Sobre un runner real con dependencia real, quitandole su `pyyaml` al job:
 
