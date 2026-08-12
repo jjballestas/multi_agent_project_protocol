@@ -139,11 +139,17 @@ Basta una bandera para pasar de rechazada a invisible, sobre la misma forma:
     N2   cd <dir> && python <base>       EXIT=1   (rechaza el token: no resuelve; no es que viera el runner)
     F1   cd <dir> && python -u <base>    EXIT=0   SILENCIOSA
 
-**Censo con poblacion DERIVADA (corregido r7):** el cardinal 69 de la primera redaccion **no
-re-derivaba** -- en el ancla hay 66 lineas `python <ruta>.py` exactas, 64 pasos de una linea, 72 con
-argumentos y 76 lineas `python` cualesquiera, y ninguna da 69. Rehecho sobre la poblacion derivada y
-aplicando la reescritura mecanica una a una: **72 silenciosas y 0 atrapadas**, y 72 es exactamente el
-`referenced=72` que el gate imprime en verde. La propiedad sale reforzada.
+**Censo con poblacion DERIVADA (corregido r8):** la poblacion son las **73** invocaciones que la
+propia puerta cuenta (`invocations=73`), todas de forma script y todas con componente de directorio.
+Aplicando la reescritura mecanica una a una: **73 silenciosas y 0 atrapadas**. La cobertura, en
+cambio, se cuenta por fichero: la puerta cubre **72** ficheros distintos (`referenced=72`), porque
+`scripts/validate_collaboration_state.py` se invoca dos veces. Los dos cardinales no son el mismo
+conjunto: ocultar una sola de esas dos invocaciones la vuelve silenciosa **sin** que el fichero
+pierda cobertura -- hacen falta las dos. (El 69 de la primera redaccion no re-derivaba -- en el ancla
+hay 66 lineas `python <ruta>.py` exactas, 64 pasos de una linea, 72 con argumentos y 76 lineas
+`python` cualesquiera, y ninguna da 69; el 72 de la segunda tampoco: salia de un criterio anclado a
+la linea que descartaba la invocacion `if ! python scripts/prune_state.py ...`, y su coincidencia con
+`referenced=72` era accidental.)
 
 Sobre un runner real con dependencia real, quitandole su `pyyaml` al job:
 
@@ -162,6 +168,20 @@ pasan de `EXIT=0` a `EXIT=1`. Falla del lado seguro y no hay ninguno en el arbol
 reparacion "natural" que se teme **ya existe medida dentro del mismo gate**: `python -m generated`
 pasa en verde donde `python "$RUNNER_TEMP/generated.py"` enrojece. Las dos mitades de la misma
 decision fallan en direcciones opuestas.
+
+**Segundo falso rojo, de la misma rama, anadido al inventario en r8:** una ruta `.py` **del
+repositorio** que aparece en un bloque `run` **sin ser invocada** -- como argumento (`--exclude`,
+`--file`, `--config`) o nombrada por otra herramienta (`git add`, `cat`, `rm`) -- tambien enrojece la
+puerta, y ahi no hay ninguna invocacion invisible que atrapar: no hay invocacion. Medido en clon
+limpio, sustitucion de una linea por una linea:
+
+    E1  python <gate> --root . --exclude scripts/prune_state.py    EXIT=1  FAIL: Python file named in
+                                                                           run block was not discovered
+    E2  git add scripts/prune_state.py && python <gate> --root .   EXIT=1  idem
+
+La letra de la propiedad lo cubre ("solo enrojece si la ruta aparece escrita en el mismo `run`"),
+pero el parrafo lo enmarca como el rescate de una invocacion que fallo la condicion (1), y el
+inventario anterior enumeraba solo `$RUNNER_TEMP` y `/tmp`. El arbol de hoy no ejerce esta clase.
 
 G2 queda explicitamente fuera de esta vuelta: la superficie de la puerta termina en el fichero
 del runner descubierto. No calcula clausura transitiva de imports locales ni certifica procesos
