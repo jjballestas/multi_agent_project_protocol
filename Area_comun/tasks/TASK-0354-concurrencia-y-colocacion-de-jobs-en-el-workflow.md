@@ -121,23 +121,31 @@ declara Windows. Esta diferencia evita interpretar `\` como escape en comandos d
 Una forma script descubierta cuyo token no resuelva a un fichero del repositorio queda en postura
 fail-closed.
 
-**Cobertura real, corregida 2026-08-12 tras el veredicto r6.** La redaccion anterior nombraba tres
-ejemplos -- `$BASE` compuesto, `find -exec` y `bash -c` -- y se leia como lista completa. **La
-medicion la refuta.** La propiedad, enunciada y no enumerada:
+**Cobertura real, corregida 2026-08-12 tras los veredictos r6 y r7.** La redaccion original nombraba
+tres ejemplos y se leia como lista completa; la primera correccion nombro **una** condicion cuando el
+mecanismo aplica **dos**. Esta es la que describe lo medido:
 
-> La puerta solo descubre la invocacion si el **token inmediatamente posterior a `python` es el
-> propio objetivo** (una ruta `.py`, o `-m <modulo>`). Una bandera, un `-c`, un envoltorio o un token
-> compuesto la dejan **invisible**; y solo enrojece si la ruta relativa a la raiz aparece **literal**
-> en el mismo `run`.
+> La puerta descubre una invocacion solo si se cumplen **dos** condiciones a la vez: (1) el token
+> inmediatamente posterior a `python` es el propio objetivo -- una ruta terminada en `.py`, o
+> `-m <modulo>`; y (2) ese objetivo, **tal como esta escrito, resuelve a un fichero existente relativo
+> a la raiz del repositorio**, porque la puerta no modela el directorio de trabajo. Si falla (1) -- una
+> bandera, un `-c`, un envoltorio, un token compuesto -- la invocacion queda invisible y solo enrojece
+> si la ruta relativa a la raiz aparece escrita en el mismo `run` (con `\` normalizado a `/` y un `./`
+> opcional). Si falla (2), las dos formas fallan en direcciones **opuestas**: una forma script queda
+> fail-closed y enrojece; una forma `-m <modulo>` se descarta **en silencio** y el bloque queda verde.
 
-Basta una bandera para pasar de atrapada a invisible, sobre la misma forma:
+Basta una bandera para pasar de rechazada a invisible, sobre la misma forma:
 
-    N2   cd <dir> && python <base>       EXIT=1   atrapada
+    N2   cd <dir> && python <base>       EXIT=1   (rechaza el token: no resuelve; no es que viera el runner)
     F1   cd <dir> && python -u <base>    EXIT=0   SILENCIOSA
 
-**Censo, no anecdota:** tomando los **69** pasos `run: python <ruta>.py` del workflow y aplicando a
-cada uno la reescritura mecanica a `cd <dir> && python -u <base>`, el resultado es **69 silenciosas y
-0 atrapadas**. Sobre un runner real con dependencia real, quitandole su `pyyaml` al job:
+**Censo con poblacion DERIVADA (corregido r7):** el cardinal 69 de la primera redaccion **no
+re-derivaba** -- en el ancla hay 66 lineas `python <ruta>.py` exactas, 64 pasos de una linea, 72 con
+argumentos y 76 lineas `python` cualesquiera, y ninguna da 69. Rehecho sobre la poblacion derivada y
+aplicando la reescritura mecanica una a una: **72 silenciosas y 0 atrapadas**, y 72 es exactamente el
+`referenced=72` que el gate imprime en verde. La propiedad sale reforzada.
+
+Sobre un runner real con dependencia real, quitandole su `pyyaml` al job:
 
     B4 working-directory + bandera   gate PASS invocations=72 EXIT=0 | runner ModuleNotFoundError EXIT=1
     B5 cd + `python -m <mod>`        gate PASS invocations=72 EXIT=0 | runner ModuleNotFoundError EXIT=1
@@ -150,8 +158,10 @@ comando EJECUTADO y no de su texto* -- exige otro mecanismo y va a tarea propia 
 
 **Residual adicional, coste de la propia remediacion:** la rama de error enrojece tambien objetivos
 legitimos **fuera** del repositorio -- `python "$RUNNER_TEMP/generated.py"` y `python /tmp/generated.py`
-pasan de `EXIT=0` a `EXIT=1`. No hay ninguno en el arbol de hoy y falla del lado seguro, pero su
-reparacion natural empujaria esas invocaciones a la clase silenciosa.
+pasan de `EXIT=0` a `EXIT=1`. Falla del lado seguro y no hay ninguno en el arbol de hoy. Y la
+reparacion "natural" que se teme **ya existe medida dentro del mismo gate**: `python -m generated`
+pasa en verde donde `python "$RUNNER_TEMP/generated.py"` enrojece. Las dos mitades de la misma
+decision fallan en direcciones opuestas.
 
 G2 queda explicitamente fuera de esta vuelta: la superficie de la puerta termina en el fichero
 del runner descubierto. No calcula clausura transitiva de imports locales ni certifica procesos
