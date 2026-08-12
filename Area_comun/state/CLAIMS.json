@@ -171,6 +171,19 @@
             "updated_at": "2026-08-12T09:31:40Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Arquitecto-OPS-review-spec-memhib",
+            "expires_at": "2026-08-13T06:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-OPS-review-spec-memhib",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Analista-REVIEW-SPEC-MEMORIA-HIBRIDA-formal.md"
+            ],
+            "started_at": "2026-08-12T13:10:35Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260812",
+            "updated_at": "2026-08-12T13:10:35Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Arquitecto-OPS-selfhosted-probe",
             "expires_at": "2026-08-12T22:00:00Z",
             "owner": "Arquitecto",
