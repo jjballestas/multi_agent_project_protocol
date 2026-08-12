@@ -123,7 +123,7 @@
         {
             "id": "TASK-0350",
             "owner": "Codex",
-            "status": "blocked",
+            "status": "ready",
             "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada"
         },
         {
@@ -215,6 +215,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un mensaje sin tarea numerada no puede reservar ejecucion y muere en silencio a las dos horas"
+        },
+        {
+            "id": "TASK-0367",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

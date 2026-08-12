@@ -1,7 +1,7 @@
 ---
 id: TASK-0350
 title: El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada
-status: blocked
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md
@@ -43,10 +43,18 @@ intake:
       afirmado. La diferencia tiene que ser EXACTAMENTE la que el criterio de AC1 explica: ni un
       fichero perdido (deja de cazarse algo que se cazaba) ni uno ganado. Ensanchar un patron puede
       estrecharlo, asi que se reporta la tabla en las dos direcciones."
-    - "AC5 (paso 50 verde en clon limpio, citado): `case_coordination_default_and_flag` pasa en
-      checkout limpio del arbol, citando la salida del runner antes y despues por exit code. Se
-      declara ademas que queda en la instancia generada respecto del motor de memoria segun la salida
-      elegida en AC1: si viaja, sigue siendo ejecutable ahi; si no viaja, se dice explicitamente."
+    - "AC5 (ENMENDADO 2026-08-12 20:20 -- la causa muere, y el paso 50 no lo cierra esta tarea): la
+      version original pedia el caso ENTERO verde mientras declaraba otras causas fuera de alcance;
+      era contradictoria y el defecto es del encargo, no de la entrega. Lo que acredita: (a) la firma
+      del fallo se MUEVE -- antes el caso aborta en el chequeo de marcadores, despues pasa la
+      generacion y cae mas adelante; (b) el residuo se nombra por su causa y se prueba PREEXISTENTE,
+      derivandolo del diff (esta tarea toca `scripts/new_instance.py` y el runner de casos, asi que
+      lo que falla fuera de esas rutas no lo introdujo ella); (c) el residuo se transfiere a una
+      tarea CONCRETA que lo acepta, citada por id. `Sigue rojo pero es de otro` sin ese id no
+      acredita: es como un rojo sobrevive meses. El paso 50 lo cierra TASK-0367, no esta."
+    - "AC6 (declarado el destino del motor en la instancia): se declara que queda en la instancia
+      generada respecto del motor de memoria segun la salida elegida en AC1: si viaja, sigue siendo
+      ejecutable ahi; si no viaja, se dice explicitamente."
   verification_cmd:
     - "python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py"
     - "python scripts/validate_collaboration_state.py --root ."
@@ -56,6 +64,9 @@ intake:
     - scripts/memory/test_memory_db.py
     - examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
   out_of_scope:
+    - "La SEGUNDA causa del paso 50 -- la identidad de esta instancia cableada en el nucleo, que el
+      escaner de neutralidad caza sobre la instancia GENERADA: es TASK-0367, abierta para ella. NO es
+      de TASK-0347, que declara el paso 50 fuera de su alcance y se lo asigna por nombre a esta."
     - "Los quince rojos de causa `obstacles` del job validate: son TASK-0347, no esta."
     - "El resto de la cascada del gate (TASK-0349, TASK-0351, TASK-0352): cada una tiene su propia
       causa y su propia tarea; no se arreglan de paso aqui."

@@ -258,6 +258,28 @@
             "updated_at": "2026-08-12T17:30:18Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Arquitecto-TASK-0350-resp",
+            "expires_at": "2026-08-13T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-TASK-0350-resp",
+                "Area_comun/state/TASK_INDEX.json#TASK-0350",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0350",
+                "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0367",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
+                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
+                "Area_comun/mailbox/open/MSG-20260812-Codex-to-Arquitecto-QUESTION-TASK-0350-AC5.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Codex-to-Arquitecto-QUESTION-TASK-0350-AC5.md",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Codex-GO-TASK-0350.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Arquitecto-to-Codex-GO-TASK-0350.md"
+            ],
+            "started_at": "2026-08-12T18:15:22Z",
+            "status": "released",
+            "task_id": "TASK-0350",
+            "updated_at": "2026-08-12T18:15:22Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Arquitecto-TASK-0353-go",
             "expires_at": "2026-08-12T23:00:00Z",
             "owner": "Arquitecto",
