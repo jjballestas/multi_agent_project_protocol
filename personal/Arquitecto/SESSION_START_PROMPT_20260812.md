@@ -4,8 +4,13 @@
 > describia una pausa por viaje ya consumida) y al SESSION_START_PROMPT_20260801.md. Estado REAL
 > verificado por medicion, no por plan.
 >
-> **DIFERENCIA CLAVE CON EL CIERRE ANTERIOR: los crons quedaron VIVOS.** No hay marcador `.stop`.
-> Los peones siguen trabajando su cola mientras no haya nadie mirando.
+> **ACTUALIZADO 21:05 -- LOS CRONS ESTAN PARADOS CON MARCADOR `.stop` Y SIN PROCESOS VIVOS.** El
+> operador cerro el PC. Borra los dos marcadores antes de relanzar. Las colas de reintento se
+> VACIARON a proposito (backup `*.retry.json.bak-cierre-20260812`): sus relojes de defer eran viejos
+> y al relanzar los mensajes habrian llegado muertos. Los 3 mensajes vivos de `open/` se re-toman
+> frescos. El exec de `GO-TASK-0364` se corto a los ~12 min con autorizacion; el arnes hizo rollback
+> limpio (`ROLLBACK_QUARANTINED` en `.protocol-tmp/rollback-quarantine/`) y **el arbol gobernado no
+> quedo tocado**.
 
 ## ROL
 Arquitecto / Orquestador de `multi_agent_project_protocol` (D:\Agentes\multi_agent_project_protocol).
