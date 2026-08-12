@@ -1,7 +1,7 @@
 ---
 id: TASK-0354
 title: El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan
-status: in_review
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md
@@ -153,7 +153,11 @@ Todos salen de la misma familia, medida en el ancla:
     linea de `run`                            66                        72
     paso de `run` de una sola linea           64                        69
 
-mas 76 lineas que **empiezan** por `python` (78 si se cuenta el token en cualquier posicion). El **69**
+mas 76 lineas cuyo **primer** token es `python` -- mismo conjunto contando por prefijo crudo de la
+linea y con el tokenizador de la propia puerta (`shlex.split`). Contar el token `python` en cualquier
+otra posicion no da un cardinal sino tres, segun donde se ponga la frontera: **77** con el tokenizador
+de la puerta, **78** delimitando por espacios, **80** con frontera de palabra. Esa dispersion es la
+razon por la que ninguna cifra de esta familia es la poblacion. El **69**
 de la primera redaccion es la celda paso+argumentos; el **72** de la segunda es la celda
 linea+argumentos, y su coincidencia con `referenced=72` -- que cuenta ficheros -- era accidental.
 Ninguna celda de esa tabla es la poblacion: la poblacion es lo que la puerta descubre, 73.)

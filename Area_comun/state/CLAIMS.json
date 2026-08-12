@@ -111,6 +111,22 @@
             "updated_at": "2026-08-12T09:47:29Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Arquitecto-OPS-hyg-r10",
+            "expires_at": "2026-08-12T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-OPS-hyg-r10",
+                "Area_comun/mailbox/open/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0354-r10.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0354-r10.md",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r4.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r4.md"
+            ],
+            "started_at": "2026-08-12T09:56:16Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260812",
+            "updated_at": "2026-08-12T09:56:16Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Arquitecto-OPS-hyg-r9",
             "expires_at": "2026-08-12T22:00:00Z",
             "owner": "Arquitecto",
@@ -159,6 +175,21 @@
             "status": "released",
             "task_id": "TASK-0353",
             "updated_at": "2026-08-12T09:45:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260812-Arquitecto-TASK-0354-cierre",
+            "expires_at": "2026-08-12T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-TASK-0354-cierre",
+                "Area_comun/state/TASK_INDEX.json#TASK-0354",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0354",
+                "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md"
+            ],
+            "started_at": "2026-08-12T09:55:10Z",
+            "status": "released",
+            "task_id": "TASK-0354",
+            "updated_at": "2026-08-12T09:55:10Z"
         },
         {
             "claim_id": "CLAIM-20260812-Arquitecto-TASK-0354-texto-r3",
