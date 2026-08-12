@@ -103,6 +103,37 @@ Emite una vez por episodio (flag `alerted`) y se resetea cuando el lock se va o 
 entregas cubre los DOS desenlaces de un exec: entrega (commit/MSG) o cuelgue (silencioso). El fix PERMANENTE del
 cuelgue es TASK-0236/0237 (harness + hang-proof del npm test); el watchdog es el control compensatorio mientras tanto.
 
+**USA EL HEARTBEAT `EXEC_RUNNING` DEL LOG DEL CRON, NO EL mtime DEL `err.log` (correccion 2026-08-12).**
+La version de arriba falso-positivea en CADA review: en text-mode el `err.log` queda a **0 bytes** y su
+mtime nunca se refresca, asi que a los 480 s canta cuelgue con el exec perfectamente vivo (medido: disparo
+a los 511 s mientras el hijo `claude.exe` tenia WS de 450 MB y el heartbeat latia). El arnes emite
+`EXEC_RUNNING pid=... elapsed=Ns` cada 60 s (TASK-0302): esa SI es senal de vida. Version corregida --
+alerta solo si el LOG DEL CRON lleva >300 s sin latir y el ultimo evento no es `EXEC_EXIT`:
+```bash
+cd /d/Agentes/multi_agent_project_protocol
+declare -A alerted
+while true; do
+  for peer in codex analista; do
+    dir=".protocol-tmp/${peer}_mailbox_cron"; lock="$dir/${peer}_mailbox_cron.lock"; log="$dir/${peer}_mailbox_cron.log"
+    if [ -f "$lock" ] && [ -f "$log" ]; then
+      hb=$(grep -n "EXEC_RUNNING\|EXEC_START\|EXEC_EXIT" "$log" 2>/dev/null | tail -1)
+      logage=$(( $(date +%s) - $(stat -c %Y "$log") ))
+      case "$hb" in
+        *EXEC_EXIT*) alerted[$peer]=0 ;;
+        *) if [ "$logage" -gt 300 ]; then
+             if [ "${alerted[$peer]}" != "1" ]; then
+               echo "=== HUNG-EXEC $(date '+%H:%M:%S') ==="
+               echo "$peer: lock retenido y el HEARTBEAT lleva ${logage}s sin latir (ultimo: ${hb})."
+               alerted[$peer]=1
+             fi
+           else alerted[$peer]=0; fi ;;
+      esac
+    else alerted[$peer]=0; fi
+  done
+  sleep 60
+done
+```
+
 **FALSO POSITIVO EN TEXT-MODE -- NO MATES SIN VERIFICAR LIVENESS REAL (leccion 2026-07/08, aplicada ~5x):** con
 `claude --output-format text` el exec BUFEA stdout hasta el final y deja `runs/*.err.log` en **0 bytes**, asi que su
 mtime NUNCA se refresca -> este watchdog lo ve "CONGELADO" y falso-positivea en CADA review (las reviews del Analista

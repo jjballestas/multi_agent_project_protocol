@@ -102,6 +102,24 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
 - **Reglas de normalizacion de grading: TODAS ex-ante en el set sellado** (palabra==cifra, decimales
   numericos, items de 2 campos exigen ambos). Anadir una regla en el momento de calificar = hallazgo del
   sello (paso: q14/q16 T1 A-bis).
+- **TODO encargo a un peon lleva `task_id: TASK-NNNN` REAL, aunque sea review de SPEC/decision/proceso
+  (2026-08-12, mato un mensaje en silencio).** `Get-MessageWorkDescriptor` (`peer_mailbox_cron.ps1:1050`)
+  exige `^TASK-[0-9]{4}$`, resuelve su fila en el indice y lee los `scope_routes` del `.md` de la tarea.
+  Si CUALQUIERA de esos pasos falla devuelve nulo -> `Acquire-ExecReservation` responde
+  `message_scope_ambiguous` -> el mensaje se DIFIERE en bucle hasta agotar 7200 s y **muere sin que
+  nadie lo lea, sin error**. Desde fuera el cuadro es identico al de un peon ocupado (cron vivo,
+  mensaje en `open/`, cero errores). Si no hay tarea, se REGISTRA una (`task_upsert` + promover a
+  ready) y el mensaje la cita. Las OTRAS tres formas del mismo agujero: fila inexistente en el indice,
+  fila que apunta a un fichero ausente, y fichero sin bloque `scope_routes`.
+- **`scope_routes` de una review = lo que la review ESCRIBE (`Area_comun/mailbox/open/`), NO lo que
+  lee.** Si metes ahi el codigo que va a auditar, chocas con el claim del maker que lo esta tocando y
+  el arnes difiere por `active_external_claim`.
+- **El bloque `scope_routes` debe casar el regex del arnes:** `  scope_routes:` a 2 espacios y los
+  items a 4 (`    - ruta`). Otra indentacion = nulo = mensaje muerto.
+- **Al RELANZAR un cron, lee su log en la PRIMERA ronda.** Un `RETRY_DEFER` con causa no transitoria
+  (`message_scope_ambiguous`) es un mensaje muerto andando, no una espera.
+- **`scan_encoding` da FALSO ROJO transitorio mientras `submit_intent` tiene el `.ledger.lock`**
+  (PermissionError al intentar leerlo). Re-correr; sale limpio. No es un byte no-ASCII real.
 - **Estampa de hora en MSG/artefactos: SIEMPRE del reloj (`date +%H:%M`), JAMAS estimada.** Reincidencia
   2x (hub 05c51a2; instancia 21e6f27): escribir la hora "esperada" adelanta el reloj y obliga a un chore
   de correccion. Tomar la hora en el MISMO paso en que se escribe el archivo.

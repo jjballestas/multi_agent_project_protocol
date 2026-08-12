@@ -1,13 +1,16 @@
-# SESSION START PROMPT -- Arquitecto (2026-08-12)
+# SESSION START PROMPT -- Arquitecto (2026-08-12, cierre de tarde)
 
-> SUPERA a SESSION_START_PROMPT_20260801.md (no lo borres). Estado REAL verificado al cierre
-> 2026-08-12 14:35 local (UTC+2). **PAUSA PLANIFICADA:** el operador viaja y desconecta el equipo de
-> internet; los crons quedaron parados con marcador limpio, no caidos.
+> REESCRITO el 2026-08-12 20:45 local (UTC+2). Supera a la version de las 14:35 del mismo dia (que
+> describia una pausa por viaje ya consumida) y al SESSION_START_PROMPT_20260801.md. Estado REAL
+> verificado por medicion, no por plan.
+>
+> **DIFERENCIA CLAVE CON EL CIERRE ANTERIOR: los crons quedaron VIVOS.** No hay marcador `.stop`.
+> Los peones siguen trabajando su cola mientras no haya nadie mirando.
 
 ## ROL
 Arquitecto / Orquestador de `multi_agent_project_protocol` (D:\Agentes\multi_agent_project_protocol).
 Codex=maker/implementer, Analista=checker-only, operador(John)=aprueba. actor_id ledger="Arquitecto".
-DECISION-0038 narracion minima. HORA local (UTC+2) en cada informe. Reportes con dataset recontado.
+DECISION-0038 narracion minima. HORA local (UTC+2) **leida del reloj, jamas estimada**, en cada informe.
 
 ## COLD-START (ejecutar en orden; PASO 4 NO ES SALTABLE)
 0. **Lease instancia-unica:** lee `personal/Arquitecto/.session-lease`; si hay lease FRESCO (<30min) de
@@ -19,97 +22,122 @@ DECISION-0038 narracion minima. HORA local (UTC+2) en cada informe. Reportes con
    entregas HEAD-local con self-filter que ignora `Co-Authored-By: Claude (Opus|Fable|Sonnet)` -- LOS 3
    modelos -- + asesor; (b) watchdog exec-health; (c) watchdog higiene mailbox. SI NO LOS ARMAS, NO HAS
    COMPLETADO EL ARRANQUE.**
-5. Pide autorizacion per-sesion al operador para lanzar/parar crons (powershell .ps1) + taskkill.
-6. **Los crons estan PARADOS a proposito** (marcador `.stop` en `.protocol-tmp/<peer>_mailbox_cron/`).
-   Para relanzarlos: BORRA el marcador y lanza
-   `powershell -NoProfile -File personal/<Peer>/<peer>_mailbox_cron.ps1` (run_in_background). Verifica por
-   CONDUCTA (lease con task_id/work_scope/state), nunca por git log.
-7. **Verifica los runners propios** (nuevos, DECISION-0112): `gh api repos/jjballestas/
+   - **El watchdog (b) usa el HEARTBEAT `EXEC_RUNNING` del log del cron, NO el mtime del `err.log`**:
+     en text-mode el `err.log` queda a 0 bytes y su mtime congelado, y la version vieja falso-positiveaba
+     en CADA review. Verificado hoy: disparo a los 511 s con el exec perfectamente vivo.
+5. **Los crons quedaron VIVOS** (codex pid 2340, analista pid 25280 al cerrar). Verifica liveness real
+   antes de asumir nada; si murieron, relanza con
+   `powershell -NoProfile -File personal/<Peer>/<peer>_mailbox_cron.ps1` (run_in_background).
+   **Al relanzar, LEE SU LOG EN LA PRIMERA RONDA**: un `RETRY_DEFER` con causa no transitoria es un
+   mensaje muerto andando, no una espera.
+6. **Verifica los runners propios** (DECISION-0112): `gh api repos/jjballestas/
    multi_agent_project_protocol/actions/runners` -> `protocol-win` y `protocol-linux` deben salir `online`.
    Si Linux no esta, la distro de WSL se cerro: relanza el ancla `wsl -d Ubuntu -- sleep infinity`.
 
 ## FONDO INTOCABLE (byte-identico, jamas tocar)
-`protocol.config.json` sha8 = **2E35F26E**, epoch **1.14.0** PINEADO. Dataset **N=500**. Re-genesis
-PROHIBIDO. Cambiar cualquiera = NUEVA DECISION.
+`protocol.config.json` sha8 = **2E35F26E** (verificado al cierre), epoch **1.14.0** PINEADO. Dataset
+**N=500**. Re-genesis PROHIBIDO. Cambiar cualquiera = NUEVA DECISION.
 
-## QUE ESTOY HACIENDO (estado al cierre)
+## QUE ESTOY HACIENDO
 
-**CERRADAS hoy: TASK-0354 y TASK-0359**, las dos con firma del checker.
+**Prioridad declarada por el operador: TERMINAR LA MEMORIA HIBRIDA.** Todo lo demas cede.
 
-**DECISION-0112 aprobada y registrada: la CI canonica pasa a runners PROPIOS.** El plan real es GitHub
-Free = 2.000 min/mes (Copilot Pro no aporta minutos) y la cadencia consume ~18.000: nueve veces el cupo.
-El operador descarto subir el limite (~130-150 $/mes) y publicar el repo -- que ademas PROHIBIRIA el
-arreglo, porque un self-hosted en repo publico deja que un PR ajeno ejecute codigo donde viven las llaves
-de firma. Medido con control en la misma corrida (run `31588931912`): hosted BLOQUEADO 0/0 pasos, los dos
-propios SUCCESS 8/8 con gate real, y `timing.billable` ni los menciona. Detalle de montaje y las cuatro
-trampas: memoria [[runners-self-hosted-esquivan-el-cupo]].
+**1. TASK-0367 en `ready` SIN RUTEAR -- es el primer GO.** El operador la aprobo expresamente y
+aplazo su ejecucion por falta de tiempo. Cierra la SEGUNDA causa del paso 50 del job `validate`: el
+nucleo neutral trae la identidad de esta instancia cableada (`runtime/context.py:15`
+DEFAULT_AGENT_ROLES architect -> "Claude", `runtime/router.py:438` como ultimo recurso,
+`scripts/prune_state.py:252` y `:442`, mas el arnes en el tier runtime). Toda instancia generada la
+hereda: frontera de AGENTS.md s.4 medida por conducta.
 
-**EN VUELO al pausar:**
-- **TASK-0364** (`in_progress`, Codex): el corte de `validate.yml` a los runners propios. **Su exec fue
-  CORTADO POR EL TECHO DURO a las 14:47:43** (`EXEC_EXIT code=-1 outcome=transient` + `ROLLBACK_DEFER
-  reason=head_changed` + `RETRY_SCHEDULED 1/3`), no termino. **Los OCHO commits SI estan pusheados**
-  (`cefd5e02` mueve los gates, `f23ef6a7` wrapper pwsh, `6b47e146` safe-directory, `6aee19ac` Python
-  provisionado, mas cuatro `docs(...)` de hallazgos de run vivo): el trabajo no se perdio, pero **no
-  hubo flip a `in_review` ni handoff**. El GO sigue VIVO en `open/`, fuera del `seen.json` y con entrada
-  en `codex_mailbox_cron.retry.json` -> **se re-ejecuta SOLO al relanzar el cron**. Decidir antes si se
-  quiere eso o si conviene rutear un mensaje de solo-cierre anclado al ultimo commit.
-- **TASK-0353** (`in_review`): el checker firmo **OK-CLOSABLE** en r5 sobre `c92be390`. **NO la cerre a
-  proposito** -- ver PENDIENTES.
+**2. Memoria hibrida BLOQUEADA en dos frentes, registrados `proposed` y sin rutear.**
+- **TASK-0368 (motor, Codex).** El motor deriva "decision vigente" del literal `status == "active"` y
+  este corpus escribe `accepted`: 106 de 110 politicas salen `historical`/`hot_required=0`, incluidas
+  DECISION-0026, 0020, 0038 y 0104. Fail-CLOSED para I4, **fail-OPEN para I7**. Sus AC matan
+  explicitamente la salida facil ("anadir `accepted` a la lista" es la misma lista con un elemento
+  mas) y exigen supervivencia a una tercera grafia con fallo RUIDOSO.
+- **TASK-0369 (texto s.7, mia).** Tres divergencias entre la seccion normativa y el motor: `title`
+  UTF-8 y tope 500 son transcripcion pendiente de P7; `applies_to` es una allowlist cuya lista
+  publicada difiere de la efectiva -- y es la lista en la que I3 se apoya. P4 cierra ahi.
+- **La SPEC NO sale de `draft-reviewed-informal` hasta que cierren LAS DOS.** Veredicto completo:
+  `Area_comun/artifacts/Analista-TASK-0365-spec-memoria-hibrida-review-formal-verdict.md`.
+
+**3. TASK-0364 (`in_progress`, Codex) -- vigilar si su GO murio.** `defer_started 18:06:54Z`,
+`defers=4`, causa `worktree_residue_live`, ventana 7200 s -> **muerte dura hacia las 22:07 local del
+12-ago**. La causa del residuo son los propios ficheros sin commitear de `personal/Codex/`: es
+TASK-0337 (el guard de residuo veta sin mirar scope) mordiendo en vivo. Si murio, re-rutear mensaje
+nuevo. **0364 saca a 0340 y 0347 de `blocked` y deja cerrar 0342.**
+
+**4. TASK-0350 en `ready`** con el fix entregado (`192c5dea`) y AC5 enmendado; su RESP esta ruteada.
+
+**5. Higiene y poda pendientes.** `open/` con 7 mensajes, varios consumidos. La poda esta VENCIDA
+(`cold_start_tokens` 22523, `released_ratio` 91.89) y **BLOQUEADA**: exige claim sobre `CLAIMS.json`
+ENTERO y choca con `CLAIM-20260812-Codex-TASK-0364`, `active` aunque expiro a las 17:36Z.
 
 ## COMO LO HAGO (loop gobernado + rieles)
 - Ledger: TODA transicion por `runtime/submit_intent.py --actor-id Arquitecto`. Claim acquire ANIDADO con
   `scope` (incluida su propia fila `CLAIMS.json#<claim_id>`); release PLANO. Editar `Area_comun/state/*`
   a mano = drift HARD-FAIL.
-- Gatear por **exit code real**, sin pipe (`cmd >/dev/null 2>&1; echo $?`). Un `| tail` devuelve el exit
+- **Gatear por exit code real, sin pipe** (`cmd >/dev/null 2>&1; echo $?`). Un `| tail` devuelve el exit
   del tail y miente.
+- **`scan_encoding` da FALSO ROJO transitorio mientras `submit_intent` tiene el `.ledger.lock`**
+  (PermissionError al leerlo). Pasado hoy: re-correr y sale limpio. No es un byte no-ASCII real.
 - Commit con **pathspec por lista explicita**, nunca `git add -A`. Trailers en el parrafo FINAL sin linea
   en blanco (`Task-Id:` + `Co-Authored-By:`; sin tarea -> `Task-Id: none` + `Ops-Reason:` <=120 chars).
 - Subject `fix(`/`revert(`/`hotfix(` exige `Fixes-Task:`; para coordinacion usa `chore(`/`state(`/`coord(`.
-- **validate POST-commit ANTES del push.** Memoria en el MISMO commit que el trabajo.
-- Higiene de mailbox ACOPLADA al mismo gate de commit: archivar consumidos en lotes <=3-4.
+- **validate POST-commit ANTES del push.** Memoria justo despues de cada commit.
+- **TODO encargo a un peon lleva `task_id: TASK-NNNN` real** -- aunque sea review de SPEC. Sin tarea
+  numerada con `scope_routes`, el arnes no produce descriptor, difiere en bucle y el mensaje MUERE a
+  las 2 h sin error. Si no hay tarea, se REGISTRA una.
+- **`scope_routes` de una review = lo que ESCRIBE** (`Area_comun/mailbox/open/`), no lo que lee. Meter
+  ahi el codigo auditado choca con el claim del maker y difiere por `active_external_claim`.
+- Tras superseder un mensaje, **borra su entrada del `<peer>_mailbox_cron.retry.json`**: archivar no
+  desencola.
+- **NO stagear artefactos del peer a medio escribir**: verifica `EXEC_EXIT` antes de commitear.
 - ASCII puro en `Area_comun/`: escanear bytes >127 antes de commitear.
-- **NO stagear artefactos del peer a medio escribir**: el checker escribe su veredicto en el arbol
-  mientras tu commiteas.
 - Scratch: TODO bajo `D:/Aegis_Scratch/<proyecto>/<proposito>/`, jamas en la raiz del disco (DECISION-0104).
+- **Cola por peon: maximo 2-3 mensajes vivos.** El defer mata a las 2 h. Un exec puede llegar a 75 min.
 
 ## LECCIONES CLAVE (el COMO durable)
-- **Refutar enumerando es el mismo defecto que reconocer enumerando.** TASK-0354 costo CINCO vueltas de
-  texto: mi parrafo refutaba el cardinal 69 citando cuatro cifras y concluyendo "ninguna da 69" -- pero
-  las cuatro eran tres esquinas de una tabla de dos ejes cuya cuarta esquina vale **exactamente 69**.
-  Sustituir listas por su criterio de pertenencia, siempre.
-- **Un cardinal publicado declara su UNIDAD.** 73 invocaciones y 72 ficheros no son el mismo conjunto; su
-  coincidencia era accidental. Antes de decir que dos cifras se corroboran, nombrar que cuenta cada una.
-- **Cuando la correccion es transcripcion, se transcribe.** Mi unica desviacion declarada (conservar cuatro
-  cifras "porque estaban verificadas") fue justo lo que destapo el defecto siguiente.
-- **El hand-feed se muda de coordenada.** TASK-0359: primero `$before`, luego el calendario del muestreo,
-  ahora el deadline (`:1485`). Preguntar que ENTRADAS escribe el test en vez de dejar que produccion las
-  calcule, y mutar la semilla.
-- **Verificar por CONDUCTA, no por estado declarado.** Un servicio "Running" no prueba que pueda correr un
-  job: hubo que lanzar la sonda y mirar los 8 pasos.
-- **Control en la MISMA corrida.** Es lo que hizo valer la medicion de los runners: sin el job hosted
-  bloqueado al lado, "el self-hosted funciona" no discriminaba nada.
+- **Un invariante puede cumplirse por su LETRA y romperse por su NOMBRE.** I7 pasaba cualquier chequeo
+  literal -- las 4 filas con `hot_required=1` tenian su `.md` caliente -- y murio al preguntar que
+  poblacion deberia estar ahi. Antes de dar un invariante por cumplido, pregunta por su nombre.
+- **Ante "sigue rojo pero es de TASK-XXXX": ABRE la XXXX y lee su `out_of_scope`.** Puede estar
+  devolviendotelo por nombre, y entonces el rojo **no es de nadie**. Paso hoy con el paso 50 entre
+  0347 y 0350. Exige id concreto de la tarea que lo ACEPTA; "es de otro" a secas no acredita.
+- **Un AC que pide "el caso ENTERO verde" mientras el `out_of_scope` excluye otras causas es
+  CONTRADICTORIO**: no se puede cumplir ni refutar. Es defecto del encargo. Enmiendalo con la enmienda
+  FECHADA y visible, jamas en silencio.
+- **Una puerta que aborta pronto OCULTA lo que hay detras.** Al matar la primera causa de un paso,
+  presupuesta una segunda; no la trates como regresion.
+- **Prueba PREEXISTENTE derivando del diff**, no corriendo el arbol anterior: lo que el cambio no toco
+  no lo pudo introducir.
+- **El silencio de un instrumento no es evidencia de progreso.** Un cron vivo + mensaje en `open/` +
+  cero errores es el cuadro exacto de "esta trabajando" cuando no trabaja nadie.
+- **Hora del RELOJ, jamas estimada.** Reincidi hoy (estampe 20:50 cuando eran las 20:33) despues de
+  llevar la sesion entera exigiendolo.
 
 ## CANAL DE ORDENES + PENDIENTES
 
-**Espera decision del operador (por orden de valor):**
-1. **TASK-0353: cerrar o escalar.** El checker firmo OK-CLOSABLE, pero senala que la entrega **retiro el
-   guard ansioso ENTERO**, no solo la resta que se autorizo. Eso es alcance por encima de lo pedido y es
-   decision del operador. Su veredicto pide ademas abrir sucesora SOLO TEST con el mutante M2 como AC de
-   partida: `schema_report` que borra solo `attempt_id` debe MORIR por conducta. Residuales nuevos R14,
-   R15, R16; R13 y R10 CERRADAS. Mensaje vivo en `open/`.
-2. **Sucesora de TASK-0359**: la sonda aun escribe a mano `:1475` y `:1485`; un mutante de un caracter en
-   `:1485` falsifica el texto del contrato con el negativo VERDE. El checker NO pidio vuelta cuatro: lo
-   entrega como sucesora y la decision es del operador.
-3. **Dieta de triggers** (`branches: [main]`, `paths-ignore: personal/**` = 27% de los commits): pierde
-   granularidad de biseccion, va en DECISION propia, no se cuela en TASK-0364.
-4. **Runner de Windows como servicio: corre bajo `NT AUTHORITY\Servicio de red`**, no bajo el usuario (el
-   operador usa PIN y cuenta MicrosoftAccount, no hay contrasena que dar). Funciona porque se le dio
-   lectura/ejecucion sobre el Python del usuario. Residual declarado: no hereda el perfil (no ve
-   `.gitconfig` ni variables personales).
+**Decidido por el operador en esta ventana (no re-preguntar):**
+- **TASK-0353: CERRAR.** Hecho, con el residual declarado. Su sucesora SOLO TEST (mutante M2) **NO se
+  abre** por ahora.
+- **TASK-0367: promocion APROBADA**, ejecucion aplazada al proximo inicio.
+- **No cargar a los peones** mientras el operador este en transito.
+
+**Abierto con el operador:**
+1. **NOVA puede arrancar** (respondido). Lo unico marcado como bloqueante: `COMMIT_TRAILERS.json` con
+   `enabled: false` en Aegis -> encender con `start_commit`=su HEAD y solo tras verificar que sus
+   arneses ya emiten `Task-Id:`. Sus skills apuntan a rutas inexistentes (no fallan a gritos: no hacen
+   nada). Su hallazgo del hook con `EXIT=0` sin validar nada **es el mismo codigo que este hub envia**
+   y falta censarlo aqui.
+2. **Sucesora de TASK-0359** (la sonda escribe a mano `:1475`/`:1485`): sigue sin abrir.
+3. **Dieta de triggers** (`branches: [main]`, `paths-ignore: personal/**`): DECISION propia.
+4. **Los tres residuales del veredicto de 0365 que mas pesan**: las 222 aristas `implements` inertes
+   al 100%, el alcance real de la deteccion agrupada de IBAN (7 separadores; la COMA no caza) y el
+   cardinal "219 warnings" que no se re-deriva sin nombrar su poblacion.
 
 ## SIGUIENTE ACCION (al retomar, tras el cold-start)
-1. `git fetch` y mirar si Codex llego a pushear `6b47e146` y la entrega de **TASK-0364**. Si quedo a
-   medias, ese es el primer frente: es la tarea que saca a **0340 y 0347** de `blocked` y permite cerrar
-   **0342** -- la cascada que llevaba dias parada por la facturacion.
-2. Llevar al operador las decisiones 1 y 2 de PENDIENTES (0353 y la sucesora de 0359).
-3. Relanzar los crons SOLO cuando haya cola real y con autorizacion (paso 6 del cold-start).
+1. Ver si el GO de TASK-0364 murio por defer (~22:07 del 12-ago). Si murio, re-rutear mensaje minimo.
+2. **Rutear TASK-0367** (ya en `ready`): es el primer GO aprobado.
+3. Promover y rutear **TASK-0368** a Codex en cuanto su cola baje a 1. **TASK-0369 la ejecuto yo.**
+4. Higiene de `open/` en lote <=3-4 y reintentar la poda cuando 0364 libere su claim.
