@@ -195,3 +195,15 @@ corridas de CI en `failure`: no hay verde de Actions para esta entrega).
 
 Esta era la vuelta 2 de 2. Conceder una tercera o cerrar con S2 abierto **lo decide el operador**.
 
+## Remediacion Codex vuelta 3 2026-08-12
+
+- La sonda de desenlace ya no escribe a mano el calendario de muestreo. Lee el artefacto bajo
+  prueba y ejecuta desde la semilla de produccion hasta el final del `while`, por lo que el
+  calendario y el bucle forman una sola frontera conductual.
+- El negativo declara y ejecuta tres mutantes de produccion que hacen inalcanzable el muestreo:
+  guarda `if ($false)`, semilla fijada en `DateTime::MaxValue` y cambio de signo de
+  `AddSeconds(-$progressSampleSeconds)` a `AddSeconds($progressSampleSeconds)`. En los tres casos
+  el exec silencioso que consume CPU termina como colgado y recibe una llamada de corte; el arbol
+  sano observa progreso y no recibe ninguna.
+- Esta vuelta cambia solo el test y el texto del contrato. No cambia produccion ni absorbe los
+  residuales R9, R10, R1, R8 o R5.

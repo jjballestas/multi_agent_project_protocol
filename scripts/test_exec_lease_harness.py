@@ -131,12 +131,16 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "NEG-HARNESS-WORK-DERIVED-EXEC-LIVENESS",
         "negative": "The real supervision loop must keep a silent CPU-working exec alive at its first deadline and kill it when the production CPU-sampling block is unreachable.",
-        "mutation": "source.replace(live_sampling_guard, unreachable_sampling_guard, 1)",
+        "mutation": "sign_changed_source = source.replace(live_sampling_seed, sign_changed_seed, 1)",
         "boundaries": (
             'assert healthy_outcome["exec_progressing"] is True',
             'assert healthy_outcome["exec_hung"] is False',
             'assert mutant_outcome["exec_progressing"] is False',
             'assert mutant_outcome["exec_hung"] is True',
+            'assert max_deadline_outcome["exec_progressing"] is False',
+            'assert max_deadline_outcome["exec_hung"] is True',
+            'assert sign_changed_outcome["exec_progressing"] is False',
+            'assert sign_changed_outcome["exec_hung"] is True',
         ),
         "exercised_by": "test_silent_process_tree_cpu_is_work_derived_and_mutation_proven",
     },
@@ -1357,11 +1361,11 @@ $postDeliveryHardDeadlineUtc = $null
 $execHardDeadlineUtc = $deadlineUtc.AddSeconds($ProgressHardCapSeconds)
 $progressOutputBytes = 0L
 $progressLedgerBytes = 0L
-$progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)
-$progressProcessCpuSample = $null
-$nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)
 try {{
-    Invoke-Expression $whileNode.Extent.Text
+    $srcText = [System.IO.File]::ReadAllText($sourcePath)
+    $seedIdx = $srcText.IndexOf('$progressSampleSeconds = [Math]::Max(1, $ProgressFreshSeconds)')
+    if ($seedIdx -lt 0) {{ throw "missing production seed" }}
+    Invoke-Expression $srcText.Substring($seedIdx, $whileNode.Extent.EndOffset - $seedIdx)
 }} finally {{
     if (-not $process.HasExited) {{ Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue }}
     $process.WaitForExit()
@@ -1389,7 +1393,11 @@ def test_silent_process_tree_cpu_is_work_derived_and_mutation_proven() -> None:
 
     live_sampling_guard = "if ([DateTime]::UtcNow -ge $nextProgressCpuSampleUtc) {"
     unreachable_sampling_guard = "if ($false) {"
+    live_sampling_seed = "$nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds(-$progressSampleSeconds)"
+    max_deadline_seed = "$nextProgressCpuSampleUtc = [DateTime]::MaxValue"
+    sign_changed_seed = "$nextProgressCpuSampleUtc = $deadlineUtc.AddSeconds($progressSampleSeconds)"
     assert source.count(live_sampling_guard) == 1
+    assert source.count(live_sampling_seed) == 2
     mutant_source = source.replace(live_sampling_guard, unreachable_sampling_guard, 1)
     assert mutant_source != source
     with make_tempdir("supervision-loop-unreachable-sampling-") as tmp:
@@ -1399,6 +1407,26 @@ def test_silent_process_tree_cpu_is_work_derived_and_mutation_proven() -> None:
     assert mutant_outcome["exec_progressing"] is False
     assert mutant_outcome["exec_hung"] is True
     assert mutant_outcome["stop_calls"] == 1
+
+    max_deadline_source = source.replace(live_sampling_seed, max_deadline_seed, 1)
+    assert max_deadline_source != source
+    with make_tempdir("supervision-loop-max-deadline-seed-") as tmp:
+        max_deadline_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        max_deadline_path.write_text(max_deadline_source, encoding="utf-8", newline="\n")
+        max_deadline_outcome = supervision_loop_outcome_probe(max_deadline_path)
+    assert max_deadline_outcome["exec_progressing"] is False
+    assert max_deadline_outcome["exec_hung"] is True
+    assert max_deadline_outcome["stop_calls"] == 1
+
+    sign_changed_source = source.replace(live_sampling_seed, sign_changed_seed, 1)
+    assert sign_changed_source != source
+    with make_tempdir("supervision-loop-sign-changed-seed-") as tmp:
+        sign_changed_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        sign_changed_path.write_text(sign_changed_source, encoding="utf-8", newline="\n")
+        sign_changed_outcome = supervision_loop_outcome_probe(sign_changed_path)
+    assert sign_changed_outcome["exec_progressing"] is False
+    assert sign_changed_outcome["exec_hung"] is True
+    assert sign_changed_outcome["stop_calls"] == 1
 
 
 def recycled_pid_cpu_probe(source: Path) -> dict:
