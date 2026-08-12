@@ -161,6 +161,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda"
+        },
+        {
+            "id": "TASK-0368",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles"
+        },
+        {
+            "id": "TASK-0369",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist"
         }
     ],
     "view": "task_index.slim"

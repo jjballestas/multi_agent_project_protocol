@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c2d13cd96b4deb660e5239ff3636850bae78dc4d699991da4af338bedf454c03",
+  "canonical_hash": "b854ef49494ab08ee60c32d6823bf691172a042a93f7d88fcb63ec72cfd9edd9",
   "integrity": {
-    "canonical_hash": "c2d13cd96b4deb660e5239ff3636850bae78dc4d699991da4af338bedf454c03",
+    "canonical_hash": "b854ef49494ab08ee60c32d6823bf691172a042a93f7d88fcb63ec72cfd9edd9",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "dd9eb458fdbfc0a02ec8b447899f61ec5c705d66c41d0c57d92111d14a76a6a4",
-    "signature": "68ed0281f52809ddb76354a627e417d40184238d23347ece5bdaac377eaf1bc4",
-    "up_to_seq": 8987
+    "prev_hash": "5253e1c7a8df419662077928d4bc8cc86c8ffc805a96378cd0ed82242e713e57",
+    "signature": "d94dbb34955bd963506445ce8570c2c40f34d4f09b8b858198cd288039f87f7a",
+    "up_to_seq": 8991
   },
   "state": {
     "aggregate_versions": {
@@ -989,6 +989,7 @@
       "CLAIM-20260812-Arquitecto-TASK-0359-vuelta3": 1,
       "CLAIM-20260812-Arquitecto-TASK-0363-intake-r7": 1,
       "CLAIM-20260812-Arquitecto-TASK-0363-registro": 1,
+      "CLAIM-20260812-Arquitecto-TASK-0368-0369": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3657,6 +3658,8 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 1,
+      "TASK-0368": 2,
+      "TASK-0369": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3679,7 +3682,7 @@
       "protocol-prune": 68,
       "protocol-state": 1
     },
-    "events_applied": 8316,
+    "events_applied": 8320,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4578,6 +4581,10 @@
       "arq-reg-0365-0366-001-rel": 8972,
       "arq-reg-0365-0366-001-up65": 8969,
       "arq-reg-0365-0366-001-up66": 8970,
+      "arq-reg-0368-0369-001-acq": 8988,
+      "arq-reg-0368-0369-001-rel": 8991,
+      "arq-reg-0368-0369-001-up68": 8989,
+      "arq-reg-0368-0369-001-up69": 8990,
       "arq-reg3-0": 7441,
       "arq-reg3-1": 7442,
       "arq-reg3-10": 7451,
@@ -11999,5 +12006,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8987
+  "up_to_seq": 8991
 }

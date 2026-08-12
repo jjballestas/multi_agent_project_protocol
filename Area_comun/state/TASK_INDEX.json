@@ -574,6 +574,22 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+            "id": "TASK-0368",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0369-la-seccion-normativa-de-la-spec-contradice-al-motor.md",
+            "id": "TASK-0369",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist",
+            "type": "doc"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

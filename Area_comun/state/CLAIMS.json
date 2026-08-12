@@ -409,6 +409,24 @@
             "updated_at": "2026-08-11T23:29:46Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Arquitecto-TASK-0368-0369",
+            "expires_at": "2026-08-13T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-TASK-0368-0369",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0369",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0369",
+                "Area_comun/tasks/TASK-0369-la-seccion-normativa-de-la-spec-contradice-al-motor.md"
+            ],
+            "started_at": "2026-08-12T18:24:07Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-12T18:24:07Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Codex-TASK-0350",
             "expires_at": "2026-08-12T23:58:00Z",
             "notes": "Implement TASK-0350 semantic unresolved-placeholder detection and behavioral evidence.",
