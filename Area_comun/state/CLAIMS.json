@@ -59,6 +59,26 @@
             "updated_at": "2026-08-12T00:00:24Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Arquitecto-OPS-hyg-0354r8",
+            "expires_at": "2026-08-12T20:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-OPS-hyg-0354r8",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r3.md",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Codex-REMEDIACION-TASK-0359-r3.md",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r2.md",
+                "Area_comun/mailbox/open/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0354-r7.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0354-r7.md",
+                "Area_comun/mailbox/open/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0354-r8.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0354-r8.md"
+            ],
+            "started_at": "2026-08-12T08:28:39Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260812",
+            "updated_at": "2026-08-12T08:28:39Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Arquitecto-TASK-0354-texto-r3",
             "expires_at": "2026-08-12T20:00:00Z",
             "owner": "Arquitecto",
@@ -73,6 +93,21 @@
             "status": "released",
             "task_id": "TASK-0354",
             "updated_at": "2026-08-12T08:15:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260812-Arquitecto-TASK-0359-vuelta3",
+            "expires_at": "2026-08-12T20:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-TASK-0359-vuelta3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md"
+            ],
+            "started_at": "2026-08-12T08:26:23Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-12T08:26:23Z"
         },
         {
             "claim_id": "CLAIM-20260812-Arquitecto-TASK-0363-intake-r7",
