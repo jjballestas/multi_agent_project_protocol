@@ -12069,3 +12069,69 @@ se lea como error del que lo copio, envenena el canal.
 
 2 de 2. Si hiciera falta una tercera vuelta, **va al operador humano**: seria senal de que el defecto
 no esta en la redaccion.
+
+## Ultima actualizacion 2026-08-12 (71) - TASK-0354 r8: CHANGE-REQUIRED + ESCALADO (el 72 tampoco re-derivaba)
+
+- Encargo `MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r2`. **SOLO HUB, SIN PRODUCTO.**
+  Texto juzgado en `665d00fb` (== origin/main al firmar), implementacion `cf918584` intacta (diff
+  vacio + sha256 `f2d1e8a3...`). Veredicto en
+  `Area_comun/artifacts/Analista-TASK-0354-r8-cardinal-73-y-goal-refutado-verdict.md`, commit `1779240a`.
+- Clon `git clone -s` con historia completa bajo `D:/Aegis_Scratch/mapp/t354r8/`, gate extraido con
+  PyYAML. Puertas en el clon: validate 0, encoding 0, neutralidad 0, drift CLEAN up_to_seq=8896.
+  Baseline `PASS invocations=73 referenced=72` EXIT=0.
+- La seccion 4 de r7 la transcribio literal y correcta. Verifique las nueve afirmaciones del parrafo
+  nuevo y las cuatro cifras que refutan el 69 (66 / 64 / 72 / 76): las trece confirman.
+
+### LECCION 1 (la que me llevo): re-derivar la cifra que REFUTA no es re-derivar la cifra que PONGO
+
+En r7 escribi "un cardinal que publico se re-deriva o no se publica", re-derive las cuatro cifras con
+las que demolia el 69 -- y **no re-derive el 72 con que lo sustitui**. En el mismo veredicto. El 72
+salia de un criterio anclado a la LINEA (`^python <ruta>.py [args]`), que descarta en silencio la
+invocacion `if ! python scripts/prune_state.py --root . --check; then`. Es decir: **descarte por
+enumerar una forma**, el defecto exacto que la tarea existe para nombrar. Falsado con M3: ocultar esa
+invocacion 73 deja el gate verde y le quita la cobertura al fichero (`referenced` 72 -> 71).
+
+Regla: la cifra de la refutacion y la cifra de la sustitucion son dos publicaciones distintas, y la
+segunda es la que va a viajar a un AC. Re-derivar solo la primera da una sensacion de rigor falsa.
+
+### LECCION 2: dos cardinales iguales no son el mismo conjunto -- comprobar la IDENTIDAD, no el numero
+
+Escribi "72 es exactamente el `referenced=72` que el gate imprime en verde: la poblacion ocultable es
+la poblacion entera que la puerta dice cubrir". **Falso, y la coincidencia era accidental:**
+
+    72 = 73 invocaciones - 1 invocacion que mi criterio de linea descarto
+    72 = 73 invocaciones - 1 fichero duplicado (validate_collaboration_state.py se invoca 2 veces)
+
+Ocultar es **por invocacion** (73); cubrir es **por fichero** (72). M1 lo prueba: esconder UNA de las
+dos invocaciones del fichero duplicado la vuelve silenciosa y el fichero **sigue cubierto**
+(`invocations=72 referenced=72`); hacen falta las dos (M2). Cuando dos cifras casan, comprobar que los
+CONJUNTOS casan, no solo los cardinales -- y una coincidencia numerica no es corroboracion, es la
+forma mas facil de que un numero roto parezca re-derivable.
+
+### LECCION 3: la correccion se aplica donde vive la afirmacion, no donde el revisor la cito
+
+Mi seccion 4 de r7 pidio para TASK-0363 solo el **cardinal** en goal/AC1. El Arquitecto lo hizo bien
+-- y el `goal` se quedo con la propiedad de UNA condicion que TASK-0354 declara erronea en el mismo
+commit, mas N2 etiquetada "atrapada" en el cuerpo. Peor: el AC5 que el commit anade **refuta el goal
+de su propio fichero** (D6 `python "$RUNNER_TEMP/generated.py"` enrojece sin ruta relativa en el run).
+La contradiccion interna la introdujo esta vuelta, y la introdujo porque mi instruccion de remediacion
+enumeraba campos en vez de nombrar la afirmacion. **Si una afirmacion vive en dos ficheros, la
+remediacion se enuncia sobre la afirmacion.**
+
+### LECCION 4: la pregunta por "direcciones sin nombrar" tambien se responde por el lado del ROJO
+
+Direccion nueva medida: una ruta `.py` **del repositorio** nombrada en un `run` **sin ser invocada**
+enrojece la puerta -- `--exclude scripts/prune_state.py` (E1) y `git add scripts/prune_state.py` (E2),
+las dos EXIT=1. No hay invocacion invisible que rescatar: no hay invocacion. La letra de la propiedad
+lo cubre; el inventario de falsos rojos (solo `$RUNNER_TEMP` y `/tmp`) no. Residual declarable, no
+bloqueo. Y descarte sin publicar dos sondas mas porque mi inyeccion altero el escalar YAML y el
+resultado no era atribuible al mecanismo: **una sonda cuya forma efectiva no imprimo, no se publica.**
+
+### Ciclo declarado
+
+Vuelta 3 de un ciclo que yo acote en 2, asi que **ESCALA AL OPERADOR** tal como firme en r7. Opciones
+sometidas: **A** aplicar la seccion 6 (transcripcion, texto exacto y cardinales medidos ya escritos) y
+cerrar; **B** cerrar ya y llevarse la correccion entera a TASK-0363. Recomiendo A: arrastrar un
+cardinal roto a la tarea que existe para prohibir cardinales rotos es el peor sitio donde dejarlo.
+Tercera vuelta seguida en que el cardinal defectuoso lo pone el verificador; lo digo en el veredicto,
+en el mensaje y en el commit.
