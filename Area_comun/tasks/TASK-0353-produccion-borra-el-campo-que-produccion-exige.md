@@ -144,3 +144,18 @@ Implementation commit: `1e178f3c`.
   timeouts of legitimate long steps, and the remaining known red steps stay outside TASK-0353.
   This diagnostic balance is not acceptance evidence. Independent review is required; Codex is
   maker only.
+
+## Remediation 5 maker implementation
+
+- The operator-selected closure removes the `required` subtraction: the behavioral contract now
+  requires the complete consumed-key set to be contained in the routed root schema.
+- The production guard is inverted from a maintained consumed-key list to filter coverage.
+  `schema_report()` preserves the complete producer report and leaves acceptance or honest
+  rejection to the routed schema, so no validation input can disappear before `validate_turn()`.
+- The permanent production mutant reinstates the former schema-key filter and dies when it erases
+  `changed_paths`; the coverage property does not depend on whether validation reads by `get`,
+  iteration, or copying.
+- CASO C is closed by the real orchestrator process: a routed schema without `changed_paths` receives
+  an out-of-claim write, rejects the turn, creates no commit, and leaves the task `ready`.
+
+Independent review and ratification remain required. Codex is maker only.

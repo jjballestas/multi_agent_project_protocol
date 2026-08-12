@@ -70,23 +70,6 @@ except ImportError:  # pragma: no cover - direct script execution
 
 HUMAN_OUTCOMES = {"decision_required", "human_required"}
 
-# These optional top-level keys are read by at least one routed validation gate.
-# The permanent behavioral contract derives this set by executing every current
-# outcome, action and Review/QA branch.  A routed schema may reject one of these
-# keys honestly, but schema_report() must never erase it before the gate reads it.
-VALIDATION_CONSUMED_TURN_KEYS = frozenset(
-    {
-        "actions",
-        "aggregate_version",
-        "decision_refs",
-        "fencing_token",
-        "gate",
-        "obstacles",
-        "tools",
-        "transitions",
-    }
-)
-
 DEFAULT_CONTEXT_POLICY = {
     "compaction_enabled": False,
     "recent_turn_summaries": 3,
@@ -124,8 +107,8 @@ def turn_schema_keys(root: Path) -> frozenset[str]:
     """Return the only keys that the turn validator can accept.
 
     The schema is the validator's first gate and rejects additional properties.
-    Resolve it from the routed root, exactly as validate_turn does, so filtering and
-    validation cannot silently use different schema artifacts.
+    Resolve it from the routed root, exactly as validate_turn does, so coverage
+    contracts and validation cannot silently use different schema artifacts.
     """
     schema_path = root / "runtime" / "turn_schema.json"
     schema = read_json(schema_path)
@@ -136,15 +119,7 @@ def turn_schema_keys(root: Path) -> frozenset[str]:
     properties = schema.get("properties")
     if not isinstance(properties, dict):
         raise ValueError(f"{schema_path}: schema must define a properties mapping")
-    keys = frozenset(str(key) for key in properties)
-    missing_consumed = VALIDATION_CONSUMED_TURN_KEYS - keys
-    if missing_consumed:
-        missing = ", ".join(sorted(missing_consumed))
-        raise ValueError(
-            f"{schema_path}: routed schema omits top-level keys read by "
-            f"orchestrator validation gates: {missing}"
-        )
-    return keys
+    return frozenset(str(key) for key in properties)
 
 
 def token_count(text: str, divisor: int = 4) -> int:
@@ -504,8 +479,11 @@ def real_invoker_run_id_error(root: Path, *, llm_invoker: str, run_id: str | Non
 
 
 def schema_report(report: dict[str, Any], root: Path) -> dict[str, Any]:
-    allowed_keys = turn_schema_keys(root)
-    return {key: value for key, value in report.items() if key in allowed_keys}
+    # The routed schema remains the authority for accepting or rejecting keys.
+    # Preserve the complete producer report so validation can reject a schema
+    # mismatch honestly instead of silently erasing input before its gates run.
+    turn_schema_keys(root)
+    return dict(report)
 
 
 def normalize_scope_path(path: Any) -> str:

@@ -276,6 +276,24 @@
             "updated_at": "2026-08-11T23:29:46Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Codex-TASK-0353-r5",
+            "expires_at": "2026-08-12T16:30:00Z",
+            "notes": "Implement operator-selected TASK-0353 remediation round 5 as maker.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Codex-TASK-0353-r5",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/orchestrator.py",
+                "examples/runtime_turn_cases/run_runtime_turn_obstacle_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-12T10:30:00Z",
+            "status": "active",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-12T10:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Codex-TASK-0359-remediation4",
             "expires_at": "2026-08-12T20:45:00Z",
             "notes": "Implement TASK-0359 remediation round 3 test-only production-seed execution and mutation contract correction.",
