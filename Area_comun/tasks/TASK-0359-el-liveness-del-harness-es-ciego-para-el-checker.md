@@ -1,7 +1,7 @@
 ---
 id: TASK-0359
 title: El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora
-status: in_review
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md

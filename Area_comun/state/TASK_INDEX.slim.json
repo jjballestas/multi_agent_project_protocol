@@ -121,12 +121,6 @@
             "title": "La invariante de dos fases no esta atada por ninguna puerta -- el bloque existe, nadie comprueba que nada corra antes"
         },
         {
-            "id": "TASK-0359",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora"
-        },
-        {
             "id": "TASK-0360",
             "owner": "Codex",
             "status": "proposed",
