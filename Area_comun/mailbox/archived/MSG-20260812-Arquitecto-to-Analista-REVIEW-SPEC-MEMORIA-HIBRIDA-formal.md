@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: none
-status: open
+status: archived
 created: 2026-08-12T13:05:00Z
 requires_response: true
 response_owner: Analista

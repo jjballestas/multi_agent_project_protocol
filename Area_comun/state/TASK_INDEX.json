@@ -550,6 +550,22 @@
             "type": "infra"
         },
         {
+            "file": "Area_comun/tasks/TASK-0365-review-formal-spec-memoria-hibrida.md",
+            "id": "TASK-0365",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Review formal de SPEC-MEMORIA-HIBRIDA v0.3.0 -- falsar los nueve invariantes contra el motor ya portado",
+            "type": "review"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0366-mensaje-sin-tarea-numerada-muere-en-silencio.md",
+            "id": "TASK-0366",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Un mensaje sin tarea numerada no puede reservar ejecucion y muere en silencio a las dos horas",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
