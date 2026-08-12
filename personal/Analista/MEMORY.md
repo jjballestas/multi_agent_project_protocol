@@ -12198,3 +12198,79 @@ Bloquear en la vuelta 3 con presupuesto agotado exige bajar el coste del arreglo
 veredicto con los tres bloques de texto listos para pegar (parentesis de 0354, parentesis del goal de
 0363, frase de cierre del AC1). Ciclo declarado: UNA iteracion, la primera de las dos concedidas; si
 hiciera falta la segunda, escala al operador sin que yo la resuelva.
+
+## 2026-08-12 -- TASK-0354 r10 (ea3cb16d): el criterio que yo dicte tampoco nombraba su frontera
+
+Encargo `MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0354-texto-r4`. **SOLO HUB, SIN PRODUCTO.**
+Ancla `7a885882` (== `origin/main` al abrir). Veredicto
+`Area_comun/artifacts/Analista-TASK-0354-r10-el-78-no-nombra-su-tokenizador-verdict.md`, commit
+`ea3cb16d`. Clon limpio `git clone -s` en `D:/Aegis_Scratch/protocol/an0354r10/`. Puertas: validate 0,
+encoding 0, neutralidad 0, drift CLEAN up_to_seq=8922. Gate real `invocations=73 referenced=72` EXIT=0.
+sha256 del workflow identico al de r8/r9: `f2d1e8a3...` -> mecanismo intacto.
+
+### LECCION 1 (la de verdad): mi propia remediacion reintrodujo el defecto un nivel mas abajo
+
+El S3 de r9 fue *"'cualesquiera' no es cualesquiera"*: el 76 estaba calculado con un filtro de inicio
+de linea no declarado. Mi sustitucion 8.1 arreglo el 76 nombrando su criterio... y en la MISMA frase
+escribio **"(78 si se cuenta el token en cualquier posicion)"**, dejando sin nombrar la frontera del
+78. Estrechar el patron redujo el dano sin cambiar la clase -- exactamente lo que mi propia memoria
+dice que pasa con las remediaciones. **Cuando dicto una sustitucion literal, la sustitucion es texto
+mio y hay que medirla con el mismo rasero que el del maker, no darla por buena por ser mia.**
+
+Medido sobre las 228 lineas de `run` del ancla:
+
+    A  el primer token es `python`                                    76
+    B  un `python` delimitado por espacios en cualquier posicion      78
+    C  la palabra `python` con frontera de palabra (\b)               80
+    D  un token del tokenizador de la PUERTA (shlex.split)            77
+    F  la subcadena `python`                                          85
+
+El 78 sale SOLO bajo B. Y la palabra que el texto usa para elegir -- *token* -- es vocabulario de la
+propia puerta, que tokeniza con `shlex.split`: bajo SU tokenizador son **77**. `shlex` no cuenta la
+linea de `errors.append` porque el entrecomillado la colapsa en un solo token donde `python` deja de
+ser token. **Publicar "token" sin decir que tokenizador es publicar tres cardinales a la vez.**
+
+### LECCION 2: comparar CONJUNTOS, no cardinales, al re-derivar una cifra bajo dos lecturas
+
+Ya me comi una vez en esta tarea el "dos off-by-one que coinciden". Esta vuelta medi cada celda bajo
+dos criterios independientes (regex crudo y `shlex`) y compare los **conjuntos de lineas**, no solo
+los numeros: 66/72/64/69/76 salen identicos EN CONJUNTO por las dos vias -> robustos. El 78 fue el
+unico que no coincidio ni en conjunto ni en cardinal. **Ese es el discriminante: una cifra estable
+bajo dos parsers distintos con el mismo conjunto esta bien nombrada; si cambia, el criterio falta.**
+
+### LECCION 3: verificar transcripcion por TOKENS y con parser independiente, no leyendola
+
+Las tres sustituciones de r9 las verifique mecanicamente, no leyendolas: extraje el prescrito del
+artefacto y el aplicado de las tareas, quite los marcadores `>` y compare secuencias de tokens
+(126/126, 38/38). El AC1 lo saque del frontmatter con **PyYAML** -- nunca regex sobre frontmatter,
+es mi leccion vieja. Ademas busque los cuatro giros del texto viejo para confirmar que estan muertos.
+
+### LECCION 4: separar "asercion por enumeracion" BLOQUEANTE de la que no lo es
+
+Encontre una segunda: *"El arbol de HOY no esta roto: cero working-directory, cero cd, cero banderas
+intermedias"* (en 0354 Y en 0363). Las tres coordenadas son cero, medidas. Pero la enumeracion deja
+fuera un cuarto miembro que el arbol SI ejerce: **`python - <<'PY'` (validate paso 4, la propia puerta
+desde stdin) produce CERO tokens** para el tokenizador, asi que su unico import externo (`yaml`) no lo
+verifica nadie. De 77 lineas con token ejecutable `python`: 76 tokens producidos, 73 resuelven, 3 son
+`python -m pip install` y 1 no produce nada.
+**NO lo declare bloqueante**, y el criterio para no hacerlo importa: el dano que este documento define
+es *la puerta dice PASS mientras el runner muere*; aqui si faltase `pyyaml` la puerta muere en su
+propio `import yaml` y el paso sale ROJO. La conclusion sobrevive; lo inexacto es el porque.
+**Una enumeracion incompleta cuya conclusion se sostiene es observacion, no bloqueo.**
+
+### LECCION 5: cuando la remediacion llega antes que tu commit, verificala, no la supongas
+
+Al ir a commitear, `origin/main` habia avanzado a `9a3943c8` y el arbol compartido tenia TASK-0354
+modificado sin commitear **con mi R1 dentro** (el Arquitecto leyo el artefacto del disco antes de que
+yo pushease). No lo di por bueno: lo verifique con el mismo instrumento -- **79/79 tokens identicos**,
+frase vieja ausente, cero bytes>127 -- y anadi un addendum al veredicto y al mensaje diciendo que con
+eso TASK-0354 queda cerrable en el commit que lo recoja, **sin iteracion 3 ni escalada**. Commit con
+pathspec explicito de mis dos ficheros; jamas toque la modificacion del peer.
+
+### Ciclo declarado
+
+Iteracion **2 de 2** (agote el presupuesto de r9). Salidas: (a) R1 verbatim + cierre en el mismo
+commit -- la que ocurrio; (b) si el Arquitecto se desviaba una palabra, iteracion 3 -> operador. El
+re-juicio de R1 lo hice POR ADELANTADO en el propio veredicto (sus cuatro cifras medidas en la seccion
+4), de forma que el control del commit de cierre quedara **mecanico**: parrafo == R1, cuatro puertas a
+0, sha256 del workflow intacto. **Bajar el coste del arreglo a cero es lo que evita la vuelta 5.**
