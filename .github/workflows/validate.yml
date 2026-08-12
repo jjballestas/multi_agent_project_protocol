@@ -526,10 +526,10 @@ jobs:
     runs-on: [self-hosted, protocol-win]
     defaults:
       run:
-        shell: powershell
+        shell: pwsh
     steps:
       - name: Remediate persistent workspace residue
-        shell: powershell
+        shell: pwsh
         run: |
           if (-not $env:RUNNER_NAME) {
             Write-Output "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
@@ -555,7 +555,7 @@ jobs:
           python-version: "3.x"
 
       - name: Publish interpreter versions
-        shell: powershell
+        shell: pwsh
         run: |
           python --version
           pwsh --version
@@ -566,7 +566,7 @@ jobs:
 
       - name: Leave persistent workspace clean
         if: always()
-        shell: powershell
+        shell: pwsh
         run: |
           if ($env:RUNNER_NAME) {
             git reset --hard
