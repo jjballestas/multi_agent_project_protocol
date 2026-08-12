@@ -81,7 +81,7 @@
         {
             "id": "TASK-0353",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn"
         },
         {
@@ -137,6 +137,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "La puerta de dependencias descubre el objetivo por el texto del comando, no por lo que el comando ejecuta"
+        },
+        {
+            "id": "TASK-0364",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta"
         }
     ],
     "next_actions": [

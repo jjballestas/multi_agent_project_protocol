@@ -141,7 +141,7 @@
         {
             "id": "TASK-0353",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn"
         },
         {
@@ -197,6 +197,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "La puerta de dependencias descubre el objetivo por el texto del comando, no por lo que el comando ejecuta"
+        },
+        {
+            "id": "TASK-0364",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
@@ -323,7 +329,8 @@
         "DECISION-0107",
         "DECISION-0108",
         "DECISION-0109",
-        "DECISION-0110"
+        "DECISION-0110",
+        "DECISION-0112"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

@@ -1,7 +1,7 @@
 ---
 id: TASK-0353
 title: Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md
