@@ -45,10 +45,14 @@ propios SUCCESS 8/8 con gate real, y `timing.billable` ni los menciona. Detalle 
 trampas: memoria [[runners-self-hosted-esquivan-el-cupo]].
 
 **EN VUELO al pausar:**
-- **TASK-0364** (`in_progress`, Codex): el corte de `validate.yml` a los runners propios. Codex ya
-  commiteo `cefd5e02` (mueve los gates), `f23ef6a7` (wrapper pwsh del job Windows), `716142a9` (primer
-  hallazgo de run vivo) y `6b47e146` (safe-directory de Windows, LOCAL SIN PUSHEAR al pausar). Su exec
-  seguia corriendo cuando se armo la parada; el cron espera a que termine y sale.
+- **TASK-0364** (`in_progress`, Codex): el corte de `validate.yml` a los runners propios. **Su exec fue
+  CORTADO POR EL TECHO DURO a las 14:47:43** (`EXEC_EXIT code=-1 outcome=transient` + `ROLLBACK_DEFER
+  reason=head_changed` + `RETRY_SCHEDULED 1/3`), no termino. **Los OCHO commits SI estan pusheados**
+  (`cefd5e02` mueve los gates, `f23ef6a7` wrapper pwsh, `6b47e146` safe-directory, `6aee19ac` Python
+  provisionado, mas cuatro `docs(...)` de hallazgos de run vivo): el trabajo no se perdio, pero **no
+  hubo flip a `in_review` ni handoff**. El GO sigue VIVO en `open/`, fuera del `seen.json` y con entrada
+  en `codex_mailbox_cron.retry.json` -> **se re-ejecuta SOLO al relanzar el cron**. Decidir antes si se
+  quiere eso o si conviene rutear un mensaje de solo-cierre anclado al ultimo commit.
 - **TASK-0353** (`in_review`): el checker firmo **OK-CLOSABLE** en r5 sobre `c92be390`. **NO la cerre a
   proposito** -- ver PENDIENTES.
 
