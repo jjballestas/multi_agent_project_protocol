@@ -12135,3 +12135,66 @@ cerrar; **B** cerrar ya y llevarse la correccion entera a TASK-0363. Recomiendo 
 cardinal roto a la tarea que existe para prohibir cardinales rotos es el peor sitio donde dejarlo.
 Tercera vuelta seguida en que el cardinal defectuoso lo pone el verificador; lo digo en el veredicto,
 en el mensaje y en el commit.
+
+---
+
+## 2026-08-12 -- TASK-0354 r9 (edb10d7e): refutar un cardinal ENUMERANDO criterios es el mismo defecto
+
+Ancla `153ca6b1`. Veredicto CHANGE-REQUIRED, transcripcion pura, una vuelta.
+Artefacto: `Area_comun/artifacts/Analista-TASK-0354-r9-los-cardinales-retirados-si-re-derivan-verdict.md`.
+
+### LECCION 1: "no re-deriva" es una afirmacion UNIVERSAL y se refuta con UN criterio
+
+El texto demolia el 69 citando cuatro cifras y concluyendo "y ninguna da 69". Las cuatro no eran
+cuatro criterios independientes: eran tres esquinas de una tabla de DOS EJES -- unidad (linea de `run`
+/ paso de `run` de una sola linea) por forma (`python <ruta>.py` exacta / con argumentos):
+
+    unidad \ forma            exacta    con args
+    linea de `run`              66         72
+    paso de una sola linea      64       **69**   <- la esquina que el texto no cita
+
+El 69 es el conteo de pasos de una linea que invocan `python <ruta>.py`. **Re-deriva.** Y el 72
+tambien: la misma frase que lo negaba nombraba su criterio ("salia de un criterio anclado a la
+linea") -- una cifra que sale de un criterio re-deriva bajo ese criterio, por definicion.
+**Antes de escribir "X no re-deriva", completar la tabla de la familia de criterios**: si las cifras
+que cito comparten ejes, el cardinal que niego es probablemente una celda que me falta.
+Y la frase falsa la escribi YO en la seccion 6 de r8, sin re-derivarla: cuarta vuelta seguida en que
+el cardinal defectuoso lo pone el verificador.
+
+### LECCION 2: la regla correcta no es "re-derivable", es "unidad declarada + criterio no anclado a la forma"
+
+AC1 de TASK-0363 decia "un cardinal que no se pueda re-derivar del arbol no vale". Es falsa como
+diagnostico: **los dos cardinales defectuosos re-derivan**. Lo que fallaba era la UNIDAD (contaban
+pasos o lineas cuando la poblacion es lo que la puerta descubre) bajo un criterio anclado a la forma
+del texto. La primera mitad del propio AC1 ya lo decia bien; la frase de cierre la contradecia dentro
+del mismo criterio de aceptacion. **Un criterio de falsacion con un dato falso dentro ensena el test
+equivocado.**
+
+### LECCION 3: una palabra como "cualesquiera" ES un criterio, y hay que medirla
+
+"76 lineas `python` cualesquiera" -> son 76 solo bajo el filtro NO declarado "que EMPIEZAN por
+python"; con el token en cualquier posicion son **78**. Y una de las dos lineas que el filtro excluye
+es `if ! python scripts/prune_state.py --root . --check; then`: **la invocacion 73**, la que todo el
+hallazgo de r8 existia para rescatar. La cota que se presenta como la mas laxa de la familia estaba
+calculada con el mismo anclaje de forma que el texto condena.
+
+### LECCION 4: el censo completo es barato y cierra los residuales heredados
+
+r8 dejo el residual 7.5 ("no verifique invocacion a invocacion que las 73 sean silenciosas": 72
+heredadas de r7). Cerrado en r9 con 74 ejecuciones del gate real (~12 s cada una, ~15 min en
+background). Instrumento que lo hizo honesto:
+1. enumerar con el tokenizador **del propio gate**, no con uno mio;
+2. anclar cada invocacion a su linea cruda y **verificar que los dos multiconjuntos coinciden**
+   (`YAML_derived=73 raw_line_sites=73 multisets_equal=True`) ANTES de mutar nada -- si no coinciden,
+   el instrumento mide otra cosa;
+3. sustitucion de una linea por una linea, un mutante por vez, restaurando entre medias;
+4. sha256 del workflow identico al terminar + `git status --short` vacio.
+Resultado: **73 SILENCIOSAS, 0 ATRAPADAS de 73**; duplicado -> `referenced=72` en las dos
+direcciones; invocacion 73 -> `referenced=71`. Todo en `D:/Aegis_Scratch/mapp/t354r9/`.
+
+### LECCION 5: dar la sustitucion literal mantiene la remediacion en transcripcion
+
+Bloquear en la vuelta 3 con presupuesto agotado exige bajar el coste del arreglo a cero: seccion 8 del
+veredicto con los tres bloques de texto listos para pegar (parentesis de 0354, parentesis del goal de
+0363, frase de cierre del AC1). Ciclo declarado: UNA iteracion, la primera de las dos concedidas; si
+hiciera falta la segunda, escala al operador sin que yo la resuelva.
