@@ -24,7 +24,9 @@ from pathlib import Path
 from typing import Any
 
 
-PLACEHOLDER_RE = re.compile(r"\{\{([A-Z0-9_]+)\}\}")
+# Placeholder names are identifiers owned by the instantiator.  A leading digit
+# instead denotes product text such as a doubled regex quantifier in an f-string.
+PLACEHOLDER_RE = re.compile(r"\{\{([A-Z][A-Z0-9_]*)\}\}")
 
 # Encapsulated instance layout (model 2.A): for the attested tier the governance
 # instance (methodology "Aegis") lives in a constant subfolder of the product repo,

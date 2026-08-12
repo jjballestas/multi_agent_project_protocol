@@ -100,54 +100,6 @@ def generate(target: Path, tier: str | None = None) -> None:
     assert_ok(run(command))
 
 
-def generate_with_partitioned_placeholder_gate(target: Path, tier: str) -> None:
-    """Run new_instance while isolating the pre-existing memory-test regex false positive."""
-    module = load_new_instance_module()
-    original_find = module.find_unresolved_placeholders
-    original_argv = sys.argv
-
-    def focused_find(root: Path) -> list[str]:
-        unresolved = original_find(root)
-        normalized = {item.replace("\\", "/") for item in unresolved}
-        assert normalized <= {"scripts/memory/test_memory_db.py"}, unresolved
-        return []
-
-    module.find_unresolved_placeholders = focused_find
-    sys.argv = [
-        str(NEW_INSTANCE),
-        "--source-template",
-        str(ROOT),
-        "--target",
-        str(target),
-        "--project-name",
-        f"{tier}_project",
-        "--project-goal",
-        "Validate the generated runtime schema filter.",
-        "--project-description",
-        "Focused generated fixture with an unrelated placeholder gate partitioned.",
-        "--architect",
-        "Claude",
-        "--implementer",
-        "Codex",
-        "--analyst",
-        "Analyst",
-        "--human-owner",
-        "Human",
-        "--phase-id",
-        "P2",
-        "--phase-name",
-        "Instantiation fixture",
-        "--phase-goal",
-        "Keep the fixture valid.",
-        "--tier",
-        tier,
-    ]
-    try:
-        assert module.main() == 0
-    finally:
-        sys.argv = original_argv
-
-
 def load_config(root: Path) -> dict:
     return json.loads((root / "protocol.config.json").read_text(encoding="utf-8-sig"))
 
@@ -263,7 +215,7 @@ def case_generated_runtime_preserves_validator_fields() -> None:
         prefix="tier-runtime-schema-filter-", dir=task_scratch_root()
     ) as temp:
         root = Path(temp) / "runtime"
-        generate_with_partitioned_placeholder_gate(root, "runtime")
+        generate(root, "runtime")
         probe = run(
             [
                 sys.executable,
@@ -280,6 +232,61 @@ def case_generated_runtime_preserves_validator_fields() -> None:
             cwd=root,
         )
         assert_ok(probe)
+
+
+def case_placeholder_gate_distinguishes_identifiers_from_regex_quantifiers() -> None:
+    module = load_new_instance_module()
+    old_pattern = __import__("re").compile(r"\{\{([A-Z0-9_]+)\}\}")
+    with tempfile.TemporaryDirectory(
+        prefix="placeholder-criterion-", dir=task_scratch_root()
+    ) as temp:
+        clean = Path(temp) / "clean"
+        generate(clean, "runtime")
+
+        old_hits = []
+        for path in clean.rglob("*"):
+            if path.is_file():
+                try:
+                    text = path.read_text(encoding="utf-8")
+                except UnicodeDecodeError:
+                    continue
+                if old_pattern.search(text):
+                    old_hits.append(path.relative_to(clean).as_posix())
+        new_hits = [item.replace("\\", "/") for item in module.find_unresolved_placeholders(clean)]
+        assert old_hits == ["scripts/memory/test_memory_db.py"], old_hits
+        assert new_hits == [], new_hits
+
+        moved = Path(temp) / "moved"
+        moved.mkdir()
+        (moved / "product_regex.py").write_text(
+            'pattern = rf"[0-9a-f]{{128}}"\n', encoding="utf-8"
+        )
+        assert module.find_unresolved_placeholders(moved) == []
+
+        dirty = Path(temp) / "dirty"
+        original_configure = module.configure_git_hooks_path
+
+        def configure_and_inject(target: Path, gov: Path) -> None:
+            original_configure(target, gov)
+            (target / "genuine-marker.txt").write_text("{{PROJECT_NAME}}\n", encoding="utf-8")
+
+        module.configure_git_hooks_path = configure_and_inject
+        original_argv = sys.argv
+        sys.argv = [
+            str(NEW_INSTANCE), "--source-template", str(ROOT), "--target", str(dirty),
+            "--project-name", "dirty_project", "--project-goal", "Test genuine marker.",
+            "--project-description", "Negative placeholder fixture.", "--architect", "Claude",
+            "--implementer", "Codex", "--analyst", "Analyst", "--human-owner", "Human",
+            "--phase-id", "P2", "--phase-name", "Instantiation fixture", "--phase-goal",
+            "Keep the fixture valid.", "--tier", "runtime",
+        ]
+        try:
+            dirty_exit = module.main()
+        finally:
+            sys.argv = original_argv
+        assert dirty_exit == 1
+        print(json.dumps({"placeholder_gate": {"before": old_hits, "after": new_hits,
+                                               "clean_exit": 0, "dirty_exit": dirty_exit}}))
 
 
 def case_generated_hook_rejects_broken_governed_state() -> None:
@@ -357,6 +364,7 @@ def main() -> int:
         case_coordination_default_and_flag,
         case_runtime_tier_scaffolds_motor_gates_ci_off,
         case_generated_runtime_preserves_validator_fields,
+        case_placeholder_gate_distinguishes_identifiers_from_regex_quantifiers,
         case_generated_hook_rejects_broken_governed_state,
         case_missing_exported_ledger_head_is_detected,
         case_declared_tier_mismatch_is_detected,
@@ -374,7 +382,7 @@ def main() -> int:
     if failures:
         print(json.dumps({"status": "FAILED", "failures": failures}, indent=2))
         return 1
-    print("OK: runtime instantiation cases passed (9 + ps1 parity when available).")
+    print("OK: runtime instantiation cases passed (10 + ps1 parity when available).")
     return 0
 
 
