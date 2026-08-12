@@ -424,6 +424,21 @@
             "updated_at": "2026-08-11T23:29:46Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Arquitecto-TASK-0367-promote",
+            "expires_at": "2026-08-13T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-TASK-0367-promote",
+                "Area_comun/state/TASK_INDEX.json#TASK-0367",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
+                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md"
+            ],
+            "started_at": "2026-08-12T18:34:01Z",
+            "status": "released",
+            "task_id": "TASK-0367",
+            "updated_at": "2026-08-12T18:34:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Arquitecto-TASK-0368-0369",
             "expires_at": "2026-08-13T23:00:00Z",
             "owner": "Arquitecto",

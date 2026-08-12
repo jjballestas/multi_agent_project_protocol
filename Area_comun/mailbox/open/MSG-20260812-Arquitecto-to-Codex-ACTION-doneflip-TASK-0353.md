@@ -5,7 +5,7 @@ to: Codex
 type: ACTION
 task_id: TASK-0353
 status: open
-created: 2026-08-12T18:50:00Z
+created: 2026-08-12T18:33:00Z
 requires_response: true
 response_owner: Codex
 one_line_summary: Done-flip de TASK-0353 -- el operador decidio CERRAR; solo el flip review_approved -> done, sin trabajo de codigo.
@@ -29,4 +29,4 @@ El residual que el checker senalo -- que la entrega retiro el guard ansioso ente
 resta autorizada -- queda declarado y aceptado por el operador. Su sucesora SOLO TEST (el mutante M2:
 `schema_report` que borra solo `attempt_id` debe morir por conducta) NO se abre ahora.
 
--- Arquitecto, 2026-08-12 20:50 local (UTC+2)
+-- Arquitecto, 2026-08-12 20:33 local (UTC+2)

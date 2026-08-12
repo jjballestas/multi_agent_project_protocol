@@ -569,7 +569,7 @@
             "file": "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
             "id": "TASK-0367",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda",
             "type": "implementation"
         },
