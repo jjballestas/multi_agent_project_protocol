@@ -12357,3 +12357,71 @@ Vuelta 3 (la ultima concedida). Salida: OK-CLOSABLE + R11/R12 declarados. **No p
 el Arquitecto juzga que el texto del contrato no puede prometer una clausula que no verifica antes
 del flip a done, la escalada al operador es suya. Instrumentos en
 `D:/Aegis_Scratch/mapp/t0359r4_probe/` (`my_instrument.py`, `run_delivered_negative.py`, `M1..M5`).
+
+---
+
+## TASK-0353 r5 -- 2026-08-12 -- OK-CLOSABLE (ancla 785500df, implementacion c92be390)
+
+Veredicto: `Area_comun/artifacts/Analista-TASK-0353-r5-la-resta-retirada-verdict.md`.
+Commit `7b73861e` (push `785500df..7b73861e`). Instrumentos en
+`D:/Aegis_Scratch/map/rev0353r5/` (`probe1_coverage_population.py`, `probe2_census.py`,
+`probe3_process.py`, `probe4_mutants.py`, `probe5_alive.py`; clones `clone`, `clone2`, `verify`).
+
+### LECCION 1: cuando la lista desaparece, el censo sustituye al ejemplo
+
+El operador eligio "dejar de restar". Codex entrego mas: retiro `VALIDATION_CONSUMED_TURN_KEYS` y
+el filtro enteros, y dejo `schema_report()` como identidad. Con eso la pregunta ya no es "esta la
+clave en la lista" sino "puede alguna desaparecer". La medida correcta dejo de ser un vector y paso
+a ser un **censo**: para cada una de las **18** claves del esquema, una raiz enrutada que la suelta
+mas un informe que la lleva. 18/18 preservadas y rechazadas por el esquema. Las siete claves
+`required` que la resta de r4 dejaba fuera quedaron **medidas**, no razonadas (R13 cerrada).
+
+### LECCION 2: la asercion de cobertura tiene una POBLACION, y hay que nombrarla
+
+`assert report.keys() <= schema_report(report).keys()` recorre los informes del **corpus**, no las
+claves del **esquema**. Lo verifique en las dos direcciones antes de acusar:
+
+- claves del esquema ausentes del corpus: `attempt_id`, `idempotency_key`
+- claves que la VALIDACION lee y no estan en ningun informe del corpus: **ninguna**
+
+Por eso el negativo **cumple entera su frase** (habla de puertas de validacion) y aun asi tiene un
+hueco real: un filtro que borre solo `attempt_id` sobrevive en exit 0. Sin la segunda medida habria
+escrito que el contrato miente; miente solo si uno le atribuye una frase que no dice. **Nombrar la
+poblacion de la asercion antes de juzgarla.**
+
+### LECCION 3: un mutante que sobrevive no vale nada si no pruebo que esta VIVO
+
+M2 (borrar solo `attempt_id`) sobrevive. Lo probe por conducta con el proceso real: la clave de
+idempotencia de `intent.applied` pasa de `Codex:TASK-9000:ready->done:ATTEMPT-DECLARED-BY-PRODUCER:1`
+a `...:RUN-fixture-TASK-9000:1`, porque `apply.report_attempt_id()` cae al `turn_id`. Es la clase de
+0353 exacta una capa mas abajo -- en el APPLY, no en la validacion. Y anadi **null-edit de control**
+(reescribir el fichero por la misma via sin cambiar nada, exit 0) para que "SOBREVIVE" no fuese un
+artefacto de mi instrumentacion. Ojo Windows: `write_text` convierte a CRLF y deja el fichero
+modificado aunque el contenido logico sea identico -- restaurar con `git checkout --`, no confiar en
+el "byte-identical" que imprime el script.
+
+### LECCION 4: medir tambien lo que la remediacion PIERDE, no solo lo que cierra
+
+El guard de r4 mataba la raiz derivada en exit 1 en **cualquier** turno; el de r5 solo cuando alguien
+declara la clave ausente. Medido: `B2` (raiz sin `actions`, informe sin `actions`) commitea. No es
+escape -- ningun turno se acepta que el hub rechazaria con la misma entrada -- pero es **ansioso ->
+perezoso** y quien cierra debe saber que compra (R16). Igual con el hueco que abre el cierre: si la
+raiz ya no admite `changed_paths`, el productor lo omite; comprobe que la frontera tiene **segunda
+puerta independiente** (`unreported_dirty_paths()` lee el informe CRUDO y el arbol sucio real) antes
+de dar el CASO C por cerrado. **Un cierre no se firma sin buscar el rodeo obvio.**
+
+### Higiene de la vuelta
+
+Gate ASCII propio (barrido de bytes>127) antes de commitear: cazo un `n` con virgulilla que
+`scan_encoding.py` habria dejado pasar. Anti-colision: Codex tenia entrega VIVA en el arbol
+(`.github/workflows/validate.yml`, ledger, `runtime/state/*` para TASK-0364) pero **ninguna claim
+sobre `Area_comun/artifacts/` ni sobre mi MSG**; commit con pathspec explicito de mis dos ficheros
+(los untracked exigen `git add` antes: `commit -- <path>` solo funciona con ficheros ya trackeados) y
+**gate en clon limpio de MI commit**, no del arbol sucio del peer. Validate y encoding EXIT=0 sobre
+`7b73861e`.
+
+### Ciclo declarado
+
+Vuelta 5, concedida por el operador tras agotarse el presupuesto en r3. Salida: **OK-CLOSABLE** con
+R14/R15/R16 nuevos y sucesora SOLO TEST cuyo AC de partida es el mutante M2. **No me concedi la
+sexta**: la escalada, si la quiere, es del Arquitecto.
