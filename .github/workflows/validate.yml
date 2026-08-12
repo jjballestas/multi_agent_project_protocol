@@ -550,9 +550,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
+        shell: pwsh
+        run: python --version
 
       - name: Publish interpreter versions
         shell: pwsh
