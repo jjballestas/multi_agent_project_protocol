@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "36c59f4602b07e12c239d46c4d48019f539207eba198eaeee3fa824bc3368f80",
+  "canonical_hash": "f95fc8322854ace4599e05a4614e68e661b97d354393dec673f6498baa8f1554",
   "integrity": {
-    "canonical_hash": "36c59f4602b07e12c239d46c4d48019f539207eba198eaeee3fa824bc3368f80",
+    "canonical_hash": "f95fc8322854ace4599e05a4614e68e661b97d354393dec673f6498baa8f1554",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "b015c75b4322c567bdaa30d5754e81269549b3a9aa4caeacf05b121e0980bbb9",
-    "signature": "b9c42fe345823d49b64308d0a40e5d1e372e33782c5f37fa63df095f48baf425",
-    "up_to_seq": 8908
+    "prev_hash": "7f8019543f7047d078a364426417a44de1f449262609c10054e9e8fad03455df",
+    "signature": "c1cc020bfc05c4e67c4be7548c0eab9271c73d8e9b197ae6764ded2f7d2225fe",
+    "up_to_seq": 8909
   },
   "state": {
     "aggregate_versions": {
@@ -3317,6 +3317,7 @@
       "OPS-MEDICION-H1-H3-20260630": 2,
       "OPS-P4B-RUNBOOK-20260802": 1,
       "OPS-PRUNE-FIX-20260719": 1,
+      "OPS-SELFHOSTED-PROBE-20260812": 1,
       "OPS-UNJAM-CODEX-20260701": 2,
       "PROJECT_STATE": 10,
       "PRUNE-JUNK": 1,
@@ -3641,7 +3642,7 @@
       "protocol-prune": 68,
       "protocol-state": 1
     },
-    "events_applied": 8237,
+    "events_applied": 8238,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8734,6 +8735,7 @@
       "intent:Arquitecto:claim:47c5725fdeb4669f02676aeabb029f1a04c880dda7b4de50f984606f0388de19": 2703,
       "intent:Arquitecto:claim:48202891fdd4650a6001f7b8810736b5ba7907c151549786a7dbfb4cdb6fba97": 3583,
       "intent:Arquitecto:claim:4838c2542fd479b43d121da4c134605d5d328ccd7be7a5f23ae52a564e5b8b10": 4275,
+      "intent:Arquitecto:claim:486054d557c37d936484b6f584334134dc78a512b8578d355ffdb681aa8f460f": 8909,
       "intent:Arquitecto:claim:487091bb93073d89cb0ed76b8842f79e962e6dcc6e158e0eaabd8a6a9025ebb8": 2955,
       "intent:Arquitecto:claim:49170338d053ac9dc2642781abe40a5d6641ba81a32f1896d826b2f96890efe5": 3099,
       "intent:Arquitecto:claim:491900ffd3980aa873ba48468ec6329d91e340efb0973830ed775f3f064f65b3": 3967,
@@ -11882,5 +11884,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8908
+  "up_to_seq": 8909
 }
