@@ -1,7 +1,7 @@
 ---
 id: TASK-0350
 title: El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada
-status: in_progress
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md

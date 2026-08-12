@@ -402,9 +402,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-12T17:58:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0350",
             "updated_at": "2026-08-12T17:58:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260812-Codex-TASK-0350-block",
+            "expires_at": "2026-08-13T00:08:00Z",
+            "notes": "Record the single blocking AC5 scope question for TASK-0350.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Codex-TASK-0350-block",
+                "Area_comun/mailbox/open/MSG-20260812-Codex-to-Arquitecto-QUESTION-TASK-0350-AC5.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-12T18:08:00Z",
+            "status": "released",
+            "task_id": "TASK-0350",
+            "updated_at": "2026-08-12T18:08:00Z"
         },
         {
             "claim_id": "CLAIM-20260812-Codex-TASK-0353-r5",

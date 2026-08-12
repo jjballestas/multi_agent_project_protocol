@@ -1,21 +1,6 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260812-Codex-TASK-0350",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Codex-TASK-0350",
-                "Area_comun/state/TASK_INDEX.json#TASK-0350",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0350",
-                "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
-                "scripts/new_instance.py",
-                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0350"
-        },
-        {
             "claim_id": "CLAIM-20260812-Codex-TASK-0364",
             "owner": "Codex",
             "scope": [
