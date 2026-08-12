@@ -1,7 +1,7 @@
 ---
 id: TASK-0359
 title: El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md
@@ -207,3 +207,6 @@ Esta era la vuelta 2 de 2. Conceder una tercera o cerrar con S2 abierto **lo dec
   sano observa progreso y no recibe ninguna.
 - Esta vuelta cambia solo el test y el texto del contrato. No cambia produccion ni absorbe los
   residuales R9, R10, R1, R8 o R5.
+- Commit exacto `e08d9e54` verificado en worktree limpio con historia completa: arnes 31/31,
+  inventario de falsacion 74/74, mailbox retry, colaboracion, encoding, neutralidad Python y
+  `git diff --check` en EXIT=0, con estado Git vacio.

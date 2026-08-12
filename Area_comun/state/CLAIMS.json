@@ -174,9 +174,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-12T08:45:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0359",
             "updated_at": "2026-08-12T08:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260812-Codex-TASK-0359-remediation4-delivery",
+            "expires_at": "2026-08-12T10:15:00Z",
+            "notes": "Deliver TASK-0359 remediation round 3 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Codex-TASK-0359-remediation4-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0359",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0359",
+                "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
+                "Area_comun/mailbox/open/MSG-20260812-Codex-to-Arquitecto-HANDOFF-TASK-0359-r4.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-12T09:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0359",
+            "updated_at": "2026-08-12T09:15:00Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

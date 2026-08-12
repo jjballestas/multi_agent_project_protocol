@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "f95fc8322854ace4599e05a4614e68e661b97d354393dec673f6498baa8f1554",
+  "canonical_hash": "f13bc04b4fa498a717c87b1b4e5b7b89a9eeb967a98921ff8631878a83085e45",
   "integrity": {
-    "canonical_hash": "f95fc8322854ace4599e05a4614e68e661b97d354393dec673f6498baa8f1554",
+    "canonical_hash": "f13bc04b4fa498a717c87b1b4e5b7b89a9eeb967a98921ff8631878a83085e45",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "7f8019543f7047d078a364426417a44de1f449262609c10054e9e8fad03455df",
-    "signature": "c1cc020bfc05c4e67c4be7548c0eab9271c73d8e9b197ae6764ded2f7d2225fe",
-    "up_to_seq": 8909
+    "prev_hash": "d7314f0726b73de928f8745c073cdc78c9b8ef32d69d71ec8fe2283d99735dfe",
+    "signature": "d9c7536d9b91fa2368ac4f0e4a9aca68fb35ee0606d525755bd56caf966334bf",
+    "up_to_seq": 8913
   },
   "state": {
     "aggregate_versions": {
@@ -3615,7 +3615,7 @@
       "TASK-0356": 1,
       "TASK-0357": 1,
       "TASK-0358": 1,
-      "TASK-0359": 35,
+      "TASK-0359": 39,
       "TASK-0360": 4,
       "TASK-0361": 11,
       "TASK-0362": 1,
@@ -3642,7 +3642,7 @@
       "protocol-prune": 68,
       "protocol-state": 1
     },
-    "events_applied": 8238,
+    "events_applied": 8242,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8261,7 +8261,11 @@
       "codex:task0359:remediation3:v2-release:20260811T212458Z": 8858,
       "codex:task0359:remediation3:v3-acquire:20260811T212458Z": 8859,
       "codex:task0359:remediation3:v3-release:20260811T214827Z": 8864,
+      "codex:task0359:remediation4:claim-release:20260812T091700Z": 8912,
       "codex:task0359:remediation4:claim:20260812T084500Z": 8908,
+      "codex:task0359:remediation4:delivery-claim-release:20260812T091700Z": 8913,
+      "codex:task0359:remediation4:delivery-claim:20260812T091500Z": 8910,
+      "codex:task0359:remediation4:in-review:20260812T091700Z": 8911,
       "codex:task0359:status-in-progress:20260811T094911Z": 8737,
       "codex:task0359:status-in-review:20260811T103415Z": 8744,
       "codex:task0361:claim-acquire:20260811T191803Z": 8836,
@@ -11884,5 +11888,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8909
+  "up_to_seq": 8913
 }
