@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c77f79cedc1e03edadd9ac87a5a0885f371ca6baadd643a3a70d207bdb1a9e51",
+  "canonical_hash": "3c9eb55039c10969557850a84bbdc0c423d635d811549a7cc038052dce098b10",
   "integrity": {
-    "canonical_hash": "c77f79cedc1e03edadd9ac87a5a0885f371ca6baadd643a3a70d207bdb1a9e51",
+    "canonical_hash": "3c9eb55039c10969557850a84bbdc0c423d635d811549a7cc038052dce098b10",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "81bd2c2208cbf116bc236d371ebbe44e163d9681d4e998ee9be842218462bd4e",
-    "signature": "c38eec8d643e25a569819973f9eaf0cb059303d73548d80111670b26e9c6d503",
-    "up_to_seq": 8963
+    "prev_hash": "4cf50c7e4a417d8367879b5a6b4f5be9e570d998646db4060b05cd08378e0bd3",
+    "signature": "e2119af0a00e5c14cfa730b69e3bd786916a68013e6f91569c4a93fe31095ff5",
+    "up_to_seq": 8967
   },
   "state": {
     "aggregate_versions": {
@@ -976,6 +976,8 @@
       "CLAIM-20260812-Arquitecto-OPS-hygiene-0354r6": 1,
       "CLAIM-20260812-Arquitecto-OPS-hygiene-0359r3": 1,
       "CLAIM-20260812-Arquitecto-OPS-review-spec-memhib": 1,
+      "CLAIM-20260812-Arquitecto-OPS-selfhosted-probe": 1,
+      "CLAIM-20260812-Arquitecto-TASK-0350": 1,
       "CLAIM-20260812-Arquitecto-TASK-0353-go": 1,
       "CLAIM-20260812-Arquitecto-TASK-0354-cierre": 1,
       "CLAIM-20260812-Arquitecto-TASK-0354-texto-r3": 1,
@@ -3630,7 +3632,7 @@
       "TASK-0347": 13,
       "TASK-0348": 2,
       "TASK-0349": 1,
-      "TASK-0350": 1,
+      "TASK-0350": 3,
       "TASK-0351": 1,
       "TASK-0352": 1,
       "TASK-0353": 51,
@@ -3667,7 +3669,7 @@
       "protocol-prune": 68,
       "protocol-state": 1
     },
-    "events_applied": 8292,
+    "events_applied": 8296,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4496,6 +4498,9 @@
       "arq-p48-001": 8387,
       "arq-p48-002": 8388,
       "arq-p48-099": 8389,
+      "arq-promote-0350-001-acq": 8964,
+      "arq-promote-0350-001-flip": 8965,
+      "arq-promote-0350-001-rel": 8966,
       "arq-r2-0": 7399,
       "arq-r2-1": 7400,
       "arq-r2-2": 7401,
@@ -4573,6 +4578,7 @@
       "arq-reg3-7": 7448,
       "arq-reg3-8": 7449,
       "arq-reg3-9": 7450,
+      "arq-release-probe-0812-001-rel": 8967,
       "arq-rj-0": 7387,
       "arq-rj-1": 7388,
       "arq-rj-2": 7389,
@@ -11963,5 +11969,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 8963
+  "up_to_seq": 8967
 }

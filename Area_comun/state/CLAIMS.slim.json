@@ -1,15 +1,6 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260812-Arquitecto-OPS-selfhosted-probe",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Arquitecto-OPS-selfhosted-probe",
-                ".github/workflows/selfhosted-probe.yml"
-            ],
-            "task_id": "OPS-SELFHOSTED-PROBE-20260812"
-        },
-        {
             "claim_id": "CLAIM-20260812-Codex-TASK-0364",
             "owner": "Codex",
             "scope": [

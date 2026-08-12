@@ -360,7 +360,7 @@
             "file": "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
             "id": "TASK-0350",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada",
             "type": "implementation"
         },
