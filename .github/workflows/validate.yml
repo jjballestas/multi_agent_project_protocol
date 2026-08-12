@@ -10,8 +10,29 @@ concurrency:
 
 jobs:
   powershell-linux-parity:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, protocol-linux]
+    defaults:
+      run:
+        shell: bash
     steps:
+      - name: Remediate persistent workspace residue
+        shell: bash
+        run: |
+          if test -z "${RUNNER_NAME:-}"; then
+            echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          elif test -d .git; then
+            residue_count="$(git status --porcelain=v1 --untracked-files=all --ignored | wc -l)"
+            if test "$residue_count" -gt 0; then
+              echo "PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=$residue_count"
+              git reset --hard
+              git clean -ffdx
+            else
+              echo "PERSISTENT_WORKSPACE CLEAN entries=0"
+            fi
+          else
+            echo "PERSISTENT_WORKSPACE FIRST_USE"
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -19,6 +40,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Publish interpreter versions
+        shell: pwsh
+        run: |
+          python --version
+          pwsh --version
 
       - name: Install parity dependencies
         run: python -m pip install pyyaml
@@ -42,9 +69,42 @@ jobs:
         if: always()
         run: python examples/neutrality_scan_cases/run_powershell_host_cases.py
 
+      - name: Leave persistent workspace clean
+        if: always()
+        shell: bash
+        run: |
+          if test -n "${RUNNER_NAME:-}"; then
+            git reset --hard
+            git clean -ffdx
+            test -z "$(git status --porcelain=v1 --untracked-files=all --ignored)"
+          else
+            echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          fi
+
   validate:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, protocol-linux]
+    defaults:
+      run:
+        shell: bash
     steps:
+      - name: Remediate persistent workspace residue
+        shell: bash
+        run: |
+          if test -z "${RUNNER_NAME:-}"; then
+            echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          elif test -d .git; then
+            residue_count="$(git status --porcelain=v1 --untracked-files=all --ignored | wc -l)"
+            if test "$residue_count" -gt 0; then
+              echo "PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=$residue_count"
+              git reset --hard
+              git clean -ffdx
+            else
+              echo "PERSISTENT_WORKSPACE CLEAN entries=0"
+            fi
+          else
+            echo "PERSISTENT_WORKSPACE FIRST_USE"
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -60,6 +120,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Publish interpreter versions
+        shell: pwsh
+        run: |
+          python --version
+          pwsh --version
 
       - name: Install Python test dependencies
         run: python -m pip install cryptography jsonschema pyyaml
@@ -149,7 +215,10 @@ jobs:
           for job_name, job in document.get("jobs", {}).items():
               declared = declared_distributions(job)
               runs_on = str(job.get("runs-on", ""))
-              posix = "windows" not in runs_on.lower()
+              posix = not any(
+                  marker in runs_on.lower()
+                  for marker in ("windows", "protocol-win")
+              )
               for step in job.get("steps", []):
                   command = str(step.get("run", ""))
                   expected_in_step = referenced_runner_paths(command)
@@ -441,9 +510,42 @@ jobs:
         shell: pwsh
         run: ./scripts/scan_domain_neutrality.ps1 -Root .
 
+      - name: Leave persistent workspace clean
+        if: always()
+        shell: bash
+        run: |
+          if test -n "${RUNNER_NAME:-}"; then
+            git reset --hard
+            git clean -ffdx
+            test -z "$(git status --porcelain=v1 --untracked-files=all --ignored)"
+          else
+            echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          fi
+
   falsification-runners:
-    runs-on: windows-latest
+    runs-on: [self-hosted, protocol-win]
+    defaults:
+      run:
+        shell: powershell
     steps:
+      - name: Remediate persistent workspace residue
+        shell: powershell
+        run: |
+          if (-not $env:RUNNER_NAME) {
+            Write-Output "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          } elseif (Test-Path .git) {
+            $residue = @(git status --porcelain=v1 --untracked-files=all --ignored)
+            if ($residue.Count -gt 0) {
+              Write-Output "PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=$($residue.Count)"
+              git reset --hard
+              git clean -ffdx
+            } else {
+              Write-Output "PERSISTENT_WORKSPACE CLEAN entries=0"
+            }
+          } else {
+            Write-Output "PERSISTENT_WORKSPACE FIRST_USE"
+          }
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -451,13 +553,56 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Publish interpreter versions
+        shell: powershell
+        run: |
+          python --version
+          pwsh --version
+          $PSVersionTable.PSVersion.ToString()
 
       - name: Execute mailbox retry falsification runner
         run: python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
 
+      - name: Leave persistent workspace clean
+        if: always()
+        shell: powershell
+        run: |
+          if ($env:RUNNER_NAME) {
+            git reset --hard
+            git clean -ffdx
+            $residue = @(git status --porcelain=v1 --untracked-files=all --ignored)
+            if ($residue.Count -ne 0) {
+              throw "Persistent workspace cleanup failed: $($residue.Count) entries remain"
+            }
+          } else {
+            Write-Output "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          }
+
   falsification-runners-python:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, protocol-linux]
+    defaults:
+      run:
+        shell: bash
     steps:
+      - name: Remediate persistent workspace residue
+        shell: bash
+        run: |
+          if test -z "${RUNNER_NAME:-}"; then
+            echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          elif test -d .git; then
+            residue_count="$(git status --porcelain=v1 --untracked-files=all --ignored | wc -l)"
+            if test "$residue_count" -gt 0; then
+              echo "PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=$residue_count"
+              git reset --hard
+              git clean -ffdx
+            else
+              echo "PERSISTENT_WORKSPACE CLEAN entries=0"
+            fi
+          else
+            echo "PERSISTENT_WORKSPACE FIRST_USE"
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -465,6 +610,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Publish interpreter versions
+        shell: pwsh
+        run: |
+          python --version
+          pwsh --version
 
       - name: Install falsification runner dependencies
         run: python -m pip install jsonschema pyyaml
@@ -476,3 +627,15 @@ jobs:
       - name: Execute post-gate falsification runner
         if: always()
         run: python examples/runtime_turn_cases/run_post_gate_obstacle_cases.py
+
+      - name: Leave persistent workspace clean
+        if: always()
+        shell: bash
+        run: |
+          if test -n "${RUNNER_NAME:-}"; then
+            git reset --hard
+            git clean -ffdx
+            test -z "$(git status --porcelain=v1 --untracked-files=all --ignored)"
+          else
+            echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
+          fi
