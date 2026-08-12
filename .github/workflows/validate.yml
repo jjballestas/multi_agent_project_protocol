@@ -534,11 +534,11 @@ jobs:
           if (-not $env:RUNNER_NAME) {
             Write-Output "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
           } elseif (Test-Path .git) {
-            $residue = @(git status --porcelain=v1 --untracked-files=all --ignored)
+            $residue = @(git -c "safe.directory=$PWD" status --porcelain=v1 --untracked-files=all --ignored)
             if ($residue.Count -gt 0) {
               Write-Output "PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=$($residue.Count)"
-              git reset --hard
-              git clean -ffdx
+              git -c "safe.directory=$PWD" reset --hard
+              git -c "safe.directory=$PWD" clean -ffdx
             } else {
               Write-Output "PERSISTENT_WORKSPACE CLEAN entries=0"
             }
@@ -569,9 +569,9 @@ jobs:
         shell: pwsh
         run: |
           if ($env:RUNNER_NAME) {
-            git reset --hard
-            git clean -ffdx
-            $residue = @(git status --porcelain=v1 --untracked-files=all --ignored)
+            git -c "safe.directory=$PWD" reset --hard
+            git -c "safe.directory=$PWD" clean -ffdx
+            $residue = @(git -c "safe.directory=$PWD" status --porcelain=v1 --untracked-files=all --ignored)
             if ($residue.Count -ne 0) {
               throw "Persistent workspace cleanup failed: $($residue.Count) entries remain"
             }
