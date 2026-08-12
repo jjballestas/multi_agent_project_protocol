@@ -7,6 +7,107 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-12 (69) - TASK-0365 review FORMAL de SPEC-MEMORIA-HIBRIDA: CHANGE-REQUIRED
+
+- Encargo `MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0365-spec-memoria-hibrida`. **SOLO HUB,
+  SIN PRODUCTO** (no gatee `npm test`). Ancla `694bd7e4`; veredicto en
+  `Area_comun/artifacts/Analista-TASK-0365-spec-memoria-hibrida-review-formal-verdict.md`,
+  commit `96984d8c`, pusheado. Dos clones limpios en `D:/Aegis_Scratch/protocol/t0365/{clone,clone2}`.
+- Puertas en el ancla: validate 0, encoding 0, neutralidad 0, suite del motor **72/72 en 322 s**,
+  build 0 (4797 artefactos), `--rebuild` 0, drift `--fast` 0 y `--full` 0. Round-trip **byte a byte**:
+  sha256 `1615731d...` identico en dos dumps de 8 942 429 bytes.
+
+### LECCION 1 (la que me llevo): un invariante puede cumplirse por su LETRA y romperse por su NOMBRE
+
+I7 dice "decision activa jamas invisible" y su clausula formal es una IMPLICACION:
+`hot_required=1 => .md hot o stub`. Las 4 filas con `hot_required=1` la cumplen, asi que leyendo la
+letra el invariante esta verde. Pero el motor deriva "activa" del literal `status == "active"`
+(`policy_row`, `_active_decisions`) y este hub escribe `accepted`: **104 accepted / 4 active** en el
+corpus, **106 historical con `hot_required=0`** en la DB. La garantia es cierta porque su
+ANTECEDENTE casi nunca se cumple, no porque proteja. Entre las 106 estan DECISION-0026, 0020, 0038,
+0104, 0018, 0016, 0022 -- todas citadas nominalmente en AGENTS.md como vinculantes hoy.
+
+**Regla que adopto:** ante una garantia con forma `P => Q`, no basta comprobar Q sobre las filas con
+P. Hay que **medir el tamano de P sobre el corpus real**. Un antecedente que casi nunca se dispara
+es un invariante apagado, y sale verde en cualquier test que solo mire las filas que si lo disparan.
+
+### LECCION 2: el mutante bueno es de DOS puntos, no de uno
+
+No plante una regla: plante **dos identicas salvo un campo** (`created_by_decision: DECISION-0026`
+accepted vs `DECISION-0099` active), las commitee (el motor lee el BLOB, editar sin commitear no
+concede nada) y corri el gate. Salio `exit 1` nombrando **solo** a DECISION-0026. Con una sola regla
+yo habria visto "el gate falla" y tendria que argumentar por que; con dos, el comportamiento se
+INVIERTE ante la diferencia de un valor y el control viaja dentro del mismo run. Un mutante sin su
+gemelo de control es una afirmacion, no una medicion.
+
+### LECCION 3: cuando el port calibra enums, mirar tambien los MAPEOS
+
+P8/P9 sacaron a `MEMORY_INDEX_POLICY.json` los enums de ACEPTACION (identidades, `status`, `type`).
+Pero `accepted` ya se indexaba sin problema: lo que nunca se calibro es el **mapeo a estado de
+politica**, cableado en `policy_row` y sin ninguna superficie de configuracion. Anadir `accepted` a
+`extra_status_values` no arregla nada. **Un valor puede estar ACEPTADO y a la vez mal INTERPRETADO**;
+son dos ejes y el port solo miro uno.
+
+### LECCION 4: un residual mal redactado oculta donde esta el hueco
+
+El ledger de la s.16.7 dice "R2: IBAN solo forma contigua". Falso en las dos direcciones: la
+deteccion AGRUPADA si existe, y esta atada a una clase de **siete separadores**. Medido con un IBAN
+valido agrupado de 4 en 4: espacio, punto, guion, barra, guion bajo, nbsp y thin-space cazan;
+**coma, punto y coma, dos puntos, barra vertical y mas, NO**. La coma es la agrupacion humana mas
+comun despues del espacio. Lo mismo con R1 ("valores con forma de id lo saltan"): no dice que la
+exencion `REQ-[0-9A-F]{8,}` sea **ilimitada** -- 40 digitos pasan. **Releer los residuales heredados
+contra el codigo antes de aceptarlos como cobertura conocida.**
+
+### LECCION 5: I8 se falsa saboteando el arbol, no leyendo `git_blob`
+
+Append de contenido en un fichero + conversion INTEGRA a CRLF en otro, y build encima: exit 0 y
+`artifacts.sha256` == `content_sha256` == sha del **blob**, distintos de la copia de trabajo. El
+`--full` tampoco falso-alarmo. Eso acredita I8; leer que el codigo llama a `git show` no.
+Corolario que declare: el gate es CIEGO al sabotaje de la copia de trabajo, y eso es correcto por
+diseno, pero conviene que este escrito.
+
+### LECCION 6: verificar yo la propiedad de atestacion en vez de relayarla
+
+La s.16.7 afirma "la declaracion solo surte efecto ATESTADA". No la copie: edite
+`MEMORY_INDEX_POLICY.json` en la copia de trabajo con `domain_pii_terms: ["salario","empleado"]` y
+el motor siguio leyendo `[]`. Control en el mismo run: con los terminos declarados, `contains_pii`
+si los caza. Dos puntos otra vez.
+
+### AC4 respondido: por LISTA, no por criterio
+
+El nucleo si quedo neutro de nomina (`salario` -> False, y el falso positivo de `nombre` murio),
+pero conserva `\b(?:NIF|NIE|NIT|DNI|SSN)\b`: cinco siglas de jurisdicciones concretas. Medido:
+`CPF` (BR), `RFC` (MX), `NINO` (UK) y `codice fiscale` (IT) pasan sin marca. P1 autorizo "palabras
+clave de id fiscal", asi que el motor **cumple P1**, pero P1 pedia patrones ESTRUCTURALES y esto es
+una lista sin criterio de pertenencia. Lo declare sin hacerlo bloqueante.
+
+### Censos que conviene no perder
+
+- Aristas: `mentions` 862/1262 resuelven, `decision_for` 970/971, `supersedes` 3/3,
+  **`implements` 0/222** (`file_target_id` sintetiza `artifact:<ruta>` y el artefacto de esa ruta
+  tiene id INTRINSECO). No viola I9, pero el tipo de arista es inerte al 100 por cien.
+- Warnings del build: **228 en total, 219 sobre `Area_comun/`, 9 sobre `personal/`**. La s.16.7
+  publica "219" sin nombrar la poblacion: no se re-deriva sin elegir lectura.
+- `revive_pack` Arquitecto **115 293** bytes contra tope 131 072 (era 1 535 306), con
+  `omitted_bytes_total`, `omitted_entries_total` y `token_estimate` dentro del pack. P11 cerrado.
+
+### Higiene de la vuelta
+
+Gate ASCII propio (bytes>127 == 0 en mis dos ficheros) antes de commitear. Anti-colision: unica
+claim activa era `CLAIM-20260812-Codex-TASK-0364`, **sin solape** con `Area_comun/artifacts/` ni con
+mi MSG; solo modificados los ficheros de memoria personal de Codex. `origin/main` se movio TRES
+veces durante la revision (`694bd7e4` -> `4a29aa8a` -> `087439ff`): verifique por exit code que
+`scripts/memory/`, la SPEC y la politica son **byte a byte identicos** en los tres, y lo escribi en
+el veredicto en vez de re-medir. `git add` primero (los untracked no entran por `commit -- <path>`).
+**PRUNE DUE** (cold_start_tokens 22249 >= 20000, released_ratio 91,67 >= 90) senalado y NO corrido:
+es del Arquitecto.
+
+### Ciclo declarado
+
+Vuelta 1. **CHANGE-REQUIRED**, maximo 2 iteraciones antes de escalar al operador. B1 al MOTOR
+(Codex) con test de PROPIEDAD, no de conteo; B2 al TEXTO (Arquitecto). Puerta anadida al re-juicio:
+repetir mi mutante de dos reglas y exigir que el censo de `policy_status` deje de decir 106/4.
+
 ## Ultima actualizacion 2026-08-11 (68) - TASK-0354 r5: CHANGE-REQUIRED + ESCALADO al operador
 
 - Encargo `MSG-20260811-Arquitecto-to-Analista-REVIEW-TASK-0354-r5`. **SOLO HUB, SIN PRODUCTO.**
