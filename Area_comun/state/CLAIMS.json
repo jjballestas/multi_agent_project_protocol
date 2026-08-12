@@ -493,6 +493,24 @@
             "updated_at": "2026-08-12T18:08:00Z"
         },
         {
+            "claim_id": "CLAIM-20260812-Codex-TASK-0353-done-flip",
+            "expires_at": "2026-08-12T19:40:54Z",
+            "notes": "Implementer done-flip after independent checker approval and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260812-Codex-TASK-0353-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0353",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0353",
+                "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-12T18:40:54Z",
+            "status": "released",
+            "task_id": "TASK-0353",
+            "updated_at": "2026-08-12T18:40:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260812-Codex-TASK-0353-r5",
             "expires_at": "2026-08-12T16:30:00Z",
             "notes": "Implement operator-selected TASK-0353 remediation round 5 as maker.",
