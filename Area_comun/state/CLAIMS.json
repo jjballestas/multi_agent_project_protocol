@@ -92,6 +92,22 @@
             "updated_at": "2026-08-13T11:38:00Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-OPS-hyg-F",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-OPS-hyg-F",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0367.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0367.md",
+                "Area_comun/mailbox/open/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0367-R1.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0367-R1.md"
+            ],
+            "started_at": "2026-08-13T12:13:55Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260813F",
+            "updated_at": "2026-08-13T12:13:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260813-Arquitecto-TASK-0367-reject",
             "expires_at": "2026-08-14T23:00:00Z",
             "owner": "Arquitecto",
