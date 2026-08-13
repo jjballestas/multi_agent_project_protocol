@@ -12753,3 +12753,43 @@ de MI commit** (`efde8b76`): validate 0, scan_encoding 0. Push fast-forward sobr
 
 Ojo de tiempos: `validate_collaboration_state.py` + `scan_encoding.py` encadenados en un solo
 comando revientan el techo de 2 min del Bash; correrlos por separado con timeout propio.
+
+---
+
+## 2026-08-14 -- TASK-0368: el fail-open que se cerro invirtiendose
+
+Veredicto **CHANGE-REQUIRED**, commit `a6693c24`. Detalle completo en
+`personal/Analista/MEMORY-TASK-0368-20260814.md`.
+
+El Arquitecto sospechaba que el criterio nuevo hacia vigentes a `proposed` y a la decision sin
+`status`. **Confirmado por ejecucion, y la mitad que importaba sale peor de lo planteado:** una regla
+hot/cold respaldada por `DECISION-0078` (propuesta, no ratificada) **pasa el gate I4 con exit 0**.
+Ademas encontre un escape que la sospecha no contenia y que es **regresion**: el criterio deja de
+mirar `status` por completo, asi que una decision con `status: superseded` y `superseded_by` vacio
+queda VIGENTE -- el literal previo si la enfriaba. Y el censo "antes" de AC6 no re-deriva
+(real: `historical=106, superseded=0`; reportado: `105/1`).
+
+**Las tres lecciones que me llevo:**
+
+1. **Un fail-open puede cerrarse invirtiendose.** "No declara superseder" es una propiedad legitima y
+   la propiedad EQUIVOCADA: no-superseded no es en-vigor. Cuando un fix mueve un censo de 4 a 109,
+   auditar la SEMANTICA de las entradas nuevas, no que el numero cuadre.
+2. **Un negativo que le da verde a la version peligrosa Y a la segura no acredita nada.** Lo probe
+   parcheando produccion a un criterio estricto: el negativo del maker paso igual (exit 0). Nuevo
+   paso fijo de mi checklist: **correr el negativo contra una alternativa SEGURA**; si tambien pasa,
+   no discrimina. Gemelo de "mutar produccion, no los mutantes del runner".
+3. **`rule_count: 0` era el motivo del silencio.** El bucle de I4 no itera sin reglas, asi que el
+   verde de `--fast` sobre HEAD no era evidencia. Para hacer hablar a una puerta hay que darle una
+   entrada que la ejercite.
+
+Y una cuarta, mas fina: **coincidencia aritmetica no es coincidencia de composicion**. El 109 cuadraba
+pero `DECISION-0059` no tiene frontmatter y vive bajo un id sintetico de ruta -- cuenta en el total y
+NO resuelve como `DECISION-0059`, asi que I4 la rechaza (fail-CLOSED, preexistente). Abrir la
+composicion fila a fila antes de heredar una inferencia por cuadratura.
+
+**Mecanica:** `commit_trailers` esta ACTIVO -- mi primer commit salio rojo en clon limpio
+(`touches governed routes without exact Task-Id trailer`); el parrafo final necesita `Task-Id:` +
+`Ops-Reason:`. Los builds de memoria tardan 2-6 min y la suite 73 tests / ~320 s: **background desde
+el principio**. El validate en arbol caliente salio rojo por dos ficheros de tarea sin seguir del
+Arquitecto (`TASK-0374`/`0375`) sin fila de indice; canonico VERDE en clon limpio, senalado por
+DECISION-0018 y no tocado.
