@@ -11,5 +11,6 @@
 - The full mailbox retry suite remains red in the pre-existing TASK-0343 main-assertion baseline:
   baseline 0/3 on two runs while all three injected mutants were caught 3/3. The new resolution probe
   passed before that unrelated failure on both runs.
-- TASK-0367 remains in_progress under
-  `CLAIM-20260813-Codex-TASK-0367-remediation1-scope-repair` pending governed delivery.
+- Delivery commit `3e162b9a` moves TASK-0367 to `in_review`, releases both active remediation
+  claims, and publishes the self-contained Arquitecto handoff. Codex remains maker only and did not
+  review or ratify the remediation.
