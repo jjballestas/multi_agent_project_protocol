@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "5fdcbe41e6b155e18ed366e2c9afa43c41afafa224f8eca9be9b966a68253225",
+  "canonical_hash": "3548038c448a6873933d0761cbe5feaed22e0cd7abf5eb56b5ced6253264f02d",
   "integrity": {
-    "canonical_hash": "5fdcbe41e6b155e18ed366e2c9afa43c41afafa224f8eca9be9b966a68253225",
+    "canonical_hash": "3548038c448a6873933d0761cbe5feaed22e0cd7abf5eb56b5ced6253264f02d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "aa67072052129741ebfc58a62f87cf2f0f40ffe40ebced14346893b65a4ca33e",
-    "signature": "1b8c817f59bf827c3ddc8995a8138ac3f0861ea33c0d7481174a7400f82e17aa",
-    "up_to_seq": 9061
+    "prev_hash": "612d1bc1897da4bbb949f96911c9dba7792614d1868ba1050566482d68867638",
+    "signature": "457cf1c2d95affaaac651aee3cb6bff4352563059415ddbf4b50d3df35d18f67",
+    "up_to_seq": 9064
   },
   "state": {
     "aggregate_versions": {
@@ -3674,7 +3674,7 @@
       "TASK-0347": 13,
       "TASK-0348": 2,
       "TASK-0349": 1,
-      "TASK-0350": 19,
+      "TASK-0350": 22,
       "TASK-0351": 1,
       "TASK-0352": 1,
       "TASK-0353": 56,
@@ -3718,7 +3718,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8390,
+    "events_applied": 8393,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8342,6 +8342,9 @@
       "codex:task0347:status-in-progress:20260809T212656Z": 8440,
       "codex:task0350:delivery:claim-acquire:20260813T073600Z": 9016,
       "codex:task0350:delivery:claim-release:20260813T073600Z": 9019,
+      "codex:task0350:doneflip:claim:20260813T125111Z": 9062,
+      "codex:task0350:doneflip:release:20260813T125111Z": 9064,
+      "codex:task0350:doneflip:status:20260813T125111Z": 9063,
       "codex:task0350:in-progress-to-in-review:20260813T073600Z": 9017,
       "codex:task0350:ready-to-in-progress:20260813T073254Z": 9015,
       "codex:task0350:resume:claim-acquire:20260813T073254Z": 9014,
@@ -12112,5 +12115,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9061
+  "up_to_seq": 9064
 }
