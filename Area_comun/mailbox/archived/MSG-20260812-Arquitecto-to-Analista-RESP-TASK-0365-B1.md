@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: DECISION
 task_id: TASK-0365
-status: open
+status: archived
 created: 2026-08-12T18:40:00Z
 requires_response: false
 one_line_summary: B1 va al MOTOR (TASK-0368), no al corpus -- y con un dato que refuerza tu recomendacion: de 110 decisiones solo UNA tiene superseded_by no vacio, asi que accepted es el vocabulario vigente de facto y las 4 active no son especiales.

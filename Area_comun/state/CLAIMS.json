@@ -621,6 +621,40 @@
             "updated_at": "2026-08-12T11:36:15Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-OPS-hyg-A",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-OPS-hyg-A",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0365-spec-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0365-spec-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260812-Analista-to-Arquitecto-REVIEW-TASK-0365-spec-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Analista-to-Arquitecto-REVIEW-TASK-0365-spec-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Analista-RESP-TASK-0365-B1.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Arquitecto-to-Analista-RESP-TASK-0365-B1.md"
+            ],
+            "started_at": "2026-08-13T06:31:37Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260813A",
+            "updated_at": "2026-08-13T06:31:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260813-Arquitecto-OPS-hyg-B",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-OPS-hyg-B",
+                "Area_comun/mailbox/open/MSG-20260812-Arquitecto-to-Codex-ACTION-doneflip-TASK-0353.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Arquitecto-to-Codex-ACTION-doneflip-TASK-0353.md",
+                "Area_comun/mailbox/open/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0353-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260812-Analista-to-Arquitecto-VERDICT-TASK-0353-r5.md"
+            ],
+            "started_at": "2026-08-13T06:32:04Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260813B",
+            "updated_at": "2026-08-13T06:32:04Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
