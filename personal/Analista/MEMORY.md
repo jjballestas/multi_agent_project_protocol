@@ -12526,3 +12526,67 @@ sobre `Area_comun/artifacts/` ni sobre mi MSG**; commit con pathspec explicito d
 Vuelta 5, concedida por el operador tras agotarse el presupuesto en r3. Salida: **OK-CLOSABLE** con
 R14/R15/R16 nuevos y sucesora SOLO TEST cuyo AC de partida es el mutante M2. **No me concedi la
 sexta**: la escalada, si la quiere, es del Arquitecto.
+
+---
+
+## 2026-08-13 -- TASK-0350 (detector de marcadores del instanciador): OK-CLOSABLE
+
+Commit del veredicto: `efde8b76`. Ancla: `192c5dea`, control `192c5dea^`, dos clones limpios en
+`D:/Aegis_Scratch/protocol/analista-0350/`. Fix bajo review: UNA linea,
+`PLACEHOLDER_RE` de `\{\{([A-Z0-9_]+)\}\}` a `\{\{([A-Z][A-Z0-9_]*)\}\}`.
+
+### LECCION 1: la misma regex gobierna la DETECCION y la SUSTITUCION -- mirar los dos consumidores
+
+Cuando se estrecha un patron, no basta con preguntar "que deja de cazar el detector". En
+`new_instance.py` la MISMA `PLACEHOLDER_RE` se usa en tres sitios: 757 (`missing`), 764 (`sub`) y 801
+(`find_unresolved_placeholders`). Estrecharla estrecha tambien **el dominio de lo que se sustituye**.
+Construido y ejecutado: con `replacements={"_INTERNAL":..,"2FA_MODE":..}` el render deja
+`a={{_INTERNAL}} b={{2FA_MODE}}` literal **y el detector devuelve `[]`**. Bajo el patron viejo se
+sustituian bien. Para esa clase de entrada el fix convierte un fallo ruidoso en uno mudo.
+
+**Grepear TODOS los usos del simbolo que se estrecha antes de firmar la direccion "perdido".** AC4
+pedia medir las dos direcciones en espacio de FICHEROS; la perdida real vivia en espacio de CLAVES.
+
+### LECCION 2: un criterio sin guardia sigue siendo una convencion
+
+El criterio ("los nombres de marcador son identificadores y empiezan por letra") es correcto y no es
+una enumeracion. Pero la invariante "toda clave de `build_replacements` casa `PLACEHOLDER_RE`" vive
+**solo en un comentario**: cero aserciones, cero casos de runner, cero gates. Verificado con grep del
+arbol entero. Lo declare como residuo con id propio recomendado -- **no como CHANGE-REQUIRED**:
+ningun AC lo exigia, y ensanchar el encargo desde la review es la misma clase de defecto que el
+encargo persigue. Regla que me llevo: **residuo latente + no alcanzable sin cambiar codigo + todos
+los AC verdes = OK-CLOSABLE con id recomendado, no bloqueo.**
+
+### LECCION 3: el control historico es lo que hace discriminante un "la firma se movio"
+
+No basta con ver 2 fallos post-fix. Clone el PADRE y corri el mismo runner: **8 cases fallando, todos
+con la firma de marcadores**; post-fix **2 cases, ninguno por marcadores**. Y algo que solo se ve con
+el control: el residuo de TASK-0367 estaba **ENMASCARADO** antes, porque la generacion abortaba antes
+de llegar al escaner de neutralidad. Sin el clon del padre habria escrito "aparecio un fallo nuevo".
+
+### LECCION 4: "ejecutable" no es "suite verde" -- y perseguir cada traza paga
+
+El HANDOFF decia que el motor "remains executable there". Medido: hub 72/72 exit 0; instancia
+generada exit 1. En vez de cantarlo como SLIP, persegui las tres trazas: (1) `git rev-parse HEAD`
+sale 128 en un repo recien `init`-ado **-- y desaparece al darle un commit inicial, lo que cierra el
+diagnostico**; (2) `FileNotFoundError` sobre `scripts/new_instance.py`, que una instancia no embarca
+por diseno; (3) `assertGreater(len(object_ids),100)` con `1`, corpus = historia git. Ninguna es del
+motor. Veredicto: AC6 PASS con correccion de precision (70/72), no fallo.
+
+**De ahi salio un hallazgo NUEVO que no es de la tarea:** el motor embarca en cada instancia un banco
+de 72 tests **rojo por construccion en una instancia recien parida**. Invisible hasta ahora porque la
+generacion abortaba. 0350 no lo introdujo; lo hizo visible. Enviado al Arquitecto como DECISION-0018.
+
+### Higiene de la vuelta
+
+Anti-colision: Codex y Arquitecto tenian entrega VIVA en el arbol compartido durante mi review (HEAD
+se movio de `6a469cc0` a `cc2d706f` mientras media, con mailbox a medio archivar y `CLAIMS.json` /
+`runtime/state/*` modificados sin commitear) pero **ninguna claim activa sobre `Area_comun/artifacts/`
+ni sobre mi MSG** -- las unicas no liberadas eran dos de Codex `blocked` de 2026-07-03 ancladas a
+`CLAIMS.json#...`. Commit con pathspec explicito de mis dos ficheros: eso **no puede capturar la obra
+a medias del peer**, que es justo lo que la regla de esperar pretende evitar. Gate ASCII propio
+(bytes>127) antes de commitear: cazo una `a` cirilica que se me colo en "Yerra". **Gate en clon limpio
+de MI commit** (`efde8b76`): validate 0, scan_encoding 0. Push fast-forward sobre `73876526`.
+
+Ojo de tiempos: `validate_collaboration_state.py` + `scan_encoding.py` encadenados en un solo
+comando revientan el techo de 2 min del Bash; correrlos por separado con timeout propio.
