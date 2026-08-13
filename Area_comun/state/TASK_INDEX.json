@@ -381,22 +381,6 @@
             "type": "implementation"
         },
         {
-            "file": "Area_comun/tasks/TASK-0353-produccion-borra-el-campo-que-produccion-exige.md",
-            "id": "TASK-0353",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Produccion borra el campo que produccion exige -- schema_report elimina obstacles justo antes de validate_turn",
-            "type": "implementation"
-        },
-        {
-            "file": "Area_comun/tasks/TASK-0354-concurrencia-y-colocacion-de-jobs-en-el-workflow.md",
-            "id": "TASK-0354",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El workflow no cancela corridas superadas y paga el multiplicador de Windows por dos runners que no lo necesitan",
-            "type": "implementation"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0355-reconocer-powershell-por-estructura-no-por-texto.md",
             "id": "TASK-0355",
             "owner": "Codex",
@@ -426,14 +410,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "La invariante de dos fases no esta atada por ninguna puerta -- el bloque existe, nadie comprueba que nada corra antes",
-            "type": "implementation"
-        },
-        {
-            "file": "Area_comun/tasks/TASK-0359-el-liveness-del-harness-es-ciego-para-el-checker.md",
-            "id": "TASK-0359",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora",
             "type": "implementation"
         },
         {
