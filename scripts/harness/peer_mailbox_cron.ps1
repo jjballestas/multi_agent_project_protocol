@@ -550,7 +550,7 @@ function Get-AgentExecutable {
         }
         throw "agent executable not found (or not a file): $AgentExe"
     }
-    $commandName = $PeerId.ToLowerInvariant()
+    $commandName = if ($AgentProvider -eq "Anthropic") { $env:PROTOCOL_ANTHROPIC_AGENT_COMMAND } else { $env:PROTOCOL_REFERENCE_AGENT_COMMAND }; if (-not $commandName) { throw "agent command is not configured for provider=$AgentProvider; pass -AgentExe or configure its provider command" }
     $cmd = Get-Command $commandName -ErrorAction SilentlyContinue
     if ($cmd -and $cmd.Source -and (Test-Path -LiteralPath $cmd.Source)) {
         if ($AgentProvider -eq "Anthropic") {

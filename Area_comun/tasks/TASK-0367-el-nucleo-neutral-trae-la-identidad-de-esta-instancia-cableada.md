@@ -125,3 +125,18 @@ domain-neutrality scan, collaboration validator, Python compilation, diff check,
 status in detached clean worktree
 `D:/Aegis_Scratch/multi_agent_project_protocol/task0367-clean-503303c9`. Codex did not review or
 ratify the implementation.
+
+## Remediation evidence
+
+The distinguishing criterion is behavioral: a participant identity attributes a protocol action or
+selects a registered actor, while a tool name selects an executable contract installed on the host.
+`PeerId` belongs to the first category; `AgentProvider` selects the second. The four runtime/context,
+router, and pruning changes concern actor attribution or generic absent-config language and therefore
+remain correct. `Get-AgentExecutable` concerns the host command contract, so it now chooses the
+provider-specific command supplied through runtime environment configuration.
+
+The mailbox retry suite now executes `Get-AgentExecutable` for both asymmetric peer/provider pairs.
+It requires Codex/Codex to resolve a fixture `codex.exe`, requires Analista/Anthropic to resolve a
+fixture `claude.ps1`, and kills a participant-name mutant by showing that it no longer preserves the
+Analista resolution. The test prints both resolved binaries, making the evidence about behavior
+rather than merely the spelling of the production literal.

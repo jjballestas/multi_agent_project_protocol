@@ -416,6 +416,64 @@ def extract_powershell_function_closure(
     return "\n\n".join(ordered)
 
 
+def run_agent_executable_resolution_cases(sandbox: Path) -> None:
+    """Prove tool resolution depends on provider, not participant identity."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    function_text = extract_powershell_function_closure(runner_text, ("Get-AgentExecutable",))
+    tools = sandbox / "agent-resolution-tools"
+    tools.mkdir()
+    claude = tools / "claude.ps1"
+    codex_wrapper = tools / "codex.cmd"
+    codex_exe = tools / "codex.exe"
+    claude.write_text("# fixture tool\n", encoding="ascii")
+    codex_exe.write_bytes(b"fixture tool\n")
+    codex_wrapper.write_text(f'@"{codex_exe}" %*\n', encoding="ascii")
+
+    def resolve(functions: str, peer_id: str, provider: str) -> str:
+        probe = sandbox / f"resolve-{peer_id.lower()}-{provider.lower()}.ps1"
+        probe.write_text(
+            "$ErrorActionPreference='Stop'\n"
+            f"$FixtureClaude='{claude}'\n"
+            f"$FixtureCodex='{codex_wrapper}'\n"
+            "function Get-Command {\n"
+            "  param([string]$Name, [object]$ErrorAction)\n"
+            "  if($Name -eq 'claude'){ return [pscustomobject]@{Source=$FixtureClaude} }\n"
+            "  if($Name -eq 'codex'){ return [pscustomobject]@{Source=$FixtureCodex} }\n"
+            "  return $null\n"
+            "}\n"
+            f"$PeerId='{peer_id}'\n"
+            f"$AgentProvider='{provider}'\n"
+            "$AgentExe=''\n"
+            "$env:PROTOCOL_ANTHROPIC_AGENT_COMMAND='claude'\n"
+            "$env:PROTOCOL_REFERENCE_AGENT_COMMAND='codex'\n"
+            + functions
+            + "\nGet-AgentExecutable\n",
+            encoding="ascii",
+        )
+        return run(
+            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox
+        ).stdout.strip()
+
+    resolved = {
+        "Codex": resolve(function_text, "Codex", "Codex"),
+        "Analista": resolve(function_text, "Analista", "Anthropic"),
+    }
+    assert Path(resolved["Codex"]).resolve() == codex_exe.resolve(), resolved
+    assert Path(resolved["Analista"]).resolve() == claude.resolve(), resolved
+
+    participant_mutant = function_text.replace(
+        '$commandName = if ($AgentProvider -eq "Anthropic") { $env:PROTOCOL_ANTHROPIC_AGENT_COMMAND } else { $env:PROTOCOL_REFERENCE_AGENT_COMMAND }',
+        "$commandName = $PeerId.ToLowerInvariant()",
+    )
+    assert participant_mutant != function_text, "participant/tool mutant was not applied"
+    mutant_analista = resolve(participant_mutant, "Analista", "Anthropic")
+    assert mutant_analista != resolved["Analista"], (
+        "participant-name mutant unexpectedly preserved Analista tool resolution: "
+        f"healthy={resolved!r}; mutant={mutant_analista!r}"
+    )
+    print(f"agent executable resolution: Codex={resolved['Codex']} Analista={resolved['Analista']}")
+
+
 def run_outcome_parser_cases(sandbox: Path) -> None:
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     function_text = extract_powershell_function_closure(runner_text, ("Get-ExecOutcomeClass",))
@@ -1921,6 +1979,7 @@ def main() -> int:
         run("git", "add", ".", cwd=sandbox)
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         if not TASK0343_ROLLBACK_ONLY:
+            run_agent_executable_resolution_cases(sandbox)
             run_outcome_parser_cases(sandbox)
             run_torn_tail_case(sandbox)
             run_nondestructive_rollback_contract()
