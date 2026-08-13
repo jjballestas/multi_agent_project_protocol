@@ -128,6 +128,26 @@
             "updated_at": "2026-08-13T19:57:38Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-OPS-hyg-H",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-OPS-hyg-H",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0364.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0364.md",
+                "Area_comun/mailbox/open/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0364-R1.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0364-R1.md",
+                "Area_comun/mailbox/open/MSG-20260813-Analista-to-Arquitecto-REVIEW-TASK-0364-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Analista-to-Arquitecto-REVIEW-TASK-0364-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0364.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0364.md"
+            ],
+            "started_at": "2026-08-13T21:19:59Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260813H",
+            "updated_at": "2026-08-13T21:19:59Z"
+        },
+        {
             "claim_id": "CLAIM-20260813-Arquitecto-TASK-0350-ratify",
             "expires_at": "2026-08-14T23:00:00Z",
             "owner": "Arquitecto",
