@@ -605,20 +605,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Reject persistent Git metadata contamination
-        shell: bash
-        run: |
-          hooks_path="$(git config --get core.hooksPath || true)"
-          case "$hooks_path" in
-            ""|.githooks)
-              echo "PERSISTENT_GIT_METADATA CLEAN hooksPath=${hooks_path:-unset}"
-              ;;
-            *)
-              echo "PERSISTENT_GIT_METADATA CONTAMINATED hooksPath=$hooks_path" >&2
-              exit 1
-              ;;
-          esac
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -652,3 +638,25 @@ jobs:
           else
             echo "PERSISTENT_WORKSPACE REPLAY_NO_MUTATION"
           fi
+
+  persistent-runner-state:
+    runs-on: [self-hosted, protocol-linux]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reject persistent Git metadata contamination
+        run: |
+          hooks_path="$(git config --get core.hooksPath || true)"
+          case "$hooks_path" in
+            ""|.githooks)
+              echo "PERSISTENT_GIT_METADATA CLEAN hooksPath=${hooks_path:-unset}"
+              ;;
+            *)
+              echo "PERSISTENT_GIT_METADATA CONTAMINATED hooksPath=$hooks_path" >&2
+              exit 1
+              ;;
+          esac

@@ -99,7 +99,7 @@ juzgando ahora mismo un texto cuya afirmacion central es que ese fichero no se t
   untracked and ignored residue was also removed by the unchanged `actions/checkout@v4`, the two
   arms used different workflow commits, and the clean arm did not pass. Persistent repository-local
   Git configuration is the replacement contaminant because it is invisible to `git status` and
-  survives both `git clean -ffdx` and `git reset --hard HEAD`. The Linux falsification witness now
+  survives both `git clean -ffdx` and `git reset --hard HEAD`. A bounded Linux witness job now
   rejects any noncanonical effective `core.hooksPath` after checkout, including a user-global value
   outside the workspace (repository-local values are covered too). The governed replacement pair
   must use one workflow commit: a poisoned external `core.hooksPath` must fail this gate, then the
