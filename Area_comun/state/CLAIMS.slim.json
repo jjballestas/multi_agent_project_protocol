@@ -1,5 +1,20 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260813-Codex-TASK-0364-remediation1",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0364-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0364",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0364",
+                "Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0364"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

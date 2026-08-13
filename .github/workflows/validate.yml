@@ -558,7 +558,7 @@ jobs:
         run: |
           python --version
           pwsh --version
-          $PSVersionTable.PSVersion.ToString()
+          powershell.exe -NoLogo -NoProfile -NonInteractive -Command '$PSVersionTable.PSVersion.ToString()'
 
       - name: Execute mailbox retry falsification runner
         run: python examples/mailbox_retry_cases/run_mailbox_retry_cases.py
@@ -604,6 +604,20 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Reject persistent Git metadata contamination
+        shell: bash
+        run: |
+          hooks_path="$(git config --local --get core.hooksPath || true)"
+          case "$hooks_path" in
+            ""|.githooks)
+              echo "PERSISTENT_GIT_METADATA CLEAN hooksPath=${hooks_path:-unset}"
+              ;;
+            *)
+              echo "PERSISTENT_GIT_METADATA CONTAMINATED hooksPath=$hooks_path" >&2
+              exit 1
+              ;;
+          esac
 
       - name: Set up Python
         uses: actions/setup-python@v5

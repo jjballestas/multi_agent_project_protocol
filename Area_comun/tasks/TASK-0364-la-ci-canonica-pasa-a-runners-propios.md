@@ -90,14 +90,19 @@ juzgando ahora mismo un texto cuya afirmacion central es que ese fichero no se t
 - Implementation: `cefd5e02`, `f23ef6a7`, `6b47e146`, `6aee19ac`.
 - Placement: `falsification-runners` uses `[self-hosted, protocol-win]`; `validate`,
   `powershell-linux-parity`, and `falsification-runners-python` use
-  `[self-hosted, protocol-linux]`. The Windows job is the only job that executes the production
-  Windows PowerShell 5.1 harness; the parity job explicitly exercises pwsh 7 on Linux.
-- Dirty/clean pair: run `31596823928` observed
-  `PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=3` on Windows before checkout; the residue was the
-  seeded obsolete `.pyc`, the seeded residual artifact, and the dirty tracked entry. Run
-  `31597752400` then observed the clean pre-check and executed checkout plus the canonical steps.
-  Both runs left their retained workspaces clean. The dirty run therefore proves removal, while the
-  following run proves the clean path.
+  `[self-hosted, protocol-linux]`. The Windows placement is required by the mailbox retry runner's
+  Windows path and process semantics. Its steps run under pwsh 7 because the service policy blocks
+  script files under Windows PowerShell 5.1; the version-publication step invokes
+  `powershell.exe` explicitly so the 5.1 host is still exercised and reported. The parity job
+  explicitly exercises pwsh 7 on Linux.
+- The original dirty/clean pair (`31596823928` / `31597752400`) is withdrawn as AC2 evidence: its
+  untracked and ignored residue was also removed by the unchanged `actions/checkout@v4`, the two
+  arms used different workflow commits, and the clean arm did not pass. Persistent repository-local
+  Git configuration is the replacement contaminant because it lives in `.git/config`, is invisible
+  to `git status`, and survives both `git clean -ffdx` and `git reset --hard HEAD`. The Linux
+  falsification witness now rejects any noncanonical local `core.hooksPath` after checkout. The
+  governed replacement pair must use one workflow commit: a poisoned external `core.hooksPath`
+  must fail this gate, then the same job must pass after removing that local override.
 - Same-anchor balance: real run `31630955323` and clean replay of exact head
   `2eae1c393c9ca8f052469f248a981f6ac06d5374` agree through the first ordinary failure: steps 1-19
   pass and `Check systematic state pruning` fails because maintenance is due. The always-run actor
