@@ -62,6 +62,23 @@ intake:
 
 # TASK-0369 -- la seccion normativa contra el motor
 
+## Re-medido por el Arquitecto (2026-08-14 01:10), antes de ejecutar
+
+Las tres divergencias las trajo el veredicto formal de TASK-0365. Las recontE yo contra el arbol
+para que esta tarea no arranque de una afirmacion heredada:
+
+    allowlist EFECTIVA  (ALLOWLIST_KEYS en build_memory_db.py)   21 claves
+    allowlist PUBLICADA (s.7 de la SPEC)                         20 claves
+    en el motor y NO publicada  ->  applies_to
+    publicada y NO en el motor  ->  (ninguna)
+
+La divergencia es de UNA clave y va en una sola direccion: el motor indexa una clave que la lista
+publicada no nombra. Ninguna clave publicada esta sin implementar, asi que el texto no promete de
+mas: promete de MENOS, que es la direccion que hace inutil una allowlist como garantia.
+
+Y en el mismo parrafo de la s.7, sobre `title`: dice **"ASCII imprimible + longitud <= 200"**. El
+motor acepta UTF-8 y tope 500, ambos autorizados por el hallazgo P7 del port. Confirmadas las tres.
+
 ## Las tres divergencias, medidas por el checker
 
     applies_to   el motor lo INDEXA; la s.7 no lo lista entre sus 20 claves
