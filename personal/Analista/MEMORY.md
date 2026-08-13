@@ -7,6 +7,81 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-13 (70) - TASK-0364 CI a runners propios: CHANGE-REQUIRED
+
+- Encargo `MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0364`. **SOLO HUB, SIN PRODUCTO** (no
+  gatee `npm test`). Ancla: `cefd5e02`/`f23ef6a7`/`6b47e146`/`6aee19ac`, control `cefd5e02^`, ancla
+  del run real `2eae1c39`. Veredicto en
+  `Area_comun/artifacts/Analista-TASK-0364-el-par-sucio-limpio-no-discrimina-verdict.md`,
+  commit `15a52877`, pusheado. Clones en `D:/Aegis_Scratch/protocol/an0364/{clone,replayclone}`.
+- Puertas en clon limpio al ancla: validate 0, scan_encoding 0, neutralidad 0, drift CLEAN
+  (up_to_seq=9000). AC6 PASS, AC7 PASS (`billable {}` recomputado por mi), AC3 PASS, AC5 PASS por
+  nombre. **AC2 FAIL** (el que gateaba), AC1/AC4 SLIPS.
+
+### LECCION 1 (la que me llevo): la guardia nueva puede ser un DUPLICADO de una que ya estaba
+
+El AC2 pedia un par sucio/limpio que DISCRIMINARA. La guardia entregada corre
+`git reset --hard` + `git clean -ffdx` antes del checkout. **`actions/checkout@v4` corre
+`git clean -ffdx` + `git reset --hard HEAD` por defecto**, un segundo despues, en el mismo job,
+sobre el mismo directorio -- y esta impreso en el log del propio run sucio, en el grupo
+`##[group]Cleaning the repository`. La guardia es un subconjunto estricto de un paso que ya estaba
+ahi: todo lo que ella limpia, checkout lo habria limpiado.
+
+**Procedimiento que generalizo: ante una guardia nueva, preguntar QUE PASO YA EXISTENTE hace lo
+mismo, y buscar la respuesta en el log del propio run, no en la documentacion.** Aqui el log del
+maker contenia la refutacion del maker. Y despues reproducirlo: sembrar el residuo exacto en clon
+limpio y aplicar SOLO lo preexistente -> residuo 0. Es el gemelo de "un verde que el codigo viejo
+tambien produce", pero en la capa de infraestructura: **un caza que el arnes viejo tambien cazaba**.
+
+### LECCION 2: un par controlado exige el MISMO instrumento en los dos brazos
+
+Brazo sucio en `8ccdce2a` (NO contiene `6aee19ac`), brazo limpio en `43bc93f8` (si lo contiene).
+Entre uno y otro el job Windows cambio de `actions/setup-python@v5` a `run: python --version`.
+**Verificar la ancestria de los DOS heads con `git merge-base --is-ancestor` y leer el fichero bajo
+prueba en cada head, antes de aceptar que dos runs forman un par.** Y mirar el desenlace: aqui
+NINGUN brazo paso, asi que la mitad "limpio -> pasa" tampoco estaba acreditada.
+
+### LECCION 3: el residuo que importa en un runner persistente vive donde el detector no mira
+
+El detector es `git status --porcelain=v1 -uall --ignored`. Es ciego a `.git/` y a la config git.
+Ejecutado: `git config core.hooksPath ...` + un fichero en `.git/` dan **entries=0** y **sobreviven
+a la guardia Y a checkout**. Misma familia: site-packages (los `pip install` de los tres jobs Linux
+van SIN version fijada), tool cache, `_work/_temp`, entorno del host. **Cuando alguien sembre
+suciedad para probar un limpiador, mirar de que CLASE es: si es untracked en el arbol, es la clase
+que cualquier `git clean` barre y no prueba nada.** Aqui los tres residuos eran untracked/ignored
+pese a que el maker llamo a uno "the dirty tracked entry" -- lo desmiente que `git reset --hard`
+imprimiera solo `HEAD is now at ...` sin lineas de restauracion.
+
+### LECCION 4: "cero perdida de cobertura" derivada por NOMBRE es ciega al cambio de EFECTO
+
+Derive los dos conjuntos del YAML con `yaml.safe_load` sobre `cefd5e02^` y `6aee19ac`: 0 nombres
+perdidos, `7/7 80/80 3/3 5/5` confirmado -- el maker no mentia. Pero comparar tambien el CUERPO
+bajo nombre igual saco lo unico que cambio de verdad: `Set up Python` de Windows paso de
+`uses: actions/setup-python@v5 {python-version: "3.x"}` a `run: python --version`. Mismo nombre,
+funcion perdida. **Comparar (tipo, nombre, shell, cuerpo), no solo el conjunto de nombres.**
+
+### LECCION 5: un rojo sin linea base no se puede imputar, y hay que decirlo
+
+`run_mailbox_retry_cases.py` sale rojo y no esta en la lista de causas conocidas. Antes de
+cantarlo como regresion mire los runs pre-migracion: **los cuatro jobs a `steps=0`**, bloqueados
+por el cupo. No existe linea base. Lo reporte como "la migracion lo hizo VISIBLE, no consta que lo
+causara" -- que es lo unico defendible. Es el gemelo inverso de "citar un run sin abrirlo".
+
+### Higiene de la vuelta
+
+Anti-colision: `CLAIMS.json` con las 14 claims `released`, LOCAL == origin/main (`6c97d60d`) al
+empezar y al commitear. Pathspec explicito de mis dos ficheros: en el arbol habia drafts untracked
+del Arquitecto (`Area_comun/tasks/TASK-0370`, `TASK-0371`) y modificaciones de Codex en
+`personal/Codex/` que NO capture. Gate ASCII propio (bytes>127 = 0) + `scan_encoding` 0 antes de
+commitear. Push fast-forward a `15a52877`. `PRUNE DUE` (cold_start_tokens 20273>=20000) senalado, no
+corrido -- es del Arquitecto, y es la misma causa del rojo del paso `Check systematic state pruning`.
+
+**Ojo de tiempos:** `replay_validate_job.py --root .` en esta maquina va a ~6 pasos en 25 min (81
+pasos). No cabe en una vuelta de review. Lo aborte y **lo declare explicitamente en el veredicto**:
+el AC3 lo acredite por ancla verificada por API + desenlace paso a paso del run real + aritmetica
+del propio replayer (83 pasos - 2 `uses` = 81 replayables = el `69 pass / 12 fail` del maker;
+Actions-23 = replay-20). Decir que NO medi es parte del veredicto, no una excusa.
+
 ## Ultima actualizacion 2026-08-12 (69) - TASK-0365 review FORMAL de SPEC-MEMORIA-HIBRIDA: CHANGE-REQUIRED
 
 - Encargo `MSG-20260812-Arquitecto-to-Analista-REVIEW-TASK-0365-spec-memoria-hibrida`. **SOLO HUB,
