@@ -98,11 +98,12 @@ juzgando ahora mismo un texto cuya afirmacion central es que ese fichero no se t
 - The original dirty/clean pair (`31596823928` / `31597752400`) is withdrawn as AC2 evidence: its
   untracked and ignored residue was also removed by the unchanged `actions/checkout@v4`, the two
   arms used different workflow commits, and the clean arm did not pass. Persistent repository-local
-  Git configuration is the replacement contaminant because it lives in `.git/config`, is invisible
-  to `git status`, and survives both `git clean -ffdx` and `git reset --hard HEAD`. The Linux
-  falsification witness now rejects any noncanonical local `core.hooksPath` after checkout. The
-  governed replacement pair must use one workflow commit: a poisoned external `core.hooksPath`
-  must fail this gate, then the same job must pass after removing that local override.
+  Git configuration is the replacement contaminant because it is invisible to `git status` and
+  survives both `git clean -ffdx` and `git reset --hard HEAD`. The Linux falsification witness now
+  rejects any noncanonical effective `core.hooksPath` after checkout, including a user-global value
+  outside the workspace (repository-local values are covered too). The governed replacement pair
+  must use one workflow commit: a poisoned external `core.hooksPath` must fail this gate, then the
+  same job must pass after removing that override.
 - Same-anchor balance: real run `31630955323` and clean replay of exact head
   `2eae1c393c9ca8f052469f248a981f6ac06d5374` agree through the first ordinary failure: steps 1-19
   pass and `Check systematic state pruning` fails because maintenance is due. The always-run actor

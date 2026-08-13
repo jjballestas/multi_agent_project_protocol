@@ -608,7 +608,7 @@ jobs:
       - name: Reject persistent Git metadata contamination
         shell: bash
         run: |
-          hooks_path="$(git config --local --get core.hooksPath || true)"
+          hooks_path="$(git config --get core.hooksPath || true)"
           case "$hooks_path" in
             ""|.githooks)
               echo "PERSISTENT_GIT_METADATA CLEAN hooksPath=${hooks_path:-unset}"
