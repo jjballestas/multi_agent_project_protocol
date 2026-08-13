@@ -1,7 +1,7 @@
 ---
 id: TASK-0368
 title: El motor deriva "decision vigente" de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md
@@ -55,6 +55,9 @@ intake:
     - "python scripts/memory/check_memory_db_drift.py --root . --fast"
     - "python scripts/memory/test_memory_db.py"
     - "python scripts/validate_collaboration_state.py --root ."
+    - "python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory"
+    - "python scripts/scan_encoding.py --root ."
+    - "python scripts/scan_domain_neutrality.py --root ."
   scope_routes:
     - scripts/memory/build_memory_db.py
     - scripts/memory/check_memory_db_drift.py

@@ -207,7 +207,7 @@
         {
             "id": "TASK-0368",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles"
         },
         {
@@ -251,6 +251,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El runner se traga el stderr, y por eso el rojo nuevo del job de Windows no tiene diagnostico"
+        },
+        {
+            "id": "TASK-0376",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El eje de vigencia vecino sigue cableado a dos literales, a doscientas lineas de la correccion que existia para matarlos"
+        },
+        {
+            "id": "TASK-0377",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Una garantia que se lee presente y no puede dispararse -- el casefold del estado de politica es inalcanzable bajo la politica viva"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

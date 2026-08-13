@@ -403,6 +403,27 @@
             "updated_at": "2026-08-13T22:30:19Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-0368-reject-r1",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0368-reject-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0376",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0376",
+                "Area_comun/tasks/TASK-0376-el-eje-de-vigencia-vecino-sigue-cableado-a-dos-literales.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0377",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0377",
+                "Area_comun/tasks/TASK-0377-una-garantia-que-se-lee-presente-y-no-puede-dispararse.md"
+            ],
+            "started_at": "2026-08-13T23:57:00Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-13T23:57:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-J",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",

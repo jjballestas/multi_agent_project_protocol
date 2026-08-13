@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "414f7bb5ef0c7bafcf53e72f92d0e936b52a8dfaa2fbff7cf5bfb42a5c1794e1",
+  "canonical_hash": "400c22d59256c78ce56174bee44169b62c46c50338aca76f6e844c106c9ba6b6",
   "integrity": {
-    "canonical_hash": "414f7bb5ef0c7bafcf53e72f92d0e936b52a8dfaa2fbff7cf5bfb42a5c1794e1",
+    "canonical_hash": "400c22d59256c78ce56174bee44169b62c46c50338aca76f6e844c106c9ba6b6",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "edc2ad460e9b46386d4b5d3dd73c040e600c140afef1aa40cf47cf215ab29471",
-    "signature": "f2227b1dd481a414964f24c0d694069f8c7300103bd4e4f6b8d9ca8d6c7fb617",
-    "up_to_seq": 9131
+    "prev_hash": "76df905f15969af440a3c2ea85580261012c0d68276bf5d59aa00348de8df08d",
+    "signature": "ec38eb45787716d79b52342a9c3cfe06b65685ece0e936653ec5128ef320f373",
+    "up_to_seq": 9136
   },
   "state": {
     "aggregate_versions": {
@@ -1010,6 +1010,7 @@
       "CLAIM-20260813-Codex-TASK-0367-remediation1-delivery": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1-scope-repair": 1,
       "CLAIM-20260814-Arquitecto-0364-ratify-0368-reject": 1,
+      "CLAIM-20260814-Arquitecto-0368-reject-r1": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-K": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-L": 1,
@@ -3726,7 +3727,7 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 16,
+      "TASK-0368": 18,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
@@ -3734,6 +3735,8 @@
       "TASK-0373": 2,
       "TASK-0374": 1,
       "TASK-0375": 1,
+      "TASK-0376": 1,
+      "TASK-0377": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3756,7 +3759,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8460,
+    "events_applied": 8465,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4877,6 +4880,11 @@
       "arq-td-001": 7921,
       "arq-td-002": 7922,
       "arq-td-099": 7923,
+      "arq-x68r1-acq": 9132,
+      "arq-x68r1-flip": 9133,
+      "arq-x68r1-rel": 9136,
+      "arq-x68r1-up76": 9134,
+      "arq-x68r1-up77": 9135,
       "arq:0202-0203:acq": 2307,
       "arq:0202-0203:rel": 2310,
       "arq:0204-0205:acq": 2327,
@@ -12220,5 +12228,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9131
+  "up_to_seq": 9136
 }
