@@ -1,7 +1,7 @@
 ---
 id: TASK-0368
 title: El motor deriva "decision vigente" de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md
@@ -113,7 +113,8 @@ mutante que vuelve a `status == "active"`. Tambien prueba que un cambio no commi
 afecta al blob atestado, y conserva el par I4: respaldo `accepted` presente pasa; respaldo ausente falla.
 
 Censo previo de la construccion real: `active=4`, `historical=105`, `superseded=1`; `hot_required=1`
-para 4 y `hot_required=0` para 106. Censo esperado por la propiedad: `active=109`, `superseded=1`,
+para 4 y `hot_required=0` para 106. Censo observado en la reconstruccion de `94aa4ca3`:
+`active=109`, `superseded=1`,
 `historical=0`; ninguna decision sin `superseded_by` deja de ser vigente y la unica que pasa a no vigente
 es DECISION-0071, que declara `superseded_by: DECISION-0081`.
 
