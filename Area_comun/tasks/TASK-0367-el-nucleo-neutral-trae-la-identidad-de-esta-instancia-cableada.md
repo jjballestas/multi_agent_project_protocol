@@ -1,7 +1,7 @@
 ---
 id: TASK-0367
 title: El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md
@@ -92,3 +92,30 @@ No es un escaner quisquilloso. `DEFAULT_AGENT_ROLES` en el nucleo dice que el ar
 se llama Claude, y `router.py` lo devuelve como ultimo recurso cuando no encuentra a nadie. Un equipo
 que instancie el protocolo hereda esa identidad sin pedirla. La frontera de AGENTS.md s.4 no la mide
 el texto del contrato: la mide lo que sale de `new_instance.py`.
+
+## Implementation evidence
+
+The pre-change generated-instance scan derived four findings for the coordination tier and five for
+the runtime tier: `runtime/context.py`, `runtime/router.py`, two sites in `scripts/prune_state.py`, and
+the additional runtime-tier site in `scripts/harness/peer_mailbox_cron.ps1`. No cited site disappeared
+from the measured population and no additional site was reported.
+
+Each correction uses one of the two accepted neutral paths:
+
+- `runtime/context.py` uses generic role identifiers for the no-config fallback. A generated instance
+  still reads its concrete architect, implementer, and human owner from `protocol.config.json`.
+- `runtime/router.py` uses the generic `architect` role identifier only when the registry contains no
+  orchestrator or architect. Configured registries still return their declared concrete agent id.
+- `scripts/prune_state.py` describes project memory without naming a participant, and derives the actor
+  from `agent_roles.architect` with the generic role identifier only as the absent-config fallback.
+- `scripts/harness/peer_mailbox_cron.ps1` derives executable discovery from the configured `PeerId`.
+
+The permanent behavioral negative generates an instance, injects its configured architect identity
+into `runtime/context.py`, executes that generated instance's neutrality scanner, and requires a
+nonzero exit naming both the identity and path. The operational probe imports the generated runtime,
+loads the three declared core roles into its registry, and proves escalation selects a declared role.
+
+Before the change, `python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py`
+exited 1 and named the two requested cases with the derived findings above. After the change it exits
+0 with `OK: runtime instantiation cases passed (10 + ps1 parity when available).` The expected
+placeholder-negative diagnostic remains part of the passing runner and is not a case failure.

@@ -550,7 +550,7 @@ function Get-AgentExecutable {
         }
         throw "agent executable not found (or not a file): $AgentExe"
     }
-    $commandName = if ($AgentProvider -eq "Anthropic") { "claude" } else { "codex" }
+    $commandName = $PeerId.ToLowerInvariant()
     $cmd = Get-Command $commandName -ErrorAction SilentlyContinue
     if ($cmd -and $cmd.Source -and (Test-Path -LiteralPath $cmd.Source)) {
         if ($AgentProvider -eq "Anthropic") {

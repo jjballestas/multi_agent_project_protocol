@@ -160,6 +160,49 @@ def validate_with_instance_tools(root: Path) -> None:
     assert_ok(run([sys.executable, str(root / "scripts" / "prune_state.py"), "--root", str(root), "--check"]))
 
 
+def assert_configured_roles_are_operational(root: Path) -> None:
+    config = load_config(root)
+    expected = {config["agent_roles"][role] for role in ("architect", "implementer", "human_owner")}
+    probe = run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "from pathlib import Path; "
+                "from runtime.context import load_agent_registry; "
+                "from runtime.router import escalation_owner; "
+                "registry=load_agent_registry(Path('.')); "
+                "roles=__import__('json').load(open('protocol.config.json', encoding='utf-8-sig'))['agent_roles']; "
+                "expected={roles[role] for role in ('architect', 'implementer', 'human_owner')}; "
+                "actual={agent['id'] for agent in registry['agents']}; "
+                "assert expected <= actual, (expected, actual); "
+                "architect=escalation_owner({'agent_registry': registry}, 'fixture-author'); "
+                "assert architect in expected, (architect, expected)"
+            ),
+        ],
+        cwd=root,
+    )
+    assert_ok(probe)
+    assert expected
+
+
+def assert_generated_identity_injection_is_rejected(root: Path) -> None:
+    identity = str(load_config(root)["agent_roles"]["architect"])
+    target = root / "runtime" / "context.py"
+    original = target.read_bytes()
+    try:
+        target.write_bytes(original + f"\n# injected concrete participant identity: {identity}\n".encode("utf-8"))
+        rejected = run(
+            [sys.executable, str(root / "scripts" / "scan_domain_neutrality.py"), "--root", str(root)],
+            cwd=root,
+        )
+    finally:
+        target.write_bytes(original)
+    output = "\n".join([rejected.stdout, rejected.stderr])
+    assert rejected.returncode != 0, "generated-instance neutrality scanner accepted an injected participant identity"
+    assert "runtime/context.py" in output and identity in output, output
+
+
 def file_snapshot(root: Path) -> dict[str, str]:
     snapshot: dict[str, str] = {}
     for path in sorted(item for item in root.rglob("*") if item.is_file()):
@@ -190,6 +233,8 @@ def case_coordination_default_and_flag() -> None:
             assert not (root / ".github" / "workflows" / "validate.yml").exists()
             validate_with_repo_tools(root)
             validate_with_instance_tools(root)
+            assert_configured_roles_are_operational(root)
+        assert_generated_identity_injection_is_rejected(default_root)
         assert file_snapshot(default_root) == file_snapshot(explicit_root)
 
 
@@ -208,6 +253,7 @@ def case_runtime_tier_scaffolds_motor_gates_ci_off() -> None:
         assert {path.name for path in (root / "scripts").iterdir() if path.is_file()} == GATE_SCRIPTS
         validate_with_repo_tools(root)
         validate_with_instance_tools(root)
+        assert_configured_roles_are_operational(root)
 
 
 def case_generated_runtime_preserves_validator_fields() -> None:

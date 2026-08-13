@@ -716,6 +716,29 @@
             "updated_at": "2026-08-13T07:26:32Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Codex-TASK-0367",
+            "expires_at": "2026-08-13T11:47:53Z",
+            "notes": "Implement TASK-0367 neutral generated-instance defaults and behavioral evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0367",
+                "Area_comun/state/TASK_INDEX.json#TASK-0367",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
+                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
+                "runtime/context.py",
+                "runtime/router.py",
+                "scripts/prune_state.py",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-13T07:47:53Z",
+            "status": "active",
+            "task_id": "TASK-0367",
+            "updated_at": "2026-08-13T07:47:53Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

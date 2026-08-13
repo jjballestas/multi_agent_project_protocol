@@ -12,9 +12,9 @@ from typing import Any
 PRIORITY_RANK = {"critical": 4, "high": 3, "normal": 2, "low": 1}
 
 DEFAULT_AGENT_ROLES = {
-    "architect": "Claude",
-    "implementer": "Codex",
-    "human_owner": "operador humano",
+    "architect": "architect",
+    "implementer": "implementer",
+    "human_owner": "human_owner",
 }
 
 ROLE_CAPABILITIES = {

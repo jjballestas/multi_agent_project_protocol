@@ -249,7 +249,7 @@ def condense_next_actions(state: dict[str, Any], keep_recent: int) -> int:
     total = prior + len(to_condense)
     sentinel = (
         f"{NEXT_ACTIONS_SENTINEL_MARK} {total} next_actions historicas condensadas por el prune "
-        "(DECISION-0014); trazabilidad en git history + memoria de Claude."
+        "(DECISION-0014); trazabilidad en git history + memoria del proyecto."
     )
     state["next_actions"] = [sentinel] + kept + other
     return len(to_condense)
@@ -439,7 +439,7 @@ def apply_prune_direct(root: Path, cfg: dict[str, Any]) -> dict[str, Any]:
 def default_actor_id(root: Path) -> str:
     config = read_json(root / "protocol.config.json")
     roles = config.get("agent_roles") if isinstance(config.get("agent_roles"), dict) else {}
-    return str(roles.get("architect") or "Claude")
+    return str(roles.get("architect") or "architect")
 
 
 def default_timestamp() -> str:

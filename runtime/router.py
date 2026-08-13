@@ -435,7 +435,7 @@ def escalation_owner(state: dict[str, Any], author: str) -> str:
         return sorted(preferred)[0]
     if fallback:
         return sorted(fallback)[0]
-    return "Claude"
+    return "architect"
 
 
 def select_agent(task: dict[str, Any], transition: str, state: dict[str, Any], *, action: str | None = None) -> dict[str, Any]:
