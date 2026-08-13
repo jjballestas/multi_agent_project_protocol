@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "cc7c31be44d4359cc880a533690213b8eeaecd91ffddca4ffc25a8151d055a22",
+  "canonical_hash": "7ce873e7b99dae434e2bb9f00efce1312ac717e85eec69e4bce192dbb0b6e9f3",
   "integrity": {
-    "canonical_hash": "cc7c31be44d4359cc880a533690213b8eeaecd91ffddca4ffc25a8151d055a22",
+    "canonical_hash": "7ce873e7b99dae434e2bb9f00efce1312ac717e85eec69e4bce192dbb0b6e9f3",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "dcbe03770e54c161195230a21a6f38aacf1427d17e3d7a899d0719f4a7ebce6c",
-    "signature": "67aba5575c0520b994515c8b501c633182b4b250b28d5c184360a29eeb8789f6",
-    "up_to_seq": 9076
+    "prev_hash": "a5f1b1145dbe0fbee1e17f59def204b8ecfc64e1dd39f3e311ee69867054939a",
+    "signature": "7a99e660032ea4d3609d468656003419260672ed1dd580de5994058ebde011c0",
+    "up_to_seq": 9082
   },
   "state": {
     "aggregate_versions": {
@@ -1002,6 +1002,7 @@
       "CLAIM-20260813-Arquitecto-OPS-hyg-G": 1,
       "CLAIM-20260813-Arquitecto-TASK-0350-ratify": 1,
       "CLAIM-20260813-Arquitecto-TASK-0367-reject": 1,
+      "CLAIM-20260813-Arquitecto-memhib-F1F2": 1,
       "CLAIM-20260813-Arquitecto-reject-0364-0367": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1-delivery": 1,
@@ -3699,11 +3700,12 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 2,
-      "TASK-0369": 1,
+      "TASK-0368": 4,
+      "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
       "TASK-0372": 1,
+      "TASK-0373": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3726,7 +3728,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8405,
+    "events_applied": 8411,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4581,6 +4583,12 @@
       "arq-l75-003": 8431,
       "arq-l75-004": 8432,
       "arq-l75-099": 8433,
+      "arq-memhib-001-acq": 9077,
+      "arq-memhib-001-f68": 9079,
+      "arq-memhib-001-f69": 9080,
+      "arq-memhib-001-f73": 9081,
+      "arq-memhib-001-rel": 9082,
+      "arq-memhib-001-up73": 9078,
       "arq-p353b-000": 8441,
       "arq-p353b-001": 8442,
       "arq-p353b-002": 8443,
@@ -12135,5 +12143,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9076
+  "up_to_seq": 9082
 }

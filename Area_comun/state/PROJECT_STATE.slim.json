@@ -141,13 +141,13 @@
         {
             "id": "TASK-0368",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles"
         },
         {
             "id": "TASK-0369",
             "owner": "Arquitecto",
-            "status": "proposed",
+            "status": "ready",
             "title": "La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist"
         },
         {
@@ -167,6 +167,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El gate de identidad solo ve los nombres que la propia instancia declara, y una instancia adoptada nace con ochenta apariciones del equipo autor que su puerta no mira"
+        },
+        {
+            "id": "TASK-0373",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido"
         }
     ],
     "next_actions": [

@@ -1,7 +1,7 @@
 ---
 id: TASK-0369
 title: La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist
-status: proposed
+status: ready
 owner: Arquitecto
 type: doc
 file: Area_comun/tasks/TASK-0369-la-seccion-normativa-de-la-spec-contradice-al-motor.md

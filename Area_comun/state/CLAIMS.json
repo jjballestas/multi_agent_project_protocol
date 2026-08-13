@@ -164,6 +164,27 @@
             "updated_at": "2026-08-13T11:36:56Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-memhib-F1F2",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-memhib-F1F2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0369",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0369",
+                "Area_comun/tasks/TASK-0369-la-seccion-normativa-de-la-spec-contradice-al-motor.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0373",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0373",
+                "Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md"
+            ],
+            "started_at": "2026-08-13T20:33:19Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-13T20:33:19Z"
+        },
+        {
             "claim_id": "CLAIM-20260813-Arquitecto-reject-0364-0367",
             "expires_at": "2026-08-14T23:00:00Z",
             "owner": "Arquitecto",

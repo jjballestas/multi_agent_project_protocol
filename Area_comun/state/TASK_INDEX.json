@@ -553,7 +553,7 @@
             "file": "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
             "id": "TASK-0368",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles",
             "type": "implementation"
         },
@@ -561,7 +561,7 @@
             "file": "Area_comun/tasks/TASK-0369-la-seccion-normativa-de-la-spec-contradice-al-motor.md",
             "id": "TASK-0369",
             "owner": "Arquitecto",
-            "status": "proposed",
+            "status": "ready",
             "title": "La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist",
             "type": "doc"
         },
@@ -587,6 +587,14 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El gate de identidad solo ve los nombres que la propia instancia declara, y una instancia adoptada nace con ochenta apariciones del equipo autor que su puerta no mira",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md",
+            "id": "TASK-0373",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido",
             "type": "implementation"
         },
         {

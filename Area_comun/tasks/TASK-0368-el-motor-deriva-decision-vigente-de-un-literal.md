@@ -1,7 +1,7 @@
 ---
 id: TASK-0368
 title: El motor deriva "decision vigente" de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md
