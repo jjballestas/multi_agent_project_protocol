@@ -562,17 +562,46 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
         {
             "current": "active",
             "non_current": "superseded",
-            "non_current_when": "superseded_by_present",
+            "non_current_when": "superseded_by_present_or_status_declared_non_current",
+            "non_current_statuses": [
+                "archived", "cancelled", "draft", "proposed", "rejected", "superseded",
+            ],
         },
     )
-    if decision_state != {
-        "current": "active",
-        "non_current": "superseded",
-        "non_current_when": "superseded_by_present",
+    if not isinstance(decision_state, dict) or set(decision_state) != {
+        "current", "non_current", "non_current_when", "non_current_statuses",
     }:
         raise ValueError(
+            f"{POLICY_PATH}.decision_policy_state has an invalid shape"
+        )
+    if (
+        decision_state["current"] != "active"
+        or decision_state["non_current"] != "superseded"
+        or decision_state["non_current_when"]
+        != "superseded_by_present_or_status_declared_non_current"
+    ):
+        raise ValueError(
             f"{POLICY_PATH}.decision_policy_state must map explicit supersession "
-            "to non-current and its absence to current"
+            "or a declared non-current status to non-current"
+        )
+    non_current_statuses = decision_state["non_current_statuses"]
+    if (
+        not isinstance(non_current_statuses, list)
+        or not non_current_statuses
+        or len(non_current_statuses) > 32
+        or not all(
+            isinstance(value, str)
+            and 0 < len(value) <= 100
+            and value.isprintable()
+            and value == value.strip()
+            and value == value.casefold()
+            for value in non_current_statuses
+        )
+        or len(set(non_current_statuses)) != len(non_current_statuses)
+    ):
+        raise ValueError(
+            f"{POLICY_PATH}.decision_policy_state.non_current_statuses "
+            "must be a non-empty bounded array of unique lowercase strings"
         )
     return policy
 
@@ -1126,11 +1155,16 @@ def load_hot_cold_rules(root: Path, commit: str) -> list[tuple[Any, ...]]:
 
 
 def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> str:
-    """A decision remains current until it explicitly names its superseder."""
+    """A decision is current unless supersession or its status says otherwise."""
     mapping = policy["decision_policy_state"]
+    status = metadata.get("status")
+    declared_non_current = (
+        isinstance(status, str)
+        and status.casefold() in mapping["non_current_statuses"]
+    )
     return (
         mapping["non_current"]
-        if value_list(metadata.get("superseded_by"))
+        if value_list(metadata.get("superseded_by")) or declared_non_current
         else mapping["current"]
     )
 

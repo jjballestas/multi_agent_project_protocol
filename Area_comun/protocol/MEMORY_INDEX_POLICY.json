@@ -38,7 +38,15 @@
   "decision_policy_state": {
     "current": "active",
     "non_current": "superseded",
-    "non_current_when": "superseded_by_present"
+    "non_current_when": "superseded_by_present_or_status_declared_non_current",
+    "non_current_statuses": [
+      "archived",
+      "cancelled",
+      "draft",
+      "proposed",
+      "rejected",
+      "superseded"
+    ]
   },
   "revive_pack": {
     "max_bytes": 131072,

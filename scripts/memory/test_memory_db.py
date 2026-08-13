@@ -183,7 +183,7 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
     },
-    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Treating one status spelling as current makes cited live policy cold.", "mutation": "mutant_current = lambda artifact: artifact.metadata.get(\"status\") == \"active\"", "boundaries": ("self.assertEqual(cited, hot)", "self.assertNotEqual(cited, mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
+    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Ignoring either supersession or a declared non-current status lets unsafe policy back live rules.", "mutation": "mutant_current = lambda artifact: not memory_db.value_list(artifact.metadata.get(\"superseded_by\"))", "boundaries": ("self.assertEqual(cited, hot)", "self.assertNotEqual(cited, literal_mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "self.assertEqual(\"superseded\", rows[\"DECISION-PROPOSED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-RETIRED\"][1])", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8", newline="\n")
@@ -3047,28 +3047,53 @@ Body is not indexed.
             policy["extra_status_values"] = ["future-vocabulary"]
             policy["decision_policy_state"] = {
                 "current": "active", "non_current": "superseded",
-                "non_current_when": "superseded_by_present",
+                "non_current_when": "superseded_by_present_or_status_declared_non_current",
+                "non_current_statuses": [
+                    "archived", "cancelled", "draft", "proposed", "rejected", "superseded",
+                ],
             }
             write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
-            write(root / "AGENTS.md", "# Contract\nDECISION-ACCEPTED and DECISION-FUTURE bind.\n")
+            live_contract = (ROOT / "AGENTS.md").read_text(encoding="utf-8-sig")
+            cited = set(re.findall(r"DECISION-[0-9]{4}", live_contract))
+            write(root / "AGENTS.md", live_contract)
+            for decision_id in cited:
+                matches = list((ROOT / "Area_comun/decisions").glob(f"{decision_id}-*.md"))
+                self.assertEqual(1, len(matches), decision_id)
+                write(
+                    root / f"Area_comun/decisions/{matches[0].name}",
+                    matches[0].read_text(encoding="utf-8-sig"),
+                )
             for decision_id, status in {
                 "DECISION-ACCEPTED": "accepted", "DECISION-FUTURE": "future-vocabulary",
-                "DECISION-OLD": "superseded",
+                "DECISION-OLD": "accepted", "DECISION-PROPOSED": "proposed",
+                "DECISION-RETIRED": "superseded",
             }.items():
                 superseded = "superseded_by: DECISION-ACCEPTED\n" if decision_id == "DECISION-OLD" else ""
                 write(root / f"Area_comun/decisions/{decision_id}.md", f"---\ndecision_id: {decision_id}\nstatus: {status}\n{superseded}---\n")
             commit = commit_fixture(root, "declare currentness policy")
             artifacts, _ = memory_db.load_artifacts(root, commit)
             attested_policy = memory_db.memory_index_policy(root, commit)
-            cited = set(re.findall(r"DECISION-[A-Z0-9-]+", memory_db.git_blob(root, commit, "AGENTS.md").decode("utf-8")))
+            cited = set(re.findall(r"DECISION-[0-9]{4}", memory_db.git_blob(root, commit, "AGENTS.md").decode("utf-8")))
             rows = {artifact.artifact_id: memory_db.policy_row(artifact, attested_policy) for artifact in artifacts if artifact.artifact_type == "decision"}
             hot = {decision_id for decision_id in cited if rows[decision_id][7] == 1}
             self.assertEqual(cited, hot)
-            mutant_current = lambda artifact: artifact.metadata.get("status") == "active"
-            mutant_hot = {artifact.artifact_id for artifact in artifacts if artifact.artifact_type == "decision" and mutant_current(artifact)}
-            self.assertNotEqual(cited, mutant_hot)
+            literal_mutant_hot = {
+                artifact.artifact_id for artifact in artifacts
+                if artifact.artifact_type == "decision"
+                and artifact.metadata.get("status") == "active"
+            }
+            self.assertNotEqual(cited, literal_mutant_hot)
+            pointer_only_mutant_hot = {
+                artifact.artifact_id for artifact in artifacts
+                if artifact.artifact_type == "decision"
+                and not memory_db.value_list(artifact.metadata.get("superseded_by"))
+            }
+            self.assertIn("DECISION-PROPOSED", pointer_only_mutant_hot)
+            self.assertIn("DECISION-RETIRED", pointer_only_mutant_hot)
             third_state_row = rows["DECISION-FUTURE"]
             self.assertEqual("active", third_state_row[1])
+            self.assertEqual("superseded", rows["DECISION-PROPOSED"][1])
+            self.assertEqual("superseded", rows["DECISION-RETIRED"][1])
             unattested = json.loads(policy_path.read_text(encoding="utf-8"))
             unattested["decision_policy_state"]["current"] = "historical"
             write(policy_path, json.dumps(unattested, sort_keys=True) + "\n")
@@ -3081,6 +3106,16 @@ Body is not indexed.
             rules["rules"][0]["created_by_decision"] = "DECISION-MISSING"
             write(root / memory_db.RULES_PATH, json.dumps(rules) + "\n")
             commit_fixture(root, "missing-backed rule")
+            with self.assertRaisesRegex(ValueError, "absent or inactive"):
+                check_memory_db_drift.fast_check(root)
+            rules["rules"][0]["created_by_decision"] = "DECISION-PROPOSED"
+            write(root / memory_db.RULES_PATH, json.dumps(rules) + "\n")
+            commit_fixture(root, "proposed-backed rule")
+            with self.assertRaisesRegex(ValueError, "absent or inactive"):
+                check_memory_db_drift.fast_check(root)
+            rules["rules"][0]["created_by_decision"] = "DECISION-RETIRED"
+            write(root / memory_db.RULES_PATH, json.dumps(rules) + "\n")
+            commit_fixture(root, "retired-backed rule")
             with self.assertRaisesRegex(ValueError, "absent or inactive"):
                 check_memory_db_drift.fast_check(root)
 

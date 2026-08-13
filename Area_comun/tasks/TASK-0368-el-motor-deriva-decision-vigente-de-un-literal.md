@@ -102,21 +102,25 @@ dura: basta que la 111 nazca con una tercera grafia.
 
 ## Implementacion Codex
 
-El criterio implementado es una propiedad: una decision sigue vigente mientras no declare un
-`superseded_by` no vacio. El status conserva su vocabulario historico y no decide vigencia. La politica
-atestada traduce ausencia de supersesion a `active` y supersesion explicita a `superseded`; el motor y el
-gate rapido consumen la misma funcion.
+El criterio implementado es una propiedad de dos fronteras: una decision sigue vigente mientras no
+declare un `superseded_by` no vacio Y no declare un estado de no-vigencia. La politica atestada contiene
+el conjunto cerrado `archived/cancelled/draft/proposed/rejected/superseded`; el motor y el gate rapido
+consumen la misma funcion. Una grafia futura que no se declare no vigente permanece vigente, mientras
+que `proposed` y `superseded` quedan fuera aun sin puntero.
 
-El negativo permanente deriva las decisiones vinculantes de las citas `DECISION-*` de un `AGENTS.md`
-de fixture. Prueba `accepted`, una tercera grafia futura y una decision con `superseded_by`; mata el
-mutante que vuelve a `status == "active"`. Tambien prueba que un cambio no commiteado de la politica no
-afecta al blob atestado, y conserva el par I4: respaldo `accepted` presente pasa; respaldo ausente falla.
+El negativo permanente deriva su poblacion de las citas `DECISION-####` del `AGENTS.md` vivo y copia
+esas decisiones reales al corpus de prueba. Ademas mata por separado el mutante literal y el mutante
+que solo mira `superseded_by`; prueba una tercera grafia futura, `proposed`, `superseded` sin puntero y
+el par completo de I4: respaldo vigente pasa, respaldo ausente, propuesto o retirado muere. Un cambio
+no commiteado de la politica sigue sin afectar al blob atestado.
 
-Censo previo de la construccion real: `active=4`, `historical=105`, `superseded=1`; `hot_required=1`
-para 4 y `hot_required=0` para 106. Censo observado en la reconstruccion de `94aa4ca3`:
-`active=109`, `superseded=1`,
-`historical=0`; ninguna decision sin `superseded_by` deja de ser vigente y la unica que pasa a no vigente
-es DECISION-0071, que declara `superseded_by: DECISION-0081`.
+Censo previo re-derivado por el checker desde una construccion real de `94aa4ca3~1`:
+`active=4`, `historical=106`, `superseded=0`; `hot_required=1` para 4 y `hot_required=0` para 106.
+Censo posterior de la reconstruccion real del candidato de remediacion: `active=108`,
+`superseded=2`, `historical=0`; `hot_required=1` para 108 y `hot_required=0` para 2.
+DECISION-0071 pasa de `historical` a `superseded` por su puntero a DECISION-0081;
+DECISION-0078 pasa de `historical` a `superseded` porque declara `status: proposed`. Las cuatro
+decisiones vigentes previas permanecen vigentes.
 
 ## Por que no basta con anadir `accepted`
 
