@@ -545,7 +545,7 @@
             "file": "Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md",
             "id": "TASK-0364",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta",
             "type": "infra"
         },

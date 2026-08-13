@@ -1,7 +1,7 @@
 ---
 id: TASK-0364
 title: La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta
-status: in_progress
+status: in_review
 owner: Codex
 type: infra
 file: Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md
@@ -84,3 +84,35 @@ Un run en runner propio es un run autentico de Actions, orquestado por GitHub, c
 
 Va **despues** de que TASK-0354 cierre: comparten `.github/workflows/validate.yml`, y su checker esta
 juzgando ahora mismo un texto cuya afirmacion central es que ese fichero no se toca.
+
+## Maker evidence (2026-08-13)
+
+- Implementation: `cefd5e02`, `f23ef6a7`, `6b47e146`, `6aee19ac`.
+- Placement: `falsification-runners` uses `[self-hosted, protocol-win]`; `validate`,
+  `powershell-linux-parity`, and `falsification-runners-python` use
+  `[self-hosted, protocol-linux]`. The Windows job is the only job that executes the production
+  Windows PowerShell 5.1 harness; the parity job explicitly exercises pwsh 7 on Linux.
+- Dirty/clean pair: run `31596823928` observed
+  `PERSISTENT_WORKSPACE DIRTY_REMEDIATED entries=3` on Windows before checkout; the residue was the
+  seeded obsolete `.pyc`, the seeded residual artifact, and the dirty tracked entry. Run
+  `31597752400` then observed the clean pre-check and executed checkout plus the canonical steps.
+  Both runs left their retained workspaces clean. The dirty run therefore proves removal, while the
+  following run proves the clean path.
+- Same-anchor balance: real run `31630955323` and clean replay of exact head
+  `2eae1c393c9ca8f052469f248a981f6ac06d5374` agree through the first ordinary failure: steps 1-19
+  pass and `Check systematic state pruning` fails because maintenance is due. The always-run actor
+  auth step and final cleanup also pass in both. There is no opposite pass/fail outcome among the
+  steps Actions executes. The clean replay continues after the ordinary failure by design and
+  reports 69 pass / 12 fail; Actions skips those later ordinary steps, so they are not environment
+  divergences. The known downstream failures remain outside TASK-0364.
+- Interpreter publication observed in real runs: Linux Python 3.14.7 and PowerShell 7.4.6; Windows
+  publishes its provisioned Python, pwsh, and Windows PowerShell 5.1.
+- Coverage inventory is unchanged apart from the four pre-clean, four version-publication, and four
+  post-clean host guards: original job steps remain 7/7, 80/80, 3/3, and 5/5 in their original
+  order. A rollback changes only one `runs-on` value.
+- Real-run accountability: run `31630955323`, head
+  `2eae1c393c9ca8f052469f248a981f6ac06d5374`, jobs `validate`,
+  `powershell-linux-parity`, `falsification-runners-python`, and `falsification-runners`; all four
+  started on their declared owned runners. The Actions timing endpoint reports `billable: {}`.
+
+Codex is maker only. Independent review and ratification remain required.
