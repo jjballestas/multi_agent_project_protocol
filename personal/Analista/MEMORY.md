@@ -12793,3 +12793,44 @@ composicion fila a fila antes de heredar una inferencia por cuadratura.
 el principio**. El validate en arbol caliente salio rojo por dos ficheros de tarea sin seguir del
 Arquitecto (`TASK-0374`/`0375`) sin fila de indice; canonico VERDE en clon limpio, senalado por
 DECISION-0018 y no tocado.
+
+---
+
+## TASK-0368 remediacion 1 (2026-08-14) -- CHANGE-REQUIRED, commit `9a7ce58b`
+
+Detalle: `personal/Analista/MEMORY-TASK-0368-r1-20260814.md`. Revisado `89af4fdb`.
+
+**Las lecciones que me llevo:**
+
+1. **Correr TODAS las puertas del repo, no solo el `verification_cmd` de la tarea.** El hallazgo
+   principal (B1) salio de la SEXTA puerta, la no declarada: `check_falsification_contracts.py` en
+   su forma de CI da exit 1 en el commit revisado. El maker gateo por sus tres comandos y la puerta
+   que lo cazaba estaba fuera de su lista. Barrer los gates de `scripts/` **y la invocacion exacta
+   de `.github/workflows/validate.yml`**.
+2. **Control historico para poder decir "lo introduce este commit".** Corri la misma puerta en el
+   padre y el abuelo (verde en ambos). Sin ese control solo puedo decir "esta rojo", y el maker
+   contesta "preexistente".
+3. **Una enumeracion cruza dos superficies: ejercitar miembro a miembro.** `rejected` esta en la
+   lista atestada de no-vigencia y **no puede disparar nunca**, porque un allowlist AGUAS ARRIBA
+   (`CORE_STATUS_VALUES`) lo descarta antes. Mirar lo que la funcion **RECIBE**, no lo que el
+   fichero dice: la columna "lo que ve el motor" (`None` vs `'archived'`) fue la que lo delato.
+4. **"Es ruidoso?" se contesta con el exit code.** Habia warnings y no servian: `result: "pass"`,
+   exit 0, texto generico que no nombra ni el valor ni la vigencia. Un aviso que no puede enrojecer
+   ninguna puerta no cumple un AC que pide "RUIDOSAMENTE".
+5. **Mi propio negativo tambien tiene que discriminar** (otra vez). Mi primer probe de I4 mato los
+   NUEVE casos, incluido el control vigente: moria por `artifact_type` invalido, no por vigencia.
+   Lo tire y lo rehice. **Si el control positivo tambien muere, no estas midiendo lo que crees.**
+6. **Mutar la POLITICA atestada, no solo el codigo.** Quitar miembros del JSON commiteado (P1-P4)
+   dejo negativo y puerta en exit 0 -- ningun mutante de produccion lo habria encontrado. Cuando
+   algo sale a una superficie de configuracion son DOS preguntas: se lee de lo atestado? y hay algo
+   que ate lo que lo atestado dice?
+7. **Declarar el alcance del dano HOY.** Corpus vivo sin ninguna decision mal clasificada y
+   `rule_count=0`: B2/B3/B5 son LATENTES, B1 no. Decirlo entero acota la severidad -- anotando que
+   un corpus limpio es exactamente la condicion bajo la cual el defecto ORIGINAL tambien parecia
+   inofensivo.
+
+**Mecanica:** `policy_row()` toma 1 argumento en `0311cca3` y 2 en `89af4fdb` -- un census historico
+revienta con `TypeError` si copias la llamada. `load_artifacts` sobre el repo real (4849 artefactos)
+tarda >2 min: background desde el principio. Trailer: bastaba `Task-Id: TASK-0368`. El Arquitecto
+escribia `Area_comun/tasks/TASK-0376-...` (mi residual R2) mientras yo commiteaba: pathspec
+explicito, no lo toque.
