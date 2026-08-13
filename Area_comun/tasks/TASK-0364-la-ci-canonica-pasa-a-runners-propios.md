@@ -102,8 +102,12 @@ juzgando ahora mismo un texto cuya afirmacion central es que ese fichero no se t
   survives both `git clean -ffdx` and `git reset --hard HEAD`. A bounded Linux witness job now
   rejects any noncanonical effective `core.hooksPath` after checkout, including a user-global value
   outside the workspace (repository-local values are covered too). The governed replacement pair
-  must use one workflow commit: a poisoned external `core.hooksPath` must fail this gate, then the
-  same job must pass after removing that override.
+  uses workflow commit `17a04fb507e53b08ce0ccadb3c4db5942f70b918` in both arms of run
+  `31740992623`: attempt 2, job `94584608517`, failed exactly at the metadata gate with the
+  user-global path `/tmp/task0364-poisoned-hooks`; after removing only that override, attempt 3,
+  job `94585084015`, passed all 5/5 job steps and reported `hooksPath=unset`. Git worktree cleanup
+  cannot remove user-global configuration, so the dirty failure and clean pass discriminate the
+  persistent host state that checkout does not normalize.
 - Same-anchor balance: real run `31630955323` and clean replay of exact head
   `2eae1c393c9ca8f052469f248a981f6ac06d5374` agree through the first ordinary failure: steps 1-19
   pass and `Check systematic state pruning` fails because maintenance is due. The always-run actor
