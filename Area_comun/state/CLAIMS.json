@@ -437,6 +437,22 @@
             "updated_at": "2026-08-13T22:44:06Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-L",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-L",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368.md",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R1.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R1.md"
+            ],
+            "started_at": "2026-08-13T23:21:47Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814L",
+            "updated_at": "2026-08-13T23:21:47Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Codex-TASK-0364-doneflip",
             "expires_at": "2026-08-14T00:40:04Z",
             "notes": "Bounded final done-flip after independent OK-CLOSABLE review.",
@@ -453,6 +469,42 @@
             "status": "released",
             "task_id": "TASK-0364",
             "updated_at": "2026-08-13T22:40:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Codex-TASK-0368-remediation1",
+            "expires_at": "2026-08-15T23:59:00Z",
+            "notes": "TASK-0368 remediation: enforce both currentness boundaries, bind the live contract population, and re-derive census evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Codex-TASK-0368-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/check_memory_db_drift.py",
+                "scripts/memory/test_memory_db.py",
+                "Area_comun/protocol/MEMORY_INDEX_POLICY.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-14T10:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T10:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Codex-TASK-0368-remediation1-delivery",
+            "expires_at": "2026-08-15T23:59:00Z",
+            "notes": "Publish TASK-0368 remediation r1 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Codex-TASK-0368-remediation1-delivery",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R1.md"
+            ],
+            "started_at": "2026-08-14T10:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T10:30:00Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
