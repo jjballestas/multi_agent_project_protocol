@@ -78,6 +78,35 @@
             "updated_at": "2026-08-13T11:29:41Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-OPS-hyg-E",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-OPS-hyg-E",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0367.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0367.md"
+            ],
+            "started_at": "2026-08-13T11:38:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260813E",
+            "updated_at": "2026-08-13T11:38:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260813-Arquitecto-TASK-0367-reject",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-TASK-0367-reject",
+                "Area_comun/state/TASK_INDEX.json#TASK-0367",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
+                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md"
+            ],
+            "started_at": "2026-08-13T11:36:56Z",
+            "status": "released",
+            "task_id": "TASK-0367",
+            "updated_at": "2026-08-13T11:36:56Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

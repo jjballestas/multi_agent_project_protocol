@@ -153,7 +153,7 @@
         {
             "id": "TASK-0367",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda"
         },
         {
