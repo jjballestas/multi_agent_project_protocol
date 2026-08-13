@@ -1,7 +1,7 @@
 ---
 id: TASK-0364
 title: La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta
-status: in_review
+status: review_approved
 owner: Codex
 type: infra
 file: Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md
@@ -22,10 +22,10 @@ intake:
     Ese riesgo se cierra por CONDUCTA, con un par sucio/limpio, no con una declaracion de higiene.
   acceptance:
     - "AC1 (colocacion por dependencia REAL, derivada): cada job se coloca en el runner que su dependencia exige y se declara uno a uno por que va donde va. `falsification-runners` va a protocol-win porque ejercita Windows PowerShell 5.1 -- el interprete real de produccion, mas fiel que windows-latest. `powershell-linux-parity` va a protocol-linux porque existe para probar pwsh 7 SOBRE LINUX. No se coloca nada por donde estaba antes."
-    - "AC2 (el entorno sucio se detecta, medido con el PAR): se ensucia el arbol de trabajo del runner a proposito antes de un run -- un `.pyc` obsoleto de un modulo que despues cambia, y un artefacto residual que el gate deberia rechazar -- y el run lo detecta o lo elimina. Se acredita con las DOS corridas: sucio -> el run lo caza; limpio -> pasa. Un run que pase en los dos casos NO acredita nada y es el falso verde que este AC existe para impedir."
+    - "AC2 (el entorno sucio se detecta, medido con el PAR): se ensucia el entorno persistente del runner a proposito antes de un run y el run lo detecta. Se acredita con las DOS corridas: sucio -> el run lo caza; limpio -> pasa. Un run que pase en los dos casos NO acredita nada y es el falso verde que este AC existe para impedir. CORRECCION 2026-08-14 (veredicto r1 del checker): la redaccion original decia `se ensucia el arbol de trabajo del runner` y ponia como ejemplos un `.pyc` obsoleto y un artefacto residual -- los tres repo-locales. Esa via NO sirve: `actions/checkout@v4` borra esa suciedad con las mismas dos ordenes un segundo despues, asi que el par no discriminaba. El contaminante que SI acredita es GLOBAL DE USUARIO y vive FUERA del arbol de trabajo (`core.hooksPath` en el gitconfig del usuario): sobrevive a `git clean -ffdx` mas `git reset --hard HEAD` y es invisible a `git status`."
     - "AC3 (el saldo se compara contra el clon limpio): el saldo paso a paso del job `validate` en el runner propio se compara con `scripts/replay_validate_job.py` sobre un clon limpio del MISMO ancla. Se reporta la tabla de divergencias. Cualquier paso que pase en el runner y falle en el clon limpio (o al reves) es contaminacion de entorno y se declara con su causa; no se ajusta el clon limpio para que coincida."
     - "AC4 (el entorno se publica en el propio run): cada job declara en su log la version de su interprete -- Python, pwsh y, en el de Windows, PowerShell 5.1 -- de modo que un cambio silencioso del host aparezca en el run y no en un veredicto tres semanas despues."
-    - "AC5 (cero perdida de cobertura): el conjunto de pasos ejecutados tras el cambio es el MISMO que antes. Se acredita comparando los dos conjuntos derivados del YAML, no afirmando que no se quito nada."
+    - "AC5 (cero perdida de cobertura): el conjunto de pasos ejecutados tras el cambio es el MISMO que antes. Se acredita comparando los dos conjuntos derivados del YAML, no afirmando que no se quito nada. CORRECCION 2026-08-14 (veredicto r1 del checker): el workflow pasa de cuatro jobs a CINCO. Los cuatro originales quedan intactos y verificados por `git diff` -- 6/6, 8/8, 10/10 y 83/83 pasos, cero perdidos, `runs-on` sin cambio --, y el quinto es `persistent-runner-state` (2 pasos), colocado en `protocol-linux` porque su cometido es observar el estado persistente de un runner propio y ese es el runner sobre el que se sembro y se midio el par del AC2. Su colocacion queda asi declarada uno a uno como el AC1 exige."
     - "AC6 (la reversion es una etiqueta): se acredita que devolver un job a GitHub-hosted es un cambio de una linea en `runs-on`, sin migracion ni efecto sobre el ledger. Se prueba revirtiendo uno y volviendolo a mover."
     - "AC7 (cerrado en un run REAL, citado): los cuatro jobs se observan en un run real de GitHub Actions sobre los runners propios, citando la terna run_id + job + head_sha, y se acredita con `timing.billable` que el consumo facturado es cero."
   verification_cmd:

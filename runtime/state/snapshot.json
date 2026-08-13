@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "aa9274e0c68c12a301d74f7f0093a06595e5fc6d91a41233ddfe615724e9eb01",
+  "canonical_hash": "02848d33543233c7895333521d8685e5606f4cc94aad72cef6c3174b43261187",
   "integrity": {
-    "canonical_hash": "aa9274e0c68c12a301d74f7f0093a06595e5fc6d91a41233ddfe615724e9eb01",
+    "canonical_hash": "02848d33543233c7895333521d8685e5606f4cc94aad72cef6c3174b43261187",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "37573a272f06222bace8c4929c449d5e7d9f4e8ee2ba89e91a4f8396063c2e5e",
-    "signature": "1ee76de7ad61dbbb19bcad7df85d5db72d75d12dbd2198a14816e7e044c92d51",
-    "up_to_seq": 9104
+    "prev_hash": "ad36dc07a5572d7abf945def91e8ee913fec3b66604b862fd91feb2d075a6a10",
+    "signature": "d1744dbb0a598f034bcea31f1d23e5db42c91234af29b27f0865952f0c65317d",
+    "up_to_seq": 9110
   },
   "state": {
     "aggregate_versions": {
@@ -1009,6 +1009,7 @@
       "CLAIM-20260813-Codex-TASK-0367-remediation1": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1-delivery": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1-scope-repair": 1,
+      "CLAIM-20260814-Arquitecto-0364-ratify-0368-reject": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3708,16 +3709,18 @@
       "TASK-0361": 11,
       "TASK-0362": 1,
       "TASK-0363": 6,
-      "TASK-0364": 16,
+      "TASK-0364": 18,
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 10,
+      "TASK-0368": 11,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
       "TASK-0372": 1,
       "TASK-0373": 2,
+      "TASK-0374": 1,
+      "TASK-0375": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3740,7 +3743,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8433,
+    "events_applied": 8439,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4687,6 +4690,12 @@
       "arq-r5a-001": 8579,
       "arq-r5a-002": 8580,
       "arq-r5a-099": 8581,
+      "arq-r64x68-acq": 9105,
+      "arq-r64x68-f64": 9106,
+      "arq-r64x68-f68": 9107,
+      "arq-r64x68-rel": 9110,
+      "arq-r64x68-up74": 9108,
+      "arq-r64x68-up75": 9109,
       "arq-ratify-0350-001-acq": 9057,
       "arq-ratify-0350-001-flip": 9058,
       "arq-ratify-0350-001-rel": 9061,
@@ -12177,5 +12186,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9104
+  "up_to_seq": 9110
 }

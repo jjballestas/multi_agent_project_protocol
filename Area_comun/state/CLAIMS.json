@@ -379,6 +379,30 @@
             "updated_at": "2026-08-13T22:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-0364-ratify-0368-reject",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0364-ratify-0368-reject",
+                "Area_comun/state/TASK_INDEX.json#TASK-0364",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0364",
+                "Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0374",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0374",
+                "Area_comun/tasks/TASK-0374-la-guardia-de-metadatos-persistentes-mira-una-sola-clave.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0375",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0375",
+                "Area_comun/tasks/TASK-0375-el-runner-se-traga-el-stderr-y-el-rojo-no-tiene-diagnostico.md"
+            ],
+            "started_at": "2026-08-13T22:30:19Z",
+            "status": "released",
+            "task_id": "TASK-0364",
+            "updated_at": "2026-08-13T22:30:19Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

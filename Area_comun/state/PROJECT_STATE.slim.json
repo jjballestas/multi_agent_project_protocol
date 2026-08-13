@@ -115,12 +115,6 @@
             "title": "La puerta de dependencias descubre el objetivo por el texto del comando, no por lo que el comando ejecuta"
         },
         {
-            "id": "TASK-0364",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta"
-        },
-        {
             "id": "TASK-0365",
             "owner": "Analista",
             "status": "ready",
@@ -141,7 +135,7 @@
         {
             "id": "TASK-0368",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles"
         },
         {
@@ -173,6 +167,18 @@
             "owner": "Codex",
             "status": "ready",
             "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido"
+        },
+        {
+            "id": "TASK-0374",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La guardia de metadatos persistentes mira UNA sola clave, y las que no mira incluyen una que reapunta de donde el runner se descarga el repo"
+        },
+        {
+            "id": "TASK-0375",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El runner se traga el stderr, y por eso el rojo nuevo del job de Windows no tiene diagnostico"
         }
     ],
     "next_actions": [
