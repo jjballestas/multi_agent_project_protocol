@@ -360,7 +360,7 @@
             "file": "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
             "id": "TASK-0350",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada",
             "type": "implementation"
         },
@@ -564,6 +564,22 @@
             "status": "proposed",
             "title": "La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist",
             "type": "doc"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0370-la-invariante-clave-a-gramatica-vive-solo-en-un-comentario.md",
+            "id": "TASK-0370",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La invariante que sostiene el detector de marcadores vive solo en un comentario, y su incumplimiento seria mudo",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0371-el-motor-embarca-un-banco-de-tests-rojo-por-construccion.md",
+            "id": "TASK-0371",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Cada instancia generada embarca un banco de 72 tests que esta rojo por construccion el dia que nace",
+            "type": "implementation"
         },
         {
             "author": "Operador",

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "008ddff6613fb1b109c40a88470fe4cc4c8da53a8c32f6da31d9bb6df0d5b7a5",
+  "canonical_hash": "5fdcbe41e6b155e18ed366e2c9afa43c41afafa224f8eca9be9b966a68253225",
   "integrity": {
-    "canonical_hash": "008ddff6613fb1b109c40a88470fe4cc4c8da53a8c32f6da31d9bb6df0d5b7a5",
+    "canonical_hash": "5fdcbe41e6b155e18ed366e2c9afa43c41afafa224f8eca9be9b966a68253225",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "cc9468f2666b0004f0e50034d15cafe19b8eabc2ee776f5c233e9e6d1b522607",
-    "signature": "b5063f1d5e83f5ab13574ba0555aba675f5a74d050805c907bc9c989b1eee78d",
-    "up_to_seq": 9056
+    "prev_hash": "aa67072052129741ebfc58a62f87cf2f0f40ffe40ebced14346893b65a4ca33e",
+    "signature": "1b8c817f59bf827c3ddc8995a8138ac3f0861ea33c0d7481174a7400f82e17aa",
+    "up_to_seq": 9061
   },
   "state": {
     "aggregate_versions": {
@@ -999,6 +999,7 @@
       "CLAIM-20260813-Arquitecto-OPS-hyg-D": 1,
       "CLAIM-20260813-Arquitecto-OPS-hyg-E": 1,
       "CLAIM-20260813-Arquitecto-OPS-hyg-F": 1,
+      "CLAIM-20260813-Arquitecto-TASK-0350-ratify": 1,
       "CLAIM-20260813-Arquitecto-TASK-0367-reject": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1": 1,
       "CLAIM-20260813-Codex-TASK-0367-remediation1-delivery": 1,
@@ -3673,7 +3674,7 @@
       "TASK-0347": 13,
       "TASK-0348": 2,
       "TASK-0349": 1,
-      "TASK-0350": 17,
+      "TASK-0350": 19,
       "TASK-0351": 1,
       "TASK-0352": 1,
       "TASK-0353": 56,
@@ -3693,6 +3694,8 @@
       "TASK-0367": 16,
       "TASK-0368": 2,
       "TASK-0369": 1,
+      "TASK-0370": 1,
+      "TASK-0371": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3715,7 +3718,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8385,
+    "events_applied": 8390,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4638,6 +4641,11 @@
       "arq-r5a-001": 8579,
       "arq-r5a-002": 8580,
       "arq-r5a-099": 8581,
+      "arq-ratify-0350-001-acq": 9057,
+      "arq-ratify-0350-001-flip": 9058,
+      "arq-ratify-0350-001-rel": 9061,
+      "arq-ratify-0350-001-up70": 9059,
+      "arq-ratify-0350-001-up71": 9060,
       "arq-ratify-0353-001-acq": 8992,
       "arq-ratify-0353-001-flip": 8993,
       "arq-ratify-0353-001-rel": 8994,
@@ -12104,5 +12112,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9056
+  "up_to_seq": 9061
 }

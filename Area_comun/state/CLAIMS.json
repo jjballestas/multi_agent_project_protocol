@@ -108,6 +108,27 @@
             "updated_at": "2026-08-13T12:13:55Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-TASK-0350-ratify",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-TASK-0350-ratify",
+                "Area_comun/state/TASK_INDEX.json#TASK-0350",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0350",
+                "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0370",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0370",
+                "Area_comun/tasks/TASK-0370-la-invariante-clave-a-gramatica-vive-solo-en-un-comentario.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0371",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0371",
+                "Area_comun/tasks/TASK-0371-el-motor-embarca-un-banco-de-tests-rojo-por-construccion.md"
+            ],
+            "started_at": "2026-08-13T12:42:36Z",
+            "status": "released",
+            "task_id": "TASK-0350",
+            "updated_at": "2026-08-13T12:42:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260813-Arquitecto-TASK-0367-reject",
             "expires_at": "2026-08-14T23:00:00Z",
             "owner": "Arquitecto",

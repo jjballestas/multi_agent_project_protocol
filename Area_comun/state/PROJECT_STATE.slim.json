@@ -61,12 +61,6 @@
             "title": "El caso de override de event-auth escribe una clave que el guard rechaza, y el gate muere sin haber probado nada"
         },
         {
-            "id": "TASK-0350",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada"
-        },
-        {
             "id": "TASK-0351",
             "owner": "Codex",
             "status": "proposed",
@@ -155,6 +149,18 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "La seccion normativa de la SPEC contradice al motor en tres puntos, y una allowlist cuya lista publicada difiere de la efectiva deja de ser allowlist"
+        },
+        {
+            "id": "TASK-0370",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La invariante que sostiene el detector de marcadores vive solo en un comentario, y su incumplimiento seria mudo"
+        },
+        {
+            "id": "TASK-0371",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Cada instancia generada embarca un banco de 72 tests que esta rojo por construccion el dia que nace"
         }
     ],
     "next_actions": [
