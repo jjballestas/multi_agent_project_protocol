@@ -655,6 +655,46 @@
             "updated_at": "2026-08-13T06:32:04Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Codex-TASK-0350-delivery",
+            "expires_at": "2026-08-13T12:36:00Z",
+            "notes": "Deliver TASK-0350 under amended AC5 and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0350-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0350-resume",
+                "Area_comun/state/TASK_INDEX.json#TASK-0350",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0350",
+                "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
+                "Area_comun/mailbox/open/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0350.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-13T07:36:00Z",
+            "status": "released",
+            "task_id": "TASK-0350",
+            "updated_at": "2026-08-13T07:36:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260813-Codex-TASK-0350-resume",
+            "expires_at": "2026-08-13T12:32:54Z",
+            "notes": "Resume TASK-0350 after amended AC5; verify existing implementation and deliver with pre-existing residual attributed to TASK-0367.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0350-resume",
+                "Area_comun/state/TASK_INDEX.json#TASK-0350",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0350",
+                "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-13T07:32:54Z",
+            "status": "released",
+            "task_id": "TASK-0350",
+            "updated_at": "2026-08-13T07:32:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260813-Codex-TASK-0364-delivery",
             "expires_at": "2026-08-13T13:26:32Z",
             "notes": "Deliver TASK-0364 owned-runner migration to independent review.",

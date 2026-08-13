@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "e2d598b5fc1bd6ccb4edbf1ada65e38d8f0fb175f39ba5fbcfc67b4ed8edeb54",
+  "canonical_hash": "7844abebf70179cfd91894e57fda2ceb6b288faff546da11f073ee5fdec05291",
   "integrity": {
-    "canonical_hash": "e2d598b5fc1bd6ccb4edbf1ada65e38d8f0fb175f39ba5fbcfc67b4ed8edeb54",
+    "canonical_hash": "7844abebf70179cfd91894e57fda2ceb6b288faff546da11f073ee5fdec05291",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "c50736b20cfa818bae2296345d20eadc92a8f9ab66059380d5658bdb5490c4a8",
-    "signature": "79787d7e6ef0a080c82cc8a07f69626d3b86c81b11c75b9d95a9d40d574857a4",
-    "up_to_seq": 9013
+    "prev_hash": "346c53d3a7f30b77fa985785e2b2035f21d56dbb98f90ece680e0435d8a360ce",
+    "signature": "23804b32a38e72c575655b2851ed419f907445f9ad99dacc9db07cd79fe4b50c",
+    "up_to_seq": 9019
   },
   "state": {
     "aggregate_versions": {
@@ -3651,7 +3651,7 @@
       "TASK-0347": 13,
       "TASK-0348": 2,
       "TASK-0349": 1,
-      "TASK-0350": 11,
+      "TASK-0350": 17,
       "TASK-0351": 1,
       "TASK-0352": 1,
       "TASK-0353": 56,
@@ -3693,7 +3693,7 @@
       "protocol-prune": 68,
       "protocol-state": 1
     },
-    "events_applied": 8342,
+    "events_applied": 8348,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8290,6 +8290,12 @@
       "codex:task0346:resume-status:20260809T025719Z": 8259,
       "codex:task0346:status-in-progress:20260809T020200Z": 8246,
       "codex:task0347:status-in-progress:20260809T212656Z": 8440,
+      "codex:task0350:delivery:claim-acquire:20260813T073600Z": 9016,
+      "codex:task0350:delivery:claim-release:20260813T073600Z": 9019,
+      "codex:task0350:in-progress-to-in-review:20260813T073600Z": 9017,
+      "codex:task0350:ready-to-in-progress:20260813T073254Z": 9015,
+      "codex:task0350:resume:claim-acquire:20260813T073254Z": 9014,
+      "codex:task0350:resume:claim-release:20260813T073600Z": 9018,
       "codex:task0353:done-flip:claim-acquire:2026-08-12T18:40:54Z": 8998,
       "codex:task0353:done-flip:claim-release:2026-08-12T18:40:54Z": 9000,
       "codex:task0353:r5:release-delivery:20260812T105800Z": 8945,
@@ -12039,5 +12045,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9013
+  "up_to_seq": 9019
 }

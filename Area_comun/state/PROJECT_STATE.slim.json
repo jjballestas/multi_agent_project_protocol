@@ -63,7 +63,7 @@
         {
             "id": "TASK-0350",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada"
         },
         {
