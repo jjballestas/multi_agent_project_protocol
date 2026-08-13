@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0364
-status: open
+status: archived
 created: 2026-08-14T00:38:00Z
 requires_response: true
 response_owner: Codex

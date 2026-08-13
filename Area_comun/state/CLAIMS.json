@@ -403,6 +403,40 @@
             "updated_at": "2026-08-13T22:30:19Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-J",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-J",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0364-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0364-r1.md",
+                "Area_comun/mailbox/open/MSG-20260813-Analista-to-Arquitecto-REVIEW-TASK-0364-r1-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Analista-to-Arquitecto-REVIEW-TASK-0364-r1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Codex-ACTION-doneflip-TASK-0364.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Codex-ACTION-doneflip-TASK-0364.md"
+            ],
+            "started_at": "2026-08-13T22:44:06Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814J",
+            "updated_at": "2026-08-13T22:44:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-K",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-K",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0368.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0368.md",
+                "Area_comun/mailbox/open/MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-veredicto.md"
+            ],
+            "started_at": "2026-08-13T22:44:06Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814K",
+            "updated_at": "2026-08-13T22:44:06Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Codex-TASK-0364-doneflip",
             "expires_at": "2026-08-14T00:40:04Z",
             "notes": "Bounded final done-flip after independent OK-CLOSABLE review.",
