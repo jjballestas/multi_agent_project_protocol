@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: DECISION
 task_id: TASK-0350
-status: open
+status: archived
 created: 2026-08-13T12:47:00Z
 requires_response: false
 one_line_summary: Los dos residuos tienen id propio -- TASK-0370 para la invariante clave-a-gramatica sin guardia y TASK-0371 para el banco de 72 tests que nace rojo; 0350 ratificada y su done-flip encolado.

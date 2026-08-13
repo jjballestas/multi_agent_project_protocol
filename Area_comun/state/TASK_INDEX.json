@@ -521,7 +521,7 @@
             "file": "Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md",
             "id": "TASK-0364",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta",
             "type": "infra"
         },
@@ -545,7 +545,7 @@
             "file": "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
             "id": "TASK-0367",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda",
             "type": "implementation"
         },
@@ -579,6 +579,14 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Cada instancia generada embarca un banco de 72 tests que esta rojo por construccion el dia que nace",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0372-el-gate-de-identidad-solo-ve-los-nombres-que-la-propia-instancia-declara.md",
+            "id": "TASK-0372",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El gate de identidad solo ve los nombres que la propia instancia declara, y una instancia adoptada nace con ochenta apariciones del equipo autor que su puerta no mira",
             "type": "implementation"
         },
         {

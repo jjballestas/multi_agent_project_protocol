@@ -108,6 +108,26 @@
             "updated_at": "2026-08-13T12:13:55Z"
         },
         {
+            "claim_id": "CLAIM-20260813-Arquitecto-OPS-hyg-G",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-OPS-hyg-G",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0350.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0350.md",
+                "Area_comun/mailbox/open/MSG-20260813-Analista-to-Arquitecto-REVIEW-TASK-0350-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Analista-to-Arquitecto-REVIEW-TASK-0350-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Analista-RESP-TASK-0350-residuos.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Analista-RESP-TASK-0350-residuos.md",
+                "Area_comun/mailbox/open/MSG-20260813-Arquitecto-to-Codex-ACTION-doneflip-TASK-0350.md",
+                "Area_comun/mailbox/archived/MSG-20260813-Arquitecto-to-Codex-ACTION-doneflip-TASK-0350.md"
+            ],
+            "started_at": "2026-08-13T19:57:38Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260813G",
+            "updated_at": "2026-08-13T19:57:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260813-Arquitecto-TASK-0350-ratify",
             "expires_at": "2026-08-14T23:00:00Z",
             "owner": "Arquitecto",
@@ -142,6 +162,27 @@
             "status": "released",
             "task_id": "TASK-0367",
             "updated_at": "2026-08-13T11:36:56Z"
+        },
+        {
+            "claim_id": "CLAIM-20260813-Arquitecto-reject-0364-0367",
+            "expires_at": "2026-08-14T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Arquitecto-reject-0364-0367",
+                "Area_comun/state/TASK_INDEX.json#TASK-0364",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0364",
+                "Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0367",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
+                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0372",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0372",
+                "Area_comun/tasks/TASK-0372-el-gate-de-identidad-solo-ve-los-nombres-que-la-propia-instancia-declara.md"
+            ],
+            "started_at": "2026-08-13T19:56:19Z",
+            "status": "released",
+            "task_id": "TASK-0364",
+            "updated_at": "2026-08-13T19:56:19Z"
         },
         {
             "claim_id": "CLAIM-20260813-Codex-TASK-0350-doneflip",
