@@ -1,7 +1,7 @@
 ---
 id: TASK-0367
 title: El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md
@@ -119,3 +119,9 @@ Before the change, `python examples/runtime_instantiation_cases/run_runtime_inst
 exited 1 and named the two requested cases with the derived findings above. After the change it exits
 0 with `OK: runtime instantiation cases passed (10 + ps1 parity when available).` The expected
 placeholder-negative diagnostic remains part of the passing runner and is not a case failure.
+
+Exact implementation commit `503303c9` passed the runtime-instantiation runner, encoding scan,
+domain-neutrality scan, collaboration validator, Python compilation, diff check, and empty tracked
+status in detached clean worktree
+`D:/Aegis_Scratch/multi_agent_project_protocol/task0367-clean-503303c9`. Codex did not review or
+ratify the implementation.

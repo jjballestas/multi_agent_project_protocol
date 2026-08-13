@@ -734,9 +734,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-13T07:47:53Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0367",
             "updated_at": "2026-08-13T07:47:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260813-Codex-TASK-0367-delivery",
+            "expires_at": "2026-08-13T09:01:03Z",
+            "notes": "Publish TASK-0367 independent-review handoff and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0367-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0367",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
+                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
+                "Area_comun/mailbox/open/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0367.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-13T08:01:03Z",
+            "status": "released",
+            "task_id": "TASK-0367",
+            "updated_at": "2026-08-13T08:01:03Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
