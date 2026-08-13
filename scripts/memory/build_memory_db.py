@@ -509,7 +509,8 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
         raise ValueError(f"{POLICY_PATH} must use schema_version 1")
     allowed = {
         "schema_version", "domain_pii_terms", "identity_aliases",
-        "extra_status_values", "extra_type_values", "revive_pack",
+        "extra_status_values", "extra_type_values", "decision_policy_state",
+        "revive_pack",
     }
     if set(policy) - allowed:
         raise ValueError(f"{POLICY_PATH} contains unknown keys")
@@ -556,6 +557,23 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
             raise ValueError(f"{POLICY_PATH}.revive_pack.{key} must be a positive integer")
     if revive["max_bytes"] > 1_048_576 or revive["max_inline_source_bytes"] > revive["max_bytes"]:
         raise ValueError(f"{POLICY_PATH}.revive_pack exceeds the bounded limits")
+    decision_state = policy.setdefault(
+        "decision_policy_state",
+        {
+            "current": "active",
+            "non_current": "superseded",
+            "non_current_when": "superseded_by_present",
+        },
+    )
+    if decision_state != {
+        "current": "active",
+        "non_current": "superseded",
+        "non_current_when": "superseded_by_present",
+    }:
+        raise ValueError(
+            f"{POLICY_PATH}.decision_policy_state must map explicit supersession "
+            "to non-current and its absence to current"
+        )
     return policy
 
 
@@ -1107,16 +1125,22 @@ def load_hot_cold_rules(root: Path, commit: str) -> list[tuple[Any, ...]]:
     return sorted(rows)
 
 
-def policy_row(artifact: SourceArtifact) -> tuple[Any, ...] | None:
+def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> str:
+    """A decision remains current until it explicitly names its superseder."""
+    mapping = policy["decision_policy_state"]
+    return (
+        mapping["non_current"]
+        if value_list(metadata.get("superseded_by"))
+        else mapping["current"]
+    )
+
+
+def policy_row(
+    artifact: SourceArtifact, policy: dict[str, Any]
+) -> tuple[Any, ...] | None:
     if artifact.artifact_type != "decision":
         return None
-    status = artifact.metadata.get("status")
-    if status == "active":
-        policy_state = "active"
-    elif status == "superseded":
-        policy_state = "superseded"
-    else:
-        policy_state = "historical"
+    policy_state = decision_policy_state(artifact.metadata, policy)
     superseded_by = value_list(artifact.metadata.get("superseded_by"))
     supersedes = value_list(artifact.metadata.get("supersedes"))
     applies_to = value_list(artifact.metadata.get("applies_to"))
@@ -1128,7 +1152,7 @@ def policy_row(artifact: SourceArtifact) -> tuple[Any, ...] | None:
         artifact.metadata.get("created_at"),
         artifact.metadata.get("closed_at"),
         json.dumps(applies_to, separators=(",", ":")) if applies_to else None,
-        int(policy_state == "active"),
+        int(policy_state == policy["decision_policy_state"]["current"]),
         None,
     )
 
@@ -1178,6 +1202,7 @@ def build(
     if db_absolute != expected_db:
         raise ValueError(f"database target must be {expected_db}")
     project = configured_project(root, commit)
+    policy = memory_index_policy(root, commit)
     artifacts, warnings = load_artifacts(root, commit)
     events = read_events_torn_safe(root)
     cold_packs = load_cold_packs(root, commit)
@@ -1306,14 +1331,14 @@ def build(
                         int(metadata.get("status") not in {"superseded", "archived"}),
                     ),
                 )
-            policy = policy_row(artifact)
-            if policy is not None:
+            policy_status = policy_row(artifact, policy)
+            if policy_status is not None:
                 connection.execute(
                     """INSERT INTO policy_status(
                     decision_id,policy_state,superseded_by,supersedes,active_from,
                     active_until,applies_to,hot_required,reason
                     ) VALUES(?,?,?,?,?,?,?,?,?)""",
-                    policy,
+                    policy_status,
                 )
             for term, field in metadata_terms(artifact.artifact_id, metadata):
                 connection.execute(

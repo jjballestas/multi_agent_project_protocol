@@ -182,8 +182,8 @@ FALSIFICATION_CONTRACTS = (
             "self.assertEqual(phone_only_compact, phone_only_grouped)", "self.assertGreater(sum(coordinate_previous_results), 0)", "self.assertTrue(all(coordinate_current_results))", "self.assertGreater(len(coordinate_types), 2)", "self.assertEqual({\"before\", \"inside\", \"after\"}, coordinate_orders)", "{\"valid-contiguous\", \"valid-grouped\", \"invalid-contiguous\"}", "self.assertEqual({}, accepted_file)", "with self.assertRaisesRegex(ValueError, \"path contains prohibited PII\")", "mutant_coordinate_lost[name] > 0", "mutant_raw_guard_lost[name] > 0", "self.assertEqual([], raw_contiguous_governed_gains)",
         ),
         "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
-    },)
-
+    },
+    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Treating one status spelling as current makes cited live policy cold.", "mutation": "mutant_current = lambda artifact: artifact.metadata.get(\"status\") == \"active\"", "boundaries": ("self.assertEqual(cited, hot)", "self.assertNotEqual(cited, mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8", newline="\n")
@@ -3036,6 +3036,53 @@ Body is not indexed.
             "TASK-0328 raw-contiguous governed price: "
             f"population={len(governed_metadata_values)} new_marks=0"
         )
+
+    def test_current_decision_is_attested_property_not_status_literal(self) -> None:
+        """PERMANENT_NEGATIVE: NEG-MEMORY-CURRENT-DECISION-PROPERTY"""
+        with tempfile.TemporaryDirectory(prefix="memory-current-decision-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            policy_path = root / memory_db.POLICY_PATH
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy["extra_status_values"] = ["future-vocabulary"]
+            policy["decision_policy_state"] = {
+                "current": "active", "non_current": "superseded",
+                "non_current_when": "superseded_by_present",
+            }
+            write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
+            write(root / "AGENTS.md", "# Contract\nDECISION-ACCEPTED and DECISION-FUTURE bind.\n")
+            for decision_id, status in {
+                "DECISION-ACCEPTED": "accepted", "DECISION-FUTURE": "future-vocabulary",
+                "DECISION-OLD": "superseded",
+            }.items():
+                superseded = "superseded_by: DECISION-ACCEPTED\n" if decision_id == "DECISION-OLD" else ""
+                write(root / f"Area_comun/decisions/{decision_id}.md", f"---\ndecision_id: {decision_id}\nstatus: {status}\n{superseded}---\n")
+            commit = commit_fixture(root, "declare currentness policy")
+            artifacts, _ = memory_db.load_artifacts(root, commit)
+            attested_policy = memory_db.memory_index_policy(root, commit)
+            cited = set(re.findall(r"DECISION-[A-Z0-9-]+", memory_db.git_blob(root, commit, "AGENTS.md").decode("utf-8")))
+            rows = {artifact.artifact_id: memory_db.policy_row(artifact, attested_policy) for artifact in artifacts if artifact.artifact_type == "decision"}
+            hot = {decision_id for decision_id in cited if rows[decision_id][7] == 1}
+            self.assertEqual(cited, hot)
+            mutant_current = lambda artifact: artifact.metadata.get("status") == "active"
+            mutant_hot = {artifact.artifact_id for artifact in artifacts if artifact.artifact_type == "decision" and mutant_current(artifact)}
+            self.assertNotEqual(cited, mutant_hot)
+            third_state_row = rows["DECISION-FUTURE"]
+            self.assertEqual("active", third_state_row[1])
+            unattested = json.loads(policy_path.read_text(encoding="utf-8"))
+            unattested["decision_policy_state"]["current"] = "historical"
+            write(policy_path, json.dumps(unattested, sort_keys=True) + "\n")
+            self.assertEqual(attested_policy, memory_db.memory_index_policy(root, commit))
+            write(policy_path, json.dumps(attested_policy, sort_keys=True) + "\n")
+            write(root / memory_db.RULES_PATH, json.dumps({"rules": [{"rule_id": "RULE-PRESENT", "artifact_type": "task", "selector": "status=done", "target_retention_class": "cold", "requires_stub": 0, "requires_active_policy_check": 1, "enabled": 1, "created_by_decision": "DECISION-ACCEPTED"}]}) + "\n")
+            commit_fixture(root, "accepted-backed rule")
+            self.assertEqual("pass", check_memory_db_drift.fast_check(root)["result"])
+            rules = json.loads((root / memory_db.RULES_PATH).read_text(encoding="utf-8"))
+            rules["rules"][0]["created_by_decision"] = "DECISION-MISSING"
+            write(root / memory_db.RULES_PATH, json.dumps(rules) + "\n")
+            commit_fixture(root, "missing-backed rule")
+            with self.assertRaisesRegex(ValueError, "absent or inactive"):
+                check_memory_db_drift.fast_check(root)
 
 
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:

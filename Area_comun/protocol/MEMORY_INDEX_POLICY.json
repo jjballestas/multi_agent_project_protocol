@@ -35,6 +35,11 @@
     "RESP",
     "RESPUESTA"
   ],
+  "decision_policy_state": {
+    "current": "active",
+    "non_current": "superseded",
+    "non_current_when": "superseded_by_present"
+  },
   "revive_pack": {
     "max_bytes": 131072,
     "max_inline_source_bytes": 65536,

@@ -24,12 +24,15 @@ def _readonly_connection(path: Path) -> sqlite3.Connection:
     return connection
 
 
-def _active_decisions(artifacts: list[memory_db.SourceArtifact]) -> set[str]:
+def _active_decisions(
+    artifacts: list[memory_db.SourceArtifact], policy: dict[str, Any]
+) -> set[str]:
     return {
         artifact.artifact_id
         for artifact in artifacts
         if artifact.artifact_type == "decision"
-        and artifact.metadata.get("status") == "active"
+        and memory_db.decision_policy_state(artifact.metadata, policy)
+        == policy["decision_policy_state"]["current"]
     }
 
 
@@ -40,7 +43,8 @@ def fast_check(root: Path, *, at: str = "HEAD") -> dict[str, Any]:
     artifacts, warnings = memory_db.load_artifacts(root, commit)
     packs = memory_db.load_cold_packs(root, commit)
     rules = memory_db.load_hot_cold_rules(root, commit)
-    active = _active_decisions(artifacts)
+    policy = memory_db.memory_index_policy(root, commit)
+    active = _active_decisions(artifacts, policy)
     missing: list[str] = []
     for row in rules:
         created_by_decision = row[-1]

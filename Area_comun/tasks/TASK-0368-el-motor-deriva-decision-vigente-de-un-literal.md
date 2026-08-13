@@ -1,7 +1,7 @@
 ---
 id: TASK-0368
 title: El motor deriva "decision vigente" de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md
@@ -99,6 +99,23 @@ uno de los dos y se quedo con el 4 por ciento.
 Reescribir 104 ficheros para que encajen en la comparacion es rehacer la historia a medida del
 instrumento. Es la misma familia de defecto que esta instancia lleva semanas desterrando, y ademas no
 dura: basta que la 111 nazca con una tercera grafia.
+
+## Implementacion Codex
+
+El criterio implementado es una propiedad: una decision sigue vigente mientras no declare un
+`superseded_by` no vacio. El status conserva su vocabulario historico y no decide vigencia. La politica
+atestada traduce ausencia de supersesion a `active` y supersesion explicita a `superseded`; el motor y el
+gate rapido consumen la misma funcion.
+
+El negativo permanente deriva las decisiones vinculantes de las citas `DECISION-*` de un `AGENTS.md`
+de fixture. Prueba `accepted`, una tercera grafia futura y una decision con `superseded_by`; mata el
+mutante que vuelve a `status == "active"`. Tambien prueba que un cambio no commiteado de la politica no
+afecta al blob atestado, y conserva el par I4: respaldo `accepted` presente pasa; respaldo ausente falla.
+
+Censo previo de la construccion real: `active=4`, `historical=105`, `superseded=1`; `hot_required=1`
+para 4 y `hot_required=0` para 106. Censo esperado por la propiedad: `active=109`, `superseded=1`,
+`historical=0`; ninguna decision sin `superseded_by` deja de ser vigente y la unica que pasa a no vigente
+es DECISION-0071, que declara `superseded_by: DECISION-0081`.
 
 ## Por que no basta con anadir `accepted`
 
