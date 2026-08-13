@@ -7,6 +7,94 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-13 (71) - TASK-0367 remediacion r1: CHANGE-REQUIRED
+
+- Encargo `MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0367-r1`. **SOLO HUB, SIN PRODUCTO**.
+  Ancla `9ab1abc6` (remediacion `832aea72`, entrega `3e162b9a`, entrega previa rechazada
+  `503303c9`), control `503303c9~1`. Veredicto en
+  `Area_comun/artifacts/Analista-TASK-0367-provider-resolution-verdict.md`, commit `3b767a35`,
+  pusheado. Clones/sondas en `D:/Aegis_Scratch/multi_agent_project_protocol/{t0367r1,pre0367,e1,probe}`.
+- Puertas del repo verdes en clon limpio: validate 0, scan_encoding 0, neutralidad 0, runner de
+  instanciacion 0. **El veredicto NO salio de una puerta roja.** Tres bloqueantes.
+
+### LECCION 1: un gate que deriva sus prohibiciones de la config de LA COSA QUE MIRA es ciego a lo ajeno
+
+`scan_domain_neutrality.py` saca los terminos de identidad prohibidos de `agent_registry`/
+`agent_roles` **de la instancia que escanea**. Consecuencia: solo caza una identidad heredada
+cuando el nombre heredado COINCIDE con un nombre que la instancia nueva se puso a si misma. El
+negativo permanente inyectaba justo ese caso (`agent_roles.architect` de la propia instancia) y
+salia rojo -- verde por construccion sobre el unico caso que el instrumento puede ver.
+
+Lo rompi asi: envenene `runtime/context.py` **DEL HUB** con `Arquitecto`, genere
+una instancia nueva con `--architect Claude`, y su propio escaner salio **exit 0** con la identidad
+presente en su arbol. Y el remate no adversarial sino descriptivo: generando con nombres de
+adoptante real (`Ana/Luis/Marta/Duena`), la instancia nace con **80** (coordination) / **98**
+(runtime) apariciones de identidades del equipo autor y su gate no ve ninguna -- incluidos defectos
+VIVOS: `runtime/apply.py:440 transition.get("owner","Codex")` y
+`scripts/prune_state.py:272 state["updated_by"]="Codex"`, ambos en `IDENTITY_LITERAL_EXEMPTIONS`.
+
+**Procedimiento que generalizo: cuando un AC dice "inyectar X y ver rojo", preguntar de donde saca
+el gate la definicion de X. Si la saca del objeto observado, el negativo prueba un punto fijo, no
+una clase. Atacar con un X que el objeto NO declara.** Ademas el barrido de identidad solo alcanza
+`runtime/**.py` y `scripts/**.{py,ps1}` (`identity_scan_path`): `AGENTS.md`, `Area_comun/protocol/*.md`,
+`scripts/**/*.md` y los `*.template.*` escapan enteros, y el patron es literal (un `"Cla"+"ude"` pasa).
+
+### LECCION 2: el rojo que el maker declara "preexistente y ajeno" puede ser SUYO -- pedir el A/B
+
+El handoff declaraba: *la suite aborta en la linea base preexistente de TASK-0343, baseline 0/3*.
+Medido: TASK-0343 sale **3/3 verde** y la suite aborta en OTRO sitio (`run_nul_residue_path_cases`,
+"stale UTF-8 residue did not age: 'live'"). A/B sobre el mismo commit:
+
+    pre-0367 (503303c9~1)                          exit 0  VERDE
+    entrega 9ab1abc6, dos corridas                 exit 1  (determinista)
+    entrega 9ab1abc6 con SOLO la llamada nueva
+      run_agent_executable_resolution_cases()
+      comentada                                    exit 0  VERDE
+
+Mecanismo aislado (sonda propia, sin la suite): el caso nuevo escribe sus fixtures **dentro del
+sandbox compartido** y **despues** del commit base, y no las limpia; `Get-StagedResidueState`
+recorre TODAS las filas de `git status --porcelain` y devuelve `live` en cuanto UNA es mas fresca
+que el corte. Sonda: residuo envejecido solo -> `aborted`; residuo envejecido + los fixtures ->
+`live`.
+
+**Regla: no heredar nunca un "rojo preexistente" declarado. Cuesta un clon en la linea base y una
+corrida con la unica linea nueva desactivada.** Un rojo mal atribuido se queda sin vigilante.
+
+### LECCION 3: fail-closed en el hueco sin configurar puede convivir con fail-OPEN en el de al lado
+
+El maker afirmaba (y el Arquitecto me pidio verificar, no asumir) que la resolucion "falla cerrada".
+Cierto SIN comando configurado (lanza). Pero con `PROTOCOL_ANTHROPIC_AGENT_COMMAND` puesta a algo
+que no resuelve, la funcion cae por la escalera de descubrimiento del OTRO proveedor
+(`where.exe codex`, `%LOCALAPPDATA%\OpenAI\Codex\bin`) y devuelve **codex.exe para el checker**, que
+con `--permission-mode` es el modo de fallo exacto que mato `503303c9`.
+**Probar siempre los TRES estados: ausente / presente-valido / presente-invalido.** El tercero es
+el que el arreglo acaba de crear.
+
+### LECCION 4: confirmar por ejecucion el hallazgo DERIVADO del coordinador (y decirlo)
+
+El Arquitecto declaro su hallazgo como DERIVADO y pidio que lo midiera. Extraje
+`Get-AgentExecutable` del clon limpio a una sonda propia: A1 Anthropic, A2 Codex y **A3 el provider
+por DEFECTO `Auto`** lanzan excepcion; D1 (con `codex` presente en el PATH) tambien lanza -> se
+quito un defecto que FUNCIONABA. Agravante propio: `scripts/harness/README.md` viaja en el scaffold
+del tier runtime y sigue documentando esas lineas como validas (":38 auto-discovered",
+":54 resolves `claude`"). **Cuando el otro declara el estado epistemico de su afirmacion, mi trabajo
+es cambiarlo de derivado a ejecutado y decir cual de los dos era.**
+
+### Lo que confirme que estaba BIEN (y lo dije por su nombre)
+
+El mutante `$PeerId.ToLowerInvariant()` **muere de verdad**: extraje la funcion, aplique el mismo
+`.replace()` y corri las dos versiones -- healthy resuelve el `claude.ps1` de fixture, el mutante
+devuelve `codex.exe`. El `assert participant_mutant != function_text` protege el modo de fallo del
+`.replace()` que no aplica. Los otros cuatro sitios siguen intactos (`git diff 503303c9 9ab1abc6`
+vacio) y son neutrales. AC5 pasa.
+
+### Operativo
+
+- `PRUNE DUE` (cold_start_tokens 22587 >= 20000) impreso por el hook al commitear: **es del
+  Arquitecto**, lo senalo y no lo corro.
+- Al pushear se publico tambien `5f561747` (commit local del Arquitecto sin pushear). Normal en
+  arbol compartido, pero conviene mirarlo antes de empujar.
+
 ## Ultima actualizacion 2026-08-13 (70) - TASK-0364 CI a runners propios: CHANGE-REQUIRED
 
 - Encargo `MSG-20260813-Arquitecto-to-Analista-REVIEW-TASK-0364`. **SOLO HUB, SIN PRODUCTO** (no
