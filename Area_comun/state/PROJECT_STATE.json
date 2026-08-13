@@ -183,7 +183,7 @@
         {
             "id": "TASK-0364",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta"
         },
         {
