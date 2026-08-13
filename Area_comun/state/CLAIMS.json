@@ -238,9 +238,23 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-13T20:30:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0364",
             "updated_at": "2026-08-13T20:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260813-Codex-TASK-0364-remediation1-delivery",
+            "expires_at": "2026-08-14T23:59:00Z",
+            "notes": "Publish TASK-0364 remediation handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260813-Codex-TASK-0364-remediation1-delivery",
+                "Area_comun/mailbox/open/MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0364-R1.md"
+            ],
+            "started_at": "2026-08-13T20:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0364",
+            "updated_at": "2026-08-13T20:40:00Z"
         },
         {
             "claim_id": "CLAIM-20260813-Codex-TASK-0367-remediation1",
