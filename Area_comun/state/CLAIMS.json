@@ -439,6 +439,21 @@
             "updated_at": "2026-08-14T01:16:27Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-0368-reject-r3",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0368-reject-r3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md"
+            ],
+            "started_at": "2026-08-14T10:07:03Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T10:07:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-DEC-0113-0114",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",

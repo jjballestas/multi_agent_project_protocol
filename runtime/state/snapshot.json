@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c2a962e33a3556ea09bfc85a37c65c9c4f3a155036e35145a7269da3ef2f55bb",
+  "canonical_hash": "38c0d8e10c3ece8efff3de7b6469b77e6ddc0e4d78ed8c7b744e393eacce240f",
   "integrity": {
-    "canonical_hash": "c2a962e33a3556ea09bfc85a37c65c9c4f3a155036e35145a7269da3ef2f55bb",
+    "canonical_hash": "38c0d8e10c3ece8efff3de7b6469b77e6ddc0e4d78ed8c7b744e393eacce240f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2519969d1f0cb74487253d58cd8daa94606b546ee2cb66acf8faf82572c1c875",
-    "signature": "268f8fa9432736af8aee00da4d652615228ec58961ef0331e65c19943f97bc28",
-    "up_to_seq": 9175
+    "prev_hash": "397832780fe4916e24ab7f79a8f8e8760608b8964c7cc432b44a519a20740ad8",
+    "signature": "4c0969d5da35f695179fc12de2c7472110cacbb002909aa70f5a9c727b9069fd",
+    "up_to_seq": 9178
   },
   "state": {
     "aggregate_versions": {
@@ -1012,6 +1012,7 @@
       "CLAIM-20260814-Arquitecto-0364-ratify-0368-reject": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r1": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r2": 1,
+      "CLAIM-20260814-Arquitecto-0368-reject-r3": 1,
       "CLAIM-20260814-Arquitecto-DEC-0113-0114": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-K": 1,
@@ -3747,7 +3748,7 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 30,
+      "TASK-0368": 32,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
@@ -3783,7 +3784,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8504,
+    "events_applied": 8507,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4938,6 +4939,9 @@
       "arq-x68r2-acq": 9156,
       "arq-x68r2-flip": 9157,
       "arq-x68r2-rel": 9158,
+      "arq-x68r3-acq": 9176,
+      "arq-x68r3-flip": 9177,
+      "arq-x68r3-rel": 9178,
       "arq:0202-0203:acq": 2307,
       "arq:0202-0203:rel": 2310,
       "arq:0204-0205:acq": 2327,
@@ -12291,5 +12295,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9175
+  "up_to_seq": 9178
 }
