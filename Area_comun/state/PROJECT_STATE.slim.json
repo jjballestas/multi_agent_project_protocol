@@ -191,6 +191,30 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Una garantia que se lee presente y no puede dispararse -- el casefold del estado de politica es inalcanzable bajo la politica viva"
+        },
+        {
+            "id": "TASK-0378",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra"
+        },
+        {
+            "id": "TASK-0379",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El prompt de arranque no declara QUIEN construye cada pendiente, y por defecto lo construye quien lo lee"
+        },
+        {
+            "id": "TASK-0380",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La liveness de maker y checker es un watchdog que se puede ignorar, no un paso 0 del cold-start"
+        },
+        {
+            "id": "TASK-0381",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El estado no distingue una tarea pendiente de una capacidad caida, y las dos ocupan la misma linea del tablero"
         }
     ],
     "next_actions": [

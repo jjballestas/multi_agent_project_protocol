@@ -474,6 +474,30 @@
             "updated_at": "2026-08-13T23:21:47Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-gate-colaboracion",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-gate-colaboracion",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0379",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0379",
+                "Area_comun/tasks/TASK-0379-el-prompt-no-declara-quien-construye-cada-pendiente.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0380",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0380",
+                "Area_comun/tasks/TASK-0380-liveness-de-maker-y-checker-como-paso-cero.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0381",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0381",
+                "Area_comun/tasks/TASK-0381-el-estado-no-distingue-pendiente-de-capacidad-caida.md"
+            ],
+            "started_at": "2026-08-14T00:36:57Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-14T00:36:57Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Codex-TASK-0364-doneflip",
             "expires_at": "2026-08-14T00:40:04Z",
             "notes": "Bounded final done-flip after independent OK-CLOSABLE review.",
@@ -548,6 +572,20 @@
             "status": "released",
             "task_id": "TASK-0368",
             "updated_at": "2026-08-14T00:04:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Codex-TASK-0368-remediation2-delivery",
+            "expires_at": "2026-08-14T12:35:47Z",
+            "notes": "Publish TASK-0368 remediation r2 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Codex-TASK-0368-remediation2-delivery",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R2.md"
+            ],
+            "started_at": "2026-08-14T00:35:47Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T00:35:47Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

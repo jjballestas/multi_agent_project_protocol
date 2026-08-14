@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "0ab25b9e229e48624f7478c8e826fbdc891c10e2fbc9912cc29a1db5e54b70fa",
+  "canonical_hash": "5e74e0327e25697611a23d49a58261a86dd57212ae28387dc529e0c63f09b40d",
   "integrity": {
-    "canonical_hash": "0ab25b9e229e48624f7478c8e826fbdc891c10e2fbc9912cc29a1db5e54b70fa",
+    "canonical_hash": "5e74e0327e25697611a23d49a58261a86dd57212ae28387dc529e0c63f09b40d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "354d8a284d7d115750b8dbd5f454c6766e6070b57979e067ef00d1216b7f1c6e",
-    "signature": "8ead1ecf1bcc9e29b21547e42b4634d8b380f12714654648f8a97ad78940649c",
-    "up_to_seq": 9139
+    "prev_hash": "dcea51845fe320713e7ac4b2314121101f11bf8db58d600317a2789118430ed0",
+    "signature": "0d373b5a6a952dd3009130f022e5423f478ef57ccfb1eb8a0a0b02f465109719",
+    "up_to_seq": 9149
   },
   "state": {
     "aggregate_versions": {
@@ -1014,6 +1014,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-K": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-L": 1,
+      "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3727,7 +3728,7 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 21,
+      "TASK-0368": 23,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
@@ -3737,6 +3738,10 @@
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
+      "TASK-0378": 3,
+      "TASK-0379": 2,
+      "TASK-0380": 1,
+      "TASK-0381": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3759,7 +3764,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8468,
+    "events_applied": 8478,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4109,6 +4114,14 @@
       "arq-d342b-000": 8760,
       "arq-d342b-001": 8761,
       "arq-d342b-099": 8762,
+      "arq-gatecol-acq": 9142,
+      "arq-gatecol-f78": 9147,
+      "arq-gatecol-f79": 9148,
+      "arq-gatecol-rel": 9149,
+      "arq-gatecol-up0378": 9143,
+      "arq-gatecol-up0379": 9144,
+      "arq-gatecol-up0380": 9145,
+      "arq-gatecol-up0381": 9146,
       "arq-go0322-20260806T1940Z-0-claim": 7243,
       "arq-go0322-20260806T1940Z-1-status": 7244,
       "arq-go0322-20260806T1940Z-2-release": 7245,
@@ -10914,6 +10927,7 @@
       "intent:Codex:claim:2a71eb4cb1dda54b7e27502e922226357ef9dbad2de9b003b2d2a51d8ca6d54d": 3038,
       "intent:Codex:claim:2abbf8a95e3488716e8885c6dc0277257091ddc438e61350d6a2a667795d1263": 8594,
       "intent:Codex:claim:2ae7dc971ddf0a2804759b63cd823fb1b85a840074cece97942c5c8d85af9a94": 3925,
+      "intent:Codex:claim:2b870f51623931ec2b1c2717e83a4d45b90ccbf44388f2694e33debb1c93311e": 9141,
       "intent:Codex:claim:2bd7bcb0e8d6414f29e637c7c701da8c3eb1e39df2a0451fb6a202b05d27e9fe": 8459,
       "intent:Codex:claim:2bd7fab499122fb6208bfcecf245ad56000a28686472651ecfbf3f943d0bf3b2": 4117,
       "intent:Codex:claim:2bf71d915bfb49cfff691f138dc43230d8bd82b7326f87184fd1a10b70422210": 3355,
@@ -11443,6 +11457,7 @@
       "intent:Codex:claim:c64774b3aef1e681080e77e76560d68424aef3baf73754c2170b0ff7f5053a31": 8634,
       "intent:Codex:claim:c66b072bb5727d28c47e859213698fce0ae7f779f4c1ca4d223b230e8c5229d6": 3112,
       "intent:Codex:claim:c6860cc18976790aa5458939ffb50039a3f67d64c59e05bab126028a958b97cf": 2764,
+      "intent:Codex:claim:c68e99c35906c0644b258b1b372e51f14b61884a8fcabec03afc9bcfeb6e2c89": 9140,
       "intent:Codex:claim:c699e38d9248a252fb3ca8765383ef595a3b56916f82fb07d4174241081937ac": 3279,
       "intent:Codex:claim:c6b8b6eefcc780cef4bfc09545885444506d19cd52d2b0cc1a4adb68e2fae144": 1479,
       "intent:Codex:claim:c7036554ea06e9dace50bef1eab8d9b9a6b53683fa7fd54c5af60022868c5cd3": 4910,
@@ -12231,5 +12246,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9139
+  "up_to_seq": 9149
 }
