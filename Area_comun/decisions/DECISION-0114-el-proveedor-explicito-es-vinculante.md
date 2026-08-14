@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0114
 title: Un proveedor de agente pedido explicitamente es vinculante -- el lanzador falla antes que caer al binario de otro proveedor
-status: proposed
+status: accepted
 date: 2026-08-14
-ratified_at: null
+ratified_at: 2026-08-14
 deciders: [operador humano, Arquitecto]
 supersedes: []
 superseded_by: []

@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0113
 title: El contrato de liveness de un peon se declara y se ENVIA con su lector, porque un contrato que se puede re-derivar se re-deriva mal
-status: proposed
+status: accepted
 date: 2026-08-14
-ratified_at: null
+ratified_at: 2026-08-14
 deciders: [operador humano, Arquitecto]
 supersedes: []
 superseded_by: []
