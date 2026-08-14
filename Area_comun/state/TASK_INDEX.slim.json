@@ -227,6 +227,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El estado no distingue una tarea pendiente de una capacidad caida, y las dos ocupan la misma linea del tablero"
+        },
+        {
+            "id": "TASK-0382",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El error de idempotencia no nombra la clave que colisiona y manda a diagnosticar un drift que no existe"
+        },
+        {
+            "id": "TASK-0383",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El self-filter descarta a una sesion hermana como si fuera uno mismo, y el lease avisa pero no controla"
         }
     ],
     "view": "task_index.slim"

@@ -591,6 +591,24 @@
             "updated_at": "2026-08-14T10:51:45Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-campo-NOVA",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-campo-NOVA",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0115-que-significa-verificado.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0382",
+                "Area_comun/tasks/TASK-0382-el-error-de-idempotencia-manda-a-cazar-un-drift-inexistente.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0383",
+                "Area_comun/tasks/TASK-0383-el-self-filter-descarta-a-un-hermano-como-si-fuera-uno-mismo.md"
+            ],
+            "started_at": "2026-08-14T11:12:30Z",
+            "status": "released",
+            "task_id": "OPS-CAMPO-NOVA-20260814",
+            "updated_at": "2026-08-14T11:12:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-gate-colaboracion",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",

@@ -662,6 +662,22 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0382-el-error-de-idempotencia-manda-a-cazar-un-drift-inexistente.md",
+            "id": "TASK-0382",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El error de idempotencia no nombra la clave que colisiona y manda a diagnosticar un drift que no existe",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0383-el-self-filter-descarta-a-un-hermano-como-si-fuera-uno-mismo.md",
+            "id": "TASK-0383",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El self-filter descarta a una sesion hermana como si fuera uno mismo, y el lease avisa pero no controla",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
