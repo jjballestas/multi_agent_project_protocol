@@ -157,3 +157,16 @@ El negativo usa una decision sin estado para fijar ese mecanismo y una decision 
 de la misma poblacion que la implementacion. Quitar el termino `superseded_by` de produccion o
 invertir el tratamiento del estado ausente pone rojo al runner declarado. El criterio de AC1 no
 cambia.
+
+## Remediacion r4
+
+El unico punto de normalizacion es la frontera de carga de decisiones, inmediatamente despues de
+validar el `status` crudo contra PII y antes de almacenarlo en `metadata`. La puerta de vocabulario y
+el clasificador consumen desde ahi el mismo valor casefolded; ninguno vuelve a normalizar. Asi,
+`Proposed` conserva la misma clasificacion no vigente que `proposed` y no puede aumentar el censo
+vigente en silencio.
+
+El inventario permanente elimina la desigualdad tautologica de conjuntos y declara las dos
+observaciones que matan al mutante de puntero sobre la misma poblacion: `DECISION-OLD` no pertenece
+al conjunto vigente de produccion y si pertenece al conjunto del mutante. Tambien fija por conducta
+la variante `Proposed` sin ampliar la allowlist atestada.

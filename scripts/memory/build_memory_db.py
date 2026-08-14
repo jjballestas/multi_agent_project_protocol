@@ -975,6 +975,9 @@ def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[
                 and not contains_pii(raw_status, domain_pii_terms, coordinate="status")
                 else metadata.get("status")
             )
+            if isinstance(status, str):
+                status = status.casefold()
+                metadata["status"] = status
             classified = (
                 set(policy["decision_policy_state"]["current_statuses"])
                 | set(policy["decision_policy_state"]["non_current_statuses"])
@@ -983,7 +986,7 @@ def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[
                 item_warnings.append(
                     "decision currentness status is missing; attested policy treats it as current"
                 )
-            elif not isinstance(status, str) or status.casefold() not in classified:
+            elif not isinstance(status, str) or status not in classified:
                 raise ValueError(
                     f"{relative}: decision currentness status {status!r} is not classified "
                     f"by {POLICY_PATH}"
@@ -1195,13 +1198,9 @@ def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> s
         if missing_status == "current_with_warning":
             return mapping["current"]
         raise ValueError(f"unsupported decision missing-status policy {missing_status!r}")
-    normalized = status.casefold() if isinstance(status, str) else ""
-    if normalized not in set(mapping["current_statuses"]) | set(mapping["non_current_statuses"]):
+    if status not in set(mapping["current_statuses"]) | set(mapping["non_current_statuses"]):
         raise ValueError(f"decision currentness status {status!r} is not classified")
-    declared_non_current = (
-        isinstance(status, str)
-        and normalized in mapping["non_current_statuses"]
-    )
+    declared_non_current = status in mapping["non_current_statuses"]
     return (
         mapping["non_current"]
         if value_list(metadata.get("superseded_by")) or declared_non_current

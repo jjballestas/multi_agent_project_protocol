@@ -183,7 +183,7 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
     },
-    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Ignoring either supersession or a declared non-current status lets unsafe policy back live rules.", "mutation": "mutant_current = lambda artifact: not memory_db.value_list(artifact.metadata.get(\"superseded_by\"))", "boundaries": ("self.assertEqual(expected_shipped_currentness, shipped_currentness)", "self.assertEqual(cited, hot)", "self.assertNotEqual(cited, literal_mutant_hot)", "self.assertNotEqual(hot, mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "with self.assertRaisesRegex(ValueError, \"not classified\")", "self.assertEqual(\"superseded\", rows[\"DECISION-PROPOSED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-REJECTED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-RETIRED\"][1])", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
+    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Ignoring either supersession or a declared non-current status lets unsafe policy back live rules.", "mutation": "mutant_current = lambda artifact: not memory_db.value_list(artifact.metadata.get(\"superseded_by\"))", "boundaries": ("self.assertEqual(expected_shipped_currentness, shipped_currentness)", "self.assertEqual(cited, hot)", "self.assertNotEqual(cited, literal_mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "with self.assertRaisesRegex(ValueError, \"not classified\")", "self.assertEqual(\"superseded\", rows[\"DECISION-PROPOSED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-PROPOSED-CASE\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-REJECTED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-RETIRED\"][1])", "self.assertNotIn(\"DECISION-OLD\", production_hot)", "self.assertIn(\"DECISION-OLD\", same_population_pointer_mutant)", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8", newline="\n")
@@ -3073,6 +3073,7 @@ Body is not indexed.
             for decision_id, status in {
                 "DECISION-ACCEPTED": "accepted", "DECISION-FUTURE": "future-vocabulary",
                 "DECISION-OLD": "accepted", "DECISION-PROPOSED": "proposed",
+                "DECISION-PROPOSED-CASE": "Proposed",
                 "DECISION-REJECTED": "rejected", "DECISION-RETIRED": "superseded",
             }.items():
                 superseded = "superseded_by: DECISION-ACCEPTED\n" if decision_id == "DECISION-OLD" else ""
@@ -3104,6 +3105,7 @@ Body is not indexed.
             third_state_row = rows["DECISION-FUTURE"]
             self.assertEqual("active", third_state_row[1])
             self.assertEqual("superseded", rows["DECISION-PROPOSED"][1])
+            self.assertEqual("superseded", rows["DECISION-PROPOSED-CASE"][1])
             self.assertEqual("superseded", rows["DECISION-REJECTED"][1])
             self.assertEqual("superseded", rows["DECISION-RETIRED"][1])
             self.assertEqual("superseded", rows["DECISION-OLD"][1])
@@ -3112,7 +3114,8 @@ Body is not indexed.
                 decision_id for decision_id, row in rows.items() if row[7] == 1
             }
             same_population_pointer_mutant = production_hot | {"DECISION-OLD"}
-            self.assertNotEqual(production_hot, same_population_pointer_mutant)
+            self.assertNotIn("DECISION-OLD", production_hot)
+            self.assertIn("DECISION-OLD", same_population_pointer_mutant)
             write(
                 root / "Area_comun/decisions/DECISION-UNREGISTERED-RETIRED.md",
                 "---\ndecision_id: DECISION-UNREGISTERED-RETIRED\nstatus: retired\n---\n",
