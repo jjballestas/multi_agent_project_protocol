@@ -439,6 +439,21 @@
             "updated_at": "2026-08-14T01:16:27Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-DEC-0113-0114",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-DEC-0113-0114",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0113-contrato-de-liveness-de-los-peones.md",
+                "Area_comun/decisions/DECISION-0114-el-proveedor-explicito-es-vinculante.md"
+            ],
+            "started_at": "2026-08-14T01:32:36Z",
+            "status": "released",
+            "task_id": "OPS-DECISIONS-20260814",
+            "updated_at": "2026-08-14T01:32:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-J",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",
@@ -523,6 +538,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260814N",
             "updated_at": "2026-08-14T01:17:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-P",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-P",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r3.md",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R3.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R3.md"
+            ],
+            "started_at": "2026-08-14T09:27:30Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814P",
+            "updated_at": "2026-08-14T09:27:30Z"
         },
         {
             "claim_id": "CLAIM-20260814-Arquitecto-gate-colaboracion",
