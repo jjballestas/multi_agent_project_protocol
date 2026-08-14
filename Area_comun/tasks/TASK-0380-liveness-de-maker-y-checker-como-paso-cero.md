@@ -30,10 +30,26 @@ intake:
       investigar, preparar y pedir -- y commitear coordinacion con `Task-Id: none`. Se acredita con
       el PAR: lo prohibido muere, lo permitido pasa. Un cierre que paralice la coordinacion cambia un
       agujero por un bloqueo."
-    - "AC4 (la vitalidad se mide por CONDUCTA): el criterio de vivo no es un pid ni un fichero de
-      lease, sino una senal que solo puede producir un peon que responde. Se declara cual y por que;
-      esta instancia ya tiene la leccion de que un servicio Running no prueba que pueda correr un job,
-      y de que un err.log de 0 bytes no prueba cuelgue."
+    - "AC4 (la vitalidad se mide por CONDUCTA, y el HARNESS ENVIA EL LECTOR): el criterio de vivo no
+      es un pid ni un fichero de lease, sino una senal que solo puede producir un peon que responde.
+      Se declara cual y por que. Y no basta con declararlo: el harness entrega **el lector** -- un
+      `--health` o script minimo junto al cron -- que responde `alive | hung | exited-by-design` a
+      partir de las senales autoritativas, de modo que ningun consumidor tenga que re-derivar el
+      contrato. Se acredita con los TRES estados observados, no con dos. Aportacion del Arquitecto de
+      la instancia NOVA, y su argumento es una medicion: los dos escribimos el watchdog mal, cada uno
+      por su lado y con el MISMO error -- leer el mtime del `runs/*.err.log`, que en text-mode queda a
+      0 bytes y nunca se refresca. Un contrato que se puede re-derivar se re-deriva mal."
+    - "AC6 (el lector es la UNICA implementacion, no un gemelo): el `--health` del AC4 no reimplementa
+      el parseo de la senal en paralelo al productor. Si el harness y el lector interpretan el
+      heartbeat por separado, se pueden desviar y tendremos dos verdades -- la trampa de paridad de
+      gemelos que esta instancia ya conoce. El watchdog CONSUME el lector; no lo imita."
+    - "AC7 (la vida util del peon, escrita y no deducida): hoy la politica se infiere de la conducta.
+      Medido: `IntervalSeconds=300` por `MaxNoCoordinatorRounds=15` = **75 minutos de silencio DEL
+      COORDINADOR** y el peon sale con `No <Coordinator> response limit reached; exiting.`. O sea que
+      la vida no esta atada a la sesion sino a que el coordinador RESPONDA. Eso se declara en el
+      contrato del harness, porque de ahi se sigue que la salida por rondas vacias NO es una muerte:
+      es la respuesta correcta, y solo necesita ser legible -- que es justo lo que da el
+      `exited-by-design` del AC4."
     - "AC5 (cierra el medio agujero, y se dice): se declara explicitamente que este control es el que
       completa a TASK-0378 en la familia maker==checker, y se acredita el caso conjunto: actor que se
       auto-clama Y no tiene checker vivo -> la entrega muere."
