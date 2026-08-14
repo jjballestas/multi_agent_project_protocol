@@ -1,7 +1,7 @@
 ---
 id: TASK-0373
 title: F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md
