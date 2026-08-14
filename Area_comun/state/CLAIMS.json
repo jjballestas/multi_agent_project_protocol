@@ -622,6 +622,22 @@
             "updated_at": "2026-08-14T11:48:13Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-S",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-S",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r5.md",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R5.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R5.md"
+            ],
+            "started_at": "2026-08-14T12:56:23Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814S",
+            "updated_at": "2026-08-14T12:56:23Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-campo-NOVA",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",
