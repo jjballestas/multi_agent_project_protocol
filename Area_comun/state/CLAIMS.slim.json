@@ -1,24 +1,16 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260814-Arquitecto-0378-r2",
+            "claim_id": "CLAIM-20260814-Arquitecto-LEDGER-commit",
             "owner": "Arquitecto",
             "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-LEDGER-commit",
                 "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0378-r2",
-                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0385-reg",
-                "Area_comun/state/TASK_INDEX.json#TASK-0378",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
-                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0386",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0386",
-                "Area_comun/tasks/TASK-0386-el-gate-se-fia-de-fuentes-que-el-actor-escribe.md",
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json",
-                "Area_comun/state/TASK_INDEX.slim.json",
-                "Area_comun/state/PROJECT_STATE.slim.json",
                 "Area_comun/state/CLAIMS.slim.json"
             ],
-            "task_id": "TASK-0378"
+            "task_id": "OPS-LEDGER-COMMIT-20260814"
         }
     ],
     "schema_version": "1.0",

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "bc298acba56271dec5fe7093461bc2439a9a760fa54d688a9adc26f2496b6c35",
+  "canonical_hash": "e9473bf7e891563c718f029c51b4da8d8fd354dfde9cff54867c8b486faa7938",
   "integrity": {
-    "canonical_hash": "bc298acba56271dec5fe7093461bc2439a9a760fa54d688a9adc26f2496b6c35",
+    "canonical_hash": "e9473bf7e891563c718f029c51b4da8d8fd354dfde9cff54867c8b486faa7938",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "bfd60fbe4f321c48618ab454650a8d27945de235123b197ae73f0661c7a317e7",
-    "signature": "b4b4dad4b6e4eeacd91626f1f6e40a68d94b97daa68790db27ddc5d591a45721",
-    "up_to_seq": 9235
+    "prev_hash": "a0966e16a9cd1a0074b5c41d237cccb8192805ceac327036398d23770c4ac80f",
+    "signature": "8788b7732aa70e77ba45fa35467e3dcf0f8b92649d7a2fb90c6ac6264af89a58",
+    "up_to_seq": 9237
   },
   "state": {
     "aggregate_versions": {
@@ -1015,6 +1015,7 @@
       "CLAIM-20260814-Arquitecto-0368-reject-r2": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r3": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r4": 1,
+      "CLAIM-20260814-Arquitecto-0378-r2": 1,
       "CLAIM-20260814-Arquitecto-0385-reg": 1,
       "CLAIM-20260814-Arquitecto-DEC-0113-0114": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
@@ -3357,6 +3358,7 @@
       "OPS-HUB-TASK9303-DONEFLIP-ANNOUNCE": 1,
       "OPS-HUB-TASK9303-F9303-01-IN-REVIEW-ANNOUNCE": 2,
       "OPS-HUB-TASK9303-RESCOPE-IN-REVIEW-ANNOUNCE": 2,
+      "OPS-LEDGER-COMMIT-20260814": 1,
       "OPS-MAILBOX-ARCHIVE-20260727": 1,
       "OPS-MAILBOX-ARCHIVE-20260728": 1,
       "OPS-MAILBOX-D0103-GO-20260719": 1,
@@ -3816,7 +3818,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8564,
+    "events_applied": 8566,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4758,6 +4760,8 @@
       "arq-l75-003": 8431,
       "arq-l75-004": 8432,
       "arq-l75-099": 8433,
+      "arq-ledger-acq": 9236,
+      "arq-ledger-relold": 9237,
       "arq-memhib-001-acq": 9077,
       "arq-memhib-001-f68": 9079,
       "arq-memhib-001-f69": 9080,
@@ -12384,5 +12388,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9235
+  "up_to_seq": 9237
 }
