@@ -3082,6 +3082,11 @@ Body is not indexed.
                 root / "Area_comun/decisions/DECISION-MISSING-STATUS.md",
                 "---\ndecision_id: DECISION-MISSING-STATUS\n---\n",
             )
+            write(
+                root / "Area_comun/decisions/DECISION-POINTER-NO-STATUS.md",
+                "---\ndecision_id: DECISION-POINTER-NO-STATUS\n"
+                "superseded_by: DECISION-ACCEPTED\n---\n",
+            )
             commit = commit_fixture(root, "declare currentness policy")
             artifacts, _ = memory_db.load_artifacts(root, commit)
             attested_policy = memory_db.memory_index_policy(root, commit)
@@ -3110,6 +3115,7 @@ Body is not indexed.
             self.assertEqual("superseded", rows["DECISION-RETIRED"][1])
             self.assertEqual("superseded", rows["DECISION-OLD"][1])
             self.assertEqual("active", rows["DECISION-MISSING-STATUS"][1])
+            self.assertEqual("superseded", rows["DECISION-POINTER-NO-STATUS"][1])
             production_hot = {
                 decision_id for decision_id, row in rows.items() if row[7] == 1
             }

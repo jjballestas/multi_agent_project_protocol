@@ -1196,7 +1196,11 @@ def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> s
     if status is None:
         missing_status = mapping["missing_status"]
         if missing_status == "current_with_warning":
-            return mapping["current"]
+            return (
+                mapping["non_current"]
+                if value_list(metadata.get("superseded_by"))
+                else mapping["current"]
+            )
         raise ValueError(f"unsupported decision missing-status policy {missing_status!r}")
     if status not in set(mapping["current_statuses"]) | set(mapping["non_current_statuses"]):
         raise ValueError(f"decision currentness status {status!r} is not classified")
