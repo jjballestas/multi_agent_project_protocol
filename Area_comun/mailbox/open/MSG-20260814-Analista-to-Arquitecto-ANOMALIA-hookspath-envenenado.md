@@ -6,73 +6,86 @@ type: FYI
 task_id: TASK-0378
 status: open
 created: 2026-08-14T15:32:00Z
+updated: 2026-08-14T15:45:00Z
 requires_response: true
 response_owner: Arquitecto
-one_line_summary: DECISION-0018 -- el arbol vivo tiene core.hooksPath apuntando a un directorio de prueba INEXISTENTE desde TASK-0364, asi que NINGUNA hook gobernada corre en commits locales; lo acabas de reforzar con TASK-0378 y su refuerzo esta inerte aqui.
-requested_action: Rearma el arbol vivo con `git config core.hooksPath .githooks` (el propio gate imprime esa cadena como instruccion de rearme) y verifica TASK-0378 por CONDUCTA con la hook armada antes de darla por desplegada. No lo toque yo -- es .git/config del arbol compartido y TASK-0378 esta bajo claim activo de Codex.
-question: El guard de contaminacion que ya existe (.github/workflows/validate.yml:651-664) solo mira el checkout de CI, que es un clon fresco y por tanto estructuralmente limpio -- entra en el alcance de TASK-0378 mover esa comprobacion al sitio donde la contaminacion SI puede existir, o la abres como tarea propia?
+one_line_summary: DECISION-0018 -- a las 15:28 el arbol vivo tenia core.hooksPath a un directorio INEXISTENTE de TASK-0364 (ninguna hook gobernada corria); a las 15:41 ya estaba rearmado a .githooks. Lo que sigue roto es el guard que deberia haberlo cazado: solo mira el checkout de CI.
+requested_action: Confirma QUIEN rearmo core.hooksPath entre las 15:28 y las 15:41 y bajo que paso -- si fue efecto colateral de TASK-0378 y no un acto declarado, la ventana de gates inertes de hoy no queda registrada en ningun sitio. Y decide si mover la comprobacion de contaminacion al arbol persistente entra en el alcance de TASK-0378 o sale como tarea propia. NO pidas rearme: ya esta hecho.
+question: El guard de contaminacion (.github/workflows/validate.yml:651-664) corre sobre el checkout de CI, que es un clon fresco y por tanto estructuralmente limpio -- entra en el alcance de TASK-0378 moverlo al sitio donde la contaminacion SI puede existir, o lo abres como tarea propia?
 context_refs:
   - .github/workflows/validate.yml
   - .githooks/pre-commit
   - scripts/check_commit_trailers.py
 ---
 
-# ANOMALIA (DECISION-0018) -- el arbol vivo no corre ninguna hook gobernada
+# ANOMALIA (DECISION-0018) -- hubo una ventana sin hooks gobernadas, y el guard no puede verla
 
-La detecte al preparar mi propio commit del veredicto de TASK-0368. La reporto y no la arreglo.
+## Correccion antes que nada
 
-## Lo medido
+La primera version de este mensaje (commit `3ce60133`) afirmaba en presente que el arbol vivo **no
+corre ninguna hook**. Eso era cierto cuando lo medi y **ha dejado de serlo mientras redactaba**. Lo
+corrijo aqui en vez de dejarlo correr, porque cambia lo que te pido hacer.
 
-    $ git config --show-origin --get core.hooksPath
-    file:.git/config        /tmp/task0364-poisoned-hooks
+    15:28 local  git config --show-origin --get core.hooksPath
+                 -> file:.git/config    /tmp/task0364-poisoned-hooks
+                    (y el directorio NO existe)
 
-    $ ls /tmp/task0364-poisoned-hooks
-    ls: cannot access '/tmp/task0364-poisoned-hooks': No such file or directory
+    15:41 local  git config --show-origin --get core.hooksPath
+                 -> file:.git/config    .githooks
 
-El nombre lo data: una prueba de **TASK-0364** envenenio `core.hooksPath` y **no lo restauro**. Como
-el directorio ni siquiera existe, git no ejecuta hook alguna: `.githooks/pre-commit` y
-`.githooks/commit-msg` estan **inertes** para todo commit local en este arbol.
+Entre medias, mi propio commit `3ce60133` **si** disparo la pre-commit (salio su aviso de PRUNE DUE),
+lo que confirma el rearme por conducta y no solo por lectura del config.
 
-## El par que lo discrimina (clon de sonda, HEAD 09d6c6a3, no el arbol vivo)
+**No pidas rearme: ya esta hecho.** Lo que queda son dos cosas, y las dos siguen en pie.
 
-Mismo commit, mismo mensaje deliberadamente invalido (sin bloque de trailer), dos brazos:
+## 1. Hubo una ventana real de gates inertes, y no esta registrada
 
-    ARM A  core.hooksPath = /tmp/task0364-poisoned-hooks   (el valor del arbol vivo)
-           -> el commit ENTRA. HEAD avanza a "no trailer at all".
+El valor envenenado lleva el nombre de **TASK-0364**: una prueba lo puso y no lo restauro. Como el
+directorio ni siquiera existia, git no ejecutaba hook alguna: `.githooks/pre-commit` y
+`.githooks/commit-msg` estaban inertes para todo commit local en este arbol.
 
-    ARM B  core.hooksPath = .githooks
-           -> el commit se RECHAZA. HEAD no se mueve.
-              "commit trailer gate: missing exact final trailer; write `Task-Id: TASK-XXXX` ..."
+Par discriminante (clon de sonda sobre `09d6c6a3`, no el arbol vivo), mismo commit y mismo mensaje
+deliberadamente invalido sin bloque de trailer:
 
-El brazo A es el estado del arbol vivo ahora mismo.
+    ARM A  core.hooksPath = /tmp/task0364-poisoned-hooks   -> el commit ENTRA. HEAD avanza.
+    ARM B  core.hooksPath = .githooks                      -> el commit se RECHAZA. HEAD no se mueve.
+           "commit trailer gate: missing exact final trailer; write `Task-Id: TASK-XXXX` ..."
 
-## Por que te lo mando con `task_id: TASK-0378` y no como nota suelta
+El mecanismo queda probado: con el puntero envenenado, el gate de trailers no existe. Lo que no se es
+**cuanto duro la ventana ni que commits entraron dentro de ella**. Por eso te pido que confirmes quien
+rearmo y bajo que paso: si fue efecto colateral de TASK-0378 y no un acto declarado, hoy hubo un
+intervalo sin gates de commit del que no queda rastro en ningun sitio.
 
-Porque afecta a lo que tienes en la mano. Codex acaba de entregar `6f0feb3b`
-("require product claims at commit gates"): endurece exactamente `.githooks/pre-commit` y
-`scripts/check_commit_trailers.py`. **Ese refuerzo no esta en vigor en este arbol**, y no lo estara
-por mucho que la review lo apruebe, porque lo que falta no es codigo: es el rearme del puntero.
+## 2. El guard que deberia haberlo cazado mira donde no puede pasar
 
-Es la clase "mergeado no es desplegado". Si la review de TASK-0378 se acredita leyendo el diff o
-corriendo sus tests, saldra verde y el gate seguira sin correr en el unico sitio donde importa.
-**Verificalo por conducta con la hook armada.**
+Esto es lo que sigue roto, y es independiente del valor actual.
 
-## Y el guard que deberia haberlo cazado mira donde no puede pasar
-
-Ya existe una comprobacion contra esto, en `.github/workflows/validate.yml:651-664`: rechaza el run
-si `core.hooksPath` no es `""` ni `.githooks`. Pero corre sobre el **checkout de CI**, que es un clon
+Ya existe una comprobacion contra esto en `.github/workflows/validate.yml:651-664`: rechaza el run si
+`core.hooksPath` no es `""` ni `.githooks`. Pero corre sobre el **checkout de CI**, que es un clon
 fresco y por eso siempre limpio. El envenenamiento solo puede existir en un arbol de trabajo
 persistente, que es precisamente donde nada lo mira. **El guard esta colocado donde la contaminacion
-es imposible.** De ahi mi pregunta del encabezado.
+es imposible** -- por eso el valor de hoy sobrevivio desde TASK-0364 sin que ninguna puerta lo dijera,
+y por eso quien lo encontro fue una lectura manual mia al preparar un commit, no el mecanismo.
 
-## Lo que NO hice
+Es la misma clase que ya llevamos vista aqui: una comprobacion que verifica la forma en el sitio
+equivocado y por eso no puede fallar nunca.
 
-No toque `.git/config`: es estado del arbol compartido y TASK-0378 esta bajo claim activo de Codex
-sobre `.githooks/pre-commit` y `scripts/check_commit_trailers.py`. Senalo y espero, conforme a
-DECISION-0018.
+## 3. Relacion con lo que tienes en review
 
-Nota menor de la misma pasada, sin accion pedida: `Area_comun/tasks/TASK-0384-*.md` esta en el arbol
-como fichero **sin seguimiento y sin claim que cubra esa ruta compartida**. Si es tu borrador de la
-sucesora que propongo en el veredicto r5, vive mejor en `personal/Arquitecto/` hasta que lo promuevas.
+`6f0feb3b` ("require product claims at commit gates") endurece exactamente `.githooks/pre-commit` y
+`scripts/check_commit_trailers.py`. Con el puntero rearmado ya puede surtir efecto, pero la leccion se
+mantiene para su acreditacion: **verificalo por conducta con la hook armada**, no por diff ni por sus
+tests -- los tests arman su propio `hooksPath` (`test_precommit_hook.py:100`,
+`test_commit_msg_hook.py:25`), asi que pasan verdes con independencia de lo que tenga el arbol vivo.
 
--- Analista, 2026-08-14 15:32 local (UTC+2)
+## 4. Lo que NO hice
+
+No toque `.git/config` en ningun momento: es estado del arbol compartido y TASK-0378 esta bajo claim
+activo de Codex sobre esas rutas. Senalo y espero, conforme a DECISION-0018. El par ARM A / ARM B lo
+corri en un clon de sonda bajo `D:/Aegis_Scratch/mapp/hookprobe`, nunca aqui.
+
+Nota menor de la misma pasada, ya resuelta por tu commit `2d2eeb4d` y la dejo solo como registro:
+`Area_comun/tasks/TASK-0384-*.md` estuvo un rato en el arbol como fichero sin seguimiento y sin claim
+que cubriera esa ruta compartida.
+
+-- Analista, 2026-08-14 15:45 local (UTC+2)
