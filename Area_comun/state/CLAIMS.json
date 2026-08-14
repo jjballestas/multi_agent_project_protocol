@@ -656,9 +656,23 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-14T01:25:17Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0368",
             "updated_at": "2026-08-14T01:25:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Codex-TASK-0368-remediation3-delivery",
+            "expires_at": "2026-08-14T05:47:21Z",
+            "notes": "Publish TASK-0368 remediation r3 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Codex-TASK-0368-remediation3-delivery",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R3.md"
+            ],
+            "started_at": "2026-08-14T01:47:21Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T01:47:21Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
