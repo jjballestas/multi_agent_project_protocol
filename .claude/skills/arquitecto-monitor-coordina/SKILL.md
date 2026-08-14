@@ -63,6 +63,21 @@ Al recibir el evento: `git fetch` + coordina + **pushea el commit local del peer
 monitor. Con el self-filter, re-armar tras tus commits es seguro. Un watcher de `origin/main` es el ERROR historico:
 te hace depender de que el operador te diga "revisa" porque no ves las entregas locales sin pushear.
 
+**ARMALO `persistent:true` (correccion 2026-08-13).** El de un disparo muere al notificar y el de 1h
+expira; esta semana costo DOS huecos ciegos de 4h y 7h, en uno de los cuales el peon vacio su cola y
+se auto-retiro sin que yo me enterara. Persistente = no vuelve a pasar. (El parrafo de abajo describe
+por que el single-shot era peligroso; se conserva como diagnostico historico.)
+
+**EL SELF-FILTER POR MODELO NO DISTINGUE A UNA SESION HERMANA (2026-08-14, medido en campo por la
+instancia NOVA y confirmado contra esta skill).** El patron
+`Co-Authored-By: Claude (Opus|Fable|Sonnet)` es una firma de MODELO: otra sesion de Arquitecto firma
+IGUAL, asi que cada monitor descarta los commits de la hermana creyendolos propios. Dos Arquitectos
+operaron una instancia durante horas siendo invisibles el uno para el otro POR CONSTRUCCION, y el
+coste fue real -- una entrega verificada como incompleta se ruteo al checker sin esa evidencia. El
+arreglo de codigo es TASK-0383 (filtrar por SESION, no por modelo). **Mientras no aterrice: si ves
+commits que no recuerdas haber hecho, NO asumas que son tuyos** -- mira el reflog y el lease antes de
+concluir nada.
+
 **CRITICO (leccion 2026-07-05): este monitor es SINGLE-SHOT -- se dispara UNA vez y muere.** A diferencia
 de los watchdogs 1b/1c (`persistent:true`), este NO sigue vivo tras notificar. Si procesas la notificacion
 (lees el mensaje, actuas, commiteas) pero NO vuelves a invocar `Monitor` con el mismo comando ANTES de

@@ -120,6 +120,24 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   (`message_scope_ambiguous`) es un mensaje muerto andando, no una espera.
 - **`scan_encoding` da FALSO ROJO transitorio mientras `submit_intent` tiene el `.ledger.lock`**
   (PermissionError al intentar leerlo). Re-correr; sale limpio. No es un byte no-ASCII real.
+- **VALIDATE Y PUSH EN COMANDOS SEPARADOS (2026-08-12, real).** Encadenar
+  `commit && validate && push` hace el validate DECORATIVO: el push sale aunque el validate de rojo,
+  porque ya iba en la cadena. Paso a las 22:37 y publique un HEAD rojo; a las 23:20 los separe, el
+  rojo aparecio (y era REAL, no transitorio) y **se quedo en local**. La diferencia no fue la suerte:
+  fue el orden de dos comandos.
+- **El pathspec se DERIVA de `git status`, no de lo que movio el ledger (2026-08-14, exit 128).**
+  `git add` con varias rutas falla ENTERO si UNA no existe. Un fichero del peer que el ledger archivo
+  estando UNTRACKED no tiene ruta en `open/` para git, aunque el evento diga que se movio. Patron:
+  `FILES=$(git status --porcelain Area_comun/ runtime/state/ | awk '{print $2}')` y commitear eso.
+- **GATE REPRODUCIBLE, no solo por exit code (DECISION-0115, ratificada 2026-08-14).** Un gate
+  acredita si REPITE: dos corridas consecutivas sobre el mismo commit, o el arnes se declara NO
+  IDEMPOTENTE y se EXCLUYE del gate. Medido en campo: la misma suite dio 106/106 y luego 104/106
+  sobre el MISMO commit. Al citar un verde, di **cuantas corridas**; "suite verde" sin numero es una.
+- **NO repares historia con el exec del peer VIVO (2026-08-13, ocurrio).** Su `git commit --amend`
+  reescribe el commit al que HEAD apunta AHORA, no el que el peer tenia en mente: se comio mi commit
+  y dejo el suyo malo intacto. Nada se pierde si no has pusheado -- rescata el mensaje con
+  `git log -1 --format=%B <sha-viejo>` (sigue en reflog) y repara con el arbol quieto. Diagnostico:
+  `git reflog -8` (ve el `commit (amend)`) + `git merge-base --is-ancestor <mi-sha> HEAD`.
 - **Estampa de hora en MSG/artefactos: SIEMPRE del reloj (`date +%H:%M`), JAMAS estimada.** Reincidencia
   2x (hub 05c51a2; instancia 21e6f27): escribir la hora "esperada" adelanta el reloj y obliga a un chore
   de correccion. Tomar la hora en el MISMO paso en que se escribe el archivo.
