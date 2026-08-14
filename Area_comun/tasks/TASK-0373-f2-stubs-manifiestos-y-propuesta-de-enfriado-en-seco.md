@@ -1,7 +1,7 @@
 ---
 id: TASK-0373
 title: F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md
@@ -105,3 +105,20 @@ detectan un cambio de formato y un `--propose-cold` que no escribe nada. F3 lo r
 marcaria como archivable justo la politica en vigor, y el gate callaria. Esa puerta es TASK-0368.
 
 F2 se puede construir en paralelo; F3 no arranca hasta que 0368 cierre.
+
+## Implementation evidence (Codex, 2026-08-15)
+
+- `MEMORY_HOT_COLD_RULES.json` declares the enabled dry-run rule. The live proposal evaluates
+  that file and reports 272 candidates; changing its selector from `status=done` to
+  `status=blocked` changes the fixture proposal from one candidate to zero.
+- `--propose-cold` reads the derived index, merged task indexes, canonical rules, and active
+  claims. The fixture proves that an active file-scoped claim removes the candidate and that
+  repository porcelain is byte-for-byte unchanged by the command.
+- Stub rendering is LF/ASCII byte-stable, keeps the mirrored status and verifiable cold pointer,
+  and is materialized at the exact indexed task path in the acceptance fixture. The canonical
+  collaboration validator exits 0 on that fixture.
+- Pack and manifest-index rendering require every specified field, sort deterministically, and
+  are covered by exact goldens plus field mutations. Loading the generated pack manifest
+  reconstructs the expected `cold_packs` row 1:1.
+- The complete memory suite passes 78/78. The live proposal exits 0. The DB still contains zero
+  `cold_packs`; no archive directory or cold artifact was created.

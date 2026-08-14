@@ -1,7 +1,7 @@
 ---
 id: TASK-0367
 title: El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda
-status: in_progress
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md
@@ -140,3 +140,22 @@ It requires Codex/Codex to resolve a fixture `codex.exe`, requires Analista/Anth
 fixture `claude.ps1`, and kills a participant-name mutant by showing that it no longer preserves the
 Analista resolution. The test prints both resolved binaries, making the evidence about behavior
 rather than merely the spelling of the production literal.
+
+## Remediation r2 evidence
+
+The documented zero-configuration startup contract is restored: absent explicit environment
+overrides, `Auto`/`Codex` resolves `codex` and `Anthropic` resolves `claude` from `PATH`; explicit
+provider-command environment variables still override those defaults. The behavioral probe clears
+both variables before resolving fixture commands, so it exercises the same no-`-AgentExe` path as
+the README instead of inheriting fixture configuration. It runs only through the explicit
+`--task0367-provider-only` entry point, uses the designated external scratch root, and removes its
+private fixtures. The full retry suite therefore never receives TASK-0367 residue or timing effects.
+
+The full retry suite currently exits 1 at the TASK-0343 baseline (`baseline=0/3`). The same command
+at untouched pre-remediation commit `fbeb215e` produces the identical `baseline=0/3` result in a
+detached worktree, while the focused TASK-0367 provider probe exits 0. This is measured attribution,
+not a claim that the red is pre-existing without a control point.
+
+The AC3 negative is intentionally narrow: it proves that the generated instance scanner rejects a
+concrete identity declared by that instance when injected into core. It does not prove detection of
+undeclared adopter identities; that broader population and enforcement gap belongs to TASK-0372.
