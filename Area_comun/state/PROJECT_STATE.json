@@ -207,7 +207,7 @@
         {
             "id": "TASK-0368",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles"
         },
         {

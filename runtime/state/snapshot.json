@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "85149e4aef7ace931006c159f3cc769511e9efef598af9810ba9f575eab3f952",
+  "canonical_hash": "0ab25b9e229e48624f7478c8e826fbdc891c10e2fbc9912cc29a1db5e54b70fa",
   "integrity": {
-    "canonical_hash": "85149e4aef7ace931006c159f3cc769511e9efef598af9810ba9f575eab3f952",
+    "canonical_hash": "0ab25b9e229e48624f7478c8e826fbdc891c10e2fbc9912cc29a1db5e54b70fa",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "db75971848f0c8216f6b555f362e6af13e916419614afb887866abc76e3a62b8",
-    "signature": "bd96450bac8a9cf1db8c03c69b1d6bbfd8b512c73a7b357913deb1f85eeec222",
-    "up_to_seq": 9137
+    "prev_hash": "354d8a284d7d115750b8dbd5f454c6766e6070b57979e067ef00d1216b7f1c6e",
+    "signature": "8ead1ecf1bcc9e29b21547e42b4634d8b380f12714654648f8a97ad78940649c",
+    "up_to_seq": 9139
   },
   "state": {
     "aggregate_versions": {
@@ -3727,7 +3727,7 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 19,
+      "TASK-0368": 21,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
@@ -3759,7 +3759,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8466,
+    "events_applied": 8468,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8540,6 +8540,8 @@
       "codex:task0368:remediation1:release-delivery:20260814": 9127,
       "codex:task0368:remediation1:release-maker:20260814": 9126,
       "codex:task0368:remediation1:status-in-review:20260814": 9125,
+      "codex:task0368:remediation2:release-maker:20260814": 9139,
+      "codex:task0368:remediation2:status-in-review:20260814": 9138,
       "codex:tasks0325-0334-0335:done-flip:claim-acquire:20260808T084041Z": 7924,
       "codex:tasks0325-0334-0335:done-flip:claim-release:20260808T084041Z": 7928,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -12229,5 +12231,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9137
+  "up_to_seq": 9139
 }
