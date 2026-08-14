@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "b1d545f840f83c9bc05a80859441f7a18c44287a8bed39554813717634d4df9b",
+  "canonical_hash": "bc298acba56271dec5fe7093461bc2439a9a760fa54d688a9adc26f2496b6c35",
   "integrity": {
-    "canonical_hash": "b1d545f840f83c9bc05a80859441f7a18c44287a8bed39554813717634d4df9b",
+    "canonical_hash": "bc298acba56271dec5fe7093461bc2439a9a760fa54d688a9adc26f2496b6c35",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "225d224fce0df26f2052bd79a2e2735c42e6f6c094c213220122a5676ce9c6ce",
-    "signature": "9ed0356224636a945d43edf59ebf75b69d5646acbdf40fefdbc13b35e729f9e9",
-    "up_to_seq": 9231
+    "prev_hash": "bfd60fbe4f321c48618ab454650a8d27945de235123b197ae73f0661c7a317e7",
+    "signature": "b4b4dad4b6e4eeacd91626f1f6e40a68d94b97daa68790db27ddc5d591a45721",
+    "up_to_seq": 9235
   },
   "state": {
     "aggregate_versions": {
@@ -1015,6 +1015,7 @@
       "CLAIM-20260814-Arquitecto-0368-reject-r2": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r3": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r4": 1,
+      "CLAIM-20260814-Arquitecto-0385-reg": 1,
       "CLAIM-20260814-Arquitecto-DEC-0113-0114": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-K": 1,
@@ -3784,7 +3785,7 @@
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
-      "TASK-0378": 11,
+      "TASK-0378": 13,
       "TASK-0379": 2,
       "TASK-0380": 1,
       "TASK-0381": 1,
@@ -3792,6 +3793,7 @@
       "TASK-0383": 1,
       "TASK-0384": 1,
       "TASK-0385": 2,
+      "TASK-0386": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3814,7 +3816,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8560,
+    "events_applied": 8564,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3997,10 +3999,14 @@
       "arq-0368close-acq": 9217,
       "arq-0368close-flip": 9218,
       "arq-0368close-rel": 9220,
+      "arq-0378r2-acq": 9232,
+      "arq-0378r2-flip": 9234,
+      "arq-0378r2-relold": 9233,
       "arq-0384-reg": 9219,
       "arq-0385-acq": 9229,
       "arq-0385-ar1": 9231,
       "arq-0385-reg": 9230,
+      "arq-0386-reg": 9235,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12378,5 +12384,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9231
+  "up_to_seq": 9235
 }

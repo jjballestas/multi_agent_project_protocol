@@ -633,7 +633,7 @@
             "file": "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
             "id": "TASK-0378",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra",
             "type": "implementation"
         },
@@ -693,6 +693,15 @@
             "reviewer": "Analista",
             "status": "proposed",
             "title": "El guard de contaminacion vigila el unico sitio donde la contaminacion es imposible",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0386-el-gate-se-fia-de-fuentes-que-el-actor-escribe.md",
+            "id": "TASK-0386",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El gate se fia de dos fuentes que el propio actor escribe -- una cadena de git config y una fila JSON sin commitear",
             "type": "implementation"
         },
         {

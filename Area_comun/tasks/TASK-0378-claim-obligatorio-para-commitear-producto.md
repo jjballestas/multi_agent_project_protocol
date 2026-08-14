@@ -1,7 +1,7 @@
 ---
 id: TASK-0378
 title: Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md
@@ -31,7 +31,22 @@ intake:
     - "AC2 (el mismo requisito, en el gancho LOCAL): `.githooks/pre-commit` rechaza fail-closed en el
       instante del commit, con los MISMOS cuatro casos y su propia prueba de rechazo. Reutilizar la
       logica del AC1 es correcto y preferible; lo que no acredita es declarar que el hook la hereda
-      sin ejecutarla desde el hook."
+      sin ejecutarla desde el hook.
+      ENMIENDA 2026-08-14 (Arquitecto, tras el veredicto del checker; defecto MIO de redaccion):
+      exigir al gancho local los MISMOS CUATRO casos era IMPOSIBLE de cumplir. Un `pre-commit` corre
+      ANTES de que exista el mensaje del commit, asi que el caso 4 -- `Task-Id: none` mas
+      `Ops-Reason` -- es irrepresentable ahi: el gancho decide con rutas staged, actor y claims, y
+      ninguno de los tres es el mensaje. Codex no lo omitio por descuido; no podia. El AC queda
+      REFORMULADO asi: el gancho local exige claim propio activo cuando hay rutas de PRODUCTO
+      staged, y no exige nada cuando no las hay -- criterio que si puede evaluar. La exencion de
+      coordinacion por `Task-Id: none` mas `Ops-Reason` se acredita SOLO en el gancho autoritativo
+      (AC1), que si ve el mensaje. Los tres casos restantes del AC1 siguen exigidos en ambos."
+    - "AC7 (ENMIENDA 2026-08-14, Arquitecto -- la frontera del perimetro, que el checker me pidio
+      decidir): `runtime/state/` NO es perimetro de producto. Es el LEDGER, del mismo genero que
+      `Area_comun/state/`, y la propia tarea excluye bloquear los commits de coordinacion. El resto
+      de `runtime/` si lo es. Se acredita midiendo que un commit de transaccion gobernada que toca
+      solo `runtime/state/` aterriza sin claim de producto, y que un commit que toca `runtime/` fuera
+      de `state/` sigue exigiendolo."
     - "AC3 (2f por partida doble: prueba de que RECHAZA, no de que pasa): cada gancho entrega su
       propia evidencia de rechazo, ejecutada, con la salida y el exit code de los casos negativos. Un
       control que nunca ha dicho que no NO esta demostrado -- es el criterio innegociable de la
