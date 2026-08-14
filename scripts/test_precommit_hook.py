@@ -74,6 +74,7 @@ def main() -> int:
         (root / ".github" / "workflows").mkdir(parents=True)
         (root / "Area_comun" / "state").mkdir(parents=True)
         shutil.copy2(source / ".githooks" / "pre-commit", root / ".githooks" / "pre-commit")
+        shutil.copy2(source / "scripts" / "check_commit_trailers.py", root / "scripts" / "check_commit_trailers.py")
         (root / "scripts" / "prune_state.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
         (root / "scripts" / "validate_collaboration_state.py").write_text(
             "import json, pathlib, sys\n"
@@ -89,12 +90,38 @@ def main() -> int:
         (root / ".github" / "workflows" / "validate.yml").write_text("name: validate\n", encoding="utf-8")
         state = root / "Area_comun" / "state" / "TASK_INDEX.json"
         state.write_text("{}\n", encoding="utf-8")
+        (root / "Area_comun" / "state" / "CLAIMS.json").write_text(
+            '{"claims":[{"claim_id":"C1","task_id":"TASK-0378","owner":"Hook Test","status":"active","scope":["scripts/work.py","scripts/prune_state.py","scripts/validate_collaboration_state.py","scripts/generate_human_guide.py","runtime/protocol_replay.py",".githooks/pre-commit"]}]}\n',
+            encoding="utf-8",
+        )
         require(run(["git", "init", "-q"], root), 0, "git init")
         require(run(["git", "config", "user.email", "hook@example.invalid"], root), 0, "git email")
         require(run(["git", "config", "user.name", "Hook Test"], root), 0, "git name")
         require(run(["git", "config", "core.hooksPath", ".githooks"], root), 0, "hook path")
         require(run(["git", "add", "."], root), 0, "initial add")
         require(run(["git", "commit", "--no-verify", "-qm", "fixture"], root), 0, "fixture commit")
+
+        product = root / "scripts" / "work.py"
+        product.write_text("x = 1\n", encoding="utf-8")
+        require(run(["git", "add", "scripts/work.py"], root), 0, "stage product claim fixture")
+        claims = root / "Area_comun" / "state" / "CLAIMS.json"
+        claims.write_text('{"claims":[]}\n', encoding="utf-8")
+        no_claim = run(["sh", ".githooks/pre-commit"], root)
+        require_rejected(no_claim, "pre-commit product without claim")
+        print(f"PRE_COMMIT_REJECTION_NO_CLAIM exit={no_claim.returncode}: {no_claim.stderr.strip().splitlines()[0]}")
+        claims.write_text(
+            '{"claims":[{"claim_id":"C2","task_id":"TASK-0378","owner":"Other","status":"active","scope":["scripts/work.py"]}]}\n',
+            encoding="utf-8",
+        )
+        other_claim = run(["sh", ".githooks/pre-commit"], root)
+        require_rejected(other_claim, "pre-commit product with other actor claim")
+        print(f"PRE_COMMIT_REJECTION_OTHER_CLAIM exit={other_claim.returncode}: {other_claim.stderr.strip().splitlines()[0]}")
+        claims.write_text(
+            '{"claims":[{"claim_id":"C1","task_id":"TASK-0378","owner":"Hook Test","status":"active","scope":["scripts/work.py","scripts/prune_state.py","scripts/validate_collaboration_state.py","scripts/generate_human_guide.py","runtime/protocol_replay.py",".githooks/pre-commit"]}]}\n',
+            encoding="utf-8",
+        )
+        require(run(["git", "restore", "--staged", "scripts/work.py"], root), 0, "unstage product claim fixture")
+        product.unlink()
 
         prune = root / "scripts" / "prune_state.py"
         prune.write_text("raise SystemExit(1)\n", encoding="utf-8")
@@ -204,6 +231,25 @@ def main() -> int:
             commit(root, "negative inventory completeness", full=True),
             "completeness sentinel deletion",
         )
+    with tempfile.TemporaryDirectory(prefix="protocol-precommit-prefix-") as tmp:
+        root = Path(tmp) / "repo"
+        instance = root / "Aegis"
+        (instance / ".githooks").mkdir(parents=True)
+        (instance / "scripts").mkdir()
+        (instance / "Area_comun/state").mkdir(parents=True)
+        shutil.copy2(source / ".githooks/pre-commit", instance / ".githooks/pre-commit")
+        shutil.copy2(source / "scripts/check_commit_trailers.py", instance / "scripts/check_commit_trailers.py")
+        (instance / "scripts/prune_state.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
+        (instance / "Area_comun/state/CLAIMS.json").write_text(
+            '{"claims":[{"claim_id":"C1","task_id":"TASK-0378","owner":"Hook Test","status":"active","scope":["scripts/check_commit_trailers.py","scripts/prune_state.py",".githooks/pre-commit"]}]}\n',
+            encoding="utf-8",
+        )
+        require(run(["git", "init", "-q"], root), 0, "prefixed git init")
+        require(run(["git", "config", "user.name", "Hook Test"], root), 0, "prefixed user")
+        require(run(["git", "config", "user.email", "hook@example.invalid"], root), 0, "prefixed email")
+        require(run(["git", "add", "Aegis"], root), 0, "prefixed stage")
+        prefixed = run(["sh", "Aegis/.githooks/pre-commit"], root)
+        require(prefixed, 0, "prefixed instance own claim")
     print(
         "OK: bounded default <2s; explicit full-mode snapshot, concurrency, "
         "R100, rejection, and cleanup regressions."

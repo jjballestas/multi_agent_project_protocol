@@ -1,5 +1,23 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260814-Codex-TASK-0378",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Codex-TASK-0378",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "scripts/check_commit_trailers.py",
+                ".githooks/pre-commit",
+                "scripts/test_commit_msg_hook.py",
+                "scripts/test_precommit_hook.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0378"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

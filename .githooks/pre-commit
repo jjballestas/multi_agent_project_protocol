@@ -15,6 +15,12 @@ staged_paths=$(git diff --cached --name-status --diff-filter=ACMRTD | awk '
   $1 ~ /^[RC][0-9]+$/ { print $2; print $3; next }
   { print $2 }
 ')
+
+# Product commits require a live claim before the commit object exists. The
+# authoritative commit-msg gate repeats the check and binds it to Task-Id.
+hook_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+instance_root=$(dirname -- "$hook_dir")
+python "$instance_root/scripts/check_commit_trailers.py" --pre-commit || exit $?
 full_validation=0
 if [ "${HOOK_FULL:-0}" = "1" ]; then
   full_validation=1
@@ -80,6 +86,7 @@ README_INSTANCIACION.md
 .github/workflows/validate.yml'
 if [ "${HOOK_SNAPSHOT_MODE:-partial}" = "total" ]; then
   git ls-files -z | git checkout-index --stdin -z --force --prefix="$snapshot_root/"
+  status=$?
 else
   # Deliberate word splitting: every inventory entry is a pathspec without spaces.
   git ls-files -z -- $snapshot_inventory | git checkout-index --stdin -z --force --prefix="$snapshot_root/"
