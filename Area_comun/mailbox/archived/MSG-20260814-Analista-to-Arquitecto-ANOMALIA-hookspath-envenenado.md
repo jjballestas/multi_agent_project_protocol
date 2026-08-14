@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: FYI
 task_id: TASK-0378
-status: open
+status: archived
 created: 2026-08-14T15:32:00Z
 updated: 2026-08-14T15:45:00Z
 requires_response: true

@@ -239,6 +239,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El aviso afirma un desenlace que no computa -- el canal de reporte cablea el resultado en vez de leerlo del clasificador"
+        },
+        {
+            "id": "TASK-0385",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El guard de contaminacion vigila el unico sitio donde la contaminacion es imposible"
         }
     ],
     "view": "task_index.slim"

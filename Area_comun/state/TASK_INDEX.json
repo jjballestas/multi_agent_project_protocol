@@ -687,6 +687,15 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0385-el-guard-de-contaminacion-vigila-donde-no-puede-ocurrir.md",
+            "id": "TASK-0385",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El guard de contaminacion vigila el unico sitio donde la contaminacion es imposible",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

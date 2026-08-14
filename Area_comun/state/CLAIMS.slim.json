@@ -1,5 +1,24 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260814-Arquitecto-0385-reg",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0385-reg",
+                "Area_comun/state/TASK_INDEX.json#TASK-0385",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0385",
+                "Area_comun/tasks/TASK-0385-el-guard-de-contaminacion-vigila-donde-no-puede-ocurrir.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/state/TASK_INDEX.slim.json",
+                "Area_comun/state/PROJECT_STATE.slim.json",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/mailbox/open/MSG-20260814-Analista-to-Arquitecto-ANOMALIA-hookspath-envenenado.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Analista-to-Arquitecto-ANOMALIA-hookspath-envenenado.md"
+            ],
+            "task_id": "TASK-0385"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
