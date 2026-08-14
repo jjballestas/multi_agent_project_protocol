@@ -968,7 +968,13 @@ def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[
             frontmatter, agents, domain_pii_terms, status_values, type_values
         )
         if artifact_type == "decision":
-            status = metadata.get("status")
+            raw_status = frontmatter.get("status")
+            status = (
+                raw_status
+                if isinstance(raw_status, str)
+                and not contains_pii(raw_status, domain_pii_terms, coordinate="status")
+                else metadata.get("status")
+            )
             classified = (
                 set(policy["decision_policy_state"]["current_statuses"])
                 | set(policy["decision_policy_state"]["non_current_statuses"])
@@ -977,7 +983,7 @@ def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[
                 item_warnings.append(
                     "decision currentness status is missing; attested policy treats it as current"
                 )
-            elif status.casefold() not in classified:
+            elif not isinstance(status, str) or status.casefold() not in classified:
                 raise ValueError(
                     f"{relative}: decision currentness status {status!r} is not classified "
                     f"by {POLICY_PATH}"
@@ -1185,7 +1191,10 @@ def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> s
     mapping = policy["decision_policy_state"]
     status = metadata.get("status")
     if status is None:
-        return mapping["current"]
+        missing_status = mapping["missing_status"]
+        if missing_status == "current_with_warning":
+            return mapping["current"]
+        raise ValueError(f"unsupported decision missing-status policy {missing_status!r}")
     normalized = status.casefold() if isinstance(status, str) else ""
     if normalized not in set(mapping["current_statuses"]) | set(mapping["non_current_statuses"]):
         raise ValueError(f"decision currentness status {status!r} is not classified")

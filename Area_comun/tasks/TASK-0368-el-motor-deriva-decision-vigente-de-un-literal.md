@@ -145,3 +145,15 @@ realmente los mutantes que ignoran la frontera del puntero y la frontera de esta
 `rejected`, una tercera grafia declarada y el fallo rojo de esa grafia al retirarla de la
 clasificacion atestada. Por tanto, quitar cualquier miembro embarcado, ignorar `superseded_by` o
 aceptar silenciosamente vocabulario de vigencia desconocida rompe la puerta permanente.
+
+## Remediacion r3
+
+La frontera de vocabulario inspecciona el `status` crudo de cada decision antes de que la allowlist
+generica pueda descartarlo. Una grafia de retirada no registrada, como `retired`, termina ahora en
+error con ruta y valor, mientras que la ausencia real sigue el mecanismo `missing_status` de la
+politica atestada.
+
+El negativo usa una decision sin estado para fijar ese mecanismo y una decision con puntero dentro
+de la misma poblacion que la implementacion. Quitar el termino `superseded_by` de produccion o
+invertir el tratamiento del estado ausente pone rojo al runner declarado. El criterio de AC1 no
+cambia.

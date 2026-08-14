@@ -3077,6 +3077,10 @@ Body is not indexed.
             }.items():
                 superseded = "superseded_by: DECISION-ACCEPTED\n" if decision_id == "DECISION-OLD" else ""
                 write(root / f"Area_comun/decisions/{decision_id}.md", f"---\ndecision_id: {decision_id}\nstatus: {status}\n{superseded}---\n")
+            write(
+                root / "Area_comun/decisions/DECISION-MISSING-STATUS.md",
+                "---\ndecision_id: DECISION-MISSING-STATUS\n---\n",
+            )
             commit = commit_fixture(root, "declare currentness policy")
             artifacts, _ = memory_db.load_artifacts(root, commit)
             attested_policy = memory_db.memory_index_policy(root, commit)
@@ -3102,6 +3106,25 @@ Body is not indexed.
             self.assertEqual("superseded", rows["DECISION-PROPOSED"][1])
             self.assertEqual("superseded", rows["DECISION-REJECTED"][1])
             self.assertEqual("superseded", rows["DECISION-RETIRED"][1])
+            self.assertEqual("superseded", rows["DECISION-OLD"][1])
+            self.assertEqual("active", rows["DECISION-MISSING-STATUS"][1])
+            production_hot = {
+                decision_id for decision_id, row in rows.items() if row[7] == 1
+            }
+            same_population_pointer_mutant = production_hot | {"DECISION-OLD"}
+            self.assertNotEqual(production_hot, same_population_pointer_mutant)
+            write(
+                root / "Area_comun/decisions/DECISION-UNREGISTERED-RETIRED.md",
+                "---\ndecision_id: DECISION-UNREGISTERED-RETIRED\nstatus: retired\n---\n",
+            )
+            unregistered_commit = commit_fixture(root, "unregistered retirement vocabulary")
+            with self.assertRaisesRegex(
+                ValueError,
+                r"DECISION-UNREGISTERED-RETIRED\.md: decision currentness status 'retired' is not classified",
+            ):
+                memory_db.load_artifacts(root, unregistered_commit)
+            (root / "Area_comun/decisions/DECISION-UNREGISTERED-RETIRED.md").unlink()
+            commit_fixture(root, "remove unregistered retirement vocabulary")
             unclassified = json.loads(policy_path.read_text(encoding="utf-8"))
             unclassified["decision_policy_state"]["current_statuses"].remove("future-vocabulary")
             write(policy_path, json.dumps(unclassified, sort_keys=True) + "\n")
