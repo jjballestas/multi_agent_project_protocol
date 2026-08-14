@@ -183,7 +183,7 @@ FALSIFICATION_CONTRACTS = (
         ),
         "exercised_by": "test_account_identifier_presentations_are_structural_and_falsifiable",
     },
-    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Ignoring either supersession or a declared non-current status lets unsafe policy back live rules.", "mutation": "mutant_current = lambda artifact: not memory_db.value_list(artifact.metadata.get(\"superseded_by\"))", "boundaries": ("self.assertEqual(cited, hot)", "self.assertNotEqual(cited, literal_mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "self.assertEqual(\"superseded\", rows[\"DECISION-PROPOSED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-RETIRED\"][1])", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
+    {"id": "NEG-MEMORY-CURRENT-DECISION-PROPERTY", "negative": "Ignoring either supersession or a declared non-current status lets unsafe policy back live rules.", "mutation": "mutant_current = lambda artifact: not memory_db.value_list(artifact.metadata.get(\"superseded_by\"))", "boundaries": ("self.assertEqual(expected_shipped_currentness, shipped_currentness)", "self.assertEqual(cited, hot)", "self.assertNotEqual(cited, literal_mutant_hot)", "self.assertNotEqual(hot, mutant_hot)", "self.assertEqual(\"active\", third_state_row[1])", "with self.assertRaisesRegex(ValueError, \"not classified\")", "self.assertEqual(\"superseded\", rows[\"DECISION-PROPOSED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-REJECTED\"][1])", "self.assertEqual(\"superseded\", rows[\"DECISION-RETIRED\"][1])", "with self.assertRaisesRegex(ValueError, \"absent or inactive\")"), "exercised_by": "test_current_decision_is_attested_property_not_status_literal"},)
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8", newline="\n")
@@ -3045,13 +3045,20 @@ Body is not indexed.
             policy_path = root / memory_db.POLICY_PATH
             policy = json.loads(policy_path.read_text(encoding="utf-8"))
             policy["extra_status_values"] = ["future-vocabulary"]
-            policy["decision_policy_state"] = {
+            expected_shipped_currentness = {
                 "current": "active", "non_current": "superseded",
                 "non_current_when": "superseded_by_present_or_status_declared_non_current",
+                "current_statuses": ["accepted", "active", "approved"],
                 "non_current_statuses": [
                     "archived", "cancelled", "draft", "proposed", "rejected", "superseded",
                 ],
+                "missing_status": "current_with_warning",
             }
+            shipped_policy = json.loads((ROOT / memory_db.POLICY_PATH).read_text(encoding="utf-8"))
+            shipped_currentness = shipped_policy["decision_policy_state"]
+            self.assertEqual(expected_shipped_currentness, shipped_currentness)
+            policy["decision_policy_state"] = json.loads(json.dumps(shipped_currentness))
+            policy["decision_policy_state"]["current_statuses"].append("future-vocabulary")
             write(policy_path, json.dumps(policy, sort_keys=True) + "\n")
             live_contract = (ROOT / "AGENTS.md").read_text(encoding="utf-8-sig")
             cited = set(re.findall(r"DECISION-[0-9]{4}", live_contract))
@@ -3066,7 +3073,7 @@ Body is not indexed.
             for decision_id, status in {
                 "DECISION-ACCEPTED": "accepted", "DECISION-FUTURE": "future-vocabulary",
                 "DECISION-OLD": "accepted", "DECISION-PROPOSED": "proposed",
-                "DECISION-RETIRED": "superseded",
+                "DECISION-REJECTED": "rejected", "DECISION-RETIRED": "superseded",
             }.items():
                 superseded = "superseded_by: DECISION-ACCEPTED\n" if decision_id == "DECISION-OLD" else ""
                 write(root / f"Area_comun/decisions/{decision_id}.md", f"---\ndecision_id: {decision_id}\nstatus: {status}\n{superseded}---\n")
@@ -3083,17 +3090,25 @@ Body is not indexed.
                 and artifact.metadata.get("status") == "active"
             }
             self.assertNotEqual(cited, literal_mutant_hot)
-            pointer_only_mutant_hot = {
+            mutant_current = lambda artifact: not memory_db.value_list(artifact.metadata.get("superseded_by"))
+            mutant_hot = {
                 artifact.artifact_id for artifact in artifacts
                 if artifact.artifact_type == "decision"
-                and not memory_db.value_list(artifact.metadata.get("superseded_by"))
+                and mutant_current(artifact)
             }
-            self.assertIn("DECISION-PROPOSED", pointer_only_mutant_hot)
-            self.assertIn("DECISION-RETIRED", pointer_only_mutant_hot)
+            self.assertNotEqual(hot, mutant_hot)
             third_state_row = rows["DECISION-FUTURE"]
             self.assertEqual("active", third_state_row[1])
             self.assertEqual("superseded", rows["DECISION-PROPOSED"][1])
+            self.assertEqual("superseded", rows["DECISION-REJECTED"][1])
             self.assertEqual("superseded", rows["DECISION-RETIRED"][1])
+            unclassified = json.loads(policy_path.read_text(encoding="utf-8"))
+            unclassified["decision_policy_state"]["current_statuses"].remove("future-vocabulary")
+            write(policy_path, json.dumps(unclassified, sort_keys=True) + "\n")
+            unclassified_commit = commit_fixture(root, "unclassified currentness vocabulary")
+            with self.assertRaisesRegex(ValueError, "not classified"):
+                memory_db.load_artifacts(root, unclassified_commit)
+            write(policy_path, json.dumps(attested_policy, sort_keys=True) + "\n")
             unattested = json.loads(policy_path.read_text(encoding="utf-8"))
             unattested["decision_policy_state"]["current"] = "historical"
             write(policy_path, json.dumps(unattested, sort_keys=True) + "\n")

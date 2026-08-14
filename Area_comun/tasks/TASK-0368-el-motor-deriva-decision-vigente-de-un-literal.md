@@ -130,3 +130,18 @@ decisiones vigentes previas permanecen vigentes.
 P8 y P9 calibraron los enums de ACEPTACION sacandolos a `MEMORY_INDEX_POLICY.json`, pero `accepted`
 ya se indexaba sin problema. Lo que nunca se calibro es el **mapeo a estado de politica**: esta
 cableado y no tiene superficie de configuracion. Anadir un literal a una lista deja la lista.
+
+## Remediacion r2
+
+La politica atestada ahora declara las dos clases completas de estado: vigente
+(`accepted/active/approved`) y no vigente
+(`archived/cancelled/draft/proposed/rejected/superseded`). El motor conserva los estados de
+decision de ambas clases aunque no pertenezcan al enum generico; una grafia no clasificada falla
+con el valor y la ruta concretos. La unica decision historica sin `status` queda distinguida y
+produce un warning de vigencia explicito, en vez de colapsar con una grafia descartada.
+
+El negativo lee el contenido embarcado de `MEMORY_INDEX_POLICY.json`, fija sus dos listas y usa
+realmente los mutantes que ignoran la frontera del puntero y la frontera de estado. Tambien prueba
+`rejected`, una tercera grafia declarada y el fallo rojo de esa grafia al retirarla de la
+clasificacion atestada. Por tanto, quitar cualquier miembro embarcado, ignorar `superseded_by` o
+aceptar silenciosamente vocabulario de vigencia desconocida rompe la puerta permanente.

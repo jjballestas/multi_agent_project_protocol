@@ -563,13 +563,16 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
             "current": "active",
             "non_current": "superseded",
             "non_current_when": "superseded_by_present_or_status_declared_non_current",
+            "current_statuses": ["accepted", "active", "approved"],
             "non_current_statuses": [
                 "archived", "cancelled", "draft", "proposed", "rejected", "superseded",
             ],
+            "missing_status": "current_with_warning",
         },
     )
     if not isinstance(decision_state, dict) or set(decision_state) != {
-        "current", "non_current", "non_current_when", "non_current_statuses",
+        "current", "non_current", "non_current_when", "current_statuses",
+        "non_current_statuses", "missing_status",
     }:
         raise ValueError(
             f"{POLICY_PATH}.decision_policy_state has an invalid shape"
@@ -579,29 +582,31 @@ def memory_index_policy(root: Path, commit: str) -> dict[str, Any]:
         or decision_state["non_current"] != "superseded"
         or decision_state["non_current_when"]
         != "superseded_by_present_or_status_declared_non_current"
+        or decision_state["missing_status"] != "current_with_warning"
     ):
         raise ValueError(
             f"{POLICY_PATH}.decision_policy_state must map explicit supersession "
             "or a declared non-current status to non-current"
         )
+    current_statuses = decision_state["current_statuses"]
     non_current_statuses = decision_state["non_current_statuses"]
+    declared_statuses = (current_statuses, non_current_statuses)
     if (
-        not isinstance(non_current_statuses, list)
-        or not non_current_statuses
-        or len(non_current_statuses) > 32
+        any(not isinstance(values, list) or not values or len(values) > 32 for values in declared_statuses)
         or not all(
             isinstance(value, str)
             and 0 < len(value) <= 100
             and value.isprintable()
             and value == value.strip()
             and value == value.casefold()
-            for value in non_current_statuses
+            for values in declared_statuses for value in values
         )
-        or len(set(non_current_statuses)) != len(non_current_statuses)
+        or any(len(set(values)) != len(values) for values in declared_statuses)
+        or set(current_statuses) & set(non_current_statuses)
     ):
         raise ValueError(
-            f"{POLICY_PATH}.decision_policy_state.non_current_statuses "
-            "must be a non-empty bounded array of unique lowercase strings"
+            f"{POLICY_PATH}.decision_policy_state status classes must be "
+            "non-empty disjoint bounded arrays of unique lowercase strings"
         )
     return policy
 
@@ -627,7 +632,13 @@ def configured_agents(
 
 
 def configured_status_values(policy: dict[str, Any]) -> frozenset[str]:
-    return CORE_STATUS_VALUES | frozenset(policy["extra_status_values"])
+    decision_state = policy["decision_policy_state"]
+    return (
+        CORE_STATUS_VALUES
+        | frozenset(policy["extra_status_values"])
+        | frozenset(decision_state["current_statuses"])
+        | frozenset(decision_state["non_current_statuses"])
+    )
 
 
 def configured_type_values(policy: dict[str, Any]) -> frozenset[str]:
@@ -956,6 +967,21 @@ def load_artifacts(root: Path, commit: str) -> tuple[list[SourceArtifact], list[
         metadata, item_warnings = validate_metadata(
             frontmatter, agents, domain_pii_terms, status_values, type_values
         )
+        if artifact_type == "decision":
+            status = metadata.get("status")
+            classified = (
+                set(policy["decision_policy_state"]["current_statuses"])
+                | set(policy["decision_policy_state"]["non_current_statuses"])
+            )
+            if status is None:
+                item_warnings.append(
+                    "decision currentness status is missing; attested policy treats it as current"
+                )
+            elif status.casefold() not in classified:
+                raise ValueError(
+                    f"{relative}: decision currentness status {status!r} is not classified "
+                    f"by {POLICY_PATH}"
+                )
         artifact_id = artifact_id_for(artifact_type, relative, metadata)
         if artifact_id in seen_ids:
             raise ValueError(f"duplicate artifact_id {artifact_id}: {seen_ids[artifact_id]} and {relative}")
@@ -1158,9 +1184,14 @@ def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> s
     """A decision is current unless supersession or its status says otherwise."""
     mapping = policy["decision_policy_state"]
     status = metadata.get("status")
+    if status is None:
+        return mapping["current"]
+    normalized = status.casefold() if isinstance(status, str) else ""
+    if normalized not in set(mapping["current_statuses"]) | set(mapping["non_current_statuses"]):
+        raise ValueError(f"decision currentness status {status!r} is not classified")
     declared_non_current = (
         isinstance(status, str)
-        and status.casefold() in mapping["non_current_statuses"]
+        and normalized in mapping["non_current_statuses"]
     )
     return (
         mapping["non_current"]

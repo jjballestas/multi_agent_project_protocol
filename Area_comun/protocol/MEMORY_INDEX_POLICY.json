@@ -39,6 +39,11 @@
     "current": "active",
     "non_current": "superseded",
     "non_current_when": "superseded_by_present_or_status_declared_non_current",
+    "current_statuses": [
+      "accepted",
+      "active",
+      "approved"
+    ],
     "non_current_statuses": [
       "archived",
       "cancelled",
@@ -46,7 +51,8 @@
       "proposed",
       "rejected",
       "superseded"
-    ]
+    ],
+    "missing_status": "current_with_warning"
   },
   "revive_pack": {
     "max_bytes": 131072,
