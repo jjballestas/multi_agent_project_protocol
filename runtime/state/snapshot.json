@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "4066ca7ae74ead4b87ef209e863c751f232ad69c93d4a84fb892aee8972d32e8",
+  "canonical_hash": "99eba5e247bbb2e74120b4ec97d7817e73525717b266ec88ec3be96d242a4bbe",
   "integrity": {
-    "canonical_hash": "4066ca7ae74ead4b87ef209e863c751f232ad69c93d4a84fb892aee8972d32e8",
+    "canonical_hash": "99eba5e247bbb2e74120b4ec97d7817e73525717b266ec88ec3be96d242a4bbe",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "9a448f9d1b9cc9b012b3286baef44e7be2f2efc34344ebfedeae4290d292e508",
-    "signature": "3c4075bc59ff3b71d68dd0cb4d7a3ff999bcc8313511314b75cc7a67c161149f",
-    "up_to_seq": 9179
+    "prev_hash": "56e60a13834531397efb8300490da5a35b52afca23778c9871c33b99b31242fd",
+    "signature": "25e7e0f2c9d278c36cc80feaca5b27928e8be0c4d4d33626651bdbccab49974e",
+    "up_to_seq": 9189
   },
   "state": {
     "aggregate_versions": {
@@ -1020,6 +1020,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-M": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-N": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-P": 1,
+      "CLAIM-20260814-Arquitecto-OPS-hyg-Q": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
@@ -3302,15 +3303,19 @@
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r1-veredicto": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r2": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-veredicto": 1,
+      "MSG-20260814-Analista-to-Arquitecto-VERDICT-TASK-0368-r3": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r1": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r2": 1,
+      "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r3": 1,
       "MSG-20260814-Arquitecto-to-Codex-ACTION-doneflip-TASK-0364": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r2": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r3": 1,
+      "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r4": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R1": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R2": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R3": 1,
+      "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R4": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -3434,6 +3439,7 @@
       "OPS-MAILBOX-HYGIENE-20260814M": 1,
       "OPS-MAILBOX-HYGIENE-20260814N": 1,
       "OPS-MAILBOX-HYGIENE-20260814P": 1,
+      "OPS-MAILBOX-HYGIENE-20260814Q": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3748,7 +3754,7 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 33,
+      "TASK-0368": 37,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
@@ -3784,7 +3790,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8508,
+    "events_applied": 8518,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4312,6 +4318,12 @@
       "arq-hygP-ar1": 9173,
       "arq-hygP-ar2": 9174,
       "arq-hygP-rel": 9175,
+      "arq-hygQ-acq": 9184,
+      "arq-hygQ-ar1": 9185,
+      "arq-hygQ-ar2": 9186,
+      "arq-hygQ-ar3": 9187,
+      "arq-hygQ-ar4": 9188,
+      "arq-hygQ-rel": 9189,
       "arq-hygb-acq-001": 8795,
       "arq-hygb-arch-001": 8796,
       "arq-hygb-arch-002": 8797,
@@ -8605,6 +8617,10 @@
       "codex:task0368:remediation3:delivery-claim:20260814T014721Z": 9164,
       "codex:task0368:remediation3:in-review:20260814T015124Z": 9165,
       "codex:task0368:remediation4:claim-acquire:20260814T102703Z": 9179,
+      "codex:task0368:remediation4:claim-release:20260814T104834Z": 9182,
+      "codex:task0368:remediation4:delivery-claim-acquire:20260814T104024Z": 9180,
+      "codex:task0368:remediation4:delivery-claim-release:20260814T104834Z": 9183,
+      "codex:task0368:remediation4:in-progress-to-in-review:20260814T104834Z": 9181,
       "codex:tasks0325-0334-0335:done-flip:claim-acquire:20260808T084041Z": 7924,
       "codex:tasks0325-0334-0335:done-flip:claim-release:20260808T084041Z": 7928,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -12296,5 +12312,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9179
+  "up_to_seq": 9189
 }
