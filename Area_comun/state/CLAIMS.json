@@ -845,9 +845,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-14T11:56:31Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0368",
             "updated_at": "2026-08-14T11:56:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Codex-TASK-0368-remediation5-delivery",
+            "expires_at": "2026-08-14T16:53:21Z",
+            "notes": "Publish TASK-0368 remediation r5 handoff and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Codex-TASK-0368-remediation5-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+                "Area_comun/mailbox/open/MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R5.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-14T12:53:21Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T12:53:21Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
