@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "fc3e03fb63b4017d41546f8066efc1ab3a65a4297eefec969463ebab455e2627",
+  "canonical_hash": "7cf8b1383acc57037d99d00c21a9e222235102bb32154bd8b96d47fd31bb46d9",
   "integrity": {
-    "canonical_hash": "fc3e03fb63b4017d41546f8066efc1ab3a65a4297eefec969463ebab455e2627",
+    "canonical_hash": "7cf8b1383acc57037d99d00c21a9e222235102bb32154bd8b96d47fd31bb46d9",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "5804c1528cfa3c338a0a3151599f7431ab01041424df781a62dbe1dbcad900d4",
-    "signature": "a0cfa5828c8e63ffb5609dd3c50f27dc9859edbb09bd082fd7a7d80ec5936b23",
-    "up_to_seq": 9262
+    "prev_hash": "f8155fb0f2ac5c4e8e897a1e590d4c568fc8a670913ed5fc4f82f7f25a117a92",
+    "signature": "c74e6116f7f61fdfb8f5268825c5dc24670c72cefbb380d0777ac4c35465fb9f",
+    "up_to_seq": 9263
   },
   "state": {
     "aggregate_versions": {
@@ -3786,7 +3786,7 @@
       "TASK-0364": 21,
       "TASK-0365": 3,
       "TASK-0366": 1,
-      "TASK-0367": 19,
+      "TASK-0367": 20,
       "TASK-0368": 46,
       "TASK-0369": 2,
       "TASK-0370": 1,
@@ -3829,7 +3829,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8591,
+    "events_applied": 8592,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8692,6 +8692,7 @@
       "codex:task0367:in-progress-to-in-review:20260813T080103Z": 9024,
       "codex:task0367:maker-claim-release:20260813T080103Z": 9025,
       "codex:task0367:ready-to-claimed:20260813T074753Z": 9021,
+      "codex:task0367:remediation2:blocked-to-in-progress:20260814T234745Z": 9263,
       "codex:task0367:remediation2:blocked:b1-gate-conflict:20260814T221725Z": 9251,
       "codex:task0367:remediation2:claim:20260814T215842Z": 9250,
       "codex:task0368:remediation1:release-delivery:20260814": 9127,
@@ -12424,5 +12425,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9262
+  "up_to_seq": 9263
 }

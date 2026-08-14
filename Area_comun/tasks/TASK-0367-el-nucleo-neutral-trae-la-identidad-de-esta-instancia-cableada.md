@@ -1,7 +1,7 @@
 ---
 id: TASK-0367
 title: El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda
-status: blocked
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md

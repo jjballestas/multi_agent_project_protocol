@@ -51,10 +51,12 @@ powershell -ExecutionPolicy Bypass -File scripts/harness/peer_mailbox_cron.ps1 `
   -AgentExe "C:\path\to\your-agent.exe" -AgentArgs @("run","--stdin")
 ```
 
-`-AgentProvider Anthropic` resolves `claude` and uses Claude Code print mode with the
-rendered prompt on STDIN. Authentication stays in local CLI state/environment and must
-never be written to the repository. `-AgentProvider Codex` retains the prior default and
-is the tested rollback path. A live checker cutover remains an operator action: stop the
+Without `-AgentExe`, the runner resolves `codex` for `Auto`/`Codex` and `claude` for
+`Anthropic` from `PATH`. `PROTOCOL_REFERENCE_AGENT_COMMAND` and
+`PROTOCOL_ANTHROPIC_AGENT_COMMAND` may override those command names. Anthropic uses Claude
+Code print mode with the rendered prompt on STDIN. Authentication stays in local CLI
+state/environment and must never be written to the repository. `-AgentProvider Codex`
+retains the prior default and is the tested rollback path. A live checker cutover remains an operator action: stop the
 current cron, launch the desired provider, verify its startup log, and reverse those two
 steps to roll back. The runtime directory is unchanged, so seen signatures, PID guards,
 locks, and leases retain their contract across provider changes.
