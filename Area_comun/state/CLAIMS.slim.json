@@ -1,14 +1,15 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260814-Arquitecto-LEDGER-commit",
+            "claim_id": "CLAIM-20260814-Arquitecto-LEDGER-commit-b",
             "owner": "Arquitecto",
             "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-LEDGER-commit-b",
                 "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-LEDGER-commit",
-                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0378-r2",
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json",
-                "Area_comun/state/CLAIMS.slim.json"
+                "Area_comun/state/CLAIMS.slim.json",
+                "personal/Arquitecto/.ledger-commit-anchor"
             ],
             "task_id": "OPS-LEDGER-COMMIT-20260814"
         }

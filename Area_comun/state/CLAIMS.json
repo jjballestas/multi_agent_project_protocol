@@ -559,9 +559,26 @@
                 "Area_comun/state/CLAIMS.slim.json"
             ],
             "started_at": "2026-08-14T21:17:51Z",
-            "status": "active",
+            "status": "released",
             "task_id": "OPS-LEDGER-COMMIT-20260814",
             "updated_at": "2026-08-14T21:17:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Arquitecto-LEDGER-commit-b",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-LEDGER-commit-b",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-LEDGER-commit",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/state/CLAIMS.slim.json",
+                "personal/Arquitecto/.ledger-commit-anchor"
+            ],
+            "started_at": "2026-08-14T21:22:30Z",
+            "status": "active",
+            "task_id": "OPS-LEDGER-COMMIT-20260814",
+            "updated_at": "2026-08-14T21:22:30Z"
         },
         {
             "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-J",
