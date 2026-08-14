@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "554a9f5b02fe8f53b92227e3c8084409322f6e492b15d3e33c63e1af787cb6e9",
+  "canonical_hash": "ddc9bfe7c656eb1cc20b3b4394b2b11c2870f3b1468140c6b2d3625a0d96eeac",
   "integrity": {
-    "canonical_hash": "554a9f5b02fe8f53b92227e3c8084409322f6e492b15d3e33c63e1af787cb6e9",
+    "canonical_hash": "ddc9bfe7c656eb1cc20b3b4394b2b11c2870f3b1468140c6b2d3625a0d96eeac",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "e2d09a8d86d6ecdcd9b6b66e19809a3bcf6fc02cb8e5ad391512fe69abb08083",
-    "signature": "9aa98120d6f933b177fae6f78cb0f595926ec4faca326338608df204bee3276c",
-    "up_to_seq": 9194
+    "prev_hash": "c8800d2ceb98a970fafb2b868c422dac9784cdfd02190c091dedc122b87f1699",
+    "signature": "69607fcba240d4acc851b2c968bb6cc92e9c8474f144fe169540bef3e629c586",
+    "up_to_seq": 9201
   },
   "state": {
     "aggregate_versions": {
@@ -1013,6 +1013,7 @@
       "CLAIM-20260814-Arquitecto-0368-reject-r1": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r2": 1,
       "CLAIM-20260814-Arquitecto-0368-reject-r3": 1,
+      "CLAIM-20260814-Arquitecto-0368-reject-r4": 1,
       "CLAIM-20260814-Arquitecto-DEC-0113-0114": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-K": 1,
@@ -1021,6 +1022,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-N": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-P": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-Q": 1,
+      "CLAIM-20260814-Arquitecto-OPS-hyg-R": 1,
       "CLAIM-20260814-Arquitecto-campo-NOVA": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -3304,11 +3306,13 @@
       "MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0368": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r1-veredicto": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r2": 1,
+      "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r4": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-veredicto": 1,
       "MSG-20260814-Analista-to-Arquitecto-VERDICT-TASK-0368-r3": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r1": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r2": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r3": 1,
+      "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r4": 1,
       "MSG-20260814-Arquitecto-to-Codex-ACTION-doneflip-TASK-0364": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r2": 1,
@@ -3443,6 +3447,7 @@
       "OPS-MAILBOX-HYGIENE-20260814N": 1,
       "OPS-MAILBOX-HYGIENE-20260814P": 1,
       "OPS-MAILBOX-HYGIENE-20260814Q": 1,
+      "OPS-MAILBOX-HYGIENE-20260814R": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3757,7 +3762,7 @@
       "TASK-0365": 3,
       "TASK-0366": 1,
       "TASK-0367": 17,
-      "TASK-0368": 37,
+      "TASK-0368": 39,
       "TASK-0369": 2,
       "TASK-0370": 1,
       "TASK-0371": 1,
@@ -3795,7 +3800,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8523,
+    "events_applied": 8530,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4334,6 +4339,10 @@
       "arq-hygQ-ar3": 9187,
       "arq-hygQ-ar4": 9188,
       "arq-hygQ-rel": 9189,
+      "arq-hygR-acq": 9198,
+      "arq-hygR-ar1": 9199,
+      "arq-hygR-ar2": 9200,
+      "arq-hygR-rel": 9201,
       "arq-hygb-acq-001": 8795,
       "arq-hygb-arch-001": 8796,
       "arq-hygb-arch-002": 8797,
@@ -4964,6 +4973,9 @@
       "arq-x68r3-acq": 9176,
       "arq-x68r3-flip": 9177,
       "arq-x68r3-rel": 9178,
+      "arq-x68r4-acq": 9195,
+      "arq-x68r4-flip": 9196,
+      "arq-x68r4-rel": 9197,
       "arq:0202-0203:acq": 2307,
       "arq:0202-0203:rel": 2310,
       "arq:0204-0205:acq": 2327,
@@ -12322,5 +12334,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9194
+  "up_to_seq": 9201
 }
