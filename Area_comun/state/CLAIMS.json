@@ -424,6 +424,21 @@
             "updated_at": "2026-08-13T23:57:00Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-0368-reject-r2",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-0368-reject-r2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0368",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0368",
+                "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md"
+            ],
+            "started_at": "2026-08-14T01:16:27Z",
+            "status": "released",
+            "task_id": "TASK-0368",
+            "updated_at": "2026-08-14T01:16:27Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-J",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",
@@ -492,6 +507,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260814M",
             "updated_at": "2026-08-14T00:43:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-N",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-N",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r2.md",
+                "Area_comun/mailbox/open/MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r2.md"
+            ],
+            "started_at": "2026-08-14T01:17:29Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814N",
+            "updated_at": "2026-08-14T01:17:29Z"
         },
         {
             "claim_id": "CLAIM-20260814-Arquitecto-gate-colaboracion",
