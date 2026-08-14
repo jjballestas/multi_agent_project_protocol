@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "0aa68dd31a47ecd242aac72107e39998d7072124e4f247586506f4953a4b4882",
+  "canonical_hash": "acbbf1ba8d322cfbebd8111f2e31a175aad2add3d622559a91b213232cfa8183",
   "integrity": {
-    "canonical_hash": "0aa68dd31a47ecd242aac72107e39998d7072124e4f247586506f4953a4b4882",
+    "canonical_hash": "acbbf1ba8d322cfbebd8111f2e31a175aad2add3d622559a91b213232cfa8183",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "491d71d79f948dcd3eef690e9895aefeed73368649216f24426c9da423d2d518",
-    "signature": "f9f28136a0e70c82b25f7ef72e26471ce812e11c1b2f8c2665b26d7edff5da98",
-    "up_to_seq": 9248
+    "prev_hash": "868de139f43cf24d020273d37b85a942d8089f37c8963d3767e92be95c9eb5e3",
+    "signature": "61f4f552f30daae31b96845306f6f681e5fb23c2e965eed0293b62cf0ed80e88",
+    "up_to_seq": 9249
   },
   "state": {
     "aggregate_versions": {
@@ -1019,6 +1019,7 @@
       "CLAIM-20260814-Arquitecto-0385-reg": 1,
       "CLAIM-20260814-Arquitecto-DEC-0113-0114": 1,
       "CLAIM-20260814-Arquitecto-LEDGER-commit": 1,
+      "CLAIM-20260814-Arquitecto-LEDGER-commit-b": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-J": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-K": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-L": 1,
@@ -3828,7 +3829,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8577,
+    "events_applied": 8578,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4780,6 +4781,7 @@
       "arq-l75-004": 8432,
       "arq-l75-099": 8433,
       "arq-ledger-acq": 9236,
+      "arq-ledger-final-rel": 9249,
       "arq-ledger-relold": 9237,
       "arq-ledgerb-acq": 9238,
       "arq-ledgerb-relold": 9239,
@@ -12409,5 +12411,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9248
+  "up_to_seq": 9249
 }
