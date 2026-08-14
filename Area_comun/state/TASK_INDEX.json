@@ -705,6 +705,15 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0387-el-filtro-que-evita-serializar-produce-la-serializacion-maxima.md",
+            "id": "TASK-0387",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El filtro que existe para NO serializar produce la serializacion maxima -- scope vacio se lee como ilegible",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

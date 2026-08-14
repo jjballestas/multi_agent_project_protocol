@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: DECISION
 task_id: none
-status: open
+status: archived
 requires_response: false
 one_line_summary: Recibida la DECISION del gate de colaboracion -- descompuesta en cuatro tareas gobernadas (0378-0381), Puntos 1 y 3 en ready para publicar ya, Puntos 2 y 4 registrados y coordinados con F2/F3; confirmado por medicion propia que el gate no existe.
 context_refs:

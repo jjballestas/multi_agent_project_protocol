@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "GO a la RAIZ del hallazgo del gate de colaboracion (4to de su familia): implementa los CUATRO puntos 6.1-6.4 del reporte NOVA, con el Punto 1 (claim obligatorio para commitear producto) como PRIORIDAD y viviendo en AMBOS ganchos: scripts/check_commit_trailers.py Y .githooks/pre-commit. El Punto 1 se prioriza y publica ya porque es desacoplable de la memoria hibrida (solo-lectura, esquema congelado); los Puntos 2 y 4 se coordinan con F2/F3. Criterio innegociable 2f: cada control entrega prueba de que RECHAZA, no de que pasa. Entregable: cambio de nucleo + nota de version adoptable por upgrade_instance.py; la instancia verifica el rechazo en clon limpio antes de activarlo."

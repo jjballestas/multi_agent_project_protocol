@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "6cd5f0cb7aab8e6e916357e222118a6aa9d831be09b0dc2cb09e009f0d2fc066",
+  "canonical_hash": "0aa68dd31a47ecd242aac72107e39998d7072124e4f247586506f4953a4b4882",
   "integrity": {
-    "canonical_hash": "6cd5f0cb7aab8e6e916357e222118a6aa9d831be09b0dc2cb09e009f0d2fc066",
+    "canonical_hash": "0aa68dd31a47ecd242aac72107e39998d7072124e4f247586506f4953a4b4882",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "75c22a83712161828a0dfd40eaa306809350d9332e9775b489ac6140241d4940",
-    "signature": "8416aadb5cee85f3c44b2ba40a11a0ee4bae48983d82e31b201aa79ee5a0e872",
-    "up_to_seq": 9239
+    "prev_hash": "491d71d79f948dcd3eef690e9895aefeed73368649216f24426c9da423d2d518",
+    "signature": "f9f28136a0e70c82b25f7ef72e26471ce812e11c1b2f8c2665b26d7edff5da98",
+    "up_to_seq": 9248
   },
   "state": {
     "aggregate_versions": {
@@ -1029,6 +1029,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-R": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-S": 1,
       "CLAIM-20260814-Arquitecto-OPS-hyg-T": 1,
+      "CLAIM-20260814-Arquitecto-OPS-hyg-U": 1,
       "CLAIM-20260814-Arquitecto-campo-NOVA": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -3316,12 +3317,16 @@
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r4": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-r5": 1,
       "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0368-veredicto": 1,
+      "MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0378-veredicto": 1,
       "MSG-20260814-Analista-to-Arquitecto-VERDICT-TASK-0368-r3": 1,
+      "MSG-20260814-Arquitecto-to-Analista-ADENDA-TASK-0378-conducta": 1,
+      "MSG-20260814-Arquitecto-to-Analista-ADENDA2-TASK-0378-identidad": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r1": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r2": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r3": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r4": 1,
       "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0368-r5": 1,
+      "MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0378": 1,
       "MSG-20260814-Arquitecto-to-Codex-ACTION-doneflip-TASK-0364": 1,
       "MSG-20260814-Arquitecto-to-Codex-GO-TASK-0378": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368": 1,
@@ -3329,12 +3334,14 @@
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r3": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r4": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r5": 1,
+      "MSG-20260814-Arquitecto-to-Operador-PLAN-gate-colaboracion": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R1": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R2": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R3": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R4": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R5": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0378": 1,
+      "MSG-20260814-Operador-to-Arquitecto-GATE-COLABORACION-claim-producto": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CAMPO-NOVA-20260814": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
@@ -3464,6 +3471,7 @@
       "OPS-MAILBOX-HYGIENE-20260814R": 1,
       "OPS-MAILBOX-HYGIENE-20260814S": 1,
       "OPS-MAILBOX-HYGIENE-20260814T": 1,
+      "OPS-MAILBOX-HYGIENE-20260814U": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -3797,6 +3805,7 @@
       "TASK-0384": 1,
       "TASK-0385": 2,
       "TASK-0386": 1,
+      "TASK-0387": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3819,7 +3828,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8568,
+    "events_applied": 8577,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4010,6 +4019,7 @@
       "arq-0385-ar1": 9231,
       "arq-0385-reg": 9230,
       "arq-0386-reg": 9235,
+      "arq-0387-reg": 9241,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -4383,6 +4393,14 @@
       "arq-hygT-ar3": 9226,
       "arq-hygT-ar4": 9227,
       "arq-hygT-rel": 9228,
+      "arq-hygU-acq": 9240,
+      "arq-hygU-ar1": 9242,
+      "arq-hygU-ar2": 9243,
+      "arq-hygU-ar3": 9244,
+      "arq-hygU-ar4": 9245,
+      "arq-hygU-ar5": 9246,
+      "arq-hygU-ar6": 9247,
+      "arq-hygU-rel": 9248,
       "arq-hygb-acq-001": 8795,
       "arq-hygb-arch-001": 8796,
       "arq-hygb-arch-002": 8797,
@@ -12391,5 +12409,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9239
+  "up_to_seq": 9248
 }

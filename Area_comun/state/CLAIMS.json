@@ -755,6 +755,33 @@
             "updated_at": "2026-08-14T13:22:18Z"
         },
         {
+            "claim_id": "CLAIM-20260814-Arquitecto-OPS-hyg-U",
+            "expires_at": "2026-08-15T23:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260814-Arquitecto-OPS-hyg-U",
+                "Area_comun/tasks/TASK-0387-el-filtro-que-evita-serializar-produce-la-serializacion-maxima.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0387",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0387",
+                "Area_comun/mailbox/open/MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0378-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Analista-to-Arquitecto-REVIEW-TASK-0378-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Analista-ADENDA-TASK-0378-conducta.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Analista-ADENDA-TASK-0378-conducta.md",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Analista-ADENDA2-TASK-0378-identidad.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Analista-ADENDA2-TASK-0378-identidad.md",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0378.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Analista-REVIEW-TASK-0378.md",
+                "Area_comun/mailbox/open/MSG-20260814-Arquitecto-to-Operador-PLAN-gate-colaboracion.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Arquitecto-to-Operador-PLAN-gate-colaboracion.md",
+                "Area_comun/mailbox/open/MSG-20260814-Operador-to-Arquitecto-GATE-COLABORACION-claim-producto.md",
+                "Area_comun/mailbox/archived/MSG-20260814-Operador-to-Arquitecto-GATE-COLABORACION-claim-producto.md"
+            ],
+            "started_at": "2026-08-14T21:28:14Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260814U",
+            "updated_at": "2026-08-14T21:28:14Z"
+        },
+        {
             "claim_id": "CLAIM-20260814-Arquitecto-campo-NOVA",
             "expires_at": "2026-08-15T23:00:00Z",
             "owner": "Arquitecto",

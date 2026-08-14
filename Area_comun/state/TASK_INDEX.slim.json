@@ -251,6 +251,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El gate se fia de dos fuentes que el propio actor escribe -- una cadena de git config y una fila JSON sin commitear"
+        },
+        {
+            "id": "TASK-0387",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El filtro que existe para NO serializar produce la serializacion maxima -- scope vacio se lee como ilegible"
         }
     ],
     "view": "task_index.slim"
