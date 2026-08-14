@@ -3167,6 +3167,78 @@ Body is not indexed.
                 check_memory_db_drift.fast_check(root)
 
 
+    def _make_f2_fixture(self, root: Path) -> None:
+        make_fixture(root)
+        task_path = "Area_comun/tasks/TASK-9000-closed.md"
+        write(root / task_path, "---\nid: TASK-9000\ntask_id: TASK-9000\ntitle: Closed fixture\nstatus: done\ntype: implementation\nowner: X\nclosed_at: 2026-01-01\n" f"file: {task_path}\n---\n\nFixture body.\n")
+        write(root / "Area_comun/state/TASK_INDEX.json", json.dumps({"schema_version": "1.0", "tasks": [{"id": "TASK-9000", "status": "done", "owner": "X", "type": "implementation", "title": "Closed fixture", "file": task_path}]}, sort_keys=True) + "\n")
+        write(root / "Area_comun/state/CLAIMS.json", '{"claims":[],"schema_version":"1.0"}\n')
+        write(root / memory_db.RULES_PATH, json.dumps({"schema_version": "1.0", "rules": [{"rule_id": "RULE-FIXTURE", "artifact_type": "task", "selector": "status=done", "target_retention_class": "cold", "window_days": None, "window_count": 0, "requires_stub": True, "requires_active_policy_check": False, "enabled": True, "created_by_decision": "DECISION-FIXTURE"}]}, sort_keys=True) + "\n")
+        commit_fixture(root, "F2 fixture")
+
+    def test_f2_proposal_is_rule_derived_claim_safe_and_read_only(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="memory-f2-proposal-") as temp:
+            root = Path(temp)
+            self._make_f2_fixture(root)
+            before = git(root, "status", "--porcelain")
+            proposed = memory_db.propose_cold(root)
+            self.assertEqual(before, git(root, "status", "--porcelain"))
+            self.assertEqual(1, proposed["candidate_count"])
+            candidate_path = proposed["candidates"][0]["original_path"]
+            self.assertEqual(1, proposed["candidates"][0]["requires_stub"])
+            rules = json.loads((root / memory_db.RULES_PATH).read_text(encoding="utf-8"))
+            rules["rules"][0]["selector"] = "status=blocked"
+            write(root / memory_db.RULES_PATH, json.dumps(rules, sort_keys=True) + "\n")
+            self.assertEqual(0, memory_db.propose_cold(root)["candidate_count"])
+            rules["rules"][0]["selector"] = "status=done"
+            write(root / memory_db.RULES_PATH, json.dumps(rules, sort_keys=True) + "\n")
+            write(root / "Area_comun/state/CLAIMS.json", json.dumps({"claims": [{"status": "active", "scope": [candidate_path]}]}) + "\n")
+            self.assertEqual(0, memory_db.propose_cold(root)["candidate_count"])
+
+    def test_f2_stub_golden_is_exact_and_keeps_original_pointer(self) -> None:
+        candidate = memory_db.ColdCandidate("TASK-9000", "Area_comun/tasks/TASK-9000-closed.md", "task", "done", "2026-01-01", "a" * 64, "RULE-FIXTURE", 1)
+        cold_path = "Area_comun/archive/cold-packs/CP-1/Area_comun/tasks/TASK-9000-closed.md"
+        rendered = memory_db.render_stub(candidate, cold_path, "b" * 40)
+        expected = ("---\nartifact_id: TASK-9000\nstatus: done\nstorage: cold_stub\n" f"cold_path: {cold_path}\nsha256: {'a' * 64}\n" f"git_commit_at_freeze: {'b' * 40}\n" "rehydration_command: python scripts/memory/query_memory_db.py --retrieve TASK-9000\n---\n\nThis artifact is stored in the canonical cold archive.\n").encode("ascii")
+        self.assertEqual(expected, rendered)
+        self.assertNotEqual(expected.replace(b"status: done", b"status: blocked"), rendered)
+
+    def test_f2_stub_at_original_task_path_keeps_canonical_validator_green(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="memory-f2-stub-validator-") as temp:
+            root = Path(temp)
+            shutil.copytree(ROOT / "examples/minimal_instance", root, dirs_exist_ok=True)
+            original_path = "Area_comun/tasks/TASK-0001-implementer-minimal-instance.md"
+            candidate = memory_db.ColdCandidate("TASK-0001", original_path, "task", "done", None, "a" * 64, "RULE-FIXTURE", 1)
+            (root / original_path).write_bytes(memory_db.render_stub(candidate, f"Area_comun/archive/cold-packs/CP-1/{original_path}", "b" * 40))
+            result = subprocess.run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], text=True, capture_output=True)
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+    def test_f2_manifest_golden_and_cold_pack_round_trip(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="memory-f2-manifest-") as temp:
+            root = Path(temp)
+            make_fixture(root)
+            pack_path = "Area_comun/archive/cold-packs/CP-1"
+            header = {"pack_id": "CP-1", "pack_type": "task_history", "path": pack_path, "git_ref": "refs/heads/main", "created_at": "2026-08-15"}
+            artifact = {"artifact_id": "TASK-9000", "original_path": "Area_comun/tasks/TASK-9000.md", "cold_path": f"{pack_path}/Area_comun/tasks/TASK-9000.md", "sha256": "a" * 64, "git_commit_at_freeze": "b" * 40, "artifact_type": "task", "status": "done", "closed_at": "2026-01-01"}
+            rendered = memory_db.render_pack_manifest(header, [artifact])
+            self.assertEqual(rendered, memory_db.render_pack_manifest(header, [artifact]))
+            mutated = dict(artifact)
+            mutated["status"] = "blocked"
+            self.assertNotEqual(rendered, memory_db.render_pack_manifest(header, [mutated]))
+            write(root / pack_path / "pack.manifest.json", rendered.decode("ascii"))
+            commit = commit_fixture(root, "cold manifest")
+            row = memory_db.load_cold_packs(root, commit)[0]
+            self.assertEqual(("CP-1", "task_history", pack_path, "refs/heads/main", "2026-08-15"), row[:5])
+            self.assertEqual((memory_db.sha256_bytes(rendered), 1), row[5:])
+
+    def test_f2_manifest_index_golden_rejects_missing_field(self) -> None:
+        row = {"pack_id": "CP-1", "path": "Area_comun/archive/cold-packs/CP-1", "sha256_manifest": "a" * 64, "artifact_count": 1}
+        rendered = memory_db.render_manifest_index([row])
+        self.assertEqual(rendered, memory_db.render_manifest_index([row]))
+        with self.assertRaisesRegex(ValueError, "incomplete"):
+            memory_db.render_manifest_index([{key: value for key, value in row.items() if key != "sha256_manifest"}])
+
+
 def domain_pii_default_violations(module_paths: tuple[Path, ...]) -> list[str]:
     violations: list[str] = []
     for module_path in module_paths:

@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "artifact_type": "task",
+      "created_by_decision": "DECISION-0100",
+      "enabled": true,
+      "requires_active_policy_check": false,
+      "requires_stub": true,
+      "rule_id": "RULE-TASK-DONE-COLD-PROPOSAL",
+      "selector": "status=done",
+      "target_retention_class": "cold",
+      "window_count": 100,
+      "window_days": null
+    }
+  ],
+  "schema_version": "1.0"
+}

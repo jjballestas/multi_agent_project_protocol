@@ -113,6 +113,10 @@ EVENTS_PATH = Path("runtime/state/events.jsonl")
 LEDGER_LOCK_PATH = Path("runtime/state/.ledger.lock")
 RULES_PATH = "Area_comun/protocol/MEMORY_HOT_COLD_RULES.json"
 POLICY_PATH = "Area_comun/protocol/MEMORY_INDEX_POLICY.json"
+TASK_INDEX_PATHS = (
+    "Area_comun/state/TASK_INDEX.json",
+    "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+)
 def account_identifier_checksum_is_valid(value: str) -> bool:
     compact = ACCOUNT_IDENTIFIER_SEPARATORS_RE.sub("", value).upper()
     if not re.fullmatch(r"[A-Z]{2}\d{2}[A-Z0-9]{10,30}", compact, re.ASCII):
@@ -303,6 +307,18 @@ class SourceArtifact:
     data: bytes
     frontmatter: dict[str, Any]
     metadata: dict[str, Any]
+
+
+@dataclass(frozen=True)
+class ColdCandidate:
+    artifact_id: str
+    original_path: str
+    artifact_type: str
+    status: str
+    closed_at: str | None
+    sha256: str
+    rule_id: str
+    requires_stub: int
 
 
 @dataclass(frozen=True)
@@ -1189,6 +1205,207 @@ def load_hot_cold_rules(root: Path, commit: str) -> list[tuple[Any, ...]]:
     return sorted(rows)
 
 
+def _working_json(root: Path, relative: str) -> Any:
+    try:
+        return json.loads((root / relative).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError(f"invalid JSON source: {relative}") from error
+
+
+def _working_rules(root: Path) -> list[dict[str, Any]]:
+    payload = _working_json(root, RULES_PATH)
+    rules = payload.get("rules") if isinstance(payload, dict) else None
+    if not isinstance(rules, list) or not all(isinstance(item, dict) for item in rules):
+        raise ValueError("canonical hot/cold rules require a rules object array")
+    required = {
+        "rule_id", "artifact_type", "selector", "target_retention_class",
+        "requires_stub", "requires_active_policy_check", "enabled",
+    }
+    for rule in rules:
+        missing = sorted(required - set(rule))
+        if missing:
+            raise ValueError(f"hot/cold rule missing fields: {', '.join(missing)}")
+        if rule["artifact_type"] not in ARTIFACT_TYPES:
+            raise ValueError(f"invalid rule artifact_type: {rule['artifact_type']}")
+        if rule["target_retention_class"] not in {
+            "hot", "warm", "cold", "sealed", "do_not_archive"
+        }:
+            raise ValueError("invalid target_retention_class")
+        for field in ("requires_stub", "requires_active_policy_check", "enabled"):
+            if rule[field] not in (0, 1, False, True):
+                raise ValueError(f"{field} must be boolean")
+    return rules
+
+
+def _merged_task_records(root: Path) -> list[dict[str, Any]]:
+    merged: dict[str, dict[str, Any]] = {}
+    for relative in TASK_INDEX_PATHS:
+        path = root / relative
+        if not path.is_file():
+            continue
+        payload = _working_json(root, relative)
+        rows = payload.get("tasks", []) if isinstance(payload, dict) else []
+        if not isinstance(rows, list):
+            raise ValueError(f"tasks must be an array: {relative}")
+        for row in rows:
+            if isinstance(row, dict) and isinstance(row.get("id"), str):
+                merged[row["id"]] = row
+    return [merged[key] for key in sorted(merged)]
+
+
+def referenced_index_paths(root: Path) -> set[str]:
+    result: set[str] = set()
+    for task in _merged_task_records(root):
+        for field in ("file", "deliverables"):
+            values = task.get(field, [])
+            if isinstance(values, str):
+                values = [values]
+            if isinstance(values, list):
+                result.update(
+                    value.replace("\\", "/") for value in values
+                    if isinstance(value, str) and value
+                )
+    return result
+
+
+def active_claim_paths(root: Path) -> set[str]:
+    payload = _working_json(root, "Area_comun/state/CLAIMS.json")
+    rows = payload.get("claims", []) if isinstance(payload, dict) else []
+    paths: set[str] = set()
+    for claim in rows:
+        if not isinstance(claim, dict) or claim.get("status") != "active":
+            continue
+        for raw in claim.get("scope", []):
+            if isinstance(raw, str):
+                paths.add(raw.split("#", 1)[0].replace("\\", "/").rstrip("/"))
+    return paths
+
+
+def _path_is_claimed(path: str, claimed: set[str]) -> bool:
+    return any(path == scope or path.startswith(scope + "/") for scope in claimed)
+
+
+def _selector_matches(selector: str, artifact: SourceArtifact) -> bool:
+    for expression in selector.split("&"):
+        if "=" not in expression:
+            raise ValueError(f"unsupported hot/cold selector: {selector}")
+        key, expected = (part.strip() for part in expression.split("=", 1))
+        actual: Any = artifact.artifact_type if key == "artifact_type" else artifact.metadata.get(key)
+        if str(actual or "").casefold() != expected.casefold():
+            return False
+    return True
+
+
+def _proposal_artifacts(root: Path, commit: str, at: str) -> tuple[list[SourceArtifact], list[str]]:
+    db_path = root / DB_PATH
+    if at == "HEAD" and db_path.is_file():
+        connection = sqlite3.connect(f"file:{db_path.as_posix()}?mode=ro", uri=True)
+        try:
+            rows = connection.execute(
+                "SELECT artifact_id,original_path,artifact_type,status,created_at,closed_at,sha256 "
+                "FROM artifacts WHERE is_hot=1"
+            ).fetchall()
+        finally:
+            connection.close()
+        return ([
+            SourceArtifact(
+                root / row[1], row[1], row[2], row[0], b"", {},
+                {"status": row[3], "created_at": row[4], "closed_at": row[5], "_sha256": row[6]},
+            )
+            for row in rows
+        ], [])
+    return load_artifacts(root, commit)
+
+
+def propose_cold(root: Path, *, at: str = "HEAD") -> dict[str, Any]:
+    root = root.resolve()
+    commit = git_commit(root, at)
+    artifacts, warnings = _proposal_artifacts(root, commit, at)
+    referenced = referenced_index_paths(root)
+    claimed = active_claim_paths(root)
+    candidates: dict[str, ColdCandidate] = {}
+    enabled_rules = [
+        rule for rule in _working_rules(root)
+        if bool(rule["enabled"]) and rule["target_retention_class"] == "cold"
+    ]
+    for rule in sorted(enabled_rules, key=lambda item: item["rule_id"]):
+        matching = [
+            artifact for artifact in artifacts
+            if artifact.artifact_type == rule["artifact_type"]
+            and _selector_matches(str(rule["selector"]), artifact)
+            and not _path_is_claimed(artifact.relative_path, claimed)
+        ]
+        matching.sort(
+            key=lambda artifact: (
+                str(artifact.metadata.get("closed_at") or artifact.metadata.get("created_at") or ""),
+                artifact.relative_path,
+            ),
+            reverse=True,
+        )
+        window_count = rule.get("window_count")
+        if isinstance(window_count, int) and window_count:
+            matching = matching[window_count:]
+        for artifact in matching:
+            requires_stub = int(bool(rule["requires_stub"]) or artifact.relative_path in referenced)
+            if artifact.relative_path in referenced and not requires_stub:
+                raise ValueError(f"referenced candidate requires a stub: {artifact.relative_path}")
+            candidates[artifact.relative_path] = ColdCandidate(
+                artifact.artifact_id,
+                artifact.relative_path,
+                artifact.artifact_type,
+                str(artifact.metadata.get("status") or ""),
+                artifact.metadata.get("closed_at"),
+                str(artifact.metadata.get("_sha256") or sha256_bytes(artifact.data)),
+                str(rule["rule_id"]),
+                requires_stub,
+            )
+    return {
+        "at": commit,
+        "candidate_count": len(candidates),
+        "candidates": [candidate.__dict__ for candidate in candidates.values()],
+        "mode": "propose-cold-dry-run",
+        "rules_evaluated": [str(rule["rule_id"]) for rule in enabled_rules],
+        "warnings": warnings,
+    }
+
+
+def render_stub(candidate: ColdCandidate, cold_path: str, git_commit: str) -> bytes:
+    payload = (
+        "---\n"
+        f"artifact_id: {candidate.artifact_id}\n"
+        f"status: {candidate.status}\n"
+        "storage: cold_stub\n"
+        f"cold_path: {cold_path}\n"
+        f"sha256: {candidate.sha256}\n"
+        f"git_commit_at_freeze: {git_commit}\n"
+        f"rehydration_command: python scripts/memory/query_memory_db.py --retrieve {candidate.artifact_id}\n"
+        "---\n\n"
+        "This artifact is stored in the canonical cold archive.\n"
+    )
+    return payload.encode("ascii")
+
+
+def render_pack_manifest(pack: dict[str, Any], artifacts: list[dict[str, Any]]) -> bytes:
+    required_pack = {"pack_id", "pack_type", "path", "git_ref", "created_at"}
+    required_artifact = {
+        "artifact_id", "original_path", "cold_path", "sha256",
+        "git_commit_at_freeze", "artifact_type", "status", "closed_at",
+    }
+    if required_pack - set(pack):
+        raise ValueError("pack manifest header is incomplete")
+    if any(required_artifact - set(item) for item in artifacts):
+        raise ValueError("pack manifest artifact is incomplete")
+    payload = {"artifacts": sorted(artifacts, key=lambda item: item["original_path"]), "pack": pack}
+    return (json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=True) + "\n").encode("ascii")
+
+
+def render_manifest_index(packs: list[dict[str, Any]]) -> bytes:
+    required = {"pack_id", "path", "sha256_manifest", "artifact_count"}
+    if any(required - set(item) for item in packs):
+        raise ValueError("manifest index row is incomplete")
+    return (json.dumps({"packs": sorted(packs, key=lambda item: item["pack_id"])}, indent=2, sort_keys=True) + "\n").encode("ascii")
+
+
 def decision_policy_state(metadata: dict[str, Any], policy: dict[str, Any]) -> str:
     """A decision is current unless supersession or its status says otherwise."""
     mapping = policy["decision_policy_state"]
@@ -1504,11 +1721,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--db", default=str(DB_PATH))
     parser.add_argument("--at", default="HEAD")
     parser.add_argument("--rebuild", action="store_true")
+    parser.add_argument("--propose-cold", action="store_true")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    if args.propose_cold:
+        print(json.dumps(propose_cold(Path(args.root), at=args.at), sort_keys=True))
+        return 0
     result = build(
         Path(args.root), Path(args.db), rebuild=args.rebuild, at=args.at
     )
