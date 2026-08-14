@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0115
 title: Que significa "verificado" -- toda afirmacion de verificacion declara su alcance, y un gate que no se repite no es un gate
-status: proposed
+status: accepted
 date: 2026-08-14
-ratified_at: null
+ratified_at: 2026-08-14
 deciders: [operador humano, Arquitecto]
 supersedes: []
 superseded_by: []
