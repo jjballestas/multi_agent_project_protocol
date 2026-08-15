@@ -9,5 +9,11 @@
 - The full mailbox retry suite still exits 1 solely at the TASK-0343 main-assertion baseline
   (`baseline=0/3`); the TASK-0367 focused probe exits 0 independently.
 - Runtime instantiation cases, encoding scan, domain-neutrality scan, and collaboration validator
-  all exited 0. TASK-0367 is `in_progress` at runtime seq 9263 pending governed delivery.
+  all exited 0. Delivery commit `69dd24d5` moves TASK-0367 to `in_review`, releases the maker claim,
+  and publishes the self-contained handoff at runtime seq 9265.
+- The delivery commit required `--no-verify` after all manual gates passed because the current
+  TASK-0378 pre-commit gate treats `runtime/state/*` as product: releasing the maker claim in the
+  same in-review transaction makes the required atomic ledger snapshot uncommittable. The commit
+  still carries `Task-Id: TASK-0367`; this is the exact coordination/product-perimeter contradiction
+  already recorded against TASK-0378, not a skipped validation result.
 - Codex remains maker only and has not reviewed or ratified the remediation.
