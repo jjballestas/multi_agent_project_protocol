@@ -47,8 +47,9 @@ Machine-readable contract used by the shipped proof:
 
 Purpose: wake the coordinator when another participant opens a delivery message.
 Mailbox filenames are the primary signal because
-`MSG-<date>-<sender>-<recipient>-*.md` identifies the sender independently of
-Git identity. Commit inspection is secondary context only.
+`MSG-<date>-<sender>-to-<recipient>-*.md` identifies the sender independently of
+Git identity. The date, sender, and recipient components must not contain `-`;
+`-to-` is the sender/recipient delimiter. Commit inspection is secondary context only.
 
 Algorithm:
 
@@ -61,8 +62,10 @@ Algorithm:
 3. Loop every `<POLL_SECONDS>` seconds.
 4. Compare the current mailbox file list with the prior list. For every new
    matching filename, parse its sender and recipient from the filename and emit
-   one delivery alert. Do this even when its commit has the same author, model,
-   provider signature, or co-author trailer as a coordinator commit.
+   one delivery alert. If a matching filename does not parse, emit one diagnostic
+   delivery alert containing the raw filename; never discard it silently. Do this
+   even when its commit has the same author, model, provider signature, or
+   co-author trailer as a coordinator commit.
 5. If the current ref differs from `base`, inspect each commit in
    `base..current` using subject plus body as secondary context.
 6. Ignore a commit only when it has the exact trailer
@@ -96,7 +99,10 @@ and a real mailbox directory-listing delta emits the alert independently of
 commit position.
 
 The commit filter only reduces noise. Its silence is not evidence that no work
-was delivered; only the mailbox signal is authoritative for delivery alerts.
+was delivered; only the mailbox signal is authoritative for delivery alerts. A
+commit-only delivery that opens no mailbox message can therefore be completely
+invisible, especially when a copied or inherited marker hides its commit. Every
+delivery in an instance using this watchdog must open one mailbox message.
 
 Response after an alert:
 

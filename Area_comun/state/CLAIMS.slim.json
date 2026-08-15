@@ -1,5 +1,22 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0392-remediation2",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392-remediation2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0392",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0392",
+                "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+                "skills/session-watchdogs.skill.md",
+                "scripts/harness/test_session_watchdog_filter.py",
+                "scripts/harness/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0392"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

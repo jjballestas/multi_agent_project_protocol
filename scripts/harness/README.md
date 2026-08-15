@@ -105,6 +105,9 @@ coordinator as its primary delivery signal. Its optional commit self-filter uses
 an exact `Protocol-Monitor-Origin` value written only by that coordination
 session; Git author and provider/model trailers are never identity evidence. The
 commit filter is advisory and copiable, so its silence is not delivery evidence.
+Every delivery must therefore open a mailbox message. A matching filename that
+does not follow `MSG-<date>-<sender>-to-<recipient>-*.md` is alerted with its raw
+name instead of being silently discarded.
 The watchdog requires a shared worktree unless an instance runbook materializes
 both the watched ref and mailbox inside each poll. Before relying on the setup,
 run the four-real-commit discrimination proof documented in

@@ -24,7 +24,7 @@ intake:
     de git no distingue a los agentes) y de TASK-0383.
   acceptance:
     - "AC1 (la senal primaria no depende de la identidad git): el monitor detecta una entrega por el
-      MAILBOX -- un `MSG-<fecha>-<emisor>-<destino>-*.md` lleva el emisor en el NOMBRE del fichero --
+      MAILBOX -- un `MSG-<fecha>-<emisor>-to-<destino>-*.md` lleva el emisor en el NOMBRE del fichero --
       y no por el autor ni la firma del commit. Se acredita con una entrega de peon cuyo commit es
       indistinguible del propio: el monitor avisa igual."
     - "AC2 (el self-filter va por marca propia): el descarte de los commits del coordinador se hace

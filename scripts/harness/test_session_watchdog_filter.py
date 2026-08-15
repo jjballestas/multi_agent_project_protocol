@@ -19,6 +19,7 @@ MARKER = "coord-session-proof-7f6d"
 MODEL_TRAILER = "Co-Authored-By: Claude (Opus) <shared-model@example.invalid>"
 CONTRACT_RE = re.compile(r"^[ ]*WATCHDOG_COMMIT_TRAILER = ([A-Za-z0-9-]+)[ ]*$", re.MULTILINE)
 MESSAGE_RE = re.compile(r"^MSG-[^-]+-(?P<sender>[^-]+)-to-(?P<recipient>[^-]+)-.+\.md$")
+OBSOLETE_GUIDE_TOKENS = ("<SELF_COMMIT_FILTER>",)
 
 
 def run(repo: Path, *args: str) -> str:
@@ -46,15 +47,27 @@ def load_trailer_key(guide: Path) -> str:
     matches = CONTRACT_RE.findall(text)
     if len(matches) != 1:
         raise ValueError("guide must expose exactly one WATCHDOG_COMMIT_TRAILER contract")
+    obsolete = [token for token in OBSOLETE_GUIDE_TOKENS if token in text]
+    if obsolete:
+        raise ValueError(
+            "guide still prescribes an identity-based self-filter: " + ", ".join(obsolete)
+        )
     return matches[0]
 
 
 def classify(guide: Path, marker: str, records: list[str]) -> dict[str, list[str]]:
     trailer_key = load_trailer_key(guide)
-    token = f"{trailer_key}: {marker}"
+    trailer = re.compile(
+        rf"^{re.escape(trailer_key)}:[ \t]*{re.escape(marker)}[ \t]*$", re.MULTILINE
+    )
+
+    def has_exact_trailer(record: str) -> bool:
+        fields = record.split("\x1f", 2)
+        return len(fields) == 3 and trailer.search(fields[2]) is not None
+
     return {
-        "filtered": [record for record in records if token in record],
-        "visible": [record for record in records if token not in record],
+        "filtered": [record for record in records if has_exact_trailer(record)],
+        "visible": [record for record in records if not has_exact_trailer(record)],
     }
 
 
@@ -69,6 +82,8 @@ def mailbox_additions(mailbox_dir: Path, previous: set[str], pattern: str) -> li
         match = MESSAGE_RE.fullmatch(name)
         if match:
             alerts.append({"name": name, **match.groupdict()})
+        else:
+            alerts.append({"name": name, "unparsed": "true"})
     return alerts
 
 
@@ -121,6 +136,12 @@ def proof(scratch: Path, guide: Path) -> int:
             if record.strip()
         ]
         result = invoke_shipped_filter(Path(__file__).resolve(), guide, records)
+        false_positive_records = [
+            f"subject\x1fShared Actor\x1fmentions Protocol-Monitor-Origin: {MARKER} in prose",
+            f"subject Protocol-Monitor-Origin: {MARKER}\x1fShared Actor\x1fclean body",
+            f"hash\x1fProtocol-Monitor-Origin: {MARKER}\x1fclean body",
+        ]
+        false_positive_result = classify(guide, MARKER, false_positive_records)
         old_own = [record for record in records if "Co-Authored-By: Claude (Opus)" in record]
         same_identity = all("\x1fShared Actor\x1f" in record and MODEL_TRAILER in record for record in records)
         alerts = mailbox_additions(mailbox_dir, before, "*-to-Coordinator-*")
@@ -128,15 +149,36 @@ def proof(scratch: Path, guide: Path) -> int:
             "name": "MSG-20990101-Worker-to-Coordinator-HANDOFF.md",
             "sender": "Worker", "recipient": "Coordinator",
         }]
+        malformed_name = "MSG-2099-01-01-Worker-Coordinator-HANDOFF.md"
+        (mailbox_dir / malformed_name).write_text("delivery\n", encoding="ascii")
+        noisy_unparsed = mailbox_additions(
+            mailbox_dir,
+            {"MSG-20990101-Worker-to-Coordinator-HANDOFF.md"},
+            "MSG-*",
+        ) == [{"name": malformed_name, "unparsed": "true"}]
+        parsed_control = mailbox_additions(
+            mailbox_dir,
+            {malformed_name},
+            "MSG-*",
+        ) == [{
+            "name": "MSG-20990101-Worker-to-Coordinator-HANDOFF.md",
+            "sender": "Worker", "recipient": "Coordinator",
+        }]
         if not (len(records) == 4 and len(result["filtered"]) == 2 and len(result["visible"]) == 2):
             raise AssertionError("shipped marker filter did not produce the required 2/2 split")
         if len(old_own) != 4:
             raise AssertionError("historical provider/model filter did not reproduce the 4/4 silent watchdog")
+        if false_positive_result != {"filtered": [], "visible": false_positive_records}:
+            raise AssertionError("marker text outside an exact trailer was incorrectly filtered")
         if not same_identity:
             raise AssertionError("fixture commits do not share Git and provider/model identity")
         if not mailbox_alert:
             raise AssertionError("mailbox directory-listing delta did not emit the worker delivery alert")
-        print("OK: old filter silenced 4/4; shipped filter split 2/2; mailbox listing alerted")
+        if not noisy_unparsed:
+            raise AssertionError("unparseable matching mailbox filename was silently discarded")
+        if not parsed_control:
+            raise AssertionError("parseable mailbox filename did not emit exactly one normal alert")
+        print("OK: old filter silenced 4/4; shipped filter split 2/2; mailbox listing alerted; malformed name alerted")
         return 0
     finally:
         if repo.exists():

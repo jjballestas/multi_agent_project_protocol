@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c8086590f7da9062453f7ca797a3b0f6e3984df11dcff88e22104ffb9027c180",
+  "canonical_hash": "92e5e38d57641034e7f5ef21719b67d12c97ce60ef4f448c7f5f2f78ea468852",
   "integrity": {
-    "canonical_hash": "c8086590f7da9062453f7ca797a3b0f6e3984df11dcff88e22104ffb9027c180",
+    "canonical_hash": "92e5e38d57641034e7f5ef21719b67d12c97ce60ef4f448c7f5f2f78ea468852",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "a9ada8a8b4998bdbce6fcc54f43dccb3de446748e631976021720722ab56739c",
-    "signature": "6f97e4eaea3e4538009d481c2f92c37beb3b335b58d8dbdd761f67a4d8b54270",
-    "up_to_seq": 9377
+    "prev_hash": "1a865a308884df65293f5db6e5984f23376a8971d4ed6dc9ab04494e041dba15",
+    "signature": "00a5dc37b184da346f336aa58d9ba9179f29376ffdb6a2baf027ac587dbcc2b2",
+    "up_to_seq": 9378
   },
   "state": {
     "aggregate_versions": {
@@ -3855,7 +3855,7 @@
       "TASK-0389": 1,
       "TASK-0390": 2,
       "TASK-0391": 2,
-      "TASK-0392": 17,
+      "TASK-0392": 18,
       "TASK-0393": 1,
       "TASK-0394": 3,
       "TASK-0395": 7,
@@ -3881,7 +3881,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8706,
+    "events_applied": 8707,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -11996,6 +11996,7 @@
       "intent:Codex:claim:ff7beae2a07a336b83c89501f4593e44c2c31f962241b8931ba345453fa339cf": 3848,
       "intent:Codex:claim:ff9a0bb12e8777690ca8c468eba91f6bd8df0c18b8017efb278bbf511623a448": 8942,
       "intent:Codex:claim:ffd018d20df9063a70a0036cf00f3ccaf1302e5fbb514301094da14c23bc2157": 3915,
+      "intent:Codex:claim:ffe6b73f265b5dbdb3b0fd077b37e493dfe8f9a47be610589964f41f7f3958d2": 9378,
       "intent:Codex:exception:23ccd134c599c59655c1a320d437a7069182f10a13b7259eaf9ed87bc2d35cff": 3304,
       "intent:Codex:exception:ec36fa23d8397330d71f765d678c3fda41768a26ab8c0c645359cfa8cd16ae5d": 3305,
       "intent:Codex:task0354:remediation4:release-delivery:20260811T150647Z": 8803,
@@ -12591,5 +12592,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9377
+  "up_to_seq": 9378
 }
