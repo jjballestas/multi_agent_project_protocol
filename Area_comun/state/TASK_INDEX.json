@@ -777,6 +777,15 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md",
+            "id": "TASK-0395",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

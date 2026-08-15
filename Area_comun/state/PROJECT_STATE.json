@@ -367,6 +367,12 @@
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos"
         },
         {
+            "id": "TASK-0395",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

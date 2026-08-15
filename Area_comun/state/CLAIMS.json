@@ -1174,6 +1174,21 @@
             "updated_at": "2026-08-15T09:12:14Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-0395",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-0395",
+                "Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0395",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0395"
+            ],
+            "started_at": "2026-08-15T09:26:31Z",
+            "status": "released",
+            "task_id": "TASK-0395",
+            "updated_at": "2026-08-15T09:26:31Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-cierre-F2b",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",
@@ -1590,6 +1605,27 @@
             "status": "active",
             "task_id": "TASK-0392",
             "updated_at": "2026-08-15T09:12:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0392-delivery",
+            "expires_at": "2026-08-15T11:21:56Z",
+            "notes": "Publish TASK-0392 maker handoff, move to in_review, and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392",
+                "Area_comun/state/TASK_INDEX.json#TASK-0392",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0392",
+                "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0392-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0392.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T09:21:56Z",
+            "status": "active",
+            "task_id": "TASK-0392",
+            "updated_at": "2026-08-15T09:21:56Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
