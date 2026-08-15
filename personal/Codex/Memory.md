@@ -6880,3 +6880,70 @@ ratified its own work.
 - Commit `dee30c60` materializes the runtime-updated task frontmatter left outside the concurrent
   Arquitecto coordination commit. TASK-0359 is now in independent review; Codex did not review or
   ratify the remediation. The commit hook reports Architect-owned pruning due at 90.48 percent.
+
+## 2026-08-11 - TASK-0361 implementation
+
+- Commit `0205c056` replaces the fixed eight-second process-tree probe lifetime with a runtime
+  derivation from two measured instrument traversals, the declared 4.5-second probe delay, and a
+  safety margin of at least five seconds or twice the observed traversal cost.
+- Every healthy, blocked, retiring-child, and mutant probe now proves that its child remained alive
+  through the second CPU sample and emits the measured cost, derived lifetime, and margin in failure
+  diagnostics. The suite runner accumulates failures, runs all 30 cases, reports a final summary,
+  and returns nonzero only after reporting every case.
+- The exec-lease harness passed 30/30 in three consecutive full runs. Compile, encoding, Python
+  neutrality, 73/73 falsification inventory, collaboration, diff, and drift gates exited 0 before
+  the implementation commit. TASK-0361 remains `in_progress` under the Codex maker claim pending
+  exact-commit clean-clone verification and governed delivery.
+- Exact commit `0205c056` then passed three more consecutive 30/30 harness runs plus compile,
+  encoding, Python neutrality, falsification inventory 73/73, collaboration, drift, diff, and
+  clean-status gates in `D:/Aegis_Scratch/multi_agent_project_protocol/task0361-clean-0205c056`.
+- Delivery commit `21e5db71` moves TASK-0361 to `in_review`, releases every Codex claim, and publishes
+  the self-contained Arquitecto handoff for independent review. Codex is maker only and did not
+  review or ratify the implementation. The commit hook reports Architect-owned pruning due at
+  20,650 cold-start tokens.
+
+## 2026-08-14 - TASK-0368 remediation iteration 1
+
+- Commit `89af4fdb` closes both decision-currentness boundaries: a decision is current only when it
+  has no explicit superseder and does not declare an attested non-current status. The policy owns
+  the bounded non-current set; `proposed` and pointerless `superseded` are no longer hot.
+- The permanent negative now derives all cited decisions from the live `AGENTS.md`, kills both the
+  literal-status and pointer-only mutants, preserves an unknown future current spelling, and makes
+  absent, proposed, and retired rule backings fail closed.
+- Candidate commit `78b07557` passed collaboration, encoding, and neutrality gates; its complete
+  memory suite passed 73/73. A real rebuild measured `active=108`, `superseded=2`, with
+  DECISION-0071 and DECISION-0078 both cold. TASK-0368 remains `in_progress` under the Codex maker
+  claim pending exact-commit gates and governed delivery; Codex has not reviewed the change.
+
+## 2026-08-14 - TASK-0368 remediation iteration 3 implementation
+
+- Commit `4b7d42b6` closes the three operator-authorized mechanical gaps without changing AC1.
+- Decision currentness now inspects raw frontmatter status before generic allowlist filtering, so
+  an unregistered retirement spelling fails with its path and value instead of becoming a missing
+  status. Structural PII rejection remains unchanged.
+- The attested `missing_status` field is dereferenced by production. The permanent negative fixes
+  a real missing-status decision and a superseded decision from the same tested population.
+- The pointer-removal and missing-status-inversion production mutants both make the declared runner
+  exit 1. The clean candidate passed all six TASK-0368 gates; memory tests passed 73/73.
+- TASK-0368 remains `in_progress` under claim
+  `CLAIM-20260814-Codex-TASK-0368-remediation3` pending governed delivery and independent review.
+
+## 2026-08-14 - TASK-0368 remediation iteration 3 delivery
+
+- Delivery commit `0feee1f1` moves TASK-0368 to `in_review`, releases both Codex r3 claims, and
+  publishes the self-contained Arquitecto handoff for independent Analista re-review.
+- Codex-signed runtime events 9164-9167 materialize the delivery with drift false.
+- Codex remains maker only and did not review or ratify the remediation.
+
+## 2026-08-15 - TASK-0392 implementation
+
+- Commit `546ce539` makes mailbox filenames the primary exportable delivery-watchdog signal.
+- Commit self-filtering now uses an exact coordinator-only `Protocol-Monitor-Origin` marker; Git
+  author and provider/model trailers are explicitly non-evidence.
+- The executable proof created four real commits with identical Git/model identity, filtered the
+  two coordinator commits, retained the two worker commits, and alerted on the worker mailbox
+  delivery. Proof, collaboration, encoding, neutrality, compile, and diff gates exited 0.
+- TASK-0392 remains maker-owned pending governed delivery to independent review.
+- Delivery commit `99a20381` moves TASK-0392 to `in_review`, releases both Codex claims, and
+  publishes the self-contained maker handoff for independent Analista review. Runtime delivery
+  reached seq 9346 with drift false. Codex did not review or ratify the work.

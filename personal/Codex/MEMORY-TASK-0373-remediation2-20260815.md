@@ -8,5 +8,6 @@
   artifact fields each have a field-removal negative.
 - Full memory suite passed 82/82. Fast drift, collaboration, encoding, Python neutrality, and
   PowerShell neutrality gates all exited 0.
-- TASK-0373 remains in progress under the remediation-r2 maker claim pending governed delivery and
-  independent Analista re-review. Codex did not review or ratify the implementation.
+- Delivery commit `3e27274e` moves TASK-0373 to `in_review`, releases both remediation-r2 maker
+  claims, and publishes the self-contained Arquitecto handoff. Independent Analista re-review is
+  required. Codex did not review or ratify the implementation.

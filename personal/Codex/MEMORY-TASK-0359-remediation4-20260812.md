@@ -8,5 +8,7 @@
   silent CPU work alive; every mutant reports hung and calls the process-tree stop once.
 - The exec-lease suite passed 31/31. Falsification inventory 74/74, mailbox retry, collaboration,
   encoding, Python neutrality, and diff gates exited 0. No production file changed.
-- TASK-0359 remains `in_progress` under the remediation-4 maker claim pending governed delivery
-  to `in_review` and independent checker re-judgment. Codex did not review or ratify the work.
+- Delivery commit `3dfea374` moves TASK-0359 to `in_review`, releases both Codex claims, and
+  publishes the self-contained Arquitecto handoff. Live collaboration, encoding, Python
+  neutrality, and diff gates exited 0 before delivery. Independent checker re-judgment is
+  required; Codex did not review or ratify the work.

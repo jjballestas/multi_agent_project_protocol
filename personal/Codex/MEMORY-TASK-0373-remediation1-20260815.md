@@ -12,3 +12,5 @@
   live validation, and canonical validation with TASK-0350 replaced by its stub all exited 0.
 - TASK-0373 remains maker-owned until governed delivery moves it to `in_review`, releases all maker
   claims, and routes an independent checker. Codex did not review or ratify the work.
+- Delivery commit `f2e8af68` moves TASK-0373 to `in_review`, releases all four remediation claims,
+  and publishes the self-contained Arquitecto handoff. Independent Analista re-review is pending.

@@ -25,6 +25,7 @@ _EXEMPT_TERM_2 = "1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b
 _EXEMPT_TERM_3 = "fcfd3ebc250c5fa0477f28cfa8c36c8910231a6836f973267d4a4ebc730d1ab7"
 _EXEMPT_TERM_4 = "e257b110509437aaceddbd342bc63d05e74221d6bac056ed279d752ff8d3afcb"
 _EXEMPT_TERM_5 = "9775f123593b08a132c7cf8f54927592c171e05134bae46a8c0ed7b40579b178"
+_EXEMPT_TERM_6 = "c857d09db23e6822e3600bc06ad8d58f92ed62bc8efd81c753f77048662cb97d"
 
 IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
     "runtime/apply.py": {
@@ -66,7 +67,7 @@ IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
         "reason": "These occurrences identify the third-party provider CLI, executable, or install path.",
         "lines": {
             9: (_EXEMPT_TERM_1,),
-            553: (_EXEMPT_TERM_1,),
+            553: (_EXEMPT_TERM_1, _EXEMPT_TERM_6),
             560: (_EXEMPT_TERM_1,),
             570: (_EXEMPT_TERM_1,),
             579: (_EXEMPT_TERM_1,),

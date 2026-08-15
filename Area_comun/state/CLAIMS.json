@@ -1473,6 +1473,20 @@
             "updated_at": "2026-08-15T02:22:26Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-unblock-queue",
+            "expires_at": "2026-08-15T18:39:19Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-unblock-queue",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/scan_domain_neutrality.py"
+            ],
+            "started_at": "2026-08-15T17:39:19Z",
+            "status": "active",
+            "task_id": "OPS-UNBLOCK-CODEX-QUEUE-20260815",
+            "updated_at": "2026-08-15T17:39:19Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Codex-TASK-0367-remediation3",
             "expires_at": "2026-08-15T06:28:41Z",
             "notes": "Implement TASK-0367 remediation r3 B6, B5, B4 and correct delivery evidence.",

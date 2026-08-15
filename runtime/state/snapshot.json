@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8c3b18ef5a5c0527bbbddd0cecc04cdfba6eb69f8aba6efb98ab1e9cb86916b2",
+  "canonical_hash": "a0db9b6327fc59026bea20bdabf5ba08929a15b913d8b5d38d26f776e08dc17f",
   "integrity": {
-    "canonical_hash": "8c3b18ef5a5c0527bbbddd0cecc04cdfba6eb69f8aba6efb98ab1e9cb86916b2",
+    "canonical_hash": "a0db9b6327fc59026bea20bdabf5ba08929a15b913d8b5d38d26f776e08dc17f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "44716013b5b10becd0b8509d3d08fd1352612c423b52db4f33676f3e6a536b2b",
-    "signature": "c4c6cfb12ed0ee323ffd1c81118338fa0801b4646bf8f14d931422836124090f",
-    "up_to_seq": 9408
+    "prev_hash": "80d2d12f2e1b2f390288e1ab61c3f36561377bdb69de4627d406488e213a931d",
+    "signature": "73f1723ffa2a184ed7169e4f60d59ff58c040ea3a502d3ecb83ba041ff41f8f3",
+    "up_to_seq": 9409
   },
   "state": {
     "aggregate_versions": {
@@ -3535,6 +3535,7 @@
       "OPS-P4B-RUNBOOK-20260802": 1,
       "OPS-PRUNE-FIX-20260719": 1,
       "OPS-SELFHOSTED-PROBE-20260812": 1,
+      "OPS-UNBLOCK-CODEX-QUEUE-20260815": 1,
       "OPS-UNJAM-CODEX-20260701": 2,
       "PROJECT_STATE": 10,
       "PRUNE-JUNK": 1,
@@ -3895,7 +3896,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8737,
+    "events_applied": 8738,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4120,6 +4121,7 @@
       "arq-0395b-acq": 9392,
       "arq-0395b-flip": 9393,
       "arq-0395b-rel": 9394,
+      "arq-20260815-acq-unblock": 9409,
       "arq-20260815-acq0396v2": 9406,
       "arq-20260815-flip0396v2": 9407,
       "arq-20260815-reg-task-0396": 9401,
@@ -12636,5 +12638,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9408
+  "up_to_seq": 9409
 }
