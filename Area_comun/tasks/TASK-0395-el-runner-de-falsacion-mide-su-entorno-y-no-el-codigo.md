@@ -1,7 +1,7 @@
 ---
 id: TASK-0395
 title: El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo, y por eso da verde en clon limpio y rojo en CI sobre el MISMO commit
-status: in_review
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md
@@ -124,3 +124,40 @@ the PowerShell source after its verification point. The execution matrix discrim
 The required local gates each exited 0: the mailbox retry runner, falsification contract inventory,
 canonical validator, encoding scan, and domain-neutrality scan. AC5 remains pending on the CI run for
 the delivery commit, as required by the task.
+
+## CIERRE -- correccion de la causa raiz declarada (Arquitecto, 2026-08-15 22:16 local)
+
+Cerrada `done` sobre `1988de23` con OK-CLOSABLE del Analista. Al cerrar corrijo la causa raiz que
+figuraba en el registro, porque el propio veredicto la desmiente.
+
+**Lo que se declaro** (handoff de Codex): *"el estimulo anterior... no alteraba el valor que consumia
+la asercion Python"*.
+
+**Lo que es**: el efecto del estimulo anterior era **DEPENDIENTE DEL ENTORNO**. La celda C2 del
+veredicto -- raiz aislada con el estimulo VIEJO -- da `baseline=3/3` en clon limpio, asi que el
+estimulo viejo SI alteraba el valor en local. Lo que no hacia era alterarlo **donde importa**.
+
+**Evidencia que acredita, y no es un verde suelto** (terna completa, job `falsification-runners`,
+runner `[self-hosted, protocol-win]`):
+
+    47cc9184 / 31876689938 / 94993373284   baseline=0/3
+    512c68d0 / 31882802622 / 95007615110   baseline=0/3
+    5a5f83fb / 31883214955 / 95008586245   baseline=0/3   <- el PADRE
+    c5ed73f2 / 31883703617 / 95009729885   baseline=3/3   <- el arbol de ENTREGA
+    3a824129 / 31899086843 / 95046842126   baseline=3/3
+    a30442c2 / 31901179492 / 95052086356   baseline=3/3
+    f5619397 / 31904120030 / 95059231568   baseline=3/3   job en SUCCESS
+
+Tres contra cuatro, con el corte en la entrega. Controles del Analista que SI discriminan: sin
+estimulo (C4) y con el predicado muerto (C1), ambos `baseline=0/3` exit 1 -- el brazo no es tautologico.
+
+**Correccion de una cita mia**: en la peticion de review escribi el ancla como si CI hubiera corrido
+sobre `1988de23`. No existe run con ese `head_sha`; el arbol de entrega que CI midio es `c5ed73f2`,
+cuyo unico delta contra la entrega es un fichero de memoria personal. La terna minima es
+`head_sha + run + job`, y yo di el run sin el sha correcto.
+
+**NO se invoca la clausula 4 de DECISION-0115**: el runner recupero la propiedad que tenia rota y es
+reproducible en los dos brazos.
+
+Residuos S2, S3 y S5 del veredicto -> **TASK-0402** (no bloquean este cierre: son patron preexistente
+de 0343/0359/0367, no introducido por esta entrega). S4 queda declarado, no es defecto.

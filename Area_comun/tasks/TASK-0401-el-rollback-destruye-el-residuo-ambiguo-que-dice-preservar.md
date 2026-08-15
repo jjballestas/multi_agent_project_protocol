@@ -33,10 +33,22 @@ intake:
     construye igual en los dos sitios. Es la misma disyuntiva de TASK-0398, y como alli, elegir por
     comodidad convierte un hallazgo en un estorbo. Empezar por AVERIGUAR CUAL.
   acceptance:
-    - "AC1 (nombrar el hecho antes de arreglar nada): determinar si `ambiguous-residue.txt` llega a
-      existir antes del rollback en el entorno de CI. Si nunca se creo, el fallo es de construccion
-      del sandbox; si existia y desaparecio, el rollback lo destruyo. Reportar cual de las dos, con
-      la evidencia, ANTES de proponer arreglo."
+    - "AC1 (nombrar el hecho antes de arreglar nada -- ENMENDADO 2026-08-15 22:16 local por el
+      Arquitecto, con una TERCERA salida que la redaccion original no contemplaba): determinar si
+      `ambiguous-residue.txt` llega a existir antes del rollback en el entorno de CI. Las salidas son
+      TRES, no dos: (a) nunca se creo -> fallo de construccion del sandbox; (b) existia y
+      desaparecio de forma sistematica -> el rollback lo destruye; (c) INTERMITENTE -> carrera o
+      dependencia de temporizacion. La evidencia que obliga a anadir (c): el job
+      `falsification-runners` CAE con esta firma sobre `a30442c2` (run 31901179492) y PASA sobre
+      `f5619397` (run 31904120030, job 95059231568, success), y `git diff --name-only a30442c2
+      f5619397` no devuelve NI UN fichero de producto -- solo mailbox, estado y markdown de tareas.
+      Mismo codigo, dos veredictos. Reportar cual de las tres, con la evidencia, ANTES de proponer
+      arreglo."
+    - "AC1b (si es (c), la intermitencia es el hallazgo): medir la tasa -- N corridas sobre el MISMO
+      commit, contando rojos -- en vez de dar por bueno el primer verde. Un gate que da veredictos
+      distintos sobre el mismo commit es exactamente el caso que DECISION-0115 obliga a declarar; y
+      un rollback que destruye SOLO A VECES es mas peligroso que uno que destruye siempre, porque no
+      se nota."
     - "AC2 (si es destruccion real): el rollback deja de borrar el material ambiguo, y se acredita
       con el par -- material ambiguo presente antes, presente despues -- ejecutado, no razonado."
     - "AC3 (si es el sandbox): la prueba construye su material ambiguo igual en Linux y en Windows, y

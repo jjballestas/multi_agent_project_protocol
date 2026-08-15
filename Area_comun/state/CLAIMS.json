@@ -1276,6 +1276,24 @@
             "updated_at": "2026-08-15T04:17:26Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-close0395",
+            "expires_at": "2026-08-15T21:16:45Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-close0395",
+                "Area_comun/state/TASK_INDEX.json#TASK-0395",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0395",
+                "Area_comun/state/TASK_INDEX.json#TASK-0402",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0402",
+                "Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md",
+                "Area_comun/tasks/TASK-0402-un-ejemplo-publicado-cablea-una-ruta-de-scratch-que-en-posix-es-relativa.md"
+            ],
+            "started_at": "2026-08-15T20:16:45Z",
+            "status": "released",
+            "task_id": "TASK-0395",
+            "updated_at": "2026-08-15T20:16:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-flips",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",

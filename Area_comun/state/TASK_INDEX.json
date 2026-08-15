@@ -781,7 +781,7 @@
             "id": "TASK-0395",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "done",
             "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo",
             "type": "implementation"
         },
@@ -843,6 +843,16 @@
             "risk": "high",
             "status": "proposed",
             "title": "El rollback destruye el residuo ambiguo que dice preservar -- y solo en CI, asi que la garantia de no borrar lo ilegible no se sostiene donde importa",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0402-un-ejemplo-publicado-cablea-una-ruta-de-scratch-que-en-posix-es-relativa.md",
+            "id": "TASK-0402",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "proposed",
+            "title": "Un ejemplo PUBLICADO cablea una ruta de scratch de Windows que en POSIX es RELATIVA -- el adoptante escribiria el scratch DENTRO del arbol atestiguado",
             "type": "implementation"
         },
         {
