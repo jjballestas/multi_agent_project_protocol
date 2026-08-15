@@ -351,7 +351,7 @@
         {
             "id": "TASK-0392",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "El self-filter que la skill documenta deja un vigia MUDO"
         },
         {
@@ -413,6 +413,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un ejemplo PUBLICADO cablea una ruta de scratch de Windows que en POSIX es RELATIVA -- el adoptante escribiria el scratch DENTRO del arbol atestiguado"
+        },
+        {
+            "id": "TASK-0403",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El enlace guia-prueba vale dos tokens y el negativo de falsos positivos mide la coordenada equivocada"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

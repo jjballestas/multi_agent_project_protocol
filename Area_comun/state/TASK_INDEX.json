@@ -754,7 +754,7 @@
             "id": "TASK-0392",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "done",
             "title": "El self-filter que la skill documenta deja un vigia MUDO",
             "type": "implementation"
         },
@@ -853,6 +853,16 @@
             "risk": "high",
             "status": "proposed",
             "title": "Un ejemplo PUBLICADO cablea una ruta de scratch de Windows que en POSIX es RELATIVA -- el adoptante escribiria el scratch DENTRO del arbol atestiguado",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0403-el-enlace-guia-prueba-vale-dos-tokens-y-el-negativo-mide-la-coordenada-equivocada.md",
+            "id": "TASK-0403",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "proposed",
+            "title": "El enlace guia-prueba vale dos tokens y el negativo de falsos positivos mide la coordenada equivocada",
             "type": "implementation"
         },
         {

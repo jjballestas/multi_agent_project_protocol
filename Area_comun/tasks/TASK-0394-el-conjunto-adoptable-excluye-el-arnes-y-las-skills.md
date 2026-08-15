@@ -53,6 +53,15 @@ intake:
     - scripts/upgrade_instance.py
     - scripts/upgrade_instance.ps1
   out_of_scope:
+    - "AMPLIACION 2026-08-15 22:22 local (Arquitecto) -- no es una exclusion, es un caso concreto que
+      ENTRA en esta tarea: el residuo N-B del veredicto del Analista sobre TASK-0392 r2. En el tier
+      POR DEFECTO (`coordination`) el reparto SEPARA una guia de su prueba:
+      `skills/session-watchdogs.skill.md` viaja al adoptante pero
+      `scripts/harness/test_session_watchdog_filter.py` no, asi que el comando del AC3 de 0392 llega
+      al adoptante como exit 2 y la guia cita una ruta que en su instancia NO EXISTE. Ruta afectada:
+      `scripts/new_instance.py`. Es el defecto que esta tarea ya nombra -- el canal no transporta lo
+      que el adoptante necesita -- con un caso medido encima: o el arnes viaja, o la guia deja de
+      citar lo que no va a estar. Se resuelve aqui, no en tarea aparte."
     - "Arreglar los defectos que hay que transportar (0337, 0391, 0392): son tareas propias. Esta
       abre el CANAL; ellas producen la carga."
     - "La discrepancia de `runtime_version` entre instancia (1.14.0) y master (0.12.0) que el mismo

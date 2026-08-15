@@ -1,7 +1,7 @@
 ---
 id: TASK-0392
 title: El self-filter que la skill documenta deja un vigia MUDO en cualquier instancia donde los agentes compartan firma
-status: in_review
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md

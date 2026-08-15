@@ -277,12 +277,6 @@
             "title": "El orden de la cola lo fija el NOMBRE DEL FICHERO y no esta documentado"
         },
         {
-            "id": "TASK-0392",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El self-filter que la skill documenta deja un vigia MUDO"
-        },
-        {
             "id": "TASK-0393",
             "owner": "Codex",
             "status": "proposed",
@@ -335,6 +329,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un ejemplo PUBLICADO cablea una ruta de scratch de Windows que en POSIX es RELATIVA -- el adoptante escribiria el scratch DENTRO del arbol atestiguado"
+        },
+        {
+            "id": "TASK-0403",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El enlace guia-prueba vale dos tokens y el negativo de falsos positivos mide la coordenada equivocada"
         }
     ],
     "view": "task_index.slim"
