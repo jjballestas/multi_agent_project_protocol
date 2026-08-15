@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "4e2e66ade047d8a75b33e51b5797f10af5321ce95693ea3b4ae25276aaffb899",
+  "canonical_hash": "c8086590f7da9062453f7ca797a3b0f6e3984df11dcff88e22104ffb9027c180",
   "integrity": {
-    "canonical_hash": "4e2e66ade047d8a75b33e51b5797f10af5321ce95693ea3b4ae25276aaffb899",
+    "canonical_hash": "c8086590f7da9062453f7ca797a3b0f6e3984df11dcff88e22104ffb9027c180",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "071a6b71b9895ce85563a10c13964084a17f3d07341152e98ed4b8f4e59e09ae",
-    "signature": "b656b0d5810990b590c420f069315685419445b48baae75c3045729d88c09e17",
-    "up_to_seq": 9374
+    "prev_hash": "a9ada8a8b4998bdbce6fcc54f43dccb3de446748e631976021720722ab56739c",
+    "signature": "6f97e4eaea3e4538009d481c2f92c37beb3b335b58d8dbdd761f67a4d8b54270",
+    "up_to_seq": 9377
   },
   "state": {
     "aggregate_versions": {
@@ -1036,6 +1036,7 @@
       "CLAIM-20260815-Arquitecto-0388-hyg": 1,
       "CLAIM-20260815-Arquitecto-0390-reg": 1,
       "CLAIM-20260815-Arquitecto-0392-back": 1,
+      "CLAIM-20260815-Arquitecto-0392-r2": 1,
       "CLAIM-20260815-Arquitecto-0394": 1,
       "CLAIM-20260815-Arquitecto-0395": 1,
       "CLAIM-20260815-Arquitecto-cierre-F2b": 1,
@@ -3854,7 +3855,7 @@
       "TASK-0389": 1,
       "TASK-0390": 2,
       "TASK-0391": 2,
-      "TASK-0392": 15,
+      "TASK-0392": 17,
       "TASK-0393": 1,
       "TASK-0394": 3,
       "TASK-0395": 7,
@@ -3880,7 +3881,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8703,
+    "events_applied": 8706,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4091,6 +4092,9 @@
       "arq-0392b-acq": 9357,
       "arq-0392b-flip": 9358,
       "arq-0392b-rel": 9359,
+      "arq-0392r2-acq": 9375,
+      "arq-0392r2-flip": 9376,
+      "arq-0392r2-rel": 9377,
       "arq-0394-acq": 9333,
       "arq-0394-ready": 9335,
       "arq-0394-reg": 9334,
@@ -12587,5 +12591,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9374
+  "up_to_seq": 9377
 }
