@@ -1502,6 +1502,21 @@
             "updated_at": "2026-08-15T17:39:19Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-unblock0396",
+            "expires_at": "2026-08-15T19:04:14Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-unblock0396",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md"
+            ],
+            "started_at": "2026-08-15T18:04:14Z",
+            "status": "released",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T18:04:14Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Codex-TASK-0367-remediation3",
             "expires_at": "2026-08-15T06:28:41Z",
             "notes": "Implement TASK-0367 remediation r3 B6, B5, B4 and correct delivery evidence.",

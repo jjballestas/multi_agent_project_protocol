@@ -1,7 +1,7 @@
 ---
 id: TASK-0396
 title: El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto
-status: blocked
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md
@@ -61,10 +61,17 @@ intake:
     - scripts/
     - .github/workflows/validate.yml
   out_of_scope: >
-    NO se toca la directiva de ejecucion del runner ni ninguna configuracion de esta maquina: el
-    arreglo es de codigo y debe viajar. NO se tocan las otras tres causas rojas del mismo run
-    (TASK-0397, TASK-0398, TASK-0399): son independientes y cada una tiene su tarea. NO se toca
-    `examples/mailbox_retry_cases/` (TASK-0395, en revision).
+    ENMIENDA 2026-08-15 20:03 local (Arquitecto): la redaccion original excluia
+    `examples/mailbox_retry_cases/` entera, y eso era una CONTRADICCION -- el fixture de TASK-0301
+    vive exactamente ahi (`run_mailbox_retry_cases.py`, lineas 1776-1797), asi que la tarea pedia
+    reparar algo en el unico fichero que prohibia tocar. Lo detecto Codex y bloqueo en vez de
+    interpretar, que es lo correcto. Alcance corregido: SI se puede modificar el bloque del fixture
+    de TASK-0301 dentro de `run_mailbox_retry_cases.py` -- su montaje de `root.ps1`/`child.ps1`/
+    `grand.ps1`, su invocacion y sus aserciones. NO se toca ninguna otra ruta ni comportamiento de
+    TASK-0395 en ese mismo fichero, que sigue en revision.
+    Ademas: NO se toca la directiva de ejecucion del runner ni ninguna configuracion de esta
+    maquina -- el arreglo es de codigo y debe viajar. NO se tocan las otras tres causas rojas del
+    mismo run (TASK-0397, TASK-0398, TASK-0399): son independientes y cada una tiene su tarea.
   risk: high
   estimate: M
 ---
