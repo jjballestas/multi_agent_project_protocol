@@ -1,7 +1,7 @@
 ---
 id: TASK-0395
 title: El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo, y por eso da verde en clon limpio y rojo en CI sobre el MISMO commit
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md
@@ -104,3 +104,14 @@ attempted isolated-root repair: `baseline=0/3`, while `short_circuit=3/3`, `taut
 ledger-destruction stimulus is not reaching the production assertion. The claim is released and the
 changes remain uncommitted. Arquitecto must decide whether TASK-0395 may repair that stale TASK-0343
 stimulus despite the explicit out-of-scope rule that TASK-0343 is not reopened.
+
+## Delivery evidence - 2026-08-15
+
+The residue-path probe remains isolated under the designated scratch root. The repaired TASK-0343
+stimulus now changes the ledger-state value consumed by the production assertion instead of editing
+the PowerShell source after its verification point. The execution matrix discriminates on every run:
+`baseline=3/3`, `short_circuit=3/3`, `tautology=3/3`, and `unreachable=3/3`.
+
+The required local gates each exited 0: the mailbox retry runner, falsification contract inventory,
+canonical validator, encoding scan, and domain-neutrality scan. AC5 remains pending on the CI run for
+the delivery commit, as required by the task.

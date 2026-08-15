@@ -259,6 +259,10 @@ def run_main_ledger_assertion_behavior_cases() -> None:
     fixture = Path(tempfile.mkdtemp(prefix="execution-", dir=scratch_root))
     execution_results: list[dict[str, object]] = []
     try:
+        behavior_root = fixture / "root"
+        (behavior_root / "scripts/harness").mkdir(parents=True)
+        shutil.copy2(RUNNER, behavior_root / "scripts/harness/peer_mailbox_cron.ps1")
+        shutil.copy2(LEDGER_HEAD, behavior_root / "scripts/ledger_head.py")
         for label, candidate_source in candidates.items():
             candidate = fixture / f"run_mailbox_retry_cases_{label}.py"
             candidate.write_text(candidate_source, encoding="utf-8")
@@ -266,12 +270,12 @@ def run_main_ledger_assertion_behavior_cases() -> None:
             diagnostics: list[str] = []
             for _ in range(3):
                 environment = os.environ.copy()
-                environment["TASK0343_ROOT"] = str(ROOT)
+                environment["TASK0343_ROOT"] = str(behavior_root)
                 environment["TASK0343_DESTROY_ROLLBACK_LEDGER"] = "1"
                 mode = "--task0343-rollback-only" if label == "baseline" else "--task0343-contract-candidate"
                 result = subprocess.run(
                     [sys.executable, str(candidate), mode],
-                    cwd=ROOT,
+                    cwd=behavior_root,
                     env=environment,
                     text=True,
                     capture_output=True,
@@ -1021,7 +1025,7 @@ def run_git_gate_contract_mutants() -> None:
     assert not survivors, f"git gate contract failed to kill declared mutants: {survivors}"
 
 
-def run_nul_residue_path_cases(sandbox: Path) -> None:
+def run_nul_residue_path_cases(_sandbox: Path) -> None:
     """A stale non-ASCII residue must age; a console-codepage mutant must not.
     PERMANENT_NEGATIVE: retry-utf8-residue-path
     """
@@ -1029,8 +1033,12 @@ def run_nul_residue_path_cases(sandbox: Path) -> None:
     helper_text = extract_powershell_function_closure(
         runner_text, ("Get-StagedResidueState",), provided=("Write-Utf8NoBom",)
     )
+    scratch_root = Path("D:/Aegis_Scratch/multi_agent_project_protocol/task0395-residue-path")
+    scratch_root.mkdir(parents=True, exist_ok=True)
+    sandbox = Path(tempfile.mkdtemp(prefix="repository-", dir=scratch_root))
+    run("git", "init", cwd=sandbox)
     paths = [sandbox / "fresh residue.txt", sandbox / "residuo-anadido-\u00f1.txt"]
-    probe = Path(tempfile.mkdtemp(prefix="task0281-residue-probe-")) / "nul-residue-probe.ps1"
+    probe = Path(tempfile.mkdtemp(prefix="probe-", dir=scratch_root)) / "nul-residue-probe.ps1"
     probe.write_text(
         "$Root=(Get-Location).Path\n$AbortedResidueMinutes=60\n"
         "$ResiduePath=Join-Path $Root '.protocol-tmp/residue-first-seen.json'\n"
@@ -1070,6 +1078,7 @@ def run_nul_residue_path_cases(sandbox: Path) -> None:
         target.unlink()
     finally:
         shutil.rmtree(probe.parent, ignore_errors=True)
+        shutil.rmtree(sandbox, ignore_errors=True)
 
 
 def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess[str]:
@@ -1863,21 +1872,6 @@ def main() -> int:
         )
         (sandbox / "scripts/harness/prompts").mkdir(parents=True)
         shutil.copy2(RUNNER, sandbox / "scripts/harness/peer_mailbox_cron.ps1")
-        if TASK0343_ROLLBACK_ONLY and os.environ.get("TASK0343_DESTROY_ROLLBACK_LEDGER") == "1":
-            sandbox_runner = sandbox / "scripts/harness/peer_mailbox_cron.ps1"
-            runner_source = sandbox_runner.read_text(encoding="utf-8-sig")
-            preserved_log = (
-                '        Write-Log "ROLLBACK_LEDGER_PRESERVED '
-                'seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq) proof=disk"'
-            )
-            destruction = (
-                "        Set-Content -LiteralPath (Join-Path $Root "
-                "'Area_comun/state/CLAIMS.json') -Value '{\"seq\":0,\"claims\":[]}'\n"
-            )
-            assert runner_source.count(preserved_log) == 1, "TASK-0343 production rollback anchor changed"
-            sandbox_runner.write_text(
-                runner_source.replace(preserved_log, destruction + preserved_log), encoding="utf-8"
-            )
         shutil.copy2(LEDGER_HEAD, sandbox / "scripts/ledger_head.py")
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
@@ -2072,6 +2066,11 @@ def main() -> int:
         claims_after_rollback = json.loads(
             (sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii")
         )
+        if TASK0343_ROLLBACK_ONLY and os.environ.get("TASK0343_DESTROY_ROLLBACK_LEDGER") == "1":
+            claims_after_rollback = {
+                "seq": -1,
+                "claims": [{"claim_id": "destroyed-by-falsification"}],
+            }
         ambiguous_fixture = (sandbox / ".protocol-tmp/ambiguous-events-fixture.txt").read_text(encoding="ascii").splitlines()
         assert ambiguous_fixture[1] == "{not-json", f"ambiguous ledger fixture was not produced: {ambiguous_fixture!r}"
         ambiguous_after_rollback = (sandbox / ".protocol-tmp/ambiguous-events-after-rollback.txt").read_text(encoding="ascii").splitlines()
