@@ -31,7 +31,7 @@ starting any monitor:
 - `<ALERT_ON_MESSAGES_TO_COORDINATOR>`: pattern for inbound delivery messages,
   for example `*-to-<COORDINATOR_ROLE>-*`.
 - `<COORDINATOR_COMMIT_MARKER>`: an exact trailer value generated for the
-  current coordination session. Only the coordinator writes it. Do not derive
+  current coordination session. The coordinator writes it by convention. Do not derive
   it from Git author, committer, provider, model, or a shared co-author trailer.
 - `<WORKER_IDS>`: identifiers of workers that may have mailbox loops or
   execution locks.
@@ -41,6 +41,10 @@ personal agent names, or product-specific paths in the skill body.
 
 ## Watchdog 1: Mailbox Deliveries With A Coordinator Marker
 
+Machine-readable contract used by the shipped proof:
+
+    WATCHDOG_COMMIT_TRAILER = Protocol-Monitor-Origin
+
 Purpose: wake the coordinator when another participant opens a delivery message.
 Mailbox filenames are the primary signal because
 `MSG-<date>-<sender>-<recipient>-*.md` identifies the sender independently of
@@ -48,7 +52,10 @@ Git identity. Commit inspection is secondary context only.
 
 Algorithm:
 
-1. Set `base` to `git rev-parse <LOCAL_REF>` inside `<WORKSPACE_ROOT>`.
+1. Require a shared-worktree deployment in which the coordinator observes the
+   same mailbox and ref that participants update. If that precondition is not
+   true, do not use this watchdog until a runbook-defined refresh materializes
+   both signals inside the loop. Set `base` to `git rev-parse <LOCAL_REF>`.
 2. Record current files in `<MAILBOX_OPEN_DIR>` matching
    `<ALERT_ON_MESSAGES_TO_COORDINATOR>`.
 3. Loop every `<POLL_SECONDS>` seconds.
@@ -61,7 +68,11 @@ Algorithm:
 6. Ignore a commit only when it has the exact trailer
    `Protocol-Monitor-Origin: <COORDINATOR_COMMIT_MARKER>`. The coordinator must
    add that trailer to every commit it wants filtered during this session, and
-   workers must never add it. A model or provider trailer is not a self-marker.
+   workers should not add it. This is an advisory noise filter, not an identity
+   or authorization mechanism: the value is public and copiable. A worker
+   commit can be hidden after amend, cherry-pick, squash, or message-template
+   inheritance carries the marker. A model or provider trailer is not a
+   self-marker.
 7. Emit one alert containing the remaining non-self commit subjects and update
    `base`. A mailbox alert from step 4 is never cancelled by this filter.
 8. Stop or return control after the first alert if the local monitor mechanism is
@@ -74,11 +85,18 @@ python scripts/harness/test_session_watchdog_filter.py `
   --scratch-root D:/Aegis_Scratch/<project>/watchdog-filter-proof
 ```
 
-The proof creates four real commits with the same Git author and provider/model
-trailer: two coordinator commits carrying the private marker and two worker
+The proof reads and executes the machine-readable filter contract above. It
+creates four real commits with the same Git author and the same historical
+`Co-Authored-By: Claude (Opus)` trailer: two coordinator commits carrying the
+session marker and two worker
 commits without it. One worker commit opens a mailbox delivery. It fails unless
-the filter identifies exactly the two coordinator commits, retains both worker
-commits, and emits the mailbox alert despite indistinguishable Git identity.
+the historical filter reproduces the 4/4 silent failure, the shipped filter
+identifies exactly the two coordinator commits, retains both worker commits,
+and a real mailbox directory-listing delta emits the alert independently of
+commit position.
+
+The commit filter only reduces noise. Its silence is not evidence that no work
+was delivered; only the mailbox signal is authoritative for delivery alerts.
 
 Response after an alert:
 

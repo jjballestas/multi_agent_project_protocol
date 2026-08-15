@@ -103,9 +103,13 @@ coordinators, `skills/session-watchdogs` in the neutral layer).
 The exportable delivery watchdog treats new mailbox filenames addressed to the
 coordinator as its primary delivery signal. Its optional commit self-filter uses
 an exact `Protocol-Monitor-Origin` value written only by that coordination
-session; Git author and provider/model trailers are never identity evidence.
-Before relying on monitor silence, run the four-real-commit discrimination proof
-documented in `skills/session-watchdogs.skill.md`.
+session; Git author and provider/model trailers are never identity evidence. The
+commit filter is advisory and copiable, so its silence is not delivery evidence.
+The watchdog requires a shared worktree unless an instance runbook materializes
+both the watched ref and mailbox inside each poll. Before relying on the setup,
+run the four-real-commit discrimination proof documented in
+`skills/session-watchdogs.skill.md`; it executes the guide's machine-readable
+filter contract and a real mailbox directory-listing delta.
 
 ## Migrating from the hub's per-peer scripts
 

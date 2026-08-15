@@ -71,9 +71,13 @@ si mismo.
 
 ## Maker evidence
 
-- The exportable watchdog now treats the mailbox filename as the primary delivery signal.
-- Commit context is filtered only by an exact coordinator-only `Protocol-Monitor-Origin` value.
-- The executable proof creates two coordinator and two worker commits with identical Git author
-  and provider/model trailer, then requires a 2/2 split and a worker mailbox alert.
+- Remediation r1 makes the proof read and execute the guide's machine-readable trailer contract;
+  restoring the pre-fix guide or deleting it now makes the proof fail.
+- The four commits share the historical `Co-Authored-By: Claude (Opus)` trailer: the old filter
+  reproduces 4/4 hidden while the delivered advisory marker splits 2/2.
+- Mailbox evidence is a real before/after directory-listing delta with filename sender/recipient
+  parsing and is independent of commit position.
+- The exportable text declares that the copiable commit marker only reduces noise, its silence is
+  not evidence, and a shared worktree (or an in-loop materialization of both signals) is required.
 - Executed command: `python scripts/harness/test_session_watchdog_filter.py --scratch-root
   D:/Aegis_Scratch/multi_agent_project_protocol/task0392-filter-proof`.
