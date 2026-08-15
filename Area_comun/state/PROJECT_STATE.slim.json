@@ -253,6 +253,12 @@
             "title": "La frontera de intake vive en dos sitios y ninguna puerta ve que divergan"
         },
         {
+            "id": "TASK-0390",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "F3 piloto -- primer enfriado REAL, lote acotado a 20 con stub-espejo y reversion probada"
+        },
+        {
             "id": "TASK-0391",
             "owner": "Codex",
             "status": "proposed",

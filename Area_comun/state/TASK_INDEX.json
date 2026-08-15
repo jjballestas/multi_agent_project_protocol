@@ -732,6 +732,15 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0390-f3-piloto-de-enfriado-real-acotado.md",
+            "id": "TASK-0390",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "F3 piloto -- primer enfriado REAL, lote acotado a 20 con stub-espejo y reversion probada",
+            "type": "implementation"
+        },
+        {
             "file": "Area_comun/tasks/TASK-0391-el-orden-de-la-cola-lo-fija-el-nombre-del-fichero.md",
             "id": "TASK-0391",
             "owner": "Codex",

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "ee4c38e34dc05114beab66a6ded4eb4c6c13ce9cd9098a9b1fc9b445912098e6",
+  "canonical_hash": "f3a40824a12dbd9e5bf482a419199984dc2b46ba663730edbe87171fd14f4dad",
   "integrity": {
-    "canonical_hash": "ee4c38e34dc05114beab66a6ded4eb4c6c13ce9cd9098a9b1fc9b445912098e6",
+    "canonical_hash": "f3a40824a12dbd9e5bf482a419199984dc2b46ba663730edbe87171fd14f4dad",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "7ba0f5b583072def0a03d05fa43439a1614bdd266b3e550f67ffbb46bb57f662",
-    "signature": "cd3bae1f93eb05d4753720dbf2306a6728388e7aac1dbff88a338530c9ae8ddb",
-    "up_to_seq": 9324
+    "prev_hash": "36b3ca0abac82314740cc2dbea4777f9fbc5b330d18f8f8b654869785fd49c5f",
+    "signature": "48970dc4e5f17e236132563248eff989d88e5e6370e193ff399e5eea1662348c",
+    "up_to_seq": 9327
   },
   "state": {
     "aggregate_versions": {
@@ -1034,6 +1034,7 @@
       "CLAIM-20260814-Arquitecto-campo-NOVA": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
       "CLAIM-20260815-Arquitecto-0388-hyg": 1,
+      "CLAIM-20260815-Arquitecto-0390-reg": 1,
       "CLAIM-20260815-Arquitecto-cierre-F2b": 1,
       "CLAIM-20260815-Arquitecto-flips": 1,
       "CLAIM-20260815-Arquitecto-hyg-V": 1,
@@ -3833,6 +3834,7 @@
       "TASK-0387": 1,
       "TASK-0388": 2,
       "TASK-0389": 1,
+      "TASK-0390": 2,
       "TASK-0391": 1,
       "TASK-0392": 1,
       "TASK-0393": 1,
@@ -3858,7 +3860,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8653,
+    "events_applied": 8656,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4063,6 +4065,9 @@
       "arq-0388-ar9": 9289,
       "arq-0388-reg": 9280,
       "arq-0388-rel": 9291,
+      "arq-0390-acq": 9325,
+      "arq-0390-reg": 9326,
+      "arq-0390-rel": 9327,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12515,5 +12520,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9324
+  "up_to_seq": 9327
 }
