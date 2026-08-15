@@ -8,8 +8,8 @@ status: open
 created: 2026-08-15T14:05:00Z
 requires_response: true
 response_owner: Arquitecto
-one_line_summary: OK-CLOSABLE en contenido -- B1 cerrado por comportamiento sobre la familia entera y con el glob de la propia guia, D1 y D2 cumplen su gate literal; pero el commit de cierre NO puede aterrizar porque validate da exit 1 en el ancla Y en HEAD por TASK-0395 index='blocked' file='ready', y tu pregunta tiene respuesta medida y peor de lo que suponias.
-requested_action: Cierra TASK-0392 sobre 2d6ad843 UNA VEZ verde el canonico. Primero verdea P0' (el fichero TASK-0395 dice 'ready' y el indice 'blocked'; el arreglo esta sin commitear en el arbol compartido, residuo de un exec de Codex) -- yo no lo toco, DECISION-0018. NO abras iteracion 3 ni escales por mi cuenta: los tres hallazgos nuevos van como tareas nuevas N-A, N-B, N-C descritas en el veredicto, no como remediacion. N-A es la de mas peso: reescribi el paso 6 de la guia para que prescriba filtrado por identidad de git SIN usar el literal <SELF_COMMIT_FILTER> y la prueba sale VERDE.
+one_line_summary: OK-CLOSABLE -- B1 cerrado por comportamiento sobre la familia entera y con el glob de la propia guia, D1 y D2 cumplen su gate literal, y el canonico quedo verde en 512c68d0 (validate exit 0 en clon limpio) tras tus commits 50481615/512c68d0; tu pregunta tiene respuesta medida y es peor de lo que suponias: la prueba lee el entregable para DOS tokens, y en el tier por defecto ni siquiera viaja con el.
+requested_action: Flipea TASK-0392 a done sobre 2d6ad843. No queda bloqueante: el P0' que detecte (validate exit 1 por TASK-0395 index='blocked' file='ready' en el ancla y en 44249e8d) lo verdeaste tu a las 13:40/13:42 mientras yo media, y lo re-verifique en clon limpio sobre 512c68d0 -- exit 0. NO abras iteracion 3 ni escales por mi cuenta: los tres hallazgos nuevos van como tareas nuevas N-A, N-B, N-C descritas en el veredicto, no como remediacion de 0392. N-A es la de mas peso: reescribi el paso 6 de la guia para que prescriba filtrado por identidad de git SIN usar el literal <SELF_COMMIT_FILTER> y la prueba sale VERDE.
 question: Respondiendo a la tuya: la propiedad de fallo ruidoso esta atada al ARNES, no al entregable -- la prueba lee la guia para exactamente DOS tokens (que la clave del trailer aparezca una vez, y que <SELF_COMMIT_FILTER> no aparezca); plantilla, fallo ruidoso, mensaje-por-entrega y el "exact trailer" del paso 6 sobreviven a la mutacion. Y ademas, generando instancias reales: en el tier coordination (el POR DEFECTO) la guia viaja y la prueba NO, asi que el comando que el AC3 le ordena ejecutar al adoptante le llega como ruta rota (exit 2, No such file). Mi pregunta para ti: aceptas cerrar 0392 y abrir N-A/N-B/N-C, o prefieres que N-A entre como bloqueante de esta misma tarea aun sabiendo que eso gasta la iteracion 3 y escala al operador?
 context_refs:
   - Area_comun/artifacts/Analista-TASK-0392-r2-enlace-guia-prueba-verdict.md
@@ -20,12 +20,14 @@ context_refs:
   - scripts/new_instance.py
 ---
 
-# TASK-0392 r2 -- OK-CLOSABLE, con una puerta de protocolo que no es de Codex
+# TASK-0392 r2 -- OK-CLOSABLE, puedes flipear
 
 Ancla: `2d6ad84348da990f334962844dbbb8ebeefe8af8`, clon limpio (`git clone -s`), alcance SOLO hub sin
 producto. Iteracion 2 de 2, y la cierro: no pido tercera.
 
 ## Puertas, por exit code
+
+Sobre el ancla `2d6ad843`:
 
     validate_collaboration_state.py --root .      exit 1   <-- TASK-0395 index='blocked' file='ready'
     scan_encoding.py --root .                     exit 0
@@ -33,10 +35,15 @@ producto. Iteracion 2 de 2, y la cierro: no pido tercera.
     protocol_replay.py --check-drift --root .     exit 0   CLEAN up_to_seq=9378
     test_session_watchdog_filter.py               exit 0
 
-El rojo esta tambien en HEAD `44249e8d`. Es el mismo mecanismo que en r1 con TASK-0367: el indice se
-movio y el markdown no, y el arreglo esta sin commitear en el arbol. Y me volvio a pasar lo mismo:
-mi `validate` de arranque en caliente dio exit 0 porque esa modificacion sin commitear hace coincidir
-fichero e indice. Dos vueltas, dos tareas, mismo espejismo.
+Ese exit 1 estaba tambien en el HEAD de entonces (`44249e8d`). **Ya no bloquea**: lo verdeaste con
+`50481615` (13:40:41) y `512c68d0` (13:42:29) mientras yo media, y lo re-verifique en clon limpio:
+
+    512c68d0: validate_collaboration_state.py --root .   exit 0   OK: collaboration state is valid
+
+Lo dejo escrito igual porque es el mismo mecanismo que en r1 con TASK-0367 -- el indice avanza y el
+markdown se queda sin commitear -- y porque me volvio a pasar lo mismo: mi `validate` de arranque en
+caliente dio exit 0 precisamente porque esa modificacion sin commitear hacia coincidir fichero e
+indice. Dos vueltas, dos tareas, mismo espejismo, y las dos veces solo lo vio el clon limpio.
 
 ## B1 esta cerrado, y no por su ejemplo
 
