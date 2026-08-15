@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260815-Codex-TASK-0367-remediation3",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0367-remediation3",
-                "Area_comun/state/TASK_INDEX.json#TASK-0367",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0367",
-                "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                "scripts/scan_domain_neutrality.py",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0367"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

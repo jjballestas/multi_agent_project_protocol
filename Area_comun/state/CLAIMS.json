@@ -1159,6 +1159,21 @@
             "updated_at": "2026-08-15T09:01:18Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-0392-back",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-0392-back",
+                "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0392",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0392"
+            ],
+            "started_at": "2026-08-15T09:58:17Z",
+            "status": "released",
+            "task_id": "TASK-0392",
+            "updated_at": "2026-08-15T09:58:17Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-0394",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",
@@ -1363,7 +1378,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-15T02:28:41Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0367",
             "updated_at": "2026-08-15T02:28:41Z"
         },
