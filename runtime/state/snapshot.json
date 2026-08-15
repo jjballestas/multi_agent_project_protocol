@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "fee6b9edd713945118e63338834500dd4c8f44c37b4905a6161474cfc2535fd4",
+  "canonical_hash": "eab4a35d0a33fea3ada7a928f967afb5a6eb1b227c459be60747e8720f318b79",
   "integrity": {
-    "canonical_hash": "fee6b9edd713945118e63338834500dd4c8f44c37b4905a6161474cfc2535fd4",
+    "canonical_hash": "eab4a35d0a33fea3ada7a928f967afb5a6eb1b227c459be60747e8720f318b79",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "13185783e00ee534e415c28d01625e26f332c9b8893ebb985daec89fcafae9ae",
-    "signature": "1f0b64c1bf4e3df05917884239f6ed9ff5edac898e8389682756f0590710f646",
-    "up_to_seq": 9424
+    "prev_hash": "cdf4c4d59689d1577937d3583ce79191e6adf8122535bb969d6fd7ff92e382a6",
+    "signature": "ee60b15cecf3faa0e5cb20213f8820892d8128bdddf0bf90767de158b857ed76",
+    "up_to_seq": 9428
   },
   "state": {
     "aggregate_versions": {
@@ -3873,7 +3873,7 @@
       "TASK-0393": 1,
       "TASK-0394": 3,
       "TASK-0395": 14,
-      "TASK-0396": 14,
+      "TASK-0396": 18,
       "TASK-0397": 1,
       "TASK-0398": 1,
       "TASK-0399": 1,
@@ -3900,7 +3900,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8753,
+    "events_applied": 8757,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8940,7 +8940,11 @@
       "codex:task0396:block-scope:claim:20260815T174602Z": 9414,
       "codex:task0396:block-scope:mailbox-claim-release:20260815T174726Z": 9419,
       "codex:task0396:block-scope:mailbox-claim:20260815T174649Z": 9415,
+      "codex:task0396:ci-question-claim-acquire:20260815T183500Z": 9425,
+      "codex:task0396:ci-question-claim-release:20260815T183500Z": 9428,
       "codex:task0396:claim-acquire:20260815T181531Z": 9423,
+      "codex:task0396:implementation-claim-release:20260815T183500Z": 9427,
+      "codex:task0396:in-progress-to-blocked-ci-other-cause:20260815T183500Z": 9426,
       "codex:task0396:in-progress-to-blocked:20260815T174726Z": 9417,
       "codex:task0396:ready-to-in-progress:20260815T174726Z": 9416,
       "codex:task0396:ready-to-in-progress:20260815T181531Z": 9424,
@@ -12657,5 +12661,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9424
+  "up_to_seq": 9428
 }

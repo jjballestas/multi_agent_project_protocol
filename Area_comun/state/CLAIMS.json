@@ -1987,7 +1987,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-15T18:15:31Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0396",
             "updated_at": "2026-08-15T18:15:31Z"
         },
@@ -2024,6 +2024,22 @@
             "status": "released",
             "task_id": "TASK-0396",
             "updated_at": "2026-08-15T17:46:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0396-ci-question",
+            "expires_at": "2026-08-15T20:35:00Z",
+            "notes": "Publish the out-of-scope CI cause that prevents TASK-0396 AC5 closure.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0396-ci-question",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-QUESTION-TASK-0396-ci-other-cause.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T18:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T18:35:00Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
