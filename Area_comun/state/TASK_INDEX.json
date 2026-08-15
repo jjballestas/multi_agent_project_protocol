@@ -768,6 +768,15 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+            "id": "TASK-0394",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

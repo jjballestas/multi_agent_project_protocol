@@ -287,6 +287,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un rojo TRANSITORIO del validador puede consumir el mensaje como visto"
+        },
+        {
+            "id": "TASK-0394",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos"
         }
     ],
     "view": "task_index.slim"

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "1571473588fcd201e16fcb410dd757e41803f5b2bedae70c88509be8a7348957",
+  "canonical_hash": "63728d9923790bd65657b526385d6cd8a92af9d4a75a01096919ea321e59134c",
   "integrity": {
-    "canonical_hash": "1571473588fcd201e16fcb410dd757e41803f5b2bedae70c88509be8a7348957",
+    "canonical_hash": "63728d9923790bd65657b526385d6cd8a92af9d4a75a01096919ea321e59134c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "4a1e68fbf47133f545496847ff49ac1c49a6cccb39125dcfdea2249c63c49afd",
-    "signature": "d48e9a9cccea155cc6a4cef2632cb33ffecd3df91d8100d248ea56ea02c2789d",
-    "up_to_seq": 9332
+    "prev_hash": "6deb17d6c214b21b5e249fe1f1269bcab1999b574e1d604cc24381bcf60d0155",
+    "signature": "f6fb9938b045085fa2bb521721e736b159c85897a69e8e71b0020a3b7921b641",
+    "up_to_seq": 9337
   },
   "state": {
     "aggregate_versions": {
@@ -1035,6 +1035,7 @@
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
       "CLAIM-20260815-Arquitecto-0388-hyg": 1,
       "CLAIM-20260815-Arquitecto-0390-reg": 1,
+      "CLAIM-20260815-Arquitecto-0394": 1,
       "CLAIM-20260815-Arquitecto-cierre-F2b": 1,
       "CLAIM-20260815-Arquitecto-flips": 1,
       "CLAIM-20260815-Arquitecto-hyg-V": 1,
@@ -3837,8 +3838,9 @@
       "TASK-0389": 1,
       "TASK-0390": 2,
       "TASK-0391": 2,
-      "TASK-0392": 2,
+      "TASK-0392": 3,
       "TASK-0393": 1,
+      "TASK-0394": 3,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3861,7 +3863,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8661,
+    "events_applied": 8666,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4069,6 +4071,10 @@
       "arq-0390-acq": 9325,
       "arq-0390-reg": 9326,
       "arq-0390-rel": 9327,
+      "arq-0394-acq": 9333,
+      "arq-0394-ready": 9335,
+      "arq-0394-reg": 9334,
+      "arq-0394-rel": 9336,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -11907,6 +11913,7 @@
       "intent:Codex:claim:f686c14d0eda555a27fcdf9ccceda73410039d6922abc087f6b70496cf7e70b0": 7835,
       "intent:Codex:claim:f6c22e4a215153bb3785623edaf66e4ed3a096687b450ffcd57f87c22ad2c769": 2918,
       "intent:Codex:claim:f6d737522d8beef1a1a9e9cfb5fcd39770c42ac447900d68f4bc551388dda239": 4911,
+      "intent:Codex:claim:f6f9532fc705d72db17b15cb72783b31441c0f1927662d9a9949337ff5ac5a89": 9337,
       "intent:Codex:claim:f70317e8714f657b8cd5b0d1f4e9cd0060868271f5d096d2bae1c73332312e03": 4093,
       "intent:Codex:claim:f7c7b4e962a9b129165c2afc345c428eeb7422f8b6e7edd1a4770675dfa80c93": 9047,
       "intent:Codex:claim:f7e0dc9d779933184eb0676936f19cbc69b1b70a2b00d0634ad66b4d34187935": 946,
@@ -12526,5 +12533,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9332
+  "up_to_seq": 9337
 }

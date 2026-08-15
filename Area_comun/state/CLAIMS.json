@@ -1159,6 +1159,21 @@
             "updated_at": "2026-08-15T09:01:18Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-0394",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394"
+            ],
+            "started_at": "2026-08-15T09:12:14Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-15T09:12:14Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-cierre-F2b",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",
@@ -1554,6 +1569,27 @@
             "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-15T01:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0392",
+            "expires_at": "2026-08-15T13:12:29Z",
+            "notes": "Correct exportable delivery watchdog guidance, add coordinator-only marker contract, and execute discriminating filter proof.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392",
+                "Area_comun/state/TASK_INDEX.json#TASK-0392",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0392",
+                "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+                "skills/session-watchdogs.skill.md",
+                "scripts/harness/README.md",
+                "scripts/harness/test_session_watchdog_filter.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T09:12:29Z",
+            "status": "active",
+            "task_id": "TASK-0392",
+            "updated_at": "2026-08-15T09:12:29Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",
