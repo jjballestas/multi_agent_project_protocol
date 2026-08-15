@@ -1,7 +1,7 @@
 ---
 id: TASK-0396
 title: El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto
-status: ready
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md
