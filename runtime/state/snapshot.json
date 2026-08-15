@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9de2f2008325d2cdba62aa1d1b402fb9407d8a89321180178650551f6587a62b",
+  "canonical_hash": "25a76b5531d1f45c06defb0fb507ba84c48f254dbcfa32b43d928f8e3a9a4395",
   "integrity": {
-    "canonical_hash": "9de2f2008325d2cdba62aa1d1b402fb9407d8a89321180178650551f6587a62b",
+    "canonical_hash": "25a76b5531d1f45c06defb0fb507ba84c48f254dbcfa32b43d928f8e3a9a4395",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "77cf000841d2ef504b34fb8d8471640ba0c75fbf566c5f43d987ffe6aed2da6f",
-    "signature": "b1238cb0482a57da003c33908e10ccecc2f50203ea5d670bb8b2f021029fb35c",
-    "up_to_seq": 9443
+    "prev_hash": "39605ce5f3958514d12f5d1535fa72ec4b020bc4c5b0bd5a52418c7451d282f9",
+    "signature": "5f4358bfed7849917511cb9f4e4c3ae9f88f1ec1d6d522c4b2124d38661f649d",
+    "up_to_seq": 9446
   },
   "state": {
     "aggregate_versions": {
@@ -1033,6 +1033,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-U": 1,
       "CLAIM-20260814-Arquitecto-campo-NOVA": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
+      "CLAIM-20260815-220250-prune-arquitecto": 1,
       "CLAIM-20260815-Arquitecto-0388-hyg": 1,
       "CLAIM-20260815-Arquitecto-0390-reg": 1,
       "CLAIM-20260815-Arquitecto-0392-back": 1,
@@ -1551,7 +1552,7 @@
       "MAILBOX-HYGIENE": 5,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
-      "MAINTENANCE-PRUNE": 67,
+      "MAINTENANCE-PRUNE": 68,
       "MSG-20260621-Arquitecto-to-Operador-CLOSE-TASK-0139": 1,
       "MSG-20260621-Arquitecto-to-Operador-RESP-RECONCILIA-ZEUS": 1,
       "MSG-20260622-Arquitecto-to-Operador-CLOSE-REQ-643B160A": 1,
@@ -3903,10 +3904,10 @@
       "claim-arq-d0103-registro-20260719": 1,
       "claim-arq-mailbox-hygiene-20260719": 1,
       "none": 35,
-      "protocol-prune": 69,
+      "protocol-prune": 70,
       "protocol-state": 1
     },
-    "events_applied": 8772,
+    "events_applied": 8775,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -12604,6 +12605,9 @@
       "prune-state:2026-08-13T11:26:45Z:claim-acquire": 9027,
       "prune-state:2026-08-13T11:26:45Z:claim-release": 9029,
       "prune-state:2026-08-13T11:26:45Z:protocol-prune": 9028,
+      "prune-state:2026-08-15T22:02:50Z:claim-acquire": 9444,
+      "prune-state:2026-08-15T22:02:50Z:claim-release": 9446,
+      "prune-state:2026-08-15T22:02:50Z:protocol-prune": 9445,
       "ratifica-0257-cierre-B-20260720T0550": 5172,
       "ratifica-0258-20260720T1146": 5281,
       "ratifica-0267-informal-20260720T0200": 5049,
@@ -12682,5 +12686,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9443
+  "up_to_seq": 9446
 }

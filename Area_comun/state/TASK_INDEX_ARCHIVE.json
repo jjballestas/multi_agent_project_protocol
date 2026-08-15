@@ -8456,6 +8456,56 @@
             "status": "done",
             "title": "El detector de liveness es ciego para el rol de checker y le mata toda review que pase de una hora",
             "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0350-el-port-del-motor-de-memoria-deja-marcadores-sin-resolver.md",
+            "id": "TASK-0350",
+            "owner": "Codex",
+            "status": "done",
+            "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0364-la-ci-canonica-pasa-a-runners-propios.md",
+            "id": "TASK-0364",
+            "owner": "Codex",
+            "status": "done",
+            "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0368-el-motor-deriva-decision-vigente-de-un-literal.md",
+            "id": "TASK-0368",
+            "owner": "Codex",
+            "status": "done",
+            "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md",
+            "id": "TASK-0373",
+            "owner": "Codex",
+            "status": "done",
+            "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+            "id": "TASK-0392",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "El self-filter que la skill documenta deja un vigia MUDO",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md",
+            "id": "TASK-0395",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo",
+            "type": "implementation"
         }
     ]
 }

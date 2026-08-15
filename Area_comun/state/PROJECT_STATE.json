@@ -121,12 +121,6 @@
             "title": "El caso de override de event-auth escribe una clave que el guard rechaza, y el gate muere sin haber probado nada"
         },
         {
-            "id": "TASK-0350",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El port del motor de memoria mete un fichero con marcadores sin resolver en la instancia generada"
-        },
-        {
             "id": "TASK-0351",
             "owner": "Codex",
             "status": "proposed",
@@ -181,12 +175,6 @@
             "title": "La puerta de dependencias descubre el objetivo por el texto del comando, no por lo que el comando ejecuta"
         },
         {
-            "id": "TASK-0364",
-            "owner": "Codex",
-            "status": "done",
-            "title": "La CI canonica pasa a runners propios, y el estado acumulado entre corridas se vigila por conducta"
-        },
-        {
             "id": "TASK-0365",
             "owner": "Analista",
             "status": "ready",
@@ -203,12 +191,6 @@
             "owner": "Codex",
             "status": "blocked",
             "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda"
-        },
-        {
-            "id": "TASK-0368",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El motor deriva decision vigente de un literal que este corpus casi no usa, y deja 106 de 110 politicas invisibles"
         },
         {
             "id": "TASK-0369",
@@ -233,12 +215,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El gate de identidad solo ve los nombres que la propia instancia declara, y una instancia adoptada nace con ochenta apariciones del equipo autor que su puerta no mira"
-        },
-        {
-            "id": "TASK-0373",
-            "owner": "Codex",
-            "status": "done",
-            "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido"
         },
         {
             "id": "TASK-0374",
@@ -349,12 +325,6 @@
             "title": "El orden de la cola lo fija el NOMBRE DEL FICHERO y no esta documentado"
         },
         {
-            "id": "TASK-0392",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El self-filter que la skill documenta deja un vigia MUDO"
-        },
-        {
             "id": "TASK-0393",
             "owner": "Codex",
             "status": "proposed",
@@ -365,12 +335,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos"
-        },
-        {
-            "id": "TASK-0395",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo"
         },
         {
             "id": "TASK-0396",
