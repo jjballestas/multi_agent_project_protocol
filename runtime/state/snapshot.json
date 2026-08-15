@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "22de4bc615a6994a6dca5f432cf602fe3e5fd4bf8d641c225d78b4d74f0442ff",
+  "canonical_hash": "ee4c38e34dc05114beab66a6ded4eb4c6c13ce9cd9098a9b1fc9b445912098e6",
   "integrity": {
-    "canonical_hash": "22de4bc615a6994a6dca5f432cf602fe3e5fd4bf8d641c225d78b4d74f0442ff",
+    "canonical_hash": "ee4c38e34dc05114beab66a6ded4eb4c6c13ce9cd9098a9b1fc9b445912098e6",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "24414d1f226e37e0da95854a08c341c7ac89c69f8b378a2d35af1d20f74a7d1d",
-    "signature": "c1af706ae896aa359667e77ef8cb3ca481262e9e7fdde4b4a70a5c8d79015dfd",
-    "up_to_seq": 9319
+    "prev_hash": "7ba0f5b583072def0a03d05fa43439a1614bdd266b3e550f67ffbb46bb57f662",
+    "signature": "cd3bae1f93eb05d4753720dbf2306a6728388e7aac1dbff88a338530c9ae8ddb",
+    "up_to_seq": 9324
   },
   "state": {
     "aggregate_versions": {
@@ -1037,6 +1037,7 @@
       "CLAIM-20260815-Arquitecto-cierre-F2b": 1,
       "CLAIM-20260815-Arquitecto-flips": 1,
       "CLAIM-20260815-Arquitecto-hyg-V": 1,
+      "CLAIM-20260815-Arquitecto-nova-D": 1,
       "CLAIM-20260815-Arquitecto-r3r2": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
@@ -3779,7 +3780,7 @@
       "TASK-0334": 21,
       "TASK-0335": 33,
       "TASK-0336": 62,
-      "TASK-0337": 2,
+      "TASK-0337": 3,
       "TASK-0338": 2,
       "TASK-0339": 1,
       "TASK-0340": 29,
@@ -3832,6 +3833,9 @@
       "TASK-0387": 1,
       "TASK-0388": 2,
       "TASK-0389": 1,
+      "TASK-0391": 1,
+      "TASK-0392": 1,
+      "TASK-0393": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3854,7 +3858,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8648,
+    "events_applied": 8653,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4846,6 +4850,11 @@
       "arq-memhib-001-f73": 9081,
       "arq-memhib-001-rel": 9082,
       "arq-memhib-001-up73": 9078,
+      "arq-novaD-0391": 9321,
+      "arq-novaD-0392": 9322,
+      "arq-novaD-0393": 9323,
+      "arq-novaD-acq": 9320,
+      "arq-novaD-rel": 9324,
       "arq-p353b-000": 8441,
       "arq-p353b-001": 8442,
       "arq-p353b-002": 8443,
@@ -12506,5 +12515,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9319
+  "up_to_seq": 9324
 }

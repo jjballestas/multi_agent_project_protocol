@@ -33,6 +33,27 @@ intake:
     - "El ciclo de vida de leases de TASK-0331: si el arreglo lo toca, se declara y se coordina, no se absorbe."
     - "Cualquier cambio en el umbral de poda o en el driver de peso de mailbox (RES-11)."
     - "Codigo de producto."
+  amendment_20260815: >
+    ENMIENDA 2026-08-15 (Arquitecto), con la medicion de campo de la instancia NOVA -- primer uso
+    real de la metodologia de principio a fin. El defecto es PEOR de lo que esta tarea enunciaba: no
+    solo veta sin mirar scope, sino que puede producir un **DEADLOCK CIRCULAR SIN SALIDA POR DISENO**.
+    Mecanismo medido alli: el ciclo del peon termina con ultimo commit -> el harness escribe
+    `personal/<Peer>/MEMORY.md` -> el exec muere, dejando esa memoria SIN COMMITEAR. El guard la ve
+    como residuo (`Get-StagedResidueState` cuenta el area personal del PROPIO peon:
+    `$candidateIsRelevant = ... -or $Matches[1] -ieq $PeerId`). Y como un peon solo commitea DENTRO
+    de un exec, y no puede arrancar uno por ese residuo, no hay salida: en NOVA seis GO encolados
+    murieron en `RETRY_DEFER reason=worktree_residue_live` con
+    `paths_json=["Aegis/personal/Codex/MEMORY.md"]` -- su PROPIO fichero -- y hubo que romperlo con
+    intervencion humana. Confirmado tambien en el hub: el 2026-08-15 la remediacion r2 de TASK-0378
+    difirio con `personal/Codex/MEMORY-*` en su `paths_json`. Lo grave es el SILENCIO: peones vivos,
+    heartbeats latiendo, ledger verde, validate y encoding en 0, y la cola muriendose sola contra un
+    reloj de 7200 s; la unica senal esta en el log del cron, que nadie mira cuando todo lo demas dice
+    que va bien. Arreglos por orden de calidad, tal como los formula NOVA: (1) que el ciclo del peon
+    TERMINE con el arbol limpio -- commitear su memoria DENTRO del exec, antes de soltar el lock --,
+    que elimina la causa; (2) que el guard ignore `personal/<peer>/**` DEL PROPIO peon que va a
+    ejecutar; (3) minimo aceptable: que el deadlock sea DETECTABLE -- si el unico residuo pertenece al
+    peon que va a ejecutar, no diferir, o emitir una linea distinta que lo nombre. El AC de esta tarea
+    se amplia: debe acreditarse que el caso del deadlock circular MUERE, reproducido.
   risk: medium
   estimate: M
 ---

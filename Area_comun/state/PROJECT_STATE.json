@@ -337,6 +337,24 @@
             "title": "La frontera de intake vive en dos sitios y ninguna puerta ve que divergan"
         },
         {
+            "id": "TASK-0391",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El orden de la cola lo fija el NOMBRE DEL FICHERO y no esta documentado"
+        },
+        {
+            "id": "TASK-0392",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El self-filter que la skill documenta deja un vigia MUDO"
+        },
+        {
+            "id": "TASK-0393",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Un rojo TRANSITORIO del validador puede consumir el mensaje como visto"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

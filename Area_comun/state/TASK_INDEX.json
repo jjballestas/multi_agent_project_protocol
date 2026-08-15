@@ -732,6 +732,33 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0391-el-orden-de-la-cola-lo-fija-el-nombre-del-fichero.md",
+            "id": "TASK-0391",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El orden de la cola lo fija el NOMBRE DEL FICHERO y no esta documentado",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+            "id": "TASK-0392",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El self-filter que la skill documenta deja un vigia MUDO",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0393-rojo-transitorio-del-validador-consume-el-mensaje.md",
+            "id": "TASK-0393",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "Un rojo TRANSITORIO del validador puede consumir el mensaje como visto",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
