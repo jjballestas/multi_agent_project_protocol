@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "3f6ea97377d25e7e27f420c3ea997964ea29efb92d95a8581d7ba6a641baa62c",
+  "canonical_hash": "a4e8240c42ec0cac08868507353df30b9951823602f322589356bb6076d97f63",
   "integrity": {
-    "canonical_hash": "3f6ea97377d25e7e27f420c3ea997964ea29efb92d95a8581d7ba6a641baa62c",
+    "canonical_hash": "a4e8240c42ec0cac08868507353df30b9951823602f322589356bb6076d97f63",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "4f745ed0394fc4c8003525e494235847a36fcbdd72004547aa6956a892568494",
-    "signature": "eb86f47c82d37a3eb11df39acde37951b3133c3ea343cef4df346b5f7b476471",
-    "up_to_seq": 9265
+    "prev_hash": "101717d898496d4ff1a825f0595e191db48c922dbc22cb57c67e1fb5292ea3c3",
+    "signature": "175545dfda8d1d63a29cb7e1032b896a4f2258389717ad9a5f325e5a5aaecb57",
+    "up_to_seq": 9269
   },
   "state": {
     "aggregate_versions": {
@@ -1033,6 +1033,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-U": 1,
       "CLAIM-20260814-Arquitecto-campo-NOVA": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
+      "CLAIM-20260815-Arquitecto-flips": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3792,12 +3793,12 @@
       "TASK-0370": 1,
       "TASK-0371": 1,
       "TASK-0372": 1,
-      "TASK-0373": 8,
+      "TASK-0373": 10,
       "TASK-0374": 1,
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
-      "TASK-0378": 18,
+      "TASK-0378": 19,
       "TASK-0379": 2,
       "TASK-0380": 1,
       "TASK-0381": 1,
@@ -3829,7 +3830,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8594,
+    "events_applied": 8598,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4200,6 +4201,10 @@
       "arq-dec1314-d13": 9169,
       "arq-dec1314-d14": 9170,
       "arq-dec1314-rel": 9171,
+      "arq-flips-373": 9267,
+      "arq-flips-378": 9268,
+      "arq-flips-acq": 9266,
+      "arq-flips-rel": 9269,
       "arq-gatecol-acq": 9142,
       "arq-gatecol-f78": 9147,
       "arq-gatecol-f79": 9148,
@@ -12427,5 +12432,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9265
+  "up_to_seq": 9269
 }
