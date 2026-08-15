@@ -754,7 +754,7 @@
             "id": "TASK-0392",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El self-filter que la skill documenta deja un vigia MUDO",
             "type": "implementation"
         },
@@ -781,7 +781,7 @@
             "id": "TASK-0395",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "blocked",
             "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo",
             "type": "implementation"
         },
