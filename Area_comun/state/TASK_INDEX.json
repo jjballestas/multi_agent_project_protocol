@@ -826,6 +826,16 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0400-el-indice-avanza-por-el-ledger-y-el-markdown-se-queda-en-el-arbol.md",
+            "id": "TASK-0400",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "proposed",
+            "title": "El indice avanza por el ledger y el markdown se queda sin commitear -- HEAD sale rojo para quien clona y el validate en caliente del autor sale verde",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

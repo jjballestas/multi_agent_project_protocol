@@ -397,6 +397,12 @@
             "title": "El probe de turno corre contra una instancia donde su propio agente no esta registrado -- el obstaculo que iba a medir no llega a ejercerse"
         },
         {
+            "id": "TASK-0400",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El indice avanza por el ledger y el markdown se queda sin commitear -- HEAD sale rojo para quien clona y el validate en caliente del autor sale verde"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

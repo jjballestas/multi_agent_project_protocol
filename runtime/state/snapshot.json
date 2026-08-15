@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "a74cd7d84e0d11ac96538df13e435863944b32b0fe10007b23fbf1faa3cf7d3f",
+  "canonical_hash": "8a2a2204e6e997a58c974949ba62fa2b03b127cae6bf1f5cf9b94a592ccdca07",
   "integrity": {
-    "canonical_hash": "a74cd7d84e0d11ac96538df13e435863944b32b0fe10007b23fbf1faa3cf7d3f",
+    "canonical_hash": "8a2a2204e6e997a58c974949ba62fa2b03b127cae6bf1f5cf9b94a592ccdca07",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "e0ce32578d8f4c4b8d9d4a424092a8f5924a379e49f981ca4638140c22b6ca77",
-    "signature": "c50fad0ddf4f3d1ab12849e981fe2ec36144ba9e3e40239543974c61d2d2209d",
-    "up_to_seq": 9410
+    "prev_hash": "ee8e1b7f79a2b290867749a5741448d6dbb81c6f257fe96c24dffa9b4ae7b5bc",
+    "signature": "36247c0a29c711a9cfad6664c7c1d1f34f7f4eed98e1705dea329730b29902ee",
+    "up_to_seq": 9413
   },
   "state": {
     "aggregate_versions": {
@@ -1051,6 +1051,7 @@
       "CLAIM-20260815-Arquitecto-prom0396": 1,
       "CLAIM-20260815-Arquitecto-promo-nova": 1,
       "CLAIM-20260815-Arquitecto-r3r2": 1,
+      "CLAIM-20260815-Arquitecto-reg0400": 1,
       "CLAIM-20260815-Arquitecto-unblock-queue": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
@@ -3875,6 +3876,7 @@
       "TASK-0397": 1,
       "TASK-0398": 1,
       "TASK-0399": 1,
+      "TASK-0400": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3897,7 +3899,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8739,
+    "events_applied": 8742,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4124,14 +4126,17 @@
       "arq-0395b-rel": 9394,
       "arq-20260815-acq-unblock": 9409,
       "arq-20260815-acq0396v2": 9406,
+      "arq-20260815-acq0400": 9411,
       "arq-20260815-flip0396v2": 9407,
       "arq-20260815-reg-task-0396": 9401,
       "arq-20260815-reg-task-0397": 9402,
       "arq-20260815-reg-task-0398": 9403,
       "arq-20260815-reg-task-0399": 9404,
       "arq-20260815-rel0396v2": 9408,
+      "arq-20260815-rel0400": 9413,
       "arq-20260815-release-ci-cascade": 9405,
       "arq-20260815-relunb": 9410,
+      "arq-20260815-ups0400": 9412,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12640,5 +12645,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9410
+  "up_to_seq": 9413
 }
