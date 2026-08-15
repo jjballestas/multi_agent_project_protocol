@@ -1,7 +1,7 @@
 ---
 id: TASK-0367
 title: El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda
-status: in_progress
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md
@@ -159,3 +159,25 @@ not a claim that the red is pre-existing without a control point.
 The AC3 negative is intentionally narrow: it proves that the generated instance scanner rejects a
 concrete identity declared by that instance when injected into core. It does not prove detection of
 undeclared adopter identities; that broader population and enforcement gap belongs to TASK-0372.
+
+## Remediation r3 evidence
+
+The provider-resolution negative now includes the off-diagonal `(Codex, Anthropic)` cell. The
+healthy resolver returns the Anthropic provider command for that cell, while the participant-keyed
+mutant returns the Codex command and is rejected. The full mailbox retry suite invokes this negative
+through its ordinary entry point, matching the unflagged CI command.
+
+The fixture directory is now rooted below the caller's disposable sandbox instead of an absolute
+drive path, so the same executed population is portable to runners without a `D:` drive. The
+provider CLI defaults are visible literals again. Their exact resolver line carries a declared,
+term-digest-scoped neutrality exemption for both provider command names; the scanner therefore
+remains green without relying on fragmented spelling. The line-number fragility of that declaration
+is partitioned to TASK-0388.
+
+## Blocker
+
+Delivery is blocked by the pre-existing TASK-0343 baseline in the full mailbox retry suite:
+`examples/mailbox_retry_cases/run_mailbox_retry_cases.py` exits 1 because the baseline variant
+reports `caught_runs: 0`. The runtime-instantiation, collaboration-state, encoding, neutrality,
+and compilation gates all exited 0. The remediation r3 changes remain uncommitted until that
+out-of-scope baseline is green.
