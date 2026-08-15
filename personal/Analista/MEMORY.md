@@ -7,6 +7,52 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-15 (73) - TASK-0373 F2 enfriado en seco: CHANGE-REQUIRED
+
+- **SOLO HUB, SIN PRODUCTO** (declarado por el Arquitecto). Detalle completo en
+  `personal/Analista/MEMORY-TASK-0373-20260815.md` (ancla `17f36268`, implementacion `e74109b4`,
+  veredicto commit `eda84611`). Artefacto:
+  `Area_comun/artifacts/Analista-TASK-0373-f2-enfriado-en-seco-verdict.md`.
+- **Las cuatro puertas del `verification_cmd` en exit 0 en clon limpio** (suite 78/78, drift `--fast`,
+  validate, encoding) y aun asi CHANGE-REQUIRED. El bloqueante no estaba en las puertas.
+- **BLOQUEANTE AC2:** `render_stub` sobre la ruta indexada exacta de una tarea `done` REAL deja
+  `validate_collaboration_state` en **exit 1** (`Task TASK-0350 missing intake block`); restaurado el
+  original, exit 0. Sobre los 273 candidatos de la propuesta viva: 11 errores de la misma clase. **El
+  test del maker pasa porque su muestra es `examples/minimal_instance/TASK-0001`, EXENTA del hard-gate
+  de intake por `id <= TASK-0238`**: la poblacion esta partida en dos mitades por una regla de
+  gobierno y la muestra cayo entera en la mitad exenta. Ademas ese verde NO discrimina: un fichero de
+  cero bytes en la misma ruta da el mismo exit 0.
+- **AC5 SLIP:** el golden del stub es real (control killed), pero los del manifiesto y del
+  manifest-index comparan **produccion contra produccion** (`assertEqual(rendered, render(...))`):
+  seis mutantes de formato sobre produccion sobreviven verdes (indent, `sort_keys`, campos requeridos
+  que desaparecen, clave raiz renombrada). El manifest-index no tiene ningun lector en el arbol.
+- **AC1 (la pregunta del Arquitecto), respondida:** reconstruye la fila de pack 1:1 -- las 7 columnas
+  NOT NULL -- pero los campos POR ARTEFACTO los LLEVA, no los reconstruye: un manifiesto escrito a
+  mano con `artifacts:[{}]` fue ACEPTADO por `load_cold_packs`, exit 0, `artifact_count=2`.
+- **AC4 PARCIAL, sacado como tarea propia y no como remediacion:** se mueve en once ejes (enabled,
+  retention class, selector, artifact_type, `window_count` 0/100/300/10000 -> 373/273/73/0, segunda
+  regla -> 275), pero con `status=done&owner=Codex` da **0 candidatos con `runtime/memory/index.db`
+  presente y 188 sin el**, exit 0 y sin warnings en ambos casos. Latente: el selector ENVIADO no
+  diverge (273 = 273).
+- **AC3 y AC6 PASAN.** AC3 mas fuerte que su propio criterio: censo SHA-256 de los 5780 ficheros del
+  arbol, **gitignorados incluidos**, sin un byte de cambio con el arbol sucio a proposito. Aviso:
+  `git status --porcelain` es CIEGO a `runtime/memory/`, asi que el instrumento declarado no acredita
+  la propiedad.
+- **Las cinco lecciones que me llevo:** (1) cuando una fixture vive en `examples/`, preguntar que
+  EXENCIONES lleva ese ejemplo -- un instrumento de referencia esta hecho para pasar; (2) correr la
+  propiedad sobre LA FAMILIA que la regla selecciona, no sobre su ejemplo (la propuesta ya me daba la
+  poblacion); (3) preguntar SIEMPRE si el verde discrimina -- el control del fichero vacio costo dos
+  minutos; (4) un "golden" que compara produccion contra produccion prueba determinismo, no formato:
+  leer la asercion, no el nombre del test; (5) funcionar y estar probado son dos preguntas -- la
+  clausula anti-B1 funciona (273/273 forzados) y aun asi se puede borrar entera de produccion sin
+  poner rojo nada.
+- **Mecanica:** `git commit -- <ruta>` NO funciona con untracked (hay que `git add` primero y
+  commitear sin pathspec). **Un exec del peer me borro el artefacto del arbol compartido mientras
+  estaba untracked, entre el `add` y el commit**: desde ahora escribo el veredicto en scratch propio y
+  lo copio a la ruta gobernada en la MISMA invocacion que hace `add` + `commit`. Senalado como
+  residual 5 por DECISION-0018. La suite construye `runtime/memory/index.db` (14 MB) en la raiz del
+  clon y esta gitignorado: saber si el DB esta antes de comparar conteos.
+
 ## Ultima actualizacion 2026-08-14 (72) - TASK-0368 remediaciones r1 y r2: CHANGE-REQUIRED las dos
 
 - **SOLO HUB, SIN PRODUCTO.** Detalle completo en `personal/Analista/MEMORY-TASK-0368-r1-20260814.md`
