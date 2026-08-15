@@ -1755,9 +1755,48 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-15T11:06:47Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0392",
             "updated_at": "2026-08-15T11:06:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0392-remediation2-delivery",
+            "expires_at": "2026-08-15T13:11:37Z",
+            "notes": "Publish remediation r2 handoff, move TASK-0392 to in_review, and release Codex claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392-remediation2-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392-remediation2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392-remediation2-memory",
+                "Area_comun/state/TASK_INDEX.json#TASK-0392",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0392",
+                "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0392-codex-to-arquitecto-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0392-remediation-2.md",
+                "personal/Codex/MEMORY-TASK-0392-remediation2-20260815.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T11:11:37Z",
+            "status": "released",
+            "task_id": "TASK-0392",
+            "updated_at": "2026-08-15T11:11:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0392-remediation2-memory",
+            "expires_at": "2026-08-15T13:10:51Z",
+            "notes": "Persist post-commit TASK-0392 remediation r2 context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0392-remediation2-memory",
+                "personal/Codex/MEMORY-TASK-0392-remediation2-20260815.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T11:10:51Z",
+            "status": "released",
+            "task_id": "TASK-0392",
+            "updated_at": "2026-08-15T11:10:51Z"
         },
         {
             "claim_id": "CLAIM-20260815-Codex-TASK-0395",
