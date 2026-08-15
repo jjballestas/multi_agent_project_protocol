@@ -1330,6 +1330,28 @@
             "updated_at": "2026-08-15T10:35:46Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-hyg-Y",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-hyg-Y",
+                "Area_comun/mailbox/open/MSG-20260815-Arquitecto-to-Codex-ACTION-0367-blocked-y-libera.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Arquitecto-to-Codex-ACTION-0367-blocked-y-libera.md",
+                "Area_comun/mailbox/open/MSG-20260815-Arquitecto-to-Codex-REMEDIACION-TASK-0392-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Arquitecto-to-Codex-REMEDIACION-TASK-0392-r2.md",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0392-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0392-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0392-r1-change-required.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0392-r1-change-required.md",
+                "Area_comun/mailbox/open/MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0392-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0392-r1.md"
+            ],
+            "started_at": "2026-08-15T11:19:46Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260815Y",
+            "updated_at": "2026-08-15T11:19:46Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-nova-D",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",
