@@ -64,7 +64,8 @@ intake:
       de producto bajo una tarea sin claim activo -- y se comprueba que AHORA muere, en los dos
       ganchos, nombrando la causa."
   verification_cmd:
-    - "python scripts/check_commit_trailers.py --root ."
+    - "python scripts/test_commit_msg_hook.py"
+    - "python scripts/test_precommit_hook.py"
     - "python scripts/validate_collaboration_state.py --root ."
     - "python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory"
     - "python scripts/scan_encoding.py --root ."

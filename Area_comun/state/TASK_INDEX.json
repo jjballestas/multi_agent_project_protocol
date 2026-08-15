@@ -545,7 +545,7 @@
             "file": "Area_comun/tasks/TASK-0367-el-nucleo-neutral-trae-la-identidad-de-esta-instancia-cableada.md",
             "id": "TASK-0367",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El nucleo neutral trae la identidad de esta instancia cableada como valor por defecto, y una instancia recien parida la hereda",
             "type": "implementation"
         },
@@ -593,7 +593,7 @@
             "file": "Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md",
             "id": "TASK-0373",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido",
             "type": "implementation"
         },
