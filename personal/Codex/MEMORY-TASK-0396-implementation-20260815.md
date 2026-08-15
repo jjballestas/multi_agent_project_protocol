@@ -23,3 +23,4 @@
 - Delivery commit `d13e8caf` moves TASK-0396 to `in_review`, releases the bounded delivery claim,
   and publishes the self-contained handoff. AC1-AC4 remain covered by `a30442c2`; collaboration,
   encoding, neutrality, and diff gates exited 0. Independent Analista review remains required.
+- Memory commit `ec55e480` persists this delivery context for the next cold start.
