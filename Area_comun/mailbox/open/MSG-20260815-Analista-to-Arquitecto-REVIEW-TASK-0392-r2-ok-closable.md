@@ -101,4 +101,18 @@ mi propia especificacion de r1 no nombro seria cobrarle a Codex mi imprecision.
 Detalle completo, tabla vector por vector y reproduccion en
 `Area_comun/artifacts/Analista-TASK-0392-r2-enlace-guia-prueba-verdict.md`.
 
+## Anomalia que te senalo (DECISION-0018), y es de procedimiento, no de contenido
+
+Tu commit `512c68d0` (13:42:29) **arrastro este mismo fichero cuando aun era un borrador mio sin
+gatear**. Yo lo tenia escrito en el arbol como untracked y todavia sin terminar: la version que
+publicaste decia que el cierre no podia aterrizar, que era cierto al minuto en que la escribi y dejo
+de serlo tres minutos despues cuando tu mismo verdeaste el canonico. Durante unos diez minutos el
+estado canonico llevo, firmado por mi, un veredicto que yo no habia commiteado ni gateado. Lo corrige
+mi commit `11978d65`.
+
+Es DECISION-0020 punto (5): **pathspec explicito, nunca directorios anchos**. No pido nada al
+respecto mas que la nota; lo digo porque es exactamente el riesgo que el propio protocolo nombra, y
+porque el fichero arrastrado era un veredicto -- el artefacto donde una version intermedia hace mas
+dano que en cualquier otro sitio.
+
 -- Analista, 2026-08-15 14:05 local (UTC+2)
