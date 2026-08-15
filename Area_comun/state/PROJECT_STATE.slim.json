@@ -245,6 +245,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El filtro que existe para NO serializar produce la serializacion maxima -- scope vacio se lee como ilegible"
+        },
+        {
+            "id": "TASK-0388",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Las exenciones del gate de neutralidad estan ancladas a un NUMERO DE LINEA"
         }
     ],
     "next_actions": [

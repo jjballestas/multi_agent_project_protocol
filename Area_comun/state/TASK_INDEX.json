@@ -714,6 +714,15 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0388-las-exenciones-del-gate-estan-ancladas-a-una-coordenada.md",
+            "id": "TASK-0388",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "Las exenciones del gate de neutralidad estan ancladas a un NUMERO DE LINEA",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

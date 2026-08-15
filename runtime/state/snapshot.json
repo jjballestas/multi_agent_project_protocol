@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "efeaa41d7b373e66113f9341a45c43e71fd177fe48adc8ffce9a99d5aef5ed19",
+  "canonical_hash": "e2d577f31d1e7a4e9abdd250e73aee0d20e8fdabed1ec84e78677af16f52c367",
   "integrity": {
-    "canonical_hash": "efeaa41d7b373e66113f9341a45c43e71fd177fe48adc8ffce9a99d5aef5ed19",
+    "canonical_hash": "e2d577f31d1e7a4e9abdd250e73aee0d20e8fdabed1ec84e78677af16f52c367",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "a84a8ff5fa8a69d411c78cd6a1f3cf6d82cd358e6ef0687a7312d5aca9f37cb8",
-    "signature": "afdb2a46e565215669fc8941a0073c8a878f65552e95bcf6345773295097682d",
-    "up_to_seq": 9278
+    "prev_hash": "5a1f4553439ed6515ceb431e34127016679f9925495de23304afc2c7124919a7",
+    "signature": "86dd751bd22c6eb020e50a0ff27ca61aba1a9738793ce0cf123ccb4c1c4670cc",
+    "up_to_seq": 9291
   },
   "state": {
     "aggregate_versions": {
@@ -1033,6 +1033,7 @@
       "CLAIM-20260814-Arquitecto-OPS-hyg-U": 1,
       "CLAIM-20260814-Arquitecto-campo-NOVA": 1,
       "CLAIM-20260814-Arquitecto-gate-colaboracion": 1,
+      "CLAIM-20260815-Arquitecto-0388-hyg": 1,
       "CLAIM-20260815-Arquitecto-flips": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
@@ -3307,6 +3308,7 @@
       "MSG-20260813-Arquitecto-to-Codex-GO-TASK-0368": 1,
       "MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0364": 1,
       "MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0367": 1,
+      "MSG-20260813-Arquitecto-to-Codex-REMEDIACION-TASK-0367-r2": 1,
       "MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0350": 1,
       "MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0364": 1,
       "MSG-20260813-Codex-to-Arquitecto-HANDOFF-TASK-0364-R1": 1,
@@ -3336,7 +3338,9 @@
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r3": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r4": 1,
       "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0368-r5": 1,
+      "MSG-20260814-Arquitecto-to-Codex-REMEDIACION-TASK-0378-r2": 1,
       "MSG-20260814-Arquitecto-to-Operador-PLAN-gate-colaboracion": 1,
+      "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0367-R2": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R1": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R2": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R3": 1,
@@ -3344,6 +3348,13 @@
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0368-R5": 1,
       "MSG-20260814-Codex-to-Arquitecto-HANDOFF-TASK-0378": 1,
       "MSG-20260814-Operador-to-Arquitecto-GATE-COLABORACION-claim-producto": 1,
+      "MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0373-verdict": 1,
+      "MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0373": 1,
+      "MSG-20260815-Arquitecto-to-Codex-GO-TASK-0373": 1,
+      "MSG-20260815-Arquitecto-to-Codex-REMEDIACION-TASK-0373-r1": 1,
+      "MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0373": 1,
+      "MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0373-remediation-1": 1,
+      "MSG-20260815-Codex-to-Arquitecto-QUESTION-TASK-0378-remediation-2": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CAMPO-NOVA-20260814": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
@@ -3808,6 +3819,7 @@
       "TASK-0385": 2,
       "TASK-0386": 1,
       "TASK-0387": 1,
+      "TASK-0388": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3830,7 +3842,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8607,
+    "events_applied": 8620,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4022,6 +4034,19 @@
       "arq-0385-reg": 9230,
       "arq-0386-reg": 9235,
       "arq-0387-reg": 9241,
+      "arq-0388-acq": 9279,
+      "arq-0388-ar1": 9281,
+      "arq-0388-ar10": 9290,
+      "arq-0388-ar2": 9282,
+      "arq-0388-ar3": 9283,
+      "arq-0388-ar4": 9284,
+      "arq-0388-ar5": 9285,
+      "arq-0388-ar6": 9286,
+      "arq-0388-ar7": 9287,
+      "arq-0388-ar8": 9288,
+      "arq-0388-ar9": 9289,
+      "arq-0388-reg": 9280,
+      "arq-0388-rel": 9291,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12441,5 +12466,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9278
+  "up_to_seq": 9291
 }
