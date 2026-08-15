@@ -122,3 +122,25 @@ diferimiento de hoy, que se resolvera solo.
 
 **No se rutea hasta que TASK-0331 cierre.** Comparte fichero con ella y Codex lo tiene modificado
 ahora mismo. Contratarla ya es para que no se pierda; ejecutarla en paralelo es fabricar un conflicto.
+
+## REFUERZO DE EVIDENCIA -- 2026-08-16 (Arquitecto)
+
+El AC6 de esta tarea se escribio sobre el caso que midio NOVA. **Se ha reproducido DOS VECES en el
+hub el 2026-08-15**, y las dos las rompio el Arquitecto commiteando a mano la memoria del peon:
+
+    ~19:35  GO de TASK-0396 -> RETRY_DEFER reason=worktree_residue_live
+            paths_json incluye personal/Codex/MEMORY-*.md (7 ficheros) -- suyos
+    ~00:30  el mismo patron tras la entrega de TASK-0396
+
+Y una TERCERA forma que el AC6 no nombra y conviene que el arreglo cubra: **el residuo de un peon
+difiere al OTRO**. El 2026-08-16, la review de TASK-0396 al Analista estuvo **30 minutos** sin
+consumirse, difiriendo primero por `active_external_claim` (los claims de Codex sobre 0397) y luego
+por `worktree_residue_live` (el arbol sucio de Codex). Quien genera el residuo no es quien paga el
+bloqueo, que es la razon por la que el incentivo no lo corrige solo.
+
+Dato que acota el arreglo: **pedirselo al peon en el texto del encargo FUNCIONA** -- se hizo en el GO
+de TASK-0397 y esa vez commiteo su memoria dentro del exec. Pero eso es disciplina por mensaje, no
+propiedad del sistema: se cae en cuanto un encargo no lo diga.
+
+**NO se abre tarea aparte para esto** (se evaluo TASK-0406 y se descarto por duplicar AC6/AC7). Lo que
+SI sale aparte es el ancla del regex, que es un defecto distinto: **TASK-0405**.

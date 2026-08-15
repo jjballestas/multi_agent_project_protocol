@@ -42,6 +42,34 @@
             "updated_at": "2026-08-15T22:02:50Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Arquitecto-lote-nova",
+            "expires_at": "2026-08-16T00:05:01Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-lote-nova",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md",
+                "Area_comun/tasks/TASK-0337-el-guard-de-residuo-veta-sin-mirar-scope.md\nArea_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0404",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0404",
+                "Area_comun/tasks/TASK-0404-la-rama-de-fallo-espera-sin-cota-y-el-diagnostico-no-se-imprime.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0405",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0405",
+                "Area_comun/tasks/TASK-0405-la-exencion-de-area-personal-ancla-en-la-raiz-del-repositorio.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0407",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0407",
+                "Area_comun/tasks/TASK-0407-el-marcador-de-parada-no-para-hasta-agotar-el-lote.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md"
+            ],
+            "started_at": "2026-08-15T23:05:01Z",
+            "status": "released",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T23:05:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Arquitecto-prom0397",
             "expires_at": "2026-08-15T23:08:22Z",
             "owner": "Arquitecto",

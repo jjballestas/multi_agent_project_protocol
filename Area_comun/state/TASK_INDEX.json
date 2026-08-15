@@ -741,7 +741,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "high",
-            "status": "in_review",
+            "status": "done",
             "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto",
             "type": "implementation"
         },
@@ -813,6 +813,46 @@
             "risk": "medium",
             "status": "proposed",
             "title": "El enlace guia-prueba vale dos tokens y el negativo de falsos positivos mide la coordenada equivocada",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0404-la-rama-de-fallo-espera-sin-cota-y-el-diagnostico-no-se-imprime.md",
+            "id": "TASK-0404",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "proposed",
+            "title": "La rama de fallo del fixture espera sin cota a los descendientes, y el diagnostico de AC4 no llega a imprimirse",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0405-la-exencion-de-area-personal-ancla-en-la-raiz-del-repositorio.md",
+            "id": "TASK-0405",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "proposed",
+            "title": "La exencion de area personal del guardian de residuo ancla en la raiz del repositorio y en instancias con gobierno anidado esta MUERTA",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0407-el-marcador-de-parada-no-para-hasta-agotar-el-lote.md",
+            "id": "TASK-0407",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "proposed",
+            "title": "El marcador de parada del peon no para -- se comprueba solo al principio del ciclo y el lote entero se ejecuta",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+            "id": "TASK-0408",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "proposed",
+            "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja",
             "type": "implementation"
         },
         {

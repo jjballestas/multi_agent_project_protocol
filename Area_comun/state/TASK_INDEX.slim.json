@@ -289,12 +289,6 @@
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos"
         },
         {
-            "id": "TASK-0396",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto"
-        },
-        {
             "id": "TASK-0397",
             "owner": "Codex",
             "status": "in_review",
@@ -335,6 +329,30 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El enlace guia-prueba vale dos tokens y el negativo de falsos positivos mide la coordenada equivocada"
+        },
+        {
+            "id": "TASK-0404",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La rama de fallo del fixture espera sin cota a los descendientes, y el diagnostico de AC4 no llega a imprimirse"
+        },
+        {
+            "id": "TASK-0405",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La exencion de area personal del guardian de residuo ancla en la raiz del repositorio y en instancias con gobierno anidado esta MUERTA"
+        },
+        {
+            "id": "TASK-0407",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El marcador de parada del peon no para -- se comprueba solo al principio del ciclo y el lote entero se ejecuta"
+        },
+        {
+            "id": "TASK-0408",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja"
         }
     ],
     "view": "task_index.slim"
