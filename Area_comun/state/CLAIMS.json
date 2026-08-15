@@ -1234,6 +1234,30 @@
             "updated_at": "2026-08-15T11:41:49Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-ci-cascade",
+            "expires_at": "2026-08-15T20:27:12Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-ci-cascade",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/state/TASK_INDEX.json#TASK-0398",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0398",
+                "Area_comun/state/TASK_INDEX.json#TASK-0399",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0399",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "Area_comun/tasks/TASK-0398-el-negativo-de-dependencia-ausente-clasifica-distinto-segun-el-host.md",
+                "Area_comun/tasks/TASK-0399-el-probe-de-turno-corre-contra-una-instancia-donde-su-propio-agente-no-existe.md"
+            ],
+            "started_at": "2026-08-15T17:27:12Z",
+            "status": "released",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T17:27:12Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-cierre-F2b",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",
@@ -1387,6 +1411,21 @@
             "status": "released",
             "task_id": "TASK-0337",
             "updated_at": "2026-08-15T08:57:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Arquitecto-prom0396",
+            "expires_at": "2026-08-15T19:28:34Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-prom0396",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md"
+            ],
+            "started_at": "2026-08-15T17:28:34Z",
+            "status": "released",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T17:28:34Z"
         },
         {
             "claim_id": "CLAIM-20260815-Arquitecto-promo-nova",

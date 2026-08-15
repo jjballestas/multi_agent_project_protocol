@@ -786,6 +786,46 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md",
+            "id": "TASK-0396",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "ready",
+            "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+            "id": "TASK-0397",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "proposed",
+            "title": "El inventario del workflow se acredita contra cardinales escritos a mano -- crecer la CI de forma legitima pone el gate en rojo",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0398-el-negativo-de-dependencia-ausente-clasifica-distinto-segun-el-host.md",
+            "id": "TASK-0398",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "proposed",
+            "title": "El negativo de dependencia ausente clasifica distinto segun el host -- en Linux devuelve excepcion donde exige razon",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0399-el-probe-de-turno-corre-contra-una-instancia-donde-su-propio-agente-no-existe.md",
+            "id": "TASK-0399",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "proposed",
+            "title": "El probe de turno corre contra una instancia donde su propio agente no esta registrado -- el obstaculo que iba a medir no llega a ejercerse",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -373,6 +373,30 @@
             "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo"
         },
         {
+            "id": "TASK-0396",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto"
+        },
+        {
+            "id": "TASK-0397",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El inventario del workflow se acredita contra cardinales escritos a mano -- crecer la CI de forma legitima pone el gate en rojo"
+        },
+        {
+            "id": "TASK-0398",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El negativo de dependencia ausente clasifica distinto segun el host -- en Linux devuelve excepcion donde exige razon"
+        },
+        {
+            "id": "TASK-0399",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El probe de turno corre contra una instancia donde su propio agente no esta registrado -- el obstaculo que iba a medir no llega a ejercerse"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
