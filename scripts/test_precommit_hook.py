@@ -115,6 +115,8 @@ def main() -> int:
         )
         other_claim = run(["sh", ".githooks/pre-commit"], root)
         require_rejected(other_claim, "pre-commit product with other actor claim")
+        if "owned by another actor" not in other_claim.stderr:
+            raise AssertionError("pre-commit did not distinguish another actor's claim")
         print(f"PRE_COMMIT_REJECTION_OTHER_CLAIM exit={other_claim.returncode}: {other_claim.stderr.strip().splitlines()[0]}")
         claims.write_text(
             '{"claims":[{"claim_id":"C1","task_id":"TASK-0378","owner":"Hook Test","status":"active","scope":["scripts/work.py","scripts/prune_state.py","scripts/validate_collaboration_state.py","scripts/generate_human_guide.py","runtime/protocol_replay.py",".githooks/pre-commit"]}]}\n',
@@ -122,6 +124,14 @@ def main() -> int:
         )
         require(run(["git", "restore", "--staged", "scripts/work.py"], root), 0, "unstage product claim fixture")
         product.unlink()
+
+        ledger = root / "runtime" / "state" / "events.jsonl"
+        ledger.parent.mkdir()
+        ledger.write_text("{}\n", encoding="utf-8")
+        require(run(["git", "add", "runtime/state/events.jsonl"], root), 0, "stage ledger-only coordination")
+        claims.write_text('{"claims":[]}\n', encoding="utf-8")
+        require(run(["sh", ".githooks/pre-commit"], root), 0, "ledger-only coordination needs no product claim")
+        require(run(["git", "reset", "--hard", "HEAD"], root), 0, "reset ledger-only fixture")
 
         prune = root / "scripts" / "prune_state.py"
         prune.write_text("raise SystemExit(1)\n", encoding="utf-8")

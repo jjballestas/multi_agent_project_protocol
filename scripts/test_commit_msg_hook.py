@@ -38,7 +38,7 @@ def fixture() -> Path:
     return root
 
 
-def attempt(repo: Path, subject: str, trailers: str, accepted: bool) -> None:
+def attempt(repo: Path, subject: str, trailers: str, accepted: bool) -> subprocess.CompletedProcess[str]:
     target = repo / "scripts/work.py"
     target.write_text(target.read_text(encoding="utf-8") + "x=1\n" if target.exists() else "x=1\n", encoding="utf-8")
     run(["git", "add", "."], repo, True)
@@ -49,6 +49,7 @@ def attempt(repo: Path, subject: str, trailers: str, accepted: bool) -> None:
         assert after == before and "commit trailer gate:" in result.stderr
         if "claim" in result.stderr:
             print(f"COMMIT_MSG_REJECTION exit={result.returncode}: {result.stderr.strip().splitlines()[0]}")
+    return result
 
 
 def main() -> int:
@@ -73,10 +74,11 @@ def main() -> int:
     try:
         claims = repo / "Area_comun/state/CLAIMS.json"
         claims.write_text(
-            '{"claims":[{"claim_id":"C1","task_id":"TASK-0279","owner":"Other","status":"active"}]}\n',
+            '{"claims":[{"claim_id":"C1","task_id":"TASK-0279","owner":"Other","status":"active","scope":["scripts/work.py","scripts/check_commit_trailers.py",".githooks/commit-msg"]}]}\n',
             encoding="utf-8",
         )
-        attempt(repo, "feat: other actor", "Task-Id: TASK-0279", False)
+        result = attempt(repo, "feat: other actor", "Task-Id: TASK-0279", False)
+        assert "owned by another actor" in result.stderr
     finally:
         shutil.rmtree(repo, ignore_errors=True)
 
@@ -96,6 +98,8 @@ def main() -> int:
         message.write_text("feat: prefixed\n\nTask-Id: TASK-0279\n", encoding="utf-8")
         verdict = run(["python", "Aegis/scripts/check_commit_trailers.py", str(message)], repo, True)
         assert verdict.returncode == 0
+        hook_verdict = run(["sh", "Aegis/.githooks/commit-msg", str(message)], repo, True)
+        assert hook_verdict.returncode == 0
     finally:
         shutil.rmtree(repo, ignore_errors=True)
     print(f"OK: commit-msg trailer gate passed {len(cases) + 2} cases including empty/non-empty instance prefixes.")

@@ -73,7 +73,13 @@ def staged_governed(root: Path, prefix: str) -> bool:
 
 def staged_product_paths(root: Path, prefix: str) -> list[str]:
     paths = instance_paths(staged_paths(root), prefix)
-    return [path for path in paths if path == "protocol.config.json" or path.startswith(("runtime/", "scripts/", ".githooks/"))]
+    return [
+        path
+        for path in paths
+        if path == "protocol.config.json"
+        or path.startswith(("scripts/", ".githooks/"))
+        or (path.startswith("runtime/") and not path.startswith("runtime/state/"))
+    ]
 
 
 def commit_actor(root: Path) -> str:
@@ -81,19 +87,26 @@ def commit_actor(root: Path) -> str:
 
 
 def has_active_claim(instance_root: Path, task_id: str | None, actor: str, product_paths: list[str]) -> bool:
+    return claim_state(instance_root, task_id, actor, product_paths) == "owned"
+
+
+def claim_state(instance_root: Path, task_id: str | None, actor: str, product_paths: list[str]) -> str:
     path = instance_root / "Area_comun/state/CLAIMS.json"
     if not path.exists():
-        return False
+        return "missing"
     rows = json.loads(path.read_text(encoding="utf-8")).get("claims", [])
+    covered_by_other = False
     for row in rows:
-        if not isinstance(row, dict) or row.get("status") != "active" or row.get("owner") != actor:
+        if not isinstance(row, dict) or row.get("status") != "active":
             continue
         if task_id is not None and row.get("task_id") != task_id:
             continue
         scope = {str(item).split("#", 1)[0] for item in row.get("scope", [])}
         if all(path in scope for path in product_paths):
-            return True
-    return False
+            if row.get("owner") == actor:
+                return "owned"
+            covered_by_other = True
+    return "other" if covered_by_other else "missing"
 
 
 def validate(root: Path, instance_root: Path, prefix: str, message: str) -> list[str]:
@@ -112,8 +125,11 @@ def validate(root: Path, instance_root: Path, prefix: str, message: str) -> list
         errors.append(f"unknown Task-Id {task_id}; use an id from TASK_INDEX or TASK_INDEX_ARCHIVE")
     if task_id != "none" and task_id in known and staged_product(root, prefix):
         actor = commit_actor(root)
-        if not has_active_claim(instance_root, task_id, actor, staged_product_paths(root, prefix)):
-            errors.append(f"product commit rejected: Task-Id {task_id} has no active claim owned by commit actor {actor}")
+        state = claim_state(instance_root, task_id, actor, staged_product_paths(root, prefix))
+        if state == "other":
+            errors.append(f"product commit rejected: Task-Id {task_id} is covered by an active claim owned by another actor, not commit actor {actor}")
+        elif state == "missing":
+            errors.append(f"product commit rejected: Task-Id {task_id} has no active claim covering every staged product path for commit actor {actor}")
     if task_id == "none":
         ops = trailers.get("Ops-Reason", [])
         if len(ops) != 1 or not OPS.fullmatch(ops[0]):
@@ -136,9 +152,11 @@ def main() -> int:
         if not staged_product(root, prefix):
             return 0
         actor = commit_actor(root)
-        if has_active_claim(instance_root, None, actor, staged_product_paths(root, prefix)):
+        state = claim_state(instance_root, None, actor, staged_product_paths(root, prefix))
+        if state == "owned":
             return 0
-        print(f"pre-commit claim gate: product commit rejected: commit actor {actor} has no active claim", file=sys.stderr)
+        cause = "active claim is owned by another actor" if state == "other" else "no active claim covers every staged product path"
+        print(f"pre-commit claim gate: product commit rejected: {cause} for commit actor {actor}", file=sys.stderr)
         return 1
     errors = validate(root, instance_root, prefix, Path(sys.argv[1]).read_text(encoding="utf-8"))
     if errors:

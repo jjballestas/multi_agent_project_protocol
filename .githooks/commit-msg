@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 set -u
 
-python scripts/check_commit_trailers.py "$1"
+hook_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+instance_root=$(dirname -- "$hook_dir")
+python "$instance_root/scripts/check_commit_trailers.py" "$1"
 exit $?
