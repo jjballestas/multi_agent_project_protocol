@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "25a76b5531d1f45c06defb0fb507ba84c48f254dbcfa32b43d928f8e3a9a4395",
+  "canonical_hash": "8c4a2ee8663cdc4a389a57d6482a7a90c8eefa9d8146d0cbf5353eebfb1a24f5",
   "integrity": {
-    "canonical_hash": "25a76b5531d1f45c06defb0fb507ba84c48f254dbcfa32b43d928f8e3a9a4395",
+    "canonical_hash": "8c4a2ee8663cdc4a389a57d6482a7a90c8eefa9d8146d0cbf5353eebfb1a24f5",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "39605ce5f3958514d12f5d1535fa72ec4b020bc4c5b0bd5a52418c7451d282f9",
-    "signature": "5f4358bfed7849917511cb9f4e4c3ae9f88f1ec1d6d522c4b2124d38661f649d",
-    "up_to_seq": 9446
+    "prev_hash": "39bc89f7c4f8e67affaf6121deacf228bfbfd53f080b12362fe35ae12f91f04d",
+    "signature": "c652ea7a0f5fbaec17e9d230f805d76cf519f22bb003c2fb59dea219a94271c0",
+    "up_to_seq": 9449
   },
   "state": {
     "aggregate_versions": {
@@ -1058,6 +1058,7 @@
       "CLAIM-20260815-Arquitecto-reg0401": 1,
       "CLAIM-20260815-Arquitecto-unblock-queue": 1,
       "CLAIM-20260815-Arquitecto-unblock0396": 1,
+      "CLAIM-20260816-Arquitecto-prom0397": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3878,7 +3879,7 @@
       "TASK-0394": 3,
       "TASK-0395": 16,
       "TASK-0396": 22,
-      "TASK-0397": 1,
+      "TASK-0397": 3,
       "TASK-0398": 1,
       "TASK-0399": 1,
       "TASK-0400": 2,
@@ -3907,7 +3908,7 @@
       "protocol-prune": 70,
       "protocol-state": 1
     },
-    "events_applied": 8775,
+    "events_applied": 8778,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4160,6 +4161,9 @@
       "arq-20260815-ups401": 9430,
       "arq-20260815-ups402": 9435,
       "arq-20260815-ups403": 9439,
+      "arq-20260816-acq397": 9447,
+      "arq-20260816-flip397": 9448,
+      "arq-20260816-rel397": 9449,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12686,5 +12690,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9446
+  "up_to_seq": 9449
 }
