@@ -1369,16 +1369,49 @@ def propose_cold(root: Path, *, at: str = "HEAD") -> dict[str, Any]:
     }
 
 
-def render_stub(candidate: ColdCandidate, cold_path: str, git_commit: str) -> bytes:
+def _task_intake_block(source_data: bytes) -> str:
+    text = source_data.decode("utf-8-sig")
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        if line == "intake:":
+            block = [line]
+            for following in lines[index + 1 :]:
+                if following.startswith((" ", "\t")) or not following:
+                    block.append(following)
+                    continue
+                break
+            while block and not block[-1]:
+                block.pop()
+            if len(block) == 1:
+                break
+            return "\n".join(block) + "\n"
+    raise ValueError("task stub source is missing intake block")
+
+
+def render_stub(
+    candidate: ColdCandidate,
+    cold_path: str,
+    git_commit: str,
+    requested_by: str,
+    source_data: bytes | None = None,
+) -> bytes:
+    if not requested_by.strip():
+        raise ValueError("stub rendering requires requested_by")
+    intake = ""
+    if candidate.artifact_type == "task":
+        if source_data is None:
+            raise ValueError("task stub rendering requires source data")
+        intake = _task_intake_block(source_data)
     payload = (
         "---\n"
         f"artifact_id: {candidate.artifact_id}\n"
         f"status: {candidate.status}\n"
+        f"{intake}"
         "storage: cold_stub\n"
         f"cold_path: {cold_path}\n"
         f"sha256: {candidate.sha256}\n"
         f"git_commit_at_freeze: {git_commit}\n"
-        f"rehydration_command: python scripts/memory/query_memory_db.py --retrieve {candidate.artifact_id}\n"
+        f"rehydration_command: python scripts/memory/query_memory_db.py --retrieve {candidate.artifact_id} --requested-by {requested_by}\n"
         "---\n\n"
         "This artifact is stored in the canonical cold archive.\n"
     )

@@ -122,3 +122,15 @@ F2 se puede construir en paralelo; F3 no arranca hasta que 0368 cierre.
   reconstructs the expected `cold_packs` row 1:1.
 - The complete memory suite passes 78/78. The live proposal exits 0. The DB still contains zero
   `cold_packs`; no archive directory or cold artifact was created.
+
+## Remediation r1 evidence (Codex, 2026-08-15)
+
+- Task stubs now require the original bytes and preserve the complete literal `intake` block. A
+  canonical TASK-0350 fixture (above the TASK-0238 exemption boundary) remains validator-green
+  after replacement; a zero-byte replacement fails the same test.
+- The literal rehydration command includes `--requested-by Codex` and is executed end to end by
+  the permanent F2 suite against a built fixture database.
+- Pack-manifest and manifest-index tests compare production bytes with independent literal ASCII
+  goldens. They bind indentation, key sorting, root names, and every required field.
+- A rule fixture sets `requires_stub: false` for an indexed task and still requires a stub. Removing
+  the production forcing clause makes this negative fail.

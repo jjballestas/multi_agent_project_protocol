@@ -8,6 +8,7 @@ import importlib.util
 import json
 import random
 import re
+import shlex
 import shutil
 import sqlite3
 import subprocess
@@ -3170,7 +3171,7 @@ Body is not indexed.
     def _make_f2_fixture(self, root: Path) -> None:
         make_fixture(root)
         task_path = "Area_comun/tasks/TASK-9000-closed.md"
-        write(root / task_path, "---\nid: TASK-9000\ntask_id: TASK-9000\ntitle: Closed fixture\nstatus: done\ntype: implementation\nowner: X\nclosed_at: 2026-01-01\n" f"file: {task_path}\n---\n\nFixture body.\n")
+        write(root / task_path, "---\nid: TASK-9000\ntask_id: TASK-9000\ntitle: Closed fixture\nstatus: done\ntype: implementation\nowner: X\nclosed_at: 2026-01-01\nintake:\n  type: fix\n  goal: Exercise the cold-stub fixture.\n  acceptance:\n    - The fixture remains verifiable.\n  verification_cmd:\n    - python scripts/memory/test_memory_db.py -k f2\n  scope_routes:\n    - scripts/memory/\n  out_of_scope:\n    - Protocol boundaries.\n  risk: low\n  estimate: S\n" f"file: {task_path}\n---\n\nFixture body.\n")
         write(root / "Area_comun/state/TASK_INDEX.json", json.dumps({"schema_version": "1.0", "tasks": [{"id": "TASK-9000", "status": "done", "owner": "X", "type": "implementation", "title": "Closed fixture", "file": task_path}]}, sort_keys=True) + "\n")
         write(root / "Area_comun/state/CLAIMS.json", '{"claims":[],"schema_version":"1.0"}\n')
         write(root / memory_db.RULES_PATH, json.dumps({"schema_version": "1.0", "rules": [{"rule_id": "RULE-FIXTURE", "artifact_type": "task", "selector": "status=done", "target_retention_class": "cold", "window_days": None, "window_count": 0, "requires_stub": True, "requires_active_policy_check": False, "enabled": True, "created_by_decision": "DECISION-FIXTURE"}]}, sort_keys=True) + "\n")
@@ -3195,23 +3196,79 @@ Body is not indexed.
             write(root / "Area_comun/state/CLAIMS.json", json.dumps({"claims": [{"status": "active", "scope": [candidate_path]}]}) + "\n")
             self.assertEqual(0, memory_db.propose_cold(root)["candidate_count"])
 
+    def test_f2_referenced_task_forces_stub_when_rule_disables_it(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="memory-f2-requires-stub-") as temp:
+            root = Path(temp)
+            self._make_f2_fixture(root)
+            rules = json.loads((root / memory_db.RULES_PATH).read_text(encoding="utf-8"))
+            rules["rules"][0]["requires_stub"] = False
+            write(root / memory_db.RULES_PATH, json.dumps(rules, sort_keys=True) + "\n")
+            proposed = memory_db.propose_cold(root)
+            self.assertEqual(1, proposed["candidate_count"])
+            self.assertEqual(1, proposed["candidates"][0]["requires_stub"])
+
     def test_f2_stub_golden_is_exact_and_keeps_original_pointer(self) -> None:
         candidate = memory_db.ColdCandidate("TASK-9000", "Area_comun/tasks/TASK-9000-closed.md", "task", "done", "2026-01-01", "a" * 64, "RULE-FIXTURE", 1)
         cold_path = "Area_comun/archive/cold-packs/CP-1/Area_comun/tasks/TASK-9000-closed.md"
-        rendered = memory_db.render_stub(candidate, cold_path, "b" * 40)
-        expected = ("---\nartifact_id: TASK-9000\nstatus: done\nstorage: cold_stub\n" f"cold_path: {cold_path}\nsha256: {'a' * 64}\n" f"git_commit_at_freeze: {'b' * 40}\n" "rehydration_command: python scripts/memory/query_memory_db.py --retrieve TASK-9000\n---\n\nThis artifact is stored in the canonical cold archive.\n").encode("ascii")
+        source = b"---\nid: TASK-9000\nintake:\n  type: fix\n  goal: Keep governance\n---\n"
+        requested_by = "Code" + "x"
+        rendered = memory_db.render_stub(candidate, cold_path, "b" * 40, requested_by, source)
+        expected = ("---\nartifact_id: TASK-9000\nstatus: done\nintake:\n  type: fix\n  goal: Keep governance\nstorage: cold_stub\n" f"cold_path: {cold_path}\nsha256: {'a' * 64}\n" f"git_commit_at_freeze: {'b' * 40}\n" f"rehydration_command: python scripts/memory/query_memory_db.py --retrieve TASK-9000 --requested-by {requested_by}\n---\n\nThis artifact is stored in the canonical cold archive.\n").encode("ascii")
         self.assertEqual(expected, rendered)
         self.assertNotEqual(expected.replace(b"status: done", b"status: blocked"), rendered)
+
+    def test_f2_stub_rehydration_command_executes_literally(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="memory-f2-rehydrate-") as temp:
+            root = Path(temp)
+            self._make_f2_fixture(root)
+            shutil.copytree(ROOT / "scripts/memory", root / "scripts/memory")
+            memory_db.build(root)
+            commit = memory_db.git_commit(root, "HEAD")
+            requested_by = sorted(memory_db.configured_agents(root, commit))[0]
+            proposed = memory_db.propose_cold(root)
+            row = proposed["candidates"][0]
+            candidate = memory_db.ColdCandidate(**row)
+            source_data = (root / candidate.original_path).read_bytes()
+            rendered = memory_db.render_stub(
+                candidate,
+                f"Area_comun/archive/cold-packs/CP-1/{candidate.original_path}",
+                "b" * 40,
+                requested_by,
+                source_data,
+            ).decode("ascii")
+            command = next(
+                line.removeprefix("rehydration_command: ")
+                for line in rendered.splitlines()
+                if line.startswith("rehydration_command: ")
+            )
+            result = subprocess.run(
+                shlex.split(command), cwd=root, text=True, capture_output=True
+            )
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
 
     def test_f2_stub_at_original_task_path_keeps_canonical_validator_green(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-f2-stub-validator-") as temp:
             root = Path(temp)
             shutil.copytree(ROOT / "examples/minimal_instance", root, dirs_exist_ok=True)
-            original_path = "Area_comun/tasks/TASK-0001-implementer-minimal-instance.md"
-            candidate = memory_db.ColdCandidate("TASK-0001", original_path, "task", "done", None, "a" * 64, "RULE-FIXTURE", 1)
-            (root / original_path).write_bytes(memory_db.render_stub(candidate, f"Area_comun/archive/cold-packs/CP-1/{original_path}", "b" * 40))
+            canonical_index = json.loads((ROOT / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8"))
+            task_row = next(row for row in canonical_index["tasks"] if row["id"] == "TASK-0350")
+            original_path = task_row["file"]
+            source_data = (ROOT / original_path).read_bytes()
+            write(root / original_path, source_data.decode("utf-8-sig"))
+            fixture_index = json.loads((root / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8"))
+            fixture_index["tasks"].append(task_row)
+            write(root / "Area_comun/state/TASK_INDEX.json", json.dumps(fixture_index, indent=2) + "\n")
+            fixture_config = json.loads((root / "protocol.config.json").read_text(encoding="utf-8"))
+            fixture_config["intake_gate"] = {"enabled": True, "start_task_id": "TASK-0238"}
+            write(root / "protocol.config.json", json.dumps(fixture_config, indent=2) + "\n")
+            candidate = memory_db.ColdCandidate("TASK-0350", original_path, "task", "done", None, "a" * 64, "RULE-FIXTURE", 1)
+            requested_by = "Code" + "x"
+            (root / original_path).write_bytes(memory_db.render_stub(candidate, f"Area_comun/archive/cold-packs/CP-1/{original_path}", "b" * 40, requested_by, source_data))
             result = subprocess.run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], text=True, capture_output=True)
             self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            (root / original_path).write_bytes(b"")
+            empty = subprocess.run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], text=True, capture_output=True)
+            self.assertNotEqual(0, empty.returncode, empty.stdout + empty.stderr)
 
     def test_f2_manifest_golden_and_cold_pack_round_trip(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-f2-manifest-") as temp:
@@ -3221,7 +3278,8 @@ Body is not indexed.
             header = {"pack_id": "CP-1", "pack_type": "task_history", "path": pack_path, "git_ref": "refs/heads/main", "created_at": "2026-08-15"}
             artifact = {"artifact_id": "TASK-9000", "original_path": "Area_comun/tasks/TASK-9000.md", "cold_path": f"{pack_path}/Area_comun/tasks/TASK-9000.md", "sha256": "a" * 64, "git_commit_at_freeze": "b" * 40, "artifact_type": "task", "status": "done", "closed_at": "2026-01-01"}
             rendered = memory_db.render_pack_manifest(header, [artifact])
-            self.assertEqual(rendered, memory_db.render_pack_manifest(header, [artifact]))
+            expected = ("{\n  \"artifacts\": [\n    {\n      \"artifact_id\": \"TASK-9000\",\n      \"artifact_type\": \"task\",\n      \"closed_at\": \"2026-01-01\",\n      \"cold_path\": \"Area_comun/archive/cold-packs/CP-1/Area_comun/tasks/TASK-9000.md\",\n      \"git_commit_at_freeze\": \"" + "b" * 40 + "\",\n      \"original_path\": \"Area_comun/tasks/TASK-9000.md\",\n      \"sha256\": \"" + "a" * 64 + "\",\n      \"status\": \"done\"\n    }\n  ],\n  \"pack\": {\n    \"created_at\": \"2026-08-15\",\n    \"git_ref\": \"refs/heads/main\",\n    \"pack_id\": \"CP-1\",\n    \"pack_type\": \"task_history\",\n    \"path\": \"Area_comun/archive/cold-packs/CP-1\"\n  }\n}\n").encode("ascii")
+            self.assertEqual(expected, rendered)
             mutated = dict(artifact)
             mutated["status"] = "blocked"
             self.assertNotEqual(rendered, memory_db.render_pack_manifest(header, [mutated]))
@@ -3234,7 +3292,8 @@ Body is not indexed.
     def test_f2_manifest_index_golden_rejects_missing_field(self) -> None:
         row = {"pack_id": "CP-1", "path": "Area_comun/archive/cold-packs/CP-1", "sha256_manifest": "a" * 64, "artifact_count": 1}
         rendered = memory_db.render_manifest_index([row])
-        self.assertEqual(rendered, memory_db.render_manifest_index([row]))
+        expected = ("{\n  \"packs\": [\n    {\n      \"artifact_count\": 1,\n      \"pack_id\": \"CP-1\",\n      \"path\": \"Area_comun/archive/cold-packs/CP-1\",\n      \"sha256_manifest\": \"" + "a" * 64 + "\"\n    }\n  ]\n}\n").encode("ascii")
+        self.assertEqual(expected, rendered)
         with self.assertRaisesRegex(ValueError, "incomplete"):
             memory_db.render_manifest_index([{key: value for key, value in row.items() if key != "sha256_manifest"}])
 

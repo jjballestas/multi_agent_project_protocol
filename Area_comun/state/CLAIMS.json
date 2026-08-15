@@ -1174,6 +1174,62 @@
             "updated_at": "2026-08-14T23:02:52Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0373-remediation1",
+            "expires_at": "2026-08-15T06:38:24Z",
+            "notes": "TASK-0373 remediation r1: intake-preserving stub, executable retrieval, literal manifest goldens, modern-path validator proof, and requires_stub negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0373-remediation1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0373",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0373",
+                "Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T00:38:24Z",
+            "status": "active",
+            "task_id": "TASK-0373",
+            "updated_at": "2026-08-15T00:38:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0373-remediation1-commit",
+            "expires_at": "2026-08-15T07:05:26Z",
+            "notes": "Single active product-scope claim for the TASK-0373 remediation commit gate.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0373-remediation1-commit",
+                "scripts/memory/build_memory_db.py",
+                "scripts/memory/test_memory_db.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T01:05:26Z",
+            "status": "active",
+            "task_id": "TASK-0373",
+            "updated_at": "2026-08-15T01:05:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0373-remediation1-neutrality",
+            "expires_at": "2026-08-15T06:57:29Z",
+            "notes": "Move reviewed identity-literal coordinates after TASK-0373 test additions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0373-remediation1-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T00:57:29Z",
+            "status": "active",
+            "task_id": "TASK-0373",
+            "updated_at": "2026-08-15T00:57:29Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Codex-TASK-0378-blocked-message",
             "expires_at": "2026-08-15T01:37:05Z",
             "notes": "Publish one blocking question for contradictory P-COORD and amended AC2 requirements.",
