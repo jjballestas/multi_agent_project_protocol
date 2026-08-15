@@ -6947,3 +6947,14 @@ ratified its own work.
 - Delivery commit `99a20381` moves TASK-0392 to `in_review`, releases both Codex claims, and
   publishes the self-contained maker handoff for independent Analista review. Runtime delivery
   reached seq 9346 with drift false. Codex did not review or ratify the work.
+
+## 2026-08-16 - TASK-0397 implementation
+
+- Commit `d3aff281` removes the handwritten workflow PowerShell cardinalities from `case_inventory`.
+- The inventory now scans the complete derived surface as a property. Executed mutations prove a
+  new safe inline PowerShell job stays green and a new unbounded inline host form is rejected.
+- The live baseline measured 7 file routes and 8 inline commands before the change. The focused
+  TASK-0397 property cases, collaboration gate, encoding scan, and neutrality scan exited 0.
+- The aggregate PowerShell host runner proceeds past TASK-0397 and currently stops at the separately
+  owned `case_linux_job_wiring` cause. TASK-0397 remains maker-owned pending governed delivery and
+  independent review; Codex has not reviewed or ratified the work.
