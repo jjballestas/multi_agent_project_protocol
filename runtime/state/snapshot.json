@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "a0db9b6327fc59026bea20bdabf5ba08929a15b913d8b5d38d26f776e08dc17f",
+  "canonical_hash": "a74cd7d84e0d11ac96538df13e435863944b32b0fe10007b23fbf1faa3cf7d3f",
   "integrity": {
-    "canonical_hash": "a0db9b6327fc59026bea20bdabf5ba08929a15b913d8b5d38d26f776e08dc17f",
+    "canonical_hash": "a74cd7d84e0d11ac96538df13e435863944b32b0fe10007b23fbf1faa3cf7d3f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "80d2d12f2e1b2f390288e1ab61c3f36561377bdb69de4627d406488e213a931d",
-    "signature": "73f1723ffa2a184ed7169e4f60d59ff58c040ea3a502d3ecb83ba041ff41f8f3",
-    "up_to_seq": 9409
+    "prev_hash": "e0ce32578d8f4c4b8d9d4a424092a8f5924a379e49f981ca4638140c22b6ca77",
+    "signature": "c50fad0ddf4f3d1ab12849e981fe2ec36144ba9e3e40239543974c61d2d2209d",
+    "up_to_seq": 9410
   },
   "state": {
     "aggregate_versions": {
@@ -1051,6 +1051,7 @@
       "CLAIM-20260815-Arquitecto-prom0396": 1,
       "CLAIM-20260815-Arquitecto-promo-nova": 1,
       "CLAIM-20260815-Arquitecto-r3r2": 1,
+      "CLAIM-20260815-Arquitecto-unblock-queue": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3896,7 +3897,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8738,
+    "events_applied": 8739,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4130,6 +4131,7 @@
       "arq-20260815-reg-task-0399": 9404,
       "arq-20260815-rel0396v2": 9408,
       "arq-20260815-release-ci-cascade": 9405,
+      "arq-20260815-relunb": 9410,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12638,5 +12640,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9409
+  "up_to_seq": 9410
 }
