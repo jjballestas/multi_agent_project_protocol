@@ -111,6 +111,15 @@ def workflow_powershell_surface(workflow_text: str) -> PowerShellSurface:
     return PowerShellSurface(frozenset(paths), tuple(inline))
 
 
+def workflow_with_job(workflow_text: str, name: str, job: dict) -> str:
+    """Return a workflow variant with one additional job."""
+    document = yaml.safe_load(workflow_text)
+    assert isinstance(document, dict) and isinstance(document.get("jobs"), dict)
+    assert name not in document["jobs"]
+    document["jobs"][name] = job
+    return yaml.safe_dump(document, sort_keys=False)
+
+
 def powershell_sources(surface: PowerShellSurface) -> dict[str, str]:
     sources: dict[str, str] = {}
     for route in sorted(surface.paths):
@@ -237,11 +246,43 @@ def linux_job_is_failure_gating(workflow_text: str) -> bool:
 
 
 def case_inventory() -> None:
-    surface = workflow_powershell_surface(WORKFLOW.read_text(encoding="utf-8"))
-    assert len(surface.paths) == 7
-    assert len(surface.inline_commands) == 1
+    workflow_text = WORKFLOW.read_text(encoding="utf-8")
+    surface = workflow_powershell_surface(workflow_text)
     assert set(BOUNDED_LINE_READERS) <= set(surface.paths)
     assert scan_powershell_surface(surface) == {}
+
+    safe_workflow = workflow_with_job(
+        workflow_text,
+        "inventory-safe-growth",
+        {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {"shell": "pwsh", "run": "Write-Output 'inventory safe growth'"}
+            ],
+        },
+    )
+    safe_surface = workflow_powershell_surface(safe_workflow)
+    assert safe_surface.paths == surface.paths
+    assert safe_surface.inline_commands[:-1] == surface.inline_commands
+    assert scan_inline_powershell(safe_surface.inline_commands[-1]) == set()
+    assert scan_powershell_surface(safe_surface) == {}
+
+    unsafe_workflow = workflow_with_job(
+        workflow_text,
+        "inventory-unbounded-inline",
+        {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {"shell": "pwsh", "run": "$rootUri.MakeRelativeUri($fileUri)"}
+            ],
+        },
+    )
+    unsafe_surface = workflow_powershell_surface(unsafe_workflow)
+    assert unsafe_surface.paths == surface.paths
+    assert unsafe_surface.inline_commands[:-1] == surface.inline_commands
+    assert scan_powershell_surface(unsafe_surface) == {
+        f"<workflow-inline:{len(unsafe_surface.inline_commands)}>": {"relative_uri"}
+    }
 
 
 def case_host_surface_mutations() -> None:
@@ -280,17 +321,20 @@ def case_host_surface_mutations() -> None:
 
     # Inline PowerShell is in scope mechanically even though the current
     # workflow has none: a new inline host form must not evade file discovery.
-    inline_mutant = workflow_text.replace(
-        "      - name: Scan encoding with PowerShell on Linux",
-        "      - name: Inline PowerShell host mutant\n"
-        "        shell: pwsh\n"
-        "        run: $rootUri.MakeRelativeUri($fileUri)\n"
-        "      - name: Scan encoding with PowerShell on Linux",
-        1,
+    inline_mutant = workflow_with_job(
+        workflow_text,
+        "inline-powershell-host-mutant",
+        {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {"shell": "pwsh", "run": "$rootUri.MakeRelativeUri($fileUri)"}
+            ],
+        },
     )
     mutant_surface = workflow_powershell_surface(inline_mutant)
     assert len(mutant_surface.inline_commands) == len(surface.inline_commands) + 1
-    assert scan_inline_powershell(mutant_surface.inline_commands[0]) == {"relative_uri"}
+    assert mutant_surface.inline_commands[:-1] == surface.inline_commands
+    assert scan_inline_powershell(mutant_surface.inline_commands[-1]) == {"relative_uri"}
 
 
 def case_linux_job_wiring() -> None:

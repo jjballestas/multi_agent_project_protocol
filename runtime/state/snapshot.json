@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8c4a2ee8663cdc4a389a57d6482a7a90c8eefa9d8146d0cbf5353eebfb1a24f5",
+  "canonical_hash": "14cdcbb7dbfd6d56f9079333836508338c37fafefa52311e151424e5bb1e7246",
   "integrity": {
-    "canonical_hash": "8c4a2ee8663cdc4a389a57d6482a7a90c8eefa9d8146d0cbf5353eebfb1a24f5",
+    "canonical_hash": "14cdcbb7dbfd6d56f9079333836508338c37fafefa52311e151424e5bb1e7246",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "39bc89f7c4f8e67affaf6121deacf228bfbfd53f080b12362fe35ae12f91f04d",
-    "signature": "c652ea7a0f5fbaec17e9d230f805d76cf519f22bb003c2fb59dea219a94271c0",
-    "up_to_seq": 9449
+    "prev_hash": "00ea70830b9d07ce7086767b1da0ac9cff65ca69bde67e00514005f23e0fb041",
+    "signature": "23f39b6301fc1b3694f1b8e4a0acde1ec7bacec51181f9bcbf6c64867381839e",
+    "up_to_seq": 9451
   },
   "state": {
     "aggregate_versions": {
@@ -3879,7 +3879,7 @@
       "TASK-0394": 3,
       "TASK-0395": 16,
       "TASK-0396": 22,
-      "TASK-0397": 3,
+      "TASK-0397": 5,
       "TASK-0398": 1,
       "TASK-0399": 1,
       "TASK-0400": 2,
@@ -3908,7 +3908,7 @@
       "protocol-prune": 70,
       "protocol-state": 1
     },
-    "events_applied": 8778,
+    "events_applied": 8780,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8971,6 +8971,8 @@
       "codex:task0396:in-progress-to-blocked:20260815T174726Z": 9417,
       "codex:task0396:ready-to-in-progress:20260815T174726Z": 9416,
       "codex:task0396:ready-to-in-progress:20260815T181531Z": 9424,
+      "codex:task0397:claim-acquire:20260815T221907Z": 9450,
+      "codex:task0397:ready-to-in-progress:20260815T221907Z": 9451,
       "codex:tasks0325-0334-0335:done-flip:claim-acquire:20260808T084041Z": 7924,
       "codex:tasks0325-0334-0335:done-flip:claim-release:20260808T084041Z": 7928,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -12690,5 +12692,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9449
+  "up_to_seq": 9451
 }
