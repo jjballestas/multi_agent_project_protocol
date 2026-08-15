@@ -134,3 +134,15 @@ F2 se puede construir en paralelo; F3 no arranca hasta que 0368 cierre.
   goldens. They bind indentation, key sorting, root names, and every required field.
 - A rule fixture sets `requires_stub: false` for an indexed task and still requires a stub. Removing
   the production forcing clause makes this negative fail.
+
+## Remediation r2 evidence (Codex, 2026-08-15)
+
+- Stub rendering now applies the canonical intake frontier: a numbered task above TASK-0238 must
+  preserve intake, while exempt legacy tasks and non-numbered task artifacts may omit it. The live
+  dry-run and renderer now agree: 273 candidates, 273 rendered, zero failures.
+- The permanent boundary negative accepts TASK-0238 without intake and rejects TASK-0239 without
+  intake. A separate negative rejects an empty requester.
+- Rehydration shell arguments use `shlex.quote`; the executable test traverses every identity
+  declared by the fixture instead of choosing one whitespace-free identity.
+- Pack-manifest tests remove every required header and artifact field one at a time and require
+  production to fail closed.

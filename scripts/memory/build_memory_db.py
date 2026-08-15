@@ -21,6 +21,7 @@ import hashlib
 import json
 import os
 import re
+import shlex
 import sqlite3
 import subprocess
 import sys
@@ -1369,7 +1370,7 @@ def propose_cold(root: Path, *, at: str = "HEAD") -> dict[str, Any]:
     }
 
 
-def _task_intake_block(source_data: bytes) -> str:
+def _task_intake_block(source_data: bytes, task_identity: str) -> str:
     text = source_data.decode("utf-8-sig")
     lines = text.splitlines()
     for index, line in enumerate(lines):
@@ -1385,7 +1386,10 @@ def _task_intake_block(source_data: bytes) -> str:
             if len(block) == 1:
                 break
             return "\n".join(block) + "\n"
-    raise ValueError("task stub source is missing intake block")
+    match = re.search(r"(?:^|/)TASK-(\d+)(?:\D|$)", task_identity)
+    if match and int(match.group(1)) > 238:
+        raise ValueError("task stub source is missing intake block")
+    return ""
 
 
 def render_stub(
@@ -1401,7 +1405,9 @@ def render_stub(
     if candidate.artifact_type == "task":
         if source_data is None:
             raise ValueError("task stub rendering requires source data")
-        intake = _task_intake_block(source_data)
+        intake = _task_intake_block(
+            source_data, f"{candidate.artifact_id}/{candidate.original_path}"
+        )
     payload = (
         "---\n"
         f"artifact_id: {candidate.artifact_id}\n"
@@ -1411,7 +1417,7 @@ def render_stub(
         f"cold_path: {cold_path}\n"
         f"sha256: {candidate.sha256}\n"
         f"git_commit_at_freeze: {git_commit}\n"
-        f"rehydration_command: python scripts/memory/query_memory_db.py --retrieve {candidate.artifact_id} --requested-by {requested_by}\n"
+        f"rehydration_command: python scripts/memory/query_memory_db.py --retrieve {candidate.artifact_id} --requested-by {shlex.quote(requested_by)}\n"
         "---\n\n"
         "This artifact is stored in the canonical cold archive.\n"
     )

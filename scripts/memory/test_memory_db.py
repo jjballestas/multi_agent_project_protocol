@@ -3224,27 +3224,59 @@ Body is not indexed.
             shutil.copytree(ROOT / "scripts/memory", root / "scripts/memory")
             memory_db.build(root)
             commit = memory_db.git_commit(root, "HEAD")
-            requested_by = sorted(memory_db.configured_agents(root, commit))[0]
             proposed = memory_db.propose_cold(root)
             row = proposed["candidates"][0]
             candidate = memory_db.ColdCandidate(**row)
             source_data = (root / candidate.original_path).read_bytes()
-            rendered = memory_db.render_stub(
-                candidate,
-                f"Area_comun/archive/cold-packs/CP-1/{candidate.original_path}",
-                "b" * 40,
-                requested_by,
-                source_data,
-            ).decode("ascii")
-            command = next(
-                line.removeprefix("rehydration_command: ")
-                for line in rendered.splitlines()
-                if line.startswith("rehydration_command: ")
+            for requested_by in sorted(memory_db.configured_agents(root, commit)):
+                with self.subTest(requested_by=requested_by):
+                    rendered = memory_db.render_stub(
+                        candidate,
+                        f"Area_comun/archive/cold-packs/CP-1/{candidate.original_path}",
+                        "b" * 40,
+                        requested_by,
+                        source_data,
+                    ).decode("ascii")
+                    command = next(
+                        line.removeprefix("rehydration_command: ")
+                        for line in rendered.splitlines()
+                        if line.startswith("rehydration_command: ")
+                    )
+                    result = subprocess.run(
+                        shlex.split(command), cwd=root, text=True, capture_output=True
+                    )
+                    self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+    def test_f2_task_stub_uses_the_canonical_intake_boundary(self) -> None:
+        cold_path = "Area_comun/archive/cold-packs/CP-1/task.md"
+        legacy = memory_db.ColdCandidate(
+            "TASK-0238", "task.md", "task", "done", None,
+            "a" * 64, "RULE-FIXTURE", 1,
+        )
+        rendered = memory_db.render_stub(
+            legacy, cold_path, "b" * 40, "agent", b"---\nstatus: done\n---\n"
+        )
+        self.assertNotIn(b"intake:", rendered)
+        modern = memory_db.ColdCandidate(
+            "TASK-0239", "task.md", "task", "done", None,
+            "a" * 64, "RULE-FIXTURE", 1,
+        )
+        with self.assertRaisesRegex(ValueError, "missing intake block"):
+            memory_db.render_stub(
+                modern, cold_path, "b" * 40, "agent",
+                b"---\nstatus: done\n---\n",
             )
-            result = subprocess.run(
-                shlex.split(command), cwd=root, text=True, capture_output=True
+
+    def test_f2_stub_rejects_empty_requester(self) -> None:
+        candidate = memory_db.ColdCandidate(
+            "TASK-0238", "task.md", "task", "done", None,
+            "a" * 64, "RULE-FIXTURE", 1,
+        )
+        with self.assertRaisesRegex(ValueError, "requires requested_by"):
+            memory_db.render_stub(
+                candidate, "cold/task.md", "b" * 40, "   ",
+                b"---\nstatus: done\n---\n",
             )
-            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
 
     def test_f2_stub_at_original_task_path_keeps_canonical_validator_green(self) -> None:
         with tempfile.TemporaryDirectory(prefix="memory-f2-stub-validator-") as temp:
@@ -3283,6 +3315,16 @@ Body is not indexed.
             mutated = dict(artifact)
             mutated["status"] = "blocked"
             self.assertNotEqual(rendered, memory_db.render_pack_manifest(header, [mutated]))
+            for field in sorted(header):
+                with self.subTest(missing_pack_field=field):
+                    incomplete = {key: value for key, value in header.items() if key != field}
+                    with self.assertRaisesRegex(ValueError, "header is incomplete"):
+                        memory_db.render_pack_manifest(incomplete, [artifact])
+            for field in sorted(artifact):
+                with self.subTest(missing_artifact_field=field):
+                    incomplete = {key: value for key, value in artifact.items() if key != field}
+                    with self.assertRaisesRegex(ValueError, "artifact is incomplete"):
+                        memory_db.render_pack_manifest(header, [incomplete])
             write(root / pack_path / "pack.manifest.json", rendered.decode("ascii"))
             commit = commit_fixture(root, "cold manifest")
             row = memory_db.load_cold_packs(root, commit)[0]
