@@ -1,7 +1,7 @@
 ---
 id: TASK-0395
 title: El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo, y por eso da verde en clon limpio y rojo en CI sobre el MISMO commit
-status: ready
+status: blocked
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md
@@ -94,3 +94,13 @@ Y porque el objeto averiado es **el runner de falsacion**: el instrumento que ex
 que los controles saben decir que no. Si su veredicto depende de quien mas escriba en el disco, todo
 lo que acredita es una coincidencia. Es la misma familia que el hub lleva una semana cazando, en el
 sitio donde mas duele: **el que mide a los que miden**.
+
+## Blocked evidence - 2026-08-15
+
+The hermetic residue-path probe passed twice from an intentionally dirty live tree, but the required
+falsification gate still exits 1 before delivery. Its TASK-0343 execution matrix is stable across the
+attempted isolated-root repair: `baseline=0/3`, while `short_circuit=3/3`, `tautology=3/3`, and
+`unreachable=3/3`. The baseline child exits 0 with `mailbox retry cases: PASS`, so the declared
+ledger-destruction stimulus is not reaching the production assertion. The claim is released and the
+changes remain uncommitted. Arquitecto must decide whether TASK-0395 may repair that stale TASK-0343
+stimulus despite the explicit out-of-scope rule that TASK-0343 is not reopened.
