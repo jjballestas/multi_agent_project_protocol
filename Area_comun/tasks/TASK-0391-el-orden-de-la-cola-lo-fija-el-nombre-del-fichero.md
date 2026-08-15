@@ -1,7 +1,7 @@
 ---
 id: TASK-0391
 title: El orden de la cola lo fija el NOMBRE DEL FICHERO y no esta documentado -- la prioridad declarada en el mensaje no tiene ningun efecto
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0391-el-orden-de-la-cola-lo-fija-el-nombre-del-fichero.md

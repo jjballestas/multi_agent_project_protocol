@@ -21,7 +21,7 @@
             "id": "TASK-0337",
             "owner": "Codex",
             "phase": "P2",
-            "status": "proposed",
+            "status": "ready",
             "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331"
         },
         {
@@ -273,13 +273,13 @@
         {
             "id": "TASK-0391",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El orden de la cola lo fija el NOMBRE DEL FICHERO y no esta documentado"
         },
         {
             "id": "TASK-0392",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El self-filter que la skill documenta deja un vigia MUDO"
         },
         {

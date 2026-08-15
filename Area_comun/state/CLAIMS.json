@@ -1248,6 +1248,27 @@
             "updated_at": "2026-08-15T08:57:31Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-promo-nova",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-promo-nova",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0391-el-orden-de-la-cola-lo-fija-el-nombre-del-fichero.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0391",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0391",
+                "Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0392",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0392"
+            ],
+            "started_at": "2026-08-15T09:07:17Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-15T09:07:17Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-r3r2",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",

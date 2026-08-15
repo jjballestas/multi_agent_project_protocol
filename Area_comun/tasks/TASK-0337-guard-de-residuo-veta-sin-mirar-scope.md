@@ -1,7 +1,7 @@
 ---
 id: TASK-0337
 title: El guard de residuo veta sin mirar scope -- gemelo de TASK-0331
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md
@@ -20,6 +20,15 @@ intake:
     - "Declarado explicitamente que garantiza el guard tras el cambio, incluida la frontera que deja de cubrir si la hay."
     - "Negativo permanente nuevo que MUERA ante el mutante de codigo muerto, no solo ante la ausencia del fichero."
     - "Sin regresion en lo ya probado del harness, en particular la admision atomica y el ciclo de vida de leases de TASK-0331."
+    - "AC6 (ANADIDO 2026-08-15 por la enmienda, y es el que mas pesa): el DEADLOCK CIRCULAR muere,
+      REPRODUCIDO. Se construye el caso exacto que midio NOVA -- el peon termina su exec dejando su
+      propia `personal/<Peer>/MEMORY.md` sin commitear -- y se comprueba por conducta que su siguiente
+      mensaje ARRANCA en vez de diferirse contra el reloj de 7200 s. Se acredita con el par: el caso
+      del deadlock arranca, y un residuo AJENO de verdad sigue difiriendo. Un arreglo que abra la
+      puerta a todo residuo no es arreglo."
+    - "AC7 (el fallo deja de ser mudo): cuando el guard difiera, el log dice QUE ruta sucia intersecta
+      QUE ruta del mensaje. Hoy emite `RETRY_DEFER reason=worktree_residue_live` sin distinguir un
+      solape real de un residuo del propio peon, y por eso costo intervencion humana detectarlo."
   verification_cmd:
     - "python scripts/test_exec_lease_harness.py"
     - "python scripts/check_falsification_contracts.py --root ."
