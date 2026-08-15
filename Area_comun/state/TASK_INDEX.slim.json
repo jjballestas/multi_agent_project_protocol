@@ -303,7 +303,7 @@
         {
             "id": "TASK-0396",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto"
         },
         {

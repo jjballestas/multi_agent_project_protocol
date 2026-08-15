@@ -1782,19 +1782,44 @@ def run_complete_tree_kill_case() -> None:
             root = fixture / "root.ps1"
             grand.write_text("Set-Content grand.pid $PID -Encoding ASCII; Start-Sleep -Seconds 60\n", encoding="ascii")
             child.write_text(
-                "Set-Content child.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','grand.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
+                "Set-Content child.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-File','grand.ps1') -RedirectStandardError grand.stderr -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
                 encoding="ascii",
             )
             root.write_text(
-                "Set-Content root.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-File','child.ps1') -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
+                "Set-Content root.pid $PID -Encoding ASCII; Start-Process powershell.exe -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-File','child.ps1') -RedirectStandardError child.stderr -WindowStyle Hidden; Start-Sleep -Seconds 60\n",
                 encoding="ascii",
             )
-            process = subprocess.Popen(["powershell.exe", "-NoProfile", "-File", str(root)], cwd=fixture)
+            process = subprocess.Popen(
+                ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(root)],
+                cwd=fixture,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+            )
             deadline = time.monotonic() + 10
             pid_files = ("root.pid", "child.pid", "grand.pid")
             while time.monotonic() < deadline and not all((fixture / name).exists() for name in pid_files):
                 time.sleep(0.1)
-            assert all((fixture / name).exists() for name in pid_files), "process tree did not start"
+            missing_pid_files = [name for name in pid_files if not (fixture / name).exists()]
+            if missing_pid_files:
+                if process.poll() is None:
+                    process.terminate()
+                    try:
+                        process.wait(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+                        process.wait(timeout=5)
+                stdout, stderr = process.communicate()
+                descendant_stderr = {
+                    path.name: path.read_text(encoding="utf-8-sig", errors="replace").strip()
+                    for path in sorted(fixture.glob("*.stderr"))
+                }
+                raise AssertionError(
+                    "process tree did not start; "
+                    f"missing_pid_files={missing_pid_files}; root_returncode={process.returncode}; "
+                    f"root_stdout={stdout.strip()!r}; root_stderr={stderr.strip()!r}; "
+                    f"descendant_stderr={descendant_stderr!r}"
+                )
             pids = [int((fixture / name).read_text().strip()) for name in pid_files]
             reparent_hook = ""
             if reparent_during_snapshot:

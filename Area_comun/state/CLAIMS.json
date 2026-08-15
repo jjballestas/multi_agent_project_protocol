@@ -1973,6 +1973,25 @@
             "updated_at": "2026-08-15T11:48:35Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0396",
+            "expires_at": "2026-08-15T22:15:31Z",
+            "notes": "Implement the bounded TASK-0301 process-tree fixture portability and no-subject diagnostics for TASK-0396.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0396",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T18:15:31Z",
+            "status": "active",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T18:15:31Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Codex-TASK-0396-blocked-mailbox",
             "expires_at": "2026-08-15T20:46:49Z",
             "notes": "Publish the single actionable TASK-0396 scope question.",
