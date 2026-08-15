@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "3ef4006386b004bbad1e2d9451f2aafde700462b31cba6c0d31ebbaaaea9ea6f",
+  "canonical_hash": "6c6816cb77042952c11eacde07125bc9669ea816eb3551a69e90148a6f57c72f",
   "integrity": {
-    "canonical_hash": "3ef4006386b004bbad1e2d9451f2aafde700462b31cba6c0d31ebbaaaea9ea6f",
+    "canonical_hash": "6c6816cb77042952c11eacde07125bc9669ea816eb3551a69e90148a6f57c72f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "cf78a143520c648de1b42d26b4b041758032ee95b41d691de5857b103e65b4b0",
-    "signature": "2e2307cc0667d02fbf193c66962dd927a17a407741eb6d99c3b761a4cbf69b7f",
-    "up_to_seq": 9391
+    "prev_hash": "00ec77eacbf73a0bf3f132f50ee4629e5a07f8794d14c743d8e50fd6edb7c7bd",
+    "signature": "16500a93324421e5e5ee108d340ae325c4c3fb2ee67bfda9f717e6a090e3a2ef",
+    "up_to_seq": 9394
   },
   "state": {
     "aggregate_versions": {
@@ -1039,6 +1039,7 @@
       "CLAIM-20260815-Arquitecto-0392-r2": 1,
       "CLAIM-20260815-Arquitecto-0394": 1,
       "CLAIM-20260815-Arquitecto-0395": 1,
+      "CLAIM-20260815-Arquitecto-0395-back": 1,
       "CLAIM-20260815-Arquitecto-cierre-F2b": 1,
       "CLAIM-20260815-Arquitecto-flips": 1,
       "CLAIM-20260815-Arquitecto-hyg-V": 1,
@@ -3865,7 +3866,7 @@
       "TASK-0392": 24,
       "TASK-0393": 1,
       "TASK-0394": 3,
-      "TASK-0395": 7,
+      "TASK-0395": 9,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3888,7 +3889,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8720,
+    "events_applied": 8723,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4110,6 +4111,9 @@
       "arq-0395-ready": 9342,
       "arq-0395-reg": 9341,
       "arq-0395-rel": 9343,
+      "arq-0395b-acq": 9392,
+      "arq-0395b-flip": 9393,
+      "arq-0395b-rel": 9394,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12612,5 +12616,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9391
+  "up_to_seq": 9394
 }

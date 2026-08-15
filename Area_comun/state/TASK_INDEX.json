@@ -781,7 +781,7 @@
             "id": "TASK-0395",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "blocked",
+            "status": "in_progress",
             "title": "El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo",
             "type": "implementation"
         },

@@ -1,7 +1,7 @@
 ---
 id: TASK-0395
 title: El runner de falsacion mide su ENTORNO y no el codigo -- lee el arbol de trabajo vivo, y por eso da verde en clon limpio y rojo en CI sobre el MISMO commit
-status: blocked
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0395-el-runner-de-falsacion-mide-su-entorno-y-no-el-codigo.md
