@@ -1144,6 +1144,24 @@
             "updated_at": "2026-08-15T01:18:48Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-cierre-F2b",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-cierre-F2b",
+                "Area_comun/tasks/TASK-0373-f2-stubs-manifiestos-y-propuesta-de-enfriado-en-seco.md",
+                "Area_comun/tasks/TASK-0389-la-frontera-de-intake-vive-en-dos-sitios-y-el-negativo-de-quote-esta-vacio.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0373",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0373",
+                "Area_comun/state/TASK_INDEX.json#TASK-0389",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0389"
+            ],
+            "started_at": "2026-08-15T04:17:26Z",
+            "status": "released",
+            "task_id": "TASK-0373",
+            "updated_at": "2026-08-15T04:17:26Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-flips",
             "expires_at": "2026-08-16T12:00:00Z",
             "owner": "Arquitecto",
@@ -1165,6 +1183,32 @@
             "status": "released",
             "task_id": "TASK-0373",
             "updated_at": "2026-08-15T00:20:57Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-Arquitecto-hyg-V",
+            "expires_at": "2026-08-16T12:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-hyg-V",
+                "Area_comun/mailbox/open/MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0367-r2-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0367-r2-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0373-r1-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Analista-to-Arquitecto-REVIEW-TASK-0373-r1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0367-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0367-r2.md",
+                "Area_comun/mailbox/open/MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0373-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Arquitecto-to-Analista-REVIEW-TASK-0373-r1.md",
+                "Area_comun/mailbox/open/MSG-20260815-Arquitecto-to-Codex-RESP-TASK-0378-scripts-producto.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Arquitecto-to-Codex-RESP-TASK-0378-scripts-producto.md",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0373-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0373-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0378-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0378-remediation-2.md"
+            ],
+            "started_at": "2026-08-15T03:13:43Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260815V",
+            "updated_at": "2026-08-15T03:13:43Z"
         },
         {
             "claim_id": "CLAIM-20260815-Arquitecto-r3r2",

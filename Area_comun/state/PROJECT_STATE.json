@@ -237,7 +237,7 @@
         {
             "id": "TASK-0373",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido"
         },
         {
@@ -329,6 +329,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Las exenciones del gate de neutralidad estan ancladas a un NUMERO DE LINEA"
+        },
+        {
+            "id": "TASK-0389",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La frontera de intake vive en dos sitios y ninguna puerta ve que divergan"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

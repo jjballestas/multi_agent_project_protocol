@@ -157,12 +157,6 @@
             "title": "El gate de identidad solo ve los nombres que la propia instancia declara, y una instancia adoptada nace con ochenta apariciones del equipo autor que su puerta no mira"
         },
         {
-            "id": "TASK-0373",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "F2 de la memoria hibrida -- formato de stub y manifiesto, goldens, y la propuesta de enfriado en seco que nunca ha corrido"
-        },
-        {
             "id": "TASK-0374",
             "owner": "Codex",
             "status": "proposed",
@@ -251,6 +245,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Las exenciones del gate de neutralidad estan ancladas a un NUMERO DE LINEA"
+        },
+        {
+            "id": "TASK-0389",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La frontera de intake vive en dos sitios y ninguna puerta ve que divergan"
         }
     ],
     "next_actions": [
