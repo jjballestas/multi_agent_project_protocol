@@ -7,6 +7,40 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-15 (74) - TASK-0367 r2: CHANGE-REQUIRED, el verde sale de cegar el gate
+
+- **SOLO HUB, SIN PRODUCTO.** Detalle en `personal/Analista/MEMORY-TASK-0367-r2-20260815.md`
+  (ancla `ccea36e2`, veredicto commit `e49c9515`). Artefacto
+  `Area_comun/artifacts/Analista-TASK-0367-r2-arranque-y-gate-verdict.md`. Segunda vuelta sobre mi r1.
+- **CERRADOS de verdad: B2 y B3.** Sin `-AgentExe` y sin env, Anthropic resuelve `claude.ps1` y
+  Codex/Auto `codex.exe` contra el PATH real (en r1 las tres lanzaban excepcion), y el negativo
+  focalizado discrimina la regresion reinyectada (exit 1). La suite completa sale **exit 0** en el
+  ancla, reproducida en dos clones, el segundo bajo carga.
+- **B4 BLOQUEANTE:** `peer_mailbox_cron.ps1:553` no neutraliza la identidad, la **fragmenta**:
+  `"cl" + "aude"` / `"co" + "dex"`, las unicas concatenaciones partidas de todo `runtime/`+`scripts/`,
+  en la linea exacta que la tarea abrio. Des-partirlas sobre el mismo commit devuelve el hallazgo
+  literal del enunciado (`553: Claude`, exit 1). La concatenacion es una evasion **registrada como
+  aceptada-fuera-de-alcance** en el fixloop de TASK-1207, y es mi propio ATTACK-3/R2 de r1 vuelto
+  codigo de produccion. No declarada en handoff, tarea ni comentario -> incumple AC2 y deja el AC5
+  sin discriminar. La via limpia ya existia aplicada a ESE fichero y ESA linea (exencion 553, razon
+  "third-party provider CLI"); la verifique: literal a la vista + `sha256("claude")` -> runner 0,
+  neutralidad 0.
+- **B5 BLOQUEANTE:** el negativo de B2 quedo fuera de toda puerta ejecutada -- la llamada sale de
+  `main()`, CI corre la suite sin bandera (`validate.yml:564`), y `--task0367-provider-only` no
+  aparece en CI/scripts/README. **Y no hacia falta: con la llamada devuelta y las fixtures externas
+  intactas la suite sale exit 0.** Agravante: scratch cableado como ruta absoluta `D:/...`.
+- **B6 BLOQUEANTE:** los dos pares muestreados correlacionan participante y proveedor, asi que un
+  resolutor keyed **enteramente por identidad** sobrevive (exit 0). La celda que discrimina es
+  `(Codex, Anthropic)`.
+- **C1:** el `baseline=0/3` **no se mide en ningun punto** -- ancla exit 0 baseline 3/3; `3fc4fd5c` y
+  `fbeb215e` exit 1 en `nul_residue` con baseline 3/3. La pregunta binaria del Arquitecto ("se movio
+  o es heredado") asumia un hecho falso. **C2:** la sonda no resuelve por PATH, stubbea `Get-Command`.
+- **R1' elevado:** restaurado el defecto, un peer `Anthropic` sin `claude` en el PATH -- el estado por
+  defecto de cualquier adoptante -- recibe `codex.exe` con `bypassPermissions`: el modo de fallo que
+  mato `503303c9`. En r1 exigia una errata; ahora no exige nada.
+- **NO depende de TASK-0372** (`proposed`): B4 no es la brecha de poblacion de 0372, es una evasion
+  del emparejador para una identidad que la instancia SI declara, dentro del scope de 0367.
+
 ## Ultima actualizacion 2026-08-15 (73) - TASK-0373 F2 enfriado en seco: CHANGE-REQUIRED
 
 - **SOLO HUB, SIN PRODUCTO** (declarado por el Arquitecto). Detalle completo en
