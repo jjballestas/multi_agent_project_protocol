@@ -30,18 +30,21 @@ starting any monitor:
 - `<MAILBOX_THRESHOLD>`: open message count that triggers a hygiene alert.
 - `<ALERT_ON_MESSAGES_TO_COORDINATOR>`: pattern for inbound delivery messages,
   for example `*-to-<COORDINATOR_ROLE>-*`.
-- `<SELF_COMMIT_FILTER>`: expression that identifies commits produced by the
-  same coordination session and should not wake the delivery monitor.
+- `<COORDINATOR_COMMIT_MARKER>`: an exact trailer value generated for the
+  current coordination session. Only the coordinator writes it. Do not derive
+  it from Git author, committer, provider, model, or a shared co-author trailer.
 - `<WORKER_IDS>`: identifiers of workers that may have mailbox loops or
   execution locks.
 
 Use generic role names in configuration. Do not hardcode local project names,
 personal agent names, or product-specific paths in the skill body.
 
-## Watchdog 1: Deliveries With Self-Filter
+## Watchdog 1: Mailbox Deliveries With A Coordinator Marker
 
-Purpose: wake the coordinator when another participant creates a delivery commit
-or opens a delivery message.
+Purpose: wake the coordinator when another participant opens a delivery message.
+Mailbox filenames are the primary signal because
+`MSG-<date>-<sender>-<recipient>-*.md` identifies the sender independently of
+Git identity. Commit inspection is secondary context only.
 
 Algorithm:
 
@@ -49,14 +52,33 @@ Algorithm:
 2. Record current files in `<MAILBOX_OPEN_DIR>` matching
    `<ALERT_ON_MESSAGES_TO_COORDINATOR>`.
 3. Loop every `<POLL_SECONDS>` seconds.
-4. If the current ref differs from `base`, inspect each commit in
-   `base..current` using subject plus body.
-5. Ignore commits matching `<SELF_COMMIT_FILTER>`.
-6. Emit one alert containing the non-self commit subjects and update `base`.
-7. Compare the current mailbox file list with the prior list. Emit one alert for
-   new matching files.
+4. Compare the current mailbox file list with the prior list. For every new
+   matching filename, parse its sender and recipient from the filename and emit
+   one delivery alert. Do this even when its commit has the same author, model,
+   provider signature, or co-author trailer as a coordinator commit.
+5. If the current ref differs from `base`, inspect each commit in
+   `base..current` using subject plus body as secondary context.
+6. Ignore a commit only when it has the exact trailer
+   `Protocol-Monitor-Origin: <COORDINATOR_COMMIT_MARKER>`. The coordinator must
+   add that trailer to every commit it wants filtered during this session, and
+   workers must never add it. A model or provider trailer is not a self-marker.
+7. Emit one alert containing the remaining non-self commit subjects and update
+   `base`. A mailbox alert from step 4 is never cancelled by this filter.
 8. Stop or return control after the first alert if the local monitor mechanism is
    one-shot; otherwise keep looping with the same deduplication.
+
+Before trusting silence, execute the shipped discrimination proof:
+
+```powershell
+python scripts/harness/test_session_watchdog_filter.py `
+  --scratch-root D:/Aegis_Scratch/<project>/watchdog-filter-proof
+```
+
+The proof creates four real commits with the same Git author and provider/model
+trailer: two coordinator commits carrying the private marker and two worker
+commits without it. One worker commit opens a mailbox delivery. It fails unless
+the filter identifies exactly the two coordinator commits, retains both worker
+commits, and emits the mailbox alert despite indistinguishable Git identity.
 
 Response after an alert:
 
@@ -124,8 +146,9 @@ Response after an alert:
 - Prefer file-scoped claims for mailbox work when the instance requires claims.
 - Do not turn a monitor alert into a state change without the normal governed
   ledger path.
-- Do not let a self-filter hide work from other participants; filter only the
-  current coordinator's own commits or explicitly configured auxiliary commits.
+- Do not let a self-filter hide work from other participants. Filter only the
+  exact coordinator marker; never Git author, committer, provider, model, or a
+  co-author signature shared by agents.
 - Treat repeated alerts for the same condition as a coordination risk that needs
   a concrete question or a governed recovery action.
 

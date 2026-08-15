@@ -100,6 +100,13 @@ The runner is one half of the operational layer; the coordinator arms watchdogs 
 methodology skills shipped with the instance (`.claude/skills/` for Claude-based
 coordinators, `skills/session-watchdogs` in the neutral layer).
 
+The exportable delivery watchdog treats new mailbox filenames addressed to the
+coordinator as its primary delivery signal. Its optional commit self-filter uses
+an exact `Protocol-Monitor-Origin` value written only by that coordination
+session; Git author and provider/model trailers are never identity evidence.
+Before relying on monitor silence, run the four-real-commit discrimination proof
+documented in `skills/session-watchdogs.skill.md`.
+
 ## Migrating from the hub's per-peer scripts
 
 The runner keeps the same runtime-state paths (`.protocol-tmp/<peerid>_mailbox_cron/`), so

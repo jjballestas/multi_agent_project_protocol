@@ -1,7 +1,7 @@
 ---
 id: TASK-0392
 title: El self-filter que la skill documenta deja un vigia MUDO en cualquier instancia donde los agentes compartan firma
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0392-el-self-filter-documentado-deja-un-vigia-mudo.md
@@ -68,3 +68,12 @@ desaparece y el filtro deja de discriminar.
 **El defecto estaba en la guia desde el principio; el hub solo no lo notaba.** Es exactamente la
 razon por la que un informe de campo de una instancia real vale mas que una revision del hub sobre
 si mismo.
+
+## Maker evidence
+
+- The exportable watchdog now treats the mailbox filename as the primary delivery signal.
+- Commit context is filtered only by an exact coordinator-only `Protocol-Monitor-Origin` value.
+- The executable proof creates two coordinator and two worker commits with identical Git author
+  and provider/model trailer, then requires a 2/2 split and a worker mailbox alert.
+- Executed command: `python scripts/harness/test_session_watchdog_filter.py --scratch-root
+  D:/Aegis_Scratch/multi_agent_project_protocol/task0392-filter-proof`.
