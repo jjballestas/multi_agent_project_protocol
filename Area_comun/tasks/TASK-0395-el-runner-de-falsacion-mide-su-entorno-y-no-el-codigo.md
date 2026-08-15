@@ -42,9 +42,18 @@ intake:
       tautology, unreachable -- siguen muriendo tras el cambio. Un runner hermetico que deje de
       matar mutantes es peor que uno irreproducible: se acredita con los tres en exit 1 y el control
       en 0."
-    - "AC5 (CI vuelve a verde por esta via): tras el arreglo, el job `falsification-runners` pasa en
-      el runner propio. Se acredita con el run de CI, no con una corrida local -- el clon limpio
-      local YA daba verde y es justamente lo que oculto el problema durante semanas."
+    - "AC5 (ENMENDADO 2026-08-15 21:25 local por el Arquitecto -- la redaccion original era
+      INSATISFACIBLE, mismo defecto que corregi en TASK-0396): pedia que el job
+      `falsification-runners` PASARA en el runner propio. Ese job carga cuatro causas independientes
+      mas (TASK-0396, 0399, 0401 y la de neutralidad), asi que no puede ponerse verde por bien
+      resuelta que quede esta tarea; redactado asi, 0395 no cerraria nunca. Forma correcta,
+      DISCRIMINANTE: sobre el commit de entrega, (a) el brazo de TASK-0343 aparece completo en el log
+      del job -- `TASK0343_MAIN_ASSERTION_EXECUTION` con sus cuatro cifras -- Y (b) el job NO cae por
+      una causa atribuible a este runner. NO se exige el verde del job entero. Se mantiene intacto lo
+      que el AC original acertaba: se acredita con el run de CI y NO con una corrida local, porque el
+      clon limpio local YA daba verde y es justamente lo que oculto el problema durante semanas --
+      verificado de nuevo el 2026-08-15, un A/B en clon limpio dio salida IDENTICA con y sin el
+      arreglo."
   verification_cmd:
     - "python examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
     - "python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory"

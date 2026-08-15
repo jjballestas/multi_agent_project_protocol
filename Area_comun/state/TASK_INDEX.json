@@ -791,7 +791,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "high",
-            "status": "blocked",
+            "status": "in_progress",
             "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto",
             "type": "implementation"
         },
@@ -833,6 +833,16 @@
             "risk": "medium",
             "status": "proposed",
             "title": "El indice avanza por el ledger y el markdown se queda sin commitear -- HEAD sale rojo para quien clona y el validate en caliente del autor sale verde",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0401-el-rollback-destruye-el-residuo-ambiguo-que-dice-preservar.md",
+            "id": "TASK-0401",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "high",
+            "status": "proposed",
+            "title": "El rollback destruye el residuo ambiguo que dice preservar -- y solo en CI, asi que la garantia de no borrar lo ilegible no se sostiene donde importa",
             "type": "implementation"
         },
         {

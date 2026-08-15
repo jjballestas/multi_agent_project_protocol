@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "eab4a35d0a33fea3ada7a928f967afb5a6eb1b227c459be60747e8720f318b79",
+  "canonical_hash": "4c9eae23946cfb815acd17bb5a48ddc68e594d7f3fbe22e9e8206aacf7539f44",
   "integrity": {
-    "canonical_hash": "eab4a35d0a33fea3ada7a928f967afb5a6eb1b227c459be60747e8720f318b79",
+    "canonical_hash": "4c9eae23946cfb815acd17bb5a48ddc68e594d7f3fbe22e9e8206aacf7539f44",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "cdf4c4d59689d1577937d3583ce79191e6adf8122535bb969d6fd7ff92e382a6",
-    "signature": "ee60b15cecf3faa0e5cb20213f8820892d8128bdddf0bf90767de158b857ed76",
-    "up_to_seq": 9428
+    "prev_hash": "48e560780e480fc21e605e361e97a624d23f0c2fd4f821e27954e6c2c84e6aea",
+    "signature": "3b7b2305be1c7d10d942c21b3ea53d166e2f1d238989e8872ba3d9b2c2ffc80b",
+    "up_to_seq": 9432
   },
   "state": {
     "aggregate_versions": {
@@ -1052,6 +1052,7 @@
       "CLAIM-20260815-Arquitecto-promo-nova": 1,
       "CLAIM-20260815-Arquitecto-r3r2": 1,
       "CLAIM-20260815-Arquitecto-reg0400": 1,
+      "CLAIM-20260815-Arquitecto-reg0401": 1,
       "CLAIM-20260815-Arquitecto-unblock-queue": 1,
       "CLAIM-20260815-Arquitecto-unblock0396": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -3873,11 +3874,12 @@
       "TASK-0393": 1,
       "TASK-0394": 3,
       "TASK-0395": 14,
-      "TASK-0396": 18,
+      "TASK-0396": 19,
       "TASK-0397": 1,
       "TASK-0398": 1,
       "TASK-0399": 1,
       "TASK-0400": 2,
+      "TASK-0401": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3900,7 +3902,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8757,
+    "events_applied": 8761,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4128,6 +4130,7 @@
       "arq-20260815-acq-unblock": 9409,
       "arq-20260815-acq0396v2": 9406,
       "arq-20260815-acq0400": 9411,
+      "arq-20260815-acq401": 9429,
       "arq-20260815-acq96b": 9420,
       "arq-20260815-flip0396v2": 9407,
       "arq-20260815-flip96b": 9421,
@@ -4137,10 +4140,13 @@
       "arq-20260815-reg-task-0399": 9404,
       "arq-20260815-rel0396v2": 9408,
       "arq-20260815-rel0400": 9413,
+      "arq-20260815-rel401": 9432,
       "arq-20260815-rel96b": 9422,
       "arq-20260815-release-ci-cascade": 9405,
       "arq-20260815-relunb": 9410,
+      "arq-20260815-unbl396": 9431,
       "arq-20260815-ups0400": 9412,
+      "arq-20260815-ups401": 9430,
       "arq-327-000": 7935,
       "arq-327-001": 7936,
       "arq-327-002": 7937,
@@ -12661,5 +12667,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9428
+  "up_to_seq": 9432
 }

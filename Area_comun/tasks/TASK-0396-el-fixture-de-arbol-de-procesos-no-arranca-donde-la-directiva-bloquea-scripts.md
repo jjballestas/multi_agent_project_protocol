@@ -1,7 +1,7 @@
 ---
 id: TASK-0396
 title: El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto
-status: blocked
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md
@@ -49,9 +49,17 @@ intake:
       cualquier causa, el runner lo dice con un mensaje que nombra la causa, y NO puede terminar en
       verde. Hoy el `assert` desnudo no distingue una cosa de la otra; esa es la propiedad que hace
       que este defecto sea generico y no anecdotico."
-    - "AC5 (CI): el job `falsification-runners` deja de caer por esta causa sobre el commit de
-      entrega. Se acredita con el run de CI. Si tras el arreglo cae por OTRA causa, se reporta esa
-      causa y no se declara cerrado el AC."
+    - "AC5 (CI, ENMENDADO 2026-08-15 21:23 local por el Arquitecto -- la redaccion original era
+      INSATISFACIBLE): la forma original pedia el job `falsification-runners` sin caer y anadia que
+      si caia por OTRA causa no se declaraba cerrado el AC. Eso no se puede cumplir: ese job carga
+      otras causas independientes (TASK-0399, TASK-0401), asi que jamas se pondria verde por mucho
+      que esta tarea quedara bien resuelta. Forma correcta, DISCRIMINANTE: sobre el commit de
+      entrega, (a) las firmas `process tree did not start`, `SecurityError` y `UnauthorizedAccess`
+      desaparecen del log del job, Y (b) la ejecucion AVANZA mas alla del bloque del fixture. Hacen
+      falta las dos: la desaparicion sola podria significar que el runner murio antes de llegar. NO
+      se exige el verde del job entero. ACREDITADO por el Arquitecto sobre el run `31901179492`,
+      commit `a30442c2`: cero apariciones de `process tree did not start` en todo el log y ejecucion
+      alcanzando la linea 2122."
   verification_cmd:
     - "python scripts/check_falsification_contracts.py --root . --workflow .github/workflows/validate.yml --inventory"
     - "python scripts/validate_collaboration_state.py --root ."

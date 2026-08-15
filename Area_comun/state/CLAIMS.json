@@ -1488,6 +1488,24 @@
             "updated_at": "2026-08-15T17:40:33Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Arquitecto-reg0401",
+            "expires_at": "2026-08-15T20:24:10Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Arquitecto-reg0401",
+                "Area_comun/state/TASK_INDEX.json#TASK-0401",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0401",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/tasks/TASK-0401-el-rollback-destruye-el-residuo-ambiguo-que-dice-preservar.md",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md"
+            ],
+            "started_at": "2026-08-15T19:24:10Z",
+            "status": "released",
+            "task_id": "TASK-0401",
+            "updated_at": "2026-08-15T19:24:10Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Arquitecto-unblock-queue",
             "expires_at": "2026-08-15T18:39:19Z",
             "owner": "Arquitecto",
