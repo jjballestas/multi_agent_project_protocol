@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "7cf8b1383acc57037d99d00c21a9e222235102bb32154bd8b96d47fd31bb46d9",
+  "canonical_hash": "3f6ea97377d25e7e27f420c3ea997964ea29efb92d95a8581d7ba6a641baa62c",
   "integrity": {
-    "canonical_hash": "7cf8b1383acc57037d99d00c21a9e222235102bb32154bd8b96d47fd31bb46d9",
+    "canonical_hash": "3f6ea97377d25e7e27f420c3ea997964ea29efb92d95a8581d7ba6a641baa62c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "f8155fb0f2ac5c4e8e897a1e590d4c568fc8a670913ed5fc4f82f7f25a117a92",
-    "signature": "c74e6116f7f61fdfb8f5268825c5dc24670c72cefbb380d0777ac4c35465fb9f",
-    "up_to_seq": 9263
+    "prev_hash": "4f745ed0394fc4c8003525e494235847a36fcbdd72004547aa6956a892568494",
+    "signature": "eb86f47c82d37a3eb11df39acde37951b3133c3ea343cef4df346b5f7b476471",
+    "up_to_seq": 9265
   },
   "state": {
     "aggregate_versions": {
@@ -3786,7 +3786,7 @@
       "TASK-0364": 21,
       "TASK-0365": 3,
       "TASK-0366": 1,
-      "TASK-0367": 20,
+      "TASK-0367": 22,
       "TASK-0368": 46,
       "TASK-0369": 2,
       "TASK-0370": 1,
@@ -3829,7 +3829,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8592,
+    "events_applied": 8594,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8694,7 +8694,9 @@
       "codex:task0367:ready-to-claimed:20260813T074753Z": 9021,
       "codex:task0367:remediation2:blocked-to-in-progress:20260814T234745Z": 9263,
       "codex:task0367:remediation2:blocked:b1-gate-conflict:20260814T221725Z": 9251,
+      "codex:task0367:remediation2:claim-release:20260815T000017Z": 9265,
       "codex:task0367:remediation2:claim:20260814T215842Z": 9250,
+      "codex:task0367:remediation2:in-review:20260815T000017Z": 9264,
       "codex:task0368:remediation1:release-delivery:20260814": 9127,
       "codex:task0368:remediation1:release-maker:20260814": 9126,
       "codex:task0368:remediation1:status-in-review:20260814": 9125,
@@ -12425,5 +12427,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9263
+  "up_to_seq": 9265
 }
