@@ -6958,3 +6958,6 @@ ratified its own work.
 - The aggregate PowerShell host runner proceeds past TASK-0397 and currently stops at the separately
   owned `case_linux_job_wiring` cause. TASK-0397 remains maker-owned pending governed delivery and
   independent review; Codex has not reviewed or ratified the work.
+- Delivery commit `39492414` moves TASK-0397 to `in_review`, releases both Codex claims, and
+  publishes the Arquitecto handoff for independent Analista review. Codex-signed runtime events
+  9452-9455 materialized the delivery with drift false. Codex did not review or ratify the work.
