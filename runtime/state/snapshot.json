@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "66815a2f2d398de2f528199ce3ae9297e69571bba3fcbbda20a8a8b2487288ed",
+  "canonical_hash": "a73026f8615f4515d753cdeac969ae5596043ded6ff55dd195f716f030a84337",
   "integrity": {
-    "canonical_hash": "66815a2f2d398de2f528199ce3ae9297e69571bba3fcbbda20a8a8b2487288ed",
+    "canonical_hash": "a73026f8615f4515d753cdeac969ae5596043ded6ff55dd195f716f030a84337",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "ed260c00e7b86c91c2e30752ff92ee4156e6756a857730465547e55eb345cb4b",
-    "signature": "458d043b3fc8c0c915b281be6ab47132733adfd99653a0a65b4f0824fdd55fd2",
-    "up_to_seq": 9292
+    "prev_hash": "7ef83b5c46af15f9bfc5d6ec6c1c828f4d6e5af806a611c8c1615fb849adfe9d",
+    "signature": "c345690fd59468dfe99511c251d02bbe6d21303ee4a4a5956d34957d3adeefdd",
+    "up_to_seq": 9296
   },
   "state": {
     "aggregate_versions": {
@@ -3809,7 +3809,7 @@
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
-      "TASK-0378": 20,
+      "TASK-0378": 24,
       "TASK-0379": 2,
       "TASK-0380": 1,
       "TASK-0381": 1,
@@ -3842,7 +3842,7 @@
       "protocol-prune": 69,
       "protocol-state": 1
     },
-    "events_applied": 8621,
+    "events_applied": 8625,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8762,7 +8762,11 @@
       "codex:task0373:remediation1:neutrality-claim:20260815T005729Z": 9271,
       "codex:task0373:start:claim:20260814T222859Z": 9252,
       "codex:task0373:start:status:20260814T222859Z": 9253,
+      "codex:task0378:in-progress-to-in-review:r2:20260815T020700Z": 9294,
+      "codex:task0378:remediation2-delivery:claim-acquire:20260815T020500Z": 9293,
+      "codex:task0378:remediation2-delivery:claim-release:20260815T020700Z": 9296,
       "codex:task0378:remediation2-resume:claim-acquire:20260815T015500Z": 9292,
+      "codex:task0378:remediation2-resume:claim-release:20260815T020700Z": 9295,
       "codex:task0378:remediation2:block-msg-claim:2026-08-14T23:37:05Z": 9259,
       "codex:task0378:remediation2:block-msg-release:2026-08-14T23:37:05Z": 9262,
       "codex:task0378:remediation2:blocked-status:2026-08-14T23:37:05Z": 9260,
@@ -12467,5 +12471,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9292
+  "up_to_seq": 9296
 }

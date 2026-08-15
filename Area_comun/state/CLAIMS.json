@@ -1326,6 +1326,26 @@
             "updated_at": "2026-08-14T23:34:22Z"
         },
         {
+            "claim_id": "CLAIM-20260815-Codex-TASK-0378-remediation2-delivery",
+            "expires_at": "2026-08-15T03:05:00Z",
+            "notes": "Publish TASK-0378 remediation r2 handoff, move to in_review, and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0378-remediation2-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260815-Codex-TASK-0378-remediation2-resume",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "Area_comun/mailbox/open/MSG-20260815-Codex-to-Arquitecto-HANDOFF-TASK-0378-remediation-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T02:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-15T02:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260815-Codex-TASK-0378-remediation2-resume",
             "expires_at": "2026-08-15T07:55:00Z",
             "notes": "Resume TASK-0378 remediation r2 after architect resolution: scripts remains product in both hooks.",
@@ -1344,7 +1364,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-15T01:55:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-15T01:55:00Z"
         },
