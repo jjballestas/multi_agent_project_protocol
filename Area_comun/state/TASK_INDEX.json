@@ -754,7 +754,7 @@
             "id": "TASK-0392",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El self-filter que la skill documenta deja un vigia MUDO",
             "type": "implementation"
         },
