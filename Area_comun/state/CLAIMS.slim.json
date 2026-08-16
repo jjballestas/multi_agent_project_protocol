@@ -16,6 +16,17 @@
                 "runtime/state/snapshot.json"
             ],
             "task_id": "TASK-0378"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-r4-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-r4-memory",
+                "personal/Codex/MEMORY-TASK-0378-remediation4-20260816.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0378"
         }
     ],
     "schema_version": "1.0",
