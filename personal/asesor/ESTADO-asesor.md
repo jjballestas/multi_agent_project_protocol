@@ -2,7 +2,15 @@
 
 ## >> BLOQUE TOP 2026-08-16 (~03:15 local) - LO VIGENTE. Todo lo de abajo es historia.
 
-### MISION EN VUELO: corte del hub (17-ago 09:30) + actualizacion instancia NOVA (ventana 17-ago 10:00-11:00 local, fallback 12:00)
+### MISION EN VUELO: corte del hub para NOVA -- EN STANDBY desde 16-ago 11:30 (dos desplazamientos consumidos)
+- **ACTUALIZACION 16-ago ~11:40:** corte fallido a las 09:00 (certificacion por conteo: 13/26,
+  regresion del propio 0378) y a las 11:30 (el fix del actor NO curo el paso 10 -- run 31937131711
+  sobre 41320c12 sigue 13/26 en "Run full-mode hook inventory cases"). NOVA en STANDBY formal,
+  coste cero (sin freeze); regla viva: solo abren con corte-publicado + hora pactada por su
+  mailbox. El hub debe: diagnostico del log del paso 10 -> paso verde MEDIDO en una corrida ->
+  par reproducible mismo commit -> tag -> corte-publicado; el Asesor retransmite hora a NOVA.
+  Hipotesis enviada: caso-contrato desalineados (el caso esperaba la semantica pre-fail-closed).
+  Mensajes clave: URGENTE-1130 (hub, df9aa350), AVISO-1130-standby (NOVA, c968fa4).
 - **Rol de esta operacion: ASESOR AUTONOMO** (orden del operador ~03:10). Coordino a los DOS
   Arquitectos (hub y NOVA) SOLO por mailbox. FRONTERA DURA: no lanzo crons de peones, no toco
   ledger, no actuo como Arquitecto. Commits solo de mensajes/area propia, pathspec explicito,
