@@ -851,7 +851,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "low",
-            "status": "review_approved",
+            "status": "done",
             "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva",
             "type": "infra"
         },

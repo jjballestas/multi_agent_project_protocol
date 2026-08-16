@@ -1,7 +1,7 @@
 ---
 id: TASK-0409
 title: Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva
-status: review_approved
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md
