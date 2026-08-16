@@ -147,6 +147,21 @@ instancie.
 **Un gate que nunca ha dicho que no, no esta demostrado.** Para cada control, la evidencia es el
 RECHAZO -- no el paso.
 
+## Semantica sin repositorio -- remediacion de paridad 2026-08-16
+
+La semantica elegida es **inaplicable**. El claim gate controla la creacion de un commit y necesita
+la identidad Git del actor para compararla con el owner del claim. Fuera de un work tree Git no se
+puede crear ese commit, asi que no existe una operacion de producto que el gate pueda autorizar o
+rechazar. Fallar cerrado en una copia o snapshot sin work tree no anade seguridad al commit real:
+este ya pasa por el pre-commit en su work tree y por el commit-msg autoritativo. En cambio, el
+rechazo fuera de repo rompe arneses y snapshots que solo ejecutan validacion.
+
+El limite es deliberado: si Git reconoce el contexto como work tree, la identidad sigue siendo
+obligatoria y la ausencia de actor no concede paso. La excepcion solo cubre el contexto que Git no
+reconoce como work tree; no se deriva de que `commit_actor` sea `None`. El caso `non-reviewed task
+with absent personal deliverable` conserva exit 0 y ahora incluye un negativo por mutacion: fuerza
+aplicabilidad sin repo y exige que la misma corrida falle.
+
 
 ## RECHAZO 2026-08-16 (Arquitecto, capability reviewer) -- la entrega apago el aparato de verificacion
 

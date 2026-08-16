@@ -68,6 +68,7 @@ def main() -> int:
         shutil.copy2(ROOT / "scripts/check_commit_trailers.py", copied_gate)
         gate = load_gate(copied_gate)
         assert gate.commit_actor(outside_repo) is None
+        assert gate.claim_gate_applicable(outside_repo) is False
         assert gate.claim_state(outside_repo, "TASK-0279", None, ["scripts/work.py"]) == "unavailable"
 
     cases = [
@@ -121,7 +122,7 @@ def main() -> int:
         shutil.rmtree(repo, ignore_errors=True)
     print(
         f"OK: commit-msg trailer gate passed {len(cases) + 3} cases including "
-        "empty/non-empty instance prefixes and fail-closed actor discovery outside a repository."
+        "empty/non-empty instance prefixes and inapplicable actor discovery outside a repository."
     )
     return 0
 

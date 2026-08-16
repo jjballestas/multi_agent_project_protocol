@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "3f71dfc28c2a5cd5583a669ee1e71dbb9d3f39d3414c5e6769983023199f36b5",
+  "canonical_hash": "46d11d4a86e88d7ed983ee1671f542f5474a0ae8ef30d4bb74e76474274b6045",
   "integrity": {
-    "canonical_hash": "3f71dfc28c2a5cd5583a669ee1e71dbb9d3f39d3414c5e6769983023199f36b5",
+    "canonical_hash": "46d11d4a86e88d7ed983ee1671f542f5474a0ae8ef30d4bb74e76474274b6045",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "3d77adbe93bec0b6ed2c6dcbd238eaea2e28b4613c4b0d7f294ca7426dc352a9",
-    "signature": "21997feac83b377b08db181b542d689a928c8c91852679efd302e17cb7d3ad94",
-    "up_to_seq": 9560
+    "prev_hash": "7804e14822bf5d7908573ad0e2e29766529b595835907686d6e4a2f5e00a2fe9",
+    "signature": "8f63003cb45295d0b6eb29114cb65f0250d89374d087caacecca2cdfcb7c4448",
+    "up_to_seq": 9561
   },
   "state": {
     "aggregate_versions": {
@@ -3870,7 +3870,7 @@
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
-      "TASK-0378": 50,
+      "TASK-0378": 51,
       "TASK-0379": 2,
       "TASK-0380": 1,
       "TASK-0381": 1,
@@ -3922,7 +3922,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8889,
+    "events_applied": 8890,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9031,6 +9031,7 @@
       "codex:task0378:r3:release-memory:2026-08-16T08:27:13Z": 9553,
       "codex:task0378:r3:release-test:2026-08-16T08:27:13Z": 9551,
       "codex:task0378:r3:test-claim:2026-08-16T08:23:50Z": 9546,
+      "codex:task0378:r4:claim:20260816T094300Z": 9561,
       "codex:task0378:remediation2-delivery:claim-acquire:20260815T020500Z": 9293,
       "codex:task0378:remediation2-delivery:claim-release:20260815T020700Z": 9296,
       "codex:task0378:remediation2-resume:claim-acquire:20260815T015500Z": 9292,
@@ -12815,5 +12816,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9560
+  "up_to_seq": 9561
 }
