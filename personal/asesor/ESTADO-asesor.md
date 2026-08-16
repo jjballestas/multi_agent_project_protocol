@@ -1,6 +1,41 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-07-19 (~11:00 local) - LO VIGENTE. Todo lo de abajo es historia.
+## >> BLOQUE TOP 2026-08-16 (~03:15 local) - LO VIGENTE. Todo lo de abajo es historia.
+
+### MISION EN VUELO: corte del hub (17-ago 09:30) + actualizacion instancia NOVA (ventana 17-ago 10:00-11:00 local, fallback 12:00)
+- **Rol de esta operacion: ASESOR AUTONOMO** (orden del operador ~03:10). Coordino a los DOS
+  Arquitectos (hub y NOVA) SOLO por mailbox. FRONTERA DURA: no lanzo crons de peones, no toco
+  ledger, no actuo como Arquitecto. Commits solo de mensajes/area propia, pathspec explicito,
+  ASCII, trailers `Task-Id: none` + `Ops-Reason: coordinacion-asesor` (self-filter del monitor).
+- **Deadline pactado:** corte del hub (release tag + nota adoptable por upgrade_instance)
+  publicado a las **09:30**; ventana NOVA 10:00-11:00 con condicion 9431 (si su review critica
+  sigue abierta a las 10:00 -> 12:00, corte limite 11:30). **COMPROMISO: si el corte se
+  retrasa, avisar a NOVA por su mailbox ANTES de las 09:00.**
+- **Minimo del paquete CONFIRMADO a NOVA:** fix del pin CI (0378) + TASK-0337 verificada
+  (su D-1, paga el 90% de su dolor: 137 aplazamientos/dia). 0408 solo si llega verificada.
+  AVISOS al hub ya trasladados: prefijo anidado (^personal/ no matchea Aegis/personal/) y
+  DOBLE GENESIS de NOVA (seq 1 + seq 796) que upgrade_instance debe tolerar ANTES del corte.
+- **Estado canal hub:** DIRECTIVA + ADENDA + DIRECTIVA-exclusion-vigias + RESP + RESP2 en
+  open/ (commits 20bf5a40, f0adde6b, cb1ae03c, ed9567a2, ebb5b41c). PENDIENTE del Arquitecto:
+  PLAN+ETA del corte, confirmacion de NO-relanzamiento y EXEC_EXIT del exec 44028.
+- **INCIDENTE RESUELTO (03:00):** el barrido de zombies del Arquitecto creyo matar los crons
+  canonicos (FYI-URGENTE 02:48). MEDIDO: fallo el kill, AMBOS motores vivos (reticula de
+  latido Analista ininterrumpida; exec 44028 de Codex consumiendo el ACTION de 0397 desde
+  02:40:07; pid.json intactos del 13-ago). RESP2 anulo el relanzamiento; kills de wrappers
+  colgados del 13-ago (38512/34424) diferidos a post-EXEC_EXIT. Vigia de NOVA exonerado
+  (watch-crons.sh solo alerta). Los 5 vigias (3 mios + 2 de NOVA) excluidos del barrido en
+  la skill cron-zombie-sweep (tabla de firmas integrada por el Arquitecto).
+- **Estado canal NOVA:** intercambio CERRADO y archivado por su Arquitecto. Su pin: 1.14.0
+  tier runtime, config sha8 c2de91f9. Interim D-8 operando (vigilan su retry.json).
+- **Monitores vivos de esta sesion:** bxx4l90lv (hub mailbox+commits, self-filter),
+  b8tcs0fsv (NOVA mailbox), bdssrcvur (watchdog 15min/3 -> escalada al hub),
+  b6vel3whi (centinela deadlines 08:45/09:30/10:00/11:30). Si la sesion muere, re-armar.
+- **DEBATE METODOLOGIA CERRADO:** v3 FINAL en personal/Analista/drafts/
+  PROPUESTA-20260816-eficiencia-coordinacion-v3-FINAL.md (2 rondas adversariales, todo
+  resuelto por instrumento). Decisiones D-A..D-D esperan FIRMA del operador; D-E activada.
+  P5 retirada; panel M0-M9; secuencia urgente = camino critico del corte.
+- Poda del hub VENCIDA (PRUNE DUE en cada commit): es del Arquitecto en su checkpoint, CI es
+  la frontera. No la corro yo.
 
 ### QUE SE CERRO (2 investigaciones completas, ambas privadas NO citables)
 1. **ECONOMIA DE PEONES: CERRADA, NO ADOPTADA.** 4 estudios convergentes (piloto +7.1pct ->
