@@ -3,12 +3,21 @@
 
 from __future__ import annotations
 
+import importlib.util
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def load_gate(path: Path):
+    spec = importlib.util.spec_from_file_location("commit_trailer_gate_probe", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def run(args: list[str], cwd: Path, ok: bool) -> subprocess.CompletedProcess[str]:
@@ -53,6 +62,14 @@ def attempt(repo: Path, subject: str, trailers: str, accepted: bool) -> subproce
 
 
 def main() -> int:
+    with tempfile.TemporaryDirectory(prefix="commit-actor-no-repo-") as tmp:
+        outside_repo = Path(tmp)
+        copied_gate = outside_repo / "check_commit_trailers.py"
+        shutil.copy2(ROOT / "scripts/check_commit_trailers.py", copied_gate)
+        gate = load_gate(copied_gate)
+        assert gate.commit_actor(outside_repo) is None
+        assert gate.claim_state(outside_repo, "TASK-0279", None, ["scripts/work.py"]) == "unavailable"
+
     cases = [
         ("valid", "feat: valid", "Task-Id: TASK-0279", True),
         ("archived", "feat: archived", "Task-Id: TASK-0200", True),
@@ -102,7 +119,10 @@ def main() -> int:
         assert hook_verdict.returncode == 0
     finally:
         shutil.rmtree(repo, ignore_errors=True)
-    print(f"OK: commit-msg trailer gate passed {len(cases) + 2} cases including empty/non-empty instance prefixes.")
+    print(
+        f"OK: commit-msg trailer gate passed {len(cases) + 3} cases including "
+        "empty/non-empty instance prefixes and fail-closed actor discovery outside a repository."
+    )
     return 0
 
 

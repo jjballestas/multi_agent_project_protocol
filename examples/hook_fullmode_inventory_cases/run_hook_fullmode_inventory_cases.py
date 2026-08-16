@@ -166,12 +166,34 @@ def main() -> int:
             json.dumps(config_data, ensure_ascii=True, indent=2) + "\n",
             encoding="ascii",
         )
+        actor = run(
+            ["git", "config", "user.name"], nonreviewed_root
+        ).stdout.strip()
+        claims_path = nonreviewed_root / "Area_comun" / "state" / "CLAIMS.json"
+        claims_data = json.loads(claims_path.read_text(encoding="utf-8"))
+        claims_data["claims"].append(
+            {
+                "claim_id": "CLAIM-20990101-HookProbe-PRODUCT",
+                "task_id": synthetic_task_id,
+                "owner": actor,
+                "status": "active",
+                "scope": ["protocol.config.json"],
+                "started_at": "2099-01-01T00:00:00Z",
+                "updated_at": "2099-01-01T00:00:00Z",
+                "expires_at": "2099-01-01T01:00:00Z",
+            }
+        )
+        claims_path.write_text(
+            json.dumps(claims_data, ensure_ascii=True, indent=4) + "\n",
+            encoding="ascii",
+        )
         require(
             run(
                 [
                     "git",
                     "add",
                     "Area_comun/state/TASK_INDEX.json",
+                    "Area_comun/state/CLAIMS.json",
                     synthetic_task_file,
                     "protocol.config.json",
                 ],

@@ -82,15 +82,38 @@ def staged_product_paths(root: Path, prefix: str) -> list[str]:
     ]
 
 
-def commit_actor(root: Path) -> str:
-    return subprocess.check_output(["git", "config", "user.name"], cwd=root, text=True).strip()
+def commit_actor(root: Path) -> str | None:
+    """Return the configured commit actor, or None when no repository can supply one.
+
+    The claim gate treats None as an unverifiable actor and therefore fails closed.
+    """
+    try:
+        inside_work_tree = subprocess.check_output(
+            ["git", "rev-parse", "--is-inside-work-tree"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+        if inside_work_tree != "true":
+            return None
+        actor = subprocess.check_output(
+            ["git", "config", "user.name"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return actor or None
 
 
-def has_active_claim(instance_root: Path, task_id: str | None, actor: str, product_paths: list[str]) -> bool:
+def has_active_claim(instance_root: Path, task_id: str | None, actor: str | None, product_paths: list[str]) -> bool:
     return claim_state(instance_root, task_id, actor, product_paths) == "owned"
 
 
-def claim_state(instance_root: Path, task_id: str | None, actor: str, product_paths: list[str]) -> str:
+def claim_state(instance_root: Path, task_id: str | None, actor: str | None, product_paths: list[str]) -> str:
+    if actor is None:
+        return "unavailable"
     path = instance_root / "Area_comun/state/CLAIMS.json"
     if not path.exists():
         return "missing"
@@ -126,7 +149,9 @@ def validate(root: Path, instance_root: Path, prefix: str, message: str) -> list
     if task_id != "none" and task_id in known and staged_product(root, prefix):
         actor = commit_actor(root)
         state = claim_state(instance_root, task_id, actor, staged_product_paths(root, prefix))
-        if state == "other":
+        if state == "unavailable":
+            errors.append(f"product commit rejected: cannot determine commit actor for Task-Id {task_id}; claim ownership cannot be verified")
+        elif state == "other":
             errors.append(f"product commit rejected: Task-Id {task_id} is covered by an active claim owned by another actor, not commit actor {actor}")
         elif state == "missing":
             errors.append(f"product commit rejected: Task-Id {task_id} has no active claim covering every staged product path for commit actor {actor}")
@@ -155,7 +180,10 @@ def main() -> int:
         state = claim_state(instance_root, None, actor, staged_product_paths(root, prefix))
         if state == "owned":
             return 0
-        cause = "active claim is owned by another actor" if state == "other" else "no active claim covers every staged product path"
+        if state == "unavailable":
+            cause = "commit actor is unavailable, so claim ownership cannot be verified"
+        else:
+            cause = "active claim is owned by another actor" if state == "other" else "no active claim covers every staged product path"
         print(f"pre-commit claim gate: product commit rejected: {cause} for commit actor {actor}", file=sys.stderr)
         return 1
     errors = validate(root, instance_root, prefix, Path(sys.argv[1]).read_text(encoding="utf-8"))

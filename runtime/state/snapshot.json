@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "2777a99404ed496c34ee59594b8b77c36908b5610e5086ad4cafc66f2f0b358f",
+  "canonical_hash": "1ccd432afdfe320b5b6e7024bd44b297721c3b3a4c7b29e3719788a80c0cbc69",
   "integrity": {
-    "canonical_hash": "2777a99404ed496c34ee59594b8b77c36908b5610e5086ad4cafc66f2f0b358f",
+    "canonical_hash": "1ccd432afdfe320b5b6e7024bd44b297721c3b3a4c7b29e3719788a80c0cbc69",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "fd0088836445d30380ba3157f901954337a20e85153baf900018329e518d799c",
-    "signature": "68ed7de3acb7ba32d71fbaffd2d3c37e187d443d049a34ae5be95862ce26c173",
-    "up_to_seq": 9544
+    "prev_hash": "d1a9a409b6721114c160834fc010da49311392cf26438e69703ac1e18d6ee5aa",
+    "signature": "5390707806e65bb6dfa441668b61bb9ef2b9acbb3140a9bd1327f97e9d1cfb34",
+    "up_to_seq": 9547
   },
   "state": {
     "aggregate_versions": {
@@ -3869,7 +3869,7 @@
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
-      "TASK-0378": 35,
+      "TASK-0378": 38,
       "TASK-0379": 2,
       "TASK-0380": 1,
       "TASK-0381": 1,
@@ -3921,7 +3921,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8873,
+    "events_applied": 8876,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9014,6 +9014,9 @@
       "codex:task0378:pin:in-progress-to-in-review:20260816T021000Z": 9487,
       "codex:task0378:pin:msgfix-claim-acquire:20260816T021400Z": 9490,
       "codex:task0378:pin:msgfix-claim-release:20260816T021500Z": 9491,
+      "codex:task0378:r3:claim:2026-08-16T08:03:06Z": 9545,
+      "codex:task0378:r3:commit-claim:2026-08-16T08:24:46Z": 9547,
+      "codex:task0378:r3:test-claim:2026-08-16T08:23:50Z": 9546,
       "codex:task0378:remediation2-delivery:claim-acquire:20260815T020500Z": 9293,
       "codex:task0378:remediation2-delivery:claim-release:20260815T020700Z": 9296,
       "codex:task0378:remediation2-resume:claim-acquire:20260815T015500Z": 9292,
@@ -12798,5 +12801,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9544
+  "up_to_seq": 9547
 }
