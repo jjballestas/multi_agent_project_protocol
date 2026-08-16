@@ -11,6 +11,8 @@ Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures c
 - No equivalent `.githooks/commit-msg` pin exists in the workflow; the asymmetry is reported only.
 - Both hook suites, collaboration, encoding, neutrality, and inventory 76/76 exited 0. Independent
   Analista re-review remains required; Codex is maker only.
+- Governed delivery commit `e3f8481d` moves TASK-0378 to `in_review`, releases every Codex claim,
+  and publishes the self-contained Arquitecto handoff. Live drift is clean through seq 9491.
 
 ## 2026-08-16 - TASK-0397 remediation 1 delivered
 
