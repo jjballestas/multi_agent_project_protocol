@@ -42,6 +42,23 @@
             "updated_at": "2026-08-16T03:23:53Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0337-h1",
+            "expires_at": "2026-08-16T06:51:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0337-h1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T03:51:50Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T03:51:50Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

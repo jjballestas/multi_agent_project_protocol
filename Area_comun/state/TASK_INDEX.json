@@ -274,7 +274,7 @@
             "id": "TASK-0337",
             "owner": "Codex",
             "phase": "P2",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331",
             "type": "implementation"
         },
