@@ -1,54 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r3",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r3",
-                "Area_comun/state/TASK_INDEX.json#TASK-0414",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
-                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
-                "Area_comun/protocol/EVENT_AUTH_KEY_REGISTRY.json",
-                "runtime/eventlog.py",
-                "runtime/protocol_replay.py",
-                "scripts/validate_collaboration_state.py",
-                "examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0414"
-        },
-        {
-            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r3-commit",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r3-commit",
-                "Area_comun/protocol/EVENT_AUTH_KEY_REGISTRY.json",
-                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
-                "runtime/eventlog.py",
-                "runtime/protocol_replay.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/scan_domain_neutrality.py",
-                "scripts/scan_domain_neutrality.ps1",
-                "examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0414"
-        },
-        {
-            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r3-neutrality",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r3-neutrality",
-                "scripts/scan_domain_neutrality.py",
-                "scripts/scan_domain_neutrality.ps1",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0414"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

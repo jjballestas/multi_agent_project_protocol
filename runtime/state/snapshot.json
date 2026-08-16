@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "aaa4f384cf6e3a8aa7111066b42d7333e6cab11d5775c2919c936d75832ab369",
+  "canonical_hash": "50628c3293f2bef130e54ca74b7dcdb6d9eb622cfd1a18db176cb8ff0034b63d",
   "integrity": {
-    "canonical_hash": "aaa4f384cf6e3a8aa7111066b42d7333e6cab11d5775c2919c936d75832ab369",
+    "canonical_hash": "50628c3293f2bef130e54ca74b7dcdb6d9eb622cfd1a18db176cb8ff0034b63d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "09560cedc94fd7784920382eaf7863f24c74eb27aeaea368aaee82f5ac1634d8",
-    "signature": "053dc07b8d3b56414a39e02cd5c6d244837afc376fd7bd97783f91253690185f",
-    "up_to_seq": 9745
+    "prev_hash": "a552c3c570d0b3b094b43168bbdbe15f0842070fe2109c535c3b43825e3a3bd9",
+    "signature": "a11be32b87aed5f43f9c5a5fecaf16c4d368fa03b434b1cfc8500366e9211aee",
+    "up_to_seq": 9751
   },
   "state": {
     "aggregate_versions": {
@@ -4000,7 +4000,7 @@
       "TASK-0411": 3,
       "TASK-0412": 3,
       "TASK-0413": 2,
-      "TASK-0414": 33,
+      "TASK-0414": 39,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4023,7 +4023,7 @@
       "protocol-prune": 73,
       "protocol-state": 1
     },
-    "events_applied": 9074,
+    "events_applied": 9080,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9248,6 +9248,11 @@
       "codex:task0414:delivery-acquire:20260816T205514Z": 9721,
       "codex:task0414:delivery-release:20260816T205943Z": 9723,
       "codex:task0414:delivery-status:20260816T205943Z": 9722,
+      "codex:task0414:r3:in-review:20260816T234100Z": 9747,
+      "codex:task0414:r3:release-commit:20260816T234100Z": 9750,
+      "codex:task0414:r3:release-delivery:20260816T234100Z": 9751,
+      "codex:task0414:r3:release-main:20260816T234100Z": 9748,
+      "codex:task0414:r3:release-neutrality:20260816T234100Z": 9749,
       "codex:task0414:start:claim:20260816T204637Z": 9714,
       "codex:task0414:start:status:20260816T204637Z": 9715,
       "codex:task0414:v2-release-for-expand:20260816T205048Z": 9718,
@@ -11865,6 +11870,7 @@
       "intent:Codex:claim:5127c248d8a6d1660e73aace51d21b884a7ff83a6c2f49ebd569a063453e990e": 4225,
       "intent:Codex:claim:51282bb371fef62a0722dee8b0574ec962d5f29944c4d04132a9b877f90ba1af": 4488,
       "intent:Codex:claim:5176deccc6f2776c8a9b7069bb7310b83adaeb13489f4b960f8dce1a102cb2c3": 8172,
+      "intent:Codex:claim:51c99dc0ee82562d271a680b8d1e8b211cf9a6370b5727c0c019751cba1ff00a": 9746,
       "intent:Codex:claim:5228466abc4233f46119e67df0b124a76550329ebc08862b6294f4c532a389d9": 3499,
       "intent:Codex:claim:528c0826150deb4a6ecc007edc1395488acf05532b1f286f10baf566cd71fcec": 3040,
       "intent:Codex:claim:52fa0fe2319722463bbeb90f05a2df27458fae9edaceddd12db0396e0eb75031": 3599,
@@ -13101,5 +13107,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9745
+  "up_to_seq": 9751
 }
