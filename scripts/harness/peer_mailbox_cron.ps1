@@ -926,7 +926,7 @@ function Get-StagedResidueState {
         $candidateComparable = ConvertTo-ComparableRoute -Route $candidateInstanceRoute
         $candidateIsOwnPersonal = ($null -ne $candidateInstanceRoute -and $candidateInstanceRoute -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
         $candidateIsRelevant = if ($null -eq $MessageWorkScope) {
-            $null -ne $candidateInstanceRoute -and ($candidateInstanceRoute -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
+            (-not $candidateIsOwnPersonal) -and $null -ne $candidateInstanceRoute
         } else {
             (-not $candidateIsOwnPersonal) -and $null -ne $candidateComparable -and
                 (Test-ScopeIntersection -Left @($candidateComparable) -Right $MessageWorkScope)
@@ -941,7 +941,7 @@ function Get-StagedResidueState {
             $sourceComparable = ConvertTo-ComparableRoute -Route $sourceInstanceRoute
             $sourceIsOwnPersonal = ($null -ne $sourceInstanceRoute -and $sourceInstanceRoute -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
             $sourceIsRelevant = if ($null -eq $MessageWorkScope) {
-                $null -ne $sourceInstanceRoute -and ($sourceInstanceRoute -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
+                (-not $sourceIsOwnPersonal) -and $null -ne $sourceInstanceRoute
             } else {
                 (-not $sourceIsOwnPersonal) -and $null -ne $sourceComparable -and
                     (Test-ScopeIntersection -Left @($sourceComparable) -Right $MessageWorkScope)

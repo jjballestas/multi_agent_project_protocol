@@ -158,14 +158,22 @@ SI sale aparte es el ancla del regex, que es un defecto distinto: **TASK-0405**.
 | `ledger_unreadable_before_exec` / `ledger_prefix_snapshot_failed` | Baseline global de evidencia | Igual | Correcto: sin baseline no se puede atribuir evidencia al exec. |
 | `index_snapshot_failed` / `untracked_snapshot_failed` | Snapshot global de rollback | Igual | Correcto: sin snapshot no hay rollback no destructivo demostrable. |
 
-Garantia tras el cambio: un mensaje con scope resoluble solo es diferido por residuo vivo si al menos
-una ruta sucia no propia intersecta una ruta material de su scope. El detalle registra el par exacto
-como `dirty_path` y `message_route`. La memoria privada del mismo peer no participa y por ello no puede
-cerrar circularmente la entrada a su siguiente exec. Una ruta ajena que si intersecta conserva el veto.
-La frontera deliberada permanece cerrada: si el scope del mensaje no es resoluble, el flujo no usa la
-ausencia de interseccion como permiso; y un fallo de lectura del worktree conserva el veto global.
+Garantia tras el cambio: la memoria privada del mismo peer no participa en el veto de residuo, tanto
+si el scope del mensaje es resoluble como si no lo es, y por ello no puede cerrar circularmente la
+entrada a su siguiente exec. Con scope resoluble, un residuo no propio solo difiere si intersecta una
+ruta material del mensaje y el detalle registra el par exacto como `dirty_path` y `message_route`.
+Sin scope resoluble, cualquier residuo no propio conserva el veto global: no se usa la ausencia de una
+interseccion demostrable como permiso. El mensaje puede seguir fallando cerrado por
+`message_scope_ambiguous`, que es un control separado de admision, pero ya no hereda
+`worktree_residue_live` de la memoria del propio peer. Un fallo de lectura del worktree tambien conserva
+el veto global.
 
 La exencion deriva el prefijo que Git usa para la raiz de la instancia. El contrato permanente ejecuta
 el mismo par en dos layouts: instancia en la raiz del repositorio (prefijo vacio) e instancia anidada
 (prefijo no vacio). En ambos, la memoria propia arranca y el residuo ajeno que intersecta sigue
 difiriendo con el par exacto en el diagnostico.
+
+La remediacion H-1 extiende el par permanente a scope no resoluble en ambos layouts: con memoria propia,
+la causa observada avanza hasta `message_scope_ambiguous`; con un residuo no propio real, permanece
+`worktree_residue_live`. El mutante elimina solo la exencion de la rama no resoluble y el caso muere al
+cambiar la causa esperada, acreditando la dependencia por conducta.

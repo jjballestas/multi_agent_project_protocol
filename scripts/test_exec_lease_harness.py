@@ -2056,21 +2056,26 @@ def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
         f"R  personal/{REVIEWER}/draft-new.md",
         f"personal/{REVIEWER}/draft-old.md",
     ]
-    assert rename["state"] == "none"
-    assert rename["paths"] == []
+    assert rename["state"] == "live"
+    assert rename["paths"] == [f"personal/{REVIEWER}/draft-new.md"]
 
 
-def test_residue_excludes_foreign_personal_and_caps_diagnostics() -> None:
+def test_residue_excludes_own_personal_and_caps_foreign_diagnostics() -> None:
     with make_tempdir("residue-probe-") as tmp:
         root = Path(tmp)
         own_paths = [f"personal/{IMPLEMENTER}/owned-{index}.txt" for index in range(12)]
         foreign_path = f"personal/{REVIEWER}/foreign.txt"
-        for relative in [foreign_path, *own_paths]:
+        shared_paths = [f"work/foreign-{index}.txt" for index in range(12)]
+        for relative in [foreign_path, *own_paths, *shared_paths]:
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("dirty\n", encoding="ascii")
         subprocess.run(("git", "init"), cwd=root, check=True, capture_output=True)
-        entries = [f"?? {foreign_path}", *(f"?? {path}" for path in own_paths)]
+        entries = [
+            f"?? {foreign_path}",
+            *(f"?? {path}" for path in own_paths),
+            *(f"?? {path}" for path in shared_paths),
+        ]
         raw = "`0".join(entries) + "`0"
         script = function_loader(HARNESS_PATH, ("Get-StagedResidueState",)) + f"""
 $Root = {ps_literal(root)}
@@ -2084,6 +2089,7 @@ function Get-GitStatusPorcelainUtf8 {{ return [pscustomobject]@{{ ok = $true; ra
 function Write-Utf8NoBom {{ param($Path, $Content) [IO.File]::WriteAllText($Path, $Content, [Text.UTF8Encoding]::new($false)) }}
 $live = Get-StagedResidueState
 $livePaths = @($script:LastResiduePaths)
+$null = Remove-Item -LiteralPath $ResiduePath -Force -ErrorAction SilentlyContinue
 $script:statusRaw = "?? {foreign_path}`0"
 $foreignOnly = Get-StagedResidueState
 [ordered]@{{ live = $live; live_paths = $livePaths; foreign_only = $foreignOnly; foreign_paths = @($script:LastResiduePaths) }} | ConvertTo-Json -Depth 6 -Compress
@@ -2091,9 +2097,9 @@ $foreignOnly = Get-StagedResidueState
         result = run_powershell(script, root)
     assert result["live"] == "live"
     assert len(result["live_paths"]) == 10
-    assert all(path.startswith(f"personal/{IMPLEMENTER}/") for path in result["live_paths"])
-    assert result["foreign_only"] == "none"
-    assert result["foreign_paths"] == []
+    assert all(not path.startswith(f"personal/{IMPLEMENTER}/") for path in result["live_paths"])
+    assert result["foreign_only"] == "live"
+    assert result["foreign_paths"] == [foreign_path]
 
 
 def test_active_peer_lease_reports_owner_and_claim_veto_survives() -> None:
@@ -2500,7 +2506,7 @@ def main() -> int:
         test_git_status_readers_enumerate_untracked_files_without_overbroad_veto,
         test_embedded_repository_dirty_claim_is_fail_closed_and_mutation_proven,
         test_parent_ignore_boundary_separates_claim_veto_from_blocking_readers,
-        test_residue_excludes_foreign_personal_and_caps_diagnostics,
+        test_residue_excludes_own_personal_and_caps_foreign_diagnostics,
         test_active_peer_lease_reports_owner_and_claim_veto_survives,
         test_scope_aware_claim_veto_kills_both_direction_mutants,
         test_scope_aware_lease_veto_kills_both_direction_mutants,
