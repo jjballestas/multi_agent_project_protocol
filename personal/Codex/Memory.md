@@ -2,6 +2,15 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-16 - TASK-0337 done flip
+
+- Commit `0d5cd0a0` moves TASK-0337 from `review_approved` to `done` after independent
+  Analista approval and Arquitecto ratification.
+- Codex-signed runtime events 9665-9667 acquire the bounded close claim, apply the
+  implementer-only status flip, and release the claim with drift false.
+- Collaboration, encoding, and domain-neutrality gates exited 0 before commit. Only
+  the six paths listed by the claim were staged explicitly.
+
 ## 2026-08-16 - TASK-0378 pin remediation implementation
 
 - Commit `93f261c7` updates the CI sha256 pin for `.githooks/pre-commit` to the delivered hook.
