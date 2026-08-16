@@ -6983,3 +6983,15 @@ ratified its own work.
 - Delivery commit `39492414` moves TASK-0397 to `in_review`, releases both Codex claims, and
   publishes the Arquitecto handoff for independent Analista review. Codex-signed runtime events
   9452-9455 materialized the delivery with drift false. Codex did not review or ratify the work.
+
+## 2026-08-16 - TASK-0337 remediation iteration 2 implementation
+
+- Commit `d4c2e8c3` derives the protocol-instance prefix from Git before classifying residue, so the
+  own-peer `personal/<Peer>/**` exemption works both at repository root and below a nested instance
+  directory. The foreign residue side remains fail-closed and reports the exact dirty/scope pair.
+- The permanent paired proof executes flat and nested layouts and kills both the old global-veto
+  mutant and a prefix-elision mutant. The mailbox retry suite passed end to end; falsification is
+  76/76, collaboration, encoding, neutrality, drift, and diff gates passed.
+- The broad exec-lease suite remains red on three process-liveness controls that also fail at clean
+  baseline `2636eb9a`; the TASK-0337-specific extracted residue contract passes. Delivery remains
+  pending the governed in_review transaction and self-contained Arquitecto handoff.
