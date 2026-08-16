@@ -7000,4 +7000,4 @@ ratified its own work.
 - Maker commit `f2de3ad7` exempts `personal/<Peer>/**` owned residue in the unresolved-scope branch while every non-owned residue remains a global veto there.
 - The permanent contract covers flat and nested instances, resolved and unresolved scopes, and kills a mutant that removes only the unresolved-branch exemption.
 - Full mailbox retry cases and falsification inventory passed. The broad exec-lease suite still reported its pre-existing process-liveness failures; the two residue expectations affected by H-1 were updated and pass in isolation.
-- Hub encoding, neutrality, and collaboration gates exited 0. TASK-0337 remains maker-owned pending governed delivery and independent review; Codex has not reviewed or ratified the work.
+- Hub encoding, neutrality, and collaboration gates exited 0. Governed delivery commit `192d8338` moves TASK-0337 to `in_review`, releases all maker claims, and publishes `MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0337-H1.md`; Codex has not reviewed or ratified the work.

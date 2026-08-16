@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "793ac8599e76377bedf3f3db1bae28946ddcdaade76b5e1240c0401860a3f3da",
+  "canonical_hash": "f4bc4a0cc361eb1c639f57f10c9e5cb7ca0b69bbba68a9378730c241faeb7da3",
   "integrity": {
-    "canonical_hash": "793ac8599e76377bedf3f3db1bae28946ddcdaade76b5e1240c0401860a3f3da",
+    "canonical_hash": "f4bc4a0cc361eb1c639f57f10c9e5cb7ca0b69bbba68a9378730c241faeb7da3",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "11d926233fcd4446df44f6e5a8730ccfa38a23a15340795786cfced030f3d5d5",
-    "signature": "1e49915a2fc562ff1fe5e1897a86cb696a84f44f61d9b8dc6abf0fdcca288850",
-    "up_to_seq": 9515
+    "prev_hash": "50104bc5f3246da9cfedda7dfe8699ce7b4f8964ec4f010ac2c03f14fe28e123",
+    "signature": "7bb46c09e892cfeb2c9b10b0660aa065b2f91029612043a8f46fa7f746f61f28",
+    "up_to_seq": 9517
   },
   "state": {
     "aggregate_versions": {
@@ -3825,7 +3825,7 @@
       "TASK-0334": 21,
       "TASK-0335": 33,
       "TASK-0336": 62,
-      "TASK-0337": 31,
+      "TASK-0337": 33,
       "TASK-0338": 2,
       "TASK-0339": 1,
       "TASK-0340": 29,
@@ -3918,7 +3918,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8844,
+    "events_applied": 8846,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8736,6 +8736,8 @@
       "codex:task0337:h1:delivery-acquire:20260816T042954Z": 9511,
       "codex:task0337:h1:delivery-release:20260816T043046Z": 9513,
       "codex:task0337:h1:expanded:20260816T042207Z": 9507,
+      "codex:task0337:h1:final-memory-claim:20260816T044000Z": 9516,
+      "codex:task0337:h1:final-memory-release:20260816T044056Z": 9517,
       "codex:task0337:h1:in-review:20260816T043046Z": 9512,
       "codex:task0337:h1:memory-expanded:20260816T042832Z": 9509,
       "codex:task0337:h1:msgfix-claim:20260816T043456Z": 9514,
@@ -12766,5 +12768,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9515
+  "up_to_seq": 9517
 }
