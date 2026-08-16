@@ -274,7 +274,7 @@
             "id": "TASK-0337",
             "owner": "Codex",
             "phase": "P2",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331",
             "type": "implementation"
         },
@@ -601,7 +601,7 @@
             "file": "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
             "id": "TASK-0378",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra",
             "type": "implementation"
         },

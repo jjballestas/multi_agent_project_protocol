@@ -1,7 +1,7 @@
 ---
 id: TASK-0378
 title: Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md
