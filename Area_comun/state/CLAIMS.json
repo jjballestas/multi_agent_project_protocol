@@ -149,6 +149,26 @@
             "updated_at": "2026-08-16T04:34:56Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-h1-revert",
+            "expires_at": "2026-08-16T08:34:09Z",
+            "notes": "Revert H-1 commit exactly as directed by Arquitecto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-h1-revert",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py"
+            ],
+            "started_at": "2026-08-16T05:34:09Z",
+            "status": "active",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T05:34:09Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Codex-TASK-0337-h1-v2",
             "expires_at": "2026-08-16T07:22:07Z",
             "notes": "Implement H-1 and update affected extracted-function harness contract.",
