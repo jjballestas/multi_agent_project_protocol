@@ -114,7 +114,22 @@ jobs:
         shell: bash
         run: |
           test -f .githooks/pre-commit
-          echo "bd89ec302961d6db9c22a214710776986199ede11c8f7fdae2f11bc5c4b98e84  .githooks/pre-commit" | sha256sum --check --strict
+          expected="1bcc0b5b90ae07b0c1044deb24a9404273451565acbbe40ba6202daaf2825c4d"
+          echo "$expected  .githooks/pre-commit" | sha256sum --check --strict
+
+          negative_hook="$(mktemp)"
+          negative_output="$(mktemp)"
+          trap 'rm -f "$negative_hook" "$negative_output"' EXIT
+          cp .githooks/pre-commit "$negative_hook"
+          printf '\n# TASK-0378 pin mismatch negative\n' >> "$negative_hook"
+          if echo "$expected  $negative_hook" | sha256sum --check --strict >"$negative_output" 2>&1; then
+            echo "PIN_MISMATCH_NEGATIVE FAILED: a changed pre-commit hook passed the stale pin" >&2
+            cat "$negative_output" >&2
+            exit 1
+          fi
+          cat "$negative_output"
+          grep -Eq 'FAILED|did NOT match' "$negative_output"
+          echo "PIN_MISMATCH_NEGATIVE PASS: stale pre-commit pin rejected"
 
       - name: Set up Python
         uses: actions/setup-python@v5
