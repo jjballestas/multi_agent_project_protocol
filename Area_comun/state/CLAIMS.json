@@ -386,7 +386,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T08:03:06Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-16T08:03:06Z"
         },
@@ -404,7 +404,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T08:24:46Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-16T08:24:46Z"
         },
@@ -420,9 +420,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T08:25:54Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-16T08:25:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-r3-msgfix",
+            "expires_at": "2026-08-16T09:00:57Z",
+            "notes": "Correct compact handoff metadata before final delivery commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-r3-msgfix",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-r3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T08:30:57Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T08:30:57Z"
         },
         {
             "claim_id": "CLAIM-20260816-Codex-TASK-0378-r3-test",
@@ -436,7 +452,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T08:23:50Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-16T08:23:50Z"
         },
