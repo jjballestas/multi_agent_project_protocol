@@ -1,7 +1,7 @@
 ---
 id: TASK-0378
 title: Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md
@@ -63,6 +63,17 @@ intake:
     - "AC6 (el incidente reportado habria sido frenado): se reproduce la forma del incidente -- commit
       de producto bajo una tarea sin claim activo -- y se comprueba que AHORA muere, en los dos
       ganchos, nombrando la causa."
+    - "AC8 (RECHAZO 2026-08-16, Arquitecto -- lo que remedia esta entrega): el pin sha256 de
+      `.githooks/pre-commit` en `.github/workflows/validate.yml` casa con el gancho entregado y el
+      paso 4 del job `validate` pasa. La entrega `6f0feb3b` cambio el gancho sin actualizar su pin
+      y el job murio en el paso 4, saltando 78 de sus ~86 pasos durante dos dias (medido: corrida
+      31802752243 = 26 success / 60 skipped; corrida 31913703515 = 6 success / 78 skipped). Se
+      acredita por exit code sobre el arbol real, no por inspeccion visual del hash."
+    - "AC9 (el negativo, que es la parte que vale): un cambio del gancho que NO actualice su pin
+      muere, y muere nombrando la causa. Reutilizar el instrumento existente es correcto y
+      preferible; lo que no acredita es declararlo sin ejecutar el negativo. Se entrega la prueba
+      de RECHAZO ejecutada -- gancho perturbado, pin intacto -- con su salida y su exit code.
+      Mismo criterio innegociable que el AC3 de esta misma tarea."
   verification_cmd:
     - "python scripts/test_commit_msg_hook.py"
     - "python scripts/test_precommit_hook.py"
@@ -72,6 +83,7 @@ intake:
   scope_routes:
     - scripts/check_commit_trailers.py
     - .githooks/pre-commit
+    - .github/workflows/validate.yml
   out_of_scope:
     - "La separacion maker/checker en la ENTREGA: el Punto 1 para el incidente reportado (tenia cero
       claims) pero por si solo deja MEDIO ABIERTA la familia maker==checker, porque un actor puede
@@ -134,3 +146,46 @@ instancie.
 
 **Un gate que nunca ha dicho que no, no esta demostrado.** Para cada control, la evidencia es el
 RECHAZO -- no el paso.
+
+
+## RECHAZO 2026-08-16 (Arquitecto, capability reviewer) -- la entrega apago el aparato de verificacion
+
+`in_review -> in_progress`. Cronologia real, verificada contra el mailbox archivado y el `retry.json`
+del Analista (corrige una lectura previa MIA que decia que la review nunca se ejecuto):
+
+    14-ago 15:18  Codex entrega 6f0feb3b  (rompe el pin, sin que nadie lo note)
+    14-ago 16:10Z review ruteada -> se difiere 22 veces por `active_external_claim`,
+                  `attempts: 0`, agota los 7200 s a las 16:15Z
+    14-ago 16:40Z el Analista entrega igualmente su veredicto: CHANGE-REQUIRED,
+                  anclado en HEAD b454ce80 / implementacion 6f0feb3b, vector a vector
+    15-ago 01:19Z remediacion r2 ruteada a Codex
+    15-ago 02:05Z Codex entrega r2 en a5c5ad57 y pregunta EXPLICITAMENTE:
+                  "Can Arquitecto route the independent review from commit a5c5ad57?"
+    ...           nadie la ruteo. ~47 h en `in_review` esperando al COORDINADOR.
+
+O sea: la perdida de dos dias **no es del sustrato ni del checker: es una omision mia**. Lo que si
+imputa al sustrato son las 2h05m de diferimiento por colision de claim del 14-ago.
+
+Lo que esta medido como defecto de la entrega. `6f0feb3b` anadio 7 lineas a
+`.githooks/pre-commit` y no toco `.github/workflows/validate.yml`, donde el paso 4 del job `validate`
+compara el sha256 del gancho contra un pin fijo. Control historico:
+
+    corrida 31802752243  (14-ago 13:00Z, 139d07e1, ANTES)   26 success,  1 failure, 60 skipped
+    corrida 31913703515  (15-ago 23:02Z, 7d9616ca, DESPUES)  6 success,  2 failure, 78 skipped
+
+y el pin del workflow resulta ser exactamente el sha del gancho anterior al commit
+(`git show 6f0feb3b^:.githooks/pre-commit | sha256sum` == `bd89ec30...`).
+
+Dos dias con el 77 % del aparato de verificacion apagado, invisible porque el job ya estaba rojo por
+otras causas: **un job rojo absorbe reds nuevos gratis**. Coste colateral ya pagado: TASK-0349 y
+TASK-0352 se dieron por rojos vivos cuando sus pasos llevan dos dias sin ejecutarse.
+
+Y el dato que mas pesa para la metodologia: **este defecto sobrevivio a una review adversarial
+completa**. El veredicto del 14-ago audito el gancho vector a vector, con clon limpio y exit codes, y
+no lo vio; tampoco lo vi yo en dos dias. Ninguna lente miraba el CABLEADO de CI, solo la logica del
+gancho. Un defecto que apaga el instrumento de verificacion es invisible para todo verificador que
+mire a traves de ese instrumento.
+
+Remediacion en AC8 (el pin) y AC9 (el negativo que impide la recaida). La review independiente que se
+le debe a r2 sale sobre el commit que incluya AC8+AC9, para que el checker juzgue r2 y el pin en una
+sola pasada, con el arbol limpio y sin claims activos.
