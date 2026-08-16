@@ -28,9 +28,9 @@ $IdentityLiteralExemptions = @{
     "runtime/eventlog.py" = @{
         Reason = "Legacy key fallbacks and historical review annotations are compatibility evidence."
         Lines = @{
-            317 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e", "fcfd3ebc250c5fa0477f28cfa8c36c8910231a6836f973267d4a4ebc730d1ab7", "57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
-            469 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e")
-            1254 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e")
+            318 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e", "fcfd3ebc250c5fa0477f28cfa8c36c8910231a6836f973267d4a4ebc730d1ab7", "57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
+            470 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e")
+            1284 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e")
         }
     }
     "runtime/ledger_ops.py" = @{

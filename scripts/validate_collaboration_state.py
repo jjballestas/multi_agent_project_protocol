@@ -1378,7 +1378,7 @@ def validate_protocol_state_drift(
     if boundaries:
         key_ids = sorted({str(item.get("key_id") or "") for item in boundaries if isinstance(item, dict)})
         validation.warn(
-            f"Runtime event auth rotation boundary: key_unavailable={len(boundaries)} key_ids={key_ids}"
+            f"Runtime event auth verification boundary: unverifiable={len(boundaries)} key_ids={key_ids}"
         )
     if drift.get("has_drift"):
         paths = drift_paths(drift)

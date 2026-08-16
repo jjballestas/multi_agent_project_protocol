@@ -145,6 +145,20 @@ def rotated_cfg(root: Path) -> dict[str, Any]:
     path = root / "secrets/eventauth-codex-v2.key"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("b" * 64 + "\n", encoding="ascii")
+    registry = root / "Area_comun" / "protocol" / "EVENT_AUTH_KEY_REGISTRY.json"
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                "keys": {
+                    "codex:v1": {"actor": "Codex", "status": "retired", "valid_through_seq": 1009},
+                    "codex:v2": {"actor": "Codex", "status": "active", "valid_through_seq": None},
+                },
+            }
+        ),
+        encoding="ascii",
+    )
     return config
 
 
@@ -193,13 +207,31 @@ def case_attested_rotation_population() -> dict[str, Any]:
         bad_state = replay_events([bad_present], None, config, root)
         assert replay_exit(bad_state) == 1
         assert bad_state["rejections"][0]["reason"] == "invalid_signature"
+
+        other_actor = sign_with(mkevent(1, "other-actor"), "codex:v2", "b" * 64)
+        other_actor["actor"] = "Arquitecto"
+        other_actor["event_auth"]["signature"] = event_signature(other_actor, "b" * 64)
+        other_actor_state = replay_events([other_actor], None, config, root)
+        assert replay_exit(other_actor_state) == 1
+        assert other_actor_state["rejections"][0]["reason"] == "key_actor_mismatch"
+
+        late_v1 = sign_with(mkevent(1010, "late-v1"), "codex:v1", "a" * 64)
+        late_v1_state = replay_events([late_v1], None, config, root)
+        assert replay_exit(late_v1_state) == 1
+        assert late_v1_state["rejections"][0]["reason"] == "key_outside_validity"
         return {
             "case": "attested-rotation-population",
             "status": "pass",
             "population": 1009,
             "key_unavailable": len(boundaries),
             "invalid_signature": 0,
-            "exit_codes": {"declared_v1": 0, "undeclared_unknown": 1, "bad_present": 1},
+            "exit_codes": {
+                "registered_v1": 0,
+                "undeclared_unknown": 1,
+                "bad_present": 1,
+                "own_key_as_other_actor": 1,
+                "retired_key_after_boundary": 1,
+            },
         }
     finally:
         remove_root_temp_dir(root, strict=True)

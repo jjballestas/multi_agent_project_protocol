@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "governance": {
+    "change_control": "claim + task trailer + independent review",
+    "material_in_repository": false
+  },
+  "keys": {
+    "analista-hmac:v1": {
+      "actor": "Analista",
+      "status": "active",
+      "valid_through_seq": null
+    },
+    "arquitecto-hmac:v1": {
+      "actor": "Arquitecto",
+      "status": "active",
+      "valid_through_seq": null
+    },
+    "codex-hmac:v1": {
+      "actor": "Codex",
+      "status": "active",
+      "valid_through_seq": null
+    },
+    "runtime-hmac:v1": {
+      "actor": "runtime",
+      "status": "active",
+      "valid_through_seq": null
+    }
+  }
+}

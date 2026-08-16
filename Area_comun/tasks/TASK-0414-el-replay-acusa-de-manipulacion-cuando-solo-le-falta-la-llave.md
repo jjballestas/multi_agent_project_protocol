@@ -108,3 +108,17 @@ declared v1 `0`; undeclared nonexistent key id with a false signature `1`; prese
 false signature `1` (`invalid_signature`). The superseded actor-attestation discriminator from
 `be3edb87` is reverted. `actor_auth` does not have the same actor-based lookup defect: it checks the
 declared `keyid` against the actor binding and then indexes the public-key registry by that exact id.
+
+## Remediation r3 - governed versioned key registry
+
+`Area_comun/protocol/EVENT_AUTH_KEY_REGISTRY.json` is the versioned, material-free authority for
+event-auth key existence, actor identity, and lifetime. Runtime configuration may supply secret
+material for a registered key, but it cannot create an identity. A registered key without locally
+resolvable material is `unresolved_key` and non-fatal; an unregistered id, wrong actor, event after
+`valid_through_seq`, or bad signature with material present remains fatal.
+
+The drift CLI publishes the complete archive-inclusive boundary cardinal and key ids. The 1,009
+event population remains non-fatal with zero invalid signatures. Counterproof exit codes are:
+registered historical key `0`; unregistered id `1`; bad present signature `1`; one live key used as
+another actor `1`; retired key after its temporal boundary `1`. Registry changes are a governed
+surface: claim, TASK trailer, and independent review are required; no secret material is stored.

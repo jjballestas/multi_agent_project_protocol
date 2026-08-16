@@ -31,6 +31,7 @@ SECRET_DIRS = {"secrets", ".protocol-secrets"}
 EVENT_AUTH_UNVERIFIABLE_REASONS = {"unresolved_key", "missing_key", "key_unavailable"}
 EVENT_AUTH_TAMPER_REASONS = {"invalid_signature", "missing_signature"}
 EVENT_AUTH_ROTATION_DECLARATION = "event_auth.key_rotation_declared"
+EVENT_AUTH_KEY_REGISTRY_PATH = Path("Area_comun") / "protocol" / "EVENT_AUTH_KEY_REGISTRY.json"
 ACTOR_AUTH_TAMPER_REASONS = {
     "invalid_signature",
     "keyid_mismatch",
@@ -645,6 +646,28 @@ def event_auth_config_for_key_id(
     return None
 
 
+def event_auth_key_registry(config: dict[str, Any] | None, *, root: Path | None = None) -> dict[str, dict[str, Any]]:
+    """Return the versioned identity/lifetime registry, or configured keys for legacy instances."""
+    if root is not None:
+        path = root.resolve() / EVENT_AUTH_KEY_REGISTRY_PATH
+        if path.exists():
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8-sig"))
+            except (OSError, json.JSONDecodeError):
+                return {}
+            keys = payload.get("keys") if isinstance(payload, dict) else None
+            return {str(key): value for key, value in (keys or {}).items() if isinstance(value, dict)}
+    derived: dict[str, dict[str, Any]] = {}
+    keys = event_auth_runtime_config(config, root).get("keys") or {}
+    if isinstance(keys, dict):
+        for actor, entry in keys.items():
+            if not isinstance(entry, dict):
+                continue
+            key_id = str(entry.get("key_id") or f"{actor}:local")
+            derived[key_id] = {"actor": str(actor), "status": "active", "valid_through_seq": None}
+    return derived
+
+
 def signable_event(event: dict[str, Any]) -> dict[str, Any]:
     payload = deepcopy(event)
     payload.pop("event_auth", None)
@@ -695,17 +718,24 @@ def verify_event_auth(
     key_id = str(auth.get("key_id") or "")
     if not key_id:
         return {"valid": False, "reason": "missing_key_id"}
+    registry_entry = event_auth_key_registry(config, root=root).get(key_id)
+    if registry_entry is None:
+        return {"valid": False, "reason": "unknown_key_id", "key_id": key_id}
+    registered_actor = str(registry_entry.get("actor") or "")
+    if not registered_actor or registered_actor != str(event.get("actor") or ""):
+        return {"valid": False, "reason": "key_actor_mismatch", "key_id": key_id}
+    valid_through = registry_entry.get("valid_through_seq")
+    if valid_through is not None and int(event.get("seq") or 0) > int(valid_through):
+        return {"valid": False, "reason": "key_outside_validity", "key_id": key_id}
     key_config = event_auth_config_for_key_id(config or {}, key_id, root=root)
     if key_config is None:
-        if key_id in (declared_unavailable_key_ids or set()):
-            return {"valid": False, "reason": "key_unavailable", "key_id": key_id}
-        return {"valid": False, "reason": "unknown_key_id", "key_id": key_id}
+        return {"valid": False, "reason": "unresolved_key", "key_id": key_id}
     try:
         secret = resolve_event_auth_secret(key_config, root=root, config=config or {})
     except EventAuthSecretResolutionError:
-        return {"valid": False, "reason": "unresolved_key"}
+        return {"valid": False, "reason": "unresolved_key", "key_id": key_id}
     if not secret:
-        return {"valid": False, "reason": "missing_key"}
+        return {"valid": False, "reason": "missing_key", "key_id": key_id}
     expected = event_signature(event, secret)
     if not hmac.compare_digest(signature, expected):
         return {"valid": False, "reason": "invalid_signature"}
@@ -715,7 +745,7 @@ def verify_event_auth(
 def attested_unavailable_event_auth_key_ids(
     events: list[dict[str, Any]], config: dict[str, Any] | None, *, root: Path | None = None
 ) -> set[str]:
-    """Collect rotation boundaries only from independently verifiable declarations."""
+    """Legacy declaration reader retained for compatibility; the versioned registry is authoritative."""
     declared: set[str] = set()
     for event in events:
         if str(event.get("type") or "") != EVENT_AUTH_ROTATION_DECLARATION:
@@ -742,13 +772,13 @@ def event_auth_verification_boundaries(
             root=root,
             declared_unavailable_key_ids=declared,
         )
-        if result.get("reason") == "key_unavailable":
+        if result.get("reason") in EVENT_AUTH_UNVERIFIABLE_REASONS:
             boundaries.append(
                 {
                     "seq": event.get("seq"),
                     "actor": event.get("actor"),
                     "key_id": result.get("key_id"),
-                    "status": "key_unavailable",
+                    "status": result.get("reason"),
                 }
             )
     return boundaries

@@ -1224,6 +1224,9 @@ def main(argv: list[str] | None = None) -> int:
     drift = protocol_state_drift(args.root)
     verdict = "CLEAN" if drift.get("has_drift") is False else "DRIFT"
     print(f"PROTOCOL_STATE_DRIFT verdict={verdict} up_to_seq={drift.get('up_to_seq')}")
+    boundaries = drift.get("event_auth_boundaries") or []
+    boundary_key_ids = sorted({str(item.get("key_id") or "") for item in boundaries if isinstance(item, dict)})
+    print(f"EVENT_AUTH_BOUNDARIES count={len(boundaries)} key_ids={boundary_key_ids}")
     for entry in drift.get("entries") or []:
         print(f"DRIFT path={entry.get('path')}")
     return _drift_exit_code(drift)
