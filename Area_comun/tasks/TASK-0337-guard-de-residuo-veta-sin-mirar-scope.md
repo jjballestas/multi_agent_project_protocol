@@ -1,7 +1,7 @@
 ---
 id: TASK-0337
 title: El guard de residuo veta sin mirar scope -- gemelo de TASK-0331
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md
