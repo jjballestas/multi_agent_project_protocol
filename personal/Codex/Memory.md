@@ -6995,3 +6995,9 @@ ratified its own work.
 - The broad exec-lease suite remains red on three process-liveness controls that also fail at clean
   baseline `2636eb9a`; the TASK-0337-specific extracted residue contract passes. Delivery remains
   pending the governed in_review transaction and self-contained Arquitecto handoff.
+# 2026-08-16 - TASK-0337 H-1 implementation committed
+
+- Maker commit `f2de3ad7` exempts `personal/<Peer>/**` owned residue in the unresolved-scope branch while every non-owned residue remains a global veto there.
+- The permanent contract covers flat and nested instances, resolved and unresolved scopes, and kills a mutant that removes only the unresolved-branch exemption.
+- Full mailbox retry cases and falsification inventory passed. The broad exec-lease suite still reported its pre-existing process-liveness failures; the two residue expectations affected by H-1 were updated and pass in isolation.
+- Hub encoding, neutrality, and collaboration gates exited 0. TASK-0337 remains maker-owned pending governed delivery and independent review; Codex has not reviewed or ratified the work.

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "38b950f5778dda5cf7f7ffc43586a7c6fc0d24f98836d75b3f4b125a8c3e3596",
+  "canonical_hash": "793ac8599e76377bedf3f3db1bae28946ddcdaade76b5e1240c0401860a3f3da",
   "integrity": {
-    "canonical_hash": "38b950f5778dda5cf7f7ffc43586a7c6fc0d24f98836d75b3f4b125a8c3e3596",
+    "canonical_hash": "793ac8599e76377bedf3f3db1bae28946ddcdaade76b5e1240c0401860a3f3da",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "456d2bda2f0332267fef86232cebe3cfcbea3dec55f0a93ace633e94c9285bee",
-    "signature": "cf563f9a1518d8c1a9f446bebe2dd274979e83c54f09e9089105063285fc49d9",
-    "up_to_seq": 9507
+    "prev_hash": "11d926233fcd4446df44f6e5a8730ccfa38a23a15340795786cfced030f3d5d5",
+    "signature": "1e49915a2fc562ff1fe5e1897a86cb696a84f44f61d9b8dc6abf0fdcca288850",
+    "up_to_seq": 9515
   },
   "state": {
     "aggregate_versions": {
@@ -3825,7 +3825,7 @@
       "TASK-0334": 21,
       "TASK-0335": 33,
       "TASK-0336": 62,
-      "TASK-0337": 23,
+      "TASK-0337": 31,
       "TASK-0338": 2,
       "TASK-0339": 1,
       "TASK-0340": 29,
@@ -3918,7 +3918,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8836,
+    "events_applied": 8844,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8733,8 +8733,16 @@
       "codex:task0336:remediation5:work-release:20260809T045600Z": 8295,
       "codex:task0337:claim-acquire:20260816T093000Z": 9463,
       "codex:task0337:h1:claim-acquire:20260816T040556Z": 9505,
+      "codex:task0337:h1:delivery-acquire:20260816T042954Z": 9511,
+      "codex:task0337:h1:delivery-release:20260816T043046Z": 9513,
       "codex:task0337:h1:expanded:20260816T042207Z": 9507,
+      "codex:task0337:h1:in-review:20260816T043046Z": 9512,
+      "codex:task0337:h1:memory-expanded:20260816T042832Z": 9509,
+      "codex:task0337:h1:msgfix-claim:20260816T043456Z": 9514,
+      "codex:task0337:h1:msgfix-release:20260816T043557Z": 9515,
+      "codex:task0337:h1:release-delivery:20260816T042954Z": 9510,
       "codex:task0337:h1:release-expand:20260816T042207Z": 9506,
+      "codex:task0337:h1:release-memory:20260816T042832Z": 9508,
       "codex:task0337:neutrality-claim-acquire:20260816T101000Z": 9465,
       "codex:task0337:neutrality-orphan-release:20260816T004702Z": 9471,
       "codex:task0337:orphan-release:20260816T004702Z": 9470,
@@ -12758,5 +12766,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9507
+  "up_to_seq": 9515
 }
