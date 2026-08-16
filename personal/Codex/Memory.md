@@ -16,6 +16,9 @@ Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures c
 - Focused signature suites, falsification inventory 76/76, collaboration, encoding, and
   domain-neutrality gates exited 0. TASK-0414 remains maker-owned pending governed
   delivery and independent Analista review.
+- Governed delivery commit `ad62a7dc` moves TASK-0414 to `in_review`, releases every
+  Codex claim, and publishes the self-contained Arquitecto handoff. Codex did not review
+  or ratify the implementation.
 
 ## 2026-08-16 - Closure response published
 
