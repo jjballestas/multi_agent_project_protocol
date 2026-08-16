@@ -217,23 +217,6 @@ def main() -> int:
             0,
             "non-reviewed task with absent personal deliverable",
         )
-        gate_path = nonreviewed_root / "scripts" / "check_commit_trailers.py"
-        gate_text = gate_path.read_text(encoding="utf-8")
-        mutation = "def claim_gate_applicable(root: Path) -> bool:\n    \"\"\"The claim gate applies only where Git can actually create a commit.\"\"\"\n    return True"
-        protected = "def claim_gate_applicable(root: Path) -> bool:\n    \"\"\"The claim gate applies only where Git can actually create a commit.\"\"\"\n    try:\n        return subprocess.check_output(\n            [\"git\", \"rev-parse\", \"--is-inside-work-tree\"],\n            cwd=root,\n            text=True,\n            stderr=subprocess.DEVNULL,\n        ).strip() == \"true\"\n    except (OSError, subprocess.CalledProcessError):\n        return False"
-        if protected not in gate_text:
-            raise AssertionError("no-repository applicability mutation target missing")
-        gate_path.write_text(gate_text.replace(protected, mutation, 1), encoding="ascii")
-        mutated = run(
-            [
-                sys.executable,
-                "-c",
-                "import importlib.util,pathlib,sys; p=pathlib.Path(sys.argv[1]); s=importlib.util.spec_from_file_location('gate_mutation', p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); raise SystemExit(1 if m.claim_gate_applicable(pathlib.Path.cwd()) else 0)",
-                str(gate_path),
-            ],
-            Path(tmp),
-        )
-        require(mutated, 1, "no-repository applicability mutation")
 
         masking_root = Path(tmp) / "masking"
         clone_with_fix(source, masking_root)

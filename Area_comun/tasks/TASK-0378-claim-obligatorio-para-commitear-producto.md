@@ -147,20 +147,22 @@ instancie.
 **Un gate que nunca ha dicho que no, no esta demostrado.** Para cada control, la evidencia es el
 RECHAZO -- no el paso.
 
-## Semantica sin repositorio -- remediacion de paridad 2026-08-16
+## Correccion de evidencia de paridad 2026-08-16
 
-La semantica elegida es **inaplicable**. El claim gate controla la creacion de un commit y necesita
-la identidad Git del actor para compararla con el owner del claim. Fuera de un work tree Git no se
-puede crear ese commit, asi que no existe una operacion de producto que el gate pueda autorizar o
-rechazar. Fallar cerrado en una copia o snapshot sin work tree no anade seguridad al commit real:
-este ya pasa por el pre-commit en su work tree y por el commit-msg autoritativo. En cambio, el
-rechazo fuera de repo rompe arneses y snapshots que solo ejecutan validacion.
+La exencion sin repositorio era codigo muerto: `main()` obtiene antes el contexto mediante
+`instance_context()`, y esa operacion falla fuera de un work tree. Por ello,
+`claim_gate_applicable()` no podia devolver `False` en ningun camino de produccion y fue eliminada
+junto con sus dos ramas. `instance_context()` queda sin cambios; cualquier tolerancia futura
+requiere una tarea separada porque podria abrir el claim gate.
 
-El limite es deliberado: si Git reconoce el contexto como work tree, la identidad sigue siendo
-obligatoria y la ausencia de actor no concede paso. La excepcion solo cubre el contexto que Git no
-reconoce como work tree; no se deriva de que `commit_actor` sea `None`. El caso `non-reviewed task
-with absent personal deliverable` conserva exit 0 y ahora incluye un negativo por mutacion: fuerza
-aplicabilidad sin repo y exige que la misma corrida falle.
+El caso `non-reviewed task with absent personal deliverable` permanece verde por la identidad Git
+que configura el arnes, no por la exencion eliminada. MUTANT B, que elimina la exencion, conserva
+el mismo resultado verde. El negativo anterior tampoco volvia a ejecutar la corrida: solo exigia
+exit 1 al importar un mutante, resultado que tambien producian un error de sintaxis o la ausencia
+de la funcion. Por tanto, no acreditaba que la mutacion cambiara el veredicto del instrumento real.
+
+Medicion posterior al borrado: MUTANT B queda identico a produccion y el caso conserva exit 0;
+el paso 10 completo (`run_hook_fullmode_inventory_cases.py`) conserva exit 0 y su resumen `OK`.
 
 
 ## RECHAZO 2026-08-16 (Arquitecto, capability reviewer) -- la entrega apago el aparato de verificacion

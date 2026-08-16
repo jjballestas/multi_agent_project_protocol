@@ -104,19 +104,6 @@ def commit_actor(root: Path) -> str | None:
     return actor or None
 
 
-def claim_gate_applicable(root: Path) -> bool:
-    """The claim gate applies only where Git can actually create a commit."""
-    try:
-        return subprocess.check_output(
-            ["git", "rev-parse", "--is-inside-work-tree"],
-            cwd=root,
-            text=True,
-            stderr=subprocess.DEVNULL,
-        ).strip() == "true"
-    except (OSError, subprocess.CalledProcessError):
-        return False
-
-
 def has_active_claim(instance_root: Path, task_id: str | None, actor: str | None, product_paths: list[str]) -> bool:
     return claim_state(instance_root, task_id, actor, product_paths) == "owned"
 
@@ -158,14 +145,13 @@ def validate(root: Path, instance_root: Path, prefix: str, message: str) -> list
         errors.append(f"unknown Task-Id {task_id}; use an id from TASK_INDEX or TASK_INDEX_ARCHIVE")
     if task_id != "none" and task_id in known and staged_product(root, prefix):
         actor = commit_actor(root)
-        if claim_gate_applicable(root):
-            state = claim_state(instance_root, task_id, actor, staged_product_paths(root, prefix))
-            if state == "unavailable":
-                errors.append(f"product commit rejected: cannot determine commit actor for Task-Id {task_id}; claim ownership cannot be verified")
-            elif state == "other":
-                errors.append(f"product commit rejected: Task-Id {task_id} is covered by an active claim owned by another actor, not commit actor {actor}")
-            elif state == "missing":
-                errors.append(f"product commit rejected: Task-Id {task_id} has no active claim covering every staged product path for commit actor {actor}")
+        state = claim_state(instance_root, task_id, actor, staged_product_paths(root, prefix))
+        if state == "unavailable":
+            errors.append(f"product commit rejected: cannot determine commit actor for Task-Id {task_id}; claim ownership cannot be verified")
+        elif state == "other":
+            errors.append(f"product commit rejected: Task-Id {task_id} is covered by an active claim owned by another actor, not commit actor {actor}")
+        elif state == "missing":
+            errors.append(f"product commit rejected: Task-Id {task_id} has no active claim covering every staged product path for commit actor {actor}")
     if task_id == "none":
         ops = trailers.get("Ops-Reason", [])
         if len(ops) != 1 or not OPS.fullmatch(ops[0]):
@@ -188,8 +174,6 @@ def main() -> int:
         if not staged_product(root, prefix):
             return 0
         actor = commit_actor(root)
-        if not claim_gate_applicable(root):
-            return 0
         state = claim_state(instance_root, None, actor, staged_product_paths(root, prefix))
         if state == "owned":
             return 0

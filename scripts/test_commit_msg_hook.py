@@ -68,7 +68,6 @@ def main() -> int:
         shutil.copy2(ROOT / "scripts/check_commit_trailers.py", copied_gate)
         gate = load_gate(copied_gate)
         assert gate.commit_actor(outside_repo) is None
-        assert gate.claim_gate_applicable(outside_repo) is False
         assert gate.claim_state(outside_repo, "TASK-0279", None, ["scripts/work.py"]) == "unavailable"
 
     cases = [
