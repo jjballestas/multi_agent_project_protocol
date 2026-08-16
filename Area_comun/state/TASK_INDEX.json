@@ -736,16 +736,6 @@
             "type": "implementation"
         },
         {
-            "file": "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md",
-            "id": "TASK-0396",
-            "owner": "Codex",
-            "reviewer": "Analista",
-            "risk": "high",
-            "status": "done",
-            "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto",
-            "type": "implementation"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
             "id": "TASK-0397",
             "owner": "Codex",

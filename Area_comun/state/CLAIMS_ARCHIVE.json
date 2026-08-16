@@ -52908,6 +52908,378 @@
             "status": "released",
             "task_id": "TASK-0396",
             "updated_at": "2026-08-15T20:38:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260815-220250-prune-arquitecto",
+            "expires_at": "2026-08-15",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-08-15T22:02:50Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-15T22:02:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0337-aterrizaje",
+            "expires_at": "2026-08-16T04:30:53Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0337-aterrizaje",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/scan_domain_neutrality.py",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:30:53Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T01:30:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0378-rechazo",
+            "expires_at": "2026-08-16T05:46:36Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0378-rechazo",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:46:36Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T01:46:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0397-reject",
+            "expires_at": "2026-08-16T04:31:18Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0397-reject",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md"
+            ],
+            "started_at": "2026-08-16T00:31:18Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T00:31:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-lote-nova",
+            "expires_at": "2026-08-16T00:05:01Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-lote-nova",
+                "Area_comun/state/TASK_INDEX.json#TASK-0396",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0396",
+                "Area_comun/tasks/TASK-0396-el-fixture-de-arbol-de-procesos-no-arranca-donde-la-directiva-bloquea-scripts.md",
+                "Area_comun/tasks/TASK-0337-el-guard-de-residuo-veta-sin-mirar-scope.md\nArea_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0404",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0404",
+                "Area_comun/tasks/TASK-0404-la-rama-de-fallo-espera-sin-cota-y-el-diagnostico-no-se-imprime.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0405",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0405",
+                "Area_comun/tasks/TASK-0405-la-exencion-de-area-personal-ancla-en-la-raiz-del-repositorio.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0407",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0407",
+                "Area_comun/tasks/TASK-0407-el-marcador-de-parada-no-para-hasta-agotar-el-lote.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md"
+            ],
+            "started_at": "2026-08-15T23:05:01Z",
+            "status": "released",
+            "task_id": "TASK-0396",
+            "updated_at": "2026-08-15T23:05:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-prom0397",
+            "expires_at": "2026-08-15T23:08:22Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-prom0397",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md"
+            ],
+            "started_at": "2026-08-15T22:08:22Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-15T22:08:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337",
+            "expires_at": "2026-08-16T15:30:00Z",
+            "notes": "Implement scope-aware pre-exec residue guard, circular-deadlock proof, and intersection diagnostics.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T09:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T09:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-neutrality",
+            "expires_at": "2026-08-16T15:30:00Z",
+            "notes": "Mechanical identity-exemption coordinate update caused by the scoped harness insertion.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T10:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T10:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-r2",
+            "expires_at": "2026-08-16T17:25:00Z",
+            "notes": "Complete AC6 paired behavior and AC10 flat/nested instance-prefix proof.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-r2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/scan_domain_neutrality.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T11:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T11:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-r2-delivery",
+            "expires_at": "2026-08-16T14:25:00Z",
+            "notes": "Governed TASK-0337 r2 delivery and independent-review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-r2-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0337-r2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T12:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T12:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-r2-v2",
+            "expires_at": "2026-08-16T17:50:00Z",
+            "notes": "Complete AC6 and AC10, including the existing extracted-function contract fixture.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-r2-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/scan_domain_neutrality.py",
+                "Area_comun/protocol/FALSIFICATION_CONTRACTS.json",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T11:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T11:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-pin",
+            "expires_at": "2026-08-16T07:02:43Z",
+            "notes": "Remediate TASK-0378 AC8 and AC9: update the pre-commit pin and add an executed mismatch negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-pin",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T02:02:43Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T02:02:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-pin-delivery",
+            "expires_at": "2026-08-16T07:09:12Z",
+            "notes": "Publish TASK-0378 AC8/AC9 handoff, move to independent review, and release maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-pin-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-pin.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T02:09:12Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T02:09:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-pin-msgfix",
+            "expires_at": "2026-08-16T03:14:00Z",
+            "notes": "Correct required HANDOFF question and context references after validator rejection.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-pin-msgfix",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-pin.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T02:14:00Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T02:14:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397",
+            "expires_at": "2026-08-16T02:19:07Z",
+            "notes": "Replace handwritten workflow PowerShell inventory cardinalities with property-based and mutation-proved coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "examples/neutrality_scan_cases/run_powershell_host_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T22:19:07Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-15T22:19:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-delivery",
+            "expires_at": "2026-08-16T00:26:18Z",
+            "notes": "Publish TASK-0397 maker handoff and transition the task to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0397-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0397.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-15T22:26:18Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-15T22:26:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1",
+            "expires_at": "2026-08-16T04:47:02Z",
+            "notes": "Remediate the stale literal assertion boundary and census the same divergence shape.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "examples/neutrality_scan_cases/run_powershell_host_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T00:47:02Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T00:47:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1-delivery",
+            "expires_at": "2026-08-16T05:30:52Z",
+            "notes": "Publish remediation evidence and transition TASK-0397 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0397-remediation-1-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0397-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:30:52Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T01:30:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1-memory",
+            "expires_at": "2026-08-16T02:40:04Z",
+            "notes": "Persist TASK-0397 remediation delivery after commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:40:04Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T01:40:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1-msgfix",
+            "expires_at": "2026-08-16T02:35:32Z",
+            "notes": "Add required compact-mailbox question field.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1-msgfix",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0397-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:35:32Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T01:35:32Z"
         }
     ]
 }
