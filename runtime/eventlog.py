@@ -28,8 +28,9 @@ SECRET_DIRS = {"secrets", ".protocol-secrets"}
 # DECISION-0046: distinguish 'verification unavailable here' (no secret material in this
 # checkout -> environment, NOT a security finding) from real tamper. UNVERIFIABLE reasons must
 # NOT mutate the materialized state, so the canonical state hash is secret-independent.
-EVENT_AUTH_UNVERIFIABLE_REASONS = {"unresolved_key", "missing_key"}
+EVENT_AUTH_UNVERIFIABLE_REASONS = {"unresolved_key", "missing_key", "key_unavailable"}
 EVENT_AUTH_TAMPER_REASONS = {"invalid_signature", "missing_signature"}
+EVENT_AUTH_ROTATION_DECLARATION = "event_auth.key_rotation_declared"
 ACTOR_AUTH_TAMPER_REASONS = {
     "invalid_signature",
     "keyid_mismatch",
@@ -629,6 +630,21 @@ def signing_key_id(config: dict[str, Any], actor: str, *, root: Path | None = No
     return str(auth.get("key_id") or f"{actor}:local")
 
 
+def event_auth_config_for_key_id(
+    config: dict[str, Any], key_id: str, *, root: Path | None = None
+) -> dict[str, Any] | None:
+    """Resolve verification material by the identifier carried by the event."""
+    event_auth = event_auth_runtime_config(config, root)
+    keys = event_auth.get("keys") or {}
+    if not isinstance(keys, dict):
+        return None
+    for actor, entry in keys.items():
+        candidate = agent_auth_config(config, str(actor), root=root)
+        if str(candidate.get("key_id") or f"{actor}:local") == key_id:
+            return candidate
+    return None
+
+
 def signable_event(event: dict[str, Any]) -> dict[str, Any]:
     payload = deepcopy(event)
     payload.pop("event_auth", None)
@@ -661,7 +677,13 @@ def sign_event(event: dict[str, Any], config: dict[str, Any], *, root: Path | No
     return signed
 
 
-def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None, *, root: Path | None = None) -> dict[str, Any]:
+def verify_event_auth(
+    event: dict[str, Any],
+    config: dict[str, Any] | None,
+    *,
+    root: Path | None = None,
+    declared_unavailable_key_ids: set[str] | None = None,
+) -> dict[str, Any]:
     if not event_auth_enabled(config):
         return {"valid": True, "reason": "event_auth_disabled"}
     auth = event.get("event_auth")
@@ -670,8 +692,16 @@ def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None, *, r
     signature = str(auth.get("signature") or "")
     if not signature:
         return {"valid": False, "reason": "missing_signature"}
+    key_id = str(auth.get("key_id") or "")
+    if not key_id:
+        return {"valid": False, "reason": "missing_key_id"}
+    key_config = event_auth_config_for_key_id(config or {}, key_id, root=root)
+    if key_config is None:
+        if key_id in (declared_unavailable_key_ids or set()):
+            return {"valid": False, "reason": "key_unavailable", "key_id": key_id}
+        return {"valid": False, "reason": "unknown_key_id", "key_id": key_id}
     try:
-        secret = signing_secret(config or {}, str(event.get("actor") or ""), root=root)
+        secret = resolve_event_auth_secret(key_config, root=root, config=config or {})
     except EventAuthSecretResolutionError:
         return {"valid": False, "reason": "unresolved_key"}
     if not secret:
@@ -680,6 +710,48 @@ def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None, *, r
     if not hmac.compare_digest(signature, expected):
         return {"valid": False, "reason": "invalid_signature"}
     return {"valid": True, "reason": "valid"}
+
+
+def attested_unavailable_event_auth_key_ids(
+    events: list[dict[str, Any]], config: dict[str, Any] | None, *, root: Path | None = None
+) -> set[str]:
+    """Collect rotation boundaries only from independently verifiable declarations."""
+    declared: set[str] = set()
+    for event in events:
+        if str(event.get("type") or "") != EVENT_AUTH_ROTATION_DECLARATION:
+            continue
+        if verify_event_auth(event, config, root=root).get("valid") is not True:
+            continue
+        payload = event.get("payload")
+        key_ids = payload.get("unavailable_key_ids") if isinstance(payload, dict) else None
+        if not isinstance(key_ids, list):
+            continue
+        declared.update(str(item).strip() for item in key_ids if str(item).strip())
+    return declared
+
+
+def event_auth_verification_boundaries(
+    events: list[dict[str, Any]], config: dict[str, Any] | None, *, root: Path | None = None
+) -> list[dict[str, Any]]:
+    declared = attested_unavailable_event_auth_key_ids(events, config, root=root)
+    boundaries: list[dict[str, Any]] = []
+    for event in sorted(events, key=lambda item: int(item.get("seq") or 0)):
+        result = verify_event_auth(
+            event,
+            config,
+            root=root,
+            declared_unavailable_key_ids=declared,
+        )
+        if result.get("reason") == "key_unavailable":
+            boundaries.append(
+                {
+                    "seq": event.get("seq"),
+                    "actor": event.get("actor"),
+                    "key_id": result.get("key_id"),
+                    "status": "key_unavailable",
+                }
+            )
+    return boundaries
 
 
 def checkpoint_runtime_config(config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
@@ -910,11 +982,17 @@ def replay_events(
     state.setdefault("idempotency_keys", {})
     state.setdefault("events_applied", 0)
     state.setdefault("rejections", [])
+    declared_unavailable_key_ids = attested_unavailable_event_auth_key_ids(events, config, root=root)
 
     for event in sorted(events, key=lambda item: int(item.get("seq") or 0)):
         event_type = str(event.get("type") or "")
         aggregate_id = str(event.get("aggregate_id") or "")
-        auth_result = verify_event_auth(event, config, root=root)
+        auth_result = verify_event_auth(
+            event,
+            config,
+            root=root,
+            declared_unavailable_key_ids=declared_unavailable_key_ids,
+        )
         actor_auth_result = verify_actor_auth(event, config, root)
         if (
             auth_result.get("valid") is not True

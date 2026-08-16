@@ -1336,15 +1336,6 @@ def validate_eventlog_agent_signatures(root: Path, config: dict[str, Any] | None
     if not runtime_state_has_content(root):
         return
     result = validate_agent_signatures(events_in_log_order(root), config)
-    if result.get("boundaries"):
-        unavailable_key_ids = sorted(
-            {str(item.get("key_id") or "<missing>") for item in result["boundaries"] if isinstance(item, dict)}
-        )
-        validation.warn(
-            "Runtime event log agent signature boundary: "
-            f"key_unavailable={result.get('key_unavailable', 0)} "
-            f"key_ids={unavailable_key_ids}"
-        )
     if result.get("valid") is not True:
         validation.fail(f"Runtime event log agent signatures invalid: {result.get('findings')}")
 
@@ -1383,6 +1374,12 @@ def validate_protocol_state_drift(
     except ProtocolMaterializationError as exc:
         validation.fail(f"Runtime protocol state drift check failed: {exc}")
         return
+    boundaries = drift.get("event_auth_boundaries") or []
+    if boundaries:
+        key_ids = sorted({str(item.get("key_id") or "") for item in boundaries if isinstance(item, dict)})
+        validation.warn(
+            f"Runtime event auth rotation boundary: key_unavailable={len(boundaries)} key_ids={key_ids}"
+        )
     if drift.get("has_drift"):
         paths = drift_paths(drift)
         if protocol_state_enforcement_enabled(config):

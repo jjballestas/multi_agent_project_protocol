@@ -43,9 +43,9 @@ IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
     "runtime/eventlog.py": {
         "reason": "Legacy key fallbacks and historical review annotations are compatibility evidence.",
         "lines": {
-            316: (_EXEMPT_TERM_2, _EXEMPT_TERM_3, _EXEMPT_TERM_1),
-            468: (_EXEMPT_TERM_2,),
-            1176: (_EXEMPT_TERM_2,),
+            317: (_EXEMPT_TERM_2, _EXEMPT_TERM_3, _EXEMPT_TERM_1),
+            469: (_EXEMPT_TERM_2,),
+            1254: (_EXEMPT_TERM_2,),
         },
     },
     "runtime/ledger_ops.py": {

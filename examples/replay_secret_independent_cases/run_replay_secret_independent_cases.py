@@ -12,7 +12,6 @@ Deterministic: fixed seqs / timestamps / idempotency keys. Exit 0 = all pass.
 
 from __future__ import annotations
 
-import base64
 import json
 import sys
 from copy import deepcopy
@@ -28,12 +27,12 @@ from runtime.eventlog import (  # noqa: E402
     EVENT_AUTH_UNVERIFIABLE_REASONS,
     UNAUTHENTICATED_EVENT,
     canonical_hash,
+    event_signature,
+    event_auth_verification_boundaries,
     replay_events,
     sign_event,
-    attestation_signing_payload,
 )
 from runtime.temp_paths import make_root_temp_dir, remove_root_temp_dir  # noqa: E402
-from runtime.protocol_replay import validate_agent_signatures  # noqa: E402
 
 KEY_REL = "secrets/eventauth-codex.key"
 SECRET = "a" * 64  # deterministic fixture secret
@@ -132,81 +131,78 @@ def case_ac2_tamper_still_rejected() -> dict[str, Any]:
 
 
 def case_ac_constants() -> dict[str, Any]:
-    assert EVENT_AUTH_UNVERIFIABLE_REASONS == {"unresolved_key", "missing_key"}
+    assert EVENT_AUTH_UNVERIFIABLE_REASONS == {"unresolved_key", "missing_key", "key_unavailable"}
     assert EVENT_AUTH_TAMPER_REASONS == {"invalid_signature", "missing_signature"}
     assert not (EVENT_AUTH_UNVERIFIABLE_REASONS & EVENT_AUTH_TAMPER_REASONS)
     return {"case": "AC-constants-partition", "status": "pass"}
 
 
-def agent_signature_cfg(public_keys: dict[str, str]) -> dict[str, Any]:
-    return {
-        "event_state": {
-            "enabled": True,
-            "agent_signatures_enabled": True,
-            "signature_config": {"backend": "local-ed25519", "public_keys": public_keys},
-        },
-        "agent_registry": {"enabled": True, "agents": [{"id": "Codex", "enabled": True}]},
+def rotated_cfg(root: Path) -> dict[str, Any]:
+    config = cfg()
+    config["event_auth"]["keys"] = {
+        "Codex": {"key_id": "codex:v2", "secret_file": "secrets/eventauth-codex-v2.key"}
     }
+    path = root / "secrets/eventauth-codex-v2.key"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("b" * 64 + "\n", encoding="ascii")
+    return config
 
 
-def attestation_event(seq: int, keyid: str, sig: str) -> dict[str, Any]:
-    predicate = {
-        "agent_id": "Codex",
-        "role": "implementer",
-        "timestamp_claimed": "2026-01-01T00:00:00Z",
-        "task_id": "TASK-FIXTURE",
+def sign_with(event: dict[str, Any], key_id: str, secret: str) -> dict[str, Any]:
+    signed = deepcopy(event)
+    signed["event_auth"] = {
+        "method": "hmac-sha256",
+        "key_id": key_id,
+        "signature": event_signature(signed, secret),
     }
-    return {
-        "seq": seq,
-        "type": "agent.attestation",
-        "payload": {
-            "agent_id": "Codex",
-            "subject_digest": "sha256:" + "a" * 64,
-            "predicate": predicate,
-            "verification_backend": "local-ed25519",
-            "signature": {"algorithm": "ed25519", "keyid": keyid, "sig": sig},
-        },
-    }
+    return signed
 
 
-def case_agent_key_boundary_and_tamper() -> dict[str, Any]:
-    from cryptography.hazmat.primitives import serialization
-    from cryptography.hazmat.primitives.asymmetric import ed25519
+def replay_exit(state: dict[str, Any]) -> int:
+    return 1 if state.get("rejections") else 0
 
-    private_key = ed25519.Ed25519PrivateKey.generate()
-    public_key = base64.b64encode(
-        private_key.public_key().public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
-    ).decode("ascii")
-    event = attestation_event(1, "codex:v1", "")
-    event["payload"]["signature"]["sig"] = base64.b64encode(
-        private_key.sign(
-            attestation_signing_payload(event["payload"]["subject_digest"], event["payload"]["predicate"])
+
+def case_attested_rotation_population() -> dict[str, Any]:
+    root = make_root_temp_dir(ROOT, "replay-rotation-")
+    try:
+        config = rotated_cfg(root)
+        population = [sign_with(mkevent(seq, f"v1-{seq}"), "codex:v1", "a" * 64) for seq in range(1, 1010)]
+        declaration = mkevent(
+            1010,
+            "rotation-v2",
+            {"unavailable_key_ids": ["codex:v1"], "replacement_key_id": "codex:v2"},
         )
-    ).decode("ascii")
+        declaration["type"] = "event_auth.key_rotation_declared"
+        declaration = sign_event(declaration, config, root=root)
+        valid_v2 = [sign_event(mkevent(seq, f"v2-{seq}"), config, root=root) for seq in (1011, 1019)]
+        state = replay_events(population + [declaration] + valid_v2, None, config, root)
+        boundaries = event_auth_verification_boundaries(population + [declaration] + valid_v2, config, root=root)
+        assert replay_exit(state) == 0, state.get("rejections")
+        assert len(boundaries) == 1009
+        assert {item.get("key_id") for item in boundaries} == {"codex:v1"}
 
-    population = [deepcopy(event) for _ in range(1009)]
-    for seq, item in enumerate(population, start=1):
-        item["seq"] = seq
-    unavailable_a = validate_agent_signatures(population, agent_signature_cfg({}))
-    unavailable_b = validate_agent_signatures(deepcopy(population), agent_signature_cfg({}))
-    assert unavailable_a["findings"] == unavailable_b["findings"] == [], "AC3 blind comparison precondition"
-    assert unavailable_a["valid"] is True and unavailable_a["key_unavailable"] == 1009
-    assert unavailable_a["invalid_signature"] == 0
-    assert unavailable_a["boundaries"] == unavailable_b["boundaries"], "AC3 boundary must survive equal-artifact comparison"
+        forged = mkevent(1, "forged", {"unavailable_key_ids": ["attacker:v9"]})
+        forged["type"] = "event_auth.key_rotation_declared"
+        forged = sign_with(forged, "attacker:v9", "not-a-real-key")
+        forged_state = replay_events([forged], None, config, root)
+        assert replay_exit(forged_state) == 1
+        assert forged_state["rejections"][0]["reason"] == "unknown_key_id"
 
-    tampered = deepcopy(event)
-    tampered["payload"]["signature"]["sig"] = base64.b64encode(b"0" * 64).decode("ascii")
-    rejected = validate_agent_signatures([tampered], agent_signature_cfg({"codex:v1": public_key}))
-    assert rejected["valid"] is False, "AC4 altered signature with available key must fail closed"
-    assert rejected["invalid_signature"] == 1 and rejected["key_unavailable"] == 0
-    assert rejected["findings"][0]["error"] == "invalid_signature"
-    return {
-        "case": "AC3-AC5-agent-key-boundary-and-tamper",
-        "status": "pass",
-        "population": 1009,
-        "key_unavailable": unavailable_a["key_unavailable"],
-        "invalid_signature": unavailable_a["invalid_signature"],
-    }
+        bad_present = sign_event(mkevent(1, "bad-present"), config, root=root)
+        bad_present["payload"] = {"tampered": True}
+        bad_state = replay_events([bad_present], None, config, root)
+        assert replay_exit(bad_state) == 1
+        assert bad_state["rejections"][0]["reason"] == "invalid_signature"
+        return {
+            "case": "attested-rotation-population",
+            "status": "pass",
+            "population": 1009,
+            "key_unavailable": len(boundaries),
+            "invalid_signature": 0,
+            "exit_codes": {"declared_v1": 0, "undeclared_unknown": 1, "bad_present": 1},
+        }
+    finally:
+        remove_root_temp_dir(root, strict=True)
 
 
 def main() -> int:
@@ -214,7 +210,7 @@ def main() -> int:
         case_ac_constants(),
         case_ac1_secret_independent(),
         case_ac2_tamper_still_rejected(),
-        case_agent_key_boundary_and_tamper(),
+        case_attested_rotation_population(),
     ]
     report = {"schema_version": "replay_secret_independent_cases.v1", "cases": cases}
     print(json.dumps(report, ensure_ascii=True, indent=2))

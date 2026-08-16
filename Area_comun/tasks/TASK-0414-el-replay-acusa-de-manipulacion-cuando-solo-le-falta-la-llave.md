@@ -90,3 +90,21 @@ reproducir **el modo ciego**.
 **No se regenera el snapshot a cero rechazos.** NOVA lo rechazo siendo suyo el error, y se ratifica:
 es el mismo principio que impide reescribir historia publicada. Limpiar el sintoma borraria la
 frontera en vez de declararla.
+
+## Remediation r2 - declared-key event auth
+
+The verifier now selects HMAC material by `event_auth.key_id`, never by the event actor. An absent
+key id is non-fatal only when an independently verifiable event of type
+`event_auth.key_rotation_declared` contains it in `payload.unavailable_key_ids`. A declaration is
+verified with presently configured material before its list is trusted; an unknown key id cannot
+authorize itself. The complete boundary list is returned as the structured
+`protocol_state_drift(...)["event_auth_boundaries"]` field and is also consumed by the canonical
+validator. It is deliberately outside materialized protocol state, so observing the boundary does
+not manufacture drift against a snapshot created while the old key was available.
+
+Measured fixture population: 1,009 v1 events, one v2-signed rotation declaration, and two valid v2
+events. Results: `key_unavailable=1009`, `invalid_signature=0`. Counterproof exit codes are:
+declared v1 `0`; undeclared nonexistent key id with a false signature `1`; present material with a
+false signature `1` (`invalid_signature`). The superseded actor-attestation discriminator from
+`be3edb87` is reverted. `actor_auth` does not have the same actor-based lookup defect: it checks the
+declared `keyid` against the actor binding and then indexes the public-key registry by that exact id.

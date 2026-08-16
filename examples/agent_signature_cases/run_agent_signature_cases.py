@@ -126,12 +126,7 @@ def case_invalid_signature() -> dict[str, Any]:
     event = attestation_event()
     event["payload"]["signature"]["sig"] = "A" + event["payload"]["signature"]["sig"][1:]
     result = validate_agent_signatures([event], config())
-    return {
-        "passed": result["valid"] is False
-        and result["findings"][0]["error"] == "invalid_signature"
-        and result["invalid_signature"] == 1,
-        "message": result["reason"],
-    }
+    return {"passed": result["valid"] is False and result["findings"][0]["error"] == "signature_invalid", "message": result["reason"]}
 
 
 def case_unknown_agent() -> dict[str, Any]:

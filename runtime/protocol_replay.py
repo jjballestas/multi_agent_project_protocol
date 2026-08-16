@@ -26,6 +26,7 @@ try:
         chain_enabled,
         compute_event_prev_hash,
         compute_genesis_prev_hash,
+        event_auth_verification_boundaries,
         read_protocol_config,
     )
     from .temp_paths import make_root_temp_dir, remove_root_temp_dir
@@ -39,6 +40,7 @@ except ImportError:  # pragma: no cover - direct script execution
         chain_enabled,
         compute_event_prev_hash,
         compute_genesis_prev_hash,
+        event_auth_verification_boundaries,
         read_protocol_config,
     )
     from temp_paths import make_root_temp_dir, remove_root_temp_dir
@@ -329,7 +331,6 @@ def validate_agent_signatures(events: list[dict[str, Any]], config: dict[str, An
     agents = agents_by_id(registry)
     sig_config = signature_config(config)
     findings: list[dict[str, Any]] = []
-    boundaries: list[dict[str, Any]] = []
     checked = 0
     for event in events:
         if event.get("type") != "agent.attestation":
@@ -354,14 +355,7 @@ def validate_agent_signatures(events: list[dict[str, Any]], config: dict[str, An
             continue
         public_key = public_key_for_attestation(agent, signature, sig_config)
         if not public_key:
-            boundaries.append(
-                {
-                    "seq": seq,
-                    "agent_id": agent_id,
-                    "key_id": str(signature.get("keyid") or ""),
-                    "status": "key_unavailable",
-                }
-            )
+            findings.append({"seq": seq, "agent_id": agent_id, "error": "public_key_missing"})
             continue
         ok, reason = verify_ed25519_signature(
             public_key,
@@ -369,22 +363,8 @@ def validate_agent_signatures(events: list[dict[str, Any]], config: dict[str, An
             attestation_signing_payload(str(payload["subject_digest"]), payload["predicate"]),
         )
         if not ok:
-            findings.append(
-                {
-                    "seq": seq,
-                    "agent_id": agent_id,
-                    "error": "invalid_signature" if reason == "signature_invalid" else reason,
-                }
-            )
-    return {
-        "valid": not findings,
-        "reason": "agent signatures valid" if not findings else "agent signatures invalid",
-        "findings": findings,
-        "boundaries": boundaries,
-        "checked": checked,
-        "key_unavailable": len(boundaries),
-        "invalid_signature": sum(1 for finding in findings if finding.get("error") == "invalid_signature"),
-    }
+            findings.append({"seq": seq, "agent_id": agent_id, "error": reason})
+    return {"valid": not findings, "reason": "agent signatures valid" if not findings else "agent signatures invalid", "findings": findings, "checked": checked}
 
 
 def anchor_payload(event: dict[str, Any]) -> dict[str, Any]:
@@ -1223,6 +1203,7 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
         "entries": entries,
         "hot_hash": canonical_hash(hot),
         "replay_hash": canonical_hash(materialized),
+        "event_auth_boundaries": event_auth_verification_boundaries(events, config, root=root),
     }
 
 
