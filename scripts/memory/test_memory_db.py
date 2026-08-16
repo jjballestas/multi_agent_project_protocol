@@ -3282,10 +3282,39 @@ Body is not indexed.
         with tempfile.TemporaryDirectory(prefix="memory-f2-stub-validator-") as temp:
             root = Path(temp)
             shutil.copytree(ROOT / "examples/minimal_instance", root, dirs_exist_ok=True)
-            canonical_index = json.loads((ROOT / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8"))
-            task_row = next(row for row in canonical_index["tasks"] if row["id"] == "TASK-0350")
+            task_row = {
+                "id": "TASK-9001",
+                "owner": "implementer_agent",
+                "status": "done",
+                "title": "Fixture task with no personal deliverable",
+                "type": "implementation",
+                "file": "Area_comun/tasks/TASK-9001-fixture.md",
+            }
             original_path = task_row["file"]
-            source_data = (ROOT / original_path).read_bytes()
+            source_data = b"""---
+id: TASK-9001
+title: Fixture task with no personal deliverable
+status: done
+owner: implementer_agent
+type: implementation
+file: Area_comun/tasks/TASK-9001-fixture.md
+intake:
+  type: fix
+  goal: Prove that a cold stub remains valid at its original task path.
+  acceptance:
+    - The canonical validator accepts the generated stub.
+  verification_cmd:
+    - python scripts/validate_collaboration_state.py --root .
+  scope_routes:
+    - Area_comun/tasks/TASK-9001-fixture.md
+  out_of_scope:
+    - Production task state.
+  risk: low
+  estimate: S
+---
+
+# Fixture task
+"""
             write(root / original_path, source_data.decode("utf-8-sig"))
             fixture_index = json.loads((root / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8"))
             fixture_index["tasks"].append(task_row)
@@ -3293,11 +3322,21 @@ Body is not indexed.
             fixture_config = json.loads((root / "protocol.config.json").read_text(encoding="utf-8"))
             fixture_config["intake_gate"] = {"enabled": True, "start_task_id": "TASK-0238"}
             write(root / "protocol.config.json", json.dumps(fixture_config, indent=2) + "\n")
-            candidate = memory_db.ColdCandidate("TASK-0350", original_path, "task", "done", None, "a" * 64, "RULE-FIXTURE", 1)
+            candidate = memory_db.ColdCandidate(task_row["id"], original_path, "task", "done", None, "a" * 64, "RULE-FIXTURE", 1)
             requested_by = "Code" + "x"
             (root / original_path).write_bytes(memory_db.render_stub(candidate, f"Area_comun/archive/cold-packs/CP-1/{original_path}", "b" * 40, requested_by, source_data))
             result = subprocess.run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], text=True, capture_output=True)
             self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
+            fixture_index["tasks"].remove(task_row)
+            write(root / "Area_comun/state/TASK_INDEX.json", json.dumps(fixture_index, indent=2) + "\n")
+            write(
+                root / "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                json.dumps({"schema_version": "1.0", "tasks": [task_row]}, indent=2) + "\n",
+            )
+            archived = subprocess.run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], text=True, capture_output=True)
+            self.assertEqual(0, archived.returncode, archived.stdout + archived.stderr)
+
             (root / original_path).write_bytes(b"")
             empty = subprocess.run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], text=True, capture_output=True)
             self.assertNotEqual(0, empty.returncode, empty.stdout + empty.stderr)
