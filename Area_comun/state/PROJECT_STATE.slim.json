@@ -341,6 +341,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja"
+        },
+        {
+            "id": "TASK-0409",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva"
         }
     ],
     "next_actions": [

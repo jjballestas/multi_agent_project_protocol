@@ -127,6 +127,21 @@
             "updated_at": "2026-08-16T06:51:57Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0409-reg",
+            "expires_at": "2026-08-16T14:59:15Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0409-reg",
+                "Area_comun/state/TASK_INDEX.json#TASK-0409",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0409",
+                "Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md"
+            ],
+            "started_at": "2026-08-16T10:59:15Z",
+            "status": "released",
+            "task_id": "TASK-0409",
+            "updated_at": "2026-08-16T10:59:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Codex-TASK-0337-h1",
             "expires_at": "2026-08-16T07:05:56Z",
             "notes": "Implement H-1 own-peer residue exemption for unresolved message scope plus mutation-proven permanent negative.",

@@ -846,6 +846,16 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md",
+            "id": "TASK-0409",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "low",
+            "status": "ready",
+            "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
