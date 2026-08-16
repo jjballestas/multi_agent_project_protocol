@@ -2,7 +2,26 @@
 
 ## >> BLOQUE TOP 2026-08-16 (~03:15 local) - LO VIGENTE. Todo lo de abajo es historia.
 
-### MISION EN VUELO: corte del hub para NOVA -- EN STANDBY desde 16-ago 11:30 (dos desplazamientos consumidos)
+### ACTUALIZACION 16-ago ~21:15 -- CORTE PUBLICADO v1.19.0 + v3 APROBADA + NOVA en keygen/ventana
+- **CORTE PUBLICADO: v1.19.0 sobre 233fc43d** (par reproducible: 2 corridas mismo sha, 26/1/60,
+  identicas al control en numero Y causa; 6 residuos R-1..R-6 declarados). Retransmitido a NOVA.
+- **INCIDENTE NOVA: claves eventauth PERDIDAS** (4 ficheros HMAC de instancia; ed25519 de actor
+  intactas). Busqueda del operador AGOTADA (papelera 0, FileHistory off, disco: solo claves de
+  otras instancias). **DECISION entregada en nombre del operador (delegacion explicita): keygen
+  v2 con discontinuidad explicita -> CLEAN por escritura real -> VENTANA v1.19.0 inmediata** con
+  registro de eventos (msg 4972b41 en NOVA). Esperando: hora de ventana (anclar en hub) +
+  confirmacion final = META CUMPLIDA.
+- **v3 APROBADA por el operador** ("apruebo V3"): DIRECTIVA 48bf524c al Arquitecto -- D-A semana 0
+  (preflight con dientes + panel M7/M8 + P4), D-B DECISION-lite (prioridad sustrato + trailer de
+  actor), D-C P6 condicionada, D-D P7 diferida, P5 retirada. Secuencia: su proximo ciclo.
+- **Lab QA de NOVA**: operativo y validado por el operador (D:/Aegis_Scratch/nova/qa-lab/, guia
+  HTML dentro; API Debug con identidad dev; reset = down -v). Decisiones 9421 (forma despliegue,
+  promovida ready) y 9438 (cableado transaccional) entregadas y aterrizadas en NOVA.
+- Intel NOVA relayado al hub (81950f41): R-1 amplificado, D-7 confirmado, D-10 (scope coordinador
+  imposible), D-11 (rollback cruza actores), R-5 invertido. cold_start del hub bajo 20k tras
+  higiene post-corte (paso 23 puede ponerse verde solo).
+
+### (historico) MISION EN VUELO: corte del hub para NOVA -- EN STANDBY desde 16-ago 11:30 (dos desplazamientos consumidos)
 - **ACTUALIZACION 16-ago ~11:40:** corte fallido a las 09:00 (certificacion por conteo: 13/26,
   regresion del propio 0378) y a las 11:30 (el fix del actor NO curo el paso 10 -- run 31937131711
   sobre 41320c12 sigue 13/26 en "Run full-mode hook inventory cases"). NOVA en STANDBY formal,
