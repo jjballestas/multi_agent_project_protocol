@@ -248,6 +248,24 @@
             "updated_at": "2026-08-16T13:00:39Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-done",
+            "expires_at": "2026-08-16T15:41:15Z",
+            "notes": "Codex implementer done flip after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T14:41:15Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T14:41:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Codex-TASK-0378-r5",
             "expires_at": "2026-08-16T17:55:08Z",
             "notes": "Delete unreachable claim gate exemption and correct TASK-0378 evidence attribution per Arquitecto ACTION r5.",
