@@ -29,6 +29,74 @@ description: >-
 - **Los peers (Codex/Analista):** si ven un mensaje stale/huerfano lo **senalan** al owner (DECISION-0018);
   no lo arreglan bajo claim ajeno ni lo dejan sin senalar.
 
+## 0-bis. SECUENCIA OBLIGATORIA: higienizar -> dejar de rutear -> podar -> volver a rutear
+
+> Directiva del operador, 2026-08-16, con la medicion que la respalda.
+
+    1. HIGIENIZAR el mailbox   (mailbox_archive de los consumidos)  <- el 73% del gate
+    2. DEJAR DE RUTEAR         (la ventana de poda se abre SOLA)
+    3. PODAR                   (cero claims y cero locks)
+    4. VOLVER A RUTEAR
+
+**El paso 1 es el que mas mueve la aguja.** Medido:
+
+    open/ 61 mensajes  ->  cold_start_tokens 74130
+    open/  5 mensajes  ->  cold_start_tokens 20277   (umbral 20000)
+
+**53.853 tokens, el 73 %, eran mailbox.** Y la confirmacion inversa, el mismo dia: rutear tres
+reviews subio el gate de 20277 a **22201**. **Rutear engorda el mismo gate que la higiene
+adelgaza**, asi que el orden no es preferencia: es lo unico que converge.
+
+**CORRECCION de una afirmacion que estuvo medio dia en commits y en una nota de version:**
+`cold_start_tokens` **NO** es irreducible. Lo declare asi tras medirlo justo despues de una poda
+que no tocaba el mailbox, y generalice mal. `prune_state.py:286` **si** poda mailbox
+(`mailbox_keep_recent: 8`) pero **recoge de `answered/`, no de `open/`**: la clasificacion de
+"consumido" es del ORQUESTADOR. **Correr la poda NO es hacer higiene de mailbox.**
+
+## 0-ter. La ventana de poda: la abro yo, no se pide (2026-08-16)
+
+**La poda no coexiste con ningun trabajo de peon:** su claim pide
+`Area_comun/state/CLAIMS.json` **ENTERO**, asi que choca con CUALQUIER claim activo, sea de la
+tarea que sea (`claim acquire overlaps active claim ...`). Igual para toda op que reclame el
+ledger completo.
+
+**La ventana NO se pide a los peones: se abre sola.** Un peon solo arranca exec **si hay mensaje
+que procesar**. Con la cola vacia se queda quieto por si mismo -- sin gastarle un exec, sin que
+se auto-retire, sin relanzar nada.
+
+> **PODAR ANTES DE RUTEAR. Cada mensaje que se suelta cierra la ventana que hace falta.**
+
+**No la caces a ojo: dura SEGUNDOS** (el hueco entre que un peon cierra su exec y tomaria el
+siguiente mensaje). Encadenala a un comando en background con las TRES condiciones a la vez:
+
+```bash
+n=0
+until { [ ! -f .protocol-tmp/codex_mailbox_cron/codex_mailbox_cron.lock ] \
+     && [ ! -f .protocol-tmp/analista_mailbox_cron/analista_mailbox_cron.lock ] \
+     && [ "$(python -c "
+import json
+c=json.load(open('Area_comun/state/CLAIMS.json'))
+cl=c.get('claims',c) if isinstance(c,dict) else c
+print(len([x for x in cl if x.get('status')=='active']))
+")" = "0" ]; } || [ $n -ge 90 ]; do sleep 20; n=$((n+1)); done
+python scripts/prune_state.py --root . --apply
+```
+
+Evidencia del 2026-08-16: fallo a las 12:29 (claim de Codex en 0378-r4) y a las 13:43 -- esta
+segunda **la cerre yo al rutear un GO**, orden invertido. Entro a las 13:56:52, intento 22 del
+encadenado, 32 claims archivados, exit 0.
+
+**Por que NO pedirlo por mailbox:** no se puede expresar "espera" en un canal donde todo mensaje
+consume una ejecucion. El mensaje de pausa gasta un exec, y cada ronda vacia cuenta contra
+`MaxNoCoordinatorRounds 15` -> el peon **se auto-retira en ~75 min**. `STOP_JOB` es todo-o-nada y
+volver exige relanzar (accion con permiso), y el marcador de parada no respeta el limite de lote
+(TASK-0407). La barrera correcta, si se hace algun dia, es una marca de estado consultada en
+`Acquire-ExecReservation` (`deferred: quiesce_active`), no un mensaje.
+
+**Lo que la poda NO cierra:** `cold_start_tokens` mide el coste de lectura en frio, que dirigen
+las tareas **ABIERTAS**, mientras la poda solo archiva las **TERMINALES**. El gate seguira rojo
+por mucho que se pode; lo que si despeja es `released_ratio` y `done_ratio`.
+
 ## 1. Escribir un mensaje bien formado (antes de dejarlo en open/)
 - **ASCII puro.** Nada de acentos ni simbolos tipograficos. Usa `->`, `>=`, `AND`, `-`.
   `scan_encoding.py` cubre `open/` Y `archived/`.
