@@ -86,6 +86,62 @@ if(-not $orphans){ Write-Host "no orphans remaining" }
 3. **Verifica limpio:** re-corre el cazador (s.2) -> vacio. `tasklist //FI "IMAGENAME eq node.exe"` sin
    procesos de trabajo. Los CRONS (`*_mailbox_cron.ps1`, pids persistentes) SIGUEN VIVOS.
 
+## 3b. REGLA DE ORO antes de cualquier kill: el EFECTO manda sobre el REGISTRO
+> Anadido 2026-08-16 tras dano real: mate los DOS crons canonicos y deje vivos los wrappers viejos.
+
+**Ante un conflicto entre un REGISTRO que declara quien es un proceso (`.pid`, `.pid.json`,
+inventario) y el COMPORTAMIENTO OBSERVABLE (quien escribe el log), manda el comportamiento.**
+Pregunta obligatoria antes de matar:
+
+> "El fichero que uso como autoridad, **ha producido alguna de las lineas que estoy viendo**?
+> Si no, no es autoridad: es una declaracion."
+
+**Caso real (2026-08-16, 02:40).** Barriendo huerfanos, mate `33148` y `42124` porque no
+aparecian en los `.pid.json`. Eran los crons del arnes **canonico**
+(`scripts/harness/peer_mailbox_cron.ps1 -PeerId <Peer>`) -- los que producian TODA la actividad
+de la noche (`EXEC_START`, `RETRY_DEFER`, el exec de 0337). Los `.pid.json` registraban los
+wrappers viejos `personal/<Peer>/<peer>_mailbox_cron.ps1` del 13-ago, que ya no eran el motor.
+**Corte el canal de entregas de los dos peones con un deadline de corte a 7 horas**, y ademas
+eran crons que coordinaba el Asesor.
+
+**Procedimiento correcto para identificar el cron REAL de un peer** (una linea, antes de matar):
+```bash
+# Quien escribe el log = quien manda. Cotejar el script del CommandLine contra el que loguea.
+powershell.exe -NoProfile -Command "Get-CimInstance Win32_Process | Where-Object { \$_.CommandLine -match 'mailbox_cron' -and \$_.Name -eq 'powershell.exe' } | ForEach-Object { 'PID={0} inicio={1} :: {2}' -f \$_.ProcessId, \$_.CreationDate, \$_.CommandLine }"
+```
+Si `.pid.json` y el proceso que loguea DISCREPAN, **no mates: investiga**. Y si el kill ya
+ocurrio, FYI inmediato al operador -- el re-armado necesita los argumentos exactos
+(`-CoordinatorId` incluido), que el log NO registra.
+
+**Clausula de recorte: un identificador RECORTADO no identifica.** Lei las lineas de comando
+cortadas a 150 caracteres y el recorte se comio el `-CoordinatorId`, el campo que distinguia el
+cron del Asesor del de un peer. Si decido por una cadena, la leo ENTERA (sin `Substring`, sin
+`head`), o no decido por ella.
+
+**Clausula de asimetria:** accion reversible (leer, medir, avisar) -> basta la sospecha. Accion
+irreversible (matar, borrar, liberar claim) -> exijo registro Y efecto de acuerdo, o pregunto.
+Con un deadline encima, la prisa es el motivo para NO actuar, no para actuar.
+
+## 3c. VIGIAS LEGITIMOS -- exclusion obligatoria (DIRECTIVA Operador 2026-08-16)
+Los watchers de coordinacion cumplen POR DISENO las dos primeras condiciones de zombie (viejo,
+CPU~0) y NINGUNA de la tercera (solo lectura, cero locks, hijos git <2s). Son **falsos positivos
+estructurales del criterio edad+CPU**. Matarlos deja CIEGO al Operador en plena ventana.
+
+**`Get-Process`/`Get-CimInstance` NO discriminan: todos son `bash.exe`. Hay que usar `ps -ef`
+desde Git Bash**, cuya columna de comando si muestra la linea msys.
+
+| Parte | Proceso | Firma discriminante |
+|---|---|---|
+| Asesor | monitor hub | `cd .../multi_agent_project_protocol` + `git fetch` + `mailbox/open` + `sleep 60` |
+| Asesor | monitor NOVA | `cd .../NOVA-Suite/NOVA` + `mailbox/open` + `sleep 60` |
+| Asesor | watchdog escalada | `HUB=.../mailbox/open` + `sleep 900` |
+| NOVA | vigia de crons | `bash /d/Aegis_Scratch/nova/watch-crons.sh` |
+| NOVA | vigia de tablero | `bash /d/Aegis_Scratch/nova/watch-tablero.sh` |
+
+Objetivo legitimo del barrido: bash residuales de sesiones viejas **SIN** esas firmas.
+**CONTRATO:** si un barrido de emergencia mata algo con firma de vigia -> **FYI por mailbox
+INMEDIATO** para re-armado. Un kill silencioso abre una ventana de ceguera.
+
 ## 4. Que NO matar (seguridad)
 - Los **crons persistentes** (`codex/analista/arquitecto_mailbox_cron.ps1`, pids de larga vida): matarlos
   DETIENE al agente. Solo se matan los EXECS de trabajo y sus hijos huerfanos.
