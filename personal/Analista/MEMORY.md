@@ -13001,3 +13001,19 @@ revienta con `TypeError` si copias la llamada. `load_artifacts` sobre el repo re
 tarda >2 min: background desde el principio. Trailer: bastaba `Task-Id: TASK-0368`. El Arquitecto
 escribia `Area_comun/tasks/TASK-0376-...` (mi residual R2) mientras yo commiteaba: pathspec
 explicito, no lo toque.
+
+## TASK-0378 r4 -- la paridad caso-contrato (2026-08-16, CHANGE-REQUIRED, commit f4819c8a)
+
+Detalle en `MEMORY-TASK-0378-r4-20260816.md`. Las tres reglas:
+
+1. **Antes de debatir la semantica de una rama, mide si es ALCANZABLE.** `claim_gate_applicable`
+   no puede devolver `False` en produccion porque `instance_context()` revienta antes. Se prueba
+   con un **censo de dos sondas sobre los cuatro contextos**, no con un ejemplo. Si la rama es
+   inalcanzable, el fallo declarado sigue vivo y el arreglo es decorativo.
+2. **Un negativo cuyo PASS es `exit 1` no distingue mutante de modulo roto.** Correr siempre el
+   brazo "el instrumento ni arranca": error de sintaxis y funcion borrada pasaron igual que el
+   mutante. Mismo defecto que R1 del pin -> es PATRON: el negativo interroga a la copia que el
+   mismo fabrica.
+3. **Imputar un verde exige DOS mutantes.** Quitar el cambio sospechoso (MUTANT B: el caso sigue
+   verde) Y quitar la alternativa (MUTANT C: rojo). Un solo brazo no imputa. Aqui el verde lo
+   produjo el ARNES (`git config user.name`), no la puerta.
