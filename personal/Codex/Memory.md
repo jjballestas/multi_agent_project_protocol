@@ -2,6 +2,20 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-16 - TASK-0409 done flip and staging control
+
+- Commit `c97ca3f1` moves TASK-0409 from `review_approved` to `done` after independent
+  Analista approval and Arquitecto ratification; Codex-signed runtime events 9668-9670
+  acquire and release the bounded close claim with drift false.
+- The commit message explicitly records that `04679824` absorbed two TASK-0409 checker
+  verdict files under Codex authorship and `Task-Id: TASK-0378`, while their internal
+  checker attribution remains intact.
+- Permanent staging rule: derive the exact file list from the active claim scope, stage
+  only those explicit paths, and verify `git diff --cached --name-only` before commit.
+  Never stage a shared directory or use a broad add. This close proved the control by
+  excluding the concurrent unclaimed report change from both index and commit.
+- Collaboration, encoding, and domain-neutrality gates exited 0 before commit.
+
 ## 2026-08-16 - TASK-0337 done flip
 
 - Commit `0d5cd0a0` moves TASK-0337 from `review_approved` to `done` after independent
