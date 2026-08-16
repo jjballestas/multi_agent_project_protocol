@@ -1,7 +1,7 @@
 ---
 id: TASK-0337
 title: El guard de residuo veta sin mirar scope -- gemelo de TASK-0331
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md
@@ -144,3 +144,23 @@ propiedad del sistema: se cae en cuanto un encargo no lo diga.
 
 **NO se abre tarea aparte para esto** (se evaluo TASK-0406 y se descarto por duplicar AC6/AC7). Lo que
 SI sale aparte es el ancla del regex, que es un defecto distinto: **TASK-0405**.
+
+## Inventario implementado de vetos pre-exec (Codex, 2026-08-16)
+
+| Veto | Liga antes del cambio | Liga tras el cambio | Alcance |
+|---|---|---|---|
+| `residue_probe_failed` | Lectura global del worktree | Igual | Correcto: no hay prueba fiable para decidir. |
+| `worktree_residue_live` | Cualquier residuo relevante del repositorio | Solo cada par ruta sucia-ruta del mensaje; `personal/<Peer>/**` propio no veta | Corregido: la decision es por-par. |
+| `message_scope_ambiguous` | Mensaje sin scope resoluble | Igual, dentro de la reserva | Correcto: falla cerrado si no puede construirse el par. |
+| `claims_unreadable` / `active_external_claim` | Ledger global ilegible; claim externo global o intersectante | Igual | Correcto: ilegibilidad falla cerrada; claim resoluble liga por interseccion. |
+| `peer_lease_unreadable` / `active_peer_lease` | Lease global ilegible; lease vivo global o intersectante | Igual | Correcto: ilegibilidad falla cerrada; lease resoluble liga por interseccion. |
+| `exec_admission_busy` / `own_lease_exists` | Reserva atomica global o lease propio existente | Igual | Correcto: protegen exclusion mutua, no rutas de trabajo. |
+| `ledger_unreadable_before_exec` / `ledger_prefix_snapshot_failed` | Baseline global de evidencia | Igual | Correcto: sin baseline no se puede atribuir evidencia al exec. |
+| `index_snapshot_failed` / `untracked_snapshot_failed` | Snapshot global de rollback | Igual | Correcto: sin snapshot no hay rollback no destructivo demostrable. |
+
+Garantia tras el cambio: un mensaje con scope resoluble solo es diferido por residuo vivo si al menos
+una ruta sucia no propia intersecta una ruta material de su scope. El detalle registra el par exacto
+como `dirty_path` y `message_route`. La memoria privada del mismo peer no participa y por ello no puede
+cerrar circularmente la entrada a su siguiente exec. Una ruta ajena que si intersecta conserva el veto.
+La frontera deliberada permanece cerrada: si el scope del mensaje no es resoluble, el flujo no usa la
+ausencia de interseccion como permiso; y un fallo de lectura del worktree conserva el veto global.

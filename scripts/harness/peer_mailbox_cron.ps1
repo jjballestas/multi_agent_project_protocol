@@ -906,6 +906,7 @@ function Get-WorktreeDiskProof {
 }
 
 function Get-StagedResidueState {
+    param([string[]]$MessageWorkScope)
     $statusResult = Get-GitStatusPorcelainUtf8
     if (-not $statusResult.ok) { return "unknown" }
     $statusRaw = [string]$statusResult.raw
@@ -915,12 +916,26 @@ function Get-StagedResidueState {
         $row = $records[$index]
         if ($row.Length -lt 4) { return "unknown" }
         $candidate = $row.Substring(3).Replace("\", "/")
-        $candidateIsRelevant = ($candidate -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
+        $candidateComparable = ConvertTo-ComparableRoute -Route $candidate
+        $candidateIsOwnPersonal = ($candidate -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
+        $candidateIsRelevant = if ($null -eq $MessageWorkScope) {
+            $candidate -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId
+        } else {
+            (-not $candidateIsOwnPersonal) -and $null -ne $candidateComparable -and
+                (Test-ScopeIntersection -Left @($candidateComparable) -Right $MessageWorkScope)
+        }
         if ($row.Substring(0, 2) -match '[RC]') {
             if (($index + 1) -ge $records.Count) { return "unknown" }
             $sourceRow = $records[$index + 1]
             $source = $sourceRow.Replace("\", "/")
-            $sourceIsRelevant = ($source -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
+            $sourceComparable = ConvertTo-ComparableRoute -Route $source
+            $sourceIsOwnPersonal = ($source -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
+            $sourceIsRelevant = if ($null -eq $MessageWorkScope) {
+                $source -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId
+            } else {
+                (-not $sourceIsOwnPersonal) -and $null -ne $sourceComparable -and
+                    (Test-ScopeIntersection -Left @($sourceComparable) -Right $MessageWorkScope)
+            }
             if ($candidateIsRelevant -or $sourceIsRelevant) {
                 $status += $row
                 $status += $sourceRow
@@ -938,6 +953,16 @@ function Get-StagedResidueState {
         if ($row.Substring(0, 2) -match '[RC]') { $index++ }
     }
     $script:LastResiduePaths = @($diagnosticPaths)
+    $intersections = @()
+    foreach ($dirtyPath in $diagnosticPaths) {
+        $dirtyComparable = ConvertTo-ComparableRoute -Route $dirtyPath
+        foreach ($messageRoute in @($MessageWorkScope)) {
+            if ($null -ne $dirtyComparable -and (Test-ScopeIntersection -Left @($dirtyComparable) -Right @($messageRoute))) {
+                $intersections += [ordered]@{ dirty_path = $dirtyPath; message_route = $messageRoute }
+            }
+        }
+    }
+    $script:LastResidueIntersections = @($intersections)
     if ($status.Count -eq 0) {
         if (Test-Path -LiteralPath $ResiduePath) { Remove-Item -LiteralPath $ResiduePath -Force -ErrorAction SilentlyContinue }
         return "none"
@@ -1408,14 +1433,17 @@ function Invoke-PeerForMessage {
     }
     # Pre-gate before taking the exec lock. A failed/slow probe retains the launch
     # and cannot strand a lock owned by no process.
-    $residueState = Get-StagedResidueState
+    $messageWork = Get-MessageWorkDescriptor -Message $Message
+    $messageWorkScope = if ($null -eq $messageWork) { $null } else { $messageWork.work_scope }
+    $residueState = Get-StagedResidueState -MessageWorkScope $messageWorkScope
     if ($residueState -eq "unknown") {
         Register-PreExecDefer -Message $Message -Reason "residue_probe_failed"
         return
     }
     if ($residueState -eq "live") {
         $residuePathsJson = ConvertTo-Json -InputObject @($script:LastResiduePaths) -Compress
-        $residueDetail = "paths_json=$residuePathsJson"
+        $intersectionsJson = ConvertTo-Json -InputObject @($script:LastResidueIntersections) -Compress
+        $residueDetail = "paths_json=$residuePathsJson intersections_json=$intersectionsJson"
         Register-PreExecDefer -Message $Message -Reason "worktree_residue_live" -Detail $residueDetail
         return
     }

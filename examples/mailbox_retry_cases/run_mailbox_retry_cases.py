@@ -78,6 +78,13 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "run_pregate_contract_mutants",
     },
     {
+        "id": "retry-residue-scope-pair",
+        "negative": "own personal residue cannot deadlock the next message while truly intersecting residue still defers with the exact pair",
+        "mutation": "mutant = runner_text.replace(",
+        "boundaries": ("exercise(runner_text, own_personal=True, expect_exec=True)", "assert not survivors"),
+        "exercised_by": "run_residue_scope_pair_case",
+    },
+    {
         "id": "retry-large-stderr-drain",
         "negative": "concurrent pipe drain terminates while the sequential mutant deadlocks",
         "mutation": "$stdout = $process.StandardOutput.ReadToEnd()",
@@ -667,7 +674,7 @@ def run_pregate_contract_mutants() -> None:
         if "$LockPath" in body and "$MessageName" in body and "process_start_time_utc" in body
     )
     writer_call = re.search(rf"(?m)^(\s*{re.escape(evidence_writer)}\b[^\r\n]*\r?\n)", invoke)
-    residue_line = re.search(r"(?m)^\s*\$residueState = Get-StagedResidueState\s*$", invoke)
+    residue_line = re.search(r"(?m)^\s*\$residueState = Get-StagedResidueState(?:\s+-[^\r\n]+)?\s*$", invoke)
     assert writer_call is not None and residue_line is not None
     moved_invoke = invoke[: writer_call.start()] + invoke[writer_call.end() :]
     moved_residue = moved_invoke.find(residue_line.group(0))
@@ -716,7 +723,7 @@ def run_deleted_residue_real_loop_case() -> None:
             task_file.parent.mkdir(parents=True)
             task_file.write_text(
                 "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-0001-deleted-residue.md\n"
-                + ("intake:\n  scope_routes:\n    - unrelated-scope.txt\n" if declare_scope else "")
+                + ("intake:\n  scope_routes:\n    - deleted-residue.txt\n" if declare_scope else "")
                 + "---\n",
                 encoding="ascii",
             )
@@ -746,7 +753,10 @@ def run_deleted_residue_real_loop_case() -> None:
                 "-MaxTransientRetries", "2", "-PreExecDeferTimeoutSeconds", "1",
                 "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
             ]
-            run(*command, cwd=fixture, timeout=20)
+            try:
+                run(*command, cwd=fixture, timeout=20)
+            except subprocess.CalledProcessError as exc:
+                raise AssertionError((exc.stdout or "") + (exc.stderr or "")) from exc
             log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
             assert ("EXEC_START " in log) is expect_exec, log
             if not expect_exec:
@@ -1219,7 +1229,7 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
 
 def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     """Environmental defers escape to a terminal state at the configured bound."""
-    residue = sandbox / "unstaged-residue.txt"
+    residue = sandbox / "unrelated-scope.txt"
     residue.write_text("dirty\n", encoding="ascii")
     runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
     runtime.mkdir(parents=True, exist_ok=True)
@@ -1269,6 +1279,95 @@ def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
     assert "MSG-retry.md" not in seen, "terminally deferred message was re-executed"
     shutil.rmtree(sandbox / ".protocol-tmp")
+
+
+def run_residue_scope_pair_case() -> None:
+    """Own memory starts; an actually intersecting foreign residue still defers and names the pair.
+    PERMANENT_NEGATIVE: retry-residue-scope-pair
+    """
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+
+    def exercise(candidate: str, *, own_personal: bool, expect_exec: bool, expect_pair: bool = False) -> None:
+        fixture = Path(tempfile.mkdtemp(prefix="task0337-residue-scope-"))
+        try:
+            for relative in (
+                "Area_comun/mailbox/open",
+                "Area_comun/state",
+                "Area_comun/tasks",
+                "runtime/state",
+                "scripts/harness/prompts",
+                "personal/TestPeer",
+                "work",
+            ):
+                (fixture / relative).mkdir(parents=True, exist_ok=True)
+            (fixture / "scripts/harness/peer_mailbox_cron.ps1").write_text(candidate, encoding="utf-8")
+            shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+            (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+            (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+            (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+            (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+            (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text('{"tasks":[]}\n', encoding="ascii")
+            (fixture / "Area_comun/tasks/TASK-0001.md").write_text(
+                "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-0001.md\n"
+                "intake:\n  scope_routes:\n    - work/target.txt\n---\n",
+                encoding="ascii",
+            )
+            (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+                '{"tasks":[{"id":"TASK-0001","file":"Area_comun/tasks/TASK-0001.md"}]}\n',
+                encoding="ascii",
+            )
+            (fixture / "Area_comun/mailbox/open/MSG-scope.md").write_text(
+                "---\nfrom: Coordinator\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0001\nstatus: open\n"
+                "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+                encoding="ascii",
+            )
+            prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+            prompt.write_text("Process @@MESSAGE_PATH@@ under @@ROOT@@.\n", encoding="ascii")
+            fake = fixture / "fake-agent.cmd"
+            fake.write_text("@echo OUTCOME: definitive\r\n", encoding="ascii")
+            (fixture / "work/target.txt").write_text("baseline\n", encoding="ascii")
+            run("git", "init", cwd=fixture)
+            run("git", "config", "user.email", "scope@example.invalid", cwd=fixture)
+            run("git", "config", "user.name", "TestPeer", cwd=fixture)
+            run("git", "add", ".", cwd=fixture)
+            run("git", "commit", "-m", "fixture", cwd=fixture)
+            dirty = fixture / ("personal/TestPeer/MEMORY.md" if own_personal else "work/target.txt")
+            dirty.write_text("dirty\n", encoding="ascii")
+            command = [
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                str(fixture / "scripts/harness/peer_mailbox_cron.ps1"), "-PeerId", "TestPeer",
+                "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+                "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "10",
+                "-PreExecDeferTimeoutSeconds", "1", "-RetryBackoffSeconds", "0",
+                "-AbortedResidueMinutes", "60",
+            ]
+            try:
+                run(*command, cwd=fixture, timeout=20)
+            except subprocess.CalledProcessError as exc:
+                raise AssertionError((exc.stdout or "") + (exc.stderr or "")) from exc
+            log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+            assert ("EXEC_START " in log) is expect_exec, log
+            if expect_pair:
+                assert 'dirty_path":"work/target.txt"' in log, log
+                assert 'message_route":"work/target.txt"' in log, log
+        finally:
+            shutil.rmtree(fixture, ignore_errors=True)
+
+    exercise(runner_text, own_personal=True, expect_exec=True)
+    exercise(runner_text, own_personal=False, expect_exec=False, expect_pair=True)
+    mutant = runner_text.replace(
+        "if ($null -eq $MessageWorkScope) {",
+        "if ($true) {",
+        1,
+    )
+    assert mutant != runner_text, "own-personal dead-code mutant was not applied"
+    survivors = []
+    try:
+        exercise(mutant, own_personal=True, expect_exec=False)
+    except AssertionError:
+        survivors.append("own_personal_global_veto")
+    assert not survivors, f"residue scope contract failed to kill declared mutants: {survivors}"
 
 
 def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
@@ -2021,6 +2120,7 @@ def main() -> int:
             run_nul_residue_path_cases(sandbox)
             run_unreadable_head_case(sandbox, prompt, fake)
             run_unstaged_residue_case(sandbox, prompt, fake)
+            run_residue_scope_pair_case()
             run_disordered_ledger_case(sandbox, prompt)
             run_exec_running_heartbeat_case()
             run_post_delivery_timeout_case()
