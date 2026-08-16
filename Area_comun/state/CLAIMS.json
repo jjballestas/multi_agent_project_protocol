@@ -190,9 +190,45 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T00:47:02Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0397",
             "updated_at": "2026-08-16T00:47:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1-delivery",
+            "expires_at": "2026-08-16T05:30:52Z",
+            "notes": "Publish remediation evidence and transition TASK-0397 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0397-remediation-1-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0397-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:30:52Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T01:30:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1-msgfix",
+            "expires_at": "2026-08-16T02:35:32Z",
+            "notes": "Add required compact-mailbox question field.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1-msgfix",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0397-remediation-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T01:35:32Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T01:35:32Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

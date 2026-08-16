@@ -1,20 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1",
-                "Area_comun/state/TASK_INDEX.json#TASK-0397",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
-                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
-                "examples/neutrality_scan_cases/run_powershell_host_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0397"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
