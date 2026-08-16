@@ -2,6 +2,21 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-16 - TASK-0414 implementation
+
+- Commit `be3edb87` separates unavailable attestation verification material from a bad
+  signature. Missing material is reported as the non-fatal `key_unavailable` boundary;
+  present material with a failed Ed25519 verification remains fatal as
+  `invalid_signature`.
+- The validator emits a compact warning with the unavailable count and key IDs while
+  preserving exit 0 when no fatal signature finding exists.
+- The population proof processes 1,009 events: 1,009 `key_unavailable`, zero
+  `invalid_signature`. A signature mutation with available material takes the fatal path,
+  and the equal-artifact blind comparison retains the declared boundary.
+- Focused signature suites, falsification inventory 76/76, collaboration, encoding, and
+  domain-neutrality gates exited 0. TASK-0414 remains maker-owned pending governed
+  delivery and independent Analista review.
+
 ## 2026-08-16 - Closure response published
 
 - Commit `f4815c11` publishes the self-contained Arquitecto response for the TASK-0337
