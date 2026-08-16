@@ -358,6 +358,18 @@
             "owner": "Codex",
             "status": "ready",
             "title": "No existe scope valido para las escrituras del coordinador -- el fragmento cae fuera y el fichero entero solapa"
+        },
+        {
+            "id": "TASK-0412",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Pre-vuelo de intake CON DIENTES -- el item mecanizable falla cerrado, y el auto-atestado queda prohibido"
+        },
+        {
+            "id": "TASK-0413",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Panel de metricas -- M7 cobertura de verificacion y M8 tiempo-mensaje muerto, las dos que no dependen del trailer de actor"
         }
     ],
     "view": "task_index.slim"

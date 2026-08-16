@@ -856,6 +856,26 @@
             "type": "infra"
         },
         {
+            "file": "Area_comun/tasks/TASK-0412-preflight-de-intake-con-dientes.md",
+            "id": "TASK-0412",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "low",
+            "status": "ready",
+            "title": "Pre-vuelo de intake CON DIENTES -- el item mecanizable falla cerrado, y el auto-atestado queda prohibido",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0413-panel-de-metricas-m7-m8.md",
+            "id": "TASK-0413",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "low",
+            "status": "ready",
+            "title": "Panel de metricas -- M7 cobertura de verificacion y M8 tiempo-mensaje muerto, las dos que no dependen del trailer de actor",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

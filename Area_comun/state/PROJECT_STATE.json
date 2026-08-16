@@ -409,6 +409,18 @@
             "title": "No existe scope valido para las escrituras del coordinador -- el fragmento cae fuera y el fichero entero solapa"
         },
         {
+            "id": "TASK-0412",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Pre-vuelo de intake CON DIENTES -- el item mecanizable falla cerrado, y el auto-atestado queda prohibido"
+        },
+        {
+            "id": "TASK-0413",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Panel de metricas -- M7 cobertura de verificacion y M8 tiempo-mensaje muerto, las dos que no dependen del trailer de actor"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -537,7 +549,9 @@
         "DECISION-0112",
         "DECISION-0113",
         "DECISION-0114",
-        "DECISION-0115"
+        "DECISION-0115",
+        "DECISION-0117",
+        "DECISION-0118"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
