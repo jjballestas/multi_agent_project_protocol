@@ -2,6 +2,16 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-16 - TASK-0378 pin remediation implementation
+
+- Commit `93f261c7` updates the CI sha256 pin for `.githooks/pre-commit` to the delivered hook.
+- The workflow step perturbs a temporary hook while retaining the pin, requires checksum rejection,
+  and verifies the output names `FAILED` or `did NOT match` before later validation steps run.
+- The real check exited 0; the negative was rejected and reported `PIN_MISMATCH_NEGATIVE PASS`.
+- No equivalent `.githooks/commit-msg` pin exists in the workflow; the asymmetry is reported only.
+- Both hook suites, collaboration, encoding, neutrality, and inventory 76/76 exited 0. Independent
+  Analista re-review remains required; Codex is maker only.
+
 ## 2026-08-16 - TASK-0397 remediation 1 delivered
 
 - Maker fix commit: `05edcabc`; governed delivery commit: `0b7b4816`.
