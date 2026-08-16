@@ -84,17 +84,43 @@ Relacionado: **la identidad de gobierno es forjable** (TASK-0386, no incluida en
 gate deriva el actor de `git config user.name`, que los tres agentes comparten. Verificado en el hub
 esta madrugada: un commit de coordinacion del Arquitecto entro firmado como `Codex`.
 
-### R-4. El gate de poda del hub: disparador y remedio disjuntos
+### R-4 (CORREGIDO). El gate de poda: el mailbox era el 73 %, no era irreducible
 
-`cold_start_tokens` mide el coste de lectura en frio, que dirigen las tareas **abiertas**, mientras
-que la poda solo archiva las **terminales**. El gate pide una accion que por construccion no puede
-satisfacerlo. **Es artefacto del backlog del hub, no del codigo que se envia**: vuestro umbral se
-mide contra vuestro propio backlog.
+**Rectificacion de una afirmacion previa de esta misma nota.** Se declaro que `cold_start_tokens`
+era IRREDUCIBLE porque media el backlog ABIERTO de tareas mientras la poda solo archiva lo
+TERMINAL. **Era falso, y el error de metodo fue medir el gate justo despues de una poda que no
+tocaba el mailbox.**
 
-Consecuencia para este corte: el paso 23 (`Check systematic state pruning`) sigue rojo en el hub.
-Por eso la certificacion **no es por color de job**.
+    open/ 61 mensajes  ->  cold_start_tokens 74130
+    open/  5 mensajes  ->  cold_start_tokens 20277   (umbral 20000)
 
----
+**53.853 tokens -- el 73 % -- eran MAILBOX.** `prune_state.py` **si** poda mailbox, pero recoge de
+`answered/`, no de `open/`: la clasificacion de "consumido" es del ORQUESTADOR. Correr la poda NO
+es hacer higiene de mailbox.
+
+**Secuencia correcta, y va como regla adoptable:** higienizar -> dejar de rutear (la ventana de
+poda se abre sola: un peon solo arranca exec si hay mensaje) -> podar -> volver a rutear. Medido
+que rutear tres mensajes subio el gate de 20277 a 22201: **rutear engorda lo que la higiene
+adelgaza**, por eso el orden no es preferencia.
+
+Lo que queda abierto de verdad: la poda reclama `CLAIMS.json` ENTERO, asi que no coexiste con
+ningun claim de peon. Con dos peones activos su ventana dura segundos.
+
+### R-5. Paridad de inventario de identidad: diverge y ademas apunta a vacio
+
+Aislado por el checker al cerrar TASK-0337 y declarado **heredado, no atribuible** a esa entrega.
+Registrado como **TASK-0410**.
+
+    NEG-NEUTRALITY-IDENTITY-INVENTORY-PARITY   ROJO
+      runner    scripts/test_scan_domain_neutrality.py
+      cableado  .github/workflows/validate.yml:522
+      censo     92 frente a 91
+      causas    1 divergencia de inventario entre gemelos
+                3 coordenadas MUERTAS en runtime/context.py
+
+Es la unica variante en la que el ancla **no diverge sino que apunta a VACIO**: exenciones cuyo
+objeto ya no esta en la linea declarada. **Una exencion muerta exime algo que ya no existe y puede
+estar tapando una violacion nueva en esa misma linea.**
 
 ## 3. Como se certifico este corte
 
@@ -102,6 +128,9 @@ Por eso la certificacion **no es por color de job**.
 absorbe reds nuevos gratis -- fue exactamente lo que oculto el defecto del pin durante dos dias.
 
 - Control historico: corrida `31802752243`, ultimo estado sano conocido, **26 success**.
+- **RESULTADO: corrida `31950779306` sobre `9ad9b6a5` da 26 success / 1 failure / 60 skipped --
+  identico al control en numero Y en causa** (el unico fallo es el paso 23, la poda, que tambien
+  fallaba en el control). Punto de partida de la jornada: 6 success, muriendo en el paso 4.
 - Criterio: restaurar ese orden de magnitud en el job `validate`.
 - **Dos corridas** sobre el mismo commit (DECISION-0115): un verde de una sola corrida es una
   primera corrida, no un verde.
