@@ -62,7 +62,7 @@ El registro esta versionado, pero **fuera del config pineado**. Entonces: **quie
 con que gate?**
 
 Si un actor puede anadirse a si mismo un `key_id` retirado con un commit normal, **hemos movido el
-ancla de sitio pero no la hemos sacado de su alcance** -- que es literalmente lo que pasó en r2. La
+ancla de sitio pero no la hemos sacado de su alcance** -- que es literalmente lo que paso en r2. La
 diferencia entre "el ancla vive en otro fichero" y "el ancla no la controla quien la usa" es la
 tarea entera.
 
