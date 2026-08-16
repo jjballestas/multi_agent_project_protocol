@@ -2,6 +2,17 @@
 
 ## >> BLOQUE TOP 2026-08-16 (~03:15 local) - LO VIGENTE. Todo lo de abajo es historia.
 
+### ORDEN PERMANENTE del operador (16-ago ~23:00): los DOS Arquitectos (hub y NOVA) dirigen
+### dudas y reportes POR MAILBOX AL OPERADOR -- el Asesor tiene vision total y queda AUTONOMO
+### para responderlas en nombre del operador. Vigilar ambos open/ como canal primario.
+
+### PENDIENTE VIVO al cierre del 16-ago (~23:00): la ventana de NOVA espera UN fix del hub
+- Hub debe entregar: replay distingue key_unavailable de invalid_signature (DIRECTIVA 5ffce59f,
+  prioridad DECISION-0117). Al publicarse: retransmitir a NOVA -> adopcion -> validate limpio ->
+  relanzar peers -> reporte final = META CUMPLIDA. NOVA congelada SEGURA en frontera seq 1009
+  (commit 0450e63), peers parados a proposito, backup 144MB con protocol-secrets dentro.
+- Ventana de NOVA anclada: inicio real 2026-08-16T18:39:27Z.
+
 ### ACTUALIZACION 16-ago ~21:15 -- CORTE PUBLICADO v1.19.0 + v3 APROBADA + NOVA en keygen/ventana
 - **CORTE PUBLICADO: v1.19.0 sobre 233fc43d** (par reproducible: 2 corridas mismo sha, 26/1/60,
   identicas al control en numero Y causa; 6 residuos R-1..R-6 declarados). Retransmitido a NOVA.
