@@ -218,6 +218,21 @@
             "updated_at": "2026-08-16T13:39:46Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0409-ratifica",
+            "expires_at": "2026-08-16T17:28:43Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0409-ratifica",
+                "Area_comun/state/TASK_INDEX.json#TASK-0409",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0409",
+                "Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md"
+            ],
+            "started_at": "2026-08-16T14:28:43Z",
+            "status": "released",
+            "task_id": "TASK-0409",
+            "updated_at": "2026-08-16T14:28:43Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Arquitecto-TASK-0410-reg",
             "expires_at": "2026-08-16T16:00:39Z",
             "owner": "Arquitecto",
