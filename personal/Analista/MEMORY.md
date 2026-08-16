@@ -13017,3 +13017,25 @@ Detalle en `MEMORY-TASK-0378-r4-20260816.md`. Las tres reglas:
 3. **Imputar un verde exige DOS mutantes.** Quitar el cambio sospechoso (MUTANT B: el caso sigue
    verde) Y quitar la alternativa (MUTANT C: rojo). Un solo brazo no imputa. Aqui el verde lo
    produjo el ARNES (`git config user.name`), no la puerta.
+
+## TASK-0414 (2026-08-16) -- CHANGE-REQUIRED: la frontera que escribe el forjador
+
+Detalle en `MEMORY-TASK-0414-20260816.md`. Commit `69da11c4`.
+
+1. **Ante un fix que anade una categoria BENIGNA, pregunta quien ESCRIBE el campo que decide la
+   entrada.** Aqui era `signature.keyid`, un campo plano del payload: lo elige quien firma **y quien
+   falsifica**. Categoria benigna + discriminador controlado por el sujeto juzgado = amnistia a
+   peticion. Se cierra con una declaracion de rotacion atestada e independiente del evento.
+2. **Mutar como muto el maker no acredita el AC.** El maker perturbo `sig` dejando el keyid quieto;
+   el atacante perturba las dos cosas. Censo V1-V9, no ejemplo.
+3. **Un hallazgo de seguridad sin A/B historico no sabe de quien es.** Los cuatro escapes daban rojo
+   contra `be3edb87^`: no es hueco heredado, lo abre el commit.
+4. **Cuando un gate se pone rojo, lee CUAL es el error antes de atribuirle la deteccion.** La
+   primera pasada dio exit 1 por `snapshot mismatch` (contabilidad); al poner el snapshot al dia con
+   las propias funciones del runtime, EXIT 0 con la atestacion falsa dentro. Y nunca escribas un
+   exit code que no has medido: lo escribi antes de correrlo y estaba mal.
+5. **La respuesta a "puede cancelarse el canal nuevo?" estaba en la asercion del propio negativo**
+   (`boundaries de A == boundaries de B`): esa igualdad ES la cancelacion ante un consumidor que
+   compara. Lo que salva la frontera es que el consumidor lee un cardinal ABSOLUTO, no el canal.
+6. **Cuando un AC prohibe el sintetico, un numero que coincide es la senal mas sospechosa.**
+   `[deepcopy(event) for _ in range(1009)]` son 1009 copias de un fixture, no una poblacion.
