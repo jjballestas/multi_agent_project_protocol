@@ -421,6 +421,12 @@
             "title": "Panel de metricas -- M7 cobertura de verificacion y M8 tiempo-mensaje muerto, las dos que no dependen del trailer de actor"
         },
         {
+            "id": "TASK-0414",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

@@ -876,6 +876,16 @@
             "type": "infra"
         },
         {
+            "file": "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+            "id": "TASK-0414",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "ready",
+            "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
