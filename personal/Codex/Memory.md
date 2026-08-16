@@ -2,6 +2,16 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-16 - TASK-0397 remediation 1 delivered
+
+- Maker fix commit: `05edcabc`; governed delivery commit: `0b7b4816`.
+- Declared PowerShell boundary was stale: the injected mutant is appended, so `[-1]` is the
+  semantic assertion coordinate. Contract gate is 76/76 and the perturbation to `[0]` is rejected.
+- Census: 353 literal assertion boundaries across 76 contracts in 12 runners share the same
+  text-divergence shape.
+- TASK-0397 is `in_review`; all remediation claims and both orphan TASK-0337 claims are released.
+- Review request: `MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0397-remediation-1.md`.
+
 ## 2026-08-11 - TASK-0354 remediation iteration 4 implementation
 
 - Commit `90fa8ffa` replaces the literal 73-invocation witness with a membership property. Every
