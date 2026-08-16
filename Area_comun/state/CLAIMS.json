@@ -527,6 +527,22 @@
             "updated_at": "2026-08-16T09:43:00Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-r4-final-memory",
+            "expires_at": "2026-08-16T11:59:28Z",
+            "notes": "Persist final TASK-0378 remediation 4 delivery commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-r4-final-memory",
+                "personal/Codex/MEMORY-TASK-0378-remediation4-20260816.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T11:14:28Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T11:14:28Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Codex-TASK-0378-r4-memory",
             "expires_at": "2026-08-16T11:14:53Z",
             "notes": "Persist post-commit TASK-0378 remediation memory.",

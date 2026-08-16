@@ -8,5 +8,8 @@
 - Local evidence: commit-msg tests green; full-mode inventory green including absent non-reviewed
   deliverable and mutation negative; collaboration validator, encoding scan, and neutrality scan
   exit 0.
-- TASK-0378 remains maker-owned until the delivery transaction moves it to `in_review`, releases
-  the maker claim, and publishes the r4 handoff. Independent review remains required.
+- Governed delivery commit `ddd13482` moves TASK-0378 to `in_review`, releases both r4 maker
+  claims, and publishes `MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-r4.md`. Runtime
+  materialization reached seq 9569 with drift false.
+- Independent Analista review remains required. Codex is maker only and did not review or ratify
+  the remediation.
