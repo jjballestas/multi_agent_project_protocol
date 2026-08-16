@@ -1,7 +1,7 @@
 ---
 id: TASK-0414
 title: El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md
