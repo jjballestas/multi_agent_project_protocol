@@ -164,3 +164,8 @@ como `dirty_path` y `message_route`. La memoria privada del mismo peer no partic
 cerrar circularmente la entrada a su siguiente exec. Una ruta ajena que si intersecta conserva el veto.
 La frontera deliberada permanece cerrada: si el scope del mensaje no es resoluble, el flujo no usa la
 ausencia de interseccion como permiso; y un fallo de lectura del worktree conserva el veto global.
+
+La exencion deriva el prefijo que Git usa para la raiz de la instancia. El contrato permanente ejecuta
+el mismo par en dos layouts: instancia en la raiz del repositorio (prefijo vacio) e instancia anidada
+(prefijo no vacio). En ambos, la memoria propia arranca y el residuo ajeno que intersecta sigue
+difiriendo con el par exacto en el diagnostico.

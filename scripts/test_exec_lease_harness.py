@@ -2069,6 +2069,7 @@ def test_residue_excludes_foreign_personal_and_caps_diagnostics() -> None:
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("dirty\n", encoding="ascii")
+        subprocess.run(("git", "init"), cwd=root, check=True, capture_output=True)
         entries = [f"?? {foreign_path}", *(f"?? {path}" for path in own_paths)]
         raw = "`0".join(entries) + "`0"
         script = function_loader(HARNESS_PATH, ("Get-StagedResidueState",)) + f"""

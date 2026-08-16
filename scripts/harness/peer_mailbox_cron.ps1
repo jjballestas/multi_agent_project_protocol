@@ -907,6 +907,10 @@ function Get-WorktreeDiskProof {
 
 function Get-StagedResidueState {
     param([string[]]$MessageWorkScope)
+    $instancePrefixRaw = @(& git -C $Root rev-parse --show-prefix 2>$null)
+    if ($LASTEXITCODE -ne 0 -or $instancePrefixRaw.Count -gt 1) { return "unknown" }
+    $instancePrefix = ([string]($instancePrefixRaw | Select-Object -First 1)).Replace("\", "/").Trim('/')
+    $instancePathPrefix = if ([string]::IsNullOrWhiteSpace($instancePrefix)) { "" } else { $instancePrefix + "/" }
     $statusResult = Get-GitStatusPorcelainUtf8
     if (-not $statusResult.ok) { return "unknown" }
     $statusRaw = [string]$statusResult.raw
@@ -916,10 +920,13 @@ function Get-StagedResidueState {
         $row = $records[$index]
         if ($row.Length -lt 4) { return "unknown" }
         $candidate = $row.Substring(3).Replace("\", "/")
-        $candidateComparable = ConvertTo-ComparableRoute -Route $candidate
-        $candidateIsOwnPersonal = ($candidate -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
+        $candidateInstanceRoute = if ($instancePathPrefix -and $candidate.StartsWith($instancePathPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            $candidate.Substring($instancePathPrefix.Length)
+        } elseif (-not $instancePathPrefix) { $candidate } else { $null }
+        $candidateComparable = ConvertTo-ComparableRoute -Route $candidateInstanceRoute
+        $candidateIsOwnPersonal = ($null -ne $candidateInstanceRoute -and $candidateInstanceRoute -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
         $candidateIsRelevant = if ($null -eq $MessageWorkScope) {
-            $candidate -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId
+            $null -ne $candidateInstanceRoute -and ($candidateInstanceRoute -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
         } else {
             (-not $candidateIsOwnPersonal) -and $null -ne $candidateComparable -and
                 (Test-ScopeIntersection -Left @($candidateComparable) -Right $MessageWorkScope)
@@ -928,10 +935,13 @@ function Get-StagedResidueState {
             if (($index + 1) -ge $records.Count) { return "unknown" }
             $sourceRow = $records[$index + 1]
             $source = $sourceRow.Replace("\", "/")
-            $sourceComparable = ConvertTo-ComparableRoute -Route $source
-            $sourceIsOwnPersonal = ($source -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
+            $sourceInstanceRoute = if ($instancePathPrefix -and $source.StartsWith($instancePathPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+                $source.Substring($instancePathPrefix.Length)
+            } elseif (-not $instancePathPrefix) { $source } else { $null }
+            $sourceComparable = ConvertTo-ComparableRoute -Route $sourceInstanceRoute
+            $sourceIsOwnPersonal = ($null -ne $sourceInstanceRoute -and $sourceInstanceRoute -match '^personal/([^/]+)(?:/|$)' -and $Matches[1] -ieq $PeerId)
             $sourceIsRelevant = if ($null -eq $MessageWorkScope) {
-                $source -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId
+                $null -ne $sourceInstanceRoute -and ($sourceInstanceRoute -notmatch '^personal/([^/]+)(?:/|$)' -or $Matches[1] -ieq $PeerId)
             } else {
                 (-not $sourceIsOwnPersonal) -and $null -ne $sourceComparable -and
                     (Test-ScopeIntersection -Left @($sourceComparable) -Right $MessageWorkScope)
@@ -955,7 +965,10 @@ function Get-StagedResidueState {
     $script:LastResiduePaths = @($diagnosticPaths)
     $intersections = @()
     foreach ($dirtyPath in $diagnosticPaths) {
-        $dirtyComparable = ConvertTo-ComparableRoute -Route $dirtyPath
+        $dirtyInstanceRoute = if ($instancePathPrefix -and $dirtyPath.StartsWith($instancePathPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            $dirtyPath.Substring($instancePathPrefix.Length)
+        } elseif (-not $instancePathPrefix) { $dirtyPath } else { $null }
+        $dirtyComparable = ConvertTo-ComparableRoute -Route $dirtyInstanceRoute
         foreach ($messageRoute in @($MessageWorkScope)) {
             if ($null -ne $dirtyComparable -and (Test-ScopeIntersection -Left @($dirtyComparable) -Right @($messageRoute))) {
                 $intersections += [ordered]@{ dirty_path = $dirtyPath; message_route = $messageRoute }

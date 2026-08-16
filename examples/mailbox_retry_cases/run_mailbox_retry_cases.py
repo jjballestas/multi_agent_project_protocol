@@ -81,7 +81,10 @@ FALSIFICATION_CONTRACTS = (
         "id": "retry-residue-scope-pair",
         "negative": "own personal residue cannot deadlock the next message while truly intersecting residue still defers with the exact pair",
         "mutation": "mutant = runner_text.replace(",
-        "boundaries": ("exercise(runner_text, own_personal=True, expect_exec=True)", "assert not survivors"),
+        "boundaries": (
+            "exercise(runner_text, nested=nested, own_personal=True, expect_exec=True)",
+            "assert not survivors",
+        ),
         "exercised_by": "run_residue_scope_pair_case",
     },
     {
@@ -1287,9 +1290,12 @@ def run_residue_scope_pair_case() -> None:
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
 
-    def exercise(candidate: str, *, own_personal: bool, expect_exec: bool, expect_pair: bool = False) -> None:
+    def exercise(
+        candidate: str, *, nested: bool, own_personal: bool, expect_exec: bool, expect_pair: bool = False
+    ) -> None:
         fixture = Path(tempfile.mkdtemp(prefix="task0337-residue-scope-"))
         try:
+            instance = fixture / "Aegis" if nested else fixture
             for relative in (
                 "Area_comun/mailbox/open",
                 "Area_comun/state",
@@ -1299,63 +1305,65 @@ def run_residue_scope_pair_case() -> None:
                 "personal/TestPeer",
                 "work",
             ):
-                (fixture / relative).mkdir(parents=True, exist_ok=True)
-            (fixture / "scripts/harness/peer_mailbox_cron.ps1").write_text(candidate, encoding="utf-8")
-            shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
-            (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+                (instance / relative).mkdir(parents=True, exist_ok=True)
+            (instance / "scripts/harness/peer_mailbox_cron.ps1").write_text(candidate, encoding="utf-8")
+            shutil.copy2(LEDGER_HEAD, instance / "scripts/ledger_head.py")
+            (instance / "protocol.config.json").write_text("{}\n", encoding="ascii")
             (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
-            (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
-            (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
-            (fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text('{"tasks":[]}\n', encoding="ascii")
-            (fixture / "Area_comun/tasks/TASK-0001.md").write_text(
+            (instance / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+            (instance / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+            (instance / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text('{"tasks":[]}\n', encoding="ascii")
+            (instance / "Area_comun/tasks/TASK-0001.md").write_text(
                 "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-0001.md\n"
                 "intake:\n  scope_routes:\n    - work/target.txt\n---\n",
                 encoding="ascii",
             )
-            (fixture / "Area_comun/state/TASK_INDEX.json").write_text(
+            (instance / "Area_comun/state/TASK_INDEX.json").write_text(
                 '{"tasks":[{"id":"TASK-0001","file":"Area_comun/tasks/TASK-0001.md"}]}\n',
                 encoding="ascii",
             )
-            (fixture / "Area_comun/mailbox/open/MSG-scope.md").write_text(
+            (instance / "Area_comun/mailbox/open/MSG-scope.md").write_text(
                 "---\nfrom: Coordinator\nto: TestPeer\ntype: ACTION\ntask_id: TASK-0001\nstatus: open\n"
                 "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
                 encoding="ascii",
             )
-            prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+            prompt = instance / "scripts/harness/prompts/test.prompt.md"
             prompt.write_text("Process @@MESSAGE_PATH@@ under @@ROOT@@.\n", encoding="ascii")
-            fake = fixture / "fake-agent.cmd"
+            fake = instance / "fake-agent.cmd"
             fake.write_text("@echo OUTCOME: definitive\r\n", encoding="ascii")
-            (fixture / "work/target.txt").write_text("baseline\n", encoding="ascii")
+            (instance / "work/target.txt").write_text("baseline\n", encoding="ascii")
             run("git", "init", cwd=fixture)
             run("git", "config", "user.email", "scope@example.invalid", cwd=fixture)
             run("git", "config", "user.name", "TestPeer", cwd=fixture)
             run("git", "add", ".", cwd=fixture)
             run("git", "commit", "-m", "fixture", cwd=fixture)
-            dirty = fixture / ("personal/TestPeer/MEMORY.md" if own_personal else "work/target.txt")
+            dirty = instance / ("personal/TestPeer/MEMORY.md" if own_personal else "work/target.txt")
             dirty.write_text("dirty\n", encoding="ascii")
             command = [
                 "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
-                str(fixture / "scripts/harness/peer_mailbox_cron.ps1"), "-PeerId", "TestPeer",
-                "-CoordinatorId", "Coordinator", "-Root", str(fixture), "-PromptFile", str(prompt),
+                str(instance / "scripts/harness/peer_mailbox_cron.ps1"), "-PeerId", "TestPeer",
+                "-CoordinatorId", "Coordinator", "-Root", str(instance), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
                 "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "10",
                 "-PreExecDeferTimeoutSeconds", "1", "-RetryBackoffSeconds", "0",
                 "-AbortedResidueMinutes", "60",
             ]
             try:
-                run(*command, cwd=fixture, timeout=20)
+                run(*command, cwd=instance, timeout=20)
             except subprocess.CalledProcessError as exc:
                 raise AssertionError((exc.stdout or "") + (exc.stderr or "")) from exc
-            log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+            log = (instance / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
             assert ("EXEC_START " in log) is expect_exec, log
             if expect_pair:
-                assert 'dirty_path":"work/target.txt"' in log, log
+                expected_dirty = "Aegis/work/target.txt" if nested else "work/target.txt"
+                assert f'dirty_path":"{expected_dirty}"' in log, log
                 assert 'message_route":"work/target.txt"' in log, log
         finally:
             shutil.rmtree(fixture, ignore_errors=True)
 
-    exercise(runner_text, own_personal=True, expect_exec=True)
-    exercise(runner_text, own_personal=False, expect_exec=False, expect_pair=True)
+    for nested in (False, True):
+        exercise(runner_text, nested=nested, own_personal=True, expect_exec=True)
+        exercise(runner_text, nested=nested, own_personal=False, expect_exec=False, expect_pair=True)
     mutant = runner_text.replace(
         "if ($null -eq $MessageWorkScope) {",
         "if ($true) {",
@@ -1364,10 +1372,21 @@ def run_residue_scope_pair_case() -> None:
     assert mutant != runner_text, "own-personal dead-code mutant was not applied"
     survivors = []
     try:
-        exercise(mutant, own_personal=True, expect_exec=False)
+        exercise(mutant, nested=False, own_personal=True, expect_exec=False)
     except AssertionError:
         survivors.append("own_personal_global_veto")
     assert not survivors, f"residue scope contract failed to kill declared mutants: {survivors}"
+    prefix_mutant = runner_text.replace(
+        '$instancePrefix = ([string]($instancePrefixRaw | Select-Object -First 1)).Replace("\\", "/").Trim(\'/\')',
+        '$instancePrefix = ""',
+        1,
+    )
+    assert prefix_mutant != runner_text, "instance-prefix mutant was not applied"
+    try:
+        exercise(prefix_mutant, nested=True, own_personal=True, expect_exec=False)
+    except AssertionError:
+        return
+    raise AssertionError("nested own-personal case survived the instance-prefix mutant")
 
 
 def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
