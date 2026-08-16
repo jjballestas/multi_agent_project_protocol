@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "0cd0c73a41da0822ea204985186036e2ed47a8674f5fd9ab2697aff4f05b055b",
+  "canonical_hash": "bf1bc84519c37ce8d87b1d5014916d9395c6b36c60383bed73addb0162a91143",
   "integrity": {
-    "canonical_hash": "0cd0c73a41da0822ea204985186036e2ed47a8674f5fd9ab2697aff4f05b055b",
+    "canonical_hash": "bf1bc84519c37ce8d87b1d5014916d9395c6b36c60383bed73addb0162a91143",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2449c1073ce23422aca62a5e7aa07e7003c4d46dd4bce6eaea5832e8d0c068ff",
-    "signature": "7161cd64003483c2747c25bafe383095c240f710118859ea6512b781ec4073bd",
-    "up_to_seq": 9573
+    "prev_hash": "c79de0ecf10bfe9ccfc538d3bbe6072d21424e6b61eac27e3def5f8a8ef933d6",
+    "signature": "c5ab313b7e36d2ec877a1833f2ea30b4e8eb530bde01032bbac350cb9e5bf0bd",
+    "up_to_seq": 9577
   },
   "state": {
     "aggregate_versions": {
@@ -3901,7 +3901,7 @@
       "TASK-0405": 1,
       "TASK-0407": 1,
       "TASK-0408": 1,
-      "TASK-0409": 5,
+      "TASK-0409": 9,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -3924,7 +3924,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8902,
+    "events_applied": 8906,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9093,6 +9093,10 @@
       "codex:task0397:remediation1:msgfix-release:2026-08-16T01:35:59Z": 9477,
       "codex:task0397:remediation1:work-release:2026-08-16T01:31:34Z": 9474,
       "codex:task0409:claim:20260816T113439Z": 9572,
+      "codex:task0409:delivery-claim:20260816T115027Z": 9574,
+      "codex:task0409:delivery-release:20260816T115027Z": 9577,
+      "codex:task0409:implementation-release:20260816T115027Z": 9576,
+      "codex:task0409:in-progress-to-in-review:20260816T115027Z": 9575,
       "codex:task0409:ready-to-in-progress:20260816T113439Z": 9573,
       "codex:tasks0325-0334-0335:done-flip:claim-acquire:20260808T084041Z": 7924,
       "codex:tasks0325-0334-0335:done-flip:claim-release:20260808T084041Z": 7928,
@@ -12830,5 +12834,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9573
+  "up_to_seq": 9577
 }

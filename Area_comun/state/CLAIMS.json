@@ -573,9 +573,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T11:34:39Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0409",
             "updated_at": "2026-08-16T11:34:39Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0409-delivery",
+            "expires_at": "2026-08-16T13:50:27Z",
+            "notes": "Publish TASK-0409 maker handoff and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0409-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0409",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0409",
+                "Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0409.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T11:50:27Z",
+            "status": "released",
+            "task_id": "TASK-0409",
+            "updated_at": "2026-08-16T11:50:27Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

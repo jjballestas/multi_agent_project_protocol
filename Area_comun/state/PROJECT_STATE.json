@@ -405,7 +405,7 @@
         {
             "id": "TASK-0409",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva"
         },
         {
