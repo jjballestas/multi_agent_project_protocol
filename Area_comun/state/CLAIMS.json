@@ -282,6 +282,42 @@
             "updated_at": "2026-08-16T04:28:32Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity",
+            "expires_at": "2026-08-16T10:04:58Z",
+            "notes": "Synchronize PowerShell neutrality exemption with Python, census numeric line-indexed exemptions, and prove twin negative parity.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T07:04:58Z",
+            "status": "active",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T07:04:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-negative",
+            "expires_at": "2026-08-16T10:18:32Z",
+            "notes": "Temporarily move the monitored identity line to prove both neutrality twins fail closed; restore byte-exact before delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity-negative",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T07:18:32Z",
+            "status": "active",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T07:18:32Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

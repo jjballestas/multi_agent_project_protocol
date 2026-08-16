@@ -169,3 +169,23 @@ La exencion deriva el prefijo que Git usa para la raiz de la instancia. El contr
 el mismo par en dos layouts: instancia en la raiz del repositorio (prefijo vacio) e instancia anidada
 (prefijo no vacio). En ambos, la memoria propia arranca y el residuo ajeno que intersecta sigue
 difiriendo con el par exacto en el diagnostico.
+
+## Correccion de paridad del gemelo PowerShell (Codex, 2026-08-16)
+
+El inventario efectivo de Python ubica la identidad vigilada de
+`scripts/harness/peer_mailbox_cron.ps1` en la linea 1515. El valor 1502 citado en el ACTION era una
+coordenada intermedia anterior al revert posterior; el escaneo del arbol vivo demostro que 1515 es
+la coordenada actual. El gemelo PowerShell se sincroniza de 1474 a 1515.
+
+Censo medido desde los dos inventarios efectivos, despues del arreglo puntual:
+
+- Python: 82 exenciones indexadas por numero de linea.
+- PowerShell: 82 exenciones indexadas por numero de linea.
+- Divergencias restantes: 1. En `scripts/harness/peer_mailbox_cron.ps1:553`, Python declara los
+  digests `_EXEMPT_TERM_1` y `_EXEMPT_TERM_6`, mientras PowerShell declara solo el primero.
+
+Negativo de paridad: insertar una linea antes de la ocurrencia vigilada la movio temporalmente de
+1515 a 1516. Ambos gemelos salieron 1 y emitieron exactamente
+`scripts/harness/peer_mailbox_cron.ps1:1516: Codex`. El fichero vigilado se restauro byte a byte
+despues de la prueba; la unica implementacion persistente de esta correccion es la coordenada del
+inventario PowerShell.

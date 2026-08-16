@@ -1,5 +1,32 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0337"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-negative",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity-negative",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0337"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
