@@ -7001,3 +7001,10 @@ ratified its own work.
 - The permanent contract covers flat and nested instances, resolved and unresolved scopes, and kills a mutant that removes only the unresolved-branch exemption.
 - Full mailbox retry cases and falsification inventory passed. The broad exec-lease suite still reported its pre-existing process-liveness failures; the two residue expectations affected by H-1 were updated and pass in isolation.
 - Hub encoding, neutrality, and collaboration gates exited 0. Governed delivery commit `192d8338` moves TASK-0337 to `in_review`, releases all maker claims, and publishes `MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0337-H1.md`; Codex has not reviewed or ratified the work.
+
+# 2026-08-16 - TASK-0337 H-1 revert started
+
+- Commit `bf68d553` records the Codex claim for the Arquitecto-directed exact revert of `f2de3ad7`.
+- Scope is limited to the eight paths changed by H-1 plus runtime claim materialization; no redesign or H-3 work is authorized.
+- Commit `7ca0d74b` is the single revert of `f2de3ad7`; immutable runtime ledger history was preserved while the four H-1 implementation/documentation paths were reversed.
+- Before clean-clone verification, `check_falsification_contracts.py` exited 0 with `permanent_negatives=76`; encoding, neutrality, and collaboration gates also exited 0.

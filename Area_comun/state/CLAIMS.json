@@ -164,9 +164,45 @@
                 "scripts/test_exec_lease_harness.py"
             ],
             "started_at": "2026-08-16T05:34:09Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0337",
             "updated_at": "2026-08-16T05:34:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-h1-revert-delivery",
+            "expires_at": "2026-08-16T08:42:53Z",
+            "notes": "Deliver exact H-1 revert and route independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-h1-revert-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0337-H1-revert.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T05:42:53Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T05:42:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-h1-revert-msgfix",
+            "expires_at": "2026-08-16T06:46:46Z",
+            "notes": "Add the required compact-mailbox question to the H-1 revert handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-h1-revert-msgfix",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0337-H1-revert.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T05:46:46Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T05:46:46Z"
         },
         {
             "claim_id": "CLAIM-20260816-Codex-TASK-0337-h1-v2",
