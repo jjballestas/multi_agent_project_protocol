@@ -7022,3 +7022,19 @@ ratified its own work.
   maker only; independent review remains required.
 - Governed delivery commit `60f962e8` moves TASK-0337 to `in_review`, releases all implementation
   claims, and publishes the self-contained Arquitecto handoff. Independent checking remains open.
+
+## 2026-08-16 - TASK-0409 implementation
+
+- Commit `cc7c158d` replaces the production-state `TASK-0350` anchor in the F2 stub validator
+  test with a self-contained done-task fixture that has no personal deliverable.
+- The same test moves that fixture row from `TASK_INDEX.json` into
+  `TASK_INDEX_ARCHIVE.json` and requires the canonical validator to remain green, while an
+  empty stub still fails.
+- Full memory tests passed 82/82. Falsification inventory passed 76/76; collaboration,
+  encoding, and neutrality gates exited 0.
+- Literal-ID census over 97 executable suite files (`test*` under `scripts/` and `run*`
+  under `examples/*_cases/`) measured 562 references: 463 task, 51 claim, and 48 decision.
+  Of those, 206 references (41 unique IDs) point to rows currently in `*_ARCHIVE.json`;
+  all 206 are task references.
+- TASK-0409 remains maker-owned pending governed delivery and independent Analista review.
+  Codex has not reviewed or ratified the implementation.
