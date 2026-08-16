@@ -252,6 +252,26 @@
             "updated_at": "2026-08-16T13:55:08Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0378-r5-delivery",
+            "expires_at": "2026-08-16T16:19:15Z",
+            "notes": "Publish r5 evidence and move TASK-0378 to independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0378-r5-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-r5.md",
+                "personal/Codex/MEMORY-TASK-0378-R5-20260816.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T14:19:15Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T14:19:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Codex-TASK-0378-r5-v2",
             "expires_at": "2026-08-16T17:57:06Z",
             "notes": "Delete unreachable exemption, remove its obsolete self-mutant, and correct evidence attribution per ACTION r5.",
@@ -288,7 +308,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T14:12:06Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0378",
             "updated_at": "2026-08-16T14:12:06Z"
         },

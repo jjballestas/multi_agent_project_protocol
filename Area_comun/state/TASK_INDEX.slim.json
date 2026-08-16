@@ -188,7 +188,7 @@
         {
             "id": "TASK-0378",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra"
         },
         {
