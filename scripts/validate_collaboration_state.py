@@ -1336,6 +1336,15 @@ def validate_eventlog_agent_signatures(root: Path, config: dict[str, Any] | None
     if not runtime_state_has_content(root):
         return
     result = validate_agent_signatures(events_in_log_order(root), config)
+    if result.get("boundaries"):
+        unavailable_key_ids = sorted(
+            {str(item.get("key_id") or "<missing>") for item in result["boundaries"] if isinstance(item, dict)}
+        )
+        validation.warn(
+            "Runtime event log agent signature boundary: "
+            f"key_unavailable={result.get('key_unavailable', 0)} "
+            f"key_ids={unavailable_key_ids}"
+        )
     if result.get("valid") is not True:
         validation.fail(f"Runtime event log agent signatures invalid: {result.get('findings')}")
 
