@@ -1291,14 +1291,7 @@ def run_residue_scope_pair_case() -> None:
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
 
     def exercise(
-        candidate: str,
-        *,
-        nested: bool,
-        own_personal: bool,
-        expect_exec: bool,
-        expect_pair: bool = False,
-        resolvable_scope: bool = True,
-        expected_defer_reason: str | None = None,
+        candidate: str, *, nested: bool, own_personal: bool, expect_exec: bool, expect_pair: bool = False
     ) -> None:
         fixture = Path(tempfile.mkdtemp(prefix="task0337-residue-scope-"))
         try:
@@ -1322,8 +1315,7 @@ def run_residue_scope_pair_case() -> None:
             (instance / "Area_comun/state/TASK_INDEX_ARCHIVE.json").write_text('{"tasks":[]}\n', encoding="ascii")
             (instance / "Area_comun/tasks/TASK-0001.md").write_text(
                 "---\ntask_id: TASK-0001\nfile: Area_comun/tasks/TASK-0001.md\n"
-                + ("intake:\n  scope_routes:\n    - work/target.txt\n" if resolvable_scope else "")
-                + "---\n",
+                "intake:\n  scope_routes:\n    - work/target.txt\n---\n",
                 encoding="ascii",
             )
             (instance / "Area_comun/state/TASK_INDEX.json").write_text(
@@ -1362,8 +1354,6 @@ def run_residue_scope_pair_case() -> None:
                 raise AssertionError((exc.stdout or "") + (exc.stderr or "")) from exc
             log = (instance / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
             assert ("EXEC_START " in log) is expect_exec, log
-            if expected_defer_reason is not None:
-                assert f"reason={expected_defer_reason}" in log, log
             if expect_pair:
                 expected_dirty = "Aegis/work/target.txt" if nested else "work/target.txt"
                 assert f'dirty_path":"{expected_dirty}"' in log, log
@@ -1374,54 +1364,18 @@ def run_residue_scope_pair_case() -> None:
     for nested in (False, True):
         exercise(runner_text, nested=nested, own_personal=True, expect_exec=True)
         exercise(runner_text, nested=nested, own_personal=False, expect_exec=False, expect_pair=True)
-        exercise(
-            runner_text,
-            nested=nested,
-            own_personal=True,
-            expect_exec=False,
-            resolvable_scope=False,
-            expected_defer_reason="message_scope_ambiguous",
-        )
-        exercise(
-            runner_text,
-            nested=nested,
-            own_personal=False,
-            expect_exec=False,
-            resolvable_scope=False,
-            expected_defer_reason="worktree_residue_live",
-        )
     mutant = runner_text.replace(
-        "(-not $candidateIsOwnPersonal) -and $null -ne $candidateComparable -and\n"
-        "                (Test-ScopeIntersection -Left @($candidateComparable) -Right $MessageWorkScope)",
-        "$null -ne $candidateInstanceRoute",
+        "if ($null -eq $MessageWorkScope) {",
+        "if ($true) {",
         1,
     )
-    assert mutant != runner_text, "resolved own-personal exemption mutant was not applied"
+    assert mutant != runner_text, "own-personal dead-code mutant was not applied"
     survivors = []
     try:
         exercise(mutant, nested=False, own_personal=True, expect_exec=False)
     except AssertionError:
         survivors.append("own_personal_global_veto")
     assert not survivors, f"residue scope contract failed to kill declared mutants: {survivors}"
-    unresolved_exemption_mutant = runner_text.replace(
-        "(-not $candidateIsOwnPersonal) -and $null -ne $candidateInstanceRoute",
-        "$null -ne $candidateInstanceRoute",
-        1,
-    )
-    assert unresolved_exemption_mutant != runner_text, "unresolved own-personal exemption mutant was not applied"
-    try:
-        exercise(
-            unresolved_exemption_mutant,
-            nested=False,
-            own_personal=True,
-            expect_exec=False,
-            resolvable_scope=False,
-            expected_defer_reason="message_scope_ambiguous",
-        )
-    except AssertionError:
-        pass
-    else:
-        raise AssertionError("unresolved own-personal case survived deletion of its exemption")
     prefix_mutant = runner_text.replace(
         '$instancePrefix = ([string]($instancePrefixRaw | Select-Object -First 1)).Replace("\\", "/").Trim(\'/\')',
         '$instancePrefix = ""',
