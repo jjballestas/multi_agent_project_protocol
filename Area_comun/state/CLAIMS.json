@@ -116,7 +116,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T09:30:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0337",
             "updated_at": "2026-08-16T09:30:00Z"
         },
@@ -132,7 +132,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T10:10:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0337",
             "updated_at": "2026-08-16T10:10:00Z"
         },
@@ -174,6 +174,25 @@
             "status": "released",
             "task_id": "TASK-0397",
             "updated_at": "2026-08-15T22:26:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0397-remediation-1",
+            "expires_at": "2026-08-16T04:47:02Z",
+            "notes": "Remediate the stale literal assertion boundary and census the same divergence shape.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0397-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "examples/neutrality_scan_cases/run_powershell_host_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T00:47:02Z",
+            "status": "active",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-16T00:47:02Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

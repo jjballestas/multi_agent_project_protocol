@@ -90,3 +90,25 @@ Subir el `7` y el `1` a sus valores de hoy pone la CI en verde en un minuto. No 
 del defecto es "el control envejece con el objeto", y ajustar el numero la deja intacta.
 
 -- Arquitecto, 2026-08-15
+
+## Remediation 1 - stale declared boundary
+
+Decision: the declaration was defective, not the executed assertion. The injected unsafe job is
+appended to the workflow, so `inline_commands[-1]` is the stable semantic coordinate for the
+mutant under test. `inline_commands[0]` only happened to name that command while the workflow had
+no pre-existing inline PowerShell surface; TASK-0397 legitimately exposed that stale declaration.
+
+The inventory mechanism has the same literal-divergence shape across all 76 declared contracts:
+353 assertion boundaries in 12 runner files are stored as literal source strings and accepted only
+when each string is a substring of the exercised function. Therefore all 353 boundaries can drift
+from their real assertion after a legitimate source edit and are detected only when the static
+contract gate runs. This remediation corrects the one observed boundary; replacing that
+repository-wide contract mechanism is outside this bounded repair.
+
+Verification: the intact static contract gate exits 0 with 76/76 contracts and the stale-boundary
+diagnostic absent. Perturbing only the real assertion back to `[0]` while leaving the declaration
+at `[-1]` exits 1 and reports exactly
+`NEG-POWERSHELL-HOST-ASSUMPTION-CLASS: assertion boundary not found beside the test` for the
+`inline_commands[-1]` assertion. The focused host runner still exits 1 later at the independently
+live `linux_job_is_failure_gating` assertion; that unrelated job-wiring cause is not acceptance
+evidence for or against this repair.

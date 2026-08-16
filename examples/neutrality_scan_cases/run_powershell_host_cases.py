@@ -28,7 +28,7 @@ FALSIFICATION_CONTRACTS = (
             "assert scan_powershell_surface(surface) == {}",
             "assert set(mutation_failures) == set(sources)",
             'assert classify_bash_boundary(bash_mutant) == {"bash_line_model"}',
-            'assert scan_inline_powershell(mutant_surface.inline_commands[0]) == {"relative_uri"}',
+            'assert scan_inline_powershell(mutant_surface.inline_commands[-1]) == {"relative_uri"}',
         ),
         "exercised_by": "case_host_surface_mutations",
     },
