@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "e1e308d74c85439fa755963591472ad02bd690ee8952b21cfe3a7517c630449e",
+  "canonical_hash": "921325012ca5bb7fef35e70755e6e9ac73641a5a5b17d7f787749e94feabb302",
   "integrity": {
-    "canonical_hash": "e1e308d74c85439fa755963591472ad02bd690ee8952b21cfe3a7517c630449e",
+    "canonical_hash": "921325012ca5bb7fef35e70755e6e9ac73641a5a5b17d7f787749e94feabb302",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "22cf0f341aa773a47b3853e9a12945b426a99244161df25aaad4784047861cbe",
-    "signature": "843f479b7dbb772bf21cb81fe74c86ff1dce2068ceef5c2a7af16e4d3b214f8a",
-    "up_to_seq": 9723
+    "prev_hash": "2152344b4470eafa14ccee22a512bc45cfc4b9a835b4e426a045113ddc280853",
+    "signature": "efd53a3ebbf932a17ca259591a26b68ea7ab28f1bb6a88cd179258317148d938",
+    "up_to_seq": 9726
   },
   "state": {
     "aggregate_versions": {
@@ -1081,6 +1081,7 @@
       "CLAIM-20260816-Arquitecto-TASK-0409-reg": 1,
       "CLAIM-20260816-Arquitecto-TASK-0410-reg": 1,
       "CLAIM-20260816-Arquitecto-TASK-0411-reg": 1,
+      "CLAIM-20260816-Arquitecto-TASK-0414-r2": 1,
       "CLAIM-20260816-Arquitecto-TASK-0414-reg": 1,
       "CLAIM-20260816-Arquitecto-lote-nova": 1,
       "CLAIM-20260816-Arquitecto-prom0397": 1,
@@ -3998,7 +3999,7 @@
       "TASK-0411": 3,
       "TASK-0412": 3,
       "TASK-0413": 2,
-      "TASK-0414": 13,
+      "TASK-0414": 15,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4021,7 +4022,7 @@
       "protocol-prune": 73,
       "protocol-state": 1
     },
-    "events_applied": 9052,
+    "events_applied": 9055,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4421,6 +4422,9 @@
       "arq-363r7-acq-001": 8890,
       "arq-363r7-rel-001": 8892,
       "arq-363r7-ups-001": 8891,
+      "arq-414r-acq-2026-08-16T21:29:57Z": 9724,
+      "arq-414r-rel-2026-08-16T21:29:57Z": 9726,
+      "arq-414r-st-2026-08-16T21:29:57Z": 9725,
       "arq-b342-000": 8621,
       "arq-b342-001": 8622,
       "arq-b342-099": 8623,
@@ -13077,5 +13081,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9723
+  "up_to_seq": 9726
 }
