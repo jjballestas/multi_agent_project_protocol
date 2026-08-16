@@ -1,0 +1,120 @@
+# Nota de version -- paquete de actualizacion para instancias, corte 2026-08-16
+
+- Emitida: 2026-08-16, corte 09:00 hora local (UTC+2)
+- Destinatario primario: instancia NOVA (modelo 2.A, gobierno anidado, tier runtime)
+- Emisor: Arquitecto del hub `multi_agent_project_protocol`
+- Adoptable por: `scripts/upgrade_instance.py`
+
+---
+
+## 1. Que entra
+
+**(A) El aparato de verificacion vuelve a operar.** El pin sha256 de `.githooks/pre-commit` en
+`.github/workflows/validate.yml` estaba desincronizado del gancho desde `6f0feb3b` (2026-08-14). El
+paso 4 del job `validate` moria y **saltaba 78 de sus ~86 pasos**. Medido con control historico:
+
+    corrida 31802752243  (14-ago, ANTES)    26 success,  1 failure, 60 skipped
+    corrida 31913703515  (15-ago, DESPUES)   6 success,  2 failure, 78 skipped
+
+Corregido, y con un **negativo permanente cableado dentro del propio paso de CI**: perturba el
+gancho y exige que el pin viejo lo rechace (`PIN_MISMATCH_NEGATIVE`).
+
+**(B) Guardia de residuo consciente del alcance (TASK-0337, AC7 + AC10).** Es lo que NOVA pidio
+como prioridad unica (su D-1), tras medir **137 aplazamientos `worktree_residue_live` en un solo
+dia** entre su maker y su checker.
+
+- **AC7:** el diferimiento ya no es mudo. El log emite `intersections_json` diciendo QUE ruta sucia
+  intersecta QUE ruta del mensaje, en vez de un `worktree_residue_live` sin sujeto.
+- **AC10:** la exencion de area personal **deriva el prefijo de instancia** (`git -C $Root rev-parse
+  --show-prefix`) en vez de anclar en `^personal/`. **Esto es lo que hacia la exencion inoperante en
+  gobierno ANIDADO**: alli `git status` emite `Aegis/personal/...` y el ancla en raiz no casaba
+  jamas. En layout plano el prefijo es cadena vacia y el comportamiento no cambia. Acreditado por el
+  checker **en las dos topologias**, con el cron lanzado desde la raiz del repo.
+
+---
+
+## 2. Residuos ABIERTOS -- leer antes de operar
+
+Se declaran porque **no estan cerrados**, no como formalidad. Cada uno con su causa medida.
+
+### R-1. El interbloqueo sigue vivo para todo mensaje sin `task_id` resoluble
+
+**Y la causa NO es el guardia de residuo: es `message_scope_ambiguous`.** Esta correccion la aporto
+el checker y rectifica un diagnostico previo del Arquitecto que atribuia el bloqueo al guardia.
+
+Poblacion medida en el hub: **292 de 458 tareas y 10 de 38 mensajes abiertos** no tienen scope
+resoluble. **Incluye los mensajes del canal Operador, que llevan `task_id: none`** -- tambien en
+vuestra instancia.
+
+Efecto operativo: un mensaje sin tarea resoluble puede diferirse en bucle hasta agotar su ventana
+de 7200 s y **morir sin que nadie lo lea y sin error visible**. Desde fuera el cuadro es identico al
+de un peon ocupado.
+
+**Mitigacion interina recomendada:** vigilancia manual del `retry.json` de cada peon, mirando
+`defers` crecientes y `RETRY_EXHAUSTED`. Trabajo abierto: TASK-0408 (que el encargo agotado deje
+rastro donde alguien mire) y H-3 de TASK-0337.
+
+Un intento de arreglo (`f2de3ad7`) **se reviritio antes de este corte**: pasaba la letra del
+requisito pero su efecto en el arbol vivo era **nulo** -- ningun vector pasaba de "no arranca" a
+"arranca" -- y dejaba en rojo `check_falsification_contracts`. Se prefirio declarar el residuo antes
+que embarcar un cambio de efecto nulo.
+
+### R-2. La reincidencia del pin no esta cerrada
+
+El pin **casa hoy**, y su negativo demuestra que el control **puede decir que no**. Lo que NO esta
+cerrado es la recaida:
+
+- El negativo original no discriminaba: el checker lo desdento y siguio imprimiendo `PASS`.
+  Remediacion R1 pendiente (aceptacion **por mutacion**, no por texto).
+- Y hay una via mas ancha: **`.github/` no esta en el perimetro de producto gobernado**, asi que el
+  checker **borro el paso del pin ENTERO** en un commit sin `Task-Id`, sin claim y sin evento de
+  ledger, **y aterrizo**. El gate no protege el fichero donde vive el gate.
+
+Decision de politica tomada: `.github/` **entra** en el perimetro gobernado -- un workflow que
+ejecuta los gates es infraestructura de control, no documentacion. Sale como tarea propia
+registrada, no ampliando TASK-0378.
+
+### R-3. Separacion maker/checker: medio abierta
+
+Heredado de TASK-0378 y ya declarado en su alcance: el claim obligatorio cierra el incidente
+reportado (commits de producto sin claim), pero **un actor puede auto-clamarse y commitear**. El
+cierre completo depende de la liveness de checker como paso 0, que es tarea aparte.
+
+Relacionado: **la identidad de gobierno es forjable** (TASK-0386, no incluida en este corte). El
+gate deriva el actor de `git config user.name`, que los tres agentes comparten. Verificado en el hub
+esta madrugada: un commit de coordinacion del Arquitecto entro firmado como `Codex`.
+
+### R-4. El gate de poda del hub: disparador y remedio disjuntos
+
+`cold_start_tokens` mide el coste de lectura en frio, que dirigen las tareas **abiertas**, mientras
+que la poda solo archiva las **terminales**. El gate pide una accion que por construccion no puede
+satisfacerlo. **Es artefacto del backlog del hub, no del codigo que se envia**: vuestro umbral se
+mide contra vuestro propio backlog.
+
+Consecuencia para este corte: el paso 23 (`Check systematic state pruning`) sigue rojo en el hub.
+Por eso la certificacion **no es por color de job**.
+
+---
+
+## 3. Como se certifico este corte
+
+**Por CONTEO DE PASOS EJECUTADOS contra control historico, no por color.** Razon: un job rojo
+absorbe reds nuevos gratis -- fue exactamente lo que oculto el defecto del pin durante dos dias.
+
+- Control historico: corrida `31802752243`, ultimo estado sano conocido, **26 success**.
+- Criterio: restaurar ese orden de magnitud en el job `validate`.
+- **Dos corridas** sobre el mismo commit (DECISION-0115): un verde de una sola corrida es una
+  primera corrida, no un verde.
+- Se cita la terna completa: `run_id` + `job` + `head_sha`, con el desglose success/failure/skipped.
+
+---
+
+## 4. Nota de metodo
+
+Este paquete se produjo en una noche con **cuatro ciclos completos maker-checker**. El checker
+devolvio **CHANGE-REQUIRED en tres de los cuatro**, todos con defecto real, medido y reproducido --
+ninguno rubber-stamp. Dos de esos rechazos mataron cambios que **pasaban su propio criterio escrito**
+y que sin embargo no producian efecto.
+
+Lo que hace utilizable este paquete no es que salga verde: es que **lo que no esta cerrado esta
+nombrado, con su causa medida y su poblacion contada**.
