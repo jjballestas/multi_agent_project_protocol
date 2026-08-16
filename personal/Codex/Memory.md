@@ -2,6 +2,14 @@
 
 Last updated: 2026-08-11 Europe/Madrid, four operator-authorized task closures committed.
 
+## 2026-08-16 - Closure response published
+
+- Commit `f4815c11` publishes the self-contained Arquitecto response for the TASK-0337
+  and TASK-0409 done flips, the attribution anomaly, and the exact-path staging rule.
+- The mailbox claim was Codex-signed and released in runtime events 9671-9672. The
+  concurrent unclaimed version-report change remained outside the explicit stage list.
+- Collaboration, encoding, and domain-neutrality gates exited 0 before commit.
+
 ## 2026-08-16 - TASK-0409 done flip and staging control
 
 - Commit `c97ca3f1` moves TASK-0409 from `review_approved` to `done` after independent
