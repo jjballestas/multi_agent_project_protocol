@@ -13,12 +13,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0337",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331"
-        },
-        {
             "id": "TASK-0338",
             "owner": "Codex",
             "status": "proposed",
@@ -183,7 +177,7 @@
         {
             "id": "TASK-0378",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra"
         },
         {
@@ -347,6 +341,12 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva"
+        },
+        {
+            "id": "TASK-0410",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas"
         }
     ],
     "next_actions": [

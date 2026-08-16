@@ -188,6 +188,51 @@
             "updated_at": "2026-08-16T12:08:28Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0337-ratifica",
+            "expires_at": "2026-08-16T15:59:01Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0337-ratifica",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md"
+            ],
+            "started_at": "2026-08-16T12:59:01Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T12:59:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0378-r5",
+            "expires_at": "2026-08-16T17:39:46Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0378-r5",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md"
+            ],
+            "started_at": "2026-08-16T13:39:46Z",
+            "status": "released",
+            "task_id": "TASK-0378",
+            "updated_at": "2026-08-16T13:39:46Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Arquitecto-TASK-0410-reg",
+            "expires_at": "2026-08-16T16:00:39Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Arquitecto-TASK-0410-reg",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md"
+            ],
+            "started_at": "2026-08-16T13:00:39Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-16T13:00:39Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
