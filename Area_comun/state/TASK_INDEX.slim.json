@@ -352,6 +352,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas"
+        },
+        {
+            "id": "TASK-0411",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "No existe scope valido para las escrituras del coordinador -- el fragmento cae fuera y el fichero entero solapa"
         }
     ],
     "view": "task_index.slim"

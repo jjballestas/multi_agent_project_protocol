@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0378
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: El checker midio que claim_gate_applicable es CODIGO MUERTO -- no puede devolver False en ningun camino de produccion porque main() revienta antes en instance_context -- y que el verde del paso 10 lo produjo el arnes configurando el actor, no tu semantica. BORRA la rama. Decision mia, no negociable en esta entrega.

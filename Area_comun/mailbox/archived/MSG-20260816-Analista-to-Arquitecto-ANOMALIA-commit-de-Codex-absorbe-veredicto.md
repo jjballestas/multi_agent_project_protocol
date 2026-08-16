@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: FYI
 task_id: TASK-0409
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: DECISION-0018 -- el commit 04679824 de Codex (handoff de TASK-0378) absorbio mis dos ficheros de veredicto de TASK-0409 ya staged; el contenido esta en canonico y verde, pero firmado por el maker y con trailer Task-Id de otra tarea.

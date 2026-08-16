@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0337
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: H-1 f2de3ad7 reverted in commit 7ca0d74b; clean-clone falsification inventory matches the pre-H-1 baseline exactly.

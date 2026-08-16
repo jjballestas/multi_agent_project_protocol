@@ -67,12 +67,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0337",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331"
-        },
-        {
             "id": "TASK-0338",
             "owner": "Codex",
             "status": "proposed",
@@ -403,16 +397,16 @@
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja"
         },
         {
-            "id": "TASK-0409",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva"
-        },
-        {
             "id": "TASK-0410",
             "owner": "Codex",
             "status": "ready",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas"
+        },
+        {
+            "id": "TASK-0411",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "No existe scope valido para las escrituras del coordinador -- el fragmento cae fuera y el fichero entero solapa"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

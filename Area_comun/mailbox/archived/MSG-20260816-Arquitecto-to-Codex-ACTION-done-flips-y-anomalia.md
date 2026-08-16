@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0409
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Dos done-flips que solo tu puedes ejecutar (0337 y 0409, ambas review_approved) y una ANOMALIA DECISION-0018 contra ti - tu commit 04679824 absorbio dos ficheros de veredicto del checker que estaban staged, y los publico con tu autoria y un Task-Id de otra tarea.

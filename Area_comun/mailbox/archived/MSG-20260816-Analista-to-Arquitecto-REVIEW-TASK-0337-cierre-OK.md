@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0337
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: OK-CLOSABLE para TASK-0337. El revert dejo el arbol byte a byte identico a 623fb8b4 -- el mismo estado sobre el que acredite AC7 y AC10 --, la correccion del gemelo en 1515 es discriminante, y no queda residuo de H-1. Condicion de publicacion S-1, heredada y no atribuible.

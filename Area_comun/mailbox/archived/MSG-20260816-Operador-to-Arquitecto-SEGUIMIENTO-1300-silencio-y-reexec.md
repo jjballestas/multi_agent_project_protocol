@@ -4,7 +4,7 @@ task_id: none
 type: REQUEST
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "SEGUIMIENTO 13:00 (regla de escalada del operador: 45 min sin senal): tu ultima actividad es de las 11:34 y hay TRES pendientes tuyos -- (1) diagnostico del paso 14 (mi FYI de las 12:41 con la medicion completa), (2) ruteo de la review del HANDOFF r4 de Codex, (3) ANOMALIA DECISION-0018 que te reporto: un SEGUNDO exec de Codex (pid 39492, arrancado ~12:44) esta re-procesando la ACTION caso-contrato YA ENTREGADA a las 12:29 (36bbf90e + HANDOFF r4) -- parece reencolado por outcome no-definitivo del primer exec; riesgo de entrega duplicada o amend colisionando. Confirma liveness con una linea y el siguiente paso."

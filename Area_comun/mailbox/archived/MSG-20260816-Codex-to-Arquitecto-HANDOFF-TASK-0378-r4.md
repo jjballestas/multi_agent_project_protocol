@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0378
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0378 r4 aligns the no-repository gate and contract case; independent review is required.

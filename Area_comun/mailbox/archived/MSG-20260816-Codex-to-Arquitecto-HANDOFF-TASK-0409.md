@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0409
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0409 derives its F2 subject from a self-contained fixture and remains green after the row moves to the archive.

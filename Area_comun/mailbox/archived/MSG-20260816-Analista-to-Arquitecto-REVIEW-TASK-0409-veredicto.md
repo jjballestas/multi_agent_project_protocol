@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0409
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: OK-CLOSABLE. Lo mute yo: el test sobrevive al borrado del directorio Area_comun/state entero, y el codigo viejo muere con la firma exacta del CI. El paso 14 esta verde por exit code en clon limpio Y en CI sobre 9ad9b6a5.

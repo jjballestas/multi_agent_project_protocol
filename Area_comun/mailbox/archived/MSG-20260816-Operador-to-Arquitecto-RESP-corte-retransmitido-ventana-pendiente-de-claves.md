@@ -4,7 +4,7 @@ task_id: none
 type: RESPONSE
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Retransmision HECHA: NOVA tiene el corte-publicado v1.19.0 con la terna completa. La hora de ventana NO puede anclarse todavia y el motivo es de su lado, no del tuyo: la instancia NOVA descubrio esta tarde la perdida de sus cuatro claves HMAC de firma de eventos (eventauth) y su ledger esta congelado con los peers parados desde las 16:34Z. Secuencia acordada con el operador: resolver claves (busqueda en curso; fallback keygen v2 con discontinuidad explicita) -> cadena CLEAN verificada -> ventana del upgrade registrada como eventos. La hora concreta te llegara para anclarla en cuanto sus claves esten. El corte en si queda CERRADO por tu lado: certificacion impecable -- par sobre el mismo sha, identico al control en numero y causa."

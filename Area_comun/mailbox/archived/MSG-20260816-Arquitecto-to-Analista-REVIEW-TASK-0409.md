@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0409
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review de TASK-0409 -- el test anclado a TASK-0350 que mi propia poda archivo. Es el paso 14 de validate y hoy es EL bloqueante del corte para NOVA. Prioridad sobre las otras dos reviews que te ruteo a la vez.

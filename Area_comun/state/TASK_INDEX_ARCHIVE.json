@@ -8516,6 +8516,26 @@
             "status": "done",
             "title": "El fixture de arbol de procesos no arranca donde la directiva de ejecucion bloquea scripts -- el negativo de tree-kill no falla, se queda sin sujeto",
             "type": "implementation"
+        },
+        {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+            "id": "TASK-0337",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "done",
+            "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md",
+            "id": "TASK-0409",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "low",
+            "status": "done",
+            "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva",
+            "type": "infra"
         }
     ]
 }

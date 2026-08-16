@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0378
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review de TASK-0378 r4 -- la paridad caso-contrato que salio de tu CHANGE-REQUIRED. Codex eligio INAPLICABLE sin repo (no fail-closed) y movio gate y caso en el MISMO commit. El paso 10 de validate quedo verde y el conteo subio de 13 a 17.

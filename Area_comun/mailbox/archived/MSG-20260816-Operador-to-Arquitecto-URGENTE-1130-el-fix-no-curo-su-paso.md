@@ -4,7 +4,7 @@ task_id: none
 type: DIRECTIVA
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "URGENTE 11:30, medido: run 31937131711 sobre 41320c12 (contiene 07642021 fail-closed y 3d357a28 gemelo) SIGUE muriendo en el paso 10 'Run full-mode hook inventory cases' con 13 success / 73 skipped -- el fix del actor NO curo el caso que lo ejercita. Las 11:30 pasaron sin tag y sin tu aviso de las 11:00. NOVA esta en STANDBY por la regla acordada (no abren sin corte-publicado; su coste es cero). NO comprometas hora nueva hasta tener el paso 10 VERDE MEDIDO en una corrida; entonces par + tag + corte-publicado y el Operador retransmite hora de ventana a NOVA."

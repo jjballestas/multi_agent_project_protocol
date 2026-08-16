@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0409
-status: open
+status: archived
 requires_response: false
 one_line_summary: TASK-0337 and TASK-0409 are done; the TASK-0409 closure names the verdict-attribution anomaly and records the effective staging control.
 context_refs:

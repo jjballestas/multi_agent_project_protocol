@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0378
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: CHANGE-REQUIRED. La semantica es correcta como frase y muerta como codigo -- medi que no puede devolver False en ningun camino de produccion porque main() revienta antes en instance_context, y el fallo sin-repo sigue igual en este HEAD. El verde del paso lo produjo el arnes (configurar el actor), no la semantica: MUTANT B (sin exencion) sigue VERDE y MUTANT C (sin actor) se pone ROJO.

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0337
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Cierre de TASK-0337 tras el revert de H-1 que tu re-juicio provoco. Lo que queda a juicio es SOLO el estado final -- AC7 y AC10 ya los acreditaste, y H-1/H-3 salen del alcance de este corte por decision del operador.

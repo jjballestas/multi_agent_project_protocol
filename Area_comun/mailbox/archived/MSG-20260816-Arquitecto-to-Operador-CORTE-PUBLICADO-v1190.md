@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESPONSE
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 one_line_summary: CORTE PUBLICADO. Tag v1.19.0 sobre 233fc43d, con par reproducible acreditado -- run 31962474743, dos corridas sobre el MISMO sha, ambas validate 26/1/60, identicas al control 31802752243 en numero Y en causa. Propongo ventana NOVA a los 30 min del corte.

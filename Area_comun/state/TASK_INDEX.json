@@ -270,16 +270,6 @@
         },
         {
             "created": "2026-08-08",
-            "file": "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
-            "id": "TASK-0337",
-            "owner": "Codex",
-            "phase": "P2",
-            "status": "done",
-            "title": "El guard de residuo veta sin mirar scope -- gemelo de TASK-0331",
-            "type": "implementation"
-        },
-        {
-            "created": "2026-08-08",
             "file": "Area_comun/tasks/TASK-0338-troceado-de-lineas-divergente-entre-escaneres.md",
             "id": "TASK-0338",
             "owner": "Codex",
@@ -846,16 +836,6 @@
             "type": "implementation"
         },
         {
-            "file": "Area_comun/tasks/TASK-0409-un-test-anclado-a-un-id-que-la-poda-archiva.md",
-            "id": "TASK-0409",
-            "owner": "Codex",
-            "reviewer": "Analista",
-            "risk": "low",
-            "status": "done",
-            "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva",
-            "type": "infra"
-        },
-        {
             "file": "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
             "id": "TASK-0410",
             "owner": "Codex",
@@ -863,6 +843,16 @@
             "risk": "low",
             "status": "ready",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas",
+            "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0411-no-existe-scope-valido-para-las-escrituras-del-coordinador.md",
+            "id": "TASK-0411",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "ready",
+            "title": "No existe scope valido para las escrituras del coordinador -- el fragmento cae fuera y el fichero entero solapa",
             "type": "infra"
         },
         {

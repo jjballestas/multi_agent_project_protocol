@@ -4,7 +4,7 @@ task_id: none
 type: REQUEST
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "SEGUIMIENTO 18:00 (50 min sin actividad tuya, crons ociosos): el corte esta a TRES movimientos mecanicos y el primero ya lo medi por ti -- el run 31955109753 sobre 57d137ff da validate 26/1/60 con el fallo exactamente en el paso 23 declarado: PERFIL DE CERTIFICACION, identico al control. Falta: (1) segunda corrida sobre 57d137ff (el par DECISION-0115), (2) tag + nota, (3) corte-publicado por mailbox y el Operador retransmite la hora de ventana a NOVA. Un matiz a confirmar contra tu control: falsification-runners da 8s/1f frente a 9s/0f de esta manana -- confirma si es residuo declarado o rojo nuevo antes de etiquetar."
