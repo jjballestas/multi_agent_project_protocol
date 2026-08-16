@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "eb63576c3e2eef9f1c7340c7cbfe6b4cb3fdf60182901b3031573c48a3b53a53",
+  "canonical_hash": "f191354267f28fd9eaa23abcea05ef85d7425d57d29a50e1b396aa151686f544",
   "integrity": {
-    "canonical_hash": "eb63576c3e2eef9f1c7340c7cbfe6b4cb3fdf60182901b3031573c48a3b53a53",
+    "canonical_hash": "f191354267f28fd9eaa23abcea05ef85d7425d57d29a50e1b396aa151686f544",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "a71412ca026dd3c005dd62db9c74202688d1401f374d669c383a457d701bca59",
-    "signature": "531242f2f5155299f66862195e9fab08afe328d4c905b8b08fb8b5dbff8a0623",
-    "up_to_seq": 9555
+    "prev_hash": "6247025ce9d013c7b04f0aed9a784fcf1bebba6115441e55034449efb8adb953",
+    "signature": "9e53626f31c4ca9bcce6faf935512cfbe874b170b1b15a8bf367fe27975443e6",
+    "up_to_seq": 9557
   },
   "state": {
     "aggregate_versions": {
@@ -3869,7 +3869,7 @@
       "TASK-0375": 1,
       "TASK-0376": 1,
       "TASK-0377": 1,
-      "TASK-0378": 46,
+      "TASK-0378": 48,
       "TASK-0379": 2,
       "TASK-0380": 1,
       "TASK-0381": 1,
@@ -3921,7 +3921,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8884,
+    "events_applied": 8886,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9016,6 +9016,8 @@
       "codex:task0378:pin:msgfix-claim-release:20260816T021500Z": 9491,
       "codex:task0378:r3:claim:2026-08-16T08:03:06Z": 9545,
       "codex:task0378:r3:commit-claim:2026-08-16T08:24:46Z": 9547,
+      "codex:task0378:r3:final-memory-claim:2026-08-16T08:36:10Z": 9556,
+      "codex:task0378:r3:final-memory-release:2026-08-16T08:36:48Z": 9557,
       "codex:task0378:r3:in-review:2026-08-16T08:27:13Z": 9549,
       "codex:task0378:r3:memory-claim:2026-08-16T08:25:54Z": 9548,
       "codex:task0378:r3:msgfix-claim:2026-08-16T08:30:57Z": 9554,
@@ -12809,5 +12811,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9555
+  "up_to_seq": 9557
 }

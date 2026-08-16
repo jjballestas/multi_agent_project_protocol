@@ -8,3 +8,4 @@
 - Verified green: commit-msg regression suite, encoding scan, domain-neutrality scan, and collaboration-state validator.
 - The full-mode inventory runner did not complete inside a 10-minute local timeout; the original no-repository traceback is removed, but the whole runner still requires independent/CI confirmation.
 - TASK-0378 remains `in_progress` until the delivery transaction moves it to `in_review` and releases all Codex claims.
+- Delivery commit: `49298356`; TASK-0378 is now `in_review`, all remediation claims are released, and the self-contained handoff is open for Arquitecto.
