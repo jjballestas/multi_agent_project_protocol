@@ -297,9 +297,45 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T07:04:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0337",
             "updated_at": "2026-08-16T07:04:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-delivery",
+            "expires_at": "2026-08-16T09:43:12Z",
+            "notes": "Deliver PowerShell neutrality parity correction, measured census, and independent-review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0337",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0337",
+                "Area_comun/tasks/TASK-0337-guard-de-residuo-veta-sin-mirar-scope.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0337-ps1-parity.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T07:43:12Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T07:43:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-memory",
+            "expires_at": "2026-08-16T09:38:38Z",
+            "notes": "Record the PowerShell parity fix commit and measured exemption census in persistent Codex memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T07:38:38Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T07:38:38Z"
         },
         {
             "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-negative",
@@ -313,7 +349,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-16T07:18:32Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0337",
             "updated_at": "2026-08-16T07:18:32Z"
         },

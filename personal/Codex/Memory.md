@@ -7008,3 +7008,15 @@ ratified its own work.
 - Scope is limited to the eight paths changed by H-1 plus runtime claim materialization; no redesign or H-3 work is authorized.
 - Commit `7ca0d74b` is the single revert of `f2de3ad7`; immutable runtime ledger history was preserved while the four H-1 implementation/documentation paths were reversed.
 - Before clean-clone verification, `check_falsification_contracts.py` exited 0 with `permanent_negatives=76`; encoding, neutrality, and collaboration gates also exited 0.
+- Delivery commit `8cdd12e1` moves TASK-0337 to `in_review`, releases all Codex claims, and publishes the independent-review handoff. Runtime materialization reached seq 9527 with drift false. Codex did not review or ratify the revert.
+
+## 2026-08-16 - TASK-0337 PowerShell neutrality parity correction
+
+- Commit `3d357a28` moves the PowerShell exemption for `scripts/harness/peer_mailbox_cron.ps1`
+  from stale line 1474 to the current monitored identity at line 1515.
+- Effective inventory census: Python 82 line-indexed exemptions, PowerShell 82, with one remaining
+  divergence at `peer_mailbox_cron.ps1:553` (Python has term digests 1 and 6; PowerShell only 1).
+- A temporary one-line shift moved the identity to 1516; both scanners exited 1 with the identical
+  `scripts/harness/peer_mailbox_cron.ps1:1516: Codex` finding. The monitored file was restored.
+- Collaboration, encoding, Python neutrality, and PowerShell neutrality gates exited 0. Codex is
+  maker only; independent review remains required.
