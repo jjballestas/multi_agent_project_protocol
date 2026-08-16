@@ -7020,3 +7020,5 @@ ratified its own work.
   `scripts/harness/peer_mailbox_cron.ps1:1516: Codex` finding. The monitored file was restored.
 - Collaboration, encoding, Python neutrality, and PowerShell neutrality gates exited 0. Codex is
   maker only; independent review remains required.
+- Governed delivery commit `60f962e8` moves TASK-0337 to `in_review`, releases all implementation
+  claims, and publishes the self-contained Arquitecto handoff. Independent checking remains open.

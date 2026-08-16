@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "7f8f2c4930c503cb4fb1757b3cc12598a9859ca17ad72ed65142b4d9dc300e21",
+  "canonical_hash": "2777a99404ed496c34ee59594b8b77c36908b5610e5086ad4cafc66f2f0b358f",
   "integrity": {
-    "canonical_hash": "7f8f2c4930c503cb4fb1757b3cc12598a9859ca17ad72ed65142b4d9dc300e21",
+    "canonical_hash": "2777a99404ed496c34ee59594b8b77c36908b5610e5086ad4cafc66f2f0b358f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "8bc0c3b3a8594bacdfbcb87dfc945880c668cc09e21002663add9aa2a9a18226",
-    "signature": "52449a5931864ae5179d60b7074377182e49589f3d2f9980438137a43594e835",
-    "up_to_seq": 9542
+    "prev_hash": "fd0088836445d30380ba3157f901954337a20e85153baf900018329e518d799c",
+    "signature": "68ed7de3acb7ba32d71fbaffd2d3c37e187d443d049a34ae5be95862ce26c173",
+    "up_to_seq": 9544
   },
   "state": {
     "aggregate_versions": {
@@ -3828,7 +3828,7 @@
       "TASK-0334": 21,
       "TASK-0335": 33,
       "TASK-0336": 62,
-      "TASK-0337": 53,
+      "TASK-0337": 55,
       "TASK-0338": 2,
       "TASK-0339": 1,
       "TASK-0340": 29,
@@ -3921,7 +3921,7 @@
       "protocol-prune": 71,
       "protocol-state": 1
     },
-    "events_applied": 8871,
+    "events_applied": 8873,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -8766,6 +8766,8 @@
       "codex:task0337:orphan-release:20260816T004702Z": 9470,
       "codex:task0337:ps1-parity-delivery:claim-acquire:20260816T074312Z": 9537,
       "codex:task0337:ps1-parity-delivery:claim-release:20260816T074312Z": 9542,
+      "codex:task0337:ps1-parity-final-memory:claim-acquire:20260816T074917Z": 9543,
+      "codex:task0337:ps1-parity-final-memory:claim-release:20260816T075023Z": 9544,
       "codex:task0337:ps1-parity-memory:claim-acquire:20260816T073838Z": 9536,
       "codex:task0337:ps1-parity-memory:claim-release:20260816T074312Z": 9541,
       "codex:task0337:ps1-parity-negative:claim-acquire:20260816T071832Z": 9535,
@@ -12796,5 +12798,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9542
+  "up_to_seq": 9544
 }

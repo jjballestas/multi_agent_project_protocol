@@ -322,6 +322,22 @@
             "updated_at": "2026-08-16T07:43:12Z"
         },
         {
+            "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-final-memory",
+            "expires_at": "2026-08-16T08:49:17Z",
+            "notes": "Record governed delivery commit in persistent memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260816-Codex-TASK-0337-ps1-parity-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-16T07:49:17Z",
+            "status": "released",
+            "task_id": "TASK-0337",
+            "updated_at": "2026-08-16T07:49:17Z"
+        },
+        {
             "claim_id": "CLAIM-20260816-Codex-TASK-0337-ps1-parity-memory",
             "expires_at": "2026-08-16T09:38:38Z",
             "notes": "Record the PowerShell parity fix commit and measured exemption census in persistent Codex memory.",
