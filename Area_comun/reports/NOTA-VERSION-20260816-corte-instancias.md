@@ -122,6 +122,28 @@ Es la unica variante en la que el ancla **no diverge sino que apunta a VACIO**: 
 objeto ya no esta en la linea declarada. **Una exencion muerta exime algo que ya no existe y puede
 estar tapando una violacion nueva en esa misma linea.**
 
+### R-6. Un job INTERMITENTE no puede formar parte del perfil de certificacion
+
+`falsification-runners` fallo el paso 6 (`Execute mailbox retry falsification runner`) con
+
+    AssertionError: mid-log ambiguity was rolled back
+
+Es **TASK-0401**, ya enumerada y declarada fuera de este corte desde el primer plan. Lo NUEVO es la
+prueba de que es **intermitente**, medida el mismo dia sobre commits equivalentes:
+
+    run 31950779306  (9ad9b6a5)   falsification-runners  9 success, 0 failure
+    run 31955109753  (57d137ff)   falsification-runners  8 success, 1 failure  <- paso 6
+
+**Correccion de una lectura propia:** se dijo que `9ad9b6a5` tenia "perfil limpio". No lo tenia:
+dio 9/9 porque 0401 **no disparo en esa tirada**, no porque estuviera sano. Un verde de un job
+intermitente no acredita ausencia del defecto.
+
+**Criterio que se adopta, y es la parte reutilizable:** un job con fallo intermitente **se declara y
+se excluye explicitamente del perfil de certificacion**, igual que el paso 23. Exigirlo verde haria
+que el corte dependiera del azar de la corrida -- que es la forma exacta de un gate que no
+discrimina. El perfil de este corte es por tanto el del job `validate`, cuyo fallo unico y su causa
+son estables y coinciden con el control.
+
 ## 3. Como se certifico este corte
 
 **Por CONTEO DE PASOS EJECUTADOS contra control historico, no por color.** Razon: un job rojo
