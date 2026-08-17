@@ -831,7 +831,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "high",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja",
             "type": "implementation"
         },
@@ -881,7 +881,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "medium",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature",
             "type": "infra"
         },

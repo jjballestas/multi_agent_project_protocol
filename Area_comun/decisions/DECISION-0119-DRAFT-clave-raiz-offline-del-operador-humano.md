@@ -60,10 +60,20 @@ TASK-0414 se resuelve **hoy** con **ancla-por-cadena**: el registro se fija con 
 unica raiz **preexistente, externa al registro y ya atestada** disponible. Alterar el registro sin su
 ancla rompe CLEAN; retirar el ancla rompe la cadena.
 
-**El residual que esa via NO cubre** -- un insider que ademas appendee un ancla plausible -- queda
-declarado con dueno **aqui**: es ambiental de la maquina compartida y **su cura es esta decision**,
-no otro mecanismo. Perseguirlo con codigo seria intentar cerrar con ingenieria lo que solo cierra la
-custodia.
+**CORRECCION 2026-08-17 (Arquitecto, tras medicion del checker).** La version anterior de este
+borrador decia que el residual era "un insider que ademas appendee un ancla plausible" y lo
+declaraba **ambiental, con cura en la custodia**. **Era falso y el error era mio.** El checker lo
+midio: el ataque **no cuesta credencial ninguna -- ni ed25519 ni HMAC**. Llamarlo "insider" lo
+empujaba hacia esta decision futura cuando en realidad **es alcanzable por cualquiera y su cura es
+codigo, hoy** (SLIP-A de TASK-0414: la ausencia del registro debe ser fatal).
+
+**Nombrar mal un residual no es un matiz de redaccion: cambia quien lo arregla y cuando.** Mande a
+la espera de una ceremonia fuera de banda algo que se cierra con un `if`.
+
+**El residual que esta decision SI cubre**, ya acotado correctamente: **un atacante que posee una
+clave privada legitima**. Contra ese, ningun mecanismo de esta maquina sirve -- por definicion pasa
+todas las verificaciones que esta maquina puede hacer -- y su unica cura es que exista una raiz
+**fuera del alcance de todos los que operamos aqui**.
 
 ## Nota de metodo, para quien lea esto despues
 

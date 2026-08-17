@@ -287,6 +287,21 @@
             "updated_at": "2026-08-17T00:07:23Z"
         },
         {
+            "claim_id": "CLAIM-20260817-Arquitecto-TASK-0414-slipa",
+            "expires_at": "2026-08-17T11:27:08Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Arquitecto-TASK-0414-slipa",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md"
+            ],
+            "started_at": "2026-08-17T07:27:08Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T07:27:08Z"
+        },
+        {
             "claim_id": "CLAIM-20260817-Arquitecto-TASK-0414-unblock",
             "expires_at": "2026-08-17T04:36:14Z",
             "owner": "Arquitecto",
@@ -300,6 +315,36 @@
             "status": "released",
             "task_id": "TASK-0414",
             "updated_at": "2026-08-17T00:36:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0408-delivery",
+            "expires_at": "2026-08-17T09:03:59.5582740Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-implementation-v3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0408.md"
+            ],
+            "started_at": "2026-08-17T07:03:59.5193728Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-17T07:03:59.5193728Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0408-handoff-fix",
+            "expires_at": "2026-08-17T08:10:04.0934175Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-handoff-fix",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0408.md"
+            ],
+            "started_at": "2026-08-17T07:10:04.0583407Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-17T07:10:04.0583407Z"
         },
         {
             "claim_id": "CLAIM-20260817-Codex-TASK-0408-implementation",
@@ -349,7 +394,7 @@
                 "scripts/scan_domain_neutrality.ps1"
             ],
             "started_at": "2026-08-17T06:58:19.9456779Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-17T06:58:19.9456779Z"
         },
