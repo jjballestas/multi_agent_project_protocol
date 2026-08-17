@@ -27,11 +27,16 @@ from runtime.eventlog import (  # noqa: E402
     EVENT_AUTH_UNVERIFIABLE_REASONS,
     UNAUTHENTICATED_EVENT,
     canonical_hash,
+    compute_event_prev_hash,
+    compute_genesis_prev_hash,
     event_signature,
     event_auth_verification_boundaries,
+    event_auth_registry_sha256,
+    validate_event_auth_registry_anchor,
     replay_events,
     sign_event,
 )
+from runtime.protocol_replay import validate_chain  # noqa: E402
 from runtime.temp_paths import make_root_temp_dir, remove_root_temp_dir  # noqa: E402
 
 KEY_REL = "secrets/eventauth-codex.key"
@@ -219,6 +224,40 @@ def case_attested_rotation_population() -> dict[str, Any]:
         late_v1_state = replay_events([late_v1], None, config, root)
         assert replay_exit(late_v1_state) == 1
         assert late_v1_state["rejections"][0]["reason"] == "key_outside_validity"
+
+        registry_path = root / "Area_comun" / "protocol" / "EVENT_AUTH_KEY_REGISTRY.json"
+        anchored_digest = event_auth_registry_sha256(root)
+        anchor = mkevent(1020, "registry-anchor", {"registry_sha256": anchored_digest})
+        anchor["type"] = "event_auth.registry_anchor"
+        assert validate_event_auth_registry_anchor([anchor], root=root)["valid"] is True
+        registry_payload = json.loads(registry_path.read_text(encoding="ascii"))
+        registry_payload["keys"]["codex:v2"]["actor"] = "Mallory"
+        registry_path.write_text(json.dumps(registry_payload), encoding="ascii")
+        assert validate_event_auth_registry_anchor([anchor], root=root)["reason"] == "registry_anchor_mismatch"
+        registry_edit_exit = 1
+
+        chain_config = deepcopy(config)
+        chain_config["event_state"]["chain_enabled"] = True
+        (root / "protocol.config.json").write_text(json.dumps(chain_config), encoding="ascii")
+        before_anchor = mkevent(1019, "before-anchor")
+        before_anchor["prev_hash"] = compute_event_prev_hash(
+            before_anchor,
+            compute_genesis_prev_hash(root / "protocol.config.json"),
+        )
+        anchor["prev_hash"] = compute_event_prev_hash(anchor, before_anchor["prev_hash"])
+        after_anchor = mkevent(1021, "after-anchor")
+        after_anchor["prev_hash"] = compute_event_prev_hash(after_anchor, anchor["prev_hash"])
+        assert validate_chain([before_anchor, anchor, after_anchor], chain_config, root=root)["valid"] is True
+        anchor_removed = validate_chain([before_anchor, after_anchor], chain_config, root=root)
+        assert anchor_removed["valid"] is False
+        anchor_removed_exit = 1
+        registry_payload["keys"]["codex:v2"]["actor"] = "Codex"
+        registry_payload["keys"]["codex:v2"]["status"] = "retired"
+        registry_path.write_text(json.dumps(registry_payload), encoding="ascii")
+        retired_without_boundary = sign_with(mkevent(1019, "retired-no-boundary"), "codex:v2", "b" * 64)
+        retired_state = replay_events([retired_without_boundary], None, config, root)
+        assert replay_exit(retired_state) == 1
+        assert retired_state["rejections"][0]["reason"] == "retired_key_missing_boundary"
         return {
             "case": "attested-rotation-population",
             "status": "pass",
@@ -231,6 +270,9 @@ def case_attested_rotation_population() -> dict[str, Any]:
                 "bad_present": 1,
                 "own_key_as_other_actor": 1,
                 "retired_key_after_boundary": 1,
+                "registry_edited_without_anchor": registry_edit_exit,
+                "registry_anchor_removed": anchor_removed_exit,
+                "retired_without_boundary": 1,
             },
         }
     finally:

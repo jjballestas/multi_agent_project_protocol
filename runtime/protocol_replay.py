@@ -27,6 +27,7 @@ try:
         compute_event_prev_hash,
         compute_genesis_prev_hash,
         event_auth_verification_boundaries,
+        validate_event_auth_registry_anchor,
         read_protocol_config,
     )
     from .temp_paths import make_root_temp_dir, remove_root_temp_dir
@@ -41,6 +42,7 @@ except ImportError:  # pragma: no cover - direct script execution
         compute_event_prev_hash,
         compute_genesis_prev_hash,
         event_auth_verification_boundaries,
+        validate_event_auth_registry_anchor,
         read_protocol_config,
     )
     from temp_paths import make_root_temp_dir, remove_root_temp_dir
@@ -1191,6 +1193,14 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
     hot = materialize_protocol_state(hot_snapshot)
     materialized = materialize_protocol_state(replay_snapshot)
     entries = drift_entries(hot, materialized)
+    registry_anchor = validate_event_auth_registry_anchor(events, root=root)
+    if registry_anchor.get("valid") is not True:
+        entries.append(
+            {
+                "path": "Area_comun/protocol/EVENT_AUTH_KEY_REGISTRY.json",
+                "reason": registry_anchor.get("reason"),
+            }
+        )
     entries.extend(prune_archive_drift(root, events))
     if slim_views_enabled(config):
         entries.extend(slim_view_drift(root).get("entries") or [])
@@ -1204,6 +1214,7 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
         "hot_hash": canonical_hash(hot),
         "replay_hash": canonical_hash(materialized),
         "event_auth_boundaries": event_auth_verification_boundaries(events, config, root=root),
+        "event_auth_registry_anchor": registry_anchor,
     }
 
 

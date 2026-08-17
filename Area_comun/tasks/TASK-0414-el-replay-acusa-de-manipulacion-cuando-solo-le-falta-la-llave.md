@@ -1,7 +1,7 @@
 ---
 id: TASK-0414
 title: El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature
-status: blocked
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md
@@ -122,3 +122,17 @@ event population remains non-fatal with zero invalid signatures. Counterproof ex
 registered historical key `0`; unregistered id `1`; bad present signature `1`; one live key used as
 another actor `1`; retired key after its temporal boundary `1`. Registry changes are a governed
 surface: claim, TASK trailer, and independent review are required; no secret material is stored.
+
+## Remediation r4c - registry anchored by the ledger chain
+
+The exact bytes of the present key registry are bound to the append-only ledger by
+`event_auth.registry_anchor`, whose payload carries the file SHA-256. Replay compares the current
+file with the latest anchor and reports enforced drift on a missing, malformed, or mismatched
+anchor. The live registry is anchored at sequence 9764. Editing the registry without appending a
+matching anchor returns exit `1`; removing the anchor from between its predecessor and successor
+breaks the hash chain and also returns exit `1`.
+
+Key `status` is now a semantic input, not documentary metadata: `active` requires no temporal
+boundary, while `retired` requires `valid_through_seq` and fails after that boundary. Mutation
+coverage independently proves registry mismatch, Mallory identity substitution, anchor removal,
+and a retired key without a boundary.

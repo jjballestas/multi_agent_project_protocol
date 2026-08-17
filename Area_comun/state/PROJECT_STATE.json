@@ -423,7 +423,7 @@
         {
             "id": "TASK-0414",
             "owner": "Codex",
-            "status": "blocked",
+            "status": "in_progress",
             "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature"
         },
         {

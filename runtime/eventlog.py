@@ -8,6 +8,7 @@ import hashlib
 import hmac
 import json
 import os
+import re
 import sys
 from contextlib import contextmanager
 from copy import deepcopy
@@ -31,6 +32,7 @@ SECRET_DIRS = {"secrets", ".protocol-secrets"}
 EVENT_AUTH_UNVERIFIABLE_REASONS = {"unresolved_key", "missing_key", "key_unavailable"}
 EVENT_AUTH_TAMPER_REASONS = {"invalid_signature", "missing_signature"}
 EVENT_AUTH_ROTATION_DECLARATION = "event_auth.key_rotation_declared"
+EVENT_AUTH_REGISTRY_ANCHOR = "event_auth.registry_anchor"
 EVENT_AUTH_KEY_REGISTRY_PATH = Path("Area_comun") / "protocol" / "EVENT_AUTH_KEY_REGISTRY.json"
 ACTOR_AUTH_TAMPER_REASONS = {
     "invalid_signature",
@@ -668,6 +670,39 @@ def event_auth_key_registry(config: dict[str, Any] | None, *, root: Path | None 
     return derived
 
 
+def event_auth_registry_sha256(root: Path) -> str:
+    path = root.resolve() / EVENT_AUTH_KEY_REGISTRY_PATH
+    if not path.is_file():
+        return ""
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def validate_event_auth_registry_anchor(events: list[dict[str, Any]], *, root: Path) -> dict[str, Any]:
+    if not (root.resolve() / EVENT_AUTH_KEY_REGISTRY_PATH).is_file():
+        return {"valid": True, "reason": "registry_absent", "checked": 0}
+    anchors = [event for event in events if str(event.get("type") or "") == EVENT_AUTH_REGISTRY_ANCHOR]
+    if not anchors:
+        return {"valid": False, "reason": "registry_anchor_missing", "checked": 0}
+    latest = max(anchors, key=lambda item: int(item.get("seq") or 0))
+    payload = latest.get("payload") if isinstance(latest.get("payload"), dict) else {}
+    expected = str(payload.get("registry_sha256") or "")
+    actual = event_auth_registry_sha256(root)
+    if not re.fullmatch(r"[0-9a-f]{64}", expected):
+        return {"valid": False, "reason": "registry_anchor_invalid", "seq": latest.get("seq"), "checked": len(anchors)}
+    if not actual:
+        return {"valid": False, "reason": "registry_missing", "seq": latest.get("seq"), "checked": len(anchors)}
+    if not hmac.compare_digest(expected, actual):
+        return {
+            "valid": False,
+            "reason": "registry_anchor_mismatch",
+            "seq": latest.get("seq"),
+            "expected": expected,
+            "actual": actual,
+            "checked": len(anchors),
+        }
+    return {"valid": True, "reason": "registry_anchor_valid", "seq": latest.get("seq"), "checked": len(anchors)}
+
+
 def signable_event(event: dict[str, Any]) -> dict[str, Any]:
     payload = deepcopy(event)
     payload.pop("event_auth", None)
@@ -724,8 +759,17 @@ def verify_event_auth(
     registered_actor = str(registry_entry.get("actor") or "")
     if not registered_actor or registered_actor != str(event.get("actor") or ""):
         return {"valid": False, "reason": "key_actor_mismatch", "key_id": key_id}
+    status = str(registry_entry.get("status") or "")
     valid_through = registry_entry.get("valid_through_seq")
-    if valid_through is not None and int(event.get("seq") or 0) > int(valid_through):
+    if status == "active":
+        if valid_through is not None:
+            return {"valid": False, "reason": "active_key_has_boundary", "key_id": key_id}
+    elif status == "retired":
+        if valid_through is None:
+            return {"valid": False, "reason": "retired_key_missing_boundary", "key_id": key_id}
+    else:
+        return {"valid": False, "reason": "invalid_key_status", "key_id": key_id}
+    if status == "retired" and int(event.get("seq") or 0) > int(valid_through):
         return {"valid": False, "reason": "key_outside_validity", "key_id": key_id}
     key_config = event_auth_config_for_key_id(config or {}, key_id, root=root)
     if key_config is None:

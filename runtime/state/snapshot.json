@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8162453977a33b837d7cc1ebeeb84b202565e154e3eafeb765d538806d6a019c",
+  "canonical_hash": "db34ebc99e7d297c35a173e971ad0b398b27b286e60fa2a8cded38d296041e67",
   "integrity": {
-    "canonical_hash": "8162453977a33b837d7cc1ebeeb84b202565e154e3eafeb765d538806d6a019c",
+    "canonical_hash": "db34ebc99e7d297c35a173e971ad0b398b27b286e60fa2a8cded38d296041e67",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "bad194f220c6668bea1cabf8d9ba226f14a566c8acca29bc73a763369ad53511",
-    "signature": "50c9021bb9a526d2f239b9f607050f3c1a1bf3c1fcd5a6ffb27d33a2dd5ebb65",
-    "up_to_seq": 9759
+    "prev_hash": "e141182b9a6767f9d95fc67bcaec24c0a68e61553fd572e793cf457c7dcff567",
+    "signature": "5a7280ffce09dedc4dc2b3156383917f0402fc5ed1930f5286aa40e6fabfa46c",
+    "up_to_seq": 9764
   },
   "state": {
     "aggregate_versions": {
@@ -1087,6 +1087,7 @@
       "CLAIM-20260816-Arquitecto-prom0397": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-r3": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-r4": 1,
+      "CLAIM-20260817-Arquitecto-TASK-0414-unblock": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -4001,7 +4002,7 @@
       "TASK-0411": 3,
       "TASK-0412": 3,
       "TASK-0413": 2,
-      "TASK-0414": 46,
+      "TASK-0414": 49,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4024,7 +4025,7 @@
       "protocol-prune": 73,
       "protocol-state": 1
     },
-    "events_applied": 9088,
+    "events_applied": 9093,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5400,6 +5401,9 @@
       "arq-td-001": 7921,
       "arq-td-002": 7922,
       "arq-td-099": 7923,
+      "arq-unb-acq-2026-08-17T00:36:14Z": 9760,
+      "arq-unb-rel-2026-08-17T00:36:14Z": 9762,
+      "arq-unb-st-2026-08-17T00:36:14Z": 9761,
       "arq-x68r1-acq": 9132,
       "arq-x68r1-flip": 9133,
       "arq-x68r1-rel": 9136,
@@ -9262,6 +9266,8 @@
       "codex:task0414:r4-root-response:claim-acquire:20260817T002650Z": 9755,
       "codex:task0414:r4-root-response:claim-release:20260817T003400Z": 9758,
       "codex:task0414:r4:in-progress-to-blocked:20260817T003400Z": 9757,
+      "codex:task0414:r4c:claim:2026-08-17T06:05:24Z": 9763,
+      "codex:task0414:r4c:registry-anchor:77d114e6f227af7fe72821ce880d2d329b5b23582a92efc804bed4ab02b984e4": 9764,
       "codex:task0414:start:claim:20260816T204637Z": 9714,
       "codex:task0414:start:status:20260816T204637Z": 9715,
       "codex:task0414:v2-release-for-expand:20260816T205048Z": 9718,
@@ -13116,5 +13122,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9759
+  "up_to_seq": 9764
 }
