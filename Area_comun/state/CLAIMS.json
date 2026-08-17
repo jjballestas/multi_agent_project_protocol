@@ -40,6 +40,65 @@
             "updated_at": "2026-08-17T07:42:41Z"
         },
         {
+            "claim_id": "CLAIM-20260817-Arquitecto-OPS-HYG-2212",
+            "expires_at": "2026-08-17T23:14:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Arquitecto-OPS-HYG-2212",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-ALERTA-TASK-0414-r5-muerto-retry-exhausted.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-ALERTA-TASK-0414-r5-muerto-retry-exhausted.md",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-AVISO-r5-muerto-reenvia-r5b.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-AVISO-r5-muerto-reenvia-r5b.md",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-NOTA-supersede-aviso-r5b.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-NOTA-supersede-aviso-r5b.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5-ausencia-fatal.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5-ausencia-fatal.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5b-cierra-tu-entrega.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Operador-RESP-ALERTA-0414-residuo-adjudicado.md"
+            ],
+            "started_at": "2026-08-17T20:14:50Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260817",
+            "updated_at": "2026-08-17T20:14:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5",
+            "expires_at": "2026-08-17T11:55:04Z",
+            "notes": "Remediation r5: make registry absence fatal after any chain anchor and add deletion-resync plus disablement counterproofs.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+                "runtime/eventlog.py",
+                "examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T07:55:04Z",
+            "status": "active",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T07:55:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5-neutrality",
+            "expires_at": "2026-08-17T12:01:00Z",
+            "notes": "Align line-bound neutrality evidence after the TASK-0414 r5 insertion.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T08:01:00Z",
+            "status": "active",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T08:01:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

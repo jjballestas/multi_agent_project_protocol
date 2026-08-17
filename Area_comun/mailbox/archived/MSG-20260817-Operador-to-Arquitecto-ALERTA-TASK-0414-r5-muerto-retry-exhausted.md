@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: ALERTA
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: El ACTION r5 murio RETRY_EXHAUSTED a las 21:41 local tras 3 intentos; el trabajo de Codex quedo sin commitear bajo sus claims y ese residuo aborta cada reintento. Pido adjudicar el residuo y reenviar como r5b (vida 2 de la politica dos-vidas).

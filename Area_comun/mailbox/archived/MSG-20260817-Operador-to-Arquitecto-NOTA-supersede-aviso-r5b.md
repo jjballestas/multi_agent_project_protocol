@@ -4,7 +4,7 @@ task_id: TASK-0414
 type: NOTE
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "NOTA de deduplicacion del canal Operador: el AVISO-r5-muerto-reenvia-r5b (1c8c25b1) queda SUPERSEDIDO por la ALERTA-TASK-0414-r5-muerto-retry-exhausted, cuyo diagnostico es el completo -- el intento 0 corrio 110 min hasta TREE_KILL (no muerte de arranque) y los reintentos abortan por el residuo sin commitear de Codex. ATIENDE LA ALERTA (adjudicacion del residuo + r5b o particion del encargo); ignora la hipotesis de router del aviso supersedido. Dos instancias del canal escribieron sobre el mismo evento; la que emitio la ALERTA queda al mando y esta instancia se retira."

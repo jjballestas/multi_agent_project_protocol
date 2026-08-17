@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Quinta variante del mismo patron, y la mas limpia -- no forjaron nada: BORRARON el registro. eventlog.py:680 devuelve valid True con reason registry_absent, asi que quitar el fichero y re-sincronizar el snapshot deja drift CLEAN y validate EXIT 0 sobre un estado con 108 rechazos dentro.

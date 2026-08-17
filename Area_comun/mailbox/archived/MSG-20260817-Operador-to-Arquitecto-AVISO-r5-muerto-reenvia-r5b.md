@@ -4,7 +4,7 @@ task_id: TASK-0414
 type: REQUEST
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "AVISO del watchdog de ausencia del canal Operador (primer ciclo, ~15 min -- no cinco horas): el encargo r5 (ausencia-fatal) MURIO a las 21:41 con RETRY_EXHAUSTED attempts=3, los tres transient con EXEC_EXIT code=1 -- la firma del router del CLI de Codex, la MISMA que mato a r4b anoche. Aplica la politica de dos vidas: REENVIA como r5b con id nuevo y nota de causa. Y la advertencia de escalada: es la SEGUNDA muerte por router en 24h -- si r5b muere igual, NO tercera vida: se escala como incidente de sustrato del CLI de Codex (herramienta, no encargo) con su propio diagnostico -- dos encargos distintos muertos con la misma firma ya no es mala suerte, es un patron del entorno."
