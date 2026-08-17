@@ -1,6 +1,26 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-08-17 (~09:45 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+## >> BLOQUE TOP 2026-08-17 (~22:15 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### TURNO NOCTURNO AUTONOMO (orden del operador ~22:10): coordinar a los DOS Arquitectos
+### hasta la META sin paradas ciegas. Ambos Arquitectos RELANZADOS y vivos ~22:05.
+- r5 de TASK-0414 MURIO RETRY_EXHAUSTED a las 21:41 local (3 intentos: hard_cap 110 min,
+  hard_cap 217 min, code=1 en 135 s; 6 h de defers staged_residue_aborted entre medias).
+  El residuo = trabajo r5 de Codex SIN commitear bajo sus 2 claims activos (interbloqueo
+  conocido). ALERTA enviada y pusheada (92bd2b76): adjudicar residuo con checkpoint-commit
+  -> reenviar como r5b (vida 2, id nuevo, que quepa en el techo) -> segunda muerte = escalada.
+- Vigias de esta sesion (mueren con ella): monitor hub bii297xqy (self-filter Ops-Reason),
+  monitor NOVA b3ugix40i (*Operador* + upgrade/ventana), watchdog ausencia bdnq1tomk
+  (15min/3 + RETRY_EXHAUSTED nuevo; baseline = los 5 exhausted conocidos al 17-ago 22:00).
+  COMPROMISO con el operador: al 3er strike sin respuesta -> mensaje por mailbox con
+  evidencia de liveness REAL (el Arquitecto a veces cree que los peones trabajan y no).
+- Backlog de control: task list del harness, 11 tareas (cadena critica 1->8 = META:
+  residuo -> r5b -> entrega -> veredicto -> par -> tag v1.19.1 -> retransmitir -> retorno NOVA).
+- PRUNE DUE avisado por el hook (cold_start 22627 >= 20000): del checkpoint del Arquitecto.
+- Debate respondido: modo automatico del arnes vs memoria hibrida (capas ortogonales, roce =
+  perfil opaco fuera del dataset; recomendacion sin "otros repos"; el clic es del operador).
+
+## BLOQUE 2026-08-17 (~09:45 local) [SUPERADO por el TOP de las 22:15]
 
 ### ROL Y ORDENES PERMANENTES
 - Asesor NO-FIRMANTE, canal = mailbox firmado Operador en AMBOS proyectos (hub +
