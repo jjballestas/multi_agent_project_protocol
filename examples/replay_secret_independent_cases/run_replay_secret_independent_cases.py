@@ -230,6 +230,31 @@ def case_attested_rotation_population() -> dict[str, Any]:
         anchor = mkevent(1020, "registry-anchor", {"registry_sha256": anchored_digest})
         anchor["type"] = "event_auth.registry_anchor"
         assert validate_event_auth_registry_anchor([anchor], root=root)["valid"] is True
+        registry_bytes = registry_path.read_bytes()
+
+        registry_path.unlink()
+        missing_registry = validate_event_auth_registry_anchor([anchor], root=root)
+        assert missing_registry["valid"] is False
+        assert missing_registry["reason"] == "registry_missing"
+        registry_deleted_resynced_snapshot_exit = 1
+
+        registry_path.write_bytes(b"")
+        assert validate_event_auth_registry_anchor([anchor], root=root)["valid"] is False
+        empty_registry_exit = 1
+
+        registry_path.write_text('{"schema_version":"1.0","keys":[]}', encoding="ascii")
+        assert validate_event_auth_registry_anchor([anchor], root=root)["valid"] is False
+        empty_key_list_exit = 1
+
+        registry_path.unlink()
+        never_anchored = validate_event_auth_registry_anchor([], root=root)
+        assert never_anchored == {"valid": True, "reason": "registry_absent", "checked": 0}
+        never_anchored_exit = 0
+
+        registry_path.write_bytes(registry_bytes)
+        assert validate_event_auth_registry_anchor([], root=root)["reason"] == "registry_anchor_missing"
+        registry_without_anchor_exit = 1
+
         registry_payload = json.loads(registry_path.read_text(encoding="ascii"))
         registry_payload["keys"]["codex:v2"]["actor"] = "Mallory"
         registry_path.write_text(json.dumps(registry_payload), encoding="ascii")
@@ -272,6 +297,11 @@ def case_attested_rotation_population() -> dict[str, Any]:
                 "retired_key_after_boundary": 1,
                 "registry_edited_without_anchor": registry_edit_exit,
                 "registry_anchor_removed": anchor_removed_exit,
+                "registry_deleted_resynced_snapshot": registry_deleted_resynced_snapshot_exit,
+                "registry_empty": empty_registry_exit,
+                "registry_empty_key_list": empty_key_list_exit,
+                "never_anchored_without_registry": never_anchored_exit,
+                "registry_without_any_anchor": registry_without_anchor_exit,
                 "retired_without_boundary": 1,
             },
         }

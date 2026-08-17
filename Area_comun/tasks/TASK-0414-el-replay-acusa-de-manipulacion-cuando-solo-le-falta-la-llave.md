@@ -136,3 +136,15 @@ Key `status` is now a semantic input, not documentary metadata: `active` require
 boundary, while `retired` requires `valid_through_seq` and fails after that boundary. Mutation
 coverage independently proves registry mismatch, Mallory identity substitution, anchor removal,
 and a retired key without a boundary.
+
+## Remediation r5 - anchored registry presence fails closed
+
+Registry absence is neutral only for an instance whose chain has never contained an
+`event_auth.registry_anchor`. Once any anchor exists, deleting the registry returns
+`registry_missing` and enforced drift is red even if the materialized snapshot is synchronized.
+The early `registry_absent` return no longer makes that branch unreachable.
+
+The focused input mutations also cover the other disablement shapes. With an existing anchor,
+an empty file exits `1` and a file whose `keys` value is an empty list exits `1`. A chain with no
+anchor and no registry exits `0`, preserving adoption for never-anchored instances; a registry
+present without any anchor exits `1`.

@@ -45,7 +45,7 @@ IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
         "lines": {
             320: (_EXEMPT_TERM_2, _EXEMPT_TERM_3, _EXEMPT_TERM_1),
             472: (_EXEMPT_TERM_2,),
-            1328: (_EXEMPT_TERM_2,),
+            1331: (_EXEMPT_TERM_2,),
         },
     },
     "runtime/ledger_ops.py": {

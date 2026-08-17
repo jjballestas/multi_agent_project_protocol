@@ -678,9 +678,12 @@ def event_auth_registry_sha256(root: Path) -> str:
 
 
 def validate_event_auth_registry_anchor(events: list[dict[str, Any]], *, root: Path) -> dict[str, Any]:
-    if not (root.resolve() / EVENT_AUTH_KEY_REGISTRY_PATH).is_file():
-        return {"valid": True, "reason": "registry_absent", "checked": 0}
     anchors = [event for event in events if str(event.get("type") or "") == EVENT_AUTH_REGISTRY_ANCHOR]
+    if not (root.resolve() / EVENT_AUTH_KEY_REGISTRY_PATH).is_file():
+        if anchors:
+            latest = max(anchors, key=lambda item: int(item.get("seq") or 0))
+            return {"valid": False, "reason": "registry_missing", "seq": latest.get("seq"), "checked": len(anchors)}
+        return {"valid": True, "reason": "registry_absent", "checked": 0}
     if not anchors:
         return {"valid": False, "reason": "registry_anchor_missing", "checked": 0}
     latest = max(anchors, key=lambda item: int(item.get("seq") or 0))
