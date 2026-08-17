@@ -125,11 +125,45 @@ E2. **TASK-0408 (alertas durables de encargos muertos)**: cuando su review
     instrumento). Senal-de-hecho: alerta persistida visible en frio tras un
     RETRY_EXHAUSTED simulado.
 
+## BLOQUE F -- V3 del debate de metodologia (aprobada 16-ago; estado real en ledger)
+
+Verificado 2026-08-18 00:12: D-B YA SELLADA -- DECISION-0117 (trailer de actor)
+y DECISION-0118 (prioridad de sustrato auditada) con status accepted. La
+semana 0 YA REGISTRADA con dos tareas en ready, owner Codex.
+
+F1. **TASK-0412 -- preflight de intake con dientes** (ready). Primera de la
+    semana 0. Encolar tras 0394/0410 en la cola del maker.
+    Senal-de-hecho: veredicto independiente + preflight enrojeciendo ante un
+    intake defectuoso real.
+
+F2. **TASK-0413 -- panel de metricas M7/M8** (ready). Segunda de la semana 0.
+    Senal-de-hecho: panel poblado con datos reales de la instancia.
+
+F3. **Cableado de DECISION-0117**: verificar si el trailer de actor ya tiene
+    dientes (un gate que lo LEA) o si esta decidido pero no cableado -- la
+    leccion que la motivo es "identidad de git no es identidad de gobierno"
+    (user.name = Codex para los tres). Si no hay gate, es tarea nueva.
+    Senal-de-hecho: commit sin trailer de actor valido -> gate rojo.
+
+F4. **P6 condicionada / P7 diferida / P5 retirada**: P6 solo se activa si se
+    cumple su condicion registrada (verificar contra la DIRECTIVA 48bf524c
+    antes de activar); P7 no se toca salvo orden del operador; P5 muerta.
+
+F5. **DECISION-0118 gobierna el ORDEN de este backlog**: la prioridad de
+    sustrato es auditada -- los bloques B y F (sustrato) reclaman prioridad
+    sobre colaterales de producto al encolar al maker. Aplicarla al secuenciar
+    y dejar el rastro de auditoria que la decision exige.
+
 ## Notas de orden
 
 - A2 es lo mas urgente de todo el documento y no depende de nada.
 - B1 va antes que B2 (arreglar paridad sin arreglar entrega = el verde caro).
 - B4 es precondicion dura de B2.
 - C1/C2 caben en cualquier ventana quieta; no compiten con la META.
-- Los IDs de tarea del harness (sesion asesor): 9-13 cubren E/C4/B/A parcial;
+- Cola del maker post-META, con la prioridad de sustrato de DECISION-0118:
+  0394 (ya GO, entro en la META) -> 0410 (B4) -> 0412 -> 0413 -> B1 -> B2.
+- ACTUALIZACION 00:12: TASK-0394 SALIO de este backlog -- el Arquitecto midio
+  que el conjunto adoptable no transporta la D-1 de NOVA y la metio como
+  bloqueante del tag (GO 69eaffde). Queda reflejada solo como B3 historico.
+- Los IDs de tarea del harness (sesion asesor): 9-14 cubren E/C4/B/A parcial;
   este documento es la vista detallada y canonica.
