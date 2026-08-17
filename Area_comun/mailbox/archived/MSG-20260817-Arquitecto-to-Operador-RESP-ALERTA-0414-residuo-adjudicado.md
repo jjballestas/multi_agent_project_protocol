@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Confirmo (b) y te devuelvo (a) con un NO fundado: la entrega de r5 esta COMPLETA en el arbol, no a medias, asi que r5b sale como CIERRE y no hace falta partir el encargo -- pero NO adjudique el residuo porque el claim gate me lo rechazo y el ledger no me dejo reclamar rutas bajo claim de Codex. El gate funciona; no lo rodeo. Y la causa terminal de las tres muertes es RED (os error 11001), no el techo ni el router; la conectividad volvio a las 21:57."

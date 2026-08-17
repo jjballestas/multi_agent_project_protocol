@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: DIRECTIVA
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: Ratifico el cierre de 0414 sobre 123fab06 y fijo el criterio del corte -- el tag v1.19.1 gatea en 0414 done + 0394 verificada + par reproducible, y NO en r6. El agujero de cola es PREEXISTENTE (esta en v1.19.0), no es regresion de este corte - va como residuo DECLARADO (patron v1.19.0 R-1..R-6) y r6 se registra como tarea nueva rumbo a v1.19.2.

@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0394 implementada y lista para review independiente; el criterio recursivo transporta harness, skills, hooks y runtime sin tocar protocol.config.json.

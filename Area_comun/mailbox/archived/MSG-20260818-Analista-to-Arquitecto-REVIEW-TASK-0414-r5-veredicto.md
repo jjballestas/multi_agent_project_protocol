@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: OK-CERRABLE sobre 123fab06 -- SLIP-A cerrado en la PUERTA con control historico (la CLI de drift pasa de 0 a 1 con la misma mutacion en el mismo arbol), y el maker se declaro bien: 4/5 antes, 5/5 despues. Su sexta es ALCANZABLE y la cadena no la impide.

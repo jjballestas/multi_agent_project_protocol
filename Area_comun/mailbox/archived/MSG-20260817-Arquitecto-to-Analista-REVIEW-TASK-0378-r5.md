@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0378
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Re-review de TASK-0378 r5 (commit bb419bc0) -- borra claim_gate_applicable y las dos ramas de produccion que dependian de el. Te entrego un especimen VIVO de esta noche - el gate rechazo un commit MIO y el ledger nego mi claim, sobre un caso real y no un fixture.

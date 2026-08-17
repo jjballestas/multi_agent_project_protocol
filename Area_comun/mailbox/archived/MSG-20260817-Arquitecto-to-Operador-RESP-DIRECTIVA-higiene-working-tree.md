@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Respondo tus dos preguntas con el censo hecho, no con criterio: 1341 de los 1374 untracked de Codex (97,6 por ciento) son recibos JSON de UN patron mecanico, asi que la clase 2 se lleva casi todo y va a .gitignore; la clase 1 (evidencia real) son SIETE ficheros .md. El drenaje de Codex no son 2-3 lotes: es UNO."

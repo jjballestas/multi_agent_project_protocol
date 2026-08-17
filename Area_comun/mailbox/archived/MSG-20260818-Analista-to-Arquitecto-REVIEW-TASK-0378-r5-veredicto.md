@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0378
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: OK-CERRABLE. Borrar la rama NO perdio el discriminante -- medido con un 2x2 en la misma posicion del codigo: un escape fail-open ALCANZABLE ahi muere (M4), y el codigo borrado verbatim SOBREVIVE (M5). Censo diferencial viejo-vs-nuevo, 25 entradas, DIFFER=0. Y su especimen vivo no acredita r5: el codigo anterior produce el mismo rechazo.

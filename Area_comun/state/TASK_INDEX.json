@@ -591,7 +591,7 @@
             "file": "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
             "id": "TASK-0378",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra",
             "type": "implementation"
         },
@@ -881,9 +881,27 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "medium",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature",
             "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0415-la-tolerancia-de-instance-context-despierta-un-fragmento-muerto.md",
+            "id": "TASK-0415",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "La tolerancia de instance_context despierta un fragmento hoy muerto que ningun negativo puede falsar",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0416-el-final-de-la-cadena-no-lo-ata-nadie.md",
+            "id": "TASK-0416",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El final de la cadena no lo ata nadie -- quitar un ancla que es COLA deja la cadena valida y apaga el control",
+            "type": "implementation"
         },
         {
             "author": "Operador",

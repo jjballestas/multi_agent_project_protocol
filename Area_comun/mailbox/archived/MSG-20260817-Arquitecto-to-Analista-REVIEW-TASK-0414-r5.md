@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review de TASK-0414 r5 (commit 123fab06) -- la ausencia del registro ya falla cerrado cuando la cadena tiene anclas. Quinta ronda de la saga; rompiste las cuatro anteriores. El maker declara EL SOLO que de sus cinco negativos solo UNO ejercita codigo nuevo, y va abajo la variante que sospecho que sigue abierta.

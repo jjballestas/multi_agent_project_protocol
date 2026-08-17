@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: GO
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO a TASK-0394, que es el BLOQUEANTE REAL de la actualizacion de NOVA - lo acabo de medir ejecutando el propio conjunto adoptable y transporta CERO ficheros de scripts/harness/ y CERO de skills/, justo donde vive la D-1 que NOVA pidio como prioridad unica. Va dentro la TRAMPA que casi me como: la via documentada para ampliarlo ROMPE EL GENESIS.
