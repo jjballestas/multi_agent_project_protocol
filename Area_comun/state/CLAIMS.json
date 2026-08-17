@@ -411,6 +411,22 @@
             "updated_at": "2026-08-16T23:27:00Z"
         },
         {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r4-root-response",
+            "expires_at": "2026-08-17T01:26:50Z",
+            "notes": "Record the required pre-implementation answer and stop on the missing non-circular trust root.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r4-root-response",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-QUESTION-TASK-0414-r4-root.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T00:26:50Z",
+            "status": "active",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T00:26:50Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
