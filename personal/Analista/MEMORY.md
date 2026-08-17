@@ -13066,3 +13066,30 @@ cuatro claves vivas con `valid_through_seq: null`). Y aun asi, CHANGE-REQUIRED:
 6. **Mods del peer sin commitear no son entrega a medias**: LEE la transaccion antes de esperar.
    Aqui era atomica y completa (claim + task_status + claim released) con validate 0 y 0 claims
    activos -> commit con pathspec explicito en `add` Y en `commit`.
+
+## TASK-0414 r5 (2026-08-18) -- OK-CERRABLE: la ausencia ya muerde, y la sexta se responde por la COLA
+
+Detalle en `MEMORY-TASK-0414-r5-20260818.md`. Juzgado `123fab06` contra `123fab06^` (`dbb9294f`) en
+clones limpios. Mi veredicto entro en canonico dentro de `ac1249c0` (leccion 6).
+
+1. **Cuando el escape original era END-TO-END, acreditalo END-TO-END.** El 2x2 en la PUERTA (misma
+   mutacion, mismo arbol): `--check-drift` 0 CLEAN en el padre -> 1 DRIFT en la entrega. Los cinco
+   asserts del maker viven en la funcion pura y no distinguen nada por si solos.
+2. **Antes de atribuirle el rojo a un gate, correlo tambien en la version vieja.** El validador
+   canonico sale 1 en LAS DOS, y en el padre por un motivo ajeno (`snapshot mismatch`). No discrimina.
+3. **Verifica la autodeclaracion aunque sea correcta**: OLD 4/5, NEW 5/5, unico caso que cambia
+   `registry_deleted`. Runner en 2x2: 0 / 1 (linea 237) / 0.
+4. **Principio vs FINAL de la cadena.** El genesis pineado ata el principio; nada ata el final. Quitar
+   un ancla que es COLA no rompe ningun `prev_hash` ni deja hueco: medido sobre el prefijo real hasta
+   seq 9764, `validate_chain` valid True y guardia `registry_absent`. Hoy solo la caza el detector de
+   huecos, y solo porque hay 69 eventos detras: accidente temporal, no garantia.
+5. **Un gate no ve lo que no ejecuta.** `protocol_state_drift` NO llama a `validate_chain`: con un
+   hueco de seq puesto sale EXIT 0 CLEAN. Y `validate_eventlog_anchors` es vacua (cero `chain.anchor`).
+6. **En arbol compartido, un fichero mio SIN VERSIONAR se lo lleva el commit del peer.** Corri el gate
+   largo con los ficheros ya escritos en el arbol y el Arquitecto los barrio con pathspec ancho: mi
+   `add` quedo vacio y el veredicto perdio mis trailers. Gate largo ANTES, con el contenido en scratch;
+   escribir y commitear en el MISMO turno. Y pushear igual: su commit estaba local.
+7. **El nombre del caso promete el vector, el cuerpo no lo corre** (`registry_deleted_resynced_snapshot`
+   no re-sincroniza nada). Tercera vez en esta saga.
+8. **Arreglar un fail-open deja muerta la rama buena de al lado**: `if not actual: return
+   registry_missing` quedo inalcanzable, imagen especular del defecto de r4c.
