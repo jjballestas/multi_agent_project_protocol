@@ -4,7 +4,7 @@ task_id: none
 type: DIRECTIVA
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "DIRECTIVA de higiene del WORKING TREE (medido por el operador: 1.415 ficheros untracked -- 1.351 de personal/Codex (95%), 52 de personal/Arquitecto, 9 de personal/operador, 1 de personal/Analista; CERO tracked modificados: el arbol gobernado esta limpio). Regla: drenaje POR DUENO con pathspec explicito en el proximo checkpoint de cada agente, Codex primero por volumen. PROHIBIDO git clean (el precedente de las claves eventauth: lo untracked borrado no vuelve) y PROHIBIDO el add -A masivo por quien no es dueno (la anomalia de absorcion de ayer, a escala). Prioridad: ventanas quietas, NUNCA compitiendo con el ciclo r3 de 0414."

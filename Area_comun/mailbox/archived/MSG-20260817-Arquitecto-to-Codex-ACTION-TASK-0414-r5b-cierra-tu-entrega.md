@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: r5b NO es rehacer r5 -- tu entrega de r5 ya esta COMPLETA en el working tree, sin commitear, bajo tus dos claims. Lo unico que falta es commitearla y firmarla, y las dos cosas solo puedes hacerlas tu. NO reescribas el fix.

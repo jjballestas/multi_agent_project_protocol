@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0408 implements durable retry-exhaustion and persistent no-worker alerts.
