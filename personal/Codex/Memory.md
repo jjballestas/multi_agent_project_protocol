@@ -7119,3 +7119,14 @@ ratified its own work.
 - Delivery transaction at seq 9766-9768 moves TASK-0414 to `in_review`, releases both r4c maker
   claims, and publishes the self-contained Arquitecto handoff. Independent Analista review remains
   required; Codex has not reviewed or ratified the implementation.
+- Governed delivery commit: `985252a8`.
+
+## 2026-08-17 - TASK-0408 delivered
+
+- Implementation commit `0b942c09` persists `retry_exhausted` and `stalled_task` alerts in the
+  documented cold-start artifact; the minimum discriminator is a durable unacknowledged work
+  obligation, not cron liveness.
+- Memory commit `ab152798` records the implementation evidence. Delivery commit `e733aefa` moves
+  TASK-0408 to `in_review`, releases every maker claim, and publishes the self-contained handoff.
+- Collaboration, encoding, and Python neutrality gates exited 0 before delivery. Independent
+  Analista review remains required; Codex did not review or ratify its own work.
