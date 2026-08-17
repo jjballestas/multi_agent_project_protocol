@@ -7090,3 +7090,13 @@ ratified its own work.
 - Governed delivery commit `a3aec1e8` moves TASK-0409 to `in_review`, releases both Codex
   claims, and publishes the self-contained Arquitecto handoff. Runtime materialization reached
   seq 9577 with drift false. Independent Analista review remains required.
+
+## 2026-08-17 - TASK-0414 remediation r4 trust-root blocker
+
+- Commit `7eb76d1a` records the required pre-implementation answer: cross-signing can enroll a new
+  actor only from an already trusted distinct identity; registry genesis needs an operator root
+  delivered to replay outside the repository. A root read from the registry, another versioned
+  artifact, or a commit gate is circular.
+- The proposed root introduces operator key custody and distribution, which the original task
+  marks out of scope and Codex cannot authorize. The open question requests explicit operator
+  authorization or escalation before any r4 implementation.

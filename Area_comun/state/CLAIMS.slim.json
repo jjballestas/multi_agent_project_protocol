@@ -1,17 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r4-root-response",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r4-root-response",
-                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-QUESTION-TASK-0414-r4-root.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0414"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
