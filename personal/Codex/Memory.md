@@ -7115,3 +7115,7 @@ ratified its own work.
 - Focused cases, falsification inventory 76/76, collaboration validation, encoding, and Python
   neutrality gates exited 0. TASK-0414 remains maker-owned until governed delivery; independent
   Analista review is still required.
+- Memory checkpoint commit: `b35a1a1c`.
+- Delivery transaction at seq 9766-9768 moves TASK-0414 to `in_review`, releases both r4c maker
+  claims, and publishes the self-contained Arquitecto handoff. Independent Analista review remains
+  required; Codex has not reviewed or ratified the implementation.
