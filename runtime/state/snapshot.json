@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "d7f2b9a2a46d73dfc6eea33fb20954bb68ba4b4eb0e985b745aa021fa79bbe85",
+  "canonical_hash": "417e634074d718b35f465de90b7eabbcba5c43e318f45d9f9dad5b9c1fe3735d",
   "integrity": {
-    "canonical_hash": "d7f2b9a2a46d73dfc6eea33fb20954bb68ba4b4eb0e985b745aa021fa79bbe85",
+    "canonical_hash": "417e634074d718b35f465de90b7eabbcba5c43e318f45d9f9dad5b9c1fe3735d",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "2b10dcadc843866d306324ace07c44f82659ca724018d553ce375832aae66442",
-    "signature": "b7fed5fa47564fee02bfeec805d4c2a2d978048a7f9e3bab251c8daf90c0cc45",
-    "up_to_seq": 9768
+    "prev_hash": "5376532401083c535c376f0bebdcd723e575bf6150bed70b47edd30478a18011",
+    "signature": "831d6dbb8991c101972795223f8327c6d5d8354071aa620758be17af11b92e48",
+    "up_to_seq": 9771
   },
   "state": {
     "aggregate_versions": {
@@ -1085,6 +1085,7 @@
       "CLAIM-20260816-Arquitecto-TASK-0414-reg": 1,
       "CLAIM-20260816-Arquitecto-lote-nova": 1,
       "CLAIM-20260816-Arquitecto-prom0397": 1,
+      "CLAIM-20260817-Arquitecto-TASK-0408-promo": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-r3": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-r4": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-unblock": 1,
@@ -3996,7 +3997,7 @@
       "TASK-0404": 1,
       "TASK-0405": 1,
       "TASK-0407": 1,
-      "TASK-0408": 1,
+      "TASK-0408": 3,
       "TASK-0409": 16,
       "TASK-0410": 3,
       "TASK-0411": 3,
@@ -4025,7 +4026,7 @@
       "protocol-prune": 73,
       "protocol-state": 1
     },
-    "events_applied": 9097,
+    "events_applied": 9100,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4253,6 +4254,9 @@
       "arq-0395b-acq": 9392,
       "arq-0395b-flip": 9393,
       "arq-0395b-rel": 9394,
+      "arq-0408-acq-2026-08-17T06:31:36Z": 9769,
+      "arq-0408-rdy-2026-08-17T06:31:36Z": 9770,
+      "arq-0408-rel-2026-08-17T06:31:36Z": 9771,
       "arq-0409-acq-c-2026-08-16T10:59:15Z": 9563,
       "arq-0409-rdy-c-2026-08-16T10:59:15Z": 9565,
       "arq-0409-rel-c-2026-08-16T10:59:15Z": 9566,
@@ -13126,5 +13130,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9768
+  "up_to_seq": 9771
 }
