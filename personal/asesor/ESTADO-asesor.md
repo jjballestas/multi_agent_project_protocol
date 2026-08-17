@@ -2,6 +2,13 @@
 
 ## >> BLOQUE TOP 2026-08-16 (~03:15 local) - LO VIGENTE. Todo lo de abajo es historia.
 
+### LECCION DURA 17-ago (5 horas perdidas, mitad culpa de este canal): los monitores de EVENTOS
+### no ven un encargo MUERTO (cero eventos = cuadro identico a "no hay trabajo"). La directriz
+### del operador (15 min / 3 pasadas -> preguntar) NUNCA se deja sin instrumento: siempre debe
+### correr un watchdog de AUSENCIA (encargo pendiente en open/ + commit-age >15m, 3 strikes) +
+### alerta por RETRY_EXHAUSTED nuevo en los retry.json de ambos peones. Armado esta manana
+### (task bcak03g4h); re-armar en CADA sesion mientras haya camino critico en vuelo.
+
 ### ORDEN PERMANENTE del operador (16-ago ~23:00): los DOS Arquitectos (hub y NOVA) dirigen
 ### dudas y reportes POR MAILBOX AL OPERADOR -- el Asesor tiene vision total y queda AUTONOMO
 ### para responderlas en nombre del operador. Vigilar ambos open/ como canal primario.
