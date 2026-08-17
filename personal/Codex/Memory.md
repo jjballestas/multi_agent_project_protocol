@@ -7100,3 +7100,18 @@ ratified its own work.
 - The proposed root introduces operator key custody and distribution, which the original task
   marks out of scope and Codex cannot authorize. The open question requests explicit operator
   authorization or escalation before any r4 implementation.
+
+## 2026-08-17 - TASK-0414 remediation r4c chain anchor implementation
+
+- Commit `ea191781` binds the exact bytes of `EVENT_AUTH_KEY_REGISTRY.json` to ledger event
+  `event_auth.registry_anchor` at seq 9764 and makes enforced replay drift fail on a missing,
+  malformed, or mismatched latest anchor.
+- Independent mutation exits are registry edited without anchor `1`, anchor removed from between
+  its predecessor and successor `1`, Mallory identity substitution `1`, and retired key without
+  boundary `1`.
+- Registry status is enforced: active keys cannot carry a retirement boundary; retired keys must
+  carry `valid_through_seq` and fail after it. The 1,009 historical v1 population remains a
+  non-fatal unresolved boundary with zero invalid signatures.
+- Focused cases, falsification inventory 76/76, collaboration validation, encoding, and Python
+  neutrality gates exited 0. TASK-0414 remains maker-owned until governed delivery; independent
+  Analista review is still required.
