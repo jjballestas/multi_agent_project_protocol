@@ -25,6 +25,18 @@ HARNESS_PATH = ROOT / "scripts/harness/peer_mailbox_cron.ps1"
 
 FALSIFICATION_CONTRACTS = (
     {
+        "id": "NEG-HARNESS-RETRY-EXHAUSTED-DURABLE-ALERT",
+        "negative": "A terminal retry must create a durable cold-start alert, and the stalled-task control must honor its persistence threshold.",
+        "mutation": "source.replace(retry_alert_call, dead_retry_alert_call, 1)",
+        "boundaries": (
+            'assert healthy["retry_alert_count"] == 1',
+            'assert healthy["fresh_stalled_count"] == 0',
+            'assert healthy["old_stalled_count"] == 1',
+            'assert mutant["retry_alert_count"] == 0',
+        ),
+        "exercised_by": "test_retry_exhaustion_alert_and_stalled_task_threshold_kill_mutant",
+    },
+    {
         "id": "NEG-HARNESS-PREEXEC-DEFER-STARVATION",
         "negative": "Mixed healthy pre-exec causes cannot exhaust the exec retry budget, while one stable over-time cause remains terminal.",
         "mutation": "source.replace(stable_counter, shared_counter).replace(wall_clock_terminal, count_terminal)",
@@ -1521,6 +1533,43 @@ $cleared = $script:state[$message.Name]
         return run_powershell(script, root)
 
 
+def obligation_alert_probe(source: Path) -> dict:
+    with make_tempdir("obligation-alert-") as tmp:
+        root = Path(tmp)
+        task_path = root / "Area_comun/tasks/TASK-test.md"
+        task_path.parent.mkdir(parents=True)
+        task_path.write_text("---\nstatus: in_progress\n---\n", encoding="ascii")
+        state = root / "Area_comun/state"
+        state.mkdir(parents=True)
+        (state / "TASK_INDEX.json").write_text(json.dumps({"tasks": [{"id": "TASK-test", "status": "in_progress", "owner": IMPLEMENTER, "reviewer": REVIEWER, "file": "Area_comun/tasks/TASK-test.md"}]}), encoding="ascii")
+        (state / "CLAIMS.json").write_text('{"claims": []}', encoding="ascii")
+        message = root / "MSG-test.md"
+        message.write_text("task_id: TASK-test\n", encoding="ascii")
+        script = function_loader(source, ("Write-CoordinationAlert", "Register-RetryExhausted", "Test-StalledTaskObligations")) + f"""
+$Root = {ps_literal(root)}
+$PeerId = "{IMPLEMENTER}"
+$RuntimeDir = Join-Path $Root ".protocol-tmp\\probe"
+New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
+$AlertPath = Join-Path $RuntimeDir "alerts.json"
+$LeasePath = Join-Path $RuntimeDir "lease.json"
+$StalledTaskMinutes = 30
+function Get-Field {{ param($Content, $Name) if ($Content -match '(?m)^task_id:\\s*(.+)$') {{ return $Matches[1].Trim() }} return "" }}
+function Write-AtomicUtf8NoBom {{ param($Path, $Content) [IO.File]::WriteAllText($Path, $Content, [Text.UTF8Encoding]::new($false)) }}
+function Write-Log {{ param($Line) }}
+$message = Get-Item -LiteralPath {ps_literal(message)}
+Register-RetryExhausted -Message $message -Attempts 3 -Outcome "transient"
+$retryCount = if (Test-Path $AlertPath) {{ (Get-Content -LiteralPath $AlertPath -Raw | ConvertFrom-Json).alerts.psobject.Properties.Count }} else {{ 0 }}
+Remove-Item -LiteralPath $AlertPath
+Test-StalledTaskObligations
+$freshCount = if (Test-Path $AlertPath) {{ (Get-Content -LiteralPath $AlertPath -Raw | ConvertFrom-Json).alerts.psobject.Properties.Count }} else {{ 0 }}
+(Get-Item -LiteralPath {ps_literal(task_path)}).LastWriteTimeUtc = [DateTime]::UtcNow.AddMinutes(-31)
+Test-StalledTaskObligations
+$oldCount = (Get-Content -LiteralPath $AlertPath -Raw | ConvertFrom-Json).alerts.psobject.Properties.Count
+[ordered]@{{ retry_alert_count = $retryCount; fresh_stalled_count = $freshCount; old_stalled_count = $oldCount }} | ConvertTo-Json -Compress
+"""
+        return run_powershell(script, root)
+
+
 def real_foreign_personal_rename_probe() -> dict:
     with make_tempdir("residue-rename-") as tmp:
         root = Path(tmp)
@@ -2060,6 +2109,23 @@ def test_preexec_defer_budget_kills_shared_counter_mutant() -> None:
     assert rename["paths"] == []
 
 
+def test_retry_exhaustion_alert_and_stalled_task_threshold_kill_mutant() -> None:
+    """PERMANENT_NEGATIVE: NEG-HARNESS-RETRY-EXHAUSTED-DURABLE-ALERT"""
+    source = HARNESS_PATH.read_text(encoding="utf-8")
+    retry_alert_call = 'Write-CoordinationAlert -Kind "retry_exhausted" -Message $Message -Detail "outcome=$Outcome attempts=$Attempts"'
+    dead_retry_alert_call = '# retry alert disabled by mutant'
+    assert source.count(retry_alert_call) == 1
+    healthy = obligation_alert_probe(HARNESS_PATH)
+    assert healthy["retry_alert_count"] == 1
+    assert healthy["fresh_stalled_count"] == 0
+    assert healthy["old_stalled_count"] == 1
+    with make_tempdir("retry-alert-mutant-") as tmp:
+        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+        mutant_path.write_text(source.replace(retry_alert_call, dead_retry_alert_call, 1), encoding="utf-8", newline="\n")
+        mutant = obligation_alert_probe(mutant_path)
+    assert mutant["retry_alert_count"] == 0
+
+
 def test_residue_excludes_foreign_personal_and_caps_diagnostics() -> None:
     with make_tempdir("residue-probe-") as tmp:
         root = Path(tmp)
@@ -2494,6 +2560,7 @@ def main() -> int:
         test_post_delivery_window_honors_main_progress_extensions,
         test_silent_process_tree_cpu_is_work_derived_and_mutation_proven,
         test_process_tree_cpu_sample_distinguishes_recycled_pid,
+        test_retry_exhaustion_alert_and_stalled_task_threshold_kill_mutant,
         test_preexec_defer_budget_kills_shared_counter_mutant,
         test_worktree_disk_proof_pairs_real_git_rename_records,
         test_zombie_sweeper_parses_real_git_quoted_rename_paths,

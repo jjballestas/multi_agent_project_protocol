@@ -393,7 +393,7 @@
         {
             "id": "TASK-0408",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja"
         },
         {

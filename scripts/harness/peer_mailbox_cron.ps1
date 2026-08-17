@@ -19,7 +19,8 @@ param(
     [int]$MaxTransientRetries = 3,
     [ValidateRange(1, 2147483647)][int]$PreExecDeferTimeoutSeconds = 7200,
     [int]$RetryBackoffSeconds = 30,
-    [int]$AbortedResidueMinutes = 5
+    [int]$AbortedResidueMinutes = 5,
+    [ValidateRange(1, 2147483647)][int]$StalledTaskMinutes = 30
 )
 
 # peer_mailbox_cron.ps1 -- generic launchable runtime for a protocol peer agent
@@ -90,6 +91,7 @@ $LeasePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.exec-lease.json"
 $ExecAdmissionPath = Join-Path $Root ".protocol-tmp\peer-exec-admission.lock"
 $SeenPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.seen.json"
 $RetryPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.retry.json"
+$AlertPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.alerts.json"
 $ResiduePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.residue-first-seen.json"
 $ResidueDiagnosticPathLimit = 10
 $script:LastResiduePaths = @()
@@ -1251,10 +1253,74 @@ function Register-PreExecDefer {
     Write-RetryState -State $retry
     $detailSuffix = if ([string]::IsNullOrWhiteSpace($Detail)) { "" } else { " detail=$Detail" }
     if ($terminal) {
+        Write-CoordinationAlert -Kind "retry_exhausted" -Message $Message -Detail "outcome=defer_terminal reason=$Reason"
         Write-Log "RETRY_EXHAUSTED defers=$defers attempts=$attempts elapsed_seconds=$elapsedSeconds timeout_seconds=$PreExecDeferTimeoutSeconds signal=watchdog outcome=defer_terminal reason=$Reason$detailSuffix message=$($Message.Name)"
     } else {
         Write-Log "RETRY_DEFER defer=$defers attempts=$attempts elapsed_seconds=$elapsedSeconds timeout_seconds=$PreExecDeferTimeoutSeconds reason=$Reason$detailSuffix message=$($Message.Name)"
         if ($RetryBackoffSeconds -gt 0) { Start-Sleep -Seconds $RetryBackoffSeconds }
+    }
+}
+
+function Write-CoordinationAlert {
+    param([string]$Kind, [System.IO.FileInfo]$Message, [string]$Detail = "", [string]$TaskId = "")
+    if (-not $TaskId -and $null -ne $Message) {
+        $content = Get-Content -LiteralPath $Message.FullName -Raw -Encoding UTF8
+        $TaskId = Get-Field -Content $content -Name "task_id"
+    }
+    $key = "$Kind|$TaskId|$(if ($null -ne $Message) { $Message.Name } else { '' })"
+    $state = [ordered]@{ schema_version = 1; alerts = @{} }
+    if (Test-Path -LiteralPath $AlertPath) {
+        try {
+            $loaded = Get-Content -LiteralPath $AlertPath -Raw -Encoding UTF8 | ConvertFrom-Json -AsHashtable
+            if ($null -ne $loaded -and $loaded.ContainsKey("alerts")) { $state = $loaded }
+        } catch { }
+    }
+    $now = [DateTime]::UtcNow.ToString("o")
+    $first = $now
+    if ($state.alerts.ContainsKey($key) -and $state.alerts[$key].ContainsKey("first_detected_at")) {
+        $first = [string]$state.alerts[$key].first_detected_at
+    }
+    $state.alerts[$key] = [ordered]@{
+        kind = $Kind
+        task_id = $TaskId
+        message = $(if ($null -ne $Message) { $Message.Name } else { "" })
+        detail = $Detail
+        first_detected_at = $first
+        last_detected_at = $now
+        acknowledged = $false
+    }
+    Write-AtomicUtf8NoBom -Path $AlertPath -Content (($state | ConvertTo-Json -Depth 8) + "`n")
+}
+
+function Register-RetryExhausted {
+    param([System.IO.FileInfo]$Message, [int]$Attempts, [string]$Outcome)
+    Write-CoordinationAlert -Kind "retry_exhausted" -Message $Message -Detail "outcome=$Outcome attempts=$Attempts"
+    Write-Log "RETRY_EXHAUSTED attempts=$Attempts signal=watchdog outcome=$Outcome message=$($Message.Name)"
+}
+
+function Test-StalledTaskObligations {
+    $indexPath = Join-Path $Root "Area_comun\state\TASK_INDEX.json"
+    $claimsPath = Join-Path $Root "Area_comun\state\CLAIMS.json"
+    if (-not (Test-Path -LiteralPath $indexPath) -or -not (Test-Path -LiteralPath $claimsPath)) { return }
+    $index = Get-Content -LiteralPath $indexPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $claims = Get-Content -LiteralPath $claimsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $leaseTask = ""
+    if (Test-Path -LiteralPath $LeasePath) {
+        try { $leaseTask = [string](Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json).task_id } catch { }
+    }
+    foreach ($task in @($index.tasks)) {
+        $owned = ([string]$task.status -eq "in_progress" -and [string]$task.owner -eq $PeerId) -or
+            ([string]$task.status -eq "in_review" -and [string]$task.reviewer -eq $PeerId)
+        if (-not $owned) { continue }
+        $activeClaim = @($claims.claims | Where-Object { [string]$_.task_id -eq [string]$task.id -and [string]$_.status -eq "active" }).Count -gt 0
+        if ($activeClaim -or $leaseTask -eq [string]$task.id) { continue }
+        $taskPath = Join-Path $Root ([string]$task.file)
+        if (-not (Test-Path -LiteralPath $taskPath)) { continue }
+        $ageMinutes = ([DateTime]::UtcNow - (Get-Item -LiteralPath $taskPath).LastWriteTimeUtc).TotalMinutes
+        if ($ageMinutes -ge $StalledTaskMinutes) {
+            Write-CoordinationAlert -Kind "stalled_task" -TaskId ([string]$task.id) -Detail ("status={0} age_minutes={1} threshold_minutes={2} no_active_claim=true no_live_exec=true" -f $task.status, [int][Math]::Floor($ageMinutes), $StalledTaskMinutes)
+            Write-Log "WORK_STALLED task=$($task.id) status=$($task.status) age_minutes=$([int][Math]::Floor($ageMinutes)) threshold_minutes=$StalledTaskMinutes alert=$AlertPath"
+        }
     }
 }
 
@@ -1634,7 +1700,7 @@ function Invoke-PeerForMessage {
             $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempt; exhausted = $exhausted; outcome = $outcome; updated_at = [DateTime]::UtcNow.ToString("o") }
             Write-RetryState -State $retry
             if ($exhausted) {
-                Write-Log "RETRY_EXHAUSTED attempts=$attempt signal=watchdog outcome=$outcome message=$($Message.Name)"
+                Register-RetryExhausted -Message $Message -Attempts $attempt -Outcome $outcome
             } else {
                 Write-Log "RETRY_SCHEDULED attempt=$attempt max=$MaxTransientRetries backoff_seconds=$RetryBackoffSeconds outcome=$outcome message=$($Message.Name)"
                 if ($RetryBackoffSeconds -gt 0) { Start-Sleep -Seconds $RetryBackoffSeconds }
@@ -1650,7 +1716,9 @@ function Invoke-PeerForMessage {
         $exhausted = $attempt -ge $MaxTransientRetries
         $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempt; exhausted = $exhausted; outcome = "transient"; updated_at = [DateTime]::UtcNow.ToString("o") }
         Write-RetryState -State $retry
-        if ($exhausted) { Write-Log "RETRY_EXHAUSTED attempts=$attempt signal=watchdog outcome=transient message=$($Message.Name)" }
+        if ($exhausted) {
+            Register-RetryExhausted -Message $Message -Attempts $attempt -Outcome "transient"
+        }
     } finally {
         if (Test-Path -LiteralPath $LeasePath) {
             Remove-Item -LiteralPath $LeasePath -Force
@@ -1736,6 +1804,7 @@ while ($true) {
         }
 
         $messages = @(Get-ProcessablePeerMessages)
+        Test-StalledTaskObligations
         if ($messages.Count -eq 0) {
             Write-Log "Heartbeat processable_messages=0"
         } else {

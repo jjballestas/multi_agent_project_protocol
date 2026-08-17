@@ -159,6 +159,17 @@ preserve old behavior:
   queue. A cause change or one clear observation resets that defer window. One unchanged cause
   that survives the full window still ends in `defer_terminal`; this preserves bounded recovery
   from a real stuck condition.
+- Terminal retry and persistent work-without-worker conditions are also written to
+  `.protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.alerts.json`. This durable runtime
+  alert is the cold-start signal; operators and coordinators must read it without opening
+  the cron log. `retry_exhausted` directly records a dead assignment. `stalled_task` records
+  an `in_progress` owner obligation or `in_review` reviewer obligation only after the
+  configurable `-StalledTaskMinutes` window (default 30) has elapsed with no active claim
+  and no matching live exec lease. A legitimate assign-to-claim window stays silent.
+- To revive an exhausted assignment, append an explanatory `## REENVIO` block to the
+  mailbox message. `Get-MessageSignature` is `Name|Length|LastWriteTimeUtc.Ticks`; changing
+  the message bytes changes the signature, resets the retry budget, and leaves an auditable
+  reason for re-admission. Do not touch only the timestamp.
 - The pre-exec residue gate uses full NUL-delimited `git status --porcelain -z`, not only the
   index. Paths with spaces or non-ASCII bytes are never quoted or escape-parsed. Fresh
   unstaged residue therefore defers with a retry signal. `worktree_residue_live` logs up to

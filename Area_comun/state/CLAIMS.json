@@ -302,6 +302,58 @@
             "updated_at": "2026-08-17T00:36:14Z"
         },
         {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0408-implementation",
+            "expires_at": "2026-08-17T12:49:14.9062068Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-implementation Area_comun/state/TASK_INDEX.json#TASK-0408 Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408 Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md scripts/harness/peer_mailbox_cron.ps1 scripts/test_exec_lease_harness.py scripts/harness/README.md"
+            ],
+            "started_at": "2026-08-17T06:49:14.8626564Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-17T06:49:14.8626564Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0408-implementation-v2",
+            "expires_at": "2026-08-17T12:50:18.6766375Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-implementation-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/harness/README.md"
+            ],
+            "started_at": "2026-08-17T06:50:18.6402514Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-17T06:50:18.6402514Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0408-implementation-v3",
+            "expires_at": "2026-08-17T12:58:20.0661153Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-implementation-v3",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0408-implementation-v2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/harness/README.md",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1"
+            ],
+            "started_at": "2026-08-17T06:58:19.9456779Z",
+            "status": "active",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-17T06:58:19.9456779Z"
+        },
+        {
             "claim_id": "CLAIM-20260817-Codex-TASK-0414-r2-commit",
             "expires_at": "2026-08-17T06:10:00Z",
             "notes": "Bind the exact TASK-0414 r2 product commit surface under one maker claim.",

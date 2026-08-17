@@ -1,7 +1,7 @@
 ---
 id: TASK-0408
 title: Un encargo agotado muere sin dejar rastro donde se mira, y el tablero sigue afirmando que alguien lo trabaja -- todos los gates en verde describiendo trabajo que nadie hace
-status: ready
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md
@@ -89,3 +89,22 @@ Todos los controles verifican **coherencia del estado**. Aqui el estado era cohe
 precision un trabajo que nadie estaba haciendo.
 
 -- Arquitecto, 2026-08-16
+
+## Maker implementation evidence (Codex, 2026-08-17)
+
+The minimum discriminator is a durable, unacknowledged work obligation: a terminal
+`retry_exhausted` record, or an active board obligation that remains without an active claim and
+without a matching live exec beyond the configured persistence window. Cron liveness alone is not
+part of the discriminator.
+
+- `RETRY_EXHAUSTED` now writes an idempotent durable alert under
+  `.protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.alerts.json`; cold starts can inspect it
+  without reading the cron log.
+- The same alert file records `stalled_task` only after `-StalledTaskMinutes` (default 30) for an
+  `in_progress` owner obligation or an `in_review` reviewer obligation with neither an active claim
+  nor a matching live exec lease.
+- The executable property proves a fresh claim window stays silent, the same state after 31 minutes
+  alerts, and a production-source mutation removing the terminal-retry alert is caught.
+- Resurrection is explicit: append a `## REENVIO` explanation. The resulting
+  `Name|Length|LastWriteTimeUtc.Ticks` signature change re-admits the message and preserves the
+  reason; timestamp-only touching is not the documented path.
