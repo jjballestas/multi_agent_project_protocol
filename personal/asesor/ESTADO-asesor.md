@@ -1,5 +1,56 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
+## >> BLOQUE TOP 2026-08-17 (~09:45 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### ROL Y ORDENES PERMANENTES
+- Asesor NO-FIRMANTE, canal = mailbox firmado Operador en AMBOS proyectos (hub +
+  D:/Agentes/NOVA-Suite/NOVA con gobernanza en NOVA/Aegis/). AUTONOMO por orden del operador:
+  coordino a los DOS Arquitectos; ellos dirigen dudas/reportes por mailbox AL OPERADOR.
+- FRONTERAS DE LA DELEGACION (ejercidas 2 veces, ledger 690ef7fd y f7b8212e): el FONDO
+  INTOCABLE (config 2E35F26E / epoch 1.14.0 / N=500) y cualquier CLAVE RAIZ fuera de banda
+  NO los administra este canal -- solo el operador humano en persona. DECISION-0119 (clave
+  raiz offline) esta en borrador esperando SU firma, sin reloj.
+- Politica de encargos muertos (pactada): DOS VIDAS -- un reenvio automatico con id nuevo
+  y nota de causa; si el reenvio muere -> escalar con evidencia, sin bucles.
+
+### FOCO: cerrar TASK-0414 (r5 = ausencia fatal, ULTIMO agujero conocido) -> par -> tag
+### v1.19.1 -> retransmitir a NOVA -> NOVA completa su ventana = META CUMPLIDA
+- Cadena de la saga 0414 (todas CHANGE-REQUIRED convergentes): r1 etiqueta forjable ->
+  r2 caso-contrato -> r3 registro escribible por cualquiera -> r4c ancla-por-cadena OK pero
+  ausencia no detectada -> r5 EN VUELO (ausencia fatal + resync de snapshot no lava rechazos).
+- HUB open/ (4 vivos a las 09:44): ACTION r5 (consumo de Codex pendiente), HANDOFF 0378-r5
+  (re-review pendiente), HANDOFF 0408 (review por rutear; su entrega 0b942c09 = alertas
+  persistentes de encargos muertos), y mi DIRECTIVA de higiene del working tree (1.415
+  untracked, 95% personal/Codex; drenaje por dueno, sin git clean, ventanas quietas).
+- v1.19.0: publicada y certificada (233fc43d, par 26/1/60 identico al control). v1.19.1:
+  retirada DOS veces por el checker (bypass r1; HEAD rojo r2); sale solo tras r5 verificada.
+- NOVA: congelada SEGURA en frontera seq 1009 (claves v2 OK, cadena CLEAN, peers parados a
+  proposito, backup 144MB). Espera SOLO v1.19.1. Su Arquitecto ya abrio 9441 (shell del
+  front -- la adaptacion al prototipo que el operador tratara con el directamente).
+- v3 del debate de metodologia: APROBADA e inscrita (DECISION-0117 prioridad sustrato +
+  0118 trailer de actor; semana 0 dada de alta). P5 retirada, P6 condicionada, P7 diferida.
+- Lab QA de NOVA del operador: OPERATIVO en D:/Aegis_Scratch/nova/qa-lab/ (compose todo-
+  imagen, 3 bases restauradas de seeds, API en Debug con identidad dev, guia HTML dentro).
+
+### VIGILANCIA (RE-ARMAR EN CADA SESION -- leccion de las 5 horas)
+- LECCION DURA 17-ago: los monitores de eventos NO ven un encargo muerto (cero eventos =
+  identico a "no hay trabajo"); r4b murio 03:18 y nadie lo vio hasta 08:00. La directriz
+  del operador (15 min / 3 pasadas -> preguntar) exige SIEMPRE un watchdog de AUSENCIA:
+  encargos pendientes en open/ + commit-age >15m (3 strikes) + alerta por RETRY_EXHAUSTED
+  nuevo en los retry.json de ambos peones. Ver memoria .claude watchdog-de-ausencia.
+- Vigias de esta sesion (mueren con ella; RE-ARMAR): monitor hub (mailbox+commits ajenos,
+  self-filter Ops-Reason coordinacion-asesor), monitor NOVA fino (solo *Operador* +
+  commits de upgrade), watchdog de ausencia 15min/3.
+
+### SIGUIENTE ACCION CONCRETA
+1. Vigilar r5: entrega -> veredicto -> si OK: par sobre commit final -> tag v1.19.1 ->
+   retransmitir corte-publicado a NOVA (su retorno: adoptar fix -> validate limpio ->
+   relanzar peers -> reporte final = meta).
+2. Rutear/vigilar review de 0408 y re-review de 0378-r5 (cola del checker).
+3. Pendientes del humano: firmar DECISION-0119 (raiz offline) cuando quiera; espejo v3
+   a NOVA (practicas como decisiones suyas) UN DIA despues de su retorno completo.
+
+
 ## >> BLOQUE TOP 2026-08-16 (~03:15 local) - LO VIGENTE. Todo lo de abajo es historia.
 
 ### LECCION DURA 17-ago (5 horas perdidas, mitad culpa de este canal): los monitores de EVENTOS
