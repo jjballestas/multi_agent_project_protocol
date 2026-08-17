@@ -13039,3 +13039,30 @@ Detalle en `MEMORY-TASK-0414-20260816.md`. Commit `69da11c4`.
    compara. Lo que salva la frontera es que el consumidor lee un cardinal ABSOLUTO, no el canal.
 6. **Cuando un AC prohibe el sintetico, un numero que coincide es la senal mas sospechosa.**
    `[deepcopy(event) for _ in range(1009)]` son 1009 copias de un fixture, no una poblacion.
+
+## TASK-0414 r3 (2026-08-17) -- CHANGE-REQUIRED: el registro es la autoridad, y lo escribe cualquiera
+
+Detalle en `MEMORY-TASK-0414-r3-20260817.md`. Commit `b39736ae`. Juzgado `150ff371` en clon limpio.
+
+Los tres numeros del encargo son CIERTOS y los confirme: cinco puertas en EXIT 0 en clon limpio,
+cross-actor en `key_actor_mismatch` con rejections=1, y `analista-hmac:v1` = 108 de 9074 boundaries
+recomputado por mi. Existencia e identidad enteras; la temporal funciona pero esta INERTE (las
+cuatro claves vivas con `valid_through_seq: null`). Y aun asi, CHANGE-REQUIRED:
+
+1. **Cuando una remediacion MUEVE el ancla, mide la puerta del sitio nuevo, no el mecanismo.**
+   `staged_product_paths` de `check_commit_trailers.py` (74-82) EXCLUYE `Area_comun/`, que es
+   justo donde vive el registro. Identidad git "Mallory", sin claim, ata un key_id nuevo al actor
+   "Arquitecto" con solo un trailer `Task-Id:` -> puerta EXIT 0; con material propio, eventos
+   forjados como la victima con `rejections=[]`. Las cinco puertas siguen en 0.
+2. **Un bloque `governance` dentro del artefacto gobernado no gobierna nada.** Primera
+   comprobacion: `grep` de quien LO LEE. `governance.change_control` no lo abre ningun modulo.
+3. **El nombre de un caso promete; la mutacion acredita.** `retired_key_after_boundary` activa DOS
+   condiciones; quitando `valid_through_seq` el caso revienta su propio assert -> el campo `status`
+   no lo lee nadie y una clave "retired" sigue validando. Mutar cada condicion POR SEPARADO.
+4. **Corre la puerta que el handoff CITA, y las demas.** Con el registro borrado, `--check-drift`
+   sale 0 `CLEAN` y `validate` sale 1 `snapshot mismatch`: dos instrumentos, dos respuestas.
+5. **El verde del clon limpio no es verde de autenticidad**: 9074 de 9745 son `unresolved_key`
+   porque `secrets/` no viaja. Declararlo siempre.
+6. **Mods del peer sin commitear no son entrega a medias**: LEE la transaccion antes de esperar.
+   Aqui era atomica y completa (claim + task_status + claim released) con validate 0 y 0 claims
+   activos -> commit con pathspec explicito en `add` Y en `commit`.
