@@ -18,9 +18,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# Conjunto adoptable por defecto (DISENO-robustez-operacional.md §1.2). Configurable via master
-# protocol.config.json -> upgrade.adoptable_globs.
-$DefaultAdoptableGlobs = @(
+# Criterio adoptable: masters explicitos y arboles reutilizables completos. Los arboles son
+# recursivos por definicion, de modo que un subdirectorio nuevo tambien se exporta. Una seleccion
+# configurada se comprueba contra el criterio y falla si deja carga generica fuera.
+$AdoptableMasterFiles = @(
     "AGENTS.template.md",
     "CLAUDE.template.md",
     "protocol.config.template.json",
@@ -29,10 +30,11 @@ $DefaultAdoptableGlobs = @(
     "Area_comun/protocol/*.md",
     "Area_comun/specs/*_TEMPLATE.md",
     "profiles/PROFILE_TEMPLATE/**/*",
-    "scripts/*.py",
-    "scripts/*.ps1",
-    "runtime/**",
     ".github/workflows/validate.yml"
+)
+$AdoptableRecursiveRoots = @("scripts", "skills", ".githooks", "runtime")
+$DefaultAdoptableGlobs = @($AdoptableMasterFiles) + @(
+    $AdoptableRecursiveRoots | ForEach-Object { "$_/**" }
 )
 
 function Read-AllTextNoBom([string]$Path) {
@@ -161,6 +163,17 @@ $instanceTier = Get-AdoptionTier $instanceFull
 $masterRuntimeV = Get-RuntimeVersion $masterFull
 $instanceRuntimeV = Get-RuntimeVersion $instanceFull
 $globs = Get-AdoptableGlobs $masterFull
+$requiredRelFiles = Get-AdoptableRelFiles $masterFull $DefaultAdoptableGlobs |
+    Where-Object { -not (Test-ExcludedRuntimeArtifact $_) }
+$selectedRelFiles = Get-AdoptableRelFiles $masterFull $globs
+$selectedSet = @{}
+foreach ($rel in $selectedRelFiles) { $selectedSet[$rel] = $true }
+$uncovered = @($requiredRelFiles | Where-Object { -not $selectedSet.ContainsKey($_) } | Sort-Object -Unique)
+if ($uncovered.Count -gt 0) {
+    [Console]::Error.WriteLine("ERROR: ficheros genericos fuera del conjunto adoptable:")
+    foreach ($rel in $uncovered) { [Console]::Error.WriteLine("- $rel") }
+    exit 1
+}
 $relFiles = @((Get-AdoptableRelFiles $masterFull $globs) + (Get-AdoptableRelFiles $instanceFull $globs)) |
     Where-Object { Test-AdoptableForInstance $_ $instanceTier } |
     Sort-Object -Unique
@@ -194,6 +207,8 @@ $lines.Add("")
 $lines.Add("- Version de la instancia: ``$instanceV``")
 $lines.Add("- Version del master: ``$masterV``")
 $lines.Add("- Conjunto adoptable: $($rows.Count) archivos (nuevo=$nuevo, cambiado=$cambiado, igual=$igual, eliminado=$eliminado)")
+$lines.Add("- Criterio: masters declarados y arboles reutilizables completos bajo ``scripts/``, ``skills/``, ``.githooks/`` y ``runtime/``.")
+$lines.Add("- Fuera del conjunto: estado vivo y ejecuciones (``runtime/state/``, ``runtime/runs/``), estado/coordinacion de instancia (``Area_comun/`` salvo masters declarados), ``personal/``, ``examples/``, ``research/`` y artefactos locales; no son carga generica.")
 if ($instanceTier -eq "runtime") {
     $lines.Add("- Adoption tier de la instancia: ``$instanceTier``")
     $lines.Add("- Runtime version de la instancia: ``$instanceRuntimeV``")

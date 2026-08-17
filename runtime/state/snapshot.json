@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8e1d410e2b36e3b7a4b54071fd39b89ba5afb95342ba2a56aaeb7ad609c73694",
+  "canonical_hash": "1cf7321acf4e67520f40876ddfcde02521bf7add42cbf8572dc1218290a810cf",
   "integrity": {
-    "canonical_hash": "8e1d410e2b36e3b7a4b54071fd39b89ba5afb95342ba2a56aaeb7ad609c73694",
+    "canonical_hash": "1cf7321acf4e67520f40876ddfcde02521bf7add42cbf8572dc1218290a810cf",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "462ea1ce1dd38dfdb89aeea535ef42d6f064aee3e2924c7b997fe094100e637e",
-    "signature": "6c8af3a824cd0ab004c04c6ab467847e7aaf3dd1056bac336d55ed18b9ecb5a3",
-    "up_to_seq": 9849
+    "prev_hash": "dcc42a8d8ac1f6ded5c757b18921c48a9ecb8158b4084e4c25933005fd4dcf9e",
+    "signature": "0e234c2b9a5ded4c51727ce63dfcd36cc4b9b6a1824624b3dcde2ab00099b5ab",
+    "up_to_seq": 9851
   },
   "state": {
     "aggregate_versions": {
@@ -4034,7 +4034,7 @@
       "TASK-0391": 2,
       "TASK-0392": 26,
       "TASK-0393": 1,
-      "TASK-0394": 3,
+      "TASK-0394": 5,
       "TASK-0395": 16,
       "TASK-0396": 24,
       "TASK-0397": 20,
@@ -4076,7 +4076,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9178,
+    "events_applied": 9180,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9268,6 +9268,8 @@
       "codex:task0392:r1:delivery:status:2026-08-15T10:31:12Z": 9366,
       "codex:task0392:remediation2:release:": 9382,
       "codex:task0392:remediation2:status:20260815T1314Z": 9381,
+      "codex:task0394:start:claim:20260817T221504Z": 9850,
+      "codex:task0394:start:status:20260817T221504Z": 9851,
       "codex:task0395:claim-acquire:20260815T100606Z": 9360,
       "codex:task0395:claim-release:20260815T101649Z": 9363,
       "codex:task0395:in-progress-to-blocked:20260815T101649Z": 9362,
@@ -13258,5 +13260,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9849
+  "up_to_seq": 9851
 }

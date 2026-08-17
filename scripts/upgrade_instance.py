@@ -18,10 +18,12 @@ import sys
 from pathlib import Path
 from pathlib import PurePosixPath
 
-# Conjunto adoptable (DISENO-robustez-operacional.md §1.2): archivos genericos/masters que una
-# instancia copia verbatim a la misma ruta relativa. Configurable via master
-# protocol.config.json -> {"upgrade": {"adoptable_globs": [...]}}.
-DEFAULT_ADOPTABLE_GLOBS = [
+# Criterio adoptable (DISENO-robustez-operacional.md §1.2): masters explicitos y todo
+# fichero bajo los arboles de herramientas reutilizables. Los arboles son recursivos por
+# definicion: un subdirectorio nuevo de scripts, skills, hooks o runtime tambien se exporta.
+# La seleccion puede declararse en protocol.config.json, pero se comprueba contra este
+# criterio para que una lista obsoleta falle en vez de omitir carga silenciosamente.
+ADOPTABLE_MASTER_FILES = (
     "AGENTS.template.md",
     "CLAUDE.template.md",
     "protocol.config.template.json",
@@ -30,11 +32,12 @@ DEFAULT_ADOPTABLE_GLOBS = [
     "Area_comun/protocol/*.md",
     "Area_comun/specs/*_TEMPLATE.md",
     "profiles/PROFILE_TEMPLATE/**/*",
-    "scripts/*.py",
-    "scripts/*.ps1",
-    ".githooks/**",
-    "runtime/**",
     ".github/workflows/validate.yml",
+)
+ADOPTABLE_RECURSIVE_ROOTS = ("scripts", "skills", ".githooks", "runtime")
+DEFAULT_ADOPTABLE_GLOBS = [
+    *ADOPTABLE_MASTER_FILES,
+    *(f"{root}/**" for root in ADOPTABLE_RECURSIVE_ROOTS),
 ]
 
 
@@ -113,6 +116,16 @@ def collect_files(root: Path, globs: list[str]) -> set[str]:
     return found
 
 
+def uncovered_adoptable_files(master: Path, globs: list[str]) -> set[str]:
+    """Generic master files required by the criterion but omitted by the effective globs."""
+    required = {
+        rel
+        for rel in collect_files(master, DEFAULT_ADOPTABLE_GLOBS)
+        if not excluded_runtime_artifact(rel)
+    }
+    return required - collect_files(master, globs)
+
+
 def normalized(path: Path) -> str:
     """Contenido con EOL+BOM normalizado para comparar sin falsos 'cambiado' por CRLF/LF/BOM."""
     try:
@@ -164,6 +177,11 @@ def render_report(
         f"- Conjunto adoptable: {len(rows)} archivos "
         f"(nuevo={counts['nuevo']}, cambiado={counts['cambiado']}, "
         f"igual={counts['igual']}, eliminado={counts['eliminado']})",
+        "- Criterio: masters declarados y arboles reutilizables completos bajo "
+        "`scripts/`, `skills/`, `.githooks/` y `runtime/`.",
+        "- Fuera del conjunto: estado vivo y ejecuciones (`runtime/state/`, `runtime/runs/`), "
+        "estado/coordinacion de instancia (`Area_comun/` salvo masters declarados), "
+        "`personal/`, `examples/`, `research/` y artefactos locales; no son carga generica.",
     ]
     if instance_tier == "runtime":
         lines.extend(
@@ -211,6 +229,12 @@ def main(argv: list[str] | None = None) -> int:
     instance_v = read_protocol_version(instance)
     instance_tier = adoption_tier(instance)
     globs = adoptable_globs(master)
+    uncovered = uncovered_adoptable_files(master, globs)
+    if uncovered:
+        print("ERROR: ficheros genericos fuera del conjunto adoptable:", file=sys.stderr)
+        for rel in sorted(uncovered):
+            print(f"- {rel}", file=sys.stderr)
+        return 1
     rel_files = {
         rel
         for rel in collect_files(master, globs) | collect_files(instance, globs)

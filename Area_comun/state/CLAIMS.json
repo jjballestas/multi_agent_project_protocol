@@ -84,6 +84,26 @@
             "updated_at": "2026-08-17T21:30:13Z"
         },
         {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0394",
+            "expires_at": "2026-08-18T04:15:04Z",
+            "notes": "Implement the declared adoptable-file criterion, Python/PowerShell parity, omission detection, exclusions, and report disclosure without changing protocol.config.json.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0394",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T22:15:04Z",
+            "status": "active",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-17T22:15:04Z"
+        },
+        {
             "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5",
             "expires_at": "2026-08-17T11:55:04Z",
             "notes": "Remediation r5: make registry absence fatal after any chain anchor and add deletion-resync plus disablement counterproofs.",

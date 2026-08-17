@@ -721,7 +721,7 @@
             "id": "TASK-0394",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos",
             "type": "implementation"
         },
