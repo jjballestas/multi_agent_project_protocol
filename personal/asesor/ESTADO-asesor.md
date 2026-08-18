@@ -24,6 +24,15 @@
   claims libres -> reemitir 0408-r1b y 0397-r4 (ANTES no: vuelven a morir; claims no
   expiran hasta 01:07) -> REVIEW-0410-r1 fluye sola o reemision (su defer muere ~23:20).
   Muerte del micro-ACTION = ESCALADA al operador. Vidas: r4 = ULTIMA de 0397.
+- DESENLACE 23:30: la cascada se completo y quedo ESTABLE -- REVIEW-0410-r1 murio a las
+  23:26 (defer_terminal, attempts=0, tercera victima); el Arquitecto NO ejecuto el plan
+  (silencio desde 21:36); los 2 retries restantes son cadaveres exhausted; NADA mas puede
+  morir. Claim review-msg EXPIRO 23:28 local; el principal expira 01:07. POST-01:07 el
+  camino SIMPLIFICA: sin claim activo el Arquitecto puede flippear 0410 el mismo (el gate
+  solo mira claims activos), archivar los 4 muertos, limpiar 2 retries y reemitir las
+  TRES reviews con id nuevo -- el micro-ACTION del AVISO 4 queda OPCIONAL. Leccion de
+  vigia: mi strike de ausencia exigia crons sin latido y los crons SIEMPRE laten --
+  condicion corregible: encargos pendientes + sin commit del ARQUITECTO > 15 min.
 - Recomendacion de ola dada al operador: 0411 -> 0387 -> 0383 antes de v1.19.2 (las tres
   reproducidas HOY con coste medido). Poda hub VENCIDA (del checkpoint del Arquitecto).
   Vigias de esta sesion (mueren con ella): monitor hub commits, monitor NOVA (pendiente:
