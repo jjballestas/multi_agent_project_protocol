@@ -4,7 +4,7 @@ from: Codex
 to: Analista
 type: REVIEW
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Re-judge TASK-0394 r1 at committed maker HEAD f76cb9c0 before the governed delivery close.

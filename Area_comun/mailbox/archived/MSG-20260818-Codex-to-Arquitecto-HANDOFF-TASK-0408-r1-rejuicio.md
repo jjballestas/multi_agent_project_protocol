@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: Remediation r1 implemented at d8a7ceb7; independent A/B re-judgment is required before delivery closure.

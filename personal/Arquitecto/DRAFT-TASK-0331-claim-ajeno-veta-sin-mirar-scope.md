@@ -1,0 +1,107 @@
+---
+task_id: TASK-0331
+file: Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md
+title: "Exclusion mutua total entre agentes: un claim ajeno vivo veta sin mirar scope Y una lease de exec ajena veta sin condicion alguna, asi que maker y checker no pueden trabajar nunca a la vez"
+status: proposed
+type: infra
+owner: Codex
+reviewer: Analista
+priority: high
+project: multi_agent_project_protocol
+relates_to:
+  - TASK-0319
+  - TASK-0321
+created_at: 2026-08-07
+intake:
+  type: fix
+  goal: >
+    `Get-AdditionalWorkSignal` en `peer_mailbox_cron.ps1` recorre `CLAIMS.json` y devuelve
+    `active_external_claim` en cuanto encuentra UN claim vivo de otro owner. No compara `scope`, ni
+    `task_id`, ni ruta alguna. Consecuencia: mientras Codex sostiene un claim sobre TASK-0322, el
+    Analista no puede ejecutar NINGUN mensaje -- ni siquiera la review de TASK-0324, otra tarea, sin
+    una sola ruta en comun.
+    Eso serializa por completo al maker y al checker. El ciclo de dos capas existe precisamente para
+    que el checker revise la tarea N mientras el maker construye la N+1; con este guard se alternan
+    en vez de solaparse, y como los claims del maker duran lo que dura una implementacion (30-70 min
+    medidos esta noche), el checker pasa ese tiempo parado.
+    El propio DECISION-0020 formula la regla CON alcance -- "el peer no tiene claim activo sobre las
+    rutas" -- asi que el guard es MAS ESTRICTO que la politica que implementa. No hay que cambiar la
+    politica: hay que implementarla como esta escrita.
+    Medido en los logs: 12 diferimientos por esta causa en el cron del Analista frente a 1 en el de
+    Codex. La asimetria es la esperada -- el que revisa es el que paga el peaje.
+    **Y hay un SEGUNDO veto, mas absoluto todavia.** La misma funcion recorre las leases de exec y
+    devuelve `active_peer_lease` si CUALQUIER lease ajena tiene proceso vivo, sin mirar tarea, ruta
+    ni nada. Medido en vivo 2026-08-07: liberado el claim de 0322, el Analista paso de
+    `active_external_claim` a `active_peer_lease detail=peer=Codex` y siguio bloqueado. Con este
+    veto, el checker no puede ejecutar mientras el maker ejecute -- y como el maker suele tener cola,
+    la exclusion es practicamente permanente. El ciclo de dos capas queda estrictamente secuencial.
+    El veto de lease es el que de verdad manda: el de claim ni siquiera llega a notarse cuando hay
+    un exec vivo.
+    **Y el veto NO es un lock: es un check-then-act sin atomicidad.** Medido 2026-08-07: los dos
+    peers emitieron `EXEC_START` en el MISMO SEGUNDO (08:59:34, pids 76572 y 55112) con dos
+    `exec-lease.json` vivas a la vez. Ambos leyeron "no hay lease ajena", ambos escribieron la suya,
+    ambos arrancaron. No hay lock, ni compare-and-swap, ni orden. De modo que el guard es
+    ESTRICTO DE MAS cuando los peers llegan escalonados y NO GARANTIZA NADA cuando llegan juntos:
+    paga el coste completo de la exclusion mutua sin entregar la garantia. Si alguna parte del
+    sistema se apoya en esa exclusion para la seguridad del ledger (la anti-colision de
+    DECISION-0020), la garantia es ilusoria.
+  acceptance:
+    - "AC1 (falsacion previa): se reproduce que un claim ajeno SIN interseccion de rutas con el trabajo del mensaje produce active_external_claim, y se declara con la traza que lo demuestra (residua ya excusada y defer por el claim solo)."
+    - "AC2 (el guard pasa a mirar el scope): un claim ajeno vivo veta solo si su scope interseca las rutas que el mensaje va a tocar. La comparacion es por ruta, con el mismo criterio de normalizacion que ya usa el resto del harness."
+    - "AC2b (la lease ajena deja de ser veto incondicional): una lease de exec ajena viva veta solo si el trabajo que ampara interseca el del mensaje. Si no se puede determinar que ampara -- lease sin tarea declarada, ilegible o ambigua -- SIGUE VETANDO (mismo criterio fail-closed del AC3). Se declara por medicion cuanto tiempo de solape recupera el ciclo."
+    - "AC3 (fail-closed en toda duda, INNEGOCIABLE): un claim sin scope, con scope vacio, ilegible o no parseable SIGUE VETANDO. Un claim malformado no puede convertirse en permiso. Test negativo por cada una de esas cuatro formas."
+    - "AC4 (la asimetria deliberada se conserva): la ausencia de claims NUNCA es permiso para saltarse el veto de arbol sucio -- es lo que dice el comentario de la funcion y debe seguir siendo cierto. Test que lo fije."
+    - "AC4b (la carrera de arranque simultaneo, INDEPENDIENTE del scope): dos peers que sondean en el mismo tick no deben poder arrancar los dos. Se reproduce primero la carrera (dos EXEC_START en el mismo segundo con dos leases vivas) y luego se cierra con una adquisicion ATOMICA de la lease -- creacion exclusiva del fichero, o el primitivo equivalente del sistema -- no con una relectura. Un guard que solo LEE nunca excluye."
+    - "AC4c (declarar el alcance real de la garantia): el handoff declara EXPLICITAMENTE que garantiza el mecanismo tras el arreglo y que no. Si tras 0331 dos peers pueden seguir escribiendo el ledger a la vez por diseno, se dice; si no pueden, se demuestra. Lo que no puede quedar es la ambiguedad actual, donde el guard aparenta una exclusion que no da."
+    - "AC5 (contrato): negativo permanente que caiga si el guard deja pasar con un claim ajeno que SI interseca, y otro que caiga si veta con uno que no interseca; ambos verificados por MUTACION y cableados en CI."
+    - "AC6 (sin regresion): suite del harness y gates del repo exit 0 en clon limpio."
+  verification_cmd: "python scripts/test_exec_lease_harness.py && python scripts/check_falsification_contracts.py --root . && python scripts/validate_collaboration_state.py --root . && python scripts/scan_domain_neutrality.py --root ."
+  scope_routes:
+    - scripts/harness/peer_mailbox_cron.ps1
+    - scripts/test_exec_lease_harness.py
+    - Area_comun/protocol/FALSIFICATION_CONTRACTS.json
+  out_of_scope: >
+    No se toca el veto de arbol sucio ni la clasificacion live/aborted de residuas, que funcionan
+    bien. No se toca DECISION-0020 -- esta tarea acerca la implementacion a la politica, no la
+    politica a la implementacion. No se tocan las leases de exec.
+  risk: >
+    Es un guard de anti-colision: relajarlo mal reintroduce escrituras concurrentes del ledger, que
+    es el fallo que DECISION-0020 existe para evitar. Por eso AC3 es innegociable y el criterio ante
+    cualquier ambiguedad es VETAR. La direccion del fallo hoy es CERRADA (bloquea, no corrompe), asi
+    que el arreglo no debe convertirla en abierta a cambio de rendimiento: si el checker no logra un
+    criterio de interseccion que le convenza, es preferible dejar el veto como esta y declararlo.
+  estimate: M
+---
+
+# TASK-0331 -- el guard serializa a los dos agentes
+
+## Lo medido (2026-08-07)
+
+    07:13:41  RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=5     <- residua excusada
+    07:13:41  RETRY_DEFER     reason=active_external_claim                    <- y aun asi difiere
+
+La segunda linea sale inmediatamente despues de la primera: con el arbol ya excusado, lo unico que
+bloqueaba era el claim de Codex sobre TASK-0322, una tarea distinta de la que el mensaje pedia
+revisar. Evidencia por comportamiento, no por lectura del codigo.
+
+    defers por claim ajeno, cron del Analista    12
+    defers por claim ajeno, cron de Codex         1
+
+## Por que esto no es una urgencia pero si un impuesto
+
+Falla CERRADO: bloquea trabajo, no lo corrompe, y el diferimiento tiene 7200 s de margen antes de
+volverse terminal, asi que no se pierde ningun mensaje. Por la regla de direccion del fallo que
+gobierna este hilo, eso lo situa por debajo de los residuales que fallan abiertos.
+
+Pero se cobra el solape entero entre maker y checker, que es la premisa de rendimiento del ciclo de
+dos capas. Y explica algo que yo venia leyendo mal: al Analista ocioso mientras Codex trabaja lo
+interpretaba como "no hay nada que revisar", y en parte era este veto.
+
+## La linea que NO se puede cruzar
+
+El comentario de la funcion dice que la ausencia de claims "nunca se usa como permiso para saltarse
+el veto de arbol sucio". Esa asimetria es deliberada y correcta: el guard puede ser mas estricto que
+las senales, nunca mas laxo. El AC3 la extiende a lo que toca esta tarea -- un claim ilegible,
+vacio o sin scope sigue vetando. Convertir un claim malformado en permiso seria cambiar un guard
+que falla cerrado por uno que falla abierto, exactamente el defecto que estamos corrigiendo en el
+resto del arbol esta noche.

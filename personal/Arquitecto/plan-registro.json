@@ -1,0 +1,50 @@
+[
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+    "id": "TASK-0327",
+    "dest": "Area_comun/tasks/TASK-0327-contains-pii-default-ciega-capa-instancia.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0328-iban-solo-forma-contigua.md",
+    "id": "TASK-0328",
+    "dest": "Area_comun/tasks/TASK-0328-iban-solo-forma-contigua.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0329-exencion-de-archivo-completo-ciega-el-gate.md",
+    "id": "TASK-0329",
+    "dest": "Area_comun/tasks/TASK-0329-exencion-archivo-completo-ciega-gate-identidad.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0330-contratos-declarados-que-CI-nunca-ejecuta.md",
+    "id": "TASK-0330",
+    "dest": "Area_comun/tasks/TASK-0330-contratos-declarados-que-ci-nunca-ejecuta.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+    "id": "TASK-0331",
+    "dest": "Area_comun/tasks/TASK-0331-claim-ajeno-veta-sin-mirar-scope.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+    "id": "TASK-0332",
+    "dest": "Area_comun/tasks/TASK-0332-muestreos-disjuntos-contrato-por-comportamiento.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+    "id": "TASK-0333",
+    "dest": "Area_comun/tasks/TASK-0333-tercer-lector-ciego-gate-cambios-no-declarados.md",
+    "intake": true
+  },
+  {
+    "src": "personal/Arquitecto/DRAFT-TASK-0334-repo-embebido-invisible-al-barredor.md",
+    "id": "TASK-0334",
+    "dest": "Area_comun/tasks/TASK-0334-repo-embebido-invisible-al-barredor.md",
+    "intake": true
+  }
+]

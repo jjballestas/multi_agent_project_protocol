@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: DIRECTIVA
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: Ataque ordenado al tablero (el operador delego la discrecion a este canal): flip barato de 0342; comparar los 4 jobs rojos de CI de esta noche contra el BASELINE del par (numero Y causa -- rojo nuevo = tarea inmediata); poda YA (dos gatillos disparados); cola del maker post-remediaciones fijada 0410 -> 0412 -> 0413 -> 0416 -> 0418 (0417 despues); promocion por olas con criterio declarado, no en masa; revisar si las 3 bloqueadas tienen desbloqueo barato.

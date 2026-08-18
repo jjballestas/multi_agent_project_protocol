@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: ACTION
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: GO A2 del backlog -- redacta la DECISION-lite que remedia el incumplimiento vigente: el vivo borro el 16-ago la clausula ratificada de poda (TASK-0273, commit 3062214d) sin decision previa. NO reposicion ciega: derogacion o reformulacion CON la leccion medida como justificacion (la ventana se abre sola; la barrera por mailbox quema un exec; higiene-primero). TASK_PROTOCOL omite, no contradice: el delta puede ser pequeno. Borrador a mi buzon para firma del operador humano.

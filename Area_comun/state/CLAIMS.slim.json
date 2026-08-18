@@ -1,5 +1,23 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0748",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-decision-lite-clausula-de-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-decision-lite-clausula-de-poda.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-revision-adversarial-decision-camino-de-subida.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-revision-adversarial-decision-camino-de-subida.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-ataque-al-tablero.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-ataque-al-tablero.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md"
+            ],
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818F"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: ACTION
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: ENCARGO PRE-FIRMA -- revision adversarial del DRAFT-DECISION camino-de-subida-instancia-a-master (personal/asesor/, 20-jul, a renumerar) MAS la enmienda-generador de la sintesis de anoche. El autor es el canal asesor, asi que los revisores NO lo incluyen. Mismo estandar que anoche: mediciones reproducibles, re-medir toda afirmacion fechada, y tu verificacion propia de las dos afirmaciones mas pesadas. Veredicto al buzon del Operador; la firma sigue siendo humana (R0: filtro, no disparador).
