@@ -1,31 +1,6 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0605",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos.md",
-                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191.md",
-                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md"
-            ],
-            "task_id": "OPS-MAILBOX-HYGIENE-20260818E"
-        },
-        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1",
             "owner": "Codex",
             "scope": [

@@ -317,7 +317,7 @@
                 "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md"
             ],
             "started_at": "2026-08-18T04:06:13Z",
-            "status": "active",
+            "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260818E",
             "updated_at": "2026-08-18T04:06:13Z"
         },
@@ -373,6 +373,19 @@
             "status": "released",
             "task_id": "OPS-CLAIM-CLEANUP-20260818",
             "updated_at": "2026-08-18T03:33:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-purga-0649",
+            "expires_at": "2026-08-18T05:04:38Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-purga-0649",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0605"
+            ],
+            "started_at": "2026-08-18T04:49:38Z",
+            "status": "released",
+            "task_id": "OPS-CLAIM-CLEANUP-20260818B",
+            "updated_at": "2026-08-18T04:49:38Z"
         },
         {
             "claim_id": "CLAIM-20260818-Arquitecto-reg-0418",
