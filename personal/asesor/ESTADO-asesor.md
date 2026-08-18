@@ -24,7 +24,17 @@
   claims libres -> reemitir 0408-r1b y 0397-r4 (ANTES no: vuelven a morir; claims no
   expiran hasta 01:07) -> REVIEW-0410-r1 fluye sola o reemision (su defer muere ~23:20).
   Muerte del micro-ACTION = ESCALADA al operador. Vidas: r4 = ULTIMA de 0397.
-- DESENLACE 23:30: la cascada se completo y quedo ESTABLE -- REVIEW-0410-r1 murio a las
+- RESOLUCION 00:30 (19-ago): EPISODIO CERRADO. Cadena: micro-ACTION nego su preflight
+  (validate exit 124) -> diagnostico del canal AVISO 5 (2368d0b0): el gate de trailers
+  recorria 1862 commits x ~3 spawns git > 600 s -- gate LENTO que desbordo presupuesto,
+  no roto -> Arquitecto avanzo baseline (d093e8e5, PRIMER avance por COSTE en 20+
+  precedentes) -> validate verde en 80 s -> retry del micro completo flip+release
+  (7071dec9): TASK-0410 in_review, CERO claims. 0408-r1b ya ejecuto y dio
+  CHANGE-REQUIRED (680b45cb). Quedan: reemision 0397-r4 (ULTIMA vida) y REVIEW-0410,
+  r2 de 0408 -- todo del Arquitecto, camino libre. Leccion nueva en memoria .claude:
+  gate-que-escala-con-la-historia-desborda-su-timeout. Fixes durables recomendados en
+  AVISO 5: batchear el walk en UNA llamada git + TASK-0279 (pre-commit con aborto).
+- DESENLACE 23:30 [superado por la resolucion de las 00:30]: la cascada se completo y quedo ESTABLE -- REVIEW-0410-r1 murio a las
   23:26 (defer_terminal, attempts=0, tercera victima); el Arquitecto NO ejecuto el plan
   (silencio desde 21:36); los 2 retries restantes son cadaveres exhausted; NADA mas puede
   morir. Claim review-msg EXPIRO 23:28 local; el principal expira 01:07. POST-01:07 el
