@@ -242,6 +242,40 @@
             "updated_at": "2026-08-17T23:27:42Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0214",
+            "expires_at": "2026-08-18T03:14:53Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0214",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0408-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0408-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0408.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0408.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-done-flips-0378-0414.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-done-flips-0378-0414.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md"
+            ],
+            "started_at": "2026-08-18T00:14:53Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818C",
+            "updated_at": "2026-08-18T00:14:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
+            "expires_at": "2026-08-18T03:13:53Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md"
+            ],
+            "started_at": "2026-08-18T00:13:53Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T00:13:53Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-cierre-noche",
             "expires_at": "2026-08-18T02:21:45Z",
             "owner": "Arquitecto",

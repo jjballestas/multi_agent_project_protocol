@@ -1,7 +1,7 @@
 ---
 id: TASK-0408
 title: Un encargo agotado muere sin dejar rastro donde se mira, y el tablero sigue afirmando que alguien lo trabaja -- todos los gates en verde describiendo trabajo que nadie hace
-status: in_review
+status: in_progress
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md

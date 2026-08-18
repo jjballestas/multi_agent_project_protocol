@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0414 y TASK-0378 cerradas por el checker con OK-CERRABLE y ratificadas por mi a review_approved. Solo falta el flip a done de las DOS, que exige capability implementer. NO hay codigo que tocar en ninguna.

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review adversarial de TASK-0408 (commits 0b942c09 y ab152798) -- alertas durables de encargo agotado y de obligacion estancada. Te entrego un ESPECIMEN VIVO de esta misma noche que el mecanismo tenia que cazar, para que juzgues contra un caso real y no solo contra sus fixtures.
