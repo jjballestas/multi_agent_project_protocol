@@ -251,10 +251,13 @@ function Test-IdentityLiteralExempt {
         [string]$Term
     )
 
-    if (-not $IdentityLiteralExemptions.ContainsKey($RelativePath)) {
+    $declaredPath = $IdentityLiteralExemptions.Keys |
+        Where-Object { [string]::Equals($_, $RelativePath, [System.StringComparison]::Ordinal) } |
+        Select-Object -First 1
+    if ($null -eq $declaredPath) {
         return $false
     }
-    $declaration = $IdentityLiteralExemptions[$RelativePath]
+    $declaration = $IdentityLiteralExemptions[$declaredPath]
     if (-not $declaration.Lines.ContainsKey($LineNumber)) {
         return $false
     }
@@ -266,7 +269,9 @@ function Test-IdentityLiteralExempt {
     } finally {
         $sha256.Dispose()
     }
-    return $declaration.Lines[$LineNumber] -contains $digest
+    return @($declaration.Lines[$LineNumber]).Where({
+        [string]::Equals($_, $digest, [System.StringComparison]::Ordinal)
+    }).Count -gt 0
 }
 
 $resolvedRoot = (Resolve-Path $Root).Path
@@ -285,12 +290,16 @@ $denylist = @($neutrality.denylist)
 $scanGlobs = @($neutrality.scan_globs)
 $exemptGlobs = @($neutrality.exempt_globs)
 foreach ($pattern in $RequiredScanGlobs) {
-    if ($scanGlobs -notcontains $pattern) {
+    if (@($scanGlobs).Where({
+        [string]::Equals($_, $pattern, [System.StringComparison]::Ordinal)
+    }).Count -eq 0) {
         $scanGlobs += $pattern
     }
 }
 foreach ($pattern in $RequiredExemptGlobs) {
-    if ($exemptGlobs -notcontains $pattern) {
+    if (@($exemptGlobs).Where({
+        [string]::Equals($_, $pattern, [System.StringComparison]::Ordinal)
+    }).Count -eq 0) {
         $exemptGlobs += $pattern
     }
 }

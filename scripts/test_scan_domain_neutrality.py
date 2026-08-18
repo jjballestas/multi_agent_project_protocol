@@ -647,6 +647,20 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         self.assertIn(expected, python_result.stdout)
         self.assertIn(expected, powershell_result.stdout)
 
+    def test_identity_exemption_path_matching_is_case_sensitive_in_both_gates(self) -> None:
+        provider_identity = "Code" + "x"
+        probe = self.root / "scripts" / "Harness" / "peer_mailbox_cron.ps1"
+        probe.parent.mkdir()
+        probe.write_text("\n" * 554 + f'$owner = "{provider_identity}"\n', encoding="utf-8")
+
+        expected = f"scripts/Harness/peer_mailbox_cron.ps1:555: {provider_identity}"
+        python_result = self.run_python_scanner()
+        powershell_result = self.run_powershell_scanner()
+        self.assertEqual(python_result.returncode, 1, python_result.stdout + python_result.stderr)
+        self.assertEqual(powershell_result.returncode, 1, powershell_result.stdout + powershell_result.stderr)
+        self.assertIn(expected, python_result.stdout)
+        self.assertIn(expected, powershell_result.stdout)
+
     def test_moved_exempt_identity_fails_both_gates_with_same_finding(self) -> None:
         moved = self.root / "runtime" / "apply.py"
         moved.parent.mkdir(exist_ok=True)
