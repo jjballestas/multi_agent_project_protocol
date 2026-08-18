@@ -98,19 +98,19 @@ appended to the workflow, so `inline_commands[-1]` is the stable semantic coordi
 mutant under test. `inline_commands[0]` only happened to name that command while the workflow had
 no pre-existing inline PowerShell surface; TASK-0397 legitimately exposed that stale declaration.
 
-The inventory mechanism has the same literal-divergence shape across all 75 declared contracts:
-351 assertion-boundary strings in 12 runner files are stored as literal source strings and accepted only
-when each string is a substring of the exercised function. Therefore all 351 boundaries can drift
+The inventory mechanism has the same literal-divergence shape across all 77 declared contracts:
+357 assertion-boundary strings in 12 runner files are stored as literal source strings and accepted only
+when each string is a substring of the exercised function. Therefore all 357 boundaries can drift
 from their real assertion after a legitimate source edit and are detected only when the static
 contract gate runs. This remediation corrects the one observed boundary; replacing that
 repository-wide contract mechanism is outside this bounded repair.
 
 The census is not transcribed from a hot tree: the delivery gate emits
-`FALSIFICATION_CONTRACT_CENSUS contracts=75 assertion_boundaries=351 runner_files=12` from the
+`FALSIFICATION_CONTRACT_CENSUS contracts=77 assertion_boundaries=357 runner_files=12` from the
 validated contract objects in the same execution. Its units are declared contracts,
 assertion-boundary strings, and distinct runner files that own those contracts, respectively.
 
-Verification: the intact static contract gate exits 0 with 75/75 contracts and the stale-boundary
+Verification: the intact static contract gate exits 0 with 77/77 contracts and the stale-boundary
 diagnostic absent. Perturbing only the real assertion back to `[0]` while leaving the declaration
 at `[-1]` exits 1 and reports exactly
 `NEG-POWERSHELL-HOST-ASSUMPTION-CLASS: assertion boundary not found beside the test` for the
