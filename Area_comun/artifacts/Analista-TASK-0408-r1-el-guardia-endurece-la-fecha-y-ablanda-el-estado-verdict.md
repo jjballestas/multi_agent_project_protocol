@@ -224,7 +224,27 @@ entre las 28 verdes. Discrimine caso por caso antes de acusar a nadie:
 | `test_atomic_exec_admission_kills_peer_specific_lock_mutant` | reejecutado aislado | **PASS x2 -- flaky bajo carga**, no la entrega |
 | `test_live_unreadable_lease_is_preserved_and_deadline_mutant_dies` | leido el error | **`PermissionError [WinError 32]`** sobre `D:/Aegis_Scratch/multi_agent_project_protocol/task0319-tests` -- colision de entorno |
 | `test_admission_liveness_path_uses_production_functions_and_kills_constant_mutants` | corrido en clon limpio del PADRE `d8a7ceb7^` (`ebc3eab1`) | **FAIL x2 tambien en el padre -- PREEXISTENTE**, no la entrega |
-| el cuarto | nombre no capturado en mi primera corrida | no clasificado; lo declaro como limitacion medida |
+| `test_silent_process_tree_cpu_is_work_derived_and_mutation_proven` | ver adenda: segunda corrida completa | muestreo de CPU bajo carga -- inestable, no la entrega |
+
+### Adenda (misma sesion, tras publicar la tabla): el cardinal `failed=4` NO es estable
+
+Corri la suite una SEGUNDA vez entera y dio **`total=32 passed=29 failed=3`**. El conjunto de
+caidos cambio entre corridas:
+
+| Test | corrida 1 | corrida 2 | aislado |
+|---|---|---|---|
+| `test_atomic_exec_admission_kills_peer_specific_lock_mutant` | FAIL | PASS | PASS x2 |
+| `test_silent_process_tree_cpu_is_work_derived_and_mutation_proven` | FAIL | FAIL | -- |
+| `test_live_unreadable_lease_is_preserved_and_deadline_mutant_dies` | FAIL | FAIL | FAIL x2 (`WinError 32`) |
+| `test_admission_liveness_path_uses_production_functions_and_kills_constant_mutants` | FAIL | FAIL | FAIL x2, **y tambien en el padre `ebc3eab1`** |
+
+Corrijo lo que publique: no son "cuatro caidos", es **un conjunto de caidos que varia entre corridas
+sobre el MISMO commit**. Un unico fallo es estable y preexistente
+(`test_admission_liveness_path_...`, que cae igual en el padre); los otros tres son sensibles a la
+carga y a la ruta de scratch compartida. Eso refuerza la conclusion en vez de ablandarla: **esta
+suite completa no es hoy un gate discriminante**, porque su veredicto depende de quien mas este
+corriendo en la maquina. La propiedad enfocada que gatea TASK-0408, en cambio, dio PASS en las dos
+corridas completas y en las dos aisladas.
 
 **Anomalia de entorno que si merece aviso (DECISION-0018), y no es de esta entrega:**
 `scripts/test_exec_lease_harness.py:329` fija una ruta de scratch ABSOLUTA y COMPARTIDA:
