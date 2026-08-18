@@ -583,7 +583,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-18T06:10:17Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0394",
             "updated_at": "2026-08-18T06:10:17Z"
         },
@@ -599,7 +599,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-18T06:26:09Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0394",
             "updated_at": "2026-08-18T06:26:09Z"
         },

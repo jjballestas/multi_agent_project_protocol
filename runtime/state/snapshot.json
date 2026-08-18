@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "9f562f5dce7355c080026ecfc392a7fca9bf7ebe5c58b83681b821719ff8aeed",
+  "canonical_hash": "391ad0d8e5dc83aee3a55dbe7b438e733ba8f1d9f6546ccee2b975627be9eca4",
   "integrity": {
-    "canonical_hash": "9f562f5dce7355c080026ecfc392a7fca9bf7ebe5c58b83681b821719ff8aeed",
+    "canonical_hash": "391ad0d8e5dc83aee3a55dbe7b438e733ba8f1d9f6546ccee2b975627be9eca4",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "3af44dd3b069654726ad2ed169d3720c3d9c88c4fdce7790b45ae9c0957a563f",
-    "signature": "53e72d40c79cc4dd7eaec764487e80acdddd367abda82cbcbc4055058f59ad54",
-    "up_to_seq": 9953
+    "prev_hash": "e6fb0607d0c27d50f0c8ce9df7e6003ea18486fd93ab1e0f907283d929ec8a9c",
+    "signature": "bc28e26e0b716a49ee3d295e357569ef6bde79ffa8b8b157ab932efdf41c6bbf",
+    "up_to_seq": 9955
   },
   "state": {
     "aggregate_versions": {
@@ -4097,7 +4097,7 @@
       "TASK-0391": 2,
       "TASK-0392": 26,
       "TASK-0393": 1,
-      "TASK-0394": 19,
+      "TASK-0394": 21,
       "TASK-0395": 16,
       "TASK-0396": 24,
       "TASK-0397": 20,
@@ -4143,7 +4143,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9282,
+    "events_applied": 9284,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9350,6 +9350,8 @@
       "codex:task0394:msgfix:release:20260817T225600Z": 9857,
       "codex:task0394:release-r1-rejudgment:2026-08-18T05:08:51Z": 9929,
       "codex:task0394:release-r1:2026-08-18T05:08:51Z": 9928,
+      "codex:task0394:release-r2-rejudgment:20260818T081724Z": 9955,
+      "codex:task0394:release-r2:20260818T081724Z": 9954,
       "codex:task0394:start:claim:20260817T221504Z": 9850,
       "codex:task0394:start:status:20260817T221504Z": 9851,
       "codex:task0395:claim-acquire:20260815T100606Z": 9360,
@@ -13429,5 +13431,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9953
+  "up_to_seq": 9955
 }
