@@ -1,6 +1,36 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-08-18 (~20:15 local, checkpoint de cierre) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+## >> BLOQUE TOP 2026-08-18 (~21:58 local, sesion nocturna del canal) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### NOVA: dos escaladas resueltas con GO del operador y pipeline fluyendo. HUB: cascada de
+### colision medida; plan vigente = AVISO 4 (micro-ACTION); proximo reloj REVIEW-0410 ~23:20.
+- NOVA: 9431 OK-CLOSABLE + doneflip; 9432 resuelta camino A (GO canonico ec6b46d; ejecucion
+  ejemplar: 9442 con F4-A/F4-B separados, 5 reproducciones del checker como controles
+  negativos de estreno, coste medido DENTRO); 9438 GO camino A + ENSANCHAR 3e8c41a (iter 3
+  acotada: payload 500001 rojo-en-padre + gateway a frontera real >=50000, 500->409
+  aceptado y registrado; escalera: otro CHANGE-REQUIRED = B sin nueva escalada); su
+  Arquitecto ruteo iter3 + unidades 9443/9444 + higiene. META total = su reporte final al
+  vaciar cola -> arrancar reloj espejo v3 (+1 dia, tarea 11).
+- HUB, cronologia de la cascada: 21:20 defer_terminal MATA 0408-r1 (att1) y 0397-r3 (att2)
+  -- RETRY_EXHAUSTED directo, el terminal NO quema-intento; 21:24 Codex entrega el fix de
+  0410 (b7bb0be1+ce2f5a73) pero el techo 21:32 corta la finalizacion (2o corte del dia);
+  el Arquitecto aterriza 693b634a y MIDE el interbloqueo del gate (release/flip ajenos
+  imposibles por scope: 0411 forma cara); retry attempt=2 (21:37-21:49) sale EXIT 0 SIN
+  hacer flip/release (especimen 0384, 2a vez hoy) -> RETRY_EXHAUSTED att3. Los 2 claims de
+  Codex quedan activos hasta la 01:07. AVISOs del canal 1-4: e94b312f / 973edd69 /
+  14162c4b / 81d16069.
+- PLAN VIGENTE (AVISO 4): Arquitecto archiva el ACTION agotado + limpia su retry ->
+  micro-ACTION con ID NUEVO (flip 0410 + release de los 2 claims, PROHIBIDO retrabajar) ->
+  claims libres -> reemitir 0408-r1b y 0397-r4 (ANTES no: vuelven a morir; claims no
+  expiran hasta 01:07) -> REVIEW-0410-r1 fluye sola o reemision (su defer muere ~23:20).
+  Muerte del micro-ACTION = ESCALADA al operador. Vidas: r4 = ULTIMA de 0397.
+- Recomendacion de ola dada al operador: 0411 -> 0387 -> 0383 antes de v1.19.2 (las tres
+  reproducidas HOY con coste medido). Poda hub VENCIDA (del checkpoint del Arquitecto).
+  Vigias de esta sesion (mueren con ella): monitor hub commits, monitor NOVA (pendiente:
+  anadir self-filter de mis propios ficheros Operador-*), watchdog defer/exhausted/exec.
+  Pendientes del operador sin cambio: DECISION-0119 + alta human_owner.
+
+## BLOQUE 2026-08-18 (~20:15 local, checkpoint de cierre) [SUPERADO por el TOP de las 21:58]
 
 ### RESUMEN DE 24H: v1.19.1 TAGGED (27acf137) + ADOPTADA POR NOVA + DECISION-0120 y 0121
 ### SELLADAS Y APLICADAS. Falta SOLO: dos veredictos del checker NOVA -> reporte = META total.
