@@ -824,7 +824,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "low",
-            "status": "ready",
+            "status": "in_review",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas",
             "type": "infra"
         },

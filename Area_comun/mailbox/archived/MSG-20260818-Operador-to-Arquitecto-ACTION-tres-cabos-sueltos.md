@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: ACTION
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Tres tramites medidos a las 15:47, con el maker OCIOSO dos horas: (1) TASK-0397 esta ATASCADA -- in_review, su REVIEW archivada SIN veredicto y ya marcada vista por el checker (nunca la re-procesara): re-rutea con ID NUEVO; (2) TASK-0408 in_progress con el handoff del re-juicio archivado y sin REVIEW formal al checker: rutea la review que falta; (3) TASK-0410 sigue ready sin GO -- la cola que aceptaste (0410 con E6 como AC -> 0412 -> 0413 -> 0416 -> 0418) no ha arrancado: emite el GO. Profundidad de cola tras esto: 2-3 para el checker, 1 para el maker -- dentro del limite."

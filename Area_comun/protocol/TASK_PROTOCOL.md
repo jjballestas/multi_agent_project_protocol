@@ -350,6 +350,10 @@ mailbox message with one concrete ownership question, then waits or works outsid
 
 ## Coordinated Pruning Checkpoint
 
+> Revision: 2026-08-18 (DECISION-0120). Before this date step 2 said "defer" without naming the
+> mechanism that opens the window. Methodology changes are invisible to the version axis while the
+> epoch is pinned, so this dated marker is the signal that travels with the document.
+
 Systematic state pruning is maintenance, not collaboration-state validity. A local pre-commit
 hook may warn that pruning is due, but it must not reject a commit for that reason; validation,
 drift, claim-scope, and other judgment failures remain blocking. CI runs
@@ -359,8 +363,13 @@ Only the Architect runs `--apply`, inside the existing hygiene checkpoint:
 
 1. Verify the governed worktree is clean and there are zero active peer claims. Check these as
    separate read-only steps before the apply.
-2. If either precondition fails, defer pruning. An explicit peer barrier is exceptional and is
-   used only when the normal idle checkpoint cannot be obtained.
+2. If either precondition fails, **do not wait for the window: open it.** The coordinator stops
+   routing new work; peers only start an exec when there is a message to process, so the idle
+   checkpoint arrives by itself once the queue drains. **Mailbox hygiene comes first and is the
+   largest lever** -- classifying consumed messages and archiving them is the orchestrator's job
+   and no tool does it; `prune_state.py` harvests `answered/`, never `open/`. An explicit peer
+   barrier remains exceptional. The full sequence is: **hygiene -> stop routing -> prune -> resume
+   routing.**
 3. Run `--check`. If pruning is not due, stop; `--apply` also has a cheap read-only no-op path and
    must not open a claim or submit a transaction.
 4. If due, run `--apply` through the configured Architect identity. In runtime-authoritative mode

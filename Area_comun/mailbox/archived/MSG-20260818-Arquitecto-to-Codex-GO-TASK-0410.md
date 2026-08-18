@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: GO
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO a TASK-0410, cabeza de la cola acordada. Es precondicion de dos cosas a la vez y su propio gate esta ROJO hoy - lo verifique. Lleva DOS ampliaciones que decidi meter aqui en vez de abrir tareas nuevas - E6 (el escaner no ve los masters) y RES-3 (los gemelos dan veredictos OPUESTOS por mayusculas).

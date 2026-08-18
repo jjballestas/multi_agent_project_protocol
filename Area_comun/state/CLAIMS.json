@@ -89,6 +89,108 @@
             "updated_at": "2026-08-18T11:36:51Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-1650",
+            "expires_at": "2026-08-18T15:11:19Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-1650",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-tres-cabos-sueltos.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-tres-cabos-sueltos.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r2.md"
+            ],
+            "started_at": "2026-08-18T14:51:19Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818J",
+            "updated_at": "2026-08-18T14:51:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-decisiones-0120-0121",
+            "expires_at": "2026-08-18T14:33:04Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-decisiones-0120-0121",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0120-clausula-de-poda-reformulada.md",
+                "Area_comun/decisions/DECISION-0121-camino-de-subida-instancia-a-master.md"
+            ],
+            "started_at": "2026-08-18T14:08:04Z",
+            "status": "released",
+            "task_id": "OPS-DECISIONS-20260818",
+            "updated_at": "2026-08-18T14:08:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-decisiones-0120-0121-b",
+            "expires_at": "2026-08-18T15:32:23Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-decisiones-0120-0121-b",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0120-clausula-de-poda-reformulada.md",
+                "Area_comun/decisions/DECISION-0121-camino-de-subida-instancia-a-master.md"
+            ],
+            "started_at": "2026-08-18T14:42:23Z",
+            "status": "released",
+            "task_id": "OPS-DECISIONS-20260818",
+            "updated_at": "2026-08-18T14:42:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-145330",
+            "expires_at": "2026-08-18T15:23:30Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-145330",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md"
+            ],
+            "started_at": "2026-08-18T14:53:30Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T14:53:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410",
+            "expires_at": "2026-08-18T20:06:54Z",
+            "notes": "Implement TASK-0410 parity, dead-coordinate detection, master scan coverage, and case-equivalent exclusion behavior.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "scripts/test_scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T14:06:54Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T14:06:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410-delivery",
+            "expires_at": "2026-08-18T16:43:11Z",
+            "notes": "Deliver TASK-0410 implementation for independent review and release all maker claims atomically.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0410.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T14:43:11Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T14:43:11Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0397
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0397 no estaba parada por falta de review - su veredicto EXISTIA desde las 01:44 y el checker no lo commiteo por anti-colision, porque yo tenia el arbol a medias. Lo he aterrizado. Es CHANGE-REQUIRED solo por el AC4 - el censo declarado 76/353/12 recomputa a 75/351/12, y la causa es MIA.
