@@ -179,6 +179,37 @@
             "updated_at": "2026-08-18T16:00:43Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-163649",
+            "expires_at": "2026-08-18T17:01:49Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-163649",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0410-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0410-veredicto.md"
+            ],
+            "started_at": "2026-08-18T16:36:49Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T16:36:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-rechazo-0410-163406",
+            "expires_at": "2026-08-18T16:59:06Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-rechazo-0410-163406",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0410.md"
+            ],
+            "started_at": "2026-08-18T16:34:06Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T16:34:06Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3",
             "expires_at": "2026-08-18T18:14:29Z",
             "notes": "Remediate only TASK-0397 AC4 by deriving and printing census from the static contract gate.",

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review independiente de TASK-0410 en el commit 96af63c6 -- paridad de gemelos, cuatro AC y las dos ampliaciones autorizadas (E6 masters y RES-3 sensibilidad a mayusculas), con el cardinal derivado bajo sospecha de vacuidad.
