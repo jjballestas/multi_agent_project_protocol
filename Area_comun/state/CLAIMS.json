@@ -368,7 +368,7 @@
                 "scripts/test_exec_lease_harness.py"
             ],
             "started_at": "2026-08-18T00:41:30Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-18T00:41:30Z"
         },
@@ -383,7 +383,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-08-18T01:12:14Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-18T01:12:14Z"
         },
@@ -397,7 +397,7 @@
                 "scripts/scan_domain_neutrality.ps1"
             ],
             "started_at": "2026-08-18T00:48:30Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-18T00:48:30Z"
         },
@@ -435,7 +435,7 @@
                 "scripts/scan_domain_neutrality.ps1"
             ],
             "started_at": "2026-08-18T01:16:06Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-18T01:16:06Z"
         },

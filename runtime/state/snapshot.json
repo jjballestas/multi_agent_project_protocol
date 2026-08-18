@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8d4820c74b97f93c5caa0e5672110d0103900fc668cac33795c2145caef81383",
+  "canonical_hash": "e6327c4043db4e4fdd722eb83870f0534e8709b71cdfd32feaec95bc3fa8180f",
   "integrity": {
-    "canonical_hash": "8d4820c74b97f93c5caa0e5672110d0103900fc668cac33795c2145caef81383",
+    "canonical_hash": "e6327c4043db4e4fdd722eb83870f0534e8709b71cdfd32feaec95bc3fa8180f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "655c1bf4c0af54f2fd3277ae7e24569a94999f9534e1912d129f9042171aa9f9",
-    "signature": "a2d4abe648c59e529349a0e54e4057c08b72ef9638d7e0a6b7ad01f06f172ada",
-    "up_to_seq": 9894
+    "prev_hash": "e3480a80102ca7d6aae73ec00c7e58cc0ff34efbbd89c60e0c535ae3d9f97255",
+    "signature": "aad58923cfcb6f6b6999df1dc90ae3fa9e09cdbdb2f410d5f024294bc0257ac8",
+    "up_to_seq": 9898
   },
   "state": {
     "aggregate_versions": {
@@ -4067,7 +4067,7 @@
       "TASK-0404": 1,
       "TASK-0405": 1,
       "TASK-0407": 1,
-      "TASK-0408": 22,
+      "TASK-0408": 26,
       "TASK-0409": 16,
       "TASK-0410": 3,
       "TASK-0411": 3,
@@ -4098,7 +4098,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9223,
+    "events_applied": 9227,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9339,6 +9339,10 @@
       "codex:task0397:remediation1:msgfix-claim:2026-08-16T01:35:32Z": 9476,
       "codex:task0397:remediation1:msgfix-release:2026-08-16T01:35:59Z": 9477,
       "codex:task0397:remediation1:work-release:2026-08-16T01:31:34Z": 9474,
+      "codex:task0408:release-r1-commit:20260818": 9896,
+      "codex:task0408:release-r1-neutrality:20260818": 9897,
+      "codex:task0408:release-r1-snapshot:20260818": 9898,
+      "codex:task0408:release-r1:20260818": 9895,
       "codex:task0409:claim:20260816T113439Z": 9572,
       "codex:task0409:delivery-claim:20260816T115027Z": 9574,
       "codex:task0409:delivery-release:20260816T115027Z": 9577,
@@ -13325,5 +13329,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9894
+  "up_to_seq": 9898
 }
