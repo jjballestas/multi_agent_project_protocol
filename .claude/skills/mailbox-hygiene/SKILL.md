@@ -29,6 +29,32 @@ description: >-
 - **Los peers (Codex/Analista):** si ven un mensaje stale/huerfano lo **senalan** al owner (DECISION-0018);
   no lo arreglan bajo claim ajeno ni lo dejan sin senalar.
 
+## 0-quater. Poda coordinada en el checkpoint (clausula NORMATIVA -- DECISION-0120)
+
+> Revision: 2026-08-18 (DECISION-0120, firmada por el operador humano en persona).
+> Antes de esta fecha esta seccion NO EXISTIA en la copia viva: el 16-ago se borro la clausula
+> ratificada de TASK-0273 **sin decision previa**, que CLAUDE.md regla 2 exige. La 0120 regulariza
+> ese incumplimiento y reformula el paso 2 en vez de derogarlo.
+
+La norma vive en `Area_comun/protocol/TASK_PROTOCOL.md`, seccion *Coordinated Pruning Checkpoint*.
+**Esta skill no la sustituye: la operacionaliza.** Lo vinculante:
+
+- solo el Arquitecto corre `--apply`, dentro del checkpoint de higiene;
+- **precondiciones (paso 1, intactas y correctas):** arbol gobernado limpio y CERO claims de peer,
+  comprobados como pasos de solo-lectura SEPARADOS antes del apply;
+- **paso 2, reformulado por la 0120:** si falla una precondicion **no se espera la ventana: se
+  abre.** El coordinador deja de rutear; un peon solo arranca exec si hay mensaje, asi que el
+  checkpoint ocioso llega solo cuando la cola drena. La barrera explicita a peers sigue siendo
+  excepcional;
+- la secuencia completa es la de la seccion 0-bis: **higiene -> dejar de rutear -> podar -> volver
+  a rutear**;
+- el checkpoint **no relaja claim-as-lock** ni permite podar a traves de scopes de peer vivos.
+
+**Las cuatro superficies (problema n-ario de la 0120 s.4):** esta copia viva, el master exportable,
+`TASK_PROTOCOL.md` y la copia desplegada en cada instancia deben decir lo mismo. La 0120 alinea
+**esta y la normativa**; el master espera al generador y la desplegada espera a **TASK-0417**,
+porque hoy el informe de upgrade no compara la ruta consumida.
+
 ## 0-bis. SECUENCIA OBLIGATORIA: higienizar -> dejar de rutear -> podar -> volver a rutear
 
 > Directiva del operador, 2026-08-16, con la medicion que la respalda.

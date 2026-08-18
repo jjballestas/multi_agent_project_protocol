@@ -188,7 +188,9 @@ proxy mecanico del cada-5-consumidos.
 Al arrancar como Arquitecto, arma SIEMPRE los tres como parte del cold-start: (1) monitor de entregas (s.1),
 (2) watchdog 15-min/salud-execs (s.1b, ampliado a stall silencioso), (3) watchdog de higiene de mailbox (s.1c).
 Los watchdogs son el ENFORCER; el auto-poll por turno es red primaria pero se cae bajo carga -> los monitores
-mecanicos lo respaldan. **Exportabilidad:** estos watchdogs deben poder EXPORTARSE al instanciar la metodologia
+mecanicos lo respaldan. **Y arma tambien el CUARTO (s.1g, encargo muerto)**: los tres obligatorios cubren
+entrega y cuelgue, pero un exec que MUERE sin colgarse se ve exactamente igual que un peon sin trabajo, y ese
+punto ciego costo cinco horas el 17-ago. **Exportabilidad:** estos watchdogs deben poder EXPORTARSE al instanciar la metodologia
 (un Aegis/instancia recien creada arma los mismos en el arranque de sus agentes) -> item de diseno: portarlos a la
 capa neutral `skills/` (DECISION-0061, exportable via new_instance) o al agent-runbook del TASK_TEMPLATE de instancia.
 Ver [[watchdogs-al-iniciar-sesion]].
@@ -223,6 +225,58 @@ while true; do
   sleep 120
 done
 ```
+
+## 1g. EL CUARTO DESENLACE que los 3 watchdogs NO cubren: el ENCARGO MUERTO (2026-08-17, 5 horas ciegas)
+Los 3 obligatorios cubren dos desenlaces de un exec: **entrega** (s.1) y **cuelgue** (s.1b). Hay un TERCERO
+que ninguno ve: el exec **muere sin colgarse**. El arnes lo reintenta, agota los intentos
+(`RETRY_EXHAUSTED attempts=3`, causa tipica: el CLI del proveedor revienta con un error de su router), marca
+el mensaje y **vuelve a idle**. Desde fuera el cuadro es **IDENTICO al de "no hay trabajo"**: cron vivo,
+heartbeat puntual, `processable_messages=0`, sin lock, sin claims, sin commit. El monitor de entregas calla
+(no hubo salida), el de salud calla (no hay lock retenido), el de higiene calla. **Caso real: 03:18 -> 07:56,
+cinco horas creyendo que el peon trabajaba.**
+
+**El discriminador NO es la liveness del cron.** Es una **obligacion de trabajo pendiente, no reconocida y
+DURADERA**: hay una tarea `in_progress` cuyo dueno no ha producido nada en N minutos y cuyo mensaje ya no
+esta pendiente en `open/`. Cuarto watchdog, barato y directo a la causa:
+```bash
+cd /d/Agentes/multi_agent_project_protocol
+declare -A alerted
+while true; do
+  for peer in codex analista; do
+    r=".protocol-tmp/${peer}_mailbox_cron/${peer}_mailbox_cron.retry.json"
+    log=".protocol-tmp/${peer}_mailbox_cron/${peer}_mailbox_cron.log"
+    dead=$(grep -o "RETRY_EXHAUSTED[^\"]*" "$log" 2>/dev/null | tail -1)
+    ex=$(grep -o "EXEC_EXIT code=[0-9]*" "$log" 2>/dev/null | tail -1)
+    if [ -n "$dead" ] || [ "$ex" != "EXEC_EXIT code=0" -a -n "$ex" ]; then
+      if [ "${alerted[$peer]}" != "$dead$ex" ]; then
+        echo "=== ENCARGO MUERTO $(date '+%H:%M:%S') ==="
+        echo "$peer: $dead / $ex -- el cron sigue vivo y ocioso. Reenvia con ID NUEVO o ESCALA."
+        alerted[$peer]="$dead$ex"
+      fi
+    fi
+  done
+  sleep 120
+done
+```
+**SEGUNDA CONDICION OBLIGATORIA (2026-08-18, falso positivo caro):** `RETRY_EXHAUSTED` **no
+distingue** un encargo MUERTO de un encargo **CUMPLIDO y no marcado consumido**. Caso medido: r2 de
+TASK-0394 se entrego (commit del maker) y se ruteo (mensaje al checker) ANTES del primer reintento;
+los tres execs siguientes encontraron el trabajo hecho, salieron `transient` y agotaron los intentos.
+Aplicar dos-vidas ahi habria duplicado trabajo cerrado. **Antes de reenviar, busca el ARTEFACTO DE
+ENTREGA** (commit del maker o mensaje de handoff): si existe, NO esta muerto -- esta sin marcar, y lo
+que toca es archivar el mensaje y desencolar su entrada del `retry.json`. Coste del falso positivo:
+tres execs de peer.
+
+**Y el punto ciego que NINGUN monitor cubre: el encargo que se esta MURIENDO.** Un `RETRY_DEFER` no
+emite commits ni eventos, asi que los vigias ven el mismo silencio que "no hay trabajo". Solo se ve
+leyendo el `retry.json` del peer y comparando su `defer_started_at + 7200s` contra los `expires_at`
+de los claims que lo bloquean. **Metelo en el auto-poll de cada turno**: dos colisiones en un solo
+dia se cazaron asi, con 66 y 27 minutos de margen.
+
+**Politica del operador (17-ago): DOS VIDAS POR ORDEN.** Un reenvio automatico con **id NUEVO** y nota de la
+causa; si el reenvio tambien muere, **ESCALADA al operador**. Nunca una tercera a ciegas. Y no atribuyas la
+muerte a un incidente de proveedor sin mirar QUE CLI la emitio: el error de un proveedor no explica la caida
+del exec del otro (me paso: culpe a un incidente ya resuelto y perdi el diagnostico real).
 
 ## 2. Reglas de reaccion (que hacer con cada senal de peer)
 En cada wake: `git fetch` + `git merge --ff-only origin/main` (los peers commitean al arbol compartido; tu HEAD

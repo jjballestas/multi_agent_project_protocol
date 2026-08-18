@@ -125,6 +125,11 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   porque ya iba en la cadena. Paso a las 22:37 y publique un HEAD rojo; a las 23:20 los separe, el
   rojo aparecio (y era REAL, no transitorio) y **se quedo en local**. La diferencia no fue la suerte:
   fue el orden de dos comandos.
+- **GATE POR CONJUNCION: nunca imprimas una senal y condiciones a OTRA (2026-08-17, dos veces el mismo dia).**
+  El fallo no fue saltarme el gate: fue **medir tres cosas y decidir con una**. Imprimi `no-ASCII: 1` y el
+  `if` solo miraba `$VALIDATE` -> pushee un byte no-ASCII. La forma correcta es una sola condicion con las
+  TRES: `[ "$ASCII" = 0 ] && [ "$VALIDATE" = 0 ] && [ "$ENCODING" = 0 ] || { echo ABORT; exit 1; }`. Si una
+  senal aparece en la salida, tiene que estar en la condicion; si no va a estar en la condicion, no la midas.
 - **El pathspec se DERIVA de `git status`, no de lo que movio el ledger (2026-08-14, exit 128).**
   `git add` con varias rutas falla ENTERO si UNA no existe. Un fichero del peer que el ledger archivo
   estando UNTRACKED no tiene ruta en `open/` para git, aunque el evento diga que se movio. Patron:
@@ -156,6 +161,13 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
 - **Secuenciar en submits separados** (acquire -> upsert -> release) es mas robusto que un solo `--intents`
   cuando hay dependencia claim->write; si usas `--intents`, valida el ordenamiento.
 - **`--actor-id Arquitecto`, `--timestamp` UTC real, `--commit $(git rev-parse HEAD)`** en cada llamada.
+- **`idempotency_key` EXPLICITA POR INTENT dentro de un `--intents` (2026-08-17, 12 reintentos ciegos).**
+  Sin clave propia, la key de cada intent se deriva del HASH DE SU CONTENIDO: dos intents identicos en la
+  misma tx (o el mismo intent re-enviado tras un fallo parcial) COLISIONAN y la tx muere con **`partial
+  transaction idempotency state exists`**. Ese error es **DETERMINISTA, no transitorio**: reintentarlo da
+  exactamente lo mismo -- lo reintente 12 veces antes de leerlo. Regla: si el mensaje de error nombra un
+  ESTADO PERSISTIDO, reintentar no es una estrategia; cambia la clave (`"idempotency_key"` distinto en cada
+  intent) o limpia el estado parcial.
 
 ### 2b. Lecciones 2026-07-03 (fallos reales, no repetir)
 - **TODO `task_status` exige claim ACTIVO del actor** que cubra `TASK_INDEX.json#<id>` +
@@ -380,6 +392,36 @@ autorizacion explicita** (via `AskUserQuestion` en sesion interactiva, o via mai
 contexto completo del precedente/historia; tu trabajo es darle ese contexto al operador para que decida,
 no rodear el bloqueo). Si el operador confirma, procede con la MISMA accion que fue bloqueada (no una
 alternativa "creativa"); si no confirma, deja la accion pendiente y sigue con el resto de la cola.
+
+## 9. El gate ASCII y el scope minimo (2026-08-18, dos fallos propios medidos)
+
+**El chequeo ASCII con `LC_ALL=C` es un FALSO VERDE.** GNU grep rechaza `-P` fuera de locales
+unibyte/UTF-8 (`grep: -P supports only unibyte and UTF-8 locales`); con el stderr silenciado, `wc -l`
+cuenta **0** y eso se lee como "cero ficheros no-ASCII" cuando significa **"el buscador no llego a
+buscar"**. Forma correcta, y ademas medida **sobre el LOTE** y no sobre todo el arbol (hay ~147
+ficheros no-ASCII preexistentes y legitimos):
+
+    A=0
+    for f in $(git status --porcelain Area_comun/ | awk '{print $2}'); do
+      [ -f "$f" ] || continue
+    LC_ALL=C.UTF-8 grep -qP '[\x80-\xFF]' "$f" 2>/dev/null && { A=$((A+1)); echo "no-ASCII: $f"; }
+    done
+
+Reglas que salen de ahi: **todo gate nuevo se estrena con su NEGATIVO** (mete una violacion a
+proposito y comprueba que enrojece); **no silencies el stderr de un instrumento de medida**; y
+**distingue "no encontro nada" de "no pudo buscar"**.
+
+**Scope MINIMO Y EXACTO para desbloquearse de un claim ajeno.** Ante `overlaps active claim`, no
+esperes: mira QUE ruta nombra el error y pregunta si tu transaccion la escribe de verdad. Quitando
+`CLAIMS.json` (que se incluye por costumbre, para poder liberar) el solape baja por capas hasta
+desaparecer. **PERO incluye SIEMPRE tu propia fila `CLAIMS.json#<claim_id>`**: sin ella el claim
+**no admite release** y queda vencido-y-activo -- exactamente el defecto de TASK-0408, cometido seis
+veces en una sesion. Si aun asi hay que omitirla, `expires_at` CORTO y purga en el MISMO paso.
+
+**El intent `decision` es el caso duro:** exige `Area_comun/state/PROJECT_STATE.json` ruta COMPLETA,
+asi que **solapa con cualquier fragmento de un peon**. Una decision firmada no se puede inscribir
+mientras un peon tenga claim sobre PROJECT_STATE. Es TASK-0411 en su forma mas pura; el remedio hoy
+es esperar la ventana y reintentar el tx (idempotente).
 
 ## Checklist de una linea (pega mentalmente antes de actuar)
 ASCII? · response_owner? · type valido para el peer? · sin "para"+peer? · claim anidado + scope#self + fragmentos? ·
