@@ -7,6 +7,29 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-22 (8) (TASK-0283 CIERRE iter3 NO-GO/CHANGE-REQUIRED sobre commit 8b61b05, veredicto commit 3ed3af2: acceptance REFINADO por el Arquitecto -completitud absoluta retirada por indecidible-; el maker cambio el glob a `rglob("*.py")` sobre examples/ Y scripts/ -> CASO C cerrado en el eje de FICHERO: coloque negativos marcados sin contrato en subdir profundo + nombre no estandar bajo AMBOS arboles -> visibles y rojos, missing=2 exit1; A3 marcador load-bearing -quitarlo pone stale-loud- y A4 regresion de contrato declarado siguen con dientes. BLOQUEANTE = escape NUEVO por PLACEMENT: `permanent_negatives()` y `function_source()` iteran solo `tree.body`, asi que un negativo REAL con su marcador `PERMANENT_NEGATIVE:` correcto pero escrito como METODO DE CLASE (A2a) o FUNCION ANIDADA (A2b) es INVISIBLE -> 15/15/0 exit0. NO es el caso retirado -alli la senal esta AUSENTE; aqui el marker esta PRESENTE y el walk somero lo descarta-; rompe la clausula #2 -marker necesario pero NO suficiente, la colocacion top-level tampoco esta escrita- y la mitigacion documentada -revision/CI- NO lo atrapa porque el revisor VE el marcador y asume cobertura; el export new_instance.py lo propaga a suites basadas en clase -unittest/pytest-. Remediacion iter 1 de 2: F1 ast.walk / F2 fail-closed sobre marcador extraviado + doc de colocacion; anadir 2 casos al self-test -metodo Y anidado->rojo-. Clon limpio /d/c283i3, exit codes. PRUNE DUE 95.35>=90 senalado no corrido -es del Arquitecto-. SIN PRODUCTO EN ALCANCE); antes (7) (TASK-0283 RE-JUICIO del denominador independiente NO-GO/CHANGE-REQUIRED sobre commit 2a52e0c, veredicto commit fae8e02: el maker cerro mi bloqueante de iter1 -denominador REAL independiente de la lista de contratos, `missing` computado, un negativo MARCADO sin contrato -> ROJO missing=1 exit1, y Q1a/Q4 siguen con dientes- PERO el universo es auto-declarado DOS veces: una funcion solo entra si lleva el marker `PERMANENT_NEGATIVE:` Y vive en `examples/**/run_*.py`; inyecte un negativo REAL sin marker (B) -> invisible 14/14 missing=0, y un negativo REAL con marker en fichero fuera del glob (C) -> invisible; corrobora `attestation_negative_cases` -negativos reales sin marker, no contados- que choca con acceptance #3 clausula 2 "sin dejar el resto pendiente indefinido"; iteracion 2 de 2 -> escale al operador la DECISION DE ALCANCE -marcado-solo vs estructural- con dos direcciones R1 fail-closed / R2 enrolar-el-resto; prune vencido 94.59>=90 senalado no corrido; SIN PRODUCTO EN ALCANCE); antes (6) TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
 
+## Ultima actualizacion 2026-08-18 (77) - TASK-0397 r1: CHANGE-REQUIRED, el censo se midio en el arbol caliente
+
+- **SOLO HUB, SIN PRODUCTO.** Detalle en `personal/Analista/MEMORY-TASK-0397-20260818.md`. Entrega
+  `05edcabc`, ancla HEAD `dda6ec32` (fichero de producto byte-identico entre ambos). Veredicto y
+  mensaje en `D:/Aegis_Scratch/protocol/an0397-verdict/` y `personal/Analista/drafts/`, **SIN
+  COMMITEAR** por B1+B2.
+- **AC4 FALLA: el censo declarado (76/353/12) no reproduce en la entrega (75/351/12).** Dos
+  instrumentos coinciden: el checker embarcado y mi AST propio. **Reproduce EXACTO en `2636eb9a`**,
+  el commit donde el Arquitecto aterrizo el 0337 sin commitear del maker. Leccion: **cuando un censo
+  no cuadra, buscar el commit donde SI cuadra** -- localiza el arbol en que se midio. Y **nombrar la
+  unidad**: de las 351 cadenas solo **257** empiezan por `assert`.
+- **AC1/AC2/AC3 PASAN.** `[-1]` **no es un ancla mudada, esta DERIVADO**: lo certifican las dos
+  aserciones previas y `workflow_with_job` anexa al final con `sort_keys=False`. Lo medi creciendo el
+  workflow con un job `zzz-legit-growth` **elegido para ordenar DESPUES del mutante** -- verde.
+  Tecnica reutilizable para probar que una coordenada esta derivada.
+- **El negativo mata por el mecanismo:** coordenada, formato y **neutralizacion en sitio** (comentar
+  la linea dejando el texto) -> las tres exit 1 con el caso verde. Descarta el verde falso
+  silencioso. El precio real es **rojo falso** por reformateo cosmetico: residuo declarado.
+- **B1 -- canonico ROJO:** `MSG-20260818-Operador-...-DIRECTIVA-corte-v1191-...` commiteado con
+  `requires_response: true` y sin `requested_action`. **El mensaje que ordena el corte lo bloquea.**
+- **B2 -- peer a medio escribir:** 0378/0414 en `review_approved` en el arbol vs `in_review` en HEAD.
+  **Un estado INTERMEDIO es la firma de una transaccion a medio camino.**
+
 ## Ultima actualizacion 2026-08-16 (76) - TASK-0378 r3: CHANGE-REQUIRED, el negativo que se fabrica su propia victima
 
 - **SOLO HUB, SIN PRODUCTO** (no gatee `npm test`). Detalle en
@@ -13093,3 +13116,29 @@ clones limpios. Mi veredicto entro en canonico dentro de `ac1249c0` (leccion 6).
    no re-sincroniza nada). Tercera vez en esta saga.
 8. **Arreglar un fail-open deja muerta la rama buena de al lado**: `if not actual: return
    registry_missing` quedo inalcanzable, imagen especular del defecto de r4c.
+
+## 2026-08-18 -- TASK-0408 CHANGE-REQUIRED: el claim vencido que sigue hablando
+
+Detalle en `MEMORY-TASK-0408-20260818.md`. Juzgado `0b942c09` en clon limpio; mi veredicto entro en
+canonico dentro de `fec969c3` (leccion 6, otra vez).
+
+1. **Si el mismo fichero ya define el predicado MAS FUERTE en otro sitio, la version debil es una
+   omision, no un diseno.** `Test-StalledTaskObligations` mira solo `claim.status`;
+   `Get-AdditionalWorkSignal` (160 lineas arriba) ya exige ademas `expires_at > now`. Eso convierte
+   un juicio letra-vs-proposito en defecto duro.
+2. **Pregunta QUIEN puede satisfacer la condicion de disparo.** El arnes no libera claims; un exec
+   muerto deja el suyo `active` para siempre. La alerta solo puede saltar tras la liberacion manual,
+   o sea tras el acto de quien YA se dio cuenta. Un detector que depende del acto de quien deberia
+   ser avisado no es un detector: el aviso no llega tarde, no llega NUNCA.
+3. **El A/B mas fuerte se corre sobre el ESTADO CANONICO REAL.** `git show dbb9294f:<ruta>` para
+   materializar indice+claims+tarea, funciones de PRODUCCION cargadas por AST del clon limpio:
+   A tal cual = 0 alertas, B con la unica delta de reetiquetar los vencidos = 1 alerta.
+4. **Un mutante honesto puede ser ciego.** El del maker mataba por conducta (sobrevive a perturbar
+   la semilla), pero su sonda fijaba `CLAIMS.json` a vacio y la rama de SUPRESION -- la que llevaba
+   el defecto -- no la ejercitaba ninguna asercion. Con rama de supresion, exige poblaciones
+   ausente / valida / degradada.
+5. **Copiar un predicado puede invertir la direccion de seguridad**: alli lo conservador es bloquear,
+   aqui es avisar. Decirlo en la remediacion o el maker reintroduce el fail-open por el otro lado.
+6. **El coordinador vivo consume el mensaje de `open/` en menos de un minuto y lo archiva.** Verifica
+   DONDE quedo el fichero antes de stagearlo, y asume que su commit se llevara tus rutas: el
+   contenido llega a canonico, los trailers se pierden.
