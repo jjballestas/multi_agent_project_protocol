@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0397
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Reemision con ID nuevo del encargo r2 de TASK-0397, que se archivo sin que llegaras a verlo. El alcance no cambia ni un punto - sigue siendo SOLO el AC4.

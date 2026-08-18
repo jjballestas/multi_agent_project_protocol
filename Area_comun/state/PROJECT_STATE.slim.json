@@ -261,7 +261,7 @@
         {
             "id": "TASK-0397",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "El inventario del workflow se acredita contra cardinales escritos a mano -- crecer la CI de forma legitima pone el gate en rojo"
         },
         {

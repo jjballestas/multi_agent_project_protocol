@@ -165,6 +165,71 @@
             "updated_at": "2026-08-18T15:04:22Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-160044",
+            "expires_at": "2026-08-18T16:25:43Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-160044",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r3.md"
+            ],
+            "started_at": "2026-08-18T16:00:43Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T16:00:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3",
+            "expires_at": "2026-08-18T18:14:29Z",
+            "notes": "Remediate only TASK-0397 AC4 by deriving and printing census from the static contract gate.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0397-r3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "scripts/check_falsification_contracts.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T15:14:29Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T15:14:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3-mailbox",
+            "expires_at": "2026-08-18T17:33:18Z",
+            "notes": "Publish TASK-0397 remediation 3 review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0397-r3-mailbox",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T15:33:18Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T15:33:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3-msgfix",
+            "expires_at": "2026-08-18T16:46:08Z",
+            "notes": "Add required compact-mailbox question field to TASK-0397 review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0397-r3-msgfix",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T15:46:08Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T15:46:08Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0410",
             "expires_at": "2026-08-18T20:06:54Z",
             "notes": "Implement TASK-0410 parity, dead-coordinate detection, master scan coverage, and case-equivalent exclusion behavior.",
