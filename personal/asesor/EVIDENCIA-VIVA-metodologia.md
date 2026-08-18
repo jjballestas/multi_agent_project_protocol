@@ -321,3 +321,31 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   marcador `coordinacion-asesor` es COMPARTIDO (lo llevan las DIRECTIVAS del operador ruteadas via asesor), y me
   OCULTO el GO de Fase A (b27cd80); corregido para no ocultar nunca rutas de gobierno. La tesis en vivo aplicada al
   propio asesor, no solo al maker. Traza: FYI clasificador recurrente, DIRECTIVA opcion (c), memoria monitor-self-filter.
+- **2026-08-17/18 (Asesor, turno nocturno del corte v1.19.1 -- la noche completa como especimen):** doce horas
+  de camino critico coordinado integramente por mailbox, con la cadena leccion->memoria->prompt->conducta cerrada
+  DENTRO de la misma ventana. (1) DETECCION: r5 de TASK-0414 murio RETRY_EXHAUSTED a las 21:41; el arranque frio
+  protocolizado (v13, paso obligatorio retry.json) lo detecto a los 8 MINUTOS -- el dia anterior el mismo patron
+  (r4b) costo 5 HORAS. La otra instancia del canal, caliente pero sin protocolo, diagnostico "router" leyendo solo
+  el tail; el frio con serie completa acerto (hard_cap + residuo) y la caliente emitio NOTA de supersede y se
+  retiro: nace la regla "una voz por canal, el tail no es la serie". (2) EL CORTE: r5b como CIERRE (la entrega
+  estaba completa sin commitear; el claim gate VETO al coordinador commitear material ajeno aunque el operador lo
+  autorizo -- un gate tecnico no lo levanta la autorizacion), OK-CERRABLE en 5a ronda, dos DIRECTIVAS del canal
+  fijaron que ni r6 (cola sin ancla, preexistente) ni el CHANGE-REQUIRED de 0394 (guardas de futuro) retienen un
+  tag cuyo contenido embarcado esta verificado -- el Arquitecto respondio con el argumento MONOTONO (v1.19.1 exige
+  al atacante estrictamente mas que v1.19.0) y corto con TRES limites declarados. (3) NOVA: acredito el tag en el
+  ORIGEN, midio antes de creer (el codigo solo renombra la acusacion; el registro de claves de instancia la
+  explica: 1009->0), el diente de r5 le mordio en el banco (primer positivo de campo), adopto por identidad
+  byte-a-byte ignorando el informe declarado no-fuente, y devolvio TRES hallazgos medidos -- uno SERIO y nuevo
+  (lease suelto con exit code ilegible = dos escritores simultaneos ~2 min; termino bien por SUERTE). validate 0
+  en clon limpio por primera vez desde el 16. (4) LA RONDA TRIPLE-AUTOR: el draft del canal (camino de subida)
+  recibio BLOQUEA unanime de 3 revisores con bloqueantes verificados contra el genesis real (el R6 del canal
+  rompia el pin; el generador del Arquitecto quedo enterrado por medicion: 86,2 por ciento del hueco es juicio
+  editorial; y la enmienda E6 del propio revisor rompia el bloqueante que levantaba -- cazada por el canal en la
+  cirugia). Frase del Arquitecto que resume la tesis: "el proceso funciono contra el autor del canal, contra mi
+  propuesta del generador y contra mi propia enmienda E6, en la misma ronda. Tres autores distintos, ninguno se
+  defendio, y las tres correcciones vinieron con medicion delante". (5) FONDO INTOCABLE: mostro los dientes CUATRO
+  veces medidas (re-genesis descartada, clave raiz negada, adoptable_globs via config = mismatch, scan_globs via
+  config = mismatch) -- la frontera no-delegable trabajando A FAVOR como filtro de diseno. (6) Firmas: 0120 y 0121
+  quedaron LISTOS-PARA-FIRMA; el canal con delegacion amplia DECLINO firmarse normativa a si mismo (R0 en acto).
+  Traza: 92bd2b76 (ALERTA), dda6ec32/3d77f65a (DIRECTIVAS del corte), 27acf137 (tag v1.19.1), 45a4c03 (GO NOVA),
+  2ff755b9 (adopcion cerrada), 710f046b (BLOQUEA), 238a515a (cirugia E1-E8), f2a7a678 (E-check PASA).
