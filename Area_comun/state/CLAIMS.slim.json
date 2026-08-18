@@ -35,6 +35,19 @@
             "task_id": "TASK-0408"
         },
         {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
+                "Area_comun/state/CLAIMS.slim.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md"
+            ],
+            "task_id": "TASK-0408"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-snapshot",
             "owner": "Codex",
             "scope": [

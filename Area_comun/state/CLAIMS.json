@@ -402,6 +402,23 @@
             "updated_at": "2026-08-18T00:48:30Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
+            "expires_at": "2026-08-18T05:20:14Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
+                "Area_comun/state/CLAIMS.slim.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md"
+            ],
+            "started_at": "2026-08-18T01:20:14Z",
+            "status": "active",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T01:20:14Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-snapshot",
             "expires_at": "2026-08-18T05:16:06Z",
             "owner": "Codex",
