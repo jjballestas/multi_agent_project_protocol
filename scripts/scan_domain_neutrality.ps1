@@ -18,13 +18,6 @@ $IdentityLiteralExemptions = @{
             104 = @("1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b2e")
         }
     }
-    "runtime/context.py" = @{
-        Reason = "Legacy fallback roles preserve the pre-registry compatibility contract."
-        Lines = @{
-            16 = @("57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
-            17 = @("e257b110509437aaceddbd342bc63d05e74221d6bac056ed279d752ff8d3afcb", "9775f123593b08a132c7cf8f54927592c171e05134bae46a8c0ed7b40579b178")
-        }
-    }
     "runtime/eventlog.py" = @{
         Reason = "Legacy key fallbacks and historical review annotations are compatibility evidence."
         Lines = @{
@@ -142,6 +135,7 @@ $GenericIdentityTokens = @("agent", "human", "humano", "owner")
 $RequiredScanGlobs = @(
     "scripts/**/*.py",
     "scripts/**/*.ps1",
+    "scripts/**/*.md",
     "Area_comun/protocol/*.json"
 )
 $RequiredExemptGlobs = @("runtime/memory/**")
@@ -182,7 +176,7 @@ function Test-AnyGlob {
     )
 
     foreach ($pattern in $Patterns) {
-        if ($RelativePath -match (Convert-GlobToRegex -Pattern $pattern)) {
+        if ($RelativePath -cmatch (Convert-GlobToRegex -Pattern $pattern)) {
             return $true
         }
     }

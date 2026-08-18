@@ -25,7 +25,6 @@ _EXEMPT_TERM_2 = "1a05b53aa74c2c562c4ce31e6e8bc5d7e4b954218793b97f95660a88c54d4b
 _EXEMPT_TERM_3 = "fcfd3ebc250c5fa0477f28cfa8c36c8910231a6836f973267d4a4ebc730d1ab7"
 _EXEMPT_TERM_4 = "e257b110509437aaceddbd342bc63d05e74221d6bac056ed279d752ff8d3afcb"
 _EXEMPT_TERM_5 = "9775f123593b08a132c7cf8f54927592c171e05134bae46a8c0ed7b40579b178"
-_EXEMPT_TERM_6 = "c857d09db23e6822e3600bc06ad8d58f92ed62bc8efd81c753f77048662cb97d"
 
 IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
     "runtime/apply.py": {
@@ -35,10 +34,6 @@ IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
     "runtime/budget.py": {
         "reason": "Historical hardening annotations identify the independent review pass.",
         "lines": {68: (_EXEMPT_TERM_2,), 104: (_EXEMPT_TERM_2,)},
-    },
-    "runtime/context.py": {
-        "reason": "Legacy fallback roles preserve the pre-registry compatibility contract.",
-        "lines": {16: (_EXEMPT_TERM_1,), 17: (_EXEMPT_TERM_4, _EXEMPT_TERM_5)},
     },
     "runtime/eventlog.py": {
         "reason": "Legacy key fallbacks and historical review annotations are compatibility evidence.",
@@ -67,7 +62,7 @@ IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
         "reason": "These occurrences identify the third-party provider CLI, executable, or install path.",
         "lines": {
             9: (_EXEMPT_TERM_1,),
-            555: (_EXEMPT_TERM_1, _EXEMPT_TERM_6),
+            555: (_EXEMPT_TERM_1,),
             562: (_EXEMPT_TERM_1,),
             572: (_EXEMPT_TERM_1,),
             581: (_EXEMPT_TERM_1,),
@@ -153,6 +148,7 @@ GENERIC_IDENTITY_TOKENS = {"agent", "human", "humano", "owner"}
 REQUIRED_SCAN_GLOBS = (
     "scripts/**/*.py",
     "scripts/**/*.ps1",
+    "scripts/**/*.md",
     "Area_comun/protocol/*.json",
 )
 REQUIRED_EXEMPT_GLOBS = ("runtime/memory/**",)

@@ -66,7 +66,7 @@ FALSIFICATION_CONTRACTS = (
         "boundaries": (
             "self.assertEqual(python_inventory, powershell_inventory)",
             "self.assertTrue(all(mutation_results.values()), mutation_results)",
-            "self.assertEqual(declared_exemption_count, 91)",
+            "self.assertEqual(declared_exemption_count, expected_exemption_count)",
         ),
         "exercised_by": "test_identity_exemption_inventories_are_one_to_one_and_in_parity",
     },
@@ -612,7 +612,54 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
                         len(matches), 1, f"{relative_path}:{line_number}:{term}"
                     )
                     declared_exemption_count += 1
-        self.assertEqual(declared_exemption_count, 91)
+        expected_exemption_count = sum(
+            len(hashes) for lines in powershell_inventory.values() for hashes in lines.values()
+        )
+        self.assertEqual(declared_exemption_count, expected_exemption_count)
+
+    def test_required_markdown_masters_are_scanned_by_both_gates(self) -> None:
+        master = self.root / "scripts" / "claude-skills" / "sample" / "SKILL.template.md"
+        master.parent.mkdir(parents=True)
+        master.write_text(f"forbidden: {self.term}\n", encoding="utf-8")
+
+        expected = f"scripts/claude-skills/sample/SKILL.template.md:1: {self.term}"
+        python_result = self.run_python_scanner()
+        powershell_result = self.run_powershell_scanner()
+        self.assertEqual(python_result.returncode, 1, python_result.stdout + python_result.stderr)
+        self.assertEqual(powershell_result.returncode, 1, powershell_result.stdout + powershell_result.stderr)
+        self.assertIn(expected, python_result.stdout)
+        self.assertIn(expected, powershell_result.stdout)
+
+    def test_exempt_glob_matching_is_case_sensitive_in_both_gates(self) -> None:
+        config_path = self.root / "protocol.config.json"
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        config["domain_neutrality"]["exempt_globs"].append("scripts/secrets/**")
+        config_path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
+        probe = self.root / "scripts" / "Secrets" / "leak.py"
+        probe.parent.mkdir()
+        probe.write_text(f'VALUE = "{self.term}"\n', encoding="utf-8")
+
+        expected = f"scripts/Secrets/leak.py:1: {self.term}"
+        python_result = self.run_python_scanner()
+        powershell_result = self.run_powershell_scanner()
+        self.assertEqual(python_result.returncode, 1, python_result.stdout + python_result.stderr)
+        self.assertEqual(powershell_result.returncode, 1, powershell_result.stdout + powershell_result.stderr)
+        self.assertIn(expected, python_result.stdout)
+        self.assertIn(expected, powershell_result.stdout)
+
+    def test_moved_exempt_identity_fails_both_gates_with_same_finding(self) -> None:
+        moved = self.root / "runtime" / "apply.py"
+        moved.parent.mkdir(exist_ok=True)
+        provider_identity = "Code" + "x"
+        moved.write_text("\n" * 440 + f'OWNER = "{provider_identity}"\n', encoding="utf-8")
+
+        expected = f"runtime/apply.py:441: {provider_identity}"
+        python_result = self.run_python_scanner()
+        powershell_result = self.run_powershell_scanner()
+        self.assertEqual(python_result.returncode, 1, python_result.stdout + python_result.stderr)
+        self.assertEqual(powershell_result.returncode, 1, powershell_result.stdout + powershell_result.stderr)
+        self.assertIn(expected, python_result.stdout)
+        self.assertIn(expected, powershell_result.stdout)
 
     def test_powershell_scanner_matches_required_coverage_when_available(self) -> None:
         result = self.run_powershell_scanner()
