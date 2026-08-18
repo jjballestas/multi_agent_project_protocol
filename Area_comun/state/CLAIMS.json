@@ -301,6 +301,42 @@
             "updated_at": "2026-08-18T14:43:11Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410-r1",
+            "expires_at": "2026-08-18T23:07:31Z",
+            "notes": "Remediate TASK-0410 RES-3 with ordinal path and digest membership plus real-scanner behavioral parity negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T17:07:31Z",
+            "status": "active",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T17:07:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410-review-msg-r1",
+            "expires_at": "2026-08-18T21:28:52Z",
+            "notes": "Commit and publish independent review request for TASK-0410 remediation r1.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410-review-msg-r1",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0410-r1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T19:28:52Z",
+            "status": "active",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T19:28:52Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
