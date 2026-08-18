@@ -550,6 +550,24 @@
             "updated_at": "2026-08-17T22:38:26Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-done",
+            "expires_at": "2026-08-18T12:31:22Z",
+            "notes": "Implementer done-flip after independent Analista approval and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T10:31:22Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T10:31:22Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0394-msgfix",
             "expires_at": "2026-08-18T00:51:51Z",
             "notes": "Add the validator-required explicit question to the TASK-0394 handoff.",

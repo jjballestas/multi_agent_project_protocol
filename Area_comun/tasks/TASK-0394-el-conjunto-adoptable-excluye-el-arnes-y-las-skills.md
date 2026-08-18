@@ -1,7 +1,7 @@
 ---
 id: TASK-0394
 title: El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los ficheros donde viven los defectos reportados
-status: review_approved
+status: done
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md
