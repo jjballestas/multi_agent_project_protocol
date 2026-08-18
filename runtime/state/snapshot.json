@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "c419238515d5f341ea3373cd62a9dfe76f9eb57ad30404e83a56b18fc944e65a",
+  "canonical_hash": "845dd8ad53fdc7d8a77c1a84fa448c5e952c1ce89d5144a34d77b9d03eeedc5c",
   "integrity": {
-    "canonical_hash": "c419238515d5f341ea3373cd62a9dfe76f9eb57ad30404e83a56b18fc944e65a",
+    "canonical_hash": "845dd8ad53fdc7d8a77c1a84fa448c5e952c1ce89d5144a34d77b9d03eeedc5c",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "67cacf816fa56080cc45584621977122cb4749510973099643a03b35d2f493f6",
-    "signature": "9297f5bed5ae087542af05b44d323137179dbe408f6c9d812a298e4a273eb642",
-    "up_to_seq": 9905
+    "prev_hash": "ac35f2971f453919b114c17c50ec5977fe59cb8cbab4c3a17d2b91d155e6cba5",
+    "signature": "2864e2235b40274d87f3fe939ef2c0d3e98489c751d83f1d427d1dff55a22f07",
+    "up_to_seq": 9910
   },
   "state": {
     "aggregate_versions": {
@@ -1094,11 +1094,14 @@
       "CLAIM-20260817-Arquitecto-TASK-0414-r4": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-slipa": 1,
       "CLAIM-20260817-Arquitecto-TASK-0414-unblock": 1,
+      "CLAIM-20260818-Arquitecto-0394-0417": 1,
       "CLAIM-20260818-Arquitecto-HYG-0126A": 1,
       "CLAIM-20260818-Arquitecto-HYG-0126B": 1,
       "CLAIM-20260818-Arquitecto-HYG-0214": 1,
+      "CLAIM-20260818-Arquitecto-HYG-0438": 1,
       "CLAIM-20260818-Arquitecto-TASK-0408-rechazo": 1,
       "CLAIM-20260818-Arquitecto-cierre-noche": 1,
+      "CLAIM-20260818-Arquitecto-limpieza-claims": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3579,6 +3582,7 @@
       "OPS-CAMPO-NOVA-20260814": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
+      "OPS-CLAIM-CLEANUP-20260818": 1,
       "OPS-CLEAN-CLONE-20260808": 2,
       "OPS-D0103-READY-20260719": 1,
       "OPS-D0103-REGISTRO-20260719": 1,
@@ -4057,7 +4061,7 @@
       "TASK-0391": 2,
       "TASK-0392": 26,
       "TASK-0393": 1,
-      "TASK-0394": 13,
+      "TASK-0394": 14,
       "TASK-0395": 16,
       "TASK-0396": 24,
       "TASK-0397": 20,
@@ -4102,7 +4106,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9234,
+    "events_applied": 9239,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -12416,6 +12420,7 @@
       "intent:Codex:claim:b00e2b07bc20c56893d328f00bb4d48127e0970cf661737ed88215ba265e4600": 3601,
       "intent:Codex:claim:b0317ee2627f01cce2175e0f96f7dbbdda7a7f53bad831ba7999e5321f21cb4b": 8635,
       "intent:Codex:claim:b09073e3a14f431f93b914d3463d634620617c986c762c56a9bdd3d1197c2b5b": 2081,
+      "intent:Codex:claim:b0b201f495acc9f80be82901b45ad731f6365f0d125e7c2410911f996f2ce039": 9906,
       "intent:Codex:claim:b0d9d55c59804438a20367be1b629ed6f57ef664597233630a407ae90493f0a0": 2325,
       "intent:Codex:claim:b0da22d2bf93bf9c75c6518ced29c57a25522fedc4b5fe6e8fbeb4dba0ac493b": 4229,
       "intent:Codex:claim:b11b3825bdf472016553f44baacfec8a6a10ffeb18e75690b18b5ec0cbd21b2d": 4395,
@@ -13034,6 +13039,10 @@
       "ledger-op:task-0200-delivery:TASK-0200:CLAIM-20260627-Codex-TASK-0200-delivery:claim-acquire": 2288,
       "ledger-op:task-0200-release:TASK-0200:claim-release-delivery": 2289,
       "ledger-op:task-0200-release:TASK-0200:claim-release-main": 2290,
+      "lim-acq": 9907,
+      "lim-rel-0": 9908,
+      "lim-rel-1": 9909,
+      "lim-rel-self": 9910,
       "manual:hub:TASK-1208-inreview-flip:memory-final-acquire": 4504,
       "manual:hub:TASK-1208-inreview-flip:memory-final-release": 4505,
       "manual:hub:TASK-1208-inreview-flip:response-claim": 4502,
@@ -13340,5 +13349,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9905
+  "up_to_seq": 9910
 }

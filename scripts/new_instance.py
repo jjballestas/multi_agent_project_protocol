@@ -939,6 +939,9 @@ def main() -> int:
         create_personal_areas(gov, args)
         # Every tier ships the local hook, so every tier also needs its gate scripts.
         copy_gate_scripts(source, gov)
+        # The watchdog skill cites its executable proof. Keep guide and proof together in
+        # every tier, including the default coordination tier.
+        copy_peer_harness(source, gov)
         # The Python validator imports the neutral runtime replay/event modules even
         # when event state is disabled, so coordination instances need the library.
         copy_runtime_dir(source, gov)

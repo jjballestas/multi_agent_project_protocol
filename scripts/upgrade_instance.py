@@ -34,7 +34,25 @@ ADOPTABLE_MASTER_FILES = (
     "profiles/PROFILE_TEMPLATE/**/*",
     ".github/workflows/validate.yml",
 )
-ADOPTABLE_RECURSIVE_ROOTS = ("scripts", "skills", ".githooks", "runtime")
+ADOPTABLE_RECURSIVE_ROOTS = (
+    "scripts",
+    "skills",
+    ".githooks",
+    "runtime",
+)
+GENERIC_TOOL_SUFFIXES = (".py", ".ps1", ".skill.md")
+NON_DISTRIBUTABLE_ROOTS = {
+    ".git",
+    ".claude",
+    ".protocol-tmp",
+    "Area_comun",
+    "connectors",
+    "examples",
+    "personal",
+    "profiles",
+    "research",
+    "tests",
+}
 DEFAULT_ADOPTABLE_GLOBS = [
     *ADOPTABLE_MASTER_FILES,
     *(f"{root}/**" for root in ADOPTABLE_RECURSIVE_ROOTS),
@@ -118,11 +136,16 @@ def collect_files(root: Path, globs: list[str]) -> set[str]:
 
 def uncovered_adoptable_files(master: Path, globs: list[str]) -> set[str]:
     """Generic master files required by the criterion but omitted by the effective globs."""
-    required = {
-        rel
-        for rel in collect_files(master, DEFAULT_ADOPTABLE_GLOBS)
-        if not excluded_runtime_artifact(rel)
-    }
+    required: set[str] = set()
+    for path in master.rglob("*"):
+        if not path.is_file():
+            continue
+        rel_path = path.relative_to(master)
+        rel = rel_path.as_posix()
+        if rel_path.parts[0] in NON_DISTRIBUTABLE_ROOTS:
+            continue
+        if rel.endswith(GENERIC_TOOL_SUFFIXES) and not excluded_runtime_artifact(rel):
+            required.add(rel)
     return required - collect_files(master, globs)
 
 
@@ -181,7 +204,8 @@ def render_report(
         "`scripts/`, `skills/`, `.githooks/` y `runtime/`.",
         "- Fuera del conjunto: estado vivo y ejecuciones (`runtime/state/`, `runtime/runs/`), "
         "estado/coordinacion de instancia (`Area_comun/` salvo masters declarados), "
-        "`personal/`, `examples/`, `research/` y artefactos locales; no son carga generica.",
+        "`personal/`, `examples/`, `research/`, `connectors/`, `tests/` y artefactos "
+        "locales; no son carga generica.",
     ]
     if instance_tier == "runtime":
         lines.extend(

@@ -1,28 +1,18 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260818-Arquitecto-0394-0417",
-            "owner": "Arquitecto",
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1",
+            "owner": "Codex",
             "scope": [
-                "Area_comun/state/TASK_INDEX.json#TASK-0394",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
-                "Area_comun/state/TASK_INDEX.json#TASK-0417",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0417",
-                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
-                "Area_comun/tasks/TASK-0417-el-informe-compara-la-ruta-de-staging-no-la-consumida.md"
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "scripts/new_instance.py",
+                "scripts/test_upgrade_instance_contract.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
             ],
             "task_id": "TASK-0394"
-        },
-        {
-            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0438",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
-                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md",
-                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md"
-            ],
-            "task_id": "OPS-MAILBOX-HYGIENE-20260818D"
         }
     ],
     "schema_version": "1.0",

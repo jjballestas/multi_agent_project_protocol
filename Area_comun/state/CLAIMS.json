@@ -210,7 +210,7 @@
                 "Area_comun/tasks/TASK-0417-el-informe-compara-la-ruta-de-staging-no-la-consumida.md"
             ],
             "started_at": "2026-08-18T02:49:26Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0394",
             "updated_at": "2026-08-18T02:49:26Z"
         },
@@ -288,7 +288,7 @@
                 "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md"
             ],
             "started_at": "2026-08-18T02:37:58Z",
-            "status": "active",
+            "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260818D",
             "updated_at": "2026-08-18T02:37:58Z"
         },
@@ -330,6 +330,20 @@
             "status": "released",
             "task_id": "TASK-0414",
             "updated_at": "2026-08-17T23:21:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-limpieza-claims",
+            "expires_at": "2026-08-18T03:53:37Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-limpieza-claims",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-0394-0417",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0438"
+            ],
+            "started_at": "2026-08-18T03:33:37Z",
+            "status": "released",
+            "task_id": "OPS-CLAIM-CLEANUP-20260818",
+            "updated_at": "2026-08-18T03:33:37Z"
         },
         {
             "claim_id": "CLAIM-20260818-Codex-DONE-0378-0414",
@@ -386,6 +400,25 @@
             "status": "released",
             "task_id": "TASK-0394",
             "updated_at": "2026-08-17T22:51:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1",
+            "expires_at": "2026-08-18T07:32:16Z",
+            "notes": "Remediate the tree-derived omission control and ship the session watchdog proof in coordination instances.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "scripts/new_instance.py",
+                "scripts/test_upgrade_instance_contract.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T03:32:16Z",
+            "status": "active",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T03:32:16Z"
         },
         {
             "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1",
