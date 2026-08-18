@@ -1,6 +1,28 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-08-18 (~05:25 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+## >> BLOQUE TOP 2026-08-18 (~13:45 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### MEDIODIA: hub LIMPIO (open/ 0, poda verde, 0394+0414+0378 done, tag v1.19.1 fuera).
+### NOVA en ventana con maker vivo; TODO lo restante es del OPERADOR o post-firma.
+- Manana completa: 0394 cerrada en r2 (OK-CLOSABLE, 4 residuos declarados) tras DOS
+  colisiones claim-vs-review resueltas por AVISO con aritmetica (patron: el defer muere
+  antes que los claims; el reloj resetea al cambiar el motivo). Exhausted fantasma de r2
+  desactivado a tiempo (EXIT 0 clasificado transient = especimen de 0384). El canal
+  descubrio su propio defecto de esquema (7/19 mensajes sin requested_action ponian CI
+  roja en paso 9 ENMASCARANDO el baseline del 23) -- esquema 4-campos SIEMPRE, en memoria.
+- Revision adversarial de A1: BLOQUEA unanime; cirugia E1-E8 aplicada por el canal ->
+  DRAFT-DECISION-0121 con E-check PASA. R0 = limite declarado; alta human_owner = agenda
+  re-genesis del operador. DRAFT-0120 (poda reformulada) tambien listo.
+- PENDIENTES DEL OPERADOR: (1) clic del checker NOVA en su ventana (tarea 16; dos
+  veredictos esperan) -> retorno completo = META total; (2) firmas 0120 y 0121;
+  (3) DECISION-0119 sin reloj. Espejo v3 a NOVA: +1 dia tras su retorno completo.
+- Colaterales hub vivos: cola del maker aceptada 0410->0412->0413->0416->0418 (E6 como
+  AC de 0410); 0408-r1 re-juicio pendiente de rutear; veredicto 0397 por aclarar tras
+  la poda; hallazgo del lease (dos escritores) relayado, pendiente de registro.
+- CI: 3/4 rojos = baseline identico; prediccion falsable del Arquitecto en pie (validate
+  vuelve a 26/1/60 paso 23 tras limpiar mis mensajes).
+
+## BLOQUE 2026-08-18 (~05:25 local) [SUPERADO por el TOP de las 13:45]
 
 ### HITO: v1.19.1 TAGGED (27acf137) Y RETRANSMITIDO A NOVA (45a4c03 en su main).
 ### Par reproducible 2 corridas clon limpio, config byte-identico, epoch 1.14.0 intacta.
