@@ -338,7 +338,7 @@
                 "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md"
             ],
             "started_at": "2026-08-18T05:45:17Z",
-            "status": "active",
+            "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260818F",
             "updated_at": "2026-08-18T05:45:17Z"
         },
@@ -357,7 +357,7 @@
                 "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida.md"
             ],
             "started_at": "2026-08-18T06:14:27Z",
-            "status": "active",
+            "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260818G",
             "updated_at": "2026-08-18T06:14:27Z"
         },
@@ -426,6 +426,20 @@
             "status": "released",
             "task_id": "OPS-CLAIM-CLEANUP-20260818B",
             "updated_at": "2026-08-18T04:49:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-purga-0826",
+            "expires_at": "2026-08-18T06:41:40Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-purga-0826",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0748",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0813"
+            ],
+            "started_at": "2026-08-18T06:26:40Z",
+            "status": "released",
+            "task_id": "OPS-CLAIM-CLEANUP-20260818C",
+            "updated_at": "2026-08-18T06:26:40Z"
         },
         {
             "claim_id": "CLAIM-20260818-Arquitecto-reg-0418",
@@ -550,6 +564,22 @@
             "status": "active",
             "task_id": "TASK-0394",
             "updated_at": "2026-08-18T06:10:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r2-rejudgment",
+            "expires_at": "2026-08-18T10:26:09Z",
+            "notes": "Publish committed TASK-0394 r2 maker evidence for the mandatory independent pre-delivery re-judgment.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r2-rejudgment",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T06:26:09Z",
+            "status": "active",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T06:26:09Z"
         },
         {
             "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1",
