@@ -386,6 +386,12 @@ def main() -> int:
         "FALSIFICATION_INVENTORY "
         f"permanent_negatives={len(existing_ids)} declared={len(declared_ids)} missing={len(missing)}"
     )
+    print(
+        "FALSIFICATION_CONTRACT_CENSUS "
+        f"contracts={len(contracts)} "
+        f"assertion_boundaries={sum(len(contract.boundaries) for contract in contracts)} "
+        f"runner_files={len({owners[contract.id] for contract in contracts})}"
+    )
     for contract in contracts:
         print(f"DECLARED {contract.id} boundaries={len(contract.boundaries)} runner={owners[contract.id].relative_to(root)}")
     for error in errors:
