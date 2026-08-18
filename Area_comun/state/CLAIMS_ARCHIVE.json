@@ -55645,6 +55645,367 @@
             "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-18T01:16:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-104233-prune-arquitecto",
+            "expires_at": "2026-08-18",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-08-18T10:42:33Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-18T10:42:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-0397-rechazo",
+            "expires_at": "2026-08-18T14:13:01Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-0397-rechazo",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md"
+            ],
+            "started_at": "2026-08-18T13:53:01Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T13:53:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-1336",
+            "expires_at": "2026-08-18T11:56:52Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-1336",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0397.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0397.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r2-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r2-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-done-flip-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-done-flip-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-r2.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-directiva-tablero.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-directiva-tablero.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r2.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-consume-el-veredicto-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-consume-el-veredicto-r2.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-colision-r2-claims-hasta-1210.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-colision-r2-claims-hasta-1210.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-FYI-exhausted-de-r2-es-post-entrega.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-FYI-exhausted-de-r2-es-post-entrega.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-NOTE-higiene-pendiente-recordatorio.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-NOTE-higiene-pendiente-recordatorio.md"
+            ],
+            "started_at": "2026-08-18T11:36:51Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818I",
+            "updated_at": "2026-08-18T11:36:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-1650",
+            "expires_at": "2026-08-18T15:11:19Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-1650",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-tres-cabos-sueltos.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-tres-cabos-sueltos.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r2.md"
+            ],
+            "started_at": "2026-08-18T14:51:19Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818J",
+            "updated_at": "2026-08-18T14:51:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-decisiones-0120-0121",
+            "expires_at": "2026-08-18T14:33:04Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-decisiones-0120-0121",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0120-clausula-de-poda-reformulada.md",
+                "Area_comun/decisions/DECISION-0121-camino-de-subida-instancia-a-master.md"
+            ],
+            "started_at": "2026-08-18T14:08:04Z",
+            "status": "released",
+            "task_id": "OPS-DECISIONS-20260818",
+            "updated_at": "2026-08-18T14:08:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-decisiones-0120-0121-b",
+            "expires_at": "2026-08-18T15:32:23Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-decisiones-0120-0121-b",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0120-clausula-de-poda-reformulada.md",
+                "Area_comun/decisions/DECISION-0121-camino-de-subida-instancia-a-master.md"
+            ],
+            "started_at": "2026-08-18T14:42:23Z",
+            "status": "released",
+            "task_id": "OPS-DECISIONS-20260818",
+            "updated_at": "2026-08-18T14:42:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-145330",
+            "expires_at": "2026-08-18T15:23:30Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-145330",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-GO-TASK-0410.md"
+            ],
+            "started_at": "2026-08-18T14:53:30Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T14:53:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-150422",
+            "expires_at": "2026-08-18T15:29:22Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-150422",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0410.md"
+            ],
+            "started_at": "2026-08-18T15:04:22Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T15:04:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-160044",
+            "expires_at": "2026-08-18T16:25:43Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-160044",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0397-r3.md"
+            ],
+            "started_at": "2026-08-18T16:00:43Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T16:00:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-163649",
+            "expires_at": "2026-08-18T17:01:49Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-163649",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0410-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0410-veredicto.md"
+            ],
+            "started_at": "2026-08-18T16:36:49Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T16:36:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-193424",
+            "expires_at": "2026-08-18T19:59:24Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-193424",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0408-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0408-r1.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md"
+            ],
+            "started_at": "2026-08-18T19:34:24Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T19:34:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-rechazo-0410-163406",
+            "expires_at": "2026-08-18T16:59:06Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-rechazo-0410-163406",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0410.md"
+            ],
+            "started_at": "2026-08-18T16:34:06Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T16:34:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-vehiculos-214502",
+            "expires_at": "2026-08-18T22:25:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-vehiculos-214502",
+                "Area_comun/state/TASK_INDEX.json#TASK-0420",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0420",
+                "Area_comun/tasks/TASK-0420-vehiculo-de-review-para-task-0408.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0421",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0421",
+                "Area_comun/tasks/TASK-0421-vehiculo-de-review-para-task-0397.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0410-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0410-r1.md"
+            ],
+            "started_at": "2026-08-18T21:45:02Z",
+            "status": "released",
+            "task_id": "TASK-0420",
+            "updated_at": "2026-08-18T21:45:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3",
+            "expires_at": "2026-08-18T18:14:29Z",
+            "notes": "Remediate only TASK-0397 AC4 by deriving and printing census from the static contract gate.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0397-r3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+                "scripts/check_falsification_contracts.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T15:14:29Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T15:14:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3-mailbox",
+            "expires_at": "2026-08-18T17:33:18Z",
+            "notes": "Publish TASK-0397 remediation 3 review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0397-r3-mailbox",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T15:33:18Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T15:33:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3-msgfix",
+            "expires_at": "2026-08-18T16:46:08Z",
+            "notes": "Add required compact-mailbox question field to TASK-0397 review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0397-r3-msgfix",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T15:46:08Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T15:46:08Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410",
+            "expires_at": "2026-08-18T20:06:54Z",
+            "notes": "Implement TASK-0410 parity, dead-coordinate detection, master scan coverage, and case-equivalent exclusion behavior.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "scripts/test_scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T14:06:54Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T14:06:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410-delivery",
+            "expires_at": "2026-08-18T16:43:11Z",
+            "notes": "Deliver TASK-0410 implementation for independent review and release all maker claims atomically.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0410.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T14:43:11Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T14:43:11Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410-r1",
+            "expires_at": "2026-08-18T23:07:31Z",
+            "notes": "Remediate TASK-0410 RES-3 with ordinal path and digest membership plus real-scanner behavioral parity negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T17:07:31Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T17:07:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0410-review-msg-r1",
+            "expires_at": "2026-08-18T21:28:52Z",
+            "notes": "Commit and publish independent review request for TASK-0410 remediation r1.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0410-review-msg-r1",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0410-r1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T19:28:52Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-18T19:28:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260819-Arquitecto-ratifica-0397-230224",
+            "expires_at": "2026-08-18T23:32:24Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260819-Arquitecto-ratifica-0397-230224",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md"
+            ],
+            "started_at": "2026-08-18T23:02:24Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T23:02:24Z"
         }
     ]
 }
