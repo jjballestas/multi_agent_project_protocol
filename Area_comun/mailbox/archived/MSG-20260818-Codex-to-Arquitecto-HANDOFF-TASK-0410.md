@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0410 implementation delivered for independent Analista review at commit 96af63c6.

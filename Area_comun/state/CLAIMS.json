@@ -151,6 +151,20 @@
             "updated_at": "2026-08-18T14:53:30Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-150422",
+            "expires_at": "2026-08-18T15:29:22Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-150422",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0410.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0410.md"
+            ],
+            "started_at": "2026-08-18T15:04:22Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T15:04:22Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0410",
             "expires_at": "2026-08-18T20:06:54Z",
             "notes": "Implement TASK-0410 parity, dead-coordinate detection, master scan coverage, and case-equivalent exclusion behavior.",
