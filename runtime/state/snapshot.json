@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "8264d7416e3738eac636368cd322041815e2e0ab6523a4438c503afa8755615e",
+  "canonical_hash": "765c99c4b6a5cce7d993ff779edd9f8552afa7011702724d096466f8c1708618",
   "integrity": {
-    "canonical_hash": "8264d7416e3738eac636368cd322041815e2e0ab6523a4438c503afa8755615e",
+    "canonical_hash": "765c99c4b6a5cce7d993ff779edd9f8552afa7011702724d096466f8c1708618",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "149749ced0140e0ef87b78a69332ae3c5d81588b98e85a3605c87e6d59f0743f",
-    "signature": "4b243c150bd2198c9525de8b1049331b241d1e64878b6892ef508806d8a4f219",
-    "up_to_seq": 9979
+    "prev_hash": "137a14b2c01684f50b28751a7774c1c88efa49148f771facdcb0ef831cad527a",
+    "signature": "d512af894ce1d7d77421ca05e82cf2c071e13ab23b29be98a309bf949bae7dce",
+    "up_to_seq": 9982
   },
   "state": {
     "aggregate_versions": {
@@ -1096,6 +1096,7 @@
       "CLAIM-20260817-Arquitecto-TASK-0414-unblock": 1,
       "CLAIM-20260818-104233-prune-arquitecto": 1,
       "CLAIM-20260818-Arquitecto-0394-0417": 1,
+      "CLAIM-20260818-Arquitecto-0397-rechazo": 1,
       "CLAIM-20260818-Arquitecto-HYG-0126A": 1,
       "CLAIM-20260818-Arquitecto-HYG-0126B": 1,
       "CLAIM-20260818-Arquitecto-HYG-0214": 1,
@@ -4115,7 +4116,7 @@
       "TASK-0394": 26,
       "TASK-0395": 16,
       "TASK-0396": 24,
-      "TASK-0397": 20,
+      "TASK-0397": 22,
       "TASK-0398": 1,
       "TASK-0399": 1,
       "TASK-0400": 2,
@@ -4159,7 +4160,7 @@
       "protocol-prune": 75,
       "protocol-state": 1
     },
-    "events_applied": 9308,
+    "events_applied": 9311,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -13434,6 +13435,9 @@
       "release-done-flip-manual-2": 4231,
       "release-impl-normalized-92fddd97a46f4193939955b1f22e2076": 3953,
       "release-orphan-OPS-GRAFO-MEMHIB-V02-REVIEW-2026-07-20T03:10:14Z-analista-r1": 5091,
+      "t397-acq": 9980,
+      "t397-rel": 9982,
+      "t397-st": 9981,
       "task-0160-delivery-claim": 1319,
       "task-0160-go-answer-claim": 1323,
       "task-0160-release-delivery-claim": 1322,
@@ -13471,5 +13475,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9979
+  "up_to_seq": 9982
 }

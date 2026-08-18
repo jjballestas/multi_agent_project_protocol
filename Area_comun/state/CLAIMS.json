@@ -42,6 +42,21 @@
             "updated_at": "2026-08-18T10:42:33Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-0397-rechazo",
+            "expires_at": "2026-08-18T14:13:01Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-0397-rechazo",
+                "Area_comun/state/TASK_INDEX.json#TASK-0397",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0397",
+                "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md"
+            ],
+            "started_at": "2026-08-18T13:53:01Z",
+            "status": "released",
+            "task_id": "TASK-0397",
+            "updated_at": "2026-08-18T13:53:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-HYG-1336",
             "expires_at": "2026-08-18T11:56:52Z",
             "owner": "Arquitecto",
