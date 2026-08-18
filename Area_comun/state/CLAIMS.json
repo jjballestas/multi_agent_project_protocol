@@ -421,6 +421,22 @@
             "updated_at": "2026-08-18T03:32:16Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1-rejudgment",
+            "expires_at": "2026-08-18T07:51:18Z",
+            "notes": "Publish the committed maker remediation for independent pre-delivery re-judgment.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1-rejudgment",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T03:51:18Z",
+            "status": "active",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T03:51:18Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1",
             "expires_at": "2026-08-18T04:41:30Z",
             "owner": "Codex",
