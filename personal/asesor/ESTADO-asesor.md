@@ -1,6 +1,26 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-08-17 (~22:15 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+## >> BLOQUE TOP 2026-08-18 (~05:25 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### HITO: v1.19.1 TAGGED (27acf137) Y RETRANSMITIDO A NOVA (45a4c03 en su main).
+### Par reproducible 2 corridas clon limpio, config byte-identico, epoch 1.14.0 intacta.
+- La noche completa: r5 muerto (RED os 11001) -> ALERTA -> r5b como CIERRE (la entrega
+  estaba completa sin commitear) -> OK-CERRABLE 5 rondas -> 0414 y 0378 DONE ->
+  0394 entregada (conjunto 150->176, D-1 dentro) pero CHANGE-REQUIRED en guardas ->
+  DIRECTIVAS del canal: r6 (0416) y 0394-r1 NO retienen el tag, residuos DECLARADOS
+  (argumento monotono del Arquitecto) -> nota con TRES limites -> tag -> GO a NOVA.
+- GO a NOVA (45a4c03): secuencia de retorno de 6 pasos; limite 3 CRITICO (informe de
+  upgrade NO es fuente para skills -> delta fichero a fichero); reemision GO-28-9432
+  con id nuevo; watchdog de ausencia al relanzar peers. Su Arquitecto quieto desde
+  ~23:55; si no despierta por auto-poll, el operador lo relanza por la manana.
+- Hub post-corte en vuelo: 0394-r1 (Codex), 0408-r1 re-juicio, 0397 sin veredicto aun,
+  0416/0417 registradas. PRUNE DUE pendiente del checkpoint del Arquitecto.
+- Backlog post-META del operador: personal/operador/BACKLOG-post-meta-20260818.md
+  (bloques A-F; F = v3 semana 0: 0412/0413 ready + cableado de 0117 por verificar).
+- Manana del operador: permiso taskkill NOVA (tarea 12), firmas A1/A2/0119, y si NOVA
+  no desperto sola, abrir su sesion (el GO es su primer encargo, autocontenido).
+
+## BLOQUE 2026-08-17 (~22:15 local) [SUPERADO por el TOP de las 05:25]
 
 ### TURNO NOCTURNO AUTONOMO (orden del operador ~22:10): coordinar a los DOS Arquitectos
 ### hasta la META sin paradas ciegas. Ambos Arquitectos RELANZADOS y vivos ~22:05.
