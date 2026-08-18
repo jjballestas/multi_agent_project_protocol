@@ -1,31 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1",
-                "scripts/upgrade_instance.py",
-                "scripts/upgrade_instance.ps1",
-                "scripts/new_instance.py",
-                "scripts/test_upgrade_instance_contract.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0394"
-        },
-        {
-            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1-rejudgment",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1-rejudgment",
-                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0394"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
