@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "b58d3cf8fab49d42cf414b6ffdd121d66a17dac9439453a9564829eb7e0fd26f",
+  "canonical_hash": "29f4af82bae905d19e927c802f0131ef087adfe107398586440d5efe416f3321",
   "integrity": {
-    "canonical_hash": "b58d3cf8fab49d42cf414b6ffdd121d66a17dac9439453a9564829eb7e0fd26f",
+    "canonical_hash": "29f4af82bae905d19e927c802f0131ef087adfe107398586440d5efe416f3321",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "f5a62b96a4cb04739d5815143018e85a027f6679d9f9b001f43b371c01dfe2dc",
-    "signature": "85b7f4afb5be40db7fc5532820a120b619f952bea24c012bd12e595cab4ee062",
-    "up_to_seq": 10040
+    "prev_hash": "43ee0d6b6493eabd9438fcc535481880537080d28c9c7bac43877e5a639c4385",
+    "signature": "aedc36e9eb676ad1003e49a31f969c90588c34fe9f6a3830bdaca1bcacbc7fc8",
+    "up_to_seq": 10043
   },
   "state": {
     "aggregate_versions": {
@@ -1124,6 +1124,7 @@
       "CLAIM-20260818-Arquitecto-reg-0418": 1,
       "CLAIM-20260818-Arquitecto-reg-0419": 1,
       "CLAIM-20260818-Arquitecto-vehiculos-214502": 1,
+      "CLAIM-20260819-Arquitecto-ratifica-0397-230224": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -4141,7 +4142,7 @@
       "TASK-0394": 26,
       "TASK-0395": 16,
       "TASK-0396": 24,
-      "TASK-0397": 29,
+      "TASK-0397": 31,
       "TASK-0398": 1,
       "TASK-0399": 1,
       "TASK-0400": 2,
@@ -4187,7 +4188,7 @@
       "protocol-prune": 75,
       "protocol-state": 1
     },
-    "events_applied": 9369,
+    "events_applied": 9372,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -13465,6 +13466,9 @@
       "rat-acq": 9956,
       "rat-rel": 9958,
       "rat-st": 9957,
+      "rat397-acq-230224": 10041,
+      "rat397-rel-230224": 10043,
+      "rat397-st-230224": 10042,
       "ratifica-0257-cierre-B-20260720T0550": 5172,
       "ratifica-0258-20260720T1146": 5281,
       "ratifica-0267-informal-20260720T0200": 5049,
@@ -13560,5 +13564,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 10040
+  "up_to_seq": 10043
 }
