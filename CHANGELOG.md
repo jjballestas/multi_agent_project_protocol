@@ -13,6 +13,44 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.19.1] - 2026-08-18
+> Note: patch release. The live instance `protocol_version` stays **1.14.0** (epoch versioning,
+> DECISION-0047) -- no config change, no re-genesis. `protocol.config.json` is byte-identical.
+
+### Fixed
+- **The anchored key registry now fails closed when it is deleted (TASK-0414, five rounds).**
+  `validate_event_auth_registry_anchor` declared an absent registry `valid: True` via an early
+  return, so removing the file and re-syncing the snapshot left drift CLEAN over a state holding
+  108 rejections. Absence is now fatal **when the chain contains anchors**; an instance that never
+  anchored still adopts cleanly (exit 0). Accredited at the **gate**, not only in the function:
+  the same mutation on both trees moves `protocol_replay --check-drift` from `EXIT 0 CLEAN` to
+  `EXIT 1 DRIFT`.
+- **The update channel now carries the peer harness and the skills (TASK-0394, partial).** The
+  adoptable set used single-level globs for `scripts/` and no glob at all for `skills/`, so the
+  files holding the defects reported by instances were never delivered. Measured in a clean clone:
+  **150 -> 176 useful files**, with `scripts/harness/peer_mailbox_cron.ps1` and
+  `skills/session-watchdogs.skill.md` inside. Both the Python and PowerShell twins were changed;
+  `protocol.config.json` was not touched.
+- **The claim gate no longer accepts an unreachable exemption (TASK-0378, five rounds).**
+  `claim_gate_applicable` and both production branches depending on it are deleted. Accredited
+  with a 2x2 in the same code position -- a reachable fail-open escape there dies, the deleted
+  code restored verbatim survives -- plus a 25-entry differential census with **DIFFER = 0**.
+
+### Declared residuals (open work, with owner and registered task)
+- **The end of the chain is not pinned by anything (TASK-0416).** The genesis pins the chain's
+  **start**; nothing pins its **end**. Removing an anchor that is the **tail** breaks no
+  `prev_hash` and leaves no gap. Pre-existing in 1.19.0 and **not a regression**: this release is
+  monotone in the safe direction -- before, deleting the registry alone disabled the control;
+  now the anchor must be deleted too.
+- **The anti-drift control of the adoptable set is vacuous (TASK-0394 r1, in remediation).** It
+  subtracts the default glob set from itself, so it cannot redden when a new directory is born.
+  The set shipped here is complete and measured; the guard against future gaps is still being built.
+- **The upgrade report does not compare deployed skills (TASK-0417).** `classify()` compares
+  master and instance at the **same relative path**, but skill masters are consumed relocated
+  under `<gov>/.claude/skills/`. Real divergence injected into the consumed file leaves the tool
+  at exit 0. **Until this closes, adopters must read the skills delta file by file; the report is
+  not the source for those routes.**
+
 ## [1.19.0] - 2026-07-14
 > Note: capabilities shipped; the live instance `protocol_version` stays **1.14.0** under #4 (epoch versioning,
 > DECISION-0047) -- no config change, no re-genesis. Everything shipped lives **outside** `protocol.config.json`.
