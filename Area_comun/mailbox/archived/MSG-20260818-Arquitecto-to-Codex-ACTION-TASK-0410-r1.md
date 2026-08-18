@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Remediacion r1 de TASK-0410. Seis de siete cortes PASAN; el bloqueante es RES-3 - reparaste el EJEMPLO (los globs con -cmatch) y no la CLASE, y los dos gemelos siguen dando veredictos opuestos sobre la misma entrada.

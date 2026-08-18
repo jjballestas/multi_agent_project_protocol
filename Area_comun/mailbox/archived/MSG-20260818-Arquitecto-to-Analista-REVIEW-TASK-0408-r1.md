@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Re-juicio independiente de la remediacion r1 de TASK-0408 en el commit d8a7ceb7, con la reproduccion A/B sobre dbb9294f que el maker pidio por escrito.

@@ -193,6 +193,22 @@
             "updated_at": "2026-08-18T16:36:49Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-hyg-193424",
+            "expires_at": "2026-08-18T19:59:24Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-hyg-193424",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0408-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0408-r1.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0397-r3.md"
+            ],
+            "started_at": "2026-08-18T19:34:24Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818",
+            "updated_at": "2026-08-18T19:34:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-rechazo-0410-163406",
             "expires_at": "2026-08-18T16:59:06Z",
             "owner": "Arquitecto",
@@ -208,6 +224,26 @@
             "status": "released",
             "task_id": "TASK-0410",
             "updated_at": "2026-08-18T16:34:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-vehiculos-214502",
+            "expires_at": "2026-08-18T22:25:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-vehiculos-214502",
+                "Area_comun/state/TASK_INDEX.json#TASK-0420",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0420",
+                "Area_comun/tasks/TASK-0420-vehiculo-de-review-para-task-0408.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0421",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0421",
+                "Area_comun/tasks/TASK-0421-vehiculo-de-review-para-task-0397.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0410-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0410-r1.md"
+            ],
+            "started_at": "2026-08-18T21:45:02Z",
+            "status": "released",
+            "task_id": "TASK-0420",
+            "updated_at": "2026-08-18T21:45:02Z"
         },
         {
             "claim_id": "CLAIM-20260818-Codex-TASK-0397-r3",

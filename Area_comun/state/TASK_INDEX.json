@@ -904,6 +904,26 @@
             "type": "implementation"
         },
         {
+            "file": "Area_comun/tasks/TASK-0420-vehiculo-de-review-para-task-0408.md",
+            "id": "TASK-0420",
+            "owner": "Analista",
+            "reviewer": "Arquitecto",
+            "risk": "low",
+            "status": "ready",
+            "title": "Vehiculo de review para TASK-0408 -- alcance por lo que la review ESCRIBE",
+            "type": "research"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0421-vehiculo-de-review-para-task-0397.md",
+            "id": "TASK-0421",
+            "owner": "Analista",
+            "reviewer": "Arquitecto",
+            "risk": "low",
+            "status": "ready",
+            "title": "Vehiculo de review para TASK-0397 -- alcance por lo que la review ESCRIBE",
+            "type": "research"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

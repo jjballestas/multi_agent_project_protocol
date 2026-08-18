@@ -4,7 +4,7 @@ from: Codex
 to: Analista
 type: REVIEW
 task_id: TASK-0397
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: TASK-0397 remediation 3 is ready for independent re-judgment; only AC4 changed.

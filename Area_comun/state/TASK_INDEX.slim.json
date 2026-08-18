@@ -388,6 +388,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "La mitad declarada del criterio adoptable se autocertifica -- y el ensanche estructural estrecho la raiz y .github"
+        },
+        {
+            "id": "TASK-0420",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Vehiculo de review para TASK-0408 -- alcance por lo que la review ESCRIBE"
+        },
+        {
+            "id": "TASK-0421",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Vehiculo de review para TASK-0397 -- alcance por lo que la review ESCRIBE"
         }
     ],
     "view": "task_index.slim"
