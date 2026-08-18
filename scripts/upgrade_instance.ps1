@@ -33,17 +33,21 @@ $AdoptableMasterFiles = @(
     ".github/workflows/validate.yml"
 )
 $AdoptableRecursiveRoots = @("scripts", "skills", ".githooks", "runtime")
-$GenericToolSuffixes = @(".py", ".ps1", ".skill.md")
 $NonDistributableRoots = @{
+    ".agents" = $true
     ".git" = $true
+    ".github" = $true
     ".claude" = $true
     ".protocol-tmp" = $true
     "Area_comun" = $true
     "connectors" = $true
+    "dist" = $true
     "examples" = $true
     "personal" = $true
+    "pre_t0_ledger_seal" = $true
     "profiles" = $true
     "research" = $true
+    "secrets" = $true
     "tests" = $true
 }
 $DefaultAdoptableGlobs = @($AdoptableMasterFiles) + @(
@@ -181,8 +185,10 @@ $requiredRelFiles = Get-ChildItem -Path $masterFull -Recurse -File -ErrorAction 
     Where-Object {
         $parts = $_ -split '/'
         $rel = $_
+        # Generic payload membership is structural, not suffix-based: every file below a
+        # non-instance-only top-level tree is required. Root masters remain explicit.
+        ($parts.Count -ge 2) -and
         (-not $NonDistributableRoots.ContainsKey($parts[0])) -and
-        ($GenericToolSuffixes | Where-Object { $rel.EndsWith($_) }) -and
         (-not (Test-ExcludedRuntimeArtifact $rel))
     } |
     Sort-Object -Unique

@@ -40,17 +40,21 @@ ADOPTABLE_RECURSIVE_ROOTS = (
     ".githooks",
     "runtime",
 )
-GENERIC_TOOL_SUFFIXES = (".py", ".ps1", ".skill.md")
 NON_DISTRIBUTABLE_ROOTS = {
+    ".agents",
     ".git",
+    ".github",
     ".claude",
     ".protocol-tmp",
     "Area_comun",
     "connectors",
+    "dist",
     "examples",
     "personal",
+    "pre_t0_ledger_seal",
     "profiles",
     "research",
+    "secrets",
     "tests",
 }
 DEFAULT_ADOPTABLE_GLOBS = [
@@ -135,16 +139,22 @@ def collect_files(root: Path, globs: list[str]) -> set[str]:
 
 
 def uncovered_adoptable_files(master: Path, globs: list[str]) -> set[str]:
-    """Generic master files required by the criterion but omitted by the effective globs."""
+    """Reusable-tree files required by the criterion but omitted by the effective globs.
+
+    A generic payload is any file below a top-level tree that has not been declared
+    instance-only. Root-level protocol masters remain explicit because they mix live and
+    template artifacts. This tree rule deliberately ignores names and suffixes: removing an
+    entire declared export root (including extensionless hooks) must make the control fail.
+    """
     required: set[str] = set()
     for path in master.rglob("*"):
         if not path.is_file():
             continue
         rel_path = path.relative_to(master)
         rel = rel_path.as_posix()
-        if rel_path.parts[0] in NON_DISTRIBUTABLE_ROOTS:
+        if len(rel_path.parts) < 2 or rel_path.parts[0] in NON_DISTRIBUTABLE_ROOTS:
             continue
-        if rel.endswith(GENERIC_TOOL_SUFFIXES) and not excluded_runtime_artifact(rel):
+        if not excluded_runtime_artifact(rel):
             required.add(rel)
     return required - collect_files(master, globs)
 
