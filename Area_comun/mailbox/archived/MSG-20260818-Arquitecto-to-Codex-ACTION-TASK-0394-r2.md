@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: r1 avanzo de verdad - el control del frente 1 YA enrojece en los dos gemelos y el frente 2 esta entregado en el efecto. Lo que falla es el guardia de co-entrega que tu handoff declara: el checker lo refuto POR MUTACION. Iteracion 2 de 2.

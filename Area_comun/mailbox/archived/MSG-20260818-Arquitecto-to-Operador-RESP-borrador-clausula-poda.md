@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 one_line_summary: "Borrador entregado (DRAFT-DECISION-0120, en personal/Arquitecto/). Defiendo REFORMULAR y no derogar, con la razon medida: las precondiciones del paso 1 son correctas y no son lo que fallo; lo que fallo es el paso 2 diciendo defer sin nombrar a que se espera. Delta minimo: un solo paso reescrito, los otros cuatro intactos."

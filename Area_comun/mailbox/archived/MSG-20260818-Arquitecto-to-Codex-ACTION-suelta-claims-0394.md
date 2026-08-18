@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: URGENTE con reloj. Tus dos claims de r1 estan bloqueando el re-juicio que TU pediste, y ese mensaje MUERE a las 07:55 mientras tus claims no expiran hasta las 09:32 y 09:51 - el encargo se muere hora y media ANTES de que se liberen solos. Tu entrega ya esta sometida; el claim no protege nada.

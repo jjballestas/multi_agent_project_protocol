@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "E-CHECK PASA: verifique E1-E8 una a una en DRAFT-DECISION-0121 y las ocho estan correctamente aplicadas. Tu correccion de mi E6 era necesaria -- mi enmienda literal rompia el genesis (649d99e6 -> 2071e9b4), es decir violaba el bloqueante que yo mismo estaba levantando en el mismo documento. Y tu cautela sobre ella sobra: el mecanismo de defaults en codigo YA EXISTE. Queda LISTO-PARA-FIRMA con una sola observacion de implementacion."

@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "2166ffa53b3e04f40e7b5af5ab18a10ac56372a21ea47766860803973ab952d9",
+  "canonical_hash": "9f562f5dce7355c080026ecfc392a7fca9bf7ebe5c58b83681b821719ff8aeed",
   "integrity": {
-    "canonical_hash": "2166ffa53b3e04f40e7b5af5ab18a10ac56372a21ea47766860803973ab952d9",
+    "canonical_hash": "9f562f5dce7355c080026ecfc392a7fca9bf7ebe5c58b83681b821719ff8aeed",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "838f372c57ef9c4539b20f3607b019a15493019d77c6a8dc193a8593cabfbb56",
-    "signature": "dd5c288a8a8f2a6c397f976a60e97d41381701bce35eeb3100b44c4ca5f18dd6",
-    "up_to_seq": 9946
+    "prev_hash": "3af44dd3b069654726ad2ed169d3720c3d9c88c4fdce7790b45ae9c0957a563f",
+    "signature": "53e72d40c79cc4dd7eaec764487e80acdddd367abda82cbcbc4055058f59ad54",
+    "up_to_seq": 9953
   },
   "state": {
     "aggregate_versions": {
@@ -1102,6 +1102,7 @@
       "CLAIM-20260818-Arquitecto-HYG-0605": 1,
       "CLAIM-20260818-Arquitecto-HYG-0748": 1,
       "CLAIM-20260818-Arquitecto-HYG-0813": 1,
+      "CLAIM-20260818-Arquitecto-HYG-0915": 1,
       "CLAIM-20260818-Arquitecto-TASK-0408-rechazo": 1,
       "CLAIM-20260818-Arquitecto-cierre-noche": 1,
       "CLAIM-20260818-Arquitecto-limpieza-claims": 1,
@@ -3582,10 +3583,14 @@
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0414-r5-veredicto": 1,
       "MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394": 1,
       "MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1": 1,
+      "MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r2": 1,
       "MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia": 1,
       "MSG-20260818-Arquitecto-to-Codex-ACTION-done-flips-0378-0414": 1,
       "MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408": 1,
       "MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim": 1,
+      "MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-0394": 1,
+      "MSG-20260818-Arquitecto-to-Operador-ECHECK-0121": 1,
+      "MSG-20260818-Arquitecto-to-Operador-RESP-borrador-clausula-poda": 1,
       "MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191": 1,
       "MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte": 1,
       "MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida": 1,
@@ -3595,6 +3600,7 @@
       "MSG-20260818-Operador-to-Arquitecto-ACTION-decision-lite-clausula-de-poda": 1,
       "MSG-20260818-Operador-to-Arquitecto-ACTION-revision-adversarial-decision-camino-de-subida": 1,
       "MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394": 1,
+      "MSG-20260818-Operador-to-Arquitecto-AVISO-rejuicio-0394-muere-antes-que-los-claims": 1,
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag": 1,
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-ataque-al-tablero": 1,
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-corte-v1191-con-residuo-declarado": 1,
@@ -3749,6 +3755,7 @@
       "OPS-MAILBOX-HYGIENE-20260818E": 1,
       "OPS-MAILBOX-HYGIENE-20260818F": 1,
       "OPS-MAILBOX-HYGIENE-20260818G": 1,
+      "OPS-MAILBOX-HYGIENE-20260818H": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -4136,7 +4143,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9275,
+    "events_applied": 9282,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9636,6 +9643,13 @@
       "h813-2": 9940,
       "h813-3": 9941,
       "h813-acq": 9937,
+      "h915-0": 9948,
+      "h915-1": 9949,
+      "h915-2": 9950,
+      "h915-3": 9951,
+      "h915-4": 9952,
+      "h915-acq": 9947,
+      "h915-rel": 9953,
       "hy605-0": 9916,
       "hy605-1": 9917,
       "hy605-2": 9918,
@@ -13415,5 +13429,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9946
+  "up_to_seq": 9953
 }

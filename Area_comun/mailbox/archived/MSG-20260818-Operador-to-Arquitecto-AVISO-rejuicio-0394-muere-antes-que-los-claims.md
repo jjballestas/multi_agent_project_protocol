@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: AVISO
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: false
 response_owner: none
 question: none

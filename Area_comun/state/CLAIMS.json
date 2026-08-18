@@ -362,6 +362,28 @@
             "updated_at": "2026-08-18T06:14:27Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0915",
+            "expires_at": "2026-08-18T07:34:24Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0915",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r2.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-rejuicio-0394-muere-antes-que-los-claims.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-rejuicio-0394-muere-antes-que-los-claims.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-ECHECK-0121.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-ECHECK-0121.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-borrador-clausula-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-borrador-clausula-poda.md"
+            ],
+            "started_at": "2026-08-18T07:14:24Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818H",
+            "updated_at": "2026-08-18T07:14:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
             "expires_at": "2026-08-18T03:13:53Z",
             "owner": "Arquitecto",
