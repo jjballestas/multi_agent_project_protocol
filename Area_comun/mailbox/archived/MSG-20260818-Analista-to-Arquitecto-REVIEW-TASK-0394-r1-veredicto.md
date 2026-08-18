@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: CHANGE-REQUIRED en r1 -- el control del frente 1 YA enrojece en los dos gemelos y el frente 2 esta entregado en el efecto, pero el guardia de co-entrega que el handoff declara es vacuo, refutado por mutacion.

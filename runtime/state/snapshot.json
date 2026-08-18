@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "98b21582d3b2827917dc696f4e6beef98f1db8621e7d22c387ee8a0d0c4bcb80",
+  "canonical_hash": "10372169ab2bb812aed9e3ecd74d45785cbc0eea193b5ab5748f16ffa54d1531",
   "integrity": {
-    "canonical_hash": "98b21582d3b2827917dc696f4e6beef98f1db8621e7d22c387ee8a0d0c4bcb80",
+    "canonical_hash": "10372169ab2bb812aed9e3ecd74d45785cbc0eea193b5ab5748f16ffa54d1531",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "42dbf8d5e48725d4af34dfe19ddbd432e7c5e08d37ee05e03b3f3a93e4335cdf",
-    "signature": "88032f4a9e54116629f457741e7c2788745b023f895c33f11095a8b2df28fc2a",
-    "up_to_seq": 9935
+    "prev_hash": "eebffe93728937eac2c1e241d0805218069ae86fbe4677993a0012e210ee30ce",
+    "signature": "d2ab5ade7324e8dcb511d062fa4fd9ed7b39083a136ae8e5d0538889497ffc2d",
+    "up_to_seq": 9941
   },
   "state": {
     "aggregate_versions": {
@@ -3574,6 +3574,7 @@
       "MSG-20260817-Operador-to-Arquitecto-RESP-reporte-0800-politica-y-0408-ya": 1,
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0378-r5-veredicto": 1,
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394": 1,
+      "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r1-veredicto": 1,
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0408-veredicto": 1,
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0414-r5-veredicto": 1,
       "MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394": 1,
@@ -3584,6 +3585,7 @@
       "MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim": 1,
       "MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191": 1,
       "MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte": 1,
+      "MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida": 1,
       "MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1": 1,
       "MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0394": 1,
       "MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio": 1,
@@ -3594,7 +3596,9 @@
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-ataque-al-tablero": 1,
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-corte-v1191-con-residuo-declarado": 1,
       "MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos": 1,
+      "MSG-20260818-Operador-to-Arquitecto-FYI-lease-suelto-con-exec-vivo": 1,
       "MSG-20260818-Operador-to-Arquitecto-RESP-higiene-censo-aprobado": 1,
+      "MSG-20260818-Operador-to-Arquitecto-RESP-veredicto-aceptado-y-cirugia-hecha": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CAMPO-NOVA-20260814": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
@@ -3740,6 +3744,7 @@
       "OPS-MAILBOX-HYGIENE-20260818D": 1,
       "OPS-MAILBOX-HYGIENE-20260818E": 1,
       "OPS-MAILBOX-HYGIENE-20260818F": 1,
+      "OPS-MAILBOX-HYGIENE-20260818G": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -4081,7 +4086,7 @@
       "TASK-0391": 2,
       "TASK-0392": 26,
       "TASK-0393": 1,
-      "TASK-0394": 17,
+      "TASK-0394": 18,
       "TASK-0395": 16,
       "TASK-0396": 24,
       "TASK-0397": 20,
@@ -4127,7 +4132,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9264,
+    "events_applied": 9270,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9622,6 +9627,11 @@
       "h748-3": 9934,
       "h748-4": 9935,
       "h748-acq": 9930,
+      "h813-0": 9938,
+      "h813-1": 9939,
+      "h813-2": 9940,
+      "h813-3": 9941,
+      "h813-acq": 9937,
       "hy605-0": 9916,
       "hy605-1": 9917,
       "hy605-2": 9918,
@@ -12287,6 +12297,7 @@
       "intent:Codex:claim:7b93f4c1cf2954d39f5589e83773414f45f4fa22b02dcb293923f903b3ed9a52": 3986,
       "intent:Codex:claim:7c39f33ccdb7589dd8d88510dd9d262e078725f950710290147f1d79ad3a8f88": 9671,
       "intent:Codex:claim:7c461acd58c234018f0408b88d32cda967db602cb630c404c095ab3ef3507686": 3051,
+      "intent:Codex:claim:7c77b0f6f4582f0a06770d1aa60919ad1a665a0893afd55ec6e123a27bf781de": 9936,
       "intent:Codex:claim:7c87cd22277eecd98bbd3dc2a1c3c5d537587ff5a52ef87c29ce41c9844f6262": 8089,
       "intent:Codex:claim:7c8e30d78ea9af9372a80148d12ea24299d9a6576f2c1a146d0d0b1b3a0eb41e": 4173,
       "intent:Codex:claim:7cb16e0039751340ac4f6ed1c70142867dea6c10fd295a0c86901ad066f32e3b": 5084,
@@ -13395,5 +13406,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9935
+  "up_to_seq": 9941
 }

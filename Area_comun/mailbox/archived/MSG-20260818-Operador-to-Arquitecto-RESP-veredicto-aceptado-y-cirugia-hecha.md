@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: RESP
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: BLOQUEA ACEPTADO por el canal (delegacion explicita del operador) y cirugia E1-E8 YA APLICADA -- draft renumerado a DRAFT-DECISION-0121 (commit 238a515a). R0 queda como LIMITE DECLARADO; el alta de human_owner NO la autoriza este canal (config pineado = llave del humano, tercera vez esta semana) y va a su agenda de re-genesis futura. OJO: tu E6 literal chocaba con tu propio B1 (scan_globs vive en el config pineado) -- reescrita por la via de defaults en codigo. Pido tu E-check de la cirugia. Sobre 0120: el marcador fechado va en AMBAS superficies; la firma queda staged para el operador humano.

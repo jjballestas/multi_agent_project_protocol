@@ -16,6 +16,34 @@
                 "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md"
             ],
             "task_id": "OPS-MAILBOX-HYGIENE-20260818F"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0813",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-RESP-veredicto-aceptado-y-cirugia-hecha.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-RESP-veredicto-aceptado-y-cirugia-hecha.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-FYI-lease-suelto-con-exec-vivo.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-FYI-lease-suelto-con-exec-vivo.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r1-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida.md"
+            ],
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818G"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r2",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r2",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "scripts/test_upgrade_instance_contract.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0394"
         }
     ],
     "schema_version": "1.0",

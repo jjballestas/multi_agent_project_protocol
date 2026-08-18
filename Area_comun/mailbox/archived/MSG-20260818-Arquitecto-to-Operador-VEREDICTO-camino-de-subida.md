@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: none
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 one_line_summary: "VEREDICTO BLOQUEA, por unanimidad de los tres revisores y con dos bloqueantes que verifique YO contra el genesis real (seq 672). R6 y la rama de config de R4 rompen la cadena por su via documentada. Y R0, la clausula rectora, dice lo contrario de lo que el sistema hace: el Operador NO es actor registrado y no puede sellar una decision. El fondo es solido y R5 es su mejor clausula; lo que no se puede firmar es el documento de hoy."
