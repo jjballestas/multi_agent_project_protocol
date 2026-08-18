@@ -1,6 +1,33 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-08-18 (~13:45 local) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+## >> BLOQUE TOP 2026-08-18 (~20:15 local, checkpoint de cierre) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### RESUMEN DE 24H: v1.19.1 TAGGED (27acf137) + ADOPTADA POR NOVA + DECISION-0120 y 0121
+### SELLADAS Y APLICADAS. Falta SOLO: dos veredictos del checker NOVA -> reporte = META total.
+- HEAD hub = c9b4795c = origin. sha8 2E35F26E, epoch 1.14.0 INTACTOS. Poda verde (18.2k).
+- **INCIDENTE PROVEEDOR ACTIVO** (verificado status.claude.com 20:00): degraded en TODOS los
+  modelos Claude -> transients frecuentes en execs. SESGO DECLARADO: no diagnosticar defectos
+  de agente por fallos que son del proveedor; los reintentos absorben; NO matar/relanzar.
+- EN VUELO hub (dueno Arquitecto, ciclo sano): 0410-r1 (exec corto en techo 20:10, retry
+  programado -- verificar si la entrega quedo local para aterrizar), 0408-r1 review (cola
+  checker), 0397-r3 re-juicio (difiriendo con presupuesto). DECISION-0120 aplicada VERIFICADA
+  por los greps de su seccion 6 (TASK_PROTOCOL + skill viva + marcador fechado).
+- NOVA: checker VIVO revisando (el operador dio el clic); esperan 9431-H8 y 9438-E2E ->
+  reporte final = META. Al confirmarse: arrancar reloj del ESPEJO V3 (+1 dia; tarea 11).
+- INCIDENTE dual-sesion (17:07, FYI del Arquitecto en open/): dos Arquitectos duplicaron
+  eventos atestados (ruido permanente, estado NO corrupto) y archivaron un encargo vivo (ya
+  reemitido). Causa = self-filter por modelo -> TASK-0383 PRIORIZAR. Recomendado al operador:
+  UNA sola ventana de Arquitecto hasta que 0383 aterrice.
+- PENDIENTES OPERADOR: DECISION-0119 (sin reloj) + alta human_owner en agent_registry
+  (agenda re-genesis futura, su llave). Tablero: BACKLOG-post-meta (personal/operador/) +
+  task list del harness (tareas 8, 9, 10, 11, 15 abiertas).
+- LECCIONES NUEVAS DE LA SESION (ya en memoria .claude): esquema 4-campos AMBOS repos
+  (requested_action o CI muere en paso 9 enmascarando baseline); date POR MENSAJE; playbook
+  colision claims-vs-review (aritmetica + suelta-claims + el reloj resetea al cambiar motivo);
+  fantasma post-entrega (EXIT 0 -> transient -> exhausted sobre encargo YA completo: verificar
+  completitud ANTES de re-emitir); una-voz-por-canal; gate ASCII encadenado al push con &&.
+
+## BLOQUE 2026-08-18 (~13:45 local) [SUPERADO por el TOP de las 20:15]
 
 ### MEDIODIA: hub LIMPIO (open/ 0, poda verde, 0394+0414+0378 done, tag v1.19.1 fuera).
 ### NOVA en ventana con maker vivo; TODO lo restante es del OPERADOR o post-firma.
