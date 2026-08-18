@@ -1,6 +1,17 @@
 {
     "claims": [
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0438",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md"
+            ],
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818D"
+        },
+        {
             "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
             "owner": "Codex",
             "scope": [

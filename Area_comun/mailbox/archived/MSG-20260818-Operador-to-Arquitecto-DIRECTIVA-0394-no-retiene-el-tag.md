@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: DIRECTIVA
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: Actualizo el criterio del corte tras el CHANGE-REQUIRED -- donde dije "0394 verificada" lease "el CONJUNTO verificado". Lo que embarca v1.19.1 (conjunto 150->174 con la D-1 dentro, gemelos identicos HOY) lo verifico el propio checker; lo rechazado son guardas de FUTURO (AC3 vacuo, ampliacion new_instance, informe del punto D) que van como residuos DECLARADOS + sucesora de D abierta ANTES de la nota, como pide el checker. 0394 sigue ABIERTA en remediacion post-corte, max 2 iteraciones. El tag no la espera.

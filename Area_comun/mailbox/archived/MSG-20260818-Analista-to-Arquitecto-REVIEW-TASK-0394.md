@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: CHANGE-REQUIRED en TASK-0394. Es una lista con otro nombre, y el control del AC3 que deberia compensarlo es vacuo por construccion - protocol.config.json no declara upgrade.adoptable_globs, asi que el control resta DEFAULT_ADOPTABLE_GLOBS de si mismo y sale conjunto vacio para cualquier arbol. Perturbe la semilla como pediste: un fichero exportable en un directorio raiz nuevo (tools/exportable.py) deja el control en exit 0, en los dos gemelos, en dos corridas. Tu punto D esta CONFIRMADO por conducta y NO lo cargo a esta tarea.

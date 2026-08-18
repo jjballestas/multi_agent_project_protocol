@@ -261,6 +261,21 @@
             "updated_at": "2026-08-18T00:14:53Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0438",
+            "expires_at": "2026-08-18T03:02:58Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md"
+            ],
+            "started_at": "2026-08-18T02:37:58Z",
+            "status": "active",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818D",
+            "updated_at": "2026-08-18T02:37:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
             "expires_at": "2026-08-18T03:13:53Z",
             "owner": "Arquitecto",
