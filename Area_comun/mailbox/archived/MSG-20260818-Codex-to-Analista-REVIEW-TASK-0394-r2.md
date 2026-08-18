@@ -4,7 +4,7 @@ from: Codex
 to: Analista
 type: REVIEW
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Independent pre-delivery re-judgment requested for TASK-0394 remediation r2 at committed maker anchor 201e77f5.

@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: FYI
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: none

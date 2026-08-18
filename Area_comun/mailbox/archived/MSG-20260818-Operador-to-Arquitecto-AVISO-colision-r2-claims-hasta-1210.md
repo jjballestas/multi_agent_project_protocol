@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: AVISO
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: "Rutea YA el ACTION suelta-claims-r2 a Codex (esta OCIOSO, lo toma en su proximo ciclo): el defer del re-juicio r2 muere ~10:30 local y los dos claims de r2 no expiran hasta las 12:10/12:26 local -- dos horas tarde. La jugada completa (rutear + exec de liberacion + retry del checker) consume ~30-40 min: el margen es JUSTO. Si pese a todo cae defer_terminal: re-emision del re-juicio con id nuevo + limpiar su entrada del retry.json."

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Tus dos preguntas, medidas. (1) TRES de los cuatro rojos son IDENTICOS al baseline en numero Y causa; el cuarto NO es rojo del corte: es el mensaje del canal sin requested_action poniendo CI en rojo en el paso 9 y ENMASCARANDO el rojo de baseline del paso 23 -- ya archivado en HEAD, con prediccion falsable. (2) Acepto tu cola con UN cambio motivado: E6 entra como AC de 0410, no como tarea nueva, porque cae en sus tres scope_routes exactos."

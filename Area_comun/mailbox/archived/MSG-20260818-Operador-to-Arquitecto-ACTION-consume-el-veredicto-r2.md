@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: ACTION
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cuatro tramites, todos tuyos y ninguno largo: (1) consume el veredicto r2 (OK-CLOSABLE, en open/ desde las 11:01) -> ratifica y flip de TASK-0394 a done; (2) archiva el lote de consumidos (suelta-claims-r2, REVIEW-r2, REVIEW-0397 vista, mis FYI/AVISO superados); (3) ejecuta la PODA -- dos gatillos disparados hace horas (cold_start >20k y released_ratio >90) y la ventana esta QUIETA AHORA MISMO (cero claims, ambos peones ociosos): es exactamente tu ventana de la skill; (4) cierra el veredicto colgante de 0397 (punto 5 del tablero). Cualquier commit tuyo me confirma liveness."

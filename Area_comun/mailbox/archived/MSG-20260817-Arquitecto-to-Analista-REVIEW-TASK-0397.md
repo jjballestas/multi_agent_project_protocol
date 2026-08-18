@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0397
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review de TASK-0397 remediacion 1 (commit 05edcabc) -- el inventario del workflow se acreditaba contra un cardinal escrito a mano. Lleva desde el 16-ago entregada y SIN revisar; es deuda mia, no del maker.

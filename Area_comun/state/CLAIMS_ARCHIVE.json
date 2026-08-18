@@ -54935,6 +54935,716 @@
             "status": "released",
             "task_id": "TASK-0414",
             "updated_at": "2026-08-17T06:20:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-074241-prune-arquitecto",
+            "expires_at": "2026-08-17",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-08-17T07:42:41Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-08-17T07:42:41Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Arquitecto-OPS-HYG-2212",
+            "expires_at": "2026-08-17T23:14:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Arquitecto-OPS-HYG-2212",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-ALERTA-TASK-0414-r5-muerto-retry-exhausted.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-ALERTA-TASK-0414-r5-muerto-retry-exhausted.md",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-AVISO-r5-muerto-reenvia-r5b.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-AVISO-r5-muerto-reenvia-r5b.md",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-NOTA-supersede-aviso-r5b.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-NOTA-supersede-aviso-r5b.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5-ausencia-fatal.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5-ausencia-fatal.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5b-cierra-tu-entrega.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Operador-RESP-ALERTA-0414-residuo-adjudicado.md"
+            ],
+            "started_at": "2026-08-17T20:14:50Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260817",
+            "updated_at": "2026-08-17T20:14:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Arquitecto-OPS-HYG-2315",
+            "expires_at": "2026-08-18T00:30:13Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Arquitecto-OPS-HYG-2315",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0414-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0414-r5.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5b-cierra-tu-entrega.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Codex-ACTION-TASK-0414-r5b-cierra-tu-entrega.md",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0408.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0408.md",
+                "Area_comun/mailbox/open/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260816-Codex-to-Arquitecto-HANDOFF-TASK-0378-r5.md",
+                "Area_comun/mailbox/open/MSG-20260817-Operador-to-Arquitecto-DIRECTIVA-higiene-working-tree-por-dueno.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Operador-to-Arquitecto-DIRECTIVA-higiene-working-tree-por-dueno.md"
+            ],
+            "started_at": "2026-08-17T21:30:13Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260817B",
+            "updated_at": "2026-08-17T21:30:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0394",
+            "expires_at": "2026-08-18T04:15:04Z",
+            "notes": "Implement the declared adoptable-file criterion, Python/PowerShell parity, omission detection, exclusions, and report disclosure without changing protocol.config.json.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0394",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T22:15:04Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-17T22:15:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5",
+            "expires_at": "2026-08-17T11:55:04Z",
+            "notes": "Remediation r5: make registry absence fatal after any chain anchor and add deletion-resync plus disablement counterproofs.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+                "runtime/eventlog.py",
+                "examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T07:55:04Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T07:55:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5-delivery",
+            "expires_at": "2026-08-17T23:04:22Z",
+            "notes": "Publish r5 handoff, move TASK-0414 to in_review, and release maker delivery claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0414-r5.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T21:04:22Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T21:04:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5-msgfix",
+            "expires_at": "2026-08-17T22:16:20Z",
+            "notes": "Add required compact-message question, gate, and release immediately.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5-msgfix",
+                "Area_comun/mailbox/open/MSG-20260817-Codex-to-Arquitecto-HANDOFF-TASK-0414-r5.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T21:16:20Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T21:16:20Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5-neutrality",
+            "expires_at": "2026-08-17T12:01:00Z",
+            "notes": "Align line-bound neutrality evidence after the TASK-0414 r5 insertion.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T08:01:00Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T08:01:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260817-Codex-TASK-0414-r5b",
+            "expires_at": "2026-08-17T22:57:17Z",
+            "notes": "Commit verified r5 residue and perform governed delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260817-Codex-TASK-0414-r5b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+                "runtime/eventlog.py",
+                "examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T20:57:17Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T20:57:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-0394-0417",
+            "expires_at": "2026-08-18T03:19:26Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/state/TASK_INDEX.json#TASK-0417",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0417",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "Area_comun/tasks/TASK-0417-el-informe-compara-la-ruta-de-staging-no-la-consumida.md"
+            ],
+            "started_at": "2026-08-18T02:49:26Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T02:49:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0126A",
+            "expires_at": "2026-08-18T02:27:43Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0126A",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-corte-v1191-con-residuo-declarado.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-corte-v1191-con-residuo-declarado.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-RESP-higiene-censo-aprobado.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-RESP-higiene-censo-aprobado.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0414-r5-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0414-r5-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0378-r5-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0378-r5-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0394.md"
+            ],
+            "started_at": "2026-08-17T23:27:42Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818B",
+            "updated_at": "2026-08-17T23:27:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0126B",
+            "expires_at": "2026-08-18T02:27:43Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0126B",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Codex-GO-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Codex-GO-TASK-0394.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0414-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0414-r5.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0378-r5.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0378-r5.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Operador-RESP-ALERTA-0414-residuo-adjudicado.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Operador-RESP-ALERTA-0414-residuo-adjudicado.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Operador-RESP-DIRECTIVA-higiene-working-tree.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Operador-RESP-DIRECTIVA-higiene-working-tree.md"
+            ],
+            "started_at": "2026-08-17T23:27:42Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818B",
+            "updated_at": "2026-08-17T23:27:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0214",
+            "expires_at": "2026-08-18T03:14:53Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0214",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0408-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0408-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0408.md",
+                "Area_comun/mailbox/archived/MSG-20260817-Arquitecto-to-Analista-REVIEW-TASK-0408.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-done-flips-0378-0414.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-done-flips-0378-0414.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md"
+            ],
+            "started_at": "2026-08-18T00:14:53Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818C",
+            "updated_at": "2026-08-18T00:14:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0438",
+            "expires_at": "2026-08-18T03:02:58Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394.md"
+            ],
+            "started_at": "2026-08-18T02:37:58Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818D",
+            "updated_at": "2026-08-18T02:37:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0605",
+            "expires_at": "2026-08-18T04:26:13Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md"
+            ],
+            "started_at": "2026-08-18T04:06:13Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818E",
+            "updated_at": "2026-08-18T04:06:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0748",
+            "expires_at": "2026-08-18T06:05:17Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-decision-lite-clausula-de-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-decision-lite-clausula-de-poda.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-ACTION-revision-adversarial-decision-camino-de-subida.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-ACTION-revision-adversarial-decision-camino-de-subida.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-ataque-al-tablero.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-ataque-al-tablero.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md"
+            ],
+            "started_at": "2026-08-18T05:45:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818F",
+            "updated_at": "2026-08-18T05:45:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0813",
+            "expires_at": "2026-08-18T06:34:27Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-RESP-veredicto-aceptado-y-cirugia-hecha.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-RESP-veredicto-aceptado-y-cirugia-hecha.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-FYI-lease-suelto-con-exec-vivo.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-FYI-lease-suelto-con-exec-vivo.md",
+                "Area_comun/mailbox/open/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r1-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394-r1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-VEREDICTO-camino-de-subida.md"
+            ],
+            "started_at": "2026-08-18T06:14:27Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818G",
+            "updated_at": "2026-08-18T06:14:27Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0915",
+            "expires_at": "2026-08-18T07:34:24Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0915",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r2.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-suelta-claims-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-rejuicio-0394-muere-antes-que-los-claims.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-rejuicio-0394-muere-antes-que-los-claims.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-ECHECK-0121.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-ECHECK-0121.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-borrador-clausula-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-borrador-clausula-poda.md"
+            ],
+            "started_at": "2026-08-18T07:14:24Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818H",
+            "updated_at": "2026-08-18T07:14:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
+            "expires_at": "2026-08-18T03:13:53Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md"
+            ],
+            "started_at": "2026-08-18T00:13:53Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T00:13:53Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-cierre-noche",
+            "expires_at": "2026-08-18T02:21:45Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-cierre-noche",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/state/TASK_INDEX.json#TASK-0415",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0415",
+                "Area_comun/state/TASK_INDEX.json#TASK-0416",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0416",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+                "Area_comun/tasks/TASK-0415-la-tolerancia-de-instance-context-despierta-un-fragmento-muerto.md",
+                "Area_comun/tasks/TASK-0416-el-final-de-la-cadena-no-lo-ata-nadie.md"
+            ],
+            "started_at": "2026-08-17T23:21:45Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T23:21:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-limpieza-claims",
+            "expires_at": "2026-08-18T03:53:37Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-limpieza-claims",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-0394-0417",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0438"
+            ],
+            "started_at": "2026-08-18T03:33:37Z",
+            "status": "released",
+            "task_id": "OPS-CLAIM-CLEANUP-20260818",
+            "updated_at": "2026-08-18T03:33:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-purga-0649",
+            "expires_at": "2026-08-18T05:04:38Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-purga-0649",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0605"
+            ],
+            "started_at": "2026-08-18T04:49:38Z",
+            "status": "released",
+            "task_id": "OPS-CLAIM-CLEANUP-20260818B",
+            "updated_at": "2026-08-18T04:49:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-purga-0826",
+            "expires_at": "2026-08-18T06:41:40Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-purga-0826",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0748",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-HYG-0813"
+            ],
+            "started_at": "2026-08-18T06:26:40Z",
+            "status": "released",
+            "task_id": "OPS-CLAIM-CLEANUP-20260818C",
+            "updated_at": "2026-08-18T06:26:40Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-ratifica-0394",
+            "expires_at": "2026-08-18T10:11:20Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-ratifica-0394",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md"
+            ],
+            "started_at": "2026-08-18T09:51:20Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T09:51:20Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-reg-0418",
+            "expires_at": "2026-08-18T04:25:19Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-reg-0418",
+                "Area_comun/state/TASK_INDEX.json#TASK-0418",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0418",
+                "Area_comun/tasks/TASK-0418-la-llave-declarada-no-disponible-no-llega-a-ninguna-parte.md"
+            ],
+            "started_at": "2026-08-18T04:05:19Z",
+            "status": "released",
+            "task_id": "TASK-0418",
+            "updated_at": "2026-08-18T04:05:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-reg-0419",
+            "expires_at": "2026-08-18T10:16:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-reg-0419",
+                "Area_comun/state/TASK_INDEX.json#TASK-0419",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0419",
+                "Area_comun/tasks/TASK-0419-la-mitad-declarada-del-criterio-adoptable-no-tiene-guardia.md",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md"
+            ],
+            "started_at": "2026-08-18T09:56:50Z",
+            "status": "released",
+            "task_id": "TASK-0419",
+            "updated_at": "2026-08-18T09:56:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-DONE-0378-0414",
+            "expires_at": "2026-08-18T05:54:43Z",
+            "notes": "Perform implementer-only done flips for independently approved TASK-0378 and TASK-0414.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-DONE-0378-0414",
+                "Area_comun/state/TASK_INDEX.json#TASK-0378",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0378",
+                "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0414",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0414",
+                "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T23:54:42Z",
+            "status": "released",
+            "task_id": "TASK-0414",
+            "updated_at": "2026-08-17T23:54:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-delivery",
+            "expires_at": "2026-08-18T04:38:26Z",
+            "notes": "Deliver TASK-0394 to independent review and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0394.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T22:38:26Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-17T22:38:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-done",
+            "expires_at": "2026-08-18T12:31:22Z",
+            "notes": "Implementer done-flip after independent Analista approval and Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T10:31:22Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T10:31:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-msgfix",
+            "expires_at": "2026-08-18T00:51:51Z",
+            "notes": "Add the validator-required explicit question to the TASK-0394 handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-msgfix",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0394.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-17T22:51:51Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-17T22:51:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1",
+            "expires_at": "2026-08-18T07:32:16Z",
+            "notes": "Remediate the tree-derived omission control and ship the session watchdog proof in coordination instances.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "scripts/new_instance.py",
+                "scripts/test_upgrade_instance_contract.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T03:32:16Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T03:32:16Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r1-rejudgment",
+            "expires_at": "2026-08-18T07:51:18Z",
+            "notes": "Publish the committed maker remediation for independent pre-delivery re-judgment.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r1-rejudgment",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T03:51:18Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T03:51:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r2",
+            "expires_at": "2026-08-18T10:10:17Z",
+            "notes": "Remediation r2: derive generic payload membership without suffix enumeration and bind co-delivery proof to the real default-tier main path.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r2",
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "scripts/test_upgrade_instance_contract.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T06:10:17Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T06:10:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0394-r2-rejudgment",
+            "expires_at": "2026-08-18T10:26:09Z",
+            "notes": "Publish committed TASK-0394 r2 maker evidence for the mandatory independent pre-delivery re-judgment.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0394-r2-rejudgment",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0394-r2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T06:26:09Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T06:26:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1",
+            "expires_at": "2026-08-18T04:41:30Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py"
+            ],
+            "started_at": "2026-08-18T00:41:30Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T00:41:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-commit",
+            "expires_at": "2026-08-18T05:12:14Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-commit",
+                "Area_comun/state/CLAIMS.slim.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T01:12:14Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T01:12:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-neutrality",
+            "expires_at": "2026-08-18T04:48:30Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1"
+            ],
+            "started_at": "2026-08-18T00:48:30Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T00:48:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
+            "expires_at": "2026-08-18T05:20:14Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-rejudgment-msg",
+                "Area_comun/state/CLAIMS.slim.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md"
+            ],
+            "started_at": "2026-08-18T01:20:14Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T01:20:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-snapshot",
+            "expires_at": "2026-08-18T05:16:06Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-snapshot",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1"
+            ],
+            "started_at": "2026-08-18T01:16:06Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T01:16:06Z"
         }
     ]
 }

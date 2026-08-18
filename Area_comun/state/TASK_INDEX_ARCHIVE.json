@@ -8536,6 +8536,33 @@
             "status": "done",
             "title": "Un test se ancla a un ID de tarea concreto y la poda, que es el propio protocolo, se lo lleva",
             "type": "infra"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0378-claim-obligatorio-para-commitear-producto.md",
+            "id": "TASK-0378",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Claim obligatorio para commitear PRODUCTO -- el gate valida la etiqueta y no el proceso que la etiqueta nombra",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+            "id": "TASK-0394",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0414-el-replay-acusa-de-manipulacion-cuando-solo-le-falta-la-llave.md",
+            "id": "TASK-0414",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "done",
+            "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature",
+            "type": "infra"
         }
     ]
 }

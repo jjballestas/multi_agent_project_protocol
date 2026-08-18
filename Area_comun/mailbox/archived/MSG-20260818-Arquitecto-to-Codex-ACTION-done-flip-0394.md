@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0394 CERRADA por el checker con OK-CLOSABLE y ratificada por mi a review_approved. Solo falta el flip a done, que exige implementer. NO hay codigo que tocar - los cuatro residuos ya estan repartidos y ninguno vuelve a ti en esta tarea.

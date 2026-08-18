@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: URGENTE con reloj de 39 minutos. Tus dos claims de r2 bloquean el re-juicio que TU ruteaste, y ese mensaje muere a las 10:29 mientras tus claims no expiran hasta las 12:10 y 12:26 - dos horas tarde. Tu entrega esta commiteada y el mensaje al checker ya esta en open/: el claim no protege nada.

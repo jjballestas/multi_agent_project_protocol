@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: NOTE
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: none

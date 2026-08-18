@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0394 r2 OK-CLOSABLE en 201e77f5 - D1 y R1 verificados por mutacion de produccion, con cuatro residuos declarados.
