@@ -198,6 +198,23 @@
             "updated_at": "2026-08-17T20:57:17Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-0394-0417",
+            "expires_at": "2026-08-18T03:19:26Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/state/TASK_INDEX.json#TASK-0417",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0417",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md",
+                "Area_comun/tasks/TASK-0417-el-informe-compara-la-ruta-de-staging-no-la-consumida.md"
+            ],
+            "started_at": "2026-08-18T02:49:26Z",
+            "status": "active",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T02:49:26Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-HYG-0126A",
             "expires_at": "2026-08-18T02:27:43Z",
             "owner": "Arquitecto",
@@ -429,7 +446,7 @@
                 "Area_comun/mailbox/open/MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0408-r1-rejuicio.md"
             ],
             "started_at": "2026-08-18T01:20:14Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0408",
             "updated_at": "2026-08-18T01:20:14Z"
         },

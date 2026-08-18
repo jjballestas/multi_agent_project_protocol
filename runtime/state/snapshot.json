@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "33b7f8f1e9074e59e9c3e9bbce23add2af2818cd9573a1d5520896de9aae2077",
+  "canonical_hash": "c419238515d5f341ea3373cd62a9dfe76f9eb57ad30404e83a56b18fc944e65a",
   "integrity": {
-    "canonical_hash": "33b7f8f1e9074e59e9c3e9bbce23add2af2818cd9573a1d5520896de9aae2077",
+    "canonical_hash": "c419238515d5f341ea3373cd62a9dfe76f9eb57ad30404e83a56b18fc944e65a",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "396894b09fd18b19f1f8cc376c24ba249803c5a128406013f11ff0c7d8e0652a",
-    "signature": "6de76ab4136fba466800eb72f7be8846aa40f66b87ffcd581ca3c75b90c8022e",
-    "up_to_seq": 9901
+    "prev_hash": "67cacf816fa56080cc45584621977122cb4749510973099643a03b35d2f493f6",
+    "signature": "9297f5bed5ae087542af05b44d323137179dbe408f6c9d812a298e4a273eb642",
+    "up_to_seq": 9905
   },
   "state": {
     "aggregate_versions": {
@@ -4057,7 +4057,7 @@
       "TASK-0391": 2,
       "TASK-0392": 26,
       "TASK-0393": 1,
-      "TASK-0394": 11,
+      "TASK-0394": 13,
       "TASK-0395": 16,
       "TASK-0396": 24,
       "TASK-0397": 20,
@@ -4070,7 +4070,7 @@
       "TASK-0404": 1,
       "TASK-0405": 1,
       "TASK-0407": 1,
-      "TASK-0408": 26,
+      "TASK-0408": 27,
       "TASK-0409": 16,
       "TASK-0410": 3,
       "TASK-0411": 3,
@@ -4079,6 +4079,7 @@
       "TASK-0414": 71,
       "TASK-0415": 1,
       "TASK-0416": 1,
+      "TASK-0417": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4101,7 +4102,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9230,
+    "events_applied": 9234,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9342,6 +9343,7 @@
       "codex:task0397:remediation1:msgfix-claim:2026-08-16T01:35:32Z": 9476,
       "codex:task0397:remediation1:msgfix-release:2026-08-16T01:35:59Z": 9477,
       "codex:task0397:remediation1:work-release:2026-08-16T01:31:34Z": 9474,
+      "codex:task0408:release-all-active:r1-rejudgment-msg:20260818": 9905,
       "codex:task0408:release-r1-commit:20260818": 9896,
       "codex:task0408:release-r1-neutrality:20260818": 9897,
       "codex:task0408:release-r1-snapshot:20260818": 9898,
@@ -13330,10 +13332,13 @@
       "task0268-h1-inprogress-20260720-0430": 5134,
       "task0268-h1-inreview-20260720-0420": 5138,
       "task0268-h1-memory-claim-20260720-0415": 5135,
-      "task0268-h1-memory-release-20260720-0415": 5136
+      "task0268-h1-memory-release-20260720-0415": 5136,
+      "z417-acq": 9902,
+      "z417-st": 9904,
+      "z417-up": 9903
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9901
+  "up_to_seq": 9905
 }

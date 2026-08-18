@@ -721,7 +721,7 @@
             "id": "TASK-0394",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos",
             "type": "implementation"
         },
@@ -901,6 +901,15 @@
             "reviewer": "Analista",
             "status": "proposed",
             "title": "El final de la cadena no lo ata nadie -- quitar un ancla que es COLA deja la cadena valida y apaga el control",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0417-el-informe-compara-la-ruta-de-staging-no-la-consumida.md",
+            "id": "TASK-0417",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "El informe de actualizacion compara la ruta de STAGING y nunca la que la instancia consume",
             "type": "implementation"
         },
         {

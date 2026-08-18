@@ -327,7 +327,7 @@
         {
             "id": "TASK-0394",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos"
         },
         {
@@ -437,6 +437,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "El final de la cadena no lo ata nadie -- quitar un ancla que es COLA deja la cadena valida y apaga el control"
+        },
+        {
+            "id": "TASK-0417",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "El informe de actualizacion compara la ruta de STAGING y nunca la que la instancia consume"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
