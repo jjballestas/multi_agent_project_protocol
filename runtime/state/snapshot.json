@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "391ad0d8e5dc83aee3a55dbe7b438e733ba8f1d9f6546ccee2b975627be9eca4",
+  "canonical_hash": "8600064c12c60f04ea656a5b35c7df747c84e6b36d887989aa53aa331ec692c6",
   "integrity": {
-    "canonical_hash": "391ad0d8e5dc83aee3a55dbe7b438e733ba8f1d9f6546ccee2b975627be9eca4",
+    "canonical_hash": "8600064c12c60f04ea656a5b35c7df747c84e6b36d887989aa53aa331ec692c6",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "e6fb0607d0c27d50f0c8ce9df7e6003ea18486fd93ab1e0f907283d929ec8a9c",
-    "signature": "bc28e26e0b716a49ee3d295e357569ef6bde79ffa8b8b157ab932efdf41c6bbf",
-    "up_to_seq": 9955
+    "prev_hash": "9ea20c59c2daab9c95a4d4ea2ad2b1305a6395501b0a6c5595146bdc767f8614",
+    "signature": "42bbb84bc2b7683936645e8b5849c6887e129f62fc09f3f9910836f17d22e8ce",
+    "up_to_seq": 9961
   },
   "state": {
     "aggregate_versions": {
@@ -1108,7 +1108,9 @@
       "CLAIM-20260818-Arquitecto-limpieza-claims": 1,
       "CLAIM-20260818-Arquitecto-purga-0649": 1,
       "CLAIM-20260818-Arquitecto-purga-0826": 1,
+      "CLAIM-20260818-Arquitecto-ratifica-0394": 1,
       "CLAIM-20260818-Arquitecto-reg-0418": 1,
+      "CLAIM-20260818-Arquitecto-reg-0419": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -4097,7 +4099,7 @@
       "TASK-0391": 2,
       "TASK-0392": 26,
       "TASK-0393": 1,
-      "TASK-0394": 21,
+      "TASK-0394": 23,
       "TASK-0395": 16,
       "TASK-0396": 24,
       "TASK-0397": 20,
@@ -4121,6 +4123,7 @@
       "TASK-0416": 1,
       "TASK-0417": 1,
       "TASK-0418": 2,
+      "TASK-0419": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4143,7 +4146,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9284,
+    "events_applied": 9290,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -13350,6 +13353,12 @@
       "r0408-acq": 9882,
       "r0408-rel": 9884,
       "r0408-st": 9883,
+      "r419b-acq": 9959,
+      "r419b-rel": 9961,
+      "r419b-up": 9960,
+      "rat-acq": 9956,
+      "rat-rel": 9958,
+      "rat-st": 9957,
       "ratifica-0257-cierre-B-20260720T0550": 5172,
       "ratifica-0258-20260720T1146": 5281,
       "ratifica-0267-informal-20260720T0200": 5049,
@@ -13431,5 +13440,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9955
+  "up_to_seq": 9961
 }

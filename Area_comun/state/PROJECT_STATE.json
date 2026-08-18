@@ -327,7 +327,7 @@
         {
             "id": "TASK-0394",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "review_approved",
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos"
         },
         {
@@ -449,6 +449,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "La llave declarada no disponible se calcula, se pasa y no la lee nadie -- y la razon que deberia producir es inalcanzable"
+        },
+        {
+            "id": "TASK-0419",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La mitad declarada del criterio adoptable se autocertifica -- y el ensanche estructural estrecho la raiz y .github"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

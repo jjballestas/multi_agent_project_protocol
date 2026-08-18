@@ -721,7 +721,7 @@
             "id": "TASK-0394",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "review_approved",
             "title": "El conjunto adoptable excluye el arnes y las skills -- la via de actualizacion no transporta los defectos corregidos",
             "type": "implementation"
         },
@@ -919,6 +919,15 @@
             "reviewer": "Analista",
             "status": "proposed",
             "title": "La llave declarada no disponible se calcula, se pasa y no la lee nadie -- y la razon que deberia producir es inalcanzable",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0419-la-mitad-declarada-del-criterio-adoptable-no-tiene-guardia.md",
+            "id": "TASK-0419",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "La mitad declarada del criterio adoptable se autocertifica -- y el ensanche estructural estrecho la raiz y .github",
             "type": "implementation"
         },
         {

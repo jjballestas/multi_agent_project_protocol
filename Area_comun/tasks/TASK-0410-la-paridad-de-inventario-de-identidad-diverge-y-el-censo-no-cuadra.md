@@ -46,6 +46,15 @@ intake:
     - scripts/scan_domain_neutrality.py
     - scripts/scan_domain_neutrality.ps1
   out_of_scope:
+    - "AMPLIACION 2026-08-18 11:55 local (Arquitecto) -- no es exclusion, es un caso que ENTRA:
+      RES-3 del veredicto de TASK-0394 r2. La lista negra esta espejada en CONTENIDO pero NO en
+      COMPORTAMIENTO: `ContainsKey` de una hashtable de PowerShell es INSENSIBLE a mayusculas y la
+      pertenencia a un `set` de Python no lo es. Reproducido por el Arquitecto:
+      `Secrets/leak.py` -> Python exit 1 nombrando el fichero, PowerShell exit 0. Los dos gemelos
+      dan veredictos OPUESTOS sobre la misma entrada, que es exactamente la paridad que esta tarea
+      gobierna -- por eso entra aqui y no en tarea propia: crear un tercer dueno sobre
+      scan/upgrade_instance.{py,ps1} es la colision que costo dos intervenciones con reloj el
+      18-ago. Se resuelve aqui, no en tarea aparte."
     - "Las otras cuatro variantes del patron de coordenada fragil (0397 fronteras literales, 0388
       exenciones por linea, 0378 pin literal, 0409 ID de tarea clavado): cada una tiene su via."
     - "Igualar el censo tocando el numero esperado sin explicar la divergencia: descartado

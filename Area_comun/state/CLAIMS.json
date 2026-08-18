@@ -464,6 +464,21 @@
             "updated_at": "2026-08-18T06:26:40Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-ratifica-0394",
+            "expires_at": "2026-08-18T10:11:20Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-ratifica-0394",
+                "Area_comun/state/TASK_INDEX.json#TASK-0394",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0394",
+                "Area_comun/tasks/TASK-0394-el-conjunto-adoptable-excluye-el-arnes-y-las-skills.md"
+            ],
+            "started_at": "2026-08-18T09:51:20Z",
+            "status": "released",
+            "task_id": "TASK-0394",
+            "updated_at": "2026-08-18T09:51:20Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-reg-0418",
             "expires_at": "2026-08-18T04:25:19Z",
             "owner": "Arquitecto",
@@ -477,6 +492,22 @@
             "status": "released",
             "task_id": "TASK-0418",
             "updated_at": "2026-08-18T04:05:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-reg-0419",
+            "expires_at": "2026-08-18T10:16:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-reg-0419",
+                "Area_comun/state/TASK_INDEX.json#TASK-0419",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0419",
+                "Area_comun/tasks/TASK-0419-la-mitad-declarada-del-criterio-adoptable-no-tiene-guardia.md",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md"
+            ],
+            "started_at": "2026-08-18T09:56:50Z",
+            "status": "released",
+            "task_id": "TASK-0419",
+            "updated_at": "2026-08-18T09:56:50Z"
         },
         {
             "claim_id": "CLAIM-20260818-Codex-DONE-0378-0414",
