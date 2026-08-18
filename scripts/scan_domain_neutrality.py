@@ -74,7 +74,7 @@ IDENTITY_LITERAL_EXEMPTIONS: dict[str, dict[str, object]] = {
             582: (_EXEMPT_TERM_1,),
             589: (_EXEMPT_TERM_1,),
             605: (_EXEMPT_TERM_1,),
-            1581: (_EXEMPT_TERM_1,),
+            1591: (_EXEMPT_TERM_1,),
         },
     },
     "scripts/memory/test_memory_db.py": {

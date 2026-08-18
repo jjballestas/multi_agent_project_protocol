@@ -1298,6 +1298,11 @@ function Register-RetryExhausted {
     Write-Log "RETRY_EXHAUSTED attempts=$Attempts signal=watchdog outcome=$Outcome message=$($Message.Name)"
 }
 
+function Test-ExecRetryExhausted {
+    param([int]$ExitCode, [string]$Outcome, [int]$Attempt)
+    return ($Attempt -ge $MaxTransientRetries) -or ($ExitCode -eq -1 -and $Outcome -eq "transient")
+}
+
 function Test-StalledTaskObligations {
     $indexPath = Join-Path $Root "Area_comun\state\TASK_INDEX.json"
     $claimsPath = Join-Path $Root "Area_comun\state\CLAIMS.json"
@@ -1312,7 +1317,12 @@ function Test-StalledTaskObligations {
         $owned = ([string]$task.status -eq "in_progress" -and [string]$task.owner -eq $PeerId) -or
             ([string]$task.status -eq "in_review" -and [string]$task.reviewer -eq $PeerId)
         if (-not $owned) { continue }
-        $activeClaim = @($claims.claims | Where-Object { [string]$_.task_id -eq [string]$task.id -and [string]$_.status -eq "active" }).Count -gt 0
+        $activeClaim = @($claims.claims | Where-Object {
+            if ([string]$_.task_id -ne [string]$task.id -or [string]$_.status -eq "released") { return $false }
+            $expiresAt = [DateTimeOffset]::MinValue
+            $readableExpiry = [DateTimeOffset]::TryParse([string]$_.expires_at, [ref]$expiresAt)
+            return $readableExpiry -and $expiresAt.UtcDateTime -gt [DateTime]::UtcNow
+        }).Count -gt 0
         if ($activeClaim -or $leaseTask -eq [string]$task.id) { continue }
         $taskPath = Join-Path $Root ([string]$task.file)
         if (-not (Test-Path -LiteralPath $taskPath)) { continue }
@@ -1696,7 +1706,7 @@ function Invoke-PeerForMessage {
             $retry = Read-RetryState
             $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
             $attempt = $previous + 1
-            $exhausted = $attempt -ge $MaxTransientRetries
+            $exhausted = Test-ExecRetryExhausted -ExitCode $process.ExitCode -Outcome $outcome -Attempt $attempt
             $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempt; exhausted = $exhausted; outcome = $outcome; updated_at = [DateTime]::UtcNow.ToString("o") }
             Write-RetryState -State $retry
             if ($exhausted) {

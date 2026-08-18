@@ -108,3 +108,13 @@ part of the discriminator.
 - Resurrection is explicit: append a `## REENVIO` explanation. The resulting
   `Name|Length|LastWriteTimeUtc.Ticks` signature change re-admits the message and preserves the
   reason; timestamp-only touching is not the documented path.
+
+## Maker remediation r1 evidence (Codex, 2026-08-18)
+
+- A claim suppresses `stalled_task` only when it is not released, has a readable `expires_at`, and
+  that expiry is still in the future. Missing or unreadable expiry alerts instead of suppressing;
+  this is the conservative direction for a watchdog.
+- `EXEC_EXIT code=-1 outcome=transient` is terminal on its first observation and writes the same
+  durable `retry_exhausted` signal instead of waiting for a retry budget it may never consume.
+- The executable probe covers no claim, a current claim, and an expired claim. It also kills the
+  old status-only claim mutant and the retry-count-only `-1` mutant.

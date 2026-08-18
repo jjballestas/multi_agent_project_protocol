@@ -63,7 +63,7 @@ $IdentityLiteralExemptions = @{
             582 = @("57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
             589 = @("57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
             605 = @("57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
-            1581 = @("57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
+            1591 = @("57de4cf40144bdf7d00010f2f5557a7d642c2b9705309bfade167dd313e2ca93")
         }
     }
     "scripts/memory/test_memory_db.py" = @{

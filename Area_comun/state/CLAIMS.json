@@ -356,6 +356,73 @@
             "updated_at": "2026-08-17T22:51:51Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1",
+            "expires_at": "2026-08-18T04:41:30Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py"
+            ],
+            "started_at": "2026-08-18T00:41:30Z",
+            "status": "active",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T00:41:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-commit",
+            "expires_at": "2026-08-18T05:12:14Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-commit",
+                "Area_comun/state/CLAIMS.slim.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-08-18T01:12:14Z",
+            "status": "active",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T01:12:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-neutrality",
+            "expires_at": "2026-08-18T04:48:30Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-neutrality",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1"
+            ],
+            "started_at": "2026-08-18T00:48:30Z",
+            "status": "active",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T00:48:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Codex-TASK-0408-r1-snapshot",
+            "expires_at": "2026-08-18T05:16:06Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Codex-TASK-0408-r1-snapshot",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/test_exec_lease_harness.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1"
+            ],
+            "started_at": "2026-08-18T01:16:06Z",
+            "status": "active",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-18T01:16:06Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",
