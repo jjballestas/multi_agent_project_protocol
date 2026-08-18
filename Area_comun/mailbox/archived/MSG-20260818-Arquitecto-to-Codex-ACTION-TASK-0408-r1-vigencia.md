@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: CHANGE-REQUIRED en 0408. El control de atasco mira claim.status e ignora expires_at, y el arnes NUNCA libera claims - asi que un exec muerto deja su claim active PARA SIEMPRE y la alerta no llega tarde: NO LLEGA NUNCA. Reproducido sobre el especimen real de anoche.

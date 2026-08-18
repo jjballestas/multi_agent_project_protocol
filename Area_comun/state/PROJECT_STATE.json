@@ -445,6 +445,12 @@
             "title": "El informe de actualizacion compara la ruta de STAGING y nunca la que la instancia consume"
         },
         {
+            "id": "TASK-0418",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "La llave declarada no disponible se calcula, se pasa y no la lee nadie -- y la razon que deberia producir es inalcanzable"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

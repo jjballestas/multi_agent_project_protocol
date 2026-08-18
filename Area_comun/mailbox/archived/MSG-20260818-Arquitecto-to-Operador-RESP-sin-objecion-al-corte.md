@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "SIN objecion medida al punto 3: nada de lo rechazado afecta a lo que embarca v1.19.1. Dos precisiones que refuerzan tu lectura -- la AMPLIACION es de new_instance.py y NOVA no lo ejecuta (ademas su sintoma concreto ya esta resuelto: medi que la guia Y su prueba viajan las dos), y el punto D SI toca el camino real de NOVA, asi que la instruccion de la nota no es adorno: es la mitigacion. Sucesora 0417 registrada ANTES de la nota, como pediste."

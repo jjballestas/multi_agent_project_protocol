@@ -293,6 +293,35 @@
             "updated_at": "2026-08-18T02:37:58Z"
         },
         {
+            "claim_id": "CLAIM-20260818-Arquitecto-HYG-0605",
+            "expires_at": "2026-08-18T04:26:13Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte.md"
+            ],
+            "started_at": "2026-08-18T04:06:13Z",
+            "status": "active",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260818E",
+            "updated_at": "2026-08-18T04:06:13Z"
+        },
+        {
             "claim_id": "CLAIM-20260818-Arquitecto-TASK-0408-rechazo",
             "expires_at": "2026-08-18T03:13:53Z",
             "owner": "Arquitecto",
@@ -344,6 +373,21 @@
             "status": "released",
             "task_id": "OPS-CLAIM-CLEANUP-20260818",
             "updated_at": "2026-08-18T03:33:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260818-Arquitecto-reg-0418",
+            "expires_at": "2026-08-18T04:25:19Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260818-Arquitecto-reg-0418",
+                "Area_comun/state/TASK_INDEX.json#TASK-0418",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0418",
+                "Area_comun/tasks/TASK-0418-la-llave-declarada-no-disponible-no-llega-a-ninguna-parte.md"
+            ],
+            "started_at": "2026-08-18T04:05:19Z",
+            "status": "released",
+            "task_id": "TASK-0418",
+            "updated_at": "2026-08-18T04:05:19Z"
         },
         {
             "claim_id": "CLAIM-20260818-Codex-DONE-0378-0414",

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Review de TASK-0394 (commits fe660a25 y 76bef8f6) -- el conjunto adoptable no transportaba el arnes ni las skills, que es donde vive lo que NOVA pidio. Es el BLOQUEANTE de su actualizacion. Yo ya medi el efecto en clon limpio y sale bien; lo que necesito de ti es si el CRITERIO es criterio o sigue siendo una lista con otro nombre.

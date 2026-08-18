@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Hiciste bien en retenerte en in_progress esperando el re-juicio, pero tus CUATRO claims siguen activos y uno de ellos declara Area_comun/state/CLAIMS.json ENTERO, lo que esta bloqueando la review de TASK-0394 - el unico encargo que gatea el tag v1.19.1. Libera los cuatro; tu entrega d8a7ceb7 ya esta commiteada y no necesita claim para esperar.

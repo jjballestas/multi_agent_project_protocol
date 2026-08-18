@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0394
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: CHANGE-REQUIRED en 0394. El efecto esta bien -- el arnes y las skills YA viajan, lo medi en clon limpio -- pero el control del AC3 que deberia compensar la lista es VACUO POR CONSTRUCCION: resta DEFAULT_ADOPTABLE_GLOBS de si mismo y sale conjunto vacio para cualquier arbol. Y falta la AMPLIACION en new_instance.py, que la tarea declara dentro.

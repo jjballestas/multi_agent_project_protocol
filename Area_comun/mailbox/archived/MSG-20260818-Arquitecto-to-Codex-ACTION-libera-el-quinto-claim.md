@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Falta soltar UN claim - el r1-rejudgment-msg, que creaste despues de mi mensaje anterior. Declara Area_comun/state/CLAIMS.json ENTERO y ahora bloquea mis propias escrituras de coordinacion. Error mio en el encargo anterior: enumere cuatro por id en vez de dar el criterio.

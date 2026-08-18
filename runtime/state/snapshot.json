@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "81f0d0fdb2a3ea2a83fdc8f04228f78d4d421ba5c48afee300103e161d902b80",
+  "canonical_hash": "e31a00952f80c0defb48e179d0fc844a3dd2197b5aca2bba60ff7e09342361a9",
   "integrity": {
-    "canonical_hash": "81f0d0fdb2a3ea2a83fdc8f04228f78d4d421ba5c48afee300103e161d902b80",
+    "canonical_hash": "e31a00952f80c0defb48e179d0fc844a3dd2197b5aca2bba60ff7e09342361a9",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "ed6402cdcd3710ec435e49870f0052f97ec9d58794393b126208d758f6740f92",
-    "signature": "cefbcd9d7ca8356897c6d8a4e1ab219f87d4999a76383db54e43382a40d449cc",
-    "up_to_seq": 9911
+    "prev_hash": "6af4d8372f0219710b9375455a4041fd7e682852f868adb89bc54ff8145b5328",
+    "signature": "359b8f12a087c587a066aa2b37a662798e98fa0ca2eac6c5f00fb56c7123bbb5",
+    "up_to_seq": 9924
   },
   "state": {
     "aggregate_versions": {
@@ -1102,6 +1102,7 @@
       "CLAIM-20260818-Arquitecto-TASK-0408-rechazo": 1,
       "CLAIM-20260818-Arquitecto-cierre-noche": 1,
       "CLAIM-20260818-Arquitecto-limpieza-claims": 1,
+      "CLAIM-20260818-Arquitecto-reg-0418": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -3573,10 +3574,19 @@
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0394": 1,
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0408-veredicto": 1,
       "MSG-20260818-Analista-to-Arquitecto-REVIEW-TASK-0414-r5-veredicto": 1,
+      "MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0394": 1,
+      "MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0394-r1": 1,
+      "MSG-20260818-Arquitecto-to-Codex-ACTION-TASK-0408-r1-vigencia": 1,
       "MSG-20260818-Arquitecto-to-Codex-ACTION-done-flips-0378-0414": 1,
+      "MSG-20260818-Arquitecto-to-Codex-ACTION-libera-claims-0408": 1,
+      "MSG-20260818-Arquitecto-to-Codex-ACTION-libera-el-quinto-claim": 1,
+      "MSG-20260818-Arquitecto-to-Operador-RESP-corte-v1191": 1,
+      "MSG-20260818-Arquitecto-to-Operador-RESP-sin-objecion-al-corte": 1,
       "MSG-20260818-Codex-to-Arquitecto-HANDOFF-TASK-0394": 1,
+      "MSG-20260818-Operador-to-Arquitecto-AVISO-carrera-lease-0394": 1,
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-0394-no-retiene-el-tag": 1,
       "MSG-20260818-Operador-to-Arquitecto-DIRECTIVA-corte-v1191-con-residuo-declarado": 1,
+      "MSG-20260818-Operador-to-Arquitecto-FYI-intel-NOVA-tres-hallazgos": 1,
       "MSG-20260818-Operador-to-Arquitecto-RESP-higiene-censo-aprobado": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CAMPO-NOVA-20260814": 1,
@@ -3720,6 +3730,7 @@
       "OPS-MAILBOX-HYGIENE-20260818B": 2,
       "OPS-MAILBOX-HYGIENE-20260818C": 1,
       "OPS-MAILBOX-HYGIENE-20260818D": 1,
+      "OPS-MAILBOX-HYGIENE-20260818E": 1,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -4084,6 +4095,7 @@
       "TASK-0415": 1,
       "TASK-0416": 1,
       "TASK-0417": 1,
+      "TASK-0418": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4106,7 +4118,7 @@
       "protocol-prune": 74,
       "protocol-state": 1
     },
-    "events_applied": 9240,
+    "events_applied": 9253,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9568,6 +9580,9 @@
       "front:requirement-intake:FB27AF72": 835,
       "front:requirement-intake:FB27AF72:claim-acquire": 834,
       "front:requirement-intake:FB27AF72:claim-release": 836,
+      "g418-acq": 9912,
+      "g418-rel": 9914,
+      "g418-up": 9913,
       "h214-0": 9886,
       "h214-1": 9887,
       "h214-2": 9888,
@@ -9590,6 +9605,16 @@
       "h438-0": 9900,
       "h438-1": 9901,
       "h438-acq": 9899,
+      "hy605-0": 9916,
+      "hy605-1": 9917,
+      "hy605-2": 9918,
+      "hy605-3": 9919,
+      "hy605-4": 9920,
+      "hy605-5": 9921,
+      "hy605-6": 9922,
+      "hy605-7": 9923,
+      "hy605-8": 9924,
+      "hy605-acq": 9915,
       "hyg-0-2026-08-16T12:06:25Z": 9582,
       "hyg-1-2026-08-16T12:06:25Z": 9583,
       "hyg-10-2026-08-16T12:06:25Z": 9592,
@@ -13350,5 +13375,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 9911
+  "up_to_seq": 9924
 }

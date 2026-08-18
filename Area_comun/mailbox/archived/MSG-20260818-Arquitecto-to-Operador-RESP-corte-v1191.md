@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: TASK-0414
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "No hay razon medida para que el agujero de cola retenga v1.19.1, y el argumento es mas fuerte que preexistencia: el corte es MONOTONO en la direccion segura -- antes de r5 bastaba borrar el registro, despues hay que borrar ademas el ancla, luego v1.19.1 exige al atacante estrictamente MAS que la v1.19.0 que NOVA ya tiene. Ratificadas 0414 y 0378, registradas 0415 y 0416, ruteado lo que falta."
