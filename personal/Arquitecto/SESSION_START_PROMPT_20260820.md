@@ -23,6 +23,10 @@ Canal de ordenes y reportes: **mailbox al Operador**, no chat.
    manda sobre este prompt si es mas nuevo.
 2. **Skill `arquitecto-ledger-ops`** antes de tocar el ledger.
 3. `git fetch` + `git merge --ff-only origin/main`.
+3b. **LOS DOS CRONS ESTAN PARADOS** (stand-down del 20-ago 08:02, salida limpia por marcador).
+   **BORRA `.protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.stop` de AMBOS antes de
+   relanzarlos**, o el cron nuevo se apaga en su primera vuelta. El relanzamiento tiene gate de
+   permisos y exige `-CoordinatorId`. Sin crons, nada de lo que dejes en `open/` se procesa.
 4. **ARMA LOS WATCHDOGS. Si no los armas, NO has completado el arranque.** Son CINCO:
    - **Entregas** (`persistent:true`): HEAD local + MSG `*-to-Arquitecto-*`. Self-filter que ignora
      `Co-Authored-By: Claude (Opus|Fable|Sonnet)` -- **LOS TRES modelos** -- mas `Co-Authored-By:
@@ -57,7 +61,8 @@ bloqueado. Lo pendiente son ruteos ordinarios; el detalle vivo esta en el bloque
 
     0342  review_approved   -> falta done-flip (CODEX; yo no tengo implementer)
     0397  review_approved   -> falta done-flip; cerrar anclando en el PAR 83efdca1 + bfeb4789
-    0410  in_review         -> su review lleva ENCOLADA desde el 18-ago
+    0410  in_review         -> su review MURIO por defer_terminal: reemitir con ID nuevo
+                            SOBRE VEHICULO, y desencolarla del retry.json del checker
     0408  in_progress       -> necesita r2 (veredicto CHANGE-REQUIRED consumible)
     0420 / 0421  ready      -> vehiculos de review, ya probados en campo
 
