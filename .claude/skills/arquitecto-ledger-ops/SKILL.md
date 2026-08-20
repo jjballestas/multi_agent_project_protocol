@@ -376,7 +376,10 @@ completar TODOS los intents de la transaccion o sus EFECTOS DE ARCHIVO. Dos sint
   regenerar el snapshot -> events.jsonl adelantado, snapshot rezagado, `validate=1 up_to_seq differs`. Fix:
   lanzar con `run_in_background:true` (detach real del harness); y si quedo desincronizado, re-correr el MISMO
   tx (idempotente) regenera el snapshot al final -> verde. NUNCA regenesis (fondo intocable).
-- **`intake.type` valido del DoR gate = {feature, doc, infra, analysis, triage, extraction}.** `bug` NO pasa
+- **`intake.type` valido del DoR gate = `{feature, fix, infra, doc, research}`** -- verificado en
+  `submit_intent.py:115` y `validate_collaboration_state.py:104` el 2026-08-19, DESPUES de que este mismo
+  skill declarara mal el conjunto y me tumbara una tx entera. NO existen `analysis`, `triage` ni `extraction`,
+  y `bug` tampoco pasa
   (`ERROR: task ... intake.type out of range: bug`) -> para un fix usar `infra`. Al registrar tarea nueva por
   `task_upsert`: crear en `proposed` y luego `task_status proposed->ready` para EJERCER el DoR gate (valida el
   intake); el `type` del `task_obj` debe casar con el `intake.type` del `.md`.
@@ -427,3 +430,37 @@ es esperar la ventana y reintentar el tx (idempotente).
 ASCII? · response_owner? · type valido para el peer? · sin "para"+peer? · claim anidado + scope#self + fragmentos? ·
 .md con status/file? · validate+encoding exit 0? · committeado antes de pedir review? · gateado por exit-code? ·
 si el classifier bloquea, pido permiso -- no rodeo?
+
+## 10. Liberar el claim de un PEER: autorizado y a la vez imposible (2026-08-19, medido)
+
+`submit_intent --actor-id Arquitecto` sobre el release de un claim ajeno responde
+**`ERROR: no active claim for actor covers this intent`**. Son DOS puertas independientes:
+
+    :1030  "only the claim owner or an ORCHESTRATOR can release/block a claim"   -> PASA
+    :865   required_scopes(release) = ["Area_comun/state/CLAIMS.json#<claim_id>"]
+    :934   exige que un claim MIO cubra esa ruta                                  -> FALLA
+    :923-929  el acquire rechaza el solape con el claim activo de otro dueno
+
+Para tener el scope habria que adquirir un claim sobre `CLAIMS.json#<claim_id>`, pero esa fila
+pertenece **al claim que se quiere liberar**. Cerrado por construccion; es TASK-0411 en su forma mas
+pura. **No gastes la ventana intentandolo: rutea la liberacion al DUENO con un ACTION** (>6
+precedentes archivados). Y si el dueno "no puede" porque su exec sale limpio sin efecto, **mira su
+PREFLIGHT antes que a el**: un `validate` que desborda su presupuesto produce exactamente ese cuadro
+(s. 11).
+
+## 11. El coste de un gate es una serie temporal, no una constante (2026-08-19, 4 h perdidas)
+
+El gate de trailers recorre `start_commit..HEAD` lanzando **~3 subprocesos git POR COMMIT**. Con 1863
+commits eso son ~5600 invocaciones y **desborda los 600 s** del preflight de un peon. Cadena de
+efecto medida: preflight exit 124 -> la disciplina del maker le prohibe tocar el ledger sin verde ->
+su exec sale **`code=0` SIN HACER NADA** -> sus claims quedan retenidos -> **tres encargos del checker
+mueren** por `active_external_claim`. Desde fuera parece un peon que no trabaja; es obediencia a una
+regla impagable.
+
+**Diagnostico:** `time python scripts/validate_collaboration_state.py --root .`. Mas de ~2 min es
+sospechoso; cerca del timeout del que lo corre, es el defecto.
+**Remedio gobernado (>20 precedentes en el propio fichero):** avanzar `start_commit` de
+`COMMIT_TRAILERS.json` a un tag reciente verificado + linea de rationale. Medido: 1863 -> 61 commits,
+validate de **>600 s a 2m37s**.
+**PROHIBIDO** autorizar la omision del preflight: un gate tecnico se repara, no se levanta.
+**Fix durable:** batchear el walk en UNA llamada `git log` con formato.

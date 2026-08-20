@@ -272,3 +272,22 @@ checkpoint).** -
 Escribo: ASCII? response_owner? type valido para el peer? sin corte+peer? gateado exit 0? -
 Archivo (solo Arq): mensaje resuelto? claim file-scoped open+archived+#self? message_id seguro? orchestrator? -
 Peer: stale? -> senalo al owner (DECISION-0018), no toco.
+
+## Dos reglas duras que costaron encargos vivos (2026-08-18/19)
+
+**NO archives un `MSG-...-to-<Peer>` que no este en el `seen.json` de su destinatario.** Una pasada
+de higiene archivo un ACTION **vivo y sin consumir**: el peon nunca lo vio y ademas se le borro la
+entrada del `retry.json`. La tarea quedo `in_progress` **sin mensaje, sin reintento y sin claim** --
+un encargo huerfano que NINGUN vigia ve, porque los tres desenlaces que vigilan (entrega, cuelgue,
+`RETRY_EXHAUSTED`) exigen que el encargo haya llegado a ejecutarse. "Consumido" no es una propiedad
+del mensaje ni de su edad: es una propiedad del DESTINATARIO. Antes de meter un encargo en un lote,
+exige UNA de dos pruebas: su clave esta en `.protocol-tmp/<peer>_mailbox_cron/*.seen.json`, o existe
+su artefacto de entrega (commit del maker, handoff, veredicto). Sin ninguna, **no se archiva aunque
+lleve horas**. Si ya se archivo, el destrabe no es des-archivar: es **reemitir con ID NUEVO**.
+
+**ARCHIVAR NO DESENCOLA.** Un `mailbox_archive` gobernado saca el mensaje de `open/` pero deja su
+entrada viva en el `retry.json` del peer, que seguira reintentandolo. Toda muerte o consumo de un
+encargo son **TRES pasos juntos, nunca un subconjunto**: (1) archivar de forma gobernada, (2) borrar
+su entrada del `retry.json` (con respaldo `.bak-<hora>` antes), (3) si murio, reemitir con **ID
+NUEVO** escribiendo dentro la causa y la cuenta de vidas. Ojo con `outcome=defer_terminal`: **agota
+la entrada entera**, no consume un intento, aunque imprima un `attempts=N` que parece margen.

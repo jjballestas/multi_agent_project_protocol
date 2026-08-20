@@ -365,3 +365,43 @@ local puede ir detras de origin). Luego, segun la senal:
 Arma monitor self-filter -> wake con peer -> fetch+ff -> reacciona (GO=ratifico+done-flip / NO-GO=remediacion /
 entrega=REVIEW / done=promuevo siguiente / rr=respondo) -> gate exit-code -> commit+push -> re-arma monitor.
 Complementa: arquitecto-ledger-ops (recetas submit_intent), arquitecto-cron-lifecycle (cron atascado), mailbox-hygiene.
+
+## 1h. Correcciones de campo a los watchdogs (2026-08-19, las tres costaron un diagnostico falso)
+
+**(a) El monitor de entregas murio con `exit 255` sin stderr.** Endurecelo: `set +e` al inicio,
+toda llamada a git tolerante (`cur=$(git rev-parse HEAD 2>/dev/null); [ -z "$cur" ] && cur="$base"`),
+y **sustituye `comm -13 <(...) <(...)` por comparacion en shell puro** (`echo "$seen" | grep -qxF
+"$f"`). La sustitucion de procesos es la sospechosa. Un monitor caido no avisa de que se cayo.
+
+**(b) El patron del codigo de salida DEBE aceptar negativos:** `EXEC_EXIT code=-\?[0-9]\+`. Los
+arneses usan **`code=-1`** para "lo mate yo", y `code=[0-9]*` casa la cadena VACIA -> el alerta sale
+con `code=` a secas y la comparacion contra `"EXEC_EXIT code=0"` dispara siempre.
+
+**(c) La condicion de artefacto se escribe por AUTORIA y se agrega por MENSAJE.** Buscar
+`<peer>-to-Arquitecto` clasifico como MUERTA una entrega perfecta cuyo maker habia ruteado su review
+**directo al checker**. Correcto: `^MSG-.*-<Peer>-to-` sobre todo `open/`, MAS commits suyos de las
+ultimas 2 h, MAS el residuo sin commitear de `Area_comun/state/` y `runtime/state/` -- que es la
+senal mas informativa de las tres, porque distingue "no hizo nada" de "hizo y no publico". Y
+**agrega por MENSAJE, no por peon**: en la misma ventana un peer puede tener un encargo entregado y
+otro muerto, y agregar por peon mezcla los dos destinos.
+
+**Regla general: un vigia nuevo se estrena contra el caso que YA ocurrio**, no contra el que
+imaginas. El v2 se valido re-clasificando correctamente el mismo evento que el v1 fallo.
+
+## 1i. Cuando el checker se muere de hambre: el VEHICULO de review
+
+Sintoma: el checker acumula `RETRY_DEFER ... reason=active_external_claim` y **nunca ejecuta**,
+mientras el maker trabaja legitimamente. Causa: el arnes resuelve las rutas del encargo desde el
+`.md` de **su** `task_id`, asi que una review que cita la tarea auditada hereda su `scope_routes` de
+CODIGO (`scripts/`) y choca con el claim del maker. Y **el defer (7200 s) muere antes que cualquier
+claim de exec largo**, asi que esperar no lo arregla: el 18-ago murieron TRES encargos asi, con 21
+diferimientos y cero ejecuciones.
+
+Remedio operativo, probado en campo: **registra una tarea-vehiculo** (`type: research`, owner del
+checker, intake completo) cuyo `scope_routes` sea **lo que la review ESCRIBE** --
+`Area_comun/artifacts/` -- y rutea la review citando ESE `task_id`. El juicio y su exigencia siguen
+siendo los de la tarea auditada, y se dice dentro del mensaje junto con la causa de la muerte
+anterior y la cuenta de vidas. **No uses `Area_comun/mailbox/open/` como ruta** si algun peer tiene
+claim file-scoped sobre un MSG: un directorio solapa con un fichero suyo. Acreditado por EFECTO --
+el checker arranco con los dos claims del maker ACTIVOS. El fix de RAIZ es TASK-0387; declara el
+vehiculo como rodeo en su `out_of_scope`.
