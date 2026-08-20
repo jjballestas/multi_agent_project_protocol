@@ -1,6 +1,53 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
-## >> BLOQUE TOP 2026-08-18 (~21:58 local, sesion nocturna del canal) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+## >> BLOQUE TOP 2026-08-20 (08:00 local, cierre de la sesion nocturna 18-19) - LO VIGENTE. SUPERSEDE todo lo de abajo.
+
+### SALDO: cascada 0410 RESUELTA en verde, N=6 LANZADO (bloqueado solo por F3.1 del
+### operador), hub estable-ocioso, TODOS los vigias DETENIDOS al cierre (re-armar al arrancar).
+- HEAD hub = d50bb565 = origin. sha8 2E35F26E, epoch 1.14.0 INTACTOS. open/ = 13 (la
+  mayoria consumidos pendientes de archivar por el Arquitecto). Crons de peers VIVOS
+  polleando en vacio, sin locks.
+- SALDO CASCADA (noche 18-19, resuelta 00:30): 0410 in_review (fix RES-3 b7bb0be1 +
+  flip 7071dec9, exec confirmed); 0397 review_approved (OK-CLOSABLE r4 en ULTIMA vida;
+  FALTA done-flip); 0408 CHANGE-REQUIRED r1b + adenda del checker (FALTA rutear r2);
+  REVIEW-0410 FALTA reemitir. Gate de trailers reparado POR COSTE (d093e8e5; validate
+  80 s). Poda: released_ratio despejado; cold_start_tokens NO lo despeja la poda (es
+  backlog vivo: se despeja archivando mensajes consumidos).
+- N=6 LANZADO: GO-N6 a jheredia emitido 19-ago por su Arquitecto; registro canonico mio
+  0b79096 (clave v2 entregada EN PERSONA por el operador; orden anexo 9402/9403/9404/
+  9406/9401/9405; BD de Julian CONGELADA hasta cerrar las seis; friccion residual APARTE
+  de F3.3). Sigue: 0.a de Julian -> Unidad 1 = 9402. **BLOQUEO F3.1 (doc del Arquitecto
+  d50bb565): la politica de medicion de empleados (consentimiento, no punitivo,
+  retencion, disputa) esta PENDIENTE y es DEL OPERADOR -- gatea el arranque real de
+  Julian como unidad medida.**
+- NOVA: 9431/9432/9438 done con alcance declarado; 9442 (F4, ejemplar) + 9443-9448 en
+  cola; 9436 iter1 en vuelo; higiene hecha (open 4). Reporte final de ventana PENDIENTE
+  -> el reloj del espejo v3 (+1 dia) AUN NO ARRANCA.
+- GOs del canal en la sesion: 9432 camino A (ec6b46d), 9438 camino A + ENSANCHAR
+  (3e8c41a; escalera: otro CHANGE-REQUIRED = B sin escalada), registro N6 (0b79096).
+  AVISOs 1-5 en el hub = la cadena que diagnostico y resolvio la cascada (el 5 con el
+  diagnostico del gate por coste que el Arquitecto adopto en d093e8e5).
+- PENDIENTES DEL OPERADOR, en orden: (1) **F3.1 politica de medicion de empleados**
+  (NUEVO, gatea a Julian); (2) ventana de Arquitecto hub para: done-flip 0397, rutear
+  r2 de 0408, reemitir REVIEW-0410, archivar consumidos (despeja cold_start_tokens);
+  (3) DECISION-0119 + alta human_owner; (4) ola 0411 -> 0387 -> 0383 + 2 fixes del
+  AVISO 5 (batchear el walk del gate en UNA llamada git; TASK-0279 pre-commit con
+  aborto); (5) tablero: nota del Arquitecto (su area) + mis mediciones (el archivo de
+  394 tareas NO tiene fechas; estampar archived_at en la poda + backfill) -> tarea
+  cuando se quiera.
+- LECCIONES DE LA SESION (ya en memoria .claude): gate-que-escala-con-la-historia
+  (exit 124 sin salida != cuelgue; faulthandler + aritmetica N x spawn; 1er avance de
+  baseline POR COSTE); defer_terminal AGOTA la entrada (no quema intento); la
+  completitud tiene grados (flip pendiente = retry LEGITIMO, no fantasma); release de
+  claim ajeno autorizado-pero-imposible (gate de scope; expiracion = unico desbloqueo
+  mecanico); watchdog de ausencia: strike por SIN-COMMITS-DEL-ARQUITECTO, no por latido
+  de crons (los crons SIEMPRE laten); el monitor NOVA necesita self-filter de mis
+  propios ficheros Operador-* (auto-eco); NUNCA barrer procesos por antiguedad (leccion
+  del Arquitecto del 19-ago: mato NOVA y a un Asesor).
+- VIGIAS: los tres monitores + watchdog DETENIDOS al cierre por orden del operador.
+  La proxima sesion los RE-ARMA como paso obligatorio (prompt v15).
+
+## BLOQUE 2026-08-18 (~21:58 local, sesion nocturna del canal) [SUPERADO por el TOP del 20-ago 08:00]
 
 ### NOVA: dos escaladas resueltas con GO del operador y pipeline fluyendo. HUB: cascada de
 ### colision medida; plan vigente = AVISO 4 (micro-ACTION); proximo reloj REVIEW-0410 ~23:20.

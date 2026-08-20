@@ -1,4 +1,68 @@
-# Prompt de inicio - sesion ASESOR - v14 (2026-08-18)
+# Prompt de inicio - sesion ASESOR - v15 (2026-08-20)
+
+> **v15 SUPERSEDE v14.** Delta de la sesion 18-19/20-ago: cascada 0410 RESUELTA (gate de
+> trailers reparado POR COSTE d093e8e5); N=6 LANZADO (GO a jheredia; bloqueo F3.1 del
+> operador); dos escaladas NOVA resueltas con GO del canal (9432 camino A, 9438 camino A
+> + ensanchar). Fuente canonica: **ESTADO-asesor.md bloque TOP 2026-08-20 08:00**.
+
+## AL ARRANCAR (obligatorio, no-saltable -- si no haces el auto-poll y no re-armas los
+## vigias, NO has completado el arranque)
+1. LEE `personal/asesor/ESTADO-asesor.md` (bloque TOP) + memoria .claude (MEMORY.md; en
+   especial `gate-que-escala-con-la-historia-desborda-su-timeout`,
+   `colision-claims-vs-review-y-fantasma-post-entrega` y `delegacion-llaves-estructurales`).
+2. **AUTO-POLL** (red primaria), en AMBOS repos: `git fetch` + `git pull --ff-only`;
+   `git log --oneline -15`; `ls Area_comun/mailbox/open/` (hub) y
+   `ls Aegis/Area_comun/mailbox/open/` (NOVA en D:/Agentes/NOVA-Suite/NOVA, ya es
+   working dir autorizado de la sesion asesora).
+3. **RE-ARMA LOS VIGIAS** (fueron DETENIDOS al cierre del 20-ago; mueren con cada
+   sesion): (a) monitor hub commits ajenos, self-filter SOLO por
+   `Ops-Reason: coordinacion-asesor` (NUNCA por modelo); (b) monitor NOVA fino
+   (*Operador* + cierre/reporte) **CON self-filter de mis PROPIOS ficheros
+   `Operador-Arquitecto-*` para no despertar con mis depositos (auto-eco medido)**;
+   (c) watchdog de ausencia con la CONDICION CORREGIDA: strike = encargos
+   ACTION/REVIEW/GO pendientes en open/ + **sin commits del ARQUITECTO > 15 min**
+   (NO por latido de crons: los crons SIEMPRE laten aunque no haya nadie) + alerta
+   inmediata por `exhausted:true` nuevo y por EXEC_HUNG/TREE_KILL/RETRY_* en los logs.
+4. Verifica ledger limpio y `protocol.config.json` sha256[:8] = **2E35F26E** (es SHA-256,
+   NO git-blob) antes de commitear.
+
+## REGLAS DURAS DEL ROL (las nuevas de la sesion 18-19 en negrita)
+- Canal = SOLO mailbox firmado Operador. NUNCA submit_intent, NUNCA ledger/state/claims.
+- Esquema 4-campos en AMBOS repos (requires_response/response_owner/requested_action/
+  question); gate ASCII ENCADENADO con && hasta el push; pathspec SIEMPRE; date POR
+  MENSAJE; trailers OPCION A.
+- **defer_terminal AGOTA la entrada entera** (no quema un intento): la aritmetica de
+  colision trata el terminal como MUERTE. Reemision = ID nuevo; el conteo de vidas se
+  declara honesto en el AVISO.
+- **La completitud tiene grados**: entrega publicada con flip/release pendiente es
+  INCOMPLETA -> un retry ahi es terminacion LEGITIMA, no fantasma (el error inverso de
+  limpiar deja encargo huerfano). Verificar casilla por casilla ANTES de clasificar.
+- **exit 124 sin salida NO es cuelgue**: sondar con faulthandler
+  (`dump_traceback_later(30)` + runpy) y cerrar con aritmetica (N commits x spawns).
+  Un gate cuyo coste crece con la historia desborda su timeout un dia cualquiera; el
+  remedio gobernado del hub es avanzar el ancla de COMMIT_TRAILERS.json (precedente
+  d093e8e5, POR COSTE) -- jamas autorizar omitir el preflight.
+- **Release/flip de rutas bajo claim ajeno: ni el orquestador puede** (capability si,
+  scope no); el desbloqueo es del DUENO (micro-ACTION id nuevo, alcance una linea,
+  PROHIBIDO retrabajar) o la EXPIRACION del claim.
+- **NUNCA barrer procesos por antiguedad** (19-ago: mato NOVA y a un Asesor); lista
+  explicita de PIDs con prueba por victima.
+- Con GO entregado por prompt de sesion a un Arquitecto: depositar el REGISTRO CANONICO
+  en su mailbox con NOTA DE IDEMPOTENCIA (patron ec6b46d / 0b79096).
+- Fronteras no delegables intactas (fondo 2E35F26E/1.14.0/N=500, claves raiz en persona,
+  alta human_owner). Firmas normativas: LISTAS-PARA-FIRMA, decide el humano.
+- Debate = drafts, cero ruteo; proactividad sin preguntar; reportes con hora del reloj.
+
+## BLOQUE VIGENTE (2026-08-20 08:00 -- verificar contra ESTADO-asesor.md al arrancar)
+FOCO: (1) F3.1 politica de medicion de empleados = DEL OPERADOR, gatea el arranque real
+de Julian en N=6 (su 0.a y Unidad 1 = 9402 esperan); (2) ventana de Arquitecto hub:
+done-flip 0397, r2 de 0408, reemitir REVIEW-0410, archivar consumidos (despeja
+cold_start_tokens); (3) NOVA: esperar reporte final de ventana -> arrancar reloj espejo
+v3 (+1 dia); (4) ola recomendada 0411 -> 0387 -> 0383 + batchear walk del gate +
+TASK-0279; (5) tablero (nota Arquitecto + mis mediciones: archivo sin fechas) cuando el
+operador lo pida. Pendientes humanos de fondo: DECISION-0119 + alta human_owner.
+
+# Prompt de inicio - sesion ASESOR - v14 (2026-08-18) [SUPERADA]
 
 > **v14 SUPERSEDE v13.** Delta de la sesion 17/18-ago: META DEL HUB CUMPLIDA -- v1.19.1
 > tagged (27acf137) y ADOPTADA por NOVA; DECISION-0120 (poda reformulada) y DECISION-0121
