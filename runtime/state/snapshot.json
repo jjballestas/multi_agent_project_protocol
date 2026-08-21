@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "6e6c79f0faf3c4d210a94a40950a5e82d39b51ae3274f5cfbf4af75ec235a3e2",
+  "canonical_hash": "1858268c7264bb4d19b03d578de60bb83a83e993e438c4c69a3c379958b8211f",
   "integrity": {
-    "canonical_hash": "6e6c79f0faf3c4d210a94a40950a5e82d39b51ae3274f5cfbf4af75ec235a3e2",
+    "canonical_hash": "1858268c7264bb4d19b03d578de60bb83a83e993e438c4c69a3c379958b8211f",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "94b94e9bf0f45d457a5c98c6254494859596bf8e4d5b7ccfde3108d2b1be5ddc",
-    "signature": "8825286906741283d14e17626b435b9c200a4b2bfd27fafc2a0732bd1430b364",
-    "up_to_seq": 10084
+    "prev_hash": "9963a92dcca0423b8c50a5fe0d4ae4d504339d33f896eb02999384573b37fdd0",
+    "signature": "ace866732028ff23dbfcae0013a18322104776ad93a969e72bfe82064fe6ef56",
+    "up_to_seq": 10092
   },
   "state": {
     "aggregate_versions": {
@@ -1134,6 +1134,7 @@
       "CLAIM-20260821-Arquitecto-nova-defectos-214345": 1,
       "CLAIM-20260821-Arquitecto-promo-205502": 1,
       "CLAIM-20260821-Arquitecto-veh422-205131": 1,
+      "CLAIM-20260822-Arquitecto-nova4-220109": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -4192,6 +4193,9 @@
       "TASK-0422": 3,
       "TASK-0423": 3,
       "TASK-0424": 2,
+      "TASK-0425": 3,
+      "TASK-0426": 2,
+      "TASK-0427": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -4214,7 +4218,7 @@
       "protocol-prune": 77,
       "protocol-state": 1
     },
-    "events_applied": 9413,
+    "events_applied": 9421,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -13276,6 +13280,14 @@
       "manual:hub:TASK-1208-inreview-flip:response-claim": 4502,
       "manual:hub:TASK-1208-inreview-flip:response-release": 4503,
       "mbhyg-20260707-1204window-release-standalone": 4391,
+      "nova4-acq-220109": 10085,
+      "nova4-rdy1-220109": 10089,
+      "nova4-rdy2-220109": 10090,
+      "nova4-rdy3-220109": 10091,
+      "nova4-rel-220109": 10092,
+      "nova4-ups1-220109": 10086,
+      "nova4-ups2-220109": 10087,
+      "nova4-ups3-220109": 10088,
       "novadef-acq-214345": 10079,
       "novadef-rdy1-214345": 10082,
       "novadef-rdy2-214345": 10083,
@@ -13631,5 +13643,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 10084
+  "up_to_seq": 10092
 }

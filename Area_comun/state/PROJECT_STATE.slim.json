@@ -401,6 +401,24 @@
             "owner": "Codex",
             "status": "ready",
             "title": "El arnes carga al presupuesto del encargo los fallos del PROVEEDOR, y descarta la prueba que los distingue"
+        },
+        {
+            "id": "TASK-0425",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El arnes suelta el lease de un exec que sigue VIVO -- descarta el veredicto del kill que el mismo calcula"
+        },
+        {
+            "id": "TASK-0426",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El vocabulario de inverificabilidad esta declarado y nunca se produce, y su parametro es codigo muerto"
+        },
+        {
+            "id": "TASK-0427",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El defer de la sonda de residuo tira el motivo exacto que el arnes ya calculo"
         }
     ],
     "next_actions": [

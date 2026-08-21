@@ -954,6 +954,36 @@
             "type": "implementation"
         },
         {
+            "created": "2026-08-22",
+            "file": "Area_comun/tasks/TASK-0425-el-arnes-suelta-el-lease-de-un-exec-que-sigue-vivo.md",
+            "id": "TASK-0425",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El arnes suelta el lease de un exec que sigue VIVO -- descarta el veredicto del kill que el mismo calcula",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-22",
+            "file": "Area_comun/tasks/TASK-0426-vocabulario-de-inverificabilidad-declarado-y-nunca-producido.md",
+            "id": "TASK-0426",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El vocabulario de inverificabilidad esta declarado y nunca se produce, y su parametro es codigo muerto",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-22",
+            "file": "Area_comun/tasks/TASK-0427-el-defer-tira-el-motivo-que-el-arnes-ya-calculo.md",
+            "id": "TASK-0427",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El defer de la sonda de residuo tira el motivo exacto que el arnes ya calculo",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

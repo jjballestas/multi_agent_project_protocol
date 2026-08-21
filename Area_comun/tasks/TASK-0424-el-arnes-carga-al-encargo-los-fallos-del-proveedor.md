@@ -42,6 +42,12 @@ intake:
       esta tarea, con el colateral declarado: un exec que SI escribio en el ledger y murio por el
       techo antes de imprimir su OUTCOME pierde los dos intentos que tenia para aterrizar lo que
       dejo a medias."
+    - "AC6: cuando un encargo SI se agota, su salida de la cola deja de ser invisible. Hoy
+      RETRY_EXHAUSTED lo saca del reintento y el fichero SIGUE en Area_comun/mailbox/open/ con el
+      mismo aspecto que uno pendiente: la instancia NOVA tuvo un GO dos dias asi antes de que
+      alguien lo notara, y tuvo que reponer el contador a mano para reanudar sin arriesgar la cola.
+      Acreditar que un encargo agotado es distinguible de uno pendiente leyendo solo lo que el
+      arnes deja escrito, sin abrir runs/*.err.log."
   verification_cmd:
     - "python scripts/validate_collaboration_state.py --root ."
     - "python scripts/scan_encoding.py --root ."
@@ -86,3 +92,12 @@ decidir que un mensaje quedo consumido, o cualquier epilogo ruidoso daria por en
 sin hacer. El arreglo correcto es asimetrico y hay que escribirlo asi: un fallo de proveedor
 **exime del cobro del intento**, y no habilita ninguna via nueva para consumir el mensaje. AC2
 existe para que esa asimetria se acredite y no se pierda en la implementacion.
+
+## Nota anadida el 2026-08-22 -- la consecuencia que lo vuelve caro
+
+El informe completo de NOVA cierra el circulo: el coste no acaba en el intento gastado. Cuando el
+tercer intento se quema, `RETRY_EXHAUSTED` saca el mensaje de la cola **en silencio** y el fichero
+se queda en `open/` **aparentando pendiente**. Su GO-28-9432 estuvo dos dias en ese estado. Es la
+misma forma que nos mordio a nosotros con la review de TASK-0410, y la razon por la que aqui hubo
+que armar un vigia que lee el `retry.json`: porque una muerte por agotamiento **no emite commit ni
+evento**, y desde el buzon un encargo muerto y uno pendiente son identicos.
