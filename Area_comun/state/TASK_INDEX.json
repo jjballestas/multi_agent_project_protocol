@@ -934,6 +934,26 @@
             "type": "research"
         },
         {
+            "created": "2026-08-21",
+            "file": "Area_comun/tasks/TASK-0423-el-enlace-de-firma-exige-la-clave-que-el-registro-retiro.md",
+            "id": "TASK-0423",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El enlace de firma exige la clave que el registro ya retiro -- la rotacion esta implementada a medias",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-21",
+            "file": "Area_comun/tasks/TASK-0424-el-arnes-carga-al-encargo-los-fallos-del-proveedor.md",
+            "id": "TASK-0424",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "El arnes carga al presupuesto del encargo los fallos del PROVEEDOR, y descarta la prueba que los distingue",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -400,6 +400,18 @@
             "owner": "Analista",
             "status": "ready",
             "title": "Vehiculo de review para TASK-0410 -- la anterior murio por defer_terminal, no estaba encolada"
+        },
+        {
+            "id": "TASK-0423",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El enlace de firma exige la clave que el registro ya retiro -- la rotacion esta implementada a medias"
+        },
+        {
+            "id": "TASK-0424",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "El arnes carga al presupuesto del encargo los fallos del PROVEEDOR, y descarta la prueba que los distingue"
         }
     ],
     "view": "task_index.slim"
