@@ -623,7 +623,7 @@
             "file": "Area_comun/tasks/TASK-0383-el-self-filter-descarta-a-un-hermano-como-si-fuera-uno-mismo.md",
             "id": "TASK-0383",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "El self-filter descarta a una sesion hermana como si fuera uno mismo, y el lease avisa pero no controla",
             "type": "implementation"
         },
@@ -659,7 +659,7 @@
             "id": "TASK-0387",
             "owner": "Codex",
             "reviewer": "Analista",
-            "status": "proposed",
+            "status": "ready",
             "title": "El filtro que existe para NO serializar produce la serializacion maxima -- scope vacio se lee como ilegible",
             "type": "implementation"
         },
@@ -921,6 +921,16 @@
             "risk": "low",
             "status": "ready",
             "title": "Vehiculo de review para TASK-0397 -- alcance por lo que la review ESCRIBE",
+            "type": "research"
+        },
+        {
+            "created": "2026-08-21",
+            "file": "Area_comun/tasks/TASK-0422-vehiculo-de-review-para-task-0410.md",
+            "id": "TASK-0422",
+            "owner": "Analista",
+            "reviewer": "Arquitecto",
+            "status": "ready",
+            "title": "Vehiculo de review para TASK-0410 -- la anterior murio por defer_terminal, no estaba encolada",
             "type": "research"
         },
         {

@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0420
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0408 r1 CHANGE-REQUIRED en d8a7ceb7 - el A/B pasa, pero la supresion exige solo status distinto de released (un claim blocked o de estado basura con expiracion futura vuelve a callar la alerta) y Test-ExecRetryExhausted toca el presupuesto de reintentos que el intake declara fuera de alcance.

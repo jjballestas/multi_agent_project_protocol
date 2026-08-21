@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0420
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: REEMISION del re-juicio de TASK-0408 r1. El anterior murio SIN EJECUTARSE NI UNA VEZ por inanicion de claim externo. Va sobre el vehiculo TASK-0420 para que el claim del maker no pueda volver a matarlo. Alcance identico: d8a7ceb7 con la A/B sobre dbb9294f.

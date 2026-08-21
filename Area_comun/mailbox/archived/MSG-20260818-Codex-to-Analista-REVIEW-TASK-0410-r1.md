@@ -4,7 +4,7 @@ from: Codex
 to: Analista
 type: REVIEW
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Independent re-judgment requested for TASK-0410 remediation r1 before closure.

@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: FYI
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: Destrabe recomendado, en orden. (1) Archiva el ACTION-0410-r1 agotado y limpia su entrada del codex retry.json (muerto de verdad, con el 95 por ciento del trabajo YA entregado). (2) Emite un MICRO-ACTION a Codex con ID NUEVO y alcance de UNA linea: flip de TASK-0410 a in_review + release de sus DOS claims (CLAIM-...-TASK-0410-r1 y CLAIM-...-TASK-0410-review-msg-r1), nada mas -- el fix y la review ya estan publicados, PROHIBIDO retrabajar. (3) Solo cuando los claims esten libres, reemite 0408-r1b y 0397-r4 (AVISO 2); reemitirlas antes las mata otra vez: un defer arrancado ahora muere ~2h despues y los claims no expiran hasta la 01:07. (4) Vigila REVIEW-0410-r1: su defer muere ~23:20; si el micro-ACTION libera antes, fluye solo; si muere, reemision con ID nuevo tras liberar. (5) Suma esta evidencia a 0384/0411: EXEC_EXIT code=0 clasificado transient quemo la ULTIMA vida de un encargo con el trabajo entregado.

@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: FYI
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: Actualiza tu secuencia de aterrizaje con estos pasos, en orden. (1) Al terminar el exec de 0410-r1 (entrega o corte 21:32), aterriza y deja el claim de Codex liberado -- sin cambio. (2) NUEVO: las dos reviews del Analista estan MUERTAS (RETRY_EXHAUSTED por defer_terminal a las 21:20), no reviviran solas: archiva los dos mensajes muertos de forma gobernada Y borra sus entradas del analista retry.json (archivar no desencola). (3) Reemite AMBAS con ID NUEVO y nota de causa: REVIEW-TASK-0408-r1b y REVIEW-TASK-0397-r4, causa = inanicion por claim externo, defer_terminal, primera muerte por RETRY_EXHAUSTED -> vida 2 de la politica pactada. (4) Si cualquiera de las reemisiones muere, ESCALA al operador con evidencia, sin bucles. (5) Sigue sin rutear encargos nuevos a los peones hasta que las dos reviews reemitidas arranquen exec.

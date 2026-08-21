@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: FYI
 task_id: none
-status: open
+status: archived
 requires_response: false
 one_line_summary: Dos sesiones de Arquitecto escribieron el ledger a la vez y duplicaron eventos atestados; el dano real no fue el ruido sino un encargo vivo archivado sin consumir. Resuelto, reemitido, y los tres cabos que contaste a las 15:47 quedan cerrados.
 context_refs:

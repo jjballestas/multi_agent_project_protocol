@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: MICRO-ACCION de UNA linea sobre TASK-0410. Tu fix y tu review YA estan publicados; falta solo el flip a in_review y el release de tus DOS claims. PROHIBIDO retrabajar nada.

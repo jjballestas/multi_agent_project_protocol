@@ -40,6 +40,113 @@
             "updated_at": "2026-08-18T23:08:11Z"
         },
         {
+            "claim_id": "CLAIM-20260821-Arquitecto-hygA-204245",
+            "expires_at": "2026-08-21T21:22:45Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260821-Arquitecto-hygA-204245",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0397-r4.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0397-r4.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0408-r1b.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Analista-REVIEW-TASK-0408-r1b.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Codex-MICRO-TASK-0410-flip-y-release.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Codex-MICRO-TASK-0410-flip-y-release.md"
+            ],
+            "started_at": "2026-08-21T20:42:45Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260821",
+            "updated_at": "2026-08-21T20:42:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260821-Arquitecto-hygB-204245",
+            "expires_at": "2026-08-21T21:22:45Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260821-Arquitecto-hygB-204245",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-FYI-dual-sesion-y-tres-cabos.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-FYI-dual-sesion-y-tres-cabos.md",
+                "Area_comun/mailbox/open/MSG-20260818-Arquitecto-to-Operador-RESP-veredicto-0410-y-el-198-retirado.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Arquitecto-to-Operador-RESP-veredicto-0410-y-el-198-retirado.md",
+                "Area_comun/mailbox/open/MSG-20260819-Analista-to-Arquitecto-REVIEW-TASK-0397-r4-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260819-Analista-to-Arquitecto-REVIEW-TASK-0397-r4-veredicto.md"
+            ],
+            "started_at": "2026-08-21T20:42:45Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260821",
+            "updated_at": "2026-08-21T20:42:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260821-Arquitecto-hygC-204245",
+            "expires_at": "2026-08-21T21:22:45Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260821-Arquitecto-hygC-204245",
+                "Area_comun/mailbox/open/MSG-20260819-Analista-to-Arquitecto-REVIEW-TASK-0408-r1-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260819-Analista-to-Arquitecto-REVIEW-TASK-0408-r1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-0408-0397-muertas-reemision.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-0408-0397-muertas-reemision.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-0410-destrabe-micro-accion.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-0410-destrabe-micro-accion.md"
+            ],
+            "started_at": "2026-08-21T20:42:45Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260821",
+            "updated_at": "2026-08-21T20:42:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260821-Arquitecto-hygD-204245",
+            "expires_at": "2026-08-21T21:22:45Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260821-Arquitecto-hygD-204245",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-0410-flip-pendiente-retry-legitimo.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-0410-flip-pendiente-retry-legitimo.md",
+                "Area_comun/mailbox/open/MSG-20260818-Operador-to-Arquitecto-AVISO-colision-0410-claims-vs-reviews.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Operador-to-Arquitecto-AVISO-colision-0410-claims-vs-reviews.md",
+                "Area_comun/mailbox/open/MSG-20260819-Operador-to-Arquitecto-AVISO-5-validate-desbordo-su-presupuesto.md",
+                "Area_comun/mailbox/archived/MSG-20260819-Operador-to-Arquitecto-AVISO-5-validate-desbordo-su-presupuesto.md"
+            ],
+            "started_at": "2026-08-21T20:42:45Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260821",
+            "updated_at": "2026-08-21T20:42:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260821-Arquitecto-promo-205502",
+            "expires_at": "2026-08-21T21:40:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260821-Arquitecto-promo-205502",
+                "Area_comun/state/TASK_INDEX.json#TASK-0387",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0387",
+                "Area_comun/tasks/TASK-0387-el-filtro-que-evita-serializar-produce-la-serializacion-maxima.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0383",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0383",
+                "Area_comun/tasks/TASK-0383-el-self-filter-descarta-a-un-hermano-como-si-fuera-uno-mismo.md"
+            ],
+            "started_at": "2026-08-21T20:55:02Z",
+            "status": "released",
+            "task_id": "TASK-0387",
+            "updated_at": "2026-08-21T20:55:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260821-Arquitecto-veh422-205131",
+            "expires_at": "2026-08-21T21:36:31Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260821-Arquitecto-veh422-205131",
+                "Area_comun/state/TASK_INDEX.json#TASK-0422",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0422",
+                "Area_comun/tasks/TASK-0422-vehiculo-de-review-para-task-0410.md",
+                "Area_comun/mailbox/open/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0410-r1.md",
+                "Area_comun/mailbox/archived/MSG-20260818-Codex-to-Analista-REVIEW-TASK-0410-r1.md"
+            ],
+            "started_at": "2026-08-21T20:51:31Z",
+            "status": "released",
+            "task_id": "TASK-0422",
+            "updated_at": "2026-08-21T20:51:31Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0421
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "AC4 de TASK-0397 PASA en bfeb4789: OK-CLOSABLE. El censo lo deriva la corrida que gatea (5 perturbaciones de semilla), re-deriva 77/357/12 con tres instrumentos, y el control historico no emite la linea. Correccion de hechos: 96af63c6 anadio CERO contratos; el 75/351 de 83efdca1 ya era falso en su propio commit."

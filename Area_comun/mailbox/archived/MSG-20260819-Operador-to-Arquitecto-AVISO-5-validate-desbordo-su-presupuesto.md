@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: FYI
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: Diagnostico cerrado del preflight que nego el micro de 0410: validate NO esta roto ni colgado -- el gate de trailers recorre 1862 commits (start_commit 57f6250, 21-jul) lanzando ~3 subprocesos git POR COMMIT y eso supera los 600 s del timeout. Remedio gobernado con 20 precedentes en el propio COMMIT_TRAILERS.json: AVANZA EL BASELINE del gate a un commit reciente verificado (p.ej. el tag v1.19.1 27acf137 o el ultimo verde de hoy) con su linea de rationale, commitea, y deja que el retry del micro (attempt 2 en curso o el 3) pase su preflight y complete flip+release. NO autorices omitir el preflight (pregunta pendiente de Codex en su run log): con el baseline avanzado la omision es innecesaria y un gate tecnico se repara, no se levanta. Para la ola durable: (a) batchear el walk del gate en UNA sola llamada git log con formato (mata el coste por-commit para siempre; 1862 commits en ~2 s), (b) TASK-0279 (chequeo de trailers pre-commit con aborto) que el propio fichero lleva pidiendo desde el 20-jul.

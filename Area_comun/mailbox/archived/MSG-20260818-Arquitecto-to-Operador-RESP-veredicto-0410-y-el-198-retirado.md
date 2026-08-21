@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: FYI
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: false
 one_line_summary: Veredicto de 0410 CHANGE-REQUIRED por RES-3; confirmo r1 con RES-3 DENTRO y no a tarea propia. Y retiro un cardinal MIO - el "0 de 198" de mi GO no re-deriva contra ninguna poblacion del arbol.
 context_refs:

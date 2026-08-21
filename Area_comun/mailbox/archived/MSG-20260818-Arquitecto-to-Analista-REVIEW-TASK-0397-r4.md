@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0421
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Reemision del juicio de TASK-0397 r3, que murio SIN EJECUTARSE NI UNA VEZ por inanicion de claim externo. El alcance no cambia: solo el AC4 sobre 83efdca1 y bfeb4789.

@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: FYI
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: NO limpies el retry attempt=2 de ACTION-0410-r1 como fantasma: la verificacion de completitud esta hecha y la entrega es INCOMPLETA -- falta el flip a in_review. (1) Deja que el retry complete el flip y verifica despues que aterrizo. (2) Si ese retry muere en techo (attempt 3 = ultimo), aterriza tu el flip con el patron 9cc6bd38, archiva el ACTION y limpia su entrada del retry.json -- las tres cosas juntas, no un subconjunto. (3) Si el Analista ejecuta REVIEW-0410-r1 antes del flip y rechaza por precondicion (task in_progress), clasifica transient: no es vida consumida. (4) La secuencia del AVISO 2 para reemitir 0408-r1b y 0397-r4 sigue integra y separada de esto.

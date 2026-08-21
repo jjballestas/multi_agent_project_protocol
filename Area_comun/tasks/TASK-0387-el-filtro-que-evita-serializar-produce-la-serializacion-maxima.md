@@ -1,7 +1,7 @@
 ---
 id: TASK-0387
 title: El filtro que existe para NO serializar produce la serializacion maxima -- scope vacio se lee como ilegible y bloquea todo
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0387-el-filtro-que-evita-serializar-produce-la-serializacion-maxima.md

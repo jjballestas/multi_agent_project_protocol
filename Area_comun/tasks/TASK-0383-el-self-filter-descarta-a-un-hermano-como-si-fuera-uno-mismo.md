@@ -1,7 +1,7 @@
 ---
 id: TASK-0383
 title: El self-filter descarta a una sesion hermana como si fuera uno mismo, y el lease avisa pero no controla
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0383-el-self-filter-descarta-a-un-hermano-como-si-fuera-uno-mismo.md

@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: FYI
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: Al terminar el exec vivo de 0410-r1 (entrega o corte en techo), la PRIMERA operacion de tu ventana es dejar el claim de Codex liberado. Si entrega, verifica que la liberacion vino en el mismo paso de coordinacion; si corte en techo, aterriza el residuo local con checkpoint-commit (patron 9cc6bd38) y libera el claim ANTES de cualquier otro paso. No rutees encargos nuevos a los peones hasta que las dos reviews del Analista arranquen exec. Trata el intento 3 de 0397-r3 como ventana protegida: su proxima muerte es RETRY_EXHAUSTED.
