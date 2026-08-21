@@ -1300,7 +1300,7 @@ function Register-RetryExhausted {
 
 function Test-ExecRetryExhausted {
     param([int]$ExitCode, [string]$Outcome, [int]$Attempt)
-    return ($Attempt -ge $MaxTransientRetries) -or ($ExitCode -eq -1 -and $Outcome -eq "transient")
+    return ($Attempt -ge $MaxTransientRetries)
 }
 
 function Test-StalledTaskObligations {
@@ -1318,7 +1318,7 @@ function Test-StalledTaskObligations {
             ([string]$task.status -eq "in_review" -and [string]$task.reviewer -eq $PeerId)
         if (-not $owned) { continue }
         $activeClaim = @($claims.claims | Where-Object {
-            if ([string]$_.task_id -ne [string]$task.id -or [string]$_.status -eq "released") { return $false }
+            if ([string]$_.task_id -ne [string]$task.id -or [string]$_.status -ne "active") { return $false }
             $expiresAt = [DateTimeOffset]::MinValue
             $readableExpiry = [DateTimeOffset]::TryParse([string]$_.expires_at, [ref]$expiresAt)
             return $readableExpiry -and $expiresAt.UtcDateTime -gt [DateTime]::UtcNow

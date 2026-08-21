@@ -1544,8 +1544,8 @@ def obligation_alert_probe(source: Path, claim_population: str = "none") -> dict
         (state / "TASK_INDEX.json").write_text(json.dumps({"tasks": [{"id": "TASK-test", "status": "in_progress", "owner": IMPLEMENTER, "reviewer": REVIEWER, "file": "Area_comun/tasks/TASK-test.md"}]}), encoding="ascii")
         claims = []
         if claim_population != "none":
-            expiry = "2999-01-01T00:00:00Z" if claim_population == "current" else "2000-01-01T00:00:00Z"
-            claims.append({"task_id": "TASK-test", "status": "active", "expires_at": expiry})
+            expiry = "2999-01-01T00:00:00Z" if claim_population in {"current", "non_active"} else "2000-01-01T00:00:00Z"
+            claims.append({"task_id": "TASK-test", "status": "blocked" if claim_population == "non_active" else "active", "expires_at": expiry})
         (state / "CLAIMS.json").write_text(json.dumps({"claims": claims}), encoding="ascii")
         message = root / "MSG-test.md"
         message.write_text("task_id: TASK-test\n", encoding="ascii")
@@ -2124,14 +2124,14 @@ def test_retry_exhaustion_alert_and_stalled_task_threshold_kill_mutant() -> None
     assert source.count(retry_alert_call) == 1
     healthy = obligation_alert_probe(HARNESS_PATH, "none")
     assert healthy["retry_alert_count"] == 1
-    assert healthy["minus_one_exhausted"] is True
+    assert healthy["minus_one_exhausted"] is False
     assert healthy["ordinary_transient_exhausted"] is False
     assert healthy["fresh_stalled_count"] == 0
     assert healthy["old_stalled_count"] == 1
     current = obligation_alert_probe(HARNESS_PATH, "current")
-    assert current["old_stalled_count"] == 0
     expired = obligation_alert_probe(HARNESS_PATH, "expired")
-    assert expired["old_stalled_count"] == 1
+    non_active = obligation_alert_probe(HARNESS_PATH, "non_active")
+    assert (current["old_stalled_count"], expired["old_stalled_count"], non_active["old_stalled_count"]) == (0, 1, 1)
     with make_tempdir("retry-alert-mutant-") as tmp:
         mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
         mutant_path.write_text(source.replace(retry_alert_call, dead_retry_alert_call, 1), encoding="utf-8", newline="\n")
@@ -2145,14 +2145,14 @@ def test_retry_exhaustion_alert_and_stalled_task_threshold_kill_mutant() -> None
         mutant_path.write_text(source.replace(expiry_predicate, status_only_predicate, 1), encoding="utf-8", newline="\n")
         mutant = obligation_alert_probe(mutant_path, "expired")
     assert mutant["old_stalled_count"] == 0
-    minus_one_predicate = 'return ($Attempt -ge $MaxTransientRetries) -or ($ExitCode -eq -1 -and $Outcome -eq "transient")'
-    retry_count_only = 'return ($Attempt -ge $MaxTransientRetries)'
-    assert source.count(minus_one_predicate) == 1
-    with make_tempdir("minus-one-mutant-") as tmp:
-        mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
-        mutant_path.write_text(source.replace(minus_one_predicate, retry_count_only, 1), encoding="utf-8", newline="\n")
-        mutant = obligation_alert_probe(mutant_path, "none")
-    assert mutant["minus_one_exhausted"] is False
+    status_predicate = '[string]$_.status -ne "active"'
+    assert source.count(status_predicate) == 1
+    for mutant_predicate in ('$false', '[string]$_.status -eq "released"'):
+        with make_tempdir("stalled-status-mutant-") as tmp:
+            mutant_path = Path(tmp) / "peer_mailbox_cron.ps1"
+            mutant_path.write_text(source.replace(status_predicate, mutant_predicate, 1), encoding="utf-8", newline="\n")
+            mutant = obligation_alert_probe(mutant_path, "non_active")
+        assert mutant["old_stalled_count"] == 0
 
 
 def test_residue_excludes_foreign_personal_and_caps_diagnostics() -> None:
