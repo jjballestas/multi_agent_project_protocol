@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "1858268c7264bb4d19b03d578de60bb83a83e993e438c4c69a3c379958b8211f",
+  "canonical_hash": "2ef2d8f46ca3eb4d31837237ffc72b7276db0506008cb9d9e11162ea14f9eea5",
   "integrity": {
-    "canonical_hash": "1858268c7264bb4d19b03d578de60bb83a83e993e438c4c69a3c379958b8211f",
+    "canonical_hash": "2ef2d8f46ca3eb4d31837237ffc72b7276db0506008cb9d9e11162ea14f9eea5",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "9963a92dcca0423b8c50a5fe0d4ae4d504339d33f896eb02999384573b37fdd0",
-    "signature": "ace866732028ff23dbfcae0013a18322104776ad93a969e72bfe82064fe6ef56",
-    "up_to_seq": 10092
+    "prev_hash": "d80856205636922188086a7a4cf79c4cd8f02b04e4ecd6a357040333161805d5",
+    "signature": "b3cad0a53b7a5613f003a081e7c3c46c50eed068aa78031dd1df431a3fb8349a",
+    "up_to_seq": 10094
   },
   "state": {
     "aggregate_versions": {
@@ -1134,6 +1134,7 @@
       "CLAIM-20260821-Arquitecto-nova-defectos-214345": 1,
       "CLAIM-20260821-Arquitecto-promo-205502": 1,
       "CLAIM-20260821-Arquitecto-veh422-205131": 1,
+      "CLAIM-20260822-Arquitecto-banco423-230055": 1,
       "CLAIM-20260822-Arquitecto-nova4-220109": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
@@ -4191,7 +4192,7 @@
       "TASK-0420": 3,
       "TASK-0421": 2,
       "TASK-0422": 3,
-      "TASK-0423": 3,
+      "TASK-0423": 4,
       "TASK-0424": 2,
       "TASK-0425": 3,
       "TASK-0426": 2,
@@ -4218,7 +4219,7 @@
       "protocol-prune": 77,
       "protocol-state": 1
     },
-    "events_applied": 9421,
+    "events_applied": 9423,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -7200,6 +7201,8 @@
       "arquitecto:upsert-0156:claim-acquire": 1201,
       "arquitecto:upsert-0156:claim-release": 1203,
       "arquitecto:upsert-0156:ready": 1202,
+      "banco423-acq-230055": 10093,
+      "banco423-rel-230055": 10094,
       "claim-20260712-codex-hub-task9303-doneflip-msg": 4579,
       "claim-release-Codex-TASK-1203-hub-fixloop-response-20260707": 4377,
       "cn-acq": 9858,
@@ -13643,5 +13646,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 10092
+  "up_to_seq": 10094
 }

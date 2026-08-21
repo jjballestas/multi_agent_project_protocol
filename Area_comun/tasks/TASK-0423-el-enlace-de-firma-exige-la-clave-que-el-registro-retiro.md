@@ -92,3 +92,47 @@ NOVA parcheo una linea en su instancia bajo decision propia
 declara como delta local, retirable en cuanto el hub emita el arreglo de raiz. Su calibracion 7/7
 esta reproducida arriba como AC1-AC3 y su trampa metodologica como AC4. **La propuesta se estudia,
 no se adopta a ciegas**: el arreglo del hub se acredita con su propio banco.
+
+## Banco de la instancia NOVA -- entregado el 2026-08-22, y va aqui para que no muera en el buzon
+
+Se lo pedimos y lo mandaron: los CASOS, no el diagnostico. Es material de partida, no un banco
+adoptado: el arreglo del hub se acredita con su propio banco y con su propio checker.
+
+### Lo primero es como se construye, porque ahi estuvo la trampa
+
+`ensure_attested_actor_key_binding` sale por `if not actor_auth_enforce_enabled(config, root):
+return`, y `actor_auth_enforce` **solo** puede venir del override -- `eventlog.py:295-301` lo
+descarta del config a proposito. **Un banco que ponga el enforce en `protocol.config.json` no
+ejercita nada y da TODO en verde.** A NOVA su primera pasada le dio los siete casos verdes y era un
+banco falso.
+
+Las **cuatro** condiciones tienen que darse a la vez:
+
+    1. EVENT_STATE_RUNTIME_CONFIG_PATH apuntando a un override propio del banco
+    2. ese override con event_state.actor_auth_enforce = true
+       (y SOLO actor_auth_enforce / actor_auth_config / event_auth: cualquier otra clave
+        hace que validate lo rechace con "unsupported event_state keys")
+    3. attested_instancing.enabled = true en el config
+    4. el actor con tier "signer" en el agent_registry, o la funcion sale por la rama
+       de no-firmante antes de llegar al enlace
+
+**El canario, y esto es lo exigible (AC4):** antes de creerse ningun verde, comprobar que
+`actor_auth_enforce_enabled(config, root)` devuelve `True` **y** que un caso que debe morder muerde.
+Si los siete salen verdes a la primera, el banco esta roto, no el codigo arreglado.
+
+### Los siete casos
+
+| # | key_id declarado en el override | registro | esperado |
+|---|---|---|---|
+| 1 | `<slug>-hmac:v2` | v1 retired 1009, v2 active | PASA |
+| 2 | `<slug>-hmac:v1` | v1 retired 1009, v2 active | RECHAZA -- la clave retirada sigue prohibida |
+| 3 | `<slug>-hmac:v3` (inexistente) | v1 retired, v2 active | RECHAZA |
+| 4 | `<slug>-hmac:v2` | solo v1 retired, ninguna active | RECHAZA -- falla cerrado |
+| 5 | `<slug>-hmac:v2` | v2 active Y v3 active | RECHAZA -- falla cerrado por ambiguedad |
+| 6 | `<slug>-hmac:v1` | SIN fichero de registro | PASA -- conducta anterior intacta |
+| 7 | `<slug>-hmac:v2` | SIN fichero de registro | RECHAZA -- conducta anterior intacta |
+
+**6 y 7** son los que acreditan que una instancia que NO roto no cambia de conducta; sin ellos el
+arreglo podria estar aflojando la puerta para todo el mundo sin que nadie lo viera. **4 y 5** son la
+parte que no estaba en el defecto original: un registro que no declara exactamente una clave activa
+para el actor tiene que rechazar, no elegir por su cuenta.

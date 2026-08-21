@@ -58,6 +58,21 @@
             "updated_at": "2026-08-21T21:43:45Z"
         },
         {
+            "claim_id": "CLAIM-20260822-Arquitecto-banco423-230055",
+            "expires_at": "2026-08-21T23:40:55Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Arquitecto-banco423-230055",
+                "Area_comun/tasks/TASK-0423-el-enlace-de-firma-exige-la-clave-que-el-registro-retiro.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0423",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0423"
+            ],
+            "started_at": "2026-08-21T23:00:55Z",
+            "status": "released",
+            "task_id": "TASK-0423",
+            "updated_at": "2026-08-21T23:00:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260822-Arquitecto-nova4-220109",
             "expires_at": "2026-08-21T22:56:09Z",
             "owner": "Arquitecto",
