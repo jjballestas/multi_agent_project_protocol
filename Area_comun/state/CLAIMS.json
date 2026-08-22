@@ -196,6 +196,20 @@
             "updated_at": "2026-08-21T23:44:27Z"
         },
         {
+            "claim_id": "CLAIM-20260822-Codex-TASK-0410-r2",
+            "expires_at": "2026-08-22T04:50:10Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Codex-TASK-0410-r2",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py"
+            ],
+            "started_at": "2026-08-22T00:50:10Z",
+            "status": "active",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-22T00:50:10Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

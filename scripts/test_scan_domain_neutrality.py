@@ -661,6 +661,45 @@ class DomainNeutralityCoverageTests(unittest.TestCase):
         self.assertIn(expected, python_result.stdout)
         self.assertIn(expected, powershell_result.stdout)
 
+    def test_identity_exemption_digest_matching_is_ordinal_in_powershell_gate(self) -> None:
+        provider_identity = "Code" + "x"
+        digest = hashlib.sha256(provider_identity.casefold().encode("utf-8")).hexdigest()
+        probe = self.root / "runtime" / "apply.py"
+        probe.parent.mkdir(exist_ok=True)
+        probe.write_text(
+            "\n" * 439 + f'OWNER = "{provider_identity}"\n', encoding="utf-8"
+        )
+
+        production_source = POWERSHELL_SCANNER_PATH.read_text(encoding="utf-8-sig")
+        declaration = f'440 = @(\"{digest}\")'
+        uppercase_declaration = f'440 = @(\"{digest.upper()}\")'
+        uppercase_inventory_source = production_source.replace(
+            declaration, uppercase_declaration, 1
+        )
+        self.assertNotEqual(production_source, uppercase_inventory_source)
+
+        ordinal_clause = """    return @($declaration.Lines[$LineNumber]).Where({
+        [string]::Equals($_, $digest, [System.StringComparison]::Ordinal)
+    }).Count -gt 0"""
+        insensitive_clause = (
+            "    return @($declaration.Lines[$LineNumber]) -contains $digest"
+        )
+        insensitive_source = uppercase_inventory_source.replace(
+            ordinal_clause, insensitive_clause, 1
+        )
+        self.assertNotEqual(uppercase_inventory_source, insensitive_source)
+
+        ordinal_path = self.scratch_root / "scan_domain_neutrality_ordinal_digest.ps1"
+        ordinal_path.write_text(uppercase_inventory_source, encoding="utf-8")
+        insensitive_path = self.scratch_root / "scan_domain_neutrality_insensitive_digest.ps1"
+        insensitive_path.write_text(insensitive_source, encoding="utf-8")
+
+        expected = f"runtime/apply.py:440: {provider_identity}"
+        ordinal_result = self.run_powershell_scanner(ordinal_path)
+        insensitive_result = self.run_powershell_scanner(insensitive_path)
+        self.assertIn(expected, ordinal_result.stdout)
+        self.assertNotIn(expected, insensitive_result.stdout)
+
     def test_moved_exempt_identity_fails_both_gates_with_same_finding(self) -> None:
         moved = self.root / "runtime" / "apply.py"
         moved.parent.mkdir(exist_ok=True)

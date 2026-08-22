@@ -1,5 +1,16 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260822-Codex-TASK-0410-r2",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Codex-TASK-0410-r2",
+                "scripts/scan_domain_neutrality.ps1",
+                "scripts/test_scan_domain_neutrality.py"
+            ],
+            "task_id": "TASK-0410"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

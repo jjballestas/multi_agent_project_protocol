@@ -208,7 +208,7 @@ function Get-RelativePath {
 function Get-ConfiguredIdentityTerms {
     param([object]$Config)
 
-    $terms = New-Object System.Collections.Generic.HashSet[string] ([System.StringComparer]::OrdinalIgnoreCase)
+    $terms = New-Object System.Collections.Generic.HashSet[string] ([System.StringComparer]::Ordinal)
     if ($Config.agent_registry -and $Config.agent_registry.agents) {
         foreach ($agent in @($Config.agent_registry.agents)) {
             $value = ([string]$agent.id).Trim()
