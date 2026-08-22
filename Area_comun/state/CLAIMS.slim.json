@@ -1,20 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260822-Codex-TASK-0408-r2b",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Codex-TASK-0408-r2b",
-                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Codex-TASK-0408-r2",
-                "Area_comun/state/TASK_INDEX.json#TASK-0408",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
-                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                "scripts/test_exec_lease_harness.py"
-            ],
-            "task_id": "TASK-0408"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

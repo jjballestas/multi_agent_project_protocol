@@ -1,7 +1,7 @@
 ---
 id: TASK-0408
 title: Un encargo agotado muere sin dejar rastro donde se mira, y el tablero sigue afirmando que alguien lo trabaja -- todos los gates en verde describiendo trabajo que nadie hace
-status: in_progress
+status: in_review
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md
@@ -118,3 +118,15 @@ part of the discriminator.
   durable `retry_exhausted` signal instead of waiting for a retry budget it may never consume.
 - The executable probe covers no claim, a current claim, and an expired claim. It also kills the
   old status-only claim mutant and the retry-count-only `-1` mutant.
+
+## Maker remediation r2 evidence (Codex, 2026-08-22)
+
+- Implementation anchor `6eb491f5` requires `status == active` plus a readable future expiry
+  before a claim suppresses `stalled_task`. A future-expiring `blocked` claim now alerts.
+- The focused property kills both weakened status predicates: removing the status clause and the
+  former `status != released` condition. It passed two independent runs.
+- `Test-ExecRetryExhausted` again exhausts transient work only at `MaxTransientRetries`; `exit=-1`
+  no longer changes the declared three-attempt retry budget.
+- Collaboration validation, encoding, and Python domain neutrality each passed two runs. The broad
+  `test_exec_lease_harness.py` suite was excluded as directed because it is not a discriminating
+  gate for this remediation.

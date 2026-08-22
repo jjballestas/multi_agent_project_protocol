@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "2ba855387846fa47cec6628d823f75ba43eb32434961b228049b3d75f60ecfb8",
+  "canonical_hash": "a51026b90a4fe6f6e4745cf72fd35211b06a5aae1284d3fb83bea9318ddc68af",
   "integrity": {
-    "canonical_hash": "2ba855387846fa47cec6628d823f75ba43eb32434961b228049b3d75f60ecfb8",
+    "canonical_hash": "a51026b90a4fe6f6e4745cf72fd35211b06a5aae1284d3fb83bea9318ddc68af",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "3025b9d01589d8f383df904d700f8807cd6700a115d397dcac22e4d31deba504",
-    "signature": "54bc5aed15e7dde13dc9c0ec1c18b8baa9cbb1ea91d728ae0b95b5d1937254ed",
-    "up_to_seq": 10103
+    "prev_hash": "cd2d981fc62109bf7eaeded02d8a18ec2f9ef923566f35425ec9d7fa76c4c863",
+    "signature": "bb38dd9a51b25d35608141957998b1acea0f8e3305909dba49d5518168a3ef15",
+    "up_to_seq": 10107
   },
   "state": {
     "aggregate_versions": {
@@ -4177,7 +4177,7 @@
       "TASK-0404": 1,
       "TASK-0405": 1,
       "TASK-0407": 1,
-      "TASK-0408": 30,
+      "TASK-0408": 34,
       "TASK-0409": 16,
       "TASK-0410": 16,
       "TASK-0411": 3,
@@ -4219,7 +4219,7 @@
       "protocol-prune": 77,
       "protocol-state": 1
     },
-    "events_applied": 9432,
+    "events_applied": 9436,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9482,7 +9482,11 @@
       "codex:task0397:remediation1:msgfix-release:2026-08-16T01:35:59Z": 9477,
       "codex:task0397:remediation1:work-release:2026-08-16T01:31:34Z": 9474,
       "codex:task0397:review-approved-to-done:20260821T232831Z": 10099,
+      "codex:task0408:r2:delivery-claim:2026-08-21T23:59:10Z": 10104,
+      "codex:task0408:r2:in-review:2026-08-22T00:01:24Z": 10105,
       "codex:task0408:r2:release-bad:2026-08-21T23:46:28Z": 10103,
+      "codex:task0408:r2:release-delivery:2026-08-22T00:01:24Z": 10107,
+      "codex:task0408:r2:release-main:2026-08-22T00:01:24Z": 10106,
       "codex:task0408:r2b:acquire:2026-08-21T23:44:27Z": 10102,
       "codex:task0408:release-all-active:r1-rejudgment-msg:20260818": 9905,
       "codex:task0408:release-r1-commit:20260818": 9896,
@@ -13655,5 +13659,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 10103
+  "up_to_seq": 10107
 }
