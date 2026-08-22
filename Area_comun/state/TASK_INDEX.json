@@ -274,7 +274,7 @@
             "id": "TASK-0338",
             "owner": "Codex",
             "phase": "P2",
-            "status": "proposed",
+            "status": "ready",
             "title": "Los dos escaneres no comparten la definicion de LINEA a la que atan las coordenadas",
             "type": "implementation"
         },
@@ -824,7 +824,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "low",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas",
             "type": "infra"
         },

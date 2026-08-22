@@ -73,6 +73,24 @@
             "updated_at": "2026-08-21T23:00:55Z"
         },
         {
+            "claim_id": "CLAIM-20260822-Arquitecto-lote-003542",
+            "expires_at": "2026-08-22T01:20:42Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Arquitecto-lote-003542",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0122-la-causa-cruza-la-frontera-o-no-hay-frontera.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0338",
+                "Area_comun/tasks/TASK-0338-troceado-de-lineas-divergente-entre-escaneres.md"
+            ],
+            "started_at": "2026-08-22T00:35:42Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-22T00:35:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260822-Arquitecto-nova4-220109",
             "expires_at": "2026-08-21T22:56:09Z",
             "owner": "Arquitecto",

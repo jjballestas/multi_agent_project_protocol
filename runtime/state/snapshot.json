@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "a51026b90a4fe6f6e4745cf72fd35211b06a5aae1284d3fb83bea9318ddc68af",
+  "canonical_hash": "f6f1a63b73d42acba31603041bcdc8a541188aa7309b9cc4bc1452d930e68516",
   "integrity": {
-    "canonical_hash": "a51026b90a4fe6f6e4745cf72fd35211b06a5aae1284d3fb83bea9318ddc68af",
+    "canonical_hash": "f6f1a63b73d42acba31603041bcdc8a541188aa7309b9cc4bc1452d930e68516",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "cd2d981fc62109bf7eaeded02d8a18ec2f9ef923566f35425ec9d7fa76c4c863",
-    "signature": "bb38dd9a51b25d35608141957998b1acea0f8e3305909dba49d5518168a3ef15",
-    "up_to_seq": 10107
+    "prev_hash": "ff632e00180ef128f1e93e7f1e1e02a54beb8cf1e2bd0fc37d556174d829214e",
+    "signature": "463f8d4467052a5a403491fef35a8200217981ce4d7043b8fd5865ce1c6b845e",
+    "up_to_seq": 10112
   },
   "state": {
     "aggregate_versions": {
@@ -1135,6 +1135,7 @@
       "CLAIM-20260821-Arquitecto-promo-205502": 1,
       "CLAIM-20260821-Arquitecto-veh422-205131": 1,
       "CLAIM-20260822-Arquitecto-banco423-230055": 1,
+      "CLAIM-20260822-Arquitecto-lote-003542": 1,
       "CLAIM-20260822-Arquitecto-nova4-220109": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
@@ -1629,6 +1630,7 @@
       "DECISION-0118": 1,
       "DECISION-0120": 2,
       "DECISION-0121": 2,
+      "DECISION-0122": 1,
       "GOAL-VISION-NOVA-001": 8,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE": 5,
@@ -4108,7 +4110,7 @@
       "TASK-0335": 33,
       "TASK-0336": 62,
       "TASK-0337": 60,
-      "TASK-0338": 2,
+      "TASK-0338": 3,
       "TASK-0339": 1,
       "TASK-0340": 29,
       "TASK-0341": 2,
@@ -4179,7 +4181,7 @@
       "TASK-0407": 1,
       "TASK-0408": 34,
       "TASK-0409": 16,
-      "TASK-0410": 16,
+      "TASK-0410": 18,
       "TASK-0411": 3,
       "TASK-0412": 3,
       "TASK-0413": 2,
@@ -4219,7 +4221,7 @@
       "protocol-prune": 77,
       "protocol-state": 1
     },
-    "events_applied": 9436,
+    "events_applied": 9441,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -13291,6 +13293,11 @@
       "lim-rel-0": 9908,
       "lim-rel-1": 9909,
       "lim-rel-self": 9910,
+      "lote-338-003542": 10111,
+      "lote-410-003542": 10110,
+      "lote-acq-003542": 10108,
+      "lote-dec-003542": 10109,
+      "lote-rel-003542": 10112,
       "manual:hub:TASK-1208-inreview-flip:memory-final-acquire": 4504,
       "manual:hub:TASK-1208-inreview-flip:memory-final-release": 4505,
       "manual:hub:TASK-1208-inreview-flip:response-claim": 4502,
@@ -13659,5 +13666,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 10107
+  "up_to_seq": 10112
 }

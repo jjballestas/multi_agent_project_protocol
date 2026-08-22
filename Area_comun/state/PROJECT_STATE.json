@@ -69,7 +69,7 @@
         {
             "id": "TASK-0338",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Los dos escaneres no comparten la definicion de LINEA a la que atan las coordenadas"
         },
         {
@@ -387,7 +387,7 @@
         {
             "id": "TASK-0410",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas"
         },
         {
@@ -619,7 +619,8 @@
         "DECISION-0117",
         "DECISION-0118",
         "DECISION-0120",
-        "DECISION-0121"
+        "DECISION-0121",
+        "DECISION-0122"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

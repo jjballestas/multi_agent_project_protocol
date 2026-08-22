@@ -1,7 +1,7 @@
 ---
 id: TASK-0338
 title: Los dos escaneres no comparten la definicion de LINEA a la que atan las coordenadas
-status: proposed
+status: ready
 owner: Codex
 type: implementation
 file: Area_comun/tasks/TASK-0338-troceado-de-lineas-divergente-entre-escaneres.md
@@ -68,3 +68,32 @@ cara Python.
 **Pero es el unico caso encontrado en que el gemelo falla ABIERTO**, y una instancia solo-Windows
 que corra unicamente el `.ps1` -- exactamente lo que `new_instance.py` copia -- queda ciega ahi sin
 que nada se lo diga. Ese consumidor es el que justifica la tarea, no el hub.
+
+## Segunda medicion independiente -- 2026-08-22, veredicto r1 de TASK-0410
+
+Este defecto se ha medido **dos veces, con catorce dias de diferencia, por el mismo checker y en dos
+tareas distintas**, mientras esta tarea seguia en `proposed`. La primera fue el re-juicio r2 de
+TASK-0329 (8-ago), que la origino. La segunda es el veredicto r1 de TASK-0410 (22-ago), y aporta
+evidencia nueva que vale la pena tener aqui:
+
+**La sonda ya no es sintetica: es sobre el fichero REAL del inventario.**
+`scripts/harness/peer_mailbox_cron.ps1`, exento en la linea 555, con **un** U+000C insertado antes
+de la identidad:
+
+    numeracion:  PY splitlines -> 556      PS Get-Content -> 555
+
+    python scan_domain_neutrality.py --root probeLF
+      scripts/harness/peer_mailbox_cron.ps1:556: Codex        PY_EXIT=1
+    pwsh -File scan_domain_neutrality.ps1 -Root probeLF
+                                                              PS_EXIT=0
+
+**Misma entrada, veredictos OPUESTOS, y PowerShell es el permisivo:** exime en silencio una fuga de
+identidad REAL. Cinco separadores lo reproducen (VT, FF, FS, NEL, LS) y la suite completa sale
+exit 0 con el escape vivo. Coordenadas exactas del arbol de hoy:
+
+    scan_domain_neutrality.py:267    text.splitlines()
+    scan_domain_neutrality.ps1:329   Get-Content -Encoding UTF8
+
+**Por que no se absorbio en TASK-0410 y vive aqui:** la r1 de 0410 cerro los dos ejes que le tocaban
+-- la clave de RUTA y el DIGEST -- y su censo cuadra 88 == 88. El eje de la COORDENADA es heredado y
+no atribuible a esa remediacion. El cierre de TASK-0410 nombra este residuo y apunta aqui.
