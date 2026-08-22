@@ -205,9 +205,26 @@
                 "scripts/test_scan_domain_neutrality.py"
             ],
             "started_at": "2026-08-22T00:50:10Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0410",
             "updated_at": "2026-08-22T00:50:10Z"
+        },
+        {
+            "claim_id": "CLAIM-20260822-Codex-TASK-0410-r2-delivery",
+            "expires_at": "2026-08-22T02:22:39Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Codex-TASK-0410-r2-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260822-Codex-TASK-0410-r2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/mailbox/open/MSG-20260822-Codex-to-Arquitecto-HANDOFF-TASK-0410-r2.md"
+            ],
+            "started_at": "2026-08-22T01:22:39Z",
+            "status": "released",
+            "task_id": "TASK-0410",
+            "updated_at": "2026-08-22T01:22:39Z"
         },
         {
             "claim_id": "CLAIM-arq-tanda-20260811",

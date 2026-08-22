@@ -1,12 +1,12 @@
 {
-  "canonical_hash": "0551dbb72bb86d86e826a42bf73633cadfaa453ef300e73709056040b260b965",
+  "canonical_hash": "13aeb2d07d2aeb0af65fda13759a697bd77c22d955a28004e41ce42e17caa2a3",
   "integrity": {
-    "canonical_hash": "0551dbb72bb86d86e826a42bf73633cadfaa453ef300e73709056040b260b965",
+    "canonical_hash": "13aeb2d07d2aeb0af65fda13759a697bd77c22d955a28004e41ce42e17caa2a3",
     "key_id": "runtime-hmac:v1",
     "method": "hmac-sha256",
-    "prev_hash": "077b2d70cb0c4983af53ea311bbfece8bc13bb516871ccb7d54c8b373e9e22b1",
-    "signature": "42b6b1fa2f83ff694fa28adb8db58fdf079327d8bccfe93423f6e5285f0e1689",
-    "up_to_seq": 10113
+    "prev_hash": "aa018cc627eebefb799d034d419593e713926b1f23560c29de0c486d1ee7e090",
+    "signature": "0468f63dd6e2889ba4c59e79f22bb99f992cc901ca87de31d834c5b2bde04b72",
+    "up_to_seq": 10117
   },
   "state": {
     "aggregate_versions": {
@@ -1137,6 +1137,8 @@
       "CLAIM-20260822-Arquitecto-banco423-230055": 1,
       "CLAIM-20260822-Arquitecto-lote-003542": 1,
       "CLAIM-20260822-Arquitecto-nova4-220109": 1,
+      "CLAIM-20260822-Codex-TASK-0410-r2": 1,
+      "CLAIM-20260822-Codex-TASK-0410-r2-delivery": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -4181,7 +4183,7 @@
       "TASK-0407": 1,
       "TASK-0408": 34,
       "TASK-0409": 16,
-      "TASK-0410": 19,
+      "TASK-0410": 21,
       "TASK-0411": 3,
       "TASK-0412": 3,
       "TASK-0413": 2,
@@ -4221,7 +4223,7 @@
       "protocol-prune": 77,
       "protocol-state": 1
     },
-    "events_applied": 9442,
+    "events_applied": 9446,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -9510,6 +9512,9 @@
       "codex:task0410:r1-release:20260818T222812Z": 10039,
       "codex:task0410:r1-review-msg-claim:20260818T192852Z": 10026,
       "codex:task0410:r1:claim-acquire:20260818T170731Z": 10025,
+      "codex:task0410:r2-claim-release": 10116,
+      "codex:task0410:r2-delivery-claim-release": 10117,
+      "codex:task0410:r2-in-review": 10115,
       "codex:task0410:review-msg-r1-release:20260818T222812Z": 10040,
       "codex:task0410:start:20260818T140939Z": 9984,
       "codex:task0414:claim-expanded:20260816T204904Z": 9717,
@@ -12488,6 +12493,7 @@
       "intent:Codex:claim:7a405e2cca6d918eae4d2dbcffa803f04d9512b0eefe8c867edfe583d816bd45": 3312,
       "intent:Codex:claim:7a98f6f96336a41057b24c983e94d796f4f11ef41428ae4abf13ff6d92cc82d4": 2846,
       "intent:Codex:claim:7ad5d6b9a4097615278064e7c3ba8c8cc65f72e65a3aa5ebb443a144460e60de": 8515,
+      "intent:Codex:claim:7b4e661117fb00f29c75867cd41e1cef173eec29b1aa14248270a7297d00a5a8": 10114,
       "intent:Codex:claim:7b6a09fbbb7fcaf00163b562b5390ec3743a46b6c20ecd32ed33ff9f4519c326": 8070,
       "intent:Codex:claim:7b93f4c1cf2954d39f5589e83773414f45f4fa22b02dcb293923f903b3ed9a52": 3986,
       "intent:Codex:claim:7c39f33ccdb7589dd8d88510dd9d262e078725f950710290147f1d79ad3a8f88": 9671,
@@ -13667,5 +13673,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 10113
+  "up_to_seq": 10117
 }
