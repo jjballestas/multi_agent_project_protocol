@@ -91,12 +91,6 @@
             "title": "El certificador de contratos es ciego a la frontera muerta y fragil al reformateo"
         },
         {
-            "id": "TASK-0342",
-            "owner": "Codex",
-            "status": "done",
-            "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows"
-        },
-        {
             "id": "TASK-0347",
             "owner": "Codex",
             "status": "blocked",
@@ -319,12 +313,6 @@
             "title": "Un rojo TRANSITORIO del validador puede consumir el mensaje como visto"
         },
         {
-            "id": "TASK-0397",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El inventario del workflow se acredita contra cardinales escritos a mano -- crecer la CI de forma legitima pone el gate en rojo"
-        },
-        {
             "id": "TASK-0398",
             "owner": "Codex",
             "status": "proposed",
@@ -383,12 +371,6 @@
             "owner": "Codex",
             "status": "review_approved",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja"
-        },
-        {
-            "id": "TASK-0410",
-            "owner": "Codex",
-            "status": "review_approved",
-            "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas"
         },
         {
             "id": "TASK-0411",

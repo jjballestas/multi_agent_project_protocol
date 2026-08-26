@@ -8563,6 +8563,36 @@
             "status": "done",
             "title": "El replay acusa de MANIPULACION cuando lo unico que le falta es la llave -- key_unavailable no es invalid_signature",
             "type": "infra"
+        },
+        {
+            "created": "2026-08-08",
+            "file": "Area_comun/tasks/TASK-0342-la-exclusion-del-gemelo-de-encoding-liga-la-barra-de-windows.md",
+            "id": "TASK-0342",
+            "owner": "Codex",
+            "phase": "P2",
+            "status": "done",
+            "title": "La exclusion de directorios del gemelo de encoding liga la barra invertida de Windows",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0397-el-inventario-del-workflow-se-acredita-contra-cardinales-escritos-a-mano.md",
+            "id": "TASK-0397",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "medium",
+            "status": "done",
+            "title": "El inventario del workflow se acredita contra cardinales escritos a mano -- crecer la CI de forma legitima pone el gate en rojo",
+            "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+            "id": "TASK-0410",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "risk": "low",
+            "status": "done",
+            "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas",
+            "type": "infra"
         }
     ]
 }
