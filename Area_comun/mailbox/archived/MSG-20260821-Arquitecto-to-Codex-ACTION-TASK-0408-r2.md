@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Remediacion r2 de TASK-0408 con tres puntos cerrados. La puerta es la PROPIEDAD ENFOCADA, no la suite ancha test_exec_lease_harness.py, que el checker demostro que NO discrimina.

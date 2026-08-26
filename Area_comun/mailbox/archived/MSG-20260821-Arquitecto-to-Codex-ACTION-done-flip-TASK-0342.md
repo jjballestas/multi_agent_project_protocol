@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0342
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Done-flip de TASK-0342, que lleva en review_approved desde el 11-ago sin que nadie le ruteara el cierre. Solo el flip; PROHIBIDO retrabajar.

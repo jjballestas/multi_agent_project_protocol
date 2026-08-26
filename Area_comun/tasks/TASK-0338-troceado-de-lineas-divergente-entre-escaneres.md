@@ -97,3 +97,25 @@ exit 0 con el escape vivo. Coordenadas exactas del arbol de hoy:
 **Por que no se absorbio en TASK-0410 y vive aqui:** la r1 de 0410 cerro los dos ejes que le tocaban
 -- la clave de RUTA y el DIGEST -- y su censo cuadra 88 == 88. El eje de la COORDENADA es heredado y
 no atribuible a esa remediacion. El cierre de TASK-0410 nombra este residuo y apunta aqui.
+
+## RES-2-GUARD -- residuo enganchado aqui desde el cierre de TASK-0410 (2026-08-24)
+
+El checker lo midio al aprobar la r2 de TASK-0410 y lo dejo fuera de aquel cierre. Es el MISMO
+fichero que esta tarea ya declara en su alcance (`scripts/scan_domain_neutrality.ps1`) y la misma
+familia -- paridad entre gemelos --, asi que se engancha aqui en vez de fragmentar el arreglo:
+
+**El arreglo ordinal de la linea 211 no tiene negativo.** `mut211` revierte en PRODUCCION la unica
+linea de ese arreglo -- de `[System.StringComparer]::Ordinal` a `OrdinalIgnoreCase` en el
+`HashSet[string]` de terminos -- y **los 11 tests siguen VERDES** con la paridad medida y rota.
+
+    produccion (b899167b):  New-Object ... HashSet[string] ([System.StringComparer]::Ordinal)
+    control    (371ee761):  la misma linea con OrdinalIgnoreCase
+
+Es la tercera vez en esta familia que aparece la misma forma: un arreglo **presente pero no
+acreditado**, que nada mata al revertirlo (RES-3 de 0410 fue la anterior). Por eso entra como
+criterio y no como nota.
+
+**AC7 (anadido por este enganche):** el arreglo ordinal de la linea 211 tiene un negativo PERMANENTE
+que MUERE al revertir la linea en produccion. El checker ya lo tiene medido -- es su sonda F1
+convertida en test, y la vio morir contra `b899167b^` --, asi que el trabajo aqui es cablearlo donde
+el gate lo corra, no volver a inventarlo.

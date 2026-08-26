@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0397
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Done-flip de TASK-0397, ratificada a review_approved el 19-ago con el veredicto r4 OK-CLOSABLE. El cierre se ancla en el PAR 83efdca1 + bfeb4789, no en 83efdca1 a secas.

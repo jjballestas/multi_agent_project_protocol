@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0422
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: OK-CLOSABLE la r2 de TASK-0410 en b899167b. mut269 MUERE al revertir produccion, y muere ademas un mutante que deja la clausula ordinal verbatim. RES-2 cierra por efecto sobre seis vectores con el control rompiendo cuatro. Residual NUEVO medido -- RES-2-GUARD -- que el cierre debe nombrar junto a RES-1.

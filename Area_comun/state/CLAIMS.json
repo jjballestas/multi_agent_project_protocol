@@ -227,6 +227,114 @@
             "updated_at": "2026-08-22T01:22:39Z"
         },
         {
+            "claim_id": "CLAIM-20260824-Arquitecto-cierre-210330",
+            "expires_at": "2026-08-24T21:53:30Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260824-Arquitecto-cierre-210330",
+                "Area_comun/tasks/TASK-0338-troceado-de-lineas-divergente-entre-escaneres.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0408",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0408",
+                "Area_comun/tasks/TASK-0408-un-encargo-agotado-muere-y-el-tablero-sigue-diciendo-que-se-trabaja.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0410",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0410",
+                "Area_comun/tasks/TASK-0410-la-paridad-de-inventario-de-identidad-diverge-y-el-censo-no-cuadra.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0428",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0428",
+                "Area_comun/tasks/TASK-0428-dos-mutantes-de-produccion-sobreviven-a-la-propiedad-que-los-vigila.md"
+            ],
+            "started_at": "2026-08-24T21:03:30Z",
+            "status": "released",
+            "task_id": "TASK-0408",
+            "updated_at": "2026-08-24T21:03:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260824-Arquitecto-hig1-211915",
+            "expires_at": "2026-08-24T22:49:15Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260824-Arquitecto-hig1-211915",
+                "Area_comun/mailbox/open/MSG-20260821-Arquitecto-to-Analista-REVIEW-TASK-0410-r1-reemision.md",
+                "Area_comun/mailbox/archived/MSG-20260821-Arquitecto-to-Analista-REVIEW-TASK-0410-r1-reemision.md",
+                "Area_comun/mailbox/open/MSG-20260821-Arquitecto-to-Codex-ACTION-TASK-0408-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260821-Arquitecto-to-Codex-ACTION-TASK-0408-r2.md",
+                "Area_comun/mailbox/open/MSG-20260821-Arquitecto-to-Codex-ACTION-done-flip-TASK-0342.md",
+                "Area_comun/mailbox/archived/MSG-20260821-Arquitecto-to-Codex-ACTION-done-flip-TASK-0342.md",
+                "Area_comun/mailbox/open/MSG-20260821-Arquitecto-to-Codex-ACTION-done-flip-TASK-0397.md",
+                "Area_comun/mailbox/archived/MSG-20260821-Arquitecto-to-Codex-ACTION-done-flip-TASK-0397.md",
+                "Area_comun/mailbox/open/MSG-20260821-Arquitecto-to-Operador-RESP-NOVA-tres-puntos.md",
+                "Area_comun/mailbox/archived/MSG-20260821-Arquitecto-to-Operador-RESP-NOVA-tres-puntos.md"
+            ],
+            "started_at": "2026-08-24T21:19:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260824",
+            "updated_at": "2026-08-24T21:19:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260824-Arquitecto-hig2-211915",
+            "expires_at": "2026-08-24T22:49:15Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260824-Arquitecto-hig2-211915",
+                "Area_comun/mailbox/open/MSG-20260822-Analista-to-Arquitecto-REVIEW-TASK-0410-r1-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Analista-to-Arquitecto-REVIEW-TASK-0410-r1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260822-Analista-to-Arquitecto-REVIEW-TASK-0408-r2-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Analista-to-Arquitecto-REVIEW-TASK-0408-r2-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260822-Analista-to-Arquitecto-REVIEW-TASK-0410-r2-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Analista-to-Arquitecto-REVIEW-TASK-0410-r2-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260822-Arquitecto-to-Analista-REVIEW-TASK-0408-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Arquitecto-to-Analista-REVIEW-TASK-0408-r2.md",
+                "Area_comun/mailbox/open/MSG-20260822-Arquitecto-to-Analista-REVIEW-TASK-0410-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Arquitecto-to-Analista-REVIEW-TASK-0410-r2.md"
+            ],
+            "started_at": "2026-08-24T21:19:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260824",
+            "updated_at": "2026-08-24T21:19:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260824-Arquitecto-hig3-211915",
+            "expires_at": "2026-08-24T22:49:15Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260824-Arquitecto-hig3-211915",
+                "Area_comun/mailbox/open/MSG-20260822-Arquitecto-to-Codex-ACTION-TASK-0410-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Arquitecto-to-Codex-ACTION-TASK-0410-r2.md",
+                "Area_comun/mailbox/open/MSG-20260822-Arquitecto-to-Operador-RESP-NOVA-adenda-seccion-4-y-5.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Arquitecto-to-Operador-RESP-NOVA-adenda-seccion-4-y-5.md",
+                "Area_comun/mailbox/open/MSG-20260822-Arquitecto-to-Operador-RESP-octavo-campo-SI-y-un-aviso-medido.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Arquitecto-to-Operador-RESP-octavo-campo-SI-y-un-aviso-medido.md",
+                "Area_comun/mailbox/open/MSG-20260822-Codex-to-Arquitecto-HANDOFF-TASK-0408-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Codex-to-Arquitecto-HANDOFF-TASK-0408-r2.md",
+                "Area_comun/mailbox/open/MSG-20260822-Codex-to-Arquitecto-HANDOFF-TASK-0410-r2.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Codex-to-Arquitecto-HANDOFF-TASK-0410-r2.md"
+            ],
+            "started_at": "2026-08-24T21:19:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260824",
+            "updated_at": "2026-08-24T21:19:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260824-Arquitecto-hig4-211915",
+            "expires_at": "2026-08-24T22:49:15Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260824-Arquitecto-hig4-211915",
+                "Area_comun/mailbox/open/MSG-20260822-Operador-to-Arquitecto-ACTION-confirma-ruta-medicion-antes-del-gate.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Operador-to-Arquitecto-ACTION-confirma-ruta-medicion-antes-del-gate.md",
+                "Area_comun/mailbox/open/MSG-20260822-Operador-to-Arquitecto-GO-inscribe-decision-y-septimo-caso-de-NOVA.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Operador-to-Arquitecto-GO-inscribe-decision-y-septimo-caso-de-NOVA.md",
+                "Area_comun/mailbox/open/MSG-20260822-Operador-to-Arquitecto-RESP-opcion-A-resuelta.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Operador-to-Arquitecto-RESP-opcion-A-resuelta.md",
+                "Area_comun/mailbox/open/MSG-20260822-Operador-to-Arquitecto-RESP-ruteo-NOVA-hecho-y-anclaje-esta-noche.md",
+                "Area_comun/mailbox/archived/MSG-20260822-Operador-to-Arquitecto-RESP-ruteo-NOVA-hecho-y-anclaje-esta-noche.md"
+            ],
+            "started_at": "2026-08-24T21:19:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260824",
+            "updated_at": "2026-08-24T21:19:15Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tanda-20260811",
             "expires_at": "2026-08-12T23:59:00Z",
             "owner": "Arquitecto",

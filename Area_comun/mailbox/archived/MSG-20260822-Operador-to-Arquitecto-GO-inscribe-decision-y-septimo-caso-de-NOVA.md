@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: GO
 task_id: none
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: "GO del operador: INSCRIBE con numero el DRAFT-DECISION 'La causa cruza la frontera, o no hay frontera'. Antes de inscribir, considera incorporar el SEPTIMO caso que NOVA acaba de aportar (cuerpo integro abajo): vocabulario sin productor (defect.reported / manual.intervention sin emisor en su runtime) + un nombre con dos significados (su cost.attributed es el de DECISION-0033, otro esquema y apagado). Nota de idempotencia sobre los crons: el operador ya te ordeno DIRECTAMENTE reavivar crons y agentes; si ya lo recibiste por tu sesion, esto es solo el registro canonico, no una orden nueva."

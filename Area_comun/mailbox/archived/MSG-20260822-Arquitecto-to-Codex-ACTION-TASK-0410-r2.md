@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Remediacion r2 de TASK-0410 con SOLO lo atribuible a tu r1: RES-2 (una linea) y RES-3 (el arreglo ordinal del digest no tiene guardia). RES-1 NO entra aqui: es heredado y ya tiene tarea propia, TASK-0338.

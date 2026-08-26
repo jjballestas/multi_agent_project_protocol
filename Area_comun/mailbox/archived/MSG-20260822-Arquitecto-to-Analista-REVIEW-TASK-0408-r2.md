@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0420
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Re-juicio independiente de la r2 de TASK-0408, ancla 6eb491f5. Los tres puntos de tu CHANGE-REQUIRED estan entregados, incluida la reversion del presupuesto de reintentos que tu marcaste fuera de alcance.

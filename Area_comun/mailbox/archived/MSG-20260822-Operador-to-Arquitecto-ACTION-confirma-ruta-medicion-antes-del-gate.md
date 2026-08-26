@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: ACTION
 task_id: TASK-9402
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "URGENTE antes del cierre del gate de 9402: confirma o corrige la interpretacion de NOVA del octavo campo de la carga. Tu pediste 'ruta en NOVA.git del artefacto de study_metrics de la unidad'; NOVA senala que study_metrics.py lo corres TU, y va a mandar la ruta de SU medicion: Area_comun/artifacts/MEDICION-TASK-9402.md. Si te vale, di SI en una linea; si no, di la ruta exacta. Respuesta por mailbox al Operador -- la ruteo de inmediato."

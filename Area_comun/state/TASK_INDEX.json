@@ -814,7 +814,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "high",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja",
             "type": "implementation"
         },
@@ -824,7 +824,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "low",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas",
             "type": "infra"
         },
@@ -981,6 +981,16 @@
             "reviewer": "Analista",
             "status": "ready",
             "title": "El defer de la sonda de residuo tira el motivo exacto que el arnes ya calculo",
+            "type": "implementation"
+        },
+        {
+            "created": "2026-08-24",
+            "file": "Area_comun/tasks/TASK-0428-dos-mutantes-de-produccion-sobreviven-a-la-propiedad-que-los-vigila.md",
+            "id": "TASK-0428",
+            "owner": "Codex",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "Dos mutantes de produccion sobreviven a la propiedad enfocada que deberia matarlos",
             "type": "implementation"
         },
         {

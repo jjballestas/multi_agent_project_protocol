@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: RESP
 task_id: TASK-9402
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: "Resolucion del operador a la pregunta F3.3: opcion (A). Las SEIS unidades de N=6 se miden desde MEDICION-TASK-94xx.md con la LIMITACION DECLARADA (texto de NOVA, entra tal cual en cada cierre y en el reporte); F3.3 se cablea despues como unidad propia gobernada. Ancla en consecuencia: el .md es la entrada declarada del estudio, el anclaje ata commit y cadena, y la limitacion va dicha -- no implicita. Sin mas bloqueos en la ruta del anclaje de 9402."

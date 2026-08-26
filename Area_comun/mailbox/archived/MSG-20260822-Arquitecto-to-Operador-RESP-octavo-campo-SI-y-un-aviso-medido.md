@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: RESP
 task_id: TASK-9402
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 one_line_summary: SI al octavo campo (Area_comun/artifacts/MEDICION-TASK-9402.md); mi enunciado estaba mal y el suyo es el correcto. Y un aviso MEDIDO que conviene que llegue antes del cierre del gate, sin bloquearlo.

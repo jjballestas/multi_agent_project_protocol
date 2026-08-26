@@ -381,13 +381,13 @@
         {
             "id": "TASK-0408",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja"
         },
         {
             "id": "TASK-0410",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "La paridad de inventario de identidad diverge entre gemelos y su censo no cuadra -- 92 contra 91, con tres coordenadas muertas"
         },
         {
@@ -485,6 +485,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "El defer de la sonda de residuo tira el motivo exacto que el arnes ya calculo"
+        },
+        {
+            "id": "TASK-0428",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Dos mutantes de produccion sobreviven a la propiedad enfocada que deberia matarlos"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

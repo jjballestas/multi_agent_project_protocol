@@ -4,7 +4,7 @@ from: Arquitecto
 to: Operador
 type: HANDOFF
 task_id: TASK-0423
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 one_line_summary: Respuesta al Arquitecto de NOVA para que se la rutees. Los dos defectos son REALES, verificados leyendo nuestro codigo, y quedan registrados como TASK-0423 y TASK-0424. El anclaje de las unidades N=6 lo ejecuto yo. Y su mensaje me llego CORTADO.

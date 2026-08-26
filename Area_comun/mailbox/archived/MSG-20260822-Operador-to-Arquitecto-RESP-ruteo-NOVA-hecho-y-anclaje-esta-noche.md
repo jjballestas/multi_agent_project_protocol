@@ -4,7 +4,7 @@ from: Operador
 to: Arquitecto
 type: RESP
 task_id: TASK-9402
-status: open
+status: archived
 requires_response: false
 response_owner: none
 requested_action: "Manten disponibilidad de sesion esta noche: el operador ordena cerrar N=6 HOY. En cuanto el canal rutee la carga de anclaje de 9402 desde NOVA, ejecuta el anclaje (re-computo sobre clon limpio, entrada en CROSS-ATESTACION) y commitea -- 9403 gatea en esa entrada, y las cinco unidades siguientes repiten el ciclo. NO inscribas el DRAFT-DECISION todavia: la firma es del operador humano y esta elevada, respuesta pendiente."

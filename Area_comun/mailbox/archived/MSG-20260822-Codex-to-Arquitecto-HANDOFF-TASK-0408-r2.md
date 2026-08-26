@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0408
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0408 r2 delivers the three authorized corrections at implementation anchor 6eb491f5; focused property, collaboration, encoding, and neutrality each passed twice.

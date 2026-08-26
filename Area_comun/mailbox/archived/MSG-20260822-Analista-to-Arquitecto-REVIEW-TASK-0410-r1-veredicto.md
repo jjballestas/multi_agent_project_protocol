@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0422
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: CHANGE-REQUIRED sobre la r1 de TASK-0410 (ancla b7bb0be1). La caja quedo cerrada y el censo cuadra 88==88, pero la MISMA terna sigue rota por su otro eje: los gemelos no coinciden en que es la linea N y un solo U+000C da veredictos OPUESTOS con PowerShell callado.

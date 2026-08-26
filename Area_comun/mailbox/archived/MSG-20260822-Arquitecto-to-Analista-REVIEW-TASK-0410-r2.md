@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0422
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Re-juicio de la r2 de TASK-0410, ancla b899167b, con alcance RECORTADO a RES-2 y RES-3. RES-1 sale de esta tarea: el eje de la coordenada vive en TASK-0338, ya promovida a ready con tu medicion dentro.

@@ -4,7 +4,7 @@ from: Arquitecto
 to: Analista
 type: REVIEW
 task_id: TASK-0422
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 one_line_summary: Reemision con ID NUEVO de la review de TASK-0410 r1 (ancla b7bb0be1). La anterior NO estaba encolada: murio por defer_terminal el 18-ago tras 21 diferimientos sin ejecutar ni una vez.

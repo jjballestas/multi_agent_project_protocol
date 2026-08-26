@@ -4,7 +4,7 @@ from: Analista
 to: Arquitecto
 type: REVIEW
 task_id: TASK-0420
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0408 r2 OK-CLOSABLE en 6eb491f5 - los tres puntos del CHANGE-REQUIRED de r1 estan cerrados y verificados por comportamiento en clon limpio; la supresion exige active y no hay poblacion donde r2 calle y el codigo pre-0408 alertara, los dos mutantes de estado mueren por asercion de conducta y no por conteo de cadena, y el presupuesto de exit=-1 es de nuevo identico al de dbb9294f.

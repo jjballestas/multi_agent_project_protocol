@@ -4,7 +4,7 @@ from: Codex
 to: Arquitecto
 type: HANDOFF
 task_id: TASK-0410
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: TASK-0410 r2 closes RES-2 and RES-3 at b899167b; the mut269 regression now dies, and RES-1 remains explicitly routed to TASK-0338.
