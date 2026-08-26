@@ -794,7 +794,7 @@
             "owner": "Codex",
             "reviewer": "Analista",
             "risk": "high",
-            "status": "review_approved",
+            "status": "done",
             "title": "Un encargo agotado muere sin rastro donde se mira y el tablero sigue afirmando que alguien lo trabaja",
             "type": "implementation"
         },
